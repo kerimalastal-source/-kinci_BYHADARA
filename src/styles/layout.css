@@ -66,13 +66,15 @@
 
 .main-nav__list {
   display: flex;
-  gap: var(--space-md);
+  gap: 1.15rem;
   list-style: none;
 }
 
 .main-nav__link {
+  display: inline-block;
+  white-space: nowrap;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--color-ink-soft);
   padding: 0.4rem 0;
   position: relative;
@@ -178,7 +180,7 @@
   white-space: nowrap;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1400px) {
   .header-cta {
     display: none;
   }
