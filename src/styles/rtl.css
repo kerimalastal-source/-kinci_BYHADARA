@@ -1,0 +1,21 @@
+/* Most spacing/positioning already uses CSS logical properties (inset-inline-*,
+   padding-inline-*, margin-inline-*, text-align: start/end) so they flip
+   automatically with [dir="rtl"]. This file only handles direction-sensitive
+   icons that CSS logical properties can't fix on their own. */
+
+[dir="rtl"] .back-link svg,
+[dir="rtl"] .lightbox__nav--prev svg,
+[dir="rtl"] .lightbox__nav--next svg {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .project-card__meta,
+[dir="rtl"] .fact-list > div {
+  direction: rtl;
+}
+
+[dir="rtl"] .stat-tile,
+[dir="rtl"] .benefits-list li,
+[dir="rtl"] .steps-list__item {
+  text-align: start;
+}
