@@ -9,9 +9,14 @@
     "projects": "Projets",
     "about": "À propos",
     "citizenship": "Citoyenneté par investissement",
+    "faq": "FAQ",
     "contact": "Contact",
     "getInTouch": "Nous contacter",
     "search": "Rechercher"
+  },
+  "floatingActions": {
+    "whatsapp": "Discuter sur WhatsApp",
+    "call": "Appelez-nous"
   },
   "lang": {
     "en": "English",
@@ -198,6 +203,88 @@
     "ctaTitle": "Prêt à explorer vos options ?",
     "ctaText": "Nos conseillers vous présenteront les projets éligibles et l'ensemble de la procédure de citoyenneté.",
     "ctaButton": "Parler à un conseiller"
+  },
+  "faq": {
+    "heroEyebrow": "Assistance",
+    "heroTitle": "Questions Fréquentes",
+    "heroSubtitle": "Réponses aux questions que nous recevons le plus souvent sur HADARA, l'investissement immobilier en Turquie et la citoyenneté turque par investissement.",
+    "categories": [
+      {
+        "title": "À propos de HADARA",
+        "items": [
+          {
+            "q": "Qui est HADARA Immobilier ?",
+            "a": "HADARA Immobilier est une société de développement et d'investissement immobilier fondée en 2014, basée à Beylikdüzü, Istanbul. Nous concevons, construisons et livrons des développements résidentiels et à usage mixte ainsi que des villas privées à Beylikdüzü et Büyükçekmece."
+          },
+          {
+            "q": "Quels types de projets HADARA développe-t-elle ?",
+            "a": "Notre portefeuille comprend des ensembles résidentiels planifiés, des projets à usage mixte combinant résidences, bureaux et commerces, ainsi que des villas de luxe sur mesure — tous construits avec qualité et valeur durable."
+          },
+          {
+            "q": "Où sont situés les projets de HADARA ?",
+            "a": "Tous nos développements actuels sont situés du côté européen d'Istanbul, dans les quartiers en forte croissance de Beylikdüzü et Büyükçekmece."
+          },
+          {
+            "q": "Comment puis-je contacter l'équipe de HADARA ?",
+            "a": "Vous pouvez nous contacter via la page Contact, par téléphone au +90 531 930 92 14, ou par e-mail à info@byhadara.com. Notre équipe est disponible du lundi au samedi, de 09h00 à 18h00 (heure d'Istanbul)."
+          }
+        ]
+      },
+      {
+        "title": "L'investissement immobilier en Turquie",
+        "items": [
+          {
+            "q": "Pourquoi investir dans l'immobilier à Istanbul ?",
+            "a": "Istanbul combine une économie en croissance, des infrastructures en expansion et une forte demande locative, ce qui en fait l'un des marchés immobiliers les plus attractifs reliant l'Europe et l'Asie. Les quartiers de Beylikdüzü et Büyükçekmece sont parmi les plus dynamiques du côté européen."
+          },
+          {
+            "q": "Les étrangers peuvent-ils acheter un bien immobilier en Turquie ?",
+            "a": "Oui. Les citoyens de la plupart des pays peuvent librement acheter des biens résidentiels et commerciaux en Turquie, selon les procédures standard de titre de propriété. Notre équipe accompagne les acheteurs internationaux à chaque étape."
+          },
+          {
+            "q": "Quelles sont les options de paiement disponibles ?",
+            "a": "HADARA propose des plans de paiement échelonné flexibles sur certains projets, en plus de l'achat comptant classique, facilitant l'acquisition pour les résidents comme pour les investisseurs."
+          },
+          {
+            "q": "Quels frais dois-je prévoir en plus du prix d'achat ?",
+            "a": "Les frais additionnels habituels incluent les frais de transfert du titre de propriété, le rapport d'expertise, et les frais administratifs standard. Notre équipe vous détaillera l'ensemble des coûts pour le projet qui vous intéresse."
+          },
+          {
+            "q": "Acheter un bien en Turquie est-il un bon investissement locatif ?",
+            "a": "La forte croissance touristique et démographique d'Istanbul soutient une demande locative saine, en particulier pour les développements à usage mixte bien situés comme Lotus İstanbul."
+          }
+        ]
+      },
+      {
+        "title": "La citoyenneté turque par l'achat immobilier",
+        "items": [
+          {
+            "q": "Comment obtenir la citoyenneté turque en achetant un bien immobilier ?",
+            "a": "Le programme turc de citoyenneté par investissement permet aux ressortissants étrangers qui achètent un bien immobilier éligible d'une valeur supérieure au minimum requis, et le conservent pendant au moins trois ans, de demander la citoyenneté turque."
+          },
+          {
+            "q": "Quel est le montant minimum d'investissement requis ?",
+            "a": "Selon les règles actuelles du programme, le montant minimum d'investissement immobilier éligible est de 400 000 USD (ou équivalent). L'équipe de HADARA peut confirmer quels projets répondent à ce seuil."
+          },
+          {
+            "q": "La citoyenneté s'étend-elle à ma famille ?",
+            "a": "Oui. Votre conjoint et vos enfants de moins de 18 ans sont inclus dans la même demande de citoyenneté, sans investissement supplémentaire."
+          },
+          {
+            "q": "Combien de temps dure la procédure ?",
+            "a": "Une fois l'achat du bien et le rapport d'expertise finalisés, la demande de citoyenneté est généralement examinée et approuvée par les autorités turques en quelques mois."
+          },
+          {
+            "q": "Puis-je conserver ma nationalité actuelle ?",
+            "a": "Oui. La Turquie autorise la double nationalité pour la plupart des nationalités, vous n'êtes donc pas tenu de renoncer à votre citoyenneté d'origine."
+          },
+          {
+            "q": "Dois-je résider en Turquie pour être éligible ?",
+            "a": "Non. Il n'y a aucune obligation de résidence avant ou après l'approbation — vous pouvez conserver le bien comme investissement sans avoir à vous installer sur place."
+          }
+        ]
+      }
+    ]
   },
   "contact": {
     "heroEyebrow": "Contactez-nous",

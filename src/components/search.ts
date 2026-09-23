@@ -26,6 +26,7 @@ function buildIndex(): SearchResult[] {
   results.push({ title: t("nav.projects"), snippet: t("projects.heroSubtitle"), route: "#/projects" });
   results.push({ title: t("nav.about"), snippet: t("about.heroSubtitle"), route: "#/about" });
   results.push({ title: t("nav.citizenship"), snippet: t("citizenship.heroSubtitle"), route: "#/citizenship" });
+  results.push({ title: t("nav.faq"), snippet: t("faq.heroSubtitle"), route: "#/faq" });
   results.push({ title: t("nav.contact"), snippet: t("contact.heroSubtitle"), route: "#/contact" });
 
   return results;
