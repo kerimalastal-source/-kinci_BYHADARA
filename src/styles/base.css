@@ -78,7 +78,7 @@ p {
 
 .skip-link {
   position: absolute;
-  left: -999px;
+  inset-inline-start: -999px;
   top: 0;
   background: var(--color-accent);
   color: var(--color-primary-dark);
@@ -87,7 +87,7 @@ p {
 }
 
 .skip-link:focus {
-  left: 0;
+  inset-inline-start: 0;
 }
 
 .section {
