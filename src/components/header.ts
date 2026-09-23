@@ -18,7 +18,7 @@ export function renderHeader(el: HTMLElement, route: Route): void {
   el.innerHTML = `
     <div class="site-header__inner container">
       <a class="brand" href="#/" aria-label="${t("meta.siteNameFull")}">
-        <span class="brand__mark">H</span>
+        <img class="brand__logo" src="/logo-dark.png" alt="${t("meta.siteNameFull")}" />
         <span class="brand__text">
           <span class="brand__name">${t("meta.siteName")}</span>
           <span class="brand__tagline">${t("meta.tagline")}</span>

@@ -10,7 +10,7 @@ export function renderFooter(el: HTMLElement): void {
     <div class="container site-footer__inner">
       <div class="site-footer__brand">
         <a class="brand" href="#/" aria-label="${t("meta.siteNameFull")}">
-          <span class="brand__mark">H</span>
+          <img class="brand__logo brand__logo--footer" src="/logo-light.png" alt="${t("meta.siteNameFull")}" />
           <span class="brand__text">
             <span class="brand__name">${t("meta.siteName")}</span>
             <span class="brand__tagline">${t("meta.tagline")}</span>

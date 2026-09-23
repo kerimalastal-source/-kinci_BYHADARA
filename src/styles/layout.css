@@ -32,18 +32,14 @@
   margin-inline-end: auto;
 }
 
-.brand__mark {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  color: var(--color-accent-light);
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.2rem;
+.brand__logo {
+  height: 58px;
+  width: auto;
   flex-shrink: 0;
+}
+
+.brand__logo--footer {
+  height: 68px;
 }
 
 .brand__text {
