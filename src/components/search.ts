@@ -1,11 +1,17 @@
-import { t, getProjectContent } from "../i18n";
+import { t, tRaw, getProjectContent } from "../i18n";
 import { getSortedProjects } from "../data/projects";
+import { getSortedBlogPosts } from "../data/blog";
 import { navigate } from "../router";
 
 interface SearchResult {
   title: string;
   snippet: string;
   route: string;
+}
+
+interface BlogArticleContent {
+  title: string;
+  excerpt: string;
 }
 
 let overlay: HTMLDivElement | null = null;
@@ -22,10 +28,20 @@ function buildIndex(): SearchResult[] {
     });
   }
 
+  for (const post of getSortedBlogPosts()) {
+    const content = tRaw<BlogArticleContent>(`blogData.${post.slug}`);
+    results.push({
+      title: content.title,
+      snippet: content.excerpt,
+      route: `#/blog/${post.slug}`
+    });
+  }
+
   results.push({ title: t("nav.home"), snippet: t("home.heroSubtitle"), route: "#/" });
   results.push({ title: t("nav.projects"), snippet: t("projects.heroSubtitle"), route: "#/projects" });
   results.push({ title: t("nav.about"), snippet: t("about.heroSubtitle"), route: "#/about" });
   results.push({ title: t("nav.citizenship"), snippet: t("citizenship.heroSubtitle"), route: "#/citizenship" });
+  results.push({ title: t("nav.blog"), snippet: t("blog.heroSubtitle"), route: "#/blog" });
   results.push({ title: t("nav.faq"), snippet: t("faq.heroSubtitle"), route: "#/faq" });
   results.push({ title: t("nav.contact"), snippet: t("contact.heroSubtitle"), route: "#/contact" });
 
