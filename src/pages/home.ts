@@ -1,7 +1,9 @@
 import { t, tRaw } from "../i18n";
 import { getSortedProjects } from "../data/projects";
+import { partners } from "../data/partners";
 import { renderProjectCard } from "../components/projectCard";
 import { initStatCounters } from "../components/statCounter";
+import { initScrollReveal } from "../components/scrollReveal";
 import { wixImg } from "../utils/image";
 
 const HERO_IMAGE = wixImg("3510f9_9700bfeff9a74a0fb54aee54a8091089~mv2.jpg");
@@ -44,6 +46,24 @@ export function renderHome(el: HTMLElement): void {
             <div class="stat-tile">
               <span class="stat-tile__value" data-stat-value="${s.value}">0</span>
               <span class="stat-tile__label">${s.label}</span>
+            </div>`
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+
+    <section class="section partners-section">
+      <div class="container">
+        <p class="eyebrow eyebrow--center">${t("home.partnersEyebrow")}</p>
+        <h2 class="section-title section-title--center">${t("home.partnersTitle")}</h2>
+        <p class="section-subtitle section-subtitle--center">${t("home.partnersSubtitle")}</p>
+        <div class="partners-grid">
+          ${partners
+            .map(
+              (p, i) => `
+            <div class="partner-logo" data-reveal data-reveal-index="${i}">
+              <img src="${p.logo}" alt="${p.name}" loading="lazy" />
             </div>`
             )
             .join("")}
@@ -139,4 +159,5 @@ export function renderHome(el: HTMLElement): void {
   `;
 
   initStatCounters(el);
+  initScrollReveal(el);
 }
