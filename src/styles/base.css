@@ -107,6 +107,11 @@ p {
   color: var(--color-muted);
 }
 
+.section-subtitle--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
 .section-head {
   display: flex;
   align-items: flex-end;
