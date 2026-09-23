@@ -1,0 +1,307 @@
+{
+  "meta": {
+    "siteName": "HADARA",
+    "siteNameFull": "HADARA Immobilier",
+    "tagline": "Construire l'Istanbul de demain"
+  },
+  "nav": {
+    "home": "Accueil",
+    "projects": "Projets",
+    "about": "À propos",
+    "citizenship": "Citoyenneté par investissement",
+    "contact": "Contact",
+    "getInTouch": "Nous contacter",
+    "search": "Rechercher"
+  },
+  "lang": {
+    "en": "English",
+    "ar": "العربية",
+    "fr": "Français",
+    "ru": "Русский"
+  },
+  "common": {
+    "discoverMore": "En savoir plus",
+    "viewAllProjects": "Voir tous les projets",
+    "readMore": "Lire la suite",
+    "backToProjects": "Retour aux projets",
+    "location": "Emplacement",
+    "timeline": "Calendrier",
+    "status": "Statut",
+    "statusNewLaunch": "Nouveau lancement",
+    "statusOngoing": "En construction",
+    "statusDelivered": "Livré",
+    "close": "Fermer",
+    "searchPlaceholder": "Rechercher un projet, une page...",
+    "searchNoResults": "Aucun résultat trouvé.",
+    "searchResultsFor": "Résultats de recherche pour",
+    "loading": "Chargement...",
+    "statLabels": {
+      "landArea": "Superficie du terrain",
+      "delivery": "Année de livraison",
+      "apartments": "Appartements",
+      "blocksFloors": "Blocs × étages",
+      "constructionArea": "Surface construite",
+      "greenAndParkArea": "Espaces verts et parc",
+      "offices": "Bureaux",
+      "shops": "Commerces",
+      "floors": "Étages",
+      "exclusiveVilla": "Villa exclusive",
+      "bathrooms": "Salles de bain",
+      "livingRoom": "Salon",
+      "terrace": "Terrasse"
+    }
+  },
+  "footer": {
+    "description": "HADARA Immobilier est une société de développement et d'investissement immobilier basée à Istanbul, livrant des villas de luxe et des projets résidentiels haut de gamme depuis 2014.",
+    "quickLinks": "Liens rapides",
+    "getInTouch": "Nous contacter",
+    "followUs": "Suivez-nous",
+    "rights": "Tous droits réservés."
+  },
+  "home": {
+    "heroEyebrow": "Promotion immobilière à Istanbul",
+    "heroTitle": "Créer des lieux de vie d'exception à Istanbul",
+    "heroSubtitle": "HADARA conçoit, développe et livre des projets résidentiels et à usage mixte dans les quartiers les plus dynamiques d'Istanbul — fondés sur la confiance, la précision et la valeur à long terme.",
+    "heroCtaPrimary": "Découvrir nos projets",
+    "heroCtaSecondary": "Parler à notre équipe",
+    "statsTitle": "HADARA en chiffres",
+    "stats": [
+      { "value": "12+", "label": "années d'excellence" },
+      { "value": "5", "label": "projets emblématiques" },
+      { "value": "400+", "label": "unités résidentielles" },
+      { "value": "2", "label": "quartiers phares d'Istanbul" }
+    ],
+    "aboutEyebrow": "Qui sommes-nous",
+    "aboutTitle": "Un promoteur de proximité, signature Istanbul",
+    "aboutText1": "Depuis 2014, HADARA Immobilier façonne des développements résidentiels et mixtes à Istanbul, avec un accent particulier sur Beylikdüzü et Büyükçekmece — deux des axes de croissance les plus dynamiques de la ville.",
+    "aboutText2": "Des villas privées de luxe aux grands ensembles résidentiels, chaque projet HADARA repose sur une architecture soignée, une construction de qualité et une réelle compréhension des attentes de nos clients.",
+    "aboutCta": "En savoir plus sur HADARA",
+    "projectsEyebrow": "Notre portefeuille",
+    "projectsTitle": "Projets phares",
+    "projectsSubtitle": "Un aperçu des développements qui façonnent les quartiers de Beylikdüzü et Büyükçekmece à Istanbul.",
+    "servicesEyebrow": "Notre expertise",
+    "servicesTitle": "Une expertise immobilière complète",
+    "services": [
+      {
+        "title": "Développement résidentiel",
+        "desc": "Des ensembles résidentiels planifiés, pensés pour le confort, la sécurité et le quotidien."
+      },
+      {
+        "title": "Villas de luxe",
+        "desc": "Des résidences privées sur mesure, aux finitions haut de gamme, avec intimité et vues panoramiques sur Istanbul."
+      },
+      {
+        "title": "Sites à usage mixte",
+        "desc": "Des destinations intégrant résidentiel, bureaux et commerces, pensées pour une valeur locative et patrimoniale durable."
+      },
+      {
+        "title": "Citoyenneté par investissement",
+        "desc": "Un accompagnement complet pour les acheteurs internationaux souhaitant obtenir la citoyenneté turque par l'immobilier."
+      }
+    ],
+    "whyEyebrow": "Pourquoi HADARA",
+    "whyTitle": "Fondée sur la confiance, livrée avec précision",
+    "why": [
+      { "title": "Un savoir-faire éprouvé", "desc": "Plus de 12 ans dans la réalisation de projets résidentiels et mixtes à Istanbul." },
+      { "title": "Des emplacements de choix", "desc": "Chaque projet est implanté dans un quartier en forte croissance, bien desservi et connecté." },
+      { "title": "Pensé pour l'investisseur", "desc": "Plans de paiement flexibles et accompagnement complet pour la citoyenneté turque par investissement." },
+      { "title": "Une qualité visible", "desc": "De la structure aux finitions intérieures, chaque détail est conçu pour durer." }
+    ],
+    "citizenshipTitle": "La citoyenneté turque par l'investissement immobilier",
+    "citizenshipText": "HADARA accompagne les investisseurs internationaux à chaque étape de l'obtention de la citoyenneté turque via l'un de nos projets résidentiels éligibles.",
+    "citizenshipCta": "Découvrir la citoyenneté",
+    "ctaTitle": "Construisons ensemble votre nouveau chapitre à Istanbul",
+    "ctaText": "Que vous recherchiez une maison familiale, une villa privée ou une opportunité d'investissement, notre équipe est prête à vous accompagner.",
+    "ctaButton": "Contacter notre équipe"
+  },
+  "about": {
+    "heroEyebrow": "À propos de HADARA",
+    "heroTitle": "Un promoteur d'Istanbul fondé sur le savoir-faire et la confiance",
+    "heroSubtitle": "HADARA Immobilier est une société de développement et d'investissement immobilier dédiée aux villas de luxe et aux projets résidentiels haut de gamme, pensés pour un mode de vie moderne et une valeur durable.",
+    "storyEyebrow": "Notre histoire",
+    "storyTitle": "D'une vision unique à un portefeuille en pleine croissance",
+    "storyText1": "Fondée en 2014 et basée à Beylikdüzü, Istanbul, HADARA Immobilier est née d'une idée simple : une conception réfléchie et une construction honnête créent une valeur durable pour ceux qui vivent dans nos projets, comme pour ceux qui y investissent.",
+    "storyText2": "Au fil de la dernière décennie, cette idée s'est transformée en un portefeuille de résidences, de sites à usage mixte et de villas privées à Beylikdüzü et Büyükçekmece, deux des axes de croissance les plus recherchés du côté européen d'Istanbul.",
+    "missionTitle": "Notre mission",
+    "missionText": "Concevoir et livrer des projets résidentiels et mixtes qui allient qualité architecturale, confort quotidien et valeur durable, pour les résidents comme pour les investisseurs.",
+    "visionTitle": "Notre vision",
+    "visionText": "Être reconnue comme le promoteur de référence à Istanbul — reconnue pour sa précision, sa transparence et des projets conçus pour durer.",
+    "valuesTitle": "Nos valeurs",
+    "values": [
+      { "title": "Intégrité", "desc": "Des prix clairs, des délais honnêtes et une communication transparente avec chaque client et partenaire." },
+      { "title": "Savoir-faire", "desc": "Chaque projet reflète une planification architecturale soignée et des normes de construction rigoureuses." },
+      { "title": "Communauté", "desc": "Nous concevons des quartiers, pas seulement des bâtiments — avec des espaces verts et des équipements qui rassemblent." },
+      { "title": "Valeur durable", "desc": "Du choix de l'emplacement aux matériaux de finition, chaque décision protège l'investissement de nos clients." }
+    ],
+    "timelineTitle": "Notre parcours",
+    "timeline": [
+      { "year": "2014", "text": "Fondation de HADARA Immobilier à Beylikdüzü, Istanbul." },
+      { "year": "2022", "text": "Lancement des travaux de Lotus Koru 1 et Lotus İstanbul, nos premiers grands projets résidentiels et mixtes." },
+      { "year": "2023", "text": "Lancement de Lotus Koru 2, un ensemble de 204 appartements entouré de 17 500 m² d'espaces verts et de parc." },
+      { "year": "2024", "text": "Livraison de Lotus Koru 1 et démarrage de Marmara Haven Villa, notre résidence privée phare à Büyükçekmece." },
+      { "year": "2026", "text": "Lancement de Beylikdüzü Living, un nouveau projet résidentiel de 21 000 m², dont la livraison est prévue en 2028." }
+    ],
+    "statsTitle": "Notre bilan",
+    "stats": [
+      { "value": "12+", "label": "années d'activité" },
+      { "value": "5", "label": "projets emblématiques" },
+      { "value": "400+", "label": "unités résidentielles" },
+      { "value": "60 000+ m²", "label": "de terrain développé" }
+    ]
+  },
+  "projects": {
+    "heroEyebrow": "Notre portefeuille",
+    "heroTitle": "Des projets qui façonnent Istanbul",
+    "heroSubtitle": "Des villas privées aux grands ensembles résidentiels, découvrez les projets conçus, construits et livrés par HADARA à Beylikdüzü et Büyükçekmece.",
+    "filterAll": "Tous les projets",
+    "filterNewLaunch": "Nouveau lancement",
+    "filterOngoing": "En construction",
+    "filterDelivered": "Livré",
+    "noResults": "Aucun projet ne correspond à ce filtre."
+  },
+  "projectDetail": {
+    "overviewTitle": "Aperçu du projet",
+    "keyFactsTitle": "Chiffres clés",
+    "galleryTitle": "Galerie",
+    "locationLabel": "Emplacement",
+    "timelineLabel": "Calendrier",
+    "statusLabel": "Statut",
+    "highlightsTitle": "Points forts",
+    "ctaTitle": "Intéressé par ce projet ?",
+    "ctaText": "Contactez notre équipe pour connaître les disponibilités, les prix et les modalités d'investissement.",
+    "ctaButton": "Demander des informations",
+    "backLabel": "Retour aux projets",
+    "otherProjectsTitle": "Découvrir d'autres projets"
+  },
+  "citizenship": {
+    "heroEyebrow": "Services aux investisseurs",
+    "heroTitle": "La citoyenneté turque par l'investissement immobilier",
+    "heroSubtitle": "HADARA offre un accompagnement complet et fiable aux investisseurs internationaux souhaitant obtenir la citoyenneté turque grâce à l'investissement immobilier.",
+    "introTitle": "Un chemin clair vers la citoyenneté",
+    "introText": "Le programme turc de citoyenneté par investissement permet aux ressortissants étrangers d'obtenir la citoyenneté en achetant un bien immobilier éligible. Les projets résidentiels de HADARA sont sélectionnés et structurés pour répondre aux exigences du programme, et notre équipe vous accompagne de la première visite jusqu'à l'approbation finale.",
+    "stepsTitle": "Comment ça marche",
+    "steps": [
+      { "title": "Consultation initiale", "desc": "Nous évaluons vos objectifs et vous présentons les projets et unités HADARA éligibles." },
+      { "title": "Sélection et réservation du bien", "desc": "Choisissez votre appartement ou villa et sécurisez-le par un contrat de réservation." },
+      { "title": "Achat et expertise", "desc": "Nous coordonnons le rapport d'expertise officiel et le transfert du titre de propriété requis par la loi." },
+      { "title": "Demande de citoyenneté", "desc": "Nos partenaires préparent et soumettent votre dossier aux autorités turques compétentes." },
+      { "title": "Approbation et passeport", "desc": "Après approbation, vous et les membres éligibles de votre famille recevez la citoyenneté et les passeports turcs." }
+    ],
+    "benefitsTitle": "Pourquoi investir pour la citoyenneté turque",
+    "benefits": [
+      "Accès sans visa ou avec visa à l'arrivée dans plus de 110 pays",
+      "La citoyenneté s'étend au conjoint et aux enfants de moins de 18 ans",
+      "Aucune obligation de résidence avant ou après l'approbation",
+      "Accès à l'économie et au marché immobilier turcs en pleine croissance",
+      "La double nationalité est autorisée pour la plupart des nationalités"
+    ],
+    "ctaTitle": "Prêt à explorer vos options ?",
+    "ctaText": "Nos conseillers vous présenteront les projets éligibles et l'ensemble de la procédure de citoyenneté.",
+    "ctaButton": "Parler à un conseiller"
+  },
+  "contact": {
+    "heroEyebrow": "Contactez-nous",
+    "heroTitle": "Parlons de votre prochain bien immobilier",
+    "heroSubtitle": "Une question sur un projet, un prix ou la procédure de citoyenneté ? Notre équipe est là pour vous aider.",
+    "formTitle": "Envoyez-nous un message",
+    "formSubtitle": "Les champs marqués d'un * sont obligatoires.",
+    "nameLabel": "Nom complet *",
+    "namePlaceholder": "Votre nom complet",
+    "emailLabel": "Adresse e-mail *",
+    "emailPlaceholder": "vous@exemple.com",
+    "phoneLabel": "Numéro de téléphone *",
+    "phonePlaceholder": "+90 5xx xxx xx xx",
+    "subjectLabel": "Objet",
+    "subjectPlaceholder": "ex. disponibilité Lotus Koru 2",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Parlez-nous un peu de ce que vous recherchez...",
+    "submitButton": "Envoyer le message",
+    "submitting": "Envoi en cours...",
+    "errors": {
+      "nameRequired": "Veuillez saisir votre nom complet.",
+      "emailRequired": "Veuillez saisir votre adresse e-mail.",
+      "emailInvalid": "Veuillez saisir une adresse e-mail valide.",
+      "phoneRequired": "Veuillez saisir votre numéro de téléphone.",
+      "phoneInvalid": "Veuillez saisir un numéro de téléphone valide."
+    },
+    "successTitle": "Merci !",
+    "successText": "Votre message a été préparé. Votre client e-mail va s'ouvrir pour l'envoyer à notre équipe, qui reviendra vers vous rapidement.",
+    "infoTitle": "Informations de contact",
+    "addressTitle": "Bureau",
+    "address": "Adnan Kahveci Mah., Beylikdüzü, Istanbul 34000, Turquie",
+    "phoneTitle": "Téléphone",
+    "emailTitle": "E-mail",
+    "hoursTitle": "Horaires d'ouverture",
+    "hoursText": "Lundi – Samedi, 09h00 – 18h00 (heure d'Istanbul)",
+    "mapTitle": "Nous trouver"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "text": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "button": "Retour à l'accueil"
+  },
+  "projectsData": {
+    "beylikduzu-living": {
+      "name": "Beylikdüzü Living",
+      "tagline": "Un projet résidentiel nouvellement lancé, conçu pour un mode de vie moderne.",
+      "shortDescription": "Construit sur un terrain de 21 000 m², Beylikdüzü Living propose une sélection résidentielle bien pensée, soutenue par des équipements sociaux complets, pour un cadre de vie équilibré.",
+      "longDescription": "Construit sur un terrain de 21 000 m², Beylikdüzü Living propose une sélection résidentielle bien pensée, soutenue par des équipements sociaux complets, pour un cadre de vie équilibré. Des options de paiement échelonné flexibles facilitent l'accès à la propriété, tandis que l'éligibilité à la citoyenneté turque par l'investissement immobilier ajoute une valeur à long terme. Avec une livraison prévue fin 2028, ce projet représente un choix solide, à la fois pour un cadre de vie confortable et pour un investissement durable à Istanbul.",
+      "highlights": [
+        "Terrain de 21 000 m² en plan d'ensemble",
+        "Équipements sociaux complets",
+        "Plans de paiement échelonné flexibles",
+        "Éligible à la citoyenneté turque par investissement",
+        "Livraison prévue fin 2028"
+      ]
+    },
+    "lotus-koru-2": {
+      "name": "Lotus Koru 2",
+      "tagline": "Un nouveau concept de vie urbaine au cœur de Beylikdüzü.",
+      "shortDescription": "Lotus Koru 2 est un projet résidentiel soigneusement conçu à Beylikdüzü, offrant un mode de vie urbain moderne entouré de vastes espaces paysagers et de riches équipements sociaux.",
+      "longDescription": "Lotus Koru 2 est un projet résidentiel soigneusement conçu à Beylikdüzü, offrant un mode de vie urbain moderne entouré de vastes espaces paysagers et de riches équipements sociaux. Construit sur un terrain de 15 005 m², l'ensemble comprend 10 500 m² d'espaces verts paysagers ainsi qu'un parc public de 7 000 m² directement en face du projet — une quantité exceptionnelle d'espaces ouverts et verts pour la vie quotidienne. Lotus Koru 2 compte 13 blocs de 5 étages, offrant 204 appartements sur une surface construite totale d'environ 40 000 m². Sa position centrale à Beylikdüzü permet un accès facile à toutes les parties d'Istanbul, alliant commodité urbaine et cadre résidentiel soigneusement planifié.",
+      "highlights": [
+        "204 appartements répartis sur 13 blocs bas",
+        "Terrain de 15 005 m²",
+        "10 500 m² d'espaces verts paysagers et un parc de 7 000 m² à proximité immédiate",
+        "Position centrale à Beylikdüzü avec un accès facile à tout Istanbul"
+      ]
+    },
+    "lotus-istanbul": {
+      "name": "Lotus İstanbul",
+      "tagline": "Un site emblématique à usage mixte du côté européen d'Istanbul.",
+      "shortDescription": "Lotus İstanbul est un développement à usage mixte moderne situé à Beylikdüzü, réunissant résidences, bureaux et commerces dans une architecture emblématique.",
+      "longDescription": "Lotus İstanbul est un développement à usage mixte moderne situé à Beylikdüzü, réunissant résidences, bureaux et commerces dans une architecture emblématique. Le projet combine 102 bureaux, 62 appartements résidentiels et 47 commerces au sein d'un site unique, stratégiquement situé du côté européen d'Istanbul — conçu pour un fort potentiel locatif autant que pour un quotidien confortable et bien connecté.",
+      "highlights": [
+        "102 bureaux, 62 résidences et 47 commerces",
+        "Site emblématique à usage mixte du côté européen d'Istanbul",
+        "Fort potentiel locatif et de revente",
+        "À proximité immédiate des commodités quotidiennes de Beylikdüzü"
+      ]
+    },
+    "lotus-koru-1": {
+      "name": "Lotus Koru 1",
+      "tagline": "Une vie de plain-pied entourée de nature, au cœur de Beylikdüzü.",
+      "shortDescription": "Lotus Koru 1 est un projet résidentiel bien pensé offrant de vastes espaces paysagers, des bâtiments bas et un cadre de vie confortable à Beylikdüzü.",
+      "longDescription": "Lotus Koru 1 est un projet résidentiel bien pensé offrant de vastes espaces paysagers, des bâtiments bas et un cadre de vie confortable à Beylikdüzü. Les blocs de cinq étages de la résidence s'intègrent dans de larges espaces paysagers et des commerces intégrés, offrant aux résidents un équilibre de vie dans un cadre calme et familial — avec déjà 144 appartements livrés à leurs propriétaires.",
+      "highlights": [
+        "144 appartements répartis sur des blocs bas de cinq étages",
+        "Vastes espaces paysagers",
+        "Commerces intégrés au site",
+        "Cadre calme et familial à Beylikdüzü"
+      ]
+    },
+    "marmara-haven-villa": {
+      "name": "Marmara Haven Villa",
+      "tagline": "Un sanctuaire privé avec vue panoramique sur la mer de Marmara.",
+      "shortDescription": "Marmara Haven Villa est une résidence privée luxueuse offrant des espaces de vie généreux, une intimité totale et une vue panoramique saisissante sur la mer de Marmara.",
+      "longDescription": "Marmara Haven Villa est une résidence privée luxueuse à Büyükçekmece offrant des espaces de vie généreux, une intimité totale et une vue panoramique saisissante sur la mer de Marmara. La villa comprend un salon de 54 m² baigné de lumière naturelle, une chambre principale avec salle de bain privative et dressing, sept salles de bain, une cuisine entièrement équipée, ainsi qu'un toit-terrasse privé doté de sa propre cuisine pour recevoir en extérieur. Une terrasse de 26 m² relie les espaces intérieurs et extérieurs, tandis qu'un système d'interphone intelligent apporte sécurité et confort modernes à cette résidence unique.",
+      "highlights": [
+        "Vue panoramique sur la mer de Marmara",
+        "Piscine privée et toit-terrasse avec cuisine",
+        "Salon de 54 m² baigné de lumière naturelle",
+        "Suite principale avec salle de bain privative et dressing",
+        "Sept salles de bain et domotique intelligente"
+      ]
+    }
+  }
+}
