@@ -37,6 +37,7 @@ export function renderFooter(el: HTMLElement): void {
           <li><a href="#/projects">${t("nav.projects")}</a></li>
           <li><a href="#/about">${t("nav.about")}</a></li>
           <li><a href="#/citizenship">${t("nav.citizenship")}</a></li>
+          <li><a href="#/faq">${t("nav.faq")}</a></li>
           <li><a href="#/contact">${t("nav.contact")}</a></li>
         </ul>
       </div>

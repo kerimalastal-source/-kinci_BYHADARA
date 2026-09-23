@@ -9,9 +9,14 @@
     "projects": "Projects",
     "about": "About Us",
     "citizenship": "Citizenship by Investment",
+    "faq": "FAQ",
     "contact": "Contact",
     "getInTouch": "Get in Touch",
     "search": "Search"
+  },
+  "floatingActions": {
+    "whatsapp": "Chat on WhatsApp",
+    "call": "Call us"
   },
   "lang": {
     "en": "English",
@@ -198,6 +203,88 @@
     "ctaTitle": "Ready to Explore Your Options?",
     "ctaText": "Our advisors will walk you through eligible projects and the full citizenship process.",
     "ctaButton": "Speak With an Advisor"
+  },
+  "faq": {
+    "heroEyebrow": "Support",
+    "heroTitle": "Frequently Asked Questions",
+    "heroSubtitle": "Answers to the questions we hear most often about HADARA, investing in Turkish real estate, and Turkish citizenship by investment.",
+    "categories": [
+      {
+        "title": "About HADARA",
+        "items": [
+          {
+            "q": "Who is HADARA Real Estate?",
+            "a": "HADARA Real Estate is a boutique real estate development and investment company founded in 2014, headquartered in Beylikdüzü, Istanbul. We design, build and deliver residential and mixed-use developments and private villas across Beylikdüzü and Büyükçekmece."
+          },
+          {
+            "q": "What types of projects does HADARA develop?",
+            "a": "Our portfolio spans master-planned residential communities, mixed-use developments combining residences, offices and retail, and bespoke luxury villas — each built with quality construction and long-term value in mind."
+          },
+          {
+            "q": "Where are HADARA's projects located?",
+            "a": "All of our current developments are located on Istanbul's European side, in the fast-growing districts of Beylikdüzü and Büyükçekmece."
+          },
+          {
+            "q": "How can I get in touch with HADARA's team?",
+            "a": "You can reach us through the Contact page, by phone at +90 531 930 92 14, or by email at info@byhadara.com. Our team is available Monday–Saturday, 09:00–18:00 (Istanbul time)."
+          }
+        ]
+      },
+      {
+        "title": "Real Estate Investment in Turkey",
+        "items": [
+          {
+            "q": "Why invest in real estate in Istanbul?",
+            "a": "Istanbul combines a growing economy, expanding infrastructure and strong rental demand, making it one of the most attractive real estate markets connecting Europe and Asia. Districts like Beylikdüzü and Büyükçekmece are among the fastest-growing on the European side."
+          },
+          {
+            "q": "Can foreign nationals buy property in Turkey?",
+            "a": "Yes. Citizens of most countries can freely purchase residential and commercial property in Turkey, subject to standard title deed procedures. Our team guides international buyers through every step."
+          },
+          {
+            "q": "What payment options are available?",
+            "a": "HADARA offers flexible installment payment plans on select projects, in addition to standard cash purchase, making it easier for both residents and investors to secure a unit."
+          },
+          {
+            "q": "What costs should I budget for beyond the purchase price?",
+            "a": "Typical additional costs include the title deed transfer fee, the appraisal report, and standard administrative charges. Our team will walk you through the full cost breakdown for any project you're interested in."
+          },
+          {
+            "q": "Is buying property in Turkey a good rental investment?",
+            "a": "Istanbul's strong tourism and population growth support healthy rental demand, particularly in mixed-use and centrally located developments such as Lotus İstanbul."
+          }
+        ]
+      },
+      {
+        "title": "Turkish Citizenship by Real Estate Purchase",
+        "items": [
+          {
+            "q": "How can I obtain Turkish citizenship by buying property?",
+            "a": "Turkey's citizenship-by-investment program allows foreign nationals who purchase qualifying real estate above a minimum value, and hold it for at least three years, to apply for Turkish citizenship."
+          },
+          {
+            "q": "What is the minimum investment amount required?",
+            "a": "Under the current program rules, the minimum qualifying real estate investment is $400,000 USD (or equivalent). HADARA's team can confirm which of our projects meet this threshold."
+          },
+          {
+            "q": "Does citizenship extend to my family?",
+            "a": "Yes. Your spouse and children under 18 are included in the same citizenship application at no additional investment."
+          },
+          {
+            "q": "How long does the process take?",
+            "a": "After the property purchase and valuation report are completed, the citizenship application typically takes a few months to be reviewed and approved by the Turkish authorities."
+          },
+          {
+            "q": "Can I keep my current nationality?",
+            "a": "Yes. Turkey permits dual citizenship for most nationalities, so you are not required to give up your original citizenship."
+          },
+          {
+            "q": "Do I need to live in Turkey to qualify?",
+            "a": "No. There is no residency requirement before or after approval — you can maintain the property as an investment without relocating."
+          }
+        ]
+      }
+    ]
   },
   "contact": {
     "heroEyebrow": "Contact Us",

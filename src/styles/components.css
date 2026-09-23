@@ -952,3 +952,108 @@
 .not-found__inner .btn {
   margin-top: var(--space-md);
 }
+
+/* ---------- Floating action buttons ---------- */
+/* Fixed to the physical right edge of the viewport on purpose (not a
+   logical inset-inline-end): this matches the universal WhatsApp/call
+   widget convention and stays in the same spot regardless of language. */
+.floating-actions {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.floating-actions__btn {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  color: var(--color-on-primary);
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition);
+}
+
+.floating-actions__btn:hover {
+  transform: translateY(-3px);
+}
+
+.floating-actions__btn--whatsapp {
+  background: #25d366;
+}
+
+.floating-actions__btn--call {
+  background: var(--color-primary);
+}
+
+@media (max-width: 640px) {
+  .floating-actions {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .floating-actions__btn {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* ---------- FAQ ---------- */
+.faq-category {
+  margin-bottom: var(--space-xl);
+}
+
+.faq-category:last-child {
+  margin-bottom: 0;
+}
+
+.faq-category__title {
+  margin-bottom: var(--space-md);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.2rem;
+}
+
+.faq-item__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  cursor: pointer;
+  list-style: none;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.faq-item__question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item__question svg {
+  flex-shrink: 0;
+  color: var(--color-accent-dark);
+  transition: transform var(--transition);
+}
+
+.faq-item[open] .faq-item__question svg {
+  transform: rotate(180deg);
+}
+
+.faq-item__answer {
+  margin: 0.75rem 0 0;
+  color: var(--color-ink-soft);
+}

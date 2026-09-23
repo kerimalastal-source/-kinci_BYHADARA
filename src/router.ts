@@ -3,10 +3,12 @@ import { renderProjects } from "./pages/projects";
 import { renderProjectDetail } from "./pages/projectDetail";
 import { renderAbout } from "./pages/about";
 import { renderCitizenship } from "./pages/citizenship";
+import { renderFaq } from "./pages/faq";
 import { renderContact } from "./pages/contact";
 import { renderNotFound } from "./pages/notFound";
 import { renderHeader } from "./components/header";
 import { renderFooter } from "./components/footer";
+import { renderFloatingButtons } from "./components/floatingButtons";
 import { onLocaleChange } from "./i18n";
 import { closeSearch } from "./components/search";
 
@@ -16,6 +18,7 @@ export type Route =
   | { name: "project"; slug: string }
   | { name: "about" }
   | { name: "citizenship" }
+  | { name: "faq" }
   | { name: "contact" }
   | { name: "not-found" };
 
@@ -28,6 +31,7 @@ function parseHash(): Route {
   if (segment === "projects") return { name: "projects" };
   if (segment === "about") return { name: "about" };
   if (segment === "citizenship") return { name: "citizenship" };
+  if (segment === "faq") return { name: "faq" };
   if (segment === "contact") return { name: "contact" };
   return { name: "not-found" };
 }
@@ -53,6 +57,9 @@ function renderRoute(route: Route, main: HTMLElement): void {
     case "citizenship":
       renderCitizenship(main);
       break;
+    case "faq":
+      renderFaq(main);
+      break;
     case "contact":
       renderContact(main);
       break;
@@ -68,12 +75,14 @@ export function startRouter(root: HTMLElement): void {
       <header id="site-header"></header>
       <main id="main-content"></main>
       <footer id="site-footer"></footer>
+      <div id="floating-actions"></div>
     </div>
   `;
 
   const header = root.querySelector<HTMLElement>("#site-header")!;
   const main = root.querySelector<HTMLElement>("#main-content")!;
   const footer = root.querySelector<HTMLElement>("#site-footer")!;
+  const floatingActions = root.querySelector<HTMLElement>("#floating-actions")!;
 
   function renderAll(): void {
     closeSearch();
@@ -81,6 +90,7 @@ export function startRouter(root: HTMLElement): void {
     renderHeader(header, route);
     renderRoute(route, main);
     renderFooter(footer);
+    renderFloatingButtons(floatingActions);
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }
 
