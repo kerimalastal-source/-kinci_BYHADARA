@@ -2,15 +2,25 @@ import type { Route } from "../router";
 import { t, tRaw, getLocale, setLocale, locales, type Locale } from "../i18n";
 import { openSearch } from "./search";
 
-const NAV_ITEMS: { route: string; key: string; match: Route["name"][] }[] = [
+interface NavLink {
+  route: string;
+  key: string;
+  match: Route["name"][];
+}
+
+const NAV_LINKS: NavLink[] = [
   { route: "#/", key: "nav.home", match: ["home"] },
   { route: "#/projects", key: "nav.projects", match: ["projects", "project"] },
-  { route: "#/about", key: "nav.about", match: ["about"] },
+  { route: "#/about", key: "nav.about", match: ["about"] }
+];
+
+const NAV_RESOURCES: NavLink[] = [
   { route: "#/citizenship", key: "nav.citizenship", match: ["citizenship"] },
   { route: "#/blog", key: "nav.blog", match: ["blog", "blog-post"] },
-  { route: "#/faq", key: "nav.faq", match: ["faq"] },
-  { route: "#/contact", key: "nav.contact", match: ["contact"] }
+  { route: "#/faq", key: "nav.faq", match: ["faq"] }
 ];
+
+const NAV_TAIL: NavLink[] = [{ route: "#/contact", key: "nav.contact", match: ["contact"] }];
 
 export function renderHeader(el: HTMLElement, route: Route): void {
   const locale = getLocale();
@@ -29,7 +39,35 @@ export function renderHeader(el: HTMLElement, route: Route): void {
 
       <nav class="main-nav" id="main-nav" aria-label="Main navigation">
         <ul class="main-nav__list">
-          ${NAV_ITEMS.map(
+          ${NAV_LINKS.map(
+            (item) => `
+            <li>
+              <a class="main-nav__link${item.match.includes(route.name) ? " is-active" : ""}" href="${item.route}">
+                ${t(item.key)}
+              </a>
+            </li>`
+          ).join("")}
+          <li class="nav-group">
+            <button
+              type="button"
+              class="main-nav__link nav-group__toggle${NAV_RESOURCES.some((item) => item.match.includes(route.name)) ? " is-active" : ""}"
+              id="resources-toggle"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              ${t("nav.resources")}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <ul class="nav-group__menu" id="resources-menu" hidden>
+              ${NAV_RESOURCES.map(
+                (item) => `
+                <li>
+                  <a class="nav-group__link${item.match.includes(route.name) ? " is-active" : ""}" href="${item.route}">${t(item.key)}</a>
+                </li>`
+              ).join("")}
+            </ul>
+          </li>
+          ${NAV_TAIL.map(
             (item) => `
             <li>
               <a class="main-nav__link${item.match.includes(route.name) ? " is-active" : ""}" href="${item.route}">
@@ -101,12 +139,26 @@ export function renderHeader(el: HTMLElement, route: Route): void {
       setLocale(li.dataset.lang as Locale);
     });
   });
+
+  const resourcesToggle = el.querySelector<HTMLButtonElement>("#resources-toggle")!;
+  const resourcesMenu = el.querySelector<HTMLUListElement>("#resources-menu")!;
+  resourcesToggle.addEventListener("click", () => {
+    const hidden = resourcesMenu.hasAttribute("hidden");
+    if (hidden) resourcesMenu.removeAttribute("hidden");
+    else resourcesMenu.setAttribute("hidden", "");
+    resourcesToggle.setAttribute("aria-expanded", String(hidden));
+  });
+
   document.addEventListener(
     "click",
     (e) => {
       if (!el.contains(e.target as Node)) return;
       if (!(e.target as HTMLElement).closest(".lang-switch")) {
         langMenu.setAttribute("hidden", "");
+      }
+      if (!(e.target as HTMLElement).closest(".nav-group")) {
+        resourcesMenu.setAttribute("hidden", "");
+        resourcesToggle.setAttribute("aria-expanded", "false");
       }
     },
     { capture: true }
