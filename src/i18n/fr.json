@@ -9,6 +9,7 @@
     "projects": "Projets",
     "about": "À propos",
     "citizenship": "Citoyenneté par investissement",
+    "blog": "Blog",
     "faq": "FAQ",
     "contact": "Contact",
     "getInTouch": "Nous contacter",
@@ -388,6 +389,116 @@
         "Salon de 54 m² baigné de lumière naturelle",
         "Suite principale avec salle de bain privative et dressing",
         "Sept salles de bain et domotique intelligente"
+      ]
+    }
+  },
+  "blog": {
+    "heroEyebrow": "Actualités",
+    "heroTitle": "Le Blog Immobilier HADARA",
+    "heroSubtitle": "Guides et analyses sur le marché immobilier turc, Istanbul, la vie en Turquie et la citoyenneté par investissement immobilier.",
+    "readMore": "Lire l'article",
+    "backLabel": "Retour au blog",
+    "otherArticlesTitle": "D'autres articles à lire"
+  },
+  "blogData": {
+    "real-estate-in-turkey": {
+      "category": "Immobilier",
+      "title": "Comprendre le marché immobilier turc",
+      "excerpt": "Un aperçu pratique de ce qui rend le marché immobilier turc attractif, pour les résidents comme pour les acheteurs internationaux.",
+      "body": [
+        "Le marché immobilier turc a connu une croissance constante au cours de la dernière décennie, portée par une population jeune, une urbanisation rapide et une position stratégique reliant l'Europe et l'Asie. Istanbul reste le marché le plus vaste et le plus liquide du pays, avec une demande répartie entre le résidentiel, le mixte et le commercial.",
+        "Pour les acheteurs, le marché offre un large éventail d'options — des appartements abordables dans des quartiers émergents aux résidences et villas haut de gamme dans des quartiers établis. Les prix varient considérablement selon le quartier, la proximité des axes de transport et la qualité de la construction et des équipements.",
+        "Qu'il s'agisse d'acheter une résidence principale ou un bien d'investissement, faire appel à un promoteur qui maîtrise la réglementation locale, les normes de construction et les délais de livraison — comme HADARA — facilite grandement le parcours, de la première visite à la remise des clés."
+      ]
+    },
+    "citizenship-by-real-estate": {
+      "category": "Citoyenneté par investissement",
+      "title": "Comment l'investissement immobilier ouvre la voie à la citoyenneté turque",
+      "excerpt": "Un aperçu de la façon dont l'achat d'un bien éligible en Turquie peut ouvrir la voie à la citoyenneté turque pour vous et votre famille.",
+      "body": [
+        "Le programme turc de citoyenneté par investissement est l'une des voies les plus accessibles vers une seconde nationalité dans le monde. En achetant un bien immobilier au-dessus du seuil minimum requis et en le conservant pendant au moins trois ans, les ressortissants étrangers peuvent demander la citoyenneté turque pour eux-mêmes et leur famille proche.",
+        "L'intérêt va au-delà du passeport lui-même : les investisseurs accèdent à un marché immobilier en croissance, à un potentiel de revenus locatifs, et à un ancrage dans un pays qui relie l'Europe, l'Asie et le Moyen-Orient.",
+        "La procédure comprend l'achat du bien, un rapport d'expertise officiel, puis le dépôt d'une demande de citoyenneté auprès des autorités compétentes. L'équipe de HADARA accompagne les investisseurs à chacune de ces étapes, du choix d'un projet éligible jusqu'à l'approbation finale."
+      ]
+    },
+    "about-turkey": {
+      "category": "À propos de la Turquie",
+      "title": "Découvrir la Turquie : un pays entre deux continents",
+      "excerpt": "Une brève introduction à la géographie, l'économie et la culture de la Turquie pour les futurs investisseurs et résidents.",
+      "body": [
+        "La Turquie s'étend sur deux continents, Istanbul elle-même chevauchant l'Europe et l'Asie de part et d'autre du Bosphore. Cette position unique a façonné l'histoire, la culture et l'économie du pays pendant des siècles, en faisant un pont naturel pour le commerce, les voyages et l'investissement.",
+        "Avec une population de plus de 85 millions d'habitants et l'une des plus grandes économies émergentes au monde, la Turquie combine une main-d'œuvre jeune et dynamique, une classe moyenne en croissance et des infrastructures en expansion — autoroutes, aéroports et lignes de métro reliant ses grandes villes.",
+        "Du littoral méditerranéen aux montagnes d'Anatolie, la diversité de la Turquie va bien au-delà d'Istanbul, mais c'est l'échelle et la connectivité d'Istanbul qui continuent d'attirer la plus grande part des résidents comme des investisseurs internationaux."
+      ]
+    },
+    "about-istanbul": {
+      "category": "À propos d'Istanbul",
+      "title": "Istanbul : la ville où se rencontrent les continents",
+      "excerpt": "Pourquoi Istanbul reste l'une des villes les plus attractives pour vivre, travailler et investir.",
+      "body": [
+        "Istanbul est la plus grande ville de Turquie et son cœur économique, avec plus de 15 millions d'habitants. Sa position sur le Bosphore, reliant la mer Noire à la mer de Marmara, en a fait un centre de commerce et de culture depuis des millénaires.",
+        "Aujourd'hui, Istanbul mêle quartiers historiques et zones en développement rapide comme Beylikdüzü et Büyükçekmece côté européen, où de nouvelles infrastructures, centres commerciaux et ensembles résidentiels continuent de redessiner l'horizon de la ville.",
+        "Pour les résidents, Istanbul offre un mélange rare d'histoire, de culture, de littoral et de vie urbaine moderne. Pour les investisseurs, son échelle, sa connectivité et sa croissance démographique constante continuent de soutenir une demande durable, tant pour l'habitat que pour la location."
+      ]
+    },
+    "life-in-turkey": {
+      "category": "Vivre en Turquie",
+      "title": "Comment se vit le quotidien en Turquie",
+      "excerpt": "Un aperçu de la vie quotidienne, du coût de la vie et de ce à quoi s'attendre en s'installant en Turquie.",
+      "body": [
+        "La vie en Turquie associe un rythme méditerranéen détendu au confort des grandes villes modernes. L'hospitalité turque est bien connue, et la plupart des zones urbaines offrent un mélange agréable de culture locale et de commodités internationales — écoles internationales, centres commerciaux et établissements de santé.",
+        "Comparé à de nombreux pays européens, le coût de la vie en Turquie reste attractif, notamment pour les dépenses quotidiennes comme les courses, les repas au restaurant et les transports, tandis que des logements de qualité sont disponibles pour tous les budgets.",
+        "Pour les résidents internationaux, la présence croissante de communautés expatriées dans des zones comme Beylikdüzü facilite l'installation, avec des services — de la banque à la scolarité — de plus en plus adaptés pour accompagner les nouveaux arrivants."
+      ]
+    },
+    "buying-property-and-tapu": {
+      "category": "Achat immobilier",
+      "title": "Comment acheter un bien en Turquie et l'enregistrer au titre de propriété (Tapu)",
+      "excerpt": "Un aperçu étape par étape du processus d'achat immobilier, de la réservation à la remise de votre Tapu.",
+      "body": [
+        "L'achat d'un bien en Turquie suit généralement une séquence claire : choisir un logement, signer un contrat de réservation, effectuer le paiement (comptant ou échelonné), puis transférer le titre de propriété — appelé localement le Tapu — auprès du bureau du cadastre.",
+        "Le Tapu est le document officiel attestant la propriété et il est nécessaire pour que le bien soit légalement enregistré au nom de l'acheteur. Dans le cadre de la procédure, un rapport d'expertise officiel est établi, et les deux parties (ou leurs représentants autorisés) se présentent au bureau du titre de propriété pour finaliser le transfert.",
+        "L'équipe de HADARA coordonne chacune de ces étapes pour le compte de nos acheteurs — de la préparation des documents requis à l'accompagnement de vous-même ou de votre représentant au bureau du cadastre — afin que le transfert soit réalisé correctement et dans les délais."
+      ]
+    },
+    "taxes-and-tapu-fees": {
+      "category": "Taxes et frais",
+      "title": "Comprendre la taxe foncière et les frais de titre de propriété (Tapu) en Turquie",
+      "excerpt": "Un récapitulatif clair des taxes et frais à prévoir lors de l'achat d'un bien en Turquie.",
+      "body": [
+        "Au-delà du prix d'achat, les acheteurs doivent prévoir un nombre restreint de frais standards. Le plus important est le frais de transfert du titre de propriété (Tapu), calculé en pourcentage de la valeur déclarée du bien et généralement partagé entre l'acheteur et le vendeur.",
+        "Une taxe foncière annuelle est également due à la municipalité locale une fois le bien enregistré, et représente généralement un pourcentage modeste de la valeur estimée du bien — bien inférieur aux taxes foncières de nombreux autres pays.",
+        "Des frais supplémentaires peuvent inclure les frais du rapport d'expertise et les frais administratifs standards. Notre équipe fournit un détail complet des coûts pour tout projet avant votre engagement, afin d'éviter toute surprise pendant l'achat."
+      ]
+    },
+    "real-estate-valuation": {
+      "category": "Expertise immobilière",
+      "title": "Pourquoi l'expertise immobilière compte lors d'un achat",
+      "excerpt": "Ce qu'est un rapport d'expertise immobilière, pourquoi il est requis, et comment il protège les acheteurs.",
+      "body": [
+        "Un rapport d'expertise immobilière est une évaluation officielle de la valeur marchande d'un bien, réalisée par un expert agréé. En Turquie, ce rapport est une étape obligatoire avant le transfert du titre de propriété, et il est également requis pour les acheteurs étrangers demandant la citoyenneté par investissement.",
+        "L'expertise prend en compte des facteurs tels que l'emplacement, la qualité de la construction, la surface et les ventes comparables dans la zone, offrant une référence objective qui protège l'acheteur comme le vendeur d'une sur- ou sous-évaluation.",
+        "Pour les investisseurs, le rapport d'expertise constitue également un enregistrement officiel de la valeur du bien au moment de l'achat — une pièce utile pour une future revente, un financement, ou la procédure de demande de citoyenneté."
+      ]
+    },
+    "citizenship-investment-laws": {
+      "category": "Droit de la citoyenneté",
+      "title": "Le droit turc de la citoyenneté par investissement, expliqué",
+      "excerpt": "Le cadre juridique du programme turc de citoyenneté par investissement, et ce qu'il implique pour les acheteurs.",
+      "body": [
+        "Le programme turc de citoyenneté par investissement est régi par des règlements pris en application du droit de la citoyenneté turque, qui définissent les voies d'investissement éligibles — dont l'achat immobilier au-dessus d'une valeur minimale — et les conditions que doivent remplir les candidats.",
+        "Selon les règles actuelles, un ressortissant étranger qui achète un bien immobilier éligible et s'engage à ne pas le vendre pendant au moins trois ans peut demander la citoyenneté, ainsi que pour son conjoint et ses enfants de moins de 18 ans, sans investissement supplémentaire.",
+        "Ces règlements pouvant être modifiés par le gouvernement turc, il est important de collaborer avec une équipe qui suit l'actualité des exigences. Les conseillers de HADARA confirment les seuils et les exigences documentaires les plus récents avant tout engagement d'achat."
+      ]
+    },
+    "real-estate-market-trends": {
+      "category": "Tendances du marché",
+      "title": "Les tendances immobilières à suivre à Istanbul",
+      "excerpt": "Un tour d'horizon des tendances qui façonnent la demande, les prix et la conception dans les quartiers en croissance d'Istanbul.",
+      "body": [
+        "Le marché immobilier d'Istanbul continue d'évoluer, la demande se concentrant de plus en plus sur des quartiers bien connectés et soigneusement planifiés, offrant un mélange d'espaces résidentiels, commerciaux et verts plutôt que de simples immeubles isolés.",
+        "Les développements à usage mixte — combinant logements, bureaux et commerces au sein d'un même projet — ont gagné en popularité, offrant aux résidents comme aux investisseurs un meilleur potentiel locatif et davantage de commodité au quotidien.",
+        "Parallèlement, les acheteurs accordent aujourd'hui plus d'importance à la qualité de construction, à l'efficacité énergétique et aux équipements collectifs qu'auparavant, une évolution qui continue d'influencer la façon dont des promoteurs comme HADARA conçoivent et livrent leurs nouveaux projets."
       ]
     }
   }

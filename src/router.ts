@@ -4,6 +4,8 @@ import { renderProjectDetail } from "./pages/projectDetail";
 import { renderAbout } from "./pages/about";
 import { renderCitizenship } from "./pages/citizenship";
 import { renderFaq } from "./pages/faq";
+import { renderBlog } from "./pages/blog";
+import { renderBlogDetail } from "./pages/blogDetail";
 import { renderContact } from "./pages/contact";
 import { renderNotFound } from "./pages/notFound";
 import { renderHeader } from "./components/header";
@@ -19,6 +21,8 @@ export type Route =
   | { name: "about" }
   | { name: "citizenship" }
   | { name: "faq" }
+  | { name: "blog" }
+  | { name: "blog-post"; slug: string }
   | { name: "contact" }
   | { name: "not-found" };
 
@@ -32,6 +36,8 @@ function parseHash(): Route {
   if (segment === "about") return { name: "about" };
   if (segment === "citizenship") return { name: "citizenship" };
   if (segment === "faq") return { name: "faq" };
+  if (segment === "blog" && param) return { name: "blog-post", slug: param };
+  if (segment === "blog") return { name: "blog" };
   if (segment === "contact") return { name: "contact" };
   return { name: "not-found" };
 }
@@ -59,6 +65,12 @@ function renderRoute(route: Route, main: HTMLElement): void {
       break;
     case "faq":
       renderFaq(main);
+      break;
+    case "blog":
+      renderBlog(main);
+      break;
+    case "blog-post":
+      renderBlogDetail(main, route.slug);
       break;
     case "contact":
       renderContact(main);

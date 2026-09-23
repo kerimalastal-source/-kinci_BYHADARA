@@ -7,6 +7,7 @@ const NAV_ITEMS: { route: string; key: string; match: Route["name"][] }[] = [
   { route: "#/projects", key: "nav.projects", match: ["projects", "project"] },
   { route: "#/about", key: "nav.about", match: ["about"] },
   { route: "#/citizenship", key: "nav.citizenship", match: ["citizenship"] },
+  { route: "#/blog", key: "nav.blog", match: ["blog", "blog-post"] },
   { route: "#/faq", key: "nav.faq", match: ["faq"] },
   { route: "#/contact", key: "nav.contact", match: ["contact"] }
 ];

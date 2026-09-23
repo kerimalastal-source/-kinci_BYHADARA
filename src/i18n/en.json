@@ -9,6 +9,7 @@
     "projects": "Projects",
     "about": "About Us",
     "citizenship": "Citizenship by Investment",
+    "blog": "Blog",
     "faq": "FAQ",
     "contact": "Contact",
     "getInTouch": "Get in Touch",
@@ -388,6 +389,116 @@
         "54 m² living room bathed in natural light",
         "Master suite with en-suite bathroom and walk-in closet",
         "Seven bathrooms and smart-home technology"
+      ]
+    }
+  },
+  "blog": {
+    "heroEyebrow": "Insights",
+    "heroTitle": "The HADARA Real Estate Blog",
+    "heroSubtitle": "Guides and insights on the Turkish property market, Istanbul, life in Turkey, and citizenship by real estate investment.",
+    "readMore": "Read Article",
+    "backLabel": "Back to Blog",
+    "otherArticlesTitle": "More Articles to Read"
+  },
+  "blogData": {
+    "real-estate-in-turkey": {
+      "category": "Real Estate",
+      "title": "Understanding the Turkish Real Estate Market",
+      "excerpt": "A practical look at what makes Turkey's property market attractive to both residents and international buyers.",
+      "body": [
+        "Turkey's real estate market has grown steadily over the past decade, driven by a young population, rapid urbanization, and a strategic location bridging Europe and Asia. Istanbul remains the country's largest and most liquid market, with demand spread across residential, mixed-use and commercial segments.",
+        "For buyers, the market offers a wide range of options — from affordable apartments in emerging districts to premium residences and villas in established neighborhoods. Prices vary significantly by district, proximity to transport links, and the quality of construction and amenities.",
+        "Whether you're buying a home or an investment property, working with a developer who understands local regulations, construction standards and delivery timelines — like HADARA — makes the process considerably smoother from first viewing to final handover."
+      ]
+    },
+    "citizenship-by-real-estate": {
+      "category": "Citizenship by Investment",
+      "title": "How Real Estate Investment Leads to Turkish Citizenship",
+      "excerpt": "An overview of how buying qualifying property in Turkey can open the door to Turkish citizenship for you and your family.",
+      "body": [
+        "Turkey's citizenship-by-investment program is one of the most accessible routes to a second citizenship worldwide. By purchasing real estate above the minimum investment threshold and holding it for at least three years, foreign nationals can apply for Turkish citizenship for themselves and their immediate family.",
+        "The appeal goes beyond the passport itself: investors gain exposure to a growing property market, rental income potential, and a foothold in a country connecting Europe, Asia and the Middle East.",
+        "The process involves property purchase, an official valuation report, and a citizenship application submitted to the relevant authorities. HADARA's team supports investors through each of these steps, from selecting a qualifying project to final approval."
+      ]
+    },
+    "about-turkey": {
+      "category": "About Turkey",
+      "title": "Getting to Know Turkey: A Country Between Two Continents",
+      "excerpt": "A brief introduction to Turkey's geography, economy and culture for prospective investors and residents.",
+      "body": [
+        "Turkey spans two continents, with Istanbul itself straddling Europe and Asia across the Bosphorus. This unique position has shaped the country's history, culture and economy for centuries, making it a natural bridge for trade, travel and investment.",
+        "With a population of over 85 million and one of the world's largest emerging economies, Turkey combines a young, dynamic workforce with a growing middle class and expanding infrastructure — highways, airports, and metro lines connecting its major cities.",
+        "From the Mediterranean coastline to the mountains of Anatolia, Turkey's diversity extends well beyond Istanbul, but it is Istanbul's scale and connectivity that continues to draw the largest share of both residents and international investors."
+      ]
+    },
+    "about-istanbul": {
+      "category": "About Istanbul",
+      "title": "Istanbul: The City Where Continents Meet",
+      "excerpt": "Why Istanbul remains one of the most compelling cities for living, working and investing.",
+      "body": [
+        "Istanbul is Turkey's largest city and its economic heart, home to over 15 million people. Its position on the Bosphorus, linking the Black Sea to the Sea of Marmara, has made it a center of trade and culture for thousands of years.",
+        "Today, Istanbul blends historic neighborhoods with rapidly developing districts like Beylikdüzü and Büyükçekmece on the European side, where new infrastructure, shopping centers and residential communities continue to reshape the skyline.",
+        "For residents, Istanbul offers a rare mix of history, culture, coastline and modern city life. For investors, its scale, connectivity and steady population growth continue to support long-term demand for both housing and rental properties."
+      ]
+    },
+    "life-in-turkey": {
+      "category": "Life in Turkey",
+      "title": "What It's Like to Live in Turkey",
+      "excerpt": "A look at daily life, cost of living and what to expect when settling in Turkey.",
+      "body": [
+        "Life in Turkey combines a relaxed Mediterranean pace with the convenience of large modern cities. Turkish hospitality is well known, and most urban areas offer a comfortable blend of local culture and international amenities — from international schools to shopping malls and healthcare facilities.",
+        "Compared to many European countries, the cost of living in Turkey remains attractive, particularly for daily expenses such as groceries, dining out and transportation, while quality housing is available across a wide range of budgets.",
+        "For international residents, the growing presence of expat communities in areas like Beylikdüzü makes settling in easier, with many services — from banking to schooling — increasingly set up to support newcomers."
+      ]
+    },
+    "buying-property-and-tapu": {
+      "category": "Buying Property",
+      "title": "How to Buy Property in Turkey and Register the Title Deed (Tapu)",
+      "excerpt": "A step-by-step look at the property purchase process, from reservation to receiving your Tapu.",
+      "body": [
+        "Buying property in Turkey generally follows a clear sequence: selecting a unit, signing a reservation agreement, completing payment (in cash or installments), and finally transferring the title deed — known locally as the Tapu — at the Land Registry Office.",
+        "The Tapu is the official document proving ownership and is required for the property to be legally registered in the buyer's name. As part of the process, an official valuation report is prepared, and both parties (or their authorized representatives) attend the title deed office to finalize the transfer.",
+        "HADARA's team coordinates each of these steps on behalf of our buyers — from preparing the required documents to accompanying you or your representative to the Land Registry Office — so the transfer is completed correctly and on time."
+      ]
+    },
+    "taxes-and-tapu-fees": {
+      "category": "Taxes & Fees",
+      "title": "Understanding Property Tax and Title Deed (Tapu) Fees in Turkey",
+      "excerpt": "A clear breakdown of the taxes and fees to budget for when purchasing property in Turkey.",
+      "body": [
+        "Beyond the purchase price, buyers should budget for a small number of standard fees. The most significant is the title deed (Tapu) transfer fee, which is calculated as a percentage of the property's declared value and is typically shared between buyer and seller.",
+        "Annual property tax is also payable to the local municipality once the property is registered, and is generally a modest percentage of the property's assessed value — far lower than property taxes in many other countries.",
+        "Additional costs may include the valuation report fee and standard administrative charges. Our team provides a full cost breakdown for any project before you commit, so there are no surprises during the purchase process."
+      ]
+    },
+    "real-estate-valuation": {
+      "category": "Valuation",
+      "title": "Why Real Estate Valuation Matters When Buying Property",
+      "excerpt": "What a property valuation report is, why it's required, and how it protects buyers.",
+      "body": [
+        "A real estate valuation report is an official assessment of a property's market value, prepared by a licensed appraiser. In Turkey, this report is a mandatory step before the title deed transfer, and it is also required for foreign buyers applying for citizenship by investment.",
+        "The valuation considers factors such as location, construction quality, size, and comparable sales in the area, providing an objective benchmark that protects both buyer and seller from over- or under-valuation.",
+        "For investors, the valuation report also serves as an official record of the property's value at the time of purchase — useful documentation for future resale, financing, or the citizenship application process."
+      ]
+    },
+    "citizenship-investment-laws": {
+      "category": "Citizenship Law",
+      "title": "Turkey's Citizenship-by-Investment Laws, Explained",
+      "excerpt": "The legal framework behind Turkey's citizenship-by-investment program, and what it means for buyers.",
+      "body": [
+        "Turkey's citizenship-by-investment program is governed by regulations issued under Turkish citizenship law, which set out the qualifying investment routes — including real estate purchase above a minimum value — and the conditions applicants must meet.",
+        "Under current rules, a foreign national who purchases qualifying real estate and undertakes not to sell it for at least three years may apply for citizenship, along with a spouse and children under 18, without any additional investment.",
+        "Because these regulations can be updated by the Turkish government, it's important to work with a team that stays current on the requirements. HADARA's advisors confirm the latest thresholds and documentation requirements before you commit to a purchase."
+      ]
+    },
+    "real-estate-market-trends": {
+      "category": "Market Trends",
+      "title": "Real Estate Trends Worth Watching in Istanbul",
+      "excerpt": "A roundup of the trends shaping demand, pricing and design across Istanbul's growing districts.",
+      "body": [
+        "Istanbul's real estate market continues to evolve, with demand increasingly concentrated in well-connected, master-planned districts that offer a mix of residential, retail and green space rather than standalone apartment blocks.",
+        "Mixed-use developments — combining homes, offices and retail in a single project — have grown in popularity, offering both residents and investors stronger rental potential and everyday convenience.",
+        "At the same time, buyers are placing more weight on construction quality, energy efficiency and social amenities than in previous years, a shift that continues to shape how developers like HADARA plan and deliver new projects."
       ]
     }
   }
