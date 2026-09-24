@@ -321,7 +321,7 @@
 }
 
 @media (max-width: 1400px) {
-  .header-cta {
+  .header-actions .header-cta {
     display: none;
   }
 
@@ -359,6 +359,54 @@
 
   .menu-toggle {
     display: inline-flex;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header__inner {
+    gap: var(--space-sm);
+    height: 84px;
+  }
+
+  .main-nav {
+    top: 84px;
+  }
+
+  .brand {
+    gap: 0.5rem;
+  }
+
+  .brand__logo {
+    height: 40px;
+  }
+
+  .brand__tagline {
+    display: none;
+  }
+
+  .brand__name {
+    font-size: 1.15rem;
+  }
+
+  .header-actions {
+    gap: 0.4rem;
+  }
+
+  .icon-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .lang-switch__current {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.72rem;
+  }
+
+  .account-switch__login,
+  .account-switch__current {
+    padding: 0.3rem 0.55rem;
+    font-size: 0.72rem;
+    max-width: 84px;
   }
 }
 
