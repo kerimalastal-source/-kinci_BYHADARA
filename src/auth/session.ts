@@ -42,6 +42,10 @@ async function loadProfile(userId: string): Promise<Profile | null> {
 }
 
 async function refreshState(): Promise<void> {
+  const wasLoading = state.loading;
+  const prevUserId = state.userId;
+  const prevRole = state.profile?.role ?? null;
+
   const { data } = await supabase.auth.getSession();
   const session = data.session;
   if (session?.user) {
@@ -54,7 +58,13 @@ async function refreshState(): Promise<void> {
     state.profile = null;
   }
   state.loading = false;
-  notify();
+
+  // Only re-render the app when auth actually changed (e.g. signUp() before email
+  // confirmation leaves the visitor anonymous) — otherwise a full router re-render
+  // would blow away whatever page-local UI state the caller is about to update
+  // (e.g. register.ts swapping the form for a "check your email" message).
+  const roleChanged = prevRole !== (state.profile?.role ?? null);
+  if (wasLoading || prevUserId !== state.userId || roleChanged) notify();
 }
 
 supabase.auth.onAuthStateChange(() => {
