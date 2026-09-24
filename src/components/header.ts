@@ -18,6 +18,7 @@ const NAV_LINKS: NavLink[] = [
 
 const NAV_RESOURCES: NavLink[] = [
   { route: "#/citizenship", key: "nav.citizenship", match: ["citizenship"] },
+  { route: "#/property-request", key: "nav.propertyRequest", match: ["property-request"] },
   { route: "#/blog", key: "nav.blog", match: ["blog", "blog-post"] },
   { route: "#/faq", key: "nav.faq", match: ["faq"] }
 ];

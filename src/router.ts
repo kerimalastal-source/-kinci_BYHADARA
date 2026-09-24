@@ -6,6 +6,7 @@ import { renderCitizenship } from "./pages/citizenship";
 import { renderFaq } from "./pages/faq";
 import { renderBlog } from "./pages/blog";
 import { renderBlogDetail } from "./pages/blogDetail";
+import { renderPropertyRequest } from "./pages/propertyRequest";
 import { renderContact } from "./pages/contact";
 import { renderNotFound } from "./pages/notFound";
 import { renderLogin } from "./pages/login";
@@ -32,6 +33,7 @@ export type Route =
   | { name: "faq" }
   | { name: "blog" }
   | { name: "blog-post"; slug: string }
+  | { name: "property-request" }
   | { name: "contact" }
   | { name: "login" }
   | { name: "register" }
@@ -57,6 +59,7 @@ function parseHash(): Route {
   if (segment === "faq") return { name: "faq" };
   if (segment === "blog" && p1) return { name: "blog-post", slug: p1 };
   if (segment === "blog") return { name: "blog" };
+  if (segment === "property-request") return { name: "property-request" };
   if (segment === "contact") return { name: "contact" };
   if (segment === "login") return { name: "login" };
   if (segment === "register") return { name: "register" };
@@ -103,6 +106,9 @@ function renderRoute(route: Route, main: HTMLElement): void {
       break;
     case "blog-post":
       renderBlogDetail(main, route.slug);
+      break;
+    case "property-request":
+      renderPropertyRequest(main);
       break;
     case "contact":
       renderContact(main);
