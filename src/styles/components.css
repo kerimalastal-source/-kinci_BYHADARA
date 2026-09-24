@@ -862,7 +862,27 @@
   margin-bottom: 0;
 }
 
-.form-field select {
+.phone-field {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.phone-field__country {
+  flex: 1 1 130px;
+  min-width: 118px;
+  max-width: 180px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.4rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.phone-field__number {
+  flex: 1;
+  min-width: 90px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: 0.75rem 0.9rem;
@@ -870,6 +890,27 @@
   font-size: 0.95rem;
   background: var(--color-surface);
   color: var(--color-ink);
+}
+
+.phone-field__number:focus,
+.phone-field__country:focus {
+  outline: none;
+  border-color: var(--color-accent-dark);
+}
+
+.phone-field__number[aria-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
+@media (max-width: 480px) {
+  .phone-field {
+    flex-direction: column;
+  }
+
+  .phone-field__country {
+    width: 100%;
+    max-width: none;
+  }
 }
 
 /* ---------- Auth (login / register) ---------- */

@@ -1,6 +1,7 @@
 import { t } from "../../i18n";
 import { requireAuth, getCurrentUserId } from "../../auth/session";
 import { renderNotFound } from "../notFound";
+import { turkeyProvinces, type District } from "../../data/turkeyLocations";
 import {
   fetchListingById,
   createDraftListing,
@@ -123,6 +124,13 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
     if (el) el.textContent = message;
   }
 
+  function placeOptionsHtml(items: District[], placeholder: string, selectedLabel: string): string {
+    return `
+      <option value="" disabled${selectedLabel ? "" : " selected"}>${placeholder}</option>
+      ${items.map((i) => `<option value="${i.value}"${i.label === selectedLabel ? " selected" : ""}>${i.label}</option>`).join("")}
+    `;
+  }
+
   function paintDetails(body: HTMLElement): void {
     body.innerHTML = `
       <form class="wizard-step" id="details-form" novalidate>
@@ -141,12 +149,24 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
         <div class="form-row">
           <div class="form-field">
             <label for="wf-city">${t("account.cityLabel")}</label>
-            <input type="text" id="wf-city" name="city" placeholder="${t("account.cityPlaceholder")}" value="${values.city}" />
+            <select id="wf-city" name="city">
+              ${placeOptionsHtml(turkeyProvinces, t("account.cityPlaceholder"), values.city)}
+            </select>
             <p class="form-field__error" data-error-for="city"></p>
           </div>
           <div class="form-field">
             <label for="wf-district">${t("account.districtLabel")}</label>
-            <input type="text" id="wf-district" name="district" placeholder="${t("account.districtPlaceholder")}" value="${values.district}" />
+            <select id="wf-district" name="district"${values.city ? "" : " disabled"}>
+              ${
+                values.city
+                  ? placeOptionsHtml(
+                      turkeyProvinces.find((p) => p.label === values.city)?.districts ?? [],
+                      t("account.districtSelectPlaceholder"),
+                      values.district
+                    )
+                  : `<option value="" disabled selected>${t("account.districtPlaceholder")}</option>`
+              }
+            </select>
             <p class="form-field__error" data-error-for="district"></p>
           </div>
         </div>
@@ -218,6 +238,20 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
 
     const form = body.querySelector<HTMLFormElement>("#details-form")!;
     const nextBtn = body.querySelector<HTMLButtonElement>("#wf-next")!;
+    const citySelect = body.querySelector<HTMLSelectElement>("#wf-city")!;
+    const districtSelect = body.querySelector<HTMLSelectElement>("#wf-district")!;
+
+    citySelect.addEventListener("change", () => {
+      const province = turkeyProvinces.find((p) => p.value === citySelect.value);
+      fieldError(form, "district", "");
+      if (!province) {
+        districtSelect.innerHTML = `<option value="" disabled selected>${t("account.districtPlaceholder")}</option>`;
+        districtSelect.disabled = true;
+        return;
+      }
+      districtSelect.disabled = false;
+      districtSelect.innerHTML = placeOptionsHtml(province.districts, t("account.districtSelectPlaceholder"), "");
+    });
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -225,8 +259,8 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
       const next: NewListingInput = {
         title: String(data.get("title") ?? "").trim(),
         description: String(data.get("description") ?? "").trim(),
-        city: String(data.get("city") ?? "").trim(),
-        district: String(data.get("district") ?? "").trim(),
+        city: citySelect.value ? (citySelect.selectedOptions[0]?.textContent ?? "") : "",
+        district: districtSelect.value ? (districtSelect.selectedOptions[0]?.textContent ?? "") : "",
         address_line: String(data.get("address_line") ?? "").trim(),
         property_type: String(data.get("property_type") ?? "apartment") as PropertyType,
         size_m2: Number(data.get("size_m2") ?? 0),

@@ -1,9 +1,11 @@
 import { t } from "../i18n";
 import { isAuthenticated, signUp } from "../auth/session";
 import { navigate } from "../router";
+import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "../components/phoneInput";
+import { countries } from "../data/countries";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_RE = /^[+()\d\s-]{7,20}$/;
+const PHONE_ID = "rf-phone";
 
 function setError(form: HTMLFormElement, field: string, message: string): void {
   const errorEl = form.querySelector<HTMLElement>(`[data-error-for="${field}"]`);
@@ -14,8 +16,7 @@ function setError(form: HTMLFormElement, field: string, message: string): void {
 
 function validate(form: HTMLFormElement): boolean {
   const fullName = (form.elements.namedItem("fullName") as HTMLInputElement).value.trim();
-  const phone = (form.elements.namedItem("phone") as HTMLInputElement).value.trim();
-  const country = (form.elements.namedItem("country") as HTMLInputElement).value.trim();
+  const country = (form.elements.namedItem("country") as HTMLSelectElement).value.trim();
   const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
   const password = (form.elements.namedItem("password") as HTMLInputElement).value;
   const confirmPassword = (form.elements.namedItem("confirmPassword") as HTMLInputElement).value;
@@ -29,14 +30,17 @@ function validate(form: HTMLFormElement): boolean {
     setError(form, "fullName", "");
   }
 
-  if (!phone) {
+  if (!isPhoneFilled(form, PHONE_ID)) {
     setError(form, "phone", t("auth.errors.phoneRequired"));
+    setPhoneInvalid(form, PHONE_ID, true);
     valid = false;
-  } else if (!PHONE_RE.test(phone)) {
+  } else if (!isPhoneValid(form, PHONE_ID)) {
     setError(form, "phone", t("auth.errors.phoneRequired"));
+    setPhoneInvalid(form, PHONE_ID, true);
     valid = false;
   } else {
     setError(form, "phone", "");
+    setPhoneInvalid(form, PHONE_ID, false);
   }
 
   if (!country) {
@@ -107,18 +111,19 @@ export function renderRegister(el: HTMLElement): void {
             <p class="form-field__error" data-error-for="fullName"></p>
           </div>
 
-          <div class="form-row">
-            <div class="form-field">
-              <label for="rf-phone">${t("auth.phoneLabel")}</label>
-              <input dir="ltr" type="tel" id="rf-phone" name="phone" placeholder="${t("auth.phonePlaceholder")}" autocomplete="tel" />
-              <p class="form-field__error" data-error-for="phone"></p>
-            </div>
+          <div class="form-field">
+            <label for="${PHONE_ID}-number">${t("auth.phoneLabel")}</label>
+            ${renderPhoneInput(PHONE_ID, "phone")}
+            <p class="form-field__error" data-error-for="phone"></p>
+          </div>
 
-            <div class="form-field">
-              <label for="rf-country">${t("auth.countryLabel")}</label>
-              <input type="text" id="rf-country" name="country" placeholder="${t("auth.countryPlaceholder")}" autocomplete="country-name" />
-              <p class="form-field__error" data-error-for="country"></p>
-            </div>
+          <div class="form-field">
+            <label for="rf-country">${t("auth.countryLabel")}</label>
+            <select id="rf-country" name="country" autocomplete="country-name">
+              <option value="" disabled selected>${t("auth.countryPlaceholder")}</option>
+              ${countries.map((c) => `<option value="${c.name}">${c.name}</option>`).join("")}
+            </select>
+            <p class="form-field__error" data-error-for="country"></p>
           </div>
 
           <div class="form-field">
@@ -164,7 +169,7 @@ export function renderRegister(el: HTMLElement): void {
 
     const data = new FormData(form);
     const fullName = String(data.get("fullName") ?? "").trim();
-    const phone = String(data.get("phone") ?? "").trim();
+    const phone = getPhoneValue(form, PHONE_ID);
     const country = String(data.get("country") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const password = String(data.get("password") ?? "");

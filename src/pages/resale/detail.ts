@@ -1,6 +1,7 @@
 import { t } from "../../i18n";
 import { renderNotFound } from "../notFound";
 import { openLightbox } from "../../components/lightbox";
+import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "../../components/phoneInput";
 import {
   fetchListingById,
   fetchListingPhotos,
@@ -11,7 +12,7 @@ import {
 } from "../../data/listings";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_RE = /^[+()\d\s-]{7,20}$/;
+const PHONE_ID = "iq-phone";
 
 export function renderResaleDetail(el: HTMLElement, id: string): void {
   el.innerHTML = `<section class="section"><div class="container"><p>${t("common.loading")}</p></div></section>`;
@@ -90,8 +91,8 @@ function paint(el: HTMLElement, listing: Listing, photos: ListingPhoto[]): void 
                 <p class="form-field__error" data-error-for="email"></p>
               </div>
               <div class="form-field">
-                <label for="iq-phone">${t("resale.inquiryPhoneLabel")}</label>
-                <input dir="ltr" type="tel" id="iq-phone" name="phone" />
+                <label for="${PHONE_ID}-number">${t("resale.inquiryPhoneLabel")}</label>
+                ${renderPhoneInput(PHONE_ID, "phone")}
                 <p class="form-field__error" data-error-for="phone"></p>
               </div>
               <div class="form-field">
@@ -135,7 +136,7 @@ function paint(el: HTMLElement, listing: Listing, photos: ListingPhoto[]): void 
     const data = new FormData(form);
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
-    const phone = String(data.get("phone") ?? "").trim();
+    const phone = getPhoneValue(form, PHONE_ID);
     const message = String(data.get("message") ?? "").trim();
 
     let valid = true;
@@ -152,13 +153,18 @@ function paint(el: HTMLElement, listing: Listing, photos: ListingPhoto[]): void 
       valid = false;
     } else setError("email", "");
 
-    if (!phone) {
+    if (!isPhoneFilled(form, PHONE_ID)) {
       setError("phone", t("contact.errors.phoneRequired"));
+      setPhoneInvalid(form, PHONE_ID, true);
       valid = false;
-    } else if (!PHONE_RE.test(phone)) {
+    } else if (!isPhoneValid(form, PHONE_ID)) {
       setError("phone", t("contact.errors.phoneInvalid"));
+      setPhoneInvalid(form, PHONE_ID, true);
       valid = false;
-    } else setError("phone", "");
+    } else {
+      setError("phone", "");
+      setPhoneInvalid(form, PHONE_ID, false);
+    }
 
     if (!valid) return;
 

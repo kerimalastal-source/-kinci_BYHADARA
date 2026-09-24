@@ -1,8 +1,9 @@
 import { t } from "../i18n";
+import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
 
 const CONTACT_EMAIL = "info@byhadara.com";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_RE = /^[+()\d\s-]{7,20}$/;
+const PHONE_ID = "cf-phone";
 
 export function renderContactForm(): string {
   return `
@@ -23,8 +24,8 @@ export function renderContactForm(): string {
         </div>
 
         <div class="form-field">
-          <label for="cf-phone">${t("contact.phoneLabel")}</label>
-          <input dir="ltr" type="tel" id="cf-phone" name="phone" placeholder="${t("contact.phonePlaceholder")}" autocomplete="tel" />
+          <label for="${PHONE_ID}-number">${t("contact.phoneLabel")}</label>
+          ${renderPhoneInput(PHONE_ID, "phone")}
           <p class="form-field__error" data-error-for="phone"></p>
         </div>
       </div>
@@ -59,7 +60,6 @@ function setError(form: HTMLFormElement, field: string, message: string): void {
 function validate(form: HTMLFormElement): boolean {
   const name = (form.elements.namedItem("name") as HTMLInputElement).value.trim();
   const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
-  const phone = (form.elements.namedItem("phone") as HTMLInputElement).value.trim();
 
   let valid = true;
 
@@ -80,14 +80,17 @@ function validate(form: HTMLFormElement): boolean {
     setError(form, "email", "");
   }
 
-  if (!phone) {
+  if (!isPhoneFilled(form, PHONE_ID)) {
     setError(form, "phone", t("contact.errors.phoneRequired"));
+    setPhoneInvalid(form, PHONE_ID, true);
     valid = false;
-  } else if (!PHONE_RE.test(phone)) {
+  } else if (!isPhoneValid(form, PHONE_ID)) {
     setError(form, "phone", t("contact.errors.phoneInvalid"));
+    setPhoneInvalid(form, PHONE_ID, true);
     valid = false;
   } else {
     setError(form, "phone", "");
+    setPhoneInvalid(form, PHONE_ID, false);
   }
 
   return valid;
@@ -106,7 +109,7 @@ export function initContactForm(container: ParentNode): void {
     const data = new FormData(form);
     const name = String(data.get("name") ?? "");
     const email = String(data.get("email") ?? "");
-    const phone = String(data.get("phone") ?? "");
+    const phone = getPhoneValue(form, PHONE_ID);
     const subject = String(data.get("subject") ?? "").trim() || "Website Inquiry";
     const message = String(data.get("message") ?? "");
 

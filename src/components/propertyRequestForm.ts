@@ -1,15 +1,11 @@
 import { t, tRaw } from "../i18n";
-import {
-  cityOptions,
-  propertyTypeOptions,
-  conditionOptions,
-  budgetOptions,
-  floorOptions
-} from "../data/propertyRequestOptions";
+import { propertyTypeOptions, conditionOptions, budgetOptions, floorOptions } from "../data/propertyRequestOptions";
+import { turkeyProvinces } from "../data/turkeyLocations";
+import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
 
 const CONTACT_EMAIL = "info@byhadara.com";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_RE = /^[+()\d\s-]{7,20}$/;
+const PHONE_ID = "pr-phone";
 
 function optionsHtml(values: string[], labels: Record<string, string>, placeholder: string): string {
   return `
@@ -18,12 +14,18 @@ function optionsHtml(values: string[], labels: Record<string, string>, placehold
   `;
 }
 
+function placeOptionsHtml(items: { value: string; label: string }[], placeholder: string): string {
+  return `
+    <option value="" disabled selected>${placeholder}</option>
+    ${items.map((i) => `<option value="${i.value}">${i.label}</option>`).join("")}
+  `;
+}
+
 export function renderPropertyRequestForm(): string {
   const propertyTypeLabels = tRaw<Record<string, string>>("propertyRequest.propertyTypes");
   const conditionLabels = tRaw<Record<string, string>>("propertyRequest.conditions");
   const budgetLabels = tRaw<Record<string, string>>("propertyRequest.budgets");
   const floorLabels = tRaw<Record<string, string>>("propertyRequest.floors");
-  const cityLabels = tRaw<Record<string, string>>("propertyRequest.cities");
 
   return `
     <form class="contact-form property-request-form" id="property-request-form" novalidate>
@@ -42,8 +44,8 @@ export function renderPropertyRequestForm(): string {
           <p class="form-field__error" data-error-for="email"></p>
         </div>
         <div class="form-field">
-          <label for="pr-phone">${t("propertyRequest.phoneLabel")}</label>
-          <input dir="ltr" type="tel" id="pr-phone" name="phone" placeholder="${t("propertyRequest.phonePlaceholder")}" autocomplete="tel" />
+          <label for="${PHONE_ID}-number">${t("propertyRequest.phoneLabel")}</label>
+          ${renderPhoneInput(PHONE_ID, "phone")}
           <p class="form-field__error" data-error-for="phone"></p>
         </div>
       </div>
@@ -69,11 +71,7 @@ export function renderPropertyRequestForm(): string {
         <div class="form-field">
           <label for="pr-city">${t("propertyRequest.cityLabel")}</label>
           <select id="pr-city" name="city">
-            ${optionsHtml(
-              cityOptions.map((c) => c.value),
-              cityLabels,
-              t("propertyRequest.cityPlaceholder")
-            )}
+            ${placeOptionsHtml(turkeyProvinces, t("propertyRequest.cityPlaceholder"))}
           </select>
           <p class="form-field__error" data-error-for="city"></p>
         </div>
@@ -138,7 +136,6 @@ function requireValue(form: HTMLFormElement, field: string, errorKey: string): b
 function validate(form: HTMLFormElement): boolean {
   const name = (form.elements.namedItem("name") as HTMLInputElement).value.trim();
   const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
-  const phone = (form.elements.namedItem("phone") as HTMLInputElement).value.trim();
 
   let valid = true;
 
@@ -159,14 +156,17 @@ function validate(form: HTMLFormElement): boolean {
     setError(form, "email", "");
   }
 
-  if (!phone) {
+  if (!isPhoneFilled(form, PHONE_ID)) {
     setError(form, "phone", t("propertyRequest.errors.phoneRequired"));
+    setPhoneInvalid(form, PHONE_ID, true);
     valid = false;
-  } else if (!PHONE_RE.test(phone)) {
+  } else if (!isPhoneValid(form, PHONE_ID)) {
     setError(form, "phone", t("propertyRequest.errors.phoneInvalid"));
+    setPhoneInvalid(form, PHONE_ID, true);
     valid = false;
   } else {
     setError(form, "phone", "");
+    setPhoneInvalid(form, PHONE_ID, false);
   }
 
   if (!requireValue(form, "propertyType", "propertyRequest.errors.propertyTypeRequired")) valid = false;
@@ -185,18 +185,17 @@ export function initPropertyRequestForm(container: ParentNode): void {
 
   const citySelect = form.querySelector<HTMLSelectElement>("#pr-city")!;
   const districtSelect = form.querySelector<HTMLSelectElement>("#pr-district")!;
-  const districtLabels = tRaw<Record<string, string>>("propertyRequest.districts");
 
   citySelect.addEventListener("change", () => {
-    const city = cityOptions.find((c) => c.value === citySelect.value);
+    const province = turkeyProvinces.find((p) => p.value === citySelect.value);
     setError(form, "district", "");
-    if (!city) {
+    if (!province) {
       districtSelect.innerHTML = `<option value="" disabled selected>${t("propertyRequest.districtPlaceholder")}</option>`;
       districtSelect.disabled = true;
       return;
     }
     districtSelect.disabled = false;
-    districtSelect.innerHTML = optionsHtml(city.districts, districtLabels, t("propertyRequest.districtPlaceholder"));
+    districtSelect.innerHTML = placeOptionsHtml(province.districts, t("propertyRequest.districtSelectPlaceholder"));
   });
 
   const successBox = form.querySelector<HTMLElement>("#pr-success")!;
@@ -209,15 +208,14 @@ export function initPropertyRequestForm(container: ParentNode): void {
     const conditionLabels = tRaw<Record<string, string>>("propertyRequest.conditions");
     const budgetLabels = tRaw<Record<string, string>>("propertyRequest.budgets");
     const floorLabels = tRaw<Record<string, string>>("propertyRequest.floors");
-    const cityLabels = tRaw<Record<string, string>>("propertyRequest.cities");
 
     const data = new FormData(form);
     const name = String(data.get("name") ?? "");
     const email = String(data.get("email") ?? "");
-    const phone = String(data.get("phone") ?? "");
+    const phone = getPhoneValue(form, PHONE_ID);
     const propertyType = propertyTypeLabels[String(data.get("propertyType") ?? "")] ?? "";
-    const city = cityLabels[String(data.get("city") ?? "")] ?? "";
-    const district = districtLabels[String(data.get("district") ?? "")] ?? "";
+    const city = citySelect.selectedOptions[0]?.textContent ?? "";
+    const district = districtSelect.selectedOptions[0]?.textContent ?? "";
     const condition = conditionLabels[String(data.get("condition") ?? "")] ?? "";
     const budget = budgetLabels[String(data.get("budget") ?? "")] ?? "";
     const floor = floorLabels[String(data.get("floor") ?? "")] ?? "";
