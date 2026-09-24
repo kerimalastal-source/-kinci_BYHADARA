@@ -774,6 +774,7 @@
 }
 
 .form-field input,
+.form-field select,
 .form-field textarea {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
@@ -785,13 +786,37 @@
   transition: border-color var(--transition);
 }
 
+.form-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%233c463f' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-inline-end: 2.2rem;
+}
+
+[dir="rtl"] .form-field select {
+  background-position: left 0.9rem center;
+}
+
+.form-field select:disabled {
+  background-color: var(--color-surface-alt);
+  color: var(--color-muted);
+  cursor: not-allowed;
+}
+
+.form-field select:invalid {
+  color: var(--color-muted);
+}
+
 .form-field input:focus,
+.form-field select:focus,
 .form-field textarea:focus {
   outline: none;
   border-color: var(--color-accent-dark);
 }
 
 .form-field input[aria-invalid="true"],
+.form-field select[aria-invalid="true"],
 .form-field textarea[aria-invalid="true"] {
   border-color: var(--color-danger);
 }

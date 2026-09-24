@@ -38,6 +38,16 @@ export function renderProjects(el: HTMLElement): void {
         <p class="project-grid__empty" id="project-empty" hidden>${t("projects.noResults")}</p>
       </div>
     </section>
+
+    <section class="section final-cta">
+      <div class="container final-cta__inner">
+        <div>
+          <h2 class="section-title">${t("projects.notFoundCtaTitle")}</h2>
+          <p>${t("projects.notFoundCtaText")}</p>
+        </div>
+        <a class="btn btn--primary" href="#/property-request">${t("projects.notFoundCtaButton")}</a>
+      </div>
+    </section>
   `;
 
   const filterBar = el.querySelector<HTMLElement>("#filter-bar")!;
