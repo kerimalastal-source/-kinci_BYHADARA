@@ -8,5 +8,6 @@ export const partners: Partner[] = [
   { name: "Faisal Holding", logo: "/partners/faisal-holding.png" },
   { name: "DAG Holding", logo: "/partners/dag-holding.png" },
   { name: "WUJHA Development", logo: "/partners/wujha.png" },
-  { name: "Lotus", logo: "/partners/lotus.png" }
+  { name: "Lotus", logo: "/partners/lotus.png" },
+  { name: "Studio Vertebra", logo: "/partners/studio-vertebra.png" }
 ];
