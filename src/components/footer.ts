@@ -1,4 +1,4 @@
-import { t } from "../i18n";
+import { t, link } from "../i18n";
 
 const SITE_PHONE = "+90 531 930 92 14";
 const SITE_PHONE_HREF = "+905319309214";
@@ -9,7 +9,7 @@ export function renderFooter(el: HTMLElement): void {
   el.innerHTML = `
     <div class="container site-footer__inner">
       <div class="site-footer__brand">
-        <a class="brand" href="#/" aria-label="${t("meta.siteNameFull")}">
+        <a class="brand" href="${link("/")}" aria-label="${t("meta.siteNameFull")}">
           <img class="brand__logo brand__logo--footer" src="/logo-light.png" alt="${t("meta.siteNameFull")}" />
           <span class="brand__text">
             <span class="brand__name">${t("meta.siteName")}</span>
@@ -33,14 +33,14 @@ export function renderFooter(el: HTMLElement): void {
       <div class="site-footer__col">
         <h3>${t("footer.quickLinks")}</h3>
         <ul>
-          <li><a href="#/">${t("nav.home")}</a></li>
-          <li><a href="#/projects">${t("nav.projects")}</a></li>
-          <li><a href="#/about">${t("nav.about")}</a></li>
-          <li><a href="#/citizenship">${t("nav.citizenship")}</a></li>
-          <li><a href="#/property-request">${t("nav.propertyRequest")}</a></li>
-          <li><a href="#/blog">${t("nav.blog")}</a></li>
-          <li><a href="#/faq">${t("nav.faq")}</a></li>
-          <li><a href="#/contact">${t("nav.contact")}</a></li>
+          <li><a href="${link("/")}">${t("nav.home")}</a></li>
+          <li><a href="${link("/projects")}">${t("nav.projects")}</a></li>
+          <li><a href="${link("/about")}">${t("nav.about")}</a></li>
+          <li><a href="${link("/citizenship")}">${t("nav.citizenship")}</a></li>
+          <li><a href="${link("/property-request")}">${t("nav.propertyRequest")}</a></li>
+          <li><a href="${link("/blog")}">${t("nav.blog")}</a></li>
+          <li><a href="${link("/faq")}">${t("nav.faq")}</a></li>
+          <li><a href="${link("/contact")}">${t("nav.contact")}</a></li>
         </ul>
       </div>
 

@@ -1,10 +1,10 @@
-import { t } from "../i18n";
+import { t, link } from "../i18n";
 import { listingPhotoUrl, type Listing } from "../data/listings";
 
 export function renderListingCard(listing: Listing, coverPath: string | undefined): string {
   return `
     <article class="project-card">
-      <a class="project-card__media" href="#/resale/${listing.id}" aria-label="${listing.title}">
+      <a class="project-card__media" href="${link(`/resale/${listing.id}`)}" aria-label="${listing.title}">
         ${coverPath ? `<img src="${listingPhotoUrl(coverPath)}" alt="${listing.title}" loading="lazy" />` : ""}
       </a>
       <div class="project-card__body">
@@ -21,7 +21,7 @@ export function renderListingCard(listing: Listing, coverPath: string | undefine
             <span>${t("resale.sizeLabel")}</span>
           </div>
         </div>
-        <a class="btn btn--outline btn--small" href="#/resale/${listing.id}">
+        <a class="btn btn--outline btn--small" href="${link(`/resale/${listing.id}`)}">
           ${t("common.discoverMore")}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>

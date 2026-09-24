@@ -1,4 +1,4 @@
-import { t } from "../../i18n";
+import { t, link } from "../../i18n";
 import { requireAuth, getCurrentUserId } from "../../auth/session";
 import { renderNotFound } from "../notFound";
 import {
@@ -277,8 +277,8 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
       save
         .then((id) => {
           listingId = id;
-          if (initialListing === null && window.location.hash !== `#/account/listings/${id}/edit`) {
-            history.replaceState(null, "", `#/account/listings/${id}/edit`);
+          if (initialListing === null && window.location.pathname !== link(`/account/listings/${id}/edit`)) {
+            history.replaceState(null, "", link(`/account/listings/${id}/edit`));
           }
           stepIndex = 1;
           paint();
@@ -485,7 +485,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
             <div class="contact-form__success">
               <strong>${t("account.submitSuccessTitle")}</strong>
               <p>${t("account.submitSuccessText")}</p>
-              <a class="btn btn--primary" href="#/account" style="margin-top: 1rem;">${t("account.myListingsTitle")}</a>
+              <a class="btn btn--primary" href="${link("/account")}" style="margin-top: 1rem;">${t("account.myListingsTitle")}</a>
             </div>
           `;
         })

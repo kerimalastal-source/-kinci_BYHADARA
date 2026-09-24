@@ -123,20 +123,20 @@ export async function signIn(email: string, password: string): Promise<{ error: 
 export async function signOut(): Promise<void> {
   await supabase.auth.signOut();
   await refreshState();
-  navigate("#/");
+  navigate("/");
 }
 
 /** Call at the top of a protected page's render function. Returns false and redirects if the guard fails. */
 export function requireAuth(main: HTMLElement): boolean {
   if (isAuthenticated()) return true;
   main.innerHTML = "";
-  navigate("#/login");
+  navigate("/login");
   return false;
 }
 
 export function requireAdmin(main: HTMLElement): boolean {
   if (isAuthenticated() && isAdmin()) return true;
   main.innerHTML = "";
-  navigate(isAuthenticated() ? "#/account" : "#/login");
+  navigate(isAuthenticated() ? "/account" : "/login");
   return false;
 }

@@ -1,4 +1,4 @@
-import { t } from "../../i18n";
+import { t, link } from "../../i18n";
 import { requireAdmin } from "../../auth/session";
 import { navigate } from "../../router";
 import { renderNotFound } from "../notFound";
@@ -47,7 +47,7 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], docu
   main.innerHTML = `
     <section class="page-hero">
       <div class="container">
-        <a class="back-link" href="#/admin">
+        <a class="back-link" href="${link("/admin")}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
           ${t("admin.backToQueueButton")}
         </a>
@@ -161,7 +161,7 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], docu
     approveBtn.disabled = true;
     approveBtn.textContent = t("admin.approving");
     approveListing(listing.id)
-      .then(() => navigate("#/admin"))
+      .then(() => navigate("/admin"))
       .catch((err) => {
         console.error(err);
         approveBtn.disabled = false;
@@ -182,7 +182,7 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], docu
     rejectBtn.disabled = true;
     rejectBtn.textContent = t("admin.rejecting");
     rejectListing(listing.id, reason)
-      .then(() => navigate("#/admin"))
+      .then(() => navigate("/admin"))
       .catch((err) => {
         console.error(err);
         rejectBtn.disabled = false;

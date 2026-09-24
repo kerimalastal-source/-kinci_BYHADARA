@@ -830,5 +830,64 @@
         "Parallèlement, les acheteurs accordent aujourd'hui plus d'importance à la qualité de construction, à l'efficacité énergétique et aux équipements collectifs qu'auparavant, une évolution qui continue d'influencer la façon dont des promoteurs comme HADARA conçoivent et livrent leurs nouveaux projets."
       ]
     }
+  },
+  "seo": {
+    "home": {
+      "title": "HADARA Immobilier | Promoteur immobilier à Istanbul, Turquie",
+      "description": "Promoteur immobilier à Istanbul depuis 2014 : villas de luxe, appartements et projets mixtes à Beylikdüzü et Büyükçekmece, avec accompagnement vers la citoyenneté turque."
+    },
+    "projects": {
+      "title": "Nos projets à Istanbul – Appartements et villas",
+      "description": "Découvrez les projets résidentiels, mixtes et villas de HADARA à Beylikdüzü et Büyükçekmece, Istanbul : nouveaux lancements, chantiers en cours et biens livrés."
+    },
+    "about": {
+      "title": "À propos de HADARA – Promoteur à Istanbul depuis 2014",
+      "description": "Découvrez HADARA Immobilier : notre histoire, notre mission, nos valeurs et plus de 12 ans de promotion de logements de qualité dans les quartiers dynamiques d'Istanbul."
+    },
+    "citizenship": {
+      "title": "Citoyenneté turque par investissement immobilier",
+      "description": "Comment obtenir la citoyenneté turque en achetant un bien à Istanbul : conditions, seuil de 400 000 $, étapes de la procédure et accompagnement complet par HADARA."
+    },
+    "faq": {
+      "title": "FAQ – Achat immobilier et citoyenneté turque",
+      "description": "Réponses aux questions fréquentes sur HADARA, l'achat immobilier en Turquie pour les étrangers, les modalités de paiement, les frais et la citoyenneté par investissement."
+    },
+    "blog": {
+      "title": "Blog immobilier – Guides sur la Turquie et Istanbul",
+      "description": "Guides et analyses sur le marché immobilier turc, Istanbul, la vie en Turquie, le titre de propriété (Tapu), la fiscalité et la citoyenneté par investissement."
+    },
+    "propertyRequest": {
+      "title": "Demander un bien en Turquie – Recherche sur mesure",
+      "description": "Décrivez le bien que vous recherchez à Istanbul ou ailleurs en Turquie — type, quartier, budget, étage — et nos conseillers le trouveront pour vous."
+    },
+    "contact": {
+      "title": "Contacter HADARA Immobilier – Bureau d'Istanbul",
+      "description": "Contactez HADARA Immobilier à Beylikdüzü, Istanbul. Appelez le +90 531 930 92 14 ou écrivez à info@byhadara.com pour nos projets, nos prix ou la citoyenneté turque."
+    },
+    "resale": {
+      "title": "Biens en revente en Turquie – Annonces vérifiées",
+      "description": "Parcourez des appartements, villas et locaux commerciaux vérifiés, mis en revente en Turquie par leurs propriétaires via le service de courtage agréé de HADARA."
+    },
+    "login": {
+      "title": "Connexion vendeurs",
+      "description": "Connectez-vous au portail vendeurs de HADARA pour gérer vos annonces immobilières."
+    },
+    "register": {
+      "title": "Vendez votre bien avec HADARA",
+      "description": "Créez un compte vendeur pour mettre en revente votre bien en Turquie via le service de courtage agréé de HADARA."
+    },
+    "account": {
+      "title": "Mon compte",
+      "description": "Gérez vos annonces immobilières sur HADARA."
+    },
+    "admin": {
+      "title": "Administration",
+      "description": "File de vérification des annonces."
+    },
+    "notFound": {
+      "title": "Page introuvable",
+      "description": "La page que vous recherchez n'existe pas ou a été déplacée."
+    },
+    "projectTitle": "{name} – {district}, {city}"
   }
 }

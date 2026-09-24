@@ -1,5 +1,5 @@
 import type { Route } from "../router";
-import { t, tRaw, getLocale, setLocale, locales, type Locale } from "../i18n";
+import { t, tRaw, getLocale, setLocale, locales, type Locale, link } from "../i18n";
 import { openSearch } from "./search";
 import { isAuthenticated, isAdmin, getCurrentProfile, signOut } from "../auth/session";
 
@@ -10,20 +10,20 @@ interface NavLink {
 }
 
 const NAV_LINKS: NavLink[] = [
-  { route: "#/", key: "nav.home", match: ["home"] },
-  { route: "#/projects", key: "nav.projects", match: ["projects", "project"] },
-  { route: "#/resale", key: "nav.resale", match: ["resale", "resale-listing"] },
-  { route: "#/about", key: "nav.about", match: ["about"] }
+  { route: "/", key: "nav.home", match: ["home"] },
+  { route: "/projects", key: "nav.projects", match: ["projects", "project"] },
+  { route: "/resale", key: "nav.resale", match: ["resale", "resale-listing"] },
+  { route: "/about", key: "nav.about", match: ["about"] }
 ];
 
 const NAV_RESOURCES: NavLink[] = [
-  { route: "#/citizenship", key: "nav.citizenship", match: ["citizenship"] },
-  { route: "#/property-request", key: "nav.propertyRequest", match: ["property-request"] },
-  { route: "#/blog", key: "nav.blog", match: ["blog", "blog-post"] },
-  { route: "#/faq", key: "nav.faq", match: ["faq"] }
+  { route: "/citizenship", key: "nav.citizenship", match: ["citizenship"] },
+  { route: "/property-request", key: "nav.propertyRequest", match: ["property-request"] },
+  { route: "/blog", key: "nav.blog", match: ["blog", "blog-post"] },
+  { route: "/faq", key: "nav.faq", match: ["faq"] }
 ];
 
-const NAV_TAIL: NavLink[] = [{ route: "#/contact", key: "nav.contact", match: ["contact"] }];
+const NAV_TAIL: NavLink[] = [{ route: "/contact", key: "nav.contact", match: ["contact"] }];
 
 export function renderHeader(el: HTMLElement, route: Route): void {
   const locale = getLocale();
@@ -32,7 +32,7 @@ export function renderHeader(el: HTMLElement, route: Route): void {
   el.className = "site-header";
   el.innerHTML = `
     <div class="site-header__inner container">
-      <a class="brand" href="#/" aria-label="${t("meta.siteNameFull")}">
+      <a class="brand" href="${link("/")}" aria-label="${t("meta.siteNameFull")}">
         <img class="brand__logo" src="/logo-dark.png" alt="${t("meta.siteNameFull")}" />
         <span class="brand__text">
           <span class="brand__name">${t("meta.siteName")}</span>
@@ -45,7 +45,7 @@ export function renderHeader(el: HTMLElement, route: Route): void {
           ${NAV_LINKS.map(
             (item) => `
             <li>
-              <a class="main-nav__link${item.match.includes(route.name) ? " is-active" : ""}" href="${item.route}">
+              <a class="main-nav__link${item.match.includes(route.name) ? " is-active" : ""}" href="${link(item.route)}">
                 ${t(item.key)}
               </a>
             </li>`
@@ -65,7 +65,7 @@ export function renderHeader(el: HTMLElement, route: Route): void {
               ${NAV_RESOURCES.map(
                 (item) => `
                 <li>
-                  <a class="nav-group__link${item.match.includes(route.name) ? " is-active" : ""}" href="${item.route}">${t(item.key)}</a>
+                  <a class="nav-group__link${item.match.includes(route.name) ? " is-active" : ""}" href="${link(item.route)}">${t(item.key)}</a>
                 </li>`
               ).join("")}
             </ul>
@@ -73,7 +73,7 @@ export function renderHeader(el: HTMLElement, route: Route): void {
           ${NAV_TAIL.map(
             (item) => `
             <li>
-              <a class="main-nav__link${item.match.includes(route.name) ? " is-active" : ""}" href="${item.route}">
+              <a class="main-nav__link${item.match.includes(route.name) ? " is-active" : ""}" href="${link(item.route)}">
                 ${t(item.key)}
               </a>
             </li>`
@@ -112,15 +112,15 @@ export function renderHeader(el: HTMLElement, route: Route): void {
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <ul class="account-switch__menu" id="account-menu" hidden>
-              <li><a href="#/account" class="${route.name === "account" || route.name === "account-new-listing" || route.name === "account-edit-listing" ? "is-active" : ""}">${t("nav.account")}</a></li>
-              ${isAdmin() ? `<li><a href="#/admin" class="${route.name === "admin" || route.name === "admin-listing" ? "is-active" : ""}">${t("nav.admin")}</a></li>` : ""}
+              <li><a href="${link("/account")}" class="${route.name === "account" || route.name === "account-new-listing" || route.name === "account-edit-listing" ? "is-active" : ""}">${t("nav.account")}</a></li>
+              ${isAdmin() ? `<li><a href="${link("/admin")}" class="${route.name === "admin" || route.name === "admin-listing" ? "is-active" : ""}">${t("nav.admin")}</a></li>` : ""}
               <li><button type="button" id="logout-btn">${t("nav.logout")}</button></li>
             </ul>`
-              : `<a class="account-switch__login" href="#/login">${t("nav.login")}</a>`
+              : `<a class="account-switch__login" href="${link("/login")}">${t("nav.login")}</a>`
           }
         </div>
 
-        <a class="btn btn--primary btn--small header-cta" href="#/contact">${t("nav.getInTouch")}</a>
+        <a class="btn btn--primary btn--small header-cta" href="${link("/contact")}">${t("nav.getInTouch")}</a>
 
         <button class="icon-btn menu-toggle" id="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

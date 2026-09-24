@@ -1,4 +1,4 @@
-import { t } from "../../i18n";
+import { t, link } from "../../i18n";
 import { fetchApprovedListings, fetchCoverPhotos, type Listing, type PropertyType } from "../../data/listings";
 import { renderListingCard } from "../../components/listingCard";
 
@@ -27,7 +27,7 @@ export function renderResaleList(el: HTMLElement): void {
 
         <div class="cta-card resale-sell-cta">
           <h3>${t("resale.wantToSellCta")}</h3>
-          <a class="btn btn--primary" href="#/register">${t("resale.wantToSellButton")}</a>
+          <a class="btn btn--primary" href="${link("/register")}">${t("resale.wantToSellButton")}</a>
         </div>
       </div>
     </section>

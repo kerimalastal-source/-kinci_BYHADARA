@@ -830,5 +830,64 @@
         "At the same time, buyers are placing more weight on construction quality, energy efficiency and social amenities than in previous years, a shift that continues to shape how developers like HADARA plan and deliver new projects."
       ]
     }
+  },
+  "seo": {
+    "home": {
+      "title": "HADARA Real Estate | Property Developer in Istanbul, Turkey",
+      "description": "Boutique Istanbul developer building luxury villas, apartments and mixed-use projects in Beylikdüzü and Büyükçekmece since 2014, with full Turkish citizenship support."
+    },
+    "projects": {
+      "title": "Our Projects in Istanbul – Apartments & Villas",
+      "description": "Explore HADARA's residential, mixed-use and villa projects in Beylikdüzü and Büyükçekmece, Istanbul — new launches, projects under construction and delivered homes."
+    },
+    "about": {
+      "title": "About HADARA – Istanbul Developer Since 2014",
+      "description": "Learn about HADARA Real Estate: our story, mission and values, and more than 12 years developing quality homes in Istanbul's fastest-growing districts."
+    },
+    "citizenship": {
+      "title": "Turkish Citizenship by Real Estate Investment",
+      "description": "How to get Turkish citizenship by buying property in Istanbul: requirements, the $400,000 minimum, the step-by-step process and full support from HADARA."
+    },
+    "faq": {
+      "title": "FAQ – Buying Property & Turkish Citizenship",
+      "description": "Answers to common questions about HADARA, buying real estate in Turkey as a foreigner, payment plans, costs and Turkish citizenship by investment."
+    },
+    "blog": {
+      "title": "Real Estate Blog – Turkey & Istanbul Property Guides",
+      "description": "Guides and insights on the Turkish property market, Istanbul, living in Turkey, title deeds (Tapu), taxes and citizenship by investment."
+    },
+    "propertyRequest": {
+      "title": "Request a Property in Turkey – Personal Search",
+      "description": "Tell us the home you are looking for in Istanbul or anywhere in Turkey — type, district, budget and floor — and our advisors will find it for you."
+    },
+    "contact": {
+      "title": "Contact HADARA Real Estate – Istanbul Office",
+      "description": "Contact HADARA Real Estate in Beylikdüzü, Istanbul. Call +90 531 930 92 14 or email info@byhadara.com about projects, prices or Turkish citizenship."
+    },
+    "resale": {
+      "title": "Resale Properties in Turkey – Verified Listings",
+      "description": "Browse verified resale apartments, villas and commercial properties in Turkey, listed by their owners through HADARA's licensed brokerage service."
+    },
+    "login": {
+      "title": "Seller Login",
+      "description": "Sign in to the HADARA seller portal to manage your property listings."
+    },
+    "register": {
+      "title": "Sell Your Property with HADARA",
+      "description": "Create a seller account to list your property in Turkey for resale through HADARA's licensed brokerage service."
+    },
+    "account": {
+      "title": "My Account",
+      "description": "Manage your property listings on HADARA."
+    },
+    "admin": {
+      "title": "Admin",
+      "description": "Listing review queue."
+    },
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "The page you are looking for does not exist or has been moved."
+    },
+    "projectTitle": "{name} – {district}, {city}"
   }
 }

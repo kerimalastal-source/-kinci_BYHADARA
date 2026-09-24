@@ -1,4 +1,4 @@
-import { t } from "../../i18n";
+import { t, link } from "../../i18n";
 import { requireAdmin } from "../../auth/session";
 import { fetchPendingListings, fetchCoverPhotos, listingPhotoUrl, type Listing } from "../../data/listings";
 
@@ -14,7 +14,7 @@ function renderRow(listing: Listing, coverPath: string | undefined): string {
         <p class="listing-row__meta">${[listing.district, listing.city].filter(Boolean).join(", ")} · <span dir="ltr">${listing.asking_price?.toLocaleString() ?? ""} ${listing.currency}</span></p>
       </div>
       <div class="listing-row__actions">
-        <a class="btn btn--primary btn--small" href="#/admin/listings/${listing.id}">${t("admin.reviewButton")}</a>
+        <a class="btn btn--primary btn--small" href="${link(`/admin/listings/${listing.id}`)}">${t("admin.reviewButton")}</a>
       </div>
     </article>
   `;

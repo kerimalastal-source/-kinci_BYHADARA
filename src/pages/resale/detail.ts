@@ -1,4 +1,4 @@
-import { t } from "../../i18n";
+import { t, link } from "../../i18n";
 import { renderNotFound } from "../notFound";
 import { openLightbox } from "../../components/lightbox";
 import {
@@ -35,7 +35,7 @@ function paint(el: HTMLElement, listing: Listing, photos: ListingPhoto[]): void 
   el.innerHTML = `
     <section class="project-hero" style="background-image: linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88)), url('${photos[0] ? listingPhotoUrl(photos[0].storage_path) : ""}')">
       <div class="container project-hero__inner">
-        <a class="back-link" href="#/resale">
+        <a class="back-link" href="${link("/resale")}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
           ${t("resale.detailBackLabel")}
         </a>

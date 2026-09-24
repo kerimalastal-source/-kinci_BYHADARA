@@ -1,4 +1,4 @@
-import { t } from "../i18n";
+import { t, link } from "../i18n";
 import { isAuthenticated, signIn } from "../auth/session";
 import { navigate } from "../router";
 
@@ -39,7 +39,7 @@ function validate(form: HTMLFormElement): boolean {
 
 export function renderLogin(el: HTMLElement): void {
   if (isAuthenticated()) {
-    navigate("#/account");
+    navigate("/account");
     return;
   }
 
@@ -73,7 +73,7 @@ export function renderLogin(el: HTMLElement): void {
 
           <button type="submit" class="btn btn--primary btn--block" id="lf-submit">${t("auth.loginButton")}</button>
 
-          <p class="auth-form__switch">${t("auth.noAccountText")} <a href="#/register">${t("auth.registerLink")}</a></p>
+          <p class="auth-form__switch">${t("auth.noAccountText")} <a href="${link("/register")}">${t("auth.registerLink")}</a></p>
         </form>
       </div>
     </section>
@@ -101,7 +101,7 @@ export function renderLogin(el: HTMLElement): void {
         submitBtn.textContent = t("auth.loginButton");
         return;
       }
-      navigate("#/account");
+      navigate("/account");
     });
   });
 }
