@@ -1,6 +1,7 @@
 import type { Route } from "../router";
 import { t, tRaw, getLocale, setLocale, locales, type Locale } from "../i18n";
 import { openSearch } from "./search";
+import { isAuthenticated, isAdmin, getCurrentProfile, signOut } from "../auth/session";
 
 interface NavLink {
   route: string;
@@ -11,6 +12,7 @@ interface NavLink {
 const NAV_LINKS: NavLink[] = [
   { route: "#/", key: "nav.home", match: ["home"] },
   { route: "#/projects", key: "nav.projects", match: ["projects", "project"] },
+  { route: "#/resale", key: "nav.resale", match: ["resale", "resale-listing"] },
   { route: "#/about", key: "nav.about", match: ["about"] }
 ];
 
@@ -100,6 +102,23 @@ export function renderHeader(el: HTMLElement, route: Route): void {
           </ul>
         </div>
 
+        <div class="account-switch">
+          ${
+            isAuthenticated()
+              ? `
+            <button class="account-switch__current" id="account-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+              ${getCurrentProfile()?.full_name?.split(" ")[0] || t("nav.account")}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <ul class="account-switch__menu" id="account-menu" hidden>
+              <li><a href="#/account" class="${route.name === "account" || route.name === "account-new-listing" || route.name === "account-edit-listing" ? "is-active" : ""}">${t("nav.account")}</a></li>
+              ${isAdmin() ? `<li><a href="#/admin" class="${route.name === "admin" || route.name === "admin-listing" ? "is-active" : ""}">${t("nav.admin")}</a></li>` : ""}
+              <li><button type="button" id="logout-btn">${t("nav.logout")}</button></li>
+            </ul>`
+              : `<a class="account-switch__login" href="#/login">${t("nav.login")}</a>`
+          }
+        </div>
+
         <a class="btn btn--primary btn--small header-cta" href="#/contact">${t("nav.getInTouch")}</a>
 
         <button class="icon-btn menu-toggle" id="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav">
@@ -140,6 +159,18 @@ export function renderHeader(el: HTMLElement, route: Route): void {
     });
   });
 
+  const accountToggle = el.querySelector<HTMLButtonElement>("#account-toggle");
+  const accountMenu = el.querySelector<HTMLUListElement>("#account-menu");
+  accountToggle?.addEventListener("click", () => {
+    const hidden = accountMenu!.hasAttribute("hidden");
+    if (hidden) accountMenu!.removeAttribute("hidden");
+    else accountMenu!.setAttribute("hidden", "");
+    accountToggle.setAttribute("aria-expanded", String(hidden));
+  });
+  el.querySelector<HTMLButtonElement>("#logout-btn")?.addEventListener("click", () => {
+    void signOut();
+  });
+
   const resourcesToggle = el.querySelector<HTMLButtonElement>("#resources-toggle")!;
   const resourcesMenu = el.querySelector<HTMLUListElement>("#resources-menu")!;
   resourcesToggle.addEventListener("click", () => {
@@ -159,6 +190,10 @@ export function renderHeader(el: HTMLElement, route: Route): void {
       if (!(e.target as HTMLElement).closest(".nav-group")) {
         resourcesMenu.setAttribute("hidden", "");
         resourcesToggle.setAttribute("aria-expanded", "false");
+      }
+      if (!(e.target as HTMLElement).closest(".account-switch") && accountMenu) {
+        accountMenu.setAttribute("hidden", "");
+        accountToggle?.setAttribute("aria-expanded", "false");
       }
     },
     { capture: true }
