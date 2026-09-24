@@ -24,7 +24,7 @@ function buildIndex(): SearchResult[] {
     results.push({
       title: content.name,
       snippet: content.tagline,
-      route: `#/projects/${project.slug}`
+      route: `/projects/${project.slug}`
     });
   }
 
@@ -33,18 +33,18 @@ function buildIndex(): SearchResult[] {
     results.push({
       title: content.title,
       snippet: content.excerpt,
-      route: `#/blog/${post.slug}`
+      route: `/blog/${post.slug}`
     });
   }
 
-  results.push({ title: t("nav.home"), snippet: t("home.heroSubtitle"), route: "#/" });
-  results.push({ title: t("nav.projects"), snippet: t("projects.heroSubtitle"), route: "#/projects" });
-  results.push({ title: t("nav.about"), snippet: t("about.heroSubtitle"), route: "#/about" });
-  results.push({ title: t("nav.citizenship"), snippet: t("citizenship.heroSubtitle"), route: "#/citizenship" });
-  results.push({ title: t("nav.propertyRequest"), snippet: t("propertyRequest.heroSubtitle"), route: "#/property-request" });
-  results.push({ title: t("nav.blog"), snippet: t("blog.heroSubtitle"), route: "#/blog" });
-  results.push({ title: t("nav.faq"), snippet: t("faq.heroSubtitle"), route: "#/faq" });
-  results.push({ title: t("nav.contact"), snippet: t("contact.heroSubtitle"), route: "#/contact" });
+  results.push({ title: t("nav.home"), snippet: t("home.heroSubtitle"), route: "/" });
+  results.push({ title: t("nav.projects"), snippet: t("projects.heroSubtitle"), route: "/projects" });
+  results.push({ title: t("nav.about"), snippet: t("about.heroSubtitle"), route: "/about" });
+  results.push({ title: t("nav.citizenship"), snippet: t("citizenship.heroSubtitle"), route: "/citizenship" });
+  results.push({ title: t("nav.propertyRequest"), snippet: t("propertyRequest.heroSubtitle"), route: "/property-request" });
+  results.push({ title: t("nav.blog"), snippet: t("blog.heroSubtitle"), route: "/blog" });
+  results.push({ title: t("nav.faq"), snippet: t("faq.heroSubtitle"), route: "/faq" });
+  results.push({ title: t("nav.contact"), snippet: t("contact.heroSubtitle"), route: "/contact" });
 
   return results;
 }
@@ -106,7 +106,7 @@ export function openSearch(): void {
       .join("");
     resultsEl.querySelectorAll<HTMLButtonElement>(".search-result").forEach((btn) => {
       btn.addEventListener("click", () => {
-        navigate(btn.dataset.route!.replace(/^#/, ""));
+        navigate(btn.dataset.route!);
         closeSearch();
       });
     });

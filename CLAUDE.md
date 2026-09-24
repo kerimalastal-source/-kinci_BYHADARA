@@ -21,7 +21,9 @@
 
 - **Vite** (bundler) + **TypeScript** (بدون framework — DOM manipulation مباشر)
 - **CSS خام** مقسّم لملفات منطقية (variables/base/layout/components/rtl)
-- **Hash-based routing** (`#/`, `#/projects`, `#/projects/:slug`, `#/about`, `#/citizenship`, `#/contact`) — بدون مكتبة routing، كود يدوي في `src/router.ts`
+- **Path-based routing (History API)** — روابط حقيقية مثل `/projects/lotus-koru-2`، واللغات غير الإنجليزية لها بادئة: `/ar/...`, `/fr/...`, `/ru/...`. التحويل بين الرابط والصفحة في `src/seo/routes.ts` (`parseRoute`/`routePath`/`localizePath`)، والتنقل في `src/router.ts` (اعتراض النقر على الروابط الداخلية + `popstate`). الروابط القديمة `#/...` تُحوَّل تلقائياً للمسار الجديد.
+- **أي رابط داخلي جديد** يُكتب بـ `href="${link("/path")}"` (من `src/i18n`) حتى يأخذ بادئة اللغة الحالية، والتنقل البرمجي بـ `navigate("/path")` — **لا تستخدم `#/` أبداً**.
+- `vercel.json`: `rewrites` لكل المسارات إلى `index.html` (الملفات الموجودة فعلياً تُخدَم أولاً).
 - `package.json` build script: `"build": "tsc && vite build"`
 
 ## 3. اللغات (i18n) — 4 لغات كاملة
@@ -32,7 +34,8 @@
 - **الروسية (ru)**
 
 النظام في `src/i18n/`:
-- `index.ts`: منطق الترجمة — `t(key)` (نص)، `tRaw<T>(key)` (بيانات خام كـ arrays/objects)، `getLocale()`/`setLocale()`/`onLocaleChange()`، حفظ اللغة بـ `localStorage` (`hadara-locale`)، وضبط `document.documentElement.dir` تلقائياً (`rtl` لو عربي).
+- `dictionaries.ts`: القواميس ودالة `lookup()` بدون أي اعتماد على DOM (تُستخدم أيضاً وقت البناء).
+- `index.ts`: منطق الترجمة — `t(key)` (نص)، `tRaw<T>(key)`، `link(path)`، `getLocale()`/`setLocale()`/`onLocaleChange()`. **اللغة تُؤخذ من الرابط** (بادئة `/ar` إلخ)؛ `setLocale()` ينقل لنفس الصفحة باللغة الجديدة ويحفظ الاختيار في `localStorage` (`hadara-locale`) لتوجيه الزائر العائد، ويضبط `lang`/`dir` تلقائياً.
 - `en.json` / `ar.json` / `fr.json` / `ru.json`: قواميس ترجمة متطابقة البنية بالكامل — نفس الـ keys بكل اللغات، بما فيها `projectsData` (اسم/تاجلاين/وصف قصير وطويل/highlights لكل مشروع بكل لغة).
 - زر تبديل اللغة بالـ header (`src/components/header.ts`).
 
@@ -54,6 +57,14 @@
   5. `marmara-haven-villa` (ongoing، فيلا خاصة)
 - **الصور**: مستضافة على Wix مباشرة (`https://static.wixstatic.com/media/<mediaId>`)، مبنية عبر `wixImg()` في `src/utils/image.ts`. **هذه نقطة اعتماد على Wix خارجي** — لو حذفت الشركة الصور من حساب Wix الأصلي، الصور بتنكسر بالموقع الجديد. للـ production الحقيقي، الأفضل نزّل الصور ورفعها لـ CDN/استضافة خاصة بالموقع الجديد.
 - بيانات التواصل الحقيقية: الإيميل `info@byhadara.com`، الهاتف `+90 531 930 92 14`، العنوان "Adnan Kahveci Mah., Beylikdüzü, Istanbul 34000, Türkiye".
+
+## 4.5 SEO
+
+- `src/seo/meta.ts` (بدون DOM): `buildMeta(route, locale)` يبني لكل صفحة: title، description، canonical، hreflang (4 لغات + x-default)، Open Graph/Twitter، وJSON-LD (`RealEstateAgent` بكل الصفحات، `WebSite` للرئيسية، `ApartmentComplex`/`SingleFamilyResidence` للمشاريع، `BlogPosting` للمقالات، `FAQPage`، `ItemList`، `BreadcrumbList`). صفحات الدخول/الحساب/الإدارة/404 عليها `noindex`.
+- نصوص العناوين والأوصاف في قسم `seo` بالقواميس الأربعة — **أي صفحة جديدة تحتاج مفتاح `seo.<page>`** بالأربع لغات + إضافتها في `PAGE_KEYS` و`indexableRoutes()` إذا كانت قابلة للفهرسة.
+- المتصفح: `src/seo/head.ts` يستبدل الوسوم (`[data-seo]`) بكل تنقل.
+- وقت البناء: plugin في `vite.config.ts` يولّد ملف HTML مستقل لكل صفحة × لغة (`dist/ar/projects/index.html`...) فيه الوسوم جاهزة بالـ `<head>`، ويولّد `sitemap.xml` و`robots.txt`.
+- الدومين المعتمد للروابط الـ canonical والـ sitemap: `https://hadararealestate.com` (قابل للتغيير عبر متغير البيئة `VITE_SITE_URL`).
 
 ## 5. نظام التصميم (Design System)
 
@@ -99,11 +110,12 @@
 - [ ] نقل الصور من Wix لاستضافة/CDN خاص بالموقع الجديد (اعتماد خارجي حالياً)
 - [ ] ربط فورم التواصل بخدمة إرسال حقيقية (بدل `mailto:`)
 - [ ] ربط الدومين الحقيقي `hadararealestate.com` (يقوم بها المستخدم نفسه)
-- [ ] مراجعة SEO tags (title/description) لكل صفحة
+- [x] SEO: روابط حقيقية لكل صفحة ولغة، وسوم meta/hreflang/OG/JSON-LD، sitemap وrobots (راجع قسم 4.5)
+- [ ] بعد ربط الدومين: تسجيل الموقع في Google Search Console وإرسال `sitemap.xml`
 - [ ] اختبار على أجهزة موبايل حقيقية (تم اختباره بـ Playwright فقط لحد الآن)
 
 ## 10. ملاحظات عامة للتعديل المستقبلي
 
 - أي نص جديد فيه أرقام/تواريخ يظهر داخل سياق عربي RTL → لازم `dir="ltr"` على العنصر (راجع قسم 3).
 - أي ترجمة جديدة لازم تُضاف بنفس الـ key في **الأربع ملفات JSON** (`en`, `ar`, `fr`, `ru`) للحفاظ على التطابق.
-- الـ router بسيط ومباشر — أي صفحة جديدة تحتاج: إضافة route في `src/router.ts` + دالة render في `src/pages/` + ترجمات جديدة بالقواميس الأربعة.
+- الـ router بسيط ومباشر — أي صفحة جديدة تحتاج: إضافة route في `src/seo/routes.ts` (النوع + `parseRoute` + `routePath`) + حالة في `renderRoute` بـ `src/router.ts` + دالة render في `src/pages/` + ترجمات جديدة (ومفتاح `seo.*`) بالقواميس الأربعة.

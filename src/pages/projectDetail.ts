@@ -1,4 +1,4 @@
-import { t, getProjectContent } from "../i18n";
+import { t, getProjectContent, link } from "../i18n";
 import { getProjectBySlug, getSortedProjects } from "../data/projects";
 import { renderProjectCard, projectStatusLabel } from "../components/projectCard";
 import { openLightbox } from "../components/lightbox";
@@ -18,7 +18,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   el.innerHTML = `
     <section class="project-hero" style="background-image: linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88)), url('${project.coverImage.src}')">
       <div class="container project-hero__inner">
-        <a class="back-link" href="#/projects">
+        <a class="back-link" href="${link("/projects")}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
           ${t("projectDetail.backLabel")}
         </a>
@@ -84,7 +84,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           <div class="cta-card">
             <h3>${t("projectDetail.ctaTitle")}</h3>
             <p>${t("projectDetail.ctaText")}</p>
-            <a class="btn btn--primary btn--block" href="#/contact">${t("projectDetail.ctaButton")}</a>
+            <a class="btn btn--primary btn--block" href="${link("/contact")}">${t("projectDetail.ctaButton")}</a>
           </div>
         </aside>
       </div>

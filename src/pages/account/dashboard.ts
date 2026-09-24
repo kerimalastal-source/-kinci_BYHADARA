@@ -1,4 +1,4 @@
-import { t } from "../../i18n";
+import { t, link } from "../../i18n";
 import { requireAuth, getCurrentProfile } from "../../auth/session";
 import {
   fetchMyListings,
@@ -29,8 +29,8 @@ function renderRow(listing: Listing, coverPath: string | undefined): string {
         ${listing.status === "rejected" && listing.rejection_reason ? `<p class="listing-row__rejection"><strong>${t("account.rejectionReasonLabel")}:</strong> ${listing.rejection_reason}</p>` : ""}
       </div>
       <div class="listing-row__actions">
-        ${listing.status === "approved" ? `<a class="btn btn--outline btn--small" href="#/resale/${listing.id}">${t("account.viewButton")}</a>` : ""}
-        ${canEdit ? `<a class="btn btn--outline btn--small" href="#/account/listings/${listing.id}/edit">${t("account.editButton")}</a>` : ""}
+        ${listing.status === "approved" ? `<a class="btn btn--outline btn--small" href="${link(`/resale/${listing.id}`)}">${t("account.viewButton")}</a>` : ""}
+        ${canEdit ? `<a class="btn btn--outline btn--small" href="${link(`/account/listings/${listing.id}/edit`)}">${t("account.editButton")}</a>` : ""}
         ${canWithdraw ? `<button type="button" class="btn btn--outline btn--small" data-withdraw="${listing.id}">${t("account.withdrawButton")}</button>` : ""}
       </div>
     </article>
@@ -55,7 +55,7 @@ export function renderAccountDashboard(main: HTMLElement): void {
       <div class="container">
         <div class="section-header-row">
           <h2 class="section-title">${t("account.myListingsTitle")}</h2>
-          <a class="btn btn--primary" href="#/account/listings/new">${t("account.addListingButton")}</a>
+          <a class="btn btn--primary" href="${link("/account/listings/new")}">${t("account.addListingButton")}</a>
         </div>
         <div id="listing-list" class="listing-list"></div>
         <p class="project-grid__empty" id="listing-empty" hidden>${t("account.noListingsText")}</p>

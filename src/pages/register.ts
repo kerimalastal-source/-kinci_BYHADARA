@@ -1,4 +1,4 @@
-import { t } from "../i18n";
+import { t, link } from "../i18n";
 import { isAuthenticated, signUp } from "../auth/session";
 import { navigate } from "../router";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "../components/phoneInput";
@@ -85,7 +85,7 @@ function validate(form: HTMLFormElement): boolean {
 
 export function renderRegister(el: HTMLElement): void {
   if (isAuthenticated()) {
-    navigate("#/account");
+    navigate("/account");
     return;
   }
 
@@ -148,7 +148,7 @@ export function renderRegister(el: HTMLElement): void {
 
           <button type="submit" class="btn btn--primary btn--block" id="rf-submit">${t("auth.registerButton")}</button>
 
-          <p class="auth-form__switch">${t("auth.haveAccountText")} <a href="#/login">${t("auth.loginLink")}</a></p>
+          <p class="auth-form__switch">${t("auth.haveAccountText")} <a href="${link("/login")}">${t("auth.loginLink")}</a></p>
         </form>
 
         <div class="contact-form__success" id="rf-success" hidden>

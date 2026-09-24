@@ -1,4 +1,4 @@
-import { t, tRaw } from "../i18n";
+import { t, tRaw, link } from "../i18n";
 import { getSortedProjects } from "../data/projects";
 import { partners } from "../data/partners";
 import { renderProjectCard } from "../components/projectCard";
@@ -30,8 +30,8 @@ export function renderHome(el: HTMLElement): void {
         <h1 class="hero__title">${t("home.heroTitle")}</h1>
         <p class="hero__subtitle">${t("home.heroSubtitle")}</p>
         <div class="hero__actions">
-          <a class="btn btn--primary" href="#/projects">${t("home.heroCtaPrimary")}</a>
-          <a class="btn btn--ghost" href="#/contact">${t("home.heroCtaSecondary")}</a>
+          <a class="btn btn--primary" href="${link("/projects")}">${t("home.heroCtaPrimary")}</a>
+          <a class="btn btn--ghost" href="${link("/contact")}">${t("home.heroCtaSecondary")}</a>
         </div>
       </div>
     </section>
@@ -81,7 +81,7 @@ export function renderHome(el: HTMLElement): void {
           <h2 class="section-title">${t("home.aboutTitle")}</h2>
           <p>${t("home.aboutText1")}</p>
           <p>${t("home.aboutText2")}</p>
-          <a class="btn btn--outline" href="#/about">${t("home.aboutCta")}</a>
+          <a class="btn btn--outline" href="${link("/about")}">${t("home.aboutCta")}</a>
         </div>
       </div>
     </section>
@@ -94,7 +94,7 @@ export function renderHome(el: HTMLElement): void {
             <h2 class="section-title">${t("home.projectsTitle")}</h2>
             <p class="section-subtitle">${t("home.projectsSubtitle")}</p>
           </div>
-          <a class="btn btn--outline" href="#/projects">${t("common.viewAllProjects")}</a>
+          <a class="btn btn--outline" href="${link("/projects")}">${t("common.viewAllProjects")}</a>
         </div>
         <div class="project-grid">
           ${featured.map((p) => renderProjectCard(p)).join("")}
@@ -145,7 +145,7 @@ export function renderHome(el: HTMLElement): void {
           <h2 class="section-title">${t("home.citizenshipTitle")}</h2>
           <p>${t("home.citizenshipText")}</p>
         </div>
-        <a class="btn btn--primary" href="#/citizenship">${t("home.citizenshipCta")}</a>
+        <a class="btn btn--primary" href="${link("/citizenship")}">${t("home.citizenshipCta")}</a>
       </div>
     </section>
 
@@ -153,7 +153,7 @@ export function renderHome(el: HTMLElement): void {
       <div class="container final-cta__inner">
         <h2 class="section-title">${t("home.ctaTitle")}</h2>
         <p>${t("home.ctaText")}</p>
-        <a class="btn btn--primary" href="#/contact">${t("home.ctaButton")}</a>
+        <a class="btn btn--primary" href="${link("/contact")}">${t("home.ctaButton")}</a>
       </div>
     </section>
   `;

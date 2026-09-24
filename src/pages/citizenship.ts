@@ -1,4 +1,4 @@
-import { t, tRaw } from "../i18n";
+import { t, tRaw, link } from "../i18n";
 
 interface StepItem {
   title: string;
@@ -66,7 +66,7 @@ export function renderCitizenship(el: HTMLElement): void {
       <div class="container final-cta__inner">
         <h2 class="section-title">${t("citizenship.ctaTitle")}</h2>
         <p>${t("citizenship.ctaText")}</p>
-        <a class="btn btn--primary" href="#/contact">${t("citizenship.ctaButton")}</a>
+        <a class="btn btn--primary" href="${link("/contact")}">${t("citizenship.ctaButton")}</a>
       </div>
     </section>
   `;

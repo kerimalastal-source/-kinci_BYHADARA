@@ -1,4 +1,4 @@
-import { t } from "../i18n";
+import { t, link } from "../i18n";
 import { getSortedProjects, type ProjectStatus } from "../data/projects";
 import { renderProjectCard } from "../components/projectCard";
 
@@ -45,7 +45,7 @@ export function renderProjects(el: HTMLElement): void {
           <h2 class="section-title">${t("projects.notFoundCtaTitle")}</h2>
           <p>${t("projects.notFoundCtaText")}</p>
         </div>
-        <a class="btn btn--primary" href="#/property-request">${t("projects.notFoundCtaButton")}</a>
+        <a class="btn btn--primary" href="${link("/property-request")}">${t("projects.notFoundCtaButton")}</a>
       </div>
     </section>
   `;

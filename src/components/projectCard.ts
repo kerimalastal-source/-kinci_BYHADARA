@@ -1,5 +1,5 @@
 import type { Project } from "../data/projects";
-import { t, getProjectContent } from "../i18n";
+import { t, getProjectContent, link } from "../i18n";
 
 export function projectStatusLabel(status: Project["status"]): string {
   switch (status) {
@@ -18,7 +18,7 @@ export function renderProjectCard(project: Project): string {
 
   return `
     <article class="project-card">
-      <a class="project-card__media" href="#/projects/${project.slug}" aria-label="${content.name}">
+      <a class="project-card__media" href="${link(`/projects/${project.slug}`)}" aria-label="${content.name}">
         <img
           src="${project.coverImage.src}"
           alt="${project.coverImage.alt}"
@@ -42,7 +42,7 @@ export function renderProjectCard(project: Project): string {
             <span>${t("common.timeline")}</span>
           </div>
         </div>
-        <a class="btn btn--outline btn--small" href="#/projects/${project.slug}">
+        <a class="btn btn--outline btn--small" href="${link(`/projects/${project.slug}`)}">
           ${t("common.discoverMore")}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>

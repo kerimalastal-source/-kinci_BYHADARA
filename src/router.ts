@@ -20,65 +20,56 @@ import { renderAdminReviewListing } from "./pages/admin/reviewListing";
 import { renderHeader } from "./components/header";
 import { renderFooter } from "./components/footer";
 import { renderFloatingButtons } from "./components/floatingButtons";
-import { onLocaleChange } from "./i18n";
+import { onLocaleChange, syncLocale, getPreferredLocale, link, type Locale } from "./i18n";
+import { parseRoute, splitLocale, localizePath, type Route } from "./seo/routes";
+import { applyMeta } from "./seo/head";
 import { onAuthChange } from "./auth/session";
 import { closeSearch } from "./components/search";
 
-export type Route =
-  | { name: "home" }
-  | { name: "projects" }
-  | { name: "project"; slug: string }
-  | { name: "about" }
-  | { name: "citizenship" }
-  | { name: "faq" }
-  | { name: "blog" }
-  | { name: "blog-post"; slug: string }
-  | { name: "property-request" }
-  | { name: "contact" }
-  | { name: "login" }
-  | { name: "register" }
-  | { name: "account" }
-  | { name: "account-new-listing" }
-  | { name: "account-edit-listing"; id: string }
-  | { name: "resale" }
-  | { name: "resale-listing"; id: string }
-  | { name: "admin" }
-  | { name: "admin-listing"; id: string }
-  | { name: "not-found" };
+export type { Route };
 
-function parseHash(): Route {
-  const hash = window.location.hash.replace(/^#\/?/, "");
-  const parts = hash.split("/").filter(Boolean);
-  const [segment, p1, p2, p3] = parts;
+let rerender: () => void = () => {};
+let renderedPath = "";
 
-  if (!segment) return { name: "home" };
-  if (segment === "projects" && p1) return { name: "project", slug: p1 };
-  if (segment === "projects") return { name: "projects" };
-  if (segment === "about") return { name: "about" };
-  if (segment === "citizenship") return { name: "citizenship" };
-  if (segment === "faq") return { name: "faq" };
-  if (segment === "blog" && p1) return { name: "blog-post", slug: p1 };
-  if (segment === "blog") return { name: "blog" };
-  if (segment === "property-request") return { name: "property-request" };
-  if (segment === "contact") return { name: "contact" };
-  if (segment === "login") return { name: "login" };
-  if (segment === "register") return { name: "register" };
-  if (segment === "account") {
-    if (p1 === "listings" && p2 === "new") return { name: "account-new-listing" };
-    if (p1 === "listings" && p2 && p3 === "edit") return { name: "account-edit-listing", id: p2 };
-    return { name: "account" };
+/** Navigates to an internal, unprefixed path ("/projects") in the current locale. */
+export function navigate(path: string, options: { replace?: boolean } = {}): void {
+  const url = link(path);
+  if (url !== window.location.pathname) {
+    history[options.replace ? "replaceState" : "pushState"](null, "", url);
   }
-  if (segment === "resale" && p1) return { name: "resale-listing", id: p1 };
-  if (segment === "resale") return { name: "resale" };
-  if (segment === "admin") {
-    if (p1 === "listings" && p2) return { name: "admin-listing", id: p2 };
-    return { name: "admin" };
-  }
-  return { name: "not-found" };
+  // Deferred so a redirect issued mid-render (e.g. an auth guard) doesn't nest inside that render.
+  queueMicrotask(rerender);
 }
 
-export function navigate(path: string): void {
-  window.location.hash = path;
+function currentRoute(): { locale: Locale; route: Route } {
+  const { locale, path } = splitLocale(window.location.pathname);
+  return { locale, route: parseRoute(path) };
+}
+
+/** Moves legacy "#/projects" links to "/projects", and sends returning visitors to their language. */
+function normalizeInitialUrl(): void {
+  const { hash, pathname, search } = window.location;
+  const { prefixed, path } = splitLocale(pathname);
+  if (hash.startsWith("#/")) {
+    history.replaceState(null, "", localizePath(hash.slice(1), getPreferredLocale()) + search);
+    return;
+  }
+  if (!prefixed) {
+    const preferred = getPreferredLocale();
+    if (preferred !== "en") history.replaceState(null, "", localizePath(path, preferred) + search + hash);
+  }
+}
+
+/** Handles clicks on internal links without a full page load. */
+function interceptLinks(event: MouseEvent): void {
+  if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const anchor = (event.target as Element | null)?.closest?.("a");
+  if (!anchor || anchor.target || anchor.hasAttribute("download")) return;
+  const href = anchor.getAttribute("href");
+  if (!href || !href.startsWith("/") || href.startsWith("//")) return;
+  event.preventDefault();
+  if (href !== window.location.pathname + window.location.search) history.pushState(null, "", href);
+  rerender();
 }
 
 function renderRoute(route: Route, main: HTMLElement): void {
@@ -163,15 +154,25 @@ export function startRouter(root: HTMLElement): void {
 
   function renderAll(): void {
     closeSearch();
-    const route = parseHash();
+    const { locale, route } = currentRoute();
+    syncLocale(locale);
     renderHeader(header, route);
     renderRoute(route, main);
     renderFooter(footer);
     renderFloatingButtons(floatingActions);
-    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    applyMeta(route, locale);
+    const path = window.location.pathname + window.location.search;
+    if (path !== renderedPath) window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    renderedPath = path;
   }
 
-  window.addEventListener("hashchange", renderAll);
+  rerender = renderAll;
+  normalizeInitialUrl();
+  document.addEventListener("click", interceptLinks);
+  window.addEventListener("popstate", () => {
+    // In-page anchors (e.g. the skip link) also fire popstate; only re-render real page changes.
+    if (window.location.pathname + window.location.search !== renderedPath) renderAll();
+  });
   onLocaleChange(renderAll);
   onAuthChange(renderAll);
   renderAll();
