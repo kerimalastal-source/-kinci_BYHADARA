@@ -549,6 +549,7 @@
     "heroTitle": "Properties For Resale",
     "heroSubtitle": "Verified properties listed for resale by their owners, offered through HADARA's licensed brokerage service.",
     "noResults": "No listings match this filter.",
+    "loadError": "We couldn't load listings right now. Please try again shortly.",
     "filterAll": "All Types",
     "priceLabel": "Asking Price",
     "sizeLabel": "Size",

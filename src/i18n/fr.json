@@ -549,6 +549,7 @@
     "heroTitle": "Biens en revente",
     "heroSubtitle": "Des biens vérifiés mis en revente par leurs propriétaires, proposés via le service de courtage agréé de HADARA.",
     "noResults": "Aucune annonce ne correspond à ce filtre.",
+    "loadError": "Impossible de charger les annonces pour le moment. Veuillez réessayer bientôt.",
     "filterAll": "Tous les types",
     "priceLabel": "Prix demandé",
     "sizeLabel": "Superficie",

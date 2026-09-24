@@ -24,6 +24,7 @@ export function renderResaleList(el: HTMLElement): void {
         </div>
         <div class="project-grid" id="listing-grid"></div>
         <p class="project-grid__empty" id="listing-empty" hidden>${t("resale.noResults")}</p>
+        <p class="project-grid__empty" id="listing-error" hidden>${t("resale.loadError")}</p>
 
         <div class="cta-card resale-sell-cta">
           <h3>${t("resale.wantToSellCta")}</h3>
@@ -39,30 +40,41 @@ export function renderResaleList(el: HTMLElement): void {
   const filterBar = el.querySelector<HTMLElement>("#filter-bar")!;
   const grid = el.querySelector<HTMLElement>("#listing-grid")!;
   const empty = el.querySelector<HTMLElement>("#listing-empty")!;
+  const errorEl = el.querySelector<HTMLElement>("#listing-error")!;
+
+  let listings: Listing[] = [];
+  let covers: Record<string, string> = {};
+
+  function paint(filtered: Listing[]): void {
+    grid.innerHTML = filtered.map((l) => renderListingCard(l, covers[l.id])).join("");
+    empty.hidden = filtered.length > 0;
+  }
+
+  // Wired up immediately (not inside the fetch) so the filters are never dead,
+  // even if the listings request is slow, empty, or fails outright.
+  filterBar.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".filter-chip");
+    if (!btn) return;
+    const key = btn.dataset.filter as FilterKey;
+
+    filterBar.querySelectorAll(".filter-chip").forEach((c) => c.classList.remove("is-active"));
+    btn.classList.add("is-active");
+
+    paint(key === "all" ? listings : listings.filter((l) => l.property_type === key));
+  });
 
   fetchApprovedListings()
-    .then(async (listings) => {
+    .then(async (data) => {
       if (el.dataset.requestId !== requestId) return;
-      const covers = await fetchCoverPhotos(listings.map((l) => l.id));
+      listings = data;
+      covers = await fetchCoverPhotos(listings.map((l) => l.id));
       if (el.dataset.requestId !== requestId) return;
-
-      function paint(filtered: Listing[]): void {
-        grid.innerHTML = filtered.map((l) => renderListingCard(l, covers[l.id])).join("");
-        empty.hidden = filtered.length > 0;
-      }
-
       paint(listings);
-
-      filterBar.addEventListener("click", (e) => {
-        const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".filter-chip");
-        if (!btn) return;
-        const key = btn.dataset.filter as FilterKey;
-
-        filterBar.querySelectorAll(".filter-chip").forEach((c) => c.classList.remove("is-active"));
-        btn.classList.add("is-active");
-
-        paint(key === "all" ? listings : listings.filter((l) => l.property_type === key));
-      });
     })
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error(err);
+      if (el.dataset.requestId !== requestId) return;
+      empty.hidden = true;
+      errorEl.hidden = false;
+    });
 }
