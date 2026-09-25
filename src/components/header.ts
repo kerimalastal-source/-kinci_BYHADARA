@@ -3,6 +3,7 @@ import { t, tRaw, getLocale, setLocale, locales, type Locale, link } from "../i1
 import { openSearch } from "./search";
 import { isAuthenticated, isAdmin, getCurrentProfile, signOut } from "../auth/session";
 import { escapeHtml } from "../utils/html";
+import { renderBrand } from "./brand";
 
 interface NavLink {
   route: string;
@@ -39,13 +40,7 @@ export function renderHeader(el: HTMLElement, route: Route): void {
   el.className = "site-header";
   el.innerHTML = `
     <div class="site-header__inner container">
-      <a class="brand" href="${link("/")}" aria-label="${t("meta.siteNameFull")}">
-        <img class="brand__logo" src="/logo-dark.png" alt="${t("meta.siteNameFull")}" />
-        <span class="brand__text">
-          <span class="brand__name">${t("meta.siteName")}</span>
-          <span class="brand__tagline">${t("meta.tagline")}</span>
-        </span>
-      </a>
+      ${renderBrand("header")}
 
       <nav class="main-nav" id="main-nav" aria-label="Main navigation">
         <ul class="main-nav__list">

@@ -476,6 +476,21 @@
   direction: rtl;
 }
 
+/* The brand column sits on the left in RTL too, so its description and social
+   icons line up under the logo instead of drifting to the column's far edge. */
+[dir="rtl"] .site-footer__brand {
+  text-align: left;
+}
+
+[dir="rtl"] .site-footer__desc {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+[dir="rtl"] .site-footer__brand .social-links {
+  direction: ltr;
+}
+
 .site-footer__desc {
   color: rgba(247, 244, 236, 0.75);
   max-width: 360px;
