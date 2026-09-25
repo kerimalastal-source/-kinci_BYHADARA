@@ -83,6 +83,7 @@ export const projects: Project[] = [
     ],
     stats: [
       { value: "58", labelKey: "apartments" },
+      { value: "2027", labelKey: "delivery" },
       { value: "2", labelKey: "blocks" },
       { value: "3+1", labelKey: "layout" },
       { value: "117 – 143 m²", labelKey: "grossArea" }
