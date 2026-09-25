@@ -346,6 +346,7 @@
     "propertyTypes": {
       "2-1": "2 Bedroom + Living Room",
       "3-1": "3 Bedroom + Living Room",
+      "4-1": "4 Bedroom + Living Room",
       "villa": "Villa",
       "other": "Other"
     },

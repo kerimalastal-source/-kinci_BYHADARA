@@ -1,4 +1,4 @@
-export const propertyTypeOptions: string[] = ["2-1", "3-1", "villa", "other"];
+export const propertyTypeOptions: string[] = ["2-1", "3-1", "4-1", "villa", "other"];
 
 export const conditionOptions: string[] = ["new-only", "new-or-resale"];
 
