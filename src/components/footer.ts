@@ -1,4 +1,5 @@
 import { t, link } from "../i18n";
+import { renderBrand, BRAND_FULL } from "./brand";
 
 const SITE_PHONE = "+90 531 930 92 14";
 const SITE_PHONE_HREF = "+905319309214";
@@ -9,13 +10,7 @@ export function renderFooter(el: HTMLElement): void {
   el.innerHTML = `
     <div class="container site-footer__inner">
       <div class="site-footer__brand">
-        <a class="brand" href="${link("/")}" aria-label="${t("meta.siteNameFull")}">
-          <img class="brand__logo brand__logo--footer" src="/logo-light.png" alt="${t("meta.siteNameFull")}" />
-          <span class="brand__text">
-            <span class="brand__name">${t("meta.siteName")}</span>
-            <span class="brand__tagline">${t("meta.tagline")}</span>
-          </span>
-        </a>
+        ${renderBrand("footer")}
         <p class="site-footer__desc">${t("footer.description")}</p>
         <div class="social-links" aria-label="${t("footer.followUs")}">
           <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
@@ -54,7 +49,7 @@ export function renderFooter(el: HTMLElement): void {
       </div>
     </div>
     <div class="site-footer__bottom container">
-      <p>&copy; ${new Date().getFullYear()} ${t("meta.siteNameFull")}. ${t("footer.rights")}</p>
+      <p><span dir="ltr" translate="no">&copy; ${new Date().getFullYear()} ${BRAND_FULL}.</span> ${t("footer.rights")}</p>
     </div>
   `;
 }
