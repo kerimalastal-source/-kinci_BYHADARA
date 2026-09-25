@@ -512,7 +512,7 @@
     "priceLabel": "السعر المطلوب *",
     "currencyLabel": "العملة",
     "purchaseYearLabel": "سنة الشراء",
-    "titleDeedNumberLabel": "رقم سند الطابو *",
+    "titleDeedNumberLabel": "رقم سند الطابو",
     "nextButton": "التالي",
     "backButton": "رجوع",
     "photosStepTitle": "رفع الصور",
@@ -540,7 +540,6 @@
       "addressRequired": "يرجى تحديد موقع العقار.",
       "sizeRequired": "يرجى إدخال مساحة العقار.",
       "priceRequired": "يرجى إدخال السعر المطلوب.",
-      "titleDeedNumberRequired": "يرجى إدخال رقم سند الطابو.",
       "minOnePhoto": "يرجى إضافة صورة واحدة على الأقل.",
       "titleDeedDocRequired": "يرجى رفع مستند سند الطابو."
     }

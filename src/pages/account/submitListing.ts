@@ -3,6 +3,7 @@ import { requireAuth, getCurrentUserId } from "../../auth/session";
 import { renderNotFound } from "../notFound";
 import { turkeyProvinces, type District } from "../../data/turkeyLocations";
 import { escapeHtml } from "../../utils/html";
+import { toWesternDigits } from "../../utils/numbers";
 import {
   fetchListingById,
   createDraftListing,
@@ -188,7 +189,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
           </div>
           <div class="form-field">
             <label for="wf-size">${t("account.sizeLabel")}</label>
-            <input dir="ltr" type="number" min="0" id="wf-size" name="size_m2" value="${values.size_m2 || ""}" />
+            <input dir="ltr" type="text" inputmode="numeric" id="wf-size" name="size_m2" value="${values.size_m2 || ""}" />
             <p class="form-field__error" data-error-for="size_m2"></p>
           </div>
         </div>
@@ -196,18 +197,18 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
         <div class="form-row">
           <div class="form-field">
             <label for="wf-bedrooms">${t("account.bedroomsLabel")}</label>
-            <input dir="ltr" type="number" min="0" id="wf-bedrooms" name="bedrooms" value="${values.bedrooms || ""}" />
+            <input dir="ltr" type="text" inputmode="numeric" id="wf-bedrooms" name="bedrooms" value="${values.bedrooms || ""}" />
           </div>
           <div class="form-field">
             <label for="wf-bathrooms">${t("account.bathroomsLabel")}</label>
-            <input dir="ltr" type="number" min="0" id="wf-bathrooms" name="bathrooms" value="${values.bathrooms || ""}" />
+            <input dir="ltr" type="text" inputmode="numeric" id="wf-bathrooms" name="bathrooms" value="${values.bathrooms || ""}" />
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-field">
             <label for="wf-price">${t("account.priceLabel")}</label>
-            <input dir="ltr" type="number" min="0" id="wf-price" name="asking_price" value="${values.asking_price || ""}" />
+            <input dir="ltr" type="text" inputmode="numeric" id="wf-price" name="asking_price" value="${values.asking_price || ""}" />
             <p class="form-field__error" data-error-for="asking_price"></p>
           </div>
           <div class="form-field">
@@ -221,7 +222,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
         <div class="form-row">
           <div class="form-field">
             <label for="wf-year">${t("account.purchaseYearLabel")}</label>
-            <input dir="ltr" type="number" min="1950" max="2100" id="wf-year" name="original_purchase_year" value="${values.original_purchase_year || ""}" />
+            <input dir="ltr" type="text" inputmode="numeric" id="wf-year" name="original_purchase_year" value="${values.original_purchase_year || ""}" />
           </div>
           <div class="form-field">
             <label for="wf-deed">${t("account.titleDeedNumberLabel")}</label>
@@ -264,12 +265,12 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
         district: districtSelect.value ? (districtSelect.selectedOptions[0]?.textContent ?? "") : "",
         address_line: String(data.get("address_line") ?? "").trim(),
         property_type: String(data.get("property_type") ?? "apartment") as PropertyType,
-        size_m2: Number(data.get("size_m2") ?? 0),
-        bedrooms: Number(data.get("bedrooms") ?? 0),
-        bathrooms: Number(data.get("bathrooms") ?? 0),
-        asking_price: Number(data.get("asking_price") ?? 0),
+        size_m2: Number(toWesternDigits(String(data.get("size_m2") ?? ""))) || 0,
+        bedrooms: Number(toWesternDigits(String(data.get("bedrooms") ?? ""))) || 0,
+        bathrooms: Number(toWesternDigits(String(data.get("bathrooms") ?? ""))) || 0,
+        asking_price: Number(toWesternDigits(String(data.get("asking_price") ?? ""))) || 0,
         currency: String(data.get("currency") ?? "USD"),
-        original_purchase_year: Number(data.get("original_purchase_year") ?? 0),
+        original_purchase_year: Number(toWesternDigits(String(data.get("original_purchase_year") ?? ""))) || 0,
         title_deed_number: String(data.get("title_deed_number") ?? "").trim()
       };
 
@@ -279,8 +280,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
         ["description", "descriptionRequired"],
         ["city", "cityRequired"],
         ["district", "districtRequired"],
-        ["address_line", "addressRequired"],
-        ["title_deed_number", "titleDeedNumberRequired"]
+        ["address_line", "addressRequired"]
       ];
       for (const [field, errKey] of requiredChecks) {
         if (!String(next[field]).trim()) {

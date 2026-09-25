@@ -512,7 +512,7 @@
     "priceLabel": "Prix demandé *",
     "currencyLabel": "Devise",
     "purchaseYearLabel": "Année d'Achat",
-    "titleDeedNumberLabel": "Numéro de titre de propriété (Tapu) *",
+    "titleDeedNumberLabel": "Numéro de titre de propriété (Tapu)",
     "nextButton": "Suivant",
     "backButton": "Retour",
     "photosStepTitle": "Téléverser des photos",
@@ -540,7 +540,6 @@
       "addressRequired": "Veuillez indiquer l'emplacement du bien.",
       "sizeRequired": "Veuillez saisir la superficie du bien.",
       "priceRequired": "Veuillez saisir votre prix demandé.",
-      "titleDeedNumberRequired": "Veuillez saisir le numéro du titre de propriété (Tapu).",
       "minOnePhoto": "Veuillez ajouter au moins une photo.",
       "titleDeedDocRequired": "Veuillez téléverser votre document de titre de propriété (Tapu)."
     }
