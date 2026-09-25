@@ -13,8 +13,7 @@
   position: sticky;
   top: 0;
   z-index: 60;
-  background: rgba(250, 248, 244, 0.92);
-  backdrop-filter: blur(8px);
+  background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -543,6 +542,11 @@
 
 .hero {
   padding: 8.5rem 0 6rem;
+  min-height: 70vh;
+  max-height: 800px;
+  display: flex;
+  align-items: center;
+  background-position: center 68%;
 }
 
 .hero__inner {
