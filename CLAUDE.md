@@ -26,6 +26,8 @@
 - **أي رابط داخلي جديد** يُكتب بـ `href="${link("/path")}"` (من `src/i18n`) حتى يأخذ بادئة اللغة الحالية، والتنقل البرمجي بـ `navigate("/path")` — **لا تستخدم `#/` أبداً**.
 - `vercel.json`: `rewrites` كل المسارات إلى `index.html` (الملفات الموجودة فعلياً تُخدَم أولاً).
 - **Supabase** (`@supabase/supabase-js`) — قاعدة بيانات + auth حقيقيين لبوابة إعادة البيع/الوسطاء (راجع قسم 4.6). العميل في `src/lib/supabase.ts`، يعتمد على متغيرات بيئة `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` (لازم تكونوا مضبوطين بـ Vercel project settings، راجع `.env.example`).
+  - **⚠️ خطوة إعداد يدوية إلزامية على أي مشروع Supabase جديد**: `supabase/migrations/0001_init.sql` بالريبو يحتوي كل الجداول (`profiles`, `listings`, `listing_photos`, `listing_inquiries`)، الـ triggers، وسياسات RLS — **لازم يُشغَّل يدوياً** بـ Supabase Dashboard → SQL Editor (نسخ محتواه بالكامل والـ Run). لو ما اتشغّل، أي عملية على `listings` بترجع خطأ "Could not find the table 'public.listings' in the schema cache" (صار فعلياً بهذا المشروع). لو نسخ/لصق الملف كامل دفعة وحدة فشل بخطأ "syntax error at end of input" (انقطاع بالنسخ)، قسّمه لأجزاء أصغر (حسب أقسام الملف: profiles، listings، listing_photos+listing_documents، listing_inquiries+grants، storage buckets) وشغّل كل جزء لحاله.
+  - **بعد تشغيل الـ migration**: أي حساب سجّل **قبل** تشغيلها ما رح يكون عنده صف بجدول `profiles` (الـ trigger التلقائي ما كان موجود وقت تسجيله) — لازم تشغّل مرة وحدة: `insert into public.profiles (id, full_name, phone, country, role) select id, raw_user_meta_data->>'full_name', raw_user_meta_data->>'phone', raw_user_meta_data->>'country', 'seller' from auth.users where id not in (select id from public.profiles);` وإلا رفع أي عقار بيفشل بخطأ foreign key violation.
 - `package.json` build script: `"build": "tsc && vite build"`
 
 ## 3. اللغات (i18n) — 4 لغات كاملة
@@ -83,17 +85,24 @@
 - **لوحة الإدارة**: `/admin` (طابور المراجعة، `pages/admin/dashboard.ts`) و`/admin/listings/:id` (موافقة/رفض عقار، `pages/admin/reviewListing.ts`) — محمية بـ `requireAdmin()`.
 - **البيانات**: `src/data/listings.ts` (CRUD مع Supabase: `fetchPendingListings`, `fetchCoverPhotos`, `listingPhotoUrl`...)، `src/data/profiles.ts`.
 - **الهيدر**: `account-switch` بالهيدر يعرض دخول/تسجيل لو زائر، أو اسم المستخدم + قائمة (حسابي، لوحة الإدارة لو admin، تسجيل خروج) لو مسجل دخول.
-- **متطلب بيئة**: لازم `VITE_SUPABASE_URL` و`VITE_SUPABASE_ANON_KEY` مضبوطين بـ Vercel (Project Settings → Environment Variables) وإلا الموقع بيطبع خطأ بالـ console وميزات الحساب ما بتشتغل (باقي الموقع يشتغل عادي لأنه مستقل).
+- **متطلب بيئة**: لازم `VITE_SUPABASE_URL` و`VITE_SUPABASE_ANON_KEY` مضبوطين بـ Vercel (Project Settings → Environment Variables) وإلا الموقع بيطبع خطأ بالـ console وميزات الحساب ما بتشتغل (باقي الموقع يشتغل عادي لأنه مستقل). **وبالإضافة لهيك، لازم الـ migration (فوق بقسم 2) يكون اتشغّل على قاعدة البيانات نفسها.**
+- **فورم رفع العقار (`submitListing.ts`) — 3 خطوات بس** (`details` → `photos` → `review`): **تم حذف خطوة "رفع المستندات" بالكامل** (كانت رفع سند طابو + هوية/جواز) بطلب من المستخدم (اعتبرها تدخّل بالخصوصية غير ضروري بهذه المرحلة) — لا ترجّعها من دون طلب صريح. حقل "رقم سند الطابو" (`title_deed_number`) انشال هو كمان بالكامل من الفورم (كان اختياري لفترة قصيرة، بعدين حُذف تماماً) — عمود `listings.title_deed_number` ضل موجود بقاعدة البيانات (فاضي/غير مستخدم) لأنه حذف عمود يحتاج migration يدوي منفصل.
+- **الحقول الرقمية بالفورم** (المساحة، غرف النوم، الحمامات، السعر، سنة الشراء): **لازم تكون `type="text" inputmode="numeric"`، أبداً `type="number"`** — متصفح Chromium (وأغلب المتصفحات) يرفض الأرقام العربية (١٢٣) بحقل `type="number"` بصمت (القيمة تضل فاضية من دون أي رسالة خطأ)، وهاد صار يسبب مشكلة حقيقية (المستخدم كتب بالعربي وما قدر يتقدم بالفورم). الحل: `type="text"` + دالة `toWesternDigits()` (`src/utils/numbers.ts`) تحوّل الأرقام العربية/الفارسية لغربية قبل أي `Number(...)` أو حفظ.
+- **أمان مهم — escapeHtml()**: أي نص يدخله المستخدم (بائع) ويُعرض لشخص تاني (عنوان/وصف العقار، اسم البائع...) **يجب** يمرّ عبر `escapeHtml()` (`src/utils/html.ts`) قبل أي `innerHTML =`. اكتُشفت وصُلحت ثغرة XSS خطيرة هون (بائع خبيث كان ممكن يسرق جلسة الأدمن لما يفتح صفحة المراجعة) — راجع قسم 9. سياسات RLS بقاعدة البيانات (بالـ migration) قوية ومصممة صح (triggers تمنع self-approval، تمنع تعديل حقول الإدارة من غير admin) — الثغرة كانت فقط بعرض النصوص بالواجهة، مش بالصلاحيات.
 
 ## 5. نظام التصميم (Design System)
 
+> **مرجعان بصريان مهمّان**: هذا المشروع جزء من عائلة مواقع HADARA — الموقعين التاليين موجودين كـ Next.js repos على GitHub بحساب المستخدم (`kerimalastal-source/BYHADARA` = byhadara.com، `kerimalastal-source/hadararealestate` = hadararealestate.com)، ولازم يُرجَع لهم كمرجع تصميم عند أي طلب "خليه متل الموقع القديم/الأم". **الوصول المباشر لـ byhadara.com/hadararealestate.com عبر الإنترنت محجوب بسياسة الشبكة بهذه البيئة** (نفس قيد Wix/Supabase) — الطريقة الموثوقة: clone الريبوهات من GitHub (`git clone --depth 1 https://github.com/kerimalastal-source/<repo>`) وقراءة `styles/globals.css`/`components/Header.tsx`/`content/site.ts` منها مباشرة، مش محاولة fetch للموقع المباشر.
+
 `src/styles/variables.css`:
-- الألوان: أخضر غامق `--color-primary: #0f2b21` + ذهبي `--color-accent: #c9a24b` (هوية بصرية عقارية فاخرة)
-- الخطوط: **Playfair Display** (عناوين، لاتيني) + **Noto Naskh Arabic** (عناوين عربي) + **Inter** (نص، لاتيني) + **Noto Kufi Arabic** (نص عربي) — كل الخطوط من Google Fonts
+- الألوان: خلفية الموقع `--color-bg: #f7f5f0` (ايفوري — نفس درجة hadararealestate.com بالضبط)، أخضر غامق `--color-primary: #0f2b21` + ذهبي `--color-accent: #c9a24b` (لسا الهوية الأساسية، بس يُستخدم بحيطية — راجع أدناه). أخضر غامق كخلفية كاملة لقسم محصور بـ: الهيرو (overlay فوق صورة)، الفوتر، وبانر CTA وحيد بآخر الصفحة الرئيسية — **مش كخلفية متكررة لأقسام عادية** (متل الأرقام/الإحصائيات) لأنه هيك بيصير الموقع "غامق" بشكل عام (كانت هاي شكوى فعلية من المستخدم، وصُلحت).
+- الخطوط: **Inter** + **IBM Plex Sans Arabic** — للعناوين والنص كله (نفس خط byhadara.com بالضبط؛ لا تستخدم Playfair Display أو Noto Naskh/Kufi Arabic — انشالو من المشروع). من Google Fonts (`index.html`).
 - الملفات: `variables.css` (متغيرات) → `base.css` (reset/typography) → `layout.css` (header/footer/hero) → `components.css` (كل الأجزاء: buttons, cards, forms, stats, gallery, lightbox, search, partners, floating actions...) → `rtl.css` (استثناءات RTL) — كلها مجمّعة بـ `main.css` عبر `@import`.
-- **اللوغو**: اللوغو الحقيقي لحضارة (`public/logo-dark.png`/`logo-light.png` + favicons) بالهيدر/الفوتر/تاب المتصفح، بحجم واضح وكبير (مثل مرجع hadarahospitality.com) مع "REAL ESTATE" كـ tagline بدل "HOSPITALITY".
-- **الهيدر**: `.site-header__inner` هو **CSS grid بـ 3 أعمدة** (`auto 1fr auto`: brand / nav / actions) مع `.main-nav { display:flex; justify-content:center }` عشان المنيو تضل بمنتصف الهيدر تماماً بكل اللغات (LTR/RTL) — **هذا نمط إلزامي، لا ترجع لـ flex + margin-auto**. القوائم الفرعية غير الأساسية (الجنسية، طلب عقار مخصص، المدونة، الأسئلة الشائعة) مجمّعة بقائمة منسدلة "Resources" (`NAV_RESOURCES` بـ `header.ts`) لتفادي ازدحام الهيدر — أي صفحة جديدة غير أساسية تنضاف هون.
+- **اللوغو**: اللوغو الحقيقي لحضارة (`public/logo-dark.png`/`logo-light.png` + favicons) بالهيدر/الفوتر/تاب المتصفح، بحجم واضح وكبير، مع "REAL ESTATE" كـ tagline تحت "HADARA" — **لازم مسافة واضحة (`margin-top`) بين الاسم والـ tagline**، مش ملزوقين ببعض (`.brand__tagline` بـ `layout.css`).
+- **الهيدر**: `.site-header__inner` هو **CSS grid بـ 3 أعمدة** (`auto 1fr auto`: brand / nav / actions) مع `.main-nav { display:flex; justify-content:center }` عشان المنيو تضل بمنتصف الهيدر تماماً بكل اللغات (LTR/RTL) — **هذا نمط إلزامي، لا ترجع لـ flex + margin-auto** (حتى لو الموقع المرجعي byhadara.com بيستخدم flex+space-between عادي، إحنا متمسكين بالـ centering). القوائم الفرعية غير الأساسية (الجنسية، طلب عقار مخصص، المدونة، الأسئلة الشائعة) مجمّعة بقائمة منسدلة "Resources" (`NAV_RESOURCES` بـ `header.ts`) لتفادي ازدحام الهيدر — أي صفحة جديدة غير أساسية تنضاف هون.
+- **تبديل اللغة**: روابط نصية بسيطة جنب بعض (`EN AR FR RU`، النشطة تحتها خط) — **مش dropdown** (`.lang-switch` بـ `header.ts`/`layout.css`)، مطابق لأسلوب byhadara.com وhadararealestate.com. القائمة عليها `direction: ltr` صريح حتى ترتيبها يضل ثابت بكل اللغات (نفس نمط الموقعين المرجعيين).
 - **الأزرار العائمة**: WhatsApp + اتصال هاتفي، ثابتة فيزيائياً على يمين الشاشة بكل اللغات (`src/components/floatingButtons.ts`)، تستخدم الرقم `00905319309214`.
+- **صورة الهيرو الرئيسية**: `public/hero-istanbul.jpg` (منظر البوسفور الجوي — نفس صورة هيرو byhadara.com، منزّلة محلياً بدل رابط Wix خارجي مكسور).
 - **`scrollReveal.ts`**: أداة عامة قابلة لإعادة الاستخدام (`initScrollReveal(container)`, IntersectionObserver) لـ fade/slide-up متدرّج (`[data-reveal]`/`[data-reveal-index]`)، تحترم `prefers-reduced-motion` — تُستخدم بقسم شركاء النجاح وغيره.
 
 ## 6. الصفحات (`src/pages/`)
@@ -132,6 +141,10 @@
 - **`floatingButtons.ts`**: أزرار WhatsApp + اتصال عائمة، ثابتة على يمين الشاشة.
 - **`scrollReveal.ts`**: أداة fade/slide-up متدرّج عند التمرير، عامة قابلة لإعادة الاستخدام.
 
+`src/utils/`:
+- **`html.ts`** (`escapeHtml()`): تنقية أي نص يدخله مستخدم قبل عرضه بـ `innerHTML` — إلزامي لأي حقل مصدره بائع/مستخدم (راجع قسم 4.6).
+- **`numbers.ts`** (`toWesternDigits()`): تحويل الأرقام العربية/الفارسية (١٢٣ / ۱۲۳) لأرقام غربية — إلزامي قبل أي `Number(...)` على قيمة من حقل `type="text" inputmode="numeric"` (راجع قسم 4.6).
+
 ## 8. حالة النشر (Deployment) — مهم جداً
 
 - **الكود على GitHub**: مكتمل ومحفوظ 100% على فرع `main` (كل التعديلات — بما فيها من جلسات Claude Code متوازية — مدمجة هناك).
@@ -149,7 +162,7 @@
 - [ ] ربط فورم التواصل/طلب العقار المخصص بخدمة إرسال حقيقية (بدل `mailto:`)
 - [ ] ربط الدومين الحقيقي `hadararealestate.com` (يقوم بها المستخدم نفسه)
 - [x] SEO: روابط حقيقية لكل صفحة ولغة، وسوم meta/hreflang/OG/JSON-LD، sitemap وrobots (راجع قسم 4.5)
-- [x] بوابة إعادة بيع/وسطاء حقيقية بـ auth ومراجعة إدارية (راجع قسم 4.6) — تحتاج مراجعة أمنية/سياسات Supabase RLS قبل إطلاق واسع
+- [x] بوابة إعادة بيع/وسطاء حقيقية بـ auth ومراجعة إدارية (راجع قسم 4.6) — تمت مراجعة أمنية: سياسات RLS بقاعدة البيانات قوية وسليمة، وتم اكتشاف وإصلاح ثغرة XSS بعرض النصوص (راجع `escapeHtml()` بقسم 4.6/7)
 - [ ] بعد ربط الدومين: تسجيل الموقع بـ Google Search Console وإرسال `sitemap.xml`
 - [ ] اختبار على أجهزة موبايل حقيقية (تم اختباره بـ Playwright فقط لحد الآن)
 
