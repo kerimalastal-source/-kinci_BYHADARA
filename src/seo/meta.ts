@@ -108,11 +108,13 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
   const brand = tr("meta.siteNameFull");
   const abs = (path: string) => siteUrl + (path === "/" ? "/" : path);
   const url = (path: string, l: Locale = locale) => abs(localizePath(path, l));
+  // Images self-hosted under /public are site-relative; crawlers need absolute URLs.
+  const img = (src: string) => (src.startsWith("/") ? siteUrl + src : src);
 
   let pageRoute = route;
   let title = "";
   let description = "";
-  let image = projects[0].coverImage.src;
+  let image = img(projects[0].coverImage.src);
   let imageAlt = brand;
   let ogType: PageMeta["ogType"] = "website";
   const jsonLd: JsonLd[] = [];
@@ -130,7 +132,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
     const city = tr(`propertyRequest.cities.${placeKey(project.city)}`);
     title = tr("seo.projectTitle").replace("{name}", content.name).replace("{district}", district).replace("{city}", city);
     description = clip(content.shortDescription);
-    image = project.coverImage.src;
+    image = img(project.coverImage.src);
     imageAlt = content.name;
     crumbs.push({ name: tr("nav.projects"), path: "/projects" }, { name: content.name, path: routePath(route) });
     jsonLd.push({
@@ -139,7 +141,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
       name: content.name,
       description: content.longDescription,
       url: url(routePath(route)),
-      image: [project.coverImage.src, ...project.gallery.slice(0, 5).map((g) => g.src)],
+      image: [project.coverImage, ...project.gallery.slice(0, 5)].map((g) => img(g.src)),
       address: { "@type": "PostalAddress", addressLocality: project.district, addressRegion: project.city, addressCountry: "TR" },
       containedInPlace: { "@type": "City", name: project.city }
     });
@@ -221,7 +223,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
     alternateName: ["HADARA", "HADARA Real Estate", "حضارة للتطوير العقاري"],
     url: url("/"),
     logo: `${siteUrl}/favicon-512.png`,
-    image: projects[0].coverImage.src,
+    image: img(projects[0].coverImage.src),
     foundingDate: "2014",
     areaServed: "Istanbul, Türkiye",
     openingHours: "Mo-Sa 09:00-18:00",

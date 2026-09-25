@@ -20,13 +20,17 @@
 
 .site-header__inner {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  /* Brand and actions keep their natural width; the nav takes what is left.
+     Explicit columns keep the actions on the end even when the nav becomes a
+     fixed-position dropdown and leaves the grid flow. */
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
   align-items: center;
   gap: var(--space-md);
   height: 104px;
 }
 
 .brand {
+  grid-column: 1;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -66,8 +70,15 @@
 }
 
 .main-nav {
+  grid-column: 2;
   display: flex;
   justify-content: center;
+}
+
+/* "Contact" duplicates the "Get in Touch" button shown next to it on desktop. */
+.main-nav__item--tail,
+.main-nav__lang {
+  display: none;
 }
 
 .main-nav__list {
@@ -162,6 +173,7 @@
 }
 
 .header-actions {
+  grid-column: 3;
   display: flex;
   align-items: center;
   gap: 1.25rem;
@@ -344,6 +356,15 @@
   .menu-toggle {
     display: inline-flex;
   }
+
+  .main-nav__item--tail {
+    display: block;
+  }
+
+  .nav-group__toggle {
+    display: flex;
+    width: 100%;
+  }
 }
 
 @media (max-width: 640px) {
@@ -381,12 +402,23 @@
     height: 34px;
   }
 
-  .lang-switch {
-    gap: 0.5rem;
+  /* Phones: languages move from the top bar into the menu. */
+  .header-actions .lang-switch {
+    display: none;
   }
 
-  .lang-switch__link {
-    font-size: 0.7rem;
+  .main-nav__lang {
+    display: block;
+    padding-top: 0.85rem;
+  }
+
+  .main-nav__lang .lang-switch {
+    display: inline-flex;
+    gap: 1.25rem;
+  }
+
+  .main-nav__lang .lang-switch__link {
+    font-size: 0.9rem;
   }
 
   .account-switch__login,
@@ -394,6 +426,12 @@
     padding: 0.3rem 0.55rem;
     font-size: 0.72rem;
     max-width: 84px;
+  }
+}
+
+@media (max-width: 359px) {
+  .site-header .brand__text {
+    display: none;
   }
 }
 

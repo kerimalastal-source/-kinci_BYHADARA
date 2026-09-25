@@ -62,7 +62,10 @@
       "exclusiveVilla": "Exclusive Villa",
       "bathrooms": "Bathrooms",
       "livingRoom": "Living Room",
-      "terrace": "Terrace"
+      "terrace": "Terrace",
+      "blocks": "Blocks",
+      "layout": "Apartment Layout",
+      "grossArea": "Gross Area"
     }
   },
   "footer": {
@@ -81,7 +84,7 @@
     "statsTitle": "HADARA in Numbers",
     "stats": [
       { "value": "12+", "label": "Years of Excellence" },
-      { "value": "5", "label": "Landmark Developments" },
+      { "value": "6", "label": "Landmark Developments" },
       { "value": "400+", "label": "Residential Units" },
       { "value": "2", "label": "Prime Istanbul Districts" }
     ],
@@ -161,7 +164,7 @@
     "statsTitle": "Our Track Record",
     "stats": [
       { "value": "12+", "label": "Years in Business" },
-      { "value": "5", "label": "Landmark Projects" },
+      { "value": "6", "label": "Landmark Projects" },
       { "value": "400+", "label": "Residential Units" },
       { "value": "60,000+ m²", "label": "Land Developed" }
     ]
@@ -604,6 +607,22 @@
         "Flexible installment payment plans",
         "Eligible for Turkish citizenship by investment",
         "Delivery scheduled for late 2028"
+      ]
+    },
+    "diamond-marin": {
+      "name": "Diamond Marin",
+      "tagline": "The jewel of the marina — boutique seaside living in Beylikdüzü.",
+      "shortDescription": "Diamond Marin is a boutique, low-rise residential project designed exclusively for 58 families in two blocks, just minutes from West Istanbul Marina and the sea.",
+      "longDescription": "Bringing the rhythm of the city together with the calm of the sea, Diamond Marin is a boutique, low-rise residential project in Beylikdüzü designed exclusively for 58 families across two blocks. Its elegant architecture, green surroundings and sea views are complemented by a private site concept with an outdoor swimming pool, fitness center, landscaped gardens, indoor car park and 24/7 private security. Every home is a spacious 3+1 apartment of 117.60 m² to 143.08 m² gross, with private garden terraces on the ground floor, and comes with a smart home system, built-in kitchen appliances, air conditioning, a combi boiler and heat and sound insulation. West Istanbul Marina and Beylikdüzü Yaşam Vadisi are 5 minutes away, the Metrobüs 10 minutes, MarmaraPark mall and Medicana International Istanbul Hospital 15 minutes, and Büyükçekmece beach 20 minutes. The project is developed in partnership by Yıltaş, active in construction for more than 40 years, and Lotus Yapı, the developer behind the Lotus projects. Delivery is scheduled for the end of 2027.",
+      "highlights": [
+        "Boutique low-rise living for only 58 families in 2 blocks",
+        "3+1 apartments from 117.60 m² to 143.08 m² gross, with garden terraces on the ground floor",
+        "Outdoor swimming pool, fitness center and landscaped gardens",
+        "Smart home system, built-in appliances, air conditioning and heat & sound insulation",
+        "Indoor car park, 24/7 private security and camera system",
+        "5 minutes to West Istanbul Marina and Beylikdüzü Yaşam Vadisi, 10 minutes to the Metrobüs",
+        "Developed in partnership by Yıltaş and Lotus Yapı",
+        "Delivery scheduled for late 2027"
       ]
     },
     "lotus-koru-2": {

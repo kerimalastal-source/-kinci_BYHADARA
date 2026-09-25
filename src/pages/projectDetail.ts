@@ -25,7 +25,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
         <span class="badge badge--${project.status}">${projectStatusLabel(project.status)}</span>
         <h1>${content.name}</h1>
         <p class="project-hero__tagline">${content.tagline}</p>
-        <p class="project-hero__location">${project.district}, ${project.city} · <span dir="ltr">${project.timeline}</span></p>
+        <p class="project-hero__location">${project.district}, ${project.city}${project.timeline ? ` · <span dir="ltr">${project.timeline}</span>` : ""}</p>
       </div>
     </section>
 
@@ -61,10 +61,14 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
                 <dt>${t("projectDetail.locationLabel")}</dt>
                 <dd>${project.district}, ${project.city}</dd>
               </div>
-              <div>
+              ${
+                project.timeline
+                  ? `<div>
                 <dt>${t("projectDetail.timelineLabel")}</dt>
                 <dd dir="ltr">${project.timeline}</dd>
-              </div>
+              </div>`
+                  : ""
+              }
               <div>
                 <dt>${t("projectDetail.statusLabel")}</dt>
                 <dd>${projectStatusLabel(project.status)}</dd>
