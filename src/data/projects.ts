@@ -19,7 +19,8 @@ export interface Project {
   district: string;
   city: string;
   status: ProjectStatus;
-  timeline: string;
+  /** Omitted when the developer has not published start/delivery dates. */
+  timeline?: string;
   priority: number;
   coverImage: ProjectImage;
   gallery: ProjectImage[];
@@ -56,12 +57,44 @@ export const projects: Project[] = [
     ]
   },
   {
+    slug: "diamond-marin",
+    district: "Beylikdüzü",
+    city: "Istanbul",
+    status: "new-launch",
+    priority: 1,
+    coverImage: {
+      src: "/images/projects/diamond-marin/aerial-sea-view.jpg",
+      width: 1920,
+      height: 1288,
+      alt: "Diamond Marin aerial view with the sea and West Istanbul Marina"
+    },
+    gallery: [
+      { src: "/images/projects/diamond-marin/street-view.jpg", width: 1327, height: 927, alt: "Diamond Marin two blocks and entrance at dusk" },
+      { src: "/images/projects/diamond-marin/facade.jpg", width: 1448, height: 1086, alt: "Diamond Marin building facade" },
+      { src: "/images/projects/diamond-marin/facade-side.jpg", width: 773, height: 461, alt: "Diamond Marin side facade" },
+      { src: "/images/projects/diamond-marin/balcony-pool-view.jpg", width: 585, height: 670, alt: "Diamond Marin balcony overlooking the pool" },
+      { src: "/images/projects/diamond-marin/living-room.jpg", width: 1297, height: 924, alt: "Diamond Marin living room" },
+      { src: "/images/projects/diamond-marin/living-dining.jpg", width: 757, height: 517, alt: "Diamond Marin living and dining area" },
+      { src: "/images/projects/diamond-marin/kitchen.jpg", width: 774, height: 423, alt: "Diamond Marin kitchen" },
+      { src: "/images/projects/diamond-marin/master-bedroom.jpg", width: 1920, height: 1366, alt: "Diamond Marin master bedroom" },
+      { src: "/images/projects/diamond-marin/kids-bedroom.jpg", width: 775, height: 429, alt: "Diamond Marin bedroom with study corner" },
+      { src: "/images/projects/diamond-marin/dressing-room.jpg", width: 1159, height: 632, alt: "Diamond Marin dressing room" },
+      { src: "/images/projects/diamond-marin/fitness-center.jpg", width: 509, height: 362, alt: "Diamond Marin fitness center" }
+    ],
+    stats: [
+      { value: "58", labelKey: "apartments" },
+      { value: "2", labelKey: "blocks" },
+      { value: "3+1", labelKey: "layout" },
+      { value: "117 – 143 m²", labelKey: "grossArea" }
+    ]
+  },
+  {
     slug: "lotus-koru-2",
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "ongoing",
     timeline: "2023 – 2025",
-    priority: 1,
+    priority: 2,
     coverImage: {
       src: wixImg("3510f9_d33ff747ef4d4e1f8bdd85a35fa6d2f5~mv2.jpg"),
       width: 1733,
@@ -86,7 +119,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "ongoing",
     timeline: "2022 – 2024",
-    priority: 2,
+    priority: 3,
     coverImage: {
       src: wixImg("3510f9_90db09f48bde445098eb3dd251a09da1~mv2.jpeg"),
       width: 1707,
@@ -113,7 +146,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "delivered",
     timeline: "2022 – 2024",
-    priority: 3,
+    priority: 4,
     coverImage: {
       src: wixImg("3510f9_0e541a01b4db4c90aaa21e2f1bcea687~mv2.jpeg"),
       width: 1600,
@@ -139,7 +172,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "ongoing",
     timeline: "2024 – 2025",
-    priority: 4,
+    priority: 5,
     coverImage: {
       src: wixImg("3510f9_b3632c1bd958497eaf5bdf465b99b197~mv2.jpeg"),
       width: 1200,

@@ -15,6 +15,12 @@ export function projectStatusLabel(status: Project["status"]): string {
 export function renderProjectCard(project: Project): string {
   const content = getProjectContent(project.slug);
   const primaryStat = project.stats[0];
+  // Projects without published dates show their next key figure in place of the timeline.
+  const secondary = project.timeline
+    ? { value: project.timeline, label: t("common.timeline") }
+    : project.stats[1]
+      ? { value: project.stats[1].value, label: t(`common.statLabels.${project.stats[1].labelKey}`) }
+      : undefined;
 
   return `
     <article class="project-card">
@@ -37,10 +43,14 @@ export function renderProjectCard(project: Project): string {
             <strong dir="ltr">${primaryStat.value}</strong>
             <span>${t(`common.statLabels.${primaryStat.labelKey}`)}</span>
           </div>
-          <div class="project-card__stat">
-            <strong dir="ltr">${project.timeline}</strong>
-            <span>${t("common.timeline")}</span>
-          </div>
+          ${
+            secondary
+              ? `<div class="project-card__stat">
+            <strong dir="ltr">${secondary.value}</strong>
+            <span>${secondary.label}</span>
+          </div>`
+              : ""
+          }
         </div>
         <a class="btn btn--outline btn--small" href="${link(`/projects/${project.slug}`)}">
           ${t("common.discoverMore")}
