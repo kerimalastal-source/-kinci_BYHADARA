@@ -540,7 +540,8 @@
       "sizeRequired": "Please enter the property size.",
       "priceRequired": "Please enter your asking price.",
       "minOnePhoto": "Please add at least one photo.",
-      "titleDeedDocRequired": "Please upload your title deed (Tapu) document."
+      "titleDeedDocRequired": "Please upload your title deed (Tapu) document.",
+      "saveFailed": "We couldn't save your listing. Please try again, or contact us if this keeps happening."
     }
   },
   "resale": {

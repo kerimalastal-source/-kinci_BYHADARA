@@ -540,7 +540,8 @@
       "sizeRequired": "Veuillez saisir la superficie du bien.",
       "priceRequired": "Veuillez saisir votre prix demandé.",
       "minOnePhoto": "Veuillez ajouter au moins une photo.",
-      "titleDeedDocRequired": "Veuillez téléverser votre document de titre de propriété (Tapu)."
+      "titleDeedDocRequired": "Veuillez téléverser votre document de titre de propriété (Tapu).",
+      "saveFailed": "Nous n'avons pas pu enregistrer votre annonce. Veuillez réessayer, ou nous contacter si le problème persiste."
     }
   },
   "resale": {

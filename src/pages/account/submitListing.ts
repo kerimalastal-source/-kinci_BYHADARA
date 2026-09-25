@@ -66,6 +66,8 @@ export function renderSubmitListing(main: HTMLElement, listingId?: string): void
     })
     .catch((err) => {
       console.error(err);
+      if (main.dataset.requestId !== requestId) return;
+      main.innerHTML = `<section class="section"><div class="container"><p class="form-field__error">${t("account.errors.saveFailed")}</p></div></section>`;
     });
 }
 
@@ -134,6 +136,8 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
   function paintDetails(body: HTMLElement): void {
     body.innerHTML = `
       <form class="wizard-step" id="details-form" novalidate>
+        <p class="form-field__error" data-error-for="general"></p>
+
         <div class="form-field">
           <label for="wf-title">${t("account.titleLabel")}</label>
           <input type="text" id="wf-title" name="title" placeholder="${t("account.titlePlaceholder")}" value="${escapeHtml(values.title)}" />
@@ -294,6 +298,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
       }
       if (!valid) return;
 
+      fieldError(form, "general", "");
       values = next;
       nextBtn.disabled = true;
 
@@ -310,6 +315,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
         })
         .catch((err) => {
           console.error(err);
+          fieldError(form, "general", err?.message ? `${t("account.errors.saveFailed")} (${err.message})` : t("account.errors.saveFailed"));
           nextBtn.disabled = false;
         });
     });
@@ -351,12 +357,16 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
       const files = Array.from(input.files ?? []);
       input.value = "";
       let sortOrder = photos.length;
+      fieldError(body, "photos", "");
       Promise.all(files.map((file) => uploadListingPhoto(listingId!, file, sortOrder++)))
         .then((uploaded) => {
           photos = [...photos, ...uploaded];
           paintPhotos(body);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err);
+          fieldError(body, "photos", t("account.errors.saveFailed"));
+        });
     });
 
     grid.querySelectorAll<HTMLButtonElement>("[data-remove-photo]").forEach((btn) => {
@@ -432,12 +442,16 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
         const file = input.files?.[0];
         input.value = "";
         if (!file) return;
+        fieldError(body, "documents", "");
         uploadListingDocument(listingId!, file, docType)
           .then((doc) => {
             documents = [...documents, doc];
             paintDocuments(body);
           })
-          .catch((err) => console.error(err));
+          .catch((err) => {
+            console.error(err);
+            fieldError(body, "documents", t("account.errors.saveFailed"));
+          });
       });
     }
 
@@ -475,6 +489,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
       <div class="wizard-step">
         <h2>${t("account.reviewStepTitle")}</h2>
         <p class="wizard-step__hint">${t("account.reviewStepHint")}</p>
+        <p class="form-field__error" data-error-for="submit"></p>
 
         <div class="review-summary">
           <dl>
@@ -502,6 +517,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
 
     body.querySelector<HTMLButtonElement>("#wf-submit")!.addEventListener("click", () => {
       const btn = body.querySelector<HTMLButtonElement>("#wf-submit")!;
+      fieldError(body, "submit", "");
       btn.disabled = true;
       btn.textContent = t("account.submitting");
       submitForReview(listingId!)
@@ -516,6 +532,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
         })
         .catch((err) => {
           console.error(err);
+          fieldError(body, "submit", err?.message ? `${t("account.errors.saveFailed")} (${err.message})` : t("account.errors.saveFailed"));
           btn.disabled = false;
           btn.textContent = t("account.submitForReviewButton");
         });
