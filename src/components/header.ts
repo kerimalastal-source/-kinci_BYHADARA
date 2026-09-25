@@ -30,6 +30,12 @@ export function renderHeader(el: HTMLElement, route: Route): void {
   const locale = getLocale();
   const langNames = tRaw<Record<Locale, string>>("lang");
 
+  const langLinks = locales
+    .map(
+      (l) => `<button type="button" class="lang-switch__link${l === locale ? " is-active" : ""}" data-lang="${l}" aria-current="${l === locale ? "true" : "false"}" title="${langNames[l]}">${l.toUpperCase()}</button>`
+    )
+    .join("");
+
   el.className = "site-header";
   el.innerHTML = `
     <div class="site-header__inner container">
@@ -73,12 +79,15 @@ export function renderHeader(el: HTMLElement, route: Route): void {
           </li>
           ${NAV_TAIL.map(
             (item) => `
-            <li>
+            <li class="main-nav__item--tail">
               <a class="main-nav__link${item.match.includes(route.name) ? " is-active" : ""}" href="${link(item.route)}">
                 ${t(item.key)}
               </a>
             </li>`
           ).join("")}
+          <li class="main-nav__lang">
+            <div class="lang-switch" role="group" aria-label="${t("nav.language")}">${langLinks}</div>
+          </li>
         </ul>
       </nav>
 
@@ -90,13 +99,7 @@ export function renderHeader(el: HTMLElement, route: Route): void {
           </svg>
         </button>
 
-        <div class="lang-switch" role="group" aria-label="${t("nav.language")}">
-          ${locales
-            .map(
-              (l) => `<button type="button" class="lang-switch__link${l === locale ? " is-active" : ""}" data-lang="${l}" aria-current="${l === locale ? "true" : "false"}" title="${langNames[l]}">${l.toUpperCase()}</button>`
-            )
-            .join("")}
-        </div>
+        <div class="lang-switch" role="group" aria-label="${t("nav.language")}">${langLinks}</div>
 
         <div class="account-switch">
           ${
