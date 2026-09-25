@@ -1,6 +1,6 @@
 :root {
   /* Brand palette */
-  --color-bg: #faf8f4;
+  --color-bg: #f7f5f0;
   --color-surface: #ffffff;
   --color-surface-alt: #f3f0e8;
   --color-ink: #14201b;
@@ -22,8 +22,8 @@
   --color-on-primary: #f7f4ec;
 
   /* Typography */
-  --font-heading: "Playfair Display", "Noto Naskh Arabic", Georgia, serif;
-  --font-body: "Inter", "Noto Kufi Arabic", -apple-system, sans-serif;
+  --font-heading: "Inter", "IBM Plex Sans Arabic", -apple-system, sans-serif;
+  --font-body: "Inter", "IBM Plex Sans Arabic", -apple-system, sans-serif;
 
   /* Layout */
   --container-width: 1220px;

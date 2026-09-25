@@ -90,18 +90,12 @@ export function renderHeader(el: HTMLElement, route: Route): void {
           </svg>
         </button>
 
-        <div class="lang-switch">
-          <button class="lang-switch__current" id="lang-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
-            ${locale.toUpperCase()}
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <ul class="lang-switch__menu" id="lang-menu" role="listbox" hidden>
-            ${locales
-              .map(
-                (l) => `<li role="option" data-lang="${l}" aria-selected="${l === locale}" class="${l === locale ? "is-active" : ""}">${langNames[l]}</li>`
-              )
-              .join("")}
-          </ul>
+        <div class="lang-switch" role="group" aria-label="${t("nav.language")}">
+          ${locales
+            .map(
+              (l) => `<button type="button" class="lang-switch__link${l === locale ? " is-active" : ""}" data-lang="${l}" aria-current="${l === locale ? "true" : "false"}" title="${langNames[l]}">${l.toUpperCase()}</button>`
+            )
+            .join("")}
         </div>
 
         <div class="account-switch">
@@ -147,17 +141,9 @@ export function renderHeader(el: HTMLElement, route: Route): void {
     })
   );
 
-  const langToggle = el.querySelector<HTMLButtonElement>("#lang-toggle")!;
-  const langMenu = el.querySelector<HTMLUListElement>("#lang-menu")!;
-  langToggle.addEventListener("click", () => {
-    const hidden = langMenu.hasAttribute("hidden");
-    if (hidden) langMenu.removeAttribute("hidden");
-    else langMenu.setAttribute("hidden", "");
-    langToggle.setAttribute("aria-expanded", String(hidden));
-  });
-  langMenu.querySelectorAll<HTMLLIElement>("li").forEach((li) => {
-    li.addEventListener("click", () => {
-      setLocale(li.dataset.lang as Locale);
+  el.querySelectorAll<HTMLButtonElement>(".lang-switch__link").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      setLocale(btn.dataset.lang as Locale);
     });
   });
 
@@ -186,9 +172,6 @@ export function renderHeader(el: HTMLElement, route: Route): void {
     "click",
     (e) => {
       if (!el.contains(e.target as Node)) return;
-      if (!(e.target as HTMLElement).closest(".lang-switch")) {
-        langMenu.setAttribute("hidden", "");
-      }
       if (!(e.target as HTMLElement).closest(".nav-group")) {
         resourcesMenu.setAttribute("hidden", "");
         resourcesToggle.setAttribute("aria-expanded", "false");

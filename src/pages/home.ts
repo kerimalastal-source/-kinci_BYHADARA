@@ -6,7 +6,7 @@ import { initStatCounters } from "../components/statCounter";
 import { initScrollReveal } from "../components/scrollReveal";
 import { wixImg } from "../utils/image";
 
-const HERO_IMAGE = wixImg("3510f9_9700bfeff9a74a0fb54aee54a8091089~mv2.jpg");
+const HERO_IMAGE = "/hero-istanbul.jpg";
 
 interface StatItem {
   value: string;
