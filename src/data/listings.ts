@@ -59,7 +59,6 @@ export interface NewListingInput {
   asking_price: number;
   currency: string;
   original_purchase_year: number;
-  title_deed_number: string;
 }
 
 export function listingPhotoUrl(storagePath: string): string {

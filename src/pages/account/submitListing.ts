@@ -40,8 +40,7 @@ const EMPTY_INPUT: NewListingInput = {
   bathrooms: 0,
   asking_price: 0,
   currency: "USD",
-  original_purchase_year: new Date().getFullYear(),
-  title_deed_number: ""
+  original_purchase_year: new Date().getFullYear()
 };
 
 export function renderSubmitListing(main: HTMLElement, listingId?: string): void {
@@ -86,8 +85,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
         bathrooms: initialListing.bathrooms ?? 0,
         asking_price: initialListing.asking_price ?? 0,
         currency: initialListing.currency ?? "USD",
-        original_purchase_year: initialListing.original_purchase_year ?? new Date().getFullYear(),
-        title_deed_number: initialListing.title_deed_number ?? ""
+        original_purchase_year: initialListing.original_purchase_year ?? new Date().getFullYear()
       }
     : { ...EMPTY_INPUT };
   let photos = initialPhotos;
@@ -219,16 +217,9 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-field">
-            <label for="wf-year">${t("account.purchaseYearLabel")}</label>
-            <input dir="ltr" type="text" inputmode="numeric" id="wf-year" name="original_purchase_year" value="${values.original_purchase_year || ""}" />
-          </div>
-          <div class="form-field">
-            <label for="wf-deed">${t("account.titleDeedNumberLabel")}</label>
-            <input dir="ltr" type="text" id="wf-deed" name="title_deed_number" value="${escapeHtml(values.title_deed_number)}" />
-            <p class="form-field__error" data-error-for="title_deed_number"></p>
-          </div>
+        <div class="form-field">
+          <label for="wf-year">${t("account.purchaseYearLabel")}</label>
+          <input dir="ltr" type="text" inputmode="numeric" id="wf-year" name="original_purchase_year" value="${values.original_purchase_year || ""}" />
         </div>
 
         <div class="wizard-nav">
@@ -270,8 +261,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
         bathrooms: Number(toWesternDigits(String(data.get("bathrooms") ?? ""))) || 0,
         asking_price: Number(toWesternDigits(String(data.get("asking_price") ?? ""))) || 0,
         currency: String(data.get("currency") ?? "USD"),
-        original_purchase_year: Number(toWesternDigits(String(data.get("original_purchase_year") ?? ""))) || 0,
-        title_deed_number: String(data.get("title_deed_number") ?? "").trim()
+        original_purchase_year: Number(toWesternDigits(String(data.get("original_purchase_year") ?? ""))) || 0
       };
 
       let valid = true;

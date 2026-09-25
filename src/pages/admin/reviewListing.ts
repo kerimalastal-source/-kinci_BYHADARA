@@ -72,7 +72,6 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], docu
               <div><dt>${t("account.bathroomsLabel")}</dt><dd dir="ltr">${listing.bathrooms ?? "—"}</dd></div>
               <div><dt>${t("account.priceLabel")}</dt><dd dir="ltr">${listing.asking_price?.toLocaleString() ?? "—"} ${listing.currency}</dd></div>
               <div><dt>${t("account.purchaseYearLabel")}</dt><dd dir="ltr">${listing.original_purchase_year ?? "—"}</dd></div>
-              <div><dt>${t("account.titleDeedNumberLabel")}</dt><dd dir="ltr">${escapeHtml(listing.title_deed_number) || "—"}</dd></div>
               <div><dt>${t("account.addressLabel")}</dt><dd>${escapeHtml(listing.address_line) || "—"}</dd></div>
             </dl>
           </div>
