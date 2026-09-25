@@ -636,6 +636,16 @@
   margin: var(--space-sm) 0;
 }
 
+.project-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project-hero__badges .badge {
+  margin: 0;
+}
+
 .project-hero__tagline {
   color: rgba(247, 244, 236, 0.92);
   font-size: 1.1rem;

@@ -44,6 +44,7 @@
     "statusNewLaunch": "Nouveau lancement",
     "statusOngoing": "En construction",
     "statusDelivered": "Livré",
+    "unitsAvailable": "Lots disponibles",
     "close": "Fermer",
     "searchPlaceholder": "Rechercher un projet, une page...",
     "searchNoResults": "Aucun résultat trouvé.",
@@ -216,6 +217,8 @@
     "residenceApartment": "Appartement {layout}",
     "residenceVilla": "Villa {layout}",
     "residenceVariant": "Type {variant}",
+    "availabilityLabel": "Disponibilité",
+    "unitsAvailableLong": "Lots disponibles à la vente",
     "amenities": {
       "outdoorPool": "Piscine extérieure",
       "fitness": "Salle de sport",
@@ -697,8 +700,9 @@
       "name": "Lotus Manzara Güzelce",
       "tagline": "32 villas individuelles entre forêt et mer à Büyükçekmece.",
       "shortDescription": "Lotus Manzara Güzelce est un domaine exclusif de 32 villas individuelles sur 12 855 m² à Güzelce, Büyükçekmece, pensé pour vivre toute l'année entre la verdure et la mer de Marmara.",
-      "longDescription": "Pensé comme une échappée loin de la ville aujourd'hui et au cœur de la vie demain, Lotus Manzara Güzelce est un domaine exclusif de seulement 32 villas individuelles sur 12 855 m² à Güzelce, Büyükçekmece. Chaque villa 6+2 se déploie sur trois niveaux — environ 343 m² bruts — avec terrasse vue mer, terrasse-jardin, jardin privatif paysager et garage couvert pour deux voitures. Les intérieurs se distinguent par de larges baies vitrées, des matériaux raffinés et des plans ergonomiques, des espaces de vie ouverts à la suite parentale avec dressing. Les résidents partagent une salle de sport, un sauna et un hammam, avec systèmes de sécurité et de vidéosurveillance et groupe électrogène. La marina de Güzelce, le littoral et les parcs de la ville sont tout proches. Le projet est développé par Lotus Yapı Proje.",
+      "longDescription": "Pensé comme une échappée loin de la ville aujourd'hui et au cœur de la vie demain, Lotus Manzara Güzelce est un domaine exclusif de seulement 32 villas individuelles sur 12 855 m² à Güzelce, Büyükçekmece. Chaque villa 6+2 se déploie sur trois niveaux — environ 343 m² bruts — avec terrasse vue mer, terrasse-jardin, jardin privatif paysager et garage couvert pour deux voitures. Les intérieurs se distinguent par de larges baies vitrées, des matériaux raffinés et des plans ergonomiques, des espaces de vie ouverts à la suite parentale avec dressing. Les résidents partagent une salle de sport, un sauna et un hammam, avec systèmes de sécurité et de vidéosurveillance et groupe électrogène. La marina de Güzelce, le littoral et les parcs de la ville sont tout proches. Développé par Lotus Yapı Proje, le projet est achevé et prêt à habiter, avec encore une sélection de villas disponibles à la vente.",
       "highlights": [
+        "Projet achevé, prêt à habiter — villas disponibles à la vente",
         "Seulement 32 villas individuelles sur 12 855 m²",
         "Villas 6+2 sur trois niveaux — 343,15 m² bruts, 298,43 m² nets",
         "Terrasse vue mer, terrasse-jardin et jardin privatif paysager",
@@ -729,8 +733,9 @@
       "name": "Cadde Ispartakule",
       "tagline": "Au-delà des attentes — vues sur la mer, le lac et le Kanal Istanbul à Ispartakule.",
       "shortDescription": "Cadde Ispartakule est une tour résidentielle de 78 logements connectés et 12 commerces en pied d'immeuble à Ispartakule, offrant une rare combinaison de vues sur la mer, le lac et le Kanal Istanbul.",
-      "longDescription": "Située à Ispartakule, l'un des quartiers en plein essor les plus recherchés d'Istanbul, Cadde Ispartakule réunit 78 résidences connectées et 12 commerces en pied d'immeuble dans une tour élégante offrant un rare panorama sur la mer, le lac et le futur Kanal Istanbul. Les logements vont des 2+1 de 106 à 109 m² bruts aux 3+1 jusqu'à 150,61 m² bruts, tous équipés d'un système domotique et conçus pour la lumière, le confort et la sécurité. Les équipements privés comprennent une salle de sport, un sauna et un hammam, un parking avec bornes de recharge pour véhicules électriques et des jardins paysagers agrémentés d'un bassin. L'emplacement offre un accès rapide aux autoroutes TEM et du Nord de Marmara, à l'aéroport d'Istanbul et au futur Kanal Istanbul. Le projet est développé par MH Grup İnşaat, fort de plus de 20 ans d'expérience dans l'immobilier résidentiel et commercial.",
+      "longDescription": "Située à Ispartakule, l'un des quartiers en plein essor les plus recherchés d'Istanbul, Cadde Ispartakule réunit 78 résidences connectées et 12 commerces en pied d'immeuble dans une tour élégante offrant un rare panorama sur la mer, le lac et le futur Kanal Istanbul. Les logements vont des 2+1 de 106 à 109 m² bruts aux 3+1 jusqu'à 150,61 m² bruts, tous équipés d'un système domotique et conçus pour la lumière, le confort et la sécurité. Les équipements privés comprennent une salle de sport, un sauna et un hammam, un parking avec bornes de recharge pour véhicules électriques et des jardins paysagers agrémentés d'un bassin. L'emplacement offre un accès rapide aux autoroutes TEM et du Nord de Marmara, à l'aéroport d'Istanbul et au futur Kanal Istanbul. Développé par MH Grup İnşaat, fort de plus de 20 ans d'expérience dans l'immobilier résidentiel et commercial, le projet est achevé et prêt à habiter, avec encore une sélection de logements disponibles à la vente.",
       "highlights": [
+        "Projet achevé, prêt à habiter — logements disponibles à la vente",
         "78 logements et 12 commerces en pied d'immeuble",
         "Vues sur la mer, le lac et le Kanal Istanbul",
         "2+1 (106,30–108,56 m² bruts) et 3+1 (132,83–150,61 m² bruts)",

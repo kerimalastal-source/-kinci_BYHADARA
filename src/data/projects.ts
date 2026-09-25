@@ -53,6 +53,8 @@ export interface Project {
   /** Omitted when the developer has not published start/delivery dates. */
   timeline?: string;
   priority: number;
+  /** Completed or ongoing project that still has units for sale — shows an extra badge. */
+  unitsAvailable?: boolean;
   /** Developer brand(s), shown as a proper noun in every language. */
   developer?: string;
   /** Street address from the catalog, shown as written. */
@@ -140,7 +142,8 @@ export const projects: Project[] = [
     slug: "lotus-manzara-guzelce",
     district: "Büyükçekmece",
     city: "Istanbul",
-    status: "new-launch",
+    status: "delivered",
+    unitsAvailable: true,
     priority: 2,
     developer: "Lotus Yapı Proje",
     address: "Güzelce Mah., Hukukçular Cad. No:14, Büyükçekmece / İstanbul",
@@ -171,7 +174,8 @@ export const projects: Project[] = [
     slug: "cadde-ispartakule",
     district: "Avcılar",
     city: "Istanbul",
-    status: "new-launch",
+    status: "delivered",
+    unitsAvailable: true,
     priority: 3,
     developer: "MH Grup İnşaat",
     address: "Ispartakule, Eski İstanbul Cad. No:75, Avcılar / İstanbul",

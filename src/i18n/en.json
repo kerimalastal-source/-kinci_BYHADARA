@@ -44,6 +44,7 @@
     "statusNewLaunch": "New Launch",
     "statusOngoing": "Under Construction",
     "statusDelivered": "Delivered",
+    "unitsAvailable": "Units Available",
     "close": "Close",
     "searchPlaceholder": "Search projects, pages...",
     "searchNoResults": "No results found.",
@@ -216,6 +217,8 @@
     "residenceApartment": "{layout} Apartment",
     "residenceVilla": "{layout} Villa",
     "residenceVariant": "Type {variant}",
+    "availabilityLabel": "Availability",
+    "unitsAvailableLong": "Units available for sale",
     "amenities": {
       "outdoorPool": "Outdoor Pool",
       "fitness": "Fitness Center",
@@ -697,8 +700,9 @@
       "name": "Lotus Manzara Güzelce",
       "tagline": "32 detached villas between the forest and the sea in Büyükçekmece.",
       "shortDescription": "Lotus Manzara Güzelce is an exclusive enclave of 32 detached villas on 12,855 m² in Güzelce, Büyükçekmece, designed for year-round living between green woodland and the Marmara Sea.",
-      "longDescription": "Conceived as an escape from the city today and the heart of life tomorrow, Lotus Manzara Güzelce is an exclusive enclave of just 32 detached villas set on 12,855 m² in Güzelce, Büyükçekmece. Each 6+2 villa unfolds over three levels — around 343 m² gross — with a sea-view terrace, a garden terrace, a private landscaped garden and a covered garage for two cars. Interiors are defined by generous glazing, refined materials and ergonomic plans, from open living spaces to a master suite with its own dressing room. Residents share a fitness studio, sauna and Turkish bath, with security and camera systems and a backup generator throughout. Güzelce Marina, the coastline and the city's parks are close at hand. The project is developed by Lotus Yapı Proje.",
+      "longDescription": "Conceived as an escape from the city today and the heart of life tomorrow, Lotus Manzara Güzelce is an exclusive enclave of just 32 detached villas set on 12,855 m² in Güzelce, Büyükçekmece. Each 6+2 villa unfolds over three levels — around 343 m² gross — with a sea-view terrace, a garden terrace, a private landscaped garden and a covered garage for two cars. Interiors are defined by generous glazing, refined materials and ergonomic plans, from open living spaces to a master suite with its own dressing room. Residents share a fitness studio, sauna and Turkish bath, with security and camera systems and a backup generator throughout. Güzelce Marina, the coastline and the city's parks are close at hand. Developed by Lotus Yapı Proje, the project is complete and ready to move in, with a selection of villas still available for sale.",
       "highlights": [
+        "Completed and ready to move in — villas available for sale",
         "Only 32 detached villas on 12,855 m²",
         "6+2 villas over three floors — 343.15 m² gross, 298.43 m² net",
         "Sea-view terrace, garden terrace and private landscaped garden",
@@ -729,8 +733,9 @@
       "name": "Cadde Ispartakule",
       "tagline": "Beyond expectations — sea, lake and Kanal Istanbul views in Ispartakule.",
       "shortDescription": "Cadde Ispartakule is a residential tower of 78 smart homes and 12 street-level shops in Ispartakule, commanding a rare combination of sea, lake and Kanal Istanbul views.",
-      "longDescription": "Rising in Ispartakule, one of Istanbul's most sought-after growth districts, Cadde Ispartakule brings together 78 smart residences and 12 street-level shops in an elegant tower with a rare panorama of the sea, the lake and the future Kanal Istanbul. Homes range from 2+1 residences of 106–109 m² gross to 3+1 residences of up to 150.61 m² gross, each fitted with a smart home system and planned around light, comfort and security. Private amenities include a fitness centre, sauna and Turkish bath, a car park with electric-vehicle charging, and landscaped gardens around an ornamental pond. The location offers fast access to the TEM and Northern Marmara motorways, Istanbul Airport and the planned Kanal Istanbul. The project is developed by MH Grup İnşaat, which brings more than 20 years of experience in residential and commercial real estate.",
+      "longDescription": "Rising in Ispartakule, one of Istanbul's most sought-after growth districts, Cadde Ispartakule brings together 78 smart residences and 12 street-level shops in an elegant tower with a rare panorama of the sea, the lake and the future Kanal Istanbul. Homes range from 2+1 residences of 106–109 m² gross to 3+1 residences of up to 150.61 m² gross, each fitted with a smart home system and planned around light, comfort and security. Private amenities include a fitness centre, sauna and Turkish bath, a car park with electric-vehicle charging, and landscaped gardens around an ornamental pond. The location offers fast access to the TEM and Northern Marmara motorways, Istanbul Airport and the planned Kanal Istanbul. Developed by MH Grup İnşaat, which brings more than 20 years of experience in residential and commercial real estate, the project is complete and ready to move in, with a selection of residences still available for sale.",
       "highlights": [
+        "Completed and ready to move in — residences available for sale",
         "78 residences and 12 street-level shops",
         "Sea, lake and Kanal Istanbul views",
         "2+1 (106.30–108.56 m² gross) and 3+1 (132.83–150.61 m² gross) residences",

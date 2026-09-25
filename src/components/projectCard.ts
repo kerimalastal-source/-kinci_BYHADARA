@@ -32,7 +32,10 @@ export function renderProjectCard(project: Project): string {
           height="${project.coverImage.height}"
           loading="lazy"
         />
-        <span class="project-card__status badge badge--${project.status}">${projectStatusLabel(project.status)}</span>
+        <span class="project-card__status">
+          <span class="badge badge--${project.status}">${projectStatusLabel(project.status)}</span>
+          ${project.unitsAvailable ? `<span class="badge badge--available">${t("common.unitsAvailable")}</span>` : ""}
+        </span>
       </a>
       <div class="project-card__body">
         <p class="project-card__location">${placeLine(project.district, project.city)}</p>

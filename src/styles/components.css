@@ -96,6 +96,22 @@
   color: var(--color-on-primary);
 }
 
+.badge--available {
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--color-primary);
+}
+
+.badge--available::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-success);
+  box-shadow: 0 0 0 3px rgba(47, 107, 63, 0.18);
+}
+
+
 /* ---------- Stats ---------- */
 .stats-grid {
   display: grid;
@@ -280,6 +296,14 @@
   position: absolute;
   top: 1rem;
   inset-inline-start: 1rem;
+  inset-inline-end: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  pointer-events: none;
+}
+
+.project-card__status .badge {
   margin: 0;
 }
 

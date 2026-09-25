@@ -110,7 +110,10 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
           ${t("projectDetail.backLabel")}
         </a>
-        <span class="badge badge--${project.status}">${projectStatusLabel(project.status)}</span>
+        <div class="project-hero__badges">
+          <span class="badge badge--${project.status}">${projectStatusLabel(project.status)}</span>
+          ${project.unitsAvailable ? `<span class="badge badge--available">${t("common.unitsAvailable")}</span>` : ""}
+        </div>
         <h1>${content.name}</h1>
         <p class="project-hero__tagline">${content.tagline}</p>
         <p class="project-hero__location">${place}${project.timeline ? ` · <span dir="ltr">${project.timeline}</span>` : ""}</p>
@@ -187,6 +190,14 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
                 <dt>${t("projectDetail.statusLabel")}</dt>
                 <dd>${projectStatusLabel(project.status)}</dd>
               </div>
+              ${
+                project.unitsAvailable
+                  ? `<div>
+                <dt>${t("projectDetail.availabilityLabel")}</dt>
+                <dd>${t("projectDetail.unitsAvailableLong")}</dd>
+              </div>`
+                  : ""
+              }
               ${
                 project.developer
                   ? `<div>
