@@ -26,6 +26,15 @@
   align-items: center;
   gap: var(--space-md);
   height: 104px;
+  /* The logo stays physically on the left and its internal layout (mark,
+     name, tagline) stays fixed in every language — RTL flips the nav and
+     actions only. */
+  direction: ltr;
+}
+
+[dir="rtl"] .main-nav,
+[dir="rtl"] .header-actions {
+  direction: rtl;
 }
 
 .brand {
@@ -33,6 +42,9 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  /* The logo mark, "HADARA" and the tagline stay in the same left-to-right
+     order in every locale, including the footer's copy of this block. */
+  direction: ltr;
 }
 
 .brand__logo {
@@ -455,6 +467,13 @@
   gap: var(--space-lg);
   padding-bottom: var(--space-xl);
   border-bottom: 1px solid rgba(247, 244, 236, 0.14);
+  /* Keep the brand column physically on the left in every locale, like the header. */
+  direction: ltr;
+}
+
+[dir="rtl"] .site-footer__inner > .site-footer__brand,
+[dir="rtl"] .site-footer__inner > .site-footer__col {
+  direction: rtl;
 }
 
 .site-footer__desc {
