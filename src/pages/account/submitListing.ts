@@ -12,18 +12,14 @@ import {
   fetchListingPhotos,
   uploadListingPhoto,
   deleteListingPhoto,
-  fetchListingDocuments,
-  uploadListingDocument,
-  deleteListingDocument,
   listingPhotoUrl,
   type Listing,
   type ListingPhoto,
-  type ListingDocument,
   type NewListingInput,
   type PropertyType
 } from "../../data/listings";
 
-const STEPS = ["details", "photos", "documents", "review"] as const;
+const STEPS = ["details", "photos", "review"] as const;
 
 const PROPERTY_TYPES: PropertyType[] = ["apartment", "villa", "land", "commercial", "other"];
 const CURRENCIES = ["USD", "EUR", "GBP", "TRY"];
@@ -52,17 +48,17 @@ export function renderSubmitListing(main: HTMLElement, listingId?: string): void
   main.dataset.requestId = requestId;
 
   const load = listingId
-    ? Promise.all([fetchListingById(listingId), fetchListingPhotos(listingId), fetchListingDocuments(listingId)])
-    : Promise.resolve<[Listing | null, ListingPhoto[], ListingDocument[]]>([null, [], []]);
+    ? Promise.all([fetchListingById(listingId), fetchListingPhotos(listingId)])
+    : Promise.resolve<[Listing | null, ListingPhoto[]]>([null, []]);
 
   load
-    .then(([listing, photos, documents]) => {
+    .then(([listing, photos]) => {
       if (main.dataset.requestId !== requestId) return;
       if (listingId && (!listing || listing.owner_id !== getCurrentUserId())) {
         renderNotFound(main);
         return;
       }
-      mountWizard(main, listing, photos, documents);
+      mountWizard(main, listing, photos);
     })
     .catch((err) => {
       console.error(err);
@@ -71,7 +67,7 @@ export function renderSubmitListing(main: HTMLElement, listingId?: string): void
     });
 }
 
-function mountWizard(main: HTMLElement, initialListing: Listing | null, initialPhotos: ListingPhoto[], initialDocuments: ListingDocument[]): void {
+function mountWizard(main: HTMLElement, initialListing: Listing | null, initialPhotos: ListingPhoto[]): void {
   let listingId = initialListing?.id ?? null;
   let stepIndex = 0;
   let values: NewListingInput = initialListing
@@ -91,7 +87,6 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
       }
     : { ...EMPTY_INPUT };
   let photos = initialPhotos;
-  let documents = initialDocuments;
 
   function paint(): void {
     main.innerHTML = `
@@ -117,7 +112,6 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
     const step = STEPS[stepIndex];
     if (step === "details") paintDetails(body);
     else if (step === "photos") paintPhotos(body);
-    else if (step === "documents") paintDocuments(body);
     else paintReview(body);
   }
 
@@ -395,95 +389,6 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
     });
   }
 
-  function paintDocuments(body: HTMLElement): void {
-    const docLabel = (docType: ListingDocument["doc_type"]) =>
-      docType === "title_deed" ? t("account.uploadTitleDeedButton") : docType === "id_document" ? t("account.uploadIdButton") : docType;
-
-    body.innerHTML = `
-      <div class="wizard-step">
-        <h2>${t("account.documentsStepTitle")}</h2>
-        <p class="wizard-step__hint">${t("account.documentsStepHint")}</p>
-
-        <input type="file" id="doc-input-deed" accept="image/*,.pdf" hidden />
-        <input type="file" id="doc-input-id" accept="image/*,.pdf" hidden />
-        <div class="form-row">
-          <button type="button" class="btn btn--outline" id="doc-choose-deed">${t("account.uploadTitleDeedButton")}</button>
-          <button type="button" class="btn btn--outline" id="doc-choose-id">${t("account.uploadIdButton")}</button>
-        </div>
-        <p class="form-field__error" data-error-for="documents"></p>
-
-        <div class="doc-list" id="doc-list">
-          ${documents
-            .map(
-              (d) => `
-            <div class="doc-row" data-id="${d.id}">
-              <div>
-                <p class="doc-row__name">${docLabel(d.doc_type)}</p>
-                <p class="doc-row__type">${d.storage_path.split("/").pop()}</p>
-              </div>
-              <button type="button" class="btn btn--outline btn--small" data-remove-doc="${d.id}">${t("account.removeDocumentButton")}</button>
-            </div>`
-            )
-            .join("")}
-        </div>
-
-        <div class="wizard-nav">
-          <button type="button" class="btn btn--outline" id="wf-back">${t("account.backButton")}</button>
-          <button type="button" class="btn btn--primary" id="wf-next">${t("account.nextButton")}</button>
-        </div>
-      </div>
-    `;
-
-    function wireUpload(buttonId: string, inputId: string, docType: ListingDocument["doc_type"]): void {
-      const btn = body.querySelector<HTMLButtonElement>(buttonId)!;
-      const input = body.querySelector<HTMLInputElement>(inputId)!;
-      btn.addEventListener("click", () => input.click());
-      input.addEventListener("change", () => {
-        const file = input.files?.[0];
-        input.value = "";
-        if (!file) return;
-        fieldError(body, "documents", "");
-        uploadListingDocument(listingId!, file, docType)
-          .then((doc) => {
-            documents = [...documents, doc];
-            paintDocuments(body);
-          })
-          .catch((err) => {
-            console.error(err);
-            fieldError(body, "documents", t("account.errors.saveFailed"));
-          });
-      });
-    }
-
-    wireUpload("#doc-choose-deed", "#doc-input-deed", "title_deed");
-    wireUpload("#doc-choose-id", "#doc-input-id", "id_document");
-
-    body.querySelectorAll<HTMLButtonElement>("[data-remove-doc]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const doc = documents.find((d) => d.id === btn.dataset.removeDoc);
-        if (!doc) return;
-        deleteListingDocument(doc).then(() => {
-          documents = documents.filter((d) => d.id !== doc.id);
-          paintDocuments(body);
-        });
-      });
-    });
-
-    body.querySelector<HTMLButtonElement>("#wf-back")!.addEventListener("click", () => {
-      stepIndex = 1;
-      paint();
-    });
-
-    body.querySelector<HTMLButtonElement>("#wf-next")!.addEventListener("click", () => {
-      if (!documents.some((d) => d.doc_type === "title_deed")) {
-        fieldError(body, "documents", t("account.errors.titleDeedDocRequired"));
-        return;
-      }
-      stepIndex = 3;
-      paint();
-    });
-  }
-
   function paintReview(body: HTMLElement): void {
     body.innerHTML = `
       <div class="wizard-step">
@@ -499,7 +404,6 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
             <div><dt>${t("account.sizeLabel")}</dt><dd dir="ltr">${values.size_m2} m²</dd></div>
             <div><dt>${t("account.priceLabel")}</dt><dd dir="ltr">${values.asking_price.toLocaleString()} ${values.currency}</dd></div>
             <div><dt>${t("account.stepPhotos")}</dt><dd dir="ltr">${photos.length}</dd></div>
-            <div><dt>${t("account.stepDocuments")}</dt><dd dir="ltr">${documents.length}</dd></div>
           </dl>
         </div>
 
@@ -511,7 +415,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
     `;
 
     body.querySelector<HTMLButtonElement>("#wf-back")!.addEventListener("click", () => {
-      stepIndex = 2;
+      stepIndex = 1;
       paint();
     });
 

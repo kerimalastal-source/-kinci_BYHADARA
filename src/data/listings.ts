@@ -38,14 +38,6 @@ export interface ListingPhoto {
   created_at: string;
 }
 
-export interface ListingDocument {
-  id: string;
-  listing_id: string;
-  storage_path: string;
-  doc_type: "title_deed" | "id_document" | "other";
-  created_at: string;
-}
-
 export interface NewListingInput {
   title: string;
   description: string;
@@ -201,53 +193,6 @@ export async function deleteListingPhoto(photo: ListingPhoto): Promise<void> {
   await supabase.storage.from("listing-photos").remove([photo.storage_path]);
   const { error } = await supabase.from("listing_photos").delete().eq("id", photo.id);
   if (error) throw error;
-}
-
-export async function fetchListingDocuments(listingId: string): Promise<ListingDocument[]> {
-  const { data, error } = await supabase
-    .from("listing_documents")
-    .select("*")
-    .eq("listing_id", listingId)
-    .order("created_at", { ascending: true });
-  if (error) throw error;
-  return data as ListingDocument[];
-}
-
-export async function uploadListingDocument(
-  listingId: string,
-  file: File,
-  docType: ListingDocument["doc_type"]
-): Promise<ListingDocument> {
-  const userId = getCurrentUserId();
-  if (!userId) throw new Error("Not authenticated");
-  const ext = file.name.split(".").pop() ?? "pdf";
-  const path = `${userId}/${listingId}/${crypto.randomUUID()}.${ext}`;
-
-  const { error: uploadError } = await supabase.storage.from("listing-documents").upload(path, file);
-  if (uploadError) throw uploadError;
-
-  const { data, error } = await supabase
-    .from("listing_documents")
-    .insert({ listing_id: listingId, storage_path: path, doc_type: docType })
-    .select("*")
-    .single();
-  if (error) throw error;
-  return data as ListingDocument;
-}
-
-export async function deleteListingDocument(doc: ListingDocument): Promise<void> {
-  await supabase.storage.from("listing-documents").remove([doc.storage_path]);
-  const { error } = await supabase.from("listing_documents").delete().eq("id", doc.id);
-  if (error) throw error;
-}
-
-export async function getSignedDocumentUrl(storagePath: string): Promise<string | null> {
-  const { data, error } = await supabase.storage.from("listing-documents").createSignedUrl(storagePath, 300);
-  if (error) {
-    console.error(error);
-    return null;
-  }
-  return data.signedUrl;
 }
 
 export interface InquiryInput {

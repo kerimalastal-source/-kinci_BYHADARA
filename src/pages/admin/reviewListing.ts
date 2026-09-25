@@ -8,14 +8,11 @@ import { escapeHtml } from "../../utils/html";
 import {
   fetchListingById,
   fetchListingPhotos,
-  fetchListingDocuments,
   approveListing,
   rejectListing,
-  getSignedDocumentUrl,
   listingPhotoUrl,
   type Listing,
-  type ListingPhoto,
-  type ListingDocument
+  type ListingPhoto
 } from "../../data/listings";
 import type { Profile } from "../../auth/session";
 
@@ -27,8 +24,8 @@ export function renderAdminReviewListing(main: HTMLElement, listingId: string): 
   const requestId = crypto.randomUUID();
   main.dataset.requestId = requestId;
 
-  Promise.all([fetchListingById(listingId), fetchListingPhotos(listingId), fetchListingDocuments(listingId)])
-    .then(async ([listing, photos, documents]) => {
+  Promise.all([fetchListingById(listingId), fetchListingPhotos(listingId)])
+    .then(async ([listing, photos]) => {
       if (main.dataset.requestId !== requestId) return;
       if (!listing) {
         renderNotFound(main);
@@ -36,15 +33,12 @@ export function renderAdminReviewListing(main: HTMLElement, listingId: string): 
       }
       const seller = await fetchProfileById(listing.owner_id);
       if (main.dataset.requestId !== requestId) return;
-      paint(main, listing, photos, documents, seller);
+      paint(main, listing, photos, seller);
     })
     .catch((err) => console.error(err));
 }
 
-function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], documents: ListingDocument[], seller: Profile | null): void {
-  const docTypeLabel = (docType: ListingDocument["doc_type"]) =>
-    docType === "title_deed" ? t("account.uploadTitleDeedButton") : docType === "id_document" ? t("account.uploadIdButton") : docType;
-
+function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], seller: Profile | null): void {
   main.innerHTML = `
     <section class="page-hero">
       <div class="container">
@@ -87,23 +81,6 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], docu
               )
               .join("")}
           </div>
-
-          <h2>${t("admin.documentsTitle")}</h2>
-          <div class="doc-list">
-            ${
-              documents.length
-                ? documents
-                    .map(
-                      (d) => `
-              <div class="doc-row" data-id="${d.id}">
-                <p class="doc-row__name">${docTypeLabel(d.doc_type)}</p>
-                <button type="button" class="btn btn--outline btn--small" data-view-doc="${d.storage_path}">${t("admin.viewDocumentButton")}</button>
-              </div>`
-                    )
-                    .join("")
-                : `<p>${t("admin.noDocuments")}</p>`
-            }
-          </div>
         </div>
 
         <aside class="project-detail__sidebar">
@@ -145,14 +122,6 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], docu
         photos.map((p) => ({ src: listingPhotoUrl(p.storage_path), alt: "" })),
         index
       );
-    });
-  });
-
-  main.querySelectorAll<HTMLButtonElement>("[data-view-doc]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      getSignedDocumentUrl(btn.dataset.viewDoc!).then((url) => {
-        if (url) window.open(url, "_blank", "noopener,noreferrer");
-      });
     });
   });
 
