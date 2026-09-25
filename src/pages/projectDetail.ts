@@ -18,7 +18,7 @@ function renderResidences(project: Project): string {
   return `
     <section class="detail-block">
       <h2>${t("projectDetail.residencesTitle")}</h2>
-      <div class="residence-grid">
+      <div class="residence-grid${project.residences.length === 1 ? " residence-grid--single" : ""}">
         ${project.residences
           .map((r) => {
             const meta: [string, string][] = [];
@@ -126,7 +126,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           ${project.stats
             .map(
               (s) => `
-            <div class="project-stats__item">
+            <div class="project-stats__item${s.value.length > 12 ? " project-stats__item--long" : ""}">
               <dt>${t(`common.statLabels.${s.labelKey}`)}</dt>
               <dd dir="ltr">${s.value}</dd>
             </div>`

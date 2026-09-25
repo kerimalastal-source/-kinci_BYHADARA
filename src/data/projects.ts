@@ -81,6 +81,7 @@ export const projects: Project[] = [
     status: "new-launch",
     timeline: "2026 – 2028",
     priority: 0,
+    developer: "Lotus Yapı Proje",
     coverImage: {
       src: wixImg("3510f9_6cd2110b3f8148e7a91be907edf8a395~mv2.jpg"),
       width: 3000,
@@ -99,7 +100,14 @@ export const projects: Project[] = [
     ],
     stats: [
       { value: "21,000 m²", labelKey: "landArea" },
-      { value: "2028", labelKey: "delivery" }
+      { value: "2028", labelKey: "delivery" },
+      { value: "17", labelKey: "blocks" },
+      { value: "2+1 · 3+1 · 4+1", labelKey: "layout" }
+    ],
+    residences: [
+      { kind: "apartment", layout: "2+1", gross: "100 – 109 m²" },
+      { kind: "apartment", layout: "3+1", gross: "134 – 167 m²" },
+      { kind: "apartment", layout: "4+1", gross: "194 – 197 m²" }
     ]
   },
   {

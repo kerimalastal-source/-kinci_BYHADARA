@@ -55,7 +55,7 @@
 تم استخراج كل المحتوى والصور من موقع Wix الأصلي "حضارة العقاري" عبر Wix Data API فعلياً — **ليست بيانات وهمية**.
 
 - `src/data/projects.ts`: 8 مشاريع حقيقية بكل تفاصيلها (slug, district, city, status, timeline, stats, gallery images)، مرتبة حسب `priority`:
-  1. `beylikduzu-living` (new-launch، تسليم 2028)
+  1. `beylikduzu-living` (new-launch، تسليم 2028) — هو نفسه مشروع **Lotus Yaşam** (Lotus Yapı Proje، 17 بلوك، 2+1/3+1/4+1)؛ كتالوجه "LOTUS YAŞAM SUNUM DOSYASI" بمجلد المشاريع
   2. `diamond-marin` (new-launch، Yıltaş × Lotus، Beylikdüzü، تسليم أواخر 2027)
   3. `lotus-manzara-guzelce` (delivered + `unitsAvailable`، 32 فيلا 6+2، Lotus Yapı، Büyükçekmece)
   4. `cadde-ispartakule` (delivered + `unitsAvailable`، 78 شقة + 12 محل، MH Grup، Avcılar/Ispartakule)
@@ -64,6 +64,7 @@
   7. `lotus-koru-1` (delivered)
   8. `marmara-haven-villa` (ongoing، فيلا خاصة)
 - **مشاريع الكتالوجات (2–4)**: مضافة من ملفات PDF بـ Google Drive (مجلد "حضارة العقاري/المشاريع")؛ صورها مقصوصة من الكتالوجات ومستضافة محلياً في `public/images/projects/<slug>/` (مش على Wix). الكتالوجات غالباً ما فيها تواريخ تسليم — لا تخترع تواريخ؛ `timeline` اختياري.
+- **قيد تحميل ملفات Drive**: أداة Google Drive بتفشل ("session expired") مع ملفات PDF أكبر من ~5 ميغا (نجحت حتى 4.5 ميغا). `read_file_content` بيجيب النص بس (بدون صور). لملفات أكبر: اطلب من المستخدم نسخة مضغوطة (< 4 ميغا). ملفات معلّقة حالياً لهذا السبب: `Lotus Manzara Beylikdüzü.pdf` (مشروع جديد، نصه مقروء: 16 فيلا 5+2) و`LOTUS YAŞAM SUNUM DOSYASI` (صور لـ beylikduzu-living).
 - **`unitsAvailable: true`**: مشروع منفّذ (أو قيد الإنشاء) لسا فيه وحدات للبيع — بيظهر شارة "وحدات متاحة" على البطاقة والـ hero وسطر "التوفر" بأهم المعلومات. حسب المستخدم: مشاريع الكتالوجات المنفّذة كلها فيها وحدات متاحة للبيع.
 - **حقول المشروع الاختيارية** (`Project` في `projects.ts`): `developer`، `address`، `residences` (بطاقات الوحدات: layout/gross/net/garden/floors)، `amenities` (مفاتيح `AmenityKey` مع أيقونات في `components/amenityIcons.ts` وترجمات `projectDetail.amenities.*`)، ونص `nearby` (أماكن قريبة + وقت) داخل `projectsData.<slug>` بالقواميس. صفحة المشروع تعرض كل قسم فقط إذا بياناته موجودة، مع شريط أرقام رئيسية تحت الـ hero.
 - **أسماء المناطق المترجمة**: قاموس `places.<key>` (المفتاح من `placeKey()` في `src/utils/place.ts`) + `placeName()` من `src/i18n` — أي مشروع بمنطقة جديدة يحتاج مفتاحها بالأربع لغات وإلا يظهر الاسم التركي.
