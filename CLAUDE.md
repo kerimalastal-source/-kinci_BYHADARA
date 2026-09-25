@@ -54,12 +54,13 @@
 
 تم استخراج كل المحتوى والصور من موقع Wix الأصلي "حضارة العقاري" عبر Wix Data API فعلياً — **ليست بيانات وهمية**.
 
-- `src/data/projects.ts`: 5 مشاريع حقيقية بكل تفاصيلها (slug, district, city, status, timeline, stats, gallery images):
+- `src/data/projects.ts`: 6 مشاريع حقيقية بكل تفاصيلها (slug, district, city, status, timeline, stats, gallery images):
   1. `beylikduzu-living` (new-launch، تسليم 2028)
-  2. `lotus-koru-2` (ongoing)
-  3. `lotus-istanbul` (ongoing، مبنى متعدد الاستخدامات)
-  4. `lotus-koru-1` (delivered)
-  5. `marmara-haven-villa` (ongoing، فيلا خاصة)
+  2. `diamond-marin` (new-launch، Yıltaş × Lotus، Beylikdüzü، تسليم أواخر 2027) — صوره محلية بـ `public/images/projects/diamond-marin/` (مش عبر Wix)
+  3. `lotus-koru-2` (ongoing)
+  4. `lotus-istanbul` (ongoing، مبنى متعدد الاستخدامات)
+  5. `lotus-koru-1` (delivered)
+  6. `marmara-haven-villa` (ongoing، فيلا خاصة)
 - **الصور**: مستضافة على Wix مباشرة (`https://static.wixstatic.com/media/<mediaId>`)، مبنية عبر `wixImg()` في `src/utils/image.ts`. **هذه نقطة اعتماد على Wix خارجي** — لو حذفت الشركة الصور من حساب Wix الأصلي، الصور بتنكسر بالموقع الجديد. للـ production الحقيقي، الأفضل نزّل الصور ورفعها لـ CDN/استضافة خاصة بالموقع الجديد.
 - بيانات التواصل الحقيقية: الإيميل `info@byhadara.com`، الهاتف `+90 531 930 92 14` (`00905319309214` بأزرار WhatsApp/اتصال العائمة)، العنوان "Adnan Kahveci Mah., Beylikdüzü, Istanbul 34000, Türkiye".
 - `src/data/blog.ts`: 10 مقالات مدونة عقارية حقيقية المحتوى (استثمار عقاري بتركيا، الجنسية عبر الاستثمار، الحياة بتركيا، إجراءات الطابو، الضرائب والرسوم، التثمين العقاري...) بكل اللغات الأربعة، بصور توضيحية مولّدة بالذكاء الاصطناعي (Canva) ومستضافة على Wix (`mcp__Wix__UploadImageToWixSite`) للحصول على رابط دائم.
@@ -99,7 +100,7 @@
 - الخطوط: **Inter** + **IBM Plex Sans Arabic** — للعناوين والنص كله (نفس خط byhadara.com بالضبط؛ لا تستخدم Playfair Display أو Noto Naskh/Kufi Arabic — انشالو من المشروع). من Google Fonts (`index.html`).
 - الملفات: `variables.css` (متغيرات) → `base.css` (reset/typography) → `layout.css` (header/footer/hero) → `components.css` (كل الأجزاء: buttons, cards, forms, stats, gallery, lightbox, search, partners, floating actions...) → `rtl.css` (استثناءات RTL) — كلها مجمّعة بـ `main.css` عبر `@import`.
 - **اللوغو**: اللوغو الحقيقي لحضارة (`public/logo-dark.png`/`logo-light.png` + favicons) بالهيدر/الفوتر/تاب المتصفح، بحجم واضح وكبير، مع "REAL ESTATE" كـ tagline تحت "HADARA" — **لازم مسافة واضحة (`margin-top`) بين الاسم والـ tagline**، مش ملزوقين ببعض (`.brand__tagline` بـ `layout.css`).
-- **الهيدر**: `.site-header__inner` هو **CSS grid بـ 3 أعمدة** (`auto 1fr auto`: brand / nav / actions) مع `.main-nav { display:flex; justify-content:center }` عشان المنيو تضل بمنتصف الهيدر تماماً بكل اللغات (LTR/RTL) — **هذا نمط إلزامي، لا ترجع لـ flex + margin-auto** (حتى لو الموقع المرجعي byhadara.com بيستخدم flex+space-between عادي، إحنا متمسكين بالـ centering). القوائم الفرعية غير الأساسية (الجنسية، طلب عقار مخصص، المدونة، الأسئلة الشائعة) مجمّعة بقائمة منسدلة "Resources" (`NAV_RESOURCES` بـ `header.ts`) لتفادي ازدحام الهيدر — أي صفحة جديدة غير أساسية تنضاف هون.
+- **الهيدر**: `.site-header__inner` هو **CSS grid بـ 3 أعمدة** (`max-content minmax(0,1fr) max-content`: brand / nav / actions، بأعمدة `grid-column` صريحة على كل وحدة) مع `.main-nav { display:flex; justify-content:center }` عشان المنيو تضل بمنتصف الهيدر تماماً بكل اللغات (LTR/RTL) — **هذا نمط إلزامي، لا ترجع لـ flex + margin-auto** (حتى لو الموقع المرجعي byhadara.com بيستخدم flex+space-between عادي، إحنا متمسكين بالـ centering). **مهم**: عمود الـ brand يجب يضل `max-content` (لا `auto`) وإلا الشعار بينضغط/يتراكب مع جاره لما المسافة تضيق (صار فعلياً بعد تعديل تصميم الهيدر — تم تصحيحه). القوائم الفرعية غير الأساسية (الجنسية، طلب عقار مخصص، المدونة، الأسئلة الشائعة) مجمّعة بقائمة منسدلة "Resources" (`NAV_RESOURCES` بـ `header.ts`) لتفادي ازدحام الهيدر — أي صفحة جديدة غير أساسية تنضاف هون. رابط "Contact" بالمنيو الرئيسية مخفي على الديسكتوب (مكرر مع زر "Get in Touch" جنبه)، بس موجود بقائمة الموبايل.
 - **تبديل اللغة**: روابط نصية بسيطة جنب بعض (`EN AR FR RU`، النشطة تحتها خط) — **مش dropdown** (`.lang-switch` بـ `header.ts`/`layout.css`)، مطابق لأسلوب byhadara.com وhadararealestate.com. القائمة عليها `direction: ltr` صريح حتى ترتيبها يضل ثابت بكل اللغات (نفس نمط الموقعين المرجعيين).
 - **الأزرار العائمة**: WhatsApp + اتصال هاتفي، ثابتة فيزيائياً على يمين الشاشة بكل اللغات (`src/components/floatingButtons.ts`)، تستخدم الرقم `00905319309214`.
 - **صورة الهيرو الرئيسية**: `public/hero-istanbul.jpg` (منظر البوسفور الجوي — نفس صورة هيرو byhadara.com، منزّلة محلياً بدل رابط Wix خارجي مكسور).
