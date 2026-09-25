@@ -1,5 +1,5 @@
 import type { Project } from "../data/projects";
-import { t, getProjectContent, link, placeName } from "../i18n";
+import { t, getProjectContent, link, placeLine } from "../i18n";
 
 export function projectStatusLabel(status: Project["status"]): string {
   switch (status) {
@@ -35,7 +35,7 @@ export function renderProjectCard(project: Project): string {
         <span class="project-card__status badge badge--${project.status}">${projectStatusLabel(project.status)}</span>
       </a>
       <div class="project-card__body">
-        <p class="project-card__location">${placeName(project.district)}, ${placeName(project.city)}</p>
+        <p class="project-card__location">${placeLine(project.district, project.city)}</p>
         <h3 class="project-card__title">${content.name}</h3>
         <p class="project-card__tagline">${content.tagline}</p>
         <div class="project-card__meta">

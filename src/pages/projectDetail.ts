@@ -1,4 +1,4 @@
-import { t, getProjectContent, link, placeName } from "../i18n";
+import { t, getProjectContent, link, placeLine } from "../i18n";
 import { getProjectBySlug, getSortedProjects, type Project, type Residence } from "../data/projects";
 import { renderProjectCard, projectStatusLabel } from "../components/projectCard";
 import { amenityIcon } from "../components/amenityIcons";
@@ -101,7 +101,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   const content = getProjectContent(project.slug);
   const gallery = [project.coverImage, ...project.gallery];
   const others = getSortedProjects().filter((p) => p.slug !== project.slug).slice(0, 3);
-  const place = `${placeName(project.district)}, ${placeName(project.city)}`;
+  const place = placeLine(project.district, project.city);
 
   el.innerHTML = `
     <section class="project-hero" style="background-image: linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88)), url('${project.coverImage.src}')">

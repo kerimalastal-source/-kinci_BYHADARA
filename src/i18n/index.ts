@@ -102,6 +102,11 @@ export function getProjectContent(slug: string) {
   }>(`projectsData.${slug}`);
 }
 
+/** "District, City" with localized names and the locale's comma (Arabic uses "،"). */
+export function placeLine(district: string, city: string): string {
+  return `${placeName(district)}${currentLocale === "ar" ? "، " : ", "}${placeName(city)}`;
+}
+
 /** Localized name of a district or city ("Beylikdüzü" -> "بيليكدوزو"), falling back to the original. */
 export function placeName(name: string): string {
   const value = lookup(currentLocale, `places.${placeKey(name)}`);
