@@ -1,17 +1,18 @@
 import { t, link } from "../../i18n";
 import { requireAdmin } from "../../auth/session";
+import { escapeHtml } from "../../utils/html";
 import { fetchPendingListings, fetchCoverPhotos, listingPhotoUrl, type Listing } from "../../data/listings";
 
 function renderRow(listing: Listing, coverPath: string | undefined): string {
   return `
     <article class="listing-row" data-id="${listing.id}">
       <div class="listing-row__media">
-        ${coverPath ? `<img src="${listingPhotoUrl(coverPath)}" alt="${listing.title}" loading="lazy" />` : ""}
+        ${coverPath ? `<img src="${listingPhotoUrl(coverPath)}" alt="${escapeHtml(listing.title)}" loading="lazy" />` : ""}
       </div>
       <div class="listing-row__body">
         <span class="status-badge status-badge--${listing.status}">${t(`account.statusLabels.${listing.status}`)}</span>
-        <h3>${listing.title}</h3>
-        <p class="listing-row__meta">${[listing.district, listing.city].filter(Boolean).join(", ")} · <span dir="ltr">${listing.asking_price?.toLocaleString() ?? ""} ${listing.currency}</span></p>
+        <h3>${escapeHtml(listing.title)}</h3>
+        <p class="listing-row__meta">${escapeHtml([listing.district, listing.city].filter(Boolean).join(", "))} · <span dir="ltr">${listing.asking_price?.toLocaleString() ?? ""} ${listing.currency}</span></p>
       </div>
       <div class="listing-row__actions">
         <a class="btn btn--primary btn--small" href="${link(`/admin/listings/${listing.id}`)}">${t("admin.reviewButton")}</a>

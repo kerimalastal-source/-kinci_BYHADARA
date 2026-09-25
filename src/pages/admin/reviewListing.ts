@@ -4,6 +4,7 @@ import { navigate } from "../../router";
 import { renderNotFound } from "../notFound";
 import { fetchProfileById } from "../../data/profiles";
 import { openLightbox } from "../../components/lightbox";
+import { escapeHtml } from "../../utils/html";
 import {
   fetchListingById,
   fetchListingPhotos,
@@ -52,8 +53,8 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], docu
           ${t("admin.backToQueueButton")}
         </a>
         <span class="status-badge status-badge--${listing.status}">${t(`account.statusLabels.${listing.status}`)}</span>
-        <h1>${listing.title}</h1>
-        <p class="page-hero__subtitle">${[listing.district, listing.city].filter(Boolean).join(", ")}</p>
+        <h1>${escapeHtml(listing.title)}</h1>
+        <p class="page-hero__subtitle">${escapeHtml([listing.district, listing.city].filter(Boolean).join(", "))}</p>
       </div>
     </section>
 
@@ -61,7 +62,7 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], docu
       <div class="container project-detail__grid">
         <div class="project-detail__main">
           <h2>${t("admin.listingInfoTitle")}</h2>
-          <p class="project-detail__description">${listing.description ?? ""}</p>
+          <p class="project-detail__description">${escapeHtml(listing.description)}</p>
 
           <div class="review-summary">
             <dl>
@@ -71,8 +72,8 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], docu
               <div><dt>${t("account.bathroomsLabel")}</dt><dd dir="ltr">${listing.bathrooms ?? "—"}</dd></div>
               <div><dt>${t("account.priceLabel")}</dt><dd dir="ltr">${listing.asking_price?.toLocaleString() ?? "—"} ${listing.currency}</dd></div>
               <div><dt>${t("account.purchaseYearLabel")}</dt><dd dir="ltr">${listing.original_purchase_year ?? "—"}</dd></div>
-              <div><dt>${t("account.titleDeedNumberLabel")}</dt><dd dir="ltr">${listing.title_deed_number ?? "—"}</dd></div>
-              <div><dt>${t("account.addressLabel")}</dt><dd>${listing.address_line ?? "—"}</dd></div>
+              <div><dt>${t("account.titleDeedNumberLabel")}</dt><dd dir="ltr">${escapeHtml(listing.title_deed_number) || "—"}</dd></div>
+              <div><dt>${t("account.addressLabel")}</dt><dd>${escapeHtml(listing.address_line) || "—"}</dd></div>
             </dl>
           </div>
 
@@ -110,9 +111,9 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], docu
           <div class="fact-card">
             <h3>${t("admin.sellerInfoTitle")}</h3>
             <dl class="fact-list">
-              <div><dt>${t("account.fullNameLabel")}</dt><dd>${seller?.full_name ?? "—"}</dd></div>
-              <div><dt>${t("account.phoneLabel")}</dt><dd dir="ltr">${seller?.phone ?? "—"}</dd></div>
-              <div><dt>${t("account.countryLabel")}</dt><dd>${seller?.country ?? "—"}</dd></div>
+              <div><dt>${t("account.fullNameLabel")}</dt><dd>${escapeHtml(seller?.full_name) || "—"}</dd></div>
+              <div><dt>${t("account.phoneLabel")}</dt><dd dir="ltr">${escapeHtml(seller?.phone) || "—"}</dd></div>
+              <div><dt>${t("account.countryLabel")}</dt><dd>${escapeHtml(seller?.country) || "—"}</dd></div>
             </dl>
           </div>
 

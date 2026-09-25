@@ -2,6 +2,7 @@ import type { Route } from "../router";
 import { t, tRaw, getLocale, setLocale, locales, type Locale, link } from "../i18n";
 import { openSearch } from "./search";
 import { isAuthenticated, isAdmin, getCurrentProfile, signOut } from "../auth/session";
+import { escapeHtml } from "../utils/html";
 
 interface NavLink {
   route: string;
@@ -108,7 +109,7 @@ export function renderHeader(el: HTMLElement, route: Route): void {
             isAuthenticated()
               ? `
             <button class="account-switch__current" id="account-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-              ${getCurrentProfile()?.full_name?.split(" ")[0] || t("nav.account")}
+              ${escapeHtml(getCurrentProfile()?.full_name?.split(" ")[0]) || t("nav.account")}
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <ul class="account-switch__menu" id="account-menu" hidden>

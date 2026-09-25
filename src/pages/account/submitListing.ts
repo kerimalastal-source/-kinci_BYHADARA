@@ -2,6 +2,7 @@ import { t, link } from "../../i18n";
 import { requireAuth, getCurrentUserId } from "../../auth/session";
 import { renderNotFound } from "../notFound";
 import { turkeyProvinces, type District } from "../../data/turkeyLocations";
+import { escapeHtml } from "../../utils/html";
 import {
   fetchListingById,
   createDraftListing,
@@ -136,13 +137,13 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
       <form class="wizard-step" id="details-form" novalidate>
         <div class="form-field">
           <label for="wf-title">${t("account.titleLabel")}</label>
-          <input type="text" id="wf-title" name="title" placeholder="${t("account.titlePlaceholder")}" value="${values.title}" />
+          <input type="text" id="wf-title" name="title" placeholder="${t("account.titlePlaceholder")}" value="${escapeHtml(values.title)}" />
           <p class="form-field__error" data-error-for="title"></p>
         </div>
 
         <div class="form-field">
           <label for="wf-description">${t("account.descriptionLabel")}</label>
-          <textarea id="wf-description" name="description" rows="4" placeholder="${t("account.descriptionPlaceholder")}">${values.description}</textarea>
+          <textarea id="wf-description" name="description" rows="4" placeholder="${t("account.descriptionPlaceholder")}">${escapeHtml(values.description)}</textarea>
           <p class="form-field__error" data-error-for="description"></p>
         </div>
 
@@ -173,7 +174,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
 
         <div class="form-field">
           <label for="wf-address">${t("account.addressLabel")}</label>
-          <input type="text" id="wf-address" name="address_line" placeholder="${t("account.addressPlaceholder")}" value="${values.address_line}" />
+          <input type="text" id="wf-address" name="address_line" placeholder="${t("account.addressPlaceholder")}" value="${escapeHtml(values.address_line)}" />
           <p class="form-field__error" data-error-for="address_line"></p>
           <p class="wizard-step__hint">${t("account.addressHint")}</p>
         </div>
@@ -224,7 +225,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
           </div>
           <div class="form-field">
             <label for="wf-deed">${t("account.titleDeedNumberLabel")}</label>
-            <input dir="ltr" type="text" id="wf-deed" name="title_deed_number" value="${values.title_deed_number}" />
+            <input dir="ltr" type="text" id="wf-deed" name="title_deed_number" value="${escapeHtml(values.title_deed_number)}" />
             <p class="form-field__error" data-error-for="title_deed_number"></p>
           </div>
         </div>
@@ -487,7 +488,7 @@ function mountWizard(main: HTMLElement, initialListing: Listing | null, initialP
 
         <div class="review-summary">
           <dl>
-            <div><dt>${t("account.titleLabel")}</dt><dd>${values.title}</dd></div>
+            <div><dt>${t("account.titleLabel")}</dt><dd>${escapeHtml(values.title)}</dd></div>
             <div><dt>${t("account.cityLabel")}</dt><dd>${values.district}, ${values.city}</dd></div>
             <div><dt>${t("account.propertyTypeLabel")}</dt><dd>${t(`account.propertyTypes.${values.property_type}`)}</dd></div>
             <div><dt>${t("account.sizeLabel")}</dt><dd dir="ltr">${values.size_m2} m²</dd></div>

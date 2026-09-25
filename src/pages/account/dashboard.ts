@@ -1,5 +1,6 @@
 import { t, link } from "../../i18n";
 import { requireAuth, getCurrentProfile } from "../../auth/session";
+import { escapeHtml } from "../../utils/html";
 import {
   fetchMyListings,
   fetchCoverPhotos,
@@ -20,13 +21,13 @@ function renderRow(listing: Listing, coverPath: string | undefined): string {
   return `
     <article class="listing-row" data-id="${listing.id}">
       <div class="listing-row__media">
-        ${coverPath ? `<img src="${listingPhotoUrl(coverPath)}" alt="${listing.title}" loading="lazy" />` : ""}
+        ${coverPath ? `<img src="${listingPhotoUrl(coverPath)}" alt="${escapeHtml(listing.title)}" loading="lazy" />` : ""}
       </div>
       <div class="listing-row__body">
         <span class="status-badge status-badge--${listing.status}">${statusLabel(listing.status)}</span>
-        <h3>${listing.title}</h3>
-        <p class="listing-row__meta">${[listing.district, listing.city].filter(Boolean).join(", ")}</p>
-        ${listing.status === "rejected" && listing.rejection_reason ? `<p class="listing-row__rejection"><strong>${t("account.rejectionReasonLabel")}:</strong> ${listing.rejection_reason}</p>` : ""}
+        <h3>${escapeHtml(listing.title)}</h3>
+        <p class="listing-row__meta">${escapeHtml([listing.district, listing.city].filter(Boolean).join(", "))}</p>
+        ${listing.status === "rejected" && listing.rejection_reason ? `<p class="listing-row__rejection"><strong>${t("account.rejectionReasonLabel")}:</strong> ${escapeHtml(listing.rejection_reason)}</p>` : ""}
       </div>
       <div class="listing-row__actions">
         ${listing.status === "approved" ? `<a class="btn btn--outline btn--small" href="${link(`/resale/${listing.id}`)}">${t("account.viewButton")}</a>` : ""}
@@ -47,7 +48,7 @@ export function renderAccountDashboard(main: HTMLElement): void {
       <div class="container">
         <p class="eyebrow eyebrow--on-dark">${t("account.heroEyebrow")}</p>
         <h1>${t("account.heroTitle")}</h1>
-        <p class="page-hero__subtitle">${profile ? t("account.welcomeBack", { name: profile.full_name || "" }) : ""}</p>
+        <p class="page-hero__subtitle">${profile ? t("account.welcomeBack", { name: escapeHtml(profile.full_name) || "" }) : ""}</p>
       </div>
     </section>
 

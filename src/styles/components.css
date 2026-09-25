@@ -541,6 +541,7 @@
 
 .project-detail__description {
   font-size: 1.05rem;
+  white-space: pre-line;
 }
 
 .highlight-list {

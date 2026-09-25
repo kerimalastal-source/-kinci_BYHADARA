@@ -2,6 +2,7 @@ import { t, link } from "../../i18n";
 import { renderNotFound } from "../notFound";
 import { openLightbox } from "../../components/lightbox";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "../../components/phoneInput";
+import { escapeHtml } from "../../utils/html";
 import {
   fetchListingById,
   fetchListingPhotos,
@@ -40,8 +41,8 @@ function paint(el: HTMLElement, listing: Listing, photos: ListingPhoto[]): void 
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
           ${t("resale.detailBackLabel")}
         </a>
-        <h1>${listing.title}</h1>
-        <p class="project-hero__location">${[listing.district, listing.city].filter(Boolean).join(", ")}</p>
+        <h1>${escapeHtml(listing.title)}</h1>
+        <p class="project-hero__location">${escapeHtml([listing.district, listing.city].filter(Boolean).join(", "))}</p>
       </div>
     </section>
 
@@ -49,7 +50,7 @@ function paint(el: HTMLElement, listing: Listing, photos: ListingPhoto[]): void 
       <div class="container project-detail__grid">
         <div class="project-detail__main">
           <h2>${t("resale.detailOverviewTitle")}</h2>
-          <p class="project-detail__description">${listing.description ?? ""}</p>
+          <p class="project-detail__description">${escapeHtml(listing.description)}</p>
 
           <h2>${t("resale.detailGalleryTitle")}</h2>
           <div class="gallery-grid" id="listing-gallery">
