@@ -1,5 +1,6 @@
 import { defaultLocale, isLocale, lookup, locales, rtlLocales, type Locale } from "./dictionaries";
 import { localizePath, splitLocale } from "../seo/routes";
+import { placeKey } from "../utils/place";
 
 export { locales, rtlLocales, type Locale };
 
@@ -84,6 +85,12 @@ export function tRaw<T = unknown>(key: string): T {
   return lookup(currentLocale, key) as T;
 }
 
+export interface NearbyPlace {
+  place: string;
+  /** Travel time as written in the catalog, e.g. "5 min"; omitted when the catalog gives none. */
+  time?: string;
+}
+
 export function getProjectContent(slug: string) {
   return tRaw<{
     name: string;
@@ -91,5 +98,12 @@ export function getProjectContent(slug: string) {
     shortDescription: string;
     longDescription: string;
     highlights: string[];
+    nearby?: NearbyPlace[];
   }>(`projectsData.${slug}`);
+}
+
+/** Localized name of a district or city ("Beylikdüzü" -> "بيليكدوزو"), falling back to the original. */
+export function placeName(name: string): string {
+  const value = lookup(currentLocale, `places.${placeKey(name)}`);
+  return value === undefined ? name : String(value);
 }

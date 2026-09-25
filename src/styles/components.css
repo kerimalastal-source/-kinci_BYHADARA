@@ -532,7 +532,253 @@
 
 .project-detail__description {
   font-size: 1.05rem;
+  line-height: 1.8;
   white-space: pre-line;
+}
+
+.detail-block + .detail-block {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Key figures band directly under the project hero */
+.project-stats {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  margin: 0;
+}
+
+.project-stats__item {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.35rem;
+  padding: var(--space-md) var(--space-md);
+  border-inline-start: 1px solid var(--color-border);
+}
+
+.project-stats__item:first-child {
+  border-inline-start: 0;
+  padding-inline-start: 0;
+}
+
+.project-stats__item dd {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  text-align: start;
+}
+
+[dir="rtl"] .project-stats__item dd {
+  text-align: end;
+  /* dir="ltr" values still sit on the RTL start side */
+}
+
+.project-stats__item dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+}
+
+/* Residences */
+.residence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-md);
+}
+
+.residence-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.residence-card__eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+}
+
+.residence-card__title {
+  margin-bottom: var(--space-sm);
+}
+
+.residence-card__area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin: 0;
+}
+
+.residence-card__area strong {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  text-align: start;
+}
+
+[dir="rtl"] .residence-card__area strong {
+  text-align: end;
+}
+
+.residence-card__area span {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}
+
+.residence-card__meta {
+  display: grid;
+  gap: 0.45rem;
+  margin: var(--space-sm) 0 0;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.residence-card__meta div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.residence-card__meta dt {
+  color: var(--color-muted);
+}
+
+.residence-card__meta dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* Amenities */
+.amenity-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+}
+
+.amenity-grid__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.7rem;
+  padding: 1.25rem 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: center;
+  color: var(--color-ink);
+}
+
+.amenity-grid__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  color: var(--color-accent-dark);
+}
+
+@media (max-width: 560px) {
+  .amenity-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Location & connectivity */
+.detail-address {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.detail-address svg {
+  flex-shrink: 0;
+  color: var(--color-accent-dark);
+}
+
+.nearby-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  column-gap: var(--space-lg);
+}
+
+.nearby-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nearby-list__place {
+  position: relative;
+  padding-inline-start: 1.1rem;
+  color: var(--color-ink-soft);
+}
+
+.nearby-list__place::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.nearby-list__time {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .project-stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .project-stats__item {
+    padding: var(--space-sm) var(--space-sm);
+  }
+
+  .project-stats__item:nth-child(odd) {
+    border-inline-start: 0;
+    padding-inline-start: 0;
+  }
+
+  .project-stats__item:nth-child(n + 3) {
+    border-top: 1px solid var(--color-border);
+  }
 }
 
 .highlight-list {
@@ -599,6 +845,11 @@
   .gallery-grid__item--wide {
     grid-column: span 2;
     grid-row: span 1;
+  }
+
+  /* An odd image left alone on the last row spans the full width. */
+  .gallery-grid__item:last-child:nth-child(even) {
+    grid-column: span 2;
   }
 }
 

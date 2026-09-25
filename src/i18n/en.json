@@ -65,7 +65,9 @@
       "terrace": "Terrace",
       "blocks": "Blocks",
       "layout": "Apartment Layout",
-      "grossArea": "Gross Area"
+      "grossArea": "Gross Area",
+      "villas": "Villas",
+      "villaLayout": "Villa Layout"
     }
   },
   "footer": {
@@ -84,7 +86,7 @@
     "statsTitle": "HADARA in Numbers",
     "stats": [
       { "value": "12+", "label": "Years of Excellence" },
-      { "value": "6", "label": "Landmark Developments" },
+      { "value": "8", "label": "Landmark Developments" },
       { "value": "400+", "label": "Residential Units" },
       { "value": "2", "label": "Prime Istanbul Districts" }
     ],
@@ -164,7 +166,7 @@
     "statsTitle": "Our Track Record",
     "stats": [
       { "value": "12+", "label": "Years in Business" },
-      { "value": "6", "label": "Landmark Projects" },
+      { "value": "8", "label": "Landmark Projects" },
       { "value": "400+", "label": "Residential Units" },
       { "value": "60,000+ m²", "label": "Land Developed" }
     ]
@@ -172,7 +174,7 @@
   "projects": {
     "heroEyebrow": "Our Portfolio",
     "heroTitle": "Projects Shaping Istanbul",
-    "heroSubtitle": "From private villas to large residential communities, explore the developments HADARA has designed, built and delivered across Beylikdüzü and Büyükçekmece.",
+    "heroSubtitle": "From private villas to large residential communities, explore the developments in HADARA's portfolio across Beylikdüzü, Büyükçekmece and Avcılar.",
     "filterAll": "All Projects",
     "filterNewLaunch": "New Launch",
     "filterOngoing": "Under Construction",
@@ -181,6 +183,12 @@
     "notFoundCtaTitle": "Didn't Find What You're Looking For?",
     "notFoundCtaText": "Tell us the property you have in mind — any city, any district — and our advisors will help you find it.",
     "notFoundCtaButton": "Request a Custom Property"
+  },
+  "places": {
+    "istanbul": "Istanbul",
+    "beylikduzu": "Beylikdüzü",
+    "buyukcekmece": "Büyükçekmece",
+    "avcilar": "Avcılar"
   },
   "projectDetail": {
     "overviewTitle": "Project Overview",
@@ -194,7 +202,37 @@
     "ctaText": "Speak with our team for availability, pricing and investment details.",
     "ctaButton": "Request Information",
     "backLabel": "Back to Projects",
-    "otherProjectsTitle": "Explore Other Projects"
+    "otherProjectsTitle": "Explore Other Projects",
+    "residencesTitle": "Residences",
+    "amenitiesTitle": "Amenities & Services",
+    "locationTitle": "Location & Connectivity",
+    "developerLabel": "Developer",
+    "addressLabel": "Address",
+    "grossAreaLabel": "Gross area",
+    "netAreaLabel": "Net area",
+    "gardenLabel": "Private garden",
+    "floorsLabel": "Floors",
+    "planTypesLabel": "Floor plans",
+    "residenceApartment": "{layout} Apartment",
+    "residenceVilla": "{layout} Villa",
+    "residenceVariant": "Type {variant}",
+    "amenities": {
+      "outdoorPool": "Outdoor Pool",
+      "fitness": "Fitness Center",
+      "sauna": "Sauna",
+      "hamam": "Turkish Bath",
+      "smartHome": "Smart Home",
+      "indoorParking": "Indoor Parking",
+      "privateParking": "Private 2-Car Garage",
+      "evCharging": "EV Charging",
+      "security": "Security & CCTV",
+      "landscaping": "Landscaped Gardens",
+      "privateGarden": "Private Garden",
+      "seaViewTerrace": "Sea-View Terrace",
+      "generator": "Backup Generator",
+      "retail": "On-site Retail",
+      "airConditioning": "Air Conditioning"
+    }
   },
   "citizenship": {
     "heroEyebrow": "Investor Services",
@@ -623,6 +661,109 @@
         "5 minutes to West Istanbul Marina and Beylikdüzü Yaşam Vadisi, 10 minutes to the Metrobüs",
         "Developed in partnership by Yıltaş and Lotus Yapı",
         "Delivery scheduled for late 2027"
+      ],
+      "nearby": [
+        {
+          "place": "West Istanbul Marina",
+          "time": "5 min"
+        },
+        {
+          "place": "Beylikdüzü Yaşam Vadisi",
+          "time": "5 min"
+        },
+        {
+          "place": "Metrobüs",
+          "time": "10 min"
+        },
+        {
+          "place": "MarmaraPark Mall",
+          "time": "15 min"
+        },
+        {
+          "place": "Medicana International Istanbul Hospital",
+          "time": "15 min"
+        },
+        {
+          "place": "Ambarlı Port",
+          "time": "20 min"
+        },
+        {
+          "place": "Büyükçekmece Beach",
+          "time": "20 min"
+        }
+      ]
+    },
+    "lotus-manzara-guzelce": {
+      "name": "Lotus Manzara Güzelce",
+      "tagline": "32 detached villas between the forest and the sea in Büyükçekmece.",
+      "shortDescription": "Lotus Manzara Güzelce is an exclusive enclave of 32 detached villas on 12,855 m² in Güzelce, Büyükçekmece, designed for year-round living between green woodland and the Marmara Sea.",
+      "longDescription": "Conceived as an escape from the city today and the heart of life tomorrow, Lotus Manzara Güzelce is an exclusive enclave of just 32 detached villas set on 12,855 m² in Güzelce, Büyükçekmece. Each 6+2 villa unfolds over three levels — around 343 m² gross — with a sea-view terrace, a garden terrace, a private landscaped garden and a covered garage for two cars. Interiors are defined by generous glazing, refined materials and ergonomic plans, from open living spaces to a master suite with its own dressing room. Residents share a fitness studio, sauna and Turkish bath, with security and camera systems and a backup generator throughout. Güzelce Marina, the coastline and the city's parks are close at hand. The project is developed by Lotus Yapı Proje.",
+      "highlights": [
+        "Only 32 detached villas on 12,855 m²",
+        "6+2 villas over three floors — 343.15 m² gross, 298.43 m² net",
+        "Sea-view terrace, garden terrace and private landscaped garden",
+        "Covered private garage for two cars with every villa",
+        "Fitness studio, sauna and Turkish bath",
+        "Security and camera systems with a backup generator",
+        "Moments from Güzelce Marina and the coast"
+      ],
+      "nearby": [
+        {
+          "place": "Güzelce Marina"
+        },
+        {
+          "place": "Güzelce coastline"
+        },
+        {
+          "place": "Mimar Sinan Yacht Harbour"
+        },
+        {
+          "place": "Büyükçekmece State Hospital"
+        },
+        {
+          "place": "E-5 Highway"
+        }
+      ]
+    },
+    "cadde-ispartakule": {
+      "name": "Cadde Ispartakule",
+      "tagline": "Beyond expectations — sea, lake and Kanal Istanbul views in Ispartakule.",
+      "shortDescription": "Cadde Ispartakule is a residential tower of 78 smart homes and 12 street-level shops in Ispartakule, commanding a rare combination of sea, lake and Kanal Istanbul views.",
+      "longDescription": "Rising in Ispartakule, one of Istanbul's most sought-after growth districts, Cadde Ispartakule brings together 78 smart residences and 12 street-level shops in an elegant tower with a rare panorama of the sea, the lake and the future Kanal Istanbul. Homes range from 2+1 residences of 106–109 m² gross to 3+1 residences of up to 150.61 m² gross, each fitted with a smart home system and planned around light, comfort and security. Private amenities include a fitness centre, sauna and Turkish bath, a car park with electric-vehicle charging, and landscaped gardens around an ornamental pond. The location offers fast access to the TEM and Northern Marmara motorways, Istanbul Airport and the planned Kanal Istanbul. The project is developed by MH Grup İnşaat, which brings more than 20 years of experience in residential and commercial real estate.",
+      "highlights": [
+        "78 residences and 12 street-level shops",
+        "Sea, lake and Kanal Istanbul views",
+        "2+1 (106.30–108.56 m² gross) and 3+1 (132.83–150.61 m² gross) residences",
+        "Smart home system in every residence",
+        "Fitness centre, sauna and Turkish bath",
+        "Car park with EV charging and landscaped gardens",
+        "Close to the TEM and Northern Marmara motorways and Istanbul Airport"
+      ],
+      "nearby": [
+        {
+          "place": "TEM Motorway"
+        },
+        {
+          "place": "Northern Marmara Motorway"
+        },
+        {
+          "place": "Istanbul Airport"
+        },
+        {
+          "place": "Kanal Istanbul"
+        },
+        {
+          "place": "Akbatı Mall"
+        },
+        {
+          "place": "Mall of Istanbul"
+        },
+        {
+          "place": "Bahçeşehir Pond"
+        },
+        {
+          "place": "Başakşehir City Hospital"
+        }
       ]
     },
     "lotus-koru-2": {

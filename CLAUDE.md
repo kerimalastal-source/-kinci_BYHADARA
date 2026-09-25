@@ -52,12 +52,16 @@
 
 تم استخراج كل المحتوى والصور من موقع Wix الأصلي "حضارة العقاري" عبر Wix Data API فعلياً — **ليست بيانات وهمية**.
 
-- `src/data/projects.ts`: 5 مشاريع حقيقية بكل تفاصيلها (slug, district, city, status, timeline, stats, gallery images):
+- `src/data/projects.ts`: مشاريع حقيقية بكل تفاصيلها (slug, district, city, status, timeline, stats, gallery images):
   1. `beylikduzu-living` (new-launch، تسليم 2028)
   2. `lotus-koru-2` (ongoing)
   3. `lotus-istanbul` (ongoing، مبنى متعدد الاستخدامات)
   4. `lotus-koru-1` (delivered)
   5. `marmara-haven-villa` (ongoing، فيلا خاصة)
+- **مشاريع مضافة من كتالوجات PDF (Google Drive → مجلد "حضارة العقاري/المشاريع")**: `diamond-marin` (Yıltaş × Lotus، تسليم نهاية 2027)، `lotus-manzara-guzelce` (32 فيلا، Lotus Yapı)، `cadde-ispartakule` (78 شقة + 12 محل، MH Grup). صورها مقصوصة من الكتالوجات ومستضافة محلياً في `public/images/projects/<slug>/` (مش على Wix). الكتالوجات ما فيها تواريخ تسليم غالباً — لا تخترع تواريخ؛ `timeline` اختياري.
+- **حقول المشروع الاختيارية** (`Project` في `projects.ts`): `developer`، `address`، `residences` (بطاقات الوحدات: layout/gross/net/garden/floors)، `amenities` (مفاتيح `AmenityKey` مع أيقونات في `components/amenityIcons.ts` وترجمات `projectDetail.amenities.*`)، ونص `nearby` (أماكن قريبة + وقت) داخل `projectsData.<slug>` بالقواميس. صفحة المشروع تعرض كل قسم فقط إذا بياناته موجودة، مع شريط أرقام رئيسية تحت الـ hero.
+- **أسماء المناطق المترجمة**: قاموس `places.<key>` (المفتاح من `placeKey()` في `src/utils/place.ts`) + `placeName()` من `src/i18n` — أي مشروع بمنطقة جديدة يحتاج مفتاحها بالأربع لغات وإلا يظهر الاسم التركي.
+- **عدد صور المعرض**: خلي عدد صور `gallery` (بدون الغلاف) = 2 أو 5 أو 8 أو 11... حتى ما تبقى صورة وحيدة بآخر صف على الكمبيوتر.
 - **الصور**: مستضافة على Wix مباشرة (`https://static.wixstatic.com/media/<mediaId>`)، مبنية عبر `wixImg()` في `src/utils/image.ts`. **هذه نقطة اعتماد على Wix خارجي** — لو حذفت الشركة الصور من حساب Wix الأصلي، الصور بتنكسر بالموقع الجديد. للـ production الحقيقي، الأفضل نزّل الصور ورفعها لـ CDN/استضافة خاصة بالموقع الجديد.
 - بيانات التواصل الحقيقية: الإيميل `info@byhadara.com`، الهاتف `+90 531 930 92 14` (`00905319309214` بأزرار WhatsApp/اتصال العائمة)، العنوان "Adnan Kahveci Mah., Beylikdüzü, Istanbul 34000, Türkiye".
 - `src/data/blog.ts`: 10 مقالات مدونة عقارية حقيقية المحتوى (استثمار عقاري بتركيا، الجنسية عبر الاستثمار، الحياة بتركيا، إجراءات الطابو، الضرائب والرسوم، التثمين العقاري...) بكل اللغات الأربعة، بصور توضيحية مولّدة بالذكاء الاصطناعي (Canva) ومستضافة على Wix (`mcp__Wix__UploadImageToWixSite`) للحصول على رابط دائم.

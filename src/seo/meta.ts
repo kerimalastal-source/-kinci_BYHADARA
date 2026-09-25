@@ -4,6 +4,7 @@ import { lookup, locales, defaultLocale, rtlLocales, type Locale } from "../i18n
 import { localizePath, routePath, type Route } from "./routes";
 import { projects } from "../data/projects";
 import { blogPosts } from "../data/blog";
+import { placeKey } from "../utils/place";
 
 export const DEFAULT_SITE_URL = "https://hadararealestate.com";
 
@@ -94,15 +95,6 @@ function clip(text: string, max = 160): string {
   return cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\-–—،]+$/, "") + "…";
 }
 
-/** "Beylikdüzü" -> "beylikduzu", the key used in the district dictionaries. */
-function placeKey(name: string): string {
-  return name
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/ı/g, "i")
-    .toLowerCase();
-}
-
 export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_URL): PageMeta {
   const tr = (key: string): string => String(lookup(locale, key) ?? key);
   const brand = tr("meta.siteNameFull");
@@ -128,8 +120,8 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
 
   if (project) {
     const content = lookup(locale, `projectsData.${project.slug}`) as { name: string; tagline: string; shortDescription: string; longDescription: string };
-    const district = tr(`propertyRequest.districts.${placeKey(project.district)}`);
-    const city = tr(`propertyRequest.cities.${placeKey(project.city)}`);
+    const district = String(lookup(locale, `places.${placeKey(project.district)}`) ?? project.district);
+    const city = String(lookup(locale, `places.${placeKey(project.city)}`) ?? project.city);
     title = tr("seo.projectTitle").replace("{name}", content.name).replace("{district}", district).replace("{city}", city);
     description = clip(content.shortDescription);
     image = img(project.coverImage.src);

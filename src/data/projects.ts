@@ -14,6 +14,37 @@ export interface ProjectStat {
   labelKey: string;
 }
 
+export type AmenityKey =
+  | "outdoorPool"
+  | "fitness"
+  | "sauna"
+  | "hamam"
+  | "smartHome"
+  | "indoorParking"
+  | "privateParking"
+  | "evCharging"
+  | "security"
+  | "landscaping"
+  | "privateGarden"
+  | "seaViewTerrace"
+  | "generator"
+  | "retail"
+  | "airConditioning";
+
+/** One residence type, shown as a card in the project's "Residences" section. */
+export interface Residence {
+  kind: "apartment" | "villa";
+  /** Room layout as sold in Türkiye, e.g. "3+1". */
+  layout: string;
+  /** Plan variant letter from the catalog, e.g. "A". */
+  variant?: string;
+  gross: string;
+  net?: string;
+  garden?: string;
+  floors?: number;
+  planTypes?: number;
+}
+
 export interface Project {
   slug: string;
   district: string;
@@ -22,10 +53,23 @@ export interface Project {
   /** Omitted when the developer has not published start/delivery dates. */
   timeline?: string;
   priority: number;
+  /** Developer brand(s), shown as a proper noun in every language. */
+  developer?: string;
+  /** Street address from the catalog, shown as written. */
+  address?: string;
   coverImage: ProjectImage;
   gallery: ProjectImage[];
   stats: ProjectStat[];
+  residences?: Residence[];
+  amenities?: AmenityKey[];
 }
+
+const img = (slug: string, file: string, width: number, height: number, alt: string): ProjectImage => ({
+  src: `/images/projects/${slug}/${file}.jpg`,
+  width,
+  height,
+  alt
+});
 
 export const projects: Project[] = [
   {
@@ -62,6 +106,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "new-launch",
     priority: 1,
+    developer: "Yıltaş × Lotus Yapı",
     coverImage: {
       src: "/images/projects/diamond-marin/aerial-sea-view.jpg",
       width: 1920,
@@ -87,7 +132,71 @@ export const projects: Project[] = [
       { value: "2", labelKey: "blocks" },
       { value: "3+1", labelKey: "layout" },
       { value: "117 – 143 m²", labelKey: "grossArea" }
-    ]
+    ],
+    residences: [{ kind: "apartment", layout: "3+1", gross: "117.60 – 143.08 m²", planTypes: 5 }],
+    amenities: ["outdoorPool", "fitness", "smartHome", "indoorParking", "security", "landscaping", "airConditioning", "generator"]
+  },
+  {
+    slug: "lotus-manzara-guzelce",
+    district: "Büyükçekmece",
+    city: "Istanbul",
+    status: "new-launch",
+    priority: 2,
+    developer: "Lotus Yapı Proje",
+    address: "Güzelce Mah., Hukukçular Cad. No:14, Büyükçekmece / İstanbul",
+    coverImage: img("lotus-manzara-guzelce", "villa-exterior", 1166, 640, "Lotus Manzara Güzelce detached villa exterior"),
+    gallery: [
+      img("lotus-manzara-guzelce", "aerial-villas", 1500, 640, "Lotus Manzara Güzelce aerial view of the villas"),
+      img("lotus-manzara-guzelce", "aerial-masterplan", 1335, 640, "Lotus Manzara Güzelce masterplan among the trees"),
+      img("lotus-manzara-guzelce", "villa-row", 1331, 640, "Lotus Manzara Güzelce villas with private gardens"),
+      img("lotus-manzara-guzelce", "street-view", 1360, 640, "Lotus Manzara Güzelce street view"),
+      img("lotus-manzara-guzelce", "private-parking", 1331, 640, "Lotus Manzara Güzelce private covered parking"),
+      img("lotus-manzara-guzelce", "living-room", 1286, 640, "Lotus Manzara Güzelce living room"),
+      img("lotus-manzara-guzelce", "master-bedroom", 1285, 640, "Lotus Manzara Güzelce master bedroom"),
+      img("lotus-manzara-guzelce", "kitchen", 1286, 640, "Lotus Manzara Güzelce kitchen"),
+      img("lotus-manzara-guzelce", "entrance-staircase", 1285, 640, "Lotus Manzara Güzelce entrance and staircase"),
+      img("lotus-manzara-guzelce", "bathroom", 1285, 640, "Lotus Manzara Güzelce bathroom"),
+      img("lotus-manzara-guzelce", "site-plan", 1160, 640, "Lotus Manzara Güzelce site plan from above")
+    ],
+    stats: [
+      { value: "32", labelKey: "villas" },
+      { value: "12,855 m²", labelKey: "landArea" },
+      { value: "6+2", labelKey: "villaLayout" },
+      { value: "343 m²", labelKey: "grossArea" }
+    ],
+    residences: [{ kind: "villa", layout: "6+2", gross: "343.15 m²", net: "298.43 m²", floors: 3 }],
+    amenities: ["seaViewTerrace", "privateGarden", "privateParking", "fitness", "sauna", "hamam", "security", "generator"]
+  },
+  {
+    slug: "cadde-ispartakule",
+    district: "Avcılar",
+    city: "Istanbul",
+    status: "new-launch",
+    priority: 3,
+    developer: "MH Grup İnşaat",
+    address: "Ispartakule, Eski İstanbul Cad. No:75, Avcılar / İstanbul",
+    coverImage: img("cadde-ispartakule", "tower-avenue", 1920, 1329, "Cadde Ispartakule residential tower and retail avenue"),
+    gallery: [
+      img("cadde-ispartakule", "garden-pond", 1920, 1329, "Cadde Ispartakule landscaped garden with pond"),
+      img("cadde-ispartakule", "retail-avenue", 1878, 1300, "Cadde Ispartakule street-level shops"),
+      img("cadde-ispartakule", "terrace-view", 1920, 1080, "Cadde Ispartakule terrace with sea and lake views"),
+      img("cadde-ispartakule", "tower-park", 1894, 1311, "Cadde Ispartakule tower from the park"),
+      img("cadde-ispartakule", "hamam", 1600, 1066, "Cadde Ispartakule Turkish bath"),
+      img("cadde-ispartakule", "fitness", 1920, 1280, "Cadde Ispartakule fitness center"),
+      img("cadde-ispartakule", "sauna", 939, 1408, "Cadde Ispartakule sauna"),
+      img("cadde-ispartakule", "smart-home", 1920, 1176, "Cadde Ispartakule smart home system")
+    ],
+    stats: [
+      { value: "78", labelKey: "apartments" },
+      { value: "12", labelKey: "shops" },
+      { value: "2+1 · 3+1", labelKey: "layout" },
+      { value: "106 – 151 m²", labelKey: "grossArea" }
+    ],
+    residences: [
+      { kind: "apartment", layout: "2+1", gross: "106.30 – 108.56 m²", net: "89.66 – 91.92 m²" },
+      { kind: "apartment", layout: "3+1", gross: "132.83 – 150.61 m²", net: "116.19 – 133.97 m²" }
+    ],
+    amenities: ["smartHome", "fitness", "sauna", "hamam", "indoorParking", "evCharging", "landscaping", "retail"]
   },
   {
     slug: "lotus-koru-2",
@@ -95,7 +204,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "ongoing",
     timeline: "2023 – 2025",
-    priority: 2,
+    priority: 4,
     coverImage: {
       src: wixImg("3510f9_d33ff747ef4d4e1f8bdd85a35fa6d2f5~mv2.jpg"),
       width: 1733,
@@ -120,7 +229,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "ongoing",
     timeline: "2022 – 2024",
-    priority: 3,
+    priority: 5,
     coverImage: {
       src: wixImg("3510f9_90db09f48bde445098eb3dd251a09da1~mv2.jpeg"),
       width: 1707,
@@ -147,7 +256,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "delivered",
     timeline: "2022 – 2024",
-    priority: 4,
+    priority: 6,
     coverImage: {
       src: wixImg("3510f9_0e541a01b4db4c90aaa21e2f1bcea687~mv2.jpeg"),
       width: 1600,
@@ -173,7 +282,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "ongoing",
     timeline: "2024 – 2025",
-    priority: 5,
+    priority: 7,
     coverImage: {
       src: wixImg("3510f9_b3632c1bd958497eaf5bdf465b99b197~mv2.jpeg"),
       width: 1200,
