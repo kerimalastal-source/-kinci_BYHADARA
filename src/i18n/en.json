@@ -219,6 +219,8 @@
     "amenitiesTitle": "Amenities & Services",
     "locationTitle": "Location & Connectivity",
     "developerLabel": "Developer",
+    "priceLabel": "Price",
+    "priceOnRequest": "On Request",
     "addressLabel": "Address",
     "grossAreaLabel": "Gross area",
     "netAreaLabel": "Net area",

@@ -234,6 +234,12 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   const gallery = [project.coverImage, ...project.gallery];
   const others = getSortedProjects().filter((p) => p.slug !== project.slug).slice(0, 3);
   const place = placeLine(project.district, project.city);
+  const price =
+    project.price === "on-request"
+      ? t("projectDetail.priceOnRequest")
+      : project.price
+        ? `<span dir="ltr">${project.price}</span>`
+        : "";
   const inquiryHref = `${link("/contact")}?project=${project.slug}`;
   const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("projectDetail.whatsappMessage", { name: content.name }))}`;
   const heroActions = `
@@ -255,6 +261,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
         <h1>${content.name}</h1>
         <p class="project-hero__tagline">${content.tagline}</p>
         <p class="project-hero__location">${place}${project.timeline ? ` · <span dir="ltr">${project.timeline}</span>` : ""}</p>
+        ${price ? `<p class="project-hero__price">${t("projectDetail.priceLabel")}: ${price}</p>` : ""}
         <div class="project-hero__actions">${heroActions}</div>
       </div>
     </section>
@@ -338,6 +345,14 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
                   ? `<div>
                 <dt>${t("projectDetail.availabilityLabel")}</dt>
                 <dd>${t(project.soldOut ? "projectDetail.soldOutLong" : "projectDetail.unitsAvailableLong")}</dd>
+              </div>`
+                  : ""
+              }
+              ${
+                price
+                  ? `<div>
+                <dt>${t("projectDetail.priceLabel")}</dt>
+                <dd>${price}</dd>
               </div>`
                   : ""
               }

@@ -219,6 +219,8 @@
     "amenitiesTitle": "Équipements & services",
     "locationTitle": "Emplacement & accès",
     "developerLabel": "Promoteur",
+    "priceLabel": "Prix",
+    "priceOnRequest": "Sur demande",
     "addressLabel": "Adresse",
     "grossAreaLabel": "Surface brute",
     "netAreaLabel": "Surface nette",

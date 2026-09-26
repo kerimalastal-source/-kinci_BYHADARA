@@ -219,6 +219,8 @@
     "amenitiesTitle": "المرافق والخدمات",
     "locationTitle": "الموقع وسهولة الوصول",
     "developerLabel": "المطوّر",
+    "priceLabel": "السعر",
+    "priceOnRequest": "عند الطلب",
     "addressLabel": "العنوان",
     "grossAreaLabel": "المساحة الإجمالية",
     "netAreaLabel": "المساحة الصافية",

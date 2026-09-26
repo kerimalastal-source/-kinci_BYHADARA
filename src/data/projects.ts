@@ -93,6 +93,8 @@ export interface Project {
   soldOut?: boolean;
   /** Developer brand(s), shown as a proper noun in every language. */
   developer?: string;
+  /** "on-request" shows "Price: On request"; any other value is shown as written (e.g. "$1,250,000"). */
+  price?: string;
   /** Street address from the catalog, shown as written. */
   address?: string;
   coverImage: ProjectImage;
@@ -413,6 +415,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "delivered",
     timeline: "2024 – 2025",
+    price: "on-request",
     priority: 9,
     coverImage: img("marmara-haven-villa", "exterior-facade", 1200, 1600, "Marmara Haven Villa exterior facade"),
     gallery: [

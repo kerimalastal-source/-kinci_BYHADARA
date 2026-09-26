@@ -219,6 +219,8 @@
     "amenitiesTitle": "Инфраструктура и сервис",
     "locationTitle": "Расположение и транспорт",
     "developerLabel": "Девелопер",
+    "priceLabel": "Цена",
+    "priceOnRequest": "По запросу",
     "addressLabel": "Адрес",
     "grossAreaLabel": "Общая площадь",
     "netAreaLabel": "Полезная площадь",
