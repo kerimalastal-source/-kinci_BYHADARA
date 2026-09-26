@@ -245,7 +245,10 @@
       "seaView": "Vue panoramique sur la mer",
       "rooftopTerrace": "Toit-terrasse avec cuisine",
       "masterSuite": "Suite parentale",
-      "equippedKitchen": "Cuisine entièrement équipée"
+      "equippedKitchen": "Cuisine entièrement équipée",
+      "playground": "Aire de jeux pour enfants",
+      "sportsCourt": "Terrain de sport",
+      "joggingTrack": "Parcours de marche et jogging"
     }
   },
   "citizenship": {
@@ -652,10 +655,10 @@
       "name": "Beylikdüzü Living",
       "tagline": "Un projet résidentiel nouvellement lancé, conçu pour un mode de vie moderne.",
       "shortDescription": "Construit sur un terrain de 21 000 m², Beylikdüzü Living propose une sélection résidentielle bien pensée, complétée par de nombreux équipements collectifs, pour un cadre de vie équilibré.",
-      "longDescription": "Construit sur un terrain de 21 000 m², Beylikdüzü Living propose une sélection résidentielle bien pensée, complétée par de nombreux équipements collectifs, pour un cadre de vie équilibré. La résidence compte 17 bâtiments proposant des 2+1 d'environ 100 à 109 m², des 3+1 de 134 à 167 m² et de vastes 4+1 de 194 à 197 m² bruts, nombre d'entre eux avec dressing, buanderie et grands balcons. Des options de paiement échelonné flexibles facilitent l'accès à la propriété, tandis que l'éligibilité à la citoyenneté turque par l'investissement immobilier ajoute une valeur à long terme. Avec une livraison prévue fin 2028, ce projet représente un choix solide, à la fois pour un cadre de vie confortable et pour un investissement durable à Istanbul.",
+      "longDescription": "Construit sur un terrain de 21 000 m², Beylikdüzü Living propose une sélection résidentielle bien pensée, complétée par de nombreux équipements collectifs, pour un cadre de vie équilibré. La résidence compte 18 bâtiments disposés autour de cours paysagères avec aire de jeux, terrain de sport et parcours de marche, proposant des 2+1 d'environ 100 à 109 m², des 3+1 de 134 à 167 m² et de vastes 4+1 de 194 à 197 m² bruts, nombre d'entre eux avec dressing, buanderie et grands balcons. Des options de paiement échelonné flexibles facilitent l'accès à la propriété, tandis que l'éligibilité à la citoyenneté turque par l'investissement immobilier ajoute une valeur à long terme. Avec une livraison prévue fin 2028, ce projet représente un choix solide, à la fois pour un cadre de vie confortable et pour un investissement durable à Istanbul.",
       "highlights": [
         "Terrain de 21 000 m² en plan d'ensemble",
-        "17 bâtiments résidentiels avec des 2+1, 3+1 et 4+1 d'environ 100 à 197 m² bruts",
+        "18 bâtiments résidentiels avec des 2+1, 3+1 et 4+1 d'environ 100 à 197 m² bruts",
         "Nombreux équipements collectifs",
         "Plans de paiement échelonné flexibles",
         "Éligible à la citoyenneté turque par investissement",

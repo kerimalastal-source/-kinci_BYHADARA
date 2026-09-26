@@ -55,7 +55,7 @@
 تم استخراج كل المحتوى والصور من موقع Wix الأصلي "حضارة العقاري" عبر Wix Data API فعلياً — **ليست بيانات وهمية**.
 
 - `src/data/projects.ts`: 8 مشاريع حقيقية بكل تفاصيلها (slug, district, city, status, timeline, stats, gallery images)، مرتبة حسب `priority`:
-  1. `beylikduzu-living` (new-launch، تسليم 2028) — هو نفسه مشروع **Lotus Yaşam** (Lotus Yapı Proje، 17 بلوك، 2+1/3+1/4+1)؛ كتالوجه "LOTUS YAŞAM SUNUM DOSYASI" بمجلد المشاريع
+  1. `beylikduzu-living` (new-launch، تسليم 2028) — هو نفسه مشروع **Lotus Yaşam** (Lotus Yapı Proje، 18 بلوك حسب مخطط الموقع: A1–A6، B1–B2، C1–C4، D1–D4، E، F؛ 2+1/3+1/4+1)؛ كتالوجه "LOTUS YAŞAM SUNUM DOSYASI" (مقسوم لأجزاء بمجلد المشاريع)، وصوره صارت محلية بـ `public/images/projects/beylikduzu-living/` بدل Wix
   2. `diamond-marin` (new-launch، Yıltaş × Lotus، Beylikdüzü، تسليم أواخر 2027)
   3. `lotus-manzara-guzelce` (delivered + `unitsAvailable`، 32 فيلا 6+2، Lotus Yapı، Büyükçekmece)
   4. `cadde-ispartakule` (delivered + `unitsAvailable`، 78 شقة + 12 محل، MH Grup، Avcılar/Ispartakule)
@@ -65,7 +65,7 @@
   8. `marmara-haven-villa` (delivered، فيلا خاصة — بدون شارة وحدات لأنها وحدة وحيدة)
 - **قاعدة الحالة**: أي مشروع انتهت مدته الزمنية (`timeline`) لازم يكون `delivered` (بيظهر "اكتمل الإنشاء" / "Completed")، وحسب المستخدم كل المشاريع المكتملة فيها وحدات متاحة للبيع (`unitsAvailable`). فلاتر صفحة المشاريع بتخفي أي حالة ما عليها مشاريع.
 - **مشاريع الكتالوجات (2–4)**: مضافة من ملفات PDF بـ Google Drive (مجلد "حضارة العقاري/المشاريع")؛ صورها مقصوصة من الكتالوجات ومستضافة محلياً في `public/images/projects/<slug>/` (مش على Wix). الكتالوجات غالباً ما فيها تواريخ تسليم — لا تخترع تواريخ؛ `timeline` اختياري.
-- **قيد تحميل ملفات Drive**: أداة Google Drive بتفشل ("session expired") مع ملفات PDF أكبر من ~5 ميغا (نجحت حتى 4.5 ميغا). `read_file_content` بيجيب النص بس (بدون صور). لملفات أكبر: اطلب من المستخدم نسخة مضغوطة (< 4 ميغا). ملفات معلّقة حالياً لهذا السبب: `Lotus Manzara Beylikdüzü.pdf` (مشروع جديد، نصه مقروء: 16 فيلا 5+2) و`LOTUS YAŞAM SUNUM DOSYASI` (صور لـ beylikduzu-living).
+- **قيد تحميل ملفات Drive**: `download_file_content` حدّه الرسمي 10 ميغا، وعملياً بيفشل ("session expired") مع PDF أكبر من ~5 ميغا. `read_file_content` بيجيب النص بس. **الحل المجرّب والناجح**: المستخدم يقسّم الملف بـ ilovepdf (Split PDF) لأجزاء < 4 ميغا ويرفعها كـ PDF منفصلة (مش zip) — الأجزاء بتنزل عادي وبتنجمع. ملف معلّق حالياً: `Lotus Manzara Beylikdüzü.pdf` (مشروع جديد، نصه مقروء: 16 فيلا 5+2) — بانتظار أجزائه.
 - **`unitsAvailable: true`**: مشروع منفّذ (أو قيد الإنشاء) لسا فيه وحدات للبيع — بيظهر شارة "وحدات متاحة" على البطاقة والـ hero وسطر "التوفر" بأهم المعلومات. حسب المستخدم: مشاريع الكتالوجات المنفّذة كلها فيها وحدات متاحة للبيع.
 - **المرافق المشتركة (`COMMUNITY` بـ `projects.ts`)**: حسب المستخدم، كل المشاريع ما عدا الفيلا فيها: مسابح منفصلة للرجال والنساء، جيم، مرآب مغلق، حراسة 24/7، كاميرات، نظافة داخلية، حدائق داخلية، مولد احتياطي، جودة بناء عالية — استخدم `community([...extras], {swap})` لأي مشروع جديد. الشبكة بتختار 3 أعمدة لما العدد 6/9 و4 غير هيك؛ الأفضل عدد المرافق يكون 9 أو 12.
 - **حقول المشروع الاختيارية** (`Project` في `projects.ts`): `developer`، `address`، `residences` (بطاقات الوحدات: layout/gross/net/garden/floors)، `amenities` (مفاتيح `AmenityKey` مع أيقونات في `components/amenityIcons.ts` وترجمات `projectDetail.amenities.*`)، ونص `nearby` (أماكن قريبة + وقت) داخل `projectsData.<slug>` بالقواميس. صفحة المشروع تعرض كل قسم فقط إذا بياناته موجودة، مع شريط أرقام رئيسية تحت الـ hero.

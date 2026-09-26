@@ -2,6 +2,10 @@ import type { AmenityKey } from "../data/projects";
 
 // 24×24 line icons drawn with currentColor, one per amenity.
 const PATHS: Record<AmenityKey, string> = {
+  playground: '<path d="M4 21V8l4-4 4 4v13M4 12h8"/><path d="M12 12c3 0 5.5 2 8 7M16 21h5"/><circle cx="8" cy="8.5" r="1"/>',
+  sportsCourt: '<rect x="2.5" y="5" width="19" height="14" rx="1.5"/><path d="M12 5v14"/><circle cx="12" cy="12" r="2.8"/><path d="M2.5 9.5h3v5h-3M21.5 9.5h-3v5h3"/>',
+  joggingTrack:
+    '<circle cx="14" cy="4" r="1.8"/><path d="m9 21 2.5-5.5 3 2.5V22M6 11.5 9 8l4 1.5 2.5 3 3 .5"/><path d="m11.5 15.5 1.5-5.5"/>',
   separatePools:
     '<circle cx="7" cy="4.5" r="1.6"/><circle cx="17" cy="4.5" r="1.6"/><path d="M7 6.5v5M4.8 8.5h4.4M17 6.5v5M15 14l2-2.5 2 2.5"/><path d="M12 3v11"/><path d="M2 17.5c1.7 0 1.7-1.2 3.3-1.2s1.7 1.2 3.4 1.2 1.7-1.2 3.3-1.2 1.7 1.2 3.4 1.2 1.7-1.2 3.3-1.2 1.6 1.2 3.3 1.2"/><path d="M2 21c1.7 0 1.7-1.2 3.3-1.2S7 21 8.7 21s1.7-1.2 3.3-1.2 1.7 1.2 3.4 1.2 1.7-1.2 3.3-1.2S20.3 21 22 21"/>',
   cctv: '<path d="M3.5 7.5 17 3.5l1.6 5.4-13.5 4z"/><path d="m18.6 8.9 2.4-.7M10.5 11.4l1.2 3.6H6.5M6.5 12.5V20M3.5 20h6"/>',

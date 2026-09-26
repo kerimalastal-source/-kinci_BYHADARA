@@ -16,6 +16,9 @@ export interface ProjectStat {
 
 export type AmenityKey =
   | "separatePools"
+  | "playground"
+  | "sportsCourt"
+  | "joggingTrack"
   | "cctv"
   | "cleaning"
   | "buildQuality"
@@ -112,26 +115,22 @@ export const projects: Project[] = [
     timeline: "2026 – 2028",
     priority: 0,
     developer: "Lotus Yapı Proje",
-    coverImage: {
-      src: wixImg("3510f9_6cd2110b3f8148e7a91be907edf8a395~mv2.jpg"),
-      width: 3000,
-      height: 1688,
-      alt: "Beylikduzu Living exterior render"
-    },
+    coverImage: img("beylikduzu-living", "courtyard-gardens", 1193, 671, "Beylikdüzü Living landscaped courtyard between the residential blocks"),
     gallery: [
-      { src: wixImg("3510f9_98b186e70a2a458c83ea36c8ecf76110~mv2.jpg"), width: 3000, height: 1688, alt: "Beylikduzu Living facade" },
-      { src: wixImg("3510f9_a5e66c9abff646e78644e85c5f864074~mv2.jpg"), width: 3000, height: 1688, alt: "Beylikduzu Living exterior angle" },
-      { src: wixImg("3510f9_93e972a0e25c41c99258e04a712620c4~mv2.jpg"), width: 3000, height: 1696, alt: "Beylikduzu Living building view" },
-      { src: wixImg("3510f9_46fa5d6cf46c46b2a51a61a859bb4d53~mv2.jpg"), width: 3000, height: 1687, alt: "Beylikduzu Living balcony view" },
-      { src: wixImg("3510f9_b760238922074b138f2d8e9f06dfc3e4~mv2.jpg"), width: 3000, height: 1938, alt: "Beylikduzu Living evening render" },
-      { src: wixImg("3510f9_5d4e8280e0c84c8e8d5d4eb541b399ab~mv2.png"), width: 2800, height: 2200, alt: "Beylikduzu Living living room" },
-      { src: wixImg("3510f9_2fb2a0e27bfe46c6a3e0d2fef0487966~mv2.png"), width: 2800, height: 2200, alt: "Beylikduzu Living kitchen" },
-      { src: wixImg("3510f9_138f38664e7149c692279cdef485dfae~mv2.png"), width: 3000, height: 2600, alt: "Beylikduzu Living bathroom" }
+      img("beylikduzu-living", "street-facade", 1193, 612, "Beylikdüzü Living residential blocks from the street"),
+      img("beylikduzu-living", "garden-terrace", 1193, 671, "Beylikdüzü Living ground-floor garden terrace"),
+      img("beylikduzu-living", "living-room", 1191, 670, "Beylikdüzü Living living room"),
+      img("beylikduzu-living", "living-room-2", 1191, 670, "Beylikdüzü Living living room with media wall"),
+      img("beylikduzu-living", "entrance-hall", 1191, 670, "Beylikdüzü Living entrance hall"),
+      img("beylikduzu-living", "kitchen", 1191, 670, "Beylikdüzü Living kitchen and dining area"),
+      img("beylikduzu-living", "bathroom", 972, 843, "Beylikdüzü Living bathroom"),
+      img("beylikduzu-living", "site-plan", 1202, 864, "Beylikdüzü Living site plan with blocks A to F"),
+      img("beylikduzu-living", "aerial-view", 1193, 671, "Beylikdüzü Living aerial view towards the sea")
     ],
     stats: [
       { value: "21,000 m²", labelKey: "landArea" },
       { value: "2028", labelKey: "delivery" },
-      { value: "17", labelKey: "blocks" },
+      { value: "18", labelKey: "blocks" },
       { value: "2+1 · 3+1 · 4+1", labelKey: "layout" }
     ],
     residences: [
@@ -139,7 +138,7 @@ export const projects: Project[] = [
       { kind: "apartment", layout: "3+1", gross: "134 – 167 m²" },
       { kind: "apartment", layout: "4+1", gross: "194 – 197 m²" }
     ],
-    amenities: community()
+    amenities: community(["playground", "sportsCourt", "joggingTrack"])
   },
   {
     slug: "diamond-marin",
