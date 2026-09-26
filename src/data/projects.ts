@@ -95,6 +95,8 @@ export interface Project {
   developer?: string;
   /** "on-request" shows "Price: On request"; any other value is shown as written (e.g. "$1,250,000"). */
   price?: string;
+  /** Ad landing page: adds an "I'm interested" button to the hero. */
+  landing?: boolean;
   /** Street address from the catalog, shown as written. */
   address?: string;
   coverImage: ProjectImage;
@@ -416,6 +418,7 @@ export const projects: Project[] = [
     status: "delivered",
     timeline: "2024 – 2025",
     price: "on-request",
+    landing: true,
     priority: 9,
     coverImage: img("marmara-haven-villa", "exterior-facade", 1200, 1600, "Marmara Haven Villa exterior facade"),
     gallery: [

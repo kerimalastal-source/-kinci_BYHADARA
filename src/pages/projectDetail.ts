@@ -242,7 +242,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
         : "";
   const inquiryHref = `${link("/contact")}?project=${project.slug}`;
   const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("projectDetail.whatsappMessage", { name: content.name }))}`;
-  const heroActions = `
+  const contactActions = `
           <a class="btn btn--primary" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a>
           <a class="btn btn--whatsapp" href="${whatsappHref}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("projectDetail.whatsappButton")}</a>`;
 
@@ -262,7 +262,11 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
         <p class="project-hero__tagline">${content.tagline}</p>
         <p class="project-hero__location">${place}${project.timeline ? ` · <span dir="ltr">${project.timeline}</span>` : ""}</p>
         ${price ? `<p class="project-hero__price">${t("projectDetail.priceLabel")}: ${price}</p>` : ""}
-        <div class="project-hero__actions">${heroActions}</div>
+        ${
+          project.landing
+            ? `<div class="project-hero__actions"><a class="btn btn--primary" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a></div>`
+            : ""
+        }
       </div>
     </section>
 
@@ -282,7 +286,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
       </div>
     </section>
 
-    ${renderVideo(project, content, heroActions)}
+    ${renderVideo(project, content, contactActions)}
 
     <section class="section project-detail">
       <div class="container project-detail__grid">

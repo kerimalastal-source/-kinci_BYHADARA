@@ -863,13 +863,11 @@
   }
 
   /* Hero buttons stack at full, equal width. */
-  .hero__actions,
-  .project-hero__actions {
+  .hero__actions {
     flex-direction: column;
   }
 
-  .hero__actions .btn,
-  .project-hero__actions .btn {
+  .hero__actions .btn {
     justify-content: center;
   }
 
