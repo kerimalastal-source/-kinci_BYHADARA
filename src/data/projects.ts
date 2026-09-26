@@ -369,7 +369,7 @@ export const projects: Project[] = [
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "delivered",
-    unitsAvailable: true,
+    soldOut: true,
     timeline: "2022 – 2024",
     priority: 7,
     coverImage: img("lotus-istanbul", "mixed-use-development", 1707, 1280, "Lotus Istanbul mixed-use development"),

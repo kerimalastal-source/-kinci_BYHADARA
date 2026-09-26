@@ -63,7 +63,7 @@
   5. `lotus-yali` (delivered + `unitsAvailable`، 48 شقة 3+1 و5+2 دوبلكس في 8 بلوكات A–H على 8,600 م²، Lotus Yapı، Büyükçekmece/Mimarsinan؛ مسابح داخلية منفصلة — صوره الأربعة بعتها المستخدم مباشرة لأنه أجزاء الكتالوج كانت كبيرة، ممكن تنضاف صور داخلية لاحقاً)
   6. `cadde-ispartakule` (delivered + `unitsAvailable`، 78 شقة + 12 محل، MH Grup، Avcılar/Ispartakule)
   7. `lotus-koru-2` (delivered + `unitsAvailable`)
-  8. `lotus-istanbul` (delivered + `unitsAvailable`، مبنى متعدد الاستخدامات)
+  8. `lotus-istanbul` (delivered + `soldOut` — تم البيع بالكامل حسب المستخدم 2026-09-26، مبنى متعدد الاستخدامات)
   9. `lotus-koru-1` (delivered + `soldOut` — تم البيع بالكامل حسب المستخدم)
   10. `marmara-haven-villa` (delivered، فيلا خاصة — بدون شارة وحدات لأنها وحدة وحيدة؛ أرض 637 م²، 576.63 م² إجمالي على 4 طوابق، 5 غرف نوم و7 حمّامات، مصعد، منزل ذكي، تدفئة أرضية، مدفأة، بئر 220 م — التفاصيل من المستخدم مباشرة، ومعروضة طابق بطابق عبر `floorPlan`)
 - **قاعدة الحالة**: أي مشروع انتهت مدته الزمنية (`timeline`) لازم يكون `delivered` (بيظهر "اكتمل الإنشاء" / "Completed")، وحسب المستخدم كل المشاريع المكتملة فيها وحدات متاحة للبيع (`unitsAvailable`). فلاتر صفحة المشاريع بتخفي أي حالة ما عليها مشاريع.
