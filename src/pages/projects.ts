@@ -1,8 +1,8 @@
 import { t, link } from "../i18n";
-import { getSortedProjects, type ProjectStatus } from "../data/projects";
+import { getSortedProjects, type Project, type ProjectStatus } from "../data/projects";
 import { renderProjectCard } from "../components/projectCard";
 
-type FilterKey = "all" | ProjectStatus;
+type FilterKey = "all" | "available" | ProjectStatus;
 
 export function renderProjects(el: HTMLElement): void {
   const allProjects = getSortedProjects();
@@ -11,10 +11,13 @@ export function renderProjects(el: HTMLElement): void {
     { key: "all", labelKey: "projects.filterAll" },
     { key: "new-launch", labelKey: "projects.filterNewLaunch" },
     { key: "ongoing", labelKey: "projects.filterOngoing" },
-    { key: "delivered", labelKey: "projects.filterDelivered" }
+    { key: "delivered", labelKey: "projects.filterDelivered" },
+    { key: "available", labelKey: "projects.filterAvailable" }
   ];
-  // Hide status filters that no project currently matches.
-  const filters = allFilters.filter((f) => f.key === "all" || allProjects.some((p) => p.status === f.key));
+  const matches = (p: Project, key: FilterKey) =>
+    key === "all" || (key === "available" ? Boolean(p.unitsAvailable) : p.status === key);
+  // Hide filters that no project currently matches.
+  const filters = allFilters.filter((f) => allProjects.some((p) => matches(p, f.key)));
 
   el.innerHTML = `
     <section class="page-hero">
@@ -64,7 +67,7 @@ export function renderProjects(el: HTMLElement): void {
     filterBar.querySelectorAll(".filter-chip").forEach((c) => c.classList.remove("is-active"));
     btn.classList.add("is-active");
 
-    const filtered = key === "all" ? allProjects : allProjects.filter((p) => p.status === key);
+    const filtered = allProjects.filter((p) => matches(p, key));
     grid.innerHTML = filtered.map((p) => renderProjectCard(p)).join("");
     empty.hidden = filtered.length > 0;
   });

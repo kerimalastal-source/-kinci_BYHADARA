@@ -35,6 +35,7 @@ export function renderProjectCard(project: Project): string {
         <span class="project-card__status">
           <span class="badge badge--${project.status}">${projectStatusLabel(project.status)}</span>
           ${project.unitsAvailable ? `<span class="badge badge--available">${t("common.unitsAvailable")}</span>` : ""}
+          ${project.soldOut ? `<span class="badge badge--sold-out">${t("common.soldOut")}</span>` : ""}
         </span>
       </a>
       <div class="project-card__body">

@@ -69,6 +69,8 @@ export interface Project {
   priority: number;
   /** Completed or ongoing project that still has units for sale — shows an extra badge. */
   unitsAvailable?: boolean;
+  /** Every unit has been sold — shows a "Sold Out" badge instead. */
+  soldOut?: boolean;
   /** Developer brand(s), shown as a proper noun in every language. */
   developer?: string;
   /** Street address from the catalog, shown as written. */
@@ -346,7 +348,7 @@ export const projects: Project[] = [
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "delivered",
-    unitsAvailable: true,
+    soldOut: true,
     timeline: "2022 – 2024",
     priority: 7,
     coverImage: {

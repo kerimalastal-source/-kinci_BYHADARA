@@ -102,6 +102,20 @@
   color: var(--color-primary);
 }
 
+.badge--sold-out {
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--color-muted);
+}
+
+.badge--sold-out::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-muted);
+}
+
 .badge--available::before {
   content: "";
   width: 7px;
@@ -574,31 +588,62 @@
 
 .project-stats__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   margin: 0;
 }
 
+/* Icon sits beside the value + label; it's inside <dt> (keeps the <dl> valid)
+   and positioned against the item. */
 .project-stats__item {
+  --stat-pad: var(--space-md);
+  --stat-icon: 46px;
+  position: relative;
   display: flex;
   flex-direction: column-reverse;
+  justify-content: center;
   gap: 0.35rem;
-  padding: var(--space-md) var(--space-md);
+  padding: var(--space-md) var(--stat-pad);
+  padding-inline-start: calc(var(--stat-pad) + var(--stat-icon) + 0.9rem);
   border-inline-start: 1px solid var(--color-border);
 }
 
 .project-stats__item:first-child {
+  --stat-pad: 0px;
   border-inline-start: 0;
-  padding-inline-start: 0;
+}
+
+.project-stats__icon {
+  position: absolute;
+  inset-inline-start: var(--stat-pad);
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--stat-icon);
+  height: var(--stat-icon);
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  color: var(--color-accent-dark);
+  transition: background var(--transition), color var(--transition);
+}
+
+@media (hover: hover) {
+  .project-stats__item:hover .project-stats__icon {
+    background: var(--color-accent);
+    color: var(--color-primary-dark);
+  }
 }
 
 .project-stats__item dd {
   margin: 0;
-  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-size: clamp(1.3rem, 2vw, 1.65rem);
   font-weight: 700;
   color: var(--color-primary);
   letter-spacing: -0.01em;
   line-height: 1.15;
   text-align: start;
+  white-space: nowrap;
 }
 
 [dir="rtl"] .project-stats__item dd {
@@ -612,6 +657,15 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-accent-dark);
+}
+
+/* Five or more figures: tighter so values stay on one line. */
+.project-stats__grid:has(> :nth-child(5)) .project-stats__item {
+  --stat-icon: 40px;
+}
+
+.project-stats__grid:has(> :nth-child(5)) .project-stats__item dd {
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
 }
 
 /* Residences */
@@ -833,13 +887,33 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Phones: icon stacks above the figure. */
   .project-stats__item {
-    padding: var(--space-sm) var(--space-sm);
+    --stat-pad: var(--space-sm);
+    padding: var(--space-sm);
+    padding-top: calc(var(--space-sm) + var(--stat-icon) + 0.6rem);
+    padding-inline-start: var(--stat-pad);
+    /* column-reverse: flex-end is the top, so figures line up when a label wraps */
+    justify-content: flex-end;
+  }
+
+  .project-stats__item,
+  .project-stats__grid:has(> :nth-child(5)) .project-stats__item {
+    --stat-icon: 38px;
+  }
+
+  .project-stats__icon {
+    top: var(--space-sm);
+    transform: none;
   }
 
   .project-stats__item:nth-child(odd) {
+    --stat-pad: 0px;
     border-inline-start: 0;
-    padding-inline-start: 0;
+  }
+
+  .project-stats__item:nth-child(even) {
+    border-inline-start: 1px solid var(--color-border);
   }
 
   .project-stats__item:nth-child(n + 3) {

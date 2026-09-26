@@ -2,6 +2,7 @@ import { t, getProjectContent, link, placeLine } from "../i18n";
 import { getProjectBySlug, getSortedProjects, type Project, type Residence } from "../data/projects";
 import { renderProjectCard, projectStatusLabel } from "../components/projectCard";
 import { amenityIcon } from "../components/amenityIcons";
+import { statIcon } from "../components/statIcons";
 import { openLightbox } from "../components/lightbox";
 import { initStatCounters } from "../components/statCounter";
 import { initScrollReveal } from "../components/scrollReveal";
@@ -132,6 +133,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
         <div class="project-hero__badges">
           <span class="badge badge--${project.status}">${projectStatusLabel(project.status)}</span>
           ${project.unitsAvailable ? `<span class="badge badge--available">${t("common.unitsAvailable")}</span>` : ""}
+          ${project.soldOut ? `<span class="badge badge--sold-out">${t("common.soldOut")}</span>` : ""}
         </div>
         <h1>${content.name}</h1>
         <p class="project-hero__tagline">${content.tagline}</p>
@@ -146,7 +148,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
             .map(
               (s) => `
             <div class="project-stats__item${s.value.length > 12 ? " project-stats__item--long" : ""}">
-              <dt>${t(`common.statLabels.${s.labelKey}`)}</dt>
+              <dt><span class="project-stats__icon">${statIcon(s.labelKey)}</span>${t(`common.statLabels.${s.labelKey}`)}</dt>
               <dd dir="ltr"${countsUp(s.value, s.labelKey) ? ` data-stat-value="${s.value}"` : ""}>${s.value}</dd>
             </div>`
             )
@@ -210,10 +212,10 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
                 <dd>${projectStatusLabel(project.status)}</dd>
               </div>
               ${
-                project.unitsAvailable
+                project.unitsAvailable || project.soldOut
                   ? `<div>
                 <dt>${t("projectDetail.availabilityLabel")}</dt>
-                <dd>${t("projectDetail.unitsAvailableLong")}</dd>
+                <dd>${t(project.soldOut ? "projectDetail.soldOutLong" : "projectDetail.unitsAvailableLong")}</dd>
               </div>`
                   : ""
               }
