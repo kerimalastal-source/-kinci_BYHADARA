@@ -48,6 +48,7 @@
 - أغلب الـ layout يعتمد على **CSS logical properties** (`inset-inline-*`, `padding-inline-*`, `margin-inline-*`, `text-align: start/end`) فبينقلب أوتوماتيكياً مع `[dir="rtl"]`.
 - `src/styles/rtl.css`: استثناءات فقط للعناصر الحساسة للاتجاه (أيقونات السهم بالـ back-link، أسهم الـ lightbox) عبر `transform: scaleX(-1)`.
 - **مشكلة Bidi معروفة وتم حلها**: أي نص فيه أرقام إنجليزية (أرقام هاتف، مدى سنوات مثل "2022 – 2024"، قيم إحصائيات) يظهر معكوس بصرياً داخل سياق RTL. **الحل المطبّق**: إضافة `dir="ltr"` على كل عنصر يعرض رقم هاتف/إيميل/`project.timeline`/`stat.value`/سعر. لو أضفت رقم أو مدى تاريخ جديد بمكان جديد، **لازم** تعمل نفس الشي.
+- **ممنوع التمرير الأفقي (حماية عامة، 2026-09-26)**: المستخدم شاف صفحة الجنسية على الآيفون "بتروح يمين وشمال" — `base.css` فيه `overflow-x: clip` على `html, body` (مع fallback `hidden` على body لـ Safari القديم) + `text-size-adjust: 100%` + `overflow-wrap: break-word`. **لا تستبدل `clip` بـ `hidden` على الاتنين** (بيحوّل body لـ scroll container وبيكسر الهيدر الـ sticky). وشبكات الفورم (`.form-row`) لازم `minmax(0, 1fr)` مش `1fr` — خيار طويل بـ `<select>` (بالروسي) كان يعرّض الصفحة. بيئة Claude فيها Chromium بس (ما في WebKit/Safari)، فمشاكل الآيفون ممكن ما تبين بالاختبار.
 - **درس مستفاد**: أي خاصية CSS فيزيائية (`left`/`right` بدل `inset-inline-start/end`) على عنصر ظاهر بكل الصفحات (متل `.skip-link`) ممكن تسبب horizontal overflow بالعربي RTL من دون ما تنلاحظ بصرياً بسهولة — تأكد دايماً إنه `document.documentElement.scrollWidth` ما يتجاوز عرض الشاشة بعد أي تعديل.
 
 ## 4. البيانات الحقيقية (من Wix)

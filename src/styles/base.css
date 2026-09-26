@@ -6,10 +6,27 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* The page never scrolls sideways on phones, whatever a single element does.
+   "clip" (unlike "hidden") doesn't turn body into a scroll container, so the
+   sticky header keeps working; older Safari falls back to hidden on body. */
+html,
+body {
+  overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+  body {
+    overflow-x: hidden;
+  }
 }
 
 body {
   margin: 0;
+  overflow-wrap: break-word;
   font-family: var(--font-body);
   color: var(--color-ink);
   background: var(--color-bg);
