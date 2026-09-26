@@ -63,6 +63,13 @@ export interface Residence {
 }
 
 /** Gross/net area of one level; its name and features live in projectsData.<slug>.floorPlan (same order). */
+export interface ProjectVideo {
+  youtubeId: string;
+  /** Shorts and phone footage (9:16). */
+  vertical?: boolean;
+  poster: ProjectImage;
+}
+
 export interface FloorLevel {
   gross: string;
   net: string;
@@ -94,6 +101,8 @@ export interface Project {
   residences?: Residence[];
   /** Level-by-level breakdown, shown as a "Floor by Floor" section. */
   floorPlan?: FloorLevel[];
+  /** Video tour hosted on YouTube; `poster` shows until the visitor presses play. */
+  video?: ProjectVideo;
   amenities?: AmenityKey[];
 }
 
@@ -424,6 +433,11 @@ export const projects: Project[] = [
       { value: "7", labelKey: "bathrooms" },
       { value: "4", labelKey: "floors" }
     ],
+    video: {
+      youtubeId: "kvru16nD3a4",
+      vertical: true,
+      poster: img("marmara-haven-villa", "private-pool", 1500, 2000, "Marmara Haven Villa video tour")
+    },
     floorPlan: [
       { gross: "138.62 m²", net: "105.40 m²", image: img("marmara-haven-villa", "side-view", 1500, 2000, "Marmara Haven Villa basement level") },
       { gross: "223.37 m²", net: "108.60 m²", image: img("marmara-haven-villa", "living-room", 1500, 2000, "Marmara Haven Villa ground floor living room") },

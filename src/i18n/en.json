@@ -225,6 +225,8 @@
     "floorsLabel": "Floors",
     "planTypesLabel": "Floor plans",
     "floorPlanTitle": "Floor by Floor",
+    "videoEyebrow": "Video Tour",
+    "videoPlay": "Play video",
     "residenceApartment": "{layout} Apartment",
     "residenceVilla": "{layout} Villa",
     "residenceVariant": "Type {variant}",
@@ -1003,7 +1005,9 @@
           "place": "Marmara Sea swimming coast",
           "time": "5 min"
         }
-      ]
+      ],
+      "videoTitle": "Step Inside Marmara Haven Villa",
+      "videoText": "See the villa in motion — its spaces, its finishes and its view over the Marmara Sea — then arrange your private viewing."
     }
   },
   "blog": {

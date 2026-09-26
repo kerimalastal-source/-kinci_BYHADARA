@@ -225,6 +225,8 @@
     "floorsLabel": "Niveaux",
     "planTypesLabel": "Plans",
     "floorPlanTitle": "Niveau par niveau",
+    "videoEyebrow": "Visite vidéo",
+    "videoPlay": "Lire la vidéo",
     "residenceApartment": "Appartement {layout}",
     "residenceVilla": "Villa {layout}",
     "residenceVariant": "Type {variant}",
@@ -1003,7 +1005,9 @@
           "place": "Plage de baignade de la mer de Marmara",
           "time": "5 min"
         }
-      ]
+      ],
+      "videoTitle": "Entrez dans Marmara Haven Villa",
+      "videoText": "Découvrez la villa en vidéo — ses espaces, ses finitions et sa vue sur la mer de Marmara — puis organisez votre visite privée."
     }
   },
   "blog": {

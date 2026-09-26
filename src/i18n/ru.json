@@ -225,6 +225,8 @@
     "floorsLabel": "Этажей",
     "planTypesLabel": "Вариантов планировок",
     "floorPlanTitle": "По этажам",
+    "videoEyebrow": "Видеотур",
+    "videoPlay": "Смотреть видео",
     "residenceApartment": "Квартира {layout}",
     "residenceVilla": "Вилла {layout}",
     "residenceVariant": "Тип {variant}",
@@ -1003,7 +1005,9 @@
           "place": "Пляж Мраморного моря для купания",
           "time": "5 мин"
         }
-      ]
+      ],
+      "videoTitle": "Загляните внутрь Marmara Haven Villa",
+      "videoText": "Посмотрите виллу на видео — её пространства, отделку и вид на Мраморное море, — а затем договоритесь о личном просмотре."
     }
   },
   "blog": {

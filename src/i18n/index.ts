@@ -100,6 +100,8 @@ export function getProjectContent(slug: string) {
     highlights: string[];
     nearby?: NearbyPlace[];
     floorPlan?: { name: string; features: string[] }[];
+    videoTitle?: string;
+    videoText?: string;
   }>(`projectsData.${slug}`);
 }
 

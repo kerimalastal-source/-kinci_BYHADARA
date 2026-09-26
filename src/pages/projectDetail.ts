@@ -104,6 +104,49 @@ function renderFloorPlan(project: Project, levels: ReturnType<typeof getProjectC
     </section>`;
 }
 
+const PLAY_ICON =
+  '<svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>';
+
+/**
+ * Video tour. Only the poster loads with the page; the YouTube player replaces it on
+ * the first tap, which keeps the landing page fast on phones.
+ */
+function renderVideo(project: Project, content: ReturnType<typeof getProjectContent>, actions: string): string {
+  const video = project.video;
+  if (!video) return "";
+  return `
+    <section class="section project-video" aria-labelledby="project-video-title">
+      <div class="container project-video__grid${video.vertical ? " project-video__grid--vertical" : ""}">
+        <div class="project-video__head">
+          <p class="eyebrow">${t("projectDetail.videoEyebrow")}</p>
+          <h2 id="project-video-title">${content.videoTitle ?? content.name}</h2>
+          ${content.videoText ? `<p class="project-video__text">${content.videoText}</p>` : ""}
+        </div>
+        <div class="project-video__frame">
+          <button type="button" class="video-facade" data-youtube-id="${video.youtubeId}" aria-label="${t("projectDetail.videoPlay")}">
+            <img src="${video.poster.src}" alt="${video.poster.alt}" width="${video.poster.width}" height="${video.poster.height}" loading="lazy" />
+            <span class="video-facade__play">${PLAY_ICON}</span>
+            <span class="video-facade__label">${t("projectDetail.videoPlay")}</span>
+          </button>
+        </div>
+        <div class="project-video__actions">${actions}</div>
+      </div>
+    </section>`;
+}
+
+function initVideo(el: HTMLElement, title: string): void {
+  el.querySelectorAll<HTMLButtonElement>(".video-facade").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.youtubeId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
+      iframe.title = title;
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      iframe.allowFullscreen = true;
+      btn.replaceWith(iframe);
+    });
+  });
+}
+
 function renderAmenities(project: Project): string {
   if (!project.amenities?.length) return "";
   // Three columns when that fills every row (6, 9…) and four doesn't.
@@ -163,6 +206,9 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   const place = placeLine(project.district, project.city);
   const inquiryHref = `${link("/contact")}?project=${project.slug}`;
   const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("projectDetail.whatsappMessage", { name: content.name }))}`;
+  const heroActions = `
+          <a class="btn btn--primary" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a>
+          <a class="btn btn--whatsapp" href="${whatsappHref}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("projectDetail.whatsappButton")}</a>`;
 
   el.innerHTML = `
     <section class="project-hero" style="background-image: linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88)), url('${project.coverImage.src}')">
@@ -179,10 +225,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
         <h1>${content.name}</h1>
         <p class="project-hero__tagline">${content.tagline}</p>
         <p class="project-hero__location">${place}${project.timeline ? ` · <span dir="ltr">${project.timeline}</span>` : ""}</p>
-        <div class="project-hero__actions">
-          <a class="btn btn--primary" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a>
-          <a class="btn btn--whatsapp" href="${whatsappHref}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("projectDetail.whatsappButton")}</a>
-        </div>
+        <div class="project-hero__actions">${heroActions}</div>
       </div>
     </section>
 
@@ -201,6 +244,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
         </dl>
       </div>
     </section>
+
+    ${renderVideo(project, content, heroActions)}
 
     <section class="section project-detail">
       <div class="container project-detail__grid">
@@ -308,6 +353,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
 
   initStatCounters(el);
   initScrollReveal(el);
+  initVideo(el, content.name);
 
   const floorImages = (project.floorPlan ?? []).flatMap((f) => (f.image ? [f.image] : []));
   el.querySelectorAll<HTMLButtonElement>(".floor-card__media").forEach((btn) => {

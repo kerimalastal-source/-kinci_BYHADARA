@@ -225,6 +225,8 @@
     "floorsLabel": "عدد الطوابق",
     "planTypesLabel": "نماذج المخططات",
     "floorPlanTitle": "توزيع الطوابق",
+    "videoEyebrow": "جولة بالفيديو",
+    "videoPlay": "تشغيل الفيديو",
     "residenceApartment": "شقة {layout}",
     "residenceVilla": "فيلا {layout}",
     "residenceVariant": "النموذج {variant}",
@@ -1003,7 +1005,9 @@
           "place": "ساحل بحر مرمرة المخصص للسباحة",
           "time": "5 دقائق"
         }
-      ]
+      ],
+      "videoTitle": "ادخل إلى فيلا مرمرة هيفن",
+      "videoText": "شاهد الفيلا بالفيديو، بمساحاتها وتشطيباتها وإطلالتها على بحر مرمرة، ثم احجز موعد معاينتك الخاصة."
     }
   },
   "blog": {
