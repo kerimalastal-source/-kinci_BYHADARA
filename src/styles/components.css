@@ -1473,6 +1473,11 @@
   color: rgba(247, 244, 236, 0.82);
 }
 
+.cta-card__actions {
+  display: grid;
+  gap: 0.6rem;
+}
+
 .fact-list {
   display: grid;
   gap: 0.75rem;
@@ -1586,6 +1591,83 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+}
+
+/* Project the visitor is enquiring about (from "I'm interested" on a project page). */
+.inquiry-project {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.75rem;
+  padding-inline-end: var(--space-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 30px -18px rgba(15, 43, 33, 0.35);
+}
+
+.inquiry-project[hidden] {
+  display: none;
+}
+
+.inquiry-project img {
+  flex: none;
+  width: 96px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.inquiry-project__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.inquiry-project__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+}
+
+.inquiry-project__name {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  line-height: 1.3;
+}
+
+.inquiry-project__place {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.inquiry-project__link {
+  flex: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .inquiry-project {
+    flex-wrap: wrap;
+  }
+
+  .inquiry-project img {
+    width: 80px;
+    height: 64px;
+  }
+
+  .inquiry-project__link {
+    flex-basis: 100%;
+    text-align: end;
+  }
 }
 
 .contact-form__subtitle {

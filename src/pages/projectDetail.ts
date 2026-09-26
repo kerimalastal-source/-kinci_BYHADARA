@@ -6,6 +6,7 @@ import { statIcon } from "../components/statIcons";
 import { openLightbox } from "../components/lightbox";
 import { initStatCounters } from "../components/statCounter";
 import { initScrollReveal } from "../components/scrollReveal";
+import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "../components/floatingButtons";
 import { renderNotFound } from "./notFound";
 
 const PIN_ICON =
@@ -264,7 +265,13 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           <div class="cta-card">
             <h3>${t("projectDetail.ctaTitle")}</h3>
             <p>${t("projectDetail.ctaText")}</p>
-            <a class="btn btn--primary btn--block" href="${link("/contact")}">${t("projectDetail.ctaButton")}</a>
+            <div class="cta-card__actions">
+              <a class="btn btn--primary btn--block" href="${link("/contact")}?project=${project.slug}">${t("projectDetail.ctaButton")}</a>
+              <a class="btn btn--whatsapp btn--block" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("projectDetail.whatsappMessage", { name: content.name }))}" target="_blank" rel="noopener">
+                ${WHATSAPP_ICON}
+                ${t("projectDetail.whatsappButton")}
+              </a>
+            </div>
           </div>
         </aside>
       </div>

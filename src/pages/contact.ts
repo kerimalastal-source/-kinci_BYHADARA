@@ -21,7 +21,7 @@ export function renderContact(el: HTMLElement): void {
       <div class="container contact-section__grid">
         <div class="contact-section__form-col">
           <h2>${t("contact.formTitle")}</h2>
-          ${renderContactForm()}
+          ${renderContactForm(new URLSearchParams(window.location.search).get("project") ?? "")}
         </div>
 
         <div class="contact-section__info-col">
