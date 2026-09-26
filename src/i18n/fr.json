@@ -88,7 +88,7 @@
     "statsTitle": "HADARA en chiffres",
     "stats": [
       { "value": "12+", "label": "années d'excellence" },
-      { "value": "9", "label": "projets emblématiques" },
+      { "value": "10", "label": "projets emblématiques" },
       { "value": "400+", "label": "unités résidentielles" },
       { "value": "2", "label": "quartiers phares d'Istanbul" }
     ],
@@ -168,7 +168,7 @@
     "statsTitle": "Notre bilan",
     "stats": [
       { "value": "12+", "label": "années d'activité" },
-      { "value": "9", "label": "projets emblématiques" },
+      { "value": "10", "label": "projets emblématiques" },
       { "value": "400+", "label": "unités résidentielles" },
       { "value": "60 000+ m²", "label": "de terrain développé" }
     ]
@@ -782,6 +782,40 @@
         },
         {
           "place": "Hôpital Kolan Beylikdüzü"
+        },
+        {
+          "place": "Autoroute E-5 et Metrobüs"
+        }
+      ]
+    },
+    "lotus-yali": {
+      "name": "Lotus Yalı",
+      "tagline": "Une vie de conte entre le vert de la nature et le bleu de la mer à Büyükçekmece.",
+      "shortDescription": "Lotus Yalı est une résidence de charme de 48 logements répartis dans huit bâtiments de trois étages sur 8 600 m² à Büyükçekmece, orientés vers la mer au cœur de jardins couvrant 75 % du terrain.",
+      "longDescription": "Inspirée par la nature et pensée pour une vie calme et sûre, loin du rythme effréné d'Istanbul, Lotus Yalı est une résidence de charme de seulement 48 logements sur 8 600 m² à Büyükçekmece, développée par Lotus Yapı Proje. Huit bâtiments de trois étages sont orientés vers la mer, et 75 % du terrain est consacré aux espaces paysagers, où bassins et végétation variée placent le vert et le bleu au cœur du quotidien. Les logements comprennent des 3+1 en rez-de-jardin de 146,35 m² bruts avec terrasse privative, des 3+1 aux étages de 137,30 m² bruts et de vastes duplex 5+2 de 247,65 m² bruts, tous avec dressing, salle de bain parentale et buanderie. De grandes baies ouvrent sur la mer, tandis que des matériaux raffinés, des cuisines modernes et des salles de bain soignées complètent un design sobre et élégant. Les résidents profitent de piscines intérieures séparées pour hommes et femmes, d'une salle de sport, d'un sauna et d'un hammam. Le projet est achevé et prêt à habiter, avec des logements encore disponibles à la vente.",
+      "highlights": [
+        "Projet achevé, prêt à habiter — logements disponibles à la vente",
+        "Seulement 48 logements dans 8 bâtiments de 3 étages sur 8 600 m²",
+        "Bâtiments orientés vers la mer, 75 % du terrain en espaces paysagers",
+        "3+1 en rez-de-jardin (146,35 m²) et aux étages (137,30 m²), et duplex 5+2 (247,65 m² bruts)",
+        "Piscines intérieures séparées hommes / femmes, salle de sport, sauna et hammam",
+        "Suites parentales avec dressing et salle de bain"
+      ],
+      "nearby": [
+        {
+          "place": "Port de plaisance Mimar Sinan"
+        },
+        {
+          "place": "Hôpital public de Büyükçekmece"
+        },
+        {
+          "place": "Kıyı İstanbul Marina"
+        },
+        {
+          "place": "Centre commercial MarmaraPark"
+        },
+        {
+          "place": "West Istanbul Marina"
         },
         {
           "place": "Autoroute E-5 et Metrobüs"

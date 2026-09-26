@@ -88,7 +88,7 @@
     "statsTitle": "HADARA in Numbers",
     "stats": [
       { "value": "12+", "label": "Years of Excellence" },
-      { "value": "9", "label": "Landmark Developments" },
+      { "value": "10", "label": "Landmark Developments" },
       { "value": "400+", "label": "Residential Units" },
       { "value": "2", "label": "Prime Istanbul Districts" }
     ],
@@ -168,7 +168,7 @@
     "statsTitle": "Our Track Record",
     "stats": [
       { "value": "12+", "label": "Years in Business" },
-      { "value": "9", "label": "Landmark Projects" },
+      { "value": "10", "label": "Landmark Projects" },
       { "value": "400+", "label": "Residential Units" },
       { "value": "60,000+ m²", "label": "Land Developed" }
     ]
@@ -782,6 +782,40 @@
         },
         {
           "place": "Kolan Beylikdüzü Hospital"
+        },
+        {
+          "place": "E-5 Highway & Metrobüs"
+        }
+      ]
+    },
+    "lotus-yali": {
+      "name": "Lotus Yalı",
+      "tagline": "A fairytale life between the green of nature and the blue of the sea in Büyükçekmece.",
+      "shortDescription": "Lotus Yalı is a boutique community of 48 residences in eight three-storey blocks on 8,600 m² in Büyükçekmece, oriented towards the sea and set in landscaped grounds covering 75% of the site.",
+      "longDescription": "Inspired by nature and designed for a calm, secure life away from Istanbul's busy pace, Lotus Yalı is a boutique community of just 48 residences on 8,600 m² in Büyükçekmece, created by Lotus Yapı Proje. Eight three-storey blocks are positioned to face the sea, and 75% of the site is given over to landscaping, where water features and rich planting bring green and blue to the centre of daily life. Homes include 3+1 garden-floor residences of 146.35 m² gross with a private ground terrace, 3+1 upper-floor residences of 137.30 m² gross, and spacious 5+2 duplexes of 247.65 m² gross, each planned with a dressing room, en-suite master bathroom and laundry room. Large windows open onto uninterrupted sea views, while refined materials, modern kitchens and carefully detailed bathrooms complete a simple, elegant design. Residents enjoy separate indoor pools for men and women, a fitness centre, sauna and Turkish bath. The project is complete and ready to move in, with residences still available for sale.",
+      "highlights": [
+        "Completed and ready to move in — residences available for sale",
+        "Only 48 residences in 8 three-storey blocks on 8,600 m²",
+        "Blocks oriented towards the sea, with 75% of the site landscaped",
+        "3+1 garden-floor (146.35 m²) and upper-floor (137.30 m²) homes, plus 5+2 duplexes (247.65 m² gross)",
+        "Separate indoor pools for men and women, fitness centre, sauna and Turkish bath",
+        "Master bedrooms with dressing room and en-suite bathroom"
+      ],
+      "nearby": [
+        {
+          "place": "Mimar Sinan Yacht Harbour"
+        },
+        {
+          "place": "Büyükçekmece State Hospital"
+        },
+        {
+          "place": "Kıyı İstanbul Marina"
+        },
+        {
+          "place": "MarmaraPark Mall"
+        },
+        {
+          "place": "West Istanbul Marina"
         },
         {
           "place": "E-5 Highway & Metrobüs"

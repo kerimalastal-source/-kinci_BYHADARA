@@ -256,12 +256,39 @@ export const projects: Project[] = [
     amenities: community(["seaViewTerrace", "privateGarden", "spa"], VILLA_SWAP)
   },
   {
+    slug: "lotus-yali",
+    district: "Büyükçekmece",
+    city: "Istanbul",
+    status: "delivered",
+    unitsAvailable: true,
+    priority: 4,
+    developer: "Lotus Yapı Proje",
+    address: "Mimarsinan Mah., İnönü 2 Cad. No:111, Büyükçekmece / İstanbul",
+    coverImage: img("lotus-yali", "sunset-aerial", 1781, 1000, "Lotus Yalı at sunset above the Marmara Sea"),
+    gallery: [
+      img("lotus-yali", "view-from-sea", 1521, 1000, "Lotus Yalı seen from the sea"),
+      img("lotus-yali", "site-plan", 1778, 1000, "Lotus Yalı site plan with blocks A to H"),
+      img("lotus-yali", "aerial-sea-view", 1781, 1000, "Lotus Yalı aerial view on the Büyükçekmece coast")
+    ],
+    stats: [
+      { value: "48", labelKey: "apartments" },
+      { value: "8,600 m²", labelKey: "landArea" },
+      { value: "8", labelKey: "blocks" },
+      { value: "3+1 · 5+2", labelKey: "layout" }
+    ],
+    residences: [
+      { kind: "apartment", layout: "3+1", gross: "137.30 – 146.35 m²" },
+      { kind: "apartment", layout: "5+2", gross: "247.65 m²" }
+    ],
+    amenities: community(["spa", "seaView", "playground"])
+  },
+  {
     slug: "cadde-ispartakule",
     district: "Avcılar",
     city: "Istanbul",
     status: "delivered",
     unitsAvailable: true,
-    priority: 4,
+    priority: 5,
     developer: "MH Grup İnşaat",
     address: "Ispartakule, Eski İstanbul Cad. No:75, Avcılar / İstanbul",
     coverImage: img("cadde-ispartakule", "tower-avenue", 1920, 1329, "Cadde Ispartakule residential tower and retail avenue"),
@@ -294,7 +321,7 @@ export const projects: Project[] = [
     status: "delivered",
     unitsAvailable: true,
     timeline: "2023 – 2025",
-    priority: 5,
+    priority: 6,
     coverImage: {
       src: wixImg("3510f9_d33ff747ef4d4e1f8bdd85a35fa6d2f5~mv2.jpg"),
       width: 1733,
@@ -321,7 +348,7 @@ export const projects: Project[] = [
     status: "delivered",
     unitsAvailable: true,
     timeline: "2022 – 2024",
-    priority: 6,
+    priority: 7,
     coverImage: {
       src: wixImg("3510f9_90db09f48bde445098eb3dd251a09da1~mv2.jpeg"),
       width: 1707,
@@ -350,7 +377,7 @@ export const projects: Project[] = [
     status: "delivered",
     soldOut: true,
     timeline: "2022 – 2024",
-    priority: 7,
+    priority: 8,
     coverImage: {
       src: wixImg("3510f9_0e541a01b4db4c90aaa21e2f1bcea687~mv2.jpeg"),
       width: 1600,
@@ -377,7 +404,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "delivered",
     timeline: "2024 – 2025",
-    priority: 8,
+    priority: 9,
     coverImage: {
       src: wixImg("3510f9_b3632c1bd958497eaf5bdf465b99b197~mv2.jpeg"),
       width: 1200,

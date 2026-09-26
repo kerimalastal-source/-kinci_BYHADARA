@@ -54,18 +54,19 @@
 
 تم استخراج كل المحتوى والصور من موقع Wix الأصلي "حضارة العقاري" عبر Wix Data API فعلياً — **ليست بيانات وهمية**.
 
-- `src/data/projects.ts`: 9 مشاريع حقيقية بكل تفاصيلها (slug, district, city, status, timeline, stats, gallery images)، مرتبة حسب `priority`:
+- `src/data/projects.ts`: 10 مشاريع حقيقية بكل تفاصيلها (slug, district, city, status, timeline, stats, gallery images)، مرتبة حسب `priority`:
   1. `beylikduzu-living` (new-launch، تسليم 2028) — هو نفسه مشروع **Lotus Yaşam** (Lotus Yapı Proje، 18 بلوك حسب مخطط الموقع: A1–A6، B1–B2، C1–C4، D1–D4، E، F؛ 2+1/3+1/4+1)؛ كتالوجه "LOTUS YAŞAM SUNUM DOSYASI" (مقسوم لأجزاء بمجلد المشاريع)، وصوره صارت محلية بـ `public/images/projects/beylikduzu-living/` بدل Wix
   2. `diamond-marin` (new-launch، Yıltaş × Lotus، Beylikdüzü، تسليم أواخر 2027)
   3. `lotus-manzara-guzelce` (delivered + `unitsAvailable`، 32 فيلا 6+2، Lotus Yapı، Büyükçekmece)
   4. `lotus-manzara-beylikduzu` (delivered + `unitsAvailable`، 16 فيلا 5+2: 8 مستقلة A + 8 توأم B، Lotus Yapı، Beylikdüzü/Dereağzı)
-  5. `cadde-ispartakule` (delivered + `unitsAvailable`، 78 شقة + 12 محل، MH Grup، Avcılar/Ispartakule)
-  6. `lotus-koru-2` (delivered + `unitsAvailable`)
-  7. `lotus-istanbul` (delivered + `unitsAvailable`، مبنى متعدد الاستخدامات)
-  8. `lotus-koru-1` (delivered + `soldOut` — تم البيع بالكامل حسب المستخدم)
-  9. `marmara-haven-villa` (delivered، فيلا خاصة — بدون شارة وحدات لأنها وحدة وحيدة)
+  5. `lotus-yali` (delivered + `unitsAvailable`، 48 شقة 3+1 و5+2 دوبلكس في 8 بلوكات A–H على 8,600 م²، Lotus Yapı، Büyükçekmece/Mimarsinan؛ مسابح داخلية منفصلة — صوره الأربعة بعتها المستخدم مباشرة لأنه أجزاء الكتالوج كانت كبيرة، ممكن تنضاف صور داخلية لاحقاً)
+  6. `cadde-ispartakule` (delivered + `unitsAvailable`، 78 شقة + 12 محل، MH Grup، Avcılar/Ispartakule)
+  7. `lotus-koru-2` (delivered + `unitsAvailable`)
+  8. `lotus-istanbul` (delivered + `unitsAvailable`، مبنى متعدد الاستخدامات)
+  9. `lotus-koru-1` (delivered + `soldOut` — تم البيع بالكامل حسب المستخدم)
+  10. `marmara-haven-villa` (delivered، فيلا خاصة — بدون شارة وحدات لأنها وحدة وحيدة)
 - **قاعدة الحالة**: أي مشروع انتهت مدته الزمنية (`timeline`) لازم يكون `delivered` (بيظهر "اكتمل الإنشاء" / "Completed")، وحسب المستخدم كل المشاريع المكتملة فيها وحدات متاحة للبيع (`unitsAvailable`). فلاتر صفحة المشاريع بتخفي أي حالة ما عليها مشاريع.
-- **مشاريع الكتالوجات (2–5)**: مضافة من ملفات PDF بـ Google Drive (مجلد "حضارة العقاري/المشاريع")؛ صورها مقصوصة من الكتالوجات ومستضافة محلياً في `public/images/projects/<slug>/` (مش على Wix). الكتالوجات غالباً ما فيها تواريخ تسليم — لا تخترع تواريخ؛ `timeline` اختياري.
+- **مشاريع الكتالوجات (2–6)**: مضافة من ملفات PDF بـ Google Drive (مجلد "حضارة العقاري/المشاريع")؛ صورها مقصوصة من الكتالوجات ومستضافة محلياً في `public/images/projects/<slug>/` (مش على Wix). الكتالوجات غالباً ما فيها تواريخ تسليم — لا تخترع تواريخ؛ `timeline` اختياري.
 - **قيد تحميل ملفات Drive**: `download_file_content` حدّه الرسمي 10 ميغا، وعملياً بيفشل ("session expired") مع PDF أكبر من ~5 ميغا. `read_file_content` بيجيب النص بس. **الحل المجرّب والناجح**: المستخدم يقسّم الملف بـ ilovepdf (Split PDF) لأجزاء < 4 ميغا ويرفعها كـ PDF منفصلة (مش zip) — الأجزاء بتنزل عادي وبتنجمع. كل ملفات مجلد المشاريع انضافت (ما في ملفات معلّقة).
 - **`soldOut: true`**: مشروع خلص البيع فيه — شارة "تم البيع بالكامل" (رمادية) بدل "وحدات متاحة"، وسطر "التوفر: تم بيع جميع الوحدات". صفحة المشاريع فيها فلتر **"وحدات متاحة"** (`available`) بيعرض المشاريع اللي عليها `unitsAvailable`.
 - **أيقونات شريط الأرقام الرئيسية**: `src/components/statIcons.ts` (أيقونة لكل `labelKey`؛ أي `labelKey` جديد يحتاج أيقونة هون وإلا بتطلع أيقونة عامة). الأيقونة جوّا `<dt>` وموضوعة absolute (حتى يضل `<dl>` صالح)؛ على الموبايل بتطلع فوق الرقم.
