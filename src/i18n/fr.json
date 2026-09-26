@@ -60,6 +60,7 @@
       "constructionArea": "Surface construite",
       "greenAndParkArea": "Espaces verts et parc",
       "offices": "Bureaux",
+      "homeOffices": "Home offices",
       "shops": "Commerces",
       "floors": "Étages",
       "exclusiveVilla": "Villa exclusive",
@@ -90,16 +91,16 @@
     "statsTitle": "HADARA en chiffres",
     "stats": [
       { "value": "12+", "label": "années d'excellence" },
-      { "value": "10", "label": "projets emblématiques" },
-      { "value": "650+", "label": "unités résidentielles" },
-      { "value": "3", "label": "quartiers phares d'Istanbul" }
+      { "value": "11", "label": "projets emblématiques" },
+      { "value": "950+", "label": "unités résidentielles" },
+      { "value": "4", "label": "quartiers phares d'Istanbul" }
     ],
     "partnersEyebrow": "Réseau de confiance",
     "partnersTitle": "Nos partenaires",
     "partnersSubtitle": "HADARA collabore avec des promoteurs et groupes d'investissement régionaux de premier plan pour livrer des projets sur lesquels nos clients peuvent compter.",
     "aboutEyebrow": "Qui sommes-nous",
     "aboutTitle": "Un promoteur de proximité, signature Istanbul",
-    "aboutText1": "Depuis 2014, HADARA Immobilier façonne des développements résidentiels et mixtes à Istanbul, avec un accent particulier sur Beylikdüzü, Büyükçekmece et Avcılar — parmi les axes de croissance les plus dynamiques de la ville.",
+    "aboutText1": "Depuis 2014, HADARA Immobilier façonne des développements résidentiels et mixtes à Istanbul, avec un accent particulier sur Beylikdüzü, Büyükçekmece, Avcılar et Şişli — parmi les axes de croissance les plus dynamiques de la ville.",
     "aboutText2": "Des villas privées de luxe aux grands ensembles résidentiels, chaque projet HADARA repose sur une architecture soignée, une construction de qualité et une réelle compréhension des attentes de nos clients.",
     "aboutCta": "En savoir plus sur HADARA",
     "spotlightEyebrow": "Nouveau lancement",
@@ -109,7 +110,7 @@
     "spotlightWhatsappMessage": "Bonjour, je souhaiterais obtenir plus d'informations sur le projet {name}.",
     "projectsEyebrow": "Notre portefeuille",
     "projectsTitle": "Projets phares",
-    "projectsSubtitle": "Un aperçu des développements qui façonnent les quartiers de Beylikdüzü, Büyükçekmece et Avcılar à Istanbul.",
+    "projectsSubtitle": "Un aperçu des développements qui façonnent les quartiers de Beylikdüzü, Büyükçekmece, Avcılar et Şişli à Istanbul.",
     "servicesEyebrow": "Notre expertise",
     "servicesTitle": "Une expertise immobilière complète",
     "services": [
@@ -152,7 +153,7 @@
     "storyEyebrow": "Notre histoire",
     "storyTitle": "D'une vision unique à un portefeuille en pleine croissance",
     "storyText1": "Fondée en 2014 et basée à Beylikdüzü, Istanbul, HADARA Immobilier est née d'une idée simple : une conception réfléchie et une construction honnête créent une valeur durable pour ceux qui vivent dans nos projets, comme pour ceux qui y investissent.",
-    "storyText2": "Au fil de la dernière décennie, cette idée s'est transformée en un portefeuille de résidences, de sites à usage mixte et de villas privées à Beylikdüzü, Büyükçekmece et Avcılar, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul.",
+    "storyText2": "Au fil de la dernière décennie, cette idée s'est transformée en un portefeuille de résidences, de sites à usage mixte et de villas privées à Beylikdüzü, Büyükçekmece, Avcılar et Şişli, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul.",
     "missionTitle": "Notre mission",
     "missionText": "Concevoir et livrer des projets résidentiels et mixtes qui allient qualité architecturale, confort quotidien et valeur durable, pour les résidents comme pour les investisseurs.",
     "visionTitle": "Notre vision",
@@ -175,15 +176,15 @@
     "statsTitle": "Notre bilan",
     "stats": [
       { "value": "12+", "label": "années d'activité" },
-      { "value": "10", "label": "projets emblématiques" },
-      { "value": "650+", "label": "unités résidentielles" },
+      { "value": "11", "label": "projets emblématiques" },
+      { "value": "950+", "label": "unités résidentielles" },
       { "value": "60 000+ m²", "label": "de terrain développé" }
     ]
   },
   "projects": {
     "heroEyebrow": "Notre portefeuille",
     "heroTitle": "Des projets qui façonnent Istanbul",
-    "heroSubtitle": "Des villas privées aux grands ensembles résidentiels, découvrez les projets du portefeuille HADARA à Beylikdüzü, Büyükçekmece et Avcılar.",
+    "heroSubtitle": "Des villas privées aux grands ensembles résidentiels, découvrez les projets du portefeuille HADARA à Beylikdüzü, Büyükçekmece, Avcılar et Şişli.",
     "filterAll": "Tous les projets",
     "filterNewLaunch": "Nouveau lancement",
     "filterOngoing": "En construction",
@@ -198,7 +199,8 @@
     "istanbul": "Istanbul",
     "beylikduzu": "Beylikdüzü",
     "buyukcekmece": "Büyükçekmece",
-    "avcilar": "Avcılar"
+    "avcilar": "Avcılar",
+    "sisli": "Şişli"
   },
   "projectDetail": {
     "overviewTitle": "Aperçu du projet",
@@ -232,6 +234,9 @@
     "videoPlay": "Lire la vidéo",
     "residenceApartment": "Appartement {layout}",
     "residenceVilla": "Villa {layout}",
+    "officeClosed": "Bureau fermé",
+    "officeOpen": "Bureau open space",
+    "saleableAreaLabel": "Surface commerciale",
     "residenceVariant": "Type {variant}",
     "availabilityLabel": "Disponibilité",
     "unitsAvailableLong": "Lots disponibles à la vente",
@@ -252,6 +257,14 @@
       "generator": "Groupe électrogène",
       "retail": "Commerces sur place",
       "airConditioning": "Climatisation",
+      "indoorPool": "Piscine intérieure",
+      "pilates": "Studio de Pilates Reformer",
+      "concierge": "Service de conciergerie",
+      "lounge": "Lounge des résidents",
+      "meetingRooms": "Salles de réunion",
+      "cafe": "Café & bar à vitamines",
+      "cinemaRoom": "Salle de cinéma privée",
+      "gameRoom": "Salle PlayStation",
       "separatePools": "Piscines séparées hommes / femmes",
       "cctv": "Vidéosurveillance",
       "cleaning": "Entretien des parties communes",
@@ -317,7 +330,7 @@
           },
           {
             "q": "Où sont situés les projets de HADARA ?",
-            "a": "Tous nos développements actuels sont situés du côté européen d'Istanbul, dans les quartiers en forte croissance de Beylikdüzü, Büyükçekmece et Avcılar."
+            "a": "Tous nos développements actuels sont situés du côté européen d'Istanbul, dans les quartiers en forte croissance de Beylikdüzü, Büyükçekmece, Avcılar et Şişli."
           },
           {
             "q": "Comment puis-je contacter l'équipe de HADARA ?",
@@ -888,6 +901,63 @@
         }
       ]
     },
+    "lotus-sisli": {
+      "name": "Lotus Şişli",
+      "tagline": "Un projet mixte novateur au cœur d'Istanbul.",
+      "shortDescription": "Lotus Şişli réunit 320 home offices, des appartements, des penthouses et des commerces sur rue dans deux tours de 18 étages sur le boulevard Piyalepaşa, au cœur du quartier d'affaires de Şişli.",
+      "longDescription": "Au cœur d'Istanbul, Lotus Şişli s'apprête à devenir l'une des adresses les plus prestigieuses de Şişli. Conçu par l'architecte Hakan Saçık pour Lotus Yapı Proje, le projet totalise 35 342 m² de surface construite répartis sur deux blocs de 18 étages, réunissant 320 home offices, des appartements, des penthouses et des commerces sur rue. Les home offices peuvent servir de bureau, de logement ou des deux, avec des appartements 1+1 et 2+1 et des bureaux fermés ou en open space, tandis que les penthouses couronnent les tours de vastes terrasses sur la ville. Le concept « flex space » permet d'ajouter de l'espace à son logement uniquement en cas de besoin, sans frais tant qu'il n'est pas utilisé. Les résidents profitent d'un service de conciergerie, d'un lounge, d'une piscine intérieure, d'une salle de sport, d'un studio de Pilates Reformer et d'un spa avec hammam, sauna, bain finlandais et salles de massage, ainsi que de salles de réunion, d'un café et bar à vitamines, d'une salle de cinéma et d'une salle PlayStation, complétés par un vaste parking, une sécurité privée et un système de caméras. À quelques pas du métro, du Metrobüs et de l'E-5, entouré d'hôpitaux, d'hôtels, du palais de justice d'Istanbul et de centres commerciaux, Lotus Şişli est en construction, avec des unités actuellement en vente.",
+      "highlights": [
+        "En construction — unités actuellement en vente",
+        "320 home offices, ainsi que des appartements, penthouses et commerces sur rue",
+        "Deux tours de 18 étages, 35 342 m² de surface construite",
+        "Emplacement de choix à Şişli, boulevard Piyalepaşa, à deux pas du métro et du Metrobüs",
+        "Conciergerie, piscine intérieure, salle de sport, studio de Pilates et spa complet",
+        "Flex space : agrandissez votre logement uniquement quand vous en avez besoin",
+        "Conçu par l'architecte Hakan Saçık pour Lotus Yapı Proje"
+      ],
+      "nearby": [
+        {
+          "place": "Hôpital Memorial Şişli",
+          "time": "100 m"
+        },
+        {
+          "place": "Hôpital universitaire d'Okmeydanı",
+          "time": "280 m"
+        },
+        {
+          "place": "Centre d'affaires Perpa",
+          "time": "500 m"
+        },
+        {
+          "place": "Arrêt Metrobüs Darülaceze–Perpa",
+          "time": "540 m"
+        },
+        {
+          "place": "Palais de justice d'Istanbul",
+          "time": "880 m"
+        },
+        {
+          "place": "Métro Çağlayan",
+          "time": "1 km"
+        },
+        {
+          "place": "Centre commercial Cevahir",
+          "time": "1,5 km"
+        },
+        {
+          "place": "Nişantaşı",
+          "time": "2 km"
+        },
+        {
+          "place": "Taksim",
+          "time": "2,9 km"
+        },
+        {
+          "place": "Zorlu Center",
+          "time": "4,1 km"
+        }
+      ]
+    },
     "lotus-koru-2": {
       "name": "Lotus Koru 2",
       "tagline": "Un nouveau concept de vie urbaine au cœur de Beylikdüzü.",
@@ -1126,11 +1196,11 @@
   "seo": {
     "home": {
       "title": "HADARA Immobilier | Promoteur immobilier à Istanbul, Turquie",
-      "description": "Promoteur immobilier à Istanbul depuis 2014 : villas de luxe, appartements et projets mixtes à Beylikdüzü, Büyükçekmece et Avcılar, avec accompagnement vers la citoyenneté turque."
+      "description": "Promoteur immobilier à Istanbul depuis 2014 : villas de luxe, appartements et projets mixtes à Beylikdüzü, Büyükçekmece, Avcılar et Şişli, avec accompagnement vers la citoyenneté turque."
     },
     "projects": {
       "title": "Nos projets à Istanbul – Appartements et villas",
-      "description": "Découvrez les projets résidentiels, mixtes et villas de HADARA à Beylikdüzü, Büyükçekmece et Avcılar, Istanbul : nouveaux lancements, chantiers en cours et biens livrés."
+      "description": "Découvrez les projets résidentiels, mixtes et villas de HADARA à Beylikdüzü, Büyükçekmece, Avcılar et Şişli, Istanbul : nouveaux lancements, chantiers en cours et biens livrés."
     },
     "about": {
       "title": "À propos de HADARA – Promoteur à Istanbul depuis 2014",

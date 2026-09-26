@@ -46,17 +46,27 @@ export type AmenityKey =
   | "seaViewTerrace"
   | "generator"
   | "retail"
-  | "airConditioning";
+  | "airConditioning"
+  | "indoorPool"
+  | "pilates"
+  | "concierge"
+  | "lounge"
+  | "meetingRooms"
+  | "cafe"
+  | "cinemaRoom"
+  | "gameRoom";
 
 /** One residence type, shown as a card in the project's "Residences" section. */
 export interface Residence {
-  kind: "apartment" | "villa";
-  /** Room layout as sold in Türkiye, e.g. "3+1". */
+  kind: "apartment" | "villa" | "office";
+  /** Room layout as sold in Türkiye, e.g. "3+1"; for offices "closed" or "open". */
   layout: string;
   /** Plan variant letter from the catalog, e.g. "A". */
   variant?: string;
   gross: string;
   net?: string;
+  /** Saleable gross area (Turkish "satışa esas brüt"), when the catalog quotes it. */
+  saleable?: string;
   garden?: string;
   floors?: number;
   planTypes?: number;
@@ -217,12 +227,62 @@ export const projects: Project[] = [
     amenities: community(["smartHome", "airConditioning", "insulation"])
   },
   {
+    slug: "lotus-sisli",
+    district: "Şişli",
+    city: "Istanbul",
+    status: "ongoing",
+    unitsAvailable: true,
+    priority: 2,
+    developer: "Lotus Yapı Proje",
+    address: "Kaptan Paşa Mah., Piyale Paşa Blv., Okmeydanı Cad., Şişli / İstanbul",
+    coverImage: img("lotus-sisli", "tower-night", 1200, 1263, "Lotus Şişli towers at dusk"),
+    gallery: [
+      img("lotus-sisli", "aerial-city", 1265, 1164, "Lotus Şişli in the heart of Şişli, aerial view"),
+      img("lotus-sisli", "tower-day", 849, 1162, "Lotus Şişli tower and street-front shops"),
+      img("lotus-sisli", "tower-garden", 948, 1263, "Lotus Şişli two 18-storey blocks"),
+      img("lotus-sisli", "twin-towers", 1257, 1106, "Lotus Şişli entrance and retail podium"),
+      img("lotus-sisli", "apartment-living", 1600, 1068, "Lotus Şişli apartment living room and kitchen"),
+      img("lotus-sisli", "living-room", 1600, 670, "Lotus Şişli apartment interior"),
+      img("lotus-sisli", "penthouse-terrace", 1600, 671, "Lotus Şişli penthouse terrace over the city"),
+      img("lotus-sisli", "office-interior", 1600, 671, "Lotus Şişli office interior")
+    ],
+    stats: [
+      { value: "320", labelKey: "homeOffices" },
+      { value: "2 × 18", labelKey: "blocksFloors" },
+      { value: "35,342 m²", labelKey: "constructionArea" },
+      { value: "1+1 · 2+1", labelKey: "layout" }
+    ],
+    residences: [
+      { kind: "apartment", layout: "1+1", gross: "57.56 m²", net: "43.41 m²", saleable: "75.97 m²" },
+      { kind: "apartment", layout: "2+1", gross: "83.75 m²", net: "63.16 m²", saleable: "110.53 m²" },
+      { kind: "office", layout: "closed", gross: "57.56 m²", net: "43.41 m²", saleable: "75.97 m²" },
+      { kind: "office", layout: "open", gross: "83.75 m²", net: "63.16 m²", saleable: "110.53 m²" }
+    ],
+    amenities: [
+      "indoorPool",
+      "fitness",
+      "pilates",
+      "hamam",
+      "sauna",
+      "concierge",
+      "lounge",
+      "meetingRooms",
+      "cafe",
+      "cinemaRoom",
+      "gameRoom",
+      "indoorParking",
+      "security",
+      "cctv",
+      "retail"
+    ]
+  },
+  {
     slug: "lotus-manzara-guzelce",
     district: "Büyükçekmece",
     city: "Istanbul",
     status: "delivered",
     unitsAvailable: true,
-    priority: 2,
+    priority: 3,
     developer: "Lotus Yapı Proje",
     address: "Güzelce Mah., Hukukçular Cad. No:14, Büyükçekmece / İstanbul",
     coverImage: img("lotus-manzara-guzelce", "villa-exterior", 1166, 640, "Lotus Manzara Güzelce detached villa exterior"),
@@ -254,7 +314,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "delivered",
     unitsAvailable: true,
-    priority: 3,
+    priority: 4,
     developer: "Lotus Yapı Proje",
     address: "Dereağzı Mah., Şenyurt Cad. No:35, Beylikdüzü / İstanbul",
     coverImage: img("lotus-manzara-beylikduzu", "villas-entrance", 1920, 955, "Lotus Manzara Beylikdüzü villas and gated entrance"),
@@ -289,7 +349,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "delivered",
     unitsAvailable: true,
-    priority: 4,
+    priority: 5,
     developer: "Lotus Yapı Proje",
     address: "Mimarsinan Mah., İnönü 2 Cad. No:111, Büyükçekmece / İstanbul",
     coverImage: img("lotus-yali", "sunset-aerial", 1781, 1000, "Lotus Yalı at sunset above the Marmara Sea"),
@@ -316,7 +376,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "delivered",
     unitsAvailable: true,
-    priority: 5,
+    priority: 6,
     developer: "MH Grup İnşaat",
     address: "Ispartakule, Eski İstanbul Cad. No:75, Avcılar / İstanbul",
     coverImage: img("cadde-ispartakule", "tower-avenue", 1920, 1329, "Cadde Ispartakule residential tower and retail avenue"),
@@ -349,7 +409,7 @@ export const projects: Project[] = [
     status: "delivered",
     unitsAvailable: true,
     timeline: "2023 – 2025",
-    priority: 6,
+    priority: 7,
     coverImage: img("lotus-koru-2", "landscaped-grounds", 1733, 1000, "Lotus Koru 2 landscaped grounds"),
     gallery: [
       img("lotus-koru-2", "urban-living-concept", 1500, 1000, "Lotus Koru 2 urban living concept"),
@@ -371,7 +431,7 @@ export const projects: Project[] = [
     status: "delivered",
     soldOut: true,
     timeline: "2022 – 2024",
-    priority: 7,
+    priority: 8,
     coverImage: img("lotus-istanbul", "mixed-use-development", 1707, 1280, "Lotus Istanbul mixed-use development"),
     gallery: [
       img("lotus-istanbul", "premium-mixed-use-project", 1677, 1000, "Lotus Istanbul premium mixed-use project"),
@@ -395,7 +455,7 @@ export const projects: Project[] = [
     status: "delivered",
     soldOut: true,
     timeline: "2022 – 2024",
-    priority: 8,
+    priority: 9,
     coverImage: img("lotus-koru-1", "residential-exterior", 1600, 923, "Lotus Koru 1 residential exterior"),
     gallery: [
       img("lotus-koru-1", "low-rise-residential-concept", 2000, 1333, "Lotus Koru 1 low-rise residential concept"),
@@ -419,7 +479,7 @@ export const projects: Project[] = [
     timeline: "2024 – 2025",
     price: "on-request",
     landing: true,
-    priority: 9,
+    priority: 10,
     coverImage: img("marmara-haven-villa", "exterior-facade", 1200, 1600, "Marmara Haven Villa exterior facade"),
     gallery: [
       img("marmara-haven-villa", "main-facade", 2000, 1500, "Marmara Haven Villa main facade"),

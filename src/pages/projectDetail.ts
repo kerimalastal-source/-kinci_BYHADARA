@@ -27,6 +27,7 @@ function galleryTail(total: number): string {
 }
 
 function residenceTitle(r: Residence): string {
+  if (r.kind === "office") return t(r.layout === "open" ? "projectDetail.officeOpen" : "projectDetail.officeClosed");
   const layout = `<span dir="ltr">${r.layout}</span>`;
   return t(r.kind === "villa" ? "projectDetail.residenceVilla" : "projectDetail.residenceApartment", { layout });
 }
@@ -40,6 +41,7 @@ function renderResidences(project: Project): string {
         ${project.residences
           .map((r, i) => {
             const meta: [string, string][] = [];
+            if (r.saleable) meta.push([t("projectDetail.saleableAreaLabel"), r.saleable]);
             if (r.net) meta.push([t("projectDetail.netAreaLabel"), r.net]);
             if (r.garden) meta.push([t("projectDetail.gardenLabel"), r.garden]);
             if (r.floors) meta.push([t("projectDetail.floorsLabel"), String(r.floors)]);
