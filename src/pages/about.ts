@@ -1,6 +1,5 @@
 import { t, tRaw } from "../i18n";
 import { initStatCounters } from "../components/statCounter";
-import { wixImg } from "../utils/image";
 
 interface ValueItem {
   title: string;
@@ -32,7 +31,7 @@ export function renderAbout(el: HTMLElement): void {
     <section class="section about-teaser">
       <div class="container about-teaser__grid">
         <div class="about-teaser__media">
-          <img src="${wixImg("3510f9_9700bfeff9a74a0fb54aee54a8091089~mv2.jpg")}" alt="HADARA Real Estate headquarters area in Beylikdüzü" loading="lazy" />
+          <img src="/images/pages/hadara-monogram.jpg" alt="HADARA Real Estate headquarters area in Beylikdüzü" loading="lazy" />
         </div>
         <div class="about-teaser__content">
           <p class="eyebrow">${t("about.storyEyebrow")}</p>

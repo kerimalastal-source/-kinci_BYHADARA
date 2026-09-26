@@ -4,7 +4,6 @@ import { partners } from "../data/partners";
 import { renderProjectCard } from "../components/projectCard";
 import { initStatCounters } from "../components/statCounter";
 import { initScrollReveal } from "../components/scrollReveal";
-import { wixImg } from "../utils/image";
 
 const HERO_IMAGE = "/hero-istanbul.jpg";
 
@@ -74,7 +73,7 @@ export function renderHome(el: HTMLElement): void {
     <section class="section about-teaser">
       <div class="container about-teaser__grid">
         <div class="about-teaser__media">
-          <img src="${wixImg("3510f9_d33ff747ef4d4e1f8bdd85a35fa6d2f5~mv2.jpg")}" alt="HADARA residential development in Beylikdüzü" loading="lazy" />
+          <img src="/images/projects/lotus-koru-2/landscaped-grounds.jpg" alt="HADARA residential development in Beylikdüzü" loading="lazy" />
         </div>
         <div class="about-teaser__content">
           <p class="eyebrow">${t("home.aboutEyebrow")}</p>

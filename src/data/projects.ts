@@ -1,5 +1,3 @@
-import { wixImg } from "../utils/image";
-
 export type ProjectStatus = "new-launch" | "ongoing" | "delivered";
 
 export interface ProjectImage {
@@ -322,16 +320,11 @@ export const projects: Project[] = [
     unitsAvailable: true,
     timeline: "2023 – 2025",
     priority: 6,
-    coverImage: {
-      src: wixImg("3510f9_d33ff747ef4d4e1f8bdd85a35fa6d2f5~mv2.jpg"),
-      width: 1733,
-      height: 1000,
-      alt: "Lotus Koru 2 landscaped grounds"
-    },
+    coverImage: img("lotus-koru-2", "landscaped-grounds", 1733, 1000, "Lotus Koru 2 landscaped grounds"),
     gallery: [
-      { src: wixImg("3510f9_e15d992eba2e4dafa2398a6b75bb25ec~mv2.jpg"), width: 1500, height: 1000, alt: "Lotus Koru 2 urban living concept" },
-      { src: wixImg("3510f9_358bbb9965fe42dd986348fd165c1bc9~mv2.jpg"), width: 1733, height: 1000, alt: "Lotus Koru 2 central location" },
-      { src: wixImg("3510f9_1ce5b4bad8084ed084ecbd9ce23edd7b~mv2.jpeg"), width: 1600, height: 1133, alt: "Lotus Koru 2 residential blocks" }
+      img("lotus-koru-2", "urban-living-concept", 1500, 1000, "Lotus Koru 2 urban living concept"),
+      img("lotus-koru-2", "central-location", 1733, 1000, "Lotus Koru 2 central location"),
+      img("lotus-koru-2", "residential-blocks", 1600, 1133, "Lotus Koru 2 residential blocks")
     ],
     stats: [
       { value: "204", labelKey: "apartments" },
@@ -349,19 +342,14 @@ export const projects: Project[] = [
     unitsAvailable: true,
     timeline: "2022 – 2024",
     priority: 7,
-    coverImage: {
-      src: wixImg("3510f9_90db09f48bde445098eb3dd251a09da1~mv2.jpeg"),
-      width: 1707,
-      height: 1280,
-      alt: "Lotus Istanbul mixed-use development"
-    },
+    coverImage: img("lotus-istanbul", "mixed-use-development", 1707, 1280, "Lotus Istanbul mixed-use development"),
     gallery: [
-      { src: wixImg("3510f9_9633582539ad473685a43de656ba6faa~mv2.jpg"), width: 1677, height: 1000, alt: "Lotus Istanbul premium mixed-use project" },
-      { src: wixImg("3510f9_dfaf26e5b1744a45a788e155ff70cab6~mv2.jpg"), width: 2000, height: 1287, alt: "Lotus Istanbul iconic urban development" },
-      { src: wixImg("3510f9_57734070697e4e2794b0e1fe62f6f3f8~mv2.jpg"), width: 1494, height: 1000, alt: "Lotus Istanbul luxury living concept" },
-      { src: wixImg("3510f9_c849d57c16a04fb3a75873f19255e8bc~mv2.jpg"), width: 2000, height: 1333, alt: "Lotus Istanbul modern mixed-use landmark" },
-      { src: wixImg("3510f9_830eb2ea0530466dbf9252685140c491~mv2.jpg"), width: 2000, height: 1333, alt: "Lotus Istanbul exclusive investment opportunity" },
-      { src: wixImg("3510f9_27e6044b26614e799fae79a347efe773~mv2.jpeg"), width: 1707, height: 1280, alt: "Lotus Istanbul contemporary urban project" }
+      img("lotus-istanbul", "premium-mixed-use-project", 1677, 1000, "Lotus Istanbul premium mixed-use project"),
+      img("lotus-istanbul", "iconic-urban-development", 2000, 1287, "Lotus Istanbul iconic urban development"),
+      img("lotus-istanbul", "luxury-living-concept", 1494, 1000, "Lotus Istanbul luxury living concept"),
+      img("lotus-istanbul", "modern-mixed-use-landmark", 2000, 1333, "Lotus Istanbul modern mixed-use landmark"),
+      img("lotus-istanbul", "exclusive-investment-opportunity", 2000, 1333, "Lotus Istanbul exclusive investment opportunity"),
+      img("lotus-istanbul", "contemporary-urban-project", 1707, 1280, "Lotus Istanbul contemporary urban project")
     ],
     stats: [
       { value: "102", labelKey: "offices" },
@@ -378,19 +366,14 @@ export const projects: Project[] = [
     soldOut: true,
     timeline: "2022 – 2024",
     priority: 8,
-    coverImage: {
-      src: wixImg("3510f9_0e541a01b4db4c90aaa21e2f1bcea687~mv2.jpeg"),
-      width: 1600,
-      height: 923,
-      alt: "Lotus Koru 1 residential exterior"
-    },
+    coverImage: img("lotus-koru-1", "residential-exterior", 1600, 923, "Lotus Koru 1 residential exterior"),
     gallery: [
-      { src: wixImg("3510f9_edbdee8ad770462fb853a8730c094518~mv2.jpg"), width: 2000, height: 1333, alt: "Lotus Koru 1 low-rise residential concept" },
-      { src: wixImg("3510f9_ad7dc0dc93a74625a1542c2cad01ebcd~mv2.jpeg"), width: 2000, height: 1462, alt: "Lotus Koru 1 green living project" },
-      { src: wixImg("3510f9_5da11f8697ff4b1cbb8ac3763d35bce1~mv2.jpeg"), width: 2000, height: 1429, alt: "Lotus Koru 1 nature-inspired residences" },
-      { src: wixImg("3510f9_af156a90b5d44ce29d99a67e19be43c1~mv2.jpeg"), width: 1600, height: 1142, alt: "Lotus Koru 1 landscape-focused housing" },
-      { src: wixImg("3510f9_fce46be4de0143468e889189ad57107f~mv2.jpeg"), width: 1600, height: 800, alt: "Lotus Koru 1 green-focused residential project" },
-      { src: wixImg("3510f9_5f818f66eee54ae7a89c51be664b9c6f~mv2.jpeg"), width: 1600, height: 1142, alt: "Lotus Koru 1 modern green community" }
+      img("lotus-koru-1", "low-rise-residential-concept", 2000, 1333, "Lotus Koru 1 low-rise residential concept"),
+      img("lotus-koru-1", "green-living-project", 2000, 1462, "Lotus Koru 1 green living project"),
+      img("lotus-koru-1", "nature-inspired-residences", 2000, 1429, "Lotus Koru 1 nature-inspired residences"),
+      img("lotus-koru-1", "landscape-focused-housing", 1600, 1142, "Lotus Koru 1 landscape-focused housing"),
+      img("lotus-koru-1", "green-focused-residential-project", 1600, 800, "Lotus Koru 1 green-focused residential project"),
+      img("lotus-koru-1", "modern-green-community", 1600, 1142, "Lotus Koru 1 modern green community")
     ],
     stats: [
       { value: "144", labelKey: "apartments" },
@@ -405,22 +388,17 @@ export const projects: Project[] = [
     status: "delivered",
     timeline: "2024 – 2025",
     priority: 9,
-    coverImage: {
-      src: wixImg("3510f9_b3632c1bd958497eaf5bdf465b99b197~mv2.jpeg"),
-      width: 1200,
-      height: 1600,
-      alt: "Marmara Haven Villa exterior facade"
-    },
+    coverImage: img("marmara-haven-villa", "exterior-facade", 1200, 1600, "Marmara Haven Villa exterior facade"),
     gallery: [
-      { src: wixImg("3510f9_7c18d7b91a814c0ea70edccacf0f8c3e~mv2.jpeg"), width: 2000, height: 1500, alt: "Marmara Haven Villa main facade" },
-      { src: wixImg("3510f9_a0832cb474b941bb96c1ab41ce532e75~mv2.jpeg"), width: 1500, height: 2000, alt: "Marmara Haven Villa side view" },
-      { src: wixImg("3510f9_c4e14f77b98144a59013aca49d0e7c40~mv2.jpeg"), width: 1500, height: 2000, alt: "Marmara Haven Villa private pool" },
-      { src: wixImg("3510f9_9d3cbcac812a48f0b36fb38d5613aaaa~mv2.jpeg"), width: 1500, height: 2000, alt: "Marmara Haven Villa living room" },
-      { src: wixImg("3510f9_d65530e758bc4bddb028ea568bfe622f~mv2.jpeg"), width: 1500, height: 2000, alt: "Marmara Haven Villa kitchen" },
-      { src: wixImg("3510f9_1019755331544605aa88b119e8d96577~mv2.jpeg"), width: 1500, height: 2000, alt: "Marmara Haven Villa master bedroom" },
-      { src: wixImg("3510f9_c1f78d5852a340e4903cc67d84c1783d~mv2.jpeg"), width: 1200, height: 1600, alt: "Marmara Haven Villa rooftop" },
-      { src: wixImg("3510f9_beaa3916396246acabcd42c4b456bedc~mv2.jpeg"), width: 1200, height: 1600, alt: "Marmara Haven Villa terrace" },
-      { src: wixImg("3510f9_8f47f822eae24c6f956ac137840326f7~mv2.jpeg"), width: 1200, height: 1600, alt: "Marmara Haven Villa sea view" }
+      img("marmara-haven-villa", "main-facade", 2000, 1500, "Marmara Haven Villa main facade"),
+      img("marmara-haven-villa", "side-view", 1500, 2000, "Marmara Haven Villa side view"),
+      img("marmara-haven-villa", "private-pool", 1500, 2000, "Marmara Haven Villa private pool"),
+      img("marmara-haven-villa", "living-room", 1500, 2000, "Marmara Haven Villa living room"),
+      img("marmara-haven-villa", "kitchen", 1500, 2000, "Marmara Haven Villa kitchen"),
+      img("marmara-haven-villa", "master-bedroom", 1500, 2000, "Marmara Haven Villa master bedroom"),
+      img("marmara-haven-villa", "rooftop", 1200, 1600, "Marmara Haven Villa rooftop"),
+      img("marmara-haven-villa", "terrace", 1200, 1600, "Marmara Haven Villa terrace"),
+      img("marmara-haven-villa", "sea-view", 1200, 1600, "Marmara Haven Villa sea view")
     ],
     stats: [
       { value: "1", labelKey: "exclusiveVilla" },

@@ -608,7 +608,7 @@
 .page-hero {
   padding: 7rem 0 4.5rem;
   background: linear-gradient(180deg, rgba(15, 43, 33, 0.55), rgba(15, 43, 33, 0.88)),
-    url("https://static.wixstatic.com/media/3510f9_9700bfeff9a74a0fb54aee54a8091089~mv2.jpg") center/cover;
+    url("/images/pages/hadara-monogram.jpg") center/cover;
 }
 
 .page-hero h1 {

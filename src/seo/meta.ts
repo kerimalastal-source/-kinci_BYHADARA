@@ -141,7 +141,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
     const content = lookup(locale, `blogData.${post.slug}`) as { category: string; title: string; excerpt: string };
     title = content.title;
     description = clip(content.excerpt);
-    image = post.coverImage.src;
+    image = img(post.coverImage.src);
     imageAlt = content.title;
     ogType = "article";
     crumbs.push({ name: tr("nav.blog"), path: "/blog" }, { name: content.title, path: routePath(route) });
@@ -151,7 +151,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
       headline: content.title,
       description: content.excerpt,
       articleSection: content.category,
-      image: post.coverImage.src,
+      image: img(post.coverImage.src),
       inLanguage: locale,
       url: url(routePath(route)),
       mainEntityOfPage: url(routePath(route)),
