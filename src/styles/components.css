@@ -425,9 +425,37 @@
   overflow: hidden;
 }
 
+/* Icon beside each figure; it sits inside <dt> (keeps the <dl> valid) and is
+   positioned against the tile. */
 .spotlight__stat {
-  padding: 0.9rem 1.1rem;
+  --spot-pad: 1.1rem;
+  --spot-icon: 40px;
+  position: relative;
+  padding: 0.9rem var(--spot-pad);
+  padding-inline-start: calc(var(--spot-pad) + var(--spot-icon) + 0.75rem);
   background: var(--color-surface);
+}
+
+.spotlight__icon {
+  position: absolute;
+  inset-inline-start: var(--spot-pad);
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: var(--spot-icon);
+  height: var(--spot-icon);
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  color: var(--color-accent-dark);
+  transition: background var(--transition), color var(--transition);
+}
+
+@media (hover: hover) {
+  .spotlight__stat:hover .spotlight__icon {
+    background: var(--color-accent);
+    color: var(--color-primary-dark);
+  }
 }
 
 .spotlight__stat dt {
@@ -528,8 +556,22 @@
     justify-content: center;
   }
 
+  /* Phones: half-width tiles are too narrow for a side icon, so it sits above the label. */
   .spotlight__stat {
     padding: 0.75rem 0.85rem;
+  }
+
+  .spotlight__icon {
+    position: static;
+    transform: none;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 0.45rem;
+  }
+
+  .spotlight__icon svg {
+    width: 18px;
+    height: 18px;
   }
 
   .spotlight__stat dd {

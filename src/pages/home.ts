@@ -5,6 +5,7 @@ import { renderProjectCard } from "../components/projectCard";
 import { initStatCounters } from "../components/statCounter";
 import { initScrollReveal } from "../components/scrollReveal";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "../components/floatingButtons";
+import { statIcon } from "../components/statIcons";
 
 const HERO_IMAGE = "/hero-istanbul.jpg";
 
@@ -224,7 +225,7 @@ function renderSpotlight(project: Project): string {
                 .map(
                   (s) => `
                 <div class="spotlight__stat">
-                  <dt>${t(`common.statLabels.${s.labelKey}`)}</dt>
+                  <dt><span class="spotlight__icon">${statIcon(s.labelKey)}</span>${t(`common.statLabels.${s.labelKey}`)}</dt>
                   <dd dir="ltr">${s.value}</dd>
                 </div>`
                 )
