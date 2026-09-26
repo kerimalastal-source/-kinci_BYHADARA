@@ -66,6 +66,10 @@ export interface Residence {
 export interface FloorLevel {
   gross: string;
   net: string;
+  /** Photo shown at the top of the level's card. */
+  image?: ProjectImage;
+  /** Adds a "sea view" tag on the photo. */
+  seaView?: boolean;
 }
 
 export interface Project {
@@ -421,10 +425,15 @@ export const projects: Project[] = [
       { value: "4", labelKey: "floors" }
     ],
     floorPlan: [
-      { gross: "138.62 m²", net: "105.40 m²" },
-      { gross: "223.37 m²", net: "108.60 m²" },
-      { gross: "143.19 m²", net: "126.21 m²" },
-      { gross: "103.66 m²", net: "82.82 m²" }
+      { gross: "138.62 m²", net: "105.40 m²", image: img("marmara-haven-villa", "side-view", 1500, 2000, "Marmara Haven Villa basement level") },
+      { gross: "223.37 m²", net: "108.60 m²", image: img("marmara-haven-villa", "living-room", 1500, 2000, "Marmara Haven Villa ground floor living room") },
+      { gross: "143.19 m²", net: "126.21 m²", image: img("marmara-haven-villa", "master-bedroom", 1500, 2000, "Marmara Haven Villa first floor bedroom") },
+      {
+        gross: "103.66 m²",
+        net: "82.82 m²",
+        image: img("marmara-haven-villa", "terrace", 1200, 1600, "Marmara Haven Villa rooftop terrace with sea view"),
+        seaView: true
+      }
     ],
     amenities: [
       "privatePool",

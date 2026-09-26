@@ -77,7 +77,15 @@ function renderFloorPlan(project: Project, levels: ReturnType<typeof getProjectC
             const text = levels[i];
             if (!text) return "";
             return `
-          <article class="floor-card" ${reveal(i, 2)}>
+          <article class="floor-card${level.image ? " floor-card--media" : ""}" ${reveal(i, 2)}>
+            ${
+              level.image
+                ? `<button type="button" class="floor-card__media" data-floor-index="${i}" aria-label="${text.name}">
+              <img src="${level.image.src}" alt="${level.image.alt}" width="${level.image.width}" height="${level.image.height}" loading="lazy" />
+              ${level.seaView ? `<span class="floor-card__tag">${t("projectDetail.amenities.seaView")}</span>` : ""}
+            </button>`
+                : ""
+            }
             <header class="floor-card__head">
               <span class="floor-card__index" dir="ltr">${String(i + 1).padStart(2, "0")}</span>
               <h3>${text.name}</h3>
@@ -153,6 +161,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   const gallery = [project.coverImage, ...project.gallery];
   const others = getSortedProjects().filter((p) => p.slug !== project.slug).slice(0, 3);
   const place = placeLine(project.district, project.city);
+  const inquiryHref = `${link("/contact")}?project=${project.slug}`;
+  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("projectDetail.whatsappMessage", { name: content.name }))}`;
 
   el.innerHTML = `
     <section class="project-hero" style="background-image: linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88)), url('${project.coverImage.src}')">
@@ -169,6 +179,10 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
         <h1>${content.name}</h1>
         <p class="project-hero__tagline">${content.tagline}</p>
         <p class="project-hero__location">${place}${project.timeline ? ` · <span dir="ltr">${project.timeline}</span>` : ""}</p>
+        <div class="project-hero__actions">
+          <a class="btn btn--primary" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a>
+          <a class="btn btn--whatsapp" href="${whatsappHref}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("projectDetail.whatsappButton")}</a>
+        </div>
       </div>
     </section>
 
@@ -266,8 +280,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
             <h3>${t("projectDetail.ctaTitle")}</h3>
             <p>${t("projectDetail.ctaText")}</p>
             <div class="cta-card__actions">
-              <a class="btn btn--primary btn--block" href="${link("/contact")}?project=${project.slug}">${t("projectDetail.ctaButton")}</a>
-              <a class="btn btn--whatsapp btn--block" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("projectDetail.whatsappMessage", { name: content.name }))}" target="_blank" rel="noopener">
+              <a class="btn btn--primary btn--block" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a>
+              <a class="btn btn--whatsapp btn--block" href="${whatsappHref}" target="_blank" rel="noopener">
                 ${WHATSAPP_ICON}
                 ${t("projectDetail.whatsappButton")}
               </a>
@@ -294,6 +308,14 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
 
   initStatCounters(el);
   initScrollReveal(el);
+
+  const floorImages = (project.floorPlan ?? []).flatMap((f) => (f.image ? [f.image] : []));
+  el.querySelectorAll<HTMLButtonElement>(".floor-card__media").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const image = project.floorPlan![Number(btn.dataset.floorIndex)].image!;
+      openLightbox(floorImages.map((g) => ({ src: g.src, alt: g.alt })), floorImages.indexOf(image));
+    });
+  });
 
   const galleryEl = el.querySelector<HTMLElement>("#project-gallery")!;
   galleryEl.querySelectorAll<HTMLButtonElement>(".gallery-grid__item").forEach((btn) => {

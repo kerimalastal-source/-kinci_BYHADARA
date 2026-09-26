@@ -1,6 +1,7 @@
 import { t, link, getLocale, getProjectContent, placeLine } from "../i18n";
 import { lookup } from "../i18n/dictionaries";
 import { getProjectBySlug, getSortedProjects } from "../data/projects";
+import { campaignSource } from "../utils/campaign";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
 
 const CONTACT_EMAIL = "info@byhadara.com";
@@ -175,6 +176,7 @@ export function initContactForm(container: ParentNode): void {
       `Email: ${email}`,
       `Phone: ${phone}`,
       `Language: ${getLocale().toUpperCase()}`,
+      ...(campaignSource() ? [`Source: ${campaignSource()}`] : []),
       "",
       message
     ].join("\n");
