@@ -87,7 +87,7 @@
     "statsTitle": "HADARA en chiffres",
     "stats": [
       { "value": "12+", "label": "années d'excellence" },
-      { "value": "8", "label": "projets emblématiques" },
+      { "value": "9", "label": "projets emblématiques" },
       { "value": "400+", "label": "unités résidentielles" },
       { "value": "2", "label": "quartiers phares d'Istanbul" }
     ],
@@ -167,7 +167,7 @@
     "statsTitle": "Notre bilan",
     "stats": [
       { "value": "12+", "label": "années d'activité" },
-      { "value": "8", "label": "projets emblématiques" },
+      { "value": "9", "label": "projets emblématiques" },
       { "value": "400+", "label": "unités résidentielles" },
       { "value": "60 000+ m²", "label": "de terrain développé" }
     ]
@@ -741,6 +741,47 @@
         },
         {
           "place": "Autoroute E-5"
+        }
+      ]
+    },
+    "lotus-manzara-beylikduzu": {
+      "name": "Lotus Manzara Beylikdüzü",
+      "tagline": "16 villas privées avec vue mer, entre littoral et nature à Beylikdüzü.",
+      "shortDescription": "Lotus Manzara Beylikdüzü est un domaine exclusif de seulement 16 villas individuelles et jumelées sur 5 500 m² à Beylikdüzü, pensé pour vivre toute l'année près de la West Istanbul Marina et du littoral.",
+      "longDescription": "Une échappée loin de la ville aujourd'hui, au cœur de la vie demain : Lotus Manzara Beylikdüzü est un domaine exclusif de seulement 16 villas sur 5 500 m² à Beylikdüzü, conçu par Lotus Yapı Proje comme résidence d'été comme de toute l'année. Deux types de villas sont proposés : huit villas individuelles de type A de 322,15 m² bruts avec jardin de 247 m², et huit villas jumelées de type B de 303,40 m² bruts avec jardin de 178 m². Chaque villa 5+2 se déploie sur trois niveaux, avec terrasse vue mer, terrasse-jardin, jardin privatif paysager et garage couvert pour deux voitures. Les intérieurs se distinguent par de larges baies vitrées, des matériaux raffinés et des plans ergonomiques, des espaces de vie ouverts à la suite parentale avec dressing et salle de bain. Les résidents profitent d'une salle de sport, d'un sauna et d'un hammam, avec systèmes de sécurité et de vidéosurveillance et groupe électrogène. La West Istanbul Marina, le littoral de Gürpınar et le Yaşam Vadisi de Beylikdüzü sont tout proches. Le projet est achevé et prêt à habiter, avec des villas encore disponibles à la vente.",
+      "highlights": [
+        "Projet achevé, prêt à habiter — villas disponibles à la vente",
+        "Seulement 16 villas sur 5 500 m² : 8 individuelles (type A) et 8 jumelées (type B)",
+        "Villas 5+2 sur trois niveaux — de 303,40 à 322,15 m² bruts",
+        "Jardins privatifs de 178 à 247 m², terrasse vue mer et terrasse-jardin",
+        "Garage couvert privatif pour deux voitures par villa",
+        "Salle de sport, sauna et hammam",
+        "Proche de la West Istanbul Marina et du littoral de Gürpınar"
+      ],
+      "nearby": [
+        {
+          "place": "West Istanbul Marina"
+        },
+        {
+          "place": "Littoral de Gürpınar"
+        },
+        {
+          "place": "Beylikdüzü Yaşam Vadisi"
+        },
+        {
+          "place": "Centre commercial MarmaraPark"
+        },
+        {
+          "place": "Centre commercial Torium"
+        },
+        {
+          "place": "Hôpital Medilife Beylikdüzü"
+        },
+        {
+          "place": "Hôpital Kolan Beylikdüzü"
+        },
+        {
+          "place": "Autoroute E-5 et Metrobüs"
         }
       ]
     },

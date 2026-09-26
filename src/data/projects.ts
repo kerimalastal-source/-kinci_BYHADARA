@@ -209,12 +209,47 @@ export const projects: Project[] = [
     amenities: community(["seaViewTerrace", "privateGarden", "spa"], { indoorParking: "privateParking" })
   },
   {
+    slug: "lotus-manzara-beylikduzu",
+    district: "Beylikdüzü",
+    city: "Istanbul",
+    status: "delivered",
+    unitsAvailable: true,
+    priority: 3,
+    developer: "Lotus Yapı Proje",
+    address: "Dereağzı Mah., Şenyurt Cad. No:35, Beylikdüzü / İstanbul",
+    coverImage: img("lotus-manzara-beylikduzu", "villas-entrance", 1920, 955, "Lotus Manzara Beylikdüzü villas and gated entrance"),
+    gallery: [
+      img("lotus-manzara-beylikduzu", "aerial-sea-view", 1920, 1121, "Lotus Manzara Beylikdüzü villas from above with the Marmara Sea"),
+      img("lotus-manzara-beylikduzu", "aerial-villas", 1920, 693, "Lotus Manzara Beylikdüzü aerial view of the villas"),
+      img("lotus-manzara-beylikduzu", "villa-type-a", 1043, 1036, "Lotus Manzara Beylikdüzü type A detached villa"),
+      img("lotus-manzara-beylikduzu", "villa-type-b", 1043, 1012, "Lotus Manzara Beylikdüzü type B twin villas"),
+      img("lotus-manzara-beylikduzu", "street-view", 1920, 955, "Lotus Manzara Beylikdüzü street view"),
+      img("lotus-manzara-beylikduzu", "private-parking", 1920, 957, "Lotus Manzara Beylikdüzü private covered parking"),
+      img("lotus-manzara-beylikduzu", "living-room", 1920, 993, "Lotus Manzara Beylikdüzü living room"),
+      img("lotus-manzara-beylikduzu", "master-bedroom", 1920, 993, "Lotus Manzara Beylikdüzü master bedroom"),
+      img("lotus-manzara-beylikduzu", "kitchen", 1920, 992, "Lotus Manzara Beylikdüzü kitchen"),
+      img("lotus-manzara-beylikduzu", "entrance-staircase", 1920, 992, "Lotus Manzara Beylikdüzü entrance and staircase"),
+      img("lotus-manzara-beylikduzu", "site-plan", 1273, 728, "Lotus Manzara Beylikdüzü site plan with villas A1–A8 and B1–B8")
+    ],
+    stats: [
+      { value: "16", labelKey: "villas" },
+      { value: "5,500 m²", labelKey: "landArea" },
+      { value: "5+2", labelKey: "villaLayout" },
+      { value: "303 – 322 m²", labelKey: "grossArea" }
+    ],
+    residences: [
+      { kind: "villa", layout: "5+2", variant: "A", gross: "322.15 m²", garden: "247 m²", floors: 3 },
+      { kind: "villa", layout: "5+2", variant: "B", gross: "303.40 m²", garden: "178 m²", floors: 3 }
+    ],
+    amenities: community(["seaViewTerrace", "privateGarden", "spa"], { indoorParking: "privateParking" })
+  },
+  {
     slug: "cadde-ispartakule",
     district: "Avcılar",
     city: "Istanbul",
     status: "delivered",
     unitsAvailable: true,
-    priority: 3,
+    priority: 4,
     developer: "MH Grup İnşaat",
     address: "Ispartakule, Eski İstanbul Cad. No:75, Avcılar / İstanbul",
     coverImage: img("cadde-ispartakule", "tower-avenue", 1920, 1329, "Cadde Ispartakule residential tower and retail avenue"),
@@ -247,7 +282,7 @@ export const projects: Project[] = [
     status: "delivered",
     unitsAvailable: true,
     timeline: "2023 – 2025",
-    priority: 4,
+    priority: 5,
     coverImage: {
       src: wixImg("3510f9_d33ff747ef4d4e1f8bdd85a35fa6d2f5~mv2.jpg"),
       width: 1733,
@@ -274,7 +309,7 @@ export const projects: Project[] = [
     status: "delivered",
     unitsAvailable: true,
     timeline: "2022 – 2024",
-    priority: 5,
+    priority: 6,
     coverImage: {
       src: wixImg("3510f9_90db09f48bde445098eb3dd251a09da1~mv2.jpeg"),
       width: 1707,
@@ -303,7 +338,7 @@ export const projects: Project[] = [
     status: "delivered",
     unitsAvailable: true,
     timeline: "2022 – 2024",
-    priority: 6,
+    priority: 7,
     coverImage: {
       src: wixImg("3510f9_0e541a01b4db4c90aaa21e2f1bcea687~mv2.jpeg"),
       width: 1600,
@@ -330,7 +365,7 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "delivered",
     timeline: "2024 – 2025",
-    priority: 7,
+    priority: 8,
     coverImage: {
       src: wixImg("3510f9_b3632c1bd958497eaf5bdf465b99b197~mv2.jpeg"),
       width: 1200,
