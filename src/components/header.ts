@@ -4,6 +4,7 @@ import { openSearch } from "./search";
 import { isAuthenticated, isAdmin, getCurrentProfile, signOut } from "../auth/session";
 import { escapeHtml } from "../utils/html";
 import { renderBrand } from "./brand";
+import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "./floatingButtons";
 
 interface NavLink {
   route: string;
@@ -83,6 +84,13 @@ export function renderHeader(el: HTMLElement, route: Route): void {
           <li class="main-nav__lang">
             <div class="lang-switch" role="group" aria-label="${t("nav.language")}">${langLinks}</div>
           </li>
+          <li class="main-nav__actions">
+            <a class="btn btn--primary btn--block" href="${link("/contact")}">${t("nav.getInTouch")}</a>
+            <a class="btn btn--whatsapp btn--block" href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener">
+              ${WHATSAPP_ICON}
+              ${t("floatingActions.whatsapp")}
+            </a>
+          </li>
         </ul>
       </nav>
 
@@ -109,17 +117,24 @@ export function renderHeader(el: HTMLElement, route: Route): void {
               ${isAdmin() ? `<li><a href="${link("/admin")}" class="${route.name === "admin" || route.name === "admin-listing" ? "is-active" : ""}">${t("nav.admin")}</a></li>` : ""}
               <li><button type="button" id="logout-btn">${t("nav.logout")}</button></li>
             </ul>`
-              : `<a class="account-switch__login" href="${link("/login")}">${t("nav.login")}</a>`
+              : `<a class="account-switch__login" href="${link("/login")}" aria-label="${t("nav.login")}">
+            <svg class="account-switch__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>
+            <span class="account-switch__text">${t("nav.login")}</span>
+          </a>`
           }
         </div>
 
         <a class="btn btn--primary btn--small header-cta" href="${link("/contact")}">${t("nav.getInTouch")}</a>
 
         <button class="icon-btn menu-toggle" id="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg class="menu-toggle__open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg class="menu-toggle__close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18"></line>
           </svg>
         </button>
       </div>
@@ -128,16 +143,23 @@ export function renderHeader(el: HTMLElement, route: Route): void {
 
   const nav = el.querySelector<HTMLElement>("#main-nav")!;
   const menuToggle = el.querySelector<HTMLButtonElement>("#menu-toggle")!;
-  menuToggle.addEventListener("click", () => {
-    const isOpen = nav.classList.toggle("is-open");
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
+  const setMenuOpen = (open: boolean) => {
+    nav.classList.toggle("is-open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+    // The page behind the full-height mobile menu doesn't scroll.
+    document.body.classList.toggle("nav-open", open);
+  };
+  // The header re-renders on every navigation; never leave the page locked.
+  setMenuOpen(false);
+  menuToggle.addEventListener("click", () => setMenuOpen(!nav.classList.contains("is-open")));
+  nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenuOpen(false)));
+  // On the inner wrapper (rebuilt each render) so listeners don't pile up on `el`.
+  el.querySelector<HTMLElement>(".site-header__inner")!.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("is-open")) {
+      setMenuOpen(false);
+      menuToggle.focus();
+    }
   });
-  nav.querySelectorAll("a").forEach((a) =>
-    a.addEventListener("click", () => {
-      nav.classList.remove("is-open");
-      menuToggle.setAttribute("aria-expanded", "false");
-    })
-  );
 
   el.querySelectorAll<HTMLButtonElement>(".lang-switch__link").forEach((btn) => {
     btn.addEventListener("click", () => {

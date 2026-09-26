@@ -162,6 +162,27 @@
   }
 }
 
+@media (max-width: 640px) {
+  .stats-grid {
+    gap: 0.75rem;
+    margin-top: var(--space-md);
+  }
+
+  .stat-tile {
+    padding: 1.1rem 0.75rem;
+    background: var(--color-surface);
+  }
+
+  .stat-tile__value {
+    font-size: 1.9rem;
+  }
+
+  .stat-tile__label {
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+}
+
 /* ---------- Success partners ---------- */
 .partners-section {
   background: var(--color-surface-alt);
@@ -485,6 +506,10 @@
   .spotlight__stat dd {
     font-size: 1.05rem;
   }
+
+  .spotlight__stat dt {
+    letter-spacing: 0.04em;
+  }
 }
 
 /* ---------- Project grid & cards ---------- */
@@ -606,6 +631,20 @@
   }
 }
 
+/* Tablets: a card left alone on the last row of the two-column grid spans the
+   full width as a horizontal card instead of leaving an empty cell. */
+@media (min-width: 641px) and (max-width: 1000px) {
+  .project-grid > .project-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+
+  .project-grid > .project-card:last-child:nth-child(odd) .project-card__media {
+    flex: 0 0 50%;
+    aspect-ratio: auto;
+  }
+}
+
 @media (max-width: 640px) {
   .project-grid {
     grid-template-columns: 1fr;
@@ -621,6 +660,7 @@
 }
 
 .filter-chip {
+  min-height: 40px;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   padding: 0.55rem 1.1rem;
@@ -695,6 +735,16 @@
   .services-grid,
   .why-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .service-card,
+  .why-card {
+    padding: 1.25rem;
+  }
+
+  .service-card__index {
+    font-size: 1.3rem;
   }
 }
 
@@ -1145,6 +1195,41 @@
   .project-stats__item--long dd {
     font-size: 1.05rem;
   }
+
+  /* An odd figure left alone on the last row spans both columns. */
+  .project-stats__item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Tablets with five figures: one row of five, icons stacked above the values
+   (auto-fit would leave the fifth alone on a second row). */
+@media (min-width: 721px) and (max-width: 1100px) {
+  .project-stats__grid:has(> :nth-child(5)) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .project-stats__grid:has(> :nth-child(5)) .project-stats__item {
+    --stat-pad: var(--space-sm);
+    --stat-icon: 36px;
+    padding: var(--space-sm);
+    padding-top: calc(var(--space-sm) + var(--stat-icon) + 0.6rem);
+    padding-inline-start: var(--stat-pad);
+    justify-content: flex-end;
+  }
+
+  .project-stats__grid:has(> :nth-child(5)) .project-stats__item:first-child {
+    --stat-pad: 0px;
+  }
+
+  .project-stats__grid:has(> :nth-child(5)) .project-stats__icon {
+    top: var(--space-sm);
+    transform: none;
+  }
+
+  .project-stats__grid:has(> :nth-child(5)) .project-stats__item dd {
+    font-size: 1.15rem;
+  }
 }
 
 .highlight-list {
@@ -1230,6 +1315,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  /* The sidebar sticks as one block; sticky cards on their own slid over
+     each other while scrolling. */
+  position: sticky;
+  top: calc(104px + var(--space-md));
+  align-self: start;
 }
 
 .fact-card,
@@ -1237,8 +1327,6 @@
   background: var(--color-surface-alt);
   border-radius: var(--radius-md);
   padding: var(--space-md);
-  position: sticky;
-  top: 120px;
 }
 
 .cta-card {
@@ -1248,6 +1336,10 @@
 
 .cta-card h3 {
   color: var(--color-on-primary);
+}
+
+.cta-card p {
+  color: rgba(247, 244, 236, 0.82);
 }
 
 .fact-list {
@@ -1281,8 +1373,7 @@
     grid-template-columns: 1fr;
   }
 
-  .fact-card,
-  .cta-card {
+  .project-detail__sidebar {
     position: static;
   }
 }
@@ -1524,8 +1615,21 @@
   }
 
   .phone-field__country {
+    /* flex-basis would become the select's height in a column */
+    flex: none;
     width: 100%;
     max-width: none;
+  }
+}
+
+/* 16px text in fields: smaller sizes make iPhone zoom the page on focus. */
+@media (max-width: 1024px) {
+  .form-field input,
+  .form-field select,
+  .form-field textarea,
+  .phone-field__country,
+  .phone-field__number {
+    font-size: 1rem;
   }
 }
 
@@ -2086,19 +2190,77 @@
   background: #25d366;
 }
 
+.floating-actions__btn--whatsapp svg {
+  width: 26px;
+  height: 26px;
+}
+
+.floating-actions__btn--call svg {
+  width: 22px;
+  height: 22px;
+}
+
 .floating-actions__btn--call {
   background: var(--color-primary);
 }
 
+.floating-actions__label {
+  display: none;
+}
+
+body.nav-open .floating-actions {
+  display: none;
+}
+
+/* Phones: the two round buttons become a fixed bottom bar with labels, so they
+   never cover text, buttons or the footer. */
 @media (max-width: 640px) {
+  body {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom));
+  }
+
   .floating-actions {
-    bottom: 16px;
-    right: 16px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: row;
+    gap: 0.6rem;
+    padding: 0.6rem var(--space-md) calc(0.6rem + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 -6px 20px rgba(15, 43, 33, 0.08);
   }
 
   .floating-actions__btn {
-    width: 48px;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: auto;
     height: 48px;
+    border-radius: var(--radius-sm);
+    padding-inline: 0.5rem;
+    box-shadow: none;
+    font-weight: 700;
+    font-size: 0.88rem;
+    white-space: nowrap;
+  }
+
+  .floating-actions__btn:hover {
+    transform: none;
+  }
+
+  .floating-actions__btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .floating-actions__label {
+    display: inline;
   }
 }
 

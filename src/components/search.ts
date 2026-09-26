@@ -1,4 +1,5 @@
 import { t, tRaw, getProjectContent } from "../i18n";
+import { lookup } from "../i18n/dictionaries";
 import { getSortedProjects } from "../data/projects";
 import { getSortedBlogPosts } from "../data/blog";
 import { navigate } from "../router";
@@ -7,6 +8,8 @@ interface SearchResult {
   title: string;
   snippet: string;
   route: string;
+  /** Extra text that matches but isn't shown, e.g. the English project name on an Arabic page. */
+  keywords?: string;
 }
 
 interface BlogArticleContent {
@@ -24,7 +27,10 @@ function buildIndex(): SearchResult[] {
     results.push({
       title: content.name,
       snippet: content.tagline,
-      route: `/projects/${project.slug}`
+      route: `/projects/${project.slug}`,
+      keywords: [lookup("en", `projectsData.${project.slug}.name`), project.district, project.city, project.developer]
+        .filter(Boolean)
+        .join(" ")
     });
   }
 
@@ -49,12 +55,19 @@ function buildIndex(): SearchResult[] {
   return results;
 }
 
+/** Case- and accent-insensitive form, so "beylikduzu" finds "Beylikdüzü". */
+function normalize(text: string): string {
+  return text
+    .toLocaleLowerCase("tr")
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .replace(/ı/g, "i");
+}
+
 function runSearch(query: string): SearchResult[] {
-  const q = query.trim().toLowerCase();
+  const q = normalize(query.trim());
   if (!q) return [];
-  return buildIndex().filter(
-    (r) => r.title.toLowerCase().includes(q) || r.snippet.toLowerCase().includes(q)
-  );
+  return buildIndex().filter((r) => normalize(`${r.title} ${r.snippet} ${r.keywords ?? ""}`).includes(q));
 }
 
 export function openSearch(): void {

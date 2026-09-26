@@ -48,12 +48,13 @@ h4 {
   margin: 0 0 var(--space-sm);
 }
 
+/* Fluid type: one scale from phones (~31px / 25px) up to desktop. */
 h1 {
-  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-size: clamp(1.9rem, 1.2rem + 3vw, 3.4rem);
 }
 
 h2 {
-  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.4rem);
 }
 
 h3 {
@@ -78,8 +79,10 @@ p {
 
 .skip-link {
   position: absolute;
-  inset-inline-start: -999px;
+  inset-inline-start: 0;
   top: 0;
+  /* Hidden above the page (not off to the side, which widens RTL pages). */
+  transform: translateY(-120%);
   background: var(--color-accent);
   color: var(--color-primary-dark);
   padding: 0.5rem 1rem;
@@ -87,7 +90,7 @@ p {
 }
 
 .skip-link:focus {
-  inset-inline-start: 0;
+  transform: none;
 }
 
 .section {
@@ -143,8 +146,31 @@ p {
   color: var(--color-ink-soft);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .section {
-    padding: var(--space-xl) 0;
+    padding: 4.5rem 0;
   }
+}
+
+@media (max-width: 640px) {
+  h3 {
+    font-size: 1.15rem;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .section-head {
+    margin-bottom: var(--space-md);
+  }
+
+  .lead-text {
+    font-size: 1.02rem;
+  }
+}
+
+/* The page behind the open mobile menu stays put. */
+body.nav-open {
+  overflow: hidden;
 }

@@ -25,7 +25,9 @@
   },
   "floatingActions": {
     "whatsapp": "تواصل عبر واتساب",
-    "call": "اتصل بنا"
+    "call": "اتصل بنا",
+    "whatsappShort": "واتساب",
+    "callShort": "اتصل بنا"
   },
   "lang": {
     "en": "English",

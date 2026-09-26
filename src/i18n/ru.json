@@ -25,7 +25,9 @@
   },
   "floatingActions": {
     "whatsapp": "Написать в WhatsApp",
-    "call": "Позвоните нам"
+    "call": "Позвоните нам",
+    "whatsappShort": "WhatsApp",
+    "callShort": "Позвонить"
   },
   "lang": {
     "en": "English",

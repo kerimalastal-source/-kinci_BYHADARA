@@ -10,6 +10,7 @@
 
 /* ---------- Header ---------- */
 .site-header {
+  --header-h: 104px;
   position: sticky;
   top: 0;
   z-index: 60;
@@ -25,7 +26,7 @@
   grid-template-columns: max-content minmax(0, 1fr) max-content;
   align-items: center;
   gap: var(--space-md);
-  height: 104px;
+  height: var(--header-h);
   /* The logo stays physically on the left and its internal layout (mark,
      name, tagline) stays fixed in every language — RTL flips the nav and
      actions only. */
@@ -212,6 +213,26 @@
   display: none;
 }
 
+.menu-toggle__close,
+.menu-toggle[aria-expanded="true"] .menu-toggle__open {
+  display: none;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__close {
+  display: block;
+}
+
+.menu-toggle[aria-expanded="true"] {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  border-color: var(--color-primary);
+}
+
+/* Contact buttons at the bottom of the mobile/tablet menu only. */
+.main-nav__actions {
+  display: none;
+}
+
 .lang-switch {
   display: flex;
   align-items: center;
@@ -226,7 +247,7 @@
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--color-muted);
-  padding: 0.3rem 0;
+  padding: 0.55rem 0.1rem;
   border-bottom: 1px solid transparent;
   cursor: pointer;
 }
@@ -332,21 +353,28 @@
     display: none;
   }
 
+  /* Full-height panel under the header: nothing of the page shows through,
+     and long menus scroll inside it. */
   .main-nav {
     position: fixed;
     inset-inline: 0;
-    top: 104px;
+    top: var(--header-h);
+    bottom: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: var(--color-surface);
-    border-bottom: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border);
     transform: translateY(-8px);
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity var(--transition), transform var(--transition);
+    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
   }
 
   .main-nav.is-open {
     opacity: 1;
     transform: translateY(0);
+    visibility: visible;
     pointer-events: auto;
   }
 
@@ -354,14 +382,67 @@
     flex-direction: column;
     align-items: stretch;
     width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
     gap: 0;
-    padding: var(--space-sm) var(--space-md) var(--space-md);
+    padding: var(--space-xs) var(--space-md) calc(var(--space-lg) + env(safe-area-inset-bottom));
   }
 
-  .main-nav__link {
-    display: block;
-    padding: 0.85rem 0;
+  .main-nav__link,
+  .nav-group__toggle {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-ink);
     border-bottom: 1px solid var(--color-border);
+  }
+
+  .main-nav__link::after {
+    display: none;
+  }
+
+  .main-nav__link.is-active {
+    color: var(--color-accent-dark);
+  }
+
+  .nav-group__toggle {
+    justify-content: space-between;
+  }
+
+  /* "Resources" opens in place, as an indented list, instead of a popup. */
+  .nav-group__menu {
+    position: static;
+    min-width: 0;
+    padding: 0.25rem 0 0.5rem;
+    padding-inline-start: var(--space-sm);
+    border: 0;
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .nav-group__link {
+    padding: 0.75rem 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .main-nav__lang {
+    padding-top: var(--space-sm);
+  }
+
+  .main-nav__actions {
+    display: grid;
+    gap: 0.75rem;
+    padding-top: var(--space-md);
+  }
+
+  .main-nav__actions .btn {
+    justify-content: center;
+    padding-block: 0.95rem;
   }
 
   .menu-toggle {
@@ -372,28 +453,34 @@
     display: block;
   }
 
-  .nav-group__toggle {
-    display: flex;
-    width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .site-header {
+    --header-h: 88px;
+  }
+
+  .site-header .brand__logo {
+    height: 62px;
   }
 }
 
 @media (max-width: 640px) {
-  .site-header__inner {
-    gap: var(--space-sm);
-    height: 84px;
+  .site-header {
+    --header-h: 68px;
   }
 
-  .main-nav {
-    top: 84px;
+  .site-header__inner {
+    gap: var(--space-sm);
   }
 
   .brand {
     gap: 0.5rem;
   }
 
-  .brand__logo {
-    height: 40px;
+  .brand__logo,
+  .site-header .brand__logo {
+    height: 38px;
   }
 
   .brand__tagline {
@@ -409,8 +496,8 @@
   }
 
   .icon-btn {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
   }
 
   /* Phones: languages move from the top bar into the menu. */
@@ -434,9 +521,37 @@
 
   .account-switch__login,
   .account-switch__current {
-    padding: 0.3rem 0.55rem;
-    font-size: 0.72rem;
-    max-width: 84px;
+    min-height: 40px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    max-width: 110px;
+  }
+}
+
+.account-switch__icon {
+  display: none;
+}
+
+/* Small phones: the login pill becomes a round person icon so the header
+   (logo + search + login + menu) fits in every language. */
+@media (max-width: 400px) {
+  .account-switch__login {
+    justify-content: center;
+    width: 40px;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .account-switch__icon {
+    display: block;
+  }
+
+  .account-switch__text {
+    display: none;
+  }
+
+  .account-switch__current {
+    max-width: 80px;
   }
 }
 
@@ -557,10 +672,37 @@
   color: rgba(247, 244, 236, 0.6);
 }
 
+.site-footer__bottom p {
+  margin: 0;
+  color: inherit;
+}
+
 @media (max-width: 800px) {
   .site-footer__inner {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .site-footer {
+    padding-top: var(--space-lg);
+  }
+
+  .site-footer__inner {
+    gap: var(--space-md) var(--space-sm);
+    padding-bottom: var(--space-lg);
+  }
+
+  /* Quick links in two columns so the footer isn't a long single list. */
+  .site-footer__col .footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem var(--space-sm);
+  }
+
+  .site-footer__col h3 {
+    margin-bottom: 0.75rem;
   }
 }
 
@@ -664,4 +806,55 @@
   font-weight: 600;
   color: rgba(247, 244, 236, 0.9);
   margin-bottom: var(--space-sm);
+}
+
+/* ---------- Heroes on tablets and phones ---------- */
+@media (max-width: 900px) {
+  .hero {
+    min-height: 0;
+    padding: 6rem 0 4.5rem;
+  }
+
+  .page-hero {
+    padding: 5rem 0 3.5rem;
+  }
+
+  .project-hero {
+    min-height: 52vh;
+    padding: 6rem 0 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 4.5rem 0 3.5rem;
+  }
+
+  .hero__subtitle,
+  .page-hero__subtitle,
+  .project-hero__tagline {
+    font-size: 1rem;
+  }
+
+  /* Hero buttons stack at full, equal width. */
+  .hero__actions {
+    flex-direction: column;
+  }
+
+  .hero__actions .btn {
+    justify-content: center;
+  }
+
+  .page-hero {
+    padding: 3.5rem 0 2.5rem;
+  }
+
+  .project-hero {
+    min-height: 46vh;
+    padding: 4.5rem 0 2rem;
+  }
+
+  .back-link {
+    padding-block: 0.4rem;
+  }
 }

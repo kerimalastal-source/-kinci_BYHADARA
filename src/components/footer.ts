@@ -27,7 +27,7 @@ export function renderFooter(el: HTMLElement): void {
 
       <div class="site-footer__col">
         <h3>${t("footer.quickLinks")}</h3>
-        <ul>
+        <ul class="footer-links">
           <li><a href="${link("/")}">${t("nav.home")}</a></li>
           <li><a href="${link("/projects")}">${t("nav.projects")}</a></li>
           <li><a href="${link("/about")}">${t("nav.about")}</a></li>
