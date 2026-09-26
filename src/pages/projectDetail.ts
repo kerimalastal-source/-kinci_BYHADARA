@@ -147,6 +147,36 @@ function initVideo(el: HTMLElement, title: string): void {
   });
 }
 
+/** Phones: the long description opens collapsed to a few lines, with a "Read more" toggle. */
+const COLLAPSE_QUERY = window.matchMedia("(max-width: 640px)");
+
+function initReadMore(el: HTMLElement): void {
+  const text = el.querySelector<HTMLElement>(".project-detail__description");
+  const button = el.querySelector<HTMLButtonElement>(".read-more");
+  if (!text || !button) return;
+  let expanded = false;
+
+  const update = () => {
+    text.classList.toggle("is-collapsed", !expanded);
+    // Only offer the toggle when the collapsed text actually hides something.
+    const clipped = text.scrollHeight > text.clientHeight + 2;
+    button.hidden = !expanded && !clipped;
+    if (button.hidden) text.classList.remove("is-collapsed");
+    button.textContent = t(expanded ? "common.readLess" : "common.readMore");
+    button.setAttribute("aria-expanded", String(expanded));
+  };
+
+  button.addEventListener("click", () => {
+    expanded = !expanded;
+    update();
+    if (!expanded) text.scrollIntoView({ block: "nearest" });
+  });
+  COLLAPSE_QUERY.addEventListener("change", () => {
+    if (text.isConnected) update();
+  });
+  update();
+}
+
 function renderAmenities(project: Project): string {
   if (!project.amenities?.length) return "";
   // Three columns when that fills every row (6, 9…) and four doesn't.
@@ -252,7 +282,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
         <div class="project-detail__main">
           <section class="detail-block">
             <h2>${t("projectDetail.overviewTitle")}</h2>
-            <p class="project-detail__description">${content.longDescription}</p>
+            <p class="project-detail__description" id="project-description">${content.longDescription}</p>
+            <button type="button" class="read-more" aria-controls="project-description" aria-expanded="false" hidden>${t("common.readMore")}</button>
           </section>
 
           <section class="detail-block">
@@ -354,6 +385,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   initStatCounters(el);
   initScrollReveal(el);
   initVideo(el, content.name);
+  initReadMore(el);
 
   const floorImages = (project.floorPlan ?? []).flatMap((f) => (f.image ? [f.image] : []));
   el.querySelectorAll<HTMLButtonElement>(".floor-card__media").forEach((btn) => {

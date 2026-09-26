@@ -815,6 +815,7 @@
 .back-link {
   display: inline-flex;
   align-items: center;
+  min-height: 40px;
   gap: 0.4rem;
   font-weight: 600;
   color: rgba(247, 244, 236, 0.9);

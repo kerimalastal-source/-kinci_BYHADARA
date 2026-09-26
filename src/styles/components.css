@@ -672,6 +672,30 @@
   }
 }
 
+/* Phones: "other projects" under a project page becomes a swipeable row, so
+   the landing page doesn't end in three full-height cards. */
+@media (max-width: 640px) {
+  .other-projects .project-grid {
+    display: flex;
+    gap: var(--space-sm);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-inline: calc(-1 * var(--space-md));
+    padding: 0 var(--space-md) var(--space-sm);
+    scroll-padding-inline: var(--space-md);
+    scrollbar-width: none;
+  }
+
+  .other-projects .project-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .other-projects .project-card {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+  }
+}
+
 /* ---------- Filter bar ---------- */
 .filter-bar {
   display: flex;
@@ -865,6 +889,43 @@
   font-size: 1.05rem;
   line-height: 1.8;
   white-space: pre-line;
+}
+
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 0.25rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  color: var(--color-accent-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.read-more[hidden] {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .project-detail__description {
+    font-size: 1rem;
+  }
+
+  .project-detail__description {
+    margin-bottom: 0;
+  }
+
+  .project-detail__description.is-collapsed {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    overflow: hidden;
+  }
 }
 
 .detail-block + .detail-block {
@@ -1370,9 +1431,29 @@
     font-size: 1.05rem;
   }
 
-  /* An odd figure left alone on the last row spans both columns. */
+  /* An odd figure left alone on the last row spans both columns, laid out as
+     icon beside value and centred, so the row doesn't look half empty. */
   .project-stats__item:last-child:nth-child(odd) {
     grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: var(--space-sm) 0;
+  }
+
+  /* Icon, value, label in one line: the <dt>'s icon and text join the row. */
+  .project-stats__item:last-child:nth-child(odd) dt {
+    display: contents;
+  }
+
+  .project-stats__item:last-child:nth-child(odd) .project-stats__icon {
+    position: static;
+    order: -2;
+  }
+
+  .project-stats__item:last-child:nth-child(odd) dd {
+    order: -1;
   }
 }
 

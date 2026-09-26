@@ -37,6 +37,7 @@
     "discoverMore": "Узнать больше",
     "viewAllProjects": "Смотреть все проекты",
     "readMore": "Читать дальше",
+    "readLess": "Свернуть",
     "backToProjects": "Назад к проектам",
     "location": "Расположение",
     "timeline": "Сроки",
@@ -68,7 +69,7 @@
       "terrace": "Терраса",
       "blocks": "Корпуса",
       "layout": "Планировка",
-      "grossArea": "Общая площадь квартир",
+      "grossArea": "Общая площадь",
       "villas": "Виллы",
       "villaLayout": "Планировка виллы"
     }

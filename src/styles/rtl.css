@@ -19,3 +19,19 @@
 [dir="rtl"] .steps-list__item {
   text-align: start;
 }
+
+/* Arabic script is cursive: letter-spacing pulls the joined letters apart, and
+   the small uppercase-style labels used for Latin text are too small to read in
+   Arabic. (The brand keeps its spacing: it is marked lang="en".) */
+:lang(ar) :where(*) {
+  letter-spacing: 0 !important;
+}
+
+:lang(ar) .badge,
+:lang(ar) .eyebrow,
+:lang(ar) .project-stats__item dt,
+:lang(ar) .floor-card__areas dt,
+:lang(ar) .residence-card__eyebrow,
+:lang(ar) .floor-card__tag {
+  font-size: 0.85rem;
+}
