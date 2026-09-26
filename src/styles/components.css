@@ -116,13 +116,34 @@
   background: var(--color-muted);
 }
 
+/* "Live"-style dot: a ring pulses out from it on a loop. */
 .badge--available::before {
   content: "";
+  flex-shrink: 0;
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--color-success);
-  box-shadow: 0 0 0 3px rgba(47, 107, 63, 0.18);
+  background: #22a24a;
+  animation: live-pulse 1.6s ease-out infinite;
+}
+
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 162, 74, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(34, 162, 74, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 162, 74, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge--available::before {
+    animation: none;
+    box-shadow: 0 0 0 3px rgba(34, 162, 74, 0.2);
+  }
 }
 
 
