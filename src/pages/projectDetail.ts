@@ -3,10 +3,26 @@ import { getProjectBySlug, getSortedProjects, type Project, type Residence } fro
 import { renderProjectCard, projectStatusLabel } from "../components/projectCard";
 import { amenityIcon } from "../components/amenityIcons";
 import { openLightbox } from "../components/lightbox";
+import { initStatCounters } from "../components/statCounter";
+import { initScrollReveal } from "../components/scrollReveal";
 import { renderNotFound } from "./notFound";
 
 const PIN_ICON =
   '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>';
+
+/** Scroll-reveal attributes; the stagger restarts every row so long grids don't lag. */
+const reveal = (i: number, perRow = 4) => `data-reveal data-reveal-index="${i % perRow}"`;
+
+/** Plain counts and areas ("78", "21,000 m²") count up; years and ranges stay as written. */
+const countsUp = (value: string, labelKey: string) => labelKey !== "delivery" && /^\d[\d,.]*( m²)?$/.test(value);
+
+/**
+ * On desktop the cover takes a 2×2 block beside two images, then rows of three.
+ * A last row with a single image stretches it into a panorama, so no photo sits alone.
+ */
+function galleryTail(total: number): string {
+  return total > 3 && (total - 3) % 3 === 1 ? " gallery-grid__item--panorama" : "";
+}
 
 function residenceTitle(r: Residence): string {
   const layout = `<span dir="ltr">${r.layout}</span>`;
@@ -20,14 +36,14 @@ function renderResidences(project: Project): string {
       <h2>${t("projectDetail.residencesTitle")}</h2>
       <div class="residence-grid${project.residences.length === 1 ? " residence-grid--single" : ""}">
         ${project.residences
-          .map((r) => {
+          .map((r, i) => {
             const meta: [string, string][] = [];
             if (r.net) meta.push([t("projectDetail.netAreaLabel"), r.net]);
             if (r.garden) meta.push([t("projectDetail.gardenLabel"), r.garden]);
             if (r.floors) meta.push([t("projectDetail.floorsLabel"), String(r.floors)]);
             if (r.planTypes) meta.push([t("projectDetail.planTypesLabel"), String(r.planTypes)]);
             return `
-          <article class="residence-card">
+          <article class="residence-card" ${reveal(i, 3)}>
             ${r.variant ? `<p class="residence-card__eyebrow">${t("projectDetail.residenceVariant", { variant: r.variant })}</p>` : ""}
             <h3 class="residence-card__title">${residenceTitle(r)}</h3>
             <p class="residence-card__area">
@@ -50,14 +66,17 @@ function renderResidences(project: Project): string {
 
 function renderAmenities(project: Project): string {
   if (!project.amenities?.length) return "";
+  // Three columns when that fills every row (6, 9…) and four doesn't.
+  const n = project.amenities.length;
+  const cols = n % 3 === 0 && n % 4 !== 0 ? 3 : 4;
   return `
     <section class="detail-block">
       <h2>${t("projectDetail.amenitiesTitle")}</h2>
-      <ul class="amenity-grid">
+      <ul class="amenity-grid${cols === 3 ? " amenity-grid--3" : ""}">
         ${project.amenities
           .map(
-            (a) => `
-          <li class="amenity-grid__item">
+            (a, i) => `
+          <li class="amenity-grid__item" ${reveal(i, cols)}>
             <span class="amenity-grid__icon">${amenityIcon(a)}</span>
             <span>${t(`projectDetail.amenities.${a}`)}</span>
           </li>`
@@ -78,8 +97,8 @@ function renderLocation(project: Project, nearby: ReturnType<typeof getProjectCo
           ? `<ul class="nearby-list">
         ${nearby
           .map(
-            (n) => `
-          <li>
+            (n, i) => `
+          <li ${reveal(i, 2)}>
             <span class="nearby-list__place">${n.place}</span>
             ${n.time ? `<span class="nearby-list__time">${n.time}</span>` : ""}
           </li>`
@@ -128,7 +147,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
               (s) => `
             <div class="project-stats__item${s.value.length > 12 ? " project-stats__item--long" : ""}">
               <dt>${t(`common.statLabels.${s.labelKey}`)}</dt>
-              <dd dir="ltr">${s.value}</dd>
+              <dd dir="ltr"${countsUp(s.value, s.labelKey) ? ` data-stat-value="${s.value}"` : ""}>${s.value}</dd>
             </div>`
             )
             .join("")}
@@ -147,7 +166,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           <section class="detail-block">
             <h2>${t("projectDetail.highlightsTitle")}</h2>
             <ul class="highlight-list">
-              ${content.highlights.map((h) => `<li>${h}</li>`).join("")}
+              ${content.highlights.map((h, i) => `<li ${reveal(i, 8)}>${h}</li>`).join("")}
             </ul>
           </section>
 
@@ -161,7 +180,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
               ${gallery
                 .map(
                   (img, i) => `
-                <button type="button" class="gallery-grid__item${i === 0 ? " gallery-grid__item--wide" : ""}" data-index="${i}">
+                <button type="button" class="gallery-grid__item${i === 0 ? " gallery-grid__item--wide" : ""}${i === gallery.length - 1 ? galleryTail(gallery.length) : ""}" data-index="${i}">
                   <img src="${img.src}" alt="${img.alt}" width="${img.width}" height="${img.height}" loading="lazy" />
                 </button>`
                 )
@@ -232,6 +251,9 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
         : ""
     }
   `;
+
+  initStatCounters(el);
+  initScrollReveal(el);
 
   const galleryEl = el.querySelector<HTMLElement>("#project-gallery")!;
   galleryEl.querySelectorAll<HTMLButtonElement>(".gallery-grid__item").forEach((btn) => {

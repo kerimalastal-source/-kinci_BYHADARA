@@ -15,6 +15,17 @@ export interface ProjectStat {
 }
 
 export type AmenityKey =
+  | "separatePools"
+  | "cctv"
+  | "cleaning"
+  | "buildQuality"
+  | "spa"
+  | "insulation"
+  | "privatePool"
+  | "seaView"
+  | "rooftopTerrace"
+  | "masterSuite"
+  | "equippedKitchen"
   | "outdoorPool"
   | "fitness"
   | "sauna"
@@ -66,6 +77,25 @@ export interface Project {
   amenities?: AmenityKey[];
 }
 
+/** Shared services of every residential community (all projects except the single villa), per the owner. */
+const COMMUNITY: AmenityKey[] = [
+  "separatePools",
+  "fitness",
+  "indoorParking",
+  "security",
+  "cctv",
+  "cleaning",
+  "landscaping",
+  "generator",
+  "buildQuality"
+];
+
+/** Community services plus project-specific extras; `swap` replaces a shared item (e.g. private garages). */
+const community = (extras: AmenityKey[] = [], swap: Partial<Record<AmenityKey, AmenityKey>> = {}): AmenityKey[] => [
+  ...COMMUNITY.map((a) => swap[a] ?? a),
+  ...extras
+];
+
 const img = (slug: string, file: string, width: number, height: number, alt: string): ProjectImage => ({
   src: `/images/projects/${slug}/${file}.jpg`,
   width,
@@ -108,7 +138,8 @@ export const projects: Project[] = [
       { kind: "apartment", layout: "2+1", gross: "100 – 109 m²" },
       { kind: "apartment", layout: "3+1", gross: "134 – 167 m²" },
       { kind: "apartment", layout: "4+1", gross: "194 – 197 m²" }
-    ]
+    ],
+    amenities: community()
   },
   {
     slug: "diamond-marin",
@@ -144,7 +175,7 @@ export const projects: Project[] = [
       { value: "117 – 143 m²", labelKey: "grossArea" }
     ],
     residences: [{ kind: "apartment", layout: "3+1", gross: "117.60 – 143.08 m²", planTypes: 5 }],
-    amenities: ["outdoorPool", "fitness", "smartHome", "indoorParking", "security", "landscaping", "airConditioning", "generator"]
+    amenities: community(["smartHome", "airConditioning", "insulation"])
   },
   {
     slug: "lotus-manzara-guzelce",
@@ -176,7 +207,7 @@ export const projects: Project[] = [
       { value: "343 m²", labelKey: "grossArea" }
     ],
     residences: [{ kind: "villa", layout: "6+2", gross: "343.15 m²", net: "298.43 m²", floors: 3 }],
-    amenities: ["seaViewTerrace", "privateGarden", "privateParking", "fitness", "sauna", "hamam", "security", "generator"]
+    amenities: community(["seaViewTerrace", "privateGarden", "spa"], { indoorParking: "privateParking" })
   },
   {
     slug: "cadde-ispartakule",
@@ -208,13 +239,14 @@ export const projects: Project[] = [
       { kind: "apartment", layout: "2+1", gross: "106.30 – 108.56 m²", net: "89.66 – 91.92 m²" },
       { kind: "apartment", layout: "3+1", gross: "132.83 – 150.61 m²", net: "116.19 – 133.97 m²" }
     ],
-    amenities: ["smartHome", "fitness", "sauna", "hamam", "indoorParking", "evCharging", "landscaping", "retail"]
+    amenities: community(["smartHome", "spa", "evCharging"])
   },
   {
     slug: "lotus-koru-2",
     district: "Beylikdüzü",
     city: "Istanbul",
-    status: "ongoing",
+    status: "delivered",
+    unitsAvailable: true,
     timeline: "2023 – 2025",
     priority: 4,
     coverImage: {
@@ -233,13 +265,15 @@ export const projects: Project[] = [
       { value: "13 × 5", labelKey: "blocksFloors" },
       { value: "40,000 m²", labelKey: "constructionArea" },
       { value: "17,500 m²", labelKey: "greenAndParkArea" }
-    ]
+    ],
+    amenities: community()
   },
   {
     slug: "lotus-istanbul",
     district: "Beylikdüzü",
     city: "Istanbul",
-    status: "ongoing",
+    status: "delivered",
+    unitsAvailable: true,
     timeline: "2022 – 2024",
     priority: 5,
     coverImage: {
@@ -260,13 +294,15 @@ export const projects: Project[] = [
       { value: "102", labelKey: "offices" },
       { value: "62", labelKey: "apartments" },
       { value: "47", labelKey: "shops" }
-    ]
+    ],
+    amenities: community()
   },
   {
     slug: "lotus-koru-1",
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "delivered",
+    unitsAvailable: true,
     timeline: "2022 – 2024",
     priority: 6,
     coverImage: {
@@ -286,13 +322,14 @@ export const projects: Project[] = [
     stats: [
       { value: "144", labelKey: "apartments" },
       { value: "5", labelKey: "floors" }
-    ]
+    ],
+    amenities: community()
   },
   {
     slug: "marmara-haven-villa",
     district: "Büyükçekmece",
     city: "Istanbul",
-    status: "ongoing",
+    status: "delivered",
     timeline: "2024 – 2025",
     priority: 7,
     coverImage: {
@@ -317,7 +354,8 @@ export const projects: Project[] = [
       { value: "7", labelKey: "bathrooms" },
       { value: "54 m²", labelKey: "livingRoom" },
       { value: "26 m²", labelKey: "terrace" }
-    ]
+    ],
+    amenities: ["privatePool", "seaView", "rooftopTerrace", "smartHome", "masterSuite", "equippedKitchen"]
   }
 ];
 

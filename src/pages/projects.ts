@@ -7,12 +7,14 @@ type FilterKey = "all" | ProjectStatus;
 export function renderProjects(el: HTMLElement): void {
   const allProjects = getSortedProjects();
 
-  const filters: { key: FilterKey; labelKey: string }[] = [
+  const allFilters: { key: FilterKey; labelKey: string }[] = [
     { key: "all", labelKey: "projects.filterAll" },
     { key: "new-launch", labelKey: "projects.filterNewLaunch" },
     { key: "ongoing", labelKey: "projects.filterOngoing" },
     { key: "delivered", labelKey: "projects.filterDelivered" }
   ];
+  // Hide status filters that no project currently matches.
+  const filters = allFilters.filter((f) => f.key === "all" || allProjects.some((p) => p.status === f.key));
 
   el.innerHTML = `
     <section class="page-hero">

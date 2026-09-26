@@ -731,9 +731,47 @@
   color: var(--color-accent-dark);
 }
 
+.amenity-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.amenity-grid__item,
+.residence-card {
+  transition:
+    opacity 600ms ease,
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+}
+
+.amenity-grid__icon {
+  transition: background var(--transition), color var(--transition), transform 250ms ease;
+}
+
+@media (hover: hover) {
+  .amenity-grid__item:hover,
+  .residence-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+
+  .amenity-grid__item:hover .amenity-grid__icon {
+    background: var(--color-accent);
+    color: var(--color-primary-dark);
+    transform: scale(1.08);
+  }
+}
+
 @media (max-width: 560px) {
-  .amenity-grid {
+  .amenity-grid,
+  .amenity-grid--3 {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* An odd tile left alone on the last row spans both columns. */
+  .amenity-grid__item:last-child:nth-child(odd) {
+    grid-column: span 2;
   }
 }
 
@@ -857,6 +895,13 @@
 .gallery-grid__item--wide {
   grid-column: span 2;
   grid-row: span 2;
+}
+
+@media (min-width: 721px) {
+  .gallery-grid__item--panorama {
+    grid-column: 1 / -1;
+    aspect-ratio: 21 / 8;
+  }
 }
 
 .gallery-grid__item img {
