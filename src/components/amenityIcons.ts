@@ -2,6 +2,14 @@ import type { AmenityKey } from "../data/projects";
 
 // 24×24 line icons drawn with currentColor, one per amenity.
 const PATHS: Record<AmenityKey, string> = {
+  elevator: '<rect x="4" y="2.5" width="16" height="19" rx="1.5"/><path d="M12 2.5v19M7 9.5l1.5-2 1.5 2M14 7.5l1.5 2 1.5-2"/>',
+  underfloorHeating:
+    '<path d="M2.5 20.5h19"/><path d="M5 17.5c1.2 0 1.2-1.2 2.4-1.2s1.2 1.2 2.4 1.2 1.2-1.2 2.4-1.2 1.2 1.2 2.4 1.2 1.2-1.2 2.4-1.2 1.2 1.2 2.4 1.2"/><path d="M8 13c-.9-1.3.9-2.2 0-3.5M12 13c-.9-1.3.9-2.2 0-3.5M16 13c-.9-1.3.9-2.2 0-3.5M8 6.5c-.9-1.3.9-2.2 0-3.5M12 6.5c-.9-1.3.9-2.2 0-3.5M16 6.5c-.9-1.3.9-2.2 0-3.5"/>',
+  fireplace:
+    '<path d="M3 21.5V6h18v15.5M1.5 6h21M1.5 3h21v3"/><path d="M7 21.5V11h10v10.5"/><path d="M12 19.5c-1.6 0-2.5-1-2.5-2.3 0-1.6 1.5-2.2 1.8-3.7 1.4.9 3.2 2.1 3.2 3.9 0 1.2-1 2.1-2.5 2.1z"/>',
+  waterWell: '<path d="M12 2.5c3 3.8 5.5 6.9 5.5 10a5.5 5.5 0 0 1-11 0c0-3.1 2.5-6.2 5.5-10z"/><path d="M12 21.5v-3.5M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/>',
+  flexBasement:
+    '<rect x="2.5" y="4" width="19" height="13" rx="1.5"/><path d="m10 8 5 2.5-5 2.5z"/><path d="M8 21h8M12 17v4"/>',
   playground: '<path d="M4 21V8l4-4 4 4v13M4 12h8"/><path d="M12 12c3 0 5.5 2 8 7M16 21h5"/><circle cx="8" cy="8.5" r="1"/>',
   sportsCourt: '<rect x="2.5" y="5" width="19" height="14" rx="1.5"/><path d="M12 5v14"/><circle cx="12" cy="12" r="2.8"/><path d="M2.5 9.5h3v5h-3M21.5 9.5h-3v5h3"/>',
   joggingTrack:

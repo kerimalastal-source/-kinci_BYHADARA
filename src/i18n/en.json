@@ -63,6 +63,7 @@
       "floors": "Floors",
       "exclusiveVilla": "Exclusive Villa",
       "bathrooms": "Bathrooms",
+      "bedrooms": "Bedrooms",
       "livingRoom": "Living Room",
       "terrace": "Terrace",
       "blocks": "Blocks",
@@ -221,6 +222,7 @@
     "gardenLabel": "Private garden",
     "floorsLabel": "Floors",
     "planTypesLabel": "Floor plans",
+    "floorPlanTitle": "Floor by Floor",
     "residenceApartment": "{layout} Apartment",
     "residenceVilla": "{layout} Villa",
     "residenceVariant": "Type {variant}",
@@ -250,6 +252,11 @@
       "spa": "Sauna & Turkish Bath",
       "insulation": "Heat & Sound Insulation",
       "privatePool": "Private Pool",
+      "elevator": "Elevator to All Floors",
+      "underfloorHeating": "Underfloor Heating",
+      "fireplace": "Modern Fireplace",
+      "waterWell": "220 m Water Well",
+      "flexBasement": "Basement for Cinema or Gym",
       "seaView": "Panoramic Sea View",
       "rooftopTerrace": "Rooftop Terrace & Kitchen",
       "masterSuite": "En-suite Master Bedroom",
@@ -911,15 +918,84 @@
     "marmara-haven-villa": {
       "name": "Marmara Haven Villa",
       "tagline": "A private sanctuary with panoramic views of the Marmara Sea.",
-      "shortDescription": "Marmara Haven Villa is a luxurious private residence offering spacious living, full privacy, and breathtaking panoramic views of the Marmara Sea.",
-      "longDescription": "Marmara Haven Villa is a luxurious private residence in Büyükçekmece offering spacious living, full privacy, and breathtaking panoramic views of the Marmara Sea. The villa features a 54 m² light-filled living room, a master bedroom with en-suite bathroom and walk-in closet, seven bathrooms, a fully equipped kitchen, and a private rooftop with its own kitchen for outdoor entertaining. A 26 m² terrace connects indoor and outdoor living, while a smart-home intercom system brings modern security and convenience to this one-of-a-kind residence. The villa is complete and ready to move in.",
+      "shortDescription": "Marmara Haven Villa is a luxurious private residence of 576.63 m² over four levels on a 637 m² plot, with a private pool, full privacy and panoramic views of the Marmara Sea.",
+      "longDescription": "Marmara Haven Villa is a luxurious private residence in Büyükçekmece set on a 637 m² plot, offering 576.63 m² of gross living space over four levels, complete privacy and panoramic views of the Marmara Sea. The ground floor opens through a main entrance with a storage room onto a 53 m² living room and a 24.70 m² kitchen, which lead out to a 29.50 m² garden terrace and a 26 m² private swimming pool. The first floor holds four bedrooms and four bathrooms, a dressing room, three balconies and a laundry room, while the rooftop level adds a fifth bedroom with its own bathroom, a 34.88 m² living room with kitchen and a 24.49 m² roof terrace for entertaining above the sea. The basement can be fitted out as a home cinema or gym, and includes two spacious storage rooms, water and rainwater tanks and a bathroom. An elevator serves every floor, and an integrated smart-home system controls lighting, heating and security from your phone, complemented by underfloor heating, a modern high-efficiency fireplace and a private 220-metre-deep water well. Built with premium materials and luxury finishes, the villa is complete and ready to move in.",
       "highlights": [
         "Completed and ready to move in",
-        "Panoramic Marmara Sea views",
-        "Private swimming pool and rooftop terrace with kitchen",
-        "54 m² living room bathed in natural light",
-        "Master suite with en-suite bathroom and walk-in closet",
-        "Seven bathrooms and smart-home technology"
+        "637 m² plot with 576.63 m² of gross living space over four levels",
+        "Panoramic Marmara Sea views, with the swimming coast 5 minutes away",
+        "26 m² private pool and 29.50 m² garden terrace",
+        "Five bedrooms and seven bathrooms, including a master suite with dressing room",
+        "Rooftop living room with kitchen and a 24.49 m² roof terrace",
+        "Elevator to every floor and a smart-home system controlled from your phone",
+        "Underfloor heating, modern fireplace and a 220 m deep private water well"
+      ],
+      "floorPlan": [
+        {
+          "name": "Basement",
+          "features": [
+            "Can be fitted out as a home cinema or gym",
+            "Two spacious storage rooms",
+            "Water and rainwater tanks",
+            "Bathroom"
+          ]
+        },
+        {
+          "name": "Ground Floor",
+          "features": [
+            "53 m² living room",
+            "24.70 m² kitchen",
+            "Main entrance and storage room",
+            "Bathroom",
+            "29.50 m² garden terrace",
+            "26 m² swimming pool"
+          ]
+        },
+        {
+          "name": "First Floor",
+          "features": [
+            "4 bedrooms",
+            "4 bathrooms",
+            "Dressing room",
+            "3 balconies",
+            "Laundry room"
+          ]
+        },
+        {
+          "name": "Rooftop",
+          "features": [
+            "34.88 m² living room with kitchen",
+            "Bedroom",
+            "Bathroom",
+            "24.49 m² roof terrace"
+          ]
+        }
+      ],
+      "nearby": [
+        {
+          "place": "Istanbul Airport",
+          "time": "37 min"
+        },
+        {
+          "place": "E-5 Highway",
+          "time": "3 min"
+        },
+        {
+          "place": "E-80 (TEM) Highway",
+          "time": "7 min"
+        },
+        {
+          "place": "First Avenue Mall",
+          "time": "18 min"
+        },
+        {
+          "place": "Mall of Istanbul",
+          "time": "40 min"
+        },
+        {
+          "place": "Marmara Sea swimming coast",
+          "time": "5 min"
+        }
       ]
     }
   },

@@ -14,6 +14,11 @@ export interface ProjectStat {
 
 export type AmenityKey =
   | "separatePools"
+  | "elevator"
+  | "underfloorHeating"
+  | "fireplace"
+  | "waterWell"
+  | "flexBasement"
   | "playground"
   | "sportsCourt"
   | "joggingTrack"
@@ -57,6 +62,12 @@ export interface Residence {
   planTypes?: number;
 }
 
+/** Gross/net area of one level; its name and features live in projectsData.<slug>.floorPlan (same order). */
+export interface FloorLevel {
+  gross: string;
+  net: string;
+}
+
 export interface Project {
   slug: string;
   district: string;
@@ -77,6 +88,8 @@ export interface Project {
   gallery: ProjectImage[];
   stats: ProjectStat[];
   residences?: Residence[];
+  /** Level-by-level breakdown, shown as a "Floor by Floor" section. */
+  floorPlan?: FloorLevel[];
   amenities?: AmenityKey[];
 }
 
@@ -401,12 +414,32 @@ export const projects: Project[] = [
       img("marmara-haven-villa", "sea-view", 1200, 1600, "Marmara Haven Villa sea view")
     ],
     stats: [
-      { value: "1", labelKey: "exclusiveVilla" },
+      { value: "637 m²", labelKey: "landArea" },
+      { value: "576.63 m²", labelKey: "grossArea" },
+      { value: "5", labelKey: "bedrooms" },
       { value: "7", labelKey: "bathrooms" },
-      { value: "54 m²", labelKey: "livingRoom" },
-      { value: "26 m²", labelKey: "terrace" }
+      { value: "4", labelKey: "floors" }
     ],
-    amenities: ["privatePool", "seaView", "rooftopTerrace", "smartHome", "masterSuite", "equippedKitchen"]
+    floorPlan: [
+      { gross: "138.62 m²", net: "105.40 m²" },
+      { gross: "223.37 m²", net: "108.60 m²" },
+      { gross: "143.19 m²", net: "126.21 m²" },
+      { gross: "103.66 m²", net: "82.82 m²" }
+    ],
+    amenities: [
+      "privatePool",
+      "seaView",
+      "rooftopTerrace",
+      "elevator",
+      "smartHome",
+      "underfloorHeating",
+      "fireplace",
+      "waterWell",
+      "flexBasement",
+      "masterSuite",
+      "equippedKitchen",
+      "buildQuality"
+    ]
   }
 ];
 

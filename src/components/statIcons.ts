@@ -22,6 +22,8 @@ const PATHS: Record<string, string> = {
     '<circle cx="8" cy="15" r="4.5"/><path d="m11.2 11.8 9.3-9.3M17.5 5.5l2.5 2.5M15 8l2 2"/><circle cx="8" cy="15" r="1.2"/>',
   offices: '<rect x="2.5" y="7" width="19" height="13.5" rx="2"/><path d="M8.5 7V4.5a1.5 1.5 0 0 1 1.5-1.5h4a1.5 1.5 0 0 1 1.5 1.5V7M2.5 12.5h19M10.5 12.5v2h3v-2"/>',
   shops: '<path d="M3.5 9 5 4h14l1.5 5M3.5 9v11.5h17V9M3.5 9h17"/><path d="M9.5 20.5v-6h5v6"/>',
+  bedrooms:
+    '<path d="M3 19v-7.5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2V19M3 15.5h18M3 19v2M21 19v2"/><path d="M6 9.5V6.5a1.5 1.5 0 0 1 1.5-1.5h9A1.5 1.5 0 0 1 18 6.5v3"/>',
   bathrooms:
     '<path d="M3 12h18v2.5a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z"/><path d="M6 12V5a2 2 0 0 1 3.6-1.2M8 21.5l1-2M16 21.5l-1-2"/>',
   livingRoom:

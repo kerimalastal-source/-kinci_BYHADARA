@@ -99,6 +99,7 @@ export function getProjectContent(slug: string) {
     longDescription: string;
     highlights: string[];
     nearby?: NearbyPlace[];
+    floorPlan?: { name: string; features: string[] }[];
   }>(`projectsData.${slug}`);
 }
 

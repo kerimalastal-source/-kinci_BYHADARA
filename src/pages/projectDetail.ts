@@ -65,6 +65,36 @@ function renderResidences(project: Project): string {
     </section>`;
 }
 
+function renderFloorPlan(project: Project, levels: ReturnType<typeof getProjectContent>["floorPlan"]): string {
+  if (!project.floorPlan?.length || !levels?.length) return "";
+  return `
+    <section class="detail-block">
+      <h2>${t("projectDetail.floorPlanTitle")}</h2>
+      <div class="floor-grid">
+        ${project.floorPlan
+          .map((level, i) => {
+            const text = levels[i];
+            if (!text) return "";
+            return `
+          <article class="floor-card" ${reveal(i, 2)}>
+            <header class="floor-card__head">
+              <span class="floor-card__index" dir="ltr">${String(i + 1).padStart(2, "0")}</span>
+              <h3>${text.name}</h3>
+            </header>
+            <dl class="floor-card__areas">
+              <div><dt>${t("projectDetail.grossAreaLabel")}</dt><dd dir="ltr">${level.gross}</dd></div>
+              <div><dt>${t("projectDetail.netAreaLabel")}</dt><dd dir="ltr">${level.net}</dd></div>
+            </dl>
+            <ul class="floor-card__features">
+              ${text.features.map((f) => `<li>${f}</li>`).join("")}
+            </ul>
+          </article>`;
+          })
+          .join("")}
+      </div>
+    </section>`;
+}
+
 function renderAmenities(project: Project): string {
   if (!project.amenities?.length) return "";
   // Three columns when that fills every row (6, 9…) and four doesn't.
@@ -173,6 +203,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           </section>
 
           ${renderResidences(project)}
+          ${renderFloorPlan(project, content.floorPlan)}
           ${renderAmenities(project)}
           ${renderLocation(project, content.nearby)}
 

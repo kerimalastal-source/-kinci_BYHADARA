@@ -1020,6 +1020,116 @@
   grid-template-columns: minmax(0, 360px);
 }
 
+/* Floor by floor */
+.floor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.floor-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  transition:
+    opacity 600ms ease,
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+}
+
+@media (hover: hover) {
+  .floor-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.floor-card__head {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: var(--space-sm);
+}
+
+.floor-card__head h3 {
+  margin: 0;
+}
+
+.floor-card__index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  color: var(--color-accent-dark);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.floor-card__areas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin: 0 0 var(--space-sm);
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.floor-card__areas dt {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+.floor-card__areas dd {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: start;
+}
+
+[dir="rtl"] .floor-card__areas dd {
+  text-align: end;
+}
+
+.floor-card__features {
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.floor-card__features li {
+  position: relative;
+  padding-inline-start: 1.1rem;
+  font-size: 0.93rem;
+  color: var(--color-ink-soft);
+}
+
+.floor-card__features li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+@media (max-width: 720px) {
+  .floor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Amenities */
 /* Flex (not grid) so an incomplete last row sits centered. */
 .amenity-grid {

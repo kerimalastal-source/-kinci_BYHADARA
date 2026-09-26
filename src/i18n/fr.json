@@ -63,6 +63,7 @@
       "floors": "Étages",
       "exclusiveVilla": "Villa exclusive",
       "bathrooms": "Salles de bain",
+      "bedrooms": "Chambres",
       "livingRoom": "Salon",
       "terrace": "Terrasse",
       "blocks": "Bâtiments",
@@ -221,6 +222,7 @@
     "gardenLabel": "Jardin privatif",
     "floorsLabel": "Niveaux",
     "planTypesLabel": "Plans",
+    "floorPlanTitle": "Niveau par niveau",
     "residenceApartment": "Appartement {layout}",
     "residenceVilla": "Villa {layout}",
     "residenceVariant": "Type {variant}",
@@ -250,6 +252,11 @@
       "spa": "Sauna & hammam",
       "insulation": "Isolation thermique et phonique",
       "privatePool": "Piscine privée",
+      "elevator": "Ascenseur à tous les niveaux",
+      "underfloorHeating": "Chauffage au sol",
+      "fireplace": "Cheminée moderne",
+      "waterWell": "Puits de 220 m",
+      "flexBasement": "Sous-sol cinéma ou salle de sport",
       "seaView": "Vue panoramique sur la mer",
       "rooftopTerrace": "Toit-terrasse avec cuisine",
       "masterSuite": "Suite parentale",
@@ -911,15 +918,84 @@
     "marmara-haven-villa": {
       "name": "Marmara Haven Villa",
       "tagline": "Un sanctuaire privé avec vue panoramique sur la mer de Marmara.",
-      "shortDescription": "Marmara Haven Villa est une résidence privée luxueuse offrant des espaces de vie généreux, une intimité totale et une vue panoramique saisissante sur la mer de Marmara.",
-      "longDescription": "Marmara Haven Villa est une résidence privée luxueuse à Büyükçekmece offrant des espaces de vie généreux, une intimité totale et une vue panoramique saisissante sur la mer de Marmara. La villa comprend un salon de 54 m² baigné de lumière naturelle, une chambre principale avec salle de bain privative et dressing, sept salles de bain, une cuisine entièrement équipée, ainsi qu'un toit-terrasse privé doté de sa propre cuisine pour recevoir en extérieur. Une terrasse de 26 m² relie les espaces intérieurs et extérieurs, tandis qu'un système d'interphone intelligent apporte sécurité et confort modernes à cette résidence unique. La villa est achevée et prête à habiter.",
+      "shortDescription": "Marmara Haven Villa est une résidence privée de luxe de 576,63 m² sur quatre niveaux, bâtie sur un terrain de 637 m², avec piscine privée, intimité totale et vue panoramique sur la mer de Marmara.",
+      "longDescription": "Marmara Haven Villa est une résidence privée de luxe à Büyükçekmece, bâtie sur un terrain de 637 m² et offrant 576,63 m² bruts de surface habitable sur quatre niveaux, une intimité totale et une vue panoramique sur la mer de Marmara. Le rez-de-chaussée s'ouvre par une entrée principale avec cellier sur un salon de 53 m² et une cuisine de 24,70 m², prolongés par une terrasse de plain-pied de 29,50 m² et une piscine privée de 26 m². Le premier étage réunit quatre chambres et quatre salles de bain, un dressing, trois balcons et une buanderie, tandis que le niveau du toit ajoute une cinquième chambre avec sa salle de bain, un salon avec cuisine de 34,88 m² et une terrasse sur le toit de 24,49 m² pour recevoir face à la mer. Le sous-sol peut être aménagé en salle de cinéma ou de sport et comprend deux grands espaces de rangement, des réservoirs d'eau et d'eau de pluie ainsi qu'une salle de bain. Un ascenseur dessert tous les niveaux, et un système domotique intégré pilote l'éclairage, le chauffage et la sécurité depuis votre téléphone, complété par le chauffage au sol, une cheminée moderne à haut rendement et un puits privé de 220 mètres de profondeur. Construite avec des matériaux haut de gamme et des finitions de luxe, la villa est achevée et prête à habiter.",
       "highlights": [
         "Achevée et prête à habiter",
-        "Vue panoramique sur la mer de Marmara",
-        "Piscine privée et toit-terrasse avec cuisine",
-        "Salon de 54 m² baigné de lumière naturelle",
-        "Suite principale avec salle de bain privative et dressing",
-        "Sept salles de bain et domotique"
+        "Terrain de 637 m² et 576,63 m² habitables bruts sur quatre niveaux",
+        "Vue panoramique sur la mer de Marmara, plage de baignade à 5 minutes",
+        "Piscine privée de 26 m² et terrasse de plain-pied de 29,50 m²",
+        "Cinq chambres et sept salles de bain, dont une suite parentale avec dressing",
+        "Salon avec cuisine sur le toit et terrasse de 24,49 m²",
+        "Ascenseur à tous les niveaux et domotique pilotée depuis le téléphone",
+        "Chauffage au sol, cheminée moderne et puits privé de 220 m"
+      ],
+      "floorPlan": [
+        {
+          "name": "Sous-sol",
+          "features": [
+            "Aménageable en salle de cinéma ou de sport",
+            "Deux grands espaces de rangement",
+            "Réservoirs d'eau et d'eau de pluie",
+            "Salle de bain"
+          ]
+        },
+        {
+          "name": "Rez-de-chaussée",
+          "features": [
+            "Salon de 53 m²",
+            "Cuisine de 24,70 m²",
+            "Entrée principale et cellier",
+            "Salle de bain",
+            "Terrasse de plain-pied de 29,50 m²",
+            "Piscine de 26 m²"
+          ]
+        },
+        {
+          "name": "Premier étage",
+          "features": [
+            "4 chambres",
+            "4 salles de bain",
+            "Dressing",
+            "3 balcons",
+            "Buanderie"
+          ]
+        },
+        {
+          "name": "Toit-terrasse",
+          "features": [
+            "Salon avec cuisine de 34,88 m²",
+            "Chambre",
+            "Salle de bain",
+            "Terrasse sur le toit de 24,49 m²"
+          ]
+        }
+      ],
+      "nearby": [
+        {
+          "place": "Aéroport d'Istanbul",
+          "time": "37 min"
+        },
+        {
+          "place": "Autoroute E-5",
+          "time": "3 min"
+        },
+        {
+          "place": "Autoroute E-80 (TEM)",
+          "time": "7 min"
+        },
+        {
+          "place": "Centre commercial First Avenue",
+          "time": "18 min"
+        },
+        {
+          "place": "Mall of Istanbul",
+          "time": "40 min"
+        },
+        {
+          "place": "Plage de baignade de la mer de Marmara",
+          "time": "5 min"
+        }
       ]
     }
   },
