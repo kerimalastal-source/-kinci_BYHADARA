@@ -93,11 +93,21 @@ const COMMUNITY: AmenityKey[] = [
   "buildQuality"
 ];
 
-/** Community services plus project-specific extras; `swap` replaces a shared item (e.g. private garages). */
-const community = (extras: AmenityKey[] = [], swap: Partial<Record<AmenityKey, AmenityKey>> = {}): AmenityKey[] => [
-  ...COMMUNITY.map((a) => swap[a] ?? a),
+/**
+ * Community services plus project-specific extras. `swap` replaces a shared item
+ * (e.g. private garages) or drops it with `null` (e.g. no pools).
+ */
+const community = (extras: AmenityKey[] = [], swap: Partial<Record<AmenityKey, AmenityKey | null>> = {}): AmenityKey[] => [
+  ...COMMUNITY.flatMap((a) => {
+    const replacement = swap[a];
+    if (replacement === null) return [];
+    return [replacement ?? a];
+  }),
   ...extras
 ];
+
+/** The villa communities have private garages and no pools (confirmed by the owner). */
+const VILLA_SWAP = { indoorParking: "privateParking", separatePools: null } as const;
 
 const img = (slug: string, file: string, width: number, height: number, alt: string): ProjectImage => ({
   src: `/images/projects/${slug}/${file}.jpg`,
@@ -206,7 +216,7 @@ export const projects: Project[] = [
       { value: "343 m²", labelKey: "grossArea" }
     ],
     residences: [{ kind: "villa", layout: "6+2", gross: "343.15 m²", net: "298.43 m²", floors: 3 }],
-    amenities: community(["seaViewTerrace", "privateGarden", "spa"], { indoorParking: "privateParking" })
+    amenities: community(["seaViewTerrace", "privateGarden", "spa"], VILLA_SWAP)
   },
   {
     slug: "lotus-manzara-beylikduzu",
@@ -241,10 +251,7 @@ export const projects: Project[] = [
       { kind: "villa", layout: "5+2", variant: "A", gross: "322.15 m²", garden: "247 m²", floors: 3 },
       { kind: "villa", layout: "5+2", variant: "B", gross: "303.40 m²", garden: "178 m²", floors: 3 }
     ],
-    // No pools in this project (confirmed by the owner).
-    amenities: community(["seaViewTerrace", "privateGarden", "spa"], { indoorParking: "privateParking" }).filter(
-      (a) => a !== "separatePools"
-    )
+    amenities: community(["seaViewTerrace", "privateGarden", "spa"], VILLA_SWAP)
   },
   {
     slug: "cadde-ispartakule",
