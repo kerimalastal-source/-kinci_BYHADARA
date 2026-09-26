@@ -695,14 +695,18 @@
 }
 
 /* Amenities */
+/* Flex (not grid) so an incomplete last row sits centered. */
 .amenity-grid {
+  --amenity-cols: 4;
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-sm);
 }
 
 .amenity-grid__item {
+  flex: 0 0 calc((100% - (var(--amenity-cols) - 1) * var(--space-sm)) / var(--amenity-cols));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -732,7 +736,7 @@
 }
 
 .amenity-grid--3 {
-  grid-template-columns: repeat(3, 1fr);
+  --amenity-cols: 3;
 }
 
 .amenity-grid__item,
@@ -766,12 +770,7 @@
 @media (max-width: 560px) {
   .amenity-grid,
   .amenity-grid--3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* An odd tile left alone on the last row spans both columns. */
-  .amenity-grid__item:last-child:nth-child(odd) {
-    grid-column: span 2;
+    --amenity-cols: 2;
   }
 }
 

@@ -241,7 +241,10 @@ export const projects: Project[] = [
       { kind: "villa", layout: "5+2", variant: "A", gross: "322.15 m²", garden: "247 m²", floors: 3 },
       { kind: "villa", layout: "5+2", variant: "B", gross: "303.40 m²", garden: "178 m²", floors: 3 }
     ],
-    amenities: community(["seaViewTerrace", "privateGarden", "spa"], { indoorParking: "privateParking" })
+    // No pools in this project (confirmed by the owner).
+    amenities: community(["seaViewTerrace", "privateGarden", "spa"], { indoorParking: "privateParking" }).filter(
+      (a) => a !== "separatePools"
+    )
   },
   {
     slug: "cadde-ispartakule",
