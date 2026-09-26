@@ -170,6 +170,12 @@
   color: var(--color-primary);
 }
 
+/* Unit after a counted figure ("m²"), set smaller than the number. */
+.stat-unit {
+  font-size: 0.62em;
+  font-weight: 600;
+}
+
 .stat-tile__label {
   display: block;
   margin-top: 0.4rem;
@@ -194,8 +200,10 @@
     background: var(--color-surface);
   }
 
+  /* Scales with the screen so "60,000+ m²" stays on one line in a half-width tile. */
   .stat-tile__value {
-    font-size: 1.9rem;
+    font-size: min(1.75rem, 6.4vw);
+    white-space: nowrap;
   }
 
   .stat-tile__label {

@@ -27,6 +27,12 @@ function formatNumber(n: number, parsed: ParsedStat): string {
   return decPart ? `${withCommas}.${decPart}` : withCommas;
 }
 
+/** "60,000+ m²": the unit after the number and its symbols is set smaller so the figure stays on one line. */
+function render(el: HTMLElement, parsed: ParsedStat, value: number): void {
+  const [, symbols, unit] = parsed.suffix.match(/^([^\s\p{L}]*)(.*)$/u) ?? ["", parsed.suffix, ""];
+  el.innerHTML = `${parsed.prefix}${formatNumber(value, parsed)}${symbols}${unit.trim() ? `<span class="stat-unit">${unit}</span>` : ""}`;
+}
+
 function animateElement(el: HTMLElement, raw: string): void {
   const parsed = parseStat(raw);
   if (!parsed) {
@@ -40,7 +46,7 @@ function animateElement(el: HTMLElement, raw: string): void {
     const progress = Math.min(1, (now - start) / duration);
     const eased = 1 - Math.pow(1 - progress, 3);
     const current = parsed!.target * eased;
-    el.textContent = `${parsed!.prefix}${formatNumber(current, parsed!)}${parsed!.suffix}`;
+    render(el, parsed!, current);
     if (progress < 1) requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
