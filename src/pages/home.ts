@@ -28,7 +28,10 @@ export function renderHome(el: HTMLElement): void {
   const services = tRaw<ServiceItem[]>("home.services");
   const why = tRaw<ServiceItem[]>("home.why");
   const spotlight = getProjectBySlug(SPOTLIGHT_SLUG);
-  const featured = getSortedProjects().slice(0, 3);
+  // The spotlight project sits right above the grid, so the grid skips it.
+  const featured = getSortedProjects()
+    .filter((p) => p.slug !== spotlight?.slug)
+    .slice(0, 3);
 
   el.innerHTML = `
     <section class="hero" style="background-image: linear-gradient(180deg, rgba(15,20,18,.55), rgba(15,20,18,.82)), url('${HERO_IMAGE}')">
