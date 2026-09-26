@@ -25,9 +25,7 @@
   },
   "floatingActions": {
     "whatsapp": "Chat on WhatsApp",
-    "call": "Call us",
-    "whatsappShort": "WhatsApp",
-    "callShort": "Call Us"
+    "call": "Call us"
   },
   "lang": {
     "en": "English",

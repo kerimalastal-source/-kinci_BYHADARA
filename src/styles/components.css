@@ -2202,65 +2202,23 @@
 
 .floating-actions__btn--call {
   background: var(--color-primary);
-}
-
-.floating-actions__label {
-  display: none;
+  /* light ring: keeps it visible over the dark-green footer */
+  border: 2px solid rgba(247, 244, 236, 0.9);
 }
 
 body.nav-open .floating-actions {
   display: none;
 }
 
-/* Phones: the two round buttons become a fixed bottom bar with labels, so they
-   never cover text, buttons or the footer. */
 @media (max-width: 640px) {
-  body {
-    padding-bottom: calc(68px + env(safe-area-inset-bottom));
-  }
-
   .floating-actions {
-    left: 0;
-    right: 0;
-    bottom: 0;
-    flex-direction: row;
-    gap: 0.6rem;
-    padding: 0.6rem var(--space-md) calc(0.6rem + env(safe-area-inset-bottom));
-    background: rgba(255, 255, 255, 0.96);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-top: 1px solid var(--color-border);
-    box-shadow: 0 -6px 20px rgba(15, 43, 33, 0.08);
+    bottom: 16px;
+    right: 16px;
   }
 
   .floating-actions__btn {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: auto;
+    width: 48px;
     height: 48px;
-    border-radius: var(--radius-sm);
-    padding-inline: 0.5rem;
-    box-shadow: none;
-    font-weight: 700;
-    font-size: 0.88rem;
-    white-space: nowrap;
-  }
-
-  .floating-actions__btn:hover {
-    transform: none;
-  }
-
-  .floating-actions__btn svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .floating-actions__label {
-    display: inline;
   }
 }
 

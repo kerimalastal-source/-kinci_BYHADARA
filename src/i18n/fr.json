@@ -25,9 +25,7 @@
   },
   "floatingActions": {
     "whatsapp": "Discuter sur WhatsApp",
-    "call": "Appelez-nous",
-    "whatsappShort": "WhatsApp",
-    "callShort": "Appeler"
+    "call": "Appelez-nous"
   },
   "lang": {
     "en": "English",

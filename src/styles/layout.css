@@ -704,6 +704,12 @@
   .site-footer__col h3 {
     margin-bottom: 0.75rem;
   }
+
+  /* Room under the copyright so the floating WhatsApp/call buttons
+     (bottom-right) don't sit on top of it at the end of the page. */
+  .site-footer__bottom {
+    padding-bottom: calc(var(--space-md) + 120px);
+  }
 }
 
 /* ---------- Hero sections ---------- */
