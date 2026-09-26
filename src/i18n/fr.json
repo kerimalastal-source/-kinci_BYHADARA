@@ -89,20 +89,20 @@
     "stats": [
       { "value": "12+", "label": "années d'excellence" },
       { "value": "10", "label": "projets emblématiques" },
-      { "value": "400+", "label": "unités résidentielles" },
-      { "value": "2", "label": "quartiers phares d'Istanbul" }
+      { "value": "650+", "label": "unités résidentielles" },
+      { "value": "3", "label": "quartiers phares d'Istanbul" }
     ],
     "partnersEyebrow": "Réseau de confiance",
     "partnersTitle": "Nos partenaires",
     "partnersSubtitle": "HADARA collabore avec des promoteurs et groupes d'investissement régionaux de premier plan pour livrer des projets sur lesquels nos clients peuvent compter.",
     "aboutEyebrow": "Qui sommes-nous",
     "aboutTitle": "Un promoteur de proximité, signature Istanbul",
-    "aboutText1": "Depuis 2014, HADARA Immobilier façonne des développements résidentiels et mixtes à Istanbul, avec un accent particulier sur Beylikdüzü et Büyükçekmece — deux des axes de croissance les plus dynamiques de la ville.",
+    "aboutText1": "Depuis 2014, HADARA Immobilier façonne des développements résidentiels et mixtes à Istanbul, avec un accent particulier sur Beylikdüzü, Büyükçekmece et Avcılar — parmi les axes de croissance les plus dynamiques de la ville.",
     "aboutText2": "Des villas privées de luxe aux grands ensembles résidentiels, chaque projet HADARA repose sur une architecture soignée, une construction de qualité et une réelle compréhension des attentes de nos clients.",
     "aboutCta": "En savoir plus sur HADARA",
     "projectsEyebrow": "Notre portefeuille",
     "projectsTitle": "Projets phares",
-    "projectsSubtitle": "Un aperçu des développements qui façonnent les quartiers de Beylikdüzü et Büyükçekmece à Istanbul.",
+    "projectsSubtitle": "Un aperçu des développements qui façonnent les quartiers de Beylikdüzü, Büyükçekmece et Avcılar à Istanbul.",
     "servicesEyebrow": "Notre expertise",
     "servicesTitle": "Une expertise immobilière complète",
     "services": [
@@ -145,7 +145,7 @@
     "storyEyebrow": "Notre histoire",
     "storyTitle": "D'une vision unique à un portefeuille en pleine croissance",
     "storyText1": "Fondée en 2014 et basée à Beylikdüzü, Istanbul, HADARA Immobilier est née d'une idée simple : une conception réfléchie et une construction honnête créent une valeur durable pour ceux qui vivent dans nos projets, comme pour ceux qui y investissent.",
-    "storyText2": "Au fil de la dernière décennie, cette idée s'est transformée en un portefeuille de résidences, de sites à usage mixte et de villas privées à Beylikdüzü et Büyükçekmece, deux des axes de croissance les plus recherchés du côté européen d'Istanbul.",
+    "storyText2": "Au fil de la dernière décennie, cette idée s'est transformée en un portefeuille de résidences, de sites à usage mixte et de villas privées à Beylikdüzü, Büyükçekmece et Avcılar, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul.",
     "missionTitle": "Notre mission",
     "missionText": "Concevoir et livrer des projets résidentiels et mixtes qui allient qualité architecturale, confort quotidien et valeur durable, pour les résidents comme pour les investisseurs.",
     "visionTitle": "Notre vision",
@@ -169,7 +169,7 @@
     "stats": [
       { "value": "12+", "label": "années d'activité" },
       { "value": "10", "label": "projets emblématiques" },
-      { "value": "400+", "label": "unités résidentielles" },
+      { "value": "650+", "label": "unités résidentielles" },
       { "value": "60 000+ m²", "label": "de terrain développé" }
     ]
   },
@@ -298,7 +298,7 @@
           },
           {
             "q": "Où sont situés les projets de HADARA ?",
-            "a": "Tous nos développements actuels sont situés du côté européen d'Istanbul, dans les quartiers en forte croissance de Beylikdüzü et Büyükçekmece."
+            "a": "Tous nos développements actuels sont situés du côté européen d'Istanbul, dans les quartiers en forte croissance de Beylikdüzü, Büyükçekmece et Avcılar."
           },
           {
             "q": "Comment puis-je contacter l'équipe de HADARA ?",
@@ -1031,11 +1031,11 @@
   "seo": {
     "home": {
       "title": "HADARA Immobilier | Promoteur immobilier à Istanbul, Turquie",
-      "description": "Promoteur immobilier à Istanbul depuis 2014 : villas de luxe, appartements et projets mixtes à Beylikdüzü et Büyükçekmece, avec accompagnement vers la citoyenneté turque."
+      "description": "Promoteur immobilier à Istanbul depuis 2014 : villas de luxe, appartements et projets mixtes à Beylikdüzü, Büyükçekmece et Avcılar, avec accompagnement vers la citoyenneté turque."
     },
     "projects": {
       "title": "Nos projets à Istanbul – Appartements et villas",
-      "description": "Découvrez les projets résidentiels, mixtes et villas de HADARA à Beylikdüzü et Büyükçekmece, Istanbul : nouveaux lancements, chantiers en cours et biens livrés."
+      "description": "Découvrez les projets résidentiels, mixtes et villas de HADARA à Beylikdüzü, Büyükçekmece et Avcılar, Istanbul : nouveaux lancements, chantiers en cours et biens livrés."
     },
     "about": {
       "title": "À propos de HADARA – Promoteur à Istanbul depuis 2014",
