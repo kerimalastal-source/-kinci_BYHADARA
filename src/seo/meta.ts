@@ -7,7 +7,8 @@ import { blogPosts } from "../data/blog";
 import { placeKey } from "../utils/place";
 import { CONSULTANCY_PAGE_IMAGES } from "../data/consultancy";
 
-export const DEFAULT_SITE_URL = "https://hadararealestate.com";
+/** The live address: hadararealestate.com redirects here (308), so canonical/hreflang/sitemap URLs use www. */
+export const DEFAULT_SITE_URL = "https://www.hadararealestate.com";
 
 const OG_LOCALES: Record<Locale, string> = { en: "en_US", ar: "ar_AR", fr: "fr_FR", ru: "ru_RU" };
 
