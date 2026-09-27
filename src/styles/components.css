@@ -8345,21 +8345,22 @@ body.nav-open .back-to-top {
     margin: 0;
   }
 
-  .tour-invite {
-    grid-template-columns: auto minmax(0, 1fr);
+  /* Phones and tablets: icon on top, text and button centred (owner's request). */
+  .tour-invite,
+  .tour-invite--project {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
   }
 
-  .tour-invite__actions {
-    grid-column: 1 / -1;
-    justify-items: stretch;
+  .tour-invite__actions,
+  .tour-invite--project .tour-invite__actions {
+    grid-column: auto;
+    justify-items: center;
   }
 
   .tour-invite__actions .btn {
     justify-content: center;
-  }
-
-  .tour-invite--project .tour-invite__actions {
-    grid-column: 1 / -1;
   }
 }
 
