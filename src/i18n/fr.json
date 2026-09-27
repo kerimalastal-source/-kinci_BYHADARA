@@ -1922,5 +1922,107 @@
     "waQuestion": "Bonjour, j'ai une question : {q}",
     "waDesign": "Bonjour, je souhaite échanger au sujet d'un projet de conception architecturale / d'ingénierie.",
     "designText": "HADARA propose aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie — pour villas, résidences, commerces et hôtels, en Turquie et à l'étranger. Nos services :"
+  },
+  "match": {
+    "eyebrow": "Votre conseiller immobilier",
+    "title": "Trouvez le projet qui vous correspond en une minute",
+    "subtitle": "Répondez à quatre questions rapides et nous vous proposons les projets adaptés, avec des raisons claires. Sans inscription.",
+    "progress": "Question {current} sur {total}",
+    "back": "Retour",
+    "questions": {
+      "goal": "Dans quel but achetez-vous ?",
+      "size": "De quelle taille de logement avez-vous besoin ?",
+      "lifestyle": "Quel cadre préférez-vous ?",
+      "timing": "Quand souhaitez-vous emménager ?"
+    },
+    "options": {
+      "goal": {
+        "living": "Pour y vivre",
+        "investment": "Investissement",
+        "citizenship": "Citoyenneté turque",
+        "holiday": "Résidence de vacances"
+      },
+      "size": {
+        "small": "Appartement compact",
+        "family": "Appartement familial",
+        "large": "Grande maison ou villa"
+      },
+      "lifestyle": {
+        "sea": "Près de la mer",
+        "nature": "Verdure et calme",
+        "city": "Vie urbaine"
+      },
+      "timing": {
+        "ready": "Prêt maintenant",
+        "offplan": "En construction",
+        "any": "Peu importe"
+      }
+    },
+    "hints": {
+      "goal": {
+        "living": "Un logement pour le quotidien",
+        "investment": "Pour la location ou la revente",
+        "citizenship": "La citoyenneté par l'immobilier",
+        "holiday": "Une résidence secondaire à Istanbul"
+      },
+      "size": {
+        "small": "1+1, pour une ou deux personnes",
+        "family": "2+1 ou 3+1",
+        "large": "4+1 et plus"
+      },
+      "lifestyle": {
+        "sea": "Mer à proximité ou vue mer",
+        "nature": "Jardins, parcs et air pur",
+        "city": "Central, proche de tout"
+      },
+      "timing": {
+        "ready": "Emménager tout de suite",
+        "offplan": "Acheter tôt, recevoir plus tard",
+        "any": "Montrez-moi les deux"
+      }
+    },
+    "reasons": {
+      "size": "Propose des logements {layouts} de la taille recherchée",
+      "villa": "Des villas avec de l'espace pour une grande famille",
+      "sea": "Près de la mer ou avec vue mer",
+      "nature": "Un cadre verdoyant et calme",
+      "city": "Emplacement central, proche de la vie urbaine",
+      "ready": "Achevé et prêt à habiter",
+      "offplan": "En construction",
+      "offplanYear": "En construction, livraison {year}"
+    },
+    "notes": {
+      "sizeUnknown": "Demandez-nous les types de logements disponibles",
+      "size": "Les logements ici sont des {layouts}",
+      "villa": "Uniquement des villas, plus grandes que demandé",
+      "setting": "Son cadre : {setting}",
+      "offplan": "Encore en construction",
+      "offplanYear": "Encore en construction, livraison {year}",
+      "ready": "Déjà achevé et prêt à habiter"
+    },
+    "goalNotes": {
+      "living": "Sélectionnés selon la taille de votre famille et le cadre que vous préférez.",
+      "investment": "Notre conseiller vous communiquera les prix du jour, les plans de paiement et les logements disponibles pour chaque projet.",
+      "citizenship": "Notre équipe vous confirmera les logements éligibles à la citoyenneté turque et vous accompagnera à chaque étape.",
+      "holiday": "Nous avons privilégié les cadres en bord de mer et en pleine nature."
+    },
+    "resultsOne": "Un projet correspond à toutes vos réponses",
+    "resultsTwo": "Deux projets correspondent à toutes vos réponses",
+    "resultsMany": "{count} projets correspondent à toutes vos réponses",
+    "resultsClosest": "Aucun projet ne correspond à toutes vos réponses : voici les options les plus proches",
+    "resultsNone": "Nous n'avons pas trouvé de projet proche, mais nous pouvons chercher pour vous",
+    "viewProject": "Voir le projet",
+    "sendResults": "Envoyer mes résultats à un conseiller",
+    "customRequest": "Rien ne convient ? Nous cherchons pour vous",
+    "restart": "Recommencer",
+    "wa": {
+      "intro": "Bonjour, j'ai utilisé « Trouvez votre projet » sur votre site.",
+      "goal": "Objectif",
+      "size": "Taille du logement",
+      "lifestyle": "Cadre",
+      "timing": "Délai",
+      "projects": "Projets proposés",
+      "outro": "Je souhaiterais connaître les prix et les logements disponibles."
+    }
   }
 }

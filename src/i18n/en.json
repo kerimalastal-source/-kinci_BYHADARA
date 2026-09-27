@@ -1922,5 +1922,107 @@
     "waQuestion": "Hello, I have a question: {q}",
     "waDesign": "Hello, I'd like to discuss an architectural / engineering design project.",
     "designText": "HADARA also offers architectural design, interior design and engineering consultancy — for villas, residential, commercial and hospitality projects, in Türkiye and abroad. Our services:"
+  },
+  "match": {
+    "eyebrow": "Your Property Advisor",
+    "title": "Find the Right Project for You in a Minute",
+    "subtitle": "Answer four quick questions and we'll suggest the projects that suit you, with clear reasons. No sign-up needed.",
+    "progress": "Question {current} of {total}",
+    "back": "Back",
+    "questions": {
+      "goal": "What are you buying for?",
+      "size": "What size home do you need?",
+      "lifestyle": "Which setting do you prefer?",
+      "timing": "When would you like to move in?"
+    },
+    "options": {
+      "goal": {
+        "living": "To live in",
+        "investment": "Investment",
+        "citizenship": "Turkish citizenship",
+        "holiday": "Holiday home"
+      },
+      "size": {
+        "small": "Compact apartment",
+        "family": "Family apartment",
+        "large": "Large home or villa"
+      },
+      "lifestyle": {
+        "sea": "By the sea",
+        "nature": "Green & calm",
+        "city": "City life"
+      },
+      "timing": {
+        "ready": "Ready now",
+        "offplan": "Under construction",
+        "any": "Either is fine"
+      }
+    },
+    "hints": {
+      "goal": {
+        "living": "A home for everyday life",
+        "investment": "For rental or resale later",
+        "citizenship": "Citizenship through property",
+        "holiday": "A second home in Istanbul"
+      },
+      "size": {
+        "small": "1+1, for one or two people",
+        "family": "2+1 or 3+1",
+        "large": "4+1 and larger"
+      },
+      "lifestyle": {
+        "sea": "Sea close by or sea views",
+        "nature": "Gardens, parks and fresh air",
+        "city": "Central, close to everything"
+      },
+      "timing": {
+        "ready": "Move in right away",
+        "offplan": "Buy early, receive later",
+        "any": "Show me both"
+      }
+    },
+    "reasons": {
+      "size": "Has {layouts} homes in the size you need",
+      "villa": "Villas with room for a large family",
+      "sea": "By the sea or with sea views",
+      "nature": "Green, calm surroundings",
+      "city": "Central location, close to city life",
+      "ready": "Completed and ready to move in",
+      "offplan": "Under construction",
+      "offplanYear": "Under construction, delivery {year}"
+    },
+    "notes": {
+      "sizeUnknown": "Ask us which unit types are available",
+      "size": "Homes here are {layouts}",
+      "villa": "Villas only, larger than you asked for",
+      "setting": "Its setting: {setting}",
+      "offplan": "Still under construction",
+      "offplanYear": "Still under construction, delivery {year}",
+      "ready": "Already completed and ready to move in"
+    },
+    "goalNotes": {
+      "living": "Chosen for your family size and the setting you prefer.",
+      "investment": "Our advisor will share today's prices, payment plans and available units for each project.",
+      "citizenship": "Our team will confirm which units qualify for Turkish citizenship and guide you through every step.",
+      "holiday": "We gave extra weight to sea and nature settings."
+    },
+    "resultsOne": "One project matches all your answers",
+    "resultsTwo": "Two projects match all your answers",
+    "resultsMany": "{count} projects match all your answers",
+    "resultsClosest": "No project matches every answer, so here are the closest options",
+    "resultsNone": "We couldn't find a close match, but we can search for you",
+    "viewProject": "View project",
+    "sendResults": "Send my results to an advisor",
+    "customRequest": "Nothing fits? We'll search for you",
+    "restart": "Start again",
+    "wa": {
+      "intro": "Hello, I used \"Find My Project\" on your website.",
+      "goal": "Goal",
+      "size": "Home size",
+      "lifestyle": "Setting",
+      "timing": "Timing",
+      "projects": "Suggested projects",
+      "outro": "I'd like to know the prices and available units."
+    }
   }
 }

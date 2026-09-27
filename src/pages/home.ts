@@ -7,6 +7,7 @@ import { initScrollReveal } from "../components/scrollReveal";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "../components/floatingButtons";
 import { statIcon } from "../components/statIcons";
 import { consultancyPath } from "../seo/routes";
+import { renderProjectMatch, initProjectMatch } from "../components/projectMatch";
 
 const HERO_IMAGE = "/hero-istanbul.jpg";
 
@@ -46,6 +47,8 @@ export function renderHome(el: HTMLElement): void {
         </div>
       </div>
     </section>
+
+    ${renderProjectMatch()}
 
     <section class="section stats-section">
       <div class="container">
@@ -162,6 +165,7 @@ export function renderHome(el: HTMLElement): void {
   `;
 
   initStatCounters(el);
+  initProjectMatch(el);
   initSpotlightGallery(el);
   initScrollReveal(el);
 }

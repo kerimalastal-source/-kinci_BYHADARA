@@ -1,5 +1,7 @@
 export type ProjectStatus = "new-launch" | "ongoing" | "delivered";
 
+export type Lifestyle = "sea" | "nature" | "city";
+
 export interface ProjectImage {
   src: string;
   width: number;
@@ -105,6 +107,8 @@ export interface Project {
   developer?: string;
   /** "on-request" shows "Price: On request"; any other value is shown as written (e.g. "$1,250,000"). */
   price?: string;
+  /** Setting, taken from the project's own description: by the sea (or sea views), green and calm, or city. Used by "Find My Project". */
+  lifestyle?: Lifestyle[];
   /** Ad landing page: adds an "I'm interested" button to the hero. */
   landing?: boolean;
   /** Street address from the catalog, shown as written. */
@@ -162,6 +166,7 @@ export const projects: Project[] = [
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "new-launch",
+    lifestyle: ["city"],
     timeline: "2026 – 2028",
     priority: 0,
     developer: "Lotus Yapı Proje",
@@ -195,6 +200,7 @@ export const projects: Project[] = [
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "new-launch",
+    lifestyle: ["sea"],
     priority: 1,
     developer: "Yıltaş × Lotus Yapı",
     coverImage: {
@@ -231,6 +237,7 @@ export const projects: Project[] = [
     district: "Şişli",
     city: "Istanbul",
     status: "ongoing",
+    lifestyle: ["city"],
     unitsAvailable: true,
     priority: 2,
     developer: "Lotus Yapı Proje",
@@ -281,6 +288,7 @@ export const projects: Project[] = [
     district: "Büyükçekmece",
     city: "Istanbul",
     status: "delivered",
+    lifestyle: ["sea", "nature"],
     unitsAvailable: true,
     priority: 3,
     developer: "Lotus Yapı Proje",
@@ -313,6 +321,7 @@ export const projects: Project[] = [
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "delivered",
+    lifestyle: ["sea"],
     unitsAvailable: true,
     priority: 4,
     developer: "Lotus Yapı Proje",
@@ -348,6 +357,7 @@ export const projects: Project[] = [
     district: "Büyükçekmece",
     city: "Istanbul",
     status: "delivered",
+    lifestyle: ["sea", "nature"],
     unitsAvailable: true,
     priority: 5,
     developer: "Lotus Yapı Proje",
@@ -375,6 +385,7 @@ export const projects: Project[] = [
     district: "Avcılar",
     city: "Istanbul",
     status: "delivered",
+    lifestyle: ["sea"],
     unitsAvailable: true,
     priority: 6,
     developer: "MH Grup İnşaat",
@@ -407,6 +418,7 @@ export const projects: Project[] = [
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "delivered",
+    lifestyle: ["nature", "city"],
     unitsAvailable: true,
     timeline: "2023 – 2025",
     priority: 7,
@@ -429,6 +441,7 @@ export const projects: Project[] = [
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "delivered",
+    lifestyle: ["city"],
     soldOut: true,
     timeline: "2022 – 2024",
     priority: 8,
@@ -453,6 +466,7 @@ export const projects: Project[] = [
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "delivered",
+    lifestyle: ["nature"],
     soldOut: true,
     timeline: "2022 – 2024",
     priority: 9,
@@ -476,6 +490,7 @@ export const projects: Project[] = [
     district: "Büyükçekmece",
     city: "Istanbul",
     status: "delivered",
+    lifestyle: ["sea"],
     timeline: "2024 – 2025",
     price: "on-request",
     landing: true,
