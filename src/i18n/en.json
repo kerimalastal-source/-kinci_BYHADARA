@@ -249,7 +249,19 @@
     "openInMaps": "Open in Google Maps",
     "map": {
       "blackSea": "Black Sea",
-      "marmara": "Sea of Marmara"
+      "marmara": "Sea of Marmara",
+      "bridges": "Bosphorus bridges",
+      "bosphorus": "Bosphorus",
+      "istAirport": "Istanbul Airport",
+      "sawAirport": "Sabiha Gökçen Airport",
+      "mallOfIstanbul": "Mall of Istanbul",
+      "taksim": "Taksim",
+      "sultanahmet": "Sultanahmet",
+      "roads": {
+        "e5": "E-5 (D-100)",
+        "e80": "TEM (E80)",
+        "o7": "Northern Marmara Motorway"
+      }
     },
     "developerLabel": "Developer",
     "priceLabel": "Price",

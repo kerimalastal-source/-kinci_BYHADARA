@@ -11,9 +11,6 @@ import { favoriteButton } from "../components/favorites";
 import { renderProjectMap, initProjectMap } from "../components/projectMap";
 import { renderNotFound } from "./notFound";
 
-const PIN_ICON =
-  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>';
-
 /** Scroll-reveal attributes; the stagger restarts every row so long grids don't lag. */
 const reveal = (i: number, perRow = 4) => `data-reveal data-reveal-index="${i % perRow}"`;
 
@@ -208,7 +205,6 @@ function renderLocation(project: Project, name: string, nearby: ReturnType<typeo
     <section class="detail-block">
       <h2>${t("projectDetail.locationTitle")}</h2>
       ${renderProjectMap(project, name)}
-      ${project.address ? `<p class="detail-address">${PIN_ICON}<span dir="ltr">${project.address}</span></p>` : ""}
       ${
         nearby?.length
           ? `<ul class="nearby-list">

@@ -249,7 +249,19 @@
     "openInMaps": "Открыть в Google Картах",
     "map": {
       "blackSea": "Чёрное море",
-      "marmara": "Мраморное море"
+      "marmara": "Мраморное море",
+      "bridges": "Мосты через Босфор",
+      "bosphorus": "Босфор",
+      "istAirport": "Аэропорт Стамбула",
+      "sawAirport": "Аэропорт Сабиха Гёкчен",
+      "mallOfIstanbul": "Mall of Istanbul",
+      "taksim": "Таксим",
+      "sultanahmet": "Султанахмет",
+      "roads": {
+        "e5": "E-5 (D-100)",
+        "e80": "TEM (E80)",
+        "o7": "Северо-Мраморноморская трасса"
+      }
     },
     "developerLabel": "Девелопер",
     "priceLabel": "Цена",

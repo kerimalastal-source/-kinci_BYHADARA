@@ -1544,6 +1544,191 @@
   vector-effect: non-scaling-stroke;
 }
 
+.project-map__road-casing,
+.project-map__road,
+.project-map__bridge-casing,
+.project-map__bridge {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.project-map__road-casing {
+  stroke: #fff;
+  stroke-width: 4.5;
+}
+
+.project-map__road {
+  stroke: #c98a5c;
+  stroke-width: 2.2;
+}
+
+.project-map__bridge-casing {
+  stroke: #fff;
+  stroke-width: 6;
+}
+
+.project-map__bridge {
+  stroke: var(--color-primary);
+  stroke-width: 3;
+}
+
+/* Road number shields (on the map and in the legend): E-roads green, Turkish motorways blue. */
+.map-shield {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 18px;
+  padding: 0 0.3rem;
+  border: 1.5px solid #fff;
+  border-radius: 4px;
+  background: #2e7a4d;
+  box-shadow: 0 2px 6px -2px rgba(15, 43, 33, 0.5);
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #fff;
+  direction: ltr;
+}
+
+.map-shield--o7 {
+  background: #2f5d9e;
+}
+
+.project-map__shield {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.project-map__poi {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.project-map__poi-icon {
+  position: absolute;
+  left: -11px;
+  top: -11px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  box-shadow: 0 3px 8px -3px rgba(15, 43, 33, 0.55);
+  color: var(--color-primary);
+}
+
+.project-map__poi--airport .project-map__poi-icon {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.project-map__poi--landmark .project-map__poi-icon {
+  left: -6px;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--color-surface);
+  background: var(--color-accent-dark);
+  color: transparent;
+}
+
+.project-map__poi-label {
+  position: absolute;
+  top: -9px;
+  height: 18px;
+  padding: 0 0.35rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.86);
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 18px;
+  white-space: nowrap;
+  color: var(--color-ink);
+}
+
+.project-map__poi-label--right {
+  left: 13px;
+}
+
+.project-map__poi-label--left {
+  right: 13px;
+}
+
+.project-map__poi-label--below,
+.project-map__poi-label--above {
+  left: 0;
+  transform: translateX(-50%);
+}
+
+.project-map__poi-label--below {
+  top: 14px;
+}
+
+.project-map__poi-label--above {
+  top: -32px;
+}
+
+.project-map__poi--landmark .project-map__poi-label--right {
+  left: 9px;
+}
+
+.project-map__poi--landmark .project-map__poi-label--left {
+  right: 9px;
+}
+
+.project-map__poi--landmark .project-map__poi-label--below {
+  top: 10px;
+}
+
+.project-map__poi--landmark .project-map__poi-label--above {
+  top: -28px;
+}
+
+.project-map__strait {
+  position: absolute;
+  transform: translate(-50%, -50%) rotate(var(--angle));
+  font-size: 0.66rem;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #5f7f7a;
+  text-shadow:
+    0 0 3px #fff,
+    0 0 3px #fff;
+  pointer-events: none;
+}
+
+.project-map__legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.1rem;
+  margin: 0;
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+}
+
+.project-map__legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.project-map__legend svg {
+  color: var(--color-primary);
+}
+
 .project-map__sea {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -1658,6 +1843,19 @@
     aspect-ratio: 560 / 534;
   }
 
+  .project-map__poi-label {
+    font-size: 0.64rem;
+  }
+
+  .project-map__strait {
+    font-size: 0.58rem;
+  }
+
+  .project-map__legend {
+    gap: 0.4rem 0.9rem;
+    font-size: 0.76rem;
+  }
+
   .project-map__sea {
     font-size: 0.6rem;
     letter-spacing: 0.08em;
@@ -1678,19 +1876,6 @@
     opacity: 0.35;
     transform: scale(1.6);
   }
-}
-
-.detail-address {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 600;
-  color: var(--color-primary);
-}
-
-.detail-address svg {
-  flex-shrink: 0;
-  color: var(--color-accent-dark);
 }
 
 .nearby-list {

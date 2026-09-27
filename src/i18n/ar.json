@@ -249,7 +249,19 @@
     "openInMaps": "افتح في خرائط Google",
     "map": {
       "blackSea": "البحر الأسود",
-      "marmara": "بحر مرمرة"
+      "marmara": "بحر مرمرة",
+      "bridges": "جسور البوسفور",
+      "bosphorus": "مضيق البوسفور",
+      "istAirport": "مطار إسطنبول",
+      "sawAirport": "مطار صبيحة كوكجن",
+      "mallOfIstanbul": "مول أوف إسطنبول",
+      "taksim": "تقسيم",
+      "sultanahmet": "السلطان أحمد",
+      "roads": {
+        "e5": "E-5 (D-100)",
+        "e80": "TEM (E80)",
+        "o7": "طريق شمال مرمرة السريع"
+      }
     },
     "developerLabel": "المطوّر",
     "priceLabel": "السعر",
