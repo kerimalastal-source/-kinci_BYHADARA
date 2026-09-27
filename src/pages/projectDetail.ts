@@ -7,6 +7,7 @@ import { openLightbox } from "../components/lightbox";
 import { initStatCounters } from "../components/statCounter";
 import { initScrollReveal } from "../components/scrollReveal";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "../components/floatingButtons";
+import { favoriteButton } from "../components/favorites";
 import { renderNotFound } from "./notFound";
 
 const PIN_ICON =
@@ -259,6 +260,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           <span class="badge badge--${project.status}">${projectStatusLabel(project.status)}</span>
           ${project.unitsAvailable ? `<span class="badge badge--available">${t("common.unitsAvailable")}</span>` : ""}
           ${project.soldOut ? `<span class="badge badge--sold-out">${t("common.soldOut")}</span>` : ""}
+          ${project.soldOut ? "" : favoriteButton(project.slug, "hero")}
         </div>
         <h1>${content.name}</h1>
         <p class="project-hero__tagline">${content.tagline}</p>

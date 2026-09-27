@@ -1,5 +1,6 @@
 import type { Project } from "../data/projects";
 import { t, getProjectContent, link, placeLine } from "../i18n";
+import { favoriteButton } from "./favorites";
 
 export function projectStatusLabel(status: Project["status"]): string {
   switch (status) {
@@ -38,6 +39,7 @@ export function renderProjectCard(project: Project): string {
           ${project.soldOut ? `<span class="badge badge--sold-out">${t("common.soldOut")}</span>` : ""}
         </span>
       </a>
+      ${favoriteButton(project.slug, "card")}
       <div class="project-card__body">
         <p class="project-card__location">${placeLine(project.district, project.city)}</p>
         <h3 class="project-card__title">${content.name}</h3>

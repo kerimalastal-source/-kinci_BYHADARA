@@ -33,6 +33,14 @@
     "fr": "Français",
     "ru": "Русский"
   },
+  "favorites": {
+    "add": "احفظ {name} في قائمتك",
+    "remove": "أزل {name} من قائمتك",
+    "saved": "تم الحفظ في قائمتك",
+    "removed": "أُزيل من قائمتك",
+    "enquire": "استفسر الآن ({count})",
+    "header": "مشاريعك المحفوظة ({count})"
+  },
   "common": {
     "discoverMore": "اكتشف المزيد",
     "viewAllProjects": "عرض جميع المشاريع",

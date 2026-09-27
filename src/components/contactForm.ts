@@ -2,6 +2,7 @@ import { t, link, getLocale, getProjectContent, placeLine } from "../i18n";
 import { lookup } from "../i18n/dictionaries";
 import { getProjectBySlug, getSortedProjects } from "../data/projects";
 import { campaignSource } from "../utils/campaign";
+import { getFavorites, setFavorites } from "./favorites";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
 
 const CONTACT_EMAIL = "info@byhadara.com";
@@ -110,7 +111,9 @@ function renderProjectPicker(selected: string[]): string {
 
 /** `projectSlugs` preselects the projects of interest (from /contact?project=<slug>[,<slug>…]). */
 export function renderContactForm(projectSlugs = ""): string {
-  const selected = parseSlugs(projectSlugs);
+  // The project the visitor came from, plus everything they saved with the heart button.
+  const saved = getFavorites().filter((slug) => !getProjectBySlug(slug)!.soldOut);
+  const selected = [...new Set([...parseSlugs(projectSlugs), ...saved])];
   return `
     <form class="contact-form" id="contact-form" novalidate>
       <div class="inquiry-project" id="cf-project-card"${selected.length ? "" : " hidden"}>${renderProjectCard(selected)}</div>
@@ -259,12 +262,14 @@ export function initContactForm(container: ParentNode): void {
     const slug = option.dataset.slug!;
     selected = selected.includes(slug) ? selected.filter((s) => s !== slug) : [...selected, slug];
     render();
+    setFavorites(selected);
   });
   chips.addEventListener("click", (e) => {
     const remove = (e.target as Element).closest<HTMLButtonElement>("[data-remove]");
     if (!remove) return;
     selected = selected.filter((s) => s !== remove.dataset.remove);
     render();
+    setFavorites(selected);
     addButton.focus();
   });
 

@@ -5,6 +5,7 @@ import { isAuthenticated, isAdmin, getCurrentProfile, signOut } from "../auth/se
 import { escapeHtml } from "../utils/html";
 import { renderBrand } from "./brand";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "./floatingButtons";
+import { renderFavoritesLink } from "./favorites";
 
 interface NavLink {
   route: string;
@@ -95,6 +96,7 @@ export function renderHeader(el: HTMLElement, route: Route): void {
       </nav>
 
       <div class="header-actions">
+        ${renderFavoritesLink()}
         <button class="icon-btn" id="search-toggle" type="button" aria-label="${t("nav.search")}">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="7"></circle>

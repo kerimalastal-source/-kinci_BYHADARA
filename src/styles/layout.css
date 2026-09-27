@@ -535,6 +535,16 @@
 /* Small phones: the login pill becomes a round person icon so the header
    (logo + search + login + menu) fits in every language. */
 @media (max-width: 400px) {
+  /* Room for up to four round buttons (saved projects, search, account, menu)
+     beside the logo without touching the screen edge. */
+  .site-header__inner {
+    column-gap: 0.5rem;
+  }
+
+  .header-actions {
+    gap: 4px;
+  }
+
   .account-switch__login {
     justify-content: center;
     width: 40px;

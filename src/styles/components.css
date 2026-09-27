@@ -596,6 +596,7 @@
 }
 
 .project-card {
+  position: relative;
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -633,7 +634,8 @@
   position: absolute;
   top: 1rem;
   inset-inline-start: 1rem;
-  inset-inline-end: 1rem;
+  /* Leaves the top-end corner to the heart button. */
+  inset-inline-end: 3.9rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
@@ -718,6 +720,11 @@
   .project-grid > .project-card:last-child:nth-child(odd) .project-card__media {
     flex: 0 0 50%;
     aspect-ratio: auto;
+  }
+
+  /* Horizontal card: keep the heart on the photo half. */
+  .project-grid > .project-card:last-child:nth-child(odd) .fav-btn--card {
+    inset-inline-end: calc(50% + 0.85rem);
   }
 }
 
@@ -3260,5 +3267,195 @@ body.nav-open .floating-actions {
 
   .project-video__actions .btn {
     justify-content: center;
+  }
+}
+
+/* ---------- Saved projects (heart buttons) ---------- */
+.fav-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 200ms ease, background var(--transition), color var(--transition);
+}
+
+.fav-btn svg {
+  transition: fill 200ms ease;
+}
+
+.fav-btn[aria-pressed="true"] svg {
+  fill: currentColor;
+}
+
+.fav-btn--card {
+  position: absolute;
+  top: 0.85rem;
+  inset-inline-end: 0.85rem;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-primary);
+  box-shadow: 0 6px 16px -8px rgba(15, 43, 33, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.fav-btn--card:hover {
+  transform: scale(1.08);
+}
+
+.fav-btn--card[aria-pressed="true"] {
+  color: #d6455b;
+}
+
+/* On the dark project hero, beside the badges. */
+.fav-btn--hero {
+  margin-inline-start: auto;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.fav-btn--hero:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.fav-btn--hero[aria-pressed="true"] {
+  background: #fff;
+  color: #d6455b;
+  border-color: #fff;
+}
+
+.fav-btn.is-popping {
+  animation: fav-pop 420ms ease;
+}
+
+@keyframes fav-pop {
+  30% {
+    transform: scale(1.28);
+  }
+  60% {
+    transform: scale(0.94);
+  }
+}
+
+/* Header link to the enquiry with every saved project. */
+.fav-link {
+  position: relative;
+  color: #d6455b;
+}
+
+.fav-link[hidden] {
+  display: none;
+}
+
+.fav-link svg {
+  fill: currentColor;
+}
+
+.fav-link:hover {
+  background: #d6455b;
+  border-color: #d6455b;
+  color: #fff;
+}
+
+.fav-link__count {
+  position: absolute;
+  top: -4px;
+  inset-inline-end: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* Toast after saving/removing; physically left so it clears the floating buttons on the right. */
+.fav-toast {
+  position: fixed;
+  left: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: min(420px, calc(100vw - 104px));
+  padding: 0.6rem 0.75rem;
+  padding-inline-end: 0.9rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 16px 36px -16px rgba(15, 43, 33, 0.7);
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+.fav-toast.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.fav-toast__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.fav-toast__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.fav-toast__icon.is-on {
+  color: #ff8a9a;
+}
+
+.fav-toast__icon.is-on svg {
+  fill: currentColor;
+}
+
+.fav-toast__text {
+  min-width: 0;
+}
+
+.fav-toast__link {
+  flex: none;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .fav-toast {
+    flex-wrap: wrap;
+    border-radius: var(--radius-md);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fav-btn.is-popping {
+    animation: none;
+  }
+
+  .fav-toast {
+    transition: none;
   }
 }

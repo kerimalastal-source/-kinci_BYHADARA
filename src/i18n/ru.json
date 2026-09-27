@@ -33,6 +33,14 @@
     "fr": "Français",
     "ru": "Русский"
   },
+  "favorites": {
+    "add": "Сохранить {name} в список",
+    "remove": "Убрать {name} из списка",
+    "saved": "Добавлено в ваш список",
+    "removed": "Удалено из списка",
+    "enquire": "Запросить ({count})",
+    "header": "Сохранённые проекты ({count})"
+  },
   "common": {
     "discoverMore": "Узнать больше",
     "viewAllProjects": "Смотреть все проекты",

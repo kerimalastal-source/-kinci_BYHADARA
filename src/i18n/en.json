@@ -33,6 +33,14 @@
     "fr": "Français",
     "ru": "Русский"
   },
+  "favorites": {
+    "add": "Save {name} to your list",
+    "remove": "Remove {name} from your list",
+    "saved": "Saved to your list",
+    "removed": "Removed from your list",
+    "enquire": "Enquire now ({count})",
+    "header": "Your saved projects ({count})"
+  },
   "common": {
     "discoverMore": "Discover More",
     "viewAllProjects": "View All Projects",
