@@ -8600,3 +8600,83 @@ body.nav-open .back-to-top {
     justify-content: center;
   }
 }
+
+/* ---------- Chat: questions about one project ---------- */
+/* Clears the sticky header (104 / 88 / 68px) when the chat scrolls to the map. */
+#project-location {
+  scroll-margin-top: 120px;
+}
+
+@media (max-width: 1024px) {
+  #project-location {
+    scroll-margin-top: 104px;
+  }
+}
+
+@media (max-width: 640px) {
+  #project-location {
+    scroll-margin-top: 84px;
+  }
+}
+
+.chat-here {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.6rem;
+  padding: 0.45rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+}
+
+.chat-here img {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.chat-quick__btn--project {
+  background: rgba(201, 162, 75, 0.12);
+}
+
+.chat-card__facts--plain {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin: 0.5rem 0 0;
+}
+
+.chat-card__facts--plain > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.chat-card__facts--plain > div:last-child {
+  border-bottom: 0;
+}
+
+.chat-card__facts--plain dt {
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.chat-card__facts--plain dd {
+  font-size: 0.88rem;
+  text-align: end;
+}
+
+.chat-card__facts--plain small {
+  font-weight: 400;
+  color: var(--color-muted);
+}
+
+.chat-list--cols {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1.4rem;
+}

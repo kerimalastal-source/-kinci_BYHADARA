@@ -259,7 +259,7 @@ function renderAmenities(project: Project): string {
 
 function renderLocation(project: Project, name: string, nearby: ReturnType<typeof getProjectContent>["nearby"]): string {
   return `
-    <section class="detail-block">
+    <section class="detail-block" id="project-location">
       <h2>${t("projectDetail.locationTitle")}</h2>
       ${renderProjectMap(project, name)}
       ${

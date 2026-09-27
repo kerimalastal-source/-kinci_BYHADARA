@@ -309,7 +309,7 @@ export function initProjectMatch(root: HTMLElement): void {
     body.classList.add("is-changing");
     // Keep the question in view on phones, where the options fill the screen.
     const top = body.getBoundingClientRect().top;
-    const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 80;
+    const headerH = parseFloat(getComputedStyle(document.querySelector(".site-header") ?? document.documentElement).getPropertyValue("--header-h")) || 80;
     if (top < headerH || top > window.innerHeight * 0.6) {
       window.scrollTo({ top: window.scrollY + top - headerH - 16, behavior: reduced ? "auto" : "smooth" });
     }
