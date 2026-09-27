@@ -42,13 +42,16 @@ export const projectTypeImage = (key: ProjectTypeKey): ResponsiveImage => ({
 export type WorkCategory = "residentialDevelopment" | "residentialComplex" | "commercialComplex" | "industrialCommercial";
 
 /**
- * Selected works. Provenance (for the team, not shown on the site): designed by Kuba Mimarlık, the
- * partner office that delivers HADARA's design service; figures and renders from kubamimarlik.net.
- * On the site the service is presented as HADARA's own — no second company name, logo or link.
+ * Selected works, designed by Kuba Mimarlık, the partner office that delivers HADARA's design service
+ * (figures and renders from kubamimarlik.net). The service is presented as HADARA's own: the office is
+ * named only in one discreet credit line under the full portfolio (`WORKS_DESIGNER`) — no logo or link.
  * Images: public/images/consultancy/works/<slug>/<n>-<width>.webp, the first one is the cover.
  * The category label is `consultancy.workCategories.<category>`; the district needs a `places.*` key.
  * With an empty list the section falls back to a "portfolio on request" note.
  */
+/** Credited once, in small print, under the full portfolio grid (not translated). */
+export const WORKS_DESIGNER = "Kuba Mimarlık";
+
 export interface ConsultancyWork {
   slug: string;
   /** Project name as marketed (not translated). */

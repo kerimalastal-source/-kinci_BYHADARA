@@ -1441,6 +1441,7 @@
     "worksEmptyText": "Tell us about your project and we will share the architectural and interior work most relevant to it.",
     "worksCta": "Request our portfolio",
     "worksSubtitle": "Selected projects by the architects and engineers behind our design service.",
+    "worksCredit": "Architectural design: {team}",
     "worksOpenGallery": "View the {name} images",
     "worksImageAlt": "{name}, architectural render ({n}/{total})",
     "workCategories": {

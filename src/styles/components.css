@@ -4944,6 +4944,13 @@ body.nav-open .floating-actions {
   gap: var(--space-md);
 }
 
+.consult-works__credit {
+  margin: var(--space-md) 0 0;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
 .consult-work {
   display: flex;
   flex-direction: column;

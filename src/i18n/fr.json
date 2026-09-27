@@ -1441,6 +1441,7 @@
     "worksEmptyText": "Présentez-nous votre projet et nous partagerons les réalisations architecturales et intérieures les plus proches de vos besoins.",
     "worksCta": "Demander notre portfolio",
     "worksSubtitle": "Une sélection de projets signés par les architectes et ingénieurs de notre service de conception.",
+    "worksCredit": "Conception architecturale : {team}",
     "worksOpenGallery": "Voir les images de {name}",
     "worksImageAlt": "{name}, rendu architectural ({n}/{total})",
     "workCategories": {

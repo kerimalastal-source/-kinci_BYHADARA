@@ -6,6 +6,7 @@ import {
   SERVICE_KEYS,
   PROJECT_TYPE_KEYS,
   consultancyWorks,
+  WORKS_DESIGNER,
   CONSULTANCY_PAGE_IMAGES,
   projectTypeImage,
   srcset,
@@ -366,6 +367,7 @@ function works(limit?: number): string {
           ${teaser ? `<a class="btn btn--outline" href="${href("portfolio")}">${t("consultancy.worksTeaserCta")}</a>` : ""}
         </div>
         ${renderWorks(limit)}
+        ${limit === undefined && consultancyWorks.length ? `<p class="consult-works__credit">${t("consultancy.worksCredit", { team: `<span lang="tr" dir="ltr" translate="no">${WORKS_DESIGNER}</span>` })}</p>` : ""}
       </div>
     </section>`;
 }

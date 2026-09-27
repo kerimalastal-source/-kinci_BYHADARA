@@ -1441,6 +1441,7 @@
     "worksEmptyText": "أخبرنا عن مشروعك، وسنشاركك الأعمال المعمارية والداخلية الأقرب إليه.",
     "worksCta": "اطلب ملف أعمالنا",
     "worksSubtitle": "مشاريع مختارة من تصميم المعماريين والمهندسين الذين يقدّمون خدمة التصميم لدينا.",
+    "worksCredit": "التصميم المعماري: {team}",
     "worksOpenGallery": "عرض صور {name}",
     "worksImageAlt": "{name}، تصوّر معماري ({n}/{total})",
     "workCategories": {
