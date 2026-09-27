@@ -2153,6 +2153,24 @@ body.map-open .back-to-top {
     font-size: 1.05rem;
   }
 
+  /* Icon, figure and label centred in each box (owner's request). */
+  .project-stats__item {
+    align-items: center;
+    padding-inline: var(--space-xs);
+    text-align: center;
+  }
+
+  .project-stats__icon {
+    inset-inline-start: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .project-stats__item dd,
+  [dir="rtl"] .project-stats__item dd {
+    text-align: center;
+  }
+
   /* An odd figure left alone on the last row spans both columns, laid out as
      icon beside value and centred, so the row doesn't look half empty. */
   .project-stats__item:last-child:nth-child(odd) {
@@ -2171,6 +2189,7 @@ body.map-open .back-to-top {
 
   .project-stats__item:last-child:nth-child(odd) .project-stats__icon {
     position: static;
+    transform: none;
     order: -2;
   }
 
@@ -2201,11 +2220,21 @@ body.map-open .back-to-top {
 
   .project-stats__grid:has(> :nth-child(5)) .project-stats__icon {
     top: var(--space-sm);
-    transform: none;
+    inset-inline-start: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Centred like the phone layout. */
+  .project-stats__grid:has(> :nth-child(5)) .project-stats__item {
+    align-items: center;
+    padding-inline: var(--space-xs);
+    text-align: center;
   }
 
   .project-stats__grid:has(> :nth-child(5)) .project-stats__item dd {
     font-size: 1.15rem;
+    text-align: center;
   }
 }
 
