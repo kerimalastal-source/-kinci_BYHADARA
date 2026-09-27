@@ -429,7 +429,7 @@
    positioned against the tile. */
 .spotlight__stat {
   --spot-pad: 1.1rem;
-  --spot-icon: 40px;
+  --spot-icon: 26px;
   position: relative;
   padding: 0.9rem var(--spot-pad);
   padding-inline-start: calc(var(--spot-pad) + var(--spot-icon) + 0.75rem);
@@ -449,6 +449,11 @@
   background: var(--color-surface-alt);
   color: var(--color-accent-dark);
   transition: background var(--transition), color var(--transition);
+}
+
+.spotlight__icon svg {
+  width: 14px;
+  height: 14px;
 }
 
 @media (hover: hover) {
@@ -564,14 +569,14 @@
   .spotlight__icon {
     position: static;
     transform: none;
-    width: 34px;
-    height: 34px;
-    margin-bottom: 0.45rem;
+    width: 22px;
+    height: 22px;
+    margin-bottom: 0.35rem;
   }
 
   .spotlight__icon svg {
-    width: 18px;
-    height: 18px;
+    width: 12px;
+    height: 12px;
   }
 
   .spotlight__stat dd {
