@@ -1,5 +1,6 @@
 import { t, link } from "../i18n";
 import { renderBrand, BRAND_FULL } from "./brand";
+import { CONSULTANCY_SEGMENT } from "../seo/routes";
 
 const SITE_PHONE = "+90 531 930 92 14";
 const SITE_PHONE_HREF = "+905319309214";
@@ -30,6 +31,7 @@ export function renderFooter(el: HTMLElement): void {
         <ul class="footer-links">
           <li><a href="${link("/")}">${t("nav.home")}</a></li>
           <li><a href="${link("/projects")}">${t("nav.projects")}</a></li>
+          <li><a href="${link(`/${CONSULTANCY_SEGMENT}`)}">${t("nav.consultancy")}</a></li>
           <li><a href="${link("/about")}">${t("nav.about")}</a></li>
           <li><a href="${link("/citizenship")}">${t("nav.citizenship")}</a></li>
           <li><a href="${link("/property-request")}">${t("nav.propertyRequest")}</a></li>

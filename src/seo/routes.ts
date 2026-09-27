@@ -2,12 +2,16 @@
 // or "/ar/projects/lotus-koru-2" (other locales carry a prefix).
 import { defaultLocale, isLocale, type Locale } from "../i18n/dictionaries";
 
+/** URL segment of the Engineering & Architectural Consultancy page. */
+export const CONSULTANCY_SEGMENT = "engineering-architecture";
+
 export type Route =
   | { name: "home" }
   | { name: "projects" }
   | { name: "project"; slug: string }
   | { name: "about" }
   | { name: "citizenship" }
+  | { name: "consultancy" }
   | { name: "faq" }
   | { name: "blog" }
   | { name: "blog-post"; slug: string }
@@ -48,6 +52,7 @@ export function parseRoute(path: string): Route {
   if (segment === "projects") return { name: "projects" };
   if (segment === "about") return { name: "about" };
   if (segment === "citizenship") return { name: "citizenship" };
+  if (segment === CONSULTANCY_SEGMENT) return { name: "consultancy" };
   if (segment === "faq") return { name: "faq" };
   if (segment === "blog" && p1) return { name: "blog-post", slug: p1 };
   if (segment === "blog") return { name: "blog" };
@@ -86,6 +91,8 @@ export function routePath(route: Route): string {
       return `/resale/${route.id}`;
     case "admin-listing":
       return `/admin/listings/${route.id}`;
+    case "consultancy":
+      return `/${CONSULTANCY_SEGMENT}`;
     case "not-found":
       return "/404";
     default:

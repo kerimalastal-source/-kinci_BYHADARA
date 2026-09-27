@@ -4061,3 +4061,1026 @@ body.nav-open .floating-actions {
     transition: none;
   }
 }
+
+/* ---------- Engineering & Architectural Consultancy page ---------- */
+/* In-page anchors land below the sticky header. */
+.consult-services,
+.consult-types,
+.consult-process,
+.consult-faq,
+.consult-cta {
+  scroll-margin-top: 112px;
+}
+
+@media (max-width: 1024px) {
+  .consult-services,
+  .consult-types,
+  .consult-process,
+  .consult-faq,
+  .consult-cta {
+    scroll-margin-top: 80px;
+  }
+}
+
+/* Hero: a full-bleed render (a real <img>, so phones load a phone-sized file). */
+.consult-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-end;
+  min-height: min(88vh, 820px);
+  overflow: hidden;
+  background: var(--color-primary-dark);
+  color: var(--color-on-primary);
+}
+
+.consult-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 60%;
+  animation: consult-settle 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Dark on the text side, clear over the architecture. */
+.consult-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(8, 26, 20, 0.9) 0%, rgba(8, 26, 20, 0.66) 42%, rgba(8, 26, 20, 0.12) 100%),
+    linear-gradient(0deg, rgba(8, 26, 20, 0.55) 0%, rgba(8, 26, 20, 0) 45%);
+}
+
+[dir="rtl"] .consult-hero::before {
+  background:
+    linear-gradient(270deg, rgba(8, 26, 20, 0.9) 0%, rgba(8, 26, 20, 0.66) 42%, rgba(8, 26, 20, 0.12) 100%),
+    linear-gradient(0deg, rgba(8, 26, 20, 0.55) 0%, rgba(8, 26, 20, 0) 45%);
+}
+
+[dir="rtl"] .consult-hero__media {
+  object-position: 30% 60%;
+}
+
+.consult-hero__inner {
+  padding-block: 9rem 5rem;
+}
+
+.consult-hero__inner > * {
+  max-width: 760px;
+  animation: consult-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.consult-hero__inner > :nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.consult-hero__inner > :nth-child(3) {
+  animation-delay: 0.22s;
+}
+
+.consult-hero__inner > :nth-child(4) {
+  animation-delay: 0.32s;
+}
+
+.consult-hero__heading {
+  margin-bottom: var(--space-md);
+}
+
+.consult-hero__label {
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.consult-hero__title {
+  display: block;
+  font-size: clamp(2.05rem, 1.25rem + 3.3vw, 3.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-on-primary);
+}
+
+[dir="rtl"] .consult-hero__title {
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+.consult-hero__subtitle {
+  max-width: 620px;
+}
+
+.consult-hero__markets {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: var(--space-lg) 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(247, 244, 236, 0.75);
+}
+
+.consult-hero__markets::before {
+  content: "";
+  flex: none;
+  width: 36px;
+  height: 1px;
+  background: var(--color-accent);
+}
+
+@keyframes consult-settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes consult-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Jump links under the hero; scroll sideways on small screens instead of wrapping. */
+.consult-jump {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.consult-jump__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding-block: 0.7rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.consult-jump__inner::-webkit-scrollbar {
+  display: none;
+}
+
+.consult-jump a {
+  flex: none;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--color-ink-soft);
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.consult-jump a:hover {
+  color: var(--color-primary);
+  border-color: var(--color-border);
+}
+
+.consult-jump .consult-jump__cta {
+  margin-inline-start: auto;
+  color: var(--color-accent-dark);
+  border-color: var(--color-accent);
+}
+
+.consult-jump .consult-jump__cta:hover {
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+}
+
+/* Intro */
+.consult-intro__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.consult-intro__media {
+  position: relative;
+  isolation: isolate;
+  margin: 18px;
+  margin-inline-end: 0;
+}
+
+/* A thin gold frame offset behind the photo, like a drawing's border. */
+.consult-intro__media::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -18px;
+  inset-inline-start: -18px;
+  z-index: -1;
+  width: 55%;
+  height: 70%;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+}
+
+.consult-intro__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.consult-intro__subhead {
+  margin: var(--space-lg) 0 var(--space-xs);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.consult-clients {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-md);
+}
+
+.consult-clients li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--color-border);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+}
+
+.consult-clients li::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  background: var(--color-accent);
+  transform: rotate(45deg);
+}
+
+/* Services */
+.consult-services {
+  background: var(--color-surface);
+}
+
+.consult-services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.consult-service {
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    opacity 600ms ease,
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+}
+
+.consult-service__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.consult-service__icon,
+.consult-why__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  border-radius: 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-accent-dark);
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.consult-service__icon {
+  width: 56px;
+  height: 56px;
+}
+
+.consult-service__index {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--color-muted);
+}
+
+.consult-service h3 {
+  margin-bottom: 0.5rem;
+}
+
+.consult-service p {
+  font-size: 0.95rem;
+}
+
+.consult-service__items {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.25rem 0 1.5rem;
+}
+
+.consult-service__items li {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+}
+
+.consult-service__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  align-self: flex-start;
+  margin-top: auto;
+  padding-block: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.consult-service__link svg {
+  transition: transform var(--transition);
+}
+
+.consult-service__link:hover svg {
+  transform: translateX(3px);
+}
+
+[dir="rtl"] .consult-service__link svg {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .consult-service__link:hover svg {
+  transform: translateX(-3px) scaleX(-1);
+}
+
+@media (hover: hover) {
+  .consult-service:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+
+  .consult-service:hover .consult-service__icon,
+  .consult-why__item:hover .consult-why__icon {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-primary-dark);
+  }
+}
+
+/* Why HADARA */
+.consult-why__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.consult-why__item {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.consult-why__icon {
+  width: 48px;
+  height: 48px;
+}
+
+.consult-why__item h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.consult-why__item p {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+/* Project types */
+.consult-types {
+  background: var(--color-surface);
+}
+
+.consult-types .section-head {
+  margin-bottom: var(--space-md);
+}
+
+.consult-types__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.consult-type {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+}
+
+.consult-type img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.consult-type::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(8, 26, 20, 0.78) 0%, rgba(8, 26, 20, 0) 55%);
+}
+
+.consult-type__label {
+  position: absolute;
+  inset-inline: 1rem;
+  bottom: 0.9rem;
+  z-index: 1;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.3;
+  color: #fff;
+}
+
+@media (hover: hover) {
+  .consult-type:hover img {
+    transform: scale(1.06);
+  }
+}
+
+.consult-types__note {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+/* Process: numbered stages on a ruled line, like a drawing's title block. */
+.consult-process__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.consult-step {
+  position: relative;
+  padding: 1.5rem 0 2rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.consult-step::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -1px;
+  inset-inline-start: 0;
+  width: 48px;
+  height: 2px;
+  background: var(--color-accent);
+}
+
+.consult-step__number {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-accent);
+}
+
+.consult-step h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.35rem;
+}
+
+.consult-step p {
+  margin: 0;
+  font-size: 0.93rem;
+}
+
+/* Türkiye · Middle East · International */
+.consult-global {
+  background: var(--color-surface-alt);
+}
+
+.consult-global__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.consult-global__points {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  margin-top: var(--space-md);
+}
+
+.consult-global__points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.consult-global__points svg {
+  flex: none;
+  margin-top: 0.15rem;
+  color: var(--color-accent-dark);
+}
+
+.consult-global__visual {
+  padding: var(--space-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.consult-network {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--color-primary);
+}
+
+.consult-network__arc {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 0.02 0.018;
+  animation: consult-flow 3s linear infinite;
+}
+
+.consult-network__node circle {
+  fill: var(--color-surface);
+  stroke: var(--color-accent-dark);
+  stroke-width: 2;
+}
+
+.consult-network text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--color-ink);
+}
+
+.consult-network__hub circle {
+  fill: var(--color-primary);
+}
+
+.consult-network__hub text {
+  font-size: 16px;
+  font-weight: 700;
+  fill: var(--color-primary);
+}
+
+.consult-network__hub .consult-network__pulse {
+  fill: var(--color-accent);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: consult-pulse 2.4s ease-out infinite;
+}
+
+@keyframes consult-flow {
+  to {
+    stroke-dashoffset: -0.076;
+  }
+}
+
+@keyframes consult-pulse {
+  from {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}
+
+/* Selected works */
+.consult-works__empty {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-md) var(--space-lg);
+  margin-top: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.consult-works__empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  color: var(--color-accent-dark);
+}
+
+.consult-works__empty h3 {
+  margin-bottom: 0.3rem;
+}
+
+.consult-works__empty p {
+  margin: 0;
+}
+
+.consult-works__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.consult-work {
+  margin: 0;
+}
+
+.consult-work img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.consult-work figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-top: 0.75rem;
+}
+
+.consult-work__category {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+}
+
+.consult-work strong {
+  color: var(--color-primary);
+}
+
+.consult-work__location {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* FAQ */
+.consult-faq {
+  background: var(--color-surface);
+}
+
+.consult-faq .faq-list {
+  margin-top: var(--space-lg);
+}
+
+.consult-faq .faq-item {
+  background: var(--color-bg);
+}
+
+.consult-faq__more {
+  margin: var(--space-md) 0 0;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.consult-faq__more a {
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Closing CTA with the request form: the page's one dark band, with a faint drawing grid. */
+.consult-cta {
+  background-color: var(--color-primary);
+  background-image:
+    linear-gradient(rgba(247, 244, 236, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 244, 236, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: var(--color-on-primary);
+}
+
+.consult-cta__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.consult-cta__content {
+  position: sticky;
+  top: 140px;
+}
+
+.consult-cta .section-title,
+.consult-cta__content p {
+  color: var(--color-on-primary);
+}
+
+.consult-cta__content > p {
+  color: rgba(247, 244, 236, 0.85);
+}
+
+.consult-cta__contacts {
+  list-style: none;
+  display: grid;
+  gap: 0.9rem;
+  margin-top: var(--space-lg);
+}
+
+.consult-cta__contacts a:not(.btn) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 40px;
+  font-weight: 600;
+  color: var(--color-on-primary);
+}
+
+.consult-cta__contacts a:not(.btn):hover {
+  color: var(--color-accent-light);
+}
+
+.consult-cta__contacts svg {
+  flex: none;
+  color: var(--color-accent-light);
+}
+
+.consult-cta__card {
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  color: var(--color-ink);
+}
+
+.consult-cta__form-title {
+  font-size: 1.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.consult-form label span {
+  color: var(--color-accent-dark);
+}
+
+.consult-form .btn {
+  align-self: stretch;
+  justify-content: center;
+}
+
+/* Tablets */
+@media (max-width: 1000px) {
+  .consult-services__grid,
+  .consult-why__grid,
+  .consult-works__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .consult-process__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .consult-cta__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .consult-cta__content {
+    position: static;
+  }
+}
+
+/* 8 project types: 4 columns, then 2 (never 3, which would leave a gap). */
+@media (max-width: 700px) {
+  .consult-types__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .consult-hero {
+    min-height: min(80vh, 680px);
+  }
+
+  .consult-hero__inner {
+    padding-block: 7rem 3.5rem;
+  }
+
+  .consult-intro__grid,
+  .consult-global__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .consult-intro__media {
+    max-width: 640px;
+  }
+}
+
+/* Phones */
+@media (max-width: 640px) {
+  /* The render sits above the text instead of behind a long block of it. */
+  .consult-hero {
+    min-height: 0;
+  }
+
+  .consult-hero::before,
+  [dir="rtl"] .consult-hero::before {
+    background: linear-gradient(0deg, rgba(8, 26, 20, 0.94) 0%, rgba(8, 26, 20, 0.74) 55%, rgba(8, 26, 20, 0.12) 100%);
+  }
+
+  .consult-hero__media,
+  [dir="rtl"] .consult-hero__media {
+    object-position: 72% 50%;
+  }
+
+  .consult-hero__inner {
+    padding-block: 9rem 2.5rem;
+  }
+
+  .consult-hero__markets {
+    margin-top: var(--space-md);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+  }
+
+  .consult-jump .consult-jump__cta {
+    margin-inline-start: 0;
+  }
+
+  .consult-intro__media {
+    margin: 12px;
+    margin-inline-end: 0;
+  }
+
+  .consult-intro__media::before {
+    inset-block-start: -12px;
+    inset-inline-start: -12px;
+  }
+
+  .consult-services__grid,
+  .consult-why__grid,
+  .consult-works__grid,
+  .consult-process__list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .consult-service {
+    padding: 1.25rem;
+  }
+
+  .consult-service__head {
+    margin-bottom: 0.9rem;
+  }
+
+  .consult-service__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Phones: the items read as one compact dotted line instead of rows of chips. */
+  .consult-service__items {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+  }
+
+  .consult-service__items li {
+    display: inline;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: inherit;
+  }
+
+  .consult-service__items li:not(:last-child)::after {
+    content: " · ";
+    color: var(--color-accent-dark);
+  }
+
+  .consult-why__item {
+    padding: 1.1rem;
+  }
+
+  .consult-types__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .consult-type__label {
+    inset-inline: 0.7rem;
+    bottom: 0.6rem;
+    font-size: 0.88rem;
+  }
+
+  .consult-process__list {
+    gap: 0;
+  }
+
+  .consult-step {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 1rem;
+    padding: 1.1rem 0 1.25rem;
+  }
+
+  .consult-step__number {
+    grid-row: span 2;
+    font-size: 1.6rem;
+    margin: 0;
+  }
+
+  .consult-works__empty {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--space-md);
+  }
+
+  .consult-works__empty .btn {
+    justify-self: start;
+  }
+
+  .consult-cta__card {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .consult-clients {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .consult-type__label {
+    font-size: 0.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consult-hero__media,
+  .consult-hero__inner > *,
+  .consult-network__arc,
+  .consult-network__hub .consult-network__pulse {
+    animation: none;
+  }
+
+  .consult-type img,
+  .consult-service {
+    transition: none;
+  }
+}

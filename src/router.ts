@@ -3,6 +3,7 @@ import { renderProjects } from "./pages/projects";
 import { renderProjectDetail } from "./pages/projectDetail";
 import { renderAbout } from "./pages/about";
 import { renderCitizenship } from "./pages/citizenship";
+import { renderConsultancy } from "./pages/consultancy";
 import { renderFaq } from "./pages/faq";
 import { renderBlog } from "./pages/blog";
 import { renderBlogDetail } from "./pages/blogDetail";
@@ -88,6 +89,9 @@ function renderRoute(route: Route, main: HTMLElement): void {
       break;
     case "citizenship":
       renderCitizenship(main);
+      break;
+    case "consultancy":
+      renderConsultancy(main);
       break;
     case "faq":
       renderFaq(main);

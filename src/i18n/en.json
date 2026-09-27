@@ -7,6 +7,8 @@
   "nav": {
     "home": "Home",
     "projects": "Projects",
+    "consultancy": "Engineering & Architectural Consultancy",
+    "consultancyShort": "Engineering",
     "about": "About Us",
     "citizenship": "Citizenship by Investment",
     "propertyRequest": "Request a Property",
@@ -1208,7 +1210,325 @@
       ]
     }
   },
+  "consultancy": {
+    "heroEyebrow": "Engineering & Architectural Consultancy",
+    "heroTitle": "Turning ideas into well-considered, buildable spaces",
+    "heroSubtitle": "Engineering consultancy, architectural design and interior design for residential, commercial and hospitality projects in Türkiye and international markets.",
+    "heroCtaPrimary": "Request a Consultation",
+    "heroCtaSecondary": "Explore Our Services",
+    "markets": "Türkiye · Middle East · International",
+    "heroImageAlt": "Architectural concept render of a contemporary hillside residence with terraces and a pool at dusk",
+    "jumpLabel": "On this page",
+    "jump": {
+      "services": "Services",
+      "types": "Project types",
+      "process": "Process",
+      "faq": "FAQ",
+      "request": "Request a consultation"
+    },
+    "introEyebrow": "Our approach",
+    "introTitle": "Engineering expertise from concept to execution",
+    "introText1": "HADARA's engineering and design arm brings architecture, engineering consultancy and interior design under one roof. We shape every project around how it will be built, used and valued, pairing design thinking with the market insight we have gained in real estate development and investment.",
+    "introText2": "Our work is not limited to Türkiye: we also provide design and consultancy services for projects across the Middle East and in other international markets.",
+    "introImageAlt": "Architectural drawings, a white scale model and material samples on a design studio table",
+    "clientsTitle": "Who we work with",
+    "clients": [
+      "Investors",
+      "Real estate developers",
+      "Landowners",
+      "Villa owners",
+      "Hotels & hospitality operators",
+      "Commercial projects",
+      "Companies",
+      "Residential projects"
+    ],
+    "servicesEyebrow": "What we do",
+    "servicesTitle": "Integrated design and engineering services",
+    "servicesSubtitle": "Take a single service or combine several into one coordinated scope, from the first sketch to the final design package.",
+    "serviceCta": "Request this service",
+    "services": [
+      {
+        "title": "Architectural Design",
+        "desc": "Architecture that balances form, function and buildability, from the first concept to a coordinated design.",
+        "items": [
+          "Concept design",
+          "Architectural planning",
+          "Space planning",
+          "Facade design",
+          "Residential projects",
+          "Villas",
+          "Commercial buildings",
+          "Hospitality projects"
+        ]
+      },
+      {
+        "title": "Engineering Consultancy",
+        "desc": "Independent technical insight before you invest, build or commit to a design.",
+        "items": [
+          "Project assessment",
+          "Drawing and plan review",
+          "Engineering solution development",
+          "Design review",
+          "Value engineering",
+          "Technical opinion before investment or construction"
+        ]
+      },
+      {
+        "title": "Interior Design",
+        "desc": "Interiors with character and longevity, resolved down to materials, furniture and light.",
+        "items": [
+          "Residential interiors",
+          "Villas",
+          "Apartments",
+          "Hotels",
+          "Offices",
+          "Commercial spaces",
+          "Material and finish selection",
+          "Furniture concept",
+          "Lighting concept"
+        ]
+      },
+      {
+        "title": "3D Visualization",
+        "desc": "Photorealistic imagery that lets you, your partners and your buyers see the project before it is built.",
+        "items": [
+          "Interior renders",
+          "Exterior renders",
+          "Architectural visualization",
+          "Concept presentations"
+        ]
+      },
+      {
+        "title": "Real Estate Development Consultancy",
+        "desc": "Where our real estate experience meets design: shaping a product the market is looking for.",
+        "items": [
+          "Land analysis",
+          "Choosing the right use",
+          "Area and unit-mix planning",
+          "Real estate product optimisation",
+          "Market needs from a design perspective"
+        ]
+      },
+      {
+        "title": "Renovation & Redesign",
+        "desc": "Better layouts, renewed character and added value for spaces and buildings that already exist.",
+        "items": [
+          "Apartments",
+          "Villas",
+          "Hotels",
+          "Commercial spaces",
+          "Existing buildings"
+        ]
+      }
+    ],
+    "whyEyebrow": "Why HADARA",
+    "whyTitle": "Why HADARA Engineering & Design",
+    "whySubtitle": "A design partner that also thinks like a developer and an investor.",
+    "why": [
+      {
+        "title": "Architectural and real estate insight",
+        "desc": "We read every project as both a building and an investment, so design decisions support its long-term value."
+      },
+      {
+        "title": "Shaped by real needs",
+        "desc": "Solutions built around what investors need and what end users will actually live and work with."
+      },
+      {
+        "title": "Designed to be built",
+        "desc": "Drawings and details made to be executed on site, not just to look good in a presentation."
+      },
+      {
+        "title": "Tailored, detail-driven work",
+        "desc": "No templates: every project receives its own solution, refined down to the details."
+      },
+      {
+        "title": "Function, beauty and value",
+        "desc": "Usability, aesthetics and investment value balanced in one coherent design."
+      },
+      {
+        "title": "Flexible across borders",
+        "desc": "We work on projects in Türkiye and abroad, coordinating remotely with clients and project teams."
+      }
+    ],
+    "typesEyebrow": "Project types",
+    "typesTitle": "Spaces we design",
+    "typesSubtitle": "From private villas to hospitality venues and mixed-use developments.",
+    "typesNote": "Images are illustrative design concepts.",
+    "types": {
+      "villas": {
+        "label": "Villas",
+        "alt": "Concept render of a contemporary villa with a pool"
+      },
+      "residential": {
+        "label": "Residential Developments",
+        "alt": "Concept render of residential blocks around a landscaped courtyard"
+      },
+      "apartments": {
+        "label": "Apartments",
+        "alt": "Interior concept of a modern apartment living room"
+      },
+      "hospitality": {
+        "label": "Hotels & Hospitality",
+        "alt": "Interior concept of a boutique hotel lobby"
+      },
+      "offices": {
+        "label": "Offices",
+        "alt": "Interior concept of a contemporary office"
+      },
+      "retail": {
+        "label": "Retail & Commercial",
+        "alt": "Concept render of ground-floor retail storefronts"
+      },
+      "restaurants": {
+        "label": "Restaurants & Cafés",
+        "alt": "Interior concept of an upscale restaurant"
+      },
+      "mixedUse": {
+        "label": "Mixed-use Projects",
+        "alt": "Concept render of a mixed-use tower with a public plaza"
+      }
+    },
+    "processEyebrow": "How we work",
+    "processTitle": "A clear process, from brief to delivery",
+    "processSubtitle": "Six stages that keep every decision informed and every deliverable on track.",
+    "process": [
+      {
+        "title": "Consultation",
+        "desc": "Understanding the project, the site, your requirements and your budget."
+      },
+      {
+        "title": "Analysis",
+        "desc": "Studying the site, needs, constraints and applicable requirements."
+      },
+      {
+        "title": "Concept",
+        "desc": "Developing the idea and the initial architectural direction."
+      },
+      {
+        "title": "Design Development",
+        "desc": "Developing the plans, details and the full design."
+      },
+      {
+        "title": "Visualization",
+        "desc": "Preparing renders and 3D visuals where needed."
+      },
+      {
+        "title": "Final Delivery",
+        "desc": "Handing over the final drawings, files and design package."
+      }
+    ],
+    "globalEyebrow": "Türkiye · Middle East · International",
+    "globalTitle": "From Istanbul to projects across the region",
+    "globalText": "We are based in Istanbul, but our design and consultancy work is not bound by geography. With structured online meetings, shared digital files and clear review stages, we collaborate with clients and project teams across the Middle East and in other markets.",
+    "globalPoints": [
+      "Remote workshops and design reviews",
+      "Digital deliverables your local team can build on",
+      "A single point of contact from brief to delivery"
+    ],
+    "globalVisualLabel": "Diagram linking Istanbul with Türkiye, the Middle East and international markets",
+    "regions": {
+      "istanbul": "Istanbul",
+      "turkiye": "Türkiye",
+      "middleEast": "Middle East",
+      "international": "International"
+    },
+    "worksEyebrow": "Portfolio",
+    "worksTitle": "Selected architectural works",
+    "worksEmptyTitle": "Portfolio available on request",
+    "worksEmptyText": "Tell us about your project and we will share the architectural and interior work most relevant to it.",
+    "worksCta": "Request our portfolio",
+    "worksData": {},
+    "faqEyebrow": "FAQ",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "Do you provide design services outside Türkiye?",
+        "a": "Yes. We deliver design and consultancy services for international projects, depending on the project's scope and the service required."
+      },
+      {
+        "q": "Do you offer architectural and interior design together?",
+        "a": "Yes. They can be delivered as one integrated service or each on its own."
+      },
+      {
+        "q": "Can you study a project before we buy the land or property?",
+        "a": "Yes. We can provide an initial consultation and an architectural and development analysis of the project before you make the investment decision."
+      },
+      {
+        "q": "Can you work on an existing project and redesign it?",
+        "a": "Yes. Our services include re-planning, redesigning and upgrading existing projects and spaces."
+      },
+      {
+        "q": "Do you handle permits and official engineering approvals?",
+        "a": "Where permits or stamped drawings are legally required, they must be issued by engineers licensed in the country concerned. We can define that scope with you and coordinate our design work with the licensed local team."
+      }
+    ],
+    "faqMore": "More questions about HADARA?",
+    "ctaEyebrow": "Start a project",
+    "ctaTitle": "Have a new project or an idea that needs developing?",
+    "ctaText": "Share your project details and our team will contact you to discuss your needs and the right next steps.",
+    "ctaWhatsapp": "Talk to us on WhatsApp",
+    "whatsappMessage": "Hello HADARA, I would like to discuss an engineering / architectural design project.",
+    "form": {
+      "title": "Request a consultation",
+      "requiredNote": "Fields marked * are required.",
+      "nameLabel": "Full name",
+      "namePlaceholder": "Your full name",
+      "companyLabel": "Company / investor name",
+      "companyPlaceholder": "Optional",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone / WhatsApp",
+      "countryLabel": "Country",
+      "countryPlaceholder": "Select your country",
+      "countryGroupRegion": "Türkiye & Middle East",
+      "countryGroupAll": "All countries",
+      "locationLabel": "Project location",
+      "locationPlaceholder": "City, country",
+      "projectTypeLabel": "Project type",
+      "projectTypePlaceholder": "Select a project type",
+      "projectTypes": {
+        "villas": "Villa",
+        "residential": "Residential development",
+        "apartments": "Apartment",
+        "hospitality": "Hotel / hospitality",
+        "offices": "Office",
+        "retail": "Retail / commercial",
+        "restaurants": "Restaurant / café",
+        "mixedUse": "Mixed-use project",
+        "other": "Other"
+      },
+      "areaLabel": "Approximate project area",
+      "areaPlaceholder": "e.g. 850 m²",
+      "serviceLabel": "Required service",
+      "servicePlaceholder": "Select a service",
+      "services": {
+        "architectural": "Architectural Design",
+        "engineering": "Engineering Consultancy",
+        "interior": "Interior Design",
+        "visualization": "3D Visualization",
+        "development": "Real Estate Development Consultancy",
+        "renovation": "Renovation / Redesign",
+        "other": "Other"
+      },
+      "descriptionLabel": "Brief project description",
+      "descriptionPlaceholder": "The site, the scope, your goals and timing…",
+      "submit": "Start Your Project With Us",
+      "successTitle": "Thank you!",
+      "successText": "Your request has been prepared. Your email app will open so you can send it to our team, and we will contact you to discuss your project.",
+      "errors": {
+        "nameRequired": "Please enter your full name.",
+        "emailRequired": "Please enter your email address.",
+        "emailInvalid": "Please enter a valid email address.",
+        "phoneRequired": "Please enter your phone or WhatsApp number.",
+        "phoneInvalid": "Please enter a valid phone number.",
+        "serviceRequired": "Please select the service you need."
+      }
+    }
+  },
   "seo": {
+    "consultancy": {
+      "title": "Engineering & Architectural Consultancy",
+      "description": "Architectural design, interior design and engineering consultancy from Istanbul for villas, residential, hotel and commercial projects in Türkiye and abroad."
+    },
     "home": {
       "title": "HADARA Real Estate | Property Developer in Istanbul, Turkey",
       "description": "Boutique Istanbul developer building luxury villas, apartments and mixed-use projects in Beylikdüzü, Büyükçekmece, Avcılar and Şişli since 2014, with full Turkish citizenship support."

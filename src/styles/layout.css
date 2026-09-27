@@ -96,8 +96,26 @@
 .main-nav__list {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
+  gap: 1.5rem;
   list-style: none;
+}
+
+/* Long labels: a short form in the one-line desktop bar, the full name in the mobile menu. */
+.main-nav__label--full {
+  display: none;
+}
+
+.site-header--compact .main-nav__label--short {
+  display: none;
+}
+
+.site-header--compact .main-nav__label--full {
+  display: inline;
+}
+
+/* The logo already links home, so the one-line desktop bar leaves "Home" to the mobile menu. */
+.site-header:not(.site-header--compact) .main-nav__item--home {
+  display: none;
 }
 
 .main-nav__link {
@@ -348,112 +366,112 @@
   white-space: nowrap;
 }
 
-@media (max-width: 1400px) {
-  .header-actions .header-cta {
-    display: none;
-  }
-
-  /* Full-height panel under the header: nothing of the page shows through,
-     and long menus scroll inside it. */
-  .main-nav {
-    position: fixed;
-    inset-inline: 0;
-    top: var(--header-h);
-    bottom: 0;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    background: var(--color-surface);
-    border-top: 1px solid var(--color-border);
-    transform: translateY(-8px);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
-  }
-
-  .main-nav.is-open {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  .main-nav__list {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    max-width: 640px;
-    margin: 0 auto;
-    gap: 0;
-    padding: var(--space-xs) var(--space-md) calc(var(--space-lg) + env(safe-area-inset-bottom));
-  }
-
-  .main-nav__link,
-  .nav-group__toggle {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 1rem 0;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--color-ink);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .main-nav__link::after {
-    display: none;
-  }
-
-  .main-nav__link.is-active {
-    color: var(--color-accent-dark);
-  }
-
-  .nav-group__toggle {
-    justify-content: space-between;
-  }
-
-  /* "Resources" opens in place, as an indented list, instead of a popup. */
-  .nav-group__menu {
-    position: static;
-    min-width: 0;
-    padding: 0.25rem 0 0.5rem;
-    padding-inline-start: var(--space-sm);
-    border: 0;
-    border-bottom: 1px solid var(--color-border);
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .nav-group__link {
-    padding: 0.75rem 0.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-  }
-
-  .main-nav__lang {
-    padding-top: var(--space-sm);
-  }
-
-  .main-nav__actions {
-    display: grid;
-    gap: 0.75rem;
-    padding-top: var(--space-md);
-  }
-
-  .main-nav__actions .btn {
-    justify-content: center;
-    padding-block: 0.95rem;
-  }
-
-  .menu-toggle {
-    display: inline-flex;
-  }
-
-  .main-nav__item--tail {
-    display: block;
-  }
-
+/* Collapsed (hamburger) header: set by header.ts at ≤1400px, or wider when the
+   one-line bar would not fit (long labels in some languages, a long account name). */
+.site-header--compact .header-actions .header-cta {
+  display: none;
 }
+
+/* Full-height panel under the header: nothing of the page shows through,
+   and long menus scroll inside it. */
+.site-header--compact .main-nav {
+  position: fixed;
+  inset-inline: 0;
+  top: var(--header-h);
+  bottom: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  transform: translateY(-8px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+}
+
+.site-header--compact .main-nav.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.site-header--compact .main-nav__list {
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  gap: 0;
+  padding: var(--space-xs) var(--space-md) calc(var(--space-lg) + env(safe-area-inset-bottom));
+}
+
+.site-header--compact .main-nav__link,
+.site-header--compact .nav-group__toggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header--compact .main-nav__link::after {
+  display: none;
+}
+
+.site-header--compact .main-nav__link.is-active {
+  color: var(--color-accent-dark);
+}
+
+.site-header--compact .nav-group__toggle {
+  justify-content: space-between;
+}
+
+/* "Resources" opens in place, as an indented list, instead of a popup. */
+.site-header--compact .nav-group__menu {
+  position: static;
+  min-width: 0;
+  padding: 0.25rem 0 0.5rem;
+  padding-inline-start: var(--space-sm);
+  border: 0;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.site-header--compact .nav-group__link {
+  padding: 0.75rem 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.site-header--compact .main-nav__lang {
+  padding-top: var(--space-sm);
+}
+
+.site-header--compact .main-nav__actions {
+  display: grid;
+  gap: 0.75rem;
+  padding-top: var(--space-md);
+}
+
+.site-header--compact .main-nav__actions .btn {
+  justify-content: center;
+  padding-block: 0.95rem;
+}
+
+.site-header--compact .menu-toggle {
+  display: inline-flex;
+}
+
+.site-header--compact .main-nav__item--tail {
+  display: block;
+}
+
 
 @media (max-width: 1024px) {
   .site-header {

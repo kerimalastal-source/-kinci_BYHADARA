@@ -3,6 +3,7 @@ import { lookup } from "../i18n/dictionaries";
 import { getSortedProjects } from "../data/projects";
 import { getSortedBlogPosts } from "../data/blog";
 import { navigate } from "../router";
+import { CONSULTANCY_SEGMENT } from "../seo/routes";
 
 interface SearchResult {
   title: string;
@@ -46,6 +47,12 @@ function buildIndex(): SearchResult[] {
   results.push({ title: t("nav.home"), snippet: t("home.heroSubtitle"), route: "/" });
   results.push({ title: t("nav.projects"), snippet: t("projects.heroSubtitle"), route: "/projects" });
   results.push({ title: t("nav.about"), snippet: t("about.heroSubtitle"), route: "/about" });
+  results.push({
+    title: t("nav.consultancy"),
+    snippet: t("consultancy.heroSubtitle"),
+    route: `/${CONSULTANCY_SEGMENT}`,
+    keywords: "architecture architectural engineering interior design villa hotel 3d render renovation mimari mühendislik iç mimarlık"
+  });
   results.push({ title: t("nav.citizenship"), snippet: t("citizenship.heroSubtitle"), route: "/citizenship" });
   results.push({ title: t("nav.propertyRequest"), snippet: t("propertyRequest.heroSubtitle"), route: "/property-request" });
   results.push({ title: t("nav.blog"), snippet: t("blog.heroSubtitle"), route: "/blog" });

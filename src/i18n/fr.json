@@ -7,6 +7,8 @@
   "nav": {
     "home": "Accueil",
     "projects": "Projets",
+    "consultancy": "Conseil en ingénierie et architecture",
+    "consultancyShort": "Ingénierie",
     "about": "À propos",
     "citizenship": "Citoyenneté par investissement",
     "propertyRequest": "Demander un bien",
@@ -1208,7 +1210,325 @@
       ]
     }
   },
+  "consultancy": {
+    "heroEyebrow": "Conseil en ingénierie et architecture",
+    "heroTitle": "Transformer les idées en espaces réfléchis et réalisables",
+    "heroSubtitle": "Conseil en ingénierie, conception architecturale et architecture d'intérieur pour des projets résidentiels, commerciaux et hôteliers en Turquie et sur les marchés internationaux.",
+    "heroCtaPrimary": "Demander une consultation",
+    "heroCtaSecondary": "Découvrir nos services",
+    "markets": "Turquie · Moyen-Orient · International",
+    "heroImageAlt": "Rendu architectural d'une résidence contemporaine à flanc de colline, avec terrasses et piscine, au crépuscule",
+    "jumpLabel": "Sur cette page",
+    "jump": {
+      "services": "Services",
+      "types": "Types de projets",
+      "process": "Méthode",
+      "faq": "FAQ",
+      "request": "Demander une consultation"
+    },
+    "introEyebrow": "Notre approche",
+    "introTitle": "Une expertise d'ingénierie, de l'idée à la réalisation",
+    "introText1": "Le pôle ingénierie et design de HADARA réunit architecture, conseil en ingénierie et architecture d'intérieur sous un même toit. Nous concevons chaque projet en fonction de la manière dont il sera construit, utilisé et valorisé, en alliant réflexion architecturale et connaissance du marché acquise dans le développement et l'investissement immobiliers.",
+    "introText2": "Nos services ne se limitent pas à la Turquie : nous accompagnons également des projets au Moyen-Orient et sur d'autres marchés internationaux.",
+    "introImageAlt": "Plans d'architecte, maquette blanche et échantillons de matériaux sur une table de studio de design",
+    "clientsTitle": "Nos clients",
+    "clients": [
+      "Investisseurs",
+      "Promoteurs immobiliers",
+      "Propriétaires fonciers",
+      "Propriétaires de villas",
+      "Hôtels et acteurs de l'hospitalité",
+      "Projets commerciaux",
+      "Entreprises",
+      "Projets résidentiels"
+    ],
+    "servicesEyebrow": "Nos services",
+    "servicesTitle": "Des services intégrés de conception et d'ingénierie",
+    "servicesSubtitle": "Choisissez un service ou combinez-en plusieurs dans une mission coordonnée, de la première esquisse au dossier de conception final.",
+    "serviceCta": "Demander ce service",
+    "services": [
+      {
+        "title": "Conception architecturale",
+        "desc": "Une architecture qui concilie forme, fonction et constructibilité, du premier concept à une conception coordonnée.",
+        "items": [
+          "Conception de concept",
+          "Planification architecturale",
+          "Aménagement des espaces",
+          "Conception de façades",
+          "Projets résidentiels",
+          "Villas",
+          "Bâtiments commerciaux",
+          "Projets hôteliers"
+        ]
+      },
+      {
+        "title": "Conseil en ingénierie",
+        "desc": "Un regard technique indépendant avant d'investir, de construire ou de valider une conception.",
+        "items": [
+          "Étude du projet",
+          "Évaluation des plans",
+          "Développement de solutions techniques",
+          "Revue de conception",
+          "Ingénierie de la valeur",
+          "Avis technique avant investissement ou travaux"
+        ]
+      },
+      {
+        "title": "Architecture d'intérieur",
+        "desc": "Des intérieurs de caractère, pensés pour durer, jusqu'aux matériaux, au mobilier et à la lumière.",
+        "items": [
+          "Intérieurs résidentiels",
+          "Villas",
+          "Appartements",
+          "Hôtels",
+          "Bureaux",
+          "Espaces commerciaux",
+          "Choix des matériaux et finitions",
+          "Concept mobilier",
+          "Concept d'éclairage"
+        ]
+      },
+      {
+        "title": "Visualisation 3D",
+        "desc": "Des images photoréalistes pour que vous, vos partenaires et vos acquéreurs voyiez le projet avant sa construction.",
+        "items": [
+          "Rendus intérieurs",
+          "Rendus extérieurs",
+          "Visualisation architecturale",
+          "Présentations de concept"
+        ]
+      },
+      {
+        "title": "Conseil en développement immobilier",
+        "desc": "Là où notre expérience immobilière rencontre la conception : façonner un produit que le marché recherche.",
+        "items": [
+          "Analyse du terrain",
+          "Choix de l'usage le plus adapté",
+          "Répartition des surfaces",
+          "Optimisation du produit immobilier",
+          "Besoins du marché sous l'angle du design"
+        ]
+      },
+      {
+        "title": "Rénovation et réaménagement",
+        "desc": "De meilleurs plans, un caractère renouvelé et une valeur accrue pour des espaces et bâtiments existants.",
+        "items": [
+          "Appartements",
+          "Villas",
+          "Hôtels",
+          "Espaces commerciaux",
+          "Bâtiments existants"
+        ]
+      }
+    ],
+    "whyEyebrow": "Pourquoi HADARA",
+    "whyTitle": "Pourquoi HADARA Engineering & Design ?",
+    "whySubtitle": "Un partenaire de conception qui pense aussi comme un promoteur et un investisseur.",
+    "why": [
+      {
+        "title": "Vision architecturale et immobilière",
+        "desc": "Nous abordons chaque projet à la fois comme un bâtiment et comme un investissement, afin que la conception serve sa valeur à long terme."
+      },
+      {
+        "title": "Des solutions fondées sur les besoins réels",
+        "desc": "Des réponses construites autour des attentes de l'investisseur et de l'usage réel des occupants."
+      },
+      {
+        "title": "Une conception réalisable",
+        "desc": "Des plans et des détails pensés pour être exécutés sur le chantier, pas seulement pour séduire en présentation."
+      },
+      {
+        "title": "Sur mesure et soin du détail",
+        "desc": "Aucun modèle standard : chaque projet reçoit sa propre solution, affinée jusque dans les détails."
+      },
+      {
+        "title": "Fonction, esthétique et valeur",
+        "desc": "Usage, esthétique et rentabilité réunis dans une conception cohérente."
+      },
+      {
+        "title": "Flexibilité au-delà des frontières",
+        "desc": "Nous intervenons en Turquie et à l'étranger, en coordination à distance avec les clients et les équipes projet."
+      }
+    ],
+    "typesEyebrow": "Types de projets",
+    "typesTitle": "Les espaces que nous concevons",
+    "typesSubtitle": "Des villas privées aux lieux d'hospitalité et aux projets mixtes.",
+    "typesNote": "Images d'illustration : concepts de design.",
+    "types": {
+      "villas": {
+        "label": "Villas",
+        "alt": "Rendu d'une villa contemporaine avec piscine"
+      },
+      "residential": {
+        "label": "Ensembles résidentiels",
+        "alt": "Rendu d'immeubles résidentiels autour d'une cour paysagée"
+      },
+      "apartments": {
+        "label": "Appartements",
+        "alt": "Concept intérieur d'un séjour d'appartement moderne"
+      },
+      "hospitality": {
+        "label": "Hôtels et hospitalité",
+        "alt": "Concept intérieur d'un hall d'hôtel boutique"
+      },
+      "offices": {
+        "label": "Bureaux",
+        "alt": "Concept intérieur de bureaux contemporains"
+      },
+      "retail": {
+        "label": "Commerces",
+        "alt": "Rendu de vitrines commerciales en rez-de-chaussée"
+      },
+      "restaurants": {
+        "label": "Restaurants et cafés",
+        "alt": "Concept intérieur d'un restaurant haut de gamme"
+      },
+      "mixedUse": {
+        "label": "Projets mixtes",
+        "alt": "Rendu d'une tour mixte avec une place publique"
+      }
+    },
+    "processEyebrow": "Notre méthode",
+    "processTitle": "Une méthode claire, du brief à la livraison",
+    "processSubtitle": "Six étapes pour des décisions éclairées et des livrables maîtrisés.",
+    "process": [
+      {
+        "title": "Consultation",
+        "desc": "Comprendre le projet, le terrain, vos besoins et votre budget."
+      },
+      {
+        "title": "Analyse",
+        "desc": "Étudier le site, les besoins, les contraintes et les exigences applicables."
+      },
+      {
+        "title": "Concept",
+        "desc": "Développer l'idée et l'orientation architecturale initiale."
+      },
+      {
+        "title": "Développement de la conception",
+        "desc": "Développer les plans, les détails et la conception complète."
+      },
+      {
+        "title": "Visualisation",
+        "desc": "Préparer les rendus et visuels 3D si nécessaire."
+      },
+      {
+        "title": "Livraison finale",
+        "desc": "Remettre les plans, fichiers et le dossier de conception finaux."
+      }
+    ],
+    "globalEyebrow": "Turquie · Moyen-Orient · International",
+    "globalTitle": "D'Istanbul aux projets de toute la région",
+    "globalText": "Nous sommes basés à Istanbul, mais nos missions de conception et de conseil ne connaissent pas de frontières. Grâce à des réunions en ligne structurées, des fichiers numériques partagés et des étapes de validation claires, nous collaborons avec des clients et des équipes projet au Moyen-Orient et sur d'autres marchés.",
+    "globalPoints": [
+      "Ateliers et revues de conception à distance",
+      "Livrables numériques exploitables par votre équipe locale",
+      "Un interlocuteur unique du brief à la livraison"
+    ],
+    "globalVisualLabel": "Schéma reliant Istanbul à la Turquie, au Moyen-Orient et aux marchés internationaux",
+    "regions": {
+      "istanbul": "Istanbul",
+      "turkiye": "Turquie",
+      "middleEast": "Moyen-Orient",
+      "international": "International"
+    },
+    "worksEyebrow": "Portfolio",
+    "worksTitle": "Réalisations architecturales choisies",
+    "worksEmptyTitle": "Portfolio disponible sur demande",
+    "worksEmptyText": "Présentez-nous votre projet et nous partagerons les réalisations architecturales et intérieures les plus proches de vos besoins.",
+    "worksCta": "Demander notre portfolio",
+    "worksData": {},
+    "faqEyebrow": "FAQ",
+    "faqTitle": "Questions fréquentes",
+    "faq": [
+      {
+        "q": "Proposez-vous vos services de conception hors de Turquie ?",
+        "a": "Oui. Nous réalisons des missions de conception et de conseil pour des projets internationaux, selon l'ampleur du projet et la nature du service demandé."
+      },
+      {
+        "q": "Proposez-vous l'architecture et l'architecture d'intérieur ensemble ?",
+        "a": "Oui. Elles peuvent être fournies de manière intégrée ou séparément."
+      },
+      {
+        "q": "Pouvez-vous étudier un projet avant l'achat du terrain ou du bien ?",
+        "a": "Oui. Nous pouvons fournir une consultation initiale et une analyse architecturale et de développement du projet avant votre décision d'investissement."
+      },
+      {
+        "q": "Pouvez-vous reprendre et redessiner un projet existant ?",
+        "a": "Oui. Nos services comprennent la réorganisation, la reconception et la valorisation de projets et d'espaces existants."
+      },
+      {
+        "q": "Prenez-vous en charge les permis et validations techniques officielles ?",
+        "a": "Lorsque la loi exige des permis ou des plans visés, ceux-ci doivent être établis par des ingénieurs habilités dans le pays concerné. Nous pouvons définir ce périmètre avec vous et coordonner notre travail de conception avec l'équipe locale habilitée."
+      }
+    ],
+    "faqMore": "D'autres questions sur HADARA ?",
+    "ctaEyebrow": "Lancer un projet",
+    "ctaTitle": "Vous avez un nouveau projet ou une idée à développer ?",
+    "ctaText": "Présentez-nous votre projet : notre équipe vous contactera pour discuter de vos besoins et des prochaines étapes.",
+    "ctaWhatsapp": "Échanger sur WhatsApp",
+    "whatsappMessage": "Bonjour HADARA, je souhaite échanger au sujet d'un projet de conception architecturale / d'ingénierie.",
+    "form": {
+      "title": "Demander une consultation",
+      "requiredNote": "Les champs marqués * sont obligatoires.",
+      "nameLabel": "Nom complet",
+      "namePlaceholder": "Votre nom complet",
+      "companyLabel": "Société / investisseur",
+      "companyPlaceholder": "Facultatif",
+      "emailLabel": "E-mail",
+      "phoneLabel": "Téléphone / WhatsApp",
+      "countryLabel": "Pays",
+      "countryPlaceholder": "Sélectionnez votre pays",
+      "countryGroupRegion": "Turquie et Moyen-Orient",
+      "countryGroupAll": "Tous les pays",
+      "locationLabel": "Localisation du projet",
+      "locationPlaceholder": "Ville, pays",
+      "projectTypeLabel": "Type de projet",
+      "projectTypePlaceholder": "Sélectionnez un type de projet",
+      "projectTypes": {
+        "villas": "Villa",
+        "residential": "Ensemble résidentiel",
+        "apartments": "Appartement",
+        "hospitality": "Hôtel / hospitalité",
+        "offices": "Bureaux",
+        "retail": "Commerce",
+        "restaurants": "Restaurant / café",
+        "mixedUse": "Projet mixte",
+        "other": "Autre"
+      },
+      "areaLabel": "Surface approximative du projet",
+      "areaPlaceholder": "ex. 850 m²",
+      "serviceLabel": "Service souhaité",
+      "servicePlaceholder": "Sélectionnez un service",
+      "services": {
+        "architectural": "Conception architecturale",
+        "engineering": "Conseil en ingénierie",
+        "interior": "Architecture d'intérieur",
+        "visualization": "Visualisation 3D",
+        "development": "Conseil en développement immobilier",
+        "renovation": "Rénovation / réaménagement",
+        "other": "Autre"
+      },
+      "descriptionLabel": "Brève description du projet",
+      "descriptionPlaceholder": "Le site, le périmètre, vos objectifs et votre calendrier…",
+      "submit": "Lancez votre projet avec nous",
+      "successTitle": "Merci !",
+      "successText": "Votre demande a été préparée. Votre client e-mail va s'ouvrir pour l'envoyer à notre équipe, et nous vous contacterons pour discuter de votre projet.",
+      "errors": {
+        "nameRequired": "Veuillez saisir votre nom complet.",
+        "emailRequired": "Veuillez saisir votre adresse e-mail.",
+        "emailInvalid": "Veuillez saisir une adresse e-mail valide.",
+        "phoneRequired": "Veuillez saisir votre numéro de téléphone ou WhatsApp.",
+        "phoneInvalid": "Veuillez saisir un numéro de téléphone valide.",
+        "serviceRequired": "Veuillez sélectionner le service souhaité."
+      }
+    }
+  },
   "seo": {
+    "consultancy": {
+      "title": "Conseil en ingénierie et architecture",
+      "description": "Architecture, architecture d'intérieur et conseil en ingénierie depuis Istanbul : villas, résidences, hôtels et commerces en Turquie et à l'international."
+    },
     "home": {
       "title": "HADARA Immobilier | Promoteur immobilier à Istanbul, Turquie",
       "description": "Promoteur immobilier à Istanbul depuis 2014 : villas de luxe, appartements et projets mixtes à Beylikdüzü, Büyükçekmece, Avcılar et Şişli, avec accompagnement vers la citoyenneté turque."

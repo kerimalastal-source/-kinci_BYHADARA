@@ -5,6 +5,7 @@ import { localizePath, routePath, type Route } from "./routes";
 import { projects } from "../data/projects";
 import { blogPosts } from "../data/blog";
 import { placeKey } from "../utils/place";
+import { CONSULTANCY_OG_IMAGE } from "../data/consultancy";
 
 export const DEFAULT_SITE_URL = "https://hadararealestate.com";
 
@@ -44,6 +45,7 @@ const PAGE_KEYS: Partial<Record<Route["name"], string>> = {
   projects: "projects",
   about: "about",
   citizenship: "citizenship",
+  consultancy: "consultancy",
   faq: "faq",
   blog: "blog",
   "property-request": "propertyRequest",
@@ -79,6 +81,7 @@ export function indexableRoutes(): Route[] {
     ...projects.map((p) => ({ name: "project", slug: p.slug }) as Route),
     { name: "about" },
     { name: "citizenship" },
+    { name: "consultancy" },
     { name: "faq" },
     { name: "blog" },
     ...blogPosts.map((p) => ({ name: "blog-post", slug: p.slug }) as Route),
@@ -205,6 +208,43 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
         }))
       )
     });
+  }
+
+  if (pageRoute.name === "consultancy") {
+    const services = lookup(locale, "consultancy.services") as { title: string; desc: string }[];
+    const faq = lookup(locale, "consultancy.faq") as { q: string; a: string }[];
+    image = img(CONSULTANCY_OG_IMAGE);
+    imageAlt = tr("consultancy.heroImageAlt");
+    jsonLd.push(
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        name: `${brand} — ${title}`,
+        description,
+        url: url(routePath(pageRoute)),
+        image,
+        parentOrganization: { "@id": `${siteUrl}/#organization` },
+        areaServed: ["TR", "Middle East", "International"],
+        ...CONTACT,
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: title,
+          itemListElement: services.map((s) => ({
+            "@type": "Offer",
+            itemOffered: { "@type": "Service", name: s.title, description: s.desc }
+          }))
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a }
+        }))
+      }
+    );
   }
 
   jsonLd.push({

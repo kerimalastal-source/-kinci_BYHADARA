@@ -6,16 +6,20 @@ import { escapeHtml } from "../utils/html";
 import { renderBrand } from "./brand";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "./floatingButtons";
 import { renderFavoritesLink } from "./favorites";
+import { CONSULTANCY_SEGMENT } from "../seo/routes";
 
 interface NavLink {
   route: string;
   key: string;
   match: Route["name"][];
+  /** Shorter label for the one-line desktop bar; the full `key` label shows in the mobile menu. */
+  shortKey?: string;
 }
 
 const NAV_LINKS: NavLink[] = [
   { route: "/", key: "nav.home", match: ["home"] },
   { route: "/projects", key: "nav.projects", match: ["projects", "project"] },
+  { route: `/${CONSULTANCY_SEGMENT}`, key: "nav.consultancy", shortKey: "nav.consultancyShort", match: ["consultancy"] },
   { route: "/resale", key: "nav.resale", match: ["resale", "resale-listing"] },
   { route: "/about", key: "nav.about", match: ["about"] }
 ];
@@ -28,6 +32,44 @@ const NAV_RESOURCES: NavLink[] = [
 ];
 
 const NAV_TAIL: NavLink[] = [{ route: "/contact", key: "nav.contact", match: ["contact"] }];
+
+/* The one-line desktop bar only fits so many items (more so in French and Russian).
+   Below 1400px, or whenever the bar would overflow, the header switches to the
+   hamburger menu instead of letting links collide with the logo or the buttons. */
+const COMPACT_QUERY = "(max-width: 1400px)";
+let fittedHeader: HTMLElement | null = null;
+let closeMenu: () => void = () => {};
+
+function fitHeader(): void {
+  const el = fittedHeader;
+  if (!el?.isConnected) return;
+  const wasCompact = el.classList.contains("site-header--compact");
+  let compact = window.matchMedia(COMPACT_QUERY).matches;
+  if (!compact) {
+    el.classList.remove("site-header--compact");
+    const nav = el.querySelector<HTMLElement>(".main-nav");
+    const list = el.querySelector<HTMLElement>(".main-nav__list");
+    compact = Boolean(nav && list && list.scrollWidth > nav.clientWidth + 1);
+  }
+  el.classList.toggle("site-header--compact", compact);
+  if (wasCompact && !compact) closeMenu();
+}
+
+let fitListenersAdded = false;
+function watchHeaderFit(el: HTMLElement): void {
+  fittedHeader = el;
+  fitHeader();
+  if (fitListenersAdded) return;
+  fitListenersAdded = true;
+  window.addEventListener("resize", fitHeader);
+  // Label widths change once the web fonts arrive.
+  void document.fonts?.ready.then(fitHeader);
+}
+
+function navLabel(item: NavLink): string {
+  if (!item.shortKey) return t(item.key);
+  return `<span class="main-nav__label--short">${t(item.shortKey)}</span><span class="main-nav__label--full">${t(item.key)}</span>`;
+}
 
 export function renderHeader(el: HTMLElement, route: Route): void {
   const locale = getLocale();
@@ -48,9 +90,9 @@ export function renderHeader(el: HTMLElement, route: Route): void {
         <ul class="main-nav__list">
           ${NAV_LINKS.map(
             (item) => `
-            <li>
-              <a class="main-nav__link${item.match.includes(route.name) ? " is-active" : ""}" href="${link(item.route)}">
-                ${t(item.key)}
+            <li${item.route === "/" ? ' class="main-nav__item--home"' : ""}>
+              <a class="main-nav__link${item.match.includes(route.name) ? " is-active" : ""}" href="${link(item.route)}"${item.match.includes(route.name) ? ' aria-current="page"' : ""}>
+                ${navLabel(item)}
               </a>
             </li>`
           ).join("")}
@@ -153,6 +195,8 @@ export function renderHeader(el: HTMLElement, route: Route): void {
   };
   // The header re-renders on every navigation; never leave the page locked.
   setMenuOpen(false);
+  closeMenu = () => setMenuOpen(false);
+  watchHeaderFit(el);
   menuToggle.addEventListener("click", () => setMenuOpen(!nav.classList.contains("is-open")));
   nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenuOpen(false)));
   // On the inner wrapper (rebuilt each render) so listeners don't pile up on `el`.
