@@ -4,6 +4,7 @@ import { getProjectBySlug, getSortedProjects } from "../data/projects";
 import { campaignSource } from "../utils/campaign";
 import { getFavorites, setFavorites } from "./favorites";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
+import { trackLead } from "../utils/tracking";
 
 const CONTACT_EMAIL = "info@byhadara.com";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -365,6 +366,7 @@ export function initContactForm(container: ParentNode): void {
     ].join("\n");
 
     const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    trackLead("contact", [...englishNames, ...englishTopics].join(", "));
     window.location.href = mailto;
 
     successBox.hidden = false;

@@ -2,6 +2,7 @@ import { t, tRaw } from "../i18n";
 import { propertyTypeOptions, conditionOptions, budgetOptions, floorOptions } from "../data/propertyRequestOptions";
 import { turkeyProvinces } from "../data/turkeyLocations";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
+import { trackLead } from "../utils/tracking";
 
 const CONTACT_EMAIL = "info@byhadara.com";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -236,6 +237,7 @@ export function initPropertyRequestForm(container: ParentNode): void {
     ].join("\n");
 
     const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Property Request")}&body=${encodeURIComponent(body)}`;
+    trackLead("property-request", propertyType);
     window.location.href = mailto;
 
     successBox.hidden = false;

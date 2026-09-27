@@ -2,6 +2,7 @@ import { t, getLocale } from "../i18n";
 import { countries } from "../data/countries";
 import { PROJECT_TYPE_KEYS } from "../data/consultancy";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
+import { trackLead } from "../utils/tracking";
 
 /* Same delivery as the site's other forms: validated here, then handed to the visitor's
    email app (mailto:) addressed to the sales inbox. */
@@ -203,6 +204,7 @@ export function initConsultancyForm(container: ParentNode): void {
     const body = [...fields.filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`), "", value(form, "description")].join("\n").trim();
 
     const subject = `${EMAIL_SUBJECT} — ${selectedText(form, "service")}`;
+    trackLead("consultancy", selectedText(form, "service"));
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     successBox.hidden = false;

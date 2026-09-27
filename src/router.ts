@@ -26,6 +26,7 @@ import { parseRoute, splitLocale, localizePath, type Route } from "./seo/routes"
 import { applyMeta } from "./seo/head";
 import { onAuthChange } from "./auth/session";
 import { closeSearch } from "./components/search";
+import { trackPageView } from "./utils/tracking";
 
 export type { Route };
 
@@ -170,6 +171,7 @@ export function startRouter(root: HTMLElement): void {
       const target = window.location.hash ? document.getElementById(decodeURIComponent(window.location.hash.slice(1))) : null;
       if (target) target.scrollIntoView({ behavior: "instant" as ScrollBehavior });
       else window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+      trackPageView(route, locale);
     }
     renderedPath = path;
   }
