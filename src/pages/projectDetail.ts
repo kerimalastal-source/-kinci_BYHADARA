@@ -1,4 +1,4 @@
-import { t, getProjectContent, link, placeLine } from "../i18n";
+import { t, getProjectContent, getLocale, link, placeLine } from "../i18n";
 import { getProjectBySlug, getSortedProjects, type Project, type Residence } from "../data/projects";
 import { renderProjectCard, projectStatusLabel } from "../components/projectCard";
 import { amenityIcon } from "../components/amenityIcons";
@@ -179,6 +179,62 @@ function initReadMore(el: HTMLElement): void {
   update();
 }
 
+const SEAL_ICON =
+  '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 4.5 5.6v5.6c0 4.6 3.1 8.6 7.5 10 4.4-1.4 7.5-5.4 7.5-10V5.6z"/><path d="m8.6 12 2.4 2.4 4.6-4.8"/></svg>';
+const TICK_ICON =
+  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>';
+const DOC_ICON =
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>';
+
+/** Keeps a Latin term in brackets, e.g. "(Müstakil Tapu)", in one piece and in reading order inside Arabic text. */
+const isolateTerms = (text: string) => text.replace(/\(([^()]*[A-Za-z][^()]*)\)/g, '(<bdi dir="ltr" class="nowrap">$1</bdi>)');
+
+/** "Verified Project Card": legal and technical facts the team confirmed, with the date they were last checked. */
+function renderVerified(project: Project, name: string, values?: Record<string, string>): string {
+  const verified = project.verified;
+  if (!verified || !values) return "";
+  const items = verified.items.filter((key) => values[key]);
+  if (!items.length) return "";
+  const [y, m, d] = verified.updated.split("-").map(Number);
+  const date = new Intl.DateTimeFormat(`${getLocale()}-u-nu-latn`, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(
+    Date.UTC(y, m - 1, d)
+  );
+  const documentsHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    `${t("projectDetail.verified.documentsMessage", { name })}\n${window.location.origin}${link(`/projects/${project.slug}`)}`
+  )}`;
+  return `
+          <section class="detail-block verified-card" aria-labelledby="verified-title">
+            <header class="verified-card__head">
+              <span class="verified-card__seal">${SEAL_ICON}</span>
+              <div class="verified-card__heading">
+                <h2 id="verified-title">${t("projectDetail.verified.title")}</h2>
+                <p>${t("projectDetail.verified.subtitle")}</p>
+              </div>
+              <span class="verified-card__date">${t("projectDetail.verified.updated", { date })}</span>
+            </header>
+            <dl class="verified-card__list">
+              ${items
+                .map(
+                  (key, i) => `
+              <div class="verified-card__item" ${reveal(i, 2)}>
+                <span class="verified-card__tick">${TICK_ICON}</span>
+                <dt>${isolateTerms(t(`projectDetail.verified.labels.${key}`))}</dt>
+                <dd>${isolateTerms(values[key])}</dd>
+              </div>`
+                )
+                .join("")}
+            </dl>
+            ${
+              verified.documents
+                ? `<footer class="verified-card__foot">
+              <p>${t("projectDetail.verified.note")}</p>
+              <a class="btn btn--outline" href="${documentsHref}" target="_blank" rel="noopener">${DOC_ICON}${t("projectDetail.verified.documentsButton")}</a>
+            </footer>`
+                : ""
+            }
+          </section>`;
+}
+
 function renderAmenities(project: Project): string {
   if (!project.amenities?.length) return "";
   // Three columns when that fills every row (6, 9…) and four doesn't.
@@ -305,6 +361,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
               ${content.highlights.map((h, i) => `<li ${reveal(i, 8)}>${h}</li>`).join("")}
             </ul>
           </section>
+
+          ${renderVerified(project, content.name, content.verified)}
 
           ${renderResidences(project)}
           ${renderFloorPlan(project, content.floorPlan)}

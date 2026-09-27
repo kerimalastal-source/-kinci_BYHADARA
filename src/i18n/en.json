@@ -227,6 +227,26 @@
     "esenyurt": "Esenyurt"
   },
   "projectDetail": {
+    "verified": {
+      "title": "Verified Project Card",
+      "subtitle": "Legal and technical facts confirmed by the HADARA team.",
+      "badge": "Verified by HADARA",
+      "updated": "Last updated: {date}",
+      "note": "You can request copies of the documents on WhatsApp, or review them during your video tour or visit.",
+      "documentsButton": "Request copies of the documents",
+      "documentsMessage": "Hello HADARA, I would like copies of the documents for {name} (title deed, building permit, occupancy permit and earthquake certificates).",
+      "labels": {
+        "titleDeed": "Title deed",
+        "citizenship": "Turkish citizenship",
+        "permit": "Building permit",
+        "iskan": "Occupancy permit (İskan)",
+        "completed": "Construction completed",
+        "earthquake": "Earthquake standards",
+        "encumbrance": "Mortgage or lien",
+        "residence": "Residence permits in the area",
+        "warranty": "Construction warranties"
+      }
+    },
     "overviewTitle": "Project Overview",
     "keyFactsTitle": "Key Facts",
     "galleryTitle": "Gallery",
@@ -1237,6 +1257,17 @@
       ]
     },
     "marmara-haven-villa": {
+      "verified": {
+        "titleDeed": "Independent title deed (Müstakil Tapu)",
+        "citizenship": "Eligible",
+        "permit": "Issued by Büyükçekmece Municipality",
+        "iskan": "Issued",
+        "completed": "2026",
+        "earthquake": "Built to the 2018 Turkish Earthquake Code, with a soil survey report and certificates",
+        "encumbrance": "None",
+        "residence": "The area is open to foreign residents' registration",
+        "warranty": "Provided"
+      },
       "name": "Marmara Haven Villa",
       "tagline": "A private sanctuary with panoramic views of the Marmara Sea.",
       "shortDescription": "Marmara Haven Villa is a luxurious private residence of 576.63 m² over four levels on a 637 m² plot, with a private pool, full privacy and panoramic views of the Marmara Sea.",

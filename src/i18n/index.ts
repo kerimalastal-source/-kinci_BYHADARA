@@ -102,6 +102,8 @@ export function getProjectContent(slug: string) {
     floorPlan?: { name: string; features: string[] }[];
     videoTitle?: string;
     videoText?: string;
+    /** Values of the "Verified Project Card", keyed like Project.verified.items. */
+    verified?: Record<string, string>;
   }>(`projectsData.${slug}`);
 }
 

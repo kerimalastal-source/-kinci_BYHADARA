@@ -227,6 +227,26 @@
     "esenyurt": "Esenyurt"
   },
   "projectDetail": {
+    "verified": {
+      "title": "Fiche projet vérifiée",
+      "subtitle": "Informations juridiques et techniques confirmées par l'équipe HADARA.",
+      "badge": "Vérifiée par HADARA",
+      "updated": "Dernière mise à jour : {date}",
+      "note": "Vous pouvez demander une copie des documents sur WhatsApp, ou les consulter pendant votre visite vidéo ou sur place.",
+      "documentsButton": "Demander une copie des documents",
+      "documentsMessage": "Bonjour HADARA, je souhaite recevoir une copie des documents de {name} (titre de propriété, permis de construire, certificat d'habitabilité et certificats sismiques).",
+      "labels": {
+        "titleDeed": "Titre de propriété",
+        "citizenship": "Citoyenneté turque",
+        "permit": "Permis de construire",
+        "iskan": "Certificat d'habitabilité (İskan)",
+        "completed": "Achèvement des travaux",
+        "earthquake": "Normes sismiques",
+        "encumbrance": "Hypothèque ou saisie",
+        "residence": "Titres de séjour dans le quartier",
+        "warranty": "Garanties de construction"
+      }
+    },
     "overviewTitle": "Aperçu du projet",
     "keyFactsTitle": "Chiffres clés",
     "galleryTitle": "Galerie",
@@ -1237,6 +1257,17 @@
       ]
     },
     "marmara-haven-villa": {
+      "verified": {
+        "titleDeed": "Titre de propriété indépendant (Müstakil Tapu)",
+        "citizenship": "Éligible",
+        "permit": "Délivré par la municipalité de Büyükçekmece",
+        "iskan": "Délivré",
+        "completed": "2026",
+        "earthquake": "Conforme au règlement sismique turc de 2018, avec étude de sol et certificats",
+        "encumbrance": "Aucune",
+        "residence": "Quartier ouvert à l'enregistrement des résidents étrangers",
+        "warranty": "Assurées"
+      },
       "name": "Marmara Haven Villa",
       "tagline": "Un sanctuaire privé avec vue panoramique sur la mer de Marmara.",
       "shortDescription": "Marmara Haven Villa est une résidence privée de luxe de 576,63 m² sur quatre niveaux, bâtie sur un terrain de 637 m², avec piscine privée, intimité totale et vue panoramique sur la mer de Marmara.",

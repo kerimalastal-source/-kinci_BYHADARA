@@ -91,6 +91,27 @@ export interface FloorLevel {
   seaView?: boolean;
 }
 
+/** Legal and technical facts a project card can confirm (labels in projectDetail.verified.labels, values per project in projectsData.<slug>.verified). */
+export type VerifiedKey =
+  | "titleDeed"
+  | "citizenship"
+  | "permit"
+  | "iskan"
+  | "completed"
+  | "earthquake"
+  | "encumbrance"
+  | "residence"
+  | "warranty";
+
+export interface ProjectVerified {
+  /** "2026-09-27": when the team last confirmed the facts. */
+  updated: string;
+  /** Only facts the team confirmed, in display order. */
+  items: VerifiedKey[];
+  /** Copies of the documents can be sent on request. */
+  documents?: boolean;
+}
+
 export interface Project {
   slug: string;
   district: string;
@@ -122,6 +143,8 @@ export interface Project {
   /** Video tour hosted on YouTube; `poster` shows until the visitor presses play. */
   video?: ProjectVideo;
   amenities?: AmenityKey[];
+  /** "Verified Project Card": facts confirmed by the team (never filled in from marketing copy). */
+  verified?: ProjectVerified;
 }
 
 /** Shared services of every residential community (all projects except the single villa), per the owner. */
@@ -491,9 +514,15 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "delivered",
     lifestyle: ["sea"],
-    timeline: "2024 – 2025",
+    timeline: "2024 – 2026",
     price: "on-request",
     landing: true,
+    // Confirmed by the owner on 2026-09-27 (no monthly fee answer, so no "aidat" row).
+    verified: {
+      updated: "2026-09-27",
+      items: ["titleDeed", "citizenship", "permit", "iskan", "completed", "earthquake", "encumbrance", "residence", "warranty"],
+      documents: true
+    },
     priority: 10,
     coverImage: img("marmara-haven-villa", "exterior-facade", 1200, 1600, "Marmara Haven Villa exterior facade"),
     gallery: [
