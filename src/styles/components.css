@@ -811,6 +811,25 @@
   padding: var(--space-md);
 }
 
+/* Six services: three columns (the tablet/phone rules below still take over). */
+.services-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.service-card--link {
+  display: block;
+  color: inherit;
+  transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+}
+
+@media (hover: hover) {
+  .service-card--link:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+}
+
 .service-card__index {
   display: block;
   font-family: var(--font-heading);
@@ -5008,14 +5027,6 @@ body.nav-open .floating-actions {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-primary);
-}
-
-.consult-work__body .consult-work__credit {
-  margin-top: 0.6rem;
-  padding-top: 0.6rem;
-  border-top: 1px solid var(--color-border);
-  font-size: 0.8rem;
-  color: var(--color-muted);
 }
 
 @media (hover: hover) {

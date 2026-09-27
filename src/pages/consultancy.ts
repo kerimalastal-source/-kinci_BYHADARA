@@ -6,7 +6,6 @@ import {
   SERVICE_KEYS,
   PROJECT_TYPE_KEYS,
   consultancyWorks,
-  WORKS_TEAM,
   CONSULTANCY_PAGE_IMAGES,
   projectTypeImage,
   srcset,
@@ -144,7 +143,6 @@ function renderWorks(limit = consultancyWorks.length): string {
             <h3 class="consult-work__title" translate="no">${w.title}</h3>
             <p class="consult-work__place">${placeLine(w.district, w.city)}</p>
             <p class="consult-work__meta"><span dir="ltr">${w.year}</span><span aria-hidden="true">·</span><span dir="ltr">${w.area}</span></p>
-            <p class="consult-work__credit">${t("consultancy.worksDesignBy", { team: `<span translate="no">${WORKS_TEAM}</span>` })}</p>
           </div>
         </li>`
         )

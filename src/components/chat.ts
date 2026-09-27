@@ -7,6 +7,7 @@ import { HEART_ICON, isFavorite } from "./favorites";
 import { escapeHtml } from "../utils/html";
 import { toWesternDigits } from "../utils/numbers";
 import { placeKey } from "../utils/place";
+import { consultancyPath } from "../seo/routes";
 
 /**
  * Guided chat assistant: answers from the site's own data (projects, citizenship, contact)
@@ -15,7 +16,7 @@ import { placeKey } from "../utils/place";
  */
 
 type Filter = "all" | "new" | "ready" | "villas";
-type Topic = "greeting" | "citizenship" | "contact" | "thanks";
+type Topic = "greeting" | "citizenship" | "design" | "contact" | "thanks";
 
 type Entry =
   | { from: "user"; text: string }
@@ -139,6 +140,7 @@ function matchDistrict(text: string): string[] {
 
 const KEYWORDS: Record<string, string[]> = {
   citizenship: ["citizen", "passport", "nationality", "جنسيه", "جواز", "citoyen", "nationalite", "passeport", "граждан", "паспорт"],
+  design: ["design", "architect", "engineer", "interior", "render", "renovat", "redesign", "3d", "تصميم", "معماري", "عماره", "هندس", "ديكور", "داخلي", "ترميم", "conception", "ingenier", "interieur", "renovation", "архитект", "проектирован", "дизайн", "интерьер", "инженер", "ремонт", "реконструк"],
   contact: ["contact", "call", "phone", "whatsapp", "speak", "agent", "advisor", "تواصل", "اتصل", "اتصال", "هاتف", "تلفون", "تليفون", "رقمكم", "واتس", "موظف", "مستشار", "appel", "telephone", "conseill", "связ", "позвон", "телефон", "ватсап", "менеджер"],
   price: ["price", "cost", "how much", "budget", "سعر", "اسعار", "ثمن", "بكم", "تكلف", "ميزاني", "prix", "cout", "combien", "tarif", "цен", "стоим", "сколько", "бюджет"],
   villas: ["villa", "فيلا", "فلل", "فيلل", "вилл"],
@@ -165,6 +167,7 @@ function reply(text: string): Entry {
   if (named.length === 1) return { from: "bot", kind: "project", slug: named[0] };
   if (named.length > 1) return { from: "bot", kind: "projects", filter: "all", intro: "matched", slugs: named };
   if (has(q, "citizenship")) return { from: "bot", kind: "citizenship" };
+  if (has(q, "design")) return { from: "bot", kind: "design" };
   if (has(q, "villas")) return { from: "bot", kind: "projects", filter: "villas" };
   const inDistrict = matchDistrict(text);
   if (inDistrict.length === 1) return { from: "bot", kind: "project", slug: inDistrict[0] };
@@ -295,6 +298,19 @@ function renderCitizenship(): string {
     </div>`;
 }
 
+/** HADARA's architecture, interior design and engineering consultancy service. */
+function renderDesign(): string {
+  const services = tRaw<{ title: string }[]>("consultancy.services");
+  return `
+    <p>${t("chat.designText")}</p>
+    <ul class="chat-list">${services.map((s) => `<li>${s.title}</li>`).join("")}</ul>
+    <div class="chat-actions">
+      <a class="chat-action chat-action--wa" href="${whatsappHref(t("chat.waDesign"))}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("chat.actions.advisor")}</a>
+      <a class="chat-action" href="${link(consultancyPath("services"))}">${t("chat.actions.designServices")}</a>
+      <a class="chat-action" href="${link(consultancyPath("consultation"))}">${t("chat.actions.consult")}</a>
+    </div>`;
+}
+
 function renderContact(): string {
   return `
     <p>${t("chat.contactText")}</p>
@@ -321,6 +337,8 @@ function renderBot(entry: Extract<Entry, { from: "bot" }>): string {
       return renderProject(entry.slug);
     case "citizenship":
       return renderCitizenship();
+    case "design":
+      return renderDesign();
     case "contact":
       return renderContact();
     case "fallback":
@@ -332,7 +350,7 @@ function renderBot(entry: Extract<Entry, { from: "bot" }>): string {
   }
 }
 
-const MENU = ["projects", "price", "citizenship", "contact"] as const;
+const MENU = ["projects", "price", "design", "citizenship", "contact"] as const;
 
 function renderMenu(): string {
   return `<div class="chat-quick" role="group" aria-label="${t("chat.quickLabel")}">${MENU.map(

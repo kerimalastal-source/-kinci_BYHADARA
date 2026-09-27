@@ -138,8 +138,16 @@
         "desc": "Des destinations intégrant résidentiel, bureaux et commerces, pensées pour une valeur locative et patrimoniale durable."
       },
       {
+        "title": "Architecture et ingénierie",
+        "desc": "Architecture, architecture d'intérieur et conseil en ingénierie pour villas, résidences, commerces et hôtels."
+      },
+      {
         "title": "Citoyenneté par investissement",
         "desc": "Un accompagnement complet pour les acheteurs internationaux souhaitant obtenir la citoyenneté turque par l'immobilier."
+      },
+      {
+        "title": "Recherche de biens et revente",
+        "desc": "Dites-nous ce que vous cherchez et nous le trouverons, ou parcourez les biens en revente validés."
       }
     ],
     "whyEyebrow": "Pourquoi HADARA",
@@ -164,7 +172,7 @@
     "storyEyebrow": "Notre histoire",
     "storyTitle": "D'une vision unique à un portefeuille en pleine croissance",
     "storyText1": "Fondée en 2014 et basée à Beylikdüzü, Istanbul, HADARA Immobilier est née d'une idée simple : une conception réfléchie et une construction honnête créent une valeur durable pour ceux qui vivent dans nos projets, comme pour ceux qui y investissent.",
-    "storyText2": "Au fil de la dernière décennie, cette idée s'est transformée en un portefeuille de résidences, de sites à usage mixte et de villas privées à Beylikdüzü, Büyükçekmece, Avcılar et Şişli, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul.",
+    "storyText2": "Au fil de la dernière décennie, cette idée s'est transformée en un portefeuille de résidences, de sites à usage mixte et de villas privées à Beylikdüzü, Büyükçekmece, Avcılar et Şişli, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
     "missionTitle": "Notre mission",
     "missionText": "Concevoir et livrer des projets résidentiels et mixtes qui allient qualité architecturale, confort quotidien et valeur durable, pour les résidents comme pour les investisseurs.",
     "visionTitle": "Notre vision",
@@ -1223,7 +1231,7 @@
     "heroImageAlt": "Rendu architectural d'une résidence contemporaine à flanc de colline, avec terrasses et piscine, au crépuscule",
     "introEyebrow": "Notre approche",
     "introTitle": "Une expertise d'ingénierie, de l'idée à la réalisation",
-    "introText1": "Le pôle ingénierie et design de HADARA réunit architecture, conseil en ingénierie et architecture d'intérieur sous un même toit. Nous concevons chaque projet en fonction de la manière dont il sera construit, utilisé et valorisé, en alliant réflexion architecturale et connaissance du marché acquise dans le développement et l'investissement immobiliers.",
+    "introText1": "En plus du développement et de la commercialisation de projets résidentiels, HADARA propose la conception architecturale, le conseil en ingénierie et l'architecture d'intérieur. Nous concevons chaque projet en fonction de la manière dont il sera construit, utilisé et valorisé, en nous appuyant sur notre connaissance du marché acquise dans le développement et l'investissement immobiliers.",
     "introText2": "Nos services ne se limitent pas à la Turquie : nous accompagnons également des projets au Moyen-Orient et sur d'autres marchés internationaux.",
     "introImageAlt": "Plans d'architecte, maquette blanche et échantillons de matériaux sur une table de studio de design",
     "clientsTitle": "Nos clients",
@@ -1317,8 +1325,8 @@
       }
     ],
     "whyEyebrow": "Pourquoi HADARA",
-    "whyTitle": "Pourquoi HADARA Engineering & Design ?",
-    "whySubtitle": "Un partenaire de conception qui pense aussi comme un promoteur et un investisseur.",
+    "whyTitle": "Pourquoi concevoir votre projet avec HADARA ?",
+    "whySubtitle": "Une conception nourrie par l'expérience immobilière : nous pensons comme un promoteur et un investisseur.",
     "why": [
       {
         "title": "Vision architecturale et immobilière",
@@ -1432,10 +1440,9 @@
     "worksEmptyTitle": "Portfolio disponible sur demande",
     "worksEmptyText": "Présentez-nous votre projet et nous partagerons les réalisations architecturales et intérieures les plus proches de vos besoins.",
     "worksCta": "Demander notre portfolio",
-    "worksSubtitle": "Une sélection de projets conçus par l'équipe d'ingénierie de Kuba Mimarlık.",
-    "worksDesignBy": "Conception : équipe d'ingénierie {team}",
+    "worksSubtitle": "Une sélection de projets signés par les architectes et ingénieurs de notre service de conception.",
     "worksOpenGallery": "Voir les images de {name}",
-    "worksImageAlt": "{name}, rendu architectural de l'équipe d'ingénierie de Kuba Mimarlık ({n}/{total})",
+    "worksImageAlt": "{name}, rendu architectural ({n}/{total})",
     "workCategories": {
       "residentialDevelopment": "Ensemble résidentiel",
       "residentialComplex": "Résidence",
@@ -1534,7 +1541,7 @@
       "process": "Notre méthode",
       "consultation": "Demander une consultation"
     },
-    "subnavLabel": "Pages Ingénierie & Design",
+    "subnavLabel": "Pages Conseil en ingénierie et architecture",
     "pages": {
       "services": {
         "title": "Services d'ingénierie et de design",
@@ -1542,8 +1549,8 @@
       },
       "portfolio": {
         "title": "Portfolio",
-        "subtitle": "Une sélection de réalisations conçues par l'équipe d'ingénierie de Kuba Mimarlık, et les espaces que nous concevons.",
-        "imageAlt": "Alya Konakları, rendu architectural de l'équipe d'ingénierie de Kuba Mimarlık"
+        "subtitle": "Une sélection de réalisations architecturales et les espaces que nous concevons.",
+        "imageAlt": "Alya Konakları, rendu architectural"
       },
       "process": {
         "title": "Notre méthode",
@@ -1571,7 +1578,7 @@
       },
       "portfolio": {
         "title": "Portfolio architectural",
-        "description": "Projets résidentiels, commerciaux et industriels à Istanbul conçus par l'équipe d'ingénierie de Kuba Mimarlık, et les espaces que nous concevons."
+        "description": "Projets architecturaux résidentiels, commerciaux et industriels à Istanbul, et les types d'espaces que nous concevons pour nos clients."
       },
       "process": {
         "title": "Notre méthode : processus de conception et FAQ",
@@ -1654,6 +1661,7 @@
     "menu": {
       "projects": "🏙️ Nos projets",
       "price": "💰 Prix",
+      "design": "📐 Architecture & ingénierie",
       "citizenship": "🇹🇷 Citoyenneté turque",
       "contact": "💬 Parler à notre équipe"
     },
@@ -1691,12 +1699,16 @@
       "advisor": "Demander à un conseiller sur WhatsApp",
       "guide": "Lire le guide complet",
       "form": "Nous envoyer un message",
-      "askTeam": "Demander à notre équipe sur WhatsApp"
+      "askTeam": "Demander à notre équipe sur WhatsApp",
+      "designServices": "Nos services de conception",
+      "consult": "Demander une consultation"
     },
     "waPrice": "Bonjour, je souhaiterais connaître le prix et les logements disponibles du projet {name}.",
     "waSimilar": "Bonjour, je cherche un bien similaire au projet {name}. Qu'avez-vous de disponible ?",
     "waCitizenship": "Bonjour, je souhaiterais en savoir plus sur la citoyenneté turque par investissement immobilier.",
     "waHello": "Bonjour, je souhaiterais parler à votre équipe.",
-    "waQuestion": "Bonjour, j'ai une question : {q}"
+    "waQuestion": "Bonjour, j'ai une question : {q}",
+    "waDesign": "Bonjour, je souhaite échanger au sujet d'un projet de conception architecturale / d'ingénierie.",
+    "designText": "HADARA propose aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie — pour villas, résidences, commerces et hôtels, en Turquie et à l'étranger. Nos services :"
   }
 }

@@ -58,7 +58,7 @@ function buildIndex(): SearchResult[] {
       title: `${t(`consultancy.pages.${page}.title`)} · ${t("nav.consultancyShort")}`,
       snippet: t(`consultancy.pages.${page}.subtitle`),
       route: consultancyPath(page),
-      keywords: page === "portfolio" ? "Kuba Mimarlık Alya Memorial Akça Grande Aktim Dora Park Kırlangıç" : undefined
+      keywords: page === "portfolio" ? "Alya Konakları Memorial Akça Grande Aktim Dora Park Kırlangıç" : undefined
     });
   }
   results.push({ title: t("nav.citizenship"), snippet: t("citizenship.heroSubtitle"), route: "/citizenship" });

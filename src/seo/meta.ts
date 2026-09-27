@@ -219,16 +219,17 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
     imageAlt = tr(CONSULTANCY_PAGE_IMAGES[page].altKey);
     if (page === "overview" || page === "services") {
       const services = lookup(locale, "consultancy.services") as { title: string; desc: string }[];
+      // A service HADARA provides (not a separate organization).
       jsonLd.push({
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        name: `${brand} — ${tr("seo.consultancy.title")}`,
+        "@type": "Service",
+        name: tr("seo.consultancy.title"),
+        serviceType: services.map((s) => s.title),
         description,
         url: url(routePath(pageRoute)),
         image,
-        parentOrganization: { "@id": `${siteUrl}/#organization` },
+        provider: { "@id": `${siteUrl}/#organization` },
         areaServed: ["TR", "Middle East", "International"],
-        ...CONTACT,
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: tr("seo.consultancy.title"),

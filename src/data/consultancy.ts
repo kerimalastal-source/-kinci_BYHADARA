@@ -39,14 +39,12 @@ export const projectTypeImage = (key: ProjectTypeKey): ResponsiveImage => ({
   height: 600
 });
 
-/** Engineering team credited for the portfolio (an independent office whose work HADARA markets). */
-export const WORKS_TEAM = "Kuba Mimarlık";
-
 export type WorkCategory = "residentialDevelopment" | "residentialComplex" | "commercialComplex" | "industrialCommercial";
 
 /**
- * Selected works, designed by the Kuba Mimarlık engineering team (figures and renders from
- * kubamimarlik.net). Credit them as that team's design; don't present them as HADARA's own office.
+ * Selected works. Provenance (for the team, not shown on the site): designed by Kuba Mimarlık, the
+ * partner office that delivers HADARA's design service; figures and renders from kubamimarlik.net.
+ * On the site the service is presented as HADARA's own — no second company name, logo or link.
  * Images: public/images/consultancy/works/<slug>/<n>-<width>.webp, the first one is the cover.
  * The category label is `consultancy.workCategories.<category>`; the district needs a `places.*` key.
  * With an empty list the section falls back to a "portfolio on request" note.

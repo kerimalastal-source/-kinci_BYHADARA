@@ -6,6 +6,7 @@ import { initStatCounters } from "../components/statCounter";
 import { initScrollReveal } from "../components/scrollReveal";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "../components/floatingButtons";
 import { statIcon } from "../components/statIcons";
+import { consultancyPath } from "../seo/routes";
 
 const HERO_IMAGE = "/hero-istanbul.jpg";
 
@@ -14,6 +15,9 @@ const HERO_IMAGE = "/hero-istanbul.jpg";
 const SPOTLIGHT_SLUG = "diamond-marin";
 const SPOTLIGHT_STATS = ["apartments", "layout", "grossArea", "delivery"];
 const SPOTLIGHT_THUMBS = 3;
+
+/* Where each "What We Do" card leads, in the order of `home.services`. */
+const SERVICE_LINKS = ["/projects", "/projects", "/projects", consultancyPath(), "/citizenship", "/property-request"];
 
 interface StatItem {
   value: string;
@@ -119,15 +123,15 @@ export function renderHome(el: HTMLElement): void {
       <div class="container">
         <p class="eyebrow eyebrow--center">${t("home.servicesEyebrow")}</p>
         <h2 class="section-title section-title--center">${t("home.servicesTitle")}</h2>
-        <div class="services-grid">
+        <div class="services-grid services-grid--3">
           ${services
             .map(
               (s, i) => `
-            <div class="service-card">
+            <a class="service-card service-card--link" href="${link(SERVICE_LINKS[i] ?? "/contact")}">
               <span class="service-card__index">0${i + 1}</span>
               <h3>${s.title}</h3>
               <p>${s.desc}</p>
-            </div>`
+            </a>`
             )
             .join("")}
         </div>
