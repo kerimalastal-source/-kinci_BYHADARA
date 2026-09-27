@@ -7,6 +7,7 @@
   "nav": {
     "home": "Accueil",
     "projects": "Projets",
+    "allProjects": "Tous les projets",
     "consultancy": "Conseil en ingénierie et architecture",
     "consultancyShort": "Ingénierie",
     "about": "À propos",
@@ -1220,15 +1221,6 @@
     "heroCtaSecondary": "Découvrir nos services",
     "markets": "Turquie · Moyen-Orient · International",
     "heroImageAlt": "Rendu architectural d'une résidence contemporaine à flanc de colline, avec terrasses et piscine, au crépuscule",
-    "jumpLabel": "Sur cette page",
-    "jump": {
-      "services": "Services",
-      "types": "Types de projets",
-      "works": "Portfolio",
-      "process": "Méthode",
-      "faq": "FAQ",
-      "request": "Demander une consultation"
-    },
     "introEyebrow": "Notre approche",
     "introTitle": "Une expertise d'ingénierie, de l'idée à la réalisation",
     "introText1": "Le pôle ingénierie et design de HADARA réunit architecture, conseil en ingénierie et architecture d'intérieur sous un même toit. Nous concevons chaque projet en fonction de la manière dont il sera construit, utilisé et valorisé, en alliant réflexion architecturale et connaissance du marché acquise dans le développement et l'investissement immobiliers.",
@@ -1440,11 +1432,10 @@
     "worksEmptyTitle": "Portfolio disponible sur demande",
     "worksEmptyText": "Présentez-nous votre projet et nous partagerons les réalisations architecturales et intérieures les plus proches de vos besoins.",
     "worksCta": "Demander notre portfolio",
-    "worksSubtitle": "Une sélection de projets conçus par Kuba Mimarlık, notre bureau d'architecture à Istanbul.",
-    "worksDesignBy": "Conception : {office}",
-    "worksVisit": "Visiter Kuba Mimarlık",
+    "worksSubtitle": "Une sélection de projets conçus par l'équipe d'ingénierie de Kuba Mimarlık.",
+    "worksDesignBy": "Conception : équipe d'ingénierie {team}",
     "worksOpenGallery": "Voir les images de {name}",
-    "worksImageAlt": "{name}, rendu architectural de Kuba Mimarlık ({n}/{total})",
+    "worksImageAlt": "{name}, rendu architectural de l'équipe d'ingénierie de Kuba Mimarlık ({n}/{total})",
     "workCategories": {
       "residentialDevelopment": "Ensemble résidentiel",
       "residentialComplex": "Résidence",
@@ -1535,12 +1526,61 @@
         "phoneInvalid": "Veuillez saisir un numéro de téléphone valide.",
         "serviceRequired": "Veuillez sélectionner le service souhaité."
       }
-    }
+    },
+    "nav": {
+      "overview": "Présentation",
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "process": "Notre méthode",
+      "consultation": "Demander une consultation"
+    },
+    "subnavLabel": "Pages Ingénierie & Design",
+    "pages": {
+      "services": {
+        "title": "Services d'ingénierie et de design",
+        "subtitle": "Architecture, conseil en ingénierie, architecture d'intérieur, visualisation 3D, conseil en développement et rénovation — séparément ou dans une mission coordonnée."
+      },
+      "portfolio": {
+        "title": "Portfolio",
+        "subtitle": "Une sélection de réalisations conçues par l'équipe d'ingénierie de Kuba Mimarlık, et les espaces que nous concevons.",
+        "imageAlt": "Alya Konakları, rendu architectural de l'équipe d'ingénierie de Kuba Mimarlık"
+      },
+      "process": {
+        "title": "Notre méthode",
+        "subtitle": "Une méthode claire en six étapes, une collaboration à distance dans toute la région et les réponses aux questions fréquentes."
+      },
+      "consultation": {
+        "title": "Demander une consultation",
+        "subtitle": "Présentez-nous votre projet : notre équipe vous contactera pour discuter de vos besoins et des prochaines étapes."
+      }
+    },
+    "learnMore": "En savoir plus",
+    "allServices": "Voir tous les services",
+    "worksTeaserCta": "Voir tout le portfolio",
+    "processTeaserCta": "Découvrir notre méthode"
   },
   "seo": {
     "consultancy": {
       "title": "Conseil en ingénierie et architecture",
       "description": "Architecture, architecture d'intérieur et conseil en ingénierie depuis Istanbul : villas, résidences, hôtels et commerces en Turquie et à l'international."
+    },
+    "consultancyPages": {
+      "services": {
+        "title": "Services d'architecture, d'ingénierie et d'intérieur",
+        "description": "Conception architecturale, conseil en ingénierie, architecture d'intérieur, visualisation 3D, développement et rénovation, en Turquie et à l'international."
+      },
+      "portfolio": {
+        "title": "Portfolio architectural",
+        "description": "Projets résidentiels, commerciaux et industriels à Istanbul conçus par l'équipe d'ingénierie de Kuba Mimarlık, et les espaces que nous concevons."
+      },
+      "process": {
+        "title": "Notre méthode : processus de conception et FAQ",
+        "description": "Notre processus en six étapes, de la consultation à la livraison, la collaboration à distance au Moyen-Orient et les réponses aux questions fréquentes."
+      },
+      "consultation": {
+        "title": "Demander une consultation en ingénierie",
+        "description": "Présentez votre projet : architecture, architecture d'intérieur ou conseil en ingénierie en Turquie, au Moyen-Orient et au-delà."
+      }
     },
     "home": {
       "title": "HADARA Immobilier | Promoteur immobilier à Istanbul, Turquie",

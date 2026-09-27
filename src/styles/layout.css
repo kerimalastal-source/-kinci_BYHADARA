@@ -186,6 +186,32 @@
   z-index: 40;
 }
 
+/* Invisible bridge over the gap above the menu, so hover-open menus stay open on the way down. */
+.site-header:not(.site-header--compact) .nav-group__menu::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 100%;
+  height: 12px;
+}
+
+.nav-group__menu:not([hidden]) {
+  animation: nav-drop 180ms ease-out;
+}
+
+@keyframes nav-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-group__menu:not([hidden]) {
+    animation: none;
+  }
+}
+
 .nav-group__link {
   display: block;
   padding: 0.6rem 0.8rem;
@@ -366,7 +392,7 @@
   white-space: nowrap;
 }
 
-/* Collapsed (hamburger) header: set by header.ts at ≤1400px, or wider when the
+/* Collapsed (hamburger) header: set by header.ts at ≤1179px, or wider when the
    one-line bar would not fit (long labels in some languages, a long account name). */
 .site-header--compact .header-actions .header-cta {
   display: none;

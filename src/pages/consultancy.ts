@@ -1,11 +1,13 @@
 import { t, tRaw, link, placeLine } from "../i18n";
+import { CONSULTANCY_PAGES, consultancyPath, type ConsultancyPage } from "../seo/routes";
 import {
   HERO_IMAGE,
   STUDIO_IMAGE,
   SERVICE_KEYS,
   PROJECT_TYPE_KEYS,
   consultancyWorks,
-  WORKS_OFFICE,
+  WORKS_TEAM,
+  CONSULTANCY_PAGE_IMAGES,
   projectTypeImage,
   srcset,
   fallbackSrc,
@@ -110,12 +112,11 @@ function renderNetwork(): string {
 }
 
 const GALLERY_ICON = icon('<rect x="3" y="5" width="15" height="13" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v10"/><path d="m3 15 4-4 3 3 3-3 5 5"/>', 16);
-const EXTERNAL_ICON = icon('<path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>', 16);
 
 const workImageAlt = (work: ConsultancyWork, n: number) =>
   t("consultancy.worksImageAlt", { name: work.title, n, total: work.images.length });
 
-function renderWorks(): string {
+function renderWorks(limit = consultancyWorks.length): string {
   if (!consultancyWorks.length) {
     return `
       <div class="consult-works__empty" data-reveal>
@@ -124,12 +125,13 @@ function renderWorks(): string {
           <h3>${t("consultancy.worksEmptyTitle")}</h3>
           <p>${t("consultancy.worksEmptyText")}</p>
         </div>
-        <a class="btn btn--outline" href="#${FORM_ID}">${t("consultancy.worksCta")}</a>
+        <a class="btn btn--outline" href="${link(consultancyPath("consultation"))}">${t("consultancy.worksCta")}</a>
       </div>`;
   }
   return `
     <ul class="consult-works__grid">
       ${consultancyWorks
+        .slice(0, limit)
         .map(
           (w, i) => `
         <li class="consult-work" ${reveal(i)}>
@@ -142,7 +144,7 @@ function renderWorks(): string {
             <h3 class="consult-work__title" translate="no">${w.title}</h3>
             <p class="consult-work__place">${placeLine(w.district, w.city)}</p>
             <p class="consult-work__meta"><span dir="ltr">${w.year}</span><span aria-hidden="true">·</span><span dir="ltr">${w.area}</span></p>
-            <p class="consult-work__credit">${t("consultancy.worksDesignBy", { office: `<span translate="no">${WORKS_OFFICE.name}</span>` })}</p>
+            <p class="consult-work__credit">${t("consultancy.worksDesignBy", { team: `<span translate="no">${WORKS_TEAM}</span>` })}</p>
           </div>
         </li>`
         )
@@ -164,16 +166,24 @@ function initWorksGallery(root: HTMLElement): void {
   });
 }
 
-export function renderConsultancy(el: HTMLElement): void {
-  const clients = tRaw<string[]>("consultancy.clients");
-  const services = tRaw<ServiceItem[]>("consultancy.services");
-  const why = tRaw<TextItem[]>("consultancy.why");
-  const process = tRaw<TextItem[]>("consultancy.process");
-  const globalPoints = tRaw<string[]>("consultancy.globalPoints");
-  const faq = tRaw<FaqItem[]>("consultancy.faq");
-  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("consultancy.whatsappMessage"))}`;
+type Page = ConsultancyPage;
 
-  el.innerHTML = `
+const href = (page: Page) => link(consultancyPath(page));
+
+function sectionHead(prefix: string, center = true): string {
+  const c = center ? " eyebrow--center" : "";
+  const tc = center ? " section-title--center" : "";
+  const sc = center ? " section-subtitle--center" : "";
+  return `
+        <p class="eyebrow${c}">${t(`consultancy.${prefix}Eyebrow`)}</p>
+        <h2 class="section-title${tc}">${t(`consultancy.${prefix}Title`)}</h2>
+        <p class="section-subtitle${sc}">${t(`consultancy.${prefix}Subtitle`)}</p>`;
+}
+
+/* ---------- Page headers ---------- */
+
+function heroFull(): string {
+  return `
     <section class="consult-hero">
       ${picture(HERO_IMAGE, t("consultancy.heroImageAlt"), "100vw", 'class="consult-hero__media" fetchpriority="high" decoding="async"')}
       <div class="container consult-hero__inner">
@@ -183,24 +193,48 @@ export function renderConsultancy(el: HTMLElement): void {
         </h1>
         <p class="hero__subtitle consult-hero__subtitle">${t("consultancy.heroSubtitle")}</p>
         <div class="hero__actions">
-          <a class="btn btn--primary" href="#${FORM_ID}">${t("consultancy.heroCtaPrimary")}</a>
-          <a class="btn btn--ghost" href="#consult-services">${t("consultancy.heroCtaSecondary")}</a>
+          <a class="btn btn--primary" href="${href("consultation")}">${t("consultancy.heroCtaPrimary")}</a>
+          <a class="btn btn--ghost" href="${href("services")}">${t("consultancy.heroCtaSecondary")}</a>
         </div>
         <p class="consult-hero__markets">${t("consultancy.markets")}</p>
       </div>
-    </section>
+    </section>`;
+}
 
-    <nav class="consult-jump" aria-label="${t("consultancy.jumpLabel")}">
-      <div class="container consult-jump__inner">
-        <a href="#consult-services">${t("consultancy.jump.services")}</a>
-        <a href="#consult-types">${t("consultancy.jump.types")}</a>
-        ${consultancyWorks.length ? `<a href="#consult-works">${t("consultancy.jump.works")}</a>` : ""}
-        <a href="#consult-process">${t("consultancy.jump.process")}</a>
-        <a href="#consult-faq">${t("consultancy.jump.faq")}</a>
-        <a class="consult-jump__cta" href="#${FORM_ID}">${t("consultancy.jump.request")}</a>
+/** Shorter banner for the inner pages, with the section name linking back to the overview. */
+function heroPage(page: Exclude<Page, "overview">): string {
+  const image = CONSULTANCY_PAGE_IMAGES[page];
+  return `
+    <section class="consult-hero consult-hero--page">
+      ${picture(image.banner, t(image.altKey), "100vw", 'class="consult-hero__media" fetchpriority="high" decoding="async"')}
+      <div class="container consult-hero__inner">
+        <h1 class="consult-hero__heading">
+          <a class="eyebrow eyebrow--on-dark consult-hero__label consult-hero__crumb" href="${href("overview")}">${t("consultancy.heroEyebrow")}</a>
+          <span class="consult-hero__title">${t(`consultancy.pages.${page}.title`)}</span>
+        </h1>
+        <p class="hero__subtitle consult-hero__subtitle">${t(`consultancy.pages.${page}.subtitle`)}</p>
       </div>
-    </nav>
+    </section>`;
+}
 
+/** Tabs linking the section's pages; scrolls sideways on small screens. */
+function subnav(page: Page): string {
+  return `
+    <nav class="consult-jump" aria-label="${t("consultancy.subnavLabel")}">
+      <div class="container consult-jump__inner">
+        ${CONSULTANCY_PAGES.map(
+          (p) =>
+            `<a class="${p === "consultation" ? "consult-jump__cta" : ""}${p === page ? " is-active" : ""}" href="${href(p)}"${p === page ? ' aria-current="page"' : ""}>${t(`consultancy.nav.${p}`)}</a>`
+        ).join("")}
+      </div>
+    </nav>`;
+}
+
+/* ---------- Sections ---------- */
+
+function intro(): string {
+  const clients = tRaw<string[]>("consultancy.clients");
+  return `
     <section class="section consult-intro">
       <div class="container consult-intro__grid">
         <div class="consult-intro__media" data-reveal>
@@ -217,43 +251,71 @@ export function renderConsultancy(el: HTMLElement): void {
           </ul>
         </div>
       </div>
-    </section>
+    </section>`;
+}
 
-    <section class="section consult-services" id="consult-services">
+/** Overview: the six services at a glance, each linking to its full card on the services page. */
+function servicesGlance(): string {
+  const services = tRaw<ServiceItem[]>("consultancy.services");
+  return `
+    <section class="section consult-services">
       <div class="container">
-        <p class="eyebrow eyebrow--center">${t("consultancy.servicesEyebrow")}</p>
-        <h2 class="section-title section-title--center">${t("consultancy.servicesTitle")}</h2>
-        <p class="section-subtitle section-subtitle--center">${t("consultancy.servicesSubtitle")}</p>
+        ${sectionHead("services")}
+        <div class="consult-glance">
+          ${SERVICE_KEYS.map(
+            (key, i) => `
+          <a class="consult-glance__item" href="${href("services")}#${key}" ${reveal(i)}>
+            <span class="consult-service__icon">${SERVICE_ICONS[key]}</span>
+            <span class="consult-glance__text">
+              <strong>${services[i].title}</strong>
+              <span>${services[i].desc}</span>
+            </span>
+            <span class="consult-glance__arrow">${ARROW}</span>
+          </a>`
+          ).join("")}
+        </div>
+        <div class="consult-more"><a class="btn btn--outline" href="${href("services")}">${t("consultancy.allServices")}</a></div>
+      </div>
+    </section>`;
+}
+
+function servicesDetail(): string {
+  const services = tRaw<ServiceItem[]>("consultancy.services");
+  return `
+    <section class="section consult-services">
+      <div class="container">
         <div class="consult-services__grid">
           ${SERVICE_KEYS.map((key, i) => {
             const s = services[i];
             return `
-          <article class="consult-service" ${reveal(i)}>
+          <article class="consult-service" id="${key}" ${reveal(i)}>
             <div class="consult-service__head">
               <span class="consult-service__icon">${SERVICE_ICONS[key]}</span>
               <span class="consult-service__index" dir="ltr">${String(i + 1).padStart(2, "0")}</span>
             </div>
-            <h3>${s.title}</h3>
+            <h2 class="consult-service__title">${s.title}</h2>
             <p>${s.desc}</p>
             <ul class="consult-service__items">
               ${s.items.map((item) => `<li>${item}</li>`).join("")}
             </ul>
-            <a class="consult-service__link" href="#${FORM_ID}" data-service="${key}">
+            <a class="consult-service__link" href="${href("consultation")}?service=${key}">
               ${t("consultancy.serviceCta")} ${ARROW}
             </a>
           </article>`;
           }).join("")}
         </div>
       </div>
-    </section>
+    </section>`;
+}
 
+function why(): string {
+  const items = tRaw<TextItem[]>("consultancy.why");
+  return `
     <section class="section consult-why">
       <div class="container">
-        <p class="eyebrow eyebrow--center">${t("consultancy.whyEyebrow")}</p>
-        <h2 class="section-title section-title--center">${t("consultancy.whyTitle")}</h2>
-        <p class="section-subtitle section-subtitle--center">${t("consultancy.whySubtitle")}</p>
+        ${sectionHead("why")}
         <div class="consult-why__grid">
-          ${why
+          ${items
             .map(
               (w, i) => `
           <div class="consult-why__item" ${reveal(i)}>
@@ -267,16 +329,15 @@ export function renderConsultancy(el: HTMLElement): void {
             .join("")}
         </div>
       </div>
-    </section>
+    </section>`;
+}
 
-    <section class="section consult-types" id="consult-types">
+function types(): string {
+  return `
+    <section class="section consult-types">
       <div class="container">
         <div class="section-head">
-          <div>
-            <p class="eyebrow">${t("consultancy.typesEyebrow")}</p>
-            <h2 class="section-title">${t("consultancy.typesTitle")}</h2>
-            <p class="section-subtitle">${t("consultancy.typesSubtitle")}</p>
-          </div>
+          <div>${sectionHead("types", false)}</div>
         </div>
         <ul class="consult-types__grid">
           ${PROJECT_TYPE_KEYS.map(
@@ -289,15 +350,36 @@ export function renderConsultancy(el: HTMLElement): void {
         </ul>
         <p class="consult-types__note">${t("consultancy.typesNote")}</p>
       </div>
-    </section>
+    </section>`;
+}
 
-    <section class="section consult-process" id="consult-process">
+/** `limit` shows only the first works (overview teaser) with a link to the full portfolio. */
+function works(limit?: number): string {
+  const teaser = limit !== undefined && consultancyWorks.length > limit;
+  return `
+    <section class="section consult-works">
       <div class="container">
-        <p class="eyebrow eyebrow--center">${t("consultancy.processEyebrow")}</p>
-        <h2 class="section-title section-title--center">${t("consultancy.processTitle")}</h2>
-        <p class="section-subtitle section-subtitle--center">${t("consultancy.processSubtitle")}</p>
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">${t("consultancy.worksEyebrow")}</p>
+            <h2 class="section-title">${t("consultancy.worksTitle")}</h2>
+            ${consultancyWorks.length ? `<p class="section-subtitle">${t("consultancy.worksSubtitle")}</p>` : ""}
+          </div>
+          ${teaser ? `<a class="btn btn--outline" href="${href("portfolio")}">${t("consultancy.worksTeaserCta")}</a>` : ""}
+        </div>
+        ${renderWorks(limit)}
+      </div>
+    </section>`;
+}
+
+function processSteps(): string {
+  const steps = tRaw<TextItem[]>("consultancy.process");
+  return `
+    <section class="section consult-process">
+      <div class="container">
+        ${sectionHead("process")}
         <ol class="consult-process__list">
-          ${process
+          ${steps
             .map(
               (step, i) => `
           <li class="consult-step" ${reveal(i)}>
@@ -309,8 +391,36 @@ export function renderConsultancy(el: HTMLElement): void {
             .join("")}
         </ol>
       </div>
-    </section>
+    </section>`;
+}
 
+/** Overview: the six stages as one compact row, linking to the process page. */
+function processStrip(): string {
+  const steps = tRaw<TextItem[]>("consultancy.process");
+  return `
+    <section class="section consult-process consult-process--strip">
+      <div class="container">
+        <p class="eyebrow eyebrow--center">${t("consultancy.processEyebrow")}</p>
+        <h2 class="section-title section-title--center">${t("consultancy.processTitle")}</h2>
+        <ol class="consult-strip">
+          ${steps
+            .map(
+              (step, i) => `
+          <li class="consult-strip__step" ${reveal(i, 6)}>
+            <span class="consult-strip__number" dir="ltr">${String(i + 1).padStart(2, "0")}</span>
+            <span class="consult-strip__title">${step.title}</span>
+          </li>`
+            )
+            .join("")}
+        </ol>
+        <div class="consult-more"><a class="btn btn--outline" href="${href("process")}">${t("consultancy.processTeaserCta")}</a></div>
+      </div>
+    </section>`;
+}
+
+function global(): string {
+  const points = tRaw<string[]>("consultancy.globalPoints");
+  return `
     <section class="section consult-global">
       <div class="container consult-global__grid">
         <div class="consult-global__content">
@@ -318,37 +428,23 @@ export function renderConsultancy(el: HTMLElement): void {
           <h2 class="section-title">${t("consultancy.globalTitle")}</h2>
           <p>${t("consultancy.globalText")}</p>
           <ul class="consult-global__points">
-            ${globalPoints.map((p) => `<li>${CHECK}<span>${p}</span></li>`).join("")}
+            ${points.map((p) => `<li>${CHECK}<span>${p}</span></li>`).join("")}
           </ul>
         </div>
         <div class="consult-global__visual" data-reveal>${renderNetwork()}</div>
       </div>
-    </section>
+    </section>`;
+}
 
-    <section class="section consult-works" id="consult-works">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">${t("consultancy.worksEyebrow")}</p>
-            <h2 class="section-title">${t("consultancy.worksTitle")}</h2>
-            ${consultancyWorks.length ? `<p class="section-subtitle">${t("consultancy.worksSubtitle")}</p>` : ""}
-          </div>
-          ${
-            consultancyWorks.length
-              ? `<a class="btn btn--outline consult-works__visit" href="${WORKS_OFFICE.url}" target="_blank" rel="noopener">${t("consultancy.worksVisit")} ${EXTERNAL_ICON}</a>`
-              : ""
-          }
-        </div>
-        ${renderWorks()}
-      </div>
-    </section>
-
-    <section class="section consult-faq" id="consult-faq">
+function faq(): string {
+  const items = tRaw<FaqItem[]>("consultancy.faq");
+  return `
+    <section class="section consult-faq">
       <div class="container narrow">
         <p class="eyebrow eyebrow--center">${t("consultancy.faqEyebrow")}</p>
         <h2 class="section-title section-title--center">${t("consultancy.faqTitle")}</h2>
         <div class="faq-list">
-          ${faq
+          ${items
             .map(
               (item) => `
           <details class="faq-item">
@@ -363,8 +459,28 @@ export function renderConsultancy(el: HTMLElement): void {
         </div>
         <p class="consult-faq__more">${t("consultancy.faqMore")} <a href="${link("/faq")}">${t("nav.faq")}</a></p>
       </div>
-    </section>
+    </section>`;
+}
 
+/** Closing band on every page but the request page: the site's dark final CTA. */
+function ctaBand(): string {
+  return `
+    <section class="section final-cta">
+      <div class="container final-cta__inner">
+        <div>
+          <h2 class="section-title">${t("consultancy.ctaTitle")}</h2>
+          <p>${t("consultancy.ctaText")}</p>
+        </div>
+        <div class="consult-band__actions">
+          <a class="btn btn--primary" href="${href("consultation")}">${t("consultancy.heroCtaPrimary")}</a>
+          <a class="btn btn--whatsapp" href="${whatsappHref()}" target="_blank" rel="noopener">${WHATSAPP_ICON} ${t("consultancy.ctaWhatsapp")}</a>
+        </div>
+      </div>
+    </section>`;
+}
+
+function consultationForm(): string {
+  return `
     <section class="section consult-cta" id="${FORM_ID}" aria-labelledby="consult-cta-title">
       <div class="container consult-cta__grid">
         <div class="consult-cta__content">
@@ -373,24 +489,41 @@ export function renderConsultancy(el: HTMLElement): void {
           <p>${t("consultancy.ctaText")}</p>
           <ul class="consult-cta__contacts">
             <li>
-              <a class="btn btn--whatsapp" href="${whatsappHref}" target="_blank" rel="noopener">${WHATSAPP_ICON} ${t("consultancy.ctaWhatsapp")}</a>
+              <a class="btn btn--whatsapp" href="${whatsappHref()}" target="_blank" rel="noopener">${WHATSAPP_ICON} ${t("consultancy.ctaWhatsapp")}</a>
             </li>
             <li><a href="mailto:${SITE_EMAIL}">${MAIL_ICON}<span dir="ltr">${SITE_EMAIL}</span></a></li>
             <li><a href="tel:${SITE_PHONE_HREF}">${PHONE_ICON}<span dir="ltr">${SITE_PHONE}</span></a></li>
           </ul>
         </div>
         <div class="consult-cta__card">
-          <h3 class="consult-cta__form-title">${t("consultancy.form.title")}</h3>
+          <h2 class="consult-cta__form-title">${t("consultancy.form.title")}</h2>
           ${renderConsultancyForm()}
         </div>
       </div>
-    </section>
-  `;
+    </section>`;
+}
 
-  initConsultancyForm(el);
+const whatsappHref = () => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("consultancy.whatsappMessage"))}`;
+
+/* ---------- Pages ---------- */
+
+const PAGES: Record<Page, () => string> = {
+  overview: () => heroFull() + subnav("overview") + intro() + servicesGlance() + works(3) + processStrip() + ctaBand(),
+  services: () => heroPage("services") + subnav("services") + servicesDetail() + why() + ctaBand(),
+  portfolio: () => heroPage("portfolio") + subnav("portfolio") + works() + types() + ctaBand(),
+  process: () => heroPage("process") + subnav("process") + processSteps() + global() + faq() + ctaBand(),
+  consultation: () => heroPage("consultation") + subnav("consultation") + consultationForm()
+};
+
+export function renderConsultancy(el: HTMLElement, page: Page = "overview"): void {
+  el.innerHTML = PAGES[page]();
+
+  if (page === "consultation") {
+    initConsultancyForm(el);
+    // "Request this service" links arrive with ?service=<key>.
+    const service = new URLSearchParams(window.location.search).get("service");
+    if (service) preselectService(el, service);
+  }
   initWorksGallery(el);
-  el.querySelectorAll<HTMLAnchorElement>("[data-service]").forEach((a) =>
-    a.addEventListener("click", () => preselectService(el, a.dataset.service!))
-  );
   initScrollReveal(el);
 }

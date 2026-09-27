@@ -3,7 +3,7 @@ import { lookup } from "../i18n/dictionaries";
 import { getSortedProjects } from "../data/projects";
 import { getSortedBlogPosts } from "../data/blog";
 import { navigate } from "../router";
-import { CONSULTANCY_SEGMENT } from "../seo/routes";
+import { consultancyPath } from "../seo/routes";
 
 interface SearchResult {
   title: string;
@@ -50,9 +50,17 @@ function buildIndex(): SearchResult[] {
   results.push({
     title: t("nav.consultancy"),
     snippet: t("consultancy.heroSubtitle"),
-    route: `/${CONSULTANCY_SEGMENT}`,
-    keywords: "architecture architectural engineering interior design villa hotel 3d render renovation mimari mühendislik iç mimarlık"
+    route: consultancyPath(),
+    keywords: "architecture architectural engineering interior design villa hotel renovation mimari mühendislik iç mimarlık"
   });
+  for (const page of ["services", "portfolio", "process", "consultation"] as const) {
+    results.push({
+      title: `${t(`consultancy.pages.${page}.title`)} · ${t("nav.consultancyShort")}`,
+      snippet: t(`consultancy.pages.${page}.subtitle`),
+      route: consultancyPath(page),
+      keywords: page === "portfolio" ? "Kuba Mimarlık Alya Memorial Akça Grande Aktim Dora Park Kırlangıç" : undefined
+    });
+  }
   results.push({ title: t("nav.citizenship"), snippet: t("citizenship.heroSubtitle"), route: "/citizenship" });
   results.push({ title: t("nav.propertyRequest"), snippet: t("propertyRequest.heroSubtitle"), route: "/property-request" });
   results.push({ title: t("nav.blog"), snippet: t("blog.heroSubtitle"), route: "/blog" });

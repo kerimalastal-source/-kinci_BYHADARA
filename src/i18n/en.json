@@ -7,6 +7,7 @@
   "nav": {
     "home": "Home",
     "projects": "Projects",
+    "allProjects": "All Projects",
     "consultancy": "Engineering & Architectural Consultancy",
     "consultancyShort": "Engineering",
     "about": "About Us",
@@ -1220,15 +1221,6 @@
     "heroCtaSecondary": "Explore Our Services",
     "markets": "Türkiye · Middle East · International",
     "heroImageAlt": "Architectural concept render of a contemporary hillside residence with terraces and a pool at dusk",
-    "jumpLabel": "On this page",
-    "jump": {
-      "services": "Services",
-      "types": "Project types",
-      "works": "Portfolio",
-      "process": "Process",
-      "faq": "FAQ",
-      "request": "Request a consultation"
-    },
     "introEyebrow": "Our approach",
     "introTitle": "Engineering expertise from concept to execution",
     "introText1": "HADARA's engineering and design arm brings architecture, engineering consultancy and interior design under one roof. We shape every project around how it will be built, used and valued, pairing design thinking with the market insight we have gained in real estate development and investment.",
@@ -1440,11 +1432,10 @@
     "worksEmptyTitle": "Portfolio available on request",
     "worksEmptyText": "Tell us about your project and we will share the architectural and interior work most relevant to it.",
     "worksCta": "Request our portfolio",
-    "worksSubtitle": "A selection of projects designed by Kuba Mimarlık, our architecture office in Istanbul.",
-    "worksDesignBy": "Design: {office}",
-    "worksVisit": "Visit Kuba Mimarlık",
+    "worksSubtitle": "Selected projects designed by the Kuba Mimarlık engineering team.",
+    "worksDesignBy": "Design: {team} engineering team",
     "worksOpenGallery": "View the {name} images",
-    "worksImageAlt": "{name}, architectural render by Kuba Mimarlık ({n}/{total})",
+    "worksImageAlt": "{name}, architectural render by the Kuba Mimarlık engineering team ({n}/{total})",
     "workCategories": {
       "residentialDevelopment": "Residential development",
       "residentialComplex": "Residential complex",
@@ -1535,12 +1526,61 @@
         "phoneInvalid": "Please enter a valid phone number.",
         "serviceRequired": "Please select the service you need."
       }
-    }
+    },
+    "nav": {
+      "overview": "Overview",
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "process": "How We Work",
+      "consultation": "Request a Consultation"
+    },
+    "subnavLabel": "Engineering & Design pages",
+    "pages": {
+      "services": {
+        "title": "Engineering & Design Services",
+        "subtitle": "Architecture, engineering consultancy, interior design, 3D visualization, development consultancy and renovation — as single services or one coordinated scope."
+      },
+      "portfolio": {
+        "title": "Portfolio",
+        "subtitle": "Selected architectural works by the Kuba Mimarlık engineering team, and the kinds of spaces we design.",
+        "imageAlt": "Alya Konakları, architectural render by the Kuba Mimarlık engineering team"
+      },
+      "process": {
+        "title": "How We Work",
+        "subtitle": "A clear six-stage process, remote collaboration across the region, and answers to common questions."
+      },
+      "consultation": {
+        "title": "Request a Consultation",
+        "subtitle": "Tell us about your project and our team will contact you to discuss your needs and the right next steps."
+      }
+    },
+    "learnMore": "Learn more",
+    "allServices": "View all services",
+    "worksTeaserCta": "View the full portfolio",
+    "processTeaserCta": "See how we work"
   },
   "seo": {
     "consultancy": {
       "title": "Engineering & Architectural Consultancy",
       "description": "Architectural design, interior design and engineering consultancy from Istanbul for villas, residential, hotel and commercial projects in Türkiye and abroad."
+    },
+    "consultancyPages": {
+      "services": {
+        "title": "Architecture, Engineering & Interior Design Services",
+        "description": "Architectural design, engineering consultancy, interior design, 3D visualization, development consultancy and renovation for projects in Türkiye and abroad."
+      },
+      "portfolio": {
+        "title": "Architectural Portfolio",
+        "description": "Selected residential, commercial and industrial projects in Istanbul designed by the Kuba Mimarlık engineering team, and the project types we design."
+      },
+      "process": {
+        "title": "How We Work: Design Process & FAQ",
+        "description": "Our six-stage design process from consultation to final delivery, remote collaboration for Middle East projects, and answers to common questions."
+      },
+      "consultation": {
+        "title": "Request an Engineering Consultation",
+        "description": "Share your project details for architectural, interior design or engineering consultancy services in Türkiye, the Middle East and beyond."
+      }
     },
     "home": {
       "title": "HADARA Real Estate | Property Developer in Istanbul, Turkey",

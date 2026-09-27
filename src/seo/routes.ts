@@ -2,8 +2,26 @@
 // or "/ar/projects/lotus-koru-2" (other locales carry a prefix).
 import { defaultLocale, isLocale, type Locale } from "../i18n/dictionaries";
 
-/** URL segment of the Engineering & Architectural Consultancy page. */
+/** URL segment of the Engineering & Architectural Consultancy section. */
 export const CONSULTANCY_SEGMENT = "engineering-architecture";
+
+/** Its pages: the overview at /engineering-architecture, the others one level below. */
+export const CONSULTANCY_PAGES = ["overview", "services", "portfolio", "process", "consultation"] as const;
+export type ConsultancyPage = (typeof CONSULTANCY_PAGES)[number];
+
+const CONSULTANCY_SLUGS: Record<ConsultancyPage, string> = {
+  overview: "",
+  services: "services",
+  portfolio: "portfolio",
+  process: "how-we-work",
+  consultation: "request-consultation"
+};
+
+/** Unprefixed path of a consultancy page: consultancyPath("services") -> "/engineering-architecture/services". */
+export function consultancyPath(page: ConsultancyPage = "overview"): string {
+  const slug = CONSULTANCY_SLUGS[page];
+  return `/${CONSULTANCY_SEGMENT}${slug ? `/${slug}` : ""}`;
+}
 
 export type Route =
   | { name: "home" }
@@ -11,7 +29,7 @@ export type Route =
   | { name: "project"; slug: string }
   | { name: "about" }
   | { name: "citizenship" }
-  | { name: "consultancy" }
+  | { name: "consultancy"; page: ConsultancyPage }
   | { name: "faq" }
   | { name: "blog" }
   | { name: "blog-post"; slug: string }
@@ -52,7 +70,10 @@ export function parseRoute(path: string): Route {
   if (segment === "projects") return { name: "projects" };
   if (segment === "about") return { name: "about" };
   if (segment === "citizenship") return { name: "citizenship" };
-  if (segment === CONSULTANCY_SEGMENT) return { name: "consultancy" };
+  if (segment === CONSULTANCY_SEGMENT) {
+    const page = CONSULTANCY_PAGES.find((p) => CONSULTANCY_SLUGS[p] === (p1 ?? "") && !p2);
+    return page ? { name: "consultancy", page } : { name: "not-found" };
+  }
   if (segment === "faq") return { name: "faq" };
   if (segment === "blog" && p1) return { name: "blog-post", slug: p1 };
   if (segment === "blog") return { name: "blog" };
@@ -92,7 +113,7 @@ export function routePath(route: Route): string {
     case "admin-listing":
       return `/admin/listings/${route.id}`;
     case "consultancy":
-      return `/${CONSULTANCY_SEGMENT}`;
+      return consultancyPath(route.page);
     case "not-found":
       return "/404";
     default:

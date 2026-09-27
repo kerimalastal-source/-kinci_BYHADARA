@@ -91,7 +91,7 @@ function renderRoute(route: Route, main: HTMLElement): void {
       renderCitizenship(main);
       break;
     case "consultancy":
-      renderConsultancy(main);
+      renderConsultancy(main, route.page);
       break;
     case "faq":
       renderFaq(main);
@@ -166,7 +166,11 @@ export function startRouter(root: HTMLElement): void {
     renderFloatingButtons(floatingActions);
     applyMeta(route, locale);
     const path = window.location.pathname + window.location.search;
-    if (path !== renderedPath) window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    if (path !== renderedPath) {
+      const target = window.location.hash ? document.getElementById(decodeURIComponent(window.location.hash.slice(1))) : null;
+      if (target) target.scrollIntoView({ behavior: "instant" as ScrollBehavior });
+      else window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    }
     renderedPath = path;
   }
 

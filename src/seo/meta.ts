@@ -1,11 +1,11 @@
 // DOM-free page metadata (title, description, canonical, hreflang, Open Graph, JSON-LD).
 // Used by the browser on every navigation and by the build step that prerenders each page's <head>.
 import { lookup, locales, defaultLocale, rtlLocales, type Locale } from "../i18n/dictionaries";
-import { localizePath, routePath, type Route } from "./routes";
+import { localizePath, routePath, consultancyPath, CONSULTANCY_PAGES, type Route } from "./routes";
 import { projects } from "../data/projects";
 import { blogPosts } from "../data/blog";
 import { placeKey } from "../utils/place";
-import { CONSULTANCY_OG_IMAGE } from "../data/consultancy";
+import { CONSULTANCY_PAGE_IMAGES } from "../data/consultancy";
 
 export const DEFAULT_SITE_URL = "https://hadararealestate.com";
 
@@ -81,7 +81,7 @@ export function indexableRoutes(): Route[] {
     ...projects.map((p) => ({ name: "project", slug: p.slug }) as Route),
     { name: "about" },
     { name: "citizenship" },
-    { name: "consultancy" },
+    ...CONSULTANCY_PAGES.map((page) => ({ name: "consultancy", page }) as Route),
     { name: "faq" },
     { name: "blog" },
     ...blogPosts.map((p) => ({ name: "blog-post", slug: p.slug }) as Route),
@@ -162,9 +162,12 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
       publisher: { "@id": `${siteUrl}/#organization` }
     });
   } else {
-    const key = PAGE_KEYS[pageRoute.name] ?? "notFound";
+    const subPage = pageRoute.name === "consultancy" && pageRoute.page !== "overview" ? pageRoute.page : null;
+    const key = subPage ? `consultancyPages.${subPage}` : (PAGE_KEYS[pageRoute.name] ?? "notFound");
     title = tr(`seo.${key}.title`);
     description = tr(`seo.${key}.description`);
+    // Inner engineering pages sit under the section overview: Home › Engineering › Services.
+    if (subPage) crumbs.push({ name: tr("seo.consultancy.title"), path: consultancyPath() });
     if (pageRoute.name !== "home" && pageRoute.name !== "not-found") {
       crumbs.push({ name: title, path: routePath(pageRoute) });
     }
@@ -211,15 +214,15 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
   }
 
   if (pageRoute.name === "consultancy") {
-    const services = lookup(locale, "consultancy.services") as { title: string; desc: string }[];
-    const faq = lookup(locale, "consultancy.faq") as { q: string; a: string }[];
-    image = img(CONSULTANCY_OG_IMAGE);
-    imageAlt = tr("consultancy.heroImageAlt");
-    jsonLd.push(
-      {
+    const page = pageRoute.page;
+    image = img(CONSULTANCY_PAGE_IMAGES[page].og);
+    imageAlt = tr(CONSULTANCY_PAGE_IMAGES[page].altKey);
+    if (page === "overview" || page === "services") {
+      const services = lookup(locale, "consultancy.services") as { title: string; desc: string }[];
+      jsonLd.push({
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
-        name: `${brand} — ${title}`,
+        name: `${brand} — ${tr("seo.consultancy.title")}`,
         description,
         url: url(routePath(pageRoute)),
         image,
@@ -228,14 +231,17 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
         ...CONTACT,
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: title,
+          name: tr("seo.consultancy.title"),
           itemListElement: services.map((s) => ({
             "@type": "Offer",
             itemOffered: { "@type": "Service", name: s.title, description: s.desc }
           }))
         }
-      },
-      {
+      });
+    }
+    if (page === "process") {
+      const faq = lookup(locale, "consultancy.faq") as { q: string; a: string }[];
+      jsonLd.push({
         "@context": "https://schema.org",
         "@type": "FAQPage",
         mainEntity: faq.map((item) => ({
@@ -243,8 +249,8 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
           name: item.q,
           acceptedAnswer: { "@type": "Answer", text: item.a }
         }))
-      }
-    );
+      });
+    }
   }
 
   jsonLd.push({

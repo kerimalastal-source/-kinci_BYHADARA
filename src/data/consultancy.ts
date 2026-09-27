@@ -1,5 +1,6 @@
 // DOM-free data for the Engineering & Architectural Consultancy page (also read by the SEO build step).
 // All text lives in the dictionaries under "consultancy.*"; this file holds keys and images only.
+import type { ConsultancyPage } from "../seo/routes";
 
 /** A self-hosted image published in several widths: `${base}-${width}.webp`. */
 export interface ResponsiveImage {
@@ -11,9 +12,6 @@ export interface ResponsiveImage {
 }
 
 const DIR = "/images/consultancy";
-
-/** Social-share image (JPEG, 1200×630: WebP is not read by every link preview). */
-export const CONSULTANCY_OG_IMAGE = `${DIR}/hero-og.jpg`;
 
 export const HERO_IMAGE: ResponsiveImage = { base: `${DIR}/hero`, widths: [768, 1280, 1680], width: 1680, height: 944 };
 export const STUDIO_IMAGE: ResponsiveImage = { base: `${DIR}/studio`, widths: [640, 1200], width: 1200, height: 800 };
@@ -41,13 +39,14 @@ export const projectTypeImage = (key: ProjectTypeKey): ResponsiveImage => ({
   height: 600
 });
 
-/** Architecture office whose projects make up the portfolio (a HADARA company). */
-export const WORKS_OFFICE = { name: "Kuba Mimarlık", url: "https://www.kubamimarlik.net/" };
+/** Engineering team credited for the portfolio (an independent office whose work HADARA markets). */
+export const WORKS_TEAM = "Kuba Mimarlık";
 
 export type WorkCategory = "residentialDevelopment" | "residentialComplex" | "commercialComplex" | "industrialCommercial";
 
 /**
- * Selected works, designed by Kuba Mimarlık (figures and renders from kubamimarlik.net).
+ * Selected works, designed by the Kuba Mimarlık engineering team (figures and renders from
+ * kubamimarlik.net). Credit them as that team's design; don't present them as HADARA's own office.
  * Images: public/images/consultancy/works/<slug>/<n>-<width>.webp, the first one is the cover.
  * The category label is `consultancy.workCategories.<category>`; the district needs a `places.*` key.
  * With an empty list the section falls back to a "portfolio on request" note.
@@ -129,6 +128,18 @@ export const consultancyWorks: ConsultancyWork[] = [
     images: work("dora-park-7", [[1600, 1135], [1600, 923], [1600, 800], [1600, 808]])
   }
 ];
+
+/**
+ * Banner behind each page's title, and its link-preview image (JPEG 1200×630: WebP is not
+ * read by every preview). `altKey` is the dictionary key of the image's alt text.
+ */
+export const CONSULTANCY_PAGE_IMAGES: Record<ConsultancyPage, { banner: ResponsiveImage; og: string; altKey: string }> = {
+  overview: { banner: HERO_IMAGE, og: `${DIR}/hero-og.jpg`, altKey: "consultancy.heroImageAlt" },
+  services: { banner: STUDIO_IMAGE, og: `${DIR}/studio-og.jpg`, altKey: "consultancy.introImageAlt" },
+  portfolio: { banner: consultancyWorks[0].images[0], og: `${DIR}/portfolio-og.jpg`, altKey: "consultancy.pages.portfolio.imageAlt" },
+  process: { banner: HERO_IMAGE, og: `${DIR}/hero-og.jpg`, altKey: "consultancy.heroImageAlt" },
+  consultation: { banner: STUDIO_IMAGE, og: `${DIR}/studio-og.jpg`, altKey: "consultancy.introImageAlt" }
+};
 
 export function srcset(img: ResponsiveImage): string {
   return img.widths.map((w) => `${img.base}-${w}.webp ${w}w`).join(", ");

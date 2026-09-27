@@ -6,37 +6,96 @@ import { escapeHtml } from "../utils/html";
 import { renderBrand } from "./brand";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "./floatingButtons";
 import { renderFavoritesLink } from "./favorites";
-import { CONSULTANCY_SEGMENT } from "../seo/routes";
+import { CONSULTANCY_PAGES, consultancyPath, type ConsultancyPage } from "../seo/routes";
 
 interface NavLink {
   route: string;
   key: string;
-  match: Route["name"][];
-  /** Shorter label for the one-line desktop bar; the full `key` label shows in the mobile menu. */
-  shortKey?: string;
+  active: (route: Route) => boolean;
 }
 
-const NAV_LINKS: NavLink[] = [
-  { route: "/", key: "nav.home", match: ["home"] },
-  { route: "/projects", key: "nav.projects", match: ["projects", "project"] },
-  { route: `/${CONSULTANCY_SEGMENT}`, key: "nav.consultancy", shortKey: "nav.consultancyShort", match: ["consultancy"] },
-  { route: "/resale", key: "nav.resale", match: ["resale", "resale-listing"] },
-  { route: "/about", key: "nav.about", match: ["about"] }
+interface NavGroup {
+  id: string;
+  key: string;
+  /** Shorter label for the one-line desktop bar; the full `key` label shows in the mobile menu. */
+  shortKey?: string;
+  items: NavLink[];
+}
+
+type NavEntry = NavLink | NavGroup;
+
+const is = (...names: Route["name"][]) => (route: Route) => names.includes(route.name);
+const consultancyPage = (page: ConsultancyPage) => (route: Route) => route.name === "consultancy" && route.page === page;
+
+/* Four entries on the desktop bar (Home is the logo, Contact the button beside it);
+   everything else sits in a dropdown so the bar fits laptop screens in every language. */
+const NAV: NavEntry[] = [
+  { route: "/", key: "nav.home", active: is("home") },
+  {
+    id: "projects",
+    key: "nav.projects",
+    items: [
+      { route: "/projects", key: "nav.allProjects", active: is("projects", "project") },
+      { route: "/resale", key: "nav.resale", active: is("resale", "resale-listing") },
+      { route: "/property-request", key: "nav.propertyRequest", active: is("property-request") }
+    ]
+  },
+  {
+    id: "consultancy",
+    key: "nav.consultancy",
+    shortKey: "nav.consultancyShort",
+    items: CONSULTANCY_PAGES.map((page) => ({ route: consultancyPath(page), key: `consultancy.nav.${page}`, active: consultancyPage(page) }))
+  },
+  { route: "/about", key: "nav.about", active: is("about") },
+  {
+    id: "resources",
+    key: "nav.resources",
+    items: [
+      { route: "/citizenship", key: "nav.citizenship", active: is("citizenship") },
+      { route: "/blog", key: "nav.blog", active: is("blog", "blog-post") },
+      { route: "/faq", key: "nav.faq", active: is("faq") }
+    ]
+  },
+  { route: "/contact", key: "nav.contact", active: is("contact") }
 ];
 
-const NAV_RESOURCES: NavLink[] = [
-  { route: "/citizenship", key: "nav.citizenship", match: ["citizenship"] },
-  { route: "/property-request", key: "nav.propertyRequest", match: ["property-request"] },
-  { route: "/blog", key: "nav.blog", match: ["blog", "blog-post"] },
-  { route: "/faq", key: "nav.faq", match: ["faq"] }
-];
+const CHEVRON =
+  '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>';
 
-const NAV_TAIL: NavLink[] = [{ route: "/contact", key: "nav.contact", match: ["contact"] }];
+function renderNavEntry(entry: NavEntry, route: Route): string {
+  if ("route" in entry) {
+    const active = entry.active(route);
+    const cls = entry.route === "/" ? "main-nav__item--home" : entry.route === "/contact" ? "main-nav__item--tail" : "";
+    return `
+            <li${cls ? ` class="${cls}"` : ""}>
+              <a class="main-nav__link${active ? " is-active" : ""}" href="${link(entry.route)}"${active ? ' aria-current="page"' : ""}>${t(entry.key)}</a>
+            </li>`;
+  }
+  const active = entry.items.some((item) => item.active(route));
+  const label = entry.shortKey
+    ? `<span class="main-nav__label--short">${t(entry.shortKey)}</span><span class="main-nav__label--full">${t(entry.key)}</span>`
+    : t(entry.key);
+  return `
+          <li class="nav-group" data-nav-group>
+            <button type="button" class="main-nav__link nav-group__toggle${active ? " is-active" : ""}" id="${entry.id}-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="${entry.id}-menu">
+              ${label}
+              ${CHEVRON}
+            </button>
+            <ul class="nav-group__menu" id="${entry.id}-menu" hidden>
+              ${entry.items
+                .map((item) => {
+                  const on = item.active(route);
+                  return `<li><a class="nav-group__link${on ? " is-active" : ""}" href="${link(item.route)}"${on ? ' aria-current="page"' : ""}>${t(item.key)}</a></li>`;
+                })
+                .join("")}
+            </ul>
+          </li>`;
+}
 
 /* The one-line desktop bar only fits so many items (more so in French and Russian).
-   Below 1400px, or whenever the bar would overflow, the header switches to the
+   Below 1180px, or whenever the bar would overflow, the header switches to the
    hamburger menu instead of letting links collide with the logo or the buttons. */
-const COMPACT_QUERY = "(max-width: 1400px)";
+const COMPACT_QUERY = "(max-width: 1179px)";
 let fittedHeader: HTMLElement | null = null;
 let closeMenu: () => void = () => {};
 
@@ -66,11 +125,6 @@ function watchHeaderFit(el: HTMLElement): void {
   void document.fonts?.ready.then(fitHeader);
 }
 
-function navLabel(item: NavLink): string {
-  if (!item.shortKey) return t(item.key);
-  return `<span class="main-nav__label--short">${t(item.shortKey)}</span><span class="main-nav__label--full">${t(item.key)}</span>`;
-}
-
 export function renderHeader(el: HTMLElement, route: Route): void {
   const locale = getLocale();
   const langNames = tRaw<Record<Locale, string>>("lang");
@@ -88,42 +142,7 @@ export function renderHeader(el: HTMLElement, route: Route): void {
 
       <nav class="main-nav" id="main-nav" aria-label="Main navigation">
         <ul class="main-nav__list">
-          ${NAV_LINKS.map(
-            (item) => `
-            <li${item.route === "/" ? ' class="main-nav__item--home"' : ""}>
-              <a class="main-nav__link${item.match.includes(route.name) ? " is-active" : ""}" href="${link(item.route)}"${item.match.includes(route.name) ? ' aria-current="page"' : ""}>
-                ${navLabel(item)}
-              </a>
-            </li>`
-          ).join("")}
-          <li class="nav-group">
-            <button
-              type="button"
-              class="main-nav__link nav-group__toggle${NAV_RESOURCES.some((item) => item.match.includes(route.name)) ? " is-active" : ""}"
-              id="resources-toggle"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              ${t("nav.resources")}
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <ul class="nav-group__menu" id="resources-menu" hidden>
-              ${NAV_RESOURCES.map(
-                (item) => `
-                <li>
-                  <a class="nav-group__link${item.match.includes(route.name) ? " is-active" : ""}" href="${link(item.route)}">${t(item.key)}</a>
-                </li>`
-              ).join("")}
-            </ul>
-          </li>
-          ${NAV_TAIL.map(
-            (item) => `
-            <li class="main-nav__item--tail">
-              <a class="main-nav__link${item.match.includes(route.name) ? " is-active" : ""}" href="${link(item.route)}">
-                ${t(item.key)}
-              </a>
-            </li>`
-          ).join("")}
+          ${NAV.map((entry) => renderNavEntry(entry, route)).join("")}
           <li class="main-nav__lang">
             <div class="lang-switch" role="group" aria-label="${t("nav.language")}">${langLinks}</div>
           </li>
@@ -201,6 +220,12 @@ export function renderHeader(el: HTMLElement, route: Route): void {
   nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenuOpen(false)));
   // On the inner wrapper (rebuilt each render) so listeners don't pile up on `el`.
   el.querySelector<HTMLElement>(".site-header__inner")!.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && groups.some((g) => g.querySelector('[aria-expanded="true"]'))) {
+      const open = groups.find((g) => g.querySelector('[aria-expanded="true"]'))!;
+      closeGroups();
+      open.querySelector<HTMLButtonElement>(".nav-group__toggle")!.focus();
+      return;
+    }
     if (e.key === "Escape" && nav.classList.contains("is-open")) {
       setMenuOpen(false);
       menuToggle.focus();
@@ -225,23 +250,41 @@ export function renderHeader(el: HTMLElement, route: Route): void {
     void signOut();
   });
 
-  const resourcesToggle = el.querySelector<HTMLButtonElement>("#resources-toggle")!;
-  const resourcesMenu = el.querySelector<HTMLUListElement>("#resources-menu")!;
-  resourcesToggle.addEventListener("click", () => {
-    const hidden = resourcesMenu.hasAttribute("hidden");
-    if (hidden) resourcesMenu.removeAttribute("hidden");
-    else resourcesMenu.setAttribute("hidden", "");
-    resourcesToggle.setAttribute("aria-expanded", String(hidden));
+  const groups = [...el.querySelectorAll<HTMLElement>("[data-nav-group]")];
+  const setGroupOpen = (group: HTMLElement, open: boolean) => {
+    group.querySelector<HTMLUListElement>(".nav-group__menu")!.hidden = !open;
+    group.querySelector<HTMLButtonElement>(".nav-group__toggle")!.setAttribute("aria-expanded", String(open));
+  };
+  const closeGroups = (except?: HTMLElement) => groups.forEach((g) => g !== except && setGroupOpen(g, false));
+  groups.forEach((group) => {
+    const toggle = group.querySelector<HTMLButtonElement>(".nav-group__toggle")!;
+    // Desktop bar: open on hover too (touch and the mobile menu keep tap-to-open).
+    const hoverable = () => !el.classList.contains("site-header--compact") && window.matchMedia("(hover: hover)").matches;
+    // A menu hover just opened stays open when the same pointer then clicks its button.
+    let openedByHover = false;
+    toggle.addEventListener("click", () => {
+      const open = openedByHover || toggle.getAttribute("aria-expanded") !== "true";
+      openedByHover = false;
+      closeGroups(group);
+      setGroupOpen(group, open);
+    });
+    group.addEventListener("mouseenter", () => {
+      if (!hoverable()) return;
+      closeGroups(group);
+      setGroupOpen(group, true);
+      openedByHover = true;
+    });
+    group.addEventListener("mouseleave", () => {
+      openedByHover = false;
+      if (hoverable()) setGroupOpen(group, false);
+    });
   });
 
   document.addEventListener(
     "click",
     (e) => {
       if (!el.contains(e.target as Node)) return;
-      if (!(e.target as HTMLElement).closest(".nav-group")) {
-        resourcesMenu.setAttribute("hidden", "");
-        resourcesToggle.setAttribute("aria-expanded", "false");
-      }
+      if (!(e.target as HTMLElement).closest(".nav-group")) closeGroups();
       if (!(e.target as HTMLElement).closest(".account-switch") && accountMenu) {
         accountMenu.setAttribute("hidden", "");
         accountToggle?.setAttribute("aria-expanded", "false");
