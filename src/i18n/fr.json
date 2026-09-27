@@ -1810,61 +1810,10 @@
     "worksTeaserCta": "Voir tout le portfolio",
     "processTeaserCta": "Découvrir notre méthode"
   },
-  "privacy": {
-    "heroEyebrow": "Informations légales",
-    "heroTitle": "Politique de confidentialité",
-    "heroSubtitle": "Comment HADARA Real Estate traite les informations sur ce site.",
-    "updated": "Dernière mise à jour : 27 septembre 2026",
-    "sections": [
-      {
-        "title": "Qui sommes-nous",
-        "paragraphs": [
-          "Ce site est exploité par HADARA Real Estate, Adnan Kahveci Mah., Beylikdüzü, Istanbul 34000, Türkiye. Pour toute question relative à la confidentialité, écrivez-nous à info@byhadara.com."
-        ]
-      },
-      {
-        "title": "Statistiques de visite anonymes",
-        "paragraphs": [
-          "Pour savoir combien de personnes visitent le site et quels projets les intéressent, notre serveur enregistre chaque page consultée de manière anonyme. Pour chaque page, nous conservons uniquement :"
-        ],
-        "items": [
-          "l'adresse de la page, sans paramètres de requête ;",
-          "la langue du site (anglais, arabe, français ou russe) ;",
-          "la provenance de la visite — uniquement le nom du site référent (par exemple google.com) ou la page précédente de notre site, jamais le lien complet ;",
-          "votre pays et votre ville approximatifs, estimés par notre hébergeur (Vercel) à partir de votre connexion ;",
-          "un numéro de session aléatoire, ainsi que la date et l'heure."
-        ],
-        "after": [
-          "Le numéro de session est créé par votre navigateur et conservé dans son stockage de session (sessionStorage), uniquement pour l'onglet en cours. Ce n'est pas un cookie, il n'est lié ni à votre nom ni à votre appareil, et votre navigateur le supprime à la fermeture de l'onglet.",
-          "Nous ne conservons ni votre adresse IP ni aucune donnée personnelle dans ces statistiques, et nous ne les utilisons pas pour identifier qui que ce soit. Les pages des comptes vendeurs et d'administration ne sont pas enregistrées.",
-          "Les enregistrements de visite sont supprimés automatiquement après 30 jours. Lorsqu'une nouvelle visite commence, notre équipe reçoit une notification interne (via Telegram) contenant les mêmes informations anonymes : localisation approximative, page, langue et provenance."
-        ]
-      },
-      {
-        "title": "Informations que vous nous transmettez",
-        "paragraphs": [
-          "Les formulaires de contact, de demande de bien et de demande de consultation n'envoient rien à nos serveurs : ils ouvrent votre propre application de messagerie avec un message préparé, et nous ne recevons que ce que vous choisissez d'envoyer. Il en va de même lorsque vous nous contactez par WhatsApp ou par téléphone.",
-          "Si vous créez un compte vendeur sur le portail de revente, nous conservons les informations que vous fournissez (nom, adresse e-mail, numéro de téléphone, pays de résidence) ainsi que vos annonces et leurs photos, afin de pouvoir les examiner et les publier. Les messages envoyés au sujet d'une annonce sont conservés afin que nous puissions y répondre."
-        ]
-      },
-      {
-        "title": "Prestataires",
-        "paragraphs": [
-          "Notre site est hébergé par Vercel ; les comptes vendeurs, les annonces et les statistiques de visite sont stockés chez Supabase, et les notifications internes sont transmises via Telegram. Si nous utilisons des outils publicitaires ou d'analyse de Meta ou de Google, ceux-ci traitent des données — et peuvent utiliser des cookies — conformément à leurs propres politiques de confidentialité."
-        ]
-      },
-      {
-        "title": "Vos droits",
-        "paragraphs": [
-          "Vous pouvez nous demander quelles informations nous détenons à votre sujet, ou demander leur rectification ou leur suppression, en écrivant à info@byhadara.com. Comme les statistiques de visite ne contiennent rien qui vous identifie, elles ne peuvent pas être rattachées à une personne précise."
-        ]
-      }
-    ]
-  },
   "seo": {
     "privacy": {
       "title": "Politique de confidentialité",
-      "description": "Comment HADARA Real Estate traite les informations sur son site : statistiques de visite anonymes, sans cookies ni adresse IP, supprimées après 30 jours, et les données que vous nous transmettez."
+      "description": "Comment HADARA Real Estate collecte, utilise et protège vos données personnelles conformément à la KVKK turque et au RGPD, et comment exercer vos droits."
     },
     "videoTour": {
       "title": "Visites privées en vidéo de nos projets à Istanbul",
@@ -2384,5 +2333,169 @@
       "en": "English",
       "tr": "Türkçe"
     }
+  },
+  "privacy": {
+    "nav": "Politique de confidentialité",
+    "heroEyebrow": "Votre vie privée",
+    "heroTitle": "Politique de confidentialité",
+    "heroSubtitle": "Comment HADARA Real Estate collecte, utilise et protège vos données personnelles, et les droits dont vous disposez.",
+    "updated": "Dernière mise à jour : {date}",
+    "tocTitle": "Sommaire",
+    "sections": [
+      {
+        "title": "Qui sommes-nous",
+        "paragraphs": [
+          "HADARA Real Estate (« HADARA », « nous ») est une société de promotion et de vente immobilière basée à Istanbul. Nous sommes responsables du traitement des données personnelles collectées via www.hadararealestate.com (le « Site »).",
+          "Cette politique explique quelles informations nous collectons, pourquoi, et les droits dont vous disposez en vertu de la loi turque n° 6698 sur la protection des données personnelles (KVKK) et, lorsqu'il vous est applicable, du Règlement général sur la protection des données de l'UE (RGPD)."
+        ],
+        "items": []
+      },
+      {
+        "title": "Les informations que nous collectons",
+        "paragraphs": [
+          "Nous ne collectons que les informations que vous choisissez de nous communiquer, ainsi que les données techniques limitées nécessaires au fonctionnement du Site :"
+        ],
+        "items": [
+          "Formulaires de contact et de demande : votre nom, votre adresse e-mail, votre numéro de téléphone, les projets ou sujets qui vous intéressent, votre budget et vos préférences (pour les demandes de bien et de conseil) et votre message.",
+          "Réservations de visites privées en vidéo : les projets choisis, la date et l'heure souhaitées, l'application et la langue de l'appel, votre nom et votre numéro de téléphone, ainsi que votre fuseau horaire afin de vous appeler au bon moment.",
+          "Comptes du portail de revente : votre nom, votre adresse e-mail, votre numéro de téléphone et votre pays, les annonces et photos que vous publiez, et les messages que les acheteurs envoient au sujet de vos annonces.",
+          "Source publicitaire : si vous arrivez par l'une de nos publicités, les informations de campagne du lien (comme utm_source ou gclid) sont conservées pendant votre visite et ajoutées à votre message, afin que nous sachions quelle publicité vous a amené.",
+          "Données techniques : votre adresse IP, votre navigateur et votre type d'appareil, et les pages visitées, enregistrés par notre hébergeur et, lorsqu'ils sont activés, par les outils de mesure décrits ci-dessous."
+        ]
+      },
+      {
+        "title": "Statistiques de visite anonymes",
+        "paragraphs": [
+          "Pour savoir combien de personnes visitent le site et quels projets les intéressent, notre serveur enregistre chaque page consultée de manière anonyme. Pour chaque page, nous conservons uniquement :"
+        ],
+        "items": [
+          "l'adresse de la page, sans paramètres de requête ;",
+          "la langue du site (anglais, arabe, français ou russe) ;",
+          "la provenance de la visite — uniquement le nom du site référent (par exemple google.com) ou la page précédente de notre site, jamais le lien complet ;",
+          "votre pays et votre ville approximatifs, estimés par notre hébergeur (Vercel) à partir de votre connexion ;",
+          "un numéro de session aléatoire, ainsi que la date et l'heure."
+        ],
+        "after": [
+          "Le numéro de session est créé par votre navigateur et conservé dans son stockage de session (sessionStorage), uniquement pour l'onglet en cours. Ce n'est pas un cookie, il n'est lié ni à votre nom ni à votre appareil, et votre navigateur le supprime à la fermeture de l'onglet.",
+          "Nous ne conservons ni votre adresse IP ni aucune donnée personnelle dans ces statistiques, et nous ne les utilisons pas pour identifier qui que ce soit. Les pages des comptes vendeurs et d'administration ne sont pas enregistrées.",
+          "Les enregistrements de visite sont supprimés automatiquement après 30 jours. Lorsqu'une nouvelle visite commence, notre équipe reçoit une notification interne (via Telegram) contenant les mêmes informations anonymes : localisation approximative, page, langue et provenance."
+        ]
+      },
+      {
+        "title": "Comment vos messages nous parviennent",
+        "paragraphs": [
+          "Nos formulaires de contact, de demande et de réservation n'envoient rien en arrière-plan. Lorsque vous appuyez sur envoyer, votre messagerie ou WhatsApp s'ouvre avec un message prêt, et les informations ne nous parviennent que lorsque vous envoyez vous-même ce message. Les messages envoyés via WhatsApp sont également soumis à la politique de confidentialité de WhatsApp."
+        ],
+        "items": []
+      },
+      {
+        "title": "Pourquoi nous utilisons vos informations",
+        "paragraphs": [
+          "Nous utilisons vos informations pour :"
+        ],
+        "items": [
+          "Répondre à vos demandes et vous envoyer les informations, prix et documents que vous demandez.",
+          "Organiser et réaliser les visites privées en vidéo et les visites de nos projets.",
+          "Préparer des offres et vous accompagner dans l'achat lorsque vous décidez d'acheter.",
+          "Faire fonctionner le portail de revente : créer votre compte, vérifier et publier les annonces, et transmettre les messages des acheteurs aux vendeurs.",
+          "Mesurer et améliorer les performances du Site et de nos publicités.",
+          "Respecter nos obligations légales et défendre nos droits."
+        ]
+      },
+      {
+        "title": "Base juridique",
+        "paragraphs": [
+          "Nous traitons vos données sur les fondements prévus à l'article 5 de la KVKK (et, le cas échéant, à l'article 6 du RGPD) : les mesures prises à votre demande avant la conclusion d'un contrat et l'exécution d'un contrat ; le respect de nos obligations légales ; nos intérêts légitimes à gérer et développer notre activité, sans porter atteinte à vos droits ; et votre consentement explicite lorsque la loi l'exige, par exemple pour les cookies publicitaires.",
+          "Nous ne vendons pas vos données personnelles et ne vous envoyons pas de messages marketing que vous n'avez pas demandés."
+        ],
+        "items": []
+      },
+      {
+        "title": "Cookies et technologies similaires",
+        "paragraphs": [
+          "Le Site enregistre quelques petites informations dans votre navigateur. À l'exception du numéro de session, elles restent sur votre appareil et ne nous sont pas transmises :"
+        ],
+        "items": [
+          "Votre langue préférée, pour afficher le Site dans votre langue lors de votre prochaine visite.",
+          "Les projets que vous enregistrez avec le bouton cœur.",
+          "Votre conversation avec l'assistant, vos réponses à « Trouvez votre projet » et l'avancement de votre réservation (conservés uniquement jusqu'à la fermeture de l'onglet).",
+          "La source publicitaire de votre visite (conservée uniquement jusqu'à la fermeture de l'onglet).",
+          "Un numéro de session aléatoire, transmis uniquement avec nos statistiques de visite anonymes (voir la section 3) et supprimé à la fermeture de l'onglet.",
+          "Votre session de connexion, si vous utilisez un compte du portail de revente."
+        ],
+        "after": "Lorsqu'ils sont activés, nous utilisons Meta Pixel (Facebook et Instagram), Google Analytics et Google Ads pour compter les visites et mesurer quelles publicités génèrent des demandes. Ces outils peuvent déposer des cookies et collecter votre adresse IP et vos données de navigation. Vous pouvez bloquer ou supprimer les cookies à tout moment dans les réglages de votre navigateur ; le Site continuera de fonctionner."
+      },
+      {
+        "title": "Avec qui nous partageons vos données",
+        "paragraphs": [
+          "Nous ne partageons des données personnelles que lorsque c'est nécessaire, et uniquement les données nécessaires :"
+        ],
+        "items": [
+          "Les prestataires qui font fonctionner le Site pour nous : Vercel (hébergement, et localisation approximative des visites), Supabase (base de données et connexion du portail de revente, et statistiques de visite anonymes), Google (polices, mesure d'audience, publicité et vidéos YouTube) et Meta (WhatsApp et mesure publicitaire). La carte de notre page de contact est fournie par OpenStreetMap.",
+          "Telegram, qui transmet à notre équipe des notifications internes des nouvelles visites, avec des informations anonymes uniquement.",
+          "Les promoteurs des projets, lorsque c'est nécessaire pour traiter votre demande, par exemple pour réserver un logement ou finaliser un achat.",
+          "Dans le portail de revente : les messages des acheteurs sont transmis au propriétaire de l'annonce, et les annonces approuvées sont publiées sur le Site.",
+          "Les autorités publiques, lorsque la loi l'exige."
+        ]
+      },
+      {
+        "title": "Transferts internationaux",
+        "paragraphs": [
+          "Certains de ces prestataires stockent ou traitent des données en dehors de la Turquie, par exemple dans l'Union européenne ou aux États-Unis. Ces transferts sont effectués conformément à la KVKK et, le cas échéant, au RGPD."
+        ],
+        "items": []
+      },
+      {
+        "title": "Durée de conservation",
+        "paragraphs": [
+          "Nous conservons vos données aussi longtemps que nécessaire pour répondre à votre demande et vous servir, puis pendant la durée imposée par la loi (par exemple pour les registres fiscaux et commerciaux). Vous pouvez nous demander de supprimer vos données à tout moment, sauf si la loi nous oblige à les conserver. Les enregistrements de visite anonymes sont supprimés automatiquement après 30 jours."
+        ],
+        "items": []
+      },
+      {
+        "title": "Sécurité",
+        "paragraphs": [
+          "Nous appliquons des mesures techniques et organisationnelles raisonnables pour protéger vos données, notamment des connexions chiffrées (HTTPS) et des contrôles d'accès sur le portail de revente. Aucune transmission sur Internet n'est totalement sûre, mais nous travaillons en permanence à protéger vos informations."
+        ],
+        "items": []
+      },
+      {
+        "title": "Vos droits",
+        "paragraphs": [
+          "En vertu de l'article 11 de la KVKK (et du RGPD lorsqu'il s'applique), vous avez le droit de :"
+        ],
+        "items": [
+          "Savoir si vos données personnelles sont traitées et demander des informations à leur sujet.",
+          "Connaître la finalité du traitement et savoir si vos données sont utilisées conformément à celle-ci.",
+          "Connaître les tiers, en Turquie ou à l'étranger, auxquels vos données sont transférées.",
+          "Demander la rectification des données incomplètes ou inexactes.",
+          "Demander l'effacement ou la destruction de vos données.",
+          "Demander que ces rectifications ou effacements soient notifiés aux tiers destinataires de vos données.",
+          "Vous opposer à un résultat défavorable découlant exclusivement de l'analyse automatisée de vos données.",
+          "Demander réparation du préjudice causé par un traitement illicite de vos données.",
+          "Retirer votre consentement à tout moment, sans remettre en cause les traitements effectués auparavant."
+        ],
+        "after": [
+          "Pour exercer ces droits, écrivez-nous à info@byhadara.com. Nous vous répondrons dans les meilleurs délais et au plus tard sous 30 jours.",
+          "Nos statistiques de visite anonymes ne contenant rien qui vous identifie, elles ne peuvent pas être rattachées à une personne précise."
+        ]
+      },
+      {
+        "title": "Mineurs",
+        "paragraphs": [
+          "Le Site s'adresse aux adultes. Nous ne collectons pas sciemment de données personnelles concernant des personnes de moins de 18 ans."
+        ],
+        "items": []
+      },
+      {
+        "title": "Modifications de cette politique",
+        "paragraphs": [
+          "Nous pouvons mettre à jour cette politique de temps à autre. La date en haut de cette page indique sa dernière modification."
+        ],
+        "items": []
+      }
+    ],
+    "contactTitle": "Nous contacter",
+    "contactText": "Pour toute question sur cette politique ou vos données personnelles, contactez-nous :"
   }
 }
