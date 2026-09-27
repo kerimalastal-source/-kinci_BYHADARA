@@ -1,6 +1,7 @@
 import type { Project } from "../data/projects";
 import { t, getProjectContent, link, placeLine } from "../i18n";
 import { favoriteButton } from "./favorites";
+import { statIcon } from "./statIcons";
 
 export function projectStatusLabel(status: Project["status"]): string {
   switch (status) {
@@ -13,14 +14,25 @@ export function projectStatusLabel(status: Project["status"]): string {
   }
 }
 
+function cardStat(value: string, label: string, icon: string): string {
+  return `
+          <div class="project-card__stat">
+            <span class="project-card__stat-icon">${statIcon(icon)}</span>
+            <span class="project-card__stat-text">
+              <strong dir="ltr">${value}</strong>
+              <span>${label}</span>
+            </span>
+          </div>`;
+}
+
 export function renderProjectCard(project: Project): string {
   const content = getProjectContent(project.slug);
   const primaryStat = project.stats[0];
   // Projects without published dates show their next key figure in place of the timeline.
   const secondary = project.timeline
-    ? { value: project.timeline, label: t("common.timeline") }
+    ? { value: project.timeline, label: t("common.timeline"), icon: "timeline" }
     : project.stats[1]
-      ? { value: project.stats[1].value, label: t(`common.statLabels.${project.stats[1].labelKey}`) }
+      ? { value: project.stats[1].value, label: t(`common.statLabels.${project.stats[1].labelKey}`), icon: project.stats[1].labelKey }
       : undefined;
 
   return `
@@ -45,18 +57,8 @@ export function renderProjectCard(project: Project): string {
         <h3 class="project-card__title">${content.name}</h3>
         <p class="project-card__tagline">${content.tagline}</p>
         <div class="project-card__meta">
-          <div class="project-card__stat">
-            <strong dir="ltr">${primaryStat.value}</strong>
-            <span>${t(`common.statLabels.${primaryStat.labelKey}`)}</span>
-          </div>
-          ${
-            secondary
-              ? `<div class="project-card__stat">
-            <strong dir="ltr">${secondary.value}</strong>
-            <span>${secondary.label}</span>
-          </div>`
-              : ""
-          }
+          ${cardStat(primaryStat.value, t(`common.statLabels.${primaryStat.labelKey}`), primaryStat.labelKey)}
+          ${secondary ? cardStat(secondary.value, secondary.label, secondary.icon) : ""}
         </div>
         <a class="btn btn--outline btn--small" href="${link(`/projects/${project.slug}`)}">
           ${t("common.discoverMore")}

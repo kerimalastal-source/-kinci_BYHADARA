@@ -2,7 +2,7 @@ import { t, tRaw, link, getProjectContent, placeLine } from "../i18n";
 import { getSortedProjects, getProjectBySlug, type Project } from "../data/projects";
 import { partners } from "../data/partners";
 import { renderProjectCard } from "../components/projectCard";
-import { initStatCounters } from "../components/statCounter";
+import { initStatCounters, renderStatTiles, type StatTile } from "../components/statCounter";
 import { initScrollReveal } from "../components/scrollReveal";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "../components/floatingButtons";
 import { statIcon } from "../components/statIcons";
@@ -19,17 +19,13 @@ const SPOTLIGHT_THUMBS = 3;
 /* Where each "What We Do" card leads, in the order of `home.services`. */
 const SERVICE_LINKS = ["/projects", "/projects", "/projects", consultancyPath(), "/citizenship", "/property-request"];
 
-interface StatItem {
-  value: string;
-  label: string;
-}
 interface ServiceItem {
   title: string;
   desc: string;
 }
 
 export function renderHome(el: HTMLElement): void {
-  const stats = tRaw<StatItem[]>("home.stats");
+  const stats = tRaw<StatTile[]>("home.stats");
   const services = tRaw<ServiceItem[]>("home.services");
   const why = tRaw<ServiceItem[]>("home.why");
   const spotlight = getProjectBySlug(SPOTLIGHT_SLUG);
@@ -54,17 +50,7 @@ export function renderHome(el: HTMLElement): void {
     <section class="section stats-section">
       <div class="container">
         <h2 class="section-title section-title--center">${t("home.statsTitle")}</h2>
-        <div class="stats-grid">
-          ${stats
-            .map(
-              (s) => `
-            <div class="stat-tile">
-              <span class="stat-tile__value" data-stat-value="${s.value}">0</span>
-              <span class="stat-tile__label">${s.label}</span>
-            </div>`
-            )
-            .join("")}
-        </div>
+        ${renderStatTiles(stats)}
       </div>
     </section>
 

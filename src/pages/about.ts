@@ -1,5 +1,5 @@
 import { t, tRaw } from "../i18n";
-import { initStatCounters } from "../components/statCounter";
+import { initStatCounters, renderStatTiles, type StatTile } from "../components/statCounter";
 
 interface ValueItem {
   title: string;
@@ -9,15 +9,11 @@ interface TimelineItem {
   year: string;
   text: string;
 }
-interface StatItem {
-  value: string;
-  label: string;
-}
 
 export function renderAbout(el: HTMLElement): void {
   const values = tRaw<ValueItem[]>("about.values");
   const timeline = tRaw<TimelineItem[]>("about.timeline");
-  const stats = tRaw<StatItem[]>("about.stats");
+  const stats = tRaw<StatTile[]>("about.stats");
 
   el.innerHTML = `
     <section class="page-hero">
@@ -84,17 +80,7 @@ export function renderAbout(el: HTMLElement): void {
     <section class="section stats-section">
       <div class="container">
         <h2 class="section-title section-title--center">${t("about.statsTitle")}</h2>
-        <div class="stats-grid">
-          ${stats
-            .map(
-              (s) => `
-            <div class="stat-tile">
-              <span class="stat-tile__value" data-stat-value="${s.value}">0</span>
-              <span class="stat-tile__label">${s.label}</span>
-            </div>`
-            )
-            .join("")}
-        </div>
+        ${renderStatTiles(stats)}
       </div>
     </section>
   `;

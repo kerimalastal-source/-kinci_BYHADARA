@@ -28,7 +28,8 @@
   },
   "floatingActions": {
     "whatsapp": "Chat on WhatsApp",
-    "call": "Call us"
+    "call": "Call us",
+    "backToTop": "Back to top"
   },
   "lang": {
     "en": "English",
@@ -101,10 +102,12 @@
     "heroCtaSecondary": "Talk to Our Team",
     "statsTitle": "HADARA in Numbers",
     "stats": [
-      { "value": "12+", "label": "Years of Excellence" },
-      { "value": "11", "label": "Landmark Developments" },
-      { "value": "950+", "label": "Residential Units" },
-      { "value": "4", "label": "Prime Istanbul Districts" }
+      { "value": "12+", "label": "Years of Excellence", "icon": "years" },
+      { "value": "11", "label": "Landmark Developments", "icon": "projects" },
+      { "value": "640+", "label": "Residential Units", "icon": "apartments" },
+      { "value": "420+", "label": "Office Units", "icon": "offices" },
+      { "value": "60+", "label": "Commercial Units", "icon": "shops" },
+      { "value": "4", "label": "Prime Istanbul Districts", "icon": "districts" }
     ],
     "partnersEyebrow": "Trusted Network",
     "partnersTitle": "Our Success Partners",
@@ -194,10 +197,10 @@
     ],
     "statsTitle": "Our Track Record",
     "stats": [
-      { "value": "12+", "label": "Years in Business" },
-      { "value": "11", "label": "Landmark Projects" },
-      { "value": "950+", "label": "Residential Units" },
-      { "value": "60,000+ m²", "label": "Land Developed" }
+      { "value": "12+", "label": "Years in Business", "icon": "years" },
+      { "value": "11", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "1,100+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
+      { "value": "60,000+ m²", "label": "Land Developed", "icon": "landArea" }
     ]
   },
   "projects": {
@@ -241,6 +244,13 @@
     "residencesTitle": "Residences",
     "amenitiesTitle": "Amenities & Services",
     "locationTitle": "Location & Connectivity",
+    "mapAlt": "Map of Istanbul showing {name} in {place}",
+    "mapCaption": "{place}",
+    "openInMaps": "Open in Google Maps",
+    "map": {
+      "blackSea": "Black Sea",
+      "marmara": "Sea of Marmara"
+    },
     "developerLabel": "Developer",
     "priceLabel": "Price",
     "priceOnRequest": "On Request",
@@ -311,27 +321,199 @@
     "heroEyebrow": "Investor Services",
     "heroTitle": "Turkish Citizenship by Real Estate Investment",
     "heroSubtitle": "HADARA provides trusted, end-to-end guidance for international investors seeking Turkish citizenship through property investment.",
-    "introTitle": "A Clear Path to Citizenship",
-    "introText": "Turkey's citizenship-by-investment program allows foreign nationals to obtain citizenship by purchasing qualifying real estate. HADARA's residential projects are selected and structured to meet the program's requirements, and our team supports you from first viewing to final approval.",
-    "stepsTitle": "How It Works",
-    "steps": [
-      { "title": "Initial Consultation", "desc": "We assess your goals and introduce qualifying HADARA projects and units." },
-      { "title": "Property Selection & Reservation", "desc": "Choose your unit or villa and secure it with a reservation agreement." },
-      { "title": "Purchase & Valuation", "desc": "We coordinate the official valuation report and title deed transfer required by law." },
-      { "title": "Citizenship Application", "desc": "Our partners prepare and submit your application to the relevant Turkish authorities." },
-      { "title": "Approval & Passport", "desc": "Upon approval, you and your eligible family members receive Turkish citizenship and passports." }
+    "factsLabel": "Key figures",
+    "facts": [
+      {
+        "value": "$400,000",
+        "label": "Minimum property investment"
+      },
+      {
+        "value": "3 years",
+        "label": "Minimum holding period"
+      },
+      {
+        "value": "Whole family",
+        "label": "Spouse and children under 18 included"
+      },
+      {
+        "value": "110+",
+        "label": "Visa-free or visa-on-arrival destinations"
+      }
     ],
-    "benefitsTitle": "Why Invest in Turkish Citizenship",
+    "introTitle": "A Clear Path to Citizenship",
+    "introText": "Türkiye grants citizenship to foreign investors who buy real estate worth at least $400,000 and keep it for a minimum of three years. Your spouse and children under 18 are included in the same application, there is no requirement to live in Türkiye, and you can keep your current nationality.",
+    "introText2": "HADARA guides you through every stage — choosing an eligible property from our projects, the valuation, payment and title deed, then the citizenship file prepared with our legal partners — so the process stays clear and on schedule.",
+    "requirementsTitle": "Program Requirements",
+    "requirementsSubtitle": "The main conditions a real estate investment must meet to qualify for Turkish citizenship.",
+    "requirements": [
+      {
+        "title": "Minimum value of $400,000",
+        "desc": "The property must be worth at least USD 400,000, or the equivalent in another foreign currency. The amount can be reached with a single property or with several properties together."
+      },
+      {
+        "title": "Official valuation report",
+        "desc": "An appraisal company licensed by the Capital Markets Board (SPK) values the property, and the value in its report must meet the threshold."
+      },
+      {
+        "title": "Payment in foreign currency",
+        "desc": "The price is paid by bank transfer in foreign currency, converted at a Turkish bank against a Foreign Currency Purchase Certificate (DAB) that proves the investment."
+      },
+      {
+        "title": "Three-year holding commitment",
+        "desc": "An annotation is added to the title deed stating that the property will not be sold for at least three years."
+      },
+      {
+        "title": "Certificate of Conformity",
+        "desc": "Once the purchase is registered, the Land Registry issues a Certificate of Conformity confirming that the investment meets the program's conditions."
+      },
+      {
+        "title": "Off-plan homes qualify",
+        "desc": "Homes under construction are also eligible through a notarised promise-to-sell agreement carrying the same three-year commitment."
+      }
+    ],
+    "rulesNote": "The figures on this page reflect the rules in force at the time of writing and may change. Our team confirms the current requirements before any purchase.",
+    "stepsTitle": "The Process, Step by Step",
+    "stepsSubtitle": "Most steps can be handled through a power of attorney, so a short visit to Istanbul is usually enough.",
+    "steps": [
+      {
+        "title": "Free consultation",
+        "desc": "We discuss your goals, budget and family members, and shortlist eligible projects and units."
+      },
+      {
+        "title": "Property selection and reservation",
+        "desc": "Visit in person or by live video, choose your unit and secure it with a reservation agreement."
+      },
+      {
+        "title": "Tax number and bank account",
+        "desc": "We help you obtain a Turkish tax number and open a local bank account, both needed for the purchase."
+      },
+      {
+        "title": "Valuation and payment",
+        "desc": "The licensed valuation report is prepared and the price is transferred in foreign currency, with the DAB certificate issued by the bank."
+      },
+      {
+        "title": "Title deed",
+        "desc": "Ownership is registered at the Land Registry with the three-year annotation — or, for off-plan homes, the notarised promise-to-sell agreement is signed."
+      },
+      {
+        "title": "Certificate of Conformity",
+        "desc": "The Land Registry reviews the file and issues the Certificate of Conformity for the citizenship application."
+      },
+      {
+        "title": "Residence permit and application",
+        "desc": "You and your family obtain residence permits, and the citizenship application is submitted with the full set of documents."
+      },
+      {
+        "title": "Approval, ID card and passport",
+        "desc": "After the authorities' review, the citizenship decision is issued and you apply for your Turkish ID cards and passports."
+      }
+    ],
+    "stepsNote": "From the title deed to the decision, the process usually takes a few months, depending on the authorities' review.",
+    "documentsTitle": "Documents You Will Need",
+    "documentsSubtitle": "Our team prepares the file with you and checks every document before submission.",
+    "documents": [
+      "Valid passports for the applicant, spouse and children",
+      "Birth certificates showing the parents' names",
+      "Marriage certificate, if applicable",
+      "Recent biometric photographs",
+      "Title deed (or notarised promise-to-sell agreement), valuation report and DAB certificate",
+      "Certificate of Conformity",
+      "Residence permits"
+    ],
+    "documentsNote": "Documents issued abroad need an apostille (or consular legalisation) and a sworn Turkish translation.",
+    "costsTitle": "Costs to Plan For",
+    "costsSubtitle": "Besides the property price, budget for the following. We prepare a detailed estimate for your case.",
+    "costs": [
+      {
+        "title": "Title deed fee",
+        "desc": "4% of the declared property value, paid at registration."
+      },
+      {
+        "title": "Valuation report",
+        "desc": "Prepared by a licensed appraisal company; required for the purchase and the application."
+      },
+      {
+        "title": "Translations and notary",
+        "desc": "Sworn translations and notarisation of passports, certificates and powers of attorney."
+      },
+      {
+        "title": "Official fees",
+        "desc": "Residence permit, application and passport fees for each family member."
+      },
+      {
+        "title": "Legal support",
+        "desc": "Fees of the lawyers who prepare and follow the citizenship file."
+      }
+    ],
+    "routesTitle": "Other Investment Routes",
+    "routesSubtitle": "Real estate is the most popular route, but the program also accepts these investments.",
+    "routes": [
+      {
+        "value": "$500,000",
+        "title": "Bank deposit",
+        "desc": "Kept in a Turkish bank for at least three years."
+      },
+      {
+        "value": "$500,000",
+        "title": "Government bonds",
+        "desc": "Turkish government debt instruments held for at least three years."
+      },
+      {
+        "value": "$500,000",
+        "title": "Investment funds",
+        "desc": "Shares in real estate or venture capital investment funds, held for at least three years."
+      },
+      {
+        "value": "$500,000",
+        "title": "Fixed capital investment",
+        "desc": "An investment in a business, confirmed by the Ministry of Industry and Technology."
+      },
+      {
+        "value": "50 jobs",
+        "title": "Employment",
+        "desc": "Creating jobs for at least 50 people, confirmed by the Ministry of Labour."
+      }
+    ],
+    "routesNote": "HADARA specialises in the real estate route; for the others we refer you to trusted partners.",
+    "residenceEyebrow": "An alternative",
+    "residenceTitle": "Residence Permit Through Property",
+    "residenceText": "If citizenship is not your goal right now, buying a home in Türkiye also entitles you to a renewable residence permit.",
+    "residence": [
+      {
+        "title": "From $200,000 in Istanbul",
+        "desc": "The property must be worth at least USD 200,000 in metropolitan cities such as Istanbul, and USD 100,000 in other provinces."
+      },
+      {
+        "title": "Renewable",
+        "desc": "The permit is issued for a set period and can be renewed for as long as you own the property."
+      },
+      {
+        "title": "For your family",
+        "desc": "Your spouse and children under 18 can obtain residence permits as well."
+      },
+      {
+        "title": "Address check",
+        "desc": "Some neighbourhoods are closed to new residence registrations for foreigners, so we check the address before you buy."
+      }
+    ],
+    "residenceCta": "Ask about the residence permit",
+    "benefitsTitle": "Why Turkish Citizenship",
     "benefits": [
       "Visa-free or visa-on-arrival access to over 110 countries",
-      "Citizenship extends to spouse and children under 18",
+      "Citizenship for your spouse and children under 18",
       "No residency requirement before or after approval",
-      "Access to Turkey's growing economy and real estate market",
-      "Dual citizenship is permitted for most nationalities"
+      "Dual citizenship is permitted for most nationalities",
+      "The right to live, work and study in Türkiye, with access to public healthcare and education",
+      "Eligibility to apply for the US E-2 investor visa, as Türkiye is a treaty country",
+      "Lifelong citizenship that passes on to your future children",
+      "A real asset in Istanbul that can earn rental income and grow in value"
     ],
+    "faqTitle": "Frequently Asked Questions",
+    "faqMore": "View all FAQs",
     "ctaTitle": "Ready to Explore Your Options?",
     "ctaText": "Our advisors will walk you through eligible projects and the full citizenship process.",
-    "ctaButton": "Speak With an Advisor"
+    "ctaButton": "Speak With an Advisor",
+    "ctaSecondary": "Browse Our Projects"
   },
   "faq": {
     "heroEyebrow": "Support",
@@ -506,8 +688,8 @@
     "phonePlaceholder": "+90 5xx xxx xx xx",
     "subjectLabel": "Subject",
     "subjectPlaceholder": "e.g. Lotus Koru 2 availability",
-    "projectLabel": "Projects of Interest",
-    "projectHint": "You can choose more than one project.",
+    "projectLabel": "Your Interests",
+    "projectHint": "Choose one or more projects or topics.",
     "projectAdd": "Add another project",
     "projectChoose": "Choose a project",
     "projectRemove": "Remove {name}",
@@ -515,6 +697,18 @@
     "projectCount": "{count} projects",
     "projectMessageMany": "Hello, I'm interested in the {names} projects and would like more information about availability, prices and payment options.",
     "projectGeneral": "General inquiry",
+    "topics": {
+      "citizenship": {
+        "label": "Turkish citizenship inquiry",
+        "phrase": "Turkish citizenship by real estate investment"
+      },
+      "residence": {
+        "label": "Real estate residence permit inquiry",
+        "phrase": "the residence permit through property ownership"
+      }
+    },
+    "topicMessage": "Hello, I would like more information about {topics}.",
+    "topicMessageAlso": "I would also like more information about {topics}.",
     "projectEyebrow": "You're enquiring about",
     "projectView": "View project",
     "projectMessage": "Hello, I'm interested in the {name} project and would like more information about availability, prices and payment options.",

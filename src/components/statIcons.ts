@@ -1,4 +1,4 @@
-// 24×24 line icons for the key-figures band on project pages, keyed by stat labelKey.
+// 24×24 line icons for key figures (project pages, project cards, home numbers), keyed by stat labelKey.
 const PATHS: Record<string, string> = {
   apartments:
     '<rect x="4.5" y="2.5" width="15" height="19" rx="1"/><path d="M8.5 6.5h2M13.5 6.5h2M8.5 10h2M13.5 10h2M8.5 13.5h2M13.5 13.5h2M10.5 21.5v-4h3v4"/>',
@@ -29,6 +29,24 @@ const PATHS: Record<string, string> = {
     '<path d="M3 12h18v2.5a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z"/><path d="M6 12V5a2 2 0 0 1 3.6-1.2M8 21.5l1-2M16 21.5l-1-2"/>',
   livingRoom:
     '<path d="M4.5 11V8a2.5 2.5 0 0 1 2.5-2.5h10A2.5 2.5 0 0 1 19.5 8v3"/><path d="M2.5 13a2 2 0 0 1 4 0v2h11v-2a2 2 0 0 1 4 0v5.5h-19zM5 18.5V21M19 18.5V21"/>',
+  timeline: '<rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M7.5 13.5h2M11 13.5h2M14.5 13.5h2M7.5 17h2M11 17h2"/>',
+  years:
+    '<circle cx="12" cy="9" r="6.5"/><path d="m12 5.8 1 2 2.2.3-1.6 1.6.4 2.2-2-1-2 1 .4-2.2-1.6-1.6 2.2-.3z"/><path d="m8.2 14.2-1.7 7.3 5.5-2.8 5.5 2.8-1.7-7.3"/>',
+  projects:
+    '<rect x="2.5" y="7" width="8" height="14.5" rx="1"/><rect x="13.5" y="2.5" width="8" height="19" rx="1"/><path d="M5.5 11h2M5.5 14.5h2M16.5 6.5h2M16.5 10h2M16.5 13.5h2"/>',
+  districts: '<path d="M12 21.5s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9.5" r="2.6"/>',
+  money:
+    '<rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.8"/><path d="M6 9.5v5M18 9.5v5"/>',
+  holding: '<rect x="4.5" y="10.5" width="15" height="11" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5M12 14.5v3"/>',
+  family:
+    '<circle cx="8" cy="6.5" r="2.5"/><circle cx="16" cy="6.5" r="2.5"/><circle cx="12" cy="13" r="2"/><path d="M3.5 21v-5.5A3.5 3.5 0 0 1 7 12h2M20.5 21v-5.5A3.5 3.5 0 0 0 17 12h-2M8.5 21v-2.5a3.5 3.5 0 0 1 7 0V21"/>',
+  globe:
+    '<circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.6 3.9 5.8 3.9 9.5s-1.3 6.9-3.9 9.5c-2.6-2.6-3.9-5.8-3.9-9.5S9.4 5.1 12 2.5z"/>',
+  report:
+    '<path d="M14 2.5H6.5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8z"/><path d="M14 2.5V8h5.5M8.5 17.5v-3M12 17.5v-5M15.5 17.5v-2"/>',
+  bank: '<path d="M2.5 9 12 3.5 21.5 9"/><path d="M4 9h16M5.5 9v8.5M10 9v8.5M14 9v8.5M18.5 9v8.5M3 21h18M3.5 17.5h17"/>',
+  certificate:
+    '<path d="M4.5 3.5h15a1 1 0 0 1 1 1V15a1 1 0 0 1-1 1H14M9.5 16H4.5a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1"/><path d="M7.5 7.5h9M7.5 10.5h5"/><circle cx="12" cy="16" r="2.8"/><path d="m10.3 18.3-.8 3.2 2.5-1.2 2.5 1.2-.8-3.2"/>',
   terrace:
     '<path d="M12 3.5C7 3.5 3.5 6.5 3 10h18c-.5-3.5-4-6.5-9-6.5zM12 10v11.5M8.5 21.5h7"/><path d="M3 21.5V15h18v6.5"/>'
 };

@@ -28,7 +28,8 @@
   },
   "floatingActions": {
     "whatsapp": "Discuter sur WhatsApp",
-    "call": "Appelez-nous"
+    "call": "Appelez-nous",
+    "backToTop": "Retour en haut"
   },
   "lang": {
     "en": "English",
@@ -101,10 +102,12 @@
     "heroCtaSecondary": "Parler à notre équipe",
     "statsTitle": "HADARA en chiffres",
     "stats": [
-      { "value": "12+", "label": "années d'excellence" },
-      { "value": "11", "label": "projets emblématiques" },
-      { "value": "950+", "label": "unités résidentielles" },
-      { "value": "4", "label": "quartiers phares d'Istanbul" }
+      { "value": "12+", "label": "années d'excellence", "icon": "years" },
+      { "value": "11", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "640+", "label": "unités résidentielles", "icon": "apartments" },
+      { "value": "420+", "label": "bureaux", "icon": "offices" },
+      { "value": "60+", "label": "locaux commerciaux", "icon": "shops" },
+      { "value": "4", "label": "quartiers phares d'Istanbul", "icon": "districts" }
     ],
     "partnersEyebrow": "Réseau de confiance",
     "partnersTitle": "Nos partenaires",
@@ -194,10 +197,10 @@
     ],
     "statsTitle": "Notre bilan",
     "stats": [
-      { "value": "12+", "label": "années d'activité" },
-      { "value": "11", "label": "projets emblématiques" },
-      { "value": "950+", "label": "unités résidentielles" },
-      { "value": "60 000+ m²", "label": "de terrain développé" }
+      { "value": "12+", "label": "années d'activité", "icon": "years" },
+      { "value": "11", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "1 100+", "label": "logements, bureaux et commerces", "icon": "apartments" },
+      { "value": "60 000+ m²", "label": "de terrain développé", "icon": "landArea" }
     ]
   },
   "projects": {
@@ -241,6 +244,13 @@
     "residencesTitle": "Résidences",
     "amenitiesTitle": "Équipements & services",
     "locationTitle": "Emplacement & accès",
+    "mapAlt": "Carte d'Istanbul situant {name} à {place}",
+    "mapCaption": "{place}",
+    "openInMaps": "Ouvrir dans Google Maps",
+    "map": {
+      "blackSea": "Mer Noire",
+      "marmara": "Mer de Marmara"
+    },
     "developerLabel": "Promoteur",
     "priceLabel": "Prix",
     "priceOnRequest": "Sur demande",
@@ -311,27 +321,199 @@
     "heroEyebrow": "Services aux investisseurs",
     "heroTitle": "La citoyenneté turque par l'investissement immobilier",
     "heroSubtitle": "HADARA offre un accompagnement complet et fiable aux investisseurs internationaux souhaitant obtenir la citoyenneté turque grâce à l'investissement immobilier.",
+    "factsLabel": "Chiffres clés",
+    "facts": [
+      {
+        "value": "400 000 $",
+        "label": "Investissement immobilier minimum"
+      },
+      {
+        "value": "3 ans",
+        "label": "Durée minimale de détention"
+      },
+      {
+        "value": "Toute la famille",
+        "label": "Conjoint et enfants de moins de 18 ans inclus"
+      },
+      {
+        "value": "110+",
+        "label": "Pays sans visa ou avec visa à l'arrivée"
+      }
+    ],
     "introTitle": "Un chemin clair vers la citoyenneté",
-    "introText": "Le programme turc de citoyenneté par investissement permet aux ressortissants étrangers d'obtenir la citoyenneté en achetant un bien immobilier éligible. Les projets résidentiels de HADARA sont sélectionnés et structurés pour répondre aux exigences du programme, et notre équipe vous accompagne de la première visite jusqu'à l'approbation finale.",
-    "stepsTitle": "Comment ça marche",
+    "introText": "La Turquie accorde la citoyenneté aux investisseurs étrangers qui achètent un bien immobilier d'une valeur d'au moins 400 000 $ et le conservent au minimum trois ans. Le conjoint et les enfants de moins de 18 ans sont inclus dans la même demande, aucune résidence en Turquie n'est exigée et vous pouvez conserver votre nationalité actuelle.",
+    "introText2": "HADARA vous accompagne à chaque étape : le choix d'un bien éligible parmi nos projets, l'évaluation, le paiement et le titre de propriété, puis le dossier de citoyenneté préparé avec nos partenaires juridiques, pour un parcours clair et maîtrisé.",
+    "requirementsTitle": "Conditions du programme",
+    "requirementsSubtitle": "Les principales conditions qu'un investissement immobilier doit remplir pour ouvrir droit à la citoyenneté turque.",
+    "requirements": [
+      {
+        "title": "Valeur minimale de 400 000 $",
+        "desc": "Le bien doit valoir au moins 400 000 USD, ou l'équivalent dans une autre devise étrangère. Ce montant peut être atteint avec un seul bien ou plusieurs biens réunis."
+      },
+      {
+        "title": "Rapport d'évaluation officiel",
+        "desc": "Une société d'expertise agréée par le Conseil des marchés de capitaux (SPK) évalue le bien, et la valeur indiquée dans son rapport doit atteindre le seuil."
+      },
+      {
+        "title": "Paiement en devises",
+        "desc": "Le prix est réglé par virement en devises, converties auprès d'une banque turque contre un certificat d'achat de devises (DAB) qui atteste l'investissement."
+      },
+      {
+        "title": "Engagement de conservation de trois ans",
+        "desc": "Une annotation est inscrite au titre de propriété : le bien ne peut pas être vendu pendant au moins trois ans."
+      },
+      {
+        "title": "Certificat de conformité",
+        "desc": "Une fois l'achat enregistré, le cadastre délivre un certificat de conformité confirmant que l'investissement remplit les conditions du programme."
+      },
+      {
+        "title": "Les biens sur plan sont éligibles",
+        "desc": "Les logements en construction sont également éligibles au moyen d'une promesse de vente notariée assortie du même engagement de trois ans."
+      }
+    ],
+    "rulesNote": "Les chiffres de cette page reflètent la réglementation en vigueur au moment de sa rédaction et peuvent évoluer. Notre équipe confirme les conditions applicables avant tout achat.",
+    "stepsTitle": "Les étapes de la démarche",
+    "stepsSubtitle": "La plupart des étapes peuvent être réalisées par procuration : un court séjour à Istanbul suffit généralement.",
     "steps": [
-      { "title": "Consultation initiale", "desc": "Nous évaluons vos objectifs et vous présentons les projets et unités HADARA éligibles." },
-      { "title": "Sélection et réservation du bien", "desc": "Choisissez votre appartement ou villa et sécurisez-le par un contrat de réservation." },
-      { "title": "Achat et expertise", "desc": "Nous coordonnons le rapport d'expertise officiel et le transfert du titre de propriété requis par la loi." },
-      { "title": "Demande de citoyenneté", "desc": "Nos partenaires préparent et soumettent votre dossier aux autorités turques compétentes." },
-      { "title": "Approbation et passeport", "desc": "Après approbation, vous et les membres éligibles de votre famille recevez la citoyenneté et les passeports turcs." }
+      {
+        "title": "Consultation gratuite",
+        "desc": "Nous étudions vos objectifs, votre budget et votre famille, puis sélectionnons les projets et logements éligibles."
+      },
+      {
+        "title": "Choix et réservation du bien",
+        "desc": "Visitez sur place ou en vidéo en direct, choisissez votre logement et réservez-le par un contrat de réservation."
+      },
+      {
+        "title": "Numéro fiscal et compte bancaire",
+        "desc": "Nous vous aidons à obtenir un numéro fiscal turc et à ouvrir un compte bancaire local, tous deux nécessaires à l'achat."
+      },
+      {
+        "title": "Évaluation et paiement",
+        "desc": "Le rapport d'évaluation agréé est établi et le prix est versé en devises ; la banque délivre le certificat DAB."
+      },
+      {
+        "title": "Titre de propriété",
+        "desc": "La propriété est enregistrée au cadastre avec l'annotation de trois ans ; pour un bien sur plan, la promesse de vente notariée est signée."
+      },
+      {
+        "title": "Certificat de conformité",
+        "desc": "Le cadastre examine le dossier et délivre le certificat de conformité nécessaire à la demande de citoyenneté."
+      },
+      {
+        "title": "Permis de séjour et dépôt de la demande",
+        "desc": "Vous et votre famille obtenez un permis de séjour, puis la demande de citoyenneté est déposée avec l'ensemble des documents."
+      },
+      {
+        "title": "Décision, carte d'identité et passeport",
+        "desc": "Après examen par les autorités, la décision de citoyenneté est rendue et vous demandez vos cartes d'identité et passeports turcs."
+      }
     ],
-    "benefitsTitle": "Pourquoi investir pour la citoyenneté turque",
+    "stepsNote": "Entre le titre de propriété et la décision, il faut généralement compter quelques mois, selon le délai d'examen des autorités.",
+    "documentsTitle": "Documents à prévoir",
+    "documentsSubtitle": "Notre équipe constitue le dossier avec vous et vérifie chaque document avant le dépôt.",
+    "documents": [
+      "Passeports en cours de validité du demandeur, du conjoint et des enfants",
+      "Actes de naissance mentionnant les noms des parents",
+      "Acte de mariage, le cas échéant",
+      "Photos biométriques récentes",
+      "Titre de propriété (ou promesse de vente notariée), rapport d'évaluation et certificat DAB",
+      "Certificat de conformité",
+      "Permis de séjour"
+    ],
+    "documentsNote": "Les documents établis à l'étranger doivent être apostillés (ou légalisés par le consulat) et traduits en turc par un traducteur assermenté.",
+    "costsTitle": "Frais à prévoir",
+    "costsSubtitle": "En plus du prix du bien, prévoyez les frais suivants. Nous établissons une estimation détaillée pour votre situation.",
+    "costs": [
+      {
+        "title": "Droits d'enregistrement",
+        "desc": "4 % de la valeur déclarée du bien, réglés lors de l'enregistrement."
+      },
+      {
+        "title": "Rapport d'évaluation",
+        "desc": "Établi par une société d'expertise agréée ; requis pour l'achat et pour la demande."
+      },
+      {
+        "title": "Traductions et notaire",
+        "desc": "Traductions assermentées et légalisation des passeports, actes et procurations."
+      },
+      {
+        "title": "Frais officiels",
+        "desc": "Frais de permis de séjour, de dossier et de passeport pour chaque membre de la famille."
+      },
+      {
+        "title": "Accompagnement juridique",
+        "desc": "Honoraires des avocats qui préparent et suivent le dossier de citoyenneté."
+      }
+    ],
+    "routesTitle": "Autres voies d'investissement",
+    "routesSubtitle": "L'immobilier est la voie la plus choisie, mais le programme accepte aussi ces investissements.",
+    "routes": [
+      {
+        "value": "500 000 $",
+        "title": "Dépôt bancaire",
+        "desc": "Placé dans une banque turque pendant au moins trois ans."
+      },
+      {
+        "value": "500 000 $",
+        "title": "Obligations d'État",
+        "desc": "Titres de dette publique turcs conservés au moins trois ans."
+      },
+      {
+        "value": "500 000 $",
+        "title": "Fonds d'investissement",
+        "desc": "Parts de fonds d'investissement immobilier ou de capital-risque, conservées au moins trois ans."
+      },
+      {
+        "value": "500 000 $",
+        "title": "Investissement en capital fixe",
+        "desc": "Un investissement dans une activité, validé par le ministère de l'Industrie et de la Technologie."
+      },
+      {
+        "value": "50 emplois",
+        "title": "Création d'emplois",
+        "desc": "L'emploi d'au moins 50 personnes, validé par le ministère du Travail."
+      }
+    ],
+    "routesNote": "HADARA est spécialisée dans la voie immobilière ; pour les autres, nous vous orientons vers des partenaires de confiance.",
+    "residenceEyebrow": "Une alternative",
+    "residenceTitle": "Permis de séjour par l'immobilier",
+    "residenceText": "Si la citoyenneté n'est pas votre objectif pour l'instant, l'achat d'un logement en Turquie donne aussi droit à un permis de séjour renouvelable.",
+    "residence": [
+      {
+        "title": "Dès 200 000 $ à Istanbul",
+        "desc": "Le bien doit valoir au moins 200 000 USD dans les grandes métropoles comme Istanbul, et 100 000 USD dans les autres provinces."
+      },
+      {
+        "title": "Renouvelable",
+        "desc": "Le permis est délivré pour une durée déterminée et peut être renouvelé tant que vous êtes propriétaire du bien."
+      },
+      {
+        "title": "Pour votre famille",
+        "desc": "Votre conjoint et vos enfants de moins de 18 ans peuvent également obtenir un permis de séjour."
+      },
+      {
+        "title": "Vérification de l'adresse",
+        "desc": "Certains quartiers sont fermés aux nouvelles inscriptions de résidence pour les étrangers : nous vérifions l'adresse avant l'achat."
+      }
+    ],
+    "residenceCta": "Se renseigner sur le permis de séjour",
+    "benefitsTitle": "Pourquoi la citoyenneté turque",
     "benefits": [
-      "Accès sans visa ou avec visa à l'arrivée dans plus de 110 pays",
-      "La citoyenneté s'étend au conjoint et aux enfants de moins de 18 ans",
-      "Aucune obligation de résidence avant ou après l'approbation",
-      "Accès à l'économie et au marché immobilier turcs en pleine croissance",
-      "La double nationalité est autorisée pour la plupart des nationalités"
+      "Accès sans visa ou avec visa à l'arrivée à plus de 110 pays",
+      "La citoyenneté pour votre conjoint et vos enfants de moins de 18 ans",
+      "Aucune obligation de résidence avant ou après l'obtention",
+      "La double nationalité est autorisée pour la plupart des nationalités",
+      "Le droit de vivre, travailler et étudier en Turquie, avec accès à la santé et à l'éducation publiques",
+      "L'accès au visa d'investisseur américain E-2, la Turquie étant signataire du traité",
+      "Une citoyenneté à vie, transmise à vos futurs enfants",
+      "Un actif réel à Istanbul, pouvant générer des revenus locatifs et prendre de la valeur"
     ],
+    "faqTitle": "Questions fréquentes",
+    "faqMore": "Voir toutes les questions fréquentes",
     "ctaTitle": "Prêt à explorer vos options ?",
     "ctaText": "Nos conseillers vous présenteront les projets éligibles et l'ensemble de la procédure de citoyenneté.",
-    "ctaButton": "Parler à un conseiller"
+    "ctaButton": "Parler à un conseiller",
+    "ctaSecondary": "Découvrir nos projets"
   },
   "faq": {
     "heroEyebrow": "Assistance",
@@ -506,8 +688,8 @@
     "phonePlaceholder": "+90 5xx xxx xx xx",
     "subjectLabel": "Objet",
     "subjectPlaceholder": "ex. disponibilité Lotus Koru 2",
-    "projectLabel": "Projets qui vous intéressent",
-    "projectHint": "Vous pouvez choisir plusieurs projets.",
+    "projectLabel": "Vos centres d'intérêt",
+    "projectHint": "Vous pouvez choisir plusieurs projets ou sujets.",
     "projectAdd": "Ajouter un autre projet",
     "projectChoose": "Choisir un projet",
     "projectRemove": "Retirer {name}",
@@ -515,6 +697,18 @@
     "projectCount": "{count} projets",
     "projectMessageMany": "Bonjour, les projets {names} m'intéressent et je souhaiterais plus d'informations sur les disponibilités, les prix et les modalités de paiement.",
     "projectGeneral": "Demande générale",
+    "topics": {
+      "citizenship": {
+        "label": "Citoyenneté turque",
+        "phrase": "la citoyenneté turque par l'investissement immobilier"
+      },
+      "residence": {
+        "label": "Permis de séjour immobilier",
+        "phrase": "le permis de séjour par l'achat d'un bien immobilier"
+      }
+    },
+    "topicMessage": "Bonjour, je souhaite obtenir plus d'informations sur {topics}.",
+    "topicMessageAlso": "Je souhaite également obtenir plus d'informations sur {topics}.",
     "projectEyebrow": "Votre demande concerne",
     "projectView": "Voir le projet",
     "projectMessage": "Bonjour, le projet {name} m'intéresse et je souhaiterais plus d'informations sur les disponibilités, les prix et les modalités de paiement.",

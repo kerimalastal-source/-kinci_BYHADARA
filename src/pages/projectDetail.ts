@@ -8,6 +8,7 @@ import { initStatCounters } from "../components/statCounter";
 import { initScrollReveal } from "../components/scrollReveal";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "../components/floatingButtons";
 import { favoriteButton } from "../components/favorites";
+import { renderProjectMap, initProjectMap } from "../components/projectMap";
 import { renderNotFound } from "./notFound";
 
 const PIN_ICON =
@@ -202,11 +203,11 @@ function renderAmenities(project: Project): string {
     </section>`;
 }
 
-function renderLocation(project: Project, nearby: ReturnType<typeof getProjectContent>["nearby"]): string {
-  if (!nearby?.length && !project.address) return "";
+function renderLocation(project: Project, name: string, nearby: ReturnType<typeof getProjectContent>["nearby"]): string {
   return `
     <section class="detail-block">
       <h2>${t("projectDetail.locationTitle")}</h2>
+      ${renderProjectMap(project, name)}
       ${project.address ? `<p class="detail-address">${PIN_ICON}<span dir="ltr">${project.address}</span></p>` : ""}
       ${
         nearby?.length
@@ -311,7 +312,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           ${renderResidences(project)}
           ${renderFloorPlan(project, content.floorPlan)}
           ${renderAmenities(project)}
-          ${renderLocation(project, content.nearby)}
+          ${renderLocation(project, content.name, content.nearby)}
 
           <section class="detail-block">
             <h2>${t("projectDetail.galleryTitle")}</h2>
@@ -407,6 +408,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
 
   initStatCounters(el);
   initScrollReveal(el);
+  initProjectMap(el);
   initVideo(el, content.name);
   initReadMore(el);
 

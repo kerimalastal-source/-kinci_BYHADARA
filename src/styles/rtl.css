@@ -20,6 +20,11 @@
   text-align: start;
 }
 
+/* The tile's icon follows its start-aligned text. */
+[dir="rtl"] .stat-tile__icon {
+  margin-inline: 0 auto;
+}
+
 /* Arabic script is cursive: letter-spacing pulls the joined letters apart, and
    the small uppercase-style labels used for Latin text are too small to read in
    Arabic. (The brand keeps its spacing: it is marked lang="en".) */

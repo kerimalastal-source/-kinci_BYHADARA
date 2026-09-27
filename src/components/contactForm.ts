@@ -16,6 +16,22 @@ const PLUS_ICON =
 const CLOSE_ICON =
   '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
 
+/** Non-project subjects a visitor can pick next to (or instead of) projects; `?interest=a,b` preselects them. */
+export const INTEREST_TOPICS = ["citizenship", "residence"] as const;
+type Topic = (typeof INTEREST_TOPICS)[number];
+
+const TOPIC_ICONS: Record<Topic, string> = {
+  citizenship:
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="2.5" width="15" height="19" rx="2"/><circle cx="12" cy="10" r="3.3"/><path d="M8.7 10h6.6M12 6.7c-1 .9-1.5 2-1.5 3.3s.5 2.4 1.5 3.3c1-.9 1.5-2 1.5-3.3s-.5-2.4-1.5-3.3zM8.5 17.5h7"/></svg>',
+  residence:
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 8.5V21h13V8.5"/><circle cx="10.5" cy="14" r="2.2"/><path d="M12.4 15.2 16 17.5M14.7 16.7l.9-1.4"/></svg>'
+};
+
+/** Topics from ?interest=a,b — unknown ones are dropped. */
+function parseTopics(value: string): Topic[] {
+  return INTEREST_TOPICS.filter((topic) => value.split(",").map((v) => v.trim()).includes(topic));
+}
+
 const projectName = (slug: string) => getProjectContent(slug).name;
 
 /** "A, B and C" in the page language (Intl.ListFormat where available). */
@@ -51,14 +67,34 @@ function renderProjectCard(slugs: string[]): string {
     ${single ? `<a class="inquiry-project__link" href="${link(`/projects/${slugs[0]}`)}">${t("contact.projectView")}</a>` : ""}`;
 }
 
-function projectMessage(slugs: string[]): string {
-  if (!slugs.length) return "";
-  if (slugs.length === 1) return t("contact.projectMessage", { name: projectName(slugs[0]) });
-  return t("contact.projectMessageMany", { names: joinNames(slugs.map(projectName)) });
+/** The suggested message for the chosen projects and topics ("" when nothing is chosen). */
+function projectMessage(slugs: string[], topics: Topic[] = []): string {
+  const lines: string[] = [];
+  if (slugs.length === 1) lines.push(t("contact.projectMessage", { name: projectName(slugs[0]) }));
+  else if (slugs.length) lines.push(t("contact.projectMessageMany", { names: joinNames(slugs.map(projectName)) }));
+  if (topics.length) {
+    const about = joinNames(topics.map((topic) => t(`contact.topics.${topic}.phrase`)));
+    lines.push(t(slugs.length ? "contact.topicMessageAlso" : "contact.topicMessage", { topics: about }));
+  }
+  return lines.join("\n");
 }
 
-function renderChips(slugs: string[]): string {
-  if (!slugs.length) return `<li class="project-chip project-chip--empty">${t("contact.projectGeneral")}</li>`;
+function renderTopics(topics: Topic[]): string {
+  return `
+        <div class="interest-topics" role="group" aria-labelledby="cf-projects-label">
+          ${INTEREST_TOPICS.map(
+            (topic) => `
+          <button type="button" class="interest-topic" data-topic="${topic}" aria-pressed="${topics.includes(topic)}">
+            <span class="interest-topic__icon">${TOPIC_ICONS[topic]}</span>
+            <span class="interest-topic__label">${t(`contact.topics.${topic}.label`)}</span>
+            <span class="interest-topic__check">${CHECK_ICON}</span>
+          </button>`
+          ).join("")}
+        </div>`;
+}
+
+function renderChips(slugs: string[], topics: Topic[] = []): string {
+  if (!slugs.length) return topics.length ? "" : `<li class="project-chip project-chip--empty">${t("contact.projectGeneral")}</li>`;
   return slugs
     .map((slug) => {
       const p = getProjectBySlug(slug)!;
@@ -78,13 +114,14 @@ function renderChips(slugs: string[]): string {
  * number of others can be added from a panel of project cards (sold-out ones are
  * left out unless already chosen).
  */
-function renderProjectPicker(selected: string[]): string {
+function renderProjectPicker(selected: string[], topics: Topic[]): string {
   const options = getSortedProjects().filter((p) => !p.soldOut || selected.includes(p.slug));
   return `
-      <div class="form-field project-picker" id="cf-projects" data-selected="${selected.join(",")}">
+      <div class="form-field project-picker" id="cf-projects" data-selected="${selected.join(",")}" data-topics="${topics.join(",")}">
         <p class="project-picker__label" id="cf-projects-label">${t("contact.projectLabel")}</p>
         <p class="project-picker__hint">${t("contact.projectHint")}</p>
-        <ul class="project-picker__chips" aria-labelledby="cf-projects-label">${renderChips(selected)}</ul>
+        ${renderTopics(topics)}
+        <ul class="project-picker__chips" aria-labelledby="cf-projects-label">${renderChips(selected, topics)}</ul>
         <button type="button" class="project-picker__add" aria-expanded="false" aria-controls="cf-projects-panel">
           ${PLUS_ICON}<span>${t(selected.length ? "contact.projectAdd" : "contact.projectChoose")}</span>
         </button>
@@ -109,11 +146,15 @@ function renderProjectPicker(selected: string[]): string {
       </div>`;
 }
 
-/** `projectSlugs` preselects the projects of interest (from /contact?project=<slug>[,<slug>…]). */
-export function renderContactForm(projectSlugs = ""): string {
+/**
+ * `projectSlugs` preselects the projects of interest (from /contact?project=<slug>[,<slug>…]),
+ * `interests` the other topics (from /contact?interest=citizenship,residence).
+ */
+export function renderContactForm(projectSlugs = "", interests = ""): string {
   // The project the visitor came from, plus everything they saved with the heart button.
   const saved = getFavorites().filter((slug) => !getProjectBySlug(slug)!.soldOut);
   const selected = [...new Set([...parseSlugs(projectSlugs), ...saved])];
+  const topics = parseTopics(interests);
   return `
     <form class="contact-form" id="contact-form" novalidate>
       <div class="inquiry-project" id="cf-project-card"${selected.length ? "" : " hidden"}>${renderProjectCard(selected)}</div>
@@ -126,21 +167,19 @@ export function renderContactForm(projectSlugs = ""): string {
         <p class="form-field__error" data-error-for="name"></p>
       </div>
 
-      <div class="form-row">
-        <div class="form-field">
-          <label for="cf-email">${t("contact.emailLabel")}</label>
-          <input dir="ltr" type="email" id="cf-email" name="email" placeholder="${t("contact.emailPlaceholder")}" autocomplete="email" />
-          <p class="form-field__error" data-error-for="email"></p>
-        </div>
-
-        <div class="form-field">
-          <label for="${PHONE_ID}-number">${t("contact.phoneLabel")}</label>
-          ${renderPhoneInput(PHONE_ID, "phone")}
-          <p class="form-field__error" data-error-for="phone"></p>
-        </div>
+      <div class="form-field">
+        <label for="cf-email">${t("contact.emailLabel")}</label>
+        <input dir="ltr" type="email" id="cf-email" name="email" placeholder="${t("contact.emailPlaceholder")}" autocomplete="email" />
+        <p class="form-field__error" data-error-for="email"></p>
       </div>
 
-${renderProjectPicker(selected)}
+      <div class="form-field">
+        <label for="${PHONE_ID}-number">${t("contact.phoneLabel")}</label>
+        ${renderPhoneInput(PHONE_ID, "phone")}
+        <p class="form-field__error" data-error-for="phone"></p>
+      </div>
+
+${renderProjectPicker(selected, topics)}
 
       <div class="form-field">
         <label for="cf-subject">${t("contact.subjectLabel")}</label>
@@ -149,7 +188,7 @@ ${renderProjectPicker(selected)}
 
       <div class="form-field">
         <label for="cf-message">${t("contact.messageLabel")}</label>
-        <textarea id="cf-message" name="message" rows="5" placeholder="${t("contact.messagePlaceholder")}">${projectMessage(selected)}</textarea>
+        <textarea id="cf-message" name="message" rows="5" placeholder="${t("contact.messagePlaceholder")}">${projectMessage(selected, topics)}</textarea>
       </div>
 
       <button type="submit" class="btn btn--primary" id="cf-submit">${t("contact.submitButton")}</button>
@@ -220,11 +259,16 @@ export function initContactForm(container: ParentNode): void {
   const projectCard = form.querySelector<HTMLElement>("#cf-project-card")!;
   const messageEl = form.querySelector<HTMLTextAreaElement>("#cf-message")!;
   const initial = parseSlugs(picker.dataset.selected ?? "");
+  const initialTopics = parseTopics(picker.dataset.topics ?? "");
   let selected = [...initial];
-  let suggested = projectMessage(selected);
+  let topics = [...initialTopics];
+  let suggested = projectMessage(selected, topics);
 
   const render = () => {
-    chips.innerHTML = renderChips(selected);
+    chips.innerHTML = renderChips(selected, topics);
+    picker.querySelectorAll<HTMLButtonElement>(".interest-topic").forEach((button) => {
+      button.setAttribute("aria-pressed", String(topics.includes(button.dataset.topic as Topic)));
+    });
     projectCard.innerHTML = renderProjectCard(selected);
     projectCard.hidden = !selected.length;
     addButton.querySelector("span")!.textContent = t(selected.length ? "contact.projectAdd" : "contact.projectChoose");
@@ -233,7 +277,7 @@ export function initContactForm(container: ParentNode): void {
     });
     // Swap the suggested message only while the visitor hasn't written their own.
     if (messageEl.value.trim() === "" || messageEl.value === suggested) {
-      suggested = projectMessage(selected);
+      suggested = projectMessage(selected, topics);
       messageEl.value = suggested;
     }
   };
@@ -244,6 +288,15 @@ export function initContactForm(container: ParentNode): void {
     addButton.hidden = open;
     if (open) panel.querySelector<HTMLButtonElement>(".project-option")?.focus({ preventScroll: true });
   };
+
+  picker.querySelector(".interest-topics")!.addEventListener("click", (e) => {
+    const button = (e.target as Element).closest<HTMLButtonElement>("[data-topic]");
+    if (!button) return;
+    const topic = button.dataset.topic as Topic;
+    // Kept in the fixed INTEREST_TOPICS order, whatever order they were picked in.
+    topics = INTEREST_TOPICS.filter((k) => (k === topic ? !topics.includes(k) : topics.includes(k)));
+    render();
+  });
 
   addButton.addEventListener("click", () => setPanel(true));
   picker.querySelector(".project-picker__done")!.addEventListener("click", () => {
@@ -283,9 +336,14 @@ export function initContactForm(container: ParentNode): void {
     const phone = getPhoneValue(form, PHONE_ID);
     // The team reads these emails, so projects are named in English whatever the page language.
     const englishNames = selected.map((slug) => String(lookup("en", `projectsData.${slug}.name`) ?? slug));
+    const englishTopics = topics.map((topic) => String(lookup("en", `contact.topics.${topic}.label`) ?? topic));
     const subject =
       String(data.get("subject") ?? "").trim() ||
-      (englishNames.length ? `Project Inquiry: ${englishNames.join(", ")}` : "Website Inquiry");
+      (englishNames.length
+        ? `Project Inquiry: ${englishNames.join(", ")}${englishTopics.length ? ` + ${englishTopics.join(", ")}` : ""}`
+        : englishTopics.length
+          ? englishTopics.join(" + ")
+          : "Website Inquiry");
     const message = String(data.get("message") ?? "");
 
     const body = [
@@ -296,6 +354,7 @@ export function initContactForm(container: ParentNode): void {
             ""
           ]
         : []),
+      ...(englishTopics.length ? [`Interests: ${englishTopics.join(", ")}`, ""] : []),
       `Name: ${name}`,
       `Email: ${email}`,
       `Phone: ${phone}`,
@@ -311,7 +370,8 @@ export function initContactForm(container: ParentNode): void {
     successBox.hidden = false;
     form.reset();
     selected = [...initial];
-    suggested = projectMessage(initial);
+    topics = [...initialTopics];
+    suggested = projectMessage(initial, initialTopics);
     render();
   });
 }

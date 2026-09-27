@@ -8,6 +8,7 @@ const MAP_EMBED_SRC =
   "https://www.openstreetmap.org/export/embed.html?bbox=28.6033%2C40.9633%2C28.6633%2C41.0033&layer=mapnik&marker=40.9833%2C28.6333";
 
 export function renderContact(el: HTMLElement): void {
+  const params = new URLSearchParams(window.location.search);
   el.innerHTML = `
     <section class="page-hero">
       <div class="container">
@@ -21,7 +22,7 @@ export function renderContact(el: HTMLElement): void {
       <div class="container contact-section__grid">
         <div class="contact-section__form-col">
           <h2>${t("contact.formTitle")}</h2>
-          ${renderContactForm(new URLSearchParams(window.location.search).get("project") ?? "")}
+          ${renderContactForm(params.get("project") ?? "", params.get("interest") ?? "")}
         </div>
 
         <div class="contact-section__info-col">
