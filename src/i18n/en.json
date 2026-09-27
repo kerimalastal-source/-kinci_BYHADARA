@@ -263,7 +263,10 @@
         "e5": "E-5 (D-100)",
         "e80": "TEM (E80)",
         "o7": "Northern Marmara Motorway"
-      }
+      },
+      "enlarge": "Enlarge map",
+      "close": "Close map",
+      "swipe": "Swipe to explore the map"
     },
     "developerLabel": "Developer",
     "priceLabel": "Price",

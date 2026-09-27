@@ -1499,6 +1499,7 @@
 /* Location & connectivity */
 /* ---------- Project location map (projectMap.ts) ---------- */
 .project-map {
+  position: relative;
   margin: 0 0 var(--space-md);
   overflow: hidden;
   border: 1px solid var(--color-border);
@@ -1542,6 +1543,236 @@
   stroke-width: 1.6;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
+}
+
+.project-map__canvas {
+  cursor: zoom-in;
+}
+
+.project-map__expand {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 12px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 38px;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 8px 20px -12px rgba(15, 43, 33, 0.55);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.project-map__expand:hover,
+.project-map__expand:focus-visible {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* ---------- Enlarged map (dialog) ---------- */
+body.map-open {
+  overflow: hidden;
+}
+
+body.map-open .floating-actions,
+body.map-open .back-to-top {
+  display: none;
+}
+
+.map-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(8, 26, 20, 0.72);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.map-viewer.is-open {
+  opacity: 1;
+}
+
+.map-viewer__panel {
+  display: flex;
+  flex-direction: column;
+  width: min(1240px, 100%);
+  max-height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
+  transform: scale(0.97);
+  transition: transform 200ms ease;
+}
+
+.map-viewer.is-open .map-viewer__panel {
+  transform: none;
+}
+
+.map-viewer__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  padding: 0.75rem 0.9rem;
+  padding-inline-start: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.map-viewer__title {
+  flex: 1;
+  min-width: 0;
+}
+
+.map-viewer__title h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+.map-viewer__title span {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.map-viewer__close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.map-viewer__close:hover,
+.map-viewer__close:focus-visible {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.map-viewer__body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.map-viewer__hint {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(15, 43, 33, 0.85);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #fff;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.map-viewer.can-pan .map-viewer__hint {
+  display: inline-flex;
+  animation: map-hint 1.6s ease-in-out 3;
+}
+
+@keyframes map-hint {
+  50% {
+    transform: translateX(calc(-50% + 8px));
+  }
+}
+
+.map-viewer__scroll {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(180deg, #e3ecea, #d9e5e3);
+  /* Scroll position is set in px from the left, whatever the page direction. */
+  direction: ltr;
+}
+
+.map-viewer .map-viewer__canvas {
+  flex: none;
+  aspect-ratio: 1000 / 534;
+  cursor: default;
+}
+
+.map-viewer .project-map__svg {
+  opacity: 1;
+}
+
+.map-viewer .project-map__legend {
+  border-top: 1px solid var(--color-border);
+}
+
+/* Portrait screens: full screen, the map as tall as the space and scrollable sideways. */
+.map-viewer--pan {
+  padding: 0;
+}
+
+.map-viewer--pan .map-viewer__panel {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+.map-viewer--pan .map-viewer__body {
+  flex: 1;
+}
+
+.map-viewer--pan .map-viewer__scroll {
+  flex: 1;
+  min-height: 0;
+  justify-content: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior: contain;
+}
+
+.map-viewer--pan .map-viewer__canvas {
+  height: 100%;
+}
+
+@media (max-width: 640px) {
+  .map-viewer__head {
+    padding-inline-start: 1rem;
+  }
+
+  .map-viewer__title h2 {
+    font-size: 1rem;
+  }
+
+  /* Icon only on phones: the title needs the room. */
+  .map-viewer__head .project-map__link span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-viewer,
+  .map-viewer__panel {
+    transition: none;
+  }
 }
 
 .project-map__road-casing,

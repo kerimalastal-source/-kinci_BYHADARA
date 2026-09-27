@@ -263,7 +263,10 @@
         "e5": "E-5 (D-100)",
         "e80": "TEM (E80)",
         "o7": "Autoroute du Nord de Marmara"
-      }
+      },
+      "enlarge": "Agrandir la carte",
+      "close": "Fermer la carte",
+      "swipe": "Faites glisser pour explorer la carte"
     },
     "developerLabel": "Promoteur",
     "priceLabel": "Prix",
