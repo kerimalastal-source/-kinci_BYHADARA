@@ -1,8 +1,67 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "redirects": [
+    {
+      "source": "/en",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/lotus-koru",
+      "destination": "/projects/lotus-koru-1",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/lotus-yasam",
+      "destination": "/projects/beylikduzu-living",
+      "permanent": true
+    },
+    {
+      "source": "/en/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/ar/projects/lotus-koru",
+      "destination": "/ar/projects/lotus-koru-1",
+      "permanent": true
+    },
+    {
+      "source": "/ar/projects/lotus-yasam",
+      "destination": "/ar/projects/beylikduzu-living",
+      "permanent": true
+    },
+    {
+      "source": "/tr",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/projects/lotus-koru",
+      "destination": "/projects/lotus-koru-1",
+      "permanent": true
+    },
+    {
+      "source": "/tr/projects/lotus-yasam",
+      "destination": "/projects/beylikduzu-living",
+      "permanent": true
+    },
+    {
+      "source": "/tr/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
   "git": {
-    "deploymentEnabled": { "claude/*": false }
+    "deploymentEnabled": {
+      "claude/*": false
+    }
   }
 }
