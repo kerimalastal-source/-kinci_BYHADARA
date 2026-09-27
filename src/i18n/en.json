@@ -92,7 +92,8 @@
     "quickLinks": "Quick Links",
     "getInTouch": "Get in Touch",
     "followUs": "Follow Us",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy"
   },
   "home": {
     "heroEyebrow": "Istanbul Real Estate Development",
@@ -1809,7 +1810,62 @@
     "worksTeaserCta": "View the full portfolio",
     "processTeaserCta": "See how we work"
   },
+  "privacy": {
+    "heroEyebrow": "Legal",
+    "heroTitle": "Privacy Policy",
+    "heroSubtitle": "How HADARA Real Estate handles information on this website.",
+    "updated": "Last updated: 27 September 2026",
+    "sections": [
+      {
+        "title": "Who we are",
+        "paragraphs": [
+          "This website is operated by HADARA Real Estate, Adnan Kahveci Mah., Beylikdüzü, Istanbul 34000, Türkiye. For any privacy question, write to info@byhadara.com."
+        ]
+      },
+      {
+        "title": "Anonymous visit statistics",
+        "paragraphs": [
+          "To understand how many people visit the site and which projects interest them, our server records each page view anonymously. For each page we keep only:"
+        ],
+        "items": [
+          "the page address, without any query parameters;",
+          "the site language (English, Arabic, French or Russian);",
+          "where the visit came from — only the name of the referring website (for example google.com) or the previous page on our site, never the full link;",
+          "your approximate country and city, estimated by our hosting provider (Vercel) from your connection;",
+          "a random session number, and the date and time."
+        ],
+        "after": [
+          "The session number is created by your browser and kept in its session storage (sessionStorage), only for the current tab. It is not a cookie, it is not linked to your name or device, and your browser deletes it when you close the tab.",
+          "We do not store your IP address or any personal information in these statistics, and we do not use them to identify anyone. Seller account and administration pages are not recorded.",
+          "Visit records are deleted automatically after 30 days. When a new visit starts, our team receives an internal notification (via Telegram) with the same anonymous details: approximate location, page, language and source."
+        ]
+      },
+      {
+        "title": "Information you send us",
+        "paragraphs": [
+          "The contact, property request and consultation forms do not send anything to our servers: they open your own email app with a prepared message, and we receive only what you choose to send. The same applies when you contact us on WhatsApp or by phone.",
+          "If you create a seller account in the resale portal, we store the details you provide (name, email address, phone number, country of residence) and your listings and photos, so that we can review and publish them. Messages sent about a listing are stored so that we can reply to them."
+        ]
+      },
+      {
+        "title": "Service providers",
+        "paragraphs": [
+          "Our website is hosted by Vercel, and seller accounts, listings and visit statistics are stored with Supabase. Internal notifications are delivered through Telegram. If we use advertising or analytics tools from Meta or Google, they process data — and may use cookies — under their own privacy policies."
+        ]
+      },
+      {
+        "title": "Your rights",
+        "paragraphs": [
+          "You can ask us what information we hold about you, or ask us to correct or delete it, by writing to info@byhadara.com. Because the visit statistics contain nothing that identifies you, they cannot be linked to a specific person."
+        ]
+      }
+    ]
+  },
   "seo": {
+    "privacy": {
+      "title": "Privacy Policy",
+      "description": "How HADARA Real Estate handles information on its website: anonymous visit statistics without cookies or IP addresses, deleted after 30 days, and the details you send us."
+    },
     "videoTour": {
       "title": "Private Video Tours of Our Istanbul Projects",
       "description": "Book a free, live video tour with a HADARA advisor: the show apartment, the scale model and the project on site — in Arabic, English or Turkish, every day from 9:00 to 19:00."

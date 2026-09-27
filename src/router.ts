@@ -5,6 +5,7 @@ import { renderAbout } from "./pages/about";
 import { renderCitizenship } from "./pages/citizenship";
 import { renderConsultancy } from "./pages/consultancy";
 import { renderFaq } from "./pages/faq";
+import { renderPrivacy } from "./pages/privacy";
 import { renderBlog } from "./pages/blog";
 import { renderBlogDetail } from "./pages/blogDetail";
 import { renderPropertyRequest } from "./pages/propertyRequest";
@@ -28,6 +29,7 @@ import { applyMeta } from "./seo/head";
 import { onAuthChange } from "./auth/session";
 import { closeSearch } from "./components/search";
 import { trackPageView } from "./utils/tracking";
+import { trackVisit } from "./utils/visitorTracker";
 
 export type { Route };
 
@@ -97,6 +99,9 @@ function renderRoute(route: Route, main: HTMLElement): void {
       break;
     case "faq":
       renderFaq(main);
+      break;
+    case "privacy":
+      renderPrivacy(main);
       break;
     case "blog":
       renderBlog(main);
@@ -176,6 +181,7 @@ export function startRouter(root: HTMLElement): void {
       if (target) target.scrollIntoView({ behavior: "instant" as ScrollBehavior });
       else window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
       trackPageView(route, locale);
+      trackVisit(route, locale);
     }
     renderedPath = path;
   }

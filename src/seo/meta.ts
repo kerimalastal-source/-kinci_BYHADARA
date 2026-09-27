@@ -48,6 +48,7 @@ const PAGE_KEYS: Partial<Record<Route["name"], string>> = {
   citizenship: "citizenship",
   consultancy: "consultancy",
   faq: "faq",
+  privacy: "privacy",
   blog: "blog",
   "property-request": "propertyRequest",
   "video-tour": "videoTour",
@@ -90,7 +91,8 @@ export function indexableRoutes(): Route[] {
     { name: "property-request" },
     { name: "video-tour" },
     { name: "contact" },
-    { name: "resale" }
+    { name: "resale" },
+    { name: "privacy" }
   ];
 }
 

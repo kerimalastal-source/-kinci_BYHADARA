@@ -731,6 +731,35 @@
   color: inherit;
 }
 
+.site-footer__legal {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-footer__legal:hover {
+  color: var(--color-accent-light);
+}
+
+.site-footer__sep {
+  margin-inline: 0.35rem;
+}
+
+.site-footer__legal {
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .site-footer__sep {
+    display: none;
+  }
+
+  .site-footer__legal {
+    display: inline-block;
+    margin-top: 0.35rem;
+  }
+}
+
 @media (max-width: 800px) {
   .site-footer__inner {
     grid-template-columns: 1fr;

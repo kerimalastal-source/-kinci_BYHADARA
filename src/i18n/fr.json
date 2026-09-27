@@ -92,7 +92,8 @@
     "quickLinks": "Liens rapides",
     "getInTouch": "Nous contacter",
     "followUs": "Suivez-nous",
-    "rights": "Tous droits réservés."
+    "rights": "Tous droits réservés.",
+    "privacy": "Politique de confidentialité"
   },
   "home": {
     "heroEyebrow": "Promotion immobilière à Istanbul",
@@ -1809,7 +1810,62 @@
     "worksTeaserCta": "Voir tout le portfolio",
     "processTeaserCta": "Découvrir notre méthode"
   },
+  "privacy": {
+    "heroEyebrow": "Informations légales",
+    "heroTitle": "Politique de confidentialité",
+    "heroSubtitle": "Comment HADARA Real Estate traite les informations sur ce site.",
+    "updated": "Dernière mise à jour : 27 septembre 2026",
+    "sections": [
+      {
+        "title": "Qui sommes-nous",
+        "paragraphs": [
+          "Ce site est exploité par HADARA Real Estate, Adnan Kahveci Mah., Beylikdüzü, Istanbul 34000, Türkiye. Pour toute question relative à la confidentialité, écrivez-nous à info@byhadara.com."
+        ]
+      },
+      {
+        "title": "Statistiques de visite anonymes",
+        "paragraphs": [
+          "Pour savoir combien de personnes visitent le site et quels projets les intéressent, notre serveur enregistre chaque page consultée de manière anonyme. Pour chaque page, nous conservons uniquement :"
+        ],
+        "items": [
+          "l'adresse de la page, sans paramètres de requête ;",
+          "la langue du site (anglais, arabe, français ou russe) ;",
+          "la provenance de la visite — uniquement le nom du site référent (par exemple google.com) ou la page précédente de notre site, jamais le lien complet ;",
+          "votre pays et votre ville approximatifs, estimés par notre hébergeur (Vercel) à partir de votre connexion ;",
+          "un numéro de session aléatoire, ainsi que la date et l'heure."
+        ],
+        "after": [
+          "Le numéro de session est créé par votre navigateur et conservé dans son stockage de session (sessionStorage), uniquement pour l'onglet en cours. Ce n'est pas un cookie, il n'est lié ni à votre nom ni à votre appareil, et votre navigateur le supprime à la fermeture de l'onglet.",
+          "Nous ne conservons ni votre adresse IP ni aucune donnée personnelle dans ces statistiques, et nous ne les utilisons pas pour identifier qui que ce soit. Les pages des comptes vendeurs et d'administration ne sont pas enregistrées.",
+          "Les enregistrements de visite sont supprimés automatiquement après 30 jours. Lorsqu'une nouvelle visite commence, notre équipe reçoit une notification interne (via Telegram) contenant les mêmes informations anonymes : localisation approximative, page, langue et provenance."
+        ]
+      },
+      {
+        "title": "Informations que vous nous transmettez",
+        "paragraphs": [
+          "Les formulaires de contact, de demande de bien et de demande de consultation n'envoient rien à nos serveurs : ils ouvrent votre propre application de messagerie avec un message préparé, et nous ne recevons que ce que vous choisissez d'envoyer. Il en va de même lorsque vous nous contactez par WhatsApp ou par téléphone.",
+          "Si vous créez un compte vendeur sur le portail de revente, nous conservons les informations que vous fournissez (nom, adresse e-mail, numéro de téléphone, pays de résidence) ainsi que vos annonces et leurs photos, afin de pouvoir les examiner et les publier. Les messages envoyés au sujet d'une annonce sont conservés afin que nous puissions y répondre."
+        ]
+      },
+      {
+        "title": "Prestataires",
+        "paragraphs": [
+          "Notre site est hébergé par Vercel ; les comptes vendeurs, les annonces et les statistiques de visite sont stockés chez Supabase, et les notifications internes sont transmises via Telegram. Si nous utilisons des outils publicitaires ou d'analyse de Meta ou de Google, ceux-ci traitent des données — et peuvent utiliser des cookies — conformément à leurs propres politiques de confidentialité."
+        ]
+      },
+      {
+        "title": "Vos droits",
+        "paragraphs": [
+          "Vous pouvez nous demander quelles informations nous détenons à votre sujet, ou demander leur rectification ou leur suppression, en écrivant à info@byhadara.com. Comme les statistiques de visite ne contiennent rien qui vous identifie, elles ne peuvent pas être rattachées à une personne précise."
+        ]
+      }
+    ]
+  },
   "seo": {
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "description": "Comment HADARA Real Estate traite les informations sur son site : statistiques de visite anonymes, sans cookies ni adresse IP, supprimées après 30 jours, et les données que vous nous transmettez."
+    },
     "videoTour": {
       "title": "Visites privées en vidéo de nos projets à Istanbul",
       "description": "Réservez une visite vidéo gratuite et en direct avec un conseiller HADARA : appartement témoin, maquette et projet sur place — en arabe, anglais ou turc, tous les jours de 9 h à 19 h."
