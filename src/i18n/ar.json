@@ -210,7 +210,9 @@
     "beylikduzu": "بيليكدوزو",
     "buyukcekmece": "بيوكجكمجة",
     "avcilar": "أفجلار",
-    "sisli": "شيشلي"
+    "sisli": "شيشلي",
+    "zeytinburnu": "زيتون بورنو",
+    "esenyurt": "إسنيورت"
   },
   "projectDetail": {
     "overviewTitle": "نظرة عامة على المشروع",
@@ -1222,6 +1224,7 @@
     "jump": {
       "services": "الخدمات",
       "types": "أنواع المشاريع",
+      "works": "أعمالنا",
       "process": "منهجية العمل",
       "faq": "الأسئلة الشائعة",
       "request": "اطلب استشارة"
@@ -1437,7 +1440,17 @@
     "worksEmptyTitle": "ملف الأعمال متاح عند الطلب",
     "worksEmptyText": "أخبرنا عن مشروعك، وسنشاركك الأعمال المعمارية والداخلية الأقرب إليه.",
     "worksCta": "اطلب ملف أعمالنا",
-    "worksData": {},
+    "worksSubtitle": "مشاريع مختارة من تصميم مكتبنا المعماري Kuba Mimarlık في إسطنبول.",
+    "worksDesignBy": "التصميم: {office}",
+    "worksVisit": "زيارة موقع Kuba Mimarlık",
+    "worksOpenGallery": "عرض صور {name}",
+    "worksImageAlt": "{name}، تصوّر معماري من Kuba Mimarlık ({n}/{total})",
+    "workCategories": {
+      "residentialDevelopment": "مشروع سكني متكامل",
+      "residentialComplex": "مجمّع سكني",
+      "commercialComplex": "مجمّع تجاري",
+      "industrialCommercial": "مبنى صناعي وتجاري"
+    },
     "faqEyebrow": "الأسئلة الشائعة",
     "faqTitle": "أسئلة متكرّرة",
     "faq": [

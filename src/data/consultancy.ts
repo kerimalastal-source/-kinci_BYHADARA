@@ -41,18 +41,94 @@ export const projectTypeImage = (key: ProjectTypeKey): ResponsiveImage => ({
   height: 600
 });
 
+/** Architecture office whose projects make up the portfolio (a HADARA company). */
+export const WORKS_OFFICE = { name: "Kuba Mimarlık", url: "https://www.kubamimarlik.net/" };
+
+export type WorkCategory = "residentialDevelopment" | "residentialComplex" | "commercialComplex" | "industrialCommercial";
+
 /**
- * Selected architectural / interior works shown in the portfolio section.
- * Empty until real HADARA work is supplied: the section then shows a "portfolio on request" note.
- * Add an entry per project, put its images under public/images/consultancy/works/<slug>-<width>.webp,
- * and its text under `consultancy.worksData.<slug>` ({ title, category, location }) in all four dictionaries.
+ * Selected works, designed by Kuba Mimarlık (figures and renders from kubamimarlik.net).
+ * Images: public/images/consultancy/works/<slug>/<n>-<width>.webp, the first one is the cover.
+ * The category label is `consultancy.workCategories.<category>`; the district needs a `places.*` key.
+ * With an empty list the section falls back to a "portfolio on request" note.
  */
 export interface ConsultancyWork {
   slug: string;
-  image: ResponsiveImage;
+  /** Project name as marketed (not translated). */
+  title: string;
+  category: WorkCategory;
+  district: string;
+  city: string;
+  year: string;
+  area: string;
+  images: ResponsiveImage[];
 }
 
-export const consultancyWorks: ConsultancyWork[] = [];
+const work = (slug: string, sizes: [number, number][]): ResponsiveImage[] =>
+  sizes.map(([width, height], i) => ({ base: `${DIR}/works/${slug}/${i + 1}`, widths: [640, 1600], width, height }));
+
+export const consultancyWorks: ConsultancyWork[] = [
+  {
+    slug: "alya-konaklari",
+    title: "Alya Konakları",
+    category: "residentialDevelopment",
+    district: "Zeytinburnu",
+    city: "Istanbul",
+    year: "2023",
+    area: "85,000 m²",
+    images: work("alya-konaklari", [[1600, 900], [1600, 900], [1600, 900], [1600, 900], [1600, 900]])
+  },
+  {
+    slug: "memorial",
+    title: "Memorial",
+    category: "commercialComplex",
+    district: "Esenyurt",
+    city: "Istanbul",
+    year: "2023",
+    area: "45,000 m²",
+    images: work("memorial", [[1600, 900], [1600, 900], [1600, 1600], [1600, 1600], [1600, 1229]])
+  },
+  {
+    slug: "kirlangic-evleri",
+    title: "Beylikdüzü Kırlangıç Evleri",
+    category: "residentialDevelopment",
+    district: "Beylikdüzü",
+    city: "Istanbul",
+    year: "2023",
+    area: "65,000 m²",
+    images: work("kirlangic-evleri", [[1600, 890], [1600, 1454], [1600, 1454], [1600, 900]])
+  },
+  {
+    slug: "akca-grande",
+    title: "Akça Grande",
+    category: "residentialComplex",
+    district: "Büyükçekmece",
+    city: "Istanbul",
+    year: "2022",
+    area: "25,000 m²",
+    images: work("akca-grande", [[1600, 1143], [1600, 1067], [1600, 1333], [1600, 2000]])
+  },
+  {
+    slug: "aktim-3",
+    title: "Aktim 3",
+    category: "industrialCommercial",
+    district: "Avcılar",
+    city: "Istanbul",
+    year: "2021",
+    area: "65,000 m²",
+    images: work("aktim-3", [[1600, 800], [1600, 900], [1600, 800], [1600, 800]])
+  },
+  {
+    slug: "dora-park-7",
+    title: "Dora Park 7",
+    category: "residentialDevelopment",
+    district: "Beylikdüzü",
+    city: "Istanbul",
+    year: "2021",
+    area: "25,000 m²",
+    images: work("dora-park-7", [[1600, 1135], [1600, 923], [1600, 800], [1600, 808]])
+  }
+];
 
 export function srcset(img: ResponsiveImage): string {
   return img.widths.map((w) => `${img.base}-${w}.webp ${w}w`).join(", ");

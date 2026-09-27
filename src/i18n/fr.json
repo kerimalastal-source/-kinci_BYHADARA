@@ -210,7 +210,9 @@
     "beylikduzu": "Beylikdüzü",
     "buyukcekmece": "Büyükçekmece",
     "avcilar": "Avcılar",
-    "sisli": "Şişli"
+    "sisli": "Şişli",
+    "zeytinburnu": "Zeytinburnu",
+    "esenyurt": "Esenyurt"
   },
   "projectDetail": {
     "overviewTitle": "Aperçu du projet",
@@ -1222,6 +1224,7 @@
     "jump": {
       "services": "Services",
       "types": "Types de projets",
+      "works": "Portfolio",
       "process": "Méthode",
       "faq": "FAQ",
       "request": "Demander une consultation"
@@ -1437,7 +1440,17 @@
     "worksEmptyTitle": "Portfolio disponible sur demande",
     "worksEmptyText": "Présentez-nous votre projet et nous partagerons les réalisations architecturales et intérieures les plus proches de vos besoins.",
     "worksCta": "Demander notre portfolio",
-    "worksData": {},
+    "worksSubtitle": "Une sélection de projets conçus par Kuba Mimarlık, notre bureau d'architecture à Istanbul.",
+    "worksDesignBy": "Conception : {office}",
+    "worksVisit": "Visiter Kuba Mimarlık",
+    "worksOpenGallery": "Voir les images de {name}",
+    "worksImageAlt": "{name}, rendu architectural de Kuba Mimarlık ({n}/{total})",
+    "workCategories": {
+      "residentialDevelopment": "Ensemble résidentiel",
+      "residentialComplex": "Résidence",
+      "commercialComplex": "Complexe commercial",
+      "industrialCommercial": "Bâtiment industriel et commercial"
+    },
     "faqEyebrow": "FAQ",
     "faqTitle": "Questions fréquentes",
     "faq": [

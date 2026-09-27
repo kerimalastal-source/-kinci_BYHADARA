@@ -210,7 +210,9 @@
     "beylikduzu": "Бейликдюзю",
     "buyukcekmece": "Бююкчекмедже",
     "avcilar": "Авджылар",
-    "sisli": "Шишли"
+    "sisli": "Шишли",
+    "zeytinburnu": "Зейтинбурну",
+    "esenyurt": "Эсеньюрт"
   },
   "projectDetail": {
     "overviewTitle": "Обзор проекта",
@@ -1222,6 +1224,7 @@
     "jump": {
       "services": "Услуги",
       "types": "Типы проектов",
+      "works": "Портфолио",
       "process": "Этапы работы",
       "faq": "Вопросы",
       "request": "Запросить консультацию"
@@ -1437,7 +1440,17 @@
     "worksEmptyTitle": "Портфолио — по запросу",
     "worksEmptyText": "Расскажите о своём проекте, и мы покажем архитектурные и интерьерные работы, наиболее близкие к вашей задаче.",
     "worksCta": "Запросить портфолио",
-    "worksData": {},
+    "worksSubtitle": "Избранные проекты, созданные нашим архитектурным бюро Kuba Mimarlık в Стамбуле.",
+    "worksDesignBy": "Проект: {office}",
+    "worksVisit": "Сайт Kuba Mimarlık",
+    "worksOpenGallery": "Смотреть изображения: {name}",
+    "worksImageAlt": "{name}, архитектурная визуализация Kuba Mimarlık ({n}/{total})",
+    "workCategories": {
+      "residentialDevelopment": "Жилой квартал",
+      "residentialComplex": "Жилой комплекс",
+      "commercialComplex": "Коммерческий комплекс",
+      "industrialCommercial": "Промышленно-коммерческое здание"
+    },
     "faqEyebrow": "Вопросы",
     "faqTitle": "Частые вопросы",
     "faq": [

@@ -1,15 +1,18 @@
-import { t, tRaw, link } from "../i18n";
+import { t, tRaw, link, placeLine } from "../i18n";
 import {
   HERO_IMAGE,
   STUDIO_IMAGE,
   SERVICE_KEYS,
   PROJECT_TYPE_KEYS,
   consultancyWorks,
+  WORKS_OFFICE,
   projectTypeImage,
   srcset,
   fallbackSrc,
-  type ResponsiveImage
+  type ResponsiveImage,
+  type ConsultancyWork
 } from "../data/consultancy";
+import { openLightbox } from "../components/lightbox";
 import { initScrollReveal } from "../components/scrollReveal";
 import { renderConsultancyForm, initConsultancyForm, preselectService } from "../components/consultancyForm";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "../components/floatingButtons";
@@ -106,6 +109,12 @@ function renderNetwork(): string {
     </svg>`;
 }
 
+const GALLERY_ICON = icon('<rect x="3" y="5" width="15" height="13" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v10"/><path d="m3 15 4-4 3 3 3-3 5 5"/>', 16);
+const EXTERNAL_ICON = icon('<path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>', 16);
+
+const workImageAlt = (work: ConsultancyWork, n: number) =>
+  t("consultancy.worksImageAlt", { name: work.title, n, total: work.images.length });
+
 function renderWorks(): string {
   if (!consultancyWorks.length) {
     return `
@@ -119,22 +128,40 @@ function renderWorks(): string {
       </div>`;
   }
   return `
-    <div class="consult-works__grid">
+    <ul class="consult-works__grid">
       ${consultancyWorks
-        .map((w, i) => {
-          const text = tRaw<{ title: string; category: string; location: string }>(`consultancy.worksData.${w.slug}`);
-          return `
-        <figure class="consult-work" ${reveal(i)}>
-          ${picture(w.image, text.title, "(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 400px")}
-          <figcaption>
-            <span class="consult-work__category">${text.category}</span>
-            <strong>${text.title}</strong>
-            <span class="consult-work__location">${text.location}</span>
-          </figcaption>
-        </figure>`;
-        })
+        .map(
+          (w, i) => `
+        <li class="consult-work" ${reveal(i)}>
+          <button type="button" class="consult-work__media" data-work="${i}" aria-label="${t("consultancy.worksOpenGallery", { name: w.title })}">
+            ${picture(w.images[0], workImageAlt(w, 1), "(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 400px")}
+            <span class="consult-work__count" dir="ltr">${GALLERY_ICON}${w.images.length}</span>
+          </button>
+          <div class="consult-work__body">
+            <p class="consult-work__category">${t(`consultancy.workCategories.${w.category}`)}</p>
+            <h3 class="consult-work__title" translate="no">${w.title}</h3>
+            <p class="consult-work__place">${placeLine(w.district, w.city)}</p>
+            <p class="consult-work__meta"><span dir="ltr">${w.year}</span><span aria-hidden="true">·</span><span dir="ltr">${w.area}</span></p>
+            <p class="consult-work__credit">${t("consultancy.worksDesignBy", { office: `<span translate="no">${WORKS_OFFICE.name}</span>` })}</p>
+          </div>
+        </li>`
+        )
         .join("")}
-    </div>`;
+    </ul>`;
+}
+
+/** Each work's cover opens its full image set in the site's lightbox. */
+function initWorksGallery(root: HTMLElement): void {
+  root.querySelectorAll<HTMLButtonElement>("[data-work]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const work = consultancyWorks[Number(btn.dataset.work)];
+      if (!work) return;
+      openLightbox(
+        work.images.map((img, i) => ({ src: `${img.base}-${img.widths[img.widths.length - 1]}.webp`, alt: workImageAlt(work, i + 1) })),
+        0
+      );
+    });
+  });
 }
 
 export function renderConsultancy(el: HTMLElement): void {
@@ -167,6 +194,7 @@ export function renderConsultancy(el: HTMLElement): void {
       <div class="container consult-jump__inner">
         <a href="#consult-services">${t("consultancy.jump.services")}</a>
         <a href="#consult-types">${t("consultancy.jump.types")}</a>
+        ${consultancyWorks.length ? `<a href="#consult-works">${t("consultancy.jump.works")}</a>` : ""}
         <a href="#consult-process">${t("consultancy.jump.process")}</a>
         <a href="#consult-faq">${t("consultancy.jump.faq")}</a>
         <a class="consult-jump__cta" href="#${FORM_ID}">${t("consultancy.jump.request")}</a>
@@ -297,10 +325,20 @@ export function renderConsultancy(el: HTMLElement): void {
       </div>
     </section>
 
-    <section class="section consult-works">
+    <section class="section consult-works" id="consult-works">
       <div class="container">
-        <p class="eyebrow">${t("consultancy.worksEyebrow")}</p>
-        <h2 class="section-title">${t("consultancy.worksTitle")}</h2>
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">${t("consultancy.worksEyebrow")}</p>
+            <h2 class="section-title">${t("consultancy.worksTitle")}</h2>
+            ${consultancyWorks.length ? `<p class="section-subtitle">${t("consultancy.worksSubtitle")}</p>` : ""}
+          </div>
+          ${
+            consultancyWorks.length
+              ? `<a class="btn btn--outline consult-works__visit" href="${WORKS_OFFICE.url}" target="_blank" rel="noopener">${t("consultancy.worksVisit")} ${EXTERNAL_ICON}</a>`
+              : ""
+          }
+        </div>
         ${renderWorks()}
       </div>
     </section>
@@ -350,6 +388,7 @@ export function renderConsultancy(el: HTMLElement): void {
   `;
 
   initConsultancyForm(el);
+  initWorksGallery(el);
   el.querySelectorAll<HTMLAnchorElement>("[data-service]").forEach((a) =>
     a.addEventListener("click", () => preselectService(el, a.dataset.service!))
   );
