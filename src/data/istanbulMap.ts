@@ -110,11 +110,13 @@ export const BRIDGES: [[number, number], [number, number]][] = [
   [[560.5, 261.8], [580.2, 261.8]], // yss
 ];
 
-/** Points of interest; the label is `projectDetail.map.<key>`. */
+/** Points of interest, most important first (labels are placed in this order); the label is `projectDetail.map.<key>`. */
 export const LANDMARKS: { key: string; kind: "airport" | "mall" | "landmark"; x: number; y: number }[] = [
   { key: "istAirport", kind: "airport", x: 395.4, y: 213.8 },
   { key: "sawAirport", kind: "airport", x: 669.2, y: 459.1 },
   { key: "mallOfIstanbul", kind: "mall", x: 423.5, y: 351.7 },
+  { key: "marmaraPark", kind: "mall", x: 348.8, y: 392.4 },
+  { key: "florya", kind: "landmark", x: 411.7, y: 408.7 },
   { key: "taksim", kind: "landmark", x: 509.9, y: 369.0 },
   { key: "sultanahmet", kind: "landmark", x: 507.6, y: 387.5 },
 ];

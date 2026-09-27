@@ -1639,9 +1639,9 @@
   color: transparent;
 }
 
+/* Placed by projectMap.ts (left/top in px from the point), clear of the pin and other labels. */
 .project-map__poi-label {
   position: absolute;
-  top: -9px;
   height: 18px;
   padding: 0 0.35rem;
   border-radius: 4px;
@@ -1651,44 +1651,6 @@
   line-height: 18px;
   white-space: nowrap;
   color: var(--color-ink);
-}
-
-.project-map__poi-label--right {
-  left: 13px;
-}
-
-.project-map__poi-label--left {
-  right: 13px;
-}
-
-.project-map__poi-label--below,
-.project-map__poi-label--above {
-  left: 0;
-  transform: translateX(-50%);
-}
-
-.project-map__poi-label--below {
-  top: 14px;
-}
-
-.project-map__poi-label--above {
-  top: -32px;
-}
-
-.project-map__poi--landmark .project-map__poi-label--right {
-  left: 9px;
-}
-
-.project-map__poi--landmark .project-map__poi-label--left {
-  right: 9px;
-}
-
-.project-map__poi--landmark .project-map__poi-label--below {
-  top: 10px;
-}
-
-.project-map__poi--landmark .project-map__poi-label--above {
-  top: -28px;
 }
 
 .project-map__strait {

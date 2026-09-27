@@ -72,6 +72,8 @@ LANDMARKS = [
   ("istAirport", "airport", 41.2753, 28.7519),
   ("sawAirport", "airport", 40.8986, 29.3092),
   ("mallOfIstanbul", "mall", 41.0636, 28.8090),
+  ("marmaraPark", "mall", 41.0010, 28.6570),
+  ("florya", "landmark", 40.9760, 28.7850),
   ("taksim", "landmark", 41.0370, 28.9850),
   ("sultanahmet", "landmark", 41.0086, 28.9802),
 ]
@@ -92,7 +94,7 @@ ts += ["};", "", "/** The three Bosphorus bridges (15 July, Fatih Sultan Mehmet,
        "export const BRIDGES: [[number, number], [number, number]][] = ["]
 for k, (a, b) in BRIDGES.items():
     ts.append(f"  [[{P(*a)[0]}, {P(*a)[1]}], [{P(*b)[0]}, {P(*b)[1]}]], // {k}")
-ts += ["];", "", "/** Points of interest; the label is `projectDetail.map.<key>`. */",
+ts += ["];", "", "/** Points of interest, most important first (labels are placed in this order); the label is `projectDetail.map.<key>`. */",
        'export const LANDMARKS: { key: string; kind: "airport" | "mall" | "landmark"; x: number; y: number }[] = [']
 for k, kind, la, lo in LANDMARKS:
     x, y = P(la, lo); ts.append(f'  {{ key: "{k}", kind: "{kind}", x: {x}, y: {y} }},')

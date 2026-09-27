@@ -70,7 +70,8 @@ interface Box {
   top: number;
   bottom: number;
 }
-const overlaps = (a: Box, b: Box) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+/** Boxes may touch by up to 1px: labels are padded, so a hair of overlap is invisible. */
+const overlaps = (a: Box, b: Box) => a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1;
 
 export function initProjectMap(root: ParentNode): void {
   const figure = root.querySelector<HTMLElement>(".project-map");
@@ -94,26 +95,73 @@ export function initProjectMap(root: ParentNode): void {
     const scale = canvas.clientWidth / width;
     const px = (x: number, y: number) => ({ x: (x - x0) * scale, y: y * scale });
     const pin = px(center[0], center[1]);
-    const charWidth = scale < 0.7 ? 6 : 6.6;
-    const labelWidth = (text: string, perChar: number) => text.length * perChar + 10;
-    const pinLabel = (labelWidth(placeName(district), 7.4) + 14) / 2;
+    // Label widths are measured with the real font (a hidden label in the canvas).
+    const measure = (className: string, text: string) => {
+      const probe = document.createElement("span");
+      probe.className = className;
+      probe.style.visibility = "hidden";
+      probe.textContent = text;
+      canvas.appendChild(probe);
+      const width = probe.offsetWidth;
+      probe.remove();
+      return width;
+    };
+    const pinLabel = measure("project-map__label", placeName(district)) / 2 + 4;
     // The pin's marker and pulse, and its name chip above it.
     const taken: Box[] = [
       { left: pin.x - 20, right: pin.x + 20, top: pin.y - 40, bottom: pin.y + 14 },
       { left: pin.x - pinLabel, right: pin.x + pinLabel, top: pin.y - 74, bottom: pin.y - 40 }
     ];
     const frame = { width: canvas.clientWidth, height: MAP_HEIGHT * scale };
-    const fits = (b: Box) => b.left >= 4 && b.right <= frame.width - 4 && b.top >= 4 && b.bottom <= frame.height - 4 && !taken.some((o) => overlaps(o, b));
+    /** `from` skips the first boxes: landmark icons may sit under the pin (Marmara Park is in Beylikdüzü). */
+    const fits = (b: Box, from = 0) =>
+      b.left >= 4 && b.right <= frame.width - 4 && b.top >= 4 && b.bottom <= frame.height - 4 && !taken.slice(from).some((o) => overlaps(o, b));
 
-    // Landmark icons first (they matter most), then road shields, then the landmark names around both.
+    // Landmark icons first, then their names (in the data's order of importance), then road shields.
     const spots = map.LANDMARKS.filter((l) => inView(l.x)).flatMap((l) => {
       const p = px(l.x, l.y);
       const r = l.kind === "landmark" ? 7 : 11;
       const dot: Box = { left: p.x - r, right: p.x + r, top: p.y - r, bottom: p.y + r };
-      if (!fits(dot)) return [];
+      if (!fits(dot, 2)) return [];
       taken.push(dot);
       return [{ ...l, p, r }];
     });
+
+    const pois = spots
+      .map(({ key, kind, x, y, p, r }) => {
+        const text = t(`projectDetail.map.${key}`);
+        const w = measure("project-map__poi-label", text);
+        // Names go beside the icon (or beside the pin, when the icon sits under it), then under or
+        // over it, then at its corners.
+        const dot: Box = { left: p.x - r, right: p.x + r, top: p.y - r, bottom: p.y + r };
+        const marker = taken[0];
+        const hidden = p.x > marker.left && p.x < marker.right && p.y > marker.top && p.y < marker.bottom;
+        const a = hidden ? marker : dot;
+        const row = (left: number, dy = 0): Box => ({ left, right: left + w, top: p.y + dy - 9, bottom: p.y + dy + 9 });
+        const col = (top: number): Box => ({ left: p.x - w / 2, right: p.x + w / 2, top, bottom: top + 18 });
+        const options: Box[] = [
+          row(a.right + 3),
+          row(a.left - 3 - w),
+          col(a.bottom + 3),
+          col(a.top - 21),
+          row(a.right - 1, 14),
+          row(a.right - 1, -14),
+          row(a.left + 1 - w, 14),
+          row(a.left + 1 - w, -14)
+        ];
+        const box = options.find((b) => fits(b));
+        if (box) taken.push(box);
+        return `
+        <span class="project-map__poi project-map__poi--${kind}" style="${pct(x, y)}">
+          <span class="project-map__poi-icon">${icon(POI_ICONS[kind])}</span>
+          ${
+            box
+              ? `<span class="project-map__poi-label" style="left:${(box.left - p.x).toFixed(1)}px;top:${(box.top - p.y).toFixed(1)}px">${text}</span>`
+              : `<span class="visually-hidden">${text}</span>`
+          }
+        </span>`;
+      })
+      .join("");
 
     const shields = ROADS.map((r) => {
       const spot = map.ROAD_SHIELDS[r.key]?.find(([x, y]) => {
@@ -126,28 +174,6 @@ export function initProjectMap(root: ParentNode): void {
       });
       return spot ? `<span class="map-shield map-shield--${r.key} project-map__shield" style="${pct(spot[0], spot[1])}" translate="no">${r.shield}</span>` : "";
     }).join("");
-
-    const pois = spots
-      .map(({ key, kind, x, y, p, r }) => {
-        const text = t(`projectDetail.map.${key}`);
-        const w = labelWidth(text, charWidth);
-        const gap = r + 3;
-        // Beside the icon first, then under or over it.
-        const options: [string, Box][] = [
-          ["right", { left: p.x + gap, right: p.x + gap + w, top: p.y - 9, bottom: p.y + 9 }],
-          ["left", { left: p.x - gap - w, right: p.x - gap, top: p.y - 9, bottom: p.y + 9 }],
-          ["below", { left: p.x - w / 2, right: p.x + w / 2, top: p.y + gap, bottom: p.y + gap + 18 }],
-          ["above", { left: p.x - w / 2, right: p.x + w / 2, top: p.y - gap - 18, bottom: p.y - gap }]
-        ];
-        const [side, box] = options.find(([, b]) => fits(b)) ?? ["", null];
-        if (box) taken.push(box);
-        return `
-        <span class="project-map__poi project-map__poi--${kind}" style="${pct(x, y)}">
-          <span class="project-map__poi-icon">${icon(POI_ICONS[kind])}</span>
-          ${side ? `<span class="project-map__poi-label project-map__poi-label--${side}">${text}</span>` : `<span class="visually-hidden">${text}</span>`}
-        </span>`;
-      })
-      .join("");
 
     const others = Object.entries(DISTRICT_PATHS)
       .filter(([name]) => name !== district)
