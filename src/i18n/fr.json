@@ -1266,5 +1266,64 @@
       "description": "La page que vous recherchez n'existe pas ou a été déplacée."
     },
     "projectTitle": "{name} – {district}, {city}"
+  },
+  "chat": {
+    "bubble": "Discutez avec nous",
+    "title": "Assistant HADARA",
+    "status": "En ligne · réponse immédiate",
+    "close": "Fermer le chat",
+    "restart": "Recommencer",
+    "placeholder": "Écrivez votre question…",
+    "send": "Envoyer",
+    "typing": "Écrit…",
+    "quickLabel": "Questions suggérées",
+    "greeting": "Bonjour 👋 Je suis l'assistant virtuel de HADARA. Posez-moi vos questions sur nos projets, les prix ou la citoyenneté turque — ou choisissez une option ci-dessous.",
+    "menu": {
+      "projects": "🏙️ Nos projets",
+      "price": "💰 Prix",
+      "citizenship": "🇹🇷 Citoyenneté turque",
+      "contact": "💬 Parler à notre équipe"
+    },
+    "filters": {
+      "all": "Tous",
+      "new": "Nouveaux et en construction",
+      "ready": "Prêts à habiter",
+      "villas": "Villas"
+    },
+    "projectsIntro": {
+      "all": "Voici nos projets. Touchez-en un pour un résumé rapide :",
+      "new": "Nos projets nouveaux et en construction :",
+      "ready": "Projets achevés avec des logements prêts à habiter :",
+      "villas": "Nos projets de villas :"
+    },
+    "intro": {
+      "price": "Les prix dépendent du logement, de l'étage et du plan de paiement : notre équipe vous envoie une offre à jour sur WhatsApp. Quel projet vous intéresse ?",
+      "matched": "J'ai trouvé plusieurs projets — lequel voulez-vous dire ?",
+      "district": "Voici nos projets dans ce quartier :"
+    },
+    "projectIntro": "Voici un résumé rapide de {name} :",
+    "soldOutNote": "Tous les logements de ce projet ont été vendus. Je peux vous montrer des projets similaires encore disponibles.",
+    "benefitsTitle": "Principaux avantages :",
+    "contactText": "Notre équipe est ravie de vous aider. Choisissez comment nous joindre :",
+    "thanks": "Avec plaisir ! Puis-je vous aider pour autre chose ?",
+    "fallback": "Je ne suis pas sûr d'avoir compris. Notre équipe peut vous répondre directement sur WhatsApp — ou choisissez une option ci-dessous.",
+    "actions": {
+      "price": "Obtenir le prix sur WhatsApp",
+      "details": "Voir la page du projet",
+      "save": "Enregistrer",
+      "saved": "Enregistré",
+      "more": "Autres projets",
+      "available": "Voir les projets disponibles",
+      "similar": "Demander des logements similaires",
+      "advisor": "Demander à un conseiller sur WhatsApp",
+      "guide": "Lire le guide complet",
+      "form": "Nous envoyer un message",
+      "askTeam": "Demander à notre équipe sur WhatsApp"
+    },
+    "waPrice": "Bonjour, je souhaiterais connaître le prix et les logements disponibles du projet {name}.",
+    "waSimilar": "Bonjour, je cherche un bien similaire au projet {name}. Qu'avez-vous de disponible ?",
+    "waCitizenship": "Bonjour, je souhaiterais en savoir plus sur la citoyenneté turque par investissement immobilier.",
+    "waHello": "Bonjour, je souhaiterais parler à votre équipe.",
+    "waQuestion": "Bonjour, j'ai une question : {q}"
   }
 }

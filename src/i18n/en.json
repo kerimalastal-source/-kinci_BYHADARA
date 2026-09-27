@@ -1266,5 +1266,64 @@
       "description": "The page you are looking for does not exist or has been moved."
     },
     "projectTitle": "{name} – {district}, {city}"
+  },
+  "chat": {
+    "bubble": "Chat with us",
+    "title": "HADARA Assistant",
+    "status": "Online · instant replies",
+    "close": "Close chat",
+    "restart": "Start over",
+    "placeholder": "Type your question…",
+    "send": "Send",
+    "typing": "Typing…",
+    "quickLabel": "Suggested questions",
+    "greeting": "Hello 👋 I'm HADARA's virtual assistant. Ask me about our projects, prices or Turkish citizenship — or pick an option below.",
+    "menu": {
+      "projects": "🏙️ Our projects",
+      "price": "💰 Prices",
+      "citizenship": "🇹🇷 Turkish citizenship",
+      "contact": "💬 Talk to our team"
+    },
+    "filters": {
+      "all": "All",
+      "new": "New & under construction",
+      "ready": "Ready to move in",
+      "villas": "Villas"
+    },
+    "projectsIntro": {
+      "all": "Here are our projects. Tap one for a quick summary:",
+      "new": "Our new and under-construction projects:",
+      "ready": "Completed projects with units ready to move in:",
+      "villas": "Our villa projects:"
+    },
+    "intro": {
+      "price": "Prices depend on the unit, floor and payment plan, so our team sends you an up-to-date offer on WhatsApp. Which project are you interested in?",
+      "matched": "I found more than one project — which one do you mean?",
+      "district": "Here are our projects in that area:"
+    },
+    "projectIntro": "Here's a quick summary of {name}:",
+    "soldOutNote": "All units in this project have been sold. I can show you similar projects that are still available.",
+    "benefitsTitle": "Key benefits:",
+    "contactText": "Our team is happy to help. Choose how you'd like to reach us:",
+    "thanks": "You're welcome! Is there anything else I can help you with?",
+    "fallback": "I'm not sure I understood that. Our team can answer you directly on WhatsApp — or choose one of the options below.",
+    "actions": {
+      "price": "Get the price on WhatsApp",
+      "details": "View project page",
+      "save": "Save",
+      "saved": "Saved",
+      "more": "Other projects",
+      "available": "Show available projects",
+      "similar": "Ask about similar units",
+      "advisor": "Ask an advisor on WhatsApp",
+      "guide": "Read the full guide",
+      "form": "Send us a message",
+      "askTeam": "Ask our team on WhatsApp"
+    },
+    "waPrice": "Hello, I'd like to know the price and available units of the {name} project.",
+    "waSimilar": "Hello, I'm interested in something similar to the {name} project. What do you have available?",
+    "waCitizenship": "Hello, I'd like to know more about Turkish citizenship through real estate investment.",
+    "waHello": "Hello, I'd like to talk to your team.",
+    "waQuestion": "Hello, I have a question: {q}"
   }
 }

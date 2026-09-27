@@ -1,4 +1,5 @@
 import { t } from "../i18n";
+import { chatBubble } from "./chat";
 
 /** Company WhatsApp / phone number in E.164 form without the plus. */
 export const WHATSAPP_NUMBER = "905319309214";
@@ -10,6 +11,7 @@ const CALL_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" s
 export function renderFloatingButtons(el: HTMLElement): void {
   el.className = "floating-actions";
   el.innerHTML = `
+    ${chatBubble()}
     <a
       class="floating-actions__btn floating-actions__btn--whatsapp"
       href="https://wa.me/${WHATSAPP_NUMBER}"
