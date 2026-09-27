@@ -63,6 +63,7 @@ function buildIndex(): SearchResult[] {
   }
   results.push({ title: t("nav.citizenship"), snippet: t("citizenship.heroSubtitle"), route: "/citizenship" });
   results.push({ title: t("nav.propertyRequest"), snippet: t("propertyRequest.heroSubtitle"), route: "/property-request" });
+  results.push({ title: t("videoTour.nav"), snippet: t("videoTour.heroSubtitle"), route: "/video-tour" });
   results.push({ title: t("nav.blog"), snippet: t("blog.heroSubtitle"), route: "/blog" });
   results.push({ title: t("nav.faq"), snippet: t("faq.heroSubtitle"), route: "/faq" });
   results.push({ title: t("nav.contact"), snippet: t("contact.heroSubtitle"), route: "/contact" });

@@ -3,6 +3,7 @@ import { getSortedProjects, type Lifestyle, type Project } from "../data/project
 import { projectStatusLabel } from "./projectCard";
 import { favoriteButton } from "./favorites";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "./floatingButtons";
+import { videoTourHref, VIDEO_TOUR_ICON } from "./videoTourInvite";
 
 /**
  * "Find My Project": four quick questions on the home page, then the projects that fit,
@@ -265,6 +266,7 @@ function renderResults(a: Answers): string {
       ${matches.length ? `<div class="match__grid match__grid--${matches.length}">${matches.map(renderResultCard).join("")}</div>` : ""}
       <div class="match__actions">
         <a class="btn btn--whatsapp" href="${whatsappBrief(a, matches)}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("match.sendResults")}</a>
+        ${matches.length ? `<a class="btn btn--tour" href="${videoTourHref(matches.map((m) => m.project.slug))}">${VIDEO_TOUR_ICON}${t("videoTour.matchButton")}</a>` : ""}
         <a class="btn btn--outline" href="${link("/property-request")}">${t("match.customRequest")}</a>
       </div>
       <button type="button" class="match__restart" data-match-restart>${t("match.restart")}</button>

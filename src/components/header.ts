@@ -36,6 +36,7 @@ const NAV: NavEntry[] = [
     key: "nav.projects",
     items: [
       { route: "/projects", key: "nav.allProjects", active: is("projects", "project") },
+      { route: "/video-tour", key: "videoTour.nav", active: is("video-tour") },
       { route: "/resale", key: "nav.resale", active: is("resale", "resale-listing") },
       { route: "/property-request", key: "nav.propertyRequest", active: is("property-request") }
     ]

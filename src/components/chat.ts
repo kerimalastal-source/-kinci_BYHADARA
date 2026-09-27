@@ -8,6 +8,7 @@ import { escapeHtml } from "../utils/html";
 import { toWesternDigits } from "../utils/numbers";
 import { placeKey } from "../utils/place";
 import { consultancyPath } from "../seo/routes";
+import { videoTourHref, VIDEO_TOUR_ICON } from "./videoTourInvite";
 
 /**
  * Guided chat assistant: answers from the site's own data (projects, citizenship, contact)
@@ -16,7 +17,7 @@ import { consultancyPath } from "../seo/routes";
  */
 
 type Filter = "all" | "new" | "ready" | "villas";
-type Topic = "greeting" | "citizenship" | "design" | "contact" | "thanks";
+type Topic = "greeting" | "citizenship" | "design" | "tour" | "contact" | "thanks";
 
 type Entry =
   | { from: "user"; text: string }
@@ -147,6 +148,7 @@ const KEYWORDS: Record<string, string[]> = {
   new: ["new", "launch", "off plan", "offplan", "under construction", "جديد", "اطلاق", "قيد الانشاء", "على المخطط", "nouveau", "neuf", "lancement", "construction", "нов", "строящ"],
   ready: ["ready", "move in", "completed", "جاهز", "مكتمل", "منجز", "فوري", "pret", "livre", "termine", "готов", "сдан"],
   projects: ["project", "detail", "info", "option", "available", "apartment", "flat", "property", "properties", "home", "house", "deliver", "handover", "مشروع", "مشاريع", "تفاصيل", "معلومات", "عقار", "شقق", "شقه", "متاح", "بيت", "منزل", "تسليم", "projet", "appartement", "maison", "bien", "livraison", "проект", "подроб", "квартир", "информац", "дом", "сдач", "срок"],
+  tour: ["video", "tour", "zoom", "facetime", "فيديو", "جولة", "جوله", "زوم", "vidéo", "visite", "видео", "тур", "экскурс"],
   thanks: ["thank", "thx", "شكرا", "مشكور", "يعطيك", "تسلم", "merci", "спасибо", "благодар"],
   greeting: ["hello", "hi", "hey", "مرحبا", "اهلا", "السلام", "سلام", "هلا", "مساء", "صباح", "bonjour", "salut", "bonsoir", "привет", "здравств", "добрый"]
 };
@@ -168,6 +170,7 @@ function reply(text: string): Entry {
   if (named.length > 1) return { from: "bot", kind: "projects", filter: "all", intro: "matched", slugs: named };
   if (has(q, "citizenship")) return { from: "bot", kind: "citizenship" };
   if (has(q, "design")) return { from: "bot", kind: "design" };
+  if (has(q, "tour")) return { from: "bot", kind: "tour" };
   if (has(q, "villas")) return { from: "bot", kind: "projects", filter: "villas" };
   const inDistrict = matchDistrict(text);
   if (inDistrict.length === 1) return { from: "bot", kind: "project", slug: inDistrict[0] };
@@ -281,6 +284,7 @@ function renderProject(slug: string): string {
     <div class="chat-actions">
       ${primary}
       <a class="chat-action" href="${link(`/projects/${slug}`)}">${t("chat.actions.details")}</a>
+      ${p.soldOut ? "" : `<a class="chat-action chat-action--tour" href="${videoTourHref([slug])}">${VIDEO_TOUR_ICON}${t("videoTour.chat.bookProject")}</a>`}
       ${save}
       <button type="button" class="chat-action chat-action--ghost" data-chat-filter="all">${t("chat.actions.more")}</button>
     </div>`;
@@ -308,6 +312,16 @@ function renderDesign(): string {
       <a class="chat-action chat-action--wa" href="${whatsappHref(t("chat.waDesign"))}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("chat.actions.advisor")}</a>
       <a class="chat-action" href="${link(consultancyPath("services"))}">${t("chat.actions.designServices")}</a>
       <a class="chat-action" href="${link(consultancyPath("consultation"))}">${t("chat.actions.consult")}</a>
+    </div>`;
+}
+
+/** The private video tour, with a link to book it. */
+function renderTour(): string {
+  return `
+    <p>${t("videoTour.chat.text")}</p>
+    <div class="chat-actions">
+      <a class="chat-action chat-action--tour" href="${videoTourHref()}">${VIDEO_TOUR_ICON}${t("videoTour.chat.book")}</a>
+      <a class="chat-action" href="${link("/video-tour")}">${t("videoTour.home.more")}</a>
     </div>`;
 }
 
@@ -339,6 +353,8 @@ function renderBot(entry: Extract<Entry, { from: "bot" }>): string {
       return renderCitizenship();
     case "design":
       return renderDesign();
+    case "tour":
+      return renderTour();
     case "contact":
       return renderContact();
     case "fallback":
@@ -350,11 +366,13 @@ function renderBot(entry: Extract<Entry, { from: "bot" }>): string {
   }
 }
 
-const MENU = ["projects", "price", "design", "citizenship", "contact"] as const;
+const MENU = ["projects", "price", "tour", "design", "citizenship", "contact"] as const;
+/** Dictionary key of a quick-menu button (the video tour keeps its texts together under videoTour.*). */
+const menuKey = (m: string) => (m === "tour" ? "videoTour.chat.menu" : `chat.menu.${m}`);
 
 function renderMenu(): string {
   return `<div class="chat-quick" role="group" aria-label="${t("chat.quickLabel")}">${MENU.map(
-    (m) => `<button type="button" class="chat-quick__btn" data-chat-menu="${m}">${t(`chat.menu.${m}`)}</button>`
+    (m) => `<button type="button" class="chat-quick__btn" data-chat-menu="${m}">${t(menuKey(m))}</button>`
   ).join("")}</div>`;
 }
 
@@ -509,7 +527,7 @@ function wirePanel(el: HTMLElement): void {
           : menu === "price"
             ? { from: "bot", kind: "projects", filter: "all", intro: "price" }
             : { from: "bot", kind: menu as Topic };
-      return push({ from: "user", key: `chat.menu.${menu}` }, answer);
+      return push({ from: "user", key: menuKey(menu) }, answer);
     }
     const filter = target.closest<HTMLElement>("[data-chat-filter]")?.dataset.chatFilter as Filter | undefined;
     if (filter) return push({ from: "user", key: `chat.filters.${filter}` }, { from: "bot", kind: "projects", filter });

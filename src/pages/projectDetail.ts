@@ -9,6 +9,7 @@ import { initScrollReveal } from "../components/scrollReveal";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "../components/floatingButtons";
 import { favoriteButton } from "../components/favorites";
 import { renderProjectMap, initProjectMap } from "../components/projectMap";
+import { renderVideoTourInvite, videoTourHref, VIDEO_TOUR_ICON } from "../components/videoTourInvite";
 import { renderNotFound } from "./notFound";
 
 /** Scroll-reveal attributes; the stagger restarts every row so long grids don't lag. */
@@ -323,6 +324,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
                 .join("")}
             </div>
           </section>
+
+          ${project.soldOut ? "" : `<section class="detail-block">${renderVideoTourInvite({ slugs: [project.slug], name: content.name })}</section>`}
         </div>
 
         <aside class="project-detail__sidebar">
@@ -381,6 +384,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
                 ${WHATSAPP_ICON}
                 ${t("projectDetail.whatsappButton")}
               </a>
+              ${project.soldOut ? "" : `<a class="btn btn--tour btn--block" href="${videoTourHref([project.slug])}">${VIDEO_TOUR_ICON}${t("videoTour.cardButton")}</a>`}
             </div>
           </div>
         </aside>

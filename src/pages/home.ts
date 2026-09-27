@@ -8,6 +8,7 @@ import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "../components/floatingButtons";
 import { statIcon } from "../components/statIcons";
 import { consultancyPath } from "../seo/routes";
 import { renderProjectMatch, initProjectMatch } from "../components/projectMatch";
+import { renderVideoTourInvite } from "../components/videoTourInvite";
 
 const HERO_IMAGE = "/hero-istanbul.jpg";
 
@@ -106,6 +107,10 @@ export function renderHome(el: HTMLElement): void {
           ${featured.map((p) => renderProjectCard(p)).join("")}
         </div>
       </div>
+    </section>
+
+    <section class="section tour-invite-section">
+      <div class="container">${renderVideoTourInvite({})}</div>
     </section>
 
     <section class="section services-section">

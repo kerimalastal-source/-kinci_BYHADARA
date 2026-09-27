@@ -6,6 +6,7 @@
 //   - a page view on every route change (the site is a single-page app);
 //   - ViewContent on a project page (for retargeting that project's visitors);
 //   - Lead / generate_lead (+ the Google Ads lead conversion) when an inquiry form is sent;
+//   - Schedule (+ generate_lead and the lead conversion) when a private video tour is requested;
 //   - Contact / contact (+ the optional Google Ads contact conversion) on WhatsApp, call and email links.
 import type { Route } from "../seo/routes";
 
@@ -115,6 +116,13 @@ export function trackPageView(route: Route, locale: string): void {
 export function trackLead(form: string, detail = ""): void {
   meta("Lead", { content_category: form, ...(detail ? { content_name: detail } : {}) });
   google("generate_lead", { form_name: form, ...(detail ? { item_name: detail } : {}) });
+  adsConversion(TAGS.adsLeadLabel);
+}
+
+/** A private video tour was requested: Meta's Schedule event, counted as a lead in Analytics and Google Ads. */
+export function trackSchedule(projects: string): void {
+  meta("Schedule", { content_category: "video-tour", content_name: projects });
+  google("generate_lead", { form_name: "video-tour", item_name: projects });
   adsConversion(TAGS.adsLeadLabel);
 }
 

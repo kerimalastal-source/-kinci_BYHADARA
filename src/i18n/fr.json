@@ -1779,6 +1779,10 @@
     "processTeaserCta": "Découvrir notre méthode"
   },
   "seo": {
+    "videoTour": {
+      "title": "Visites privées en vidéo de nos projets à Istanbul",
+      "description": "Réservez une visite vidéo gratuite et en direct avec un conseiller HADARA : appartement témoin, maquette et projet sur place — en arabe, anglais ou turc, tous les jours de 9 h à 19 h."
+    },
     "consultancy": {
       "title": "Conseil en ingénierie et architecture",
       "description": "Architecture, architecture d'intérieur et conseil en ingénierie depuis Istanbul : villas, résidences, hôtels et commerces en Turquie et à l'international."
@@ -2023,6 +2027,238 @@
       "timing": "Délai",
       "projects": "Projets proposés",
       "outro": "Je souhaiterais connaître les prix et les logements disponibles."
+    }
+  },
+  "videoTour": {
+    "nav": "Visite privée en vidéo",
+    "eyebrow": "Visite privée en vidéo",
+    "heroTitle": "Visitez votre futur logement à Istanbul sans quitter le vôtre",
+    "heroSubtitle": "Une visite privée en direct, en vidéo, avec l'un de nos conseillers : nous vous montrons l'appartement témoin, la maquette de notre bureau de vente et le projet sur place, et répondons à toutes vos questions sur les prix, les plans de paiement et la citoyenneté.",
+    "heroCta": "Réservez votre visite",
+    "heroSecondary": "Comment ça se passe ?",
+    "trust": [
+      "Entièrement gratuite",
+      "Sans engagement",
+      "30 à 45 minutes",
+      "En arabe, anglais ou turc"
+    ],
+    "mock": {
+      "live": "EN DIRECT",
+      "caption": "Voici le salon de l'appartement témoin — le balcon est juste par ici.",
+      "advisor": "Votre conseiller",
+      "duration": "30–45 min",
+      "languages": "AR · EN · TR"
+    },
+    "howTitle": "Comment se déroule la visite ?",
+    "howSubtitle": "Trois étapes simples, sans inscription et sans nouvelle application à installer.",
+    "steps": [
+      {
+        "title": "Choisissez votre projet",
+        "desc": "Un projet ou plusieurs : nous pouvons tous les visiter lors du même appel."
+      },
+      {
+        "title": "Choisissez l'horaire qui vous convient",
+        "desc": "Tous les jours de 9 h à 19 h, heure d'Istanbul, chaque créneau étant aussi affiché dans votre propre fuseau horaire."
+      },
+      {
+        "title": "Nous vous appelons à l'heure prévue",
+        "desc": "Votre conseiller confirme sur WhatsApp, puis vous appelle sur l'application de votre choix."
+      }
+    ],
+    "seeTitle": "Que verrez-vous pendant la visite ?",
+    "seeSubtitle": "Tout ce que vous verriez en venant nous voir, présenté en direct et en détail par votre conseiller.",
+    "see": [
+      {
+        "title": "L'appartement témoin",
+        "desc": "Pièce par pièce : finitions, agencement, lumière naturelle et rangements, comme si vous y étiez."
+      },
+      {
+        "title": "La maquette de notre bureau de vente",
+        "desc": "Tout le projet d'un seul coup d'œil : les bâtiments, les jardins, les équipements et l'emplacement de votre logement."
+      },
+      {
+        "title": "Le projet sur place",
+        "desc": "Les bâtiments, les vues depuis les balcons, les équipements communs et l'avancement des travaux."
+      },
+      {
+        "title": "Le quartier",
+        "desc": "Nous vous présentons le secteur : transports, écoles, commerces et distance jusqu'à la mer et à l'aéroport."
+      }
+    ],
+    "askTitle": "Posez toutes les questions qui comptent pour vous",
+    "askSubtitle": "La visite est une véritable consultation, pas une simple vidéo.",
+    "ask": [
+      "Prix et logements disponibles",
+      "Plans de paiement",
+      "Dates de livraison",
+      "Éligibilité à la citoyenneté turque",
+      "Titre de propriété et étapes d'achat",
+      "Investissement et revenus locatifs"
+    ],
+    "bookTitle": "Réservez votre visite privée",
+    "bookSubtitle": "La réservation prend moins d'une minute.",
+    "wizard": {
+      "progress": "Étape {current} sur {total}",
+      "stepNames": [
+        "Projet",
+        "Horaire",
+        "Coordonnées"
+      ],
+      "projectQuestion": "Quel projet souhaitez-vous voir ?",
+      "projectHint": "Vous pouvez en choisir plusieurs.",
+      "focusQuestion": "Sur quoi devons-nous insister ? (facultatif)",
+      "focus": {
+        "apartment": "L'appartement témoin",
+        "model": "La maquette et le site",
+        "prices": "Prix et plans de paiement",
+        "citizenship": "Citoyenneté turque"
+      },
+      "next": "Continuer",
+      "back": "Retour",
+      "chooseProject": "Choisissez au moins un projet pour continuer.",
+      "timeQuestion": "Quand souhaitez-vous faire la visite ?",
+      "timeNote": "Horaires à l'heure d'Istanbul ; votre heure ({zone}) est indiquée sous chaque créneau.",
+      "sameZone": "Votre fuseau horaire est le même que celui d'Istanbul.",
+      "today": "Aujourd'hui",
+      "tomorrow": "Demain",
+      "earliest": "Premier créneau disponible : {when}",
+      "chooseTime": "Choisissez un jour et un horaire pour continuer.",
+      "periods": {
+        "morning": "Matin",
+        "afternoon": "Après-midi",
+        "evening": "Soir"
+      },
+      "detailsQuestion": "Comment vous joindre ?",
+      "appLabel": "Application d'appel vidéo",
+      "apps": {
+        "whatsapp": "WhatsApp vidéo",
+        "facetime": "FaceTime",
+        "zoom": "Zoom",
+        "meet": "Google Meet"
+      },
+      "appHints": {
+        "whatsapp": "La plus utilisée",
+        "facetime": "Appareils Apple",
+        "zoom": "Nous envoyons le lien",
+        "meet": "Nous envoyons le lien"
+      },
+      "languageLabel": "Langue de la visite",
+      "nameLabel": "Nom complet",
+      "namePlaceholder": "Votre nom",
+      "phoneLabel": "Téléphone / WhatsApp",
+      "errors": {
+        "name": "Veuillez indiquer votre nom.",
+        "phone": "Veuillez indiquer votre numéro de téléphone.",
+        "phoneInvalid": "Veuillez vérifier le numéro de téléphone."
+      },
+      "summaryTitle": "Votre visite",
+      "summary": {
+        "projects": "Projet",
+        "when": "Quand",
+        "app": "Via",
+        "language": "Langue"
+      },
+      "istanbulTime": "heure d'Istanbul",
+      "yourTime": "votre heure",
+      "confirm": "Confirmer sur WhatsApp",
+      "confirmNote": "Une conversation WhatsApp avec notre équipe s'ouvrira avec les détails de votre réservation : il vous suffira d'appuyer sur « Envoyer ».",
+      "doneTitle": "Votre demande de visite est prête, {name}",
+      "doneText": "Dès l'envoi du message WhatsApp, votre conseiller confirmera votre visite pendant nos heures d'ouverture (9 h – 19 h, heure d'Istanbul).",
+      "doneReopen": "WhatsApp ne s'est pas ouvert ? Renvoyez la demande",
+      "calendarTitle": "Ajoutez-la à votre agenda",
+      "calendarGoogle": "Google Agenda",
+      "calendarIcs": "Apple et Outlook",
+      "prepareTitle": "Pour profiter pleinement de votre visite",
+      "prepare": [
+        "Notez vos questions et votre budget à l'avance.",
+        "Invitez votre famille à rejoindre l'appel.",
+        "Utilisez une connexion internet stable et des écouteurs.",
+        "Notez les logements qui vous plaisent au fil de la visite."
+      ],
+      "again": "Réserver une autre visite",
+      "event": "Visite privée en vidéo — {projects}",
+      "eventDetails": "Votre conseiller HADARA vous appellera via {app}. L'horaire est en attente de confirmation par notre équipe sur WhatsApp."
+    },
+    "wa": {
+      "intro": "Bonjour HADARA, je souhaite réserver une visite privée en vidéo.",
+      "projects": "Projet",
+      "focus": "Priorités",
+      "date": "Date",
+      "time": "Heure",
+      "istanbul": "heure d'Istanbul",
+      "local": "mon heure",
+      "app": "Application",
+      "language": "Langue",
+      "name": "Nom",
+      "phone": "Téléphone",
+      "source": "Source",
+      "outro": "Merci !"
+    },
+    "visitTitle": "Quand vous serez prêt à acheter",
+    "visitText": "Nous vous conseillons toujours de voir le projet sur place avant de finaliser un achat. La visite vidéo vous aide à choisir le bon projet et le bon logement avant de voyager ; une fois votre décision prise, nous organisons votre venue à Istanbul et vous accompagnons à chaque étape jusqu'à la remise du titre de propriété.",
+    "visitCta": "Parler à un conseiller",
+    "faqTitle": "Questions fréquentes sur la visite",
+    "faq": [
+      {
+        "q": "La visite est-elle gratuite ?",
+        "a": "Oui, la visite est entièrement gratuite et sans aucune obligation d'achat."
+      },
+      {
+        "q": "Dois-je installer une nouvelle application ?",
+        "a": "Non. Nous utilisons l'application que vous avez déjà : WhatsApp, FaceTime, Zoom ou Google Meet. Nous vous appelons directement ou vous envoyons le lien de l'appel."
+      },
+      {
+        "q": "Combien de temps dure la visite ?",
+        "a": "Généralement de 30 à 45 minutes ; elle peut durer plus longtemps selon vos questions et le nombre de projets que vous souhaitez voir."
+      },
+      {
+        "q": "Ma famille peut-elle participer à l'appel ?",
+        "a": "Bien sûr : plusieurs personnes peuvent se joindre à l'appel sur Zoom, Google Meet ou en appel de groupe WhatsApp."
+      },
+      {
+        "q": "Quelles langues sont disponibles ?",
+        "a": "Nos conseillers assurent la visite en arabe, en anglais et en turc."
+      },
+      {
+        "q": "Et si je dois changer l'horaire ?",
+        "a": "Écrivez-nous sur WhatsApp à tout moment et nous fixerons un nouvel horaire qui vous convient."
+      },
+      {
+        "q": "Puis-je voir plusieurs projets lors de la même visite ?",
+        "a": "Oui : choisissez tous les projets qui vous intéressent lors de la réservation et nous organiserons la visite pour que vous les voyiez tous."
+      },
+      {
+        "q": "Puis-je acheter directement après la visite ?",
+        "a": "Nous vous conseillons de venir à Istanbul pour voir le projet par vous-même avant de finaliser l'achat. La visite vous aide à faire votre choix avant de voyager, et nous organisons votre venue lorsque vous êtes prêt."
+      }
+    ],
+    "finalTitle": "Istanbul est à un appel de vous",
+    "finalText": "Choisissez l'horaire qui vous convient et laissez-nous vous montrer votre futur logement.",
+    "finalCta": "Réservez votre visite",
+    "invite": {
+      "eyebrow": "Visite privée en vidéo",
+      "title": "Vous ne pouvez pas venir à Istanbul pour l'instant ?",
+      "text": "Laissez l'un de nos conseillers vous présenter {name} en direct, en vidéo, et répondre à toutes vos questions — gratuitement et sans engagement.",
+      "button": "Réserver une visite vidéo"
+    },
+    "home": {
+      "title": "Visitez nos projets depuis chez vous",
+      "text": "Une visite vidéo en direct avec l'un de nos conseillers : l'appartement témoin, la maquette et le projet sur place — gratuite et sans engagement.",
+      "button": "Réservez votre visite",
+      "more": "Comment ça se passe ?"
+    },
+    "cardButton": "Réserver une visite vidéo",
+    "matchButton": "Réserver une visite vidéo de ces projets",
+    "chat": {
+      "menu": "🎥 Visite vidéo",
+      "text": "Vous aimeriez voir un projet sans voyager ? L'un de nos conseillers vous fait visiter en direct, en vidéo : l'appartement témoin, la maquette et le projet sur place. Gratuit et sans engagement, tous les jours de 9 h à 19 h, heure d'Istanbul.",
+      "book": "Réserver une visite vidéo",
+      "bookProject": "Visite vidéo"
+    },
+    "languages": {
+      "ar": "العربية",
+      "en": "English",
+      "tr": "Türkçe"
     }
   }
 }

@@ -34,6 +34,7 @@ export type Route =
   | { name: "blog" }
   | { name: "blog-post"; slug: string }
   | { name: "property-request" }
+  | { name: "video-tour" }
   | { name: "contact" }
   | { name: "login" }
   | { name: "register" }
@@ -78,6 +79,7 @@ export function parseRoute(path: string): Route {
   if (segment === "blog" && p1) return { name: "blog-post", slug: p1 };
   if (segment === "blog") return { name: "blog" };
   if (segment === "property-request") return { name: "property-request" };
+  if (segment === "video-tour") return { name: "video-tour" };
   if (segment === "contact") return { name: "contact" };
   if (segment === "login") return { name: "login" };
   if (segment === "register") return { name: "register" };

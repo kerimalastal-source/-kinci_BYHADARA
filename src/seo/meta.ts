@@ -50,6 +50,7 @@ const PAGE_KEYS: Partial<Record<Route["name"], string>> = {
   faq: "faq",
   blog: "blog",
   "property-request": "propertyRequest",
+  "video-tour": "videoTour",
   contact: "contact",
   resale: "resale",
   "resale-listing": "resale",
@@ -87,6 +88,7 @@ export function indexableRoutes(): Route[] {
     { name: "blog" },
     ...blogPosts.map((p) => ({ name: "blog-post", slug: p.slug }) as Route),
     { name: "property-request" },
+    { name: "video-tour" },
     { name: "contact" },
     { name: "resale" }
   ];
@@ -253,6 +255,41 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
         }))
       });
     }
+  }
+
+  if (pageRoute.name === "video-tour") {
+    image = img("/images/projects/diamond-marin/living-room.jpg");
+    imageAlt = title;
+    const faq = lookup(locale, "videoTour.faq") as { q: string; a: string }[];
+    jsonLd.push(
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: title,
+        description,
+        url: url(routePath(pageRoute)),
+        image,
+        provider: { "@id": `${siteUrl}/#organization` },
+        areaServed: "International",
+        availableLanguage: ["ar", "en", "tr"],
+        hoursAvailable: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          opens: "09:00",
+          closes: "19:00"
+        },
+        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a }
+        }))
+      }
+    );
   }
 
   jsonLd.push({

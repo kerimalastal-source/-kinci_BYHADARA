@@ -1779,6 +1779,10 @@
     "processTeaserCta": "See how we work"
   },
   "seo": {
+    "videoTour": {
+      "title": "Private Video Tours of Our Istanbul Projects",
+      "description": "Book a free, live video tour with a HADARA advisor: the show apartment, the scale model and the project on site — in Arabic, English or Turkish, every day from 9:00 to 19:00."
+    },
     "consultancy": {
       "title": "Engineering & Architectural Consultancy",
       "description": "Architectural design, interior design and engineering consultancy from Istanbul for villas, residential, hotel and commercial projects in Türkiye and abroad."
@@ -2023,6 +2027,238 @@
       "timing": "Timing",
       "projects": "Suggested projects",
       "outro": "I'd like to know the prices and available units."
+    }
+  },
+  "videoTour": {
+    "nav": "Private Video Tour",
+    "eyebrow": "Private Video Tour",
+    "heroTitle": "Visit Your Istanbul Home Without Leaving Yours",
+    "heroSubtitle": "A private, live video tour with one of our advisors: we show you the show apartment, the scale model at our sales office and the project on site, and answer all your questions on prices, payment plans and citizenship.",
+    "heroCta": "Book Your Tour",
+    "heroSecondary": "How does it work?",
+    "trust": [
+      "Completely free",
+      "No obligation",
+      "30–45 minutes",
+      "In Arabic, English or Turkish"
+    ],
+    "mock": {
+      "live": "LIVE",
+      "caption": "This is the living room of the show apartment — the balcony is just through here.",
+      "advisor": "Your advisor",
+      "duration": "30–45 min",
+      "languages": "AR · EN · TR"
+    },
+    "howTitle": "How Does the Tour Work?",
+    "howSubtitle": "Three simple steps — no sign-up and no new app to install.",
+    "steps": [
+      {
+        "title": "Choose your project",
+        "desc": "Pick one project or several — we can visit them all in the same call."
+      },
+      {
+        "title": "Pick a time that suits you",
+        "desc": "Every day from 9:00 to 19:00 Istanbul time, with each slot also shown in your own time zone."
+      },
+      {
+        "title": "We call you at the set time",
+        "desc": "Your advisor confirms on WhatsApp, then calls you on the app you prefer."
+      }
+    ],
+    "seeTitle": "What Will You See?",
+    "seeSubtitle": "Everything you would see if you visited us in person, shown to you live and in detail by your advisor.",
+    "see": [
+      {
+        "title": "The show apartment",
+        "desc": "Room by room: finishes, layout, natural light and storage — as if you were walking through it yourself."
+      },
+      {
+        "title": "The scale model at our sales office",
+        "desc": "The whole project at a glance: the buildings, gardens, facilities and where your unit sits."
+      },
+      {
+        "title": "The project on site",
+        "desc": "The buildings, the views from the balconies, the shared facilities and the construction progress."
+      },
+      {
+        "title": "The neighbourhood",
+        "desc": "We introduce you to the area: transport, schools, shopping and the distance to the sea and the airport."
+      }
+    ],
+    "askTitle": "Ask About Everything That Matters to You",
+    "askSubtitle": "The tour is a full consultation, not just a video.",
+    "ask": [
+      "Prices and available units",
+      "Payment plans",
+      "Delivery dates",
+      "Turkish citizenship eligibility",
+      "Title deed and buying steps",
+      "Investment and rental income"
+    ],
+    "bookTitle": "Book Your Private Tour",
+    "bookSubtitle": "Booking takes less than a minute.",
+    "wizard": {
+      "progress": "Step {current} of {total}",
+      "stepNames": [
+        "Project",
+        "Time",
+        "Your details"
+      ],
+      "projectQuestion": "Which project would you like to see?",
+      "projectHint": "You can choose more than one.",
+      "focusQuestion": "What should we focus on? (optional)",
+      "focus": {
+        "apartment": "The show apartment",
+        "model": "The model and the site",
+        "prices": "Prices and payment plans",
+        "citizenship": "Turkish citizenship"
+      },
+      "next": "Continue",
+      "back": "Back",
+      "chooseProject": "Choose at least one project to continue.",
+      "timeQuestion": "When would you like your tour?",
+      "timeNote": "Times are in Istanbul time, with your own time ({zone}) under each slot.",
+      "sameZone": "Your time zone is the same as Istanbul's.",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "earliest": "Earliest available: {when}",
+      "chooseTime": "Choose a day and a time to continue.",
+      "periods": {
+        "morning": "Morning",
+        "afternoon": "Afternoon",
+        "evening": "Evening"
+      },
+      "detailsQuestion": "How should we reach you?",
+      "appLabel": "Video call app",
+      "apps": {
+        "whatsapp": "WhatsApp video",
+        "facetime": "FaceTime",
+        "zoom": "Zoom",
+        "meet": "Google Meet"
+      },
+      "appHints": {
+        "whatsapp": "Most popular",
+        "facetime": "For Apple devices",
+        "zoom": "We send you the link",
+        "meet": "We send you the link"
+      },
+      "languageLabel": "Tour language",
+      "nameLabel": "Full name",
+      "namePlaceholder": "Your name",
+      "phoneLabel": "Phone / WhatsApp",
+      "errors": {
+        "name": "Please enter your name.",
+        "phone": "Please enter your phone number.",
+        "phoneInvalid": "Please check the phone number."
+      },
+      "summaryTitle": "Your tour",
+      "summary": {
+        "projects": "Project",
+        "when": "When",
+        "app": "Via",
+        "language": "Language"
+      },
+      "istanbulTime": "Istanbul time",
+      "yourTime": "your time",
+      "confirm": "Confirm on WhatsApp",
+      "confirmNote": "A WhatsApp chat with our team will open with your booking details ready — just press “Send”.",
+      "doneTitle": "Your tour request is ready, {name}",
+      "doneText": "Once you send the WhatsApp message, your advisor will confirm your tour during working hours (9:00–19:00 Istanbul time).",
+      "doneReopen": "WhatsApp didn't open? Send the request again",
+      "calendarTitle": "Add it to your calendar",
+      "calendarGoogle": "Google Calendar",
+      "calendarIcs": "Apple & Outlook",
+      "prepareTitle": "How to get the most from your tour",
+      "prepare": [
+        "Write down your questions and your budget in advance.",
+        "Invite your family to join the call.",
+        "Use a stable internet connection and headphones.",
+        "Note the units you like as you go."
+      ],
+      "again": "Book another tour",
+      "event": "Private video tour — {projects}",
+      "eventDetails": "Your HADARA advisor will call you via {app}. The time is pending our team's confirmation on WhatsApp."
+    },
+    "wa": {
+      "intro": "Hello HADARA, I would like to book a private video tour.",
+      "projects": "Project",
+      "focus": "Focus",
+      "date": "Date",
+      "time": "Time",
+      "istanbul": "Istanbul time",
+      "local": "my time",
+      "app": "App",
+      "language": "Language",
+      "name": "Name",
+      "phone": "Phone",
+      "source": "Source",
+      "outro": "Thank you!"
+    },
+    "visitTitle": "When You Are Ready to Buy",
+    "visitText": "We always advise seeing the project in person before completing a purchase. The video tour helps you choose the right project and unit before you travel — and when you decide, we arrange your visit to Istanbul and accompany you at every step until you receive your title deed.",
+    "visitCta": "Talk to an advisor",
+    "faqTitle": "Video Tour FAQ",
+    "faq": [
+      {
+        "q": "Is the tour free?",
+        "a": "Yes — the tour is completely free, with no obligation to buy."
+      },
+      {
+        "q": "Do I need to install a new app?",
+        "a": "No. We use the app you already have: WhatsApp, FaceTime, Zoom or Google Meet. We call you directly or send you the call link."
+      },
+      {
+        "q": "How long does the tour take?",
+        "a": "Usually 30 to 45 minutes; it can run longer depending on your questions and the number of projects you want to see."
+      },
+      {
+        "q": "Can my family join the call?",
+        "a": "Of course — several people can join on Zoom, Google Meet or a WhatsApp group call."
+      },
+      {
+        "q": "Which languages are available?",
+        "a": "Our advisors give the tour in Arabic, English and Turkish."
+      },
+      {
+        "q": "What if I need to change the time?",
+        "a": "Message us on WhatsApp at any time and we will set a new time that suits you."
+      },
+      {
+        "q": "Can I see more than one project in the same tour?",
+        "a": "Yes — choose every project you are interested in when booking and we will plan the tour so you see them all."
+      },
+      {
+        "q": "Can I buy straight after the tour?",
+        "a": "We advise visiting Istanbul to see the project yourself before completing a purchase. The tour helps you decide what suits you before you travel, and we arrange your visit when you are ready."
+      }
+    ],
+    "finalTitle": "Istanbul Is One Call Away",
+    "finalText": "Choose a time that suits you and let us show you your future home.",
+    "finalCta": "Book Your Tour",
+    "invite": {
+      "eyebrow": "Private video tour",
+      "title": "Can't visit Istanbul right now?",
+      "text": "Let one of our advisors show you {name} live on video and answer all your questions — free and with no obligation.",
+      "button": "Book a video tour"
+    },
+    "home": {
+      "title": "Visit Our Projects From Home",
+      "text": "A live video tour with one of our advisors through the show apartment, the scale model and the project on site — free and with no obligation.",
+      "button": "Book Your Tour",
+      "more": "How does it work?"
+    },
+    "cardButton": "Book a video tour",
+    "matchButton": "Book a video tour of these projects",
+    "chat": {
+      "menu": "🎥 Video tour",
+      "text": "Would you like to see a project without travelling? One of our advisors will take you on a private, live video tour: the show apartment, the scale model and the project on site. Free and with no obligation, every day from 9:00 to 19:00 Istanbul time.",
+      "book": "Book a video tour",
+      "bookProject": "Video tour"
+    },
+    "languages": {
+      "ar": "العربية",
+      "en": "English",
+      "tr": "Türkçe"
     }
   }
 }

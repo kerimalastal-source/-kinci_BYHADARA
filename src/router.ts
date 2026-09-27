@@ -8,6 +8,7 @@ import { renderFaq } from "./pages/faq";
 import { renderBlog } from "./pages/blog";
 import { renderBlogDetail } from "./pages/blogDetail";
 import { renderPropertyRequest } from "./pages/propertyRequest";
+import { renderVideoTour } from "./pages/videoTour";
 import { renderContact } from "./pages/contact";
 import { renderNotFound } from "./pages/notFound";
 import { renderLogin } from "./pages/login";
@@ -105,6 +106,9 @@ function renderRoute(route: Route, main: HTMLElement): void {
       break;
     case "property-request":
       renderPropertyRequest(main);
+      break;
+    case "video-tour":
+      renderVideoTour(main);
       break;
     case "contact":
       renderContact(main);
