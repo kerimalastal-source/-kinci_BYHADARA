@@ -229,10 +229,10 @@
 - [ ] ربط فورم التواصل/طلب العقار المخصص بخدمة إرسال حقيقية (بدل `mailto:`) — **مهم للإعلانات**: `mailto:` بيعتمد على برنامج إيميل بموبايل الزبون، فكتير رسائل ما بتوصل. المستخدم وافق يعملها "بعد شوية" (Web3Forms أو Formspree — بيحتاج يعمل حساب مجاني بإيميل `info@byhadara.com`، والباقي علينا).
 - [ ] أكواد تتبّع الإعلانات (Meta Pixel + Google Ads/Analytics) — بانتظار الـ IDs من المستخدم.
 - [x] ربط الدومين الحقيقي `hadararealestate.com` — تم 2026-09-27 (المستخدم نقله بنفسه؛ `www` أساسي).
-- [ ] Supabase → Authentication → URL Configuration: Site URL = `https://www.hadararealestate.com` + Redirect URL `https://www.hadararealestate.com/**` (حتى روابط تأكيد الحساب تفتح على الدومين الجديد) — بيعملها المستخدم.
+- [x] Supabase → Authentication → URL Configuration: Site URL = `https://www.hadararealestate.com` + Redirect URL `https://www.hadararealestate.com/**` — عملها المستخدم 2026-09-27.
 - [x] SEO: روابط حقيقية لكل صفحة ولغة، وسوم meta/hreflang/OG/JSON-LD، sitemap وrobots (راجع قسم 4.5)
 - [x] بوابة إعادة بيع/وسطاء حقيقية بـ auth ومراجعة إدارية (راجع قسم 4.6) — تمت مراجعة أمنية: سياسات RLS بقاعدة البيانات قوية وسليمة، وتم اكتشاف وإصلاح ثغرة XSS بعرض النصوص (راجع `escapeHtml()` بقسم 4.6/7)
-- [ ] بعد ربط الدومين: تسجيل الموقع بـ Google Search Console وإرسال `sitemap.xml`
+- [x] Google Search Console: خاصية نطاق (Domain property) `hadararealestate.com` متحقَّق منها 2026-09-27 بسجل TXT `google-site-verification=...` بـ DNS تبع Vercel (**لا تمسحه**)، والمستخدم بيبعت `sitemap.xml`. الحساب فيه كمان خاصية `hadarahospitality.com` (موقع تاني، مش هاد).
 - [ ] اختبار على أجهزة موبايل حقيقية (تم اختباره بـ Playwright فقط لحد الآن)
 
 ## 10. ملاحظات عامة للتعديل المستقبلي
