@@ -805,6 +805,18 @@
   color: var(--color-on-primary);
 }
 
+/* Hero photos set by heroBackground() (utils/responsiveImage): the shade over the
+   photo, with a lighter 1280px copy on phones and tablets. */
+[style*="--hero-photo"] {
+  background-image: var(--hero-shade), var(--hero-photo);
+}
+
+@media (max-width: 900px) {
+  [style*="--hero-photo"] {
+    background-image: var(--hero-shade), var(--hero-photo-sm);
+  }
+}
+
 .hero {
   padding: 8.5rem 0 6rem;
   min-height: 70vh;

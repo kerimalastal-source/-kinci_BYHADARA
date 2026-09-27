@@ -1,6 +1,8 @@
 interface LightboxImage {
   src: string;
   alt: string;
+  /** Lighter copies for phones (see utils/responsiveImage). */
+  srcset?: string;
 }
 
 let overlay: HTMLDivElement | null = null;
@@ -11,6 +13,10 @@ function render(): void {
   if (!overlay) return;
   const img = images[currentIndex];
   const imgEl = overlay.querySelector<HTMLImageElement>(".lightbox__image")!;
+  if (img.srcset) {
+    imgEl.sizes = "100vw";
+    imgEl.srcset = img.srcset;
+  } else imgEl.removeAttribute("srcset");
   imgEl.src = img.src;
   imgEl.alt = img.alt;
   const counter = overlay.querySelector<HTMLElement>(".lightbox__counter")!;

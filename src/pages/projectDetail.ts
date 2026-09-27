@@ -11,6 +11,7 @@ import { favoriteButton } from "../components/favorites";
 import { renderProjectMap, initProjectMap } from "../components/projectMap";
 import { renderVideoTourInvite, videoTourHref, VIDEO_TOUR_ICON } from "../components/videoTourInvite";
 import { renderNotFound } from "./notFound";
+import { photoAttrs, photoSrcset, heroBackground } from "../utils/responsiveImage";
 
 /** Scroll-reveal attributes; the stagger restarts every row so long grids don't lag. */
 const reveal = (i: number, perRow = 4) => `data-reveal data-reveal-index="${i % perRow}"`;
@@ -83,7 +84,7 @@ function renderFloorPlan(project: Project, levels: ReturnType<typeof getProjectC
             ${
               level.image
                 ? `<button type="button" class="floor-card__media" data-floor-index="${i}" aria-label="${text.name}">
-              <img src="${level.image.src}" alt="${level.image.alt}" width="${level.image.width}" height="${level.image.height}" loading="lazy" />
+              <img ${photoAttrs(level.image, "(max-width: 640px) calc(100vw - 32px), 400px")} alt="${level.image.alt}" width="${level.image.width}" height="${level.image.height}" loading="lazy" />
               ${level.seaView ? `<span class="floor-card__tag">${t("projectDetail.amenities.seaView")}</span>` : ""}
             </button>`
                 : ""
@@ -126,7 +127,7 @@ function renderVideo(project: Project, content: ReturnType<typeof getProjectCont
         </div>
         <div class="project-video__frame">
           <button type="button" class="video-facade" data-youtube-id="${video.youtubeId}" aria-label="${t("projectDetail.videoPlay")}">
-            <img src="${video.poster.src}" alt="${video.poster.alt}" width="${video.poster.width}" height="${video.poster.height}" loading="lazy" />
+            <img ${photoAttrs(video.poster, "(max-width: 640px) calc(100vw - 32px), 420px")} alt="${video.poster.alt}" width="${video.poster.width}" height="${video.poster.height}" loading="lazy" />
             <span class="video-facade__play">${PLAY_ICON}</span>
             <span class="video-facade__label">${t("projectDetail.videoPlay")}</span>
           </button>
@@ -304,7 +305,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           <a class="btn btn--whatsapp" href="${whatsappHref}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("projectDetail.whatsappButton")}</a>`;
 
   el.innerHTML = `
-    <section class="project-hero" style="background-image: linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88)), url('${project.coverImage.src}')">
+    <section class="project-hero" style="${heroBackground(project.coverImage, "linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88))")}">
       <div class="container project-hero__inner">
         <a class="back-link" href="${link("/projects")}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -376,7 +377,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
                 .map(
                   (img, i) => `
                 <button type="button" class="gallery-grid__item${i === 0 ? " gallery-grid__item--wide" : ""}${i === gallery.length - 1 ? galleryTail(gallery.length) : ""}" data-index="${i}">
-                  <img src="${img.src}" alt="${img.alt}" width="${img.width}" height="${img.height}" loading="lazy" />
+                  <img ${photoAttrs(img, i === 0 || (i === gallery.length - 1 && galleryTail(gallery.length)) ? "(max-width: 720px) 100vw, 800px" : "(max-width: 720px) 50vw, 280px")} alt="${img.alt}" width="${img.width}" height="${img.height}" loading="lazy" />
                 </button>`
                 )
                 .join("")}
@@ -474,7 +475,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   el.querySelectorAll<HTMLButtonElement>(".floor-card__media").forEach((btn) => {
     btn.addEventListener("click", () => {
       const image = project.floorPlan![Number(btn.dataset.floorIndex)].image!;
-      openLightbox(floorImages.map((g) => ({ src: g.src, alt: g.alt })), floorImages.indexOf(image));
+      openLightbox(floorImages.map((g) => ({ src: g.src, alt: g.alt, srcset: photoSrcset(g) })), floorImages.indexOf(image));
     });
   });
 
@@ -482,7 +483,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   galleryEl.querySelectorAll<HTMLButtonElement>(".gallery-grid__item").forEach((btn) => {
     btn.addEventListener("click", () => {
       const index = Number(btn.dataset.index);
-      openLightbox(gallery.map((g) => ({ src: g.src, alt: g.alt })), index);
+      openLightbox(gallery.map((g) => ({ src: g.src, alt: g.alt, srcset: photoSrcset(g) })), index);
     });
   });
 }

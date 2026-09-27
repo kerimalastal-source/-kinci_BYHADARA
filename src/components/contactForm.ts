@@ -5,6 +5,7 @@ import { campaignSource } from "../utils/campaign";
 import { getFavorites, setFavorites } from "./favorites";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
 import { trackLead } from "../utils/tracking";
+import { photoAttrs } from "../utils/responsiveImage";
 
 const CONTACT_EMAIL = "info@byhadara.com";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -57,7 +58,7 @@ function renderProjectCard(slugs: string[]): string {
     <div class="inquiry-project__thumbs${single ? "" : " inquiry-project__thumbs--stack"}">
       ${projects
         .slice(0, 3)
-        .map((p) => `<img src="${p.coverImage.src}" alt="" width="${p.coverImage.width}" height="${p.coverImage.height}" />`)
+        .map((p) => `<img ${photoAttrs(p.coverImage, "96px")} alt="" width="${p.coverImage.width}" height="${p.coverImage.height}" />`)
         .join("")}
     </div>
     <div class="inquiry-project__body">
@@ -102,7 +103,7 @@ function renderChips(slugs: string[], topics: Topic[] = []): string {
       const name = projectName(slug);
       return `
       <li class="project-chip">
-        <img src="${p.coverImage.src}" alt="" width="${p.coverImage.width}" height="${p.coverImage.height}" />
+        <img ${photoAttrs(p.coverImage, "48px")} alt="" width="${p.coverImage.width}" height="${p.coverImage.height}" />
         <span>${name}</span>
         <button type="button" class="project-chip__remove" data-remove="${slug}" aria-label="${t("contact.projectRemove", { name })}">${CLOSE_ICON}</button>
       </li>`;
@@ -132,7 +133,7 @@ function renderProjectPicker(selected: string[], topics: Topic[]): string {
               .map(
                 (p) => `
             <button type="button" class="project-option" data-slug="${p.slug}" aria-pressed="${selected.includes(p.slug)}">
-              <img src="${p.coverImage.src}" alt="" width="${p.coverImage.width}" height="${p.coverImage.height}" loading="lazy" />
+              <img ${photoAttrs(p.coverImage, "96px")} alt="" width="${p.coverImage.width}" height="${p.coverImage.height}" loading="lazy" />
               <span class="project-option__text">
                 <strong>${projectName(p.slug)}</strong>
                 <span>${placeLine(p.district, p.city)}</span>

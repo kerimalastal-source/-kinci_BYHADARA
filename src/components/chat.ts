@@ -9,6 +9,7 @@ import { toWesternDigits } from "../utils/numbers";
 import { placeKey } from "../utils/place";
 import { consultancyPath, parseRoute, splitLocale } from "../seo/routes";
 import { videoTourHref, VIDEO_TOUR_ICON } from "./videoTourInvite";
+import { photoAttrs } from "../utils/responsiveImage";
 
 /**
  * Guided chat assistant: answers from the site's own data (projects, citizenship, contact)
@@ -269,7 +270,7 @@ function renderProjectOption(p: Project): string {
   const content = getProjectContent(p.slug);
   return `
     <button type="button" class="chat-option${p.soldOut ? " is-sold" : ""}" data-chat-project="${p.slug}">
-      <img src="${p.coverImage.src}" alt="" width="56" height="56" loading="lazy" />
+      <img ${photoAttrs(p.coverImage, "56px")} alt="" width="56" height="56" loading="lazy" />
       <span class="chat-option__text">
         <strong>${content.name}</strong>
         <span>${placeLine(p.district, p.city)}</span>
@@ -321,7 +322,7 @@ function renderProject(slug: string): string {
   return `
     <p>${t("chat.projectIntro", { name: content.name })}</p>
     <article class="chat-card">
-      <img class="chat-card__img" src="${p.coverImage.src}" alt="${p.coverImage.alt}" width="${p.coverImage.width}" height="${p.coverImage.height}" loading="lazy" />
+      <img class="chat-card__img" ${photoAttrs(p.coverImage, "(max-width: 640px) 100vw, 360px")} alt="${p.coverImage.alt}" width="${p.coverImage.width}" height="${p.coverImage.height}" loading="lazy" />
       <div class="chat-card__body">
         <h3 class="chat-card__title">${content.name}</h3>
         <p class="chat-card__place">${placeLine(p.district, p.city)}</p>
@@ -373,7 +374,7 @@ function renderHere(slug: string): string {
   const name = getProjectContent(slug).name;
   return `
     <div class="chat-here">
-      <img src="${p.coverImage.src}" alt="" width="52" height="52" />
+      <img ${photoAttrs(p.coverImage, "52px")} alt="" width="52" height="52" />
       <span class="chat-option__text">
         <strong>${name}</strong>
         <span>${placeLine(p.district, p.city)}</span>

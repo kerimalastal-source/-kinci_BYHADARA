@@ -1,6 +1,7 @@
 import { t, tRaw, link } from "../i18n";
 import { initScrollReveal } from "../components/scrollReveal";
 import { renderVideoTourBooking, initVideoTourBooking } from "../components/videoTourBooking";
+import { photoAttrs } from "../utils/responsiveImage";
 
 interface TextItem {
   title: string;
@@ -40,7 +41,7 @@ function heroVisual(): string {
       <div class="tour-hero__visual" aria-hidden="true">
         <div class="tour-phone">
           <div class="tour-phone__screen">
-            <img src="/images/projects/diamond-marin/living-room.jpg" alt="" width="1297" height="924" fetchpriority="high" />
+            <img ${photoAttrs({ src: "/images/projects/diamond-marin/living-room.jpg", width: 1297 }, "290px")} alt="" width="1297" height="924" fetchpriority="high" />
             <span class="tour-phone__live"><span class="tour-phone__rec"></span>${t("videoTour.mock.live")} <span dir="ltr">12:48</span></span>
             <span class="tour-phone__pip">${PERSON}<span>${t("videoTour.mock.advisor")}</span></span>
             <p class="tour-phone__caption">${t("videoTour.mock.caption")}</p>
@@ -113,7 +114,7 @@ export function renderVideoTour(el: HTMLElement): void {
               return `
           <li class="tour-see__card" data-reveal data-reveal-index="${i % 4}">
             <div class="tour-see__media">
-              <img src="${img.src}" alt="" width="${img.width}" height="${img.height}" loading="lazy" />
+              <img ${photoAttrs(img, "(max-width: 640px) calc(100vw - 32px), (max-width: 1100px) 50vw, 300px")} alt="" width="${img.width}" height="${img.height}" loading="lazy" />
               <span class="tour-see__icon">${SEE_ICONS[i]}</span>
             </div>
             <div class="tour-see__body">

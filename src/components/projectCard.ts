@@ -2,6 +2,7 @@ import type { Project } from "../data/projects";
 import { t, getProjectContent, link, placeLine } from "../i18n";
 import { favoriteButton } from "./favorites";
 import { statIcon } from "./statIcons";
+import { photoAttrs } from "../utils/responsiveImage";
 
 export function projectStatusLabel(status: Project["status"]): string {
   switch (status) {
@@ -39,7 +40,7 @@ export function renderProjectCard(project: Project): string {
     <article class="project-card">
       <a class="project-card__media" href="${link(`/projects/${project.slug}`)}" aria-label="${content.name}">
         <img
-          src="${project.coverImage.src}"
+          ${photoAttrs(project.coverImage, "(max-width: 640px) calc(100vw - 32px), (max-width: 1100px) 50vw, 400px")}
           alt="${project.coverImage.alt}"
           width="${project.coverImage.width}"
           height="${project.coverImage.height}"

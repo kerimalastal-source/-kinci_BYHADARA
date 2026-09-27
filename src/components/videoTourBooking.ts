@@ -5,6 +5,7 @@ import { campaignSource } from "../utils/campaign";
 import { trackSchedule } from "../utils/tracking";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "./floatingButtons";
+import { photoAttrs } from "../utils/responsiveImage";
 
 /**
  * Private video tour booking: project(s) -> day and time (shown in Istanbul time and the
@@ -239,7 +240,7 @@ function renderProjectStep(state: TourState): string {
             const on = state.projects.includes(p.slug);
             return `
           <button type="button" class="tour-project" data-tour-project="${p.slug}" aria-pressed="${on}">
-            <img src="${p.coverImage.src}" alt="" width="${p.coverImage.width}" height="${p.coverImage.height}" loading="lazy" />
+            <img ${photoAttrs(p.coverImage, "64px")} alt="" width="${p.coverImage.width}" height="${p.coverImage.height}" loading="lazy" />
             <span class="tour-project__text">
               <span class="tour-project__name">${projectName(p.slug)}</span>
               <span class="tour-project__place">${placeLine(p.district, p.city)}</span>

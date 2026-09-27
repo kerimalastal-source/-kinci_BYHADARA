@@ -1,6 +1,7 @@
 import { t, tRaw, link } from "../i18n";
 import { getBlogPostBySlug, getSortedBlogPosts } from "../data/blog";
 import { renderNotFound } from "./notFound";
+import { photoAttrs, heroBackground } from "../utils/responsiveImage";
 
 interface BlogArticleContent {
   category: string;
@@ -20,7 +21,7 @@ export function renderBlogDetail(el: HTMLElement, slug: string): void {
   const others = getSortedBlogPosts().filter((p) => p.slug !== post.slug).slice(0, 3);
 
   el.innerHTML = `
-    <section class="project-hero" style="background-image: linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88)), url('${post.coverImage.src}')">
+    <section class="project-hero" style="${heroBackground(post.coverImage, "linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88))")}">
       <div class="container project-hero__inner">
         <a class="back-link" href="${link("/blog")}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -53,7 +54,7 @@ export function renderBlogDetail(el: HTMLElement, slug: string): void {
               return `
               <article class="blog-card">
                 <a class="blog-card__media" href="${link(`/blog/${p.slug}`)}" aria-label="${c.title}">
-                  <img src="${p.coverImage.src}" alt="${c.title}" width="${p.coverImage.width}" height="${p.coverImage.height}" loading="lazy" />
+                  <img ${photoAttrs(p.coverImage, "(max-width: 640px) calc(100vw - 32px), (max-width: 1100px) 50vw, 400px")} alt="${c.title}" width="${p.coverImage.width}" height="${p.coverImage.height}" loading="lazy" />
                 </a>
                 <div class="blog-card__body">
                   <p class="blog-card__category">${c.category}</p>

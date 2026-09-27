@@ -4,6 +4,7 @@ import { projectStatusLabel } from "./projectCard";
 import { favoriteButton } from "./favorites";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "./floatingButtons";
 import { videoTourHref, VIDEO_TOUR_ICON } from "./videoTourInvite";
+import { photoAttrs } from "../utils/responsiveImage";
 
 /**
  * "Find My Project": four quick questions on the home page, then the projects that fit,
@@ -213,7 +214,7 @@ function renderResultCard(m: Match): string {
   return `
     <article class="match-card">
       <a class="match-card__media" href="${href}" tabindex="-1" aria-hidden="true">
-        <img src="${p.coverImage.src}" alt="" width="${p.coverImage.width}" height="${p.coverImage.height}" loading="lazy" />
+        <img ${photoAttrs(p.coverImage, "(max-width: 640px) calc(100vw - 32px), 340px")} alt="" width="${p.coverImage.width}" height="${p.coverImage.height}" loading="lazy" />
         <span class="match-card__status">
           <span class="badge badge--${p.status}">${projectStatusLabel(p.status)}</span>
           ${p.unitsAvailable ? `<span class="badge badge--available">${t("common.unitsAvailable")}</span>` : ""}

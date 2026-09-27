@@ -1,5 +1,6 @@
 import { t, tRaw, link } from "../i18n";
 import { getSortedBlogPosts } from "../data/blog";
+import { photoAttrs } from "../utils/responsiveImage";
 
 interface BlogArticleContent {
   category: string;
@@ -29,7 +30,7 @@ export function renderBlog(el: HTMLElement): void {
               <article class="blog-card">
                 <a class="blog-card__media" href="${link(`/blog/${post.slug}`)}" aria-label="${content.title}">
                   <img
-                    src="${post.coverImage.src}"
+                    ${photoAttrs(post.coverImage, "(max-width: 640px) calc(100vw - 32px), (max-width: 1100px) 50vw, 400px")}
                     alt="${content.title}"
                     width="${post.coverImage.width}"
                     height="${post.coverImage.height}"

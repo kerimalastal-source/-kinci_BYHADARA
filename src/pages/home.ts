@@ -9,8 +9,11 @@ import { statIcon } from "../components/statIcons";
 import { consultancyPath } from "../seo/routes";
 import { renderProjectMatch, initProjectMatch } from "../components/projectMatch";
 import { renderVideoTourInvite } from "../components/videoTourInvite";
+import { photoAttrs, photoSrcset, heroBackground } from "../utils/responsiveImage";
 
-const HERO_IMAGE = "/hero-istanbul.jpg";
+const HERO_IMAGE = { src: "/hero-istanbul.jpg", width: 2200 };
+/** The spotlight photo fills the width on phones and tablets, about half the container on large screens. */
+const SPOTLIGHT_SIZES = "(max-width: 900px) calc(100vw - 32px), 640px";
 
 /* The New Launch project promoted in its own section above the project grid.
    Change the slug to promote a different project. */
@@ -37,7 +40,7 @@ export function renderHome(el: HTMLElement): void {
     .slice(0, 3);
 
   el.innerHTML = `
-    <section class="hero" style="background-image: linear-gradient(180deg, rgba(15,20,18,.55), rgba(15,20,18,.82)), url('${HERO_IMAGE}')">
+    <section class="hero" style="${heroBackground(HERO_IMAGE, "linear-gradient(180deg, rgba(15,20,18,.55), rgba(15,20,18,.82))")}">
       <div class="container hero__inner">
         <p class="eyebrow eyebrow--on-dark">${t("home.heroEyebrow")}</p>
         <h1 class="hero__title">${t("home.heroTitle")}</h1>
@@ -79,7 +82,7 @@ export function renderHome(el: HTMLElement): void {
     <section class="section about-teaser">
       <div class="container about-teaser__grid">
         <div class="about-teaser__media">
-          <img src="/images/projects/lotus-koru-2/landscaped-grounds.jpg" alt="HADARA residential development in Beylikdüzü" loading="lazy" />
+          <img ${photoAttrs({ src: "/images/projects/lotus-koru-2/landscaped-grounds.jpg", width: 1733 }, "(max-width: 900px) calc(100vw - 32px), 600px")} alt="HADARA residential development in Beylikdüzü" loading="lazy" />
         </div>
         <div class="about-teaser__content">
           <p class="eyebrow">${t("home.aboutEyebrow")}</p>
@@ -192,7 +195,7 @@ function renderSpotlight(project: Project): string {
           <div class="spotlight__media">
             <a class="spotlight__main" href="${detailHref}" tabindex="-1" aria-hidden="true">
               <img
-                src="${project.coverImage.src}"
+                ${photoAttrs(project.coverImage, SPOTLIGHT_SIZES)}
                 alt="${project.coverImage.alt}"
                 width="${project.coverImage.width}"
                 height="${project.coverImage.height}"
@@ -205,8 +208,8 @@ function renderSpotlight(project: Project): string {
               ${images
                 .map(
                   (img, i) => `
-                <button type="button" class="spotlight__thumb${i === 0 ? " is-active" : ""}" data-spotlight-thumb="${img.src}" data-alt="${img.alt}" aria-label="${img.alt}">
-                  <img src="${img.src}" alt="" loading="lazy" />
+                <button type="button" class="spotlight__thumb${i === 0 ? " is-active" : ""}" data-spotlight-thumb="${img.src}" data-srcset="${photoSrcset(img)}" data-alt="${img.alt}" aria-label="${img.alt}">
+                  <img ${photoAttrs(img, "160px")} alt="" loading="lazy" />
                 </button>`
                 )
                 .join("")}
@@ -259,6 +262,9 @@ function initSpotlightGallery(root: HTMLElement): void {
   if (!main) return;
   thumbs.forEach((thumb) => {
     thumb.addEventListener("click", () => {
+      // srcset wins over src, so both are swapped.
+      if (thumb.dataset.srcset) main.srcset = thumb.dataset.srcset;
+      else main.removeAttribute("srcset");
       main.src = thumb.dataset.spotlightThumb ?? main.src;
       main.alt = thumb.dataset.alt ?? main.alt;
       thumbs.forEach((b) => b.classList.toggle("is-active", b === thumb));
