@@ -1,6 +1,6 @@
-// Messages for a new video tour booking (api/book.ts): the visitor's confirmation email in
-// the site language they booked in (with a calendar file), and the team's copy by email
-// and Telegram, in Arabic.
+// Messages for video tour bookings: the visitor's emails in the site language they booked
+// in (with a calendar file) — booked (api/book.ts), confirmed by the team and moved to a
+// new time (api/booking-admin.ts) — and the team's copies by email and Telegram, in Arabic.
 import { escapeHtml } from "./telegram.js";
 import type { EmailAttachment } from "./email.js";
 
@@ -29,26 +29,26 @@ export interface BookingDetails {
   origin: string;
 }
 
-const ISTANBUL = "Europe/Istanbul";
+export const ISTANBUL = "Europe/Istanbul";
 const TOUR_MINUTES = 45;
-const TEAM_PHONE = "+90 531 930 92 14";
+export const TEAM_PHONE = "+90 531 930 92 14";
 const TEAM_EMAIL = "info@byhadara.com";
 
-const APPS: Record<SiteLocale, Record<App, string>> = {
+export const APPS: Record<SiteLocale, Record<App, string>> = {
   en: { whatsapp: "WhatsApp video", facetime: "FaceTime", zoom: "Zoom", meet: "Google Meet" },
   ar: { whatsapp: "واتساب فيديو", facetime: "فيس تايم", zoom: "زوم", meet: "جوجل ميت" },
   fr: { whatsapp: "Vidéo WhatsApp", facetime: "FaceTime", zoom: "Zoom", meet: "Google Meet" },
   ru: { whatsapp: "Видео в WhatsApp", facetime: "FaceTime", zoom: "Zoom", meet: "Google Meet" }
 };
 
-const TOUR_LANGUAGES: Record<SiteLocale, Record<TourLanguage, string>> = {
+export const TOUR_LANGUAGES: Record<SiteLocale, Record<TourLanguage, string>> = {
   en: { ar: "Arabic", en: "English", tr: "Turkish" },
   ar: { ar: "العربية", en: "الإنجليزية", tr: "التركية" },
   fr: { ar: "Arabe", en: "Anglais", tr: "Turc" },
   ru: { ar: "Арабский", en: "Английский", tr: "Турецкий" }
 };
 
-const CONTACT_AR: Record<ContactMethod, string> = {
+export const CONTACT_AR: Record<ContactMethod, string> = {
   email: "الإيميل",
   phone: "اتصال هاتفي",
   whatsapp: "واتساب",
@@ -172,20 +172,20 @@ const VISITOR: Record<SiteLocale, VisitorText> = {
   }
 };
 
-const fill = (text: string, vars: Record<string, string>) => text.replace(/\{(\w+)\}/g, (_, key: string) => vars[key] ?? `{${key}}`);
-const list = (items: string[], locale: SiteLocale) => items.join(locale === "ar" ? "، " : ", ");
+export const fill = (text: string, vars: Record<string, string>) => text.replace(/\{(\w+)\}/g, (_, key: string) => vars[key] ?? `{${key}}`);
+export const list = (items: string[], locale: SiteLocale) => items.join(locale === "ar" ? "، " : ", ");
 const tag = (locale: SiteLocale) => `${locale}-u-nu-latn`;
 
-function formatDate(ms: number, locale: SiteLocale, timeZone: string): string {
+export function formatDate(ms: number, locale: SiteLocale, timeZone: string): string {
   return new Intl.DateTimeFormat(tag(locale), { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone }).format(ms);
 }
 
-function formatTime(ms: number, locale: SiteLocale, timeZone: string): string {
+export function formatTime(ms: number, locale: SiteLocale, timeZone: string): string {
   return new Intl.DateTimeFormat(tag(locale), { hour: "numeric", minute: "2-digit", timeZone }).format(ms);
 }
 
 /** The visitor's own date/time for the slot, or null when their zone matches Istanbul's clock. */
-function visitorClock(details: BookingDetails, locale: SiteLocale): string | null {
+export function visitorClock(details: BookingDetails, locale: SiteLocale): string | null {
   const zone = details.timeZone;
   if (!zone) return null;
   const ms = details.slot.getTime();
@@ -199,7 +199,8 @@ function visitorClock(details: BookingDetails, locale: SiteLocale): string | nul
 const icsStamp = (ms: number) => new Date(ms).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
 const icsEscape = (s: string) => s.replace(/\\/g, "\\\\").replace(/[,;]/g, (c) => `\\${c}`).replace(/\n/g, "\\n");
 
-function calendarFile(details: BookingDetails): EmailAttachment {
+/** `sequence` must grow with each change of the same booking, so calendars replace the old event. */
+function calendarFile(details: BookingDetails, sequence = 0): EmailAttachment {
   const text = VISITOR[details.locale];
   const start = details.slot.getTime();
   const app = APPS[details.locale][details.app];
@@ -211,6 +212,7 @@ function calendarFile(details: BookingDetails): EmailAttachment {
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",
     `UID:${details.reference}@hadararealestate.com`,
+    `SEQUENCE:${sequence}`,
     `DTSTAMP:${icsStamp(Date.now())}`,
     `DTSTART:${icsStamp(start)}`,
     `DTEND:${icsStamp(start + TOUR_MINUTES * 60_000)}`,
@@ -242,7 +244,7 @@ function rowsHtml(rows: [string, string][], rtl: boolean): string {
     .join("");
 }
 
-function layout(body: string, rtl: boolean, lang: string): string {
+export function layout(body: string, rtl: boolean, lang: string): string {
   return `<!doctype html>
 <html lang="${lang}" dir="${rtl ? "rtl" : "ltr"}">
 <body style="margin:0;padding:0;background:#f7f5f0;font-family:Arial,'Segoe UI',Tahoma,sans-serif">
@@ -261,13 +263,105 @@ function layout(body: string, rtl: boolean, lang: string): string {
 </html>`;
 }
 
-const ltrSpan = (value: string) => `<span dir="ltr" style="white-space:nowrap">${value}</span>`;
+export const ltrSpan = (value: string) => `<span dir="ltr" style="white-space:nowrap">${value}</span>`;
 
-/* ---------- Visitor confirmation ---------- */
+/* ---------- Visitor emails ---------- */
 
-export function visitorEmail(details: BookingDetails): { subject: string; html: string; text: string; attachment: EmailAttachment } {
+/** What the email is about: the new booking, the team's confirmation, or a new time to answer. */
+export type VisitorUpdate =
+  | { kind: "booked" }
+  | { kind: "confirmed"; sequence: number }
+  | { kind: "rescheduled"; sequence: number; acceptUrl: string; declineUrl: string };
+
+interface UpdateText {
+  subject: string;
+  intro: string;
+  calendar: string;
+}
+
+interface RescheduleText extends UpdateText {
+  question: string;
+  accept: string;
+  decline: string;
+  declineNote: string;
+}
+
+const CONFIRMED: Record<SiteLocale, UpdateText> = {
+  en: {
+    subject: "Your video tour is confirmed — {ref}",
+    intro: "Good news: our team has confirmed your private video tour. Here are the details:",
+    calendar: "The attached calendar file adds the tour to your calendar."
+  },
+  ar: {
+    subject: "تم تأكيد جولتك عبر الفيديو — {ref}",
+    intro: "يسعدنا إبلاغك بأن فريقنا أكّد جولتك الخاصة عبر الفيديو. إليك التفاصيل:",
+    calendar: "ملف التقويم المرفق يضيف الجولة إلى تقويمك."
+  },
+  fr: {
+    subject: "Votre visite vidéo est confirmée — {ref}",
+    intro: "Bonne nouvelle : notre équipe a confirmé votre visite privée en vidéo. Voici les détails :",
+    calendar: "Le fichier de calendrier joint ajoute la visite à votre agenda."
+  },
+  ru: {
+    subject: "Ваша видеоэкскурсия подтверждена — {ref}",
+    intro: "Хорошие новости: наша команда подтвердила вашу частную видеоэкскурсию. Подробности:",
+    calendar: "Приложенный файл календаря добавит экскурсию в ваш календарь."
+  }
+};
+
+const RESCHEDULED: Record<SiteLocale, RescheduleText> = {
+  en: {
+    subject: "New time for your video tour — {ref}",
+    intro: "Our team has updated the time of your private video tour. Here are the new details:",
+    calendar: "The attached calendar file has the new time.",
+    question: "Does this time suit you?",
+    accept: "Yes, this time suits me",
+    decline: "I need another time",
+    declineNote: "If you need another time, our team will contact you to agree on one."
+  },
+  ar: {
+    subject: "موعد جديد لجولتك عبر الفيديو — {ref}",
+    intro: "قام فريقنا بتحديث موعد جولتك الخاصة عبر الفيديو. إليك التفاصيل الجديدة:",
+    calendar: "ملف التقويم المرفق يتضمن الموعد الجديد.",
+    question: "هل يناسبك هذا الموعد؟",
+    accept: "نعم، الموعد مناسب",
+    decline: "أحتاج إلى موعد آخر",
+    declineNote: "إذا كنت تحتاج إلى موعد آخر، فسيتواصل معك فريقنا للاتفاق على موعد يناسبك."
+  },
+  fr: {
+    subject: "Nouvel horaire pour votre visite vidéo — {ref}",
+    intro: "Notre équipe a modifié l'horaire de votre visite privée en vidéo. Voici les nouveaux détails :",
+    calendar: "Le fichier de calendrier joint contient le nouvel horaire.",
+    question: "Cet horaire vous convient-il ?",
+    accept: "Oui, cet horaire me convient",
+    decline: "J'ai besoin d'un autre horaire",
+    declineNote: "Si vous avez besoin d'un autre horaire, notre équipe vous contactera pour en convenir."
+  },
+  ru: {
+    subject: "Новое время вашей видеоэкскурсии — {ref}",
+    intro: "Наша команда изменила время вашей частной видеоэкскурсии. Новые подробности:",
+    calendar: "В приложенном файле календаря — новое время.",
+    question: "Вам подходит это время?",
+    accept: "Да, это время мне подходит",
+    decline: "Мне нужно другое время",
+    declineNote: "Если вам нужно другое время, наша команда свяжется с вами, чтобы его согласовать."
+  }
+};
+
+const button = (href: string, label: string, primary: boolean) =>
+  `<a href="${escapeHtml(href)}" style="display:inline-block;margin:0 6px 10px;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;${
+    primary ? "background:#0f2b21;color:#ffffff" : "background:#ffffff;color:#0f2b21;border:1px solid #0f2b21"
+  }">${escapeHtml(label)}</a>`;
+
+export function visitorEmail(
+  details: BookingDetails,
+  update: VisitorUpdate = { kind: "booked" }
+): { subject: string; html: string; text: string; attachment: EmailAttachment } {
   const locale = details.locale;
   const text = VISITOR[locale];
+  const variant = update.kind === "confirmed" ? CONFIRMED[locale] : update.kind === "rescheduled" ? RESCHEDULED[locale] : null;
+  const reschedule = update.kind === "rescheduled" ? RESCHEDULED[locale] : null;
+  const intro = variant?.intro ?? text.intro;
   const rtl = locale === "ar";
   const ms = details.slot.getTime();
   const app = APPS[locale][details.app];
@@ -286,15 +380,24 @@ export function visitorEmail(details: BookingDetails): { subject: string; html: 
     [text.language, escapeHtml(TOUR_LANGUAGES[locale][details.tourLanguage])]
   ];
 
+  // A new time asks the visitor to answer; the other emails explain what happens next.
+  const answer =
+    update.kind === "rescheduled" && reschedule
+      ? `
+      <p style="margin:22px 0 12px;font-weight:700;color:#0f2b21;font-size:16px;text-align:center">${reschedule.question}</p>
+      <p style="margin:0 0 6px;text-align:center">${button(update.acceptUrl, reschedule.accept, true)}${button(update.declineUrl, reschedule.decline, false)}</p>
+      <p style="margin:0 0 18px;color:#6f776f;font-size:13px;text-align:center">${reschedule.declineNote}</p>`
+      : `
+      <p style="margin:22px 0 6px;font-weight:700;color:#0f2b21">${text.nextTitle}</p>
+      <p style="margin:0 0 8px">${escapeHtml(fill(text.next, { app }))}${needsLink ? ` ${text.linkNote}` : ""}</p>
+      <p style="margin:0 0 8px">${fill(escapeHtml(text.change), { phone: ltrSpan(TEAM_PHONE) })}</p>`;
+
   const html = layout(
     `
       <p style="margin:0 0 12px;font-size:17px;color:#0f2b21;font-weight:700">${escapeHtml(fill(text.hello, { name: details.name }))}</p>
-      <p style="margin:0 0 18px">${text.intro}</p>
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border:1px solid #eee7d8;border-radius:10px;border-collapse:separate;overflow:hidden">${rowsHtml(rows, rtl)}</table>
-      <p style="margin:22px 0 6px;font-weight:700;color:#0f2b21">${text.nextTitle}</p>
-      <p style="margin:0 0 8px">${escapeHtml(fill(text.next, { app }))}${needsLink ? ` ${text.linkNote}` : ""}</p>
-      <p style="margin:0 0 8px">${fill(escapeHtml(text.change), { phone: ltrSpan(TEAM_PHONE) })}</p>
-      <p style="margin:0 0 18px;color:#6f776f;font-size:13px">${text.calendar}</p>
+      <p style="margin:0 0 18px">${intro}</p>
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border:1px solid #eee7d8;border-radius:10px;border-collapse:separate;overflow:hidden">${rowsHtml(rows, rtl)}</table>${answer}
+      <p style="margin:0 0 18px;color:#6f776f;font-size:13px">${variant?.calendar ?? text.calendar}</p>
       <p style="margin:0">${text.thanks}<br><strong style="color:#0f2b21">${text.team}</strong></p>
       <p style="margin:18px 0 0;color:#6f776f;font-size:12px">${ltrSpan(TEAM_PHONE)} · ${ltrSpan(TEAM_EMAIL)} · ${ltrSpan("www.hadararealestate.com")}</p>`,
     rtl,
@@ -304,7 +407,7 @@ export function visitorEmail(details: BookingDetails): { subject: string; html: 
   const plain = [
     fill(text.hello, { name: details.name }),
     "",
-    text.intro,
+    intro,
     "",
     `${text.reference}: ${details.reference}`,
     `${text.projects}: ${projectNames}`,
@@ -313,14 +416,20 @@ export function visitorEmail(details: BookingDetails): { subject: string; html: 
     `${text.app}: ${app}`,
     `${text.language}: ${TOUR_LANGUAGES[locale][details.tourLanguage]}`,
     "",
-    `${fill(text.next, { app })}${needsLink ? ` ${text.linkNote}` : ""}`,
-    fill(text.change, { phone: TEAM_PHONE }),
+    ...(update.kind === "rescheduled" && reschedule
+      ? [reschedule.question, `${reschedule.accept}: ${update.acceptUrl}`, `${reschedule.decline}: ${update.declineUrl}`, reschedule.declineNote]
+      : [`${fill(text.next, { app })}${needsLink ? ` ${text.linkNote}` : ""}`, fill(text.change, { phone: TEAM_PHONE })]),
     "",
     text.thanks,
     text.team
   ].join("\n");
 
-  return { subject: fill(text.subject, { ref: details.reference }), html, text: plain, attachment: calendarFile(details) };
+  return {
+    subject: fill(variant?.subject ?? text.subject, { ref: details.reference }),
+    html,
+    text: plain,
+    attachment: calendarFile(details, update.kind === "booked" ? 0 : update.sequence)
+  };
 }
 
 /* ---------- Team copy (Arabic) ---------- */
@@ -345,7 +454,7 @@ function teamRows(details: BookingDetails): [string, string][] {
   ];
 }
 
-const adminUrl = (origin: string) => `${origin}/ar/admin/bookings`;
+export const adminUrl = (origin: string) => `${origin}/ar/admin/bookings`;
 
 export function teamEmail(details: BookingDetails): { subject: string; html: string; text: string } {
   const ms = details.slot.getTime();

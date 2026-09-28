@@ -3850,6 +3850,97 @@ body.map-open .back-to-top {
   display: none;
 }
 
+.booking-card__error--ok {
+  color: var(--color-success, #1f7a4d);
+}
+
+/* The visitor's answer to a time the team changed. */
+.booking-card__reply {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.booking-card__reply--waiting {
+  background: #fbf3df;
+  color: #7a5a12;
+}
+
+.booking-card__reply--accepted {
+  background: #e6f3ec;
+  color: #1f6b44;
+}
+
+.booking-card__reply--declined {
+  background: #fbe9e7;
+  color: #a1332a;
+}
+
+/* "Change time" panel */
+.booking-edit {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+}
+
+.booking-edit__title {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.booking-edit__fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.booking-edit__field {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.booking-edit__field select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.booking-edit__hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.booking-edit__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.booking-edit__actions .btn {
+  min-height: 42px;
+}
+
+@media (max-width: 520px) {
+  .booking-edit__fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .booking-card__actions {
   display: flex;
   flex-wrap: wrap;
@@ -8209,18 +8300,26 @@ body.nav-open .back-to-top {
   color: var(--color-accent-light);
 }
 
-/* An hour someone else already booked (one tour per hour). */
+/* A time someone else already booked, or the team's lunch break: grey and not clickable. */
 .tour-slot.is-taken {
   cursor: not-allowed;
-  background: var(--color-surface-alt);
-  border-style: dashed;
-  color: var(--color-muted);
+  background: #ecebe8;
+  border-color: #dedcd6;
+  color: #9b9a95;
+  transform: none;
+}
+
+.tour-slot.is-taken:hover {
+  border-color: #dedcd6;
   transform: none;
 }
 
 .tour-slot.is-taken .tour-slot__time {
-  text-decoration: line-through;
   font-weight: 600;
+}
+
+.tour-slot.is-taken .tour-slot__local {
+  color: #9b9a95;
 }
 
 /* Details + summary */

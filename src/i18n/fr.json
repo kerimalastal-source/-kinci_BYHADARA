@@ -948,7 +948,7 @@
   },
   "adminBookings": {
     "heroTitle": "Réservations de visites vidéo",
-    "heroSubtitle": "Toutes les visites vidéo privées réservées sur le site. Une visite par heure ; une heure annulée redevient libre.",
+    "heroSubtitle": "Toutes les visites vidéo privées réservées sur le site. Une visite par créneau (toutes les demi-heures) ; un créneau annulé redevient disponible.",
     "nav": {
       "listings": "Annonces de revente",
       "bookings": "Réservations de visites"
@@ -971,7 +971,10 @@
     "actions": {
       "confirm": "Confirmer",
       "cancel": "Annuler la réservation",
-      "restore": "Rétablir"
+      "restore": "Rétablir",
+      "edit": "Changer l'horaire",
+      "saveTime": "Enregistrer et prévenir le visiteur",
+      "closeEdit": "Fermer"
     },
     "labels": {
       "phone": "Téléphone",
@@ -988,11 +991,33 @@
     },
     "istanbulTime": "heure d'Istanbul",
     "whatsapp": "WhatsApp",
-    "cancelNote": "L'annulation libère l'heure pour d'autres visiteurs. Le visiteur n'est pas prévenu automatiquement — contactez-le vous-mêmes.",
-    "cancelConfirm": "Annuler la visite de {name} le {when} ?\n\nL'heure redevient libre. Le visiteur ne sera PAS prévenu automatiquement.",
-    "restoreTaken": "Quelqu'un d'autre a réservé cette heure entre-temps : la réservation ne peut pas être rétablie.",
+    "cancelNote": "Annuler libère le créneau pour d'autres visiteurs et n'envoie aucune notification automatique au visiteur — contactez-le vous-mêmes. Confirmer ou changer l'horaire envoie un e-mail au visiteur.",
+    "cancelConfirm": "Annuler la visite de {name} le {when} ?\n\nLe créneau redevient disponible et le visiteur ne reçoit aucune notification automatique.",
+    "restoreTaken": "Quelqu'un d'autre a réservé ce créneau après l'annulation : la réservation ne peut pas être restaurée.",
     "saveError": "La modification n'a pas pu être enregistrée. Réessayez.",
-    "loadError": "Les réservations n'ont pas pu être chargées. Actualisez la page."
+    "loadError": "Les réservations n'ont pas pu être chargées. Actualisez la page.",
+    "confirmPrompt": "Confirmer la visite de {name} le {when} ?\n\nLe visiteur recevra un e-mail de confirmation.",
+    "reschedulePrompt": "Déplacer la visite de {name} au {when} ?\n\nLe visiteur recevra un e-mail avec le nouvel horaire, lui demandant s'il lui convient.",
+    "slotTaken": "Cet horaire est réservé par un autre visiteur. Choisissez-en un autre.",
+    "notSent": "Enregistré, mais l'e-mail au visiteur n'a pas pu être envoyé — contactez-le directement.",
+    "edit": {
+      "title": "Choisissez le nouvel horaire",
+      "date": "Date",
+      "time": "Heure (Istanbul)",
+      "lunch": "pause déjeuner",
+      "taken": "réservé",
+      "hint": "Le visiteur recevra un e-mail avec le nouvel horaire, lui demandant s'il lui convient ; sa réponse vous parviendra sur Telegram et par e-mail.",
+      "same": "C'est l'horaire actuel. Choisissez-en un autre."
+    },
+    "sent": {
+      "confirm": "Confirmé, et le visiteur a reçu un e-mail de confirmation.",
+      "reschedule": "Horaire mis à jour, et le visiteur a reçu un e-mail lui demandant si le nouvel horaire lui convient."
+    },
+    "reply": {
+      "waiting": "En attente de la réponse du visiteur au nouvel horaire",
+      "accepted": "Le visiteur a accepté le nouvel horaire",
+      "declined": "Le visiteur a besoin d'un autre horaire — contactez-le"
+    }
   },
   "notFound": {
     "title": "Page introuvable",
@@ -2465,7 +2490,7 @@
           "la référence, la date et le statut de la réservation."
         ],
         "after": [
-          "Nous utilisons ces informations uniquement pour organiser la visite et vous contacter à son sujet : vous recevez un e-mail de confirmation, et notre équipe reçoit une notification interne (par e-mail et Telegram) avec les détails de la réservation. Seule notre équipe de direction peut consulter les réservations.",
+          "Nous utilisons ces informations uniquement pour organiser la visite et vous contacter à son sujet : vous recevez un e-mail de confirmation, et notre équipe reçoit une notification interne (par e-mail et Telegram) avec les détails de la réservation. Seule notre équipe de direction peut consulter les réservations. Si notre équipe confirme ou modifie l'horaire, vous recevez un autre e-mail ; un nouvel horaire est accompagné de deux boutons pour nous dire s'il vous convient, et votre réponse est enregistrée avec la réservation.",
           "Chaque réservation est supprimée automatiquement un an après la date de la visite, et vous pouvez nous demander de la supprimer plus tôt en écrivant à info@byhadara.com"
         ]
       },

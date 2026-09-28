@@ -1,9 +1,10 @@
 // POST /api/book — books a private video tour (src/components/videoTourBooking.ts).
 //
-// The slot is taken in the database right away (book_tour(), supabase/migrations/0003:
-// one tour per hour, validation, max 3 upcoming bookings per email/phone), then the
-// visitor gets a confirmation email and the team an email + Telegram alert, in the
-// background (waitUntil) so they never delay or break the answer.
+// The slot is taken in the database right away (book_tour(), supabase/migrations/0003 and
+// 0005: one tour per half-hour slot, no lunch-break slots, validation, max 3 upcoming
+// bookings per email/phone), then the visitor gets a confirmation email and the team an
+// email + Telegram alert, in the background (waitUntil) so they never delay or break the
+// answer.
 //
 // Answers: 200 {reference} · 409 {error:"slot_taken"} · 429 {error:"limit"} ·
 // 400 {error:"invalid"} · 503 {error:"unavailable"} (database not reachable).
@@ -70,7 +71,8 @@ function parseBooking(body: unknown): Parsed | null {
   if (text(d.website, 200) || typeof d.elapsedMs !== "number" || d.elapsedMs < MIN_FILL_MS) return null;
 
   const slot = new Date(text(d.slot, 40));
-  if (Number.isNaN(slot.getTime()) || slot.getUTCMinutes() !== 0 || slot.getUTCSeconds() !== 0) return null;
+  // Tours start on the hour or the half hour (Istanbul is a whole number of hours from UTC).
+  if (Number.isNaN(slot.getTime()) || slot.getUTCMinutes() % 30 !== 0 || slot.getUTCSeconds() !== 0) return null;
 
   if (!Array.isArray(d.projects) || !d.projects.length || d.projects.length > 20) return null;
   const projects = d.projects.map((p) => {

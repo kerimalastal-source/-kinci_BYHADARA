@@ -11,8 +11,9 @@ import { supabase } from "../lib/supabase";
 /**
  * Private video tour booking: project(s) -> day and time (shown in Istanbul time and the
  * visitor's own) -> app, language and contact details. "Book" sends it to /api/book
- * (api/book.ts): the slot is taken in the database right away (one tour per hour, so
- * booked hours show as taken), the visitor gets a confirmation email and the team an
+ * (api/book.ts): the slot is taken in the database right away (one tour per half-hour
+ * slot, so booked times and the lunch break show greyed out as booked), the visitor gets
+ * a confirmation email and the team an
  * email + Telegram alert. Booking through WhatsApp stays available as an alternative.
  */
 
@@ -27,9 +28,15 @@ type Language = (typeof LANGUAGES)[number];
 /** Türkiye keeps UTC+3 all year. */
 const ISTANBUL_OFFSET_MIN = 180;
 const ISTANBUL_TZ = "Europe/Istanbul";
-/** Tours start on the hour from 9:00 to 18:00 (the team works 9:00–19:00, every day). */
+/**
+ * Tours start every half hour from 9:00 to 18:30 (the team works 9:00–19:00, every day).
+ * Times are hours as numbers: 9.5 is 9:30.
+ */
 const FIRST_HOUR = 9;
-const LAST_HOUR = 18;
+const LAST_HOUR = 18.5;
+const STEP_HOURS = 0.5;
+/** The team's lunch break: shown as booked, never bookable (the database refuses them too). */
+const LUNCH_HOURS: readonly number[] = [12, 12.5, 13];
 /** The earliest bookable slot is at least this far away, so the team can confirm it. */
 const LEAD_MINUTES = 60;
 const DAYS_AHEAD = 14;
@@ -113,7 +120,7 @@ function initialState(fromUrl: string[]): TourState {
   const sameProjects = fromUrl.every((slug) => state.projects.includes(slug));
   if (fromUrl.length && (!sameProjects || state.step === 3)) return fresh(fromUrl);
   state.projects = state.projects.filter(bookable);
-  if (state.date && (state.hour === undefined || slotUtc(state.date, state.hour) < earliestAllowed())) {
+  if (state.date && (state.hour === undefined || isLunch(state.hour) || slotUtc(state.date, state.hour) < earliestAllowed())) {
     delete state.date;
     delete state.hour;
   }
@@ -131,10 +138,10 @@ const pad = (n: number) => String(n).padStart(2, "0");
 const localeTag = () => `${getLocale()}-u-nu-latn`;
 const earliestAllowed = () => Date.now() + LEAD_MINUTES * 60_000;
 
-/** UTC instant of an Istanbul day + hour. */
+/** UTC instant of an Istanbul day + time (9.5 = 9:30). */
 function slotUtc(date: string, hour: number): number {
   const [y, m, d] = date.split("-").map(Number);
-  return Date.UTC(y, m - 1, d, hour) - ISTANBUL_OFFSET_MIN * 60_000;
+  return Date.UTC(y, m - 1, d, 0, Math.round(hour * 60)) - ISTANBUL_OFFSET_MIN * 60_000;
 }
 
 function istanbulDay(ms: number): string {
@@ -147,14 +154,19 @@ interface Day {
   hours: number[];
 }
 
-/* ---------- Booked hours (one tour per hour) ---------- */
+/* ---------- Booked times (one tour per half-hour slot) ---------- */
 
-/** UTC start times of hours someone else already holds. */
+/** UTC start times someone else already holds. */
 let taken = new Set<number>();
 /** Shown above the calendar once, e.g. after the chosen hour was just taken. */
 let notice = "";
 
 const isTaken = (date: string, hour: number) => taken.has(slotUtc(date, hour));
+function isLunch(hour: number): boolean {
+  return LUNCH_HOURS.includes(hour);
+}
+/** Booked by someone else, or the lunch break: both show as "Booked". */
+const isBlocked = (date: string, hour: number) => isLunch(hour) || isTaken(date, hour);
 
 async function loadTaken(): Promise<boolean> {
   try {
@@ -170,7 +182,7 @@ async function loadTaken(): Promise<boolean> {
 /** First free slot in the calendar, if any. */
 function firstFree(days: Day[]): { date: string; hour: number } | null {
   for (const d of days) {
-    const hour = d.hours.find((h) => !isTaken(d.date, h));
+    const hour = d.hours.find((h) => !isBlocked(d.date, h));
     if (hour !== undefined) return { date: d.date, hour };
   }
   return null;
@@ -184,8 +196,8 @@ function availableDays(): Day[] {
   for (let i = 0; i < DAYS_AHEAD; i++) {
     const date = new Date(today + i * 86_400_000).toISOString().slice(0, 10);
     const hours: number[] = [];
-    for (let h = FIRST_HOUR; h <= LAST_HOUR; h++) if (slotUtc(date, h) >= min) hours.push(h);
-    if (hours.length) days.push({ date, hours });
+    for (let h = FIRST_HOUR; h <= LAST_HOUR; h += STEP_HOURS) if (slotUtc(date, h) >= min) hours.push(h);
+    if (hours.some((h) => !isLunch(h))) days.push({ date, hours });
   }
   return days;
 }
@@ -357,7 +369,7 @@ function renderTimeStep(state: TourState): string {
                 .map((h) => {
                   const ms = slotUtc(day.date, h);
                   const local = localTime(ms);
-                  if (isTaken(day.date, h)) {
+                  if (isBlocked(day.date, h)) {
                     return `
               <button type="button" class="tour-slot is-taken" disabled>
                 <span class="tour-slot__time">${formatTime(ms, ISTANBUL_TZ)}</span>

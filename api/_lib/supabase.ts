@@ -37,3 +37,38 @@ export async function rpc(fn: string, args: Record<string, unknown>): Promise<un
   const body = await res.text();
   return body ? JSON.parse(body) : null;
 }
+
+/**
+ * A REST call made as a signed-in user: their access token goes in Authorization, so the
+ * database's row-level security and is_admin() checks apply exactly as in the browser.
+ * Used by the admin endpoint (api/booking-admin.ts); never with a token we made up.
+ */
+export async function restAs(
+  token: string,
+  path: string,
+  init: { method: "GET" | "POST" | "PATCH"; body?: unknown; prefer?: string }
+): Promise<{ status: number; data: unknown }> {
+  const url = supabaseUrl();
+  const key = supabaseKey();
+  if (!url || !key) throw new Error("Supabase URL / anon key are not set");
+
+  const res = await fetch(`${url.replace(/\/$/, "")}/rest/v1/${path}`, {
+    method: init.method,
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      ...(init.prefer ? { Prefer: init.prefer } : {})
+    },
+    body: init.body === undefined ? undefined : JSON.stringify(init.body),
+    signal: AbortSignal.timeout(5000)
+  });
+  const text = await res.text();
+  let data: unknown = null;
+  try {
+    data = text ? JSON.parse(text) : null;
+  } catch {
+    data = text;
+  }
+  return { status: res.status, data };
+}

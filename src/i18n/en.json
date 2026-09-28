@@ -948,7 +948,7 @@
   },
   "adminBookings": {
     "heroTitle": "Video tour bookings",
-    "heroSubtitle": "Every private video tour booked on the website. One tour per hour; a cancelled hour becomes free again.",
+    "heroSubtitle": "All private video tours booked on the website. One tour per time slot (every half hour); a cancelled slot becomes available again.",
     "nav": {
       "listings": "Resale listings",
       "bookings": "Video tour bookings"
@@ -971,7 +971,10 @@
     "actions": {
       "confirm": "Confirm",
       "cancel": "Cancel booking",
-      "restore": "Restore"
+      "restore": "Restore",
+      "edit": "Change time",
+      "saveTime": "Save and email the visitor",
+      "closeEdit": "Close"
     },
     "labels": {
       "phone": "Phone",
@@ -988,11 +991,33 @@
     },
     "istanbulTime": "Istanbul time",
     "whatsapp": "WhatsApp",
-    "cancelNote": "Cancelling frees the hour for other visitors. The visitor is not notified automatically — contact them yourselves.",
-    "cancelConfirm": "Cancel the tour of {name} on {when}?\n\nThe hour becomes free for others. The visitor will NOT be notified automatically.",
-    "restoreTaken": "This hour has been booked by someone else since, so the booking can't be restored.",
+    "cancelNote": "Cancelling makes the slot available to other visitors and sends the visitor no automatic notice — contact them yourselves. Confirming or changing the time emails the visitor.",
+    "cancelConfirm": "Cancel {name}'s tour on {when}?\n\nThe slot becomes available to others, and the visitor gets no automatic notice.",
+    "restoreTaken": "Someone else booked this slot after the cancellation, so the booking can't be restored.",
     "saveError": "The change couldn't be saved. Please try again.",
-    "loadError": "The bookings couldn't be loaded. Please refresh the page."
+    "loadError": "The bookings couldn't be loaded. Please refresh the page.",
+    "confirmPrompt": "Confirm {name}'s tour on {when}?\n\nThe visitor will get an email confirming the time.",
+    "reschedulePrompt": "Move {name}'s tour to {when}?\n\nThe visitor will get an email with the new time, asking whether it suits them.",
+    "slotTaken": "This time is booked by another visitor. Choose another time.",
+    "notSent": "Saved, but the email to the visitor couldn't be sent — contact them directly.",
+    "edit": {
+      "title": "Choose the new time",
+      "date": "Date",
+      "time": "Time (Istanbul)",
+      "lunch": "lunch break",
+      "taken": "booked",
+      "hint": "The visitor will get an email with the new time, asking whether it suits them; their answer reaches you on Telegram and by email.",
+      "same": "That's the current time. Choose another time."
+    },
+    "sent": {
+      "confirm": "Confirmed, and the visitor was emailed the confirmation.",
+      "reschedule": "Time updated, and the visitor was emailed to ask whether the new time suits them."
+    },
+    "reply": {
+      "waiting": "Waiting for the visitor's answer to the new time",
+      "accepted": "The visitor accepted the new time",
+      "declined": "The visitor needs another time — contact them"
+    }
   },
   "notFound": {
     "title": "Page Not Found",
@@ -2465,7 +2490,7 @@
           "the booking reference, date and status."
         ],
         "after": [
-          "We use this information only to organise the tour and contact you about it: you receive a confirmation email, and our team receives an internal notification (by email and Telegram) with the booking details. Only our management team can see bookings.",
+          "We use this information only to organise the tour and contact you about it: you receive a confirmation email, and our team receives an internal notification (by email and Telegram) with the booking details. Only our management team can see bookings. If our team confirms or changes the time, you receive another email; a new time comes with two buttons to tell us whether it suits you, and your answer is saved with the booking.",
           "Each booking is deleted automatically one year after the tour date, and you can ask us to delete it sooner by writing to info@byhadara.com"
         ]
       },
