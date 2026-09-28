@@ -95,7 +95,8 @@
     "getInTouch": "Nous contacter",
     "followUs": "Suivez-nous",
     "rights": "Tous droits réservés.",
-    "privacy": "Politique de confidentialité"
+    "privacy": "Politique de confidentialité",
+    "cookieSettings": "Paramètres des cookies"
   },
   "home": {
     "heroEyebrow": "Promotion immobilière à Istanbul",
@@ -2534,9 +2535,10 @@
           "Votre conversation avec l'assistant, vos réponses à « Trouvez votre projet » et l'avancement de votre réservation (conservés uniquement jusqu'à la fermeture de l'onglet).",
           "La source publicitaire de votre visite (conservée uniquement jusqu'à la fermeture de l'onglet).",
           "Un numéro de session aléatoire, transmis uniquement avec nos statistiques de visite anonymes (voir la section 3) et supprimé à la fermeture de l'onglet.",
-          "Votre session de connexion, si vous utilisez un compte du portail de revente."
+          "Votre session de connexion, si vous utilisez un compte du portail de revente.",
+          "Votre choix concernant les cookies (accepter ou refuser), pour ne pas vous le redemander à chaque visite."
         ],
-        "after": "Lorsqu'ils sont activés, nous utilisons Meta Pixel (Facebook et Instagram), Google Analytics et Google Ads pour compter les visites et mesurer quelles publicités génèrent des demandes. Ces outils peuvent déposer des cookies et collecter votre adresse IP et vos données de navigation. Vous pouvez bloquer ou supprimer les cookies à tout moment dans les réglages de votre navigateur ; le Site continuera de fonctionner."
+        "after": "Nous utilisons Meta Pixel (Facebook et Instagram), Google Analytics et Google Ads pour compter les visites et mesurer quelles publicités génèrent des demandes, uniquement si vous choisissez « Accepter » dans l’avis sur les cookies. Ces outils peuvent déposer des cookies et collecter votre adresse IP et vos données de navigation. Si vous choisissez « Refuser », ils ne sont pas chargés du tout. Vous pouvez modifier votre choix à tout moment via « Paramètres des cookies » en bas de chaque page, et vous pouvez aussi bloquer ou supprimer les cookies dans les paramètres de votre navigateur. Le Site continue de fonctionner dans les deux cas."
       },
       {
         "title": "Avec qui nous partageons vos données",
@@ -2812,5 +2814,13 @@
       "general": "votre demande",
       "tour": "votre visite vidéo"
     }
+  },
+  "consent": {
+    "label": "Avis sur les cookies",
+    "title": "Cookies",
+    "text": "Nous utilisons des cookies de Meta et de Google pour mesurer nos publicités et vous en montrer de plus pertinentes. Ils ne sont chargés que si vous acceptez, et le site fonctionne entièrement dans les deux cas.",
+    "accept": "Accepter",
+    "decline": "Refuser",
+    "more": "Politique de confidentialité"
   }
 }

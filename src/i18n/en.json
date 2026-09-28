@@ -95,7 +95,8 @@
     "getInTouch": "Get in Touch",
     "followUs": "Follow Us",
     "rights": "All rights reserved.",
-    "privacy": "Privacy Policy"
+    "privacy": "Privacy Policy",
+    "cookieSettings": "Cookie settings"
   },
   "home": {
     "heroEyebrow": "Istanbul Real Estate Development",
@@ -2534,9 +2535,10 @@
           "Your chat assistant conversation, your Find My Project answers and your tour booking progress (kept only until you close the browser tab).",
           "The advertising source of your visit (kept only until you close the browser tab).",
           "A random session number, sent only with our anonymous visit statistics (see section 3) and deleted when you close the browser tab.",
-          "Your sign-in session, if you use a resale portal account."
+          "Your sign-in session, if you use a resale portal account.",
+          "Your cookie choice (accept or decline), so that we do not ask you again on every visit."
         ],
-        "after": "When enabled, we use Meta Pixel (Facebook and Instagram), Google Analytics and Google Ads to count visits and measure which ads bring enquiries. These tools may set cookies and collect your IP address and browsing data. You can block or delete cookies in your browser settings at any time, and the Website will keep working."
+        "after": "We use Meta Pixel (Facebook and Instagram), Google Analytics and Google Ads to count visits and measure which ads bring enquiries, but only if you choose “Accept” in the cookie notice. These tools may set cookies and collect your IP address and browsing data. If you choose “Decline”, they are not loaded at all. You can change your choice at any time through “Cookie settings” at the bottom of every page, and you can also block or delete cookies in your browser settings. The Website keeps working either way."
       },
       {
         "title": "Who we share your data with",
@@ -2812,5 +2814,13 @@
       "general": "your inquiry",
       "tour": "your private video tour"
     }
+  },
+  "consent": {
+    "label": "Cookie notice",
+    "title": "Cookies",
+    "text": "We use cookies from Meta and Google to measure our ads and show you more relevant ones. They load only if you accept, and the site works fully either way.",
+    "accept": "Accept",
+    "decline": "Decline",
+    "more": "Privacy Policy"
   }
 }

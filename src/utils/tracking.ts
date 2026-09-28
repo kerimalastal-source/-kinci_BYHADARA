@@ -1,6 +1,8 @@
 // Ad and analytics tags (Meta Pixel, Google Analytics 4, Google Ads).
 // Each tag is off until its ID is filled in below (or set as a Vercel env var),
 // so the site ships nothing to Meta/Google until the IDs exist.
+// Nothing loads until the visitor accepts the cookie notice (components/cookieConsent.ts);
+// the choice is kept in localStorage ("hadara-consent") for a year.
 //
 // Events sent:
 //   - a page view on every route change (the site is a single-page app);
@@ -9,6 +11,7 @@
 //   - Schedule (+ generate_lead and the lead conversion) when a private video tour is requested;
 //   - Contact / contact (+ the optional Google Ads contact conversion) on WhatsApp, call and email links.
 import type { Route } from "../seo/routes";
+import { SKIPPED_ROUTES } from "./visitorTracker";
 
 const TAGS = {
   /** Meta Events Manager → Datasets → "HADARA Real Estate" (business portfolio "Hadara Real Estate"). Public, not a secret. */
@@ -48,8 +51,66 @@ function whenIdle(task: () => void): void {
   else window.addEventListener("load", run, { once: true });
 }
 
-/** Sets up the queues right away (events fired early are kept) and loads the vendor scripts once idle. */
+export type Consent = "granted" | "denied";
+
+const CONSENT_KEY = "hadara-consent";
+const CONSENT_MS = 365 * 86_400_000;
+
+/** True when at least one tag has an ID, i.e. there is something to ask consent for. */
+export function trackingConfigured(): boolean {
+  return Boolean(TAGS.metaPixelId || googleId);
+}
+
+/** The visitor's choice from the cookie notice, or null if they haven't chosen (or it is over a year old). */
+export function storedConsent(): Consent | null {
+  try {
+    const saved = JSON.parse(localStorage.getItem(CONSENT_KEY) ?? "null") as { v?: string; at?: string } | null;
+    if ((saved?.v === "granted" || saved?.v === "denied") && Date.now() - Date.parse(saved.at ?? "") < CONSENT_MS) return saved.v;
+  } catch {
+    /* storage blocked or corrupt: ask again */
+  }
+  return null;
+}
+
+/** Saves the choice; accepting loads the tags now (and counts the current page), declining stops them. */
+export function setConsent(choice: Consent): void {
+  try {
+    localStorage.setItem(CONSENT_KEY, JSON.stringify({ v: choice, at: new Date().toISOString() }));
+  } catch {
+    /* still applies for this page view */
+  }
+  if (choice === "granted") startTags();
+  else stopTags();
+}
+
+let started = false;
+let active = false;
+let lastPage: { route: Route; locale: string } | null = null;
+
+/** Wires the contact-link listener and starts the tags if the visitor already accepted. */
 export function initTracking(): void {
+  if (!trackingConfigured()) return;
+  document.addEventListener("click", trackContactClick, true);
+  if (storedConsent() === "granted") startTags();
+}
+
+function stopTags(): void {
+  if (!active) return;
+  active = false;
+  window.fbq?.("consent", "revoke");
+  window.gtag?.("consent", "update", { ad_storage: "denied", analytics_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
+}
+
+/** Sets up the queues right away (events fired early are kept) and loads the vendor scripts once idle. */
+function startTags(): void {
+  if (active) return;
+  active = true;
+  if (started) {
+    window.fbq?.("consent", "grant");
+    window.gtag?.("consent", "update", { ad_storage: "granted", analytics_storage: "granted", ad_user_data: "granted", ad_personalization: "granted" });
+    return;
+  }
+  started = true;
   if (TAGS.metaPixelId) {
     // Meta's standard stub: calls queue up until fbevents.js takes over.
     const fbq = function (this: unknown) {
@@ -79,15 +140,18 @@ export function initTracking(): void {
     whenIdle(() => loadScript(`https://www.googletagmanager.com/gtag/js?id=${googleId}`));
   }
 
-  if (TAGS.metaPixelId || googleId) document.addEventListener("click", trackContactClick, true);
+  // The page the visitor accepted on hasn't been counted yet.
+  if (lastPage) trackPageView(lastPage.route, lastPage.locale);
 }
 
 function meta(event: string, params?: Params): void {
+  if (!active) return;
   if (params) window.fbq?.("track", event, params);
   else window.fbq?.("track", event);
 }
 
 function google(event: string, params?: Params): void {
+  if (!active) return;
   window.gtag?.("event", event, params);
 }
 
@@ -97,6 +161,10 @@ function adsConversion(label: string, params?: Params): void {
 
 /** Called by the router after each render that changed the URL (title and locale are already set). */
 export function trackPageView(route: Route, locale: string): void {
+  // Seller account and admin pages are ours, not ad traffic.
+  if (SKIPPED_ROUTES.has(route.name)) return;
+  lastPage = { route, locale };
+  if (!active) return;
   meta("PageView");
   if (TAGS.gaId) {
     google("page_view", {

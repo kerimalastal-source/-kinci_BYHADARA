@@ -745,6 +745,15 @@
   margin-inline: 0.35rem;
 }
 
+.site-footer__legal--button {
+  margin-inline-start: 1rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
 .site-footer__legal {
   white-space: nowrap;
 }

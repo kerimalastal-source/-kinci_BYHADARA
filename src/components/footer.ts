@@ -1,4 +1,5 @@
 import { t, link } from "../i18n";
+import { cookieSettingsLink } from "./cookieConsent";
 import { renderBrand, BRAND_FULL } from "./brand";
 import { CONSULTANCY_SEGMENT } from "../seo/routes";
 
@@ -52,7 +53,7 @@ export function renderFooter(el: HTMLElement): void {
       </div>
     </div>
     <div class="site-footer__bottom container">
-      <p><span dir="ltr" translate="no">&copy; ${new Date().getFullYear()} ${BRAND_FULL}.</span> ${t("footer.rights")} <span class="site-footer__sep" aria-hidden="true">·</span> <a class="site-footer__legal" href="${link("/privacy")}">${t("footer.privacy")}</a></p>
+      <p><span dir="ltr" translate="no">&copy; ${new Date().getFullYear()} ${BRAND_FULL}.</span> ${t("footer.rights")} <span class="site-footer__sep" aria-hidden="true">·</span> <a class="site-footer__legal" href="${link("/privacy")}">${t("footer.privacy")}</a>${cookieSettingsLink("site-footer__legal site-footer__legal--button")}</p>
     </div>
   `;
 }

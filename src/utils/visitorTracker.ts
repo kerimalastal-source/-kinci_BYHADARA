@@ -15,7 +15,7 @@ const TRAIL_MAX = 40;
 const ENDPOINT = "/api/track";
 
 /** Seller account and admin pages are internal; they are never reported. */
-const SKIPPED_ROUTES: ReadonlySet<Route["name"]> = new Set([
+export const SKIPPED_ROUTES: ReadonlySet<Route["name"]> = new Set([
   "account",
   "account-new-listing",
   "account-edit-listing",
