@@ -8,23 +8,47 @@ export function escapeHtml(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-export async function sendTelegram(html: string): Promise<void> {
+/** Calls a Bot API method in the team's chat; returns its result, or null when not sent. */
+async function callTelegram(method: string, body: Record<string, unknown>): Promise<{ message_id?: number } | null> {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
-  if (!token || !chatId) return;
+  if (!token || !chatId) return null;
 
   try {
-    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    const res = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text: html, parse_mode: "HTML", disable_web_page_preview: true }),
+      body: JSON.stringify({ chat_id: chatId, parse_mode: "HTML", disable_web_page_preview: true, ...body }),
       signal: AbortSignal.timeout(5000)
     });
     if (!res.ok) {
-      // Telegram's error text (e.g. "chat not found" before the bot was started); never the token.
-      console.error(`telegram: sendMessage failed (${res.status}): ${(await res.text()).slice(0, 200)}`);
+      // Telegram's error text (e.g. "chat not found" before the bot was started, or
+      // "message to edit not found" once the team deleted it); never the token.
+      console.error(`telegram: ${method} failed (${res.status}): ${(await res.text()).slice(0, 200)}`);
+      return null;
     }
+    const data = (await res.json().catch(() => null)) as { result?: { message_id?: number } } | null;
+    return data?.result ?? {};
   } catch (error) {
-    console.error(`telegram: sendMessage error: ${error instanceof Error ? error.name : "unknown"}`);
+    // The request URL carries the token, so only the error's name is logged.
+    console.error(`telegram: ${method} error: ${error instanceof Error ? error.name : "unknown"}`);
+    return null;
   }
+}
+
+/**
+ * Sends a message (Telegram HTML, values already escaped) — as a reply to `replyTo` when
+ * given — and returns its message id, or null when it wasn't sent.
+ */
+export async function sendTelegram(html: string, replyTo?: number | null): Promise<number | null> {
+  const result = await callTelegram("sendMessage", {
+    text: html,
+    ...(replyTo ? { reply_parameters: { message_id: replyTo, allow_sending_without_reply: true } } : {})
+  });
+  return typeof result?.message_id === "number" ? result.message_id : null;
+}
+
+/** Replaces the text of an earlier message (no new notification). False when it failed. */
+export async function editTelegram(messageId: number, html: string): Promise<boolean> {
+  return (await callTelegram("editMessageText", { message_id: messageId, text: html })) !== null;
 }

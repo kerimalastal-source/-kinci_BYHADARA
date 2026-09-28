@@ -2,37 +2,32 @@
 //
 // Stores a random per-tab session id, the path, the site language, the referring
 // site's host name and the approximate country/city from Vercel's geolocation headers,
-// in Supabase (public.visitor_events via record_visit(), supabase/migrations/0002).
-// Never reads or stores the IP address. The first page view of a session sends a
-// Telegram alert. The response (204) goes out at once; the database write and the
-// alert finish in the background (waitUntil), so neither can slow down or break it.
+// in Supabase (public.visitor_events via record_visit_state(), supabase/migrations/0004).
+// Never reads or stores the IP address. On Telegram, the first page view of a session
+// sends the "new visitor" alert and every later page edits that same message (current
+// page, page count, visit length — no new notification); the first opening of a
+// request page (contact...) in a visit sends a separate 🔥 message as a reply to it.
+// The response (204) goes out at once; the database write and the alerts finish in the
+// background (waitUntil), so neither can slow down or break it.
 import { waitUntil } from "@vercel/functions";
-import { escapeHtml, sendTelegram } from "./_lib/telegram.js";
-import { rpc } from "./_lib/supabase.js";
+import { editTelegram, sendTelegram } from "./_lib/telegram.js";
+import { rpc, RpcError } from "./_lib/supabase.js";
+import {
+  LOCALES,
+  newVisitorMessage,
+  requestPageMessage,
+  visitUpdateMessage,
+  type Geo,
+  type Locale,
+  type PageView,
+  type VisitState
+} from "./_lib/visitAlerts.js";
 
 const SESSION_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const LOCALES = ["en", "ar", "fr", "ru"] as const;
-type Locale = (typeof LOCALES)[number];
-
 /** The seller account and admin pages are never tracked (the browser skips them too). */
 const INTERNAL_PATH = /^\/(?:(?:ar|fr|ru)\/)?(?:admin|account)(?:\/|$)/;
 /** Crawlers and link previews aren't visitors. */
 const BOT_AGENT = /bot|crawl|spider|slurp|facebookexternalhit|embedly|preview|headless|lighthouse|pingdom|uptime|monitor/i;
-
-interface PageView {
-  sessionId: string;
-  path: string;
-  locale: Locale | null;
-  /** Referring site's host name ("google.com"), an internal path ("/projects"), or "" for direct. */
-  referrer: string;
-  /** Page title, sent only for a project, resale listing or blog article. */
-  title: string;
-}
-
-interface Geo {
-  country: string | null;
-  city: string | null;
-}
 
 export async function POST(request: Request): Promise<Response> {
   const view = parsePageView(await request.json().catch(() => null));
@@ -88,7 +83,15 @@ function parsePageView(body: unknown): PageView | null {
   const referrerValue = text(data.referrer, 300);
   const referrer = /^\/[^\s?#]*$/.test(referrerValue) || /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(referrerValue) ? referrerValue : "";
 
-  return { sessionId, path, locale, referrer, title: text(data.title, 150) };
+  return {
+    sessionId,
+    path,
+    locale,
+    referrer,
+    title: text(data.title, 150),
+    landingPath: text(data.landingPath, 300).split(/[?#]/)[0],
+    landingTitle: text(data.landingTitle, 150)
+  };
 }
 
 function readGeo(headers: Headers): Geo {
@@ -106,56 +109,44 @@ function readGeo(headers: Headers): Geo {
 }
 
 async function record(view: PageView, geo: Geo, origin: string): Promise<void> {
-  const isNewSession = await rpc("record_visit", {
+  const args = {
     p_session_id: view.sessionId,
     p_path: view.path,
     p_locale: view.locale,
     p_referrer: view.referrer || null,
     p_country: geo.country,
     p_city: geo.city
-  });
+  };
 
-  // Alert only for a brand-new session. A new tab opened from the site starts its own
-  // session (sessionStorage is per tab) but its referrer is one of our own pages, so it
-  // isn't a new visitor and gets no alert.
-  if (isNewSession === true && !view.referrer.startsWith("/")) {
-    await sendTelegram(newVisitorMessage(view, geo, origin));
-  }
-}
-
-const LOCALE_NAMES: Record<Locale, string> = { en: "الإنجليزية", ar: "العربية", fr: "الفرنسية", ru: "الروسية" };
-
-function countryName(code: string | null): string | null {
-  if (!code) return null;
+  let state: VisitState;
   try {
-    return new Intl.DisplayNames(["ar"], { type: "region" }).of(code) ?? code;
-  } catch {
-    return code;
-  }
-}
-
-/** What the visitor opened when it's a specific project, resale listing or article. */
-function pageSubject(path: string): string | null {
-  const match = path.match(/^\/(?:(?:ar|fr|ru)\/)?(projects|resale|blog)\/[^/]+\/?$/);
-  if (!match) return null;
-  return { projects: "المشروع", resale: "العقار", blog: "المقال" }[match[1] as "projects" | "resale" | "blog"];
-}
-
-function newVisitorMessage(view: PageView, geo: Geo, origin: string): string {
-  const place = [geo.city, countryName(geo.country)].filter(Boolean).join("، ") || "غير معروف";
-  const lines = [
-    "<b>🏢 حضارة للعقار — زائر جديد</b>",
-    `📍 من وين: ${escapeHtml(place)}`,
-    `📄 الصفحة: ${escapeHtml(view.path)}`
-  ];
-
-  const subject = pageSubject(view.path);
-  if (subject) {
-    const name = view.title.split(" | ")[0].trim() || view.path;
-    lines.push(`🏠 ${subject}: <a href="${escapeHtml(origin + view.path)}">${escapeHtml(name)}</a>`);
+    state = (await rpc("record_visit_state", args)) as VisitState;
+  } catch (error) {
+    // 404: migration 0004 hasn't been run yet — keep the plain alert of record_visit().
+    if (!(error instanceof RpcError && error.status === 404)) throw error;
+    const isNewSession = await rpc("record_visit", args);
+    if (isNewSession === true && !view.referrer.startsWith("/")) {
+      await sendTelegram(newVisitorMessage(view, geo, origin));
+    }
+    return;
   }
 
-  lines.push(`🌐 اللغة: ${view.locale ? LOCALE_NAMES[view.locale] : "غير معروفة"}`);
-  lines.push(`🔗 المصدر: ${view.referrer ? escapeHtml(view.referrer) : "مباشر"}`);
-  return lines.join("\n");
+  // A new tab opened from the site starts its own session (sessionStorage is per tab) but
+  // its first referrer is one of our own pages: it isn't a new visitor, so it gets no
+  // alert, no updates and no 🔥 message.
+  const landingReferrer = state.is_new ? view.referrer : state.landing?.referrer ?? "";
+  if ((landingReferrer ?? "").startsWith("/")) return;
+
+  let messageId = state.message_id ? Number(state.message_id) : null;
+  if (state.is_new) {
+    messageId = await sendTelegram(newVisitorMessage(view, geo, origin));
+    if (messageId) await rpc("save_visitor_alert", { p_session_id: view.sessionId, p_message_id: messageId });
+  } else if (messageId) {
+    // A message the team deleted can't be edited: that is logged (by editTelegram) and
+    // never stops the 🔥 message below.
+    await editTelegram(messageId, visitUpdateMessage(view, state, origin));
+  }
+
+  const request = requestPageMessage(view, geo, state);
+  if (request) await sendTelegram(request, messageId);
 }

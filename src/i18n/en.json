@@ -1886,7 +1886,7 @@
         "after": [
           "The session number is created by your browser and kept in its session storage (sessionStorage), only for the current tab. It is not a cookie, it is not linked to your name or device, and your browser deletes it when you close the tab.",
           "We do not store your IP address or any personal information in these statistics, and we do not use them to identify anyone. Seller account and administration pages are not recorded.",
-          "Visit records are deleted automatically after 30 days. When a new visit starts, our team receives an internal notification (via Telegram) with the same anonymous details: approximate location, page, language and source."
+          "Visit records are deleted automatically after 30 days. When a new visit starts, our team receives an internal notification (via Telegram) with the same anonymous details: approximate location, page, language and source. This notification is updated during the visit (current page, number of pages and visit length), and a separate notification is sent when the visitor opens the contact page or a request form."
         ]
       },
       {

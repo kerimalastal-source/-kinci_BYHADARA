@@ -5,6 +5,8 @@
 import type { Route } from "../seo/routes";
 
 const SESSION_KEY = "hadara-visit-session";
+/** Path and title of the session's first page, so the updated alert keeps its 🏠 project line. */
+const LANDING_TITLE_KEY = "hadara-visit-landing-title";
 const ENDPOINT = "/api/track";
 
 /** Seller account and admin pages are internal; they are never reported. */
@@ -13,7 +15,8 @@ const SKIPPED_ROUTES: ReadonlySet<Route["name"]> = new Set([
   "account-new-listing",
   "account-edit-listing",
   "admin",
-  "admin-listing"
+  "admin-listing",
+  "admin-bookings"
 ]);
 
 /** Pages whose title names a specific project, resale listing or article (shown in the alert). */
@@ -45,6 +48,19 @@ function sessionId(): string | null {
   }
 }
 
+/** The session's first page ({path, title}), remembered on its first tracked page. */
+function landingPage(path: string, title: string): { path: string; title: string } {
+  const page = { path, title };
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(LANDING_TITLE_KEY) ?? "null") as { path?: unknown; title?: unknown } | null;
+    if (saved && typeof saved.path === "string" && typeof saved.title === "string") return { path: saved.path, title: saved.title };
+    sessionStorage.setItem(LANDING_TITLE_KEY, JSON.stringify(page));
+  } catch {
+    // Storage blocked or unreadable: the updated alert shows the path instead of the name.
+  }
+  return page;
+}
+
 /** First page of this page load: the other site's host name, or our own path. Later: the previous page. */
 function referrer(): string {
   if (previousPath) return previousPath;
@@ -69,12 +85,16 @@ export function trackVisit(route: Route, locale: string): void {
   const id = sessionId();
   if (!id) return;
 
+  const title = TITLED_ROUTES.has(route.name) ? document.title : "";
+  const landing = landingPage(path, title);
   const body = JSON.stringify({
     sessionId: id,
     path,
     locale,
     referrer: from,
-    title: TITLED_ROUTES.has(route.name) ? document.title : ""
+    title,
+    landingPath: landing.path,
+    landingTitle: landing.title
   });
 
   // keepalive lets the request finish even if the visitor leaves right away.
