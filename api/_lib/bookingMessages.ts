@@ -56,7 +56,7 @@ export const CONTACT_AR: Record<ContactMethod, string> = {
   viber: "فايبر"
 };
 
-const SITE_LANGUAGE_AR: Record<SiteLocale, string> = { en: "الإنجليزية", ar: "العربية", fr: "الفرنسية", ru: "الروسية" };
+export const SITE_LANGUAGE_AR: Record<SiteLocale, string> = { en: "الإنجليزية", ar: "العربية", fr: "الفرنسية", ru: "الروسية" };
 
 interface VisitorText {
   subject: string;
@@ -231,7 +231,7 @@ function calendarFile(details: BookingDetails, sequence = 0): EmailAttachment {
 
 /* ---------- HTML helpers ---------- */
 
-function rowsHtml(rows: [string, string][], rtl: boolean): string {
+export function rowsHtml(rows: [string, string][], rtl: boolean): string {
   const align = rtl ? "right" : "left";
   return rows
     .map(

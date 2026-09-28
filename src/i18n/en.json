@@ -25,7 +25,8 @@
     "resale": "Resale Listings",
     "logout": "Log Out",
     "admin": "Admin",
-    "bookings": "Tour bookings"
+    "bookings": "Tour bookings",
+    "inquiries": "Inquiries inbox"
   },
   "floatingActions": {
     "whatsapp": "Chat on WhatsApp",
@@ -951,7 +952,8 @@
     "heroSubtitle": "All private video tours booked on the website. One tour per time slot (every half hour); a cancelled slot becomes available again.",
     "nav": {
       "listings": "Resale listings",
-      "bookings": "Video tour bookings"
+      "bookings": "Video tour bookings",
+      "inquiries": "Inquiries"
     },
     "tabs": {
       "upcoming": "Upcoming",
@@ -2478,7 +2480,7 @@
       {
         "title": "How your messages reach us",
         "paragraphs": [
-          "Our contact and request forms do not send anything in the background. When you press send, your email app or WhatsApp opens with a prepared message, and the information reaches us only when you send that message yourself. Private video tour bookings are the exception: they are recorded directly in our system (see section 5), and booking through WhatsApp remains available as an alternative. Messages sent through WhatsApp are also subject to WhatsApp's own privacy policy."
+          "Messages and requests you send through the Website's forms (contact, custom property request and engineering design consultation) are saved directly in our system. Our team receives an internal notification by Telegram and email, and you receive a confirmation email with your request number. Only our team handles them, recording their follow-up status and internal notes in order to serve you. If our system cannot be reached for a technical reason, your email app opens with a prepared message instead, and the information then reaches us only when you send that message yourself. Private video tour bookings are also recorded in our system (see section 5). Messages sent through WhatsApp are subject to WhatsApp's own privacy policy."
         ],
         "items": []
       },
@@ -2541,8 +2543,8 @@
           "We share personal data only when it is needed, and only the data that is needed:"
         ],
         "items": [
-          "Service providers who run the Website for us: Vercel (hosting, and the approximate location of visits), Supabase (resale portal database and sign-in, tour bookings, and anonymous visit statistics), Google (fonts, analytics, advertising and YouTube videos) and Meta (WhatsApp and ad measurement). The map on our contact page is provided by OpenStreetMap.",
-          "Telegram and email, which deliver internal notifications to our team: new visits (with anonymous details only) and tour bookings. Booking confirmation emails are sent through the email service Resend.",
+          "Service providers who run the Website for us: Vercel (hosting, and the approximate location of visits), Supabase (resale portal database and sign-in, messages from the Website's forms, tour bookings, and anonymous visit statistics), Google (fonts, analytics, advertising and YouTube videos) and Meta (WhatsApp and ad measurement). The map on our contact page is provided by OpenStreetMap.",
+          "Telegram and email, which deliver internal notifications to our team: new visits (with anonymous details only), new messages and requests, and tour bookings. Confirmation emails to you are sent through the email service Resend.",
           "Project developers, when it is needed to complete your request, for example to reserve a unit or complete a purchase.",
           "In the resale portal: buyers' messages are shared with the owner of the listing, and approved listings are published on the Website.",
           "Public authorities, when the law requires it."
@@ -2558,7 +2560,7 @@
       {
         "title": "How long we keep your data",
         "paragraphs": [
-          "We keep your data for as long as it is needed to answer your enquiry and serve you, and afterwards for as long as the law requires (for example, for tax and commercial records). You can ask us to delete your data at any time, unless we are required to keep it by law. Anonymous visit records are deleted automatically after 30 days. Tour bookings are deleted automatically one year after the tour date."
+          "We keep your data for as long as it is needed to answer your enquiry and serve you, and afterwards for as long as the law requires (for example, for tax and commercial records). You can ask us to delete your data at any time, unless we are required to keep it by law. Anonymous visit records are deleted automatically after 30 days. Tour bookings are deleted automatically one year after the tour date. Messages and requests from the Website's forms are deleted automatically two years after they were last updated."
         ],
         "items": []
       },
@@ -2607,5 +2609,63 @@
     ],
     "contactTitle": "Contact us",
     "contactText": "For any question about this policy or your personal data, contact us:"
+  },
+  "inquiry": {
+    "honeypot": "Leave this field empty",
+    "sending": "Sending…",
+    "sentTitle": "Thank you, we received your message!",
+    "sentText": "Our team will contact you shortly. A confirmation is on its way to your email.",
+    "reference": "Your request number: {ref}",
+    "limitTitle": "We already have your messages",
+    "limitText": "You have sent several messages today. Our team will contact you soon; for anything urgent, message us on WhatsApp."
+  },
+  "adminInquiries": {
+    "heroTitle": "Inquiries inbox",
+    "heroSubtitle": "Every message and request sent from the site's forms: contact, custom property requests and engineering design consultations.",
+    "note": "Update the status after each contact with the customer and keep your internal notes here — none of it is ever shown to the customer.",
+    "tabs": {
+      "new": "New",
+      "active": "In progress",
+      "closed": "Closed",
+      "all": "All"
+    },
+    "empty": {
+      "new": "No new inquiries.",
+      "active": "No inquiries in progress.",
+      "closed": "No closed inquiries.",
+      "all": "No inquiries yet."
+    },
+    "noResults": "Nothing matches your search.",
+    "searchPlaceholder": "Search by name, phone, email or request number",
+    "kinds": {
+      "contact": "Contact form",
+      "property_request": "Custom property request",
+      "consultation": "Engineering design consultation"
+    },
+    "status": {
+      "new": "New",
+      "contacted": "Contacted",
+      "interested": "Very interested",
+      "closed": "Closed"
+    },
+    "statusLabel": "Status",
+    "notesLabel": "Internal notes",
+    "notesPlaceholder": "E.g. called them — wants a 2+1, visiting Istanbul next month",
+    "saveNotes": "Save notes",
+    "saved": "Status saved.",
+    "notesSaved": "Notes saved.",
+    "moved": "{name}'s inquiry moved to “{status}”.",
+    "saveError": "Couldn't save. Please try again.",
+    "loadError": "Couldn't load the inquiries. Refresh the page.",
+    "labels": {
+      "phone": "Phone",
+      "email": "Email",
+      "projects": "Projects",
+      "interests": "Interests",
+      "subject": "Subject",
+      "siteLanguage": "Site language",
+      "source": "Source",
+      "page": "Sent from page"
+    }
   }
 }

@@ -226,6 +226,7 @@ export function renderAdminBookings(main: HTMLElement): void {
       <div class="container">
         <nav class="admin-subnav" aria-label="${t("admin.heroEyebrow")}">
           <a href="${link("/admin")}">${t("adminBookings.nav.listings")}</a>
+          <a href="${link("/admin/inquiries")}">${t("adminBookings.nav.inquiries")}</a>
           <a href="${link("/admin/bookings")}" aria-current="page">${t("adminBookings.nav.bookings")}</a>
         </nav>
         <div class="admin-bookings__tabs" role="tablist"></div>

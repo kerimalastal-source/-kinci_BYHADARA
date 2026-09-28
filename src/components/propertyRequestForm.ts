@@ -3,6 +3,8 @@ import { propertyTypeOptions, conditionOptions, budgetOptions, floorOptions } fr
 import { turkeyProvinces } from "../data/turkeyLocations";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
 import { trackLead } from "../utils/tracking";
+import { lookup } from "../i18n/dictionaries";
+import { honeypotField, sendInquiry, setSending, showLimit, showMailtoSent, showSent } from "../utils/inquiry";
 
 const CONTACT_EMAIL = "info@byhadara.com";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -107,9 +109,10 @@ export function renderPropertyRequestForm(): string {
         <textarea id="pr-notes" name="notes" rows="4" placeholder="${t("propertyRequest.notesPlaceholder")}"></textarea>
       </div>
 
+      ${honeypotField()}
       <button type="submit" class="btn btn--primary" id="pr-submit">${t("propertyRequest.submitButton")}</button>
 
-      <div class="contact-form__success" id="pr-success" hidden>
+      <div class="contact-form__success" id="pr-success" role="status" hidden>
         <strong>${t("propertyRequest.successTitle")}</strong>
         <p>${t("propertyRequest.successText")}</p>
       </div>
@@ -201,9 +204,13 @@ export function initPropertyRequestForm(container: ParentNode): void {
 
   const successBox = form.querySelector<HTMLElement>("#pr-success")!;
 
-  form.addEventListener("submit", (e) => {
+  const submitButton = form.querySelector<HTMLButtonElement>("#pr-submit");
+  const openedAt = Date.now();
+  let sending = false;
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (!validate(form)) return;
+    if (sending || !validate(form)) return;
 
     const propertyTypeLabels = tRaw<Record<string, string>>("propertyRequest.propertyTypes");
     const conditionLabels = tRaw<Record<string, string>>("propertyRequest.conditions");
@@ -236,11 +243,49 @@ export function initPropertyRequestForm(container: ParentNode): void {
       notes
     ].join("\n");
 
-    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Property Request")}&body=${encodeURIComponent(body)}`;
-    trackLead("property-request", propertyType);
-    window.location.href = mailto;
+    // Option keys for the admin inbox, and the same answers in Arabic for the team's alert.
+    const keys = {
+      propertyType: String(data.get("propertyType") ?? ""),
+      condition: String(data.get("condition") ?? ""),
+      budget: String(data.get("budget") ?? ""),
+      floor: String(data.get("floor") ?? "")
+    };
+    const ar = (key: string) => String(lookup("ar", key) ?? "").replace(/\s*\*$/, "");
+    sending = true;
+    successBox.hidden = true;
+    setSending(submitButton, true);
+    const result = await sendInquiry(
+      form,
+      {
+        kind: "property_request",
+        name,
+        email,
+        phone,
+        message: notes,
+        details: { ...keys, city, district },
+        summaryAr: [
+          [ar("propertyRequest.propertyTypeLabel"), ar(`propertyRequest.propertyTypes.${keys.propertyType}`)],
+          [ar("propertyRequest.cityLabel"), city],
+          [ar("propertyRequest.districtLabel"), district],
+          [ar("propertyRequest.conditionLabel"), ar(`propertyRequest.conditions.${keys.condition}`)],
+          [ar("propertyRequest.budgetLabel"), ar(`propertyRequest.budgets.${keys.budget}`)],
+          [ar("propertyRequest.floorLabel"), ar(`propertyRequest.floors.${keys.floor}`)]
+        ]
+      },
+      openedAt
+    );
+    sending = false;
+    setSending(submitButton, false);
+    if (result.status === "limit") return showLimit(successBox);
 
-    successBox.hidden = false;
+    trackLead("property-request", propertyType);
+    if (result.status === "sent") {
+      showSent(successBox, result.reference);
+    } else {
+      // The inbox couldn't take it: the visitor's email app, as before.
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Property Request")}&body=${encodeURIComponent(body)}`;
+      showMailtoSent(successBox);
+    }
     form.reset();
     districtSelect.innerHTML = `<option value="" disabled selected>${t("propertyRequest.districtPlaceholder")}</option>`;
     districtSelect.disabled = true;

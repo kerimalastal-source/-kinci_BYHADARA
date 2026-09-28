@@ -25,7 +25,8 @@
     "resale": "Biens en revente",
     "logout": "Déconnexion",
     "admin": "Administration",
-    "bookings": "Réservations de visites"
+    "bookings": "Réservations de visites",
+    "inquiries": "Boîte des demandes"
   },
   "floatingActions": {
     "whatsapp": "Discuter sur WhatsApp",
@@ -951,7 +952,8 @@
     "heroSubtitle": "Toutes les visites vidéo privées réservées sur le site. Une visite par créneau (toutes les demi-heures) ; un créneau annulé redevient disponible.",
     "nav": {
       "listings": "Annonces de revente",
-      "bookings": "Réservations de visites"
+      "bookings": "Réservations de visites",
+      "inquiries": "Demandes"
     },
     "tabs": {
       "upcoming": "À venir",
@@ -2478,7 +2480,7 @@
       {
         "title": "Comment vos messages nous parviennent",
         "paragraphs": [
-          "Nos formulaires de contact et de demande n'envoient rien en arrière-plan. Lorsque vous appuyez sur envoyer, votre messagerie ou WhatsApp s'ouvre avec un message prêt, et les informations ne nous parviennent que lorsque vous envoyez vous-même ce message. Les réservations de visites vidéo privées font exception : elles sont enregistrées directement dans notre système (voir la section 5), et la réservation via WhatsApp reste possible. Les messages envoyés via WhatsApp sont également soumis à la politique de confidentialité de WhatsApp."
+          "Les messages et demandes que vous envoyez via les formulaires du Site (contact, recherche de bien sur mesure et consultation en conception) sont enregistrés directement dans notre système. Notre équipe en reçoit une notification interne par Telegram et par e-mail, et vous recevez un e-mail de confirmation avec votre numéro de demande. Seule notre équipe les traite, en y notant leur état de suivi et des remarques internes afin de vous servir. Si notre système est inaccessible pour une raison technique, votre messagerie s'ouvre à la place avec un message prêt, et les informations ne nous parviennent alors que lorsque vous envoyez vous-même ce message. Les réservations de visites vidéo privées sont elles aussi enregistrées dans notre système (voir la section 5). Les messages envoyés via WhatsApp sont soumis à la politique de confidentialité de WhatsApp."
         ],
         "items": []
       },
@@ -2541,8 +2543,8 @@
           "Nous ne partageons des données personnelles que lorsque c'est nécessaire, et uniquement les données nécessaires :"
         ],
         "items": [
-          "Les prestataires qui font fonctionner le Site pour nous : Vercel (hébergement, et localisation approximative des visites), Supabase (base de données et connexion du portail de revente, réservations de visites, et statistiques de visite anonymes), Google (polices, mesure d'audience, publicité et vidéos YouTube) et Meta (WhatsApp et mesure publicitaire). La carte de notre page de contact est fournie par OpenStreetMap.",
-          "Telegram et l'e-mail, qui transmettent à notre équipe des notifications internes : nouvelles visites (avec des informations anonymes uniquement) et réservations de visites. Les e-mails de confirmation de réservation sont envoyés via le service d'e-mail Resend.",
+          "Les prestataires qui font fonctionner le Site pour nous : Vercel (hébergement, et localisation approximative des visites), Supabase (base de données et connexion du portail de revente, messages des formulaires du Site, réservations de visites, et statistiques de visite anonymes), Google (polices, mesure d'audience, publicité et vidéos YouTube) et Meta (WhatsApp et mesure publicitaire). La carte de notre page de contact est fournie par OpenStreetMap.",
+          "Telegram et l'e-mail, qui transmettent à notre équipe des notifications internes : nouvelles visites (avec des informations anonymes uniquement), nouveaux messages et demandes, et réservations de visites. Les e-mails de confirmation qui vous sont adressés sont envoyés via le service d'e-mail Resend.",
           "Les promoteurs des projets, lorsque c'est nécessaire pour traiter votre demande, par exemple pour réserver un logement ou finaliser un achat.",
           "Dans le portail de revente : les messages des acheteurs sont transmis au propriétaire de l'annonce, et les annonces approuvées sont publiées sur le Site.",
           "Les autorités publiques, lorsque la loi l'exige."
@@ -2558,7 +2560,7 @@
       {
         "title": "Durée de conservation",
         "paragraphs": [
-          "Nous conservons vos données aussi longtemps que nécessaire pour répondre à votre demande et vous servir, puis pendant la durée imposée par la loi (par exemple pour les registres fiscaux et commerciaux). Vous pouvez nous demander de supprimer vos données à tout moment, sauf si la loi nous oblige à les conserver. Les enregistrements de visite anonymes sont supprimés automatiquement après 30 jours. Les réservations de visites sont supprimées automatiquement un an après la date de la visite."
+          "Nous conservons vos données aussi longtemps que nécessaire pour répondre à votre demande et vous servir, puis pendant la durée imposée par la loi (par exemple pour les registres fiscaux et commerciaux). Vous pouvez nous demander de supprimer vos données à tout moment, sauf si la loi nous oblige à les conserver. Les enregistrements de visite anonymes sont supprimés automatiquement après 30 jours. Les réservations de visites sont supprimées automatiquement un an après la date de la visite. Les messages et demandes envoyés via les formulaires du Site sont supprimés automatiquement deux ans après leur dernière mise à jour."
         ],
         "items": []
       },
@@ -2607,5 +2609,63 @@
     ],
     "contactTitle": "Nous contacter",
     "contactText": "Pour toute question sur cette politique ou vos données personnelles, contactez-nous :"
+  },
+  "inquiry": {
+    "honeypot": "Laissez ce champ vide",
+    "sending": "Envoi en cours…",
+    "sentTitle": "Merci, nous avons bien reçu votre message !",
+    "sentText": "Notre équipe vous contactera très prochainement. Une confirmation vous a été envoyée par e-mail.",
+    "reference": "Votre numéro de demande : {ref}",
+    "limitTitle": "Nous avons déjà reçu vos messages",
+    "limitText": "Vous avez envoyé plusieurs messages aujourd'hui. Notre équipe vous contactera bientôt ; pour toute urgence, écrivez-nous sur WhatsApp."
+  },
+  "adminInquiries": {
+    "heroTitle": "Boîte des demandes",
+    "heroSubtitle": "Tous les messages et demandes envoyés depuis les formulaires du site : contact, recherche de bien sur mesure et consultation en conception.",
+    "note": "Mettez à jour le statut après chaque échange avec le client et notez vos remarques internes ici — rien n'est jamais montré au client.",
+    "tabs": {
+      "new": "Nouvelles",
+      "active": "En cours",
+      "closed": "Terminées",
+      "all": "Toutes"
+    },
+    "empty": {
+      "new": "Aucune nouvelle demande.",
+      "active": "Aucune demande en cours.",
+      "closed": "Aucune demande terminée.",
+      "all": "Aucune demande pour le moment."
+    },
+    "noResults": "Aucun résultat pour cette recherche.",
+    "searchPlaceholder": "Rechercher par nom, téléphone, e-mail ou numéro de demande",
+    "kinds": {
+      "contact": "Formulaire de contact",
+      "property_request": "Recherche de bien sur mesure",
+      "consultation": "Consultation en conception"
+    },
+    "status": {
+      "new": "Nouvelle",
+      "contacted": "Contacté",
+      "interested": "Très intéressé",
+      "closed": "Terminée"
+    },
+    "statusLabel": "Statut",
+    "notesLabel": "Notes internes",
+    "notesPlaceholder": "Ex. : appelé, cherche un 2+1, vient à Istanbul le mois prochain",
+    "saveNotes": "Enregistrer les notes",
+    "saved": "Statut enregistré.",
+    "notesSaved": "Notes enregistrées.",
+    "moved": "La demande de {name} est passée à « {status} ».",
+    "saveError": "Impossible d'enregistrer. Réessayez.",
+    "loadError": "Impossible de charger les demandes. Actualisez la page.",
+    "labels": {
+      "phone": "Téléphone",
+      "email": "E-mail",
+      "projects": "Projets",
+      "interests": "Centres d'intérêt",
+      "subject": "Objet",
+      "siteLanguage": "Langue du site",
+      "source": "Source",
+      "page": "Envoyé depuis la page"
+    }
   }
 }

@@ -36,6 +36,7 @@ export function renderAdminDashboard(main: HTMLElement): void {
       <div class="container">
         <nav class="admin-subnav" aria-label="${t("admin.heroEyebrow")}">
           <a href="${link("/admin")}" aria-current="page">${t("adminBookings.nav.listings")}</a>
+          <a href="${link("/admin/inquiries")}">${t("adminBookings.nav.inquiries")}</a>
           <a href="${link("/admin/bookings")}">${t("adminBookings.nav.bookings")}</a>
         </nav>
         <h2 class="section-title">${t("admin.queueTitle")}</h2>

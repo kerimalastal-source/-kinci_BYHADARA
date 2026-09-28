@@ -6,6 +6,7 @@ import { getFavorites, setFavorites } from "./favorites";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
 import { trackLead } from "../utils/tracking";
 import { photoAttrs } from "../utils/responsiveImage";
+import { honeypotField, sendInquiry, setSending, showLimit, showMailtoSent, showSent } from "../utils/inquiry";
 
 const CONTACT_EMAIL = "info@byhadara.com";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -193,9 +194,10 @@ ${renderProjectPicker(selected, topics)}
         <textarea id="cf-message" name="message" rows="5" placeholder="${t("contact.messagePlaceholder")}">${projectMessage(selected, topics)}</textarea>
       </div>
 
+      ${honeypotField()}
       <button type="submit" class="btn btn--primary" id="cf-submit">${t("contact.submitButton")}</button>
 
-      <div class="contact-form__success" id="cf-success" hidden>
+      <div class="contact-form__success" id="cf-success" role="status" hidden>
         <strong>${t("contact.successTitle")}</strong>
         <p>${t("contact.successText")}</p>
       </div>
@@ -328,9 +330,13 @@ export function initContactForm(container: ParentNode): void {
     addButton.focus();
   });
 
-  form.addEventListener("submit", (e) => {
+  const submitButton = form.querySelector<HTMLButtonElement>("#cf-submit");
+  const openedAt = Date.now();
+  let sending = false;
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (!validate(form)) return;
+    if (sending || !validate(form)) return;
 
     const data = new FormData(form);
     const name = String(data.get("name") ?? "");
@@ -366,11 +372,36 @@ export function initContactForm(container: ParentNode): void {
       message
     ].join("\n");
 
-    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    trackLead("contact", [...englishNames, ...englishTopics].join(", "));
-    window.location.href = mailto;
+    sending = true;
+    successBox.hidden = true;
+    setSending(submitButton, true);
+    const result = await sendInquiry(
+      form,
+      {
+        kind: "contact",
+        name,
+        email,
+        phone,
+        subject: String(data.get("subject") ?? "").trim(),
+        message,
+        projects: selected.map((slug) => ({ slug, nameAr: String(lookup("ar", `projectsData.${slug}.name`) ?? slug) })),
+        interests: topics,
+        interestsAr: topics.map((topic) => String(lookup("ar", `contact.topics.${topic}.label`) ?? topic))
+      },
+      openedAt
+    );
+    sending = false;
+    setSending(submitButton, false);
+    if (result.status === "limit") return showLimit(successBox);
 
-    successBox.hidden = false;
+    trackLead("contact", [...englishNames, ...englishTopics].join(", "));
+    if (result.status === "sent") {
+      showSent(successBox, result.reference);
+    } else {
+      // The inbox couldn't take it: the visitor's email app, as before.
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      showMailtoSent(successBox);
+    }
     form.reset();
     selected = [...initial];
     topics = [...initialTopics];

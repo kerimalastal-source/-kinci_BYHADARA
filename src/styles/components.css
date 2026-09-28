@@ -3375,6 +3375,27 @@ body.map-open .back-to-top {
   margin: 0.3rem 0 0;
 }
 
+.contact-form__success .contact-form__reference {
+  margin-top: 0.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* Too many messages today (the inquiries inbox's daily limit). */
+.contact-form__success--warn {
+  background: #fbf3df;
+  border-color: #d9b45a;
+}
+
+.contact-form__success--warn strong {
+  color: #7a5a12;
+}
+
+.contact-form button[type="submit"][aria-busy="true"] {
+  opacity: 0.75;
+  cursor: progress;
+}
+
 .section-header-row {
   display: flex;
   align-items: center;
@@ -3991,6 +4012,156 @@ body.map-open .back-to-top {
 
   .booking-card__actions .btn {
     flex: 1 1 auto;
+  }
+}
+
+/* ---------- Admin: inquiries inbox ---------- */
+.admin-inquiries__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.admin-inquiries__bar .admin-bookings__tabs {
+  border-bottom: 0;
+  max-width: 100%;
+}
+
+.admin-inquiries__search {
+  flex: 0 1 390px;
+  min-width: 0;
+  min-height: 42px;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.admin-inquiries__search:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(201, 162, 75, 0.2);
+}
+
+.admin-inquiries__flash {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.inquiry-card--contacted {
+  border-inline-start-color: #3b6fb6;
+}
+
+.inquiry-card--interested {
+  border-inline-start-color: var(--color-success);
+}
+
+.inquiry-card--closed {
+  border-inline-start-color: var(--color-border);
+}
+
+.inquiry-card__kind {
+  margin: 0;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.inquiry-card__received {
+  margin: 0.15rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.88rem;
+}
+
+.inquiry-status--new {
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+}
+
+.inquiry-status--contacted {
+  background: #e7eef9;
+  color: #24508f;
+}
+
+.inquiry-status--interested {
+  background: var(--color-success);
+  color: var(--color-on-primary);
+}
+
+.inquiry-status--closed {
+  background: var(--color-surface-alt);
+  color: var(--color-muted);
+}
+
+.inquiry-card__message {
+  margin: 0;
+  max-height: 14em;
+  overflow-y: auto;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.inquiry-card__controls {
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.inquiry-card__field {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.inquiry-card__field select,
+.inquiry-card__field textarea {
+  width: 100%;
+  min-height: 42px;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.inquiry-card__field textarea {
+  resize: vertical;
+}
+
+@media (max-width: 1024px) {
+  .inquiry-card__field select,
+  .inquiry-card__field textarea,
+  .admin-inquiries__search {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-inquiries__search {
+    flex-basis: 100%;
+    order: -1;
+    margin: 0;
+  }
+
+  .inquiry-card__controls {
+    grid-template-columns: 1fr;
   }
 }
 

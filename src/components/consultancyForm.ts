@@ -3,6 +3,8 @@ import { countries } from "../data/countries";
 import { PROJECT_TYPE_KEYS } from "../data/consultancy";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
 import { trackLead } from "../utils/tracking";
+import { lookup } from "../i18n/dictionaries";
+import { honeypotField, sendInquiry, setSending, showLimit, showMailtoSent, showSent } from "../utils/inquiry";
 
 /* Same delivery as the site's other forms: validated here, then handed to the visitor's
    email app (mailto:) addressed to the sales inbox. */
@@ -111,6 +113,7 @@ export function renderConsultancyForm(): string {
         <textarea id="cf-description" name="description" rows="4" placeholder="${t("consultancy.form.descriptionPlaceholder")}"></textarea>
       </div>
 
+      ${honeypotField()}
       <button type="submit" class="btn btn--primary">${t("consultancy.form.submit")}</button>
 
       <div class="contact-form__success" id="cf-success" role="status" hidden>
@@ -158,6 +161,15 @@ function validate(form: HTMLFormElement): HTMLElement | null {
   return invalid[0] ?? null;
 }
 
+/** A country's Arabic name (for the team's alert), from its ISO code. */
+function countryNameAr(iso2: string): string | undefined {
+  try {
+    return new Intl.DisplayNames(["ar"], { type: "region" }).of(iso2);
+  } catch {
+    return undefined;
+  }
+}
+
 /** Selected option text (the visitor's language) for the email body. */
 function selectedText(form: HTMLFormElement, name: string): string {
   const select = form.elements.namedItem(name) as HTMLSelectElement | null;
@@ -179,9 +191,13 @@ export function initConsultancyForm(container: ParentNode): void {
   const form = container.querySelector<HTMLFormElement>("#consultancy-form");
   if (!form) return;
   const successBox = form.querySelector<HTMLElement>("#cf-success")!;
+  const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const openedAt = Date.now();
+  let sending = false;
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (sending) return;
     successBox.hidden = true;
     const firstInvalid = validate(form);
     if (firstInvalid) {
@@ -204,10 +220,53 @@ export function initConsultancyForm(container: ParentNode): void {
     const body = [...fields.filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`), "", value(form, "description")].join("\n").trim();
 
     const subject = `${EMAIL_SUBJECT} — ${selectedText(form, "service")}`;
-    trackLead("consultancy", selectedText(form, "service"));
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-    successBox.hidden = false;
+    // Option keys for the admin inbox, and the same answers in Arabic for the team's alert.
+    const details: Record<string, string> = {
+      company: value(form, "company"),
+      country: value(form, "country"),
+      location: value(form, "location"),
+      projectType: value(form, "projectType"),
+      area: value(form, "area"),
+      service: value(form, "service")
+    };
+    const ar = (key: string) => String(lookup("ar", `consultancy.form.${key}`) ?? "");
+    const countryAr = details.country ? (countryNameAr(details.country) ?? details.country) : "";
+    const summaryAr: [string, string][] = [
+      [ar("serviceLabel"), ar(`services.${details.service}`)],
+      [ar("companyLabel"), details.company],
+      [ar("countryLabel"), countryAr],
+      [ar("locationLabel"), details.location],
+      [ar("projectTypeLabel"), details.projectType ? ar(`projectTypes.${details.projectType}`) : ""],
+      [ar("areaLabel"), details.area]
+    ];
+    sending = true;
+    setSending(submitButton, true);
+    const result = await sendInquiry(
+      form,
+      {
+        kind: "consultation",
+        name: value(form, "name"),
+        email: value(form, "email"),
+        phone: getPhoneValue(form, PHONE_ID),
+        message: value(form, "description"),
+        details,
+        summaryAr: summaryAr.filter(([, v]) => v)
+      },
+      openedAt
+    );
+    sending = false;
+    setSending(submitButton, false);
+    if (result.status === "limit") return showLimit(successBox);
+
+    trackLead("consultancy", selectedText(form, "service"));
+    if (result.status === "sent") {
+      showSent(successBox, result.reference);
+    } else {
+      // The inbox couldn't take it: the visitor's email app, as before.
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      showMailtoSent(successBox);
+    }
     form.reset();
   });
 }
