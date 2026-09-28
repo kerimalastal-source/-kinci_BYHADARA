@@ -20,6 +20,7 @@ import {
   type Geo,
   type Locale,
   type PageView,
+  type TrailStep,
   type VisitState
 } from "./_lib/visitAlerts.js";
 
@@ -90,8 +91,25 @@ function parsePageView(body: unknown): PageView | null {
     referrer,
     title: text(data.title, 150),
     landingPath: text(data.landingPath, 300).split(/[?#]/)[0],
-    landingTitle: text(data.landingTitle, 150)
+    landingTitle: text(data.landingTitle, 150),
+    trail: parseTrail(data.trail),
+    trailSkipped: Math.min(10_000, Math.max(0, Math.floor(Number(data.trailSkipped) || 0)))
   };
+}
+
+/** The browser's list of this visit's pages; anything malformed or internal is dropped. */
+function parseTrail(value: unknown): TrailStep[] {
+  if (!Array.isArray(value)) return [];
+  const steps: TrailStep[] = [];
+  for (const item of value.slice(0, 60)) {
+    if (!item || typeof item !== "object") continue;
+    const step = item as Record<string, unknown>;
+    const path = text(step.path, 300).split(/[?#]/)[0];
+    const at = Number(step.at);
+    if (!path.startsWith("/") || INTERNAL_PATH.test(path) || !Number.isFinite(at)) continue;
+    steps.push({ path, title: text(step.title, 150), at: Math.min(Math.max(0, Math.round(at)), 7 * 86_400) });
+  }
+  return steps;
 }
 
 function readGeo(headers: Headers): Geo {

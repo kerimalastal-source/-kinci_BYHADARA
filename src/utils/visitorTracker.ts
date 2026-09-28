@@ -7,6 +7,10 @@ import type { Route } from "../seo/routes";
 const SESSION_KEY = "hadara-visit-session";
 /** Path and title of the session's first page, so the updated alert keeps its 🏠 project line. */
 const LANDING_TITLE_KEY = "hadara-visit-landing-title";
+/** The pages of this visit in order ({p: path, n: title, t: time opened}), for the alert's visit trail. */
+const TRAIL_KEY = "hadara-visit-trail";
+/** Pages kept in the trail; past that, the oldest after the first page are dropped (and counted). */
+const TRAIL_MAX = 40;
 const ENDPOINT = "/api/track";
 
 /** Seller account and admin pages are internal; they are never reported. */
@@ -61,6 +65,42 @@ function landingPage(path: string, title: string): { path: string; title: string
   return page;
 }
 
+interface TrailStep {
+  p: string;
+  n: string;
+  t: number;
+}
+
+interface Trail {
+  steps: TrailStep[];
+  /** Pages dropped from the middle once the trail reached TRAIL_MAX. */
+  skipped: number;
+}
+
+/** Adds this page to the visit's trail (unless it's the page already at its end) and returns it. */
+function visitTrail(path: string, title: string): Trail {
+  let trail: Trail = { steps: [], skipped: 0 };
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(TRAIL_KEY) ?? "null") as Trail | null;
+    if (saved && Array.isArray(saved.steps)) trail = { steps: saved.steps, skipped: Number(saved.skipped) || 0 };
+  } catch {
+    // Unreadable: start again from this page.
+  }
+  if (trail.steps[trail.steps.length - 1]?.p !== path) {
+    trail.steps.push({ p: path, n: title, t: Date.now() });
+    if (trail.steps.length > TRAIL_MAX) {
+      trail.steps.splice(1, 1);
+      trail.skipped += 1;
+    }
+    try {
+      sessionStorage.setItem(TRAIL_KEY, JSON.stringify(trail));
+    } catch {
+      // Storage full or blocked: the alert keeps showing the current page only.
+    }
+  }
+  return trail;
+}
+
 /** First page of this page load: the other site's host name, or our own path. Later: the previous page. */
 function referrer(): string {
   if (previousPath) return previousPath;
@@ -87,6 +127,8 @@ export function trackVisit(route: Route, locale: string): void {
 
   const title = TITLED_ROUTES.has(route.name) ? document.title : "";
   const landing = landingPage(path, title);
+  const trail = visitTrail(path, title);
+  const start = trail.steps[0]?.t ?? Date.now();
   const body = JSON.stringify({
     sessionId: id,
     path,
@@ -94,7 +136,10 @@ export function trackVisit(route: Route, locale: string): void {
     referrer: from,
     title,
     landingPath: landing.path,
-    landingTitle: landing.title
+    landingTitle: landing.title,
+    // Each page with the seconds since the visit's first page.
+    trail: trail.steps.map((step) => ({ path: step.p, title: step.n, at: Math.max(0, Math.round((step.t - start) / 1000)) })),
+    trailSkipped: trail.skipped
   });
 
   // keepalive lets the request finish even if the visitor leaves right away.

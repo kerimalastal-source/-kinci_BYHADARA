@@ -2443,7 +2443,7 @@
         "after": [
           "Le numéro de session est créé par votre navigateur et conservé dans son stockage de session (sessionStorage), uniquement pour l'onglet en cours. Ce n'est pas un cookie, il n'est lié ni à votre nom ni à votre appareil, et votre navigateur le supprime à la fermeture de l'onglet.",
           "Nous ne conservons ni votre adresse IP ni aucune donnée personnelle dans ces statistiques, et nous ne les utilisons pas pour identifier qui que ce soit. Les pages des comptes vendeurs et d'administration ne sont pas enregistrées.",
-          "Les enregistrements de visite sont supprimés automatiquement après 30 jours. Lorsqu'une nouvelle visite commence, notre équipe reçoit une notification interne (via Telegram) contenant les mêmes informations anonymes : localisation approximative, page, langue et provenance. Cette notification est mise à jour pendant la visite (page actuelle, nombre de pages et durée de la visite), et une notification distincte est envoyée lorsque le visiteur ouvre la page de contact ou un formulaire de demande."
+          "Les enregistrements de visite sont supprimés automatiquement après 30 jours. Lorsqu'une nouvelle visite commence, notre équipe reçoit une notification interne (via Telegram) contenant les mêmes informations anonymes : localisation approximative, page, langue et provenance. Cette notification est mise à jour pendant la visite (les pages ouvertes dans l'ordre, le temps approximatif passé sur chacune, le nombre de pages et la durée de la visite), et une notification distincte est envoyée lorsque le visiteur ouvre la page de contact ou un formulaire de demande."
         ]
       },
       {
