@@ -2,7 +2,7 @@
 // HTML: every value that comes from the request is escaped.
 import { escapeHtml } from "./telegram.js";
 
-export const LOCALES = ["en", "ar", "fr", "ru"] as const;
+export const LOCALES = ["en", "ar", "fa", "fr", "ru"] as const;
 export type Locale = (typeof LOCALES)[number];
 
 /** One page of the visit, as the browser remembers it: seconds since the visit's first page. */
@@ -55,7 +55,7 @@ export interface Geo {
   city: string | null;
 }
 
-const LOCALE_NAMES: Record<Locale, string> = { en: "الإنجليزية", ar: "العربية", fr: "الفرنسية", ru: "الروسية" };
+const LOCALE_NAMES: Record<Locale, string> = { en: "الإنجليزية", ar: "العربية", fa: "الفارسية", fr: "الفرنسية", ru: "الروسية" };
 
 /**
  * Pages with a request form whose first opening in a visit sends a separate 🔥 message

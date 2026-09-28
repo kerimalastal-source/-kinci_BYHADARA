@@ -128,6 +128,16 @@ const VISITOR: Record<SiteLocale, VisitorText> = {
     contact: "للأمور العاجلة، اتصل بنا أو راسلنا عبر واتساب:",
     site: "زيارة موقعنا"
   },
+  fa: {
+    subject: "پیام شما به دست ما رسید — املاک حضارا ({ref})",
+    hello: "{name} عزیز، سلام",
+    intro: "از اینکه با املاک حضارا (HADARA Real Estate) تماس گرفتید سپاسگزاریم. پیام شما به تیم ما رسید.",
+    reference: "شماره درخواست شما: {ref}",
+    next: "یکی از مشاوران ما به‌زودی با شما تماس خواهد گرفت.",
+    yourMessage: "پیام شما",
+    contact: "برای موارد فوری، با ما تماس بگیرید یا در WhatsApp پیام دهید:",
+    site: "مشاهده وب‌سایت ما"
+  },
   fr: {
     subject: "Nous avons bien reçu votre message — HADARA Real Estate ({ref})",
     hello: "Bonjour {name},",
@@ -152,7 +162,7 @@ const VISITOR: Record<SiteLocale, VisitorText> = {
 
 export function visitorEmail(d: InquiryDetails): { subject: string; html: string; text: string } {
   const t = VISITOR[d.locale];
-  const rtl = d.locale === "ar";
+  const rtl = d.locale === "ar" || d.locale === "fa";
   const site = d.locale === "en" ? d.origin : `${d.origin}/${d.locale}`;
   const message = d.message
     ? `<p style="margin:18px 0 6px;color:#6f776f;font-size:13px">${escapeHtml(t.yourMessage)}</p>

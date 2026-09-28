@@ -1,4 +1,4 @@
-import { t, tRaw, link, getProjectContent, placeLine, onLocaleChange, locales, getLocale } from "../i18n";
+import { t, tRaw, link, getProjectContent, placeLine, onLocaleChange, locales, intlTag } from "../i18n";
 import { lookup } from "../i18n/dictionaries";
 import { getProjectBySlug, getSortedProjects, type Project, type Residence } from "../data/projects";
 import { projectStatusLabel } from "./projectCard";
@@ -83,6 +83,9 @@ function normalize(text: string): string {
     .replace(/ı/g, "i")
     .replace(/ة/g, "ه")
     .replace(/ى/g, "ي")
+    // Persian ی / ک are the same letters as Arabic ي / ك for matching.
+    .replace(/ی/g, "ي")
+    .replace(/ک/g, "ك")
     .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim();
 }
@@ -90,7 +93,7 @@ function normalize(text: string): string {
 const tokens = (text: string) => normalize(text).split(" ").filter(Boolean);
 
 /** Words shared by many project names; they never pick a project on their own. */
-const GENERIC = new Set(["lotus", "لوتس", "лотос", "villa", "فيلا", "вилла", "the", "de", "la"]);
+const GENERIC = new Set(["lotus", "لوتس", "лотос", "villa", "فيلا", "вилла", "the", "de", "la", "لوتوس", "ویلا", "ویلای"].map(normalize));
 
 interface IndexedProject {
   project: Project;
@@ -145,30 +148,30 @@ function matchDistrict(text: string): string[] {
 }
 
 const KEYWORDS: Record<string, string[]> = {
-  citizenship: ["citizen", "passport", "nationality", "جنسيه", "جواز", "citoyen", "nationalite", "passeport", "граждан", "паспорт"],
-  design: ["design", "architect", "engineer", "interior", "render", "renovat", "redesign", "3d", "تصميم", "معماري", "عماره", "هندس", "ديكور", "داخلي", "ترميم", "conception", "ingenier", "interieur", "renovation", "архитект", "проектирован", "дизайн", "интерьер", "инженер", "ремонт", "реконструк"],
-  contact: ["contact", "call", "phone", "whatsapp", "speak", "agent", "advisor", "تواصل", "اتصل", "اتصال", "هاتف", "تلفون", "تليفون", "رقمكم", "واتس", "موظف", "مستشار", "appel", "telephone", "conseill", "связ", "позвон", "телефон", "ватсап", "менеджер"],
-  price: ["price", "cost", "how much", "budget", "سعر", "اسعار", "ثمن", "بكم", "تكلف", "ميزاني", "prix", "cout", "combien", "tarif", "цен", "стоим", "сколько", "бюджет"],
-  villas: ["villa", "فيلا", "فلل", "فيلل", "вилл"],
-  new: ["new", "launch", "off plan", "offplan", "under construction", "جديد", "اطلاق", "قيد الانشاء", "على المخطط", "nouveau", "neuf", "lancement", "construction", "нов", "строящ"],
-  ready: ["ready", "move in", "completed", "جاهز", "مكتمل", "منجز", "فوري", "pret", "livre", "termine", "готов", "сдан"],
-  projects: ["project", "detail", "info", "option", "available", "apartment", "flat", "property", "properties", "home", "house", "deliver", "handover", "مشروع", "مشاريع", "تفاصيل", "معلومات", "عقار", "شقق", "شقه", "متاح", "بيت", "منزل", "تسليم", "projet", "appartement", "maison", "bien", "livraison", "проект", "подроб", "квартир", "информац", "дом", "сдач", "срок"],
-  tour: ["video", "tour", "zoom", "facetime", "فيديو", "جولة", "جوله", "زوم", "vidéo", "visite", "видео", "тур", "экскурс"],
-  thanks: ["thank", "thx", "شكرا", "مشكور", "يعطيك", "تسلم", "merci", "спасибо", "благодар"],
-  greeting: ["hello", "hi", "hey", "مرحبا", "اهلا", "السلام", "سلام", "هلا", "مساء", "صباح", "bonjour", "salut", "bonsoir", "привет", "здравств", "добрый"]
+  citizenship: ["شهروندی", "تابعیت", "پاسپورت", "گذرنامه", "citizen", "passport", "nationality", "جنسيه", "جواز", "citoyen", "nationalite", "passeport", "граждан", "паспорт"],
+  design: ["طراحی", "معماری", "مهندسی", "دکوراسیون", "بازسازی", "نوسازی", "design", "architect", "engineer", "interior", "render", "renovat", "redesign", "3d", "تصميم", "معماري", "عماره", "هندس", "ديكور", "داخلي", "ترميم", "conception", "ingenier", "interieur", "renovation", "архитект", "проектирован", "дизайн", "интерьер", "инженер", "ремонт", "реконструк"],
+  contact: ["تماس", "تلفن", "شماره", "واتساپ", "مشاور", "کارشناس", "صحبت", "contact", "call", "phone", "whatsapp", "speak", "agent", "advisor", "تواصل", "اتصل", "اتصال", "هاتف", "تلفون", "تليفون", "رقمكم", "واتس", "موظف", "مستشار", "appel", "telephone", "conseill", "связ", "позвон", "телефон", "ватсап", "менеджер"],
+  price: ["قیمت", "هزینه", "چقدر", "بودجه", "مبلغ", "price", "cost", "how much", "budget", "سعر", "اسعار", "ثمن", "بكم", "تكلف", "ميزاني", "prix", "cout", "combien", "tarif", "цен", "стоим", "сколько", "бюджет"],
+  villas: ["ویلا", "villa", "فيلا", "فلل", "فيلل", "вилл"],
+  new: ["جدید", "پیش فروش", "در حال ساخت", "new", "launch", "off plan", "offplan", "under construction", "جديد", "اطلاق", "قيد الانشاء", "على المخطط", "nouveau", "neuf", "lancement", "construction", "нов", "строящ"],
+  ready: ["آماده", "تکمیل", "تحویل فوری", "ready", "move in", "completed", "جاهز", "مكتمل", "منجز", "فوري", "pret", "livre", "termine", "готов", "сдан"],
+  projects: ["پروژه", "جزئیات", "اطلاعات", "آپارتمان", "ملک", "خانه", "project", "detail", "info", "option", "available", "apartment", "flat", "property", "properties", "home", "house", "deliver", "handover", "مشروع", "مشاريع", "تفاصيل", "معلومات", "عقار", "شقق", "شقه", "متاح", "بيت", "منزل", "تسليم", "projet", "appartement", "maison", "bien", "livraison", "проект", "подроб", "квартир", "информац", "дом", "сдач", "срок"],
+  tour: ["ویدیو", "ویدئو", "بازدید", "video", "tour", "zoom", "facetime", "فيديو", "جولة", "جوله", "زوم", "vidéo", "visite", "видео", "тур", "экскурс"],
+  thanks: ["ممنون", "مرسی", "سپاس", "متشکر", "thank", "thx", "شكرا", "مشكور", "يعطيك", "تسلم", "merci", "спасибо", "благодар"],
+  greeting: ["سلام", "درود", "وقت بخیر", "روز بخیر", "hello", "hi", "hey", "مرحبا", "اهلا", "السلام", "سلام", "هلا", "مساء", "صباح", "bonjour", "salut", "bonsoir", "привет", "здравств", "добрый"]
 };
 
 /** What a question about one project is about ("when is it ready?" on a project page). */
 const TOPIC_KEYWORDS: Record<Exclude<InfoTopic, "citizenship" | "price" | "tour">, string[]> = {
-  legal: ["deed", "tapu", "title", "permit", "iskan", "document", "legal", "licen", "earthquake", "lien", "mortgage", "طابو", "سند", "ملكيه", "رخصه", "ترخيص", "اسكان", "وثائق", "مستندات", "اوراق", "قانوني", "زلزال", "رهن", "titre", "permis", "sism", "hypothe", "тапу", "документ", "разрешен", "землетр", "ипотек", "залог"],
-  delivery: ["deliver", "handover", "ready", "when", "complet", "finish", "تسليم", "استلام", "جاهز", "متى", "امتى", "اكتمال", "livraison", "livre", "pret", "quand", "сдач", "готов", "когда", "срок"],
-  units: ["unit", "layout", "room", "bedroom", "size", "sqm", "m2", "floor plan", "type", "وحد", "غرف", "غرفه", "مساح", "متر", "نوع", "انواع", "مخطط", "piece", "chambre", "surface", "superficie", "typolog", "планиров", "комнат", "площад", "метр", "тип"],
-  location: ["where", "location", "address", "far", "distance", "airport", "metro", "beach", "near", "map", "وين", "اين", "موقع", "مكان", "عنوان", "بعيد", "قريب", "مطار", "مترو", "خريطه", "emplacement", "adresse", "aeroport", "proche", "carte", "где", "располож", "адрес", "аэропорт", "метро", "рядом", "карт"],
-  amenities: ["amenit", "facilit", "pool", "gym", "fitness", "parking", "security", "garden", "sauna", "مرافق", "مسبح", "مسابح", "جيم", "رياضه", "موقف", "مراب", "حراسه", "حديقه", "ساونا", "piscine", "sport", "securite", "jardin", "equipement", "бассейн", "спортзал", "фитнес", "парков", "охран", "инфраструкт"]
+  legal: ["طابو", "مجوز", "پایان کار", "مدارک", "قانونی", "زلزله", "وام", "deed", "tapu", "title", "permit", "iskan", "document", "legal", "licen", "earthquake", "lien", "mortgage", "طابو", "سند", "ملكيه", "رخصه", "ترخيص", "اسكان", "وثائق", "مستندات", "اوراق", "قانوني", "زلزال", "رهن", "titre", "permis", "sism", "hypothe", "тапу", "документ", "разрешен", "землетр", "ипотек", "залог"],
+  delivery: ["تحویل", "چه زمانی", "کی آماده", "تکمیل", "deliver", "handover", "ready", "when", "complet", "finish", "تسليم", "استلام", "جاهز", "متى", "امتى", "اكتمال", "livraison", "livre", "pret", "quand", "сдач", "готов", "когда", "срок"],
+  units: ["واحد", "خواب", "اتاق", "متراژ", "انواع", "unit", "layout", "room", "bedroom", "size", "sqm", "m2", "floor plan", "type", "وحد", "غرف", "غرفه", "مساح", "متر", "نوع", "انواع", "مخطط", "piece", "chambre", "surface", "superficie", "typolog", "планиров", "комнат", "площад", "метр", "тип"],
+  location: ["کجا", "موقعیت", "آدرس", "نشانی", "فاصله", "فرودگاه", "ساحل", "نزدیک", "where", "location", "address", "far", "distance", "airport", "metro", "beach", "near", "map", "وين", "اين", "موقع", "مكان", "عنوان", "بعيد", "قريب", "مطار", "مترو", "خريطه", "emplacement", "adresse", "aeroport", "proche", "carte", "где", "располож", "адрес", "аэропорт", "метро", "рядом", "карт"],
+  amenities: ["امکانات", "استخر", "باشگاه", "پارکینگ", "نگهبانی", "امنیت", "باغ", "سونا", "amenit", "facilit", "pool", "gym", "fitness", "parking", "security", "garden", "sauna", "مرافق", "مسبح", "مسابح", "جيم", "رياضه", "موقف", "مراب", "حراسه", "حديقه", "ساونا", "piscine", "sport", "securite", "jardin", "equipement", "бассейн", "спортзал", "фитнес", "парков", "охран", "инфраструкт"]
 };
 
 /** Asking about other or all projects, not the one in view. */
-const GENERAL_WORDS = ["projects", "other", "another", "all", "مشاريع", "اخرى", "ثاني", "كل", "projets", "autre", "tous", "проекты", "друг", "все"];
+const GENERAL_WORDS = ["projects", "other", "another", "all", "مشاريع", "اخرى", "ثاني", "كل", "projets", "autre", "tous", "проекты", "друг", "все", "پروژه ها", "دیگر", "همه"];
 
 /** Latin keywords match at the start of a word ("citizen" finds "citizenship"); others anywhere (Arabic prefixes like "بال"). */
 function has(q: string, group: keyof typeof KEYWORDS): boolean {
@@ -352,7 +355,7 @@ const isolateTerms = (text: string) => text.replace(/\(([^()]*[A-Za-z][^()]*)\)/
 
 function verifiedDate(updated: string): string {
   const [y, m, d] = updated.split("-").map(Number);
-  return new Intl.DateTimeFormat(`${getLocale()}-u-nu-latn`, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(Date.UTC(y, m - 1, d));
+  return new Intl.DateTimeFormat(intlTag(), { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(Date.UTC(y, m - 1, d));
 }
 
 /** Topics the chat can answer for a project, in chip order. */

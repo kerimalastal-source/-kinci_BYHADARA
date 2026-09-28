@@ -77,7 +77,10 @@ function normalize(text: string): string {
     .toLocaleLowerCase("tr")
     .normalize("NFD")
     .replace(/\p{M}/gu, "")
-    .replace(/ı/g, "i");
+    .replace(/ı/g, "i")
+    // Persian ی / ک find the Arabic ي / ك spellings and back.
+    .replace(/ی/g, "ي")
+    .replace(/ک/g, "ك");
 }
 
 function runSearch(query: string): SearchResult[] {

@@ -17,7 +17,7 @@ import { sendEmail } from "./_lib/email.js";
 import { hasSupabase, restAs } from "./_lib/supabase.js";
 import { TEAM_INBOX, visitorEmail, type BookingDetails, type SiteLocale } from "./_lib/bookingMessages.js";
 
-const LOCALES: readonly SiteLocale[] = ["en", "ar", "fr", "ru"];
+const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru"];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const SLUG = /^[a-z0-9-]{1,60}$/;
 

@@ -29,14 +29,16 @@ import {
   fill,
   formatDate,
   formatTime,
+  isRtl,
   layout,
   ltrSpan,
+  tag as localeTag,
   type App,
   type ContactMethod,
   type SiteLocale
 } from "./_lib/bookingMessages.js";
 
-const LOCALES: readonly SiteLocale[] = ["en", "ar", "fr", "ru"];
+const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru"];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const WHATSAPP = "905319309214";
 
@@ -169,6 +171,39 @@ const TEXT: Record<SiteLocale, PageText> = {
     error: "تعذّر حفظ إجابتك. يُرجى المحاولة بعد قليل، أو التواصل معنا:",
     site: "زيارة موقعنا"
   },
+  fa: {
+    pickTitle: "زمانی را که برایتان مناسب است انتخاب کنید",
+    pickIntro: "ابتدا روز و سپس ساعت را انتخاب کنید (به وقت استانبول). زمان‌های خاکستری قبلاً رزرو شده‌اند. زمانی که انتخاب می‌کنید بلافاصله برای شما نگه داشته می‌شود و تیم ما آن را تأیید خواهد کرد.",
+    booked: "رزرو شده",
+    send: "رزرو این زمان",
+    noneFit: "هیچ زمانی برایم مناسب نیست — لطفاً با من تماس بگیرید",
+    noTimes: "در دو هفته آینده زمان خالی وجود ندارد. تیم ما برای یافتن زمان مناسب با شما تماس می‌گیرد.",
+    proposedTitle: "زمان جدید شما رزرو شد",
+    proposed: "این زمان را برای شما نگه داشته‌ایم. تیم ما به‌زودی آن را تأیید می‌کند و ایمیل تأیید برایتان ارسال می‌شود.",
+    pending: "شما این زمان را انتخاب کرده‌اید؛ تیم ما به‌زودی آن را تأیید می‌کند. همچنان می‌توانید زمان دیگری انتخاب کنید.",
+    chooseAnother: "انتخاب زمان دیگر",
+    slotTaken: "این زمان همین حالا توسط شخص دیگری رزرو شد. لطفاً زمان دیگری انتخاب کنید.",
+    localNote: "ساعت کوچک زیر هر گزینه، به وقت محلی شماست.",
+    title: "بازدید ویدیویی خصوصی شما",
+    hello: "{name} عزیز، سلام",
+    intro: "زمان جدید بازدید ویدیویی شما {ref}:",
+    istanbul: "به وقت استانبول",
+    yourTime: "به وقت شما",
+    question: "آیا این زمان برای شما مناسب است؟",
+    accept: "بله، این زمان مناسب است",
+    decline: "به زمان دیگری نیاز دارم",
+    chosen: "پاسخ شما: {answer}. می‌توانید پاسخ خود را در پایین تغییر دهید.",
+    acceptedTitle: "سپاسگزاریم — بازدید شما تأیید شد",
+    accepted: "مشتاق معرفی پروژه به شما هستیم. مشاور حضارا در این زمان از طریق {app} با شما تماس می‌گیرد.",
+    declinedTitle: "از اطلاع‌رسانی شما سپاسگزاریم",
+    declined: "تیم ما به‌زودی برای هماهنگی زمانی که برایتان مناسب است با شما تماس می‌گیرد.",
+    whatsapp: "پیام در WhatsApp",
+    invalidTitle: "این لینک دیگر معتبر نیست",
+    invalid: "ممکن است زمان بازدید شما دوباره تغییر کرده باشد یا بازدید انجام شده باشد. برای هر پرسشی با ما تماس بگیرید:",
+    errorTitle: "مشکلی پیش آمد",
+    error: "پاسخ شما ذخیره نشد. لطفاً چند لحظه دیگر دوباره تلاش کنید یا با ما تماس بگیرید:",
+    site: "مشاهده وب‌سایت ما"
+  },
   fr: {
     pickTitle: "Choisissez un horaire qui vous convient",
     pickIntro: "Choisissez un jour, puis une heure (heure d'Istanbul). Les horaires grisés sont déjà réservés. L'horaire choisi vous est réservé tout de suite, et notre équipe le confirmera.",
@@ -241,7 +276,7 @@ const localeOf = (value: string | null | undefined): SiteLocale =>
   LOCALES.includes(value as SiteLocale) ? (value as SiteLocale) : "en";
 
 function html(body: string, locale: SiteLocale, title: string, status = 200, style = ""): Response {
-  const page = layout(body, locale === "ar", locale).replace(
+  const page = layout(body, isRtl(locale), locale).replace(
     "<body",
     `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>${escapeHtml(title)} — HADARA Real Estate</title>${style ? `<style>${style}</style>` : ""}</head><body`
   );
@@ -371,7 +406,7 @@ const PICKER_STYLE = `
 function pickerPage(reply: Reply, token: string, taken: Set<number>, notice = "", status = 200): Response {
   const locale = localeOf(reply.site_locale);
   const t = TEXT[locale];
-  const tag = `${locale}-u-nu-latn`;
+  const tag = localeTag(locale);
   // The time the team set is the one being replaced: it isn't offered back.
   const held = new Set(taken);
   held.add(Date.parse(reply.slot_start));

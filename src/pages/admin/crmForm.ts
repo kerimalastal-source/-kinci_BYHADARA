@@ -1,4 +1,4 @@
-import { t, getLocale, getProjectContent } from "../../i18n";
+import { t, getProjectContent, intlTag } from "../../i18n";
 import { escapeHtml } from "../../utils/html";
 import { toWesternDigits } from "../../utils/numbers";
 import { getProjectBySlug, projects as allProjects } from "../../data/projects";
@@ -10,7 +10,7 @@ import { CURRENCIES, STAGES, fromIstanbulInput, toIstanbulInput, type CrmChanges
  */
 
 const ISTANBUL = "Europe/Istanbul";
-const tag = () => `${getLocale()}-u-nu-latn`;
+const tag = () => intlTag();
 
 /** "Thu 2 Oct, 15:30" in Istanbul time, 24-hour (no AM/PM to flip in RTL). */
 export function followUpWhen(iso: string): string {

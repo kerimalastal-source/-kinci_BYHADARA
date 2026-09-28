@@ -1,4 +1,4 @@
-import { t, link } from "../../i18n";
+import { t, link, intlTag } from "../../i18n";
 import { lookup, isLocale, type Locale } from "../../i18n/dictionaries";
 import { escapeHtml } from "../../utils/html";
 import { WHATSAPP_ICON } from "../../components/floatingButtons";
@@ -41,7 +41,7 @@ function topicText(locale: Locale, c: ReplyContext): string {
 }
 
 function tourWhen(locale: Locale, slot: string): string {
-  return new Intl.DateTimeFormat(`${locale}-u-nu-latn`, {
+  return new Intl.DateTimeFormat(intlTag(locale as Locale), {
     weekday: "long",
     day: "numeric",
     month: "long",

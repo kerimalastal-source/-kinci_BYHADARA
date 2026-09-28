@@ -4,7 +4,7 @@
 import { escapeHtml } from "./telegram.js";
 import type { EmailAttachment } from "./email.js";
 
-export type SiteLocale = "en" | "ar" | "fr" | "ru";
+export type SiteLocale = "en" | "ar" | "fa" | "fr" | "ru";
 export type App = "whatsapp" | "facetime" | "zoom" | "meet";
 export type TourLanguage = "ar" | "en" | "tr";
 export type ContactMethod = "email" | "phone" | "whatsapp" | "telegram" | "viber";
@@ -37,6 +37,7 @@ const TEAM_EMAIL = "info@byhadara.com";
 export const APPS: Record<SiteLocale, Record<App, string>> = {
   en: { whatsapp: "WhatsApp video", facetime: "FaceTime", zoom: "Zoom", meet: "Google Meet" },
   ar: { whatsapp: "واتساب فيديو", facetime: "فيس تايم", zoom: "زوم", meet: "جوجل ميت" },
+  fa: { whatsapp: "تماس تصویری WhatsApp", facetime: "FaceTime", zoom: "Zoom", meet: "Google Meet" },
   fr: { whatsapp: "Vidéo WhatsApp", facetime: "FaceTime", zoom: "Zoom", meet: "Google Meet" },
   ru: { whatsapp: "Видео в WhatsApp", facetime: "FaceTime", zoom: "Zoom", meet: "Google Meet" }
 };
@@ -44,6 +45,7 @@ export const APPS: Record<SiteLocale, Record<App, string>> = {
 export const TOUR_LANGUAGES: Record<SiteLocale, Record<TourLanguage, string>> = {
   en: { ar: "Arabic", en: "English", tr: "Turkish" },
   ar: { ar: "العربية", en: "الإنجليزية", tr: "التركية" },
+  fa: { ar: "عربی", en: "انگلیسی", tr: "ترکی" },
   fr: { ar: "Arabe", en: "Anglais", tr: "Turc" },
   ru: { ar: "Арабский", en: "Английский", tr: "Турецкий" }
 };
@@ -56,7 +58,7 @@ export const CONTACT_AR: Record<ContactMethod, string> = {
   viber: "فايبر"
 };
 
-export const SITE_LANGUAGE_AR: Record<SiteLocale, string> = { en: "الإنجليزية", ar: "العربية", fr: "الفرنسية", ru: "الروسية" };
+export const SITE_LANGUAGE_AR: Record<SiteLocale, string> = { en: "الإنجليزية", ar: "العربية", fa: "الفارسية", fr: "الفرنسية", ru: "الروسية" };
 
 interface VisitorText {
   subject: string;
@@ -126,6 +128,28 @@ const VISITOR: Record<SiteLocale, VisitorText> = {
     event: "جولة خاصة عبر الفيديو — {projects}",
     eventDetails: "سيتصل بك مستشار حضارة عبر {app}. رقم الحجز {ref}."
   },
+  fa: {
+    subject: "بازدید ویدیویی خصوصی شما رزرو شد — {ref}",
+    hello: "{name} عزیز، سلام",
+    intro: "بازدید ویدیویی خصوصی شما با املاک حضارا (HADARA Real Estate) رزرو شد. جزئیات به شرح زیر است:",
+    reference: "شماره رزرو",
+    projects: "پروژه",
+    date: "تاریخ",
+    time: "ساعت",
+    istanbul: "به وقت استانبول",
+    yourTime: "به وقت شما",
+    app: "تماس تصویری",
+    language: "زبان بازدید",
+    nextTitle: "مرحله بعد",
+    next: "مشاور حضارا در زمان رزروشده از طریق {app} با شما تماس می‌گیرد.",
+    linkNote: "پیش از بازدید، لینک جلسه را برایتان ارسال می‌کنیم.",
+    change: "نیاز به تغییر زمان دارید؟ کافی است به همین ایمیل پاسخ دهید یا با شماره {phone} با ما تماس بگیرید.",
+    calendar: "فایل تقویم پیوست‌شده، بازدید را به تقویم شما اضافه می‌کند.",
+    thanks: "به امید دیدار،",
+    team: "تیم املاک حضارا (HADARA Real Estate)",
+    event: "بازدید ویدیویی خصوصی — {projects}",
+    eventDetails: "مشاور حضارا از طریق {app} با شما تماس می‌گیرد. شماره رزرو {ref}."
+  },
   fr: {
     subject: "Votre visite privée en vidéo est réservée — {ref}",
     hello: "Bonjour {name},",
@@ -173,8 +197,11 @@ const VISITOR: Record<SiteLocale, VisitorText> = {
 };
 
 export const fill = (text: string, vars: Record<string, string>) => text.replace(/\{(\w+)\}/g, (_, key: string) => vars[key] ?? `{${key}}`);
-export const list = (items: string[], locale: SiteLocale) => items.join(locale === "ar" ? "، " : ", ");
-const tag = (locale: SiteLocale) => `${locale}-u-nu-latn`;
+/** Arabic and Persian are written right to left. */
+export const isRtl = (locale: SiteLocale) => locale === "ar" || locale === "fa";
+export const list = (items: string[], locale: SiteLocale) => items.join(isRtl(locale) ? "، " : ", ");
+/** Latin digits, and the Gregorian calendar for Persian too. */
+export const tag = (locale: SiteLocale) => (locale === "fa" ? "fa-u-ca-gregory-nu-latn" : `${locale}-u-nu-latn`);
 
 export function formatDate(ms: number, locale: SiteLocale, timeZone: string): string {
   return new Intl.DateTimeFormat(tag(locale), { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone }).format(ms);
@@ -298,6 +325,11 @@ const CONFIRMED: Record<SiteLocale, UpdateText> = {
     intro: "يسعدنا إبلاغك بأن فريقنا أكّد جولتك الخاصة عبر الفيديو. إليك التفاصيل:",
     calendar: "ملف التقويم المرفق يضيف الجولة إلى تقويمك."
   },
+  fa: {
+    subject: "بازدید ویدیویی شما تأیید شد — {ref}",
+    intro: "خبر خوب: تیم ما بازدید ویدیویی خصوصی شما را تأیید کرد. جزئیات به شرح زیر است:",
+    calendar: "فایل تقویم پیوست‌شده، بازدید را به تقویم شما اضافه می‌کند."
+  },
   fr: {
     subject: "Votre visite vidéo est confirmée — {ref}",
     intro: "Bonne nouvelle : notre équipe a confirmé votre visite privée en vidéo. Voici les détails :",
@@ -321,6 +353,11 @@ const REMINDER: Record<SiteLocale, UpdateText> = {
     subject: "تذكير: جولتك عبر الفيديو غداً — {ref}",
     intro: "نذكّرك بأن موعد جولتك الخاصة عبر الفيديو مع حضارة للتطوير العقاري غداً. إليك التفاصيل:",
     calendar: "ملف التقويم المرفق يحفظ الجولة في تقويمك."
+  },
+  fa: {
+    subject: "یادآوری: بازدید ویدیویی شما فردا است — {ref}",
+    intro: "یادآوری دوستانه: بازدید ویدیویی خصوصی شما با املاک حضارا فردا برگزار می‌شود. جزئیات به شرح زیر است:",
+    calendar: "فایل تقویم پیوست‌شده، بازدید را در تقویم شما نگه می‌دارد."
   },
   fr: {
     subject: "Rappel : votre visite vidéo a lieu demain — {ref}",
@@ -352,6 +389,15 @@ const RESCHEDULED: Record<SiteLocale, RescheduleText> = {
     accept: "نعم، الموعد مناسب",
     decline: "أحتاج إلى موعد آخر",
     declineNote: "إذا كنت تحتاج إلى موعد آخر، فسيتواصل معك فريقنا للاتفاق على موعد يناسبك."
+  },
+  fa: {
+    subject: "زمان جدید بازدید ویدیویی شما — {ref}",
+    intro: "تیم ما زمان بازدید ویدیویی خصوصی شما را به‌روز کرده است. جزئیات جدید به شرح زیر است:",
+    calendar: "فایل تقویم پیوست‌شده شامل زمان جدید است.",
+    question: "آیا این زمان برای شما مناسب است؟",
+    accept: "بله، این زمان مناسب است",
+    decline: "به زمان دیگری نیاز دارم",
+    declineNote: "اگر به زمان دیگری نیاز دارید، تیم ما برای هماهنگی زمان مناسب با شما تماس می‌گیرد."
   },
   fr: {
     subject: "Nouvel horaire pour votre visite vidéo — {ref}",
@@ -394,7 +440,7 @@ export function visitorEmail(
           : null;
   const reschedule = update.kind === "rescheduled" ? RESCHEDULED[locale] : null;
   const intro = variant?.intro ?? text.intro;
-  const rtl = locale === "ar";
+  const rtl = isRtl(locale);
   const ms = details.slot.getTime();
   const app = APPS[locale][details.app];
   const date = formatDate(ms, locale, ISTANBUL);

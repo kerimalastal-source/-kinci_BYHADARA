@@ -1,4 +1,4 @@
-import { t, link, getLocale, getProjectContent } from "../../i18n";
+import { t, link, getLocale, getProjectContent, intlTag, listSep } from "../../i18n";
 import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
@@ -44,8 +44,8 @@ let query = "";
 /** A message on a card after an action (e.g. "notes saved"), until the next repaint of it. */
 const notices = new Map<string, { text: string; ok: boolean }>();
 
-const tag = () => `${getLocale()}-u-nu-latn`;
-const sep = () => (getLocale() === "ar" ? "، " : ", ");
+const tag = () => intlTag();
+const sep = () => (listSep());
 
 function formatWhen(iso: string): { day: string; time: string } {
   const ms = Date.parse(iso);

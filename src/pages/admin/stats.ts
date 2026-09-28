@@ -1,4 +1,4 @@
-import { t, getLocale, getProjectContent } from "../../i18n";
+import { t, getLocale, getProjectContent, intlTag } from "../../i18n";
 import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
@@ -15,7 +15,7 @@ import { adminHero, adminNav } from "./nav";
 const PERIODS = [7, 30] as const;
 let period: (typeof PERIODS)[number] = 7;
 
-const tag = () => `${getLocale()}-u-nu-latn`;
+const tag = () => intlTag();
 const num = (n: number) => new Intl.NumberFormat(tag()).format(n);
 const pct = (part: number, whole: number) => (whole ? `${new Intl.NumberFormat(tag(), { maximumFractionDigits: 1 }).format((part / whole) * 100)}%` : "—");
 

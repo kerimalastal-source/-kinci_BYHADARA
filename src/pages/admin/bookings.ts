@@ -1,4 +1,4 @@
-import { t, link, getLocale, getProjectContent } from "../../i18n";
+import { t, link, getProjectContent, intlTag, listSep } from "../../i18n";
 import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
@@ -36,8 +36,8 @@ let editingId: string | null = null;
 /** A message on a card after an action (e.g. "email sent"), until the next action. */
 const notices = new Map<string, { text: string; ok: boolean }>();
 
-const tag = () => `${getLocale()}-u-nu-latn`;
-const sep = () => (getLocale() === "ar" ? "، " : ", ");
+const tag = () => intlTag();
+const sep = () => (listSep());
 
 function formatWhen(iso: string, timeZone = ISTANBUL): { day: string; time: string } {
   const ms = Date.parse(iso);

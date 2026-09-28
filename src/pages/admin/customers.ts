@@ -1,4 +1,4 @@
-import { t, link, getLocale, getProjectContent } from "../../i18n";
+import { t, link, getProjectContent, intlTag, listSep } from "../../i18n";
 import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
@@ -35,8 +35,8 @@ export interface Customer {
 const ISTANBUL = "Europe/Istanbul";
 let query = "";
 
-const tag = () => `${getLocale()}-u-nu-latn`;
-const sep = () => (getLocale() === "ar" ? "، " : ", ");
+const tag = () => intlTag();
+const sep = () => (listSep());
 const when = (iso: string) =>
   new Intl.DateTimeFormat(tag(), { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: ISTANBUL }).format(
     Date.parse(iso)

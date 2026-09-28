@@ -17,7 +17,7 @@ import { teamEmail, teamTelegram, visitorEmail, type InquiryDetails, type Inquir
 
 const KINDS: readonly InquiryKind[] = ["contact", "property_request", "consultation"];
 const INTERESTS = ["citizenship", "residence"];
-const LOCALES: readonly SiteLocale[] = ["en", "ar", "fr", "ru"];
+const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru"];
 const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const PHONE = /^\+?[0-9][0-9 ()-]{5,28}$/;
 const SLUG = /^[a-z0-9-]{1,60}$/;

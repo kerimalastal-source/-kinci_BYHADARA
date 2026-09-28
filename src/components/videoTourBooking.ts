@@ -1,4 +1,4 @@
-import { t, tRaw, link, getLocale, getProjectContent, placeLine } from "../i18n";
+import { t, tRaw, link, getLocale, getProjectContent, placeLine, intlTag, listSep } from "../i18n";
 import { lookup } from "../i18n/dictionaries";
 import { getProjectBySlug, getSortedProjects } from "../data/projects";
 import { campaignSource } from "../utils/campaign";
@@ -135,7 +135,7 @@ function initialState(fromUrl: string[]): TourState {
 /* ---------- Time ---------- */
 
 const pad = (n: number) => String(n).padStart(2, "0");
-const localeTag = () => `${getLocale()}-u-nu-latn`;
+const localeTag = () => intlTag();
 const earliestAllowed = () => Date.now() + LEAD_MINUTES * 60_000;
 
 /** UTC instant of an Istanbul day + time (9.5 = 9:30). */
@@ -264,7 +264,7 @@ const periodOf = (hour: number) => (hour < 12 ? "morning" : hour < 16 ? "afterno
 /** "Today, 4:00 PM" / "Tue, 7 Oct, 10:00 AM" */
 function slotLabel(date: string, hour: number): string {
   const day = relativeDay(date) ?? `${weekday(date)} ${formatDay(date, "chip")}`;
-  return `${day}${getLocale() === "ar" ? "، " : ", "}${formatTime(slotUtc(date, hour), ISTANBUL_TZ)}`;
+  return `${day}${listSep()}${formatTime(slotUtc(date, hour), ISTANBUL_TZ)}`;
 }
 
 /* ---------- Rendering ---------- */
@@ -404,7 +404,7 @@ function summaryRows(state: TourState): string {
     local ? `<span class="tour-summary__local">${local} ${t("videoTour.wizard.yourTime")}</span>` : ""
   }`;
   return `
-    <div><dt>${t("videoTour.wizard.summary.projects")}</dt><dd>${state.projects.map(projectName).join(getLocale() === "ar" ? "، " : ", ")}</dd></div>
+    <div><dt>${t("videoTour.wizard.summary.projects")}</dt><dd>${state.projects.map(projectName).join(listSep())}</dd></div>
     <div><dt>${t("videoTour.wizard.summary.when")}</dt><dd>${when}</dd></div>
     <div><dt>${t("videoTour.wizard.summary.app")}</dt><dd data-tour-summary-app>${t(`videoTour.wizard.apps.${state.app}`)}</dd></div>
     <div><dt>${t("videoTour.wizard.summary.language")}</dt><dd data-tour-summary-lang>${t(`videoTour.languages.${state.lang}`)}</dd></div>`;

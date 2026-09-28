@@ -1,4 +1,4 @@
-import { t, getLocale } from "../../i18n";
+import { t, intlTag } from "../../i18n";
 import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { toWesternDigits } from "../../utils/numbers";
@@ -20,7 +20,7 @@ const PERIODS = ["thisMonth", "lastMonth", "last30", "last90"] as const;
 type Period = (typeof PERIODS)[number];
 let period: Period = "thisMonth";
 
-const tag = () => `${getLocale()}-u-nu-latn`;
+const tag = () => intlTag();
 const num = (n: number) => new Intl.NumberFormat(tag()).format(n);
 const istanbulToday = () => new Date(Date.now() + 3 * 3_600_000).toISOString().slice(0, 10);
 const addDays = (day: string, n: number) => new Date(Date.parse(`${day}T12:00:00Z`) + n * 86_400_000).toISOString().slice(0, 10);

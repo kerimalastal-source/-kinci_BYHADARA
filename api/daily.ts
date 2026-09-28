@@ -18,7 +18,7 @@ import { PROJECT_NAMES } from "./_lib/projectNames.js";
 import { dailySummary, type Digest } from "./_lib/dailyMessages.js";
 import { followUpsToday, sendDueFollowUps } from "./_lib/followups.js";
 
-const LOCALES: readonly SiteLocale[] = ["en", "ar", "fr", "ru"];
+const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru"];
 /** Links in emails and alerts point at the public site, whatever URL the cron called. */
 const SITE = (process.env.VITE_SITE_URL || "https://www.hadararealestate.com").replace(/\/$/, "");
 

@@ -27,7 +27,7 @@ import {
 const APPS: readonly App[] = ["whatsapp", "facetime", "zoom", "meet"];
 const TOUR_LANGUAGES: readonly TourLanguage[] = ["ar", "en", "tr"];
 const CONTACTS: readonly ContactMethod[] = ["email", "phone", "whatsapp", "telegram", "viber"];
-const LOCALES: readonly SiteLocale[] = ["en", "ar", "fr", "ru"];
+const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru"];
 const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const PHONE = /^\+?[0-9][0-9 ()-]{5,28}$/;
 const SLUG = /^[a-z0-9-]{1,60}$/;

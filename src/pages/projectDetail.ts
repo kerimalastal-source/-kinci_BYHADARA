@@ -1,4 +1,4 @@
-import { t, getProjectContent, getLocale, link, placeLine } from "../i18n";
+import { t, getProjectContent, link, placeLine, intlTag } from "../i18n";
 import { getProjectBySlug, getSortedProjects, type Project, type Residence } from "../data/projects";
 import { renderProjectCard, projectStatusLabel } from "../components/projectCard";
 import { amenityIcon } from "../components/amenityIcons";
@@ -197,7 +197,7 @@ function renderVerified(project: Project, name: string, values?: Record<string, 
   const items = verified.items.filter((key) => values[key]);
   if (!items.length) return "";
   const [y, m, d] = verified.updated.split("-").map(Number);
-  const date = new Intl.DateTimeFormat(`${getLocale()}-u-nu-latn`, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(
+  const date = new Intl.DateTimeFormat(intlTag(), { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(
     Date.UTC(y, m - 1, d)
   );
   const documentsHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(

@@ -1,4 +1,4 @@
-import { t, link, getLocale } from "../../i18n";
+import { t, link, intlTag } from "../../i18n";
 import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { fetchTourBookings, type TourBooking } from "../../data/tourBookings";
@@ -17,7 +17,7 @@ import { followUpTag, money, projectName, stageLabel } from "./crmForm";
 
 const ISTANBUL = "Europe/Istanbul";
 const CLOSED_DAYS = 60;
-const tag = () => `${getLocale()}-u-nu-latn`;
+const tag = () => intlTag();
 const shortDate = (iso: string) => new Intl.DateTimeFormat(tag(), { day: "numeric", month: "short", timeZone: ISTANBUL }).format(Date.parse(iso));
 const istanbulDay = (ms: number) => new Date(ms + 3 * 3_600_000).toISOString().slice(0, 10);
 

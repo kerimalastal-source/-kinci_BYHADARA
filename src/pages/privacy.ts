@@ -1,4 +1,4 @@
-import { t, tRaw, getLocale } from "../i18n";
+import { t, tRaw, intlTag } from "../i18n";
 
 interface PolicySection {
   title: string;
@@ -24,7 +24,7 @@ const linkEmail = (text: string) => text.replace(SITE_EMAIL, `<a href="mailto:${
 export function renderPrivacy(el: HTMLElement): void {
   const sections = tRaw<PolicySection[]>("privacy.sections");
   const [y, m, d] = LAST_UPDATED.split("-").map(Number);
-  const date = new Intl.DateTimeFormat(`${getLocale()}-u-nu-latn`, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(
+  const date = new Intl.DateTimeFormat(intlTag(), { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(
     Date.UTC(y, m - 1, d)
   );
 

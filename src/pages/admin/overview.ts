@@ -1,4 +1,4 @@
-import { t, link, getLocale, getProjectContent } from "../../i18n";
+import { t, link, getProjectContent, intlTag, listSep } from "../../i18n";
 import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
@@ -21,7 +21,7 @@ const ISTANBUL = "Europe/Istanbul";
 const DAY_MS = 86_400_000;
 const STALE_MS = DAY_MS;
 
-const tag = () => `${getLocale()}-u-nu-latn`;
+const tag = () => intlTag();
 const clock = (iso: string) =>
   new Intl.DateTimeFormat(tag(), { hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: ISTANBUL }).format(Date.parse(iso));
 const istanbulDay = (ms: number) => new Date(ms + 3 * 3_600_000).toISOString().slice(0, 10);
@@ -36,7 +36,7 @@ function ago(iso: string): string {
 }
 
 const projectNames = (slugs: string[]) =>
-  slugs.map((slug) => (getProjectBySlug(slug) ? getProjectContent(slug).name : slug)).join(getLocale() === "ar" ? "، " : ", ");
+  slugs.map((slug) => (getProjectBySlug(slug) ? getProjectContent(slug).name : slug)).join(listSep());
 
 function kpi(label: string, value: number | string, href: string, warn = false): string {
   return `<a class="admin-kpi admin-kpi--link${warn ? " admin-kpi--warn" : ""}" href="${href}">
@@ -165,7 +165,7 @@ export function renderAdminOverview(main: HTMLElement): void {
       $("visits").innerHTML = stats
         ? `${dailyChart(stats.daily)}
           <p class="admin-home__visits">${t("adminHome.visitorsWeek", { count: String(stats.totals.visitors) })}${
-            stats.sources.length ? ` · ${t("adminHome.topSources")}: ${stats.sources.slice(0, 3).map((s) => `${sourceLabel(s.source)} (${s.visitors})`).join(getLocale() === "ar" ? "، " : ", ")}` : ""
+            stats.sources.length ? ` · ${t("adminHome.topSources")}: ${stats.sources.slice(0, 3).map((s) => `${sourceLabel(s.source)} (${s.visitors})`).join(listSep())}` : ""
           }</p>`
         : `<p class="admin-stats__empty">${t("adminStats.unavailable")}</p>`;
     }

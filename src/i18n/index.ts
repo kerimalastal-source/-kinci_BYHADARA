@@ -1,4 +1,4 @@
-import { defaultLocale, isLocale, lookup, locales, rtlLocales, type Locale } from "./dictionaries";
+import { defaultLocale, intlTag as intlTagFor, isLocale, lookup, locales, rtlLocales, type Locale } from "./dictionaries";
 import { localizePath, splitLocale } from "../seo/routes";
 import { placeKey } from "../utils/place";
 
@@ -16,6 +16,16 @@ export function getLocale(): Locale {
 
 export function isRtl(locale: Locale = currentLocale): boolean {
   return rtlLocales.includes(locale);
+}
+
+/** The Intl locale for dates and numbers in the page language (see dictionaries.ts). */
+export function intlTag(locale: Locale = currentLocale): string {
+  return intlTagFor(locale);
+}
+
+/** The list separator: "، " in Arabic and Persian, ", " otherwise. */
+export function listSep(locale: Locale = currentLocale): string {
+  return isRtl(locale) ? "، " : ", ";
 }
 
 /** The locale a returning visitor picked earlier, or their browser language. */
@@ -109,7 +119,7 @@ export function getProjectContent(slug: string) {
 
 /** "District, City" with localized names and the locale's comma (Arabic uses "،"). */
 export function placeLine(district: string, city: string): string {
-  return `${placeName(district)}${currentLocale === "ar" ? "، " : ", "}${placeName(city)}`;
+  return `${placeName(district)}${listSep()}${placeName(city)}`;
 }
 
 /** Localized name of a district or city ("Beylikdüzü" -> "بيليكدوزو"), falling back to the original. */

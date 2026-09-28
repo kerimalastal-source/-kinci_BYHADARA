@@ -25,10 +25,11 @@
   margin-inline: 0 auto;
 }
 
-/* Arabic script is cursive: letter-spacing pulls the joined letters apart, and
+/* Arabic script (Arabic and Persian) is cursive: letter-spacing pulls the joined letters apart, and
    the small uppercase-style labels used for Latin text are too small to read in
    Arabic. (The brand keeps its spacing: it is marked lang="en".) */
-:lang(ar) :where(*) {
+:lang(ar) :where(*),
+:lang(fa) :where(*) {
   letter-spacing: 0 !important;
 }
 
@@ -37,6 +38,12 @@
 :lang(ar) .project-stats__item dt,
 :lang(ar) .floor-card__areas dt,
 :lang(ar) .residence-card__eyebrow,
-:lang(ar) .floor-card__tag {
+:lang(ar) .floor-card__tag,
+:lang(fa) .badge,
+:lang(fa) .eyebrow,
+:lang(fa) .project-stats__item dt,
+:lang(fa) .floor-card__areas dt,
+:lang(fa) .residence-card__eyebrow,
+:lang(fa) .floor-card__tag {
   font-size: 0.85rem;
 }
