@@ -2,7 +2,7 @@ import { t, getLocale, getProjectContent } from "../../i18n";
 import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
-import { fetchVisitStats, type VisitStats } from "../../data/adminStats";
+import { fetchConsentStats, fetchVisitStats, type ConsentStats, type VisitStats } from "../../data/adminStats";
 import { adminHero, adminNav } from "./nav";
 
 /**
@@ -114,7 +114,19 @@ function panel(title: string, body: string, wide = false): string {
   return `<section class="admin-panel${wide ? " admin-panel--wide" : ""}"><h2 class="admin-panel__title">${title}</h2>${body}</section>`;
 }
 
-function renderStats(s: VisitStats): string {
+/** Accepted / declined / didn't answer, out of the visits that saw the cookie notice. */
+function consentPanel(c: ConsentStats | null): string {
+  if (!c) return panel(t("adminStats.consentTitle"), `<p class="admin-stats__empty">${t("adminStats.consentUnavailable")}</p>`);
+  if (!c.shown) return panel(t("adminStats.consentTitle"), `<p class="admin-stats__empty">${t("adminStats.consentEmpty")}</p>`);
+  const rows = [
+    { label: t("adminStats.consentAccepted"), value: c.granted },
+    { label: t("adminStats.consentDeclined"), value: c.denied },
+    { label: t("adminStats.consentIgnored"), value: c.ignored }
+  ].map((r) => ({ ...r, note: pct(r.value, c.shown) }));
+  return panel(t("adminStats.consentTitle"), `<p class="admin-panel__hint">${t("adminStats.consentHint", { count: num(c.shown) })}</p>${barList(rows, "")}`);
+}
+
+function renderStats(s: VisitStats, consent: ConsentStats | null): string {
   const leads = s.leads.inquiries + s.leads.bookings;
   const leadRows = s.lead_sources.length
     ? `<table class="admin-table">
@@ -142,6 +154,7 @@ function renderStats(s: VisitStats): string {
       ${panel(t("adminStats.campaignsTitle"), barList(s.campaigns.map((r) => ({ label: `${sourceLabel(r.source)} · <span dir="ltr">${escapeHtml(r.campaign)}</span>`, value: r.visitors })), t("adminStats.noCampaigns")))}
       ${panel(t("adminStats.landingsTitle"), barList(s.landings.map((r) => ({ label: pageLabel(r.page), value: r.visitors })), t("adminStats.empty")))}
       ${panel(t("adminStats.localesTitle"), barList(s.locales.map((r) => ({ label: t(`lang.${r.locale}`), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
+      ${consentPanel(consent)}
     </div>
     <p class="admin-bookings__note">${t("adminStats.note")}</p>`;
 }
@@ -168,9 +181,9 @@ export function renderAdminStats(main: HTMLElement): void {
     periodsEl.innerHTML = PERIODS.map(
       (p) => `<button type="button" class="admin-stats__period" data-period="${p}" aria-pressed="${p === period}">${t("adminStats.lastDays", { count: p })}</button>`
     ).join("");
-    const stats = await fetchVisitStats(period);
+    const [stats, consent] = await Promise.all([fetchVisitStats(period), fetchConsentStats(period)]);
     if (main.dataset.requestId !== requestId) return;
-    bodyEl.innerHTML = stats ? renderStats(stats) : `<p class="admin-bookings__empty">${t("adminStats.unavailable")}</p>`;
+    bodyEl.innerHTML = stats ? renderStats(stats, consent) : `<p class="admin-bookings__empty">${t("adminStats.unavailable")}</p>`;
   };
 
   periodsEl.addEventListener("click", (e) => {

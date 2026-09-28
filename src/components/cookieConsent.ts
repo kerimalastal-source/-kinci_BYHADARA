@@ -1,5 +1,6 @@
 import { t, link, onLocaleChange } from "../i18n";
 import { setConsent, storedConsent, trackingConfigured, type Consent } from "../utils/tracking";
+import { reportConsent } from "../utils/visitorTracker";
 
 /**
  * Cookie notice: Meta Pixel and Google tags only load after "Accept" (see utils/tracking.ts).
@@ -11,6 +12,8 @@ import { setConsent, storedConsent, trackingConfigured, type Consent } from "../
 const POLICY_ANCHOR = "#policy-8";
 
 let panel: HTMLElement | null = null;
+/** Shown on its own (not reopened from the footer): this visit's answer goes into the statistics. */
+let counted = false;
 let resize: ResizeObserver | null = null;
 
 function render(el: HTMLElement): void {
@@ -58,6 +61,7 @@ function open(focus = false): void {
 
 function close(choice: Consent): void {
   setConsent(choice);
+  if (counted) reportConsent(choice);
   resize?.disconnect();
   resize = null;
   panel?.remove();
@@ -68,7 +72,11 @@ function close(choice: Consent): void {
 
 export function initCookieConsent(): void {
   if (!trackingConfigured()) return;
-  if (!storedConsent()) open();
+  if (!storedConsent()) {
+    open();
+    counted = true;
+    reportConsent("none");
+  }
   document.addEventListener("click", (event) => {
     const trigger = (event.target as Element | null)?.closest?.("[data-cookie-settings]");
     if (!trigger) return;

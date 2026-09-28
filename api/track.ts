@@ -31,8 +31,24 @@ const INTERNAL_PATH = /^\/(?:(?:ar|fr|ru)\/)?(?:admin|account)(?:\/|$)/;
 const BOT_AGENT = /bot|crawl|spider|slurp|facebookexternalhit|embedly|preview|headless|lighthouse|pingdom|uptime|monitor/i;
 
 export async function POST(request: Request): Promise<Response> {
-  const view = parsePageView(await request.json().catch(() => null));
+  const body: unknown = await request.json().catch(() => null);
   const userAgent = request.headers.get("user-agent") ?? "";
+
+  // What the visitor did with the cookie notice (src/components/cookieConsent.ts), for the
+  // admin statistics. Until migration 0009 runs, the 404 is ignored.
+  if (body && typeof body === "object" && (body as Record<string, unknown>).type === "consent") {
+    const consent = parseConsent(body);
+    if (consent && !BOT_AGENT.test(userAgent)) {
+      waitUntil(
+        rpc("save_visit_consent", { p_session: consent.sessionId, p_choice: consent.choice }).catch((error: unknown) => {
+          if (!(error instanceof RpcError && error.status === 404)) console.error(`track: save_visit_consent failed: ${error instanceof Error ? error.message : "unknown"}`);
+        })
+      );
+    }
+    return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+  }
+
+  const view = parsePageView(body);
 
   if (view && !INTERNAL_PATH.test(view.path) && !BOT_AGENT.test(userAgent)) {
     const geo = readGeo(request.headers);
@@ -97,6 +113,18 @@ function parsePageView(body: unknown): PageView | null {
     // "utm_source=facebook · utm_campaign=villa" from the ad link (src/utils/campaign.ts).
     campaign: text(data.campaign, 300).replace(/[\u0000-\u001f<>]/g, "")
   };
+}
+
+const CONSENT_CHOICES = ["granted", "denied", "none"] as const;
+
+/** { type: "consent", sessionId, choice, path } — dropped when malformed or sent from an internal page. */
+function parseConsent(body: object): { sessionId: string; choice: (typeof CONSENT_CHOICES)[number] } | null {
+  const data = body as Record<string, unknown>;
+  const sessionId = text(data.sessionId, 36);
+  const choice = CONSENT_CHOICES.find((value) => value === data.choice);
+  const path = text(data.path, 300);
+  if (!SESSION_ID.test(sessionId) || !choice || !path.startsWith("/") || INTERNAL_PATH.test(path)) return null;
+  return { sessionId, choice };
 }
 
 /** The browser's list of this visit's pages; anything malformed or internal is dropped. */

@@ -2471,6 +2471,7 @@
           "la provenance de la visite — uniquement le nom du site référent (par exemple google.com) ou la page précédente de notre site, jamais le lien complet ;",
           "votre pays et votre ville approximatifs, estimés par notre hébergeur (Vercel) à partir de votre connexion ;",
           "le nom de la campagne publicitaire, si vous êtes arrivé par un lien de l'une de nos publicités (par exemple utm_source et utm_campaign), afin de savoir quelle publicité a amené des visiteurs ;",
+        "si vous avez accepté, refusé ou laissé sans réponse l’avis sur les cookies ;",
         "un numéro de session aléatoire, ainsi que la date et l'heure."
         ],
         "after": [
@@ -2712,6 +2713,13 @@
     }
   },
   "adminStats": {
+    "consentTitle": "Avis sur les cookies",
+    "consentHint": "Sur {count} visites ayant vu l’avis. Meta et Google ne comptent que les visiteurs qui acceptent.",
+    "consentAccepted": "Accepté",
+    "consentDeclined": "Refusé",
+    "consentIgnored": "Sans réponse",
+    "consentEmpty": "Aucune visite n’a encore vu l’avis.",
+    "consentUnavailable": "Pas encore disponible.",
     "heroTitle": "Statistiques des visiteurs",
     "heroSubtitle": "D'où viennent vos visiteurs, ce qu'ils consultent, et combien de messages et de réservations chaque source apporte.",
     "period": "Période",

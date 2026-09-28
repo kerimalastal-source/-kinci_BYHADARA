@@ -26,3 +26,23 @@ export async function fetchVisitStats(days: number): Promise<VisitStats | null> 
   const stats = data as (VisitStats & { error?: string }) | null;
   return stats && !stats.error ? stats : null;
 }
+
+/** What visits did with the cookie notice (admin_consent_stats(), supabase/migrations/0009). */
+export interface ConsentStats {
+  shown: number;
+  granted: number;
+  denied: number;
+  ignored: number;
+}
+
+/** Same period as fetchVisitStats, or null when 0009 hasn't run. */
+export async function fetchConsentStats(days: number): Promise<ConsentStats | null> {
+  const { data, error } = await supabase.rpc("admin_consent_stats", { p_days: days });
+  if (error) {
+    // Before migration 0009 the function doesn't exist; the panel just says so.
+    if (error.code !== "PGRST202") console.error(error);
+    return null;
+  }
+  const stats = data as (ConsentStats & { error?: string }) | null;
+  return stats && !stats.error ? stats : null;
+}

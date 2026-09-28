@@ -153,3 +153,17 @@ export function trackVisit(route: Route, locale: string): void {
     // Counting visits must never affect the page.
   });
 }
+
+/**
+ * What the visitor did with the cookie notice in this visit: "none" when it is shown, then
+ * "granted" or "denied" when they choose. Only counted (anonymously) in the admin statistics.
+ */
+export function reportConsent(choice: "granted" | "denied" | "none"): void {
+  if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname)) return;
+  const id = sessionId();
+  if (!id) return;
+  const body = JSON.stringify({ type: "consent", sessionId: id, choice, path: window.location.pathname });
+  fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {
+    // Never affects the page.
+  });
+}

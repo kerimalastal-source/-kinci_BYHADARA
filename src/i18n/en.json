@@ -2471,6 +2471,7 @@
           "where the visit came from — only the name of the referring website (for example google.com) or the previous page on our site, never the full link;",
           "your approximate country and city, estimated by our hosting provider (Vercel) from your connection;",
           "the name of the ad campaign, if you arrived through a link in one of our ads (such as utm_source and utm_campaign), so we know which ad brought visitors;",
+        "whether you accepted, declined or did not answer the cookie notice;",
         "a random session number, and the date and time."
         ],
         "after": [
@@ -2712,6 +2713,13 @@
     }
   },
   "adminStats": {
+    "consentTitle": "Cookie notice",
+    "consentHint": "Of the {count} visits that saw the notice. Meta and Google only count the visitors who accept.",
+    "consentAccepted": "Accepted",
+    "consentDeclined": "Declined",
+    "consentIgnored": "Didn't answer",
+    "consentEmpty": "No visit has seen the notice yet.",
+    "consentUnavailable": "Not available yet.",
     "heroTitle": "Visitor statistics",
     "heroSubtitle": "Where your visitors come from, what they look at, and how many messages and bookings each source brings.",
     "period": "Period",
