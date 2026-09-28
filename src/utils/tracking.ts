@@ -11,8 +11,8 @@
 import type { Route } from "../seo/routes";
 
 const TAGS = {
-  /** Meta Events Manager → Data sources → the pixel's ID (digits only). */
-  metaPixelId: import.meta.env.VITE_META_PIXEL_ID || "",
+  /** Meta Events Manager → Datasets → "HADARA Real Estate" (business portfolio "Hadara Real Estate"). Public, not a secret. */
+  metaPixelId: import.meta.env.VITE_META_PIXEL_ID || "983229534799823",
   /** Google Analytics → Admin → Data streams → Measurement ID ("G-..."). */
   gaId: import.meta.env.VITE_GA_ID || "",
   /** Google Ads → Goals → Conversions → tag setup: the "AW-..." ID and each conversion's label. */
