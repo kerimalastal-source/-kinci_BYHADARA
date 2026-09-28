@@ -2246,6 +2246,8 @@
     ],
     "bookTitle": "احجز جولتك الخاصة",
     "bookSubtitle": "لن يستغرق الحجز أكثر من دقيقة.",
+    "officeHours": "ساعات دوامنا في المكتب: من {from} حتى {to} بتوقيت إسطنبول",
+    "officeHoursLocal": "أي من {from} حتى {to} بتوقيتك",
     "wizard": {
       "progress": "الخطوة {current} من {total}",
       "stepNames": [

@@ -642,6 +642,27 @@ function urlProjects(): string[] {
   return [...new Set(value.split(",").map((v) => v.trim()))].filter(bookable);
 }
 
+/** Office hours 9:00–18:00 Istanbul time, with the visitor's own clock when it differs. */
+const OFFICE_OPEN = 9;
+const OFFICE_CLOSE = 18;
+const CLOCK = svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>', 18);
+
+const clockTime = (ms: number, timeZone?: string) => `<span class="tour-hours__time">${formatTime(ms, timeZone)}</span>`;
+
+export function renderOfficeHours(): string {
+  const today = istanbulDay(Date.now());
+  const open = slotUtc(today, OFFICE_OPEN);
+  const close = slotUtc(today, OFFICE_CLOSE);
+  const local =
+    visitorOffset(open) !== ISTANBUL_OFFSET_MIN
+      ? `<span class="tour-hours__local">${t("videoTour.officeHoursLocal", { from: clockTime(open), to: clockTime(close) })}</span>`
+      : "";
+  return `<p class="tour-hours"><span class="tour-hours__icon">${CLOCK}</span><span class="tour-hours__text"><strong>${t("videoTour.officeHours", {
+    from: clockTime(open, ISTANBUL_TZ),
+    to: clockTime(close, ISTANBUL_TZ)
+  })}</strong>${local}</span></p>`;
+}
+
 export function renderVideoTourBooking(): string {
   return `<div class="tour-booking" data-tour-body aria-live="polite">${renderBody(initialState(urlProjects()))}</div>`;
 }

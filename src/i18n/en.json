@@ -2246,6 +2246,8 @@
     ],
     "bookTitle": "Book Your Private Tour",
     "bookSubtitle": "Booking takes less than a minute.",
+    "officeHours": "Our office hours: {from} to {to}, Istanbul time",
+    "officeHoursLocal": "That's {from} to {to} your time",
     "wizard": {
       "progress": "Step {current} of {total}",
       "stepNames": [

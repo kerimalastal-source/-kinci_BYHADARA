@@ -1,6 +1,6 @@
 import { t, tRaw, link } from "../i18n";
 import { initScrollReveal } from "../components/scrollReveal";
-import { renderVideoTourBooking, initVideoTourBooking } from "../components/videoTourBooking";
+import { renderVideoTourBooking, initVideoTourBooking, renderOfficeHours } from "../components/videoTourBooking";
 import { photoAttrs } from "../utils/responsiveImage";
 
 interface TextItem {
@@ -152,6 +152,7 @@ export function renderVideoTour(el: HTMLElement): void {
             <p class="eyebrow eyebrow--center">${t("videoTour.eyebrow")}</p>
             <h2 class="section-title section-title--center" id="tour-book-title">${t("videoTour.bookTitle")}</h2>
             <p class="section-subtitle section-subtitle--center">${t("videoTour.bookSubtitle")}</p>
+            ${renderOfficeHours()}
           </div>
           ${renderVideoTourBooking()}
         </div>

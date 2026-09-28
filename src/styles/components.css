@@ -7884,6 +7884,44 @@ body.nav-open .back-to-top {
   margin-bottom: var(--space-md);
 }
 
+/* "Our office hours" under the booking title */
+.tour-hours {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: fit-content;
+  max-width: 100%;
+  margin: calc(var(--space-md) * -0.25) auto var(--space-lg);
+  padding: 0.6rem 1.1rem;
+  border: 1px solid rgba(201, 162, 75, 0.45);
+  border-radius: var(--radius-md);
+  background: rgba(201, 162, 75, 0.1);
+  color: var(--color-primary);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.tour-hours__icon {
+  display: inline-flex;
+  flex: none;
+  color: #9a7a2e;
+}
+
+.tour-hours__text {
+  display: flex;
+  flex-direction: column;
+  text-wrap: balance;
+}
+
+.tour-hours__time {
+  white-space: nowrap;
+}
+
+.tour-hours__local {
+  color: var(--color-muted);
+  font-size: 0.87rem;
+}
+
 .tour-booking.is-changing {
   animation: match-in 280ms ease both;
 }

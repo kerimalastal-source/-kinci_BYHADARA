@@ -2246,6 +2246,8 @@
     ],
     "bookTitle": "Réservez votre visite privée",
     "bookSubtitle": "La réservation prend moins d'une minute.",
+    "officeHours": "Nos horaires de bureau : de {from} à {to}, heure d'Istanbul",
+    "officeHoursLocal": "Soit de {from} à {to} chez vous",
     "wizard": {
       "progress": "Étape {current} sur {total}",
       "stepNames": [

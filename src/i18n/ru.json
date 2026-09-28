@@ -2246,6 +2246,8 @@
     ],
     "bookTitle": "Забронируйте частный тур",
     "bookSubtitle": "Бронирование займёт меньше минуты.",
+    "officeHours": "Часы работы нашего офиса: с {from} до {to} по стамбульскому времени",
+    "officeHoursLocal": "Это с {from} до {to} по вашему времени",
     "wizard": {
       "progress": "Шаг {current} из {total}",
       "stepNames": [
