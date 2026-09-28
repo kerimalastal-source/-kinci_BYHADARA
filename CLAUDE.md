@@ -243,7 +243,7 @@
 - [x] نقل الصور من Wix لاستضافة الموقع نفسه (`public/images/`) — تم 2026-09-26، ما في أي رابط Wix متبقي بالكود. وأغلفة المدونة انعملت من جديد بدقة عالية (1536×1024) بدل النسخ القديمة الصغيرة/المشوّهة.
 - [ ] ربط فورم التواصل/طلب العقار المخصص بخدمة إرسال حقيقية (بدل `mailto:`) — **مهم للإعلانات**: `mailto:` بيعتمد على برنامج إيميل بموبايل الزبون، فكتير رسائل ما بتوصل. المستخدم وافق يعملها "بعد شوية" (Web3Forms أو Formspree — بيحتاج يعمل حساب مجاني بإيميل `info@byhadara.com`، والباقي علينا).
 - [ ] أكواد تتبّع الإعلانات (Meta Pixel + Google Ads/Analytics) — الكود جاهز (`tracking.ts`)، بانتظار الـ IDs من المستخدم لتنحط كمتغيرات بيئة بـ Vercel.
-- [ ] تتبّع الزوار + تيليجرام (قسم 4.7): ✅ البوت انعمل، ✅ `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` بـ Vercel، ✅ `0002_visitor_events.sql` انشغّل (2026-09-27). باقي: تأكيد وصول تنبيه حقيقي + runtime logs نظيفة لـ `/api/track` بعد النشر.
+- [x] تتبّع الزوار + تيليجرام (قسم 4.7): ✅ البوت انعمل، ✅ `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` بـ Vercel، ✅ `0002_visitor_events.sql` انشغّل (2026-09-27). ✅ انتشر (commit `bc56d63`، Production) و**وصل أول تنبيه حقيقي للمستخدم على تيليجرام 2026-09-28**. باقي بس: المستخدم يلقي نظرة على Vercel → Logs (`/api/track`) بعد يوم أو يومين زيارات حقيقية (أدوات Vercel عندنا بترجع 403، ما منقدر نشوف السجلات).
 - [x] ربط الدومين الحقيقي `hadararealestate.com` — تم 2026-09-27 (المستخدم نقله بنفسه؛ `www` أساسي).
 - [x] Supabase → Authentication → URL Configuration: Site URL = `https://www.hadararealestate.com` + Redirect URL `https://www.hadararealestate.com/**` — عملها المستخدم 2026-09-27.
 - [x] SEO: روابط حقيقية لكل صفحة ولغة، وسوم meta/hreflang/OG/JSON-LD، sitemap وrobots (راجع قسم 4.5)
