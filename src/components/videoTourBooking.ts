@@ -5,17 +5,22 @@ import { campaignSource } from "../utils/campaign";
 import { trackSchedule } from "../utils/tracking";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "./phoneInput";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "./floatingButtons";
+import { supabase } from "../lib/supabase";
 
 /**
  * Private video tour booking: project(s) -> day and time (shown in Istanbul time and the
- * visitor's own) -> app, language and contact details. The request goes to the team on
- * WhatsApp, ready to send; the team confirms the slot by hand.
+ * visitor's own) -> app, language and contact details. "Book" sends it to /api/book
+ * (api/book.ts): the slot is taken in the database right away (one tour per hour, so
+ * booked hours show as taken), the visitor gets a confirmation email and the team an
+ * email + Telegram alert. Booking through WhatsApp stays available as an alternative.
  */
 
 const APPS = ["whatsapp", "facetime", "zoom", "meet"] as const;
 const LANGUAGES = ["ar", "en", "tr"] as const;
 const FOCUS = ["apartment", "model", "prices", "citizenship"] as const;
+const CONTACTS = ["email", "phone", "whatsapp", "telegram", "viber"] as const;
 type App = (typeof APPS)[number];
+type Contact = (typeof CONTACTS)[number];
 type Language = (typeof LANGUAGES)[number];
 
 /** Türkiye keeps UTC+3 all year. */
@@ -46,6 +51,11 @@ interface TourState {
   number?: string;
   /** "+90 5xx…", fixed when the request is sent. */
   phone?: string;
+  email?: string;
+  /** How the visitor prefers to be contacted if the team needs to reach them. */
+  contact: Contact;
+  /** Set once the booking is saved ("HT-XXXXXX"). */
+  reference?: string;
 }
 
 const svg = (body: string, size = 22) =>
@@ -65,7 +75,14 @@ const PARTY = svg('<path d="m5 12 5 5 9-10"/>', 34);
 /* ---------- State ---------- */
 
 const defaultLanguage = (): Language => (getLocale() === "ar" ? "ar" : "en");
-const fresh = (projects: string[] = []): TourState => ({ step: 0, projects, focus: [], app: "whatsapp", lang: defaultLanguage() });
+const fresh = (projects: string[] = []): TourState => ({
+  step: 0,
+  projects,
+  focus: [],
+  app: "whatsapp",
+  lang: defaultLanguage(),
+  contact: "email"
+});
 
 function loadState(): TourState | null {
   try {
@@ -101,7 +118,9 @@ function initialState(fromUrl: string[]): TourState {
   }
   if (state.step > 0 && !state.projects.length) state.step = 0;
   if (state.step > 1 && !state.date) state.step = 1;
-  if (state.step === 3 && !state.name) state.step = 2;
+  if (!CONTACTS.includes(state.contact)) state.contact = "email";
+  // A confirmation screen without a booking number is from the old WhatsApp-only flow.
+  if (state.step === 3 && (!state.name || !state.reference)) state.step = 2;
   return state;
 }
 
@@ -125,6 +144,35 @@ function istanbulDay(ms: number): string {
 interface Day {
   date: string;
   hours: number[];
+}
+
+/* ---------- Booked hours (one tour per hour) ---------- */
+
+/** UTC start times of hours someone else already holds. */
+let taken = new Set<number>();
+/** Shown above the calendar once, e.g. after the chosen hour was just taken. */
+let notice = "";
+
+const isTaken = (date: string, hour: number) => taken.has(slotUtc(date, hour));
+
+async function loadTaken(): Promise<boolean> {
+  try {
+    const { data, error } = await supabase.rpc("tour_taken_slots");
+    if (error || !Array.isArray(data)) return false;
+    taken = new Set((data as string[]).map((iso) => Date.parse(iso)));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** First free slot in the calendar, if any. */
+function firstFree(days: Day[]): { date: string; hour: number } | null {
+  for (const d of days) {
+    const hour = d.hours.find((h) => !isTaken(d.date, h));
+    if (hour !== undefined) return { date: d.date, hour };
+  }
+  return null;
 }
 
 /** The next two weeks of Istanbul days that still have bookable hours. */
@@ -268,7 +316,7 @@ function renderProjectStep(state: TourState): string {
 function renderTimeStep(state: TourState): string {
   const days = availableDays();
   const day = days.find((d) => d.date === state.date) ?? days[0];
-  const first = days[0];
+  const first = firstFree(days);
   const showsLocal = days.some((d) => d.hours.some((h) => localTime(slotUtc(d.date, h)) !== null));
   const groups = (["morning", "afternoon", "evening"] as const)
     .map((period) => ({ period, hours: day.hours.filter((h) => periodOf(h) === period) }))
@@ -277,10 +325,14 @@ function renderTimeStep(state: TourState): string {
     <fieldset class="tour-field">
       <legend class="tour-question">${t("videoTour.wizard.timeQuestion")}</legend>
       <p class="tour-hint tour-hint--zone">${showsLocal ? t("videoTour.wizard.timeNote", { zone: ltr(zoneLabel()) }) : t("videoTour.wizard.sameZone")}</p>
-      <button type="button" class="tour-earliest" data-tour-slot="${first.date}|${first.hours[0]}">
+      ${
+        first
+          ? `<button type="button" class="tour-earliest" data-tour-slot="${first.date}|${first.hour}">
         <span class="tour-earliest__dot" aria-hidden="true"></span>
-        <span>${t("videoTour.wizard.earliest", { when: `<strong>${slotLabel(first.date, first.hours[0])}</strong>` })}</span>
-      </button>
+        <span>${t("videoTour.wizard.earliest", { when: `<strong>${slotLabel(first.date, first.hour)}</strong>` })}</span>
+      </button>`
+          : ""
+      }
       <div class="tour-days" role="group" aria-label="${t("videoTour.wizard.timeQuestion")}">
         ${days
           .map((d) => {
@@ -304,6 +356,13 @@ function renderTimeStep(state: TourState): string {
                 .map((h) => {
                   const ms = slotUtc(day.date, h);
                   const local = localTime(ms);
+                  if (isTaken(day.date, h)) {
+                    return `
+              <button type="button" class="tour-slot is-taken" disabled>
+                <span class="tour-slot__time">${formatTime(ms, ISTANBUL_TZ)}</span>
+                <span class="tour-slot__local">${t("videoTour.wizard.taken")}</span>
+              </button>`;
+                  }
                   const on = state.date === day.date && state.hour === h;
                   return `
               <button type="button" class="tour-slot" data-tour-slot="${day.date}|${h}" aria-pressed="${on}">
@@ -318,7 +377,7 @@ function renderTimeStep(state: TourState): string {
           .join("")}
       </div>
     </fieldset>
-    <p class="tour-error" data-tour-error role="alert"></p>
+    <p class="tour-error" data-tour-error role="alert">${notice}</p>
     <div class="tour-nav">
       <button type="button" class="tour-back" data-tour-back>${t("videoTour.wizard.back")}</button>
       <button type="button" class="btn btn--primary" data-tour-next>${t("videoTour.wizard.next")}</button>
@@ -371,16 +430,35 @@ function renderDetailsStep(state: TourState): string {
           <p class="form-field__error" data-error-for="name"></p>
         </div>
         <div class="form-field">
+          <label for="tour-email">${t("videoTour.wizard.emailLabel")}</label>
+          <input type="email" id="tour-email" name="email" placeholder="${t("videoTour.wizard.emailPlaceholder")}" autocomplete="email" inputmode="email" dir="ltr" value="${escapeText(state.email ?? "")}" />
+          <p class="form-field__error" data-error-for="email"></p>
+        </div>
+        <div class="form-field">
           <label for="${PHONE_ID}-number">${t("videoTour.wizard.phoneLabel")}</label>
           ${renderPhoneInput(PHONE_ID, "phone")}
           <p class="form-field__error" data-error-for="phone"></p>
+        </div>
+        <fieldset class="tour-field tour-field--contact">
+          <legend class="tour-label">${t("videoTour.wizard.contactLabel")}</legend>
+          <div class="tour-chips">
+            ${CONTACTS.map(
+              (c) =>
+                `<button type="button" class="tour-chip" data-tour-contact="${c}" aria-pressed="${state.contact === c}">${CHECK}<span>${t(`videoTour.wizard.contacts.${c}`)}</span></button>`
+            ).join("")}
+          </div>
+        </fieldset>
+        <div class="tour-hp" aria-hidden="true">
+          <label>${t("videoTour.wizard.honeypot")} <input type="text" name="website" tabindex="-1" autocomplete="off" data-tour-hp /></label>
         </div>
       </div>
       <aside class="tour-summary">
         <p class="tour-summary__title">${t("videoTour.wizard.summaryTitle")}</p>
         <dl class="tour-summary__list">${summaryRows(state)}</dl>
-        <button type="button" class="btn btn--whatsapp btn--block" data-tour-confirm>${WHATSAPP_ICON}${t("videoTour.wizard.confirm")}</button>
+        <p class="tour-error tour-error--submit" data-tour-submit-error role="alert"></p>
+        <button type="button" class="btn btn--primary btn--block" data-tour-confirm>${CALENDAR}<span data-tour-confirm-label>${t("videoTour.wizard.confirm")}</span></button>
         <p class="tour-summary__note">${t("videoTour.wizard.confirmNote")}</p>
+        <a class="tour-summary__alt" href="${whatsappUrl(state)}" target="_blank" rel="noopener" data-tour-wa>${WHATSAPP_ICON}<span>${t("videoTour.wizard.orWhatsapp")}</span></a>
       </aside>
     </div>
     <div class="tour-nav tour-nav--start">
@@ -413,8 +491,8 @@ function whatsappUrl(state: TourState): string {
     `${w("wa.time")}: ${istanbul} ${w("wa.istanbul")}${local}`,
     `${w("wa.app")}: ${w(`wizard.apps.${state.app}`)}`,
     `${w("wa.language")}: ${w(`languages.${state.lang}`)}`,
-    `${w("wa.name")}: ${state.name}`,
-    `${w("wa.phone")}: ${state.phone}`,
+    ...(state.name ? [`${w("wa.name")}: ${state.name}`] : []),
+    ...(state.phone ? [`${w("wa.phone")}: ${state.phone}`] : []),
     ...(campaignSource() ? [`${w("wa.source")}: ${campaignSource()}`] : []),
     "",
     w("wa.outro")
@@ -427,7 +505,7 @@ const icsStamp = (ms: number) => new Date(ms).toISOString().replace(/[-:]/g, "")
 function eventText(state: TourState) {
   return {
     title: t("videoTour.wizard.event", { projects: state.projects.map(projectName).join(" · ") }),
-    details: t("videoTour.wizard.eventDetails", { app: t(`videoTour.wizard.apps.${state.app}`) }),
+    details: t("videoTour.wizard.eventDetails", { app: t(`videoTour.wizard.apps.${state.app}`), ref: state.reference ?? "" }),
     start: slotUtc(state.date!, state.hour!),
     end: slotUtc(state.date!, state.hour!) + TOUR_MINUTES * 60_000
   };
@@ -447,7 +525,7 @@ function downloadIcs(state: TourState): void {
     "VERSION:2.0",
     "PRODID:-//HADARA Real Estate//Video Tour//EN",
     "BEGIN:VEVENT",
-    `UID:${e.start}-${state.projects.join("-")}@hadararealestate.com`,
+    `UID:${state.reference ?? `${e.start}-${state.projects.join("-")}`}@hadararealestate.com`,
     `DTSTAMP:${icsStamp(Date.now())}`,
     `DTSTART:${icsStamp(e.start)}`,
     `DTEND:${icsStamp(e.end)}`,
@@ -479,8 +557,14 @@ function renderDone(state: TourState): string {
       <span class="tour-done__icon">${PARTY}</span>
       <h3 class="tour-done__title">${t("videoTour.wizard.doneTitle", { name: escapeText(state.name ?? "") })}</h3>
       <p class="tour-done__when">${formatDay(state.date!, "long")} · ${formatTime(ms, ISTANBUL_TZ)} ${t("videoTour.wizard.istanbulTime")}</p>
-      <p class="tour-done__text">${t("videoTour.wizard.doneText")}</p>
-      <a class="tour-done__reopen" href="${whatsappUrl(state)}" target="_blank" rel="noopener">${WHATSAPP_ICON} ${t("videoTour.wizard.doneReopen")}</a>
+      <p class="tour-done__ref">${t("videoTour.wizard.referenceLabel")}: <strong dir="ltr">${escapeText(state.reference ?? "")}</strong></p>
+      <p class="tour-done__text">${t("videoTour.wizard.doneText", {
+        email: `<bdi dir="ltr">${escapeText(state.email ?? "")}</bdi>`,
+        app: t(`videoTour.wizard.apps.${state.app}`)
+      })}</p>
+      <a class="tour-done__reopen" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+        t("videoTour.wa.aboutBooking", { ref: state.reference ?? "" })
+      )}" target="_blank" rel="noopener">${WHATSAPP_ICON} ${t("videoTour.wizard.doneReopen")}</a>
       <div class="tour-done__grid">
         <div class="tour-done__card">
           <p class="tour-done__card-title">${t("videoTour.wizard.calendarTitle")}</p>
@@ -500,6 +584,37 @@ function renderDone(state: TourState): string {
 
 function escapeText(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+/* ---------- Sending the booking ---------- */
+
+const BOOK_ENDPOINT = "/api/book";
+const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+const englishNames = (slugs: string[]) =>
+  slugs.map((slug) => String((lookup("en", `projectsData.${slug}`) as { name: string }).name)).join(", ");
+
+/** What api/book.ts expects: names in the page language and in Arabic (for the team). */
+function bookingPayload(state: TourState, openedAt: number, honeypot: string) {
+  const arName = (slug: string) => String((lookup("ar", `projectsData.${slug}`) as { name: string }).name);
+  return {
+    slot: new Date(slotUtc(state.date!, state.hour!)).toISOString(),
+    projects: state.projects.map((slug) => ({ slug, name: projectName(slug), nameAr: arName(slug) })),
+    focus: state.focus,
+    focusLabels: state.focus.map((f) => t(`videoTour.wizard.focus.${f}`)),
+    focusLabelsAr: state.focus.map((f) => String(lookup("ar", `videoTour.wizard.focus.${f}`) ?? f)),
+    app: state.app,
+    tourLanguage: state.lang,
+    name: state.name,
+    email: state.email,
+    phone: state.phone,
+    contact: state.contact,
+    locale: getLocale(),
+    timeZone: visitorZone ?? "",
+    source: campaignSource() ?? "",
+    elapsedMs: Date.now() - openedAt,
+    website: honeypot
+  };
 }
 
 function renderBody(state: TourState): string {
@@ -523,6 +638,21 @@ export function initVideoTourBooking(root: HTMLElement): void {
   if (!body) return;
   let state = initialState(urlProjects());
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /** When the wizard opened: a booking sent seconds later is a bot (api/book.ts checks it). */
+  const openedAt = Date.now();
+  let sending = false;
+
+  /** Refreshes the booked hours; drops the visitor's choice if someone else took it meanwhile. */
+  const refreshTaken = () =>
+    loadTaken().then((ok) => {
+      if (!ok) return;
+      if (state.date && state.hour !== undefined && isTaken(state.date, state.hour)) {
+        state = { ...state, hour: undefined };
+        saveState(state);
+      }
+      if (state.step === 1) update(state, false);
+    });
+  void refreshTaken();
 
   const showError = (message: string) => {
     const el = body.querySelector<HTMLElement>("[data-tour-error]");
@@ -582,6 +712,20 @@ export function initVideoTourBooking(root: HTMLElement): void {
       if (cell) cell.textContent = t(`videoTour.wizard.apps.${state.app}`);
       return saveState(state);
     }
+    const contact = target.closest<HTMLElement>("[data-tour-contact]");
+    if (contact) {
+      state = { ...state, contact: contact.dataset.tourContact as Contact };
+      body.querySelectorAll("[data-tour-contact]").forEach((b) => pressed(b, b === contact));
+      return saveState(state);
+    }
+    const wa = target.closest<HTMLAnchorElement>("[data-tour-wa]");
+    if (wa) {
+      // Carry over what the visitor has typed so far.
+      readDetails();
+      wa.href = whatsappUrl(state);
+      trackSchedule(englishNames(state.projects));
+      return;
+    }
     const lang = target.closest<HTMLElement>("[data-tour-lang]");
     if (lang) {
       state = { ...state, lang: lang.dataset.tourLang as Language };
@@ -591,14 +735,16 @@ export function initVideoTourBooking(root: HTMLElement): void {
       return saveState(state);
     }
     if (target.closest("[data-tour-next]")) {
+      notice = "";
       if (state.step === 0 && !state.projects.length) return showError(t("videoTour.wizard.chooseProject"));
       if (state.step === 1 && (!state.date || state.hour === undefined)) return showError(t("videoTour.wizard.chooseTime"));
       return update({ ...state, step: (state.step + 1) as TourState["step"] });
     }
     if (target.closest("[data-tour-back]") && !target.closest("[data-tour-again]")) {
+      notice = "";
       return update({ ...state, step: Math.max(0, state.step - 1) as TourState["step"] });
     }
-    if (target.closest("[data-tour-confirm]")) return confirm();
+    if (target.closest("[data-tour-confirm]")) return void confirm();
     if (target.closest("[data-tour-ics]")) return downloadIcs(state);
     if (target.closest("[data-tour-again]")) return update(fresh());
   });
@@ -615,6 +761,7 @@ export function initVideoTourBooking(root: HTMLElement): void {
   const remember = (e: Event) => {
     const input = e.target as HTMLInputElement | HTMLSelectElement;
     if (input.id === "tour-name") state = { ...state, name: input.value };
+    else if (input.id === "tour-email") state = { ...state, email: input.value };
     else if (input.id === `${PHONE_ID}-number`) state = { ...state, number: input.value };
     else if (input.id === `${PHONE_ID}-country`) state = { ...state, dial: input.value };
     else return;
@@ -622,32 +769,95 @@ export function initVideoTourBooking(root: HTMLElement): void {
   };
   body.addEventListener("input", remember);
   body.addEventListener("change", remember);
+  // A field's error goes away as soon as the visitor starts fixing it.
+  body.addEventListener("input", (e) => {
+    const id = (e.target as HTMLElement).id;
+    const field = id === "tour-name" ? "name" : id === "tour-email" ? "email" : id === `${PHONE_ID}-number` ? "phone" : "";
+    if (field && body.querySelector(`[data-error-for="${field}"]`)?.textContent) fieldError(field, "");
+  });
 
-  function confirm(): void {
+  /** Name, email and phone as currently typed. */
+  function readDetails(): void {
     const name = body!.querySelector<HTMLInputElement>("#tour-name")?.value.trim() ?? "";
-    const nameError = body!.querySelector<HTMLElement>('[data-error-for="name"]');
-    const phoneError = body!.querySelector<HTMLElement>('[data-error-for="phone"]');
-    let valid = true;
-    if (!name) {
-      if (nameError) nameError.textContent = t("videoTour.wizard.errors.name");
-      valid = false;
-    } else if (nameError) nameError.textContent = "";
-    body!.querySelector("#tour-name")?.setAttribute("aria-invalid", String(!name));
-    if (!isPhoneFilled(body!, PHONE_ID) || !isPhoneValid(body!, PHONE_ID)) {
-      if (phoneError) phoneError.textContent = t(isPhoneFilled(body!, PHONE_ID) ? "videoTour.wizard.errors.phoneInvalid" : "videoTour.wizard.errors.phone");
-      setPhoneInvalid(body!, PHONE_ID, true);
-      valid = false;
-    } else {
-      if (phoneError) phoneError.textContent = "";
-      setPhoneInvalid(body!, PHONE_ID, false);
+    const email = body!.querySelector<HTMLInputElement>("#tour-email")?.value.trim() ?? "";
+    const phone = isPhoneFilled(body!, PHONE_ID) ? getPhoneValue(body!, PHONE_ID) : undefined;
+    state = { ...state, name, email, phone };
+  }
+
+  function fieldError(field: string, message: string): void {
+    const el = body!.querySelector<HTMLElement>(`[data-error-for="${field}"]`);
+    if (el) el.textContent = message;
+    const input = field === "phone" ? null : body!.querySelector(`#tour-${field}`);
+    input?.setAttribute("aria-invalid", String(Boolean(message)));
+    if (field === "phone") setPhoneInvalid(body!, PHONE_ID, Boolean(message));
+  }
+
+  function validate(): boolean {
+    const { name = "", email = "" } = state;
+    fieldError("name", name ? "" : t("videoTour.wizard.errors.name"));
+    fieldError(
+      "email",
+      !email ? t("videoTour.wizard.errors.email") : EMAIL.test(email) ? "" : t("videoTour.wizard.errors.emailInvalid")
+    );
+    const phoneOk = isPhoneFilled(body!, PHONE_ID) && isPhoneValid(body!, PHONE_ID);
+    fieldError(
+      "phone",
+      phoneOk ? "" : t(isPhoneFilled(body!, PHONE_ID) ? "videoTour.wizard.errors.phoneInvalid" : "videoTour.wizard.errors.phone")
+    );
+    const valid = Boolean(name) && EMAIL.test(email) && phoneOk;
+    if (!valid) body!.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+    return valid;
+  }
+
+  function setSending(on: boolean): void {
+    sending = on;
+    const button = body!.querySelector<HTMLButtonElement>("[data-tour-confirm]");
+    const label = body!.querySelector<HTMLElement>("[data-tour-confirm-label]");
+    if (button) {
+      button.disabled = on;
+      button.setAttribute("aria-busy", String(on));
     }
-    if (!valid) {
-      body!.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+    if (label) label.textContent = t(on ? "videoTour.wizard.booking" : "videoTour.wizard.confirm");
+  }
+
+  async function confirm(): Promise<void> {
+    if (sending) return;
+    readDetails();
+    const submitError = body!.querySelector<HTMLElement>("[data-tour-submit-error]");
+    if (submitError) submitError.textContent = "";
+    if (!validate()) return;
+
+    setSending(true);
+    let status = 0;
+    let result: { reference?: string; error?: string } = {};
+    try {
+      const res = await fetch(BOOK_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bookingPayload(state, openedAt, body!.querySelector<HTMLInputElement>("[data-tour-hp]")?.value ?? ""))
+      });
+      status = res.status;
+      result = (await res.json().catch(() => ({}))) as typeof result;
+    } catch {
+      status = 0;
+    }
+    setSending(false);
+
+    if (status === 200 && result.reference) {
+      trackSchedule(englishNames(state.projects));
+      taken.add(slotUtc(state.date!, state.hour!));
+      return update({ ...state, reference: result.reference, step: 3 });
+    }
+    if (status === 409) {
+      // Someone else took the hour a moment ago: back to the calendar with fresh availability.
+      taken.add(slotUtc(state.date!, state.hour!));
+      notice = t("videoTour.wizard.slotTakenNotice");
+      update({ ...state, hour: undefined, step: 1 });
+      void refreshTaken();
       return;
     }
-    const done: TourState = { ...state, name, phone: getPhoneValue(body!, PHONE_ID), step: 3 };
-    trackSchedule(done.projects.map((slug) => String((lookup("en", `projectsData.${slug}`) as { name: string }).name)).join(", "));
-    window.open(whatsappUrl(done), "_blank", "noopener");
-    update(done);
+    const message =
+      status === 429 ? "videoTour.wizard.errors.limit" : status === 400 ? "videoTour.wizard.errors.invalid" : "videoTour.wizard.errors.failed";
+    if (submitError) submitError.textContent = t(message);
   }
 }

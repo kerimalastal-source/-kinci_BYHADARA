@@ -20,6 +20,7 @@ import { renderResaleList } from "./pages/resale/list";
 import { renderResaleDetail } from "./pages/resale/detail";
 import { renderAdminDashboard } from "./pages/admin/dashboard";
 import { renderAdminReviewListing } from "./pages/admin/reviewListing";
+import { renderAdminBookings } from "./pages/admin/bookings";
 import { renderHeader } from "./components/header";
 import { renderFooter } from "./components/footer";
 import { renderFloatingButtons } from "./components/floatingButtons";
@@ -144,6 +145,9 @@ function renderRoute(route: Route, main: HTMLElement): void {
       break;
     case "admin-listing":
       renderAdminReviewListing(main, route.id);
+      break;
+    case "admin-bookings":
+      renderAdminBookings(main);
       break;
     default:
       renderNotFound(main);

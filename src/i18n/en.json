@@ -24,7 +24,8 @@
     "account": "My Account",
     "resale": "Resale Listings",
     "logout": "Log Out",
-    "admin": "Admin"
+    "admin": "Admin",
+    "bookings": "Tour bookings"
   },
   "floatingActions": {
     "whatsapp": "Chat on WhatsApp",
@@ -945,6 +946,54 @@
     "actionSuccessApproved": "Listing approved and published.",
     "actionSuccessRejected": "Listing rejected and sent back to the seller."
   },
+  "adminBookings": {
+    "heroTitle": "Video tour bookings",
+    "heroSubtitle": "Every private video tour booked on the website. One tour per hour; a cancelled hour becomes free again.",
+    "nav": {
+      "listings": "Resale listings",
+      "bookings": "Video tour bookings"
+    },
+    "tabs": {
+      "upcoming": "Upcoming",
+      "past": "Past",
+      "cancelled": "Cancelled"
+    },
+    "empty": {
+      "upcoming": "No upcoming tours.",
+      "past": "No past tours yet.",
+      "cancelled": "No cancelled bookings."
+    },
+    "status": {
+      "booked": "New",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled"
+    },
+    "actions": {
+      "confirm": "Confirm",
+      "cancel": "Cancel booking",
+      "restore": "Restore"
+    },
+    "labels": {
+      "phone": "Phone",
+      "email": "Email",
+      "contact": "Prefers",
+      "projects": "Projects",
+      "focus": "Wants to see",
+      "app": "App",
+      "language": "Tour language",
+      "visitorTime": "Their local time",
+      "siteLanguage": "Site language",
+      "source": "Source",
+      "bookedAt": "Booked on"
+    },
+    "istanbulTime": "Istanbul time",
+    "whatsapp": "WhatsApp",
+    "cancelNote": "Cancelling frees the hour for other visitors. The visitor is not notified automatically — contact them yourselves.",
+    "cancelConfirm": "Cancel the tour of {name} on {when}?\n\nThe hour becomes free for others. The visitor will NOT be notified automatically.",
+    "restoreTaken": "This hour has been booked by someone else since, so the booking can't be restored.",
+    "saveError": "The change couldn't be saved. Please try again.",
+    "loadError": "The bookings couldn't be loaded. Please refresh the page."
+  },
   "notFound": {
     "title": "Page Not Found",
     "text": "The page you're looking for doesn't exist or has moved.",
@@ -1814,7 +1863,7 @@
     "heroEyebrow": "Legal",
     "heroTitle": "Privacy Policy",
     "heroSubtitle": "How HADARA Real Estate handles information on this website.",
-    "updated": "Last updated: 27 September 2026",
+    "updated": "Last updated: 28 September 2026",
     "sections": [
       {
         "title": "Who we are",
@@ -1848,9 +1897,25 @@
         ]
       },
       {
+        "title": "Booking a private video tour",
+        "paragraphs": [
+          "When you book a private video tour, your appointment is recorded directly in our system, and we keep only:"
+        ],
+        "items": [
+          "your name, email address, phone number and preferred way of contact;",
+          "the time you chose, the projects and what you would like to see, the app and the tour language;",
+          "the site language, your time zone (to show the appointment in your local time) and the advertising source, if any;",
+          "the booking reference, date and status."
+        ],
+        "after": [
+          "We use this information only to organise the tour and contact you about it: you receive a confirmation email, and our team receives an internal notification (by email and Telegram) with the booking details. Only our management team can see bookings.",
+          "Each booking is deleted automatically one year after the tour date, and you can ask us to delete it sooner by writing to info@byhadara.com"
+        ]
+      },
+      {
         "title": "Service providers",
         "paragraphs": [
-          "Our website is hosted by Vercel, and seller accounts, listings and visit statistics are stored with Supabase. Internal notifications are delivered through Telegram. If we use advertising or analytics tools from Meta or Google, they process data — and may use cookies — under their own privacy policies."
+          "Our website is hosted by Vercel, and seller accounts, listings, tour bookings and visit statistics are stored with Supabase. Booking confirmation emails are sent through the email service Resend, and internal notifications are delivered through Telegram and email. If we use advertising or analytics tools from Meta or Google, they process data — and may use cookies — under their own privacy policies."
         ]
       },
       {
@@ -2186,7 +2251,7 @@
       },
       {
         "title": "We call you at the set time",
-        "desc": "Your advisor confirms on WhatsApp, then calls you on the app you prefer."
+        "desc": "Your tour is booked instantly with an email confirmation, and your advisor calls you on the app you prefer."
       }
     ],
     "seeTitle": "What Will You See?",
@@ -2269,11 +2334,26 @@
       "languageLabel": "Tour language",
       "nameLabel": "Full name",
       "namePlaceholder": "Your name",
-      "phoneLabel": "Phone / WhatsApp",
+      "phoneLabel": "Phone number",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "contactLabel": "How should we contact you if needed?",
+      "contacts": {"email": "Email", "phone": "Phone call", "whatsapp": "WhatsApp", "telegram": "Telegram", "viber": "Viber"},
+      "booking": "Booking…",
+      "orWhatsapp": "Prefer WhatsApp? Book through WhatsApp instead",
+      "taken": "Booked",
+      "referenceLabel": "Booking number",
+      "slotTakenNotice": "Sorry, that time was just booked by someone else. Please choose another time.",
+      "honeypot": "Leave this field empty",
       "errors": {
         "name": "Please enter your name.",
         "phone": "Please enter your phone number.",
-        "phoneInvalid": "Please check the phone number."
+        "phoneInvalid": "Please check the phone number.",
+        "email": "Please enter your email.",
+        "emailInvalid": "Please check the email address.",
+        "limit": "You already have 3 upcoming tours booked. Please contact us to change them.",
+        "failed": "We couldn't complete your booking right now. Please try again, or book through WhatsApp.",
+        "invalid": "Please check your details and try again."
       },
       "summaryTitle": "Your tour",
       "summary": {
@@ -2284,11 +2364,11 @@
       },
       "istanbulTime": "Istanbul time",
       "yourTime": "your time",
-      "confirm": "Confirm on WhatsApp",
-      "confirmNote": "A WhatsApp chat with our team will open with your booking details ready — just press “Send”.",
-      "doneTitle": "Your tour request is ready, {name}",
-      "doneText": "Once you send the WhatsApp message, your advisor will confirm your tour during working hours (9:00–19:00 Istanbul time).",
-      "doneReopen": "WhatsApp didn't open? Send the request again",
+      "confirm": "Book my tour",
+      "confirmNote": "Your tour is booked instantly, and a confirmation email is sent to you right away.",
+      "doneTitle": "Your tour is booked, {name}!",
+      "doneText": "We've sent a confirmation to {email}. Your advisor will call you via {app} at the booked time.",
+      "doneReopen": "Questions? Message us on WhatsApp",
       "calendarTitle": "Add it to your calendar",
       "calendarGoogle": "Google Calendar",
       "calendarIcs": "Apple & Outlook",
@@ -2301,9 +2381,10 @@
       ],
       "again": "Book another tour",
       "event": "Private video tour — {projects}",
-      "eventDetails": "Your HADARA advisor will call you via {app}. The time is pending our team's confirmation on WhatsApp."
+      "eventDetails": "Your HADARA advisor will call you via {app}. Booking number {ref}."
     },
     "wa": {
+      "aboutBooking": "Hello HADARA, about my video tour booking {ref}.",
       "intro": "Hello HADARA, I would like to book a private video tour.",
       "projects": "Project",
       "focus": "Focus",
@@ -2345,7 +2426,7 @@
       },
       {
         "q": "What if I need to change the time?",
-        "a": "Message us on WhatsApp at any time and we will set a new time that suits you."
+        "a": "Reply to your confirmation email or message us on WhatsApp, and we will set a new time that suits you."
       },
       {
         "q": "Can I see more than one project in the same tour?",

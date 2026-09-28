@@ -24,7 +24,8 @@
     "account": "Mon compte",
     "resale": "Biens en revente",
     "logout": "Déconnexion",
-    "admin": "Administration"
+    "admin": "Administration",
+    "bookings": "Réservations de visites"
   },
   "floatingActions": {
     "whatsapp": "Discuter sur WhatsApp",
@@ -945,6 +946,54 @@
     "actionSuccessApproved": "Annonce approuvée et publiée.",
     "actionSuccessRejected": "Annonce refusée et renvoyée au vendeur."
   },
+  "adminBookings": {
+    "heroTitle": "Réservations de visites vidéo",
+    "heroSubtitle": "Toutes les visites vidéo privées réservées sur le site. Une visite par heure ; une heure annulée redevient libre.",
+    "nav": {
+      "listings": "Annonces de revente",
+      "bookings": "Réservations de visites"
+    },
+    "tabs": {
+      "upcoming": "À venir",
+      "past": "Passées",
+      "cancelled": "Annulées"
+    },
+    "empty": {
+      "upcoming": "Aucune visite à venir.",
+      "past": "Aucune visite passée pour l'instant.",
+      "cancelled": "Aucune réservation annulée."
+    },
+    "status": {
+      "booked": "Nouvelle",
+      "confirmed": "Confirmée",
+      "cancelled": "Annulée"
+    },
+    "actions": {
+      "confirm": "Confirmer",
+      "cancel": "Annuler la réservation",
+      "restore": "Rétablir"
+    },
+    "labels": {
+      "phone": "Téléphone",
+      "email": "E-mail",
+      "contact": "Préfère",
+      "projects": "Projets",
+      "focus": "Souhaite voir",
+      "app": "Application",
+      "language": "Langue de la visite",
+      "visitorTime": "Son heure locale",
+      "siteLanguage": "Langue du site",
+      "source": "Source",
+      "bookedAt": "Réservée le"
+    },
+    "istanbulTime": "heure d'Istanbul",
+    "whatsapp": "WhatsApp",
+    "cancelNote": "L'annulation libère l'heure pour d'autres visiteurs. Le visiteur n'est pas prévenu automatiquement — contactez-le vous-mêmes.",
+    "cancelConfirm": "Annuler la visite de {name} le {when} ?\n\nL'heure redevient libre. Le visiteur ne sera PAS prévenu automatiquement.",
+    "restoreTaken": "Quelqu'un d'autre a réservé cette heure entre-temps : la réservation ne peut pas être rétablie.",
+    "saveError": "La modification n'a pas pu être enregistrée. Réessayez.",
+    "loadError": "Les réservations n'ont pas pu être chargées. Actualisez la page."
+  },
   "notFound": {
     "title": "Page introuvable",
     "text": "La page que vous recherchez n'existe pas ou a été déplacée.",
@@ -1814,7 +1863,7 @@
     "heroEyebrow": "Informations légales",
     "heroTitle": "Politique de confidentialité",
     "heroSubtitle": "Comment HADARA Real Estate traite les informations sur ce site.",
-    "updated": "Dernière mise à jour : 27 septembre 2026",
+    "updated": "Dernière mise à jour : 28 septembre 2026",
     "sections": [
       {
         "title": "Qui sommes-nous",
@@ -1848,9 +1897,25 @@
         ]
       },
       {
+        "title": "Réserver une visite vidéo privée",
+        "paragraphs": [
+          "Lorsque vous réservez une visite vidéo privée, votre rendez-vous est enregistré directement dans notre système, et nous conservons uniquement :"
+        ],
+        "items": [
+          "votre nom, votre adresse e-mail, votre numéro de téléphone et le moyen de contact que vous préférez ;",
+          "l'horaire choisi, les projets et ce que vous souhaitez voir, l'application et la langue de la visite ;",
+          "la langue du site, votre fuseau horaire (pour afficher le rendez-vous à votre heure locale) et la source publicitaire, le cas échéant ;",
+          "la référence, la date et le statut de la réservation."
+        ],
+        "after": [
+          "Nous utilisons ces informations uniquement pour organiser la visite et vous contacter à son sujet : vous recevez un e-mail de confirmation, et notre équipe reçoit une notification interne (par e-mail et Telegram) avec les détails de la réservation. Seule notre équipe de direction peut consulter les réservations.",
+          "Chaque réservation est supprimée automatiquement un an après la date de la visite, et vous pouvez nous demander de la supprimer plus tôt en écrivant à info@byhadara.com"
+        ]
+      },
+      {
         "title": "Prestataires",
         "paragraphs": [
-          "Notre site est hébergé par Vercel ; les comptes vendeurs, les annonces et les statistiques de visite sont stockés chez Supabase, et les notifications internes sont transmises via Telegram. Si nous utilisons des outils publicitaires ou d'analyse de Meta ou de Google, ceux-ci traitent des données — et peuvent utiliser des cookies — conformément à leurs propres politiques de confidentialité."
+          "Notre site est hébergé par Vercel ; les comptes vendeurs, les annonces, les réservations de visites et les statistiques de visite sont stockés chez Supabase ; les e-mails de confirmation de réservation sont envoyés via le service d'e-mail Resend, et les notifications internes sont transmises via Telegram et par e-mail. Si nous utilisons des outils publicitaires ou d'analyse de Meta ou de Google, ceux-ci traitent des données — et peuvent utiliser des cookies — conformément à leurs propres politiques de confidentialité."
         ]
       },
       {
@@ -2186,7 +2251,7 @@
       },
       {
         "title": "Nous vous appelons à l'heure prévue",
-        "desc": "Votre conseiller confirme sur WhatsApp, puis vous appelle sur l'application de votre choix."
+        "desc": "Votre visite est réservée immédiatement avec une confirmation par e-mail, puis votre conseiller vous appelle sur l'application de votre choix."
       }
     ],
     "seeTitle": "Que verrez-vous pendant la visite ?",
@@ -2269,11 +2334,26 @@
       "languageLabel": "Langue de la visite",
       "nameLabel": "Nom complet",
       "namePlaceholder": "Votre nom",
-      "phoneLabel": "Téléphone / WhatsApp",
+      "phoneLabel": "Numéro de téléphone",
+      "emailLabel": "E-mail",
+      "emailPlaceholder": "vous@exemple.com",
+      "contactLabel": "Comment préférez-vous être contacté si nécessaire ?",
+      "contacts": {"email": "E-mail", "phone": "Appel téléphonique", "whatsapp": "WhatsApp", "telegram": "Telegram", "viber": "Viber"},
+      "booking": "Réservation…",
+      "orWhatsapp": "Vous préférez WhatsApp ? Réservez plutôt via WhatsApp",
+      "taken": "Réservé",
+      "referenceLabel": "Numéro de réservation",
+      "slotTakenNotice": "Désolé, ce créneau vient d'être réservé par quelqu'un d'autre. Veuillez choisir un autre horaire.",
+      "honeypot": "Laissez ce champ vide",
       "errors": {
         "name": "Veuillez indiquer votre nom.",
         "phone": "Veuillez indiquer votre numéro de téléphone.",
-        "phoneInvalid": "Veuillez vérifier le numéro de téléphone."
+        "phoneInvalid": "Veuillez vérifier le numéro de téléphone.",
+        "email": "Veuillez indiquer votre e-mail.",
+        "emailInvalid": "Veuillez vérifier l'adresse e-mail.",
+        "limit": "Vous avez déjà 3 visites à venir. Contactez-nous pour les modifier.",
+        "failed": "Nous n'avons pas pu finaliser votre réservation pour le moment. Réessayez ou réservez via WhatsApp.",
+        "invalid": "Veuillez vérifier vos informations et réessayer."
       },
       "summaryTitle": "Votre visite",
       "summary": {
@@ -2284,11 +2364,11 @@
       },
       "istanbulTime": "heure d'Istanbul",
       "yourTime": "votre heure",
-      "confirm": "Confirmer sur WhatsApp",
-      "confirmNote": "Une conversation WhatsApp avec notre équipe s'ouvrira avec les détails de votre réservation : il vous suffira d'appuyer sur « Envoyer ».",
-      "doneTitle": "Votre demande de visite est prête, {name}",
-      "doneText": "Dès l'envoi du message WhatsApp, votre conseiller confirmera votre visite pendant nos heures d'ouverture (9 h – 19 h, heure d'Istanbul).",
-      "doneReopen": "WhatsApp ne s'est pas ouvert ? Renvoyez la demande",
+      "confirm": "Réserver ma visite",
+      "confirmNote": "Votre visite est réservée immédiatement, et un e-mail de confirmation vous est envoyé aussitôt.",
+      "doneTitle": "Votre visite est réservée, {name} !",
+      "doneText": "Nous avons envoyé une confirmation à {email}. Votre conseiller vous appellera via {app} à l'heure réservée.",
+      "doneReopen": "Une question ? Écrivez-nous sur WhatsApp",
       "calendarTitle": "Ajoutez-la à votre agenda",
       "calendarGoogle": "Google Agenda",
       "calendarIcs": "Apple et Outlook",
@@ -2301,9 +2381,10 @@
       ],
       "again": "Réserver une autre visite",
       "event": "Visite privée en vidéo — {projects}",
-      "eventDetails": "Votre conseiller HADARA vous appellera via {app}. L'horaire est en attente de confirmation par notre équipe sur WhatsApp."
+      "eventDetails": "Votre conseiller HADARA vous appellera via {app}. Réservation n° {ref}."
     },
     "wa": {
+      "aboutBooking": "Bonjour HADARA, au sujet de ma réservation de visite vidéo {ref}.",
       "intro": "Bonjour HADARA, je souhaite réserver une visite privée en vidéo.",
       "projects": "Projet",
       "focus": "Priorités",
@@ -2345,7 +2426,7 @@
       },
       {
         "q": "Et si je dois changer l'horaire ?",
-        "a": "Écrivez-nous sur WhatsApp à tout moment et nous fixerons un nouvel horaire qui vous convient."
+        "a": "Répondez à votre e-mail de confirmation ou écrivez-nous sur WhatsApp, et nous fixerons un nouvel horaire qui vous convient."
       },
       {
         "q": "Puis-je voir plusieurs projets lors de la même visite ?",

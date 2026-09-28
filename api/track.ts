@@ -8,6 +8,7 @@
 // alert finish in the background (waitUntil), so neither can slow down or break it.
 import { waitUntil } from "@vercel/functions";
 import { escapeHtml, sendTelegram } from "./_lib/telegram.js";
+import { rpc } from "./_lib/supabase.js";
 
 const SESSION_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const LOCALES = ["en", "ar", "fr", "ru"] as const;
@@ -45,13 +46,16 @@ export async function POST(request: Request): Promise<Response> {
         console.error(`track: ${error instanceof Error ? error.message : "unknown error"}`);
       })
     );
-    // ~1% of requests also clear events older than 30 days; a failure here is only logged.
+    // ~1% of requests also clear visit events older than 30 days and tour bookings a
+    // year past their date; a failure here is only logged.
     if (Math.random() < 0.01) {
-      waitUntil(
-        rpc("purge_old_visitor_events", {}).catch((error: unknown) => {
-          console.error(`track: purge failed: ${error instanceof Error ? error.message : "unknown error"}`);
-        })
-      );
+      for (const fn of ["purge_old_visitor_events", "purge_old_tour_bookings"]) {
+        waitUntil(
+          rpc(fn, {}).catch((error: unknown) => {
+            console.error(`track: ${fn} failed: ${error instanceof Error ? error.message : "unknown error"}`);
+          })
+        );
+      }
     }
   }
 
@@ -99,22 +103,6 @@ function readGeo(headers: Headers): Geo {
     }
   }
   return { country: country && /^[A-Z]{2}$/.test(country) ? country : null, city: city ? city.slice(0, 100) : null };
-}
-
-async function rpc(fn: string, args: Record<string, unknown>): Promise<unknown> {
-  const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-  const key = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-  if (!url || !key) throw new Error("Supabase URL / anon key are not set");
-
-  const res = await fetch(`${url.replace(/\/$/, "")}/rest/v1/rpc/${fn}`, {
-    method: "POST",
-    headers: { apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-    body: JSON.stringify(args),
-    signal: AbortSignal.timeout(5000)
-  });
-  if (!res.ok) throw new Error(`${fn} failed (${res.status}): ${(await res.text()).slice(0, 200)}`);
-  const body = await res.text();
-  return body ? JSON.parse(body) : null;
 }
 
 async function record(view: PageView, geo: Geo, origin: string): Promise<void> {
