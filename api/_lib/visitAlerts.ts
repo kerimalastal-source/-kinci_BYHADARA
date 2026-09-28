@@ -49,7 +49,9 @@ const LOCALE_NAMES: Record<Locale, string> = { en: "الإنجليزية", ar: "
  * (language prefix removed): the page's Arabic name.
  */
 export const REQUEST_PAGES: Record<string, string> = {
-  "/contact": "التواصل"
+  "/contact": "التواصل",
+  "/engineering-architecture/request-consultation": "طلب استشارة التصميم الهندسي",
+  "/property-request": "طلب عقار مخصص"
 };
 
 /** Left-to-right mark first, so a path like "/ar/contact" never reads "contact/ar/" in Arabic text. */
