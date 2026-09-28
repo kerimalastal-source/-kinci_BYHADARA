@@ -27,6 +27,8 @@ export interface PageView {
   trail: TrailStep[];
   /** Pages the browser dropped from the middle of a very long trail. */
   trailSkipped: number;
+  /** The ad campaign the visit came from ("utm_source=facebook · utm_campaign=villa"), or "". */
+  campaign: string;
 }
 
 /** A session's first page view, as record_visit_state() returns it. */
@@ -183,7 +185,9 @@ function visitorLines(landing: Landing, title: string, origin: string, pageLabel
 
 export function newVisitorMessage(view: PageView, geo: Geo, origin: string): string {
   const landing: Landing = { path: view.path, locale: view.locale, referrer: view.referrer, country: geo.country, city: geo.city };
-  return visitorLines(landing, view.title, origin, "الصفحة").join("\n");
+  const lines = visitorLines(landing, view.title, origin, "الصفحة");
+  if (view.campaign) lines.push(`📣 الإعلان: ${escapeHtml(view.campaign)}`);
+  return lines.join("\n");
 }
 
 /** Visit length in Arabic, in whole minutes. */

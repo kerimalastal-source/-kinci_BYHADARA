@@ -2469,7 +2469,8 @@
           "the site language (English, Arabic, French or Russian);",
           "where the visit came from — only the name of the referring website (for example google.com) or the previous page on our site, never the full link;",
           "your approximate country and city, estimated by our hosting provider (Vercel) from your connection;",
-          "a random session number, and the date and time."
+          "the name of the ad campaign, if you arrived through a link in one of our ads (such as utm_source and utm_campaign), so we know which ad brought visitors;",
+        "a random session number, and the date and time."
         ],
         "after": [
           "The session number is created by your browser and kept in its session storage (sessionStorage), only for the current tab. It is not a cookie, it is not linked to your name or device, and your browser deletes it when you close the tab.",
@@ -2496,7 +2497,7 @@
           "the booking reference, date and status."
         ],
         "after": [
-          "We use this information only to organise the tour and contact you about it: you receive a confirmation email, and our team receives an internal notification (by email and Telegram) with the booking details. Only our management team can see bookings. If our team confirms or changes the time, you receive another email; a new time comes with two buttons to tell us whether it suits you, and your answer is saved with the booking.",
+          "We use this information only to organise the tour and contact you about it: you receive a confirmation email, and our team receives an internal notification (by email and Telegram) with the booking details. Only our management team can see bookings. If our team confirms or changes the time, you receive another email; a new time comes with two buttons to tell us whether it suits you, and your answer is saved with the booking. The day before the tour, you receive a reminder by email.",
           "Each booking is deleted automatically one year after the tour date, and you can ask us to delete it sooner by writing to info@byhadara.com"
         ]
       },
@@ -2666,6 +2667,150 @@
       "siteLanguage": "Site language",
       "source": "Source",
       "page": "Sent from page"
+    }
+  },
+  "adminNav": {
+    "home": "Home",
+    "inquiries": "Inquiries",
+    "bookings": "Tour bookings",
+    "customers": "Customers",
+    "stats": "Statistics",
+    "listings": "Resale listings"
+  },
+  "adminHome": {
+    "heroTitle": "Dashboard",
+    "toursToday": "Today's tours",
+    "toursTomorrow": "Tomorrow's tours",
+    "allBookings": "All bookings →",
+    "followUp": "Inquiries waiting for follow-up",
+    "followUpHint": "Oldest first — the ones in red have waited more than 24 hours.",
+    "allInquiries": "Inquiries inbox →",
+    "visitors": "Visitors — last 7 days",
+    "allStats": "All statistics →",
+    "open": "Open",
+    "noToursToday": "No tours today.",
+    "noToursTomorrow": "No tours tomorrow.",
+    "noFollowUp": "No inquiries waiting. 👏",
+    "more": "{count} more in the inbox.",
+    "visitorsWeek": "Visitors in 7 days: {count}",
+    "topSources": "Top sources",
+    "kpi": {
+      "newInquiries": "New inquiries",
+      "stale": "Unanswered for 24 h",
+      "toConfirm": "Bookings to confirm",
+      "toursToday": "Tours today",
+      "visitorsToday": "Visitors today",
+      "listings": "Listings to review"
+    },
+    "tourState": {
+      "confirmed": "Confirmed",
+      "proposed": "Chosen by customer — confirm",
+      "waiting": "Waiting for customer",
+      "booked": "To confirm"
+    }
+  },
+  "adminStats": {
+    "heroTitle": "Visitor statistics",
+    "heroSubtitle": "Where your visitors come from, what they look at, and how many messages and bookings each source brings.",
+    "period": "Period",
+    "lastDays": "Last {count} days",
+    "unavailable": "Statistics aren't available yet — database update 0008 needs to be run.",
+    "note": "Figures come from the anonymous visit records of the last 30 days (deleted automatically after that). A \"visitor\" is one visit to the site; the same person may come back in another visit. Admin pages aren't counted.",
+    "empty": "No data for this period.",
+    "noLeads": "No messages or bookings in this period.",
+    "noCampaigns": "No visits from ad links (with utm_campaign) in this period.",
+    "unknownCountry": "Unknown",
+    "source": "Source",
+    "inquiries": "Messages",
+    "bookings": "Tour bookings",
+    "tipVisitors": "{count} visitors",
+    "tipPages": "{count} pages",
+    "dailyTitle": "Visitors per day",
+    "sourcesTitle": "Traffic sources",
+    "leadsTitle": "Messages and bookings by ad",
+    "leadsHint": "\"No ad\" = a customer who came without an ad link (search, direct or other).",
+    "projectsTitle": "Most viewed projects",
+    "countriesTitle": "Countries",
+    "campaignsTitle": "Ad campaigns",
+    "landingsTitle": "First page of the visit",
+    "localesTitle": "Visitors' language",
+    "kpi": {
+      "visitors": "Visitors",
+      "pages": "Pages viewed",
+      "perVisit": "{count} pages per visit",
+      "engaged": "Viewed more than one page",
+      "engagedNote": "of all visitors",
+      "leads": "Messages & bookings",
+      "leadsNote": "{inquiries} messages · {bookings} bookings",
+      "conversion": "Conversion rate",
+      "conversionNote": "messages and bookings ÷ visitors"
+    },
+    "sources": {
+      "direct": "Direct (no source)",
+      "none": "No ad",
+      "googleAds": "Google Ads",
+      "googleSearch": "Google search",
+      "google": "Google",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "bing": "Bing search",
+      "youtube": "YouTube",
+      "whatsapp": "WhatsApp"
+    },
+    "pages": {
+      "home": "Home",
+      "projects": "Projects",
+      "contact": "Contact",
+      "about": "About us",
+      "citizenship": "Citizenship",
+      "video-tour": "Video tour",
+      "blog": "Blog",
+      "faq": "FAQ",
+      "resale": "Resale",
+      "property-request": "Request a property",
+      "engineering-architecture": "Engineering design",
+      "privacy": "Privacy policy"
+    }
+  },
+  "adminCustomers": {
+    "heroTitle": "Customers",
+    "heroSubtitle": "Every customer with their full history: messages, requests, tours and the team's notes. The same email or phone number = the same customer.",
+    "searchPlaceholder": "Search by name, phone, email or request number",
+    "count": "Customers: {count}",
+    "empty": "No customers yet.",
+    "tour": "Video tour",
+    "bookedOn": "booked {date}",
+    "inquiries": "Messages: {count}",
+    "tours": "Tours: {count}",
+    "last": "Last activity: {date}",
+    "history": "History"
+  },
+  "adminReplies": {
+    "button": "Ready WhatsApp reply",
+    "language": "Message in the customer's language: {language}",
+    "history": "Customer history",
+    "labels": {
+      "welcome": "Welcome & first contact",
+      "call": "Ask for a call",
+      "info": "Send details & prices",
+      "followup": "Couldn't reach you",
+      "tour": "Tour reminder"
+    }
+  },
+  "whatsappTemplates": {
+    "welcome": "Hello {name}, this is the HADARA Real Estate team. Thank you for contacting us about {topic}. We'd be glad to help — when would be a good time to talk?",
+    "call": "Hello {name}, this is the HADARA Real Estate team. We'd like to call you to go through {topic}. Would today or tomorrow suit you, and what time is best?",
+    "info": "Hello {name}, this is the HADARA Real Estate team. We'd be happy to send you the details and current prices for {topic}. Would you like them here on WhatsApp or by email?",
+    "followup": "Hello {name}, this is the HADARA Real Estate team. We tried to reach you about {topic} but couldn't get through. When would be a good time to talk?",
+    "tour": "Hello {name}, this is the HADARA Real Estate team. A quick reminder of your private video tour on {when} (Istanbul time); we'll call you via {app}. See you then!",
+    "topics": {
+      "project": "{names}",
+      "projects": "{names}",
+      "request": "the property you're looking for",
+      "consultation": "your design consultation request",
+      "general": "your inquiry",
+      "tour": "your private video tour"
     }
   }
 }

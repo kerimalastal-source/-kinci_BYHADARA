@@ -42,7 +42,7 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], sell
   main.innerHTML = `
     <section class="page-hero">
       <div class="container">
-        <a class="back-link" href="${link("/admin")}">
+        <a class="back-link" href="${link("/admin/listings")}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
           ${t("admin.backToQueueButton")}
         </a>
@@ -130,7 +130,7 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], sell
     approveBtn.disabled = true;
     approveBtn.textContent = t("admin.approving");
     approveListing(listing.id)
-      .then(() => navigate("/admin"))
+      .then(() => navigate("/admin/listings"))
       .catch((err) => {
         console.error(err);
         approveBtn.disabled = false;
@@ -151,7 +151,7 @@ function paint(main: HTMLElement, listing: Listing, photos: ListingPhoto[], sell
     rejectBtn.disabled = true;
     rejectBtn.textContent = t("admin.rejecting");
     rejectListing(listing.id, reason)
-      .then(() => navigate("/admin"))
+      .then(() => navigate("/admin/listings"))
       .catch((err) => {
         console.error(err);
         rejectBtn.disabled = false;

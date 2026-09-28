@@ -2469,7 +2469,8 @@
           "la langue du site (anglais, arabe, français ou russe) ;",
           "la provenance de la visite — uniquement le nom du site référent (par exemple google.com) ou la page précédente de notre site, jamais le lien complet ;",
           "votre pays et votre ville approximatifs, estimés par notre hébergeur (Vercel) à partir de votre connexion ;",
-          "un numéro de session aléatoire, ainsi que la date et l'heure."
+          "le nom de la campagne publicitaire, si vous êtes arrivé par un lien de l'une de nos publicités (par exemple utm_source et utm_campaign), afin de savoir quelle publicité a amené des visiteurs ;",
+        "un numéro de session aléatoire, ainsi que la date et l'heure."
         ],
         "after": [
           "Le numéro de session est créé par votre navigateur et conservé dans son stockage de session (sessionStorage), uniquement pour l'onglet en cours. Ce n'est pas un cookie, il n'est lié ni à votre nom ni à votre appareil, et votre navigateur le supprime à la fermeture de l'onglet.",
@@ -2496,7 +2497,7 @@
           "la référence, la date et le statut de la réservation."
         ],
         "after": [
-          "Nous utilisons ces informations uniquement pour organiser la visite et vous contacter à son sujet : vous recevez un e-mail de confirmation, et notre équipe reçoit une notification interne (par e-mail et Telegram) avec les détails de la réservation. Seule notre équipe de direction peut consulter les réservations. Si notre équipe confirme ou modifie l'horaire, vous recevez un autre e-mail ; un nouvel horaire est accompagné de deux boutons pour nous dire s'il vous convient, et votre réponse est enregistrée avec la réservation.",
+          "Nous utilisons ces informations uniquement pour organiser la visite et vous contacter à son sujet : vous recevez un e-mail de confirmation, et notre équipe reçoit une notification interne (par e-mail et Telegram) avec les détails de la réservation. Seule notre équipe de direction peut consulter les réservations. Si notre équipe confirme ou modifie l'horaire, vous recevez un autre e-mail ; un nouvel horaire est accompagné de deux boutons pour nous dire s'il vous convient, et votre réponse est enregistrée avec la réservation. La veille de la visite, vous recevez un rappel par e-mail.",
           "Chaque réservation est supprimée automatiquement un an après la date de la visite, et vous pouvez nous demander de la supprimer plus tôt en écrivant à info@byhadara.com"
         ]
       },
@@ -2666,6 +2667,150 @@
       "siteLanguage": "Langue du site",
       "source": "Source",
       "page": "Envoyé depuis la page"
+    }
+  },
+  "adminNav": {
+    "home": "Accueil",
+    "inquiries": "Demandes",
+    "bookings": "Visites vidéo",
+    "customers": "Clients",
+    "stats": "Statistiques",
+    "listings": "Annonces de revente"
+  },
+  "adminHome": {
+    "heroTitle": "Tableau de bord",
+    "toursToday": "Visites d'aujourd'hui",
+    "toursTomorrow": "Visites de demain",
+    "allBookings": "Toutes les réservations →",
+    "followUp": "Demandes en attente de suivi",
+    "followUpHint": "Les plus anciennes d'abord — celles en rouge attendent depuis plus de 24 heures.",
+    "allInquiries": "Boîte des demandes →",
+    "visitors": "Visiteurs — 7 derniers jours",
+    "allStats": "Toutes les statistiques →",
+    "open": "Ouvrir",
+    "noToursToday": "Aucune visite aujourd'hui.",
+    "noToursTomorrow": "Aucune visite demain.",
+    "noFollowUp": "Aucune demande en attente. 👏",
+    "more": "{count} autres dans la boîte.",
+    "visitorsWeek": "Visiteurs sur 7 jours : {count}",
+    "topSources": "Principales sources",
+    "kpi": {
+      "newInquiries": "Nouvelles demandes",
+      "stale": "Sans réponse depuis 24 h",
+      "toConfirm": "Réservations à confirmer",
+      "toursToday": "Visites aujourd'hui",
+      "visitorsToday": "Visiteurs aujourd'hui",
+      "listings": "Annonces à vérifier"
+    },
+    "tourState": {
+      "confirmed": "Confirmée",
+      "proposed": "Choisie par le client — à confirmer",
+      "waiting": "En attente du client",
+      "booked": "À confirmer"
+    }
+  },
+  "adminStats": {
+    "heroTitle": "Statistiques des visiteurs",
+    "heroSubtitle": "D'où viennent vos visiteurs, ce qu'ils consultent, et combien de messages et de réservations chaque source apporte.",
+    "period": "Période",
+    "lastDays": "{count} derniers jours",
+    "unavailable": "Les statistiques ne sont pas encore disponibles — la mise à jour 0008 de la base de données doit être exécutée.",
+    "note": "Chiffres issus des enregistrements de visite anonymes des 30 derniers jours (supprimés automatiquement ensuite). Un « visiteur » correspond à une visite du site ; la même personne peut revenir lors d'une autre visite. Les pages d'administration ne sont pas comptées.",
+    "empty": "Aucune donnée pour cette période.",
+    "noLeads": "Aucun message ni aucune réservation sur cette période.",
+    "noCampaigns": "Aucune visite issue d'un lien publicitaire (avec utm_campaign) sur cette période.",
+    "unknownCountry": "Inconnu",
+    "source": "Source",
+    "inquiries": "Messages",
+    "bookings": "Visites réservées",
+    "tipVisitors": "{count} visiteurs",
+    "tipPages": "{count} pages",
+    "dailyTitle": "Visiteurs par jour",
+    "sourcesTitle": "Sources de trafic",
+    "leadsTitle": "Messages et réservations par publicité",
+    "leadsHint": "« Sans publicité » = client venu sans lien publicitaire (recherche, accès direct ou autre).",
+    "projectsTitle": "Projets les plus consultés",
+    "countriesTitle": "Pays",
+    "campaignsTitle": "Campagnes publicitaires",
+    "landingsTitle": "Première page de la visite",
+    "localesTitle": "Langue des visiteurs",
+    "kpi": {
+      "visitors": "Visiteurs",
+      "pages": "Pages vues",
+      "perVisit": "{count} pages par visite",
+      "engaged": "Plus d'une page vue",
+      "engagedNote": "de tous les visiteurs",
+      "leads": "Messages et réservations",
+      "leadsNote": "{inquiries} messages · {bookings} réservations",
+      "conversion": "Taux de conversion",
+      "conversionNote": "messages et réservations ÷ visiteurs"
+    },
+    "sources": {
+      "direct": "Accès direct (sans source)",
+      "none": "Sans publicité",
+      "googleAds": "Google Ads",
+      "googleSearch": "Recherche Google",
+      "google": "Google",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "bing": "Recherche Bing",
+      "youtube": "YouTube",
+      "whatsapp": "WhatsApp"
+    },
+    "pages": {
+      "home": "Accueil",
+      "projects": "Projets",
+      "contact": "Contact",
+      "about": "À propos",
+      "citizenship": "Citoyenneté",
+      "video-tour": "Visite vidéo",
+      "blog": "Blog",
+      "faq": "FAQ",
+      "resale": "Revente",
+      "property-request": "Demande de bien",
+      "engineering-architecture": "Conception",
+      "privacy": "Confidentialité"
+    }
+  },
+  "adminCustomers": {
+    "heroTitle": "Clients",
+    "heroSubtitle": "Chaque client avec son historique complet : messages, demandes, visites et notes de l'équipe. Même e-mail ou même numéro de téléphone = même client.",
+    "searchPlaceholder": "Rechercher par nom, téléphone, e-mail ou numéro de demande",
+    "count": "Clients : {count}",
+    "empty": "Aucun client pour le moment.",
+    "tour": "Visite vidéo",
+    "bookedOn": "réservée le {date}",
+    "inquiries": "Messages : {count}",
+    "tours": "Visites : {count}",
+    "last": "Dernière activité : {date}",
+    "history": "Historique"
+  },
+  "adminReplies": {
+    "button": "Réponse WhatsApp prête",
+    "language": "Message dans la langue du client : {language}",
+    "history": "Historique du client",
+    "labels": {
+      "welcome": "Accueil et premier contact",
+      "call": "Proposer un appel",
+      "info": "Envoyer infos et prix",
+      "followup": "Impossible de vous joindre",
+      "tour": "Rappel de visite"
+    }
+  },
+  "whatsappTemplates": {
+    "welcome": "Bonjour {name}, ici l'équipe HADARA Real Estate. Merci de nous avoir contactés au sujet de {topic}. Nous serons ravis de vous aider — quel moment vous conviendrait pour en parler ?",
+    "call": "Bonjour {name}, ici l'équipe HADARA Real Estate. Nous aimerions vous appeler pour parler de {topic}. Aujourd'hui ou demain vous conviendrait-il, et à quelle heure ?",
+    "info": "Bonjour {name}, ici l'équipe HADARA Real Estate. Nous pouvons vous envoyer les informations et les prix actuels concernant {topic}. Préférez-vous les recevoir ici sur WhatsApp ou par e-mail ?",
+    "followup": "Bonjour {name}, ici l'équipe HADARA Real Estate. Nous avons essayé de vous joindre au sujet de {topic}, sans succès. Quel moment vous conviendrait pour en parler ?",
+    "tour": "Bonjour {name}, ici l'équipe HADARA Real Estate. Petit rappel de votre visite privée en vidéo le {when} (heure d'Istanbul) ; nous vous appellerons via {app}. À bientôt !",
+    "topics": {
+      "project": "{names}",
+      "projects": "{names}",
+      "request": "votre recherche de bien",
+      "consultation": "votre demande de consultation",
+      "general": "votre demande",
+      "tour": "votre visite vidéo"
     }
   }
 }

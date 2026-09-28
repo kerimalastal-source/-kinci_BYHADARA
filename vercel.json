@@ -63,5 +63,11 @@
     "deploymentEnabled": {
       "claude/*": false
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/daily",
+      "schedule": "0 6 * * *"
+    }
+  ]
 }

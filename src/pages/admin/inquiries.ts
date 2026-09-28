@@ -3,6 +3,8 @@ import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
 import { fetchInquiries, updateInquiry, type Inquiry, type InquiryKind, type InquiryStatus } from "../../data/inquiries";
+import { adminNav, queryParam } from "./nav";
+import { customerLink, whatsappReplies } from "./replies";
 
 /**
  * Admin inbox for the site's forms (/admin/inquiries): contact messages, custom property
@@ -149,6 +151,14 @@ function renderCard(inquiry: Inquiry): string {
       <p class="booking-card__error${notice?.ok ? " booking-card__error--ok" : ""}" role="alert" data-inquiry-notice>${notice ? escapeHtml(notice.text) : ""}</p>
       <div class="booking-card__actions">
         <button type="button" class="btn btn--outline btn--small" data-inquiry-save-notes>${t("adminInquiries.saveNotes")}</button>
+        ${whatsappReplies({
+          phone: inquiry.phone,
+          name: inquiry.name,
+          locale: inquiry.site_locale,
+          projects: inquiry.projects,
+          topic: inquiry.kind === "property_request" ? "request" : inquiry.kind === "consultation" ? "consultation" : "general"
+        })}
+        ${customerLink(inquiry.email)}
       </div>
     </article>`;
 }
@@ -164,6 +174,12 @@ function matches(inquiry: Inquiry, search: string): boolean {
 
 export function renderAdminInquiries(main: HTMLElement): void {
   if (!requireAdmin(main)) return;
+  // ?q=<reference or email> (from the admin home or a customer's history): search all tabs.
+  const q = queryParam("q");
+  if (q) {
+    query = q;
+    activeTab = "all";
+  }
 
   main.innerHTML = `
     <section class="page-hero">
@@ -175,11 +191,7 @@ export function renderAdminInquiries(main: HTMLElement): void {
     </section>
     <section class="section admin-bookings admin-inquiries">
       <div class="container">
-        <nav class="admin-subnav" aria-label="${t("admin.heroEyebrow")}">
-          <a href="${link("/admin")}">${t("adminBookings.nav.listings")}</a>
-          <a href="${link("/admin/inquiries")}" aria-current="page">${t("adminBookings.nav.inquiries")}</a>
-          <a href="${link("/admin/bookings")}">${t("adminBookings.nav.bookings")}</a>
-        </nav>
+        ${adminNav("inquiries")}
         <div class="admin-inquiries__bar">
           <div class="admin-bookings__tabs" role="tablist"></div>
           <input type="search" class="admin-inquiries__search" placeholder="${t("adminInquiries.searchPlaceholder")}" aria-label="${t("adminInquiries.searchPlaceholder")}" value="${escapeHtml(query)}" />

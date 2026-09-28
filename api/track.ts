@@ -93,7 +93,9 @@ function parsePageView(body: unknown): PageView | null {
     landingPath: text(data.landingPath, 300).split(/[?#]/)[0],
     landingTitle: text(data.landingTitle, 150),
     trail: parseTrail(data.trail),
-    trailSkipped: Math.min(10_000, Math.max(0, Math.floor(Number(data.trailSkipped) || 0)))
+    trailSkipped: Math.min(10_000, Math.max(0, Math.floor(Number(data.trailSkipped) || 0))),
+    // "utm_source=facebook · utm_campaign=villa" from the ad link (src/utils/campaign.ts).
+    campaign: text(data.campaign, 300).replace(/[\u0000-\u001f<>]/g, "")
   };
 }
 
@@ -154,6 +156,14 @@ async function record(view: PageView, geo: Geo, origin: string): Promise<void> {
   // alert, no updates and no 🔥 message.
   const landingReferrer = state.is_new ? view.referrer : state.landing?.referrer ?? "";
   if ((landingReferrer ?? "").startsWith("/")) return;
+
+  // The ad campaign is kept with the visit's first page, for the statistics page (0008;
+  // before it runs, the 404 is ignored).
+  if (state.is_new && view.campaign) {
+    await rpc("save_visit_campaign", { p_session_id: view.sessionId, p_campaign: view.campaign }).catch((error: unknown) => {
+      if (!(error instanceof RpcError && error.status === 404)) console.error(`track: save_visit_campaign failed: ${error instanceof Error ? error.message : "unknown"}`);
+    });
+  }
 
   let messageId = state.message_id ? Number(state.message_id) : null;
   if (state.is_new) {

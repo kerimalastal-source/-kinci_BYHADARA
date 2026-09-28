@@ -3,6 +3,8 @@ import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
 import { bookingAdminAction, fetchTourBookings, setTourBookingStatus, type TourBooking } from "../../data/tourBookings";
+import { adminNav } from "./nav";
+import { customerLink, whatsappReplies } from "./replies";
 
 /**
  * Admin page for private video tour bookings (/admin/bookings): upcoming, past and
@@ -207,7 +209,17 @@ function renderCard(booking: TourBooking, tab: Tab, all: TourBooking[]): string 
       </dl>
       ${editing ? editPanel(booking, all) : ""}
       <p class="booking-card__error${notice?.ok ? " booking-card__error--ok" : ""}" role="alert" data-booking-error>${notice ? escapeHtml(notice.text) : ""}</p>
-      <div class="booking-card__actions">${actions}</div>
+      <div class="booking-card__actions">${actions}${
+        booking.status === "cancelled"
+          ? ""
+          : whatsappReplies({
+              phone: booking.phone,
+              name: booking.name,
+              locale: booking.site_locale,
+              projects: booking.projects,
+              tour: { slot: booking.slot_start, app: booking.app }
+            })
+      }${customerLink(booking.email)}</div>
     </article>`;
 }
 
@@ -224,11 +236,7 @@ export function renderAdminBookings(main: HTMLElement): void {
     </section>
     <section class="section admin-bookings">
       <div class="container">
-        <nav class="admin-subnav" aria-label="${t("admin.heroEyebrow")}">
-          <a href="${link("/admin")}">${t("adminBookings.nav.listings")}</a>
-          <a href="${link("/admin/inquiries")}">${t("adminBookings.nav.inquiries")}</a>
-          <a href="${link("/admin/bookings")}" aria-current="page">${t("adminBookings.nav.bookings")}</a>
-        </nav>
+        ${adminNav("bookings")}
         <div class="admin-bookings__tabs" role="tablist"></div>
         <p class="admin-bookings__note">${t("adminBookings.cancelNote")}</p>
         <div class="admin-bookings__list" aria-live="polite"><p>${t("common.loading")}</p></div>

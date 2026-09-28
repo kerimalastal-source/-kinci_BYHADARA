@@ -271,7 +271,8 @@ export const ltrSpan = (value: string) => `<span dir="ltr" style="white-space:no
 export type VisitorUpdate =
   | { kind: "booked" }
   | { kind: "confirmed"; sequence: number }
-  | { kind: "rescheduled"; sequence: number; acceptUrl: string; declineUrl: string };
+  | { kind: "rescheduled"; sequence: number; acceptUrl: string; declineUrl: string }
+  | { kind: "reminder"; sequence: number };
 
 interface UpdateText {
   subject: string;
@@ -306,6 +307,30 @@ const CONFIRMED: Record<SiteLocale, UpdateText> = {
     subject: "Ваша видеоэкскурсия подтверждена — {ref}",
     intro: "Хорошие новости: наша команда подтвердила вашу частную видеоэкскурсию. Подробности:",
     calendar: "Приложенный файл календаря добавит экскурсию в ваш календарь."
+  }
+};
+
+/** The day-before reminder (api/daily.ts). */
+const REMINDER: Record<SiteLocale, UpdateText> = {
+  en: {
+    subject: "Reminder: your video tour is tomorrow — {ref}",
+    intro: "A friendly reminder: your private video tour with HADARA Real Estate is tomorrow. Here are the details:",
+    calendar: "The attached calendar file keeps the tour in your calendar."
+  },
+  ar: {
+    subject: "تذكير: جولتك عبر الفيديو غداً — {ref}",
+    intro: "نذكّرك بأن موعد جولتك الخاصة عبر الفيديو مع حضارة للتطوير العقاري غداً. إليك التفاصيل:",
+    calendar: "ملف التقويم المرفق يحفظ الجولة في تقويمك."
+  },
+  fr: {
+    subject: "Rappel : votre visite vidéo a lieu demain — {ref}",
+    intro: "Petit rappel : votre visite privée en vidéo avec HADARA Real Estate a lieu demain. Voici les détails :",
+    calendar: "Le fichier de calendrier joint conserve la visite dans votre agenda."
+  },
+  ru: {
+    subject: "Напоминание: ваша видеоэкскурсия завтра — {ref}",
+    intro: "Напоминаем: ваша частная видеоэкскурсия с HADARA Real Estate состоится завтра. Подробности:",
+    calendar: "Приложенный файл календаря сохранит экскурсию в вашем календаре."
   }
 };
 
@@ -359,7 +384,14 @@ export function visitorEmail(
 ): { subject: string; html: string; text: string; attachment: EmailAttachment } {
   const locale = details.locale;
   const text = VISITOR[locale];
-  const variant = update.kind === "confirmed" ? CONFIRMED[locale] : update.kind === "rescheduled" ? RESCHEDULED[locale] : null;
+  const variant =
+    update.kind === "confirmed"
+      ? CONFIRMED[locale]
+      : update.kind === "rescheduled"
+        ? RESCHEDULED[locale]
+        : update.kind === "reminder"
+          ? REMINDER[locale]
+          : null;
   const reschedule = update.kind === "rescheduled" ? RESCHEDULED[locale] : null;
   const intro = variant?.intro ?? text.intro;
   const rtl = locale === "ar";

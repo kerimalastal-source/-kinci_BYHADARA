@@ -3,6 +3,7 @@
 // when the tab closes), plus the page path, the site language and where the visit
 // came from (the referring site's host name only, never its full URL).
 import type { Route } from "../seo/routes";
+import { campaignSource } from "./campaign";
 
 const SESSION_KEY = "hadara-visit-session";
 /** Path and title of the session's first page, so the updated alert keeps its 🏠 project line. */
@@ -21,7 +22,10 @@ const SKIPPED_ROUTES: ReadonlySet<Route["name"]> = new Set([
   "admin",
   "admin-listing",
   "admin-bookings",
-  "admin-inquiries"
+  "admin-inquiries",
+  "admin-listings",
+  "admin-stats",
+  "admin-customers"
 ]);
 
 /** Pages whose title names a specific project, resale listing or article (shown in the alert). */
@@ -140,7 +144,8 @@ export function trackVisit(route: Route, locale: string): void {
     landingTitle: landing.title,
     // Each page with the seconds since the visit's first page.
     trail: trail.steps.map((step) => ({ path: step.p, title: step.n, at: Math.max(0, Math.round((step.t - start) / 1000)) })),
-    trailSkipped: trail.skipped
+    trailSkipped: trail.skipped,
+    campaign: campaignSource()
   });
 
   // keepalive lets the request finish even if the visitor leaves right away.

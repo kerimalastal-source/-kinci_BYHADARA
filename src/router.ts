@@ -22,6 +22,9 @@ import { renderAdminDashboard } from "./pages/admin/dashboard";
 import { renderAdminReviewListing } from "./pages/admin/reviewListing";
 import { renderAdminBookings } from "./pages/admin/bookings";
 import { renderAdminInquiries } from "./pages/admin/inquiries";
+import { renderAdminOverview } from "./pages/admin/overview";
+import { renderAdminStats } from "./pages/admin/stats";
+import { renderAdminCustomers } from "./pages/admin/customers";
 import { renderHeader } from "./components/header";
 import { renderFooter } from "./components/footer";
 import { renderFloatingButtons } from "./components/floatingButtons";
@@ -142,6 +145,9 @@ function renderRoute(route: Route, main: HTMLElement): void {
       renderResaleDetail(main, route.id);
       break;
     case "admin":
+      renderAdminOverview(main);
+      break;
+    case "admin-listings":
       renderAdminDashboard(main);
       break;
     case "admin-listing":
@@ -152,6 +158,12 @@ function renderRoute(route: Route, main: HTMLElement): void {
       break;
     case "admin-inquiries":
       renderAdminInquiries(main);
+      break;
+    case "admin-stats":
+      renderAdminStats(main);
+      break;
+    case "admin-customers":
+      renderAdminCustomers(main);
       break;
     default:
       renderNotFound(main);

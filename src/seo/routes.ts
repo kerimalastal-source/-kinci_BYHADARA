@@ -48,6 +48,9 @@ export type Route =
   | { name: "admin-listing"; id: string }
   | { name: "admin-bookings" }
   | { name: "admin-inquiries" }
+  | { name: "admin-listings" }
+  | { name: "admin-stats" }
+  | { name: "admin-customers" }
   | { name: "not-found" };
 
 /** Splits "/ar/projects" into { locale: "ar", path: "/projects" }. */
@@ -98,6 +101,9 @@ export function parseRoute(path: string): Route {
     if (p1 === "listings" && p2) return { name: "admin-listing", id: p2 };
     if (p1 === "bookings") return { name: "admin-bookings" };
     if (p1 === "inquiries") return { name: "admin-inquiries" };
+    if (p1 === "listings") return { name: "admin-listings" };
+    if (p1 === "stats") return { name: "admin-stats" };
+    if (p1 === "customers") return { name: "admin-customers" };
     return { name: "admin" };
   }
   return { name: "not-found" };
@@ -124,6 +130,12 @@ export function routePath(route: Route): string {
       return "/admin/bookings";
     case "admin-inquiries":
       return "/admin/inquiries";
+    case "admin-listings":
+      return "/admin/listings";
+    case "admin-stats":
+      return "/admin/stats";
+    case "admin-customers":
+      return "/admin/customers";
     case "consultancy":
       return consultancyPath(route.page);
     case "not-found":
