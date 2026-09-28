@@ -23,7 +23,7 @@ export interface TourBooking {
   /** Set when the team moved the booking to another time (migration 0005). */
   rescheduled_at?: string | null;
   /** The visitor's answer to the new time, from the link in their email. */
-  customer_reply?: "accepted" | "declined" | null;
+  customer_reply?: "accepted" | "declined" | "proposed" | null;
   customer_reply_at?: string | null;
 }
 

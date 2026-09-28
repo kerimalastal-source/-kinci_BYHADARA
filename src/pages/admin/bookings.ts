@@ -112,8 +112,10 @@ function editPanel(booking: TourBooking, all: TourBooking[]): string {
 /** The visitor's answer to a time the team changed. */
 function replyLine(booking: TourBooking): string {
   if (!booking.rescheduled_at || booking.status === "cancelled") return "";
-  const state = booking.customer_reply ?? "waiting";
-  return `<p class="booking-card__reply booking-card__reply--${state}">${t(`adminBookings.reply.${state}`)}</p>`;
+  const reply = booking.customer_reply ?? "waiting";
+  // "proposed": the visitor picked this time on the answer page (migration 0006).
+  const state = reply === "proposed" && booking.status === "confirmed" ? "proposedConfirmed" : reply;
+  return `<p class="booking-card__reply booking-card__reply--${reply === "proposed" ? "proposed" : state}">${t(`adminBookings.reply.${state}`)}</p>`;
 }
 
 function tabOf(booking: TourBooking, now: number): Tab {

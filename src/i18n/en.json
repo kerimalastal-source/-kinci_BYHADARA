@@ -1016,7 +1016,9 @@
     "reply": {
       "waiting": "Waiting for the visitor's answer to the new time",
       "accepted": "The visitor accepted the new time",
-      "declined": "The visitor needs another time — contact them"
+      "declined": "The visitor needs another time — contact them",
+      "proposed": "The visitor chose this time themselves and it is held for them — press “Confirm” to send the confirmation email",
+      "proposedConfirmed": "The visitor chose this time themselves and it is confirmed"
     }
   },
   "notFound": {

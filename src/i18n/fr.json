@@ -1016,7 +1016,9 @@
     "reply": {
       "waiting": "En attente de la réponse du visiteur au nouvel horaire",
       "accepted": "Le visiteur a accepté le nouvel horaire",
-      "declined": "Le visiteur a besoin d'un autre horaire — contactez-le"
+      "declined": "Le visiteur a besoin d'un autre horaire — contactez-le",
+      "proposed": "Le visiteur a choisi lui-même cet horaire, qui lui est réservé — cliquez sur « Confirmer » pour lui envoyer l'e-mail de confirmation",
+      "proposedConfirmed": "Le visiteur a choisi lui-même cet horaire, qui est confirmé"
     }
   },
   "notFound": {

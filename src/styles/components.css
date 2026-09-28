@@ -3878,6 +3878,11 @@ body.map-open .back-to-top {
   color: #a1332a;
 }
 
+.booking-card__reply--proposed {
+  background: #e7eef9;
+  color: #24508f;
+}
+
 /* "Change time" panel */
 .booking-edit {
   display: grid;
