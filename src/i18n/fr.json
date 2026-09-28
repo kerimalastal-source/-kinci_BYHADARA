@@ -24,7 +24,8 @@
     "account": "Mon compte",
     "resale": "Biens en revente",
     "logout": "Déconnexion",
-    "admin": "Administration"
+    "admin": "Administration",
+    "bookings": "Réservations de visites"
   },
   "floatingActions": {
     "whatsapp": "Discuter sur WhatsApp",
@@ -944,6 +945,54 @@
     "rejectionReasonPlaceholder": "Expliquez ce qui doit être modifié avant la publication...",
     "actionSuccessApproved": "Annonce approuvée et publiée.",
     "actionSuccessRejected": "Annonce refusée et renvoyée au vendeur."
+  },
+  "adminBookings": {
+    "heroTitle": "Réservations de visites vidéo",
+    "heroSubtitle": "Toutes les visites vidéo privées réservées sur le site. Une visite par heure ; une heure annulée redevient libre.",
+    "nav": {
+      "listings": "Annonces de revente",
+      "bookings": "Réservations de visites"
+    },
+    "tabs": {
+      "upcoming": "À venir",
+      "past": "Passées",
+      "cancelled": "Annulées"
+    },
+    "empty": {
+      "upcoming": "Aucune visite à venir.",
+      "past": "Aucune visite passée pour l'instant.",
+      "cancelled": "Aucune réservation annulée."
+    },
+    "status": {
+      "booked": "Nouvelle",
+      "confirmed": "Confirmée",
+      "cancelled": "Annulée"
+    },
+    "actions": {
+      "confirm": "Confirmer",
+      "cancel": "Annuler la réservation",
+      "restore": "Rétablir"
+    },
+    "labels": {
+      "phone": "Téléphone",
+      "email": "E-mail",
+      "contact": "Préfère",
+      "projects": "Projets",
+      "focus": "Souhaite voir",
+      "app": "Application",
+      "language": "Langue de la visite",
+      "visitorTime": "Son heure locale",
+      "siteLanguage": "Langue du site",
+      "source": "Source",
+      "bookedAt": "Réservée le"
+    },
+    "istanbulTime": "heure d'Istanbul",
+    "whatsapp": "WhatsApp",
+    "cancelNote": "L'annulation libère l'heure pour d'autres visiteurs. Le visiteur n'est pas prévenu automatiquement — contactez-le vous-mêmes.",
+    "cancelConfirm": "Annuler la visite de {name} le {when} ?\n\nL'heure redevient libre. Le visiteur ne sera PAS prévenu automatiquement.",
+    "restoreTaken": "Quelqu'un d'autre a réservé cette heure entre-temps : la réservation ne peut pas être rétablie.",
+    "saveError": "La modification n'a pas pu être enregistrée. Réessayez.",
+    "loadError": "Les réservations n'ont pas pu être chargées. Actualisez la page."
   },
   "notFound": {
     "title": "Page introuvable",
@@ -2135,7 +2184,7 @@
       },
       {
         "title": "Nous vous appelons à l'heure prévue",
-        "desc": "Votre conseiller confirme sur WhatsApp, puis vous appelle sur l'application de votre choix."
+        "desc": "Votre visite est réservée immédiatement avec une confirmation par e-mail, puis votre conseiller vous appelle sur l'application de votre choix."
       }
     ],
     "seeTitle": "Que verrez-vous pendant la visite ?",
@@ -2218,11 +2267,26 @@
       "languageLabel": "Langue de la visite",
       "nameLabel": "Nom complet",
       "namePlaceholder": "Votre nom",
-      "phoneLabel": "Téléphone / WhatsApp",
+      "phoneLabel": "Numéro de téléphone",
+      "emailLabel": "E-mail",
+      "emailPlaceholder": "vous@exemple.com",
+      "contactLabel": "Comment préférez-vous être contacté si nécessaire ?",
+      "contacts": {"email": "E-mail", "phone": "Appel téléphonique", "whatsapp": "WhatsApp", "telegram": "Telegram", "viber": "Viber"},
+      "booking": "Réservation…",
+      "orWhatsapp": "Vous préférez WhatsApp ? Réservez plutôt via WhatsApp",
+      "taken": "Réservé",
+      "referenceLabel": "Numéro de réservation",
+      "slotTakenNotice": "Désolé, ce créneau vient d'être réservé par quelqu'un d'autre. Veuillez choisir un autre horaire.",
+      "honeypot": "Laissez ce champ vide",
       "errors": {
         "name": "Veuillez indiquer votre nom.",
         "phone": "Veuillez indiquer votre numéro de téléphone.",
-        "phoneInvalid": "Veuillez vérifier le numéro de téléphone."
+        "phoneInvalid": "Veuillez vérifier le numéro de téléphone.",
+        "email": "Veuillez indiquer votre e-mail.",
+        "emailInvalid": "Veuillez vérifier l'adresse e-mail.",
+        "limit": "Vous avez déjà 3 visites à venir. Contactez-nous pour les modifier.",
+        "failed": "Nous n'avons pas pu finaliser votre réservation pour le moment. Réessayez ou réservez via WhatsApp.",
+        "invalid": "Veuillez vérifier vos informations et réessayer."
       },
       "summaryTitle": "Votre visite",
       "summary": {
@@ -2233,11 +2297,11 @@
       },
       "istanbulTime": "heure d'Istanbul",
       "yourTime": "votre heure",
-      "confirm": "Confirmer sur WhatsApp",
-      "confirmNote": "Une conversation WhatsApp avec notre équipe s'ouvrira avec les détails de votre réservation : il vous suffira d'appuyer sur « Envoyer ».",
-      "doneTitle": "Votre demande de visite est prête, {name}",
-      "doneText": "Dès l'envoi du message WhatsApp, votre conseiller confirmera votre visite pendant nos heures d'ouverture (9 h – 19 h, heure d'Istanbul).",
-      "doneReopen": "WhatsApp ne s'est pas ouvert ? Renvoyez la demande",
+      "confirm": "Réserver ma visite",
+      "confirmNote": "Votre visite est réservée immédiatement, et un e-mail de confirmation vous est envoyé aussitôt.",
+      "doneTitle": "Votre visite est réservée, {name} !",
+      "doneText": "Nous avons envoyé une confirmation à {email}. Votre conseiller vous appellera via {app} à l'heure réservée.",
+      "doneReopen": "Une question ? Écrivez-nous sur WhatsApp",
       "calendarTitle": "Ajoutez-la à votre agenda",
       "calendarGoogle": "Google Agenda",
       "calendarIcs": "Apple et Outlook",
@@ -2250,9 +2314,10 @@
       ],
       "again": "Réserver une autre visite",
       "event": "Visite privée en vidéo — {projects}",
-      "eventDetails": "Votre conseiller HADARA vous appellera via {app}. L'horaire est en attente de confirmation par notre équipe sur WhatsApp."
+      "eventDetails": "Votre conseiller HADARA vous appellera via {app}. Réservation n° {ref}."
     },
     "wa": {
+      "aboutBooking": "Bonjour HADARA, au sujet de ma réservation de visite vidéo {ref}.",
       "intro": "Bonjour HADARA, je souhaite réserver une visite privée en vidéo.",
       "projects": "Projet",
       "focus": "Priorités",
@@ -2294,7 +2359,7 @@
       },
       {
         "q": "Et si je dois changer l'horaire ?",
-        "a": "Écrivez-nous sur WhatsApp à tout moment et nous fixerons un nouvel horaire qui vous convient."
+        "a": "Répondez à votre e-mail de confirmation ou écrivez-nous sur WhatsApp, et nous fixerons un nouvel horaire qui vous convient."
       },
       {
         "q": "Puis-je voir plusieurs projets lors de la même visite ?",
@@ -2357,7 +2422,7 @@
         ],
         "items": [
           "Formulaires de contact et de demande : votre nom, votre adresse e-mail, votre numéro de téléphone, les projets ou sujets qui vous intéressent, votre budget et vos préférences (pour les demandes de bien et de conseil) et votre message.",
-          "Réservations de visites privées en vidéo : les projets choisis, la date et l'heure souhaitées, l'application et la langue de l'appel, votre nom et votre numéro de téléphone, ainsi que votre fuseau horaire afin de vous appeler au bon moment.",
+          "Réservations de visites privées en vidéo : votre nom, votre adresse e-mail, votre numéro de téléphone et le moyen de contact que vous préférez, les projets et l'horaire choisis, l'application et la langue de l'appel, ainsi que votre fuseau horaire (voir la section 5).",
           "Comptes du portail de revente : votre nom, votre adresse e-mail, votre numéro de téléphone et votre pays, les annonces et photos que vous publiez, et les messages que les acheteurs envoient au sujet de vos annonces.",
           "Source publicitaire : si vous arrivez par l'une de nos publicités, les informations de campagne du lien (comme utm_source ou gclid) sont conservées pendant votre visite et ajoutées à votre message, afin que nous sachions quelle publicité vous a amené.",
           "Données techniques : votre adresse IP, votre navigateur et votre type d'appareil, et les pages visitées, enregistrés par notre hébergeur et, lorsqu'ils sont activés, par les outils de mesure décrits ci-dessous."
@@ -2378,15 +2443,31 @@
         "after": [
           "Le numéro de session est créé par votre navigateur et conservé dans son stockage de session (sessionStorage), uniquement pour l'onglet en cours. Ce n'est pas un cookie, il n'est lié ni à votre nom ni à votre appareil, et votre navigateur le supprime à la fermeture de l'onglet.",
           "Nous ne conservons ni votre adresse IP ni aucune donnée personnelle dans ces statistiques, et nous ne les utilisons pas pour identifier qui que ce soit. Les pages des comptes vendeurs et d'administration ne sont pas enregistrées.",
-          "Les enregistrements de visite sont supprimés automatiquement après 30 jours. Lorsqu'une nouvelle visite commence, notre équipe reçoit une notification interne (via Telegram) contenant les mêmes informations anonymes : localisation approximative, page, langue et provenance."
+          "Les enregistrements de visite sont supprimés automatiquement après 30 jours. Lorsqu'une nouvelle visite commence, notre équipe reçoit une notification interne (via Telegram) contenant les mêmes informations anonymes : localisation approximative, page, langue et provenance. Cette notification est mise à jour pendant la visite (page actuelle, nombre de pages et durée de la visite), et une notification distincte est envoyée lorsque le visiteur ouvre la page de contact ou un formulaire de demande."
         ]
       },
       {
         "title": "Comment vos messages nous parviennent",
         "paragraphs": [
-          "Nos formulaires de contact, de demande et de réservation n'envoient rien en arrière-plan. Lorsque vous appuyez sur envoyer, votre messagerie ou WhatsApp s'ouvre avec un message prêt, et les informations ne nous parviennent que lorsque vous envoyez vous-même ce message. Les messages envoyés via WhatsApp sont également soumis à la politique de confidentialité de WhatsApp."
+          "Nos formulaires de contact et de demande n'envoient rien en arrière-plan. Lorsque vous appuyez sur envoyer, votre messagerie ou WhatsApp s'ouvre avec un message prêt, et les informations ne nous parviennent que lorsque vous envoyez vous-même ce message. Les réservations de visites vidéo privées font exception : elles sont enregistrées directement dans notre système (voir la section 5), et la réservation via WhatsApp reste possible. Les messages envoyés via WhatsApp sont également soumis à la politique de confidentialité de WhatsApp."
         ],
         "items": []
+      },
+      {
+        "title": "Réserver une visite vidéo privée",
+        "paragraphs": [
+          "Lorsque vous réservez une visite vidéo privée, votre rendez-vous est enregistré directement dans notre système, et nous conservons uniquement :"
+        ],
+        "items": [
+          "votre nom, votre adresse e-mail, votre numéro de téléphone et le moyen de contact que vous préférez ;",
+          "l'horaire choisi, les projets et ce que vous souhaitez voir, l'application et la langue de la visite ;",
+          "la langue du site, votre fuseau horaire (pour afficher le rendez-vous à votre heure locale) et la source publicitaire, le cas échéant ;",
+          "la référence, la date et le statut de la réservation."
+        ],
+        "after": [
+          "Nous utilisons ces informations uniquement pour organiser la visite et vous contacter à son sujet : vous recevez un e-mail de confirmation, et notre équipe reçoit une notification interne (par e-mail et Telegram) avec les détails de la réservation. Seule notre équipe de direction peut consulter les réservations.",
+          "Chaque réservation est supprimée automatiquement un an après la date de la visite, et vous pouvez nous demander de la supprimer plus tôt en écrivant à info@byhadara.com"
+        ]
       },
       {
         "title": "Pourquoi nous utilisons vos informations",
@@ -2431,8 +2512,8 @@
           "Nous ne partageons des données personnelles que lorsque c'est nécessaire, et uniquement les données nécessaires :"
         ],
         "items": [
-          "Les prestataires qui font fonctionner le Site pour nous : Vercel (hébergement, et localisation approximative des visites), Supabase (base de données et connexion du portail de revente, et statistiques de visite anonymes), Google (polices, mesure d'audience, publicité et vidéos YouTube) et Meta (WhatsApp et mesure publicitaire). La carte de notre page de contact est fournie par OpenStreetMap.",
-          "Telegram, qui transmet à notre équipe des notifications internes des nouvelles visites, avec des informations anonymes uniquement.",
+          "Les prestataires qui font fonctionner le Site pour nous : Vercel (hébergement, et localisation approximative des visites), Supabase (base de données et connexion du portail de revente, réservations de visites, et statistiques de visite anonymes), Google (polices, mesure d'audience, publicité et vidéos YouTube) et Meta (WhatsApp et mesure publicitaire). La carte de notre page de contact est fournie par OpenStreetMap.",
+          "Telegram et l'e-mail, qui transmettent à notre équipe des notifications internes : nouvelles visites (avec des informations anonymes uniquement) et réservations de visites. Les e-mails de confirmation de réservation sont envoyés via le service d'e-mail Resend.",
           "Les promoteurs des projets, lorsque c'est nécessaire pour traiter votre demande, par exemple pour réserver un logement ou finaliser un achat.",
           "Dans le portail de revente : les messages des acheteurs sont transmis au propriétaire de l'annonce, et les annonces approuvées sont publiées sur le Site.",
           "Les autorités publiques, lorsque la loi l'exige."
@@ -2448,7 +2529,7 @@
       {
         "title": "Durée de conservation",
         "paragraphs": [
-          "Nous conservons vos données aussi longtemps que nécessaire pour répondre à votre demande et vous servir, puis pendant la durée imposée par la loi (par exemple pour les registres fiscaux et commerciaux). Vous pouvez nous demander de supprimer vos données à tout moment, sauf si la loi nous oblige à les conserver. Les enregistrements de visite anonymes sont supprimés automatiquement après 30 jours."
+          "Nous conservons vos données aussi longtemps que nécessaire pour répondre à votre demande et vous servir, puis pendant la durée imposée par la loi (par exemple pour les registres fiscaux et commerciaux). Vous pouvez nous demander de supprimer vos données à tout moment, sauf si la loi nous oblige à les conserver. Les enregistrements de visite anonymes sont supprimés automatiquement après 30 jours. Les réservations de visites sont supprimées automatiquement un an après la date de la visite."
         ],
         "items": []
       },

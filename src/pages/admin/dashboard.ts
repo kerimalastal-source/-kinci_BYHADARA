@@ -34,6 +34,10 @@ export function renderAdminDashboard(main: HTMLElement): void {
     </section>
     <section class="section">
       <div class="container">
+        <nav class="admin-subnav" aria-label="${t("admin.heroEyebrow")}">
+          <a href="${link("/admin")}" aria-current="page">${t("adminBookings.nav.listings")}</a>
+          <a href="${link("/admin/bookings")}">${t("adminBookings.nav.bookings")}</a>
+        </nav>
         <h2 class="section-title">${t("admin.queueTitle")}</h2>
         <div id="queue-list" class="listing-list"></div>
         <p class="project-grid__empty" id="queue-empty" hidden>${t("admin.noQueueItems")}</p>

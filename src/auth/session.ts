@@ -136,8 +136,20 @@ export async function signOut(): Promise<void> {
   navigate("/");
 }
 
+/**
+ * While the saved session is still loading (a protected page opened straight from a link
+ * or refreshed), show nothing yet: the router re-renders once it has loaded, and only then
+ * do the guards below decide whether to redirect.
+ */
+function waitingForAuth(main: HTMLElement): boolean {
+  if (isAuthReady()) return false;
+  main.innerHTML = "";
+  return true;
+}
+
 /** Call at the top of a protected page's render function. Returns false and redirects if the guard fails. */
 export function requireAuth(main: HTMLElement): boolean {
+  if (waitingForAuth(main)) return false;
   if (isAuthenticated()) return true;
   main.innerHTML = "";
   navigate("/login");
@@ -145,6 +157,7 @@ export function requireAuth(main: HTMLElement): boolean {
 }
 
 export function requireAdmin(main: HTMLElement): boolean {
+  if (waitingForAuth(main)) return false;
   if (isAuthenticated() && isAdmin()) return true;
   main.innerHTML = "";
   navigate(isAuthenticated() ? "/account" : "/login");
