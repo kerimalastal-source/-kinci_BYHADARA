@@ -27,7 +27,8 @@ export const SKIPPED_ROUTES: ReadonlySet<Route["name"]> = new Set([
   "admin-stats",
   "admin-customers",
   "admin-pipeline",
-  "admin-ads"
+  "admin-ads",
+  "admin-chats"
 ]);
 
 /** Pages whose title names a specific project, resale listing or article (shown in the alert). */

@@ -69,6 +69,7 @@ const PAGE_KEYS: Partial<Record<Route["name"], string>> = {
   "admin-customers": "admin",
   "admin-pipeline": "admin",
   "admin-ads": "admin",
+  "admin-chats": "admin",
   "not-found": "notFound"
 };
 
@@ -87,6 +88,7 @@ const NOINDEX: Route["name"][] = [
   "admin-customers",
   "admin-pipeline",
   "admin-ads",
+  "admin-chats",
   "not-found"
 ];
 

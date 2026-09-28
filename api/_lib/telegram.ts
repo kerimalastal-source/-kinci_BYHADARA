@@ -52,3 +52,36 @@ export async function sendTelegram(html: string, replyTo?: number | null): Promi
 export async function editTelegram(messageId: number, html: string): Promise<boolean> {
   return (await callTelegram("editMessageText", { message_id: messageId, text: html })) !== null;
 }
+
+/** The team's chat (TELEGRAM_CHAT_ID), to recognise updates coming from it. */
+export function teamChatId(): string | null {
+  return process.env.TELEGRAM_CHAT_ID || null;
+}
+
+/** A Bot API call that isn't a message to the team's chat (webhook setup); its result or null. */
+export async function botApi(method: string, body: Record<string, unknown>): Promise<unknown> {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  if (!token) return null;
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(5000)
+    });
+    const data = (await res.json().catch(() => null)) as { ok?: boolean; result?: unknown; description?: string } | null;
+    if (!res.ok || !data?.ok) {
+      console.error(`telegram: ${method} failed (${res.status}): ${String(data?.description ?? "").slice(0, 200)}`);
+      return null;
+    }
+    return data.result ?? true;
+  } catch (error) {
+    console.error(`telegram: ${method} error: ${error instanceof Error ? error.name : "unknown"}`);
+    return null;
+  }
+}
+
+/** Puts a reaction (e.g. 👍 "delivered") on a message in the team's chat. */
+export async function reactTelegram(messageId: number, emoji: string): Promise<boolean> {
+  return (await callTelegram("setMessageReaction", { message_id: messageId, reaction: [{ type: "emoji", emoji }] })) !== null;
+}

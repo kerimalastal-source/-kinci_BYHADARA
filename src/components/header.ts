@@ -178,7 +178,7 @@ export function renderHeader(el: HTMLElement, route: Route): void {
             </button>
             <ul class="account-switch__menu" id="account-menu" hidden>
               <li><a href="${link("/account")}" class="${route.name === "account" || route.name === "account-new-listing" || route.name === "account-edit-listing" ? "is-active" : ""}">${t("nav.account")}</a></li>
-              ${isAdmin() ? `<li><a href="${link("/admin")}" class="${route.name === "admin" || route.name === "admin-stats" || route.name === "admin-customers" || route.name === "admin-pipeline" || route.name === "admin-ads" || route.name === "admin-listings" || route.name === "admin-listing" ? "is-active" : ""}">${t("nav.admin")}</a></li>
+              ${isAdmin() ? `<li><a href="${link("/admin")}" class="${route.name === "admin" || route.name === "admin-stats" || route.name === "admin-customers" || route.name === "admin-pipeline" || route.name === "admin-ads" || route.name === "admin-chats" || route.name === "admin-listings" || route.name === "admin-listing" ? "is-active" : ""}">${t("nav.admin")}</a></li>
               <li><a href="${link("/admin/inquiries")}" class="${route.name === "admin-inquiries" ? "is-active" : ""}">${t("nav.inquiries")}</a></li>
               <li><a href="${link("/admin/bookings")}" class="${route.name === "admin-bookings" ? "is-active" : ""}">${t("nav.bookings")}</a></li>` : ""}
               <li><button type="button" id="logout-btn">${t("nav.logout")}</button></li>

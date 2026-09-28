@@ -2484,7 +2484,7 @@
       {
         "title": "How your messages reach us",
         "paragraphs": [
-          "Messages and requests you send through the Website's forms (contact, custom property request and engineering design consultation) are saved directly in our system. Our team receives an internal notification by Telegram and email, and you receive a confirmation email with your request number. Only our team handles them, recording their follow-up status and internal notes in order to serve you. If our system cannot be reached for a technical reason, your email app opens with a prepared message instead, and the information then reaches us only when you send that message yourself. Private video tour bookings are also recorded in our system (see section 5). Messages sent through WhatsApp are subject to WhatsApp's own privacy policy."
+          "Messages and requests you send through the Website's forms (contact, custom property request and engineering design consultation) are saved directly in our system. Our team receives an internal notification by Telegram and email, and you receive a confirmation email with your request number. Only our team handles them, recording their follow-up status and internal notes in order to serve you. If our system cannot be reached for a technical reason, your email app opens with a prepared message instead, and the information then reaches us only when you send that message yourself. Private video tour bookings are also recorded in our system (see section 5). Messages sent through WhatsApp are subject to WhatsApp's own privacy policy.", "When you use \"Chat with our team\" in the assistant window, your messages and our team's replies are saved in our system, together with the name and contact details you choose to add, the page you wrote from, the Website language, your approximate country and city (never your IP address) and the ad source, if any. Your messages reach our team on Telegram so they can reply, and a secret code for the conversation is kept only in your browser (local storage) so you can see the replies when you come back."
         ],
         "items": []
       },
@@ -2565,7 +2565,7 @@
       {
         "title": "How long we keep your data",
         "paragraphs": [
-          "We keep your data for as long as it is needed to answer your enquiry and serve you, and afterwards for as long as the law requires (for example, for tax and commercial records). You can ask us to delete your data at any time, unless we are required to keep it by law. Anonymous visit records are deleted automatically after 30 days. Tour bookings are deleted automatically one year after the tour date. Messages and requests from the Website's forms are deleted automatically two years after they were last updated."
+          "We keep your data for as long as it is needed to answer your enquiry and serve you, and afterwards for as long as the law requires (for example, for tax and commercial records). You can ask us to delete your data at any time, unless we are required to keep it by law. Anonymous visit records are deleted automatically after 30 days. Tour bookings are deleted automatically one year after the tour date. Messages and requests from the Website's forms are deleted automatically two years after they were last updated. Live chat conversations are deleted automatically 90 days after their last message."
         ],
         "items": []
       },
@@ -2674,6 +2674,7 @@
     }
   },
   "adminNav": {
+    "chats": "Live chats",
     "pipeline": "Sales",
     "ads": "Ads",
     "home": "Home",
@@ -2931,5 +2932,52 @@
       "errorDates": "Check the dates: the end can't be before the start.",
       "errorAmount": "Enter the amount as a number."
     }
+  },
+  "live": {
+    "start": "Chat with our team here",
+    "askHere": "Ask our team here",
+    "title": "HADARA team",
+    "status": "Live chat · we reply here",
+    "back": "Assistant",
+    "introTitle": "You're now chatting with our team",
+    "intro": "Write your question and one of our advisors will reply right here, usually within minutes (9:00–18:00 Istanbul time, every day).",
+    "offHours": "Our office is closed right now — leave your message and we'll reply here first thing in the morning.",
+    "placeholder": "Write to our team…",
+    "team": "HADARA team",
+    "sending": "Sending…",
+    "retry": "Not sent — tap to retry",
+    "delivered": "✓ Your message has reached our team. The reply will appear here.",
+    "errorSend": "Your message couldn't be sent. Please try again, or",
+    "errorLimit": "You've sent many messages in a short time. Please wait a moment, or",
+    "errorUnavailable": "Live chat isn't available right now. Please",
+    "whatsapp": "message us on WhatsApp",
+    "detailsText": "Leave your name and phone or email so we can reach you if you close this page (optional):",
+    "namePlaceholder": "Your name",
+    "contactPlaceholder": "Phone or email",
+    "detailsSave": "Save",
+    "detailsSkip": "Not now",
+    "detailsNote": "My details — name: {name}, phone/email: {contact}"
+  },
+  "adminChats": {
+    "heroTitle": "Live chats",
+    "heroSubtitle": "Visitors' conversations with the team from the site's chat. Reply on Telegram (reply to the visitor's message) or here.",
+    "visitor": "Visitor",
+    "you": "You",
+    "team": "Team",
+    "waiting": "Waiting for a reply",
+    "pick": "Choose a conversation to read and answer it.",
+    "replyPlaceholder": "Write your reply… (in the visitor's language if possible)",
+    "send": "Send",
+    "replyHint": "The reply appears in the visitor's chat within seconds while it's open, and when they come back to the site.",
+    "empty": "No conversations yet.",
+    "unavailable": "Available once database update 0011 has been run.",
+    "telegramOn": "Replies from Telegram are on: reply to a visitor's message in Telegram and it reaches them.",
+    "telegramOff": "Replies from Telegram are off. Switch them on once so your Telegram replies reach visitors:",
+    "telegramActivate": "Turn on Telegram replies",
+    "telegramFailed": "Couldn't turn them on. Try again in a minute.",
+    "telegramLastError": "Last Telegram error",
+    "telegramUnknown": "Couldn't check Telegram replies right now.",
+    "telegramNoBot": "The Telegram bot isn't set up (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID in Vercel).",
+    "telegramNoSecret": "CRON_SECRET isn't set in Vercel, so Telegram replies can't be switched on."
   }
 }

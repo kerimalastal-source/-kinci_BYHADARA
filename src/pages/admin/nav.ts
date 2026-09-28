@@ -1,11 +1,12 @@
 import { t, link } from "../../i18n";
 
 /** The admin pages, in the order of the admin sub-navigation. */
-export type AdminSection = "home" | "inquiries" | "bookings" | "customers" | "pipeline" | "stats" | "ads" | "listings";
+export type AdminSection = "home" | "inquiries" | "chats" | "bookings" | "customers" | "pipeline" | "stats" | "ads" | "listings";
 
 const SECTIONS: [AdminSection, string][] = [
   ["home", "/admin"],
   ["inquiries", "/admin/inquiries"],
+  ["chats", "/admin/chats"],
   ["bookings", "/admin/bookings"],
   ["customers", "/admin/customers"],
   ["pipeline", "/admin/pipeline"],

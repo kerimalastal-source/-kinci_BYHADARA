@@ -2484,7 +2484,7 @@
       {
         "title": "Comment vos messages nous parviennent",
         "paragraphs": [
-          "Les messages et demandes que vous envoyez via les formulaires du Site (contact, recherche de bien sur mesure et consultation en conception) sont enregistrés directement dans notre système. Notre équipe en reçoit une notification interne par Telegram et par e-mail, et vous recevez un e-mail de confirmation avec votre numéro de demande. Seule notre équipe les traite, en y notant leur état de suivi et des remarques internes afin de vous servir. Si notre système est inaccessible pour une raison technique, votre messagerie s'ouvre à la place avec un message prêt, et les informations ne nous parviennent alors que lorsque vous envoyez vous-même ce message. Les réservations de visites vidéo privées sont elles aussi enregistrées dans notre système (voir la section 5). Les messages envoyés via WhatsApp sont soumis à la politique de confidentialité de WhatsApp."
+          "Les messages et demandes que vous envoyez via les formulaires du Site (contact, recherche de bien sur mesure et consultation en conception) sont enregistrés directement dans notre système. Notre équipe en reçoit une notification interne par Telegram et par e-mail, et vous recevez un e-mail de confirmation avec votre numéro de demande. Seule notre équipe les traite, en y notant leur état de suivi et des remarques internes afin de vous servir. Si notre système est inaccessible pour une raison technique, votre messagerie s'ouvre à la place avec un message prêt, et les informations ne nous parviennent alors que lorsque vous envoyez vous-même ce message. Les réservations de visites vidéo privées sont elles aussi enregistrées dans notre système (voir la section 5). Les messages envoyés via WhatsApp sont soumis à la politique de confidentialité de WhatsApp.", "Lorsque vous utilisez « Discuter avec l'équipe » dans la fenêtre de l'assistant, vos messages et les réponses de notre équipe sont enregistrés dans notre système, avec le nom et le moyen de contact que vous choisissez d'ajouter, la page depuis laquelle vous avez écrit, la langue du site, votre pays et votre ville approximatifs (jamais votre adresse IP) et la source publicitaire, le cas échéant. Vos messages parviennent à notre équipe sur Telegram afin qu'elle puisse vous répondre, et un code secret de la conversation est conservé uniquement dans votre navigateur (stockage local) pour que vous retrouviez les réponses à votre retour."
         ],
         "items": []
       },
@@ -2565,7 +2565,7 @@
       {
         "title": "Durée de conservation",
         "paragraphs": [
-          "Nous conservons vos données aussi longtemps que nécessaire pour répondre à votre demande et vous servir, puis pendant la durée imposée par la loi (par exemple pour les registres fiscaux et commerciaux). Vous pouvez nous demander de supprimer vos données à tout moment, sauf si la loi nous oblige à les conserver. Les enregistrements de visite anonymes sont supprimés automatiquement après 30 jours. Les réservations de visites sont supprimées automatiquement un an après la date de la visite. Les messages et demandes envoyés via les formulaires du Site sont supprimés automatiquement deux ans après leur dernière mise à jour."
+          "Nous conservons vos données aussi longtemps que nécessaire pour répondre à votre demande et vous servir, puis pendant la durée imposée par la loi (par exemple pour les registres fiscaux et commerciaux). Vous pouvez nous demander de supprimer vos données à tout moment, sauf si la loi nous oblige à les conserver. Les enregistrements de visite anonymes sont supprimés automatiquement après 30 jours. Les réservations de visites sont supprimées automatiquement un an après la date de la visite. Les messages et demandes envoyés via les formulaires du Site sont supprimés automatiquement deux ans après leur dernière mise à jour. Les conversations du chat en direct sont supprimées automatiquement 90 jours après leur dernier message."
         ],
         "items": []
       },
@@ -2674,6 +2674,7 @@
     }
   },
   "adminNav": {
+    "chats": "Chats",
     "pipeline": "Ventes",
     "ads": "Publicités",
     "home": "Accueil",
@@ -2931,5 +2932,52 @@
       "errorDates": "Vérifiez les dates : la fin ne peut pas précéder le début.",
       "errorAmount": "Saisissez le montant en chiffres."
     }
+  },
+  "live": {
+    "start": "Discuter ici avec notre équipe",
+    "askHere": "Demander ici à notre équipe",
+    "title": "Équipe HADARA",
+    "status": "Chat en direct · réponse ici",
+    "back": "Assistant",
+    "introTitle": "Vous discutez maintenant avec notre équipe",
+    "intro": "Écrivez votre question : l’un de nos conseillers vous répondra ici même, généralement en quelques minutes (de 9 h à 18 h, heure d’Istanbul, tous les jours).",
+    "offHours": "Notre bureau est fermé pour le moment — laissez votre message, nous vous répondrons ici dès demain matin.",
+    "placeholder": "Écrivez à notre équipe…",
+    "team": "Équipe HADARA",
+    "sending": "Envoi…",
+    "retry": "Non envoyé — touchez pour réessayer",
+    "delivered": "✓ Votre message est bien parvenu à notre équipe. La réponse s’affichera ici.",
+    "errorSend": "Votre message n’a pas pu être envoyé. Réessayez, ou",
+    "errorLimit": "Vous avez envoyé beaucoup de messages en peu de temps. Patientez un instant, ou",
+    "errorUnavailable": "Le chat en direct n’est pas disponible pour le moment. Veuillez",
+    "whatsapp": "nous écrire sur WhatsApp",
+    "detailsText": "Laissez votre nom et votre téléphone ou e-mail pour que nous puissions vous joindre si vous fermez la page (facultatif) :",
+    "namePlaceholder": "Votre nom",
+    "contactPlaceholder": "Téléphone ou e-mail",
+    "detailsSave": "Enregistrer",
+    "detailsSkip": "Plus tard",
+    "detailsNote": "Mes coordonnées — nom : {name}, téléphone/e-mail : {contact}"
+  },
+  "adminChats": {
+    "heroTitle": "Chats en direct",
+    "heroSubtitle": "Les conversations des visiteurs avec l’équipe depuis le chat du site. Répondez sur Telegram (en répondant au message du visiteur) ou ici.",
+    "visitor": "Visiteur",
+    "you": "Vous",
+    "team": "Équipe",
+    "waiting": "En attente de réponse",
+    "pick": "Choisissez une conversation pour la lire et y répondre.",
+    "replyPlaceholder": "Écrivez votre réponse… (dans la langue du visiteur si possible)",
+    "send": "Envoyer",
+    "replyHint": "La réponse s’affiche dans le chat du visiteur en quelques secondes s’il est ouvert, et à son retour sur le site.",
+    "empty": "Aucune conversation pour l’instant.",
+    "unavailable": "Disponible une fois la mise à jour 0011 de la base de données exécutée.",
+    "telegramOn": "Les réponses depuis Telegram sont activées : répondez au message du visiteur dans Telegram et il la reçoit.",
+    "telegramOff": "Les réponses depuis Telegram sont désactivées. Activez-les une fois pour que vos réponses Telegram parviennent aux visiteurs :",
+    "telegramActivate": "Activer les réponses Telegram",
+    "telegramFailed": "Activation impossible. Réessayez dans une minute.",
+    "telegramLastError": "Dernière erreur Telegram",
+    "telegramUnknown": "Impossible de vérifier les réponses Telegram pour le moment.",
+    "telegramNoBot": "Le bot Telegram n’est pas configuré (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID dans Vercel).",
+    "telegramNoSecret": "CRON_SECRET n’est pas défini dans Vercel : les réponses Telegram ne peuvent pas être activées."
   }
 }

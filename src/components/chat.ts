@@ -4,12 +4,26 @@ import { getProjectBySlug, getSortedProjects, type Project, type Residence } fro
 import { projectStatusLabel } from "./projectCard";
 import { WHATSAPP_NUMBER, WHATSAPP_ICON } from "./floatingButtons";
 import { HEART_ICON, isFavorite } from "./favorites";
-import { escapeHtml } from "../utils/html";
+import { escapeHtml, isolateNumbers } from "../utils/html";
 import { toWesternDigits } from "../utils/numbers";
 import { placeKey } from "../utils/place";
 import { consultancyPath, parseRoute, splitLocale } from "../seo/routes";
 import { videoTourHref, VIDEO_TOUR_ICON } from "./videoTourInvite";
 import { photoAttrs } from "../utils/responsiveImage";
+import {
+  hasLiveChat,
+  liveDetails,
+  liveMessages,
+  liveUnread,
+  markLiveSeen,
+  onLiveChange,
+  sendLive,
+  setLiveDetails,
+  skipLiveDetails,
+  startLivePolling,
+  type LiveMessage,
+  type SendResult
+} from "./liveChat";
 
 /**
  * Guided chat assistant: answers from the site's own data (projects, citizenship, contact)
@@ -33,6 +47,8 @@ type Entry =
   | { from: "bot"; kind: "project"; slug: string };
 
 const STORE_KEY = "hadara-chat";
+/** "live" while the visitor is talking with the team (liveChat.ts), else the assistant. */
+const MODE_KEY = "hadara-chat-mode";
 const SEEN_KEY = "hadara-chat-seen";
 const MOBILE = "(max-width: 640px)";
 
@@ -42,6 +58,26 @@ const RESTART_ICON = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none
 const SEND_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg>`;
 
 let entries: Entry[] = load();
+let mode: "bot" | "live" = loadMode();
+/** The last send's problem, shown under the conversation until the next send. */
+let liveNotice: SendResult | null = null;
+
+function loadMode(): "bot" | "live" {
+  try {
+    return sessionStorage.getItem(MODE_KEY) === "live" ? "live" : "bot";
+  } catch {
+    return "bot";
+  }
+}
+
+function setMode(next: "bot" | "live"): void {
+  mode = next;
+  try {
+    sessionStorage.setItem(MODE_KEY, next);
+  } catch {
+    // storage unavailable
+  }
+}
 let panel: HTMLElement | null = null;
 let open = false;
 let typing = false;
@@ -528,6 +564,7 @@ function renderContact(): string {
   return `
     <p>${t("chat.contactText")}</p>
     <div class="chat-actions">
+      <button type="button" class="chat-action chat-action--live" data-chat-live>${CHAT_ICON}${t("live.start")}</button>
       <a class="chat-action chat-action--wa" href="${whatsappHref(t("chat.waHello"))}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("floatingActions.whatsapp")}</a>
       <a class="chat-action" href="tel:+${WHATSAPP_NUMBER}"><span dir="ltr">+90 531 930 92 14</span></a>
       <a class="chat-action" href="${link("/contact")}">${t("chat.actions.form")}</a>
@@ -538,6 +575,7 @@ function renderFallback(query: string): string {
   return `
     <p>${t("chat.fallback")}</p>
     <div class="chat-actions">
+      <button type="button" class="chat-action chat-action--live" data-chat-live-send="${escapeHtml(query)}">${CHAT_ICON}${t("live.askHere")}</button>
       <a class="chat-action chat-action--wa" href="${whatsappHref(t("chat.waQuestion", { q: query }))}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("chat.actions.askTeam")}</a>
     </div>`;
 }
@@ -605,9 +643,69 @@ function renderEntry(entry: Entry): string {
   return `<div class="chat-msg chat-msg--bot"><div class="chat-bubble">${renderBot(entry)}</div></div>`;
 }
 
+/* ---------- Live chat with the team ---------- */
+
+const ISTANBUL_OFFSET_MS = 3 * 3_600_000;
+/** The team answers between 9:00 and 18:00 Istanbul time, every day. */
+const officeOpen = () => {
+  const hour = new Date(Date.now() + ISTANBUL_OFFSET_MS).getUTCHours();
+  return hour >= 9 && hour < 18;
+};
+const clock = (iso: string) => new Intl.DateTimeFormat(intlTag(), { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(Date.parse(iso));
+
+/** Message text, with phone numbers kept left-to-right inside Arabic / Persian sentences. */
+const liveText = (body: string) =>
+  `<span class="chat-live__text" dir="auto">${isolateNumbers(escapeHtml(body))}</span>`;
+
+function renderLiveMessage(m: LiveMessage): string {
+  if (m.sender === "team") {
+    return `<div class="chat-msg chat-msg--bot"><div class="chat-bubble chat-bubble--team">
+      <span class="chat-live__who">${t("live.team")} · <span dir="ltr">${clock(m.at)}</span></span>
+      ${liveText(m.body)}</div></div>`;
+  }
+  const state = m.failed
+    ? `<button type="button" class="chat-live__retry" data-live-retry="${m.id}">${t("live.retry")}</button>`
+    : m.id < 0
+      ? `<span class="chat-live__state">${t("live.sending")}</span>`
+      : `<span class="chat-live__state" dir="ltr">${clock(m.at)} ✓</span>`;
+  return `<div class="chat-msg chat-msg--user${m.id < 0 && !m.failed ? " is-pending" : ""}"><div class="chat-bubble">${liveText(m.body)}${state}</div></div>`;
+}
+
+function renderLiveLog(): string {
+  const messages = liveMessages();
+  const last = messages[messages.length - 1];
+  const waiting = last?.sender === "visitor" && last.id > 0;
+  const details = liveDetails();
+  const intro = `<div class="chat-live__intro"><p><strong>${t("live.introTitle")}</strong></p><p>${t("live.intro")}</p>${
+    officeOpen() ? "" : `<p class="chat-live__off">${t("live.offHours")}</p>`
+  }</div>`;
+  const notice = liveNotice
+    ? `<p class="chat-live__notice" role="alert">${t(liveNotice === "limit" ? "live.errorLimit" : liveNotice === "unavailable" ? "live.errorUnavailable" : "live.errorSend")}
+        <a href="${whatsappHref(t("chat.waHello"))}" target="_blank" rel="noopener">${t("live.whatsapp")}</a></p>`
+    : "";
+  const delivered = waiting ? `<p class="chat-live__delivered">${t("live.delivered")}</p>` : "";
+  const ask =
+    hasLiveChat() && !details.done
+      ? `<form class="chat-live__details" data-live-details novalidate>
+          <p>${t("live.detailsText")}</p>
+          <input type="text" name="name" autocomplete="name" maxlength="120" placeholder="${t("live.namePlaceholder")}" aria-label="${t("live.namePlaceholder")}" />
+          <input type="text" name="contact" autocomplete="tel" maxlength="160" dir="auto" placeholder="${t("live.contactPlaceholder")}" aria-label="${t("live.contactPlaceholder")}" />
+          <div class="chat-live__details-actions">
+            <button type="submit" class="chat-action chat-action--live">${t("live.detailsSave")}</button>
+            <button type="button" class="chat-live__skip" data-live-skip>${t("live.detailsSkip")}</button>
+          </div>
+        </form>`
+      : "";
+  return intro + messages.map(renderLiveMessage).join("") + delivered + notice + ask;
+}
+
 function renderLog(): void {
   if (!panel) return;
   const log = panel.querySelector<HTMLElement>(".chat__log")!;
+  if (mode === "live") {
+    log.innerHTML = renderLiveLog();
+    return;
+  }
   const last = entries[entries.length - 1];
   // The main menu follows every answer except project lists, which carry their own choices.
   let menu = "";
@@ -644,15 +742,19 @@ function renderPanelChrome(): void {
     <header class="chat__head">
       <span class="chat__avatar" aria-hidden="true"><img src="/favicon-32.png" alt="" width="28" height="28" /></span>
       <div class="chat__who">
-        <strong class="chat__title">${t("chat.title")}</strong>
-        <span class="chat__status"><span class="chat__dot" aria-hidden="true"></span>${t("chat.status")}</span>
+        <strong class="chat__title">${t(mode === "live" ? "live.title" : "chat.title")}</strong>
+        <span class="chat__status"><span class="chat__dot" aria-hidden="true"></span>${t(mode === "live" ? "live.status" : "chat.status")}</span>
       </div>
-      <button type="button" class="chat__icon-btn" data-chat-restart aria-label="${t("chat.restart")}" title="${t("chat.restart")}">${RESTART_ICON}</button>
+      ${
+        mode === "live"
+          ? `<button type="button" class="chat__back" data-chat-bot>${t("live.back")}</button>`
+          : `<button type="button" class="chat__icon-btn" data-chat-restart aria-label="${t("chat.restart")}" title="${t("chat.restart")}">${RESTART_ICON}</button>`
+      }
       <button type="button" class="chat__icon-btn" data-chat-close aria-label="${t("chat.close")}" title="${t("chat.close")}">${CLOSE_ICON}</button>
     </header>
     <div class="chat__log" aria-live="polite"></div>
     <form class="chat__form" novalidate>
-      <input class="chat__input" type="text" name="q" autocomplete="off" enterkeyhint="send" maxlength="300" placeholder="${t("chat.placeholder")}" aria-label="${t("chat.placeholder")}" />
+      <input class="chat__input" type="text" name="q" autocomplete="off" enterkeyhint="send" maxlength="${mode === "live" ? 2000 : 300}" placeholder="${t(mode === "live" ? "live.placeholder" : "chat.placeholder")}" aria-label="${t(mode === "live" ? "live.placeholder" : "chat.placeholder")}" />
       <button class="chat__send" type="submit" aria-label="${t("chat.send")}">${SEND_ICON}</button>
     </form>`;
   renderLog();
@@ -683,7 +785,7 @@ function push(user: Entry, answer: Entry): void {
 function syncBubble(): void {
   document.querySelectorAll<HTMLElement>("[data-chat-toggle]").forEach((btn) => {
     btn.setAttribute("aria-expanded", String(open));
-    btn.classList.toggle("is-new", !wasSeen());
+    btn.classList.toggle("is-new", !wasSeen() || liveUnread() > 0);
   });
 }
 
@@ -709,6 +811,10 @@ function openChat(): void {
   } catch {
     // storage unavailable
   }
+  if (mode === "live") {
+    markLiveSeen();
+    startLivePolling(true);
+  }
   renderPanelChrome();
   panel.hidden = false;
   requestAnimationFrame(() => panel?.classList.add("is-open"));
@@ -724,6 +830,7 @@ function openChat(): void {
 function closeChat(returnFocus = true): void {
   if (!panel || !open) return;
   open = false;
+  startLivePolling(false);
   panel.classList.remove("is-open");
   document.body.classList.remove("chat-open");
   const el = panel;
@@ -734,12 +841,49 @@ function closeChat(returnFocus = true): void {
   if (returnFocus) document.querySelector<HTMLElement>("[data-chat-toggle]")?.focus();
 }
 
+/** Switches the panel to the conversation with the team (sending `question` if given). */
+function enterLive(question?: string): void {
+  setMode("live");
+  liveNotice = null;
+  markLiveSeen();
+  startLivePolling(true);
+  renderPanelChrome();
+  if (question) void liveSend(question);
+  if (!window.matchMedia(MOBILE).matches) panel?.querySelector<HTMLInputElement>(".chat__input")?.focus();
+}
+
+async function liveSend(text: string, retryOf?: number): Promise<void> {
+  liveNotice = null;
+  const result = await sendLive(text, retryOf);
+  liveNotice = result === "ok" ? null : result;
+  if (panel && mode === "live") {
+    renderLog();
+    const log = panel.querySelector<HTMLElement>(".chat__log");
+    if (log) log.scrollTop = log.scrollHeight;
+  }
+}
+
 function wirePanel(el: HTMLElement): void {
   el.addEventListener("submit", (e) => {
     e.preventDefault();
+    const details = (e.target as Element).closest<HTMLFormElement>("[data-live-details]");
+    if (details) {
+      const data = new FormData(details);
+      const name = String(data.get("name") ?? "").trim();
+      const contact = String(data.get("contact") ?? "").trim();
+      if (!name && !contact) return skipLiveDetails();
+      void setLiveDetails(name, contact, t("live.detailsNote", { name: name || "—", contact: contact ? contact.replace(/ /g, "\u00a0") : "—" }));
+      return;
+    }
     const input = el.querySelector<HTMLInputElement>(".chat__input")!;
     const text = input.value.trim();
-    if (!text || typing) return;
+    if (!text) return;
+    if (mode === "live") {
+      input.value = "";
+      void liveSend(text);
+      return;
+    }
+    if (typing) return;
     input.value = "";
     push({ from: "user", text }, reply(text));
   });
@@ -747,6 +891,23 @@ function wirePanel(el: HTMLElement): void {
   el.addEventListener("click", (e) => {
     const target = e.target as Element;
     if (target.closest("[data-chat-close]")) return closeChat();
+    if (target.closest("[data-chat-bot]")) {
+      setMode("bot");
+      renderPanelChrome();
+      return;
+    }
+    const liveSendBtn = target.closest<HTMLElement>("[data-chat-live-send]");
+    if (liveSendBtn || target.closest("[data-chat-live]")) {
+      enterLive(liveSendBtn?.dataset.chatLiveSend);
+      return;
+    }
+    const retry = target.closest<HTMLElement>("[data-live-retry]");
+    if (retry) {
+      const failed = liveMessages().find((m) => m.id === Number(retry.dataset.liveRetry));
+      if (failed) void liveSend(failed.body, failed.id);
+      return;
+    }
+    if (target.closest("[data-live-skip]")) return skipLiveDetails();
     if (target.closest("[data-chat-restart]")) {
       const here = pageProject();
       entries = [here ? { from: "bot", kind: "here", slug: here } : { from: "bot", kind: "greeting" }];
@@ -792,10 +953,22 @@ function wirePanel(el: HTMLElement): void {
 
 /** Chat bubble for the floating actions column. */
 export function chatBubble(): string {
-  return `<button type="button" class="floating-actions__btn floating-actions__btn--chat${wasSeen() ? "" : " is-new"}" data-chat-toggle aria-controls="chat-panel" aria-expanded="${open}" aria-label="${t("chat.bubble")}" title="${t("chat.bubble")}">${CHAT_ICON}</button>`;
+  return `<button type="button" class="floating-actions__btn floating-actions__btn--chat${wasSeen() && !liveUnread() ? "" : " is-new"}" data-chat-toggle aria-controls="chat-panel" aria-expanded="${open}" aria-label="${t("chat.bubble")}" title="${t("chat.bubble")}">${CHAT_ICON}</button>`;
 }
 
 export function initChat(): void {
+  // A reply from the team: repaint the open conversation, or light the bubble's dot.
+  onLiveChange(() => {
+    if (panel && open && mode === "live") {
+      markLiveSeen();
+      const log = panel.querySelector<HTMLElement>(".chat__log")!;
+      const atBottom = log.scrollHeight - log.scrollTop - log.clientHeight < 80;
+      renderLog();
+      if (atBottom) log.scrollTop = log.scrollHeight;
+    }
+    syncBubble();
+  });
+  if (hasLiveChat()) startLivePolling(false);
   document.addEventListener("click", (e) => {
     if (!(e.target as Element).closest("[data-chat-toggle]")) return;
     if (open) closeChat();
