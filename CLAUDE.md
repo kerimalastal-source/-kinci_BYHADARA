@@ -261,7 +261,7 @@
 - [x] بوابة إعادة بيع/وسطاء حقيقية بـ auth ومراجعة إدارية (راجع قسم 4.6) — تمت مراجعة أمنية: سياسات RLS بقاعدة البيانات قوية وسليمة، وتم اكتشاف وإصلاح ثغرة XSS بعرض النصوص (راجع `escapeHtml()` بقسم 4.6/7)
 - [x] Google Search Console: خاصية نطاق (Domain property) `hadararealestate.com` متحقَّق منها 2026-09-27 بسجل TXT `google-site-verification=...` بـ DNS تبع Vercel (**لا تمسحه**)، والمستخدم بيبعت `sitemap.xml`. الحساب فيه كمان خاصية `hadarahospitality.com` (موقع تاني، مش هاد).
 - [ ] اختبار على أجهزة موبايل حقيقية (تم اختباره بـ Playwright فقط لحد الآن)
-- [ ] حجز الجولات بالنظام (قسم 4.8): ✅ `0003_tour_bookings.sql` انشغّل (2026-09-28). باقي: حساب Resend + التحقق من دومين `hadararealestate.com` + `RESEND_API_KEY` بـ Vercel، وبعد النشر حجز تجريبي حقيقي (إيميل + تيليجرام + لوحة الحجوزات) وبعدين إلغاؤه.
+- [ ] حجز الجولات بالنظام (قسم 4.8): ✅ `0003_tour_bookings.sql` انشغّل (2026-09-28). ✅ Resend (حساب "byhadara"، الدومينين `hadararealestate.com` و`byhadara.com` Verified) + `RESEND_API_KEY` بـ Vercel (Production، Sensitive) — 2026-09-28، فالمرسل الافتراضي `bookings@hadararealestate.com` شغال بدون `BOOKING_FROM_EMAIL`. باقي: بعد النشر حجز تجريبي حقيقي (إيميل + تيليجرام + لوحة الحجوزات) وبعدين إلغاؤه.
 
 ## 10. ملاحظات عامة للتعديل المستقبلي
 
