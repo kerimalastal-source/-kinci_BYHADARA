@@ -7,6 +7,8 @@ import { fetchInquiries, type Inquiry } from "../../data/inquiries";
 import { adminHero, adminNav, queryParam } from "./nav";
 import { whatsappReplies } from "./replies";
 import { sourceLabel } from "./stats";
+import { fetchCrmLeads, leadFor, personKeys, phoneKey, saveCrmLead, type CrmLead } from "../../data/crm";
+import { crmFormHtml, followUpTag, readCrmForm, stageTag, syncCrmForm } from "./crmForm";
 
 /**
  * Customers (/admin/customers): every inquiry and video tour booking grouped by person —
@@ -15,10 +17,12 @@ import { sourceLabel } from "./stats";
  * ?q=<email|phone|name|reference> pre-fills the search (the cards' "Customer history" link).
  */
 
-type Entry = { type: "inquiry"; at: string; item: Inquiry } | { type: "tour"; at: string; item: TourBooking };
+export type Entry = { type: "inquiry"; at: string; item: Inquiry } | { type: "tour"; at: string; item: TourBooking };
 
-interface Customer {
+export interface Customer {
   id: string;
+  /** Email and phone keys, as the sales pipeline (crm_leads) matches them. */
+  keys: string[];
   name: string;
   emails: string[];
   phones: string[];
@@ -37,13 +41,11 @@ const when = (iso: string) =>
   new Intl.DateTimeFormat(tag(), { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: ISTANBUL }).format(
     Date.parse(iso)
   );
-/** Phone numbers written differently (+90 555…, 0555…) match on their last 9 digits. */
-const phoneKey = (phone: string) => phone.replace(/\D/g, "").slice(-9);
 const projectNames = (slugs: string[]) =>
   slugs.map((slug) => (getProjectBySlug(slug) ? getProjectContent(slug).name : slug)).join(sep());
 
 /** "facebook" from "utm_source=facebook · utm_campaign=villa" (as the statistics page names it). */
-function campaignSource(campaign: string): string {
+export function campaignSource(campaign: string): string {
   const utm = campaign.match(/utm_source=([^ ·&]+)/)?.[1];
   if (utm) return utm.toLowerCase();
   if (campaign.includes("gclid=")) return "google-ads";
@@ -52,7 +54,7 @@ function campaignSource(campaign: string): string {
 }
 
 /** Groups the records that share an email or a phone number (union–find). */
-function groupCustomers(inquiries: Inquiry[], bookings: TourBooking[]): Customer[] {
+export function groupCustomers(inquiries: Inquiry[], bookings: TourBooking[]): Customer[] {
   const records: { email: string; phone: string; name: string; locale: string | null; source: string | null; entry: Entry }[] = [
     ...inquiries.map((i) => ({ email: i.email, phone: i.phone, name: i.name, locale: i.site_locale, source: i.source, entry: { type: "inquiry", at: i.created_at, item: i } as Entry })),
     ...bookings.map((b) => ({ email: b.email, phone: b.phone, name: b.name, locale: b.site_locale, source: b.source, entry: { type: "tour", at: b.created_at, item: b } as Entry }))
@@ -79,11 +81,14 @@ function groupCustomers(inquiries: Inquiry[], bookings: TourBooking[]): Customer
     .map((rs) => {
       const sorted = [...rs].sort((a, b) => Date.parse(b.entry.at) - Date.parse(a.entry.at));
       const latest = sorted[0];
+      const emails = [...new Set(sorted.map((r) => r.email.trim().toLowerCase()))];
+      const phones = [...new Map(sorted.map((r) => [phoneKey(r.phone), r.phone.trim()])).values()];
       return {
         id: phoneKey(latest.phone) || latest.email.toLowerCase(),
+        keys: personKeys(emails, phones),
         name: latest.name,
-        emails: [...new Set(sorted.map((r) => r.email.trim().toLowerCase()))],
-        phones: [...new Map(sorted.map((r) => [phoneKey(r.phone), r.phone.trim()])).values()],
+        emails,
+        phones,
         locale: latest.locale,
         entries: sorted.map((r) => r.entry),
         last: latest.entry.at,
@@ -125,7 +130,8 @@ function entryHtml(e: Entry): string {
   </li>`;
 }
 
-function renderCustomer(c: Customer, open: boolean): string {
+/** `lead` is the customer's pipeline row (null: none yet; undefined: pipeline not set up — 0010). */
+function renderCustomer(c: Customer, open: boolean, lead: CrmLead | null | undefined): string {
   const inquiries = c.entries.filter((e) => e.type === "inquiry").length;
   const tours = c.entries.filter((e) => e.type === "tour").length;
   const latestInquiry = c.entries.find((e): e is Extract<Entry, { type: "inquiry" }> => e.type === "inquiry")?.item;
@@ -151,7 +157,8 @@ function renderCustomer(c: Customer, open: boolean): string {
       <span class="customer-card__counts">
         ${inquiries ? `<span class="admin-tag">${t("adminCustomers.inquiries", { count: inquiries })}</span>` : ""}
         ${tours ? `<span class="admin-tag admin-tag--confirmed">${t("adminCustomers.tours", { count: tours })}</span>` : ""}
-        ${latestInquiry ? `<span class="booking-status inquiry-status--${latestInquiry.status}">${t(`adminInquiries.status.${latestInquiry.status}`)}</span>` : ""}
+        ${lead !== undefined ? stageTag(lead?.stage ?? "new") : latestInquiry ? `<span class="booking-status inquiry-status--${latestInquiry.status}">${t(`adminInquiries.status.${latestInquiry.status}`)}</span>` : ""}
+        ${followUpTag(lead ?? null)}
       </span>
       <span class="customer-card__last">${t("adminCustomers.last", { date: when(c.last) })}</span>
     </summary>
@@ -163,6 +170,7 @@ function renderCustomer(c: Customer, open: boolean): string {
         ${c.locale ? `<div><dt>${t("adminInquiries.labels.siteLanguage")}</dt><dd>${t(`lang.${c.locale}`)}</dd></div>` : ""}
         ${c.sources.length ? `<div><dt>${t("adminInquiries.labels.source")}</dt><dd>${[...new Set(c.sources.map(campaignSource))].map(sourceLabel).join(sep())}</dd></div>` : ""}
       </dl>
+      ${lead !== undefined ? crmFormHtml(c.id, lead, projects) : `<p class="admin-panel__hint">${t("adminCrm.unavailable")}</p>`}
       <h3 class="customer-card__history">${t("adminCustomers.history")}</h3>
       <ol class="customer-entries">${c.entries.map(entryHtml).join("")}</ol>
       <div class="booking-card__actions">${replies}</div>
@@ -193,26 +201,74 @@ export function renderAdminCustomers(main: HTMLElement): void {
   const countEl = main.querySelector<HTMLElement>("[data-customers-count]")!;
   const searchEl = main.querySelector<HTMLInputElement>(".admin-inquiries__search")!;
   let customers: Customer[] = [];
+  /** Pipeline rows; null until migration 0010 has run. */
+  let leads: CrmLead[] | null = null;
+  const leadOf = (c: Customer) => (leads ? leadFor(leads, c.keys) : undefined);
 
   const paint = () => {
     const found = customers.filter((c) => matches(c, query.trim()));
     countEl.textContent = t("adminCustomers.count", { count: found.length });
     // One match (e.g. from a card's "Customer history" link) opens straight away.
     listEl.innerHTML = found.length
-      ? found.map((c) => renderCustomer(c, found.length === 1)).join("")
+      ? found.map((c) => renderCustomer(c, found.length === 1, leadOf(c))).join("")
       : `<p class="admin-bookings__empty">${t(query.trim() ? "adminInquiries.noResults" : "adminCustomers.empty")}</p>`;
   };
 
-  Promise.all([fetchInquiries().catch(() => [] as Inquiry[]), fetchTourBookings().catch(() => [] as TourBooking[])])
-    .then(([inquiries, bookings]) => {
+  Promise.all([fetchInquiries().catch(() => [] as Inquiry[]), fetchTourBookings().catch(() => [] as TourBooking[]), fetchCrmLeads()])
+    .then(([inquiries, bookings, crm]) => {
       if (main.dataset.requestId !== requestId) return;
       customers = groupCustomers(inquiries, bookings);
+      leads = crm;
       paint();
     })
     .catch((err) => {
       console.error(err);
       if (main.dataset.requestId === requestId) listEl.innerHTML = `<p class="admin-bookings__empty">${t("adminInquiries.loadError")}</p>`;
     });
+
+  listEl.addEventListener("change", (e) => {
+    const form = (e.target as Element).closest<HTMLFormElement>("[data-crm-form]");
+    if (form) syncCrmForm(form);
+  });
+
+  listEl.addEventListener("submit", async (e) => {
+    const form = (e.target as Element).closest<HTMLFormElement>("[data-crm-form]");
+    if (!form || !leads) return;
+    e.preventDefault();
+    const customer = customers.find((c) => c.id === form.dataset.crmForm);
+    const notice = form.querySelector<HTMLElement>("[data-crm-notice]")!;
+    if (!customer) return;
+    const read = readCrmForm(form);
+    if ("error" in read) {
+      notice.textContent = t(read.error);
+      notice.classList.remove("booking-card__error--ok");
+      return;
+    }
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    button.disabled = true;
+    const existing = leadFor(leads, customer.keys);
+    const saved = await saveCrmLead(
+      existing,
+      { keys: customer.keys, name: customer.name, email: customer.emails[0] ?? null, phone: customer.phones[0] ?? null },
+      read.changes
+    );
+    button.disabled = false;
+    if (!saved) {
+      notice.textContent = t("adminCrm.saveError");
+      notice.classList.remove("booking-card__error--ok");
+      return;
+    }
+    leads = [saved, ...leads.filter((l) => l.id !== saved.id)];
+    // Repaint this card (tags in its summary) and keep it open.
+    const card = form.closest<HTMLDetailsElement>(".customer-card")!;
+    card.outerHTML = renderCustomer(customer, true, saved);
+    const fresh = listEl.querySelector<HTMLFormElement>(`[data-crm-form="${CSS.escape(customer.id)}"]`);
+    const freshNotice = fresh?.querySelector<HTMLElement>("[data-crm-notice]");
+    if (freshNotice) {
+      freshNotice.textContent = t("adminCrm.saved");
+      freshNotice.classList.add("booking-card__error--ok");
+    }
+  });
 
   searchEl.addEventListener("input", () => {
     query = searchEl.value;

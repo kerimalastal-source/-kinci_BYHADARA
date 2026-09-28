@@ -37,7 +37,8 @@
     "en": "English",
     "ar": "العربية",
     "fr": "Français",
-    "ru": "Русский"
+    "ru": "Русский",
+    "fa": "فارسی"
   },
   "favorites": {
     "add": "Save {name} to your list",
@@ -2467,7 +2468,7 @@
         ],
         "items": [
           "the page address, without any query parameters;",
-          "the site language (English, Arabic, French or Russian);",
+          "the site language (English, Arabic, Persian, French or Russian);",
           "where the visit came from — only the name of the referring website (for example google.com) or the previous page on our site, never the full link;",
           "your approximate country and city, estimated by our hosting provider (Vercel) from your connection;",
           "the name of the ad campaign, if you arrived through a link in one of our ads (such as utm_source and utm_campaign), so we know which ad brought visitors;",
@@ -2673,6 +2674,8 @@
     }
   },
   "adminNav": {
+    "pipeline": "Sales",
+    "ads": "Ads",
     "home": "Home",
     "inquiries": "Inquiries",
     "bookings": "Tour bookings",
@@ -2681,6 +2684,9 @@
     "listings": "Resale listings"
   },
   "adminHome": {
+    "followUpsToday": "Sales follow-ups due",
+    "noFollowUps": "No follow-ups due today.",
+    "allPipeline": "Sales pipeline →",
     "heroTitle": "Dashboard",
     "toursToday": "Today's tours",
     "toursTomorrow": "Tomorrow's tours",
@@ -2830,5 +2836,100 @@
     "accept": "Accept",
     "decline": "Decline",
     "more": "Privacy Policy"
+  },
+  "adminCrm": {
+    "heroTitle": "Sales pipeline",
+    "heroSubtitle": "Every customer by sales stage. Move a card to its new stage; open the record for the deal and the next follow-up.",
+    "stages": {
+      "new": "New",
+      "contacted": "Contacted",
+      "tour": "Video tour",
+      "visit": "Istanbul visit",
+      "negotiation": "Negotiation",
+      "won": "Won",
+      "lost": "Lost"
+    },
+    "sectionTitle": "Sales follow-up",
+    "stage": "Stage",
+    "project": "Deal project",
+    "projectNone": "Not set",
+    "value": "Deal value",
+    "currency": "Currency",
+    "lostReason": "Why was it lost?",
+    "lostPlaceholder": "e.g. Bought elsewhere, budget",
+    "followUp": "Next follow-up",
+    "followUpNote": "What to do",
+    "notePlaceholder": "e.g. Send the villa price list",
+    "followUpHint": "Istanbul time. A reminder comes on Telegram when it's due, and in the morning summary.",
+    "save": "Save",
+    "saved": "Saved.",
+    "saveError": "Couldn't save. Please try again.",
+    "valueError": "Enter the deal value as a number.",
+    "unavailable": "The sales pipeline starts working once database update 0010 has been run.",
+    "overdue": "Overdue",
+    "lastActivity": "Last contact {date}",
+    "moveTo": "Move to",
+    "openRecord": "Open record",
+    "emptyStage": "No customers",
+    "boardNote": "Customers come from the inquiries and tour bookings. Won and lost deals stay on the board for {days} days.",
+    "kpi": {
+      "open": "Customers in progress",
+      "pipelineValue": "Deals in progress",
+      "wonMonth": "Won this month",
+      "followToday": "Follow-ups due"
+    }
+  },
+  "adminAds": {
+    "heroTitle": "Ad results",
+    "heroSubtitle": "What each ad cost and brought: visitors, messages, bookings and sales — so you know the cost of every customer.",
+    "periods": {
+      "thisMonth": "This month",
+      "lastMonth": "Last month",
+      "last30": "Last 30 days",
+      "last90": "Last 90 days"
+    },
+    "kpi": {
+      "spend": "Ad spend",
+      "leads": "Leads from ads",
+      "costPerLead": "Cost per lead",
+      "sales": "Sales from ads",
+      "costPerSale": "Cost per sale"
+    },
+    "col": {
+      "ad": "Ad",
+      "spend": "Spend",
+      "visitors": "Visitors",
+      "leads": "Leads",
+      "costPerLead": "Cost / lead",
+      "sales": "Sales",
+      "costPerSale": "Cost / sale",
+      "return": "Return"
+    },
+    "allCampaigns": "all campaigns",
+    "empty": "No ad visits, leads or spend in this period yet.",
+    "reportHint": "Leads are messages and tour bookings. A sale counts for the ad of the customer's first message or booking, in the month it was marked as won. Return = sales value ÷ spend.",
+    "addTitle": "Add ad spend",
+    "spendTitle": "Spend entered",
+    "noSpend": "Nothing entered yet.",
+    "delete": "Delete",
+    "confirmDelete": "Delete this spend entry?",
+    "unavailable": "Available once database update 0010 has been run.",
+    "note": "Visitor counts are kept for 30 days only; messages, bookings and sales are kept longer.",
+    "form": {
+      "source": "Source (utm_source)",
+      "other": "Other…",
+      "otherSource": "Source name",
+      "campaign": "Campaign (utm_campaign, optional)",
+      "from": "From",
+      "to": "To",
+      "amount": "Amount spent",
+      "note": "Note (optional)",
+      "hint": "End every ad link with ?utm_source=instagram&utm_campaign=villa and enter the same names here. Leave the campaign empty to cover all of the source's campaigns.",
+      "add": "Add",
+      "added": "Added.",
+      "errorSource": "Choose or type a source (letters, digits and - only).",
+      "errorDates": "Check the dates: the end can't be before the start.",
+      "errorAmount": "Enter the amount as a number."
+    }
   }
 }

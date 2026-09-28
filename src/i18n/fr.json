@@ -37,7 +37,8 @@
     "en": "English",
     "ar": "العربية",
     "fr": "Français",
-    "ru": "Русский"
+    "ru": "Русский",
+    "fa": "فارسی"
   },
   "favorites": {
     "add": "Enregistrer {name} dans votre liste",
@@ -2467,7 +2468,7 @@
         ],
         "items": [
           "l'adresse de la page, sans paramètres de requête ;",
-          "la langue du site (anglais, arabe, français ou russe) ;",
+          "la langue du site (anglais, arabe, persan, français ou russe) ;",
           "la provenance de la visite — uniquement le nom du site référent (par exemple google.com) ou la page précédente de notre site, jamais le lien complet ;",
           "votre pays et votre ville approximatifs, estimés par notre hébergeur (Vercel) à partir de votre connexion ;",
           "le nom de la campagne publicitaire, si vous êtes arrivé par un lien de l'une de nos publicités (par exemple utm_source et utm_campaign), afin de savoir quelle publicité a amené des visiteurs ;",
@@ -2673,6 +2674,8 @@
     }
   },
   "adminNav": {
+    "pipeline": "Ventes",
+    "ads": "Publicités",
     "home": "Accueil",
     "inquiries": "Demandes",
     "bookings": "Visites vidéo",
@@ -2681,6 +2684,9 @@
     "listings": "Annonces de revente"
   },
   "adminHome": {
+    "followUpsToday": "Relances à faire",
+    "noFollowUps": "Aucune relance aujourd’hui.",
+    "allPipeline": "Pipeline de ventes →",
     "heroTitle": "Tableau de bord",
     "toursToday": "Visites d'aujourd'hui",
     "toursTomorrow": "Visites de demain",
@@ -2830,5 +2836,100 @@
     "accept": "Accepter",
     "decline": "Refuser",
     "more": "Politique de confidentialité"
+  },
+  "adminCrm": {
+    "heroTitle": "Pipeline de ventes",
+    "heroSubtitle": "Chaque client selon son étape de vente. Déplacez une carte vers sa nouvelle étape ; ouvrez la fiche pour l’affaire et la prochaine relance.",
+    "stages": {
+      "new": "Nouveau",
+      "contacted": "Contacté",
+      "tour": "Visite vidéo",
+      "visit": "Visite à Istanbul",
+      "negotiation": "Négociation",
+      "won": "Vendu",
+      "lost": "Perdu"
+    },
+    "sectionTitle": "Suivi de la vente",
+    "stage": "Étape",
+    "project": "Projet de l’affaire",
+    "projectNone": "Non défini",
+    "value": "Montant de l’affaire",
+    "currency": "Devise",
+    "lostReason": "Pourquoi perdu ?",
+    "lostPlaceholder": "p. ex. Acheté ailleurs, budget",
+    "followUp": "Prochaine relance",
+    "followUpNote": "Que faire",
+    "notePlaceholder": "p. ex. Envoyer la grille de prix de la villa",
+    "followUpHint": "Heure d’Istanbul. Un rappel arrive sur Telegram à l’heure prévue, et dans le résumé du matin.",
+    "save": "Enregistrer",
+    "saved": "Enregistré.",
+    "saveError": "Échec de l’enregistrement. Veuillez réessayer.",
+    "valueError": "Saisissez le montant en chiffres.",
+    "unavailable": "Le pipeline de ventes fonctionnera une fois la mise à jour 0010 de la base de données exécutée.",
+    "overdue": "En retard",
+    "lastActivity": "Dernier contact {date}",
+    "moveTo": "Déplacer vers",
+    "openRecord": "Ouvrir la fiche",
+    "emptyStage": "Aucun client",
+    "boardNote": "Les clients viennent des demandes et des réservations de visite. Les affaires gagnées et perdues restent {days} jours sur le tableau.",
+    "kpi": {
+      "open": "Clients en cours",
+      "pipelineValue": "Affaires en cours",
+      "wonMonth": "Ventes ce mois-ci",
+      "followToday": "Relances à faire"
+    }
+  },
+  "adminAds": {
+    "heroTitle": "Résultats des publicités",
+    "heroSubtitle": "Ce que chaque publicité a coûté et rapporté : visiteurs, messages, réservations et ventes — pour connaître le coût de chaque client.",
+    "periods": {
+      "thisMonth": "Ce mois-ci",
+      "lastMonth": "Mois dernier",
+      "last30": "30 derniers jours",
+      "last90": "90 derniers jours"
+    },
+    "kpi": {
+      "spend": "Dépenses publicitaires",
+      "leads": "Prospects des pubs",
+      "costPerLead": "Coût par prospect",
+      "sales": "Ventes des pubs",
+      "costPerSale": "Coût par vente"
+    },
+    "col": {
+      "ad": "Publicité",
+      "spend": "Dépense",
+      "visitors": "Visiteurs",
+      "leads": "Prospects",
+      "costPerLead": "Coût / prospect",
+      "sales": "Ventes",
+      "costPerSale": "Coût / vente",
+      "return": "Retour"
+    },
+    "allCampaigns": "toutes les campagnes",
+    "empty": "Aucune visite, aucun prospect ni aucune dépense publicitaire sur cette période pour l’instant.",
+    "reportHint": "Les prospects sont les messages et les réservations de visite. Une vente compte pour la publicité du premier contact du client, le mois où elle est marquée comme vendue. Retour = valeur des ventes ÷ dépense.",
+    "addTitle": "Ajouter une dépense",
+    "spendTitle": "Dépenses saisies",
+    "noSpend": "Rien de saisi pour l’instant.",
+    "delete": "Supprimer",
+    "confirmDelete": "Supprimer cette dépense ?",
+    "unavailable": "Disponible une fois la mise à jour 0010 de la base de données exécutée.",
+    "note": "Les visiteurs sont conservés 30 jours seulement ; les messages, réservations et ventes plus longtemps.",
+    "form": {
+      "source": "Source (utm_source)",
+      "other": "Autre…",
+      "otherSource": "Nom de la source",
+      "campaign": "Campagne (utm_campaign, facultatif)",
+      "from": "Du",
+      "to": "Au",
+      "amount": "Montant dépensé",
+      "note": "Note (facultatif)",
+      "hint": "Terminez chaque lien publicitaire par ?utm_source=instagram&utm_campaign=villa et saisissez ici les mêmes noms. Laissez la campagne vide pour couvrir toutes les campagnes de la source.",
+      "add": "Ajouter",
+      "added": "Ajouté.",
+      "errorSource": "Choisissez ou saisissez une source (lettres, chiffres et - uniquement).",
+      "errorDates": "Vérifiez les dates : la fin ne peut pas précéder le début.",
+      "errorAmount": "Saisissez le montant en chiffres."
+    }
   }
 }

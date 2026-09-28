@@ -51,6 +51,8 @@ export type Route =
   | { name: "admin-listings" }
   | { name: "admin-stats" }
   | { name: "admin-customers" }
+  | { name: "admin-pipeline" }
+  | { name: "admin-ads" }
   | { name: "not-found" };
 
 /** Splits "/ar/projects" into { locale: "ar", path: "/projects" }. */
@@ -104,6 +106,8 @@ export function parseRoute(path: string): Route {
     if (p1 === "listings") return { name: "admin-listings" };
     if (p1 === "stats") return { name: "admin-stats" };
     if (p1 === "customers") return { name: "admin-customers" };
+    if (p1 === "pipeline") return { name: "admin-pipeline" };
+    if (p1 === "ads") return { name: "admin-ads" };
     return { name: "admin" };
   }
   return { name: "not-found" };
@@ -136,6 +140,10 @@ export function routePath(route: Route): string {
       return "/admin/stats";
     case "admin-customers":
       return "/admin/customers";
+    case "admin-pipeline":
+      return "/admin/pipeline";
+    case "admin-ads":
+      return "/admin/ads";
     case "consultancy":
       return consultancyPath(route.page);
     case "not-found":

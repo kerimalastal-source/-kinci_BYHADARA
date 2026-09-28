@@ -6,6 +6,8 @@ import { fetchTourBookings, type TourBooking } from "../../data/tourBookings";
 import { fetchInquiries, type Inquiry } from "../../data/inquiries";
 import { fetchPendingListings } from "../../data/listings";
 import { fetchVisitStats } from "../../data/adminStats";
+import { OPEN_STAGES, fetchCrmLeads, type CrmLead } from "../../data/crm";
+import { followUpWhen, stageTag } from "./crmForm";
 import { adminHero, adminNav } from "./nav";
 import { dailyChart, sourceLabel } from "./stats";
 
@@ -62,6 +64,17 @@ function inquiryRow(i: Inquiry): string {
   </li>`;
 }
 
+function followUpRow(l: CrmLead): string {
+  const late = Date.parse(l.follow_up_at!) < Date.now();
+  const record = l.phone ?? l.email ?? l.name;
+  return `<li class="admin-list__item">
+    <span class="admin-list__time${late ? " admin-list__time--late" : ""}">${escapeHtml(followUpWhen(l.follow_up_at!))}</span>
+    <span class="admin-list__main"><strong dir="auto">${escapeHtml(l.name)}</strong>${l.follow_up_note ? `<small dir="auto">${escapeHtml(l.follow_up_note)}</small>` : ""}</span>
+    ${stageTag(l.stage)}
+    <a class="admin-list__open" href="${link(`/admin/customers?q=${encodeURIComponent(record)}`)}">${t("adminHome.open")}</a>
+  </li>`;
+}
+
 function list(items: string[], empty: string): string {
   return items.length ? `<ul class="admin-list">${items.join("")}</ul>` : `<p class="admin-stats__empty">${empty}</p>`;
 }
@@ -89,6 +102,7 @@ export function renderAdminOverview(main: HTMLElement): void {
             <p class="admin-panel__hint">${t("adminHome.followUpHint")}</p>
             <div data-home-inquiries></div>
             <a class="admin-panel__more" href="${link("/admin/inquiries")}">${t("adminHome.allInquiries")}</a>
+            <div data-home-followups></div>
           </section>
         </div>
         <section class="admin-panel admin-panel--wide">
@@ -104,8 +118,8 @@ export function renderAdminOverview(main: HTMLElement): void {
   const live = () => main.dataset.requestId === requestId;
   const $ = (name: string) => main.querySelector<HTMLElement>(`[data-home-${name}]`)!;
 
-  void Promise.allSettled([fetchTourBookings(), fetchInquiries(), fetchPendingListings(), fetchVisitStats(7)]).then(
-    ([bookingsResult, inquiriesResult, listingsResult, statsResult]) => {
+  void Promise.allSettled([fetchTourBookings(), fetchInquiries(), fetchPendingListings(), fetchVisitStats(7), fetchCrmLeads()]).then(
+    ([bookingsResult, inquiriesResult, listingsResult, statsResult, crmResult]) => {
       if (!live()) return;
       const bookings = bookingsResult.status === "fulfilled" ? bookingsResult.value : [];
       const inquiries = inquiriesResult.status === "fulfilled" ? inquiriesResult.value : [];
@@ -136,6 +150,17 @@ export function renderAdminOverview(main: HTMLElement): void {
       $("tomorrow").innerHTML = list(toursTomorrow.map(tourRow), t("adminHome.noToursTomorrow"));
       $("inquiries").innerHTML = list(fresh.slice(0, 8).map(inquiryRow), t("adminHome.noFollowUp"));
       if (fresh.length > 8) $("inquiries").insertAdjacentHTML("beforeend", `<p class="admin-panel__hint">${t("adminHome.more", { count: fresh.length - 8 })}</p>`);
+
+      // Sales follow-ups due today or overdue (the pipeline, migration 0010).
+      const crm = crmResult.status === "fulfilled" ? crmResult.value : null;
+      if (crm) {
+        const endOfToday = Date.parse(`${todayKey}T21:00:00Z`); // 24:00 Istanbul
+        const due = crm
+          .filter((l) => l.follow_up_at && OPEN_STAGES.includes(l.stage) && Date.parse(l.follow_up_at) < endOfToday)
+          .sort((a, b) => Date.parse(a.follow_up_at!) - Date.parse(b.follow_up_at!));
+        $("followups").innerHTML = `<h3 class="admin-panel__subtitle">${t("adminHome.followUpsToday")}</h3>${list(due.slice(0, 8).map(followUpRow), t("adminHome.noFollowUps"))}
+          <a class="admin-panel__more" href="${link("/admin/pipeline")}">${t("adminHome.allPipeline")}</a>`;
+      }
 
       $("visits").innerHTML = stats
         ? `${dailyChart(stats.daily)}

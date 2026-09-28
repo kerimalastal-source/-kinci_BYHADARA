@@ -2,6 +2,7 @@
 import { escapeHtml } from "./telegram.js";
 import { ISTANBUL, formatDate } from "./bookingMessages.js";
 import { PROJECT_NAMES } from "./projectNames.js";
+import { STAGE_AR, followUpTime, type FollowUp } from "./followups.js";
 
 /** What daily_digest() returns (supabase/migrations/0008). */
 export interface Digest {
@@ -88,7 +89,12 @@ function tourState(tour: Digest["tours_today"][number]): string {
   return "بانتظار التأكيد ⏳";
 }
 
-export function dailySummary(d: Digest, site: string, reminders: { sent: number; failed: string[] }): string {
+export function dailySummary(
+  d: Digest,
+  site: string,
+  reminders: { sent: number; failed: string[] },
+  followUps: { today: FollowUp[]; overdue: number; open: number } | null = null
+): string {
   const link = (path: string, label: string) => `<a href="${escapeHtml(`${site}/ar${path}`)}">${label}</a>`;
   const lines = [`<b>☀️ حضارة للعقار — ملخص اليوم</b>`, escapeHtml(formatDate(Date.parse(`${d.today}T12:00:00Z`), "ar", "UTC")), ""];
 
@@ -112,12 +118,22 @@ export function dailySummary(d: Digest, site: string, reminders: { sent: number;
     }
     if (d.inquiries_stale_count > d.inquiries_stale.length) lines.push(`… و${d.inquiries_stale_count - d.inquiries_stale.length} آخرون`);
   }
+  if (followUps) {
+    lines.push("", `📞 <b>متابعات المبيعات اليوم (${followUps.today.length})</b>`);
+    for (const f of followUps.today.slice(0, 15)) {
+      const note = f.follow_up_note ? ` — ${escapeHtml(f.follow_up_note)}` : "";
+      lines.push(`• ${followUpTime(f.follow_up_at)} — ${escapeHtml(f.name || "—")} (${escapeHtml(STAGE_AR[f.stage] ?? f.stage)})${note}`);
+    }
+    if (!followUps.today.length) lines.push("لا توجد متابعات اليوم.");
+    if (followUps.overdue) lines.push(`⚠️ متابعات متأخرة لم تُنجز: ${followUps.overdue}`);
+    lines.push(`🧭 زبائن قيد المتابعة في مراحل البيع: ${followUps.open}`);
+  }
   if (d.listings_pending) lines.push(`🏠 إعلانات إعادة بيع بانتظار المراجعة: ${d.listings_pending}`);
 
   const sources = d.sources_yesterday.map((s) => `${escapeHtml(sourceAr(s.source))} (${s.visitors})`).join("، ");
   lines.push("", `👥 زوار أمس: ${d.visitors_yesterday}${sources ? ` — أهم المصادر: ${sources}` : ""}`);
   lines.push(`🗓️ حجوزات جولات جديدة أمس: ${d.bookings_yesterday}`);
 
-  lines.push("", `${link("/admin", "لوحة التحكم")} · ${link("/admin/inquiries", "الاستفسارات")} · ${link("/admin/bookings", "الحجوزات")} · ${link("/admin/stats", "الإحصائيات")}`);
+  lines.push("", `${link("/admin", "لوحة التحكم")} · ${link("/admin/inquiries", "الاستفسارات")} · ${link("/admin/bookings", "الحجوزات")} · ${link("/admin/pipeline", "المبيعات")} · ${link("/admin/stats", "الإحصائيات")}`);
   return lines.join("\n");
 }

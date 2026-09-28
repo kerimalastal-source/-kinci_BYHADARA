@@ -10364,3 +10364,283 @@ body.map-open .cookie-consent {
     transition: none;
   }
 }
+
+/* ---------- Admin: sales pipeline, follow-ups, ad results ---------- */
+.inquiry-card__field input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.crm-form,
+.ads-form {
+  display: grid;
+  gap: 0.6rem;
+  margin-block: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 12px);
+  background: var(--color-surface-alt);
+}
+
+.crm-form .customer-card__history {
+  margin: 0;
+}
+
+.crm-form__grid,
+.ads-form__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.crm-form__note,
+.ads-form__note {
+  grid-column: span 2;
+}
+
+/* The fields' display: grid would otherwise override [hidden]. */
+.crm-form [hidden],
+.ads-form [hidden] {
+  display: none;
+}
+
+.crm-form__money {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.crm-form__money input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.inquiry-card__field .crm-form__money select {
+  flex: 0 0 5.5rem;
+  width: auto;
+}
+
+.crm-form__hint {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.crm-form .booking-card__error,
+.ads-form .booking-card__error {
+  margin: 0;
+}
+
+.crm-form .booking-card__error:empty,
+.ads-form .booking-card__error:empty {
+  display: none;
+}
+
+.crm-stage {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: #eef0ee;
+  color: var(--color-ink-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.crm-stage--contacted { background: #e7eef9; color: #24508f; }
+.crm-stage--tour { background: #efe9f8; color: #5b3d8f; }
+.crm-stage--visit { background: #fbf3df; color: #7a5a12; }
+.crm-stage--negotiation { background: #fdebdc; color: #8a4a12; }
+.crm-stage--won { background: #e6f3ec; color: #1f6b44; }
+.crm-stage--lost { background: #f7e3e3; color: #8f2a2a; }
+
+.admin-list__time--late {
+  color: #b42318;
+}
+
+/* Board: a column per stage, side by side; on narrow screens the columns scroll sideways. */
+.pipeline-board {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(200px, 1fr);
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  gap: 0.75rem;
+  margin-top: var(--space-md);
+  padding-bottom: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  /* Keeps the off-screen columns out of the page's width. */
+  contain: paint;
+}
+
+.pipeline-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 0.75rem;
+  border-radius: var(--radius-md, 12px);
+  background: var(--color-surface-alt);
+  scroll-snap-align: start;
+}
+
+.pipeline-column__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.pipeline-column__count {
+  min-width: 1.6rem;
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-ink-soft);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.pipeline-column--won .pipeline-column__title { color: #1f6b44; }
+.pipeline-column--lost .pipeline-column__title { color: #8f2a2a; }
+
+.pipeline-column__list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pipeline-column__empty {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.pipeline-card {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+.pipeline-card p {
+  margin: 0;
+}
+
+.pipeline-card__meta,
+.pipeline-card__date {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.pipeline-card__value {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.pipeline-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pipeline-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.pipeline-card__actions select {
+  flex: 1 1 8rem;
+  min-width: 0;
+  min-height: 38px;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: 0.88rem;
+}
+
+.pipeline-card__actions a {
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-ads__range {
+  margin: -0.25rem 0 var(--space-sm);
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.admin-table-wrap {
+  margin-top: var(--space-md);
+  overflow-x: auto;
+}
+
+.ads-table {
+  min-width: 720px;
+}
+
+.ads-table td small {
+  color: var(--color-muted);
+}
+
+.ads-table__organic td {
+  color: var(--color-muted);
+}
+
+.ads-spend .admin-list__item {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .crm-form__grid,
+  .ads-form__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .inquiry-card__field input,
+  .pipeline-card__actions select {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .crm-form__grid,
+  .ads-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .crm-form__note,
+  .ads-form__note {
+    grid-column: auto;
+  }
+
+  .pipeline-board {
+    grid-auto-columns: 82%;
+  }
+}

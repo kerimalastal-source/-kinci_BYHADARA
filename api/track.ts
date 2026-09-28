@@ -12,6 +12,7 @@
 import { waitUntil } from "@vercel/functions";
 import { editTelegram, sendTelegram } from "./_lib/telegram.js";
 import { rpc, RpcError } from "./_lib/supabase.js";
+import { sendDueFollowUps } from "./_lib/followups.js";
 import {
   LOCALES,
   newVisitorMessage,
@@ -27,6 +28,8 @@ import {
 const SESSION_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 /** The seller account and admin pages are never tracked (the browser skips them too). */
 const INTERNAL_PATH = /^\/(?:(?:ar|fr|ru)\/)?(?:admin|account)(?:\/|$)/;
+/** Links in alerts point at the public site. */
+const SITE = (process.env.VITE_SITE_URL || "https://www.hadararealestate.com").replace(/\/$/, "");
 /** Crawlers and link previews aren't visitors. */
 const BOT_AGENT = /bot|crawl|spider|slurp|facebookexternalhit|embedly|preview|headless|lighthouse|pingdom|uptime|monitor/i;
 
@@ -58,6 +61,15 @@ export async function POST(request: Request): Promise<Response> {
         console.error(`track: ${error instanceof Error ? error.message : "unknown error"}`);
       })
     );
+    // Sales follow-up reminders whose time has come (the database runs the check at most
+    // every two minutes, so reminders go out within minutes whenever the site has visitors).
+    if (Math.random() < 0.3) {
+      waitUntil(
+        sendDueFollowUps(SITE, 120).catch((error: unknown) => {
+          console.error(`track: followups failed: ${error instanceof Error ? error.message : "unknown error"}`);
+        })
+      );
+    }
     // ~1% of requests also clear visit events older than 30 days and tour bookings a
     // year past their date; a failure here is only logged.
     if (Math.random() < 0.01) {

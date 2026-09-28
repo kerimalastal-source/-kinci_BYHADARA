@@ -5,7 +5,7 @@
 //      (mark_tour_reminded(); a booking moved to another day gets a new one).
 //   2. Sends the team the morning summary on Telegram: today's tours, bookings waiting for
 //      confirmation, inquiries without an answer for more than 24 hours, listings to review,
-//      and yesterday's visitors.
+//      today's sales follow-ups, and yesterday's visitors.
 //
 // Vercel calls it with "Authorization: Bearer <CRON_SECRET>". The same secret opens
 // daily_digest() in the database (supabase/migrations/0008), so CRON_SECRET in Vercel must be
@@ -16,6 +16,7 @@ import { hasSupabase, rpc, RpcError } from "./_lib/supabase.js";
 import { TEAM_INBOX, visitorEmail, type App, type BookingDetails, type ContactMethod, type SiteLocale, type TourLanguage } from "./_lib/bookingMessages.js";
 import { PROJECT_NAMES } from "./_lib/projectNames.js";
 import { dailySummary, type Digest } from "./_lib/dailyMessages.js";
+import { followUpsToday, sendDueFollowUps } from "./_lib/followups.js";
 
 const LOCALES: readonly SiteLocale[] = ["en", "ar", "fr", "ru"];
 /** Links in emails and alerts point at the public site, whatever URL the cron called. */
@@ -94,7 +95,8 @@ export async function GET(request: Request): Promise<Response> {
     });
   }
 
-  // 2. The morning summary.
-  const messageId = await sendTelegram(dailySummary(digest, SITE, { sent: sent.length, failed }));
+  // 2. Sales follow-ups that are due (usually already sent from page views), then the morning summary.
+  await sendDueFollowUps(SITE, 0);
+  const messageId = await sendTelegram(dailySummary(digest, SITE, { sent: sent.length, failed }, await followUpsToday()));
   return json({ reminders: sent.length, failed: failed.length, summary: messageId !== null });
 }

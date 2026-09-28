@@ -25,6 +25,8 @@ import { renderAdminInquiries } from "./pages/admin/inquiries";
 import { renderAdminOverview } from "./pages/admin/overview";
 import { renderAdminStats } from "./pages/admin/stats";
 import { renderAdminCustomers } from "./pages/admin/customers";
+import { renderAdminPipeline } from "./pages/admin/pipeline";
+import { renderAdminAds } from "./pages/admin/ads";
 import { renderHeader } from "./components/header";
 import { renderFooter } from "./components/footer";
 import { renderFloatingButtons } from "./components/floatingButtons";
@@ -164,6 +166,12 @@ function renderRoute(route: Route, main: HTMLElement): void {
       break;
     case "admin-customers":
       renderAdminCustomers(main);
+      break;
+    case "admin-pipeline":
+      renderAdminPipeline(main);
+      break;
+    case "admin-ads":
+      renderAdminAds(main);
       break;
     default:
       renderNotFound(main);
