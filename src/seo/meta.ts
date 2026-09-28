@@ -307,7 +307,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
     image: img(projects[0].coverImage.src),
     foundingDate: "2014",
     areaServed: "Istanbul, Türkiye",
-    openingHours: "Mo-Sa 09:00-18:00",
+    openingHours: "Mo-Su 09:00-18:00",
     ...CONTACT
   });
 

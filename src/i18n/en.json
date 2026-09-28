@@ -576,7 +576,7 @@
           },
           {
             "q": "How can I get in touch with HADARA's team?",
-            "a": "You can reach us through the Contact page, by phone at +90 531 930 92 14, or by email at info@byhadara.com. Our team is available Monday–Saturday, 09:00–18:00 (Istanbul time)."
+            "a": "You can reach us through the Contact page, by phone at +90 531 930 92 14, or by email at info@byhadara.com. Our team is available every day, 09:00–18:00 (Istanbul time)."
           }
         ]
       },
@@ -770,7 +770,7 @@
     "phoneTitle": "Phone",
     "emailTitle": "Email",
     "hoursTitle": "Office Hours",
-    "hoursText": "Monday – Saturday, 09:00 – 18:00 (Istanbul time)",
+    "hoursText": "Every day, 09:00 – 18:00 (Istanbul time)",
     "mapTitle": "Find Us"
   },
   "auth": {
