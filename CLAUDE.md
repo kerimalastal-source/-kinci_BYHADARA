@@ -34,17 +34,18 @@
   - **بعد تشغيل الـ migration**: أي حساب سجّل **قبل** تشغيلها ما رح يكون عنده صف بجدول `profiles` (الـ trigger التلقائي ما كان موجود وقت تسجيله) — لازم تشغّل مرة وحدة: `insert into public.profiles (id, full_name, phone, country, role) select id, raw_user_meta_data->>'full_name', raw_user_meta_data->>'phone', raw_user_meta_data->>'country', 'seller' from auth.users where id not in (select id from public.profiles);` وإلا رفع أي عقار بيفشل بخطأ foreign key violation.
 - `package.json` build script: `"build": "node scripts/gen-project-names.mjs && tsc && tsc -p api && vite build"` (أول خطوة بتولّد `api/_lib/projectNames.ts`، قسم 4.10)
 
-## 3. اللغات (i18n) — 4 لغات كاملة
+## 3. اللغات (i18n) — 5 لغات كاملة
 
 - **الإنجليزية (en)** — اللغة الافتراضية
 - **العربية (ar)** — بلغة عربية فصحى رسمية (MSA)، مع دعم RTL كامل
+- **الفارسية (fa)** — (طلب المستخدم 2026-09-28: "ترجمة فارسية صحيحة وسليمة") فارسية رسمية، RTL (`rtlLocales` = ar, fa)، بادئة `/fa`. التواريخ **ميلادية بأرقام لاتينية** عبر `intlTag()` (`fa-u-ca-gregory-nu-latn`) — **لا تستخدم `${getLocale()}-u-nu-latn` مباشرة بأي مكان جديد** (بالفارسي بيطلع تقويم هجري شمسي). الفاصل بين عناصر القوائم `listSep()` ("، " للعربي والفارسي). البحث والدردشة بيوحّدوا ی/ک مع ي/ك. OG `fa_IR`. اسم الفيلا بالفارسي «ویلا مرمرا هیون». **قاعدة**: كل مكان مكتوب فيه "الأربع لغات" بهالملف صار يعني **الخمس لغات** (en/ar/fa/fr/ru) — أي نص جديد لازم ينضاف لـ `fa.json` كمان، والسيرفر (`api/_lib/*Messages.ts`، `tour-reply.ts`) فيه نصوص فارسية للإيميلات.
 - **الفرنسية (fr)**
 - **الروسية (ru)**
 
 النظام في `src/i18n/`:
 - `dictionaries.ts`: القواميس ودالة `lookup()` بدون أي اعتماد على DOM (تُستخدم أيضاً وقت البناء لتوليد صفحات SEO الثابتة).
 - `index.ts`: منطق الترجمة — `t(key)` (نص)، `tRaw<T>(key)` (بيانات خام كـ arrays/objects)، `link(path)` (يبني الرابط ببادئة اللغة الحالية)، `getLocale()`/`setLocale()`/`onLocaleChange()`. **اللغة تُؤخذ من الرابط** (بادئة `/ar` إلخ)؛ `setLocale()` ينقل لنفس الصفحة باللغة الجديدة ويحفظ الاختيار بـ `localStorage` (`hadara-locale`) لتوجيه الزائر العائد، ويضبط `lang`/`dir` تلقائياً.
-- `en.json` / `ar.json` / `fr.json` / `ru.json`: قواميس ترجمة متطابقة البنية بالكامل — نفس الـ keys بكل اللغات، بما فيها `projectsData`، `blogData.<slug>`، `faq.categories`، `propertyRequest.*`، `seo.<page>`.
+- `en.json` / `ar.json` / `fa.json` / `fr.json` / `ru.json`: قواميس ترجمة متطابقة البنية بالكامل — نفس الـ keys بكل اللغات، بما فيها `projectsData`، `blogData.<slug>`، `faq.categories`، `propertyRequest.*`، `seo.<page>`.
 - زر تبديل اللغة بالـ header (`src/components/header.ts`).
 
 ### دعم RTL
@@ -176,6 +177,22 @@
 - **الخصوصية**: البند 3 فيه "اسم الحملة الإعلانية" بقائمة البيانات، والبند 5 فيه "تذكير قبل الجولة بيوم".
 - **إحصائية إشعار الكوكيز (طلب المستخدم 2026-09-28، migration `0009_visitor_consent.sql` — ✅ انشغّل 2026-09-28 على `khibypqmvnxuetmvjcnn`)**: "كم زيارة وافقت / رفضت / ما جاوبت" بصفحة الإحصائيات (`consentPanel()` بـ `stats.ts`، `fetchConsentStats()` بـ `data/adminStats.ts`). لما الإشعار يطلع لحاله (مش من رابط الفوتر) المتصفح بيبعت `reportConsent("none")` (بـ `visitorTracker.ts`) وبعدين `granted`/`denied` لما يختار — `POST /api/track` بـ `{type: "consent", sessionId, choice, path}` (أي body عليه `type: "consent"` ما بيتسجّل كزيارة أبداً، وصفحات الإدارة والبوتات بتتجاهل). جدول `visitor_consent` (session_id PK، choice `granted|denied|none`؛ `none` ما بيمسح اختيار قديم؛ RLS بدون grants؛ بينحذف بعد 30 يوم من جوّا `save_visit_consent()` ~2%)، و`admin_consent_stats(days)` (أدمن بس؛ التبويب الجديد من موقعنا ما بينحسب). ملف واحد ASCII، 81 سطر. **لحد ما ينشغّل**: اللوحة بتقول "غير متاح بعد" والسيرفر بيتجاهل الـ 404. مختبَر على PGlite (0002–0009، مرتين) + endpoint + متصفح (قبول/رفض/تجاهل).
 
+## 4.11 مراحل البيع + تذكير المتابعة + تقرير كلفة الزبون من كل إعلان (أُضيف 2026-09-28، migration `0010_sales_pipeline.sql` — ⏳ لسا ما انشغّل)
+
+- **مراحل البيع** (`/admin/pipeline`، `pages/admin/pipeline.ts` + `data/crm.ts` + `pages/admin/crmForm.ts`): صف واحد بجدول `crm_leads` لكل زبون (نفس تجميع صفحة الزبائن: `keys` = `e:<email>` و`p:<آخر 9 أرقام>`، `groupCustomers()` من `customers.ts`). المراحل `STAGES`: جديد، تم التواصل، جولة، زيارة، تفاوض، تم البيع، خسارة (مع سبب). قيمة الصفقة + العملة (USD/EUR/TRY/GBP)، المشروع، موعد المتابعة + ملاحظة. أعمدة للمراحل (بتنسحب أفقياً على الموبايل، `contain: paint` حتى الصفحة ما تتعرّض)، وتغيير المرحلة من القائمة بينحفظ فوراً. نفس الفورم بكرت كل زبون بـ `/admin/customers`. الرئيسية `/admin` فيها قائمة "متابعات اليوم". trigger بيسجّل `stage_changed_at`/`won_at` وبيصفّر `follow_up_sent_at` لما يتغيّر الموعد.
+- **تذكير المتابعة على تيليجرام** (`api/_lib/followups.ts`): `claim_due_followups(secret, gap)` بتاخد المتابعات اللي إجا وقتها (مرة وحدة لكل موعد) — بتنادى من `/api/track` (30% من الطلبات، ومحدودة بقاعدة البيانات لمرة كل 120 ثانية عبر `internal_state`) ومن الملخص اليومي. فشل الإرسال → `release_followups` وبيرجع ينحاول. الملخص اليومي فيه قسم "متابعات اليوم" (`followups_today`).
+- **تقرير الإعلانات** (`/admin/ads`، `pages/admin/ads.ts` + `data/ads.ts`): الفريق بيدخّل المصروف (المصدر، الحملة، من/إلى، المبلغ، العملة) بجدول `ad_spend` (أدمن بس)، و`admin_ad_report(from, to)` بيرجع لكل (مصدر، حملة): الزيارات، الرسائل والحجوزات، والمبيعات (`won`)، والمصروف مقسوم على الأيام حسب الفترة. المتصفح بيحسب كلفة الزبون المحتمل وكلفة البيعة والعائد. فترات: هالشهر / الشهر الماضي / آخر 30 / آخر 90 يوم. المبالغ بـ `money()` (en-US + narrowSymbol، `dir="ltr"`) حتى ما تنقلب بالعربي.
+- **لحد ما ينشغّل 0010**: الصفحتين بيقولوا "غير متاح بعد"، وقسم المبيعات بكرت الزبون ما بيطلع، والتذكيرات بتتجاهل الـ 404. مختبَر على PGlite (0002–0010).
+
+## 4.12 الدردشة المباشرة مع الفريق عبر تيليجرام (أُضيف 2026-09-28، migration `0011_live_chat.sql` — ⏳ لسا ما انشغّل)
+
+- **الزائر**: بالمساعد الفوري زر "تحدّث مع فريقنا هنا" (بجواب "تواصل") و"اسأل فريقنا هنا" (لما المساعد ما يفهم السؤال — بيبعته للفريق مباشرة). بيتحول المساعد لوضع `live` (`hadara-chat-mode` بـ sessionStorage، زر "المساعد" للرجوع): مقدمة + ملاحظة "المكتب مغلق" برّا 9–18 إسطنبول، الرسائل مع ✓ والوقت، "لم تُرسل — اضغط لإعادة المحاولة"، وبعد أول رسالة فورم اختياري (الاسم + الهاتف/الإيميل) بينبعت كرسالة. المحادثة (`chat`, `token` سرّي، الرسائل) بـ localStorage `hadara-live-chat` (30 يوم) — `src/components/liveChat.ts`: polling كل 4 ثواني والنافذة مفتوحة، وكل 30 ثانية لمدة 3 ساعات بعد ما تنسكّر (نقطة حمرا على الفقاعة لرد جديد). أرقام الهواتف بالرسائل بتنعزل LTR بـ `isolateNumbers()` (`utils/html.ts`). النصوص `live.*`.
+- **السيرفر**: `api/live-chat.ts` (POST إرسال / GET polling؛ حقل `website` مخفي، رفض البوتات، `page` لازم مسار داخلي؛ 400/404/429/503). بيبعت للفريق على تيليجرام (`api/_lib/liveChat.ts`: أول رسالة فيها المكان واللغة والصفحة والإعلان + تعليمات الرد؛ الباقي كرد على أول رسالة) وبيربط `message_id` بالمحادثة (`live_chat_link_telegram` بـ `CRON_SECRET`).
+- **رد الفريق من تيليجرام**: **Reply** على رسالة الزائر بتيليجرام → `api/telegram-webhook.ts` (السر `x-telegram-bot-api-secret-token` = أول 48 حرف من sha256(`${CRON_SECRET}:telegram-webhook`)، بس من `TELEGRAM_CHAT_ID`) → `live_chat_team_reply` → 👍 على رد الفريق. رد على تنبيه تاني (مش محادثة) أو أطول من 2000 حرف → رسالة توضيح. **التفعيل مرة وحدة**: زر "تفعيل الرد من تيليجرام" بـ `/admin/chats` → `api/telegram-setup.ts` (توكن الأدمن + `is_admin`) → `setWebhook`. **انتبه**: webhook البوت بيوقف `getUpdates` لو في شي تاني بيستعمله (ما في شي حالياً).
+- **لوحة الإدارة** `/admin/chats` (`pages/admin/chats.ts` + `data/liveChats.ts`): حالة ربط تيليجرام، قائمة المحادثات (شارة "بانتظار الرد" لما الزائر آخر واحد كتب)، المحادثة كاملة + رد مباشر (`live_chat_admin_reply`)، تحديث كل 10 ثواني بدون ما يضيع اللي عم تكتبه، `?chat=`. رابط "سجل الزبون" إذا الزائر ترك هاتف/إيميل. بشريط التنقل بعد "الاستفسارات".
+- **قاعدة البيانات**: `live_chats` (token، reference `LC-XXXXXX`، الاسم/التواصل، اللغة، الصفحة، الدولة/المدينة، الحملة، `telegram_root`)، `live_chat_messages` (visitor|team، 1–2000 حرف)، `live_chat_telegram`. RLS: الأدمن قراءة بس. حدود: 60 محادثة جديدة بالساعة (للكل)، 30 رسالة لكل محادثة بـ10 دقائق. الحذف بعد 90 يوم من آخر رسالة. مختبَر على PGlite + اختبار كامل للـ endpoints بتيليجرام وهمي.
+- **الخصوصية**: البند 4 فيه فقرة الدردشة المباشرة، والبند 11 فيه الحذف بعد 90 يوم (الخمس لغات).
+
 ## 5. نظام التصميم (Design System)
 
 > **مرجعان بصريان مهمّان**: هذا المشروع جزء من عائلة مواقع HADARA — الموقعين التاليين موجودين كـ Next.js repos على GitHub بحساب المستخدم (`kerimalastal-source/BYHADARA` = byhadara.com، `kerimalastal-source/hadararealestate` = hadararealestate.com)، ولازم يُرجَع لهم كمرجع تصميم عند أي طلب "خليه متل الموقع القديم/الأم". **الوصول المباشر لـ byhadara.com/hadararealestate.com عبر الإنترنت محجوب بسياسة الشبكة بهذه البيئة** (نفس قيد Wix/Supabase) — الطريقة الموثوقة: clone الريبوهات من GitHub (`git clone --depth 1 https://github.com/kerimalastal-source/<repo>`) وقراءة `styles/globals.css`/`components/Header.tsx`/`content/site.ts` منها مباشرة، مش محاولة fetch للموقع المباشر.
@@ -227,7 +244,7 @@
 | تسجيل دخول / حساب جديد | `/login`, `/register` | `login.ts`, `register.ts` | Supabase Auth |
 | لوحة تحكم البائع | `/account` | `account/dashboard.ts` | عقاراتي |
 | رفع/تعديل عقار | `/account/listings/new`, `/:id/edit` | `account/submitListing.ts` | |
-| لوحة الإدارة | `/admin` (الرئيسية)، `/admin/inquiries`، `/admin/bookings`، `/admin/customers`، `/admin/stats`، `/admin/listings` + `/admin/listings/:id` | `admin/overview.ts`, `admin/inquiries.ts`, `admin/bookings.ts`, `admin/customers.ts`, `admin/stats.ts`, `admin/dashboard.ts`, `admin/reviewListing.ts` (+ `nav.ts`, `replies.ts`) | ملخص اليوم، صندوق الاستفسارات (قسم 4.9)، حجوزات الجولات، سجل الزبائن، الإحصائيات، ومراجعة إعلانات إعادة البيع (قسم 4.10) — admin فقط |
+| لوحة الإدارة | `/admin` (الرئيسية)، `/admin/inquiries`، `/admin/chats` (قسم 4.12)، `/admin/bookings`، `/admin/customers`، `/admin/pipeline` + `/admin/ads` (قسم 4.11)، `/admin/stats`، `/admin/listings` + `/admin/listings/:id` | `admin/overview.ts`, `admin/inquiries.ts`, `admin/bookings.ts`, `admin/customers.ts`, `admin/stats.ts`, `admin/dashboard.ts`, `admin/reviewListing.ts` (+ `nav.ts`, `replies.ts`) | ملخص اليوم، صندوق الاستفسارات (قسم 4.9)، حجوزات الجولات، سجل الزبائن، الإحصائيات، ومراجعة إعلانات إعادة البيع (قسم 4.10) — admin فقط |
 | تواصل معنا | `/contact` | `contact.ts` | فورم التواصل + معلومات التواصل + خريطة OpenStreetMap embed |
 | 404 | — | `notFound.ts` | صفحة خطأ بسيطة |
 
