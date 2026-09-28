@@ -1,9 +1,9 @@
--- HADARA Real Estate — admin insights: visitor statistics, the daily Telegram summary and
+-- HADARA Real Estate - admin insights: visitor statistics, the daily Telegram summary and
 -- the day-before tour reminder email.
 -- Run once in the Supabase SQL Editor of the HADARA Real Estate project
 -- (khibypqmvnxuetmvjcnn), AFTER 0004, 0005 and 0007. Safe to run twice.
 --
---   * visitor_campaigns: the ad campaign (utm_source / utm_campaign …) a visit came from,
+--   * visitor_campaigns: the ad campaign (utm_source / utm_campaign ...) a visit came from,
 --     saved with the visit's first page (save_visit_campaign(), called by /api/track).
 --   * admin_visit_stats(days): aggregated visits, sources, countries, pages and leads for
 --     the admin statistics page. Admins only; no personal data.
@@ -12,6 +12,8 @@
 --     only answer with the secret stored in internal_secrets, which the team copies once
 --     into Vercel as CRON_SECRET:
 --         select value from public.internal_secrets where name = 'cron';
+
+-- Plain ASCII only: the Supabase SQL editor can cut statements at the wrong place otherwise.
 
 -- Guard: stop right here if this is not the HADARA Real Estate database, or a migration
 -- this one builds on hasn't run.
@@ -74,15 +76,15 @@ grant execute on function public.save_visit_campaign(uuid, text) to anon;
 
 /* ---------- Where a visit or a lead came from ---------- */
 
--- "facebook", "instagram", "google-ads", "google.com", "direct"… from the campaign string
--- ("utm_source=facebook · utm_campaign=villa", or a gclid / fbclid) or the referring site.
+-- "facebook", "instagram", "google-ads", "google.com", "direct"... from the campaign string
+-- ("utm_source=facebook - utm_campaign=villa", or a gclid / fbclid) or the referring site.
 create or replace function public.traffic_source(p_campaign text, p_referrer text)
 returns text
 language sql
 immutable
 as $$
   select case
-    when coalesce(p_campaign, '') ~ 'utm_source=' then lower(substring(p_campaign from 'utm_source=([^ ·&]+)'))
+    when coalesce(p_campaign, '') ~ 'utm_source=' then lower(substring(p_campaign from 'utm_source=([^ &\u00B7]+)'))
     when coalesce(p_campaign, '') ~ 'gclid=' then 'google-ads'
     when coalesce(p_campaign, '') ~ 'fbclid=' then 'facebook'
     when coalesce(p_referrer, '') = '' then 'direct'
@@ -96,7 +98,7 @@ returns text
 language sql
 immutable
 as $$
-  select lower(substring(p_campaign from 'utm_campaign=([^ ·&]+)'));
+  select lower(substring(p_campaign from 'utm_campaign=([^ &\u00B7]+)'));
 $$;
 
 /* ---------- Statistics page (admins) ---------- */
