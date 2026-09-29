@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.1",
+    "@vercel/blob": "^2.8.0",
     "@vercel/functions": "^3.9.9"
   }
 }

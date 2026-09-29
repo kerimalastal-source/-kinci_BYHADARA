@@ -4274,6 +4274,27 @@ body.map-open .back-to-top {
   font-size: 0.85rem;
 }
 
+.admin-social > .btn {
+  align-self: flex-start;
+  justify-self: start;
+}
+
+@media (max-width: 640px) {
+  .admin-social > .btn {
+    align-self: stretch;
+    justify-self: stretch;
+  }
+}
+
+.admin-social__status {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+}
+
+.admin-social__status:empty {
+  display: none;
+}
+
 .admin-panel__more {
   align-self: flex-start;
   margin-top: auto;

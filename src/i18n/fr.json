@@ -2685,6 +2685,17 @@
     "listings": "Annonces de revente"
   },
   "adminHome": {
+    "social": {
+      "title": "Publications quotidiennes sur les réseaux sociaux",
+      "hint": "Publiées automatiquement chaque jour à 10 h (heure d'Istanbul) sur Facebook et Instagram, et envoyées sur Telegram. En cas de retard, publiez-les d'ici : une publication déjà en ligne n'est jamais republiée.",
+      "button": "Publier les publications du jour",
+      "sending": "Publication en cours… cela peut prendre une minute.",
+      "done": "Terminé : {published} publiée(s) maintenant, {already} déjà en ligne. Détails sur Telegram.",
+      "failed": "Une partie de la publication a échoué — la raison est sur Telegram. Vous pouvez réessayer.",
+      "missing": "Les publications du jour ne sont pas encore prêtes (aucun fichier pour la date du jour).",
+      "blob": "Le stockage d'images (Vercel Blob) n'est pas encore relié au site.",
+      "error": "Impossible de joindre le serveur. Veuillez réessayer."
+    },
     "followUpsToday": "Relances à faire",
     "noFollowUps": "Aucune relance aujourd’hui.",
     "allPipeline": "Pipeline de ventes →",

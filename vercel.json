@@ -67,12 +67,19 @@
   "functions": {
     "api/track.ts": {
       "maxDuration": 30
+    },
+    "api/social-publish.ts": {
+      "maxDuration": 60
     }
   },
   "crons": [
     {
       "path": "/api/daily",
       "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/social-publish",
+      "schedule": "0 7 * * *"
     }
   ]
 }

@@ -9,7 +9,7 @@ export function escapeHtml(value: string): string {
 }
 
 /** Calls a Bot API method in the team's chat; returns its result, or null when not sent. */
-async function callTelegram(method: string, body: Record<string, unknown>): Promise<{ message_id?: number } | null> {
+async function callTelegram(method: string, body: Record<string, unknown>, timeoutMs = 5000): Promise<{ message_id?: number } | null> {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) return null;
@@ -19,7 +19,7 @@ async function callTelegram(method: string, body: Record<string, unknown>): Prom
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chat_id: chatId, parse_mode: "HTML", disable_web_page_preview: true, ...body }),
-      signal: AbortSignal.timeout(5000)
+      signal: AbortSignal.timeout(timeoutMs)
     });
     if (!res.ok) {
       // Telegram's error text (e.g. "chat not found" before the bot was started, or
@@ -46,6 +46,14 @@ export async function sendTelegram(html: string, replyTo?: number | null): Promi
     ...(replyTo ? { reply_parameters: { message_id: replyTo, allow_sending_without_reply: true } } : {})
   });
   return typeof result?.message_id === "number" ? result.message_id : null;
+}
+
+/**
+ * Sends a photo by its public URL (Telegram downloads it) with an HTML caption (at most 1024
+ * characters). True when it was sent.
+ */
+export async function sendTelegramPhoto(photoUrl: string, captionHtml: string): Promise<boolean> {
+  return (await callTelegram("sendPhoto", { photo: photoUrl, caption: captionHtml.slice(0, 1024) }, 20_000)) !== null;
 }
 
 /** Replaces the text of an earlier message (no new notification). False when it failed. */
