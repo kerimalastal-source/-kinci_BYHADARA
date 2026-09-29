@@ -282,6 +282,7 @@ test("/api/social-publish: the cron needs CRON_SECRET, the button needs an admin
   assert.equal((await POST(request("POST", "Bearer not-an-admin"))).status, 403);
   // The right secret but no Blob store: nothing is published, and the owner is told.
   delete process.env.BLOB_READ_WRITE_TOKEN;
+  delete process.env.BLOB_STORE_ID;
   process.env.TELEGRAM_BOT_TOKEN = "bot";
   process.env.TELEGRAM_CHAT_ID = "1";
   const response = await GET(request("GET", `Bearer ${"x".repeat(40)}`));

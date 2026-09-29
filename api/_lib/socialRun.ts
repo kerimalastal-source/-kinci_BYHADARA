@@ -6,8 +6,11 @@ import { BlobNotFoundError, del, head, put } from "@vercel/blob";
 import { istanbulDate, metaConfig, publishDay, socialSourceUrl, type DayResult, type SocialStore } from "./social.js";
 import { sendTelegram, sendTelegramPhoto } from "./telegram.js";
 
-/** Whether a Blob store is connected to the project (it sets BLOB_READ_WRITE_TOKEN). */
-export const hasBlob = () => Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+/**
+ * Whether a Blob store is connected to the project: BLOB_READ_WRITE_TOKEN, or BLOB_STORE_ID
+ * (newer connections, where @vercel/blob signs in with the deployment's OIDC token).
+ */
+export const hasBlob = () => Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
 
 const blobStore: SocialStore = {
   async put(path, body, contentType) {
