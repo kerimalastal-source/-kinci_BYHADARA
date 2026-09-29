@@ -2694,7 +2694,11 @@
       "failed": "Part of the publishing failed — the reason is on Telegram. You can try again.",
       "missing": "Today's posts aren't ready yet (no file for today's date).",
       "blob": "The image store (Vercel Blob) isn't connected to the site yet.",
-      "error": "Couldn't reach the server. Please try again."
+      "error": "Couldn't reach the server. Please try again.",
+      "started": "Publishing started ✓ — it continues in the background and the result reaches Telegram within a minute. No need to press again.",
+      "forbidden": "This account isn't an admin, or the session expired — sign in again.",
+      "session": "Your session expired — sign in again and retry.",
+      "http": "The server returned an error (code {status}). Try again in a minute."
     },
     "followUpsToday": "Sales follow-ups due",
     "noFollowUps": "No follow-ups due today.",

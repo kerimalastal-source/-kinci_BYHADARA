@@ -137,6 +137,26 @@ test("Facebook is published with the Page's own token, Instagram after FINISHED,
   assert.ok(store.files.has(`social-state/${DATE}/post-2/instagram.done`));
 });
 
+test("the posts go out side by side (a slow Instagram doesn't hold up the next post), reports in order", async () => {
+  const { deps, calls, photos } = setup();
+  const fetch = deps.fetch;
+  // Instagram takes a while with post-1's image.
+  deps.fetch = async (input, init) => {
+    if (init?.body instanceof URLSearchParams && init.body.get("caption") === POSTS["post-1"].ig) await new Promise((r) => setTimeout(r, 100));
+    return fetch(input, init);
+  };
+  const day = await publishDay(deps, DATE);
+  assert.deepEqual(day.results.map((r) => [r.post, r.facebook, r.instagram]), [
+    ["post-1", "published", "published"],
+    ["post-2", "published", "published"]
+  ]);
+  // post-2 was on Instagram before post-1's slow container was even created.
+  const media = graphCalls(calls, "IGUSER/media").filter((c) => c.body.caption);
+  assert.equal(media[0].body.caption, POSTS["post-2"].ig);
+  // Telegram still reports them in the day's order.
+  assert.deepEqual(photos.map((p) => p.url), [`https://blob.example/social/${DATE}/post-1.jpg`, `https://blob.example/social/${DATE}/post-2.jpg`]);
+});
+
 test("nothing is published twice: a second run (cron or button) does nothing and says nothing", async () => {
   const first = setup();
   await publishDay(first.deps, DATE);

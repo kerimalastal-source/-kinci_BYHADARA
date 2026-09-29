@@ -247,20 +247,19 @@ export async function publishDay(deps: PublishDeps, date: string): Promise<DayRe
   }
 
   const meta = deps.meta;
-  const results: PostResult[] = [];
-  for (const file of day.posts) {
-    const name = file.replace(/\.json$/, "");
-    if (!/^post-\d+$/.test(name)) continue;
+  type Outcome = { result: PostResult; report: (() => Promise<void>) | null };
+  // The posts are published side by side (Instagram alone can take ~20 s a post, and the
+  // function has 60 s); the Telegram reports then go out in the day's order.
+  const onePost = async (name: string): Promise<Outcome> => {
     const post = await readJson<SocialPost>(deps, `${base}/${name}.json`, headers);
     const result: PostResult = { post: name, facebook: "manual", instagram: "manual", errors: [] };
     if (!post || typeof post.fb !== "string" || typeof post.ig !== "string" || !/^post-\d+\.jpe?g$/.test(post.image ?? "")) {
       result.facebook = result.instagram = "failed";
       result.errors.push(`ملف ${name}.json غير صالح`);
       if (await deps.store.claim(markers(date, name, "invalid.warned"), "{}").catch(() => true)) {
-        await deps.telegramText(`⚠️ <b>تعذّر قراءة منشور اليوم</b> (${escapeHtml(date)} · ${escapeHtml(name)})`);
+        return { result, report: async () => void (await deps.telegramText(`⚠️ <b>تعذّر قراءة منشور اليوم</b> (${escapeHtml(date)} · ${escapeHtml(name)})`)) };
       }
-      results.push(result);
-      continue;
+      return { result, report: null };
     }
 
     const igProblem = instagramCaptionProblem(post.ig);
@@ -272,8 +271,7 @@ export async function publishDay(deps: PublishDeps, date: string): Promise<DayRe
       // Everything that can go out already did.
       result.facebook = meta ? "already" : "manual";
       result.instagram = igDone ? "already" : "manual";
-      results.push(result);
-      continue;
+      return { result, report: null };
     }
 
     // A public copy of the image for Meta and Telegram to fetch.
@@ -288,9 +286,7 @@ export async function publishDay(deps: PublishDeps, date: string): Promise<DayRe
       const message = error instanceof Error ? error.message : String(error);
       result.facebook = result.instagram = "failed";
       result.errors.push(`الصورة: ${message}`);
-      await deps.telegramText(`⚠️ <b>تعذّر تجهيز صورة منشور اليوم</b> (${escapeHtml(post.topic)})\n${escapeHtml(message)}`);
-      results.push(result);
-      continue;
+      return { result, report: async () => void (await deps.telegramText(`⚠️ <b>تعذّر تجهيز صورة منشور اليوم</b> (${escapeHtml(post.topic)})\n${escapeHtml(message)}`)) };
     }
 
     if (meta) {
@@ -309,19 +305,32 @@ export async function publishDay(deps: PublishDeps, date: string): Promise<DayRe
     const attempted = [result.facebook, result.instagram].some((s) => s === "published" || s === "failed");
     const busy = result.facebook === "busy" || result.instagram === "busy";
     if (!attempted && (telegramDone || busy)) {
-      results.push(result);
-      continue;
+      return { result, report: null };
     }
     const firstReport = !telegramDone;
-    const caption = `🗓 ${escapeHtml(date)} · ${escapeHtml(post.topic)}\n\n${statusLines(result, igProblem, Boolean(meta), Boolean(meta?.igUserId))}`;
-    const sent = await deps.telegramPhoto(imageUrl, caption);
-    // The captions that weren't published automatically, to post by hand (once).
-    if (firstReport) {
-      if (!meta) await deps.telegramText(`<b>نص فيسبوك</b>\n\n${escapeHtml(post.fb)}`.slice(0, 4096));
-      if (!meta || !meta.igUserId || igProblem) await deps.telegramText(`<b>نص إنستغرام</b>\n\n${escapeHtml(post.ig)}`.slice(0, 4096));
-    }
-    if (sent && firstReport) await deps.store.put(markers(date, name, "telegram.done"), "{}", "application/json").catch(() => undefined);
-    results.push(result);
-  }
+    const report = async () => {
+      const caption = `🗓 ${escapeHtml(date)} · ${escapeHtml(post.topic)}\n\n${statusLines(result, igProblem, Boolean(meta), Boolean(meta?.igUserId))}`;
+      const sent = await deps.telegramPhoto(imageUrl, caption);
+      // The captions that weren't published automatically, to post by hand (once).
+      if (firstReport) {
+        if (!meta) await deps.telegramText(`<b>نص فيسبوك</b>\n\n${escapeHtml(post.fb)}`.slice(0, 4096));
+        if (!meta || !meta.igUserId || igProblem) await deps.telegramText(`<b>نص إنستغرام</b>\n\n${escapeHtml(post.ig)}`.slice(0, 4096));
+      }
+      if (sent && firstReport) await deps.store.put(markers(date, name, "telegram.done"), "{}", "application/json").catch(() => undefined);
+    };
+    return { result, report };
+  };
+
+  const names = day.posts.map((file) => String(file).replace(/\.json$/, "")).filter((name) => /^post-\d+$/.test(name));
+  const outcomes = await Promise.all(
+    names.map((name) =>
+      onePost(name).catch((error): Outcome => {
+        const message = error instanceof Error ? error.message : String(error);
+        return { result: { post: name, facebook: "failed", instagram: "failed", errors: [message] }, report: null };
+      })
+    )
+  );
+  for (const outcome of outcomes) await outcome.report?.().catch(() => undefined);
+  const results = outcomes.map((outcome) => outcome.result);
   return { date, found: true, results };
 }

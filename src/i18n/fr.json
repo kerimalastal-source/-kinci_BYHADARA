@@ -2694,7 +2694,11 @@
       "failed": "Une partie de la publication a échoué — la raison est sur Telegram. Vous pouvez réessayer.",
       "missing": "Les publications du jour ne sont pas encore prêtes (aucun fichier pour la date du jour).",
       "blob": "Le stockage d'images (Vercel Blob) n'est pas encore relié au site.",
-      "error": "Impossible de joindre le serveur. Veuillez réessayer."
+      "error": "Impossible de joindre le serveur. Veuillez réessayer.",
+      "started": "Publication lancée ✓ — elle se poursuit en arrière-plan et le résultat arrive sur Telegram d’ici une minute. Inutile de cliquer à nouveau.",
+      "forbidden": "Ce compte n’est pas administrateur, ou la session a expiré — reconnectez-vous.",
+      "session": "Votre session a expiré — reconnectez-vous puis réessayez.",
+      "http": "Le serveur a renvoyé une erreur (code {status}). Réessayez dans une minute."
     },
     "followUpsToday": "Relances à faire",
     "noFollowUps": "Aucune relance aujourd’hui.",
