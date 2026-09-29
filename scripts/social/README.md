@@ -13,8 +13,13 @@ then posts or schedules them in Meta Business Suite.
 
 Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F`).
 
-1. `node scripts/social/topics.mjs` → today's 2 topics (rotation over `topics.json`),
-   each with a suggested `photo` and a `brief`.
+1. `node scripts/social/topics.mjs` → today's 2 topics from the monthly content plan
+   (`plan.json`: one entry per day, a weekly theme, 2 posts with `label`, `brief`,
+   `path` and suggested `photos`). Use each topic's `id` as the post `id` and its
+   `label` as the post `topic`; let the week's theme colour the wording.
+   **If it prints `"finished": true`, the month is over: make no posts, publish
+   nothing, and end with the Arabic summary "انتهت خطة المحتوى لهذا الشهر — حان وقت
+   مراجعة النتائج ووضع خطة جديدة مع Claude."** (`notStarted` → also make no posts.)
 2. Collect the facts for each topic **from the site only**:
    - projects: `src/data/projects.ts` (stats, residences, status, amenities, district)
      and `projectsData.<slug>` in `src/i18n/ar.json` + `en.json` (name, tagline,
@@ -50,8 +55,10 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
 - Sold-out projects (`soldOut: true`) are never promoted.
 - Engineering/design service: images are illustrative concepts; never present them
   as built HADARA projects and never name another company.
-- Don't reuse the exact headline or photo of the same topic's previous cycle
-  (`cycle` > 0 means the topic was posted before: change the angle and the photo).
+- Several posts cover the same project from different angles during the month: keep to
+  the post's angle (its `brief`) and never repeat an earlier headline for that project.
+  Already published before the plan (don't copy them): intro "شريكك العقاري في إسطنبول",
+  Marmara Haven Villa overview, Diamond Marin overview, citizenship basics, video tour.
 - No 4-byte emoji inside the image text. Emoji in captions are fine (like the examples).
 
 ## posts.json shape

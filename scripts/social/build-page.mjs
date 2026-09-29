@@ -32,7 +32,10 @@ const kept = all.slice(0, KEEP_DAYS);
 const dropped = all.slice(KEEP_DAYS);
 
 fs.writeFileSync(path.join(siteDir, "days.json"), JSON.stringify(kept));
-fs.writeFileSync(path.join(siteDir, "index.html"), page(kept));
+const planFile = path.join(here, "plan.json");
+const plan = fs.existsSync(planFile) ? JSON.parse(fs.readFileSync(planFile, "utf8")) : null;
+const planSummary = plan ? { name: plan.name, days: plan.days.map((d) => ({ date: d.date, week: d.week, labels: d.posts.map((p) => p.label) })) } : null;
+fs.writeFileSync(path.join(siteDir, "index.html"), page(kept, planSummary));
 
 const rel = (p) => path.relative(process.cwd(), p);
 const files = { "days.json": rel(path.join(siteDir, "days.json")) };
@@ -40,8 +43,8 @@ for (const p of today) files[p.image] = rel(path.join(outDir, path.basename(p.im
 for (const d of dropped) for (const p of d.posts) files[p.image] = null;
 console.log(JSON.stringify({ file_path: rel(path.join(siteDir, "index.html")), files }, null, 2));
 
-function page(days) {
-  const data = JSON.stringify(days).replace(/</g, "\\u003c");
+function page(days, plan) {
+  const data = JSON.stringify({ days, plan }).replace(/</g, "\\u003c");
   return `<title>منشورات حضارة</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@500;600;700&display=swap">
@@ -85,6 +88,14 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .caption{border:1px solid var(--line);border-radius:12px;padding:14px 16px;max-height:420px;overflow:auto;font-size:.95rem;line-height:1.75;background:var(--bg)}
 .caption p{margin:0;min-height:1em;white-space:pre-wrap;overflow-wrap:anywhere}
 .empty{color:var(--ink-soft)}
+.plan-week{margin:6px 0 4px;font-weight:700;color:var(--gold);font-size:.95rem}
+.plan-row{display:grid;grid-template-columns:7.5rem minmax(0,1fr) auto;gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--line);font-size:.9rem}
+.plan-row .d{color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.plan-row ul{margin:0;padding:0;list-style:none;display:grid;gap:2px}
+.plan-row .s{font-size:.75rem;font-weight:600;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.s.done{background:var(--gold-soft);color:var(--gold)}.s.today{background:var(--brand);color:var(--bg)}.s.next{color:var(--ink-soft);border:1px solid var(--line)}
+#plan-body{padding-bottom:12px}
+@media (max-width:520px){.plan-row{grid-template-columns:minmax(0,1fr) auto}.plan-row .d{grid-column:1/-1}}
 @media (max-width:700px){.post{grid-template-columns:minmax(0,1fr)}.shot img{max-width:360px}}
 @media (prefers-reduced-motion:no-preference){.copy{transition:background .2s}}
 </style>
@@ -103,15 +114,17 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
       <li>انشر الآن، أو اختر Planla (جدولة) لوقت لاحق من اليوم.</li>
     </ol>
   </details>
+  <details class="help plan" id="plan"><summary>خطة المحتوى لهذا الشهر</summary><div id="plan-body"></div></details>
   <main id="days"></main>
 </div>
 <script type="application/json" id="data">${data}</script>
 <script>
 (function(){
-  var days = JSON.parse(document.getElementById("data").textContent);
+  var all = JSON.parse(document.getElementById("data").textContent);
+  var days = all.days, plan = all.plan;
   var root = document.getElementById("days");
   root.style.display = "grid"; root.style.gap = "36px";
-  var todayIso = new Date().toISOString().slice(0,10);
+  var todayIso; try { todayIso = new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Istanbul"}).format(new Date()); } catch(e){ todayIso = new Date().toISOString().slice(0,10); }
   function fmt(iso){
     try { return new Intl.DateTimeFormat("ar-u-nu-latn-ca-gregory",{weekday:"long",day:"numeric",month:"long",year:"numeric",timeZone:"UTC"}).format(new Date(iso+"T00:00:00Z")); }
     catch(e){ return iso; }
@@ -120,6 +133,18 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
   function renderCaption(box, text){
     box.textContent="";
     text.replace(/\\n$/,"").split("\\n").forEach(function(line){ var p=el("p"); p.dir="auto"; p.textContent=line; box.appendChild(p); });
+  }
+  if(plan){
+    var pb=document.getElementById("plan-body"); var lastWeek=null;
+    var published={}; days.forEach(function(d){published[d.date]=true;});
+    var sum=document.querySelector("#plan summary"); sum.textContent="خطة المحتوى: "+plan.name.replace(/^.*?—\\s*/,"")+" ("+plan.days.length+" يوماً)";
+    plan.days.forEach(function(d){
+      if(d.week!==lastWeek){ pb.appendChild(el("div","plan-week",d.week)); lastWeek=d.week; }
+      var row=el("div","plan-row"); row.appendChild(el("span","d",fmt(d.date).replace(/،?\\s*\\d{4}$/,"")));
+      var ul=el("ul"); d.labels.forEach(function(l){ ul.appendChild(el("li",null,l)); }); row.appendChild(ul);
+      var st = d.date===todayIso ? ["today","اليوم"] : (published[d.date]||d.date<todayIso) ? ["done","تم"] : ["next","قادم"];
+      row.appendChild(el("span","s "+st[0],st[1])); pb.appendChild(row);
+    });
   }
   if(!days.length){ root.appendChild(el("p","empty","ستظهر هنا منشورات الصباح فور تجهيزها.")); return; }
   days.forEach(function(day){
