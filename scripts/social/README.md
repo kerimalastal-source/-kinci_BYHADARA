@@ -64,9 +64,16 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
 
 Every post uses the **one approved template** that `render.mjs` draws ("design A"):
 photo on top, dark green (`#0f2b21`) panel below, the HADARA logo top-left, a gold pill
-badge top-right (Arabic · English), the Arabic headline with the English line under it,
-a thin gold rule, **exactly 4 stat tiles** (gold number, Arabic label, English label),
-and the footer: www.hadararealestate.com + WhatsApp +90 531 930 92 14. 1080×1350 JPEG.
+badge top-right (Arabic · English), **the Arabic headline and the English headline at the
+same weight, separated by a thin gold line** (Arabic right-aligned, English left-aligned,
+each on one line), **exactly 4 stat tiles** (gold number, Arabic label, English label of
+equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 930 92 14.
+1080×1350 JPEG.
+
+- **Always bilingual, both languages equal (owner's rule 2026-09-29)**: every image has the
+  full message in Arabic and in English; every caption has a complete Arabic part, then
+  the divider `━━━━━━━━  English  ━━━━━━━━`, then a complete English part (render.mjs does
+  this). Never a post in one language only, never the English as a small afterthought.
 
 - Never change the template, colours, fonts, layout or footer, and never make an image
   any other way. Only the content changes: photo, badge, headline, 4 stats, note.
@@ -114,7 +121,7 @@ and the footer: www.hadararealestate.com + WhatsApp +90 531 930 92 14. 1080×135
     "size": "cover",                      // optional, e.g. "auto 150%" to zoom
     "badge": { "ar": "جاهز للسكن", "en": "Ready to move in" },   // optional
     "place": "Lotus Yalı · Büyükçekmece, Istanbul",              // optional caption on the photo
-    "headlineAr": "…", "headlineEn": "…", "arSize": 52,
+    "headlineAr": "…", "headlineEn": "…", "arSize": 52,  // enSize optional (default arSize × 0.8)
     "stats": [ { "value": "48", "ar": "شقة", "en": "Apartments" } ],   // exactly 4
     "note": { "ar": "…", "en": "…" }     // optional small line under the stats
   },
