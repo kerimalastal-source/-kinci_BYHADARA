@@ -22,5 +22,29 @@
     "headlineAr": "معك من أول سؤال حتى سند الطابو",
     "headlineEn": "With you from the first question to the title deed",
     "photo": "/images/projects/marmara-haven-villa/living-room.jpg"
+  },
+  {
+    "date": "2026-09-29",
+    "id": "reel-marmara-haven-villa",
+    "topic": "ريلز: فيلا مرمرة هيفن",
+    "headlineAr": "ملاذ خاص بإطلالة على بحر مرمرة",
+    "headlineEn": "A private sanctuary overlooking the Marmara Sea",
+    "photo": "/images/projects/marmara-haven-villa/main-facade.jpg"
+  },
+  {
+    "date": "2026-09-29",
+    "id": "reel-diamond-marin",
+    "topic": "ريلز: دايموند مارين",
+    "headlineAr": "جوهرة المارينا في بيليكدوزو",
+    "headlineEn": "The jewel of the marina in Beylikdüzü",
+    "photo": "/images/projects/diamond-marin/facade.jpg"
+  },
+  {
+    "date": "2026-09-29",
+    "id": "reel-citizenship",
+    "topic": "ريلز: الجنسية التركية",
+    "headlineAr": "الجنسية التركية عبر الاستثمار العقاري",
+    "headlineEn": "Turkish citizenship through real estate",
+    "photo": "/images/blog/citizenship-by-real-estate.jpg"
   }
 ]
