@@ -1,0 +1,26 @@
+[
+  {
+    "date": "2026-09-29",
+    "id": "opening-welcome",
+    "topic": "افتتاحية 1: أهلاً بكم في حضارة",
+    "headlineAr": "حضارة: شريكك العقاري في إسطنبول",
+    "headlineEn": "HADARA: your real estate partner in Istanbul",
+    "photo": "/hero-istanbul.jpg"
+  },
+  {
+    "date": "2026-09-29",
+    "id": "opening-projects",
+    "topic": "افتتاحية 2: مشاريعنا",
+    "headlineAr": "من بيليكدوزو إلى شيشلي",
+    "headlineEn": "From Beylikdüzü to Şişli",
+    "photo": "/images/projects/diamond-marin/aerial-sea-view.jpg"
+  },
+  {
+    "date": "2026-09-29",
+    "id": "opening-services",
+    "topic": "افتتاحية 3: كيف نرافقك",
+    "headlineAr": "معك من أول سؤال حتى سند الطابو",
+    "headlineEn": "With you from the first question to the title deed",
+    "photo": "/images/projects/marmara-haven-villa/living-room.jpg"
+  }
+]
