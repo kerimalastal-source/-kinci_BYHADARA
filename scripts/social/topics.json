@@ -1,0 +1,514 @@
+{
+ "start": "2026-09-29",
+ "perDay": 2,
+ "topics": [
+  {
+   "id": "beylikduzu-living",
+   "kind": "project",
+   "slug": "beylikduzu-living",
+   "angle": "overview",
+   "path": "/projects/beylikduzu-living",
+   "photos": [
+    "/images/projects/beylikduzu-living/aerial-view.jpg",
+    "/images/projects/beylikduzu-living/bathroom.jpg",
+    "/images/projects/beylikduzu-living/courtyard-gardens.jpg",
+    "/images/projects/beylikduzu-living/entrance-hall.jpg",
+    "/images/projects/beylikduzu-living/garden-terrace.jpg",
+    "/images/projects/beylikduzu-living/kitchen.jpg",
+    "/images/projects/beylikduzu-living/living-room-2.jpg",
+    "/images/projects/beylikduzu-living/living-room.jpg",
+    "/images/projects/beylikduzu-living/street-facade.jpg"
+   ],
+   "brief": "Present the project: what it is, where, status/delivery, unit types and sizes, 3-4 key facts."
+  },
+  {
+   "id": "blog-buying-property-and-tapu",
+   "kind": "article",
+   "slug": "buying-property-and-tapu",
+   "path": "/blog/buying-property-and-tapu",
+   "photos": [
+    "/images/blog/buying-property-and-tapu.jpg"
+   ],
+   "brief": "Useful tips from our article 'How to Buy Property in Turkey and Register the Title Deed (Tapu)' (blogData.buying-property-and-tapu); 3-4 practical points, then invite to read the full article."
+  },
+  {
+   "id": "lotus-sisli",
+   "kind": "project",
+   "slug": "lotus-sisli",
+   "angle": "overview",
+   "path": "/projects/lotus-sisli",
+   "photos": [
+    "/images/projects/lotus-sisli/aerial-city.jpg",
+    "/images/projects/lotus-sisli/apartment-living.jpg",
+    "/images/projects/lotus-sisli/living-room.jpg",
+    "/images/projects/lotus-sisli/office-interior.jpg",
+    "/images/projects/lotus-sisli/penthouse-terrace.jpg",
+    "/images/projects/lotus-sisli/tower-day.jpg",
+    "/images/projects/lotus-sisli/tower-garden.jpg",
+    "/images/projects/lotus-sisli/tower-night.jpg",
+    "/images/projects/lotus-sisli/twin-towers.jpg"
+   ],
+   "brief": "Present the project: what it is, where, status/delivery, unit types and sizes, 3-4 key facts."
+  },
+  {
+   "id": "blog-about-istanbul",
+   "kind": "article",
+   "slug": "about-istanbul",
+   "path": "/blog/about-istanbul",
+   "photos": [
+    "/images/blog/about-istanbul.jpg"
+   ],
+   "brief": "Useful tips from our article 'Istanbul: The City Where Continents Meet' (blogData.about-istanbul); 3-4 practical points, then invite to read the full article."
+  },
+  {
+   "id": "lotus-yali",
+   "kind": "project",
+   "slug": "lotus-yali",
+   "angle": "overview",
+   "path": "/projects/lotus-yali",
+   "photos": [
+    "/images/projects/lotus-yali/aerial-sea-view.jpg",
+    "/images/projects/lotus-yali/sunset-aerial.jpg",
+    "/images/projects/lotus-yali/view-from-sea.jpg"
+   ],
+   "brief": "Present the project: what it is, where, status/delivery, unit types and sizes, 3-4 key facts."
+  },
+  {
+   "id": "blog-taxes-and-tapu-fees",
+   "kind": "article",
+   "slug": "taxes-and-tapu-fees",
+   "path": "/blog/taxes-and-tapu-fees",
+   "photos": [
+    "/images/blog/taxes-and-tapu-fees.jpg"
+   ],
+   "brief": "Useful tips from our article 'Understanding Property Tax and Title Deed (Tapu) Fees in Turkey' (blogData.taxes-and-tapu-fees); 3-4 practical points, then invite to read the full article."
+  },
+  {
+   "id": "lotus-manzara-guzelce",
+   "kind": "project",
+   "slug": "lotus-manzara-guzelce",
+   "angle": "overview",
+   "path": "/projects/lotus-manzara-guzelce",
+   "photos": [
+    "/images/projects/lotus-manzara-guzelce/aerial-masterplan.jpg",
+    "/images/projects/lotus-manzara-guzelce/aerial-villas.jpg",
+    "/images/projects/lotus-manzara-guzelce/bathroom.jpg",
+    "/images/projects/lotus-manzara-guzelce/entrance-staircase.jpg",
+    "/images/projects/lotus-manzara-guzelce/kitchen.jpg",
+    "/images/projects/lotus-manzara-guzelce/living-room.jpg",
+    "/images/projects/lotus-manzara-guzelce/master-bedroom.jpg",
+    "/images/projects/lotus-manzara-guzelce/private-parking.jpg",
+    "/images/projects/lotus-manzara-guzelce/street-view.jpg",
+    "/images/projects/lotus-manzara-guzelce/villa-exterior.jpg",
+    "/images/projects/lotus-manzara-guzelce/villa-row.jpg"
+   ],
+   "brief": "Present the project: what it is, where, status/delivery, unit types and sizes, 3-4 key facts."
+  },
+  {
+   "id": "blog-real-estate-in-turkey",
+   "kind": "article",
+   "slug": "real-estate-in-turkey",
+   "path": "/blog/real-estate-in-turkey",
+   "photos": [
+    "/images/blog/real-estate-in-turkey.jpg"
+   ],
+   "brief": "Useful tips from our article 'Understanding the Turkish Real Estate Market' (blogData.real-estate-in-turkey); 3-4 practical points, then invite to read the full article."
+  },
+  {
+   "id": "cadde-ispartakule",
+   "kind": "project",
+   "slug": "cadde-ispartakule",
+   "angle": "overview",
+   "path": "/projects/cadde-ispartakule",
+   "photos": [
+    "/images/projects/cadde-ispartakule/fitness.jpg",
+    "/images/projects/cadde-ispartakule/garden-pond.jpg",
+    "/images/projects/cadde-ispartakule/hamam.jpg",
+    "/images/projects/cadde-ispartakule/retail-avenue.jpg",
+    "/images/projects/cadde-ispartakule/sauna.jpg",
+    "/images/projects/cadde-ispartakule/smart-home.jpg",
+    "/images/projects/cadde-ispartakule/terrace-view.jpg",
+    "/images/projects/cadde-ispartakule/tower-avenue.jpg",
+    "/images/projects/cadde-ispartakule/tower-park.jpg"
+   ],
+   "brief": "Present the project: what it is, where, status/delivery, unit types and sizes, 3-4 key facts."
+  },
+  {
+   "id": "blog-life-in-turkey",
+   "kind": "article",
+   "slug": "life-in-turkey",
+   "path": "/blog/life-in-turkey",
+   "photos": [
+    "/images/blog/life-in-turkey.jpg"
+   ],
+   "brief": "Useful tips from our article 'What It's Like to Live in Turkey' (blogData.life-in-turkey); 3-4 practical points, then invite to read the full article."
+  },
+  {
+   "id": "lotus-manzara-beylikduzu",
+   "kind": "project",
+   "slug": "lotus-manzara-beylikduzu",
+   "angle": "overview",
+   "path": "/projects/lotus-manzara-beylikduzu",
+   "photos": [
+    "/images/projects/lotus-manzara-beylikduzu/aerial-sea-view.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/aerial-villas.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/entrance-staircase.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/kitchen.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/living-room.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/master-bedroom.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/private-parking.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/street-view.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/villa-type-a.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/villa-type-b.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/villas-entrance.jpg"
+   ],
+   "brief": "Present the project: what it is, where, status/delivery, unit types and sizes, 3-4 key facts."
+  },
+  {
+   "id": "blog-real-estate-valuation",
+   "kind": "article",
+   "slug": "real-estate-valuation",
+   "path": "/blog/real-estate-valuation",
+   "photos": [
+    "/images/blog/real-estate-valuation.jpg"
+   ],
+   "brief": "Useful tips from our article 'Why Real Estate Valuation Matters When Buying Property' (blogData.real-estate-valuation); 3-4 practical points, then invite to read the full article."
+  },
+  {
+   "id": "lotus-koru-2",
+   "kind": "project",
+   "slug": "lotus-koru-2",
+   "angle": "overview",
+   "path": "/projects/lotus-koru-2",
+   "photos": [
+    "/images/projects/lotus-koru-2/central-location.jpg",
+    "/images/projects/lotus-koru-2/landscaped-grounds.jpg",
+    "/images/projects/lotus-koru-2/residential-blocks.jpg",
+    "/images/projects/lotus-koru-2/urban-living-concept.jpg"
+   ],
+   "brief": "Present the project: what it is, where, status/delivery, unit types and sizes, 3-4 key facts."
+  },
+  {
+   "id": "blog-citizenship-investment-laws",
+   "kind": "article",
+   "slug": "citizenship-investment-laws",
+   "path": "/blog/citizenship-investment-laws",
+   "photos": [
+    "/images/blog/citizenship-investment-laws.jpg"
+   ],
+   "brief": "Useful tips from our article 'Turkey's Citizenship-by-Investment Laws, Explained' (blogData.citizenship-investment-laws); 3-4 practical points, then invite to read the full article."
+  },
+  {
+   "id": "diamond-marin",
+   "kind": "project",
+   "slug": "diamond-marin",
+   "angle": "overview",
+   "path": "/projects/diamond-marin",
+   "photos": [
+    "/images/projects/diamond-marin/aerial-sea-view.jpg",
+    "/images/projects/diamond-marin/balcony-pool-view.jpg",
+    "/images/projects/diamond-marin/dressing-room.jpg",
+    "/images/projects/diamond-marin/facade-side.jpg",
+    "/images/projects/diamond-marin/facade.jpg",
+    "/images/projects/diamond-marin/fitness-center.jpg",
+    "/images/projects/diamond-marin/kids-bedroom.jpg",
+    "/images/projects/diamond-marin/kitchen.jpg",
+    "/images/projects/diamond-marin/living-dining.jpg",
+    "/images/projects/diamond-marin/living-room.jpg",
+    "/images/projects/diamond-marin/master-bedroom.jpg",
+    "/images/projects/diamond-marin/street-view.jpg"
+   ],
+   "brief": "Present the project: what it is, where, status/delivery, unit types and sizes, 3-4 key facts."
+  },
+  {
+   "id": "blog-about-turkey",
+   "kind": "article",
+   "slug": "about-turkey",
+   "path": "/blog/about-turkey",
+   "photos": [
+    "/images/blog/about-turkey.jpg"
+   ],
+   "brief": "Useful tips from our article 'Getting to Know Turkey: A Country Between Two Continents' (blogData.about-turkey); 3-4 practical points, then invite to read the full article."
+  },
+  {
+   "id": "marmara-haven-villa",
+   "kind": "project",
+   "slug": "marmara-haven-villa",
+   "angle": "overview",
+   "path": "/projects/marmara-haven-villa",
+   "photos": [
+    "/images/projects/marmara-haven-villa/exterior-facade.jpg",
+    "/images/projects/marmara-haven-villa/kitchen.jpg",
+    "/images/projects/marmara-haven-villa/living-room.jpg",
+    "/images/projects/marmara-haven-villa/main-facade.jpg",
+    "/images/projects/marmara-haven-villa/master-bedroom.jpg",
+    "/images/projects/marmara-haven-villa/private-pool.jpg",
+    "/images/projects/marmara-haven-villa/rooftop.jpg",
+    "/images/projects/marmara-haven-villa/sea-view.jpg",
+    "/images/projects/marmara-haven-villa/side-view.jpg",
+    "/images/projects/marmara-haven-villa/terrace.jpg"
+   ],
+   "brief": "Present the project: what it is, where, status/delivery, unit types and sizes, 3-4 key facts."
+  },
+  {
+   "id": "blog-real-estate-market-trends",
+   "kind": "article",
+   "slug": "real-estate-market-trends",
+   "path": "/blog/real-estate-market-trends",
+   "photos": [
+    "/images/blog/real-estate-market-trends.jpg"
+   ],
+   "brief": "Useful tips from our article 'Real Estate Trends Worth Watching in Istanbul' (blogData.real-estate-market-trends); 3-4 practical points, then invite to read the full article."
+  },
+  {
+   "id": "beylikduzu-living-life",
+   "kind": "project",
+   "slug": "beylikduzu-living",
+   "angle": "lifestyle",
+   "path": "/projects/beylikduzu-living",
+   "photos": [
+    "/images/projects/beylikduzu-living/street-facade.jpg",
+    "/images/projects/beylikduzu-living/living-room.jpg",
+    "/images/projects/beylikduzu-living/living-room-2.jpg",
+    "/images/projects/beylikduzu-living/kitchen.jpg",
+    "/images/projects/beylikduzu-living/garden-terrace.jpg",
+    "/images/projects/beylikduzu-living/entrance-hall.jpg",
+    "/images/projects/beylikduzu-living/courtyard-gardens.jpg",
+    "/images/projects/beylikduzu-living/bathroom.jpg",
+    "/images/projects/beylikduzu-living/aerial-view.jpg"
+   ],
+   "brief": "Life in the project: amenities, interiors, nearby places and travel times (from nearby), who it suits. Use a different photo and wording than the overview post."
+  },
+  {
+   "id": "blog-citizenship-by-real-estate",
+   "kind": "article",
+   "slug": "citizenship-by-real-estate",
+   "path": "/blog/citizenship-by-real-estate",
+   "photos": [
+    "/images/blog/citizenship-by-real-estate.jpg"
+   ],
+   "brief": "Useful tips from our article 'How Real Estate Investment Leads to Turkish Citizenship' (blogData.citizenship-by-real-estate); 3-4 practical points, then invite to read the full article."
+  },
+  {
+   "id": "lotus-sisli-life",
+   "kind": "project",
+   "slug": "lotus-sisli",
+   "angle": "lifestyle",
+   "path": "/projects/lotus-sisli",
+   "photos": [
+    "/images/projects/lotus-sisli/twin-towers.jpg",
+    "/images/projects/lotus-sisli/tower-night.jpg",
+    "/images/projects/lotus-sisli/tower-garden.jpg",
+    "/images/projects/lotus-sisli/tower-day.jpg",
+    "/images/projects/lotus-sisli/penthouse-terrace.jpg",
+    "/images/projects/lotus-sisli/office-interior.jpg",
+    "/images/projects/lotus-sisli/living-room.jpg",
+    "/images/projects/lotus-sisli/apartment-living.jpg",
+    "/images/projects/lotus-sisli/aerial-city.jpg"
+   ],
+   "brief": "Life in the project: amenities, interiors, nearby places and travel times (from nearby), who it suits. Use a different photo and wording than the overview post."
+  },
+  {
+   "id": "find-my-project",
+   "kind": "page",
+   "path": "/",
+   "photos": [
+    "/images/projects/lotus-yali/aerial-sea-view.jpg"
+   ],
+   "brief": "'Find my project' quiz on the home page (match.* texts): 4 quick questions -> matching projects."
+  },
+  {
+   "id": "lotus-yali-life",
+   "kind": "project",
+   "slug": "lotus-yali",
+   "angle": "lifestyle",
+   "path": "/projects/lotus-yali",
+   "photos": [
+    "/images/projects/lotus-yali/view-from-sea.jpg",
+    "/images/projects/lotus-yali/sunset-aerial.jpg",
+    "/images/projects/lotus-yali/aerial-sea-view.jpg"
+   ],
+   "brief": "Life in the project: amenities, interiors, nearby places and travel times (from nearby), who it suits. Use a different photo and wording than the overview post."
+  },
+  {
+   "id": "property-request",
+   "kind": "page",
+   "path": "/property-request",
+   "photos": [
+    "/images/projects/lotus-istanbul/iconic-urban-development.jpg"
+   ],
+   "brief": "Custom property request (propertyRequest.*): tell us what you want (type, city/district, budget, floor) and we search for you, even outside our projects."
+  },
+  {
+   "id": "lotus-manzara-guzelce-life",
+   "kind": "project",
+   "slug": "lotus-manzara-guzelce",
+   "angle": "lifestyle",
+   "path": "/projects/lotus-manzara-guzelce",
+   "photos": [
+    "/images/projects/lotus-manzara-guzelce/villa-row.jpg",
+    "/images/projects/lotus-manzara-guzelce/villa-exterior.jpg",
+    "/images/projects/lotus-manzara-guzelce/street-view.jpg",
+    "/images/projects/lotus-manzara-guzelce/private-parking.jpg",
+    "/images/projects/lotus-manzara-guzelce/master-bedroom.jpg",
+    "/images/projects/lotus-manzara-guzelce/living-room.jpg",
+    "/images/projects/lotus-manzara-guzelce/kitchen.jpg",
+    "/images/projects/lotus-manzara-guzelce/entrance-staircase.jpg",
+    "/images/projects/lotus-manzara-guzelce/bathroom.jpg",
+    "/images/projects/lotus-manzara-guzelce/aerial-villas.jpg",
+    "/images/projects/lotus-manzara-guzelce/aerial-masterplan.jpg"
+   ],
+   "brief": "Life in the project: amenities, interiors, nearby places and travel times (from nearby), who it suits. Use a different photo and wording than the overview post."
+  },
+  {
+   "id": "residence-permit",
+   "kind": "page",
+   "path": "/citizenship",
+   "photos": [
+    "/images/blog/life-in-turkey.jpg"
+   ],
+   "brief": "Real-estate residence permit (citizenship.residence*): minimum values in Istanbul vs other cities, who it suits. Add the 'subject to change' note."
+  },
+  {
+   "id": "cadde-ispartakule-life",
+   "kind": "project",
+   "slug": "cadde-ispartakule",
+   "angle": "lifestyle",
+   "path": "/projects/cadde-ispartakule",
+   "photos": [
+    "/images/projects/cadde-ispartakule/tower-park.jpg",
+    "/images/projects/cadde-ispartakule/tower-avenue.jpg",
+    "/images/projects/cadde-ispartakule/terrace-view.jpg",
+    "/images/projects/cadde-ispartakule/smart-home.jpg",
+    "/images/projects/cadde-ispartakule/sauna.jpg",
+    "/images/projects/cadde-ispartakule/retail-avenue.jpg",
+    "/images/projects/cadde-ispartakule/hamam.jpg",
+    "/images/projects/cadde-ispartakule/garden-pond.jpg",
+    "/images/projects/cadde-ispartakule/fitness.jpg"
+   ],
+   "brief": "Life in the project: amenities, interiors, nearby places and travel times (from nearby), who it suits. Use a different photo and wording than the overview post."
+  },
+  {
+   "id": "design-service",
+   "kind": "page",
+   "path": "/engineering-architecture",
+   "photos": [
+    "/images/consultancy/hero-1680.webp"
+   ],
+   "brief": "Architectural & engineering design as one of HADARA's services (consultancy.*). Never present the images as built HADARA projects and never name another company; no invented experience numbers."
+  },
+  {
+   "id": "lotus-manzara-beylikduzu-life",
+   "kind": "project",
+   "slug": "lotus-manzara-beylikduzu",
+   "angle": "lifestyle",
+   "path": "/projects/lotus-manzara-beylikduzu",
+   "photos": [
+    "/images/projects/lotus-manzara-beylikduzu/villas-entrance.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/villa-type-b.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/villa-type-a.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/street-view.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/private-parking.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/master-bedroom.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/living-room.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/kitchen.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/entrance-staircase.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/aerial-villas.jpg",
+    "/images/projects/lotus-manzara-beylikduzu/aerial-sea-view.jpg"
+   ],
+   "brief": "Life in the project: amenities, interiors, nearby places and travel times (from nearby), who it suits. Use a different photo and wording than the overview post."
+  },
+  {
+   "id": "citizenship-benefits",
+   "kind": "page",
+   "path": "/citizenship",
+   "photos": [
+    "/images/blog/citizenship-by-real-estate.jpg"
+   ],
+   "brief": "Benefits of Turkish citizenship (citizenship.benefits) + minimum investment; add the 'subject to change' note."
+  },
+  {
+   "id": "lotus-koru-2-life",
+   "kind": "project",
+   "slug": "lotus-koru-2",
+   "angle": "lifestyle",
+   "path": "/projects/lotus-koru-2",
+   "photos": [
+    "/images/projects/lotus-koru-2/urban-living-concept.jpg",
+    "/images/projects/lotus-koru-2/residential-blocks.jpg",
+    "/images/projects/lotus-koru-2/landscaped-grounds.jpg",
+    "/images/projects/lotus-koru-2/central-location.jpg"
+   ],
+   "brief": "Life in the project: amenities, interiors, nearby places and travel times (from nearby), who it suits. Use a different photo and wording than the overview post."
+  },
+  {
+   "id": "resale",
+   "kind": "page",
+   "path": "/resale",
+   "photos": [
+    "/images/projects/cadde-ispartakule/tower-park.jpg"
+   ],
+   "brief": "Resale market on the site: owners can list their property, buyers browse approved listings."
+  },
+  {
+   "id": "diamond-marin-life",
+   "kind": "project",
+   "slug": "diamond-marin",
+   "angle": "lifestyle",
+   "path": "/projects/diamond-marin",
+   "photos": [
+    "/images/projects/diamond-marin/street-view.jpg",
+    "/images/projects/diamond-marin/master-bedroom.jpg",
+    "/images/projects/diamond-marin/living-room.jpg",
+    "/images/projects/diamond-marin/living-dining.jpg",
+    "/images/projects/diamond-marin/kitchen.jpg",
+    "/images/projects/diamond-marin/kids-bedroom.jpg",
+    "/images/projects/diamond-marin/fitness-center.jpg",
+    "/images/projects/diamond-marin/facade.jpg",
+    "/images/projects/diamond-marin/facade-side.jpg",
+    "/images/projects/diamond-marin/dressing-room.jpg",
+    "/images/projects/diamond-marin/balcony-pool-view.jpg",
+    "/images/projects/diamond-marin/aerial-sea-view.jpg"
+   ],
+   "brief": "Life in the project: amenities, interiors, nearby places and travel times (from nearby), who it suits. Use a different photo and wording than the overview post."
+  },
+  {
+   "id": "video-tour",
+   "kind": "page",
+   "path": "/video-tour",
+   "photos": [
+    "/images/projects/diamond-marin/living-room.jpg"
+   ],
+   "brief": "Private video tour (videoTour.*): free, live with a consultant, WhatsApp/FaceTime/Zoom/Meet, Arabic/English/Turkish."
+  },
+  {
+   "id": "marmara-haven-villa-life",
+   "kind": "project",
+   "slug": "marmara-haven-villa",
+   "angle": "lifestyle",
+   "path": "/projects/marmara-haven-villa",
+   "photos": [
+    "/images/projects/marmara-haven-villa/terrace.jpg",
+    "/images/projects/marmara-haven-villa/side-view.jpg",
+    "/images/projects/marmara-haven-villa/sea-view.jpg",
+    "/images/projects/marmara-haven-villa/rooftop.jpg",
+    "/images/projects/marmara-haven-villa/private-pool.jpg",
+    "/images/projects/marmara-haven-villa/master-bedroom.jpg",
+    "/images/projects/marmara-haven-villa/main-facade.jpg",
+    "/images/projects/marmara-haven-villa/living-room.jpg",
+    "/images/projects/marmara-haven-villa/kitchen.jpg",
+    "/images/projects/marmara-haven-villa/exterior-facade.jpg"
+   ],
+   "brief": "Life in the project: amenities, interiors, nearby places and travel times (from nearby), who it suits. Use a different photo and wording than the overview post."
+  },
+  {
+   "id": "about-hadara",
+   "kind": "page",
+   "path": "/about",
+   "photos": [
+    "/hero-istanbul.jpg"
+   ],
+   "brief": "Who we are (about.*, home.stats): your real estate partner in Istanbul, 12+ years, 11 projects, services. General wording between development and marketing."
+  }
+ ]
+}
