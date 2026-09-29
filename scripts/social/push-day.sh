@@ -48,6 +48,8 @@ DEST="public/social/$DATE"
 rm -rf "$DEST"
 mkdir -p "$DEST"
 cp "${images[@]}" "${posts[@]}" "$DEST/"
+videos=("$OUT"/post-*.mp4)
+[ ${#videos[@]} -gt 0 ] && cp "${videos[@]}" "$DEST/"
 # day.json: the posts in order (post-1, post-2, …).
 node -e '
   const fs = require("fs");
@@ -57,6 +59,7 @@ node -e '
   for (const f of posts) {
     const p = JSON.parse(fs.readFileSync(`${dest}/${f}`, "utf8"));
     if (!p.fb || !p.ig || !fs.existsSync(`${dest}/${p.image}`)) throw new Error(`${f}: missing fb, ig or image`);
+    if (p.video && !fs.existsSync(`${dest}/${p.video}`)) throw new Error(`${f}: missing video ${p.video}`);
   }
   fs.writeFileSync(`${dest}/day.json`, JSON.stringify({ date, posts }, null, 2) + "\n");
   console.log(`day.json: ${posts.join(", ")}`);
@@ -72,7 +75,9 @@ node -e '
   const today = (Array.isArray(posts) ? posts : posts.posts).map((p) => ({
     date, id: p.id, topic: p.topic, headlineAr: p.image?.headlineAr ?? "", headlineEn: p.image?.headlineEn ?? "", photo: p.image?.photo ?? ""
   }));
-  const kept = entries.filter((e) => e.date !== date);
+  // Replace only the posts of this push (a day can be pushed twice, e.g. extra Reels later that day).
+  const ids = new Set(today.map((e) => e.id));
+  const kept = entries.filter((e) => !(e.date === date && ids.has(e.id)));
   fs.mkdirSync(require("path").dirname(log), { recursive: true });
   fs.writeFileSync(log, JSON.stringify([...kept, ...today], null, 2) + "\n");
   console.log(`social/log.json: ${kept.length + today.length} posts`);

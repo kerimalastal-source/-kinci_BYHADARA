@@ -90,7 +90,17 @@ const css = `*{margin:0;box-sizing:border-box} body{font-family:Inter,sans-serif
 .st .e{font-size:18px;font-weight:600;color:#f7f4ec;opacity:.9;margin-top:4px;direction:ltr}
 .foot{position:absolute;left:52px;right:52px;bottom:30px;padding-top:18px;border-top:1px solid rgba(201,162,75,.25);display:flex;justify-content:space-between;align-items:center;font-size:21px;font-weight:600;color:#e8e1cf}
 .foot .wa{display:flex;gap:10px;align-items:center}.foot svg{width:26px;height:26px;fill:#c9a24b}
-.note{font-size:16px;color:#cfc6ad;text-align:center;margin-top:12px}.note span{font-family:Plex}`;
+.note{font-size:16px;color:#cfc6ad;text-align:center;margin-top:12px}.note span{font-family:Plex}
+/* Reel (1080x1920, 9:16): the same design, taller photo; the top 120px and the bottom 330px
+   stay clear of Instagram's and Facebook's buttons and caption. */
+body.reel{height:1920px}
+.reel .ph{height:1200px;transform-origin:50% 45%}
+.reel .top{top:120px}
+.reel .cap{top:1106px}
+.reel .panel{top:1148px}
+.reel .ar{margin-bottom:4px}
+.reel .foot{bottom:330px}
+.reel .note{font-size:19px;margin-top:16px}`;
 
 const WA_ICON = `<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>`;
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -103,7 +113,7 @@ function imageHtml(p) {
     const textual = !/^[\d$€+.,\s–\-m²KkMm]+$/.test(s.value);
     return `<div class="st"><div class="v${textual ? " t" : ""}" dir="${textual ? "rtl" : "ltr"}">${esc(s.value)}</div><div class="a">${esc(s.ar)}</div><div class="e">${esc(s.en)}</div></div>`;
   }).join("");
-  return `<html><head><meta charset="utf-8"><style>${fonts}${css}</style></head><body>
+  return `<html><head><meta charset="utf-8"><style>${fonts}${css}</style></head><body${p.reel ? ' class="reel"' : ""}>
 <div class="ph" style="background-image:url('${fileUrl(photo)}');background-position:${im.position || "center"};background-size:${im.size || "cover"}"></div>
 <div class="top"><div class="brand" dir="ltr"><img src="${fileUrl("public/logo-light.png")}"><div><b>HADARA</b><i>REAL ESTATE</i></div></div>
 ${im.badge ? `<div class="badge"><span dir="rtl">${esc(im.badge.ar)}</span><span>·</span><span>${esc(im.badge.en)}</span></div>` : ""}</div>
@@ -119,7 +129,8 @@ const browser = await pw.chromium.launch();
 let problems = 0;
 for (const [i, p] of posts.entries()) {
   const n = i + 1;
-  const page = await browser.newPage({ viewport: { width: 1080, height: 1350 } });
+  const H = p.reel ? 1920 : 1350;
+  const page = await browser.newPage({ viewport: { width: 1080, height: H } });
   const htmlPath = path.join(outDir, `post-${n}.html`);
   fs.writeFileSync(htmlPath, imageHtml(p));
   await page.goto("file://" + htmlPath, { waitUntil: "networkidle" });
@@ -142,10 +153,32 @@ for (const [i, p] of posts.entries()) {
   if (check.arLines > 1) issues.push(`Arabic headline wraps to ${check.arLines} lines (lower arSize, e.g. 44-48, or shorten it)`);
   if (check.fonts < 4) issues.push("fonts did not load");
   await page.screenshot({ path: path.join(outDir, `post-${n}.jpg`), type: "jpeg", quality: 90 });
+  let video = null;
+  if (p.reel) {
+    // The Reel: 8 seconds at 30 fps, the photo slowly zooming in (1.00 -> 1.08) under the
+    // fixed text, with a silent audio track (Instagram expects one), H.264 + AAC, 9:16.
+    const frames = fs.mkdtempSync(path.join(outDir, ".frames-"));
+    const FPS = 30, SECONDS = 8, total = FPS * SECONDS;
+    for (let f = 0; f < total; f++) {
+      const t = f / (total - 1);
+      const scale = 1 + 0.08 * (t * t * (3 - 2 * t));
+      await page.evaluate((s) => { document.querySelector(".ph").style.transform = `scale(${s})`; }, scale);
+      await page.screenshot({ path: path.join(frames, `f${String(f).padStart(4, "0")}.jpg`), type: "jpeg", quality: 92 });
+    }
+    video = `post-${n}.mp4`;
+    const { execFileSync } = await import("node:child_process");
+    execFileSync(process.env.FFMPEG || "ffmpeg", [
+      "-y", "-loglevel", "error", "-framerate", String(FPS), "-i", path.join(frames, "f%04d.jpg"),
+      "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-shortest",
+      "-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p", "-r", String(FPS), "-b:v", "6M",
+      "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", path.join(outDir, video)
+    ]);
+    fs.rmSync(frames, { recursive: true, force: true });
+  }
   await page.close();
   fs.unlinkSync(htmlPath);
   if (p.at !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(p.at)) issues.push(`"at" must be Istanbul time "HH:MM", got ${JSON.stringify(p.at)}`);
-  const result = { id: p.id, topic: p.topic, image: `post-${n}.jpg`, fb: caption(p, "facebook"), ig: caption(p, "instagram"), ...(p.at ? { at: p.at } : {}) };
+  const result = { id: p.id, topic: p.topic, image: `post-${n}.jpg`, fb: caption(p, "facebook"), ig: caption(p, "instagram"), ...(p.at ? { at: p.at } : {}), ...(video ? { video } : {}) };
   fs.writeFileSync(path.join(outDir, `post-${n}.json`), JSON.stringify(result, null, 2));
   console.log(`post-${n} (${p.id}): ${issues.length ? "PROBLEMS\n  - " + issues.join("\n  - ") : "ok"}`);
   problems += issues.length;
