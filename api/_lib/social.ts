@@ -24,6 +24,11 @@ export interface SocialPost {
   ig: string;
   /** Istanbul time "HH:MM" the post goes out at (the first run from then on); none = the day's first run. */
   at?: string;
+  /**
+   * A Reel: this MP4 (next to post-<n>.json, 9:16) goes out as a Facebook Reel and an Instagram
+   * Reel; `image` is then its cover (Instagram grid, Telegram report).
+   */
+  video?: string;
 }
 
 export interface MetaConfig {
@@ -42,6 +47,8 @@ export interface SocialStore {
   /** Upload time of the file, or null when it doesn't exist. */
   stat(path: string): Promise<{ uploadedAt: Date } | null>;
   remove(path: string): Promise<void>;
+  /** A small text file's content, or null when it doesn't exist. */
+  read(path: string): Promise<string | null>;
 }
 
 export interface PublishDeps {
@@ -155,6 +162,68 @@ async function publishInstagram(deps: PublishDeps, meta: MetaConfig, imageUrl: s
     else await new Promise((resolve) => setTimeout(resolve, deps.pollMs ?? 2000));
   }
   if (!finished) throw new Error("media: not ready after 40 seconds");
+  const published = await graph(deps, `${meta.igUserId}/media_publish`, { creation_id: id }, "POST", meta.token);
+  return String(published.id);
+}
+
+/**
+ * Facebook Reel: start an upload session on the Page, let Facebook fetch the video from its
+ * public URL, then finish with the caption (published right away; Facebook processes it after).
+ */
+async function publishFacebookReel(deps: PublishDeps, meta: MetaConfig, videoUrl: string, caption: string): Promise<string> {
+  const token = await pageToken(deps, meta);
+  const start = await graph(deps, `${meta.pageId}/video_reels`, { upload_phase: "start" }, "POST", token);
+  const videoId = String(start.video_id ?? "");
+  if (!videoId) throw new Error("video_reels: no video_id");
+  const upload = await deps.fetch(`https://rupload.facebook.com/video-upload/v21.0/${videoId}`, {
+    method: "POST",
+    headers: { Authorization: `OAuth ${token}`, file_url: videoUrl },
+    signal: AbortSignal.timeout(30_000)
+  });
+  const uploaded = (await upload.json().catch(() => ({}))) as { success?: boolean; debug_info?: { message?: string } };
+  if (!upload.ok || !uploaded.success) throw new Error(`video upload: ${uploaded.debug_info?.message ?? `HTTP ${upload.status}`}`);
+  await graph(deps, `${meta.pageId}/video_reels`, { upload_phase: "finish", video_id: videoId, video_state: "PUBLISHED", description: caption }, "POST", token);
+  return videoId;
+}
+
+/**
+ * Instagram Reel: the container's id is kept in `instagram.container`, so a run that stops
+ * waiting for Instagram's video processing leaves it for the next run to publish instead of
+ * uploading the video again.
+ */
+async function publishInstagramReel(
+  deps: PublishDeps,
+  meta: MetaConfig,
+  videoUrl: string,
+  coverUrl: string,
+  caption: string,
+  containerPath: string
+): Promise<string> {
+  let id = "";
+  const kept = await deps.store.read(containerPath).catch(() => null);
+  if (kept) {
+    const status = await graph(deps, JSON.parse(kept).id, { fields: "status_code" }, "GET", meta.token).catch(() => null);
+    if (status && status.status_code !== "ERROR" && status.status_code !== "EXPIRED") id = JSON.parse(kept).id;
+  }
+  if (!id) {
+    const container = await graph(
+      deps,
+      `${meta.igUserId}/media`,
+      { media_type: "REELS", video_url: videoUrl, cover_url: coverUrl, caption, share_to_feed: "true" },
+      "POST",
+      meta.token
+    );
+    id = String(container.id);
+    await deps.store.put(containerPath, JSON.stringify({ id }), "application/json").catch(() => undefined);
+  }
+  let finished = false;
+  for (let attempt = 0; attempt < 15 && !finished; attempt++) {
+    const status = await graph(deps, id, { fields: "status_code" }, "GET", meta.token);
+    if (status.status_code === "FINISHED") finished = true;
+    else if (status.status_code === "ERROR" || status.status_code === "EXPIRED") throw new Error(`media: ${status.status_code}`);
+    else await new Promise((resolve) => setTimeout(resolve, deps.pollMs ?? 3000));
+  }
+  if (!finished) throw new Error("Instagram is still processing the video — the next run publishes it");
   const published = await graph(deps, `${meta.igUserId}/media_publish`, { creation_id: id }, "POST", meta.token);
   return String(published.id);
 }
@@ -291,14 +360,23 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
       return { result, report: null };
     }
 
-    // A public copy of the image for Meta and Telegram to fetch.
+    // Public copies of the image (and the Reel's video) for Meta and Telegram to fetch.
     let imageUrl: string;
+    let videoUrl: string | null = null;
     try {
       const image = await deps.fetch(`${base}/${post.image}`, { cache: "no-store", headers, signal: AbortSignal.timeout(20_000) });
       const bytes = image.ok ? await image.arrayBuffer() : null;
       const head = bytes ? new Uint8Array(bytes.slice(0, 3)) : null;
       if (!bytes || !head || head[0] !== 0xff || head[1] !== 0xd8 || head[2] !== 0xff) throw new Error(`${post.image}: ليست صورة JPEG (HTTP ${image.status})`);
       imageUrl = await deps.store.put(`social/${date}/${post.image}`, bytes, "image/jpeg");
+      if (post.video !== undefined) {
+        if (!/^post-\d+\.mp4$/.test(post.video)) throw new Error(`${post.video}: اسم فيديو غير صالح`);
+        const video = await deps.fetch(`${base}/${post.video}`, { cache: "no-store", headers, signal: AbortSignal.timeout(30_000) });
+        const data = video.ok ? await video.arrayBuffer() : null;
+        // An MP4 has "ftyp" at bytes 4-7 (a missing file comes back as the site's index.html).
+        if (!data || new TextDecoder().decode(new Uint8Array(data.slice(4, 8))) !== "ftyp") throw new Error(`${post.video}: ليس فيديو MP4 (HTTP ${video.status})`);
+        videoUrl = await deps.store.put(`social/${date}/${post.video}`, data, "video/mp4");
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       result.facebook = result.instagram = "failed";
@@ -307,11 +385,18 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
     }
 
     if (meta) {
-      const fb = await once(deps, date, name, "facebook", () => publishFacebook(deps, meta, imageUrl, post.fb));
+      const reel = videoUrl;
+      const fb = await once(deps, date, name, "facebook", () =>
+        reel ? publishFacebookReel(deps, meta, reel, post.fb) : publishFacebook(deps, meta, imageUrl, post.fb)
+      );
       result.facebook = fb.state;
       if (fb.error) result.errors.push(`فيسبوك: ${fb.error}`);
       if (meta.igUserId && !igProblem) {
-        const ig = await once(deps, date, name, "instagram", () => publishInstagram(deps, meta, imageUrl, post.ig));
+        const ig = await once(deps, date, name, "instagram", () =>
+          reel
+            ? publishInstagramReel(deps, meta, reel, imageUrl, post.ig, markers(date, name, "instagram.container"))
+            : publishInstagram(deps, meta, imageUrl, post.ig)
+        );
         result.instagram = ig.state;
         if (ig.error) result.errors.push(`إنستغرام: ${ig.error}`);
       }
@@ -326,7 +411,7 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
     }
     const firstReport = !telegramDone;
     const report = async () => {
-      const caption = `🗓 ${escapeHtml(date)} · ${escapeHtml(post.topic)}\n\n${statusLines(result, igProblem, Boolean(meta), Boolean(meta?.igUserId))}`;
+      const caption = `${post.video ? "🎬 ريلز · " : ""}🗓 ${escapeHtml(date)} · ${escapeHtml(post.topic)}\n\n${statusLines(result, igProblem, Boolean(meta), Boolean(meta?.igUserId))}`;
       const sent = await deps.telegramPhoto(imageUrl, caption);
       // The captions that weren't published automatically, to post by hand (once).
       if (firstReport) {

@@ -36,6 +36,15 @@ const blobStore: SocialStore = {
   },
   async remove(path) {
     await del(path);
+  },
+  async read(path) {
+    try {
+      const response = await fetch(`${(await head(path)).url}?v=${Date.now()}`, { cache: "no-store" });
+      return response.ok ? await response.text() : null;
+    } catch (error) {
+      if (error instanceof BlobNotFoundError) return null;
+      throw error;
+    }
   }
 };
 
