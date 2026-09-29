@@ -1,47 +1,62 @@
-// Builds the "مسودات مدونة حضارة" review page: every article on this branch that is
-// not on origin/main yet, in all 5 languages, with its cover.
+// Builds the "مسودات مدونة حضارة" review page. The drafts live on the page itself
+// (drafts.json + articles/<slug>.json + covers/<slug>.jpg), because the weekly session
+// cannot push to the repository. The HADARA session adds an approved draft to the site.
 //
-//   node scripts/blog/build-review.mjs
+//   node scripts/blog/build-review.mjs [previous-drafts.json] [--add scripts/blog/out/<slug>.json]
 //
-// Writes scripts/blog/site/index.html and prints the Artifact publish input
-// ({ file_path, files }). Run `git fetch origin main` first.
+// previous-drafts.json = the page's published drafts.json (Artifact read, path "drafts.json").
+// Drafts whose slug is already in src/data/blog.ts (published) are dropped.
+// Writes scripts/blog/site/{index.html,drafts.json} and prints the Artifact publish input.
 import fs from "node:fs";
 import path from "node:path";
-import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "../..");
 const LOCALES = [["ar", "العربية"], ["en", "English"], ["fa", "فارسی"], ["fr", "Français"], ["ru", "Русский"]];
 
-const slugsIn = (ts) => [...ts.matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
-const here_ts = fs.readFileSync(path.join(root, "src/data/blog.ts"), "utf8");
-let main_ts = "";
-try { main_ts = execSync("git show origin/main:src/data/blog.ts", { cwd: root, encoding: "utf8" }); }
-catch { console.error("warning: origin/main not found, treating every article as pending"); }
-const published = new Set(slugsIn(main_ts));
-const pending = slugsIn(here_ts).filter((s) => !published.has(s));
+const args = process.argv.slice(2);
+const adds = [];
+let prevPath = null;
+for (let i = 0; i < args.length; i++) {
+  if (args[i] === "--add") adds.push(args[++i]);
+  else prevPath = args[i];
+}
+const prev = prevPath && fs.existsSync(prevPath) ? JSON.parse(fs.readFileSync(prevPath, "utf8")) : [];
+const onSite = new Set([...fs.readFileSync(path.join(root, "src/data/blog.ts"), "utf8").matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]));
+const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Istanbul" }).format(new Date());
 
-const dicts = Object.fromEntries(LOCALES.map(([l]) => [l, JSON.parse(fs.readFileSync(path.join(root, `src/i18n/${l}.json`), "utf8"))]));
-const added = (slug) => {
-  try { return execSync(`git log --diff-filter=A --format=%cs -1 -- public/images/blog/${slug}.jpg`, { cwd: root, encoding: "utf8" }).trim(); }
-  catch { return ""; }
-};
-const articles = pending.map((slug) => ({
-  slug,
-  added: added(slug),
-  cover: `covers/${slug}.jpg`,
-  words: dicts.en.blogData[slug].body.join(" ").split(/\s+/).length,
-  langs: Object.fromEntries(LOCALES.map(([l]) => [l, dicts[l].blogData[slug]])),
-}));
+const rel = (p) => path.relative(process.cwd(), p);
+const files = {};
+let articles = prev.filter((a) => {
+  if (!onSite.has(a.slug)) return true;
+  files[a.cover] = null;
+  files[a.article] = null;
+  return false;
+});
+for (const file of adds) {
+  const art = JSON.parse(fs.readFileSync(file, "utf8"));
+  const cover = path.join(path.dirname(file), `${art.slug}.jpg`);
+  if (!fs.existsSync(cover)) { console.error(`cover missing: run add-article.py ${file} --draft first`); process.exit(1); }
+  const entry = {
+    slug: art.slug,
+    added: today,
+    cover: `covers/${art.slug}.jpg`,
+    article: `articles/${art.slug}.json`,
+    words: art.en.body.join(" ").split(/\s+/).length,
+    langs: Object.fromEntries(LOCALES.map(([l]) => [l, art[l]])),
+  };
+  articles = [entry, ...articles.filter((a) => a.slug !== art.slug)];
+  files[entry.cover] = rel(cover);
+  files[entry.article] = rel(file);
+}
 
 const siteDir = path.join(here, "site");
 fs.mkdirSync(siteDir, { recursive: true });
+fs.writeFileSync(path.join(siteDir, "drafts.json"), JSON.stringify(articles));
 fs.writeFileSync(path.join(siteDir, "index.html"), page(articles));
-const rel = (p) => path.relative(process.cwd(), p);
-const files = {};
-for (const a of articles) files[a.cover] = rel(path.join(root, "public/images/blog", `${a.slug}.jpg`));
-console.log(JSON.stringify({ file_path: rel(path.join(siteDir, "index.html")), files, pending }, null, 2));
+files["drafts.json"] = rel(path.join(siteDir, "drafts.json"));
+console.log(JSON.stringify({ file_path: rel(path.join(siteDir, "index.html")), files, pending: articles.map((a) => a.slug) }, null, 2));
 
 function page(list) {
   const data = JSON.stringify({ list, locales: LOCALES }).replace(/</g, "\\u003c");

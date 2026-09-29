@@ -1,6 +1,7 @@
 """Adds one blog article (5 languages + cover photo) to the site.
 
-    python3 scripts/blog/add-article.py scripts/blog/out/<slug>.json
+    python3 scripts/blog/add-article.py scripts/blog/out/<slug>.json            # add to the site
+    python3 scripts/blog/add-article.py scripts/blog/out/<slug>.json --draft    # check + cover only
 
 The JSON (written by the weekly blog session, see scripts/blog/README.md):
 {
@@ -10,7 +11,10 @@ The JSON (written by the weekly blog session, see scripts/blog/README.md):
   "ar": {...}, "fa": {...}, "fr": {...}, "ru": {...}
 }
 
-It crops the cover to 3:2 into public/images/blog/<slug>.jpg, makes the WebP copies,
+With --draft (the weekly session) it only validates the article and writes the cropped
+cover to scripts/blog/out/<slug>.jpg; nothing on the site changes.
+Without it (the HADARA session, after the owner approves) it crops the cover to 3:2 into
+public/images/blog/<slug>.jpg, makes the WebP copies,
 adds the post at the top of src/data/blog.ts and inserts blogData.<slug> into every
 dictionary without reformatting the rest of the file.
 """
@@ -33,9 +37,12 @@ def fail(msg: str) -> None:
 
 
 def main() -> None:
-    if len(sys.argv) != 2:
-        fail("usage: python3 scripts/blog/add-article.py <article.json>")
-    art = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+    args = [a for a in sys.argv[1:] if a != "--draft"]
+    draft = "--draft" in sys.argv[1:]
+    if len(args) != 1:
+        fail("usage: python3 scripts/blog/add-article.py <article.json> [--draft]")
+    src_json = Path(args[0])
+    art = json.loads(src_json.read_text(encoding="utf-8"))
     slug = art.get("slug", "")
     if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug):
         fail(f"bad slug {slug!r}")
@@ -83,6 +90,12 @@ def main() -> None:
     im = im.crop(box)
     if im.width > MAX_W:
         im = im.resize((MAX_W, round(MAX_W / RATIO)), Image.LANCZOS)
+    if draft:
+        dest = src_json.parent / f"{slug}.jpg"
+        im.save(dest, "JPEG", quality=86, optimize=True, progressive=True)
+        words = len(" ".join(art["en"]["body"]).split())
+        print(f"draft ok: {slug}, cover {dest} ({im.width}x{im.height}), {words} English words")
+        return
     dest = ROOT / "public/images/blog" / f"{slug}.jpg"
     im.save(dest, "JPEG", quality=86, optimize=True, progressive=True)
     subprocess.run([sys.executable, str(ROOT / "scripts/images/build-webp.py")], check=True)

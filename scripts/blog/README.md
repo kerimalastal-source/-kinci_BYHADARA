@@ -1,29 +1,27 @@
 # كاتب المدونة (weekly blog writer)
 
 Once a week a scheduled Claude session writes **one new blog article in the site's 5
-languages** (en, ar, fa, fr, ru) with a cover photo, commits it to the branch
-`claude/blog-drafts` and updates the owner's review page on claude.ai
-(`REVIEW_URL` in `scripts/blog/config.json`). **Nothing goes live** until the owner
-approves the article and it is merged into `main` from the HADARA session.
+languages** (en, ar, fa, fr, ru) with a cover photo, and saves it as a draft **on the
+owner's review page** on claude.ai (`REVIEW_URL` in `scripts/blog/config.json`):
+`drafts.json` + `articles/<slug>.json` + `covers/<slug>.jpg` are published with the page.
+The weekly session **cannot push to the repository** (routines have read-only access), so
+it never commits. **Nothing goes live** until the owner approves; then the HADARA session
+adds the article to the site (see "After approval").
 
 ## Steps for the weekly session
 
-Work from the repository root.
+Work from the repository root (clone kerimalastal-source/-kinci_BYHADARA if needed).
 
-1. Branch:
-   ```
-   git fetch origin main claude/stoic-cray-v5g7gv claude/blog-drafts   # the last two may not exist
-   git checkout -B claude/blog-drafts origin/claude/blog-drafts   # if it exists, otherwise:
-   git checkout -B claude/blog-drafts origin/claude/stoic-cray-v5g7gv   # (or origin/main)
-   git merge --no-edit origin/main
-   git merge --no-edit origin/claude/stoic-cray-v5g7gv   # only if that branch exists
-   ```
-   On a merge conflict: `git merge --abort`, write nothing, and report it.
-2. Count pending drafts: `node scripts/blog/build-review.mjs` → `pending`. If there are
-   already **4 or more**, write nothing new: just publish the review page (step 7) and end
-   with "٤ مقالات بانتظار موافقتك — لن أكتب مقالاً جديداً قبل مراجعتها."
-3. Topic: the first entry of `scripts/blog/topics.json` whose `slug` is not in
-   `src/data/blog.ts`. If none is left, write nothing and end with
+1. `git fetch origin main claude/stoic-cray-v5g7gv` and
+   `git checkout -B blog-work origin/claude/stoic-cray-v5g7gv` (or `origin/main` if that
+   branch is gone). This checkout is only for reading; do not commit or push.
+2. Read the page: Artifact `action: "read"`, `url` = REVIEW_URL, then
+   `path: "drafts.json"` (saved locally; if it does not exist, there are no drafts).
+   Run `node scripts/blog/build-review.mjs <that drafts.json>` → `pending`.
+   If there are **4 or more** pending drafts, write nothing: end with
+   "٤ مقالات بانتظار موافقتك — لن أكتب مقالاً جديداً قبل مراجعتها."
+3. Topic: the first entry of `scripts/blog/topics.json` whose `slug` is neither in
+   `src/data/blog.ts` nor in `pending`. If none is left, write nothing and end with
    "انتهت قائمة مواضيع المدونة — اطلب من Claude قائمة جديدة."
 4. Research **from the site's own data**: `src/data/projects.ts`, and in
    `src/i18n/en.json` / `ar.json`: `projectsData.*` (highlights, nearby, floorPlan,
@@ -42,14 +40,19 @@ Work from the repository root.
      video tour (plain text, no links, no HTML, no emoji).
    - `cover.photo`: the topic's `photo` (or a better one from `public/images/projects/`),
      `cover.focus` 0–1 = which part of the height to keep (0 top, 0.5 middle, 1 bottom).
-6. `python3 scripts/blog/add-article.py scripts/blog/out/<slug>.json`, then
-   `npm ci` (if `node_modules` is missing) and `npm run build` — it must pass. Look at
-   `public/images/blog/<slug>.jpg` once. Commit only the article files:
-   `git add src/data/blog.ts src/i18n/*.json public/images/blog/<slug>*` →
-   commit "Blog draft: <English title>" → `git push -u origin claude/blog-drafts`.
-7. `node scripts/blog/build-review.mjs` → publish with the Artifact tool:
-   read `REVIEW_URL` first (`action: "read"`), then publish `file_path` + `files` with
-   `url` = REVIEW_URL. Never create a new artifact.
+6. `python3 scripts/blog/add-article.py scripts/blog/out/<slug>.json --draft` must print
+   `draft ok` (fix and re-run otherwise). Look at `scripts/blog/out/<slug>.jpg` once.
+7. `node scripts/blog/build-review.mjs <drafts.json from step 2> --add scripts/blog/out/<slug>.json`
+   → publish with the Artifact tool: `url` = REVIEW_URL, `file_path` and `files` exactly as
+   printed. Never create a new artifact.
+
+## After approval (HADARA session only)
+
+Owner says "انشر المقال …": Artifact read `path: "articles/<slug>.json"` from REVIEW_URL →
+`python3 scripts/blog/add-article.py <that file>` on the working branch → `npm run build`
++ visual check (AR/EN, phone/desktop) → commit → then read `drafts.json` and republish the
+page with `node scripts/blog/build-review.mjs <drafts.json>` (published drafts drop off).
+The article goes live with the next "انشر" to `main`.
 
 ## Content rules (from the owner — do not break)
 
@@ -64,4 +67,4 @@ Work from the repository root.
 - No sold-out projects (`soldOut: true`) as recommendations.
 - No remote-purchase promises: the video tour helps choose; buying happens on a visit.
 - No HTML, no links, no emoji inside the article text.
-- Do not touch `main`, do not deploy, do not change anything else on the site.
+- Never commit, push, deploy or change the site from the weekly session.
