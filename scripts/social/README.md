@@ -21,7 +21,8 @@ the branch build in time.
 
 > **Updated 2026-09-29 (owner's request):** where the routine's message still says "both
 > posts", "two topics" or "at 10:00", this README wins: make **every** post topics.mjs gives
-> for today (3 during the intensive week), each with its `at` time, and push before 08:50.
+> for today (3 during the intensive week), each with its `at` time, **plus the day's Story**
+> (below), and push before 08:50.
 
 Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F`).
 
@@ -43,6 +44,13 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
    same project, and never repeat an angle already covered for that project. If today's
    topic from the plan was already published, keep the plan's topic but take a clearly
    different angle, headline and photo, and say so in the summary.
+   **Plus one Story every day (owner's request 2026-09-29), going out with the morning post**:
+   topics.mjs prints `story` (`basedOn` = the morning topic, its `id` and `at`). Add it as the
+   **last** entry of posts.json with `"story": true`, that `id`, the same `at` (if any), `topic`
+   «ستوري: <the morning label>», and **no `caption`** (stories have none). Same project/subject
+   as the morning post, but a **different photo** and a short story headline of its own (Arabic
+   and English at equal weight), 4 stats, optional note. The story is a 1080x1920 picture of the
+   same approved design (render.mjs draws it); keep its text inside the design, nothing else.
 2. Collect the facts for each topic **from the site only**:
    - projects: `src/data/projects.ts` (stats, residences, status, amenities, district)
      and `projectsData.<slug>` in `src/i18n/ar.json` + `en.json` (name, tagline,
@@ -53,7 +61,7 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
    (bathroom, plan, blurry), pick a better one from the topic's `photos`.
 4. Write `scripts/social/out/<date>/posts.json` (shape below) and run
    `node scripts/social/render.mjs scripts/social/out/<date>/posts.json`.
-   It must print `ok` for every post (2 or 3) — fix any PROBLEMS (shorter text, `arSize`
+   It must print `ok` for every post (2 or 3, plus the Story) — fix any PROBLEMS (shorter text, `arSize`
    44–48) and re-run. Then Read each `post-<n>.jpg` once to check it visually.
 5. Read the published page's `days.json` with the Artifact tool
    (`action: "read"`, `url` = ARTIFACT_URL, `path: "days.json"`), then run
@@ -131,6 +139,8 @@ equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 9
 { "posts": [ {
   "id": "lotus-yali",                     // used in utm_campaign=post-<id>
   "at": "09:00",                          // from topics.mjs when the plan has it (Istanbul time)
+  // "story": true  -> the day's Story: 9:16 picture, no "caption" (see step 1)
+  // "reel": true   -> a Reel: 9:16 design + an 8-second video (only when the owner asks)
   "topic": "لوتس يالي",                    // short Arabic label shown on the page
   "image": {
     "photo": "/images/projects/lotus-yali/sunset-aerial.jpg",

@@ -1,4 +1,4 @@
-// Prints today's 2 topics from the monthly content plan (plan.json).
+// Prints today's topics (2, or 3 in the intensive week) and the day's Story from the monthly content plan (plan.json).
 //
 //   node scripts/social/topics.mjs [YYYY-MM-DD]   (default: today in Istanbul)
 //
@@ -23,4 +23,6 @@ console.log(JSON.stringify({
   plan: plan.name,
   week: day.week,
   topics: day.posts.map((p) => ({ ...p, photo: p.photos[0] })),
+  // Every day also one Story, going out with the morning post (owner's request 2026-09-29).
+  story: { basedOn: day.posts[0].id, id: `${day.posts[0].id}-story`, ...(day.posts[0].at ? { at: day.posts[0].at } : {}) },
 }, null, 2));

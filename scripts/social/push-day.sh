@@ -58,7 +58,8 @@ node -e '
     .sort((a, b) => parseInt(a.slice(5)) - parseInt(b.slice(5)));
   for (const f of posts) {
     const p = JSON.parse(fs.readFileSync(`${dest}/${f}`, "utf8"));
-    if (!p.fb || !p.ig || !fs.existsSync(`${dest}/${p.image}`)) throw new Error(`${f}: missing fb, ig or image`);
+    // A Story has no caption; every other post needs both.
+    if ((!p.story && (!p.fb || !p.ig)) || !fs.existsSync(`${dest}/${p.image}`)) throw new Error(`${f}: missing fb, ig or image`);
     if (p.video && !fs.existsSync(`${dest}/${p.video}`)) throw new Error(`${f}: missing video ${p.video}`);
   }
   fs.writeFileSync(`${dest}/day.json`, JSON.stringify({ date, posts }, null, 2) + "\n");
