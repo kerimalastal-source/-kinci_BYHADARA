@@ -22,6 +22,8 @@ export interface SocialPost {
   image: string;
   fb: string;
   ig: string;
+  /** Istanbul time "HH:MM" the post goes out at (the first run from then on); none = the day's first run. */
+  at?: string;
 }
 
 export interface MetaConfig {
@@ -61,8 +63,8 @@ export type Platform = "facebook" | "instagram";
 
 export interface PostResult {
   post: string;
-  facebook: "published" | "already" | "failed" | "manual" | "busy";
-  instagram: "published" | "already" | "failed" | "manual" | "busy";
+  facebook: "published" | "already" | "failed" | "manual" | "busy" | "scheduled";
+  instagram: "published" | "already" | "failed" | "manual" | "busy" | "scheduled";
   errors: string[];
 }
 
@@ -87,6 +89,11 @@ export function socialSourceUrl(): string {
 
 export function istanbulDate(now = new Date()): string {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Istanbul" }).format(now);
+}
+
+/** Istanbul's time of day as "HH:MM" (24 h). */
+export function istanbulTime(now = new Date()): string {
+  return new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Istanbul", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(now);
 }
 
 const GRAPH = "https://graph.facebook.com/v21.0";
@@ -232,7 +239,12 @@ async function readJson<T>(deps: PublishDeps, url: string, headers: Record<strin
 }
 
 /** Publishes the day's posts. Returns what happened to each; never throws for a single post. */
-export async function publishDay(deps: PublishDeps, date: string): Promise<DayResult> {
+/**
+ * Publishes the day's posts that are due: a post with `at` waits until Istanbul's `time`
+ * reaches it (each cron run publishes what has come due, and catches up on anything an
+ * earlier run missed). Without `time` every post is due.
+ */
+export async function publishDay(deps: PublishDeps, date: string, time?: string): Promise<DayResult> {
   const headers: Record<string, string> = deps.bypass ? { "x-vercel-protection-bypass": deps.bypass } : {};
   const base = `${deps.sourceUrl}/social/${date}`;
   const day = await readJson<{ date?: string; posts?: string[] }>(deps, `${base}/day.json`, headers);
@@ -259,6 +271,11 @@ export async function publishDay(deps: PublishDeps, date: string): Promise<DayRe
       if (await deps.store.claim(markers(date, name, "invalid.warned"), "{}").catch(() => true)) {
         return { result, report: async () => void (await deps.telegramText(`⚠️ <b>تعذّر قراءة منشور اليوم</b> (${escapeHtml(date)} · ${escapeHtml(name)})`)) };
       }
+      return { result, report: null };
+    }
+
+    if (time && typeof post.at === "string" && /^\d{2}:\d{2}$/.test(post.at) && post.at > time) {
+      result.facebook = result.instagram = "scheduled";
       return { result, report: null };
     }
 

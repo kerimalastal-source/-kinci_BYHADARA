@@ -2687,7 +2687,7 @@
   "adminHome": {
     "social": {
       "title": "Publications quotidiennes sur les réseaux sociaux",
-      "hint": "Publiées automatiquement chaque jour à 10 h (heure d'Istanbul) sur Facebook et Instagram, et envoyées sur Telegram. En cas de retard, publiez-les d'ici : une publication déjà en ligne n'est jamais republiée.",
+      "hint": "Publiées automatiquement sur Facebook et Instagram, chaque publication à son heure prévue (heure d’Istanbul), avec le résultat sur Telegram. Si une publication est en retard, publiez-la d’ici — le bouton ne publie que celles dont l’heure est venue, et rien n’est publié deux fois.",
       "button": "Publier les publications du jour",
       "sending": "Publication en cours… cela peut prendre une minute.",
       "done": "Terminé : {published} publiée(s) maintenant, {already} déjà en ligne. Détails sur Telegram.",

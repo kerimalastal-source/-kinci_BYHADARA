@@ -2687,7 +2687,7 @@
   "adminHome": {
     "social": {
       "title": "Daily social posts",
-      "hint": "Published automatically every day at 10:00 Istanbul time on Facebook and Instagram, and sent to you on Telegram. If they're late, publish them from here — a post that went out is never posted again.",
+      "hint": "Published automatically on Facebook and Instagram, each post at its set time (Istanbul time), with the result sent to Telegram. If a post is late, publish it from here — the button only publishes posts whose time has come, and nothing is published twice.",
       "button": "Publish today's posts now",
       "sending": "Publishing… this can take a minute.",
       "done": "Done: {published} published now, {already} already published. Details on Telegram.",

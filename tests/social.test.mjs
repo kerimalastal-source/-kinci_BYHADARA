@@ -3,7 +3,7 @@
 // in-memory store plays Vercel Blob, and Telegram calls are recorded.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { istanbulDate, instagramCaptionProblem, publishDay } from "../.test-build/_lib/social.js";
+import { istanbulDate, istanbulTime, instagramCaptionProblem, publishDay } from "../.test-build/_lib/social.js";
 
 const DATE = "2026-09-30";
 const JPEG = new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 1, 2, 3]);
@@ -157,6 +157,36 @@ test("the posts go out side by side (a slow Instagram doesn't hold up the next p
   assert.deepEqual(photos.map((p) => p.url), [`https://blob.example/social/${DATE}/post-1.jpg`, `https://blob.example/social/${DATE}/post-2.jpg`]);
 });
 
+test("posts with a time wait for it; each run publishes what has come due and catches up", async () => {
+  const posts = { "post-1": { ...POSTS["post-1"], at: "09:00" }, "post-2": { ...POSTS["post-2"], at: "14:00" } };
+  const { deps, calls, photos } = setup({ posts });
+  // 09:05: only the morning post.
+  let day = await publishDay(deps, DATE, "09:05");
+  assert.deepEqual(day.results.map((r) => [r.post, r.facebook, r.instagram]), [
+    ["post-1", "published", "published"],
+    ["post-2", "scheduled", "scheduled"]
+  ]);
+  assert.equal(graphCalls(calls, "PAGE/photos").length, 1);
+  assert.equal(photos.length, 1);
+  // 13:59 (the admin button before 14:00): nothing new, nothing said.
+  day = await publishDay(deps, DATE, "13:59");
+  assert.deepEqual(day.results.map((r) => r.facebook), ["already", "scheduled"]);
+  assert.equal(photos.length, 1);
+  // 14:40: the afternoon post, the morning one untouched.
+  day = await publishDay(deps, DATE, "14:40");
+  assert.deepEqual(day.results.map((r) => [r.facebook, r.instagram]), [["already", "already"], ["published", "published"]]);
+  assert.equal(graphCalls(calls, "PAGE/photos").length, 2);
+  assert.equal(photos.length, 2);
+});
+
+test("a run that missed earlier slots publishes everything due at once", async () => {
+  const posts = { "post-1": { ...POSTS["post-1"], at: "09:00" }, "post-2": { ...POSTS["post-2"], at: "14:00" } };
+  const { deps, photos } = setup({ posts });
+  const day = await publishDay(deps, DATE, "21:10");
+  assert.deepEqual(day.results.map((r) => r.facebook), ["published", "published"]);
+  assert.equal(photos.length, 2);
+});
+
 test("nothing is published twice: a second run (cron or button) does nothing and says nothing", async () => {
   const first = setup();
   await publishDay(first.deps, DATE);
@@ -275,6 +305,12 @@ test("a run that died after claiming is taken over after 15 minutes", async () =
   const later = setup({ store });
   const next = await publishDay(later.deps, DATE);
   assert.equal(next.results[0].facebook, "published");
+});
+
+test("the time of day is Istanbul's", () => {
+  assert.equal(istanbulTime(new Date("2026-09-30T06:05:00Z")), "09:05");
+  assert.equal(istanbulTime(new Date("2026-09-30T18:00:00Z")), "21:00");
+  assert.equal(istanbulTime(new Date("2026-09-30T21:30:00Z")), "00:30");
 });
 
 test("the day is Istanbul's", () => {
