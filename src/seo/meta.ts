@@ -6,6 +6,7 @@ import { projects } from "../data/projects";
 import { blogPosts } from "../data/blog";
 import { placeKey } from "../utils/place";
 import { CONSULTANCY_PAGE_IMAGES } from "../data/consultancy";
+import { SOCIAL_LINKS } from "../data/social";
 
 /** The live address: hadararealestate.com redirects here (308), so canonical/hreflang/sitemap URLs use www. */
 export const DEFAULT_SITE_URL = "https://www.hadararealestate.com";
@@ -322,6 +323,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
     foundingDate: "2014",
     areaServed: "Istanbul, Türkiye",
     openingHours: "Mo-Su 09:00-18:00",
+    sameAs: SOCIAL_LINKS.map((s) => s.url),
     ...CONTACT
   });
 
