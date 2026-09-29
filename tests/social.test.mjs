@@ -7,6 +7,7 @@ import { istanbulDate, istanbulTime, instagramCaptionProblem, publishDay } from 
 
 const DATE = "2026-09-30";
 const JPEG = new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 1, 2, 3]);
+const MP4 = new Uint8Array([0, 0, 0, 0x18, 0x66, 0x74, 0x79, 0x70, 0x69, 0x73, 0x6f, 0x6d]);
 const POSTS = {
   "post-1": { id: "lotus-yali", topic: "لوتس يالي", image: "post-1.jpg", fb: "Facebook caption 1", ig: "Instagram caption 1 #HADARA" },
   "post-2": { id: "citizenship", topic: "الجنسية", image: "post-2.jpg", fb: "Facebook caption 2", ig: "Instagram caption 2 #HADARA" }
@@ -32,6 +33,10 @@ function memoryStore() {
     },
     async remove(path) {
       files.delete(path);
+    },
+    async read(path) {
+      const file = files.get(path);
+      return file ? String(file.body) : null;
     }
   };
 }
@@ -48,14 +53,26 @@ function fakeFetch(opts = {}) {
     if (url.startsWith("https://branch.example/")) {
       // A missing file falls through the site's rewrite to index.html with a 200.
       if (opts.missing) return new Response("<!doctype html><title>HADARA</title>", { status: 200, headers: { "content-type": "text/html" } });
-      if (url.endsWith("/day.json")) return json({ date: DATE, posts: ["post-1.json", "post-2.json"] });
+      if (url.endsWith("/day.json")) return json({ date: DATE, posts: opts.day ?? ["post-1.json", "post-2.json"] });
       const name = url.split("/").pop();
       if (name.endsWith(".json")) return json(opts.posts?.[name.replace(".json", "")] ?? POSTS[name.replace(".json", "")]);
+      if (name.endsWith(".mp4")) return new Response(MP4, { headers: { "content-type": "video/mp4" } });
       return new Response(JPEG, { headers: { "content-type": "image/jpeg" } });
+    }
+    if (url.startsWith("https://rupload.facebook.com/video-upload/v21.0/")) {
+      const h = new Headers(init?.headers);
+      calls[calls.length - 1].fileUrl = h.get("file_url");
+      calls[calls.length - 1].auth = h.get("authorization");
+      return json({ success: true });
     }
     if (url.startsWith("https://graph.facebook.com/v21.0/")) {
       const path = url.slice("https://graph.facebook.com/v21.0/".length).split("?")[0];
       if (path === "PAGE") return json({ access_token: "page-token", id: "PAGE" });
+      if (path === "PAGE/video_reels") {
+        if (body.upload_phase === "start") return json({ video_id: `reel${calls.filter((c) => c.body.upload_phase === "start").length}`, upload_url: "x" });
+        if (body.upload_phase === "finish") return json({ success: true });
+      }
+      if (path === "PAGE/photo_stories") return json({ success: true, post_id: `story_${body.photo_id}` });
       if (path === "PAGE/photos") {
         if (opts.failFacebook) return json({ error: { message: "Invalid parameter" } }, 400);
         return json({ id: "photo", post_id: `PAGE_${calls.filter((c) => c.url.endsWith("/photos")).length}` });
@@ -137,7 +154,7 @@ test("Facebook is published with the Page's own token, Instagram after FINISHED,
   assert.ok(store.files.has(`social-state/${DATE}/post-2/instagram.done`));
 });
 
-test("the posts go out side by side (a slow Instagram doesn't hold up the next post), reports in order", async () => {
+test("the posts go out side by side (a slow Instagram doesn't hold up the next post or its report)", async () => {
   const { deps, calls, photos } = setup();
   const fetch = deps.fetch;
   // Instagram takes a while with post-1's image.
@@ -153,8 +170,8 @@ test("the posts go out side by side (a slow Instagram doesn't hold up the next p
   // post-2 was on Instagram before post-1's slow container was even created.
   const media = graphCalls(calls, "IGUSER/media").filter((c) => c.body.caption);
   assert.equal(media[0].body.caption, POSTS["post-2"].ig);
-  // Telegram still reports them in the day's order.
-  assert.deepEqual(photos.map((p) => p.url), [`https://blob.example/social/${DATE}/post-1.jpg`, `https://blob.example/social/${DATE}/post-2.jpg`]);
+  // Each post is reported as soon as it is done: the quick one first.
+  assert.deepEqual(photos.map((p) => p.url), [`https://blob.example/social/${DATE}/post-2.jpg`, `https://blob.example/social/${DATE}/post-1.jpg`]);
 });
 
 test("posts with a time wait for it; each run publishes what has come due and catches up", async () => {
@@ -185,6 +202,64 @@ test("a run that missed earlier slots publishes everything due at once", async (
   const day = await publishDay(deps, DATE, "21:10");
   assert.deepEqual(day.results.map((r) => r.facebook), ["published", "published"]);
   assert.equal(photos.length, 2);
+});
+
+test("a Reel: the video goes to Facebook Reels and Instagram Reels, with the image as cover", async () => {
+  const posts = { "post-4": { id: "reel-villa", topic: "ريلز الفيلا", image: "post-4.jpg", video: "post-4.mp4", fb: "FB reel", ig: "IG reel #HADARA" } };
+  const { deps, calls, photos, store } = setup({ posts, day: ["post-4.json"] });
+  const day = await publishDay(deps, DATE);
+  assert.deepEqual(day.results.map((r) => [r.post, r.facebook, r.instagram]), [["post-4", "published", "published"]]);
+  // Facebook: start, upload from the public video URL with the Page token, finish with the caption.
+  const upload = calls.find((c) => c.url.startsWith("https://rupload.facebook.com/"));
+  assert.equal(upload.fileUrl, `https://blob.example/social/${DATE}/post-4.mp4`);
+  assert.equal(upload.auth, "OAuth page-token");
+  const finish = graphCalls(calls, "PAGE/video_reels").find((c) => c.body.upload_phase === "finish");
+  assert.equal(finish.body.description, "FB reel");
+  assert.equal(finish.body.video_state, "PUBLISHED");
+  assert.equal(graphCalls(calls, "PAGE/photos").length, 0);
+  // Instagram: a REELS container from the video, the design as cover, shared to the grid.
+  const media = graphCalls(calls, "IGUSER/media").find((c) => c.body.media_type);
+  assert.equal(media.body.media_type, "REELS");
+  assert.equal(media.body.video_url, `https://blob.example/social/${DATE}/post-4.mp4`);
+  assert.equal(media.body.cover_url, `https://blob.example/social/${DATE}/post-4.jpg`);
+  assert.equal(media.body.share_to_feed, "true");
+  assert.ok(store.files.has(`social-state/${DATE}/post-4/instagram.done`));
+  assert.match(photos[0].caption, /ريلز/);
+});
+
+test("a Reel whose video is missing is reported, nothing published", async () => {
+  const posts = { "post-4": { id: "reel-x", topic: "ريلز", image: "post-4.jpg", video: "post-4.mp4", fb: "a", ig: "b" } };
+  const { deps, calls, texts } = setup({ posts, day: ["post-4.json"] });
+  const fetch = deps.fetch;
+  deps.fetch = async (input, init) =>
+    String(input).endsWith(".mp4") ? new Response("<!doctype html>", { status: 200, headers: { "content-type": "text/html" } }) : fetch(input, init);
+  const day = await publishDay(deps, DATE);
+  assert.deepEqual(day.results.map((r) => r.facebook), ["failed"]);
+  assert.equal(graphCalls(calls, "PAGE/video_reels").length, 0);
+  assert.match(texts[0], /MP4/);
+});
+
+test("a Story: an unpublished Page photo posted as a Facebook story, and an Instagram story; no captions", async () => {
+  const posts = { "post-7": { id: "story-1", topic: "ستوري", image: "post-7.jpg", story: true, fb: "x", ig: "y" } };
+  const { deps, calls, photos, texts, store } = setup({ posts, day: ["post-7.json"], meta: { ...META } });
+  const day = await publishDay(deps, DATE);
+  assert.deepEqual(day.results.map((r) => [r.facebook, r.instagram]), [["published", "published"]]);
+  const photo = graphCalls(calls, "PAGE/photos")[0];
+  assert.equal(photo.body.published, "false");
+  assert.equal(photo.body.message, undefined);
+  assert.ok(graphCalls(calls, "PAGE/photo_stories")[0].body.photo_id);
+  const media = graphCalls(calls, "IGUSER/media").find((c) => c.body.media_type);
+  assert.equal(media.body.media_type, "STORIES");
+  assert.equal(media.body.caption, undefined);
+  assert.ok(store.files.has(`social-state/${DATE}/post-7/instagram.done`));
+  assert.match(photos[0].caption, /ستوري/);
+  assert.equal(texts.length, 0);
+});
+
+test("a failure leaves its reason in <platform>.error", async () => {
+  const { deps, store } = setup({ failFacebook: true });
+  await publishDay(deps, DATE);
+  assert.match(String(store.files.get(`social-state/${DATE}/post-1/facebook.error`).body), /Invalid parameter/);
 });
 
 test("nothing is published twice: a second run (cron or button) does nothing and says nothing", async () => {
