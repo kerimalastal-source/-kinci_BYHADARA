@@ -46,5 +46,29 @@
     "headlineAr": "الجنسية التركية عبر الاستثمار العقاري",
     "headlineEn": "Turkish citizenship through real estate",
     "photo": "/images/blog/citizenship-by-real-estate.jpg"
+  },
+  {
+    "date": "2026-09-29",
+    "id": "story-video-tour",
+    "topic": "ستوري: جولة خاصة عبر الفيديو",
+    "headlineAr": "زُر مشروعك في إسطنبول وأنت في منزلك",
+    "headlineEn": "Visit your Istanbul project from home",
+    "photo": "/images/projects/diamond-marin/living-dining.jpg"
+  },
+  {
+    "date": "2026-09-29",
+    "id": "story-lotus-yali",
+    "topic": "ستوري: لوتس يالي",
+    "headlineAr": "لوتس يالي قرب بحر مرمرة",
+    "headlineEn": "Lotus Yalı by the Marmara Sea",
+    "photo": "/images/projects/lotus-yali/sunset-aerial.jpg"
+  },
+  {
+    "date": "2026-09-29",
+    "id": "story-lotus-manzara-guzelce",
+    "topic": "ستوري: لوتس منظرة غوزلجه",
+    "headlineAr": "فلل ⁦6+2⁩ جاهزة في بيوكجكمجة",
+    "headlineEn": "Ready 6+2 villas in Büyükçekmece",
+    "photo": "/images/projects/lotus-manzara-guzelce/villa-exterior.jpg"
   }
 ]
