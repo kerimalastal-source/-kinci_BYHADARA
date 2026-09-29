@@ -19,6 +19,10 @@ the branch build in time.
 
 ## Steps for the daily session
 
+> **Updated 2026-09-29 (owner's request):** where the routine's message still says "both
+> posts", "two topics" or "at 10:00", this README wins: make **every** post topics.mjs gives
+> for today (3 during the intensive week), each with its `at` time, and push before 08:50.
+
 Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F`).
 
 1. `node scripts/social/topics.mjs` → today's topics from the monthly content plan
