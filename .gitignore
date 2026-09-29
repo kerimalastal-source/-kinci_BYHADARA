@@ -5,3 +5,5 @@ dist/
 .env
 scripts/social/out/
 scripts/social/site/
+scripts/blog/out/
+scripts/blog/site/
