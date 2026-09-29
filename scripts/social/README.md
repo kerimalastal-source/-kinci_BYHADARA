@@ -105,8 +105,10 @@ equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 9
   as built HADARA projects and never name another company.
 - Several posts cover the same project from different angles during the month: keep to
   the post's angle (its `brief`) and never repeat an earlier headline for that project.
-  Already published before the plan (don't copy them): intro "شريكك العقاري في إسطنبول",
-  Marmara Haven Villa overview, Diamond Marin overview, citizenship basics, video tour.
+  The account opened on 2026-09-29 with 3 opening posts (in social/log.json): welcome
+  "حضارة: شريكك العقاري في إسطنبول", projects overview "من بيليكدوزو إلى شيشلي" and
+  services "معك من أول سؤال حتى سند الطابو" — never repeat their headlines. Nothing
+  was published before them.
 - No 4-byte emoji inside the image text. Emoji in captions are fine (like the examples).
 
 ## posts.json shape
