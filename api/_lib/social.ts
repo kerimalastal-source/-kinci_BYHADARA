@@ -29,6 +29,8 @@ export interface SocialPost {
    * Reel; `image` is then its cover (Instagram grid, Telegram report).
    */
   video?: string;
+  /** A Story (24 hours, no caption): `image` is a 9:16 picture posted as a Facebook Page story and an Instagram story. */
+  story?: boolean;
 }
 
 export interface MetaConfig {
@@ -217,13 +219,37 @@ async function publishInstagramReel(
     await deps.store.put(containerPath, JSON.stringify({ id }), "application/json").catch(() => undefined);
   }
   let finished = false;
-  for (let attempt = 0; attempt < 15 && !finished; attempt++) {
+  // At most ~30 s here: the function has 60 s for the whole day; the next run carries on.
+  for (let attempt = 0; attempt < 10 && !finished; attempt++) {
     const status = await graph(deps, id, { fields: "status_code" }, "GET", meta.token);
     if (status.status_code === "FINISHED") finished = true;
     else if (status.status_code === "ERROR" || status.status_code === "EXPIRED") throw new Error(`media: ${status.status_code}`);
     else await new Promise((resolve) => setTimeout(resolve, deps.pollMs ?? 3000));
   }
   if (!finished) throw new Error("Instagram is still processing the video — the next run publishes it");
+  const published = await graph(deps, `${meta.igUserId}/media_publish`, { creation_id: id }, "POST", meta.token);
+  return String(published.id);
+}
+
+/** Facebook Page story: the photo is uploaded unpublished, then posted as a story. */
+async function publishFacebookStory(deps: PublishDeps, meta: MetaConfig, imageUrl: string): Promise<string> {
+  const token = await pageToken(deps, meta);
+  const photo = await graph(deps, `${meta.pageId}/photos`, { url: imageUrl, published: "false" }, "POST", token);
+  const story = await graph(deps, `${meta.pageId}/photo_stories`, { photo_id: String(photo.id) }, "POST", token);
+  return String(story.post_id ?? photo.id);
+}
+
+async function publishInstagramStory(deps: PublishDeps, meta: MetaConfig, imageUrl: string): Promise<string> {
+  const container = await graph(deps, `${meta.igUserId}/media`, { media_type: "STORIES", image_url: imageUrl }, "POST", meta.token);
+  const id = String(container.id);
+  let finished = false;
+  for (let attempt = 0; attempt < 20 && !finished; attempt++) {
+    const status = await graph(deps, id, { fields: "status_code" }, "GET", meta.token);
+    if (status.status_code === "FINISHED") finished = true;
+    else if (status.status_code === "ERROR" || status.status_code === "EXPIRED") throw new Error(`media: ${status.status_code}`);
+    else await new Promise((resolve) => setTimeout(resolve, deps.pollMs ?? 2000));
+  }
+  if (!finished) throw new Error("media: not ready after 40 seconds");
   const published = await graph(deps, `${meta.igUserId}/media_publish`, { creation_id: id }, "POST", meta.token);
   return String(published.id);
 }
@@ -259,8 +285,11 @@ async function once(
   try {
     id = await publish();
   } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
     await store.remove(lock).catch(() => undefined);
-    return { state: "failed", error: error instanceof Error ? error.message : String(error) };
+    // The last error, for whoever checks the store (the report on Telegram says it too).
+    await store.put(markers(date, post, `${platform}.error`), JSON.stringify({ error: message, at: new Date().toISOString() }), "application/json").catch(() => undefined);
+    return { state: "failed", error: message };
   }
   // Published: record it (a failure here is retried a few times; the claim stays either way,
   // so nothing is posted twice).
@@ -330,7 +359,7 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
   const meta = deps.meta;
   type Outcome = { result: PostResult; report: (() => Promise<void>) | null };
   // The posts are published side by side (Instagram alone can take ~20 s a post, and the
-  // function has 60 s); the Telegram reports then go out in the day's order.
+  // function has 60 s for the whole day).
   const onePost = async (name: string): Promise<Outcome> => {
     const post = await readJson<SocialPost>(deps, `${base}/${name}.json`, headers);
     const result: PostResult = { post: name, facebook: "manual", instagram: "manual", errors: [] };
@@ -348,7 +377,7 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
       return { result, report: null };
     }
 
-    const igProblem = instagramCaptionProblem(post.ig);
+    const igProblem = post.story ? null : instagramCaptionProblem(post.ig);
     const telegramDone = await deps.store.stat(markers(date, name, "telegram.done"));
     const fbDone = meta ? await deps.store.stat(markers(date, name, "facebook.done")) : null;
     const igDone = meta?.igUserId ? await deps.store.stat(markers(date, name, "instagram.done")) : null;
@@ -387,15 +416,21 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
     if (meta) {
       const reel = videoUrl;
       const fb = await once(deps, date, name, "facebook", () =>
-        reel ? publishFacebookReel(deps, meta, reel, post.fb) : publishFacebook(deps, meta, imageUrl, post.fb)
+        post.story
+          ? publishFacebookStory(deps, meta, imageUrl)
+          : reel
+            ? publishFacebookReel(deps, meta, reel, post.fb)
+            : publishFacebook(deps, meta, imageUrl, post.fb)
       );
       result.facebook = fb.state;
       if (fb.error) result.errors.push(`فيسبوك: ${fb.error}`);
       if (meta.igUserId && !igProblem) {
         const ig = await once(deps, date, name, "instagram", () =>
-          reel
-            ? publishInstagramReel(deps, meta, reel, imageUrl, post.ig, markers(date, name, "instagram.container"))
-            : publishInstagram(deps, meta, imageUrl, post.ig)
+          post.story
+            ? publishInstagramStory(deps, meta, imageUrl)
+            : reel
+              ? publishInstagramReel(deps, meta, reel, imageUrl, post.ig, markers(date, name, "instagram.container"))
+              : publishInstagram(deps, meta, imageUrl, post.ig)
         );
         result.instagram = ig.state;
         if (ig.error) result.errors.push(`إنستغرام: ${ig.error}`);
@@ -411,10 +446,10 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
     }
     const firstReport = !telegramDone;
     const report = async () => {
-      const caption = `${post.video ? "🎬 ريلز · " : ""}🗓 ${escapeHtml(date)} · ${escapeHtml(post.topic)}\n\n${statusLines(result, igProblem, Boolean(meta), Boolean(meta?.igUserId))}`;
+      const caption = `${post.story ? "📱 ستوري · " : post.video ? "🎬 ريلز · " : ""}🗓 ${escapeHtml(date)} · ${escapeHtml(post.topic)}\n\n${statusLines(result, igProblem, Boolean(meta), Boolean(meta?.igUserId))}`;
       const sent = await deps.telegramPhoto(imageUrl, caption);
       // The captions that weren't published automatically, to post by hand (once).
-      if (firstReport) {
+      if (firstReport && !post.story) {
         if (!meta) await deps.telegramText(`<b>نص فيسبوك</b>\n\n${escapeHtml(post.fb)}`.slice(0, 4096));
         if (!meta || !meta.igUserId || igProblem) await deps.telegramText(`<b>نص إنستغرام</b>\n\n${escapeHtml(post.ig)}`.slice(0, 4096));
       }
@@ -424,15 +459,21 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
   };
 
   const names = day.posts.map((file) => String(file).replace(/\.json$/, "")).filter((name) => /^post-\d+$/.test(name));
+  // Each post reports on Telegram as soon as it is done (a slow Instagram video must not
+  // keep the others' reports waiting until the function runs out of time).
+  // One report at a time, so a post's photo and texts stay together.
+  let reports: Promise<void> = Promise.resolve();
   const outcomes = await Promise.all(
-    names.map((name) =>
-      onePost(name).catch((error): Outcome => {
+    names.map(async (name) => {
+      const outcome = await onePost(name).catch((error): Outcome => {
         const message = error instanceof Error ? error.message : String(error);
         return { result: { post: name, facebook: "failed", instagram: "failed", errors: [message] }, report: null };
-      })
-    )
+      });
+      reports = reports.then(() => outcome.report?.()).catch(() => undefined);
+      await reports;
+      return outcome;
+    })
   );
-  for (const outcome of outcomes) await outcome.report?.().catch(() => undefined);
   const results = outcomes.map((outcome) => outcome.result);
   return { date, found: true, results };
 }

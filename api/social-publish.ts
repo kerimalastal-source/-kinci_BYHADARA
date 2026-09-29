@@ -9,6 +9,7 @@
 import { waitUntil } from "@vercel/functions";
 import { hasSupabase, restAs } from "./_lib/supabase.js";
 import { sendTelegram } from "./_lib/telegram.js";
+import { istanbulDate } from "./_lib/social.js";
 import { hasBlob, publishTodaysPosts } from "./_lib/socialRun.js";
 
 const json = (body: unknown, status = 200) =>
@@ -21,7 +22,7 @@ async function isAdmin(request: Request): Promise<boolean> {
   return res?.status === 200 && res.data === true;
 }
 
-async function run(trigger: string): Promise<Response> {
+async function run(trigger: string, date?: string): Promise<Response> {
   if (!hasBlob()) {
     // Without Blob there's no public image link and no record of what went out: publish nothing.
     console.error("social: no Blob store connected (BLOB_READ_WRITE_TOKEN missing)");
@@ -29,7 +30,7 @@ async function run(trigger: string): Promise<Response> {
     return json({ error: "blob" }, 503);
   }
   try {
-    const result = await publishTodaysPosts();
+    const result = await publishTodaysPosts(new Date(), date);
     console.info(`social: publish (${trigger}) ${JSON.stringify(result)}`);
     return json(result);
   } catch (error) {
@@ -46,9 +47,15 @@ export async function GET(request: Request): Promise<Response> {
 
 export async function POST(request: Request): Promise<Response> {
   if (!(await isAdmin(request))) return json({ error: "forbidden" }, 403);
-  if (!hasBlob()) return run("admin");
+  // Optional {"date": "YYYY-MM-DD"}: today (default) or yesterday in Istanbul, to finish
+  // posts a run left unfinished just before midnight.
+  const body = (await request.json().catch(() => ({}))) as { date?: unknown };
+  const today = istanbulDate();
+  const yesterday = istanbulDate(new Date(Date.now() - 86_400_000));
+  const date = body.date === yesterday ? yesterday : today;
+  if (!hasBlob()) return run("admin", date);
   // Publishing takes up to a minute (Instagram processes each image): answer the button
   // straight away and keep going in the background; the report arrives on Telegram.
-  waitUntil(run("admin"));
+  waitUntil(run("admin", date));
   return json({ started: true }, 202);
 }

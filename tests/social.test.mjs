@@ -72,6 +72,7 @@ function fakeFetch(opts = {}) {
         if (body.upload_phase === "start") return json({ video_id: `reel${calls.filter((c) => c.body.upload_phase === "start").length}`, upload_url: "x" });
         if (body.upload_phase === "finish") return json({ success: true });
       }
+      if (path === "PAGE/photo_stories") return json({ success: true, post_id: `story_${body.photo_id}` });
       if (path === "PAGE/photos") {
         if (opts.failFacebook) return json({ error: { message: "Invalid parameter" } }, 400);
         return json({ id: "photo", post_id: `PAGE_${calls.filter((c) => c.url.endsWith("/photos")).length}` });
@@ -153,7 +154,7 @@ test("Facebook is published with the Page's own token, Instagram after FINISHED,
   assert.ok(store.files.has(`social-state/${DATE}/post-2/instagram.done`));
 });
 
-test("the posts go out side by side (a slow Instagram doesn't hold up the next post), reports in order", async () => {
+test("the posts go out side by side (a slow Instagram doesn't hold up the next post or its report)", async () => {
   const { deps, calls, photos } = setup();
   const fetch = deps.fetch;
   // Instagram takes a while with post-1's image.
@@ -169,8 +170,8 @@ test("the posts go out side by side (a slow Instagram doesn't hold up the next p
   // post-2 was on Instagram before post-1's slow container was even created.
   const media = graphCalls(calls, "IGUSER/media").filter((c) => c.body.caption);
   assert.equal(media[0].body.caption, POSTS["post-2"].ig);
-  // Telegram still reports them in the day's order.
-  assert.deepEqual(photos.map((p) => p.url), [`https://blob.example/social/${DATE}/post-1.jpg`, `https://blob.example/social/${DATE}/post-2.jpg`]);
+  // Each post is reported as soon as it is done: the quick one first.
+  assert.deepEqual(photos.map((p) => p.url), [`https://blob.example/social/${DATE}/post-2.jpg`, `https://blob.example/social/${DATE}/post-1.jpg`]);
 });
 
 test("posts with a time wait for it; each run publishes what has come due and catches up", async () => {
@@ -236,6 +237,29 @@ test("a Reel whose video is missing is reported, nothing published", async () =>
   assert.deepEqual(day.results.map((r) => r.facebook), ["failed"]);
   assert.equal(graphCalls(calls, "PAGE/video_reels").length, 0);
   assert.match(texts[0], /MP4/);
+});
+
+test("a Story: an unpublished Page photo posted as a Facebook story, and an Instagram story; no captions", async () => {
+  const posts = { "post-7": { id: "story-1", topic: "ستوري", image: "post-7.jpg", story: true, fb: "x", ig: "y" } };
+  const { deps, calls, photos, texts, store } = setup({ posts, day: ["post-7.json"], meta: { ...META } });
+  const day = await publishDay(deps, DATE);
+  assert.deepEqual(day.results.map((r) => [r.facebook, r.instagram]), [["published", "published"]]);
+  const photo = graphCalls(calls, "PAGE/photos")[0];
+  assert.equal(photo.body.published, "false");
+  assert.equal(photo.body.message, undefined);
+  assert.ok(graphCalls(calls, "PAGE/photo_stories")[0].body.photo_id);
+  const media = graphCalls(calls, "IGUSER/media").find((c) => c.body.media_type);
+  assert.equal(media.body.media_type, "STORIES");
+  assert.equal(media.body.caption, undefined);
+  assert.ok(store.files.has(`social-state/${DATE}/post-7/instagram.done`));
+  assert.match(photos[0].caption, /ستوري/);
+  assert.equal(texts.length, 0);
+});
+
+test("a failure leaves its reason in <platform>.error", async () => {
+  const { deps, store } = setup({ failFacebook: true });
+  await publishDay(deps, DATE);
+  assert.match(String(store.files.get(`social-state/${DATE}/post-1/facebook.error`).body), /Invalid parameter/);
 });
 
 test("nothing is published twice: a second run (cron or button) does nothing and says nothing", async () => {

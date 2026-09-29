@@ -48,7 +48,12 @@ const blobStore: SocialStore = {
   }
 };
 
-export function publishTodaysPosts(now = new Date()): Promise<DayResult> {
+/**
+ * Publishes the posts of `date` (Istanbul, default today) that are due. An earlier day (the
+ * admin finishing yesterday's posts) counts as over, so everything on it is due.
+ */
+export function publishTodaysPosts(now = new Date(), date?: string): Promise<DayResult> {
+  const today = istanbulDate(now);
   return publishDay(
     {
       sourceUrl: socialSourceUrl(),
@@ -59,7 +64,7 @@ export function publishTodaysPosts(now = new Date()): Promise<DayResult> {
       telegramPhoto: sendTelegramPhoto,
       telegramText: async (html) => (await sendTelegram(html)) !== null
     },
-    istanbulDate(now),
-    istanbulTime(now)
+    date ?? today,
+    date && date < today ? "23:59" : istanbulTime(now)
   );
 }
