@@ -1,26 +1,34 @@
 # منشورات حضارة اليومية (Daily social posts)
 
-Every morning a scheduled Claude session prepares **2 posts** (one image + one Facebook
-caption + one Instagram caption each) for the HADARA Real Estate Facebook page and
+Every morning (07:30 Istanbul) a scheduled Claude session prepares **the day's posts** —
+2 a day, or **3 a day during the intensive week 2026-09-30 → 2026-10-06** (one image + one
+Facebook caption + one Instagram caption each) for the HADARA Real Estate Facebook page and
 Instagram account, publishes them to the team's page on claude.ai, and pushes them to
 the **`social-posts` branch**:
 
 **Artifact:** see `ARTIFACT_URL` in `scripts/social/config.json`.
 
 The website publishes them by itself (owner's request 2026-09-29): Vercel builds the
-`social-posts` branch, and at 10:00 Istanbul the site's cron (`api/social-publish.ts`)
-reads `public/social/<date>/` from that build and posts each image with its `fb` caption
-to the Facebook Page and its `ig` caption to Instagram, then sends the result to the
-owner on Telegram. Each post goes out once per platform. **Never push to `main`.**
+`social-posts` branch, and the site's cron (`api/social-publish.ts`, runs at 09:00, 14:00
+and 21:00 Istanbul) reads `public/social/<date>/` from that build and posts each image with
+its `fb` caption to the Facebook Page and its `ig` caption to Instagram **at the post's own
+time** (`at`, Istanbul "HH:MM"; a post without `at` goes out with the 09:00 run), then
+sends the result to the owner on Telegram. Each post goes out once per platform.
+**Never push to `main`.** The push must be done **before 08:50** so the 09:00 post is on
+the branch build in time.
 
 ## Steps for the daily session
 
 Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F`).
 
-1. `node scripts/social/topics.mjs` → today's 2 topics from the monthly content plan
-   (`plan.json`: one entry per day, a weekly theme, 2 posts with `label`, `brief`,
-   `path` and suggested `photos`). Use each topic's `id` as the post `id` and its
-   `label` as the post `topic`; let the week's theme colour the wording.
+1. `node scripts/social/topics.mjs` → today's topics from the monthly content plan
+   (`plan.json`: one entry per day, a weekly theme, 2 or 3 posts with `label`, `brief`,
+   `path`, suggested `photos` and, in the intensive week, `at`). Use each topic's `id` as
+   the post `id`, its `label` as the post `topic`, and **copy its `at` unchanged** into the
+   post (posts.json, in the same order); let the week's theme colour the wording.
+   In the intensive week the three times have three roles: **09:00 a project**, **14:00
+   useful information** (article, citizenship, FAQ, a site tool), **21:00 something
+   lighter** (an area of Istanbul, a question to followers, a service) — follow the brief.
    **If it prints `"finished": true`, the month is over: make no posts, publish
    nothing, and end with the Arabic summary "انتهت خطة المحتوى لهذا الشهر — حان وقت
    مراجعة النتائج ووضع خطة جديدة مع Claude."** (`notStarted` → also make no posts.)
@@ -41,7 +49,7 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
    (bathroom, plan, blurry), pick a better one from the topic's `photos`.
 4. Write `scripts/social/out/<date>/posts.json` (shape below) and run
    `node scripts/social/render.mjs scripts/social/out/<date>/posts.json`.
-   It must print `ok` for every post — fix any PROBLEMS (shorter text, `arSize`
+   It must print `ok` for every post (2 or 3) — fix any PROBLEMS (shorter text, `arSize`
    44–48) and re-run. Then Read each `post-<n>.jpg` once to check it visually.
 5. Read the published page's `days.json` with the Artifact tool
    (`action: "read"`, `url` = ARTIFACT_URL, `path: "days.json"`), then run
@@ -82,7 +90,9 @@ equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 9
 - Badges come from a fixed set so the feed looks consistent: new launch «إطلاق جديد ·
   New launch», under construction «قيد الإنشاء · Under construction», ready «جاهز للسكن ·
   Ready to move in», villas «فلل · Villas», citizenship «الجنسية التركية · Citizenship»,
-  guides «دليل المشتري · Buyer's guide» (articles), service «خدماتنا · Our services».
+  guides «دليل المشتري · Buyer's guide» (articles), service «خدماتنا · Our services»,
+  an area of Istanbul «من إسطنبول · Istanbul life», a question to followers «سؤال لكم ·
+  Your pick» (the evening posts).
 - Photos: sharp exterior/aerial/interior shots from `public/images/`; never a site plan,
   a bathroom or a blurry crop as the main photo.
 - The first 9 grid posts made on 2026-09-29 in the older full-photo style were **not
@@ -116,6 +126,7 @@ equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 9
 ```json
 { "posts": [ {
   "id": "lotus-yali",                     // used in utm_campaign=post-<id>
+  "at": "09:00",                          // from topics.mjs when the plan has it (Istanbul time)
   "topic": "لوتس يالي",                    // short Arabic label shown on the page
   "image": {
     "photo": "/images/projects/lotus-yali/sunset-aerial.jpg",

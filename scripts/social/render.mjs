@@ -144,7 +144,8 @@ for (const [i, p] of posts.entries()) {
   await page.screenshot({ path: path.join(outDir, `post-${n}.jpg`), type: "jpeg", quality: 90 });
   await page.close();
   fs.unlinkSync(htmlPath);
-  const result = { id: p.id, topic: p.topic, image: `post-${n}.jpg`, fb: caption(p, "facebook"), ig: caption(p, "instagram") };
+  if (p.at !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(p.at)) issues.push(`"at" must be Istanbul time "HH:MM", got ${JSON.stringify(p.at)}`);
+  const result = { id: p.id, topic: p.topic, image: `post-${n}.jpg`, fb: caption(p, "facebook"), ig: caption(p, "instagram"), ...(p.at ? { at: p.at } : {}) };
   fs.writeFileSync(path.join(outDir, `post-${n}.json`), JSON.stringify(result, null, 2));
   console.log(`post-${n} (${p.id}): ${issues.length ? "PROBLEMS\n  - " + issues.join("\n  - ") : "ok"}`);
   problems += issues.length;

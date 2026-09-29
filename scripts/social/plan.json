@@ -50,7 +50,8 @@
       "/images/projects/diamond-marin/master-bedroom.jpg"
      ],
      "brief": "Life in Diamond Marin: pool, gym, gardens, smart home, interiors; boutique building for 58 families.",
-     "label": "دايموند مارين · الحياة في المشروع"
+     "label": "دايموند مارين · الحياة في المشروع",
+     "at": "09:00"
     },
     {
      "id": "blog-about-istanbul",
@@ -61,9 +62,24 @@
       "/images/blog/about-istanbul.jpg"
      ],
      "brief": "3-4 practical points from the article blogData.about-istanbul, then invite to read it.",
-     "label": "مقال: إسطنبول: المدينة التي تلتقي فيها القارات"
+     "label": "مقال: إسطنبول: المدينة التي تلتقي فيها القارات",
+     "at": "14:00"
+    },
+    {
+     "id": "pick-sea-nature-city",
+     "kind": "page",
+     "angle": "question",
+     "path": "/projects",
+     "photos": [
+      "/images/projects/lotus-yali/sunset-aerial.jpg",
+      "/images/projects/lotus-sisli/twin-towers.jpg"
+     ],
+     "brief": "Evening, light and friendly: ask followers which life they prefer - sea view, nature, or the heart of the city - and name one available project for each, using only the 'lifestyle' tags in src/data/projects.ts (never soldOut). The 4 stat tiles: how many of our projects have each tag (sea / nature / city) and the number of projects on the site. Badge «سؤال لكم · Your pick». Invite them to answer in the comments.",
+     "label": "سؤال المساء: بحر، طبيعة، أم قلب المدينة؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-01",
@@ -81,7 +97,8 @@
       "/images/projects/lotus-sisli/tower-night.jpg"
      ],
      "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats.",
-     "label": "لوتس شيشلي · نظرة عامة"
+     "label": "لوتس شيشلي · نظرة عامة",
+     "at": "09:00"
     },
     {
      "id": "faq-why-istanbul",
@@ -91,9 +108,24 @@
       "/images/projects/lotus-sisli/aerial-city.jpg"
      ],
      "brief": "Answer the FAQ question faq.categories[1].items[0] (question + clear short answer from the site's answer).",
-     "label": "سؤال: لماذا إسطنبول؟"
+     "label": "سؤال: لماذا إسطنبول؟",
+     "at": "14:00"
+    },
+    {
+     "id": "area-beylikduzu",
+     "kind": "page",
+     "angle": "area",
+     "path": "/projects",
+     "photos": [
+      "/images/projects/diamond-marin/aerial-sea-view.jpg",
+      "/images/projects/beylikduzu-living/aerial-view.jpg"
+     ],
+     "brief": "Evening, light: Beylikdüzü as a place to live. Only facts from the site: which of our available projects are in Beylikdüzü (projects.ts district) and what is nearby from their projectsData.<slug>.nearby texts (ar/en). Badge «من إسطنبول · Istanbul life». No claims about prices, rents or growth.",
+     "label": "من إسطنبول: بيليكدوزو",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-02",
@@ -112,7 +144,8 @@
       "/images/projects/beylikduzu-living/living-room.jpg"
      ],
      "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. Use the residences (2+1/3+1/4+1 sizes) too.",
-     "label": "بيليكدوزو ليفينغ · الحياة في المشروع"
+     "label": "بيليكدوزو ليفينغ · الحياة في المشروع",
+     "at": "09:00"
     },
     {
      "id": "find-my-project",
@@ -122,9 +155,26 @@
       "/images/projects/lotus-yali/aerial-sea-view.jpg"
      ],
      "brief": "'Find my project' quiz on the home page (match.* texts): 4 quick questions (goal, home size, atmosphere, move-in) then matching projects. Invite to try it.",
-     "label": "اعثر على مشروعك"
+     "label": "اعثر على مشروعك",
+     "at": "14:00"
+    },
+    {
+     "id": "marmara-haven-villa-life",
+     "kind": "project",
+     "slug": "marmara-haven-villa",
+     "angle": "life",
+     "path": "/projects/marmara-haven-villa",
+     "photos": [
+      "/images/projects/marmara-haven-villa/private-pool.jpg",
+      "/images/projects/marmara-haven-villa/living-room.jpg",
+      "/images/projects/marmara-haven-villa/terrace.jpg"
+     ],
+     "brief": "Evening: everyday life in Marmara Haven Villa - the comfort features (elevator, smart home, underfloor heating, fireplace, the well, private spaces) from projects.ts and projectsData.marmara-haven-villa. Not the sizes/floors angle (later posts cover the overview, floors, sea view and verified card). Price 'on request' only. Badge «فلل · Villas».",
+     "label": "فيلا مرمرة هيفن · الحياة في الفيلا",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-03",
@@ -142,7 +192,8 @@
       "/images/projects/diamond-marin/facade.jpg"
      ],
      "brief": "Location: the nearby places and travel times (projectsData.<slug>.nearby) and the district.",
-     "label": "دايموند مارين · الموقع وما حوله"
+     "label": "دايموند مارين · الموقع وما حوله",
+     "at": "09:00"
     },
     {
      "id": "faq-foreigners-buy",
@@ -152,9 +203,24 @@
       "/images/projects/diamond-marin/facade.jpg"
      ],
      "brief": "Answer the FAQ question faq.categories[1].items[1] (question + clear short answer from the site's answer).",
-     "label": "سؤال: هل يمكن للأجانب الشراء؟"
+     "label": "سؤال: هل يمكن للأجانب الشراء؟",
+     "at": "14:00"
+    },
+    {
+     "id": "area-buyukcekmece",
+     "kind": "page",
+     "angle": "area",
+     "path": "/projects",
+     "photos": [
+      "/images/projects/lotus-yali/view-from-sea.jpg",
+      "/images/projects/lotus-manzara-guzelce/aerial-villas.jpg"
+     ],
+     "brief": "Evening, light: Büyükçekmece as a place to live (sea and lake). Only facts from the site: our available projects in Büyükçekmece (projects.ts district) and their projectsData.<slug>.nearby texts. Badge «من إسطنبول · Istanbul life».",
+     "label": "من إسطنبول: بيوكجكمجة",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-04",
@@ -172,7 +238,8 @@
       "/images/projects/lotus-sisli/tower-day.jpg"
      ],
      "brief": "Şişli home offices and office units (residences with kind office, saleable areas) for investors and professionals; location in Şişli.",
-     "label": "لوتس شيشلي · المكاتب والـ Home Office"
+     "label": "لوتس شيشلي · المكاتب والـ Home Office",
+     "at": "09:00"
     },
     {
      "id": "faq-payment-options",
@@ -182,9 +249,24 @@
       "/images/projects/beylikduzu-living/living-room-2.jpg"
      ],
      "brief": "Answer the FAQ question faq.categories[1].items[2] (question + clear short answer from the site's answer).",
-     "label": "سؤال: خيارات الدفع"
+     "label": "سؤال: خيارات الدفع",
+     "at": "14:00"
+    },
+    {
+     "id": "ask-our-team",
+     "kind": "page",
+     "angle": "service",
+     "path": "/contact",
+     "photos": [
+      "/images/projects/diamond-marin/living-dining.jpg",
+      "/images/pages/hadara-monogram.jpg"
+     ],
+     "brief": "Evening, light: you can ask us anything, in your language - the chat on the site (talk to our team), WhatsApp, the free private video tour. Facts only from the site: the 5 site languages, office hours 9:00-18:00 Istanbul (videoTour.officeHours), video tour languages (Arabic/English/Turkish). Badge «خدماتنا · Our services».",
+     "label": "اسألنا ما تريد",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-05",
@@ -203,7 +285,8 @@
       "/images/projects/beylikduzu-living/entrance-hall.jpg"
      ],
      "brief": "The homes: 2+1, 3+1 and 4+1 with gross sizes (residences), interiors, flexible installment plans, delivery late 2028.",
-     "label": "بيليكدوزو ليفينغ · الشقق والمساحات"
+     "label": "بيليكدوزو ليفينغ · الشقق والمساحات",
+     "at": "09:00"
     },
     {
      "id": "video-tour",
@@ -213,9 +296,24 @@
       "/images/projects/diamond-marin/master-bedroom.jpg"
      ],
      "brief": "Private video tour (videoTour.*): who it is for (buyers abroad), what you see, free, WhatsApp/FaceTime/Zoom/Meet, Arabic/English/Turkish. Different wording than the first video-tour post.",
-     "label": "الجولة عبر الفيديو"
+     "label": "الجولة عبر الفيديو",
+     "at": "14:00"
+    },
+    {
+     "id": "area-sisli",
+     "kind": "page",
+     "angle": "area",
+     "path": "/projects/lotus-sisli",
+     "photos": [
+      "/images/projects/lotus-sisli/tower-night.jpg",
+      "/images/projects/lotus-sisli/aerial-city.jpg"
+     ],
+     "brief": "Evening, light: Şişli, the city centre side of Istanbul. Only facts from the site: Lotus Şişli (projects.ts, projectsData.lotus-sisli incl. nearby). Different headline and angle from the Lotus Şişli overview (10-01) and offices (10-04) posts - here it is the neighbourhood and city life. Badge «من إسطنبول · Istanbul life».",
+     "label": "من إسطنبول: شيشلي",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-06",
@@ -233,7 +331,8 @@
       "/images/projects/lotus-yali/aerial-sea-view.jpg"
      ],
      "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats.",
-     "label": "لوتس يالي · نظرة عامة"
+     "label": "لوتس يالي · نظرة عامة",
+     "at": "09:00"
     },
     {
      "id": "blog-real-estate-in-turkey",
@@ -244,9 +343,24 @@
       "/images/blog/real-estate-in-turkey.jpg"
      ],
      "brief": "3-4 practical points from the article blogData.real-estate-in-turkey, then invite to read it.",
-     "label": "مقال: فهم سوق العقارات التركي"
+     "label": "مقال: فهم سوق العقارات التركي",
+     "at": "14:00"
+    },
+    {
+     "id": "pick-home-size",
+     "kind": "page",
+     "angle": "question",
+     "path": "/projects",
+     "photos": [
+      "/images/projects/beylikduzu-living/living-room.jpg",
+      "/images/projects/lotus-manzara-guzelce/villa-exterior.jpg"
+     ],
+     "brief": "Evening, light and friendly: ask followers which home suits their family - 1+1, 2+1, 3+1 or a villa - and show that our available projects offer each (from residences in projects.ts; villas from the villa projects). The 4 tiles: the layouts. Badge «سؤال لكم · Your pick». Invite answers in the comments and point to 'Find my project' on the site.",
+     "label": "سؤال المساء: أي منزل يناسب عائلتك؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-07",
@@ -917,5 +1031,15 @@
     }
    ]
   }
- ]
+ ],
+ "intensive": {
+  "from": "2026-09-30",
+  "to": "2026-10-06",
+  "times": [
+   "09:00",
+   "14:00",
+   "21:00"
+  ],
+  "note": "Owner's request 2026-09-29 (warm-up before paid ads): 3 posts a day at 09:00 (a project), 14:00 (useful information) and 21:00 (something lighter). After 2026-10-06 the owner decides; until then the days keep their 2 posts without times (published with the first run, 09:00)."
+ }
 }
