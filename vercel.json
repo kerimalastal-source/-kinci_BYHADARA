@@ -64,6 +64,11 @@
       "claude/*": false
     }
   },
+  "functions": {
+    "api/track.ts": {
+      "maxDuration": 30
+    }
+  },
   "crons": [
     {
       "path": "/api/daily",

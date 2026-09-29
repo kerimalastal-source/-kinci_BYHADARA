@@ -7,23 +7,15 @@
 // sends the "new visitor" alert and every later page edits that same message (current
 // page, page count, visit length — no new notification); the first opening of a
 // request page (contact...) in a visit sends a separate 🔥 message as a reply to it.
+// Likely automated visits (data-center towns, same-page bursts: api/_lib/visitBots.ts)
+// get no Telegram message; the logic is in api/_lib/visitRecord.ts.
 // The response (204) goes out at once; the database write and the alerts finish in the
 // background (waitUntil), so neither can slow down or break it.
 import { waitUntil } from "@vercel/functions";
-import { editTelegram, sendTelegram } from "./_lib/telegram.js";
 import { rpc, RpcError } from "./_lib/supabase.js";
 import { sendDueFollowUps } from "./_lib/followups.js";
-import {
-  LOCALES,
-  newVisitorMessage,
-  requestPageMessage,
-  visitUpdateMessage,
-  type Geo,
-  type Locale,
-  type PageView,
-  type TrailStep,
-  type VisitState
-} from "./_lib/visitAlerts.js";
+import { recordVisit } from "./_lib/visitRecord.js";
+import { LOCALES, type Geo, type Locale, type PageView, type TrailStep } from "./_lib/visitAlerts.js";
 
 const SESSION_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 /** The seller account and admin pages are never tracked (the browser skips them too). */
@@ -57,7 +49,7 @@ export async function POST(request: Request): Promise<Response> {
     const geo = readGeo(request.headers);
     const origin = new URL(request.url).origin;
     waitUntil(
-      record(view, geo, origin).catch((error: unknown) => {
+      recordVisit(view, geo, origin).catch((error: unknown) => {
         console.error(`track: ${error instanceof Error ? error.message : "unknown error"}`);
       })
     );
@@ -166,55 +158,4 @@ function readGeo(headers: Headers): Geo {
     }
   }
   return { country: country && /^[A-Z]{2}$/.test(country) ? country : null, city: city ? city.slice(0, 100) : null };
-}
-
-async function record(view: PageView, geo: Geo, origin: string): Promise<void> {
-  const args = {
-    p_session_id: view.sessionId,
-    p_path: view.path,
-    p_locale: view.locale,
-    p_referrer: view.referrer || null,
-    p_country: geo.country,
-    p_city: geo.city
-  };
-
-  let state: VisitState;
-  try {
-    state = (await rpc("record_visit_state", args)) as VisitState;
-  } catch (error) {
-    // 404: migration 0004 hasn't been run yet — keep the plain alert of record_visit().
-    if (!(error instanceof RpcError && error.status === 404)) throw error;
-    const isNewSession = await rpc("record_visit", args);
-    if (isNewSession === true && !view.referrer.startsWith("/")) {
-      await sendTelegram(newVisitorMessage(view, geo, origin));
-    }
-    return;
-  }
-
-  // A new tab opened from the site starts its own session (sessionStorage is per tab) but
-  // its first referrer is one of our own pages: it isn't a new visitor, so it gets no
-  // alert, no updates and no 🔥 message.
-  const landingReferrer = state.is_new ? view.referrer : state.landing?.referrer ?? "";
-  if ((landingReferrer ?? "").startsWith("/")) return;
-
-  // The ad campaign is kept with the visit's first page, for the statistics page (0008;
-  // before it runs, the 404 is ignored).
-  if (state.is_new && view.campaign) {
-    await rpc("save_visit_campaign", { p_session_id: view.sessionId, p_campaign: view.campaign }).catch((error: unknown) => {
-      if (!(error instanceof RpcError && error.status === 404)) console.error(`track: save_visit_campaign failed: ${error instanceof Error ? error.message : "unknown"}`);
-    });
-  }
-
-  let messageId = state.message_id ? Number(state.message_id) : null;
-  if (state.is_new) {
-    messageId = await sendTelegram(newVisitorMessage(view, geo, origin));
-    if (messageId) await rpc("save_visitor_alert", { p_session_id: view.sessionId, p_message_id: messageId });
-  } else if (messageId) {
-    // A message the team deleted can't be edited: that is logged (by editTelegram) and
-    // never stops the 🔥 message below.
-    await editTelegram(messageId, visitUpdateMessage(view, state, origin));
-  }
-
-  const request = requestPageMessage(view, geo, state);
-  if (request) await sendTelegram(request, messageId);
 }
