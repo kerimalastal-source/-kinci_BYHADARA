@@ -2,12 +2,16 @@
 
 Every morning a scheduled Claude session prepares **2 posts** (one image + one Facebook
 caption + one Instagram caption each) for the HADARA Real Estate Facebook page and
-Instagram account, and publishes them to the team's page on claude.ai:
+Instagram account, publishes them to the team's page on claude.ai, and pushes them to
+the **`social-posts` branch**:
 
 **Artifact:** see `ARTIFACT_URL` in `scripts/social/config.json`.
 
-Nothing is posted to Facebook/Instagram automatically — the owner reviews the page,
-then posts or schedules them in Meta Business Suite.
+The website publishes them by itself (owner's request 2026-09-29): Vercel builds the
+`social-posts` branch, and at 10:00 Istanbul the site's cron (`api/social-publish.ts`)
+reads `public/social/<date>/` from that build and posts each image with its `fb` caption
+to the Facebook Page and its `ig` caption to Instagram, then sends the result to the
+owner on Telegram. Each post goes out once per platform. **Never push to `main`.**
 
 ## Steps for the daily session
 
@@ -38,7 +42,16 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
    It prints `file_path` and `files`; publish them with the Artifact tool
    (`url` = ARTIFACT_URL, `file_path`, `files`) — read the page first
    (`action: "read"`, `url`) so the publish is accepted.
-6. Do not commit or push anything (outputs are git-ignored).
+6. Push the day to the `social-posts` branch (only this; never `main`):
+   `bash scripts/social/push-day.sh <date>`
+   It works in a separate worktree (`../social-posts-worktree`): merges `main` into
+   `social-posts`, copies `post-<n>.jpg` + `post-<n>.json` from `scripts/social/out/<date>/`
+   to `public/social/<date>/`, writes `day.json` (the posts in order), deletes day folders
+   older than 21 days, commits as `kerimalastal-source <kerim.alastal@gmail.com>` (Vercel's
+   free plan only builds the owner's commits) and pushes. It must end with
+   `pushed social-posts: …`. If the push is refused, stop and say exactly why in the
+   summary: at 10:00 the website then tells the owner on Telegram that today's posts
+   weren't prepared. Commit nothing else (the outputs stay git-ignored).
 
 ## Content rules (from the owner — do not break)
 
