@@ -19,7 +19,7 @@ import { LOCALES, type Geo, type Locale, type PageView, type TrailStep } from ".
 
 const SESSION_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 /** The seller account and admin pages are never tracked (the browser skips them too). */
-const INTERNAL_PATH = /^\/(?:(?:ar|fr|ru)\/)?(?:admin|account)(?:\/|$)/;
+const INTERNAL_PATH = /^\/(?:(?:ar|fa|fr|ru)\/)?(?:admin|account)(?:\/|$)/;
 /** Links in alerts point at the public site. */
 const SITE = (process.env.VITE_SITE_URL || "https://www.hadararealestate.com").replace(/\/$/, "");
 /** Crawlers and link previews aren't visitors. */
