@@ -1,10 +1,12 @@
 // /api/social-publish — publishes today's social posts (api/_lib/social.ts,
 // scripts/social/README.md) on the Facebook Page and Instagram, and sends them to Telegram.
-//   GET  — Vercel Cron at 07:00 UTC = 10:00 Istanbul (vercel.json), with
+//   GET  — Vercel Cron at 06:00, 11:00 and 18:00 UTC = 09:00, 14:00 and 21:00 Istanbul
+//          (vercel.json; each run publishes the posts whose `at` time has come), with
 //          "Authorization: Bearer <CRON_SECRET>"; refuses everything without it.
 //   POST — the "Publish today's posts now" button on the admin home (signed-in admin's own
 //          Supabase token in Authorization, checked with is_admin()).
 // A post already published on a platform is never published there again.
+import { waitUntil } from "@vercel/functions";
 import { hasSupabase, restAs } from "./_lib/supabase.js";
 import { sendTelegram } from "./_lib/telegram.js";
 import { hasBlob, publishTodaysPosts } from "./_lib/socialRun.js";
@@ -44,5 +46,9 @@ export async function GET(request: Request): Promise<Response> {
 
 export async function POST(request: Request): Promise<Response> {
   if (!(await isAdmin(request))) return json({ error: "forbidden" }, 403);
-  return run("admin");
+  if (!hasBlob()) return run("admin");
+  // Publishing takes up to a minute (Instagram processes each image): answer the button
+  // straight away and keep going in the background; the report arrives on Telegram.
+  waitUntil(run("admin"));
+  return json({ started: true }, 202);
 }

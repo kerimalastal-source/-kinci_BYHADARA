@@ -83,7 +83,11 @@ function list(items: string[], empty: string): string {
 /** One line about what the "publish now" button did. */
 function socialStatus(result: SocialPublishResult | null): string {
   if (!result) return t("adminHome.social.error");
+  if (result.started) return t("adminHome.social.started");
   if (result.error === "blob") return t("adminHome.social.blob");
+  if (result.error === "forbidden") return t("adminHome.social.forbidden");
+  if (result.error === "session") return t("adminHome.social.session");
+  if (result.error === "http") return t("adminHome.social.http", { status: String(result.status ?? "") });
   if (result.error || !result.results) return t("adminHome.social.failed");
   if (!result.found) return t("adminHome.social.missing");
   if (result.results.some((r) => r.errors.length)) return t("adminHome.social.failed");

@@ -22,6 +22,8 @@ export interface SocialPost {
   image: string;
   fb: string;
   ig: string;
+  /** Istanbul time "HH:MM" the post goes out at (the first run from then on); none = the day's first run. */
+  at?: string;
 }
 
 export interface MetaConfig {
@@ -61,8 +63,8 @@ export type Platform = "facebook" | "instagram";
 
 export interface PostResult {
   post: string;
-  facebook: "published" | "already" | "failed" | "manual" | "busy";
-  instagram: "published" | "already" | "failed" | "manual" | "busy";
+  facebook: "published" | "already" | "failed" | "manual" | "busy" | "scheduled";
+  instagram: "published" | "already" | "failed" | "manual" | "busy" | "scheduled";
   errors: string[];
 }
 
@@ -87,6 +89,11 @@ export function socialSourceUrl(): string {
 
 export function istanbulDate(now = new Date()): string {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Istanbul" }).format(now);
+}
+
+/** Istanbul's time of day as "HH:MM" (24 h). */
+export function istanbulTime(now = new Date()): string {
+  return new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Istanbul", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(now);
 }
 
 const GRAPH = "https://graph.facebook.com/v21.0";
@@ -232,7 +239,12 @@ async function readJson<T>(deps: PublishDeps, url: string, headers: Record<strin
 }
 
 /** Publishes the day's posts. Returns what happened to each; never throws for a single post. */
-export async function publishDay(deps: PublishDeps, date: string): Promise<DayResult> {
+/**
+ * Publishes the day's posts that are due: a post with `at` waits until Istanbul's `time`
+ * reaches it (each cron run publishes what has come due, and catches up on anything an
+ * earlier run missed). Without `time` every post is due.
+ */
+export async function publishDay(deps: PublishDeps, date: string, time?: string): Promise<DayResult> {
   const headers: Record<string, string> = deps.bypass ? { "x-vercel-protection-bypass": deps.bypass } : {};
   const base = `${deps.sourceUrl}/social/${date}`;
   const day = await readJson<{ date?: string; posts?: string[] }>(deps, `${base}/day.json`, headers);
@@ -247,20 +259,24 @@ export async function publishDay(deps: PublishDeps, date: string): Promise<DayRe
   }
 
   const meta = deps.meta;
-  const results: PostResult[] = [];
-  for (const file of day.posts) {
-    const name = file.replace(/\.json$/, "");
-    if (!/^post-\d+$/.test(name)) continue;
+  type Outcome = { result: PostResult; report: (() => Promise<void>) | null };
+  // The posts are published side by side (Instagram alone can take ~20 s a post, and the
+  // function has 60 s); the Telegram reports then go out in the day's order.
+  const onePost = async (name: string): Promise<Outcome> => {
     const post = await readJson<SocialPost>(deps, `${base}/${name}.json`, headers);
     const result: PostResult = { post: name, facebook: "manual", instagram: "manual", errors: [] };
     if (!post || typeof post.fb !== "string" || typeof post.ig !== "string" || !/^post-\d+\.jpe?g$/.test(post.image ?? "")) {
       result.facebook = result.instagram = "failed";
       result.errors.push(`ملف ${name}.json غير صالح`);
       if (await deps.store.claim(markers(date, name, "invalid.warned"), "{}").catch(() => true)) {
-        await deps.telegramText(`⚠️ <b>تعذّر قراءة منشور اليوم</b> (${escapeHtml(date)} · ${escapeHtml(name)})`);
+        return { result, report: async () => void (await deps.telegramText(`⚠️ <b>تعذّر قراءة منشور اليوم</b> (${escapeHtml(date)} · ${escapeHtml(name)})`)) };
       }
-      results.push(result);
-      continue;
+      return { result, report: null };
+    }
+
+    if (time && typeof post.at === "string" && /^\d{2}:\d{2}$/.test(post.at) && post.at > time) {
+      result.facebook = result.instagram = "scheduled";
+      return { result, report: null };
     }
 
     const igProblem = instagramCaptionProblem(post.ig);
@@ -272,8 +288,7 @@ export async function publishDay(deps: PublishDeps, date: string): Promise<DayRe
       // Everything that can go out already did.
       result.facebook = meta ? "already" : "manual";
       result.instagram = igDone ? "already" : "manual";
-      results.push(result);
-      continue;
+      return { result, report: null };
     }
 
     // A public copy of the image for Meta and Telegram to fetch.
@@ -288,9 +303,7 @@ export async function publishDay(deps: PublishDeps, date: string): Promise<DayRe
       const message = error instanceof Error ? error.message : String(error);
       result.facebook = result.instagram = "failed";
       result.errors.push(`الصورة: ${message}`);
-      await deps.telegramText(`⚠️ <b>تعذّر تجهيز صورة منشور اليوم</b> (${escapeHtml(post.topic)})\n${escapeHtml(message)}`);
-      results.push(result);
-      continue;
+      return { result, report: async () => void (await deps.telegramText(`⚠️ <b>تعذّر تجهيز صورة منشور اليوم</b> (${escapeHtml(post.topic)})\n${escapeHtml(message)}`)) };
     }
 
     if (meta) {
@@ -309,19 +322,32 @@ export async function publishDay(deps: PublishDeps, date: string): Promise<DayRe
     const attempted = [result.facebook, result.instagram].some((s) => s === "published" || s === "failed");
     const busy = result.facebook === "busy" || result.instagram === "busy";
     if (!attempted && (telegramDone || busy)) {
-      results.push(result);
-      continue;
+      return { result, report: null };
     }
     const firstReport = !telegramDone;
-    const caption = `🗓 ${escapeHtml(date)} · ${escapeHtml(post.topic)}\n\n${statusLines(result, igProblem, Boolean(meta), Boolean(meta?.igUserId))}`;
-    const sent = await deps.telegramPhoto(imageUrl, caption);
-    // The captions that weren't published automatically, to post by hand (once).
-    if (firstReport) {
-      if (!meta) await deps.telegramText(`<b>نص فيسبوك</b>\n\n${escapeHtml(post.fb)}`.slice(0, 4096));
-      if (!meta || !meta.igUserId || igProblem) await deps.telegramText(`<b>نص إنستغرام</b>\n\n${escapeHtml(post.ig)}`.slice(0, 4096));
-    }
-    if (sent && firstReport) await deps.store.put(markers(date, name, "telegram.done"), "{}", "application/json").catch(() => undefined);
-    results.push(result);
-  }
+    const report = async () => {
+      const caption = `🗓 ${escapeHtml(date)} · ${escapeHtml(post.topic)}\n\n${statusLines(result, igProblem, Boolean(meta), Boolean(meta?.igUserId))}`;
+      const sent = await deps.telegramPhoto(imageUrl, caption);
+      // The captions that weren't published automatically, to post by hand (once).
+      if (firstReport) {
+        if (!meta) await deps.telegramText(`<b>نص فيسبوك</b>\n\n${escapeHtml(post.fb)}`.slice(0, 4096));
+        if (!meta || !meta.igUserId || igProblem) await deps.telegramText(`<b>نص إنستغرام</b>\n\n${escapeHtml(post.ig)}`.slice(0, 4096));
+      }
+      if (sent && firstReport) await deps.store.put(markers(date, name, "telegram.done"), "{}", "application/json").catch(() => undefined);
+    };
+    return { result, report };
+  };
+
+  const names = day.posts.map((file) => String(file).replace(/\.json$/, "")).filter((name) => /^post-\d+$/.test(name));
+  const outcomes = await Promise.all(
+    names.map((name) =>
+      onePost(name).catch((error): Outcome => {
+        const message = error instanceof Error ? error.message : String(error);
+        return { result: { post: name, facebook: "failed", instagram: "failed", errors: [message] }, report: null };
+      })
+    )
+  );
+  for (const outcome of outcomes) await outcome.report?.().catch(() => undefined);
+  const results = outcomes.map((outcome) => outcome.result);
   return { date, found: true, results };
 }

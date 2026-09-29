@@ -2687,14 +2687,18 @@
   "adminHome": {
     "social": {
       "title": "Publications quotidiennes sur les réseaux sociaux",
-      "hint": "Publiées automatiquement chaque jour à 10 h (heure d'Istanbul) sur Facebook et Instagram, et envoyées sur Telegram. En cas de retard, publiez-les d'ici : une publication déjà en ligne n'est jamais republiée.",
+      "hint": "Publiées automatiquement sur Facebook et Instagram, chaque publication à son heure prévue (heure d’Istanbul), avec le résultat sur Telegram. Si une publication est en retard, publiez-la d’ici — le bouton ne publie que celles dont l’heure est venue, et rien n’est publié deux fois.",
       "button": "Publier les publications du jour",
       "sending": "Publication en cours… cela peut prendre une minute.",
       "done": "Terminé : {published} publiée(s) maintenant, {already} déjà en ligne. Détails sur Telegram.",
       "failed": "Une partie de la publication a échoué — la raison est sur Telegram. Vous pouvez réessayer.",
       "missing": "Les publications du jour ne sont pas encore prêtes (aucun fichier pour la date du jour).",
       "blob": "Le stockage d'images (Vercel Blob) n'est pas encore relié au site.",
-      "error": "Impossible de joindre le serveur. Veuillez réessayer."
+      "error": "Impossible de joindre le serveur. Veuillez réessayer.",
+      "started": "Publication lancée ✓ — elle se poursuit en arrière-plan et le résultat arrive sur Telegram d’ici une minute. Inutile de cliquer à nouveau.",
+      "forbidden": "Ce compte n’est pas administrateur, ou la session a expiré — reconnectez-vous.",
+      "session": "Votre session a expiré — reconnectez-vous puis réessayez.",
+      "http": "Le serveur a renvoyé une erreur (code {status}). Réessayez dans une minute."
     },
     "followUpsToday": "Relances à faire",
     "noFollowUps": "Aucune relance aujourd’hui.",

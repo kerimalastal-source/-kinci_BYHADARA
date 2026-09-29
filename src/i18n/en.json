@@ -2687,14 +2687,18 @@
   "adminHome": {
     "social": {
       "title": "Daily social posts",
-      "hint": "Published automatically every day at 10:00 Istanbul time on Facebook and Instagram, and sent to you on Telegram. If they're late, publish them from here — a post that went out is never posted again.",
+      "hint": "Published automatically on Facebook and Instagram, each post at its set time (Istanbul time), with the result sent to Telegram. If a post is late, publish it from here — the button only publishes posts whose time has come, and nothing is published twice.",
       "button": "Publish today's posts now",
       "sending": "Publishing… this can take a minute.",
       "done": "Done: {published} published now, {already} already published. Details on Telegram.",
       "failed": "Part of the publishing failed — the reason is on Telegram. You can try again.",
       "missing": "Today's posts aren't ready yet (no file for today's date).",
       "blob": "The image store (Vercel Blob) isn't connected to the site yet.",
-      "error": "Couldn't reach the server. Please try again."
+      "error": "Couldn't reach the server. Please try again.",
+      "started": "Publishing started ✓ — it continues in the background and the result reaches Telegram within a minute. No need to press again.",
+      "forbidden": "This account isn't an admin, or the session expired — sign in again.",
+      "session": "Your session expired — sign in again and retry.",
+      "http": "The server returned an error (code {status}). Try again in a minute."
     },
     "followUpsToday": "Sales follow-ups due",
     "noFollowUps": "No follow-ups due today.",
