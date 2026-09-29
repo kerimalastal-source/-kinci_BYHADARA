@@ -24,6 +24,13 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
    **If it prints `"finished": true`, the month is over: make no posts, publish
    nothing, and end with the Arabic summary "انتهت خطة المحتوى لهذا الشهر — حان وقت
    مراجعة النتائج ووضع خطة جديدة مع Claude."** (`notStarted` → also make no posts.)
+   **Before writing anything, read the log of everything already published**:
+   `git fetch origin social-posts && git show origin/social-posts:social/log.json`
+   (if the branch or file doesn't exist yet, use `scripts/social/log-seed.json`).
+   Never reuse a post `id`, a headline (Arabic or English) or the same photo for the
+   same project, and never repeat an angle already covered for that project. If today's
+   topic from the plan was already published, keep the plan's topic but take a clearly
+   different angle, headline and photo, and say so in the summary.
 2. Collect the facts for each topic **from the site only**:
    - projects: `src/data/projects.ts` (stats, residences, status, amenities, district)
      and `projectsData.<slug>` in `src/i18n/ar.json` + `en.json` (name, tagline,
@@ -42,7 +49,7 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
    It prints `file_path` and `files`; publish them with the Artifact tool
    (`url` = ARTIFACT_URL, `file_path`, `files`) — read the page first
    (`action: "read"`, `url`) so the publish is accepted.
-6. Push the day to the `social-posts` branch (only this; never `main`):
+6. Push the day to the `social-posts` branch (it also adds today's posts to `social/log.json`) (only this; never `main`):
    `bash scripts/social/push-day.sh <date>`
    It works in a separate worktree (`../social-posts-worktree`): merges `main` into
    `social-posts`, copies `post-<n>.jpg` + `post-<n>.json` from `scripts/social/out/<date>/`
@@ -52,6 +59,27 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
    `pushed social-posts: …`. If the push is refused, stop and say exactly why in the
    summary: at 10:00 the website then tells the owner on Telegram that today's posts
    weren't prepared. Commit nothing else (the outputs stay git-ignored).
+
+## Design (approved by the owner 2026-09-29 — locked)
+
+Every post uses the **one approved template** that `render.mjs` draws ("design A"):
+photo on top, dark green (`#0f2b21`) panel below, the HADARA logo top-left, a gold pill
+badge top-right (Arabic · English), the Arabic headline with the English line under it,
+a thin gold rule, **exactly 4 stat tiles** (gold number, Arabic label, English label),
+and the footer: www.hadararealestate.com + WhatsApp +90 531 930 92 14. 1080×1350 JPEG.
+
+- Never change the template, colours, fonts, layout or footer, and never make an image
+  any other way. Only the content changes: photo, badge, headline, 4 stats, note.
+- Headlines: short, factual, calm (no "best", "number one", no exclamation marks), at
+  most one line in Arabic when possible (`arSize` 44–52), the English line the same idea.
+- Badges come from a fixed set so the feed looks consistent: new launch «إطلاق جديد ·
+  New launch», under construction «قيد الإنشاء · Under construction», ready «جاهز للسكن ·
+  Ready to move in», villas «فلل · Villas», citizenship «الجنسية التركية · Citizenship»,
+  guides «دليل المشتري · Buyer's guide» (articles), service «خدماتنا · Our services».
+- Photos: sharp exterior/aerial/interior shots from `public/images/`; never a site plan,
+  a bathroom or a blurry crop as the main photo.
+- The first 9 grid posts made on 2026-09-29 in the older full-photo style were **not
+  published** (owner's decision) — never reuse them or their style.
 
 ## Content rules (from the owner — do not break)
 

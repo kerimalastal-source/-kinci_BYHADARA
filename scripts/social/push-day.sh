@@ -8,7 +8,8 @@
 # It never touches main or the current checkout: it works in a separate worktree
 # (../social-posts-worktree), merges main into social-posts first, copies post-<n>.jpg and
 # post-<n>.json from scripts/social/out/<date>/, writes day.json (the order of the posts),
-# deletes day folders older than 21 days, and commits as the owner (Vercel's free plan only
+# appends the day to social/log.json (every post ever published, never pruned), deletes day
+# folders older than 21 days, and commits as the owner (Vercel's free plan only
 # builds commits by the account owner).
 set -euo pipefail
 
@@ -61,6 +62,22 @@ node -e '
   console.log(`day.json: ${posts.join(", ")}`);
 ' "$DEST" "$DATE"
 
+# The permanent log of everything published (never pruned), so no headline or angle is
+# repeated: social/log.json on this branch, started from scripts/social/log-seed.json.
+node -e '
+  const fs = require("fs");
+  const [log, seed, spec, date] = process.argv.slice(1);
+  const entries = fs.existsSync(log) ? JSON.parse(fs.readFileSync(log, "utf8")) : JSON.parse(fs.readFileSync(seed, "utf8"));
+  const posts = JSON.parse(fs.readFileSync(spec, "utf8"));
+  const today = (Array.isArray(posts) ? posts : posts.posts).map((p) => ({
+    date, id: p.id, topic: p.topic, headlineAr: p.image?.headlineAr ?? "", headlineEn: p.image?.headlineEn ?? "", photo: p.image?.photo ?? ""
+  }));
+  const kept = entries.filter((e) => e.date !== date);
+  fs.mkdirSync(require("path").dirname(log), { recursive: true });
+  fs.writeFileSync(log, JSON.stringify([...kept, ...today], null, 2) + "\n");
+  console.log(`social/log.json: ${kept.length + today.length} posts`);
+' social/log.json "$ROOT/scripts/social/log-seed.json" "$OUT/posts.json" "$DATE"
+
 # Keep three weeks of days.
 CUTOFF="$(node -e 'const d = new Date(process.argv[1] + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() - 21); console.log(d.toISOString().slice(0, 10))' "$DATE")"
 for dir in public/social/*/; do
@@ -71,7 +88,7 @@ for dir in public/social/*/; do
   fi
 done
 
-git add public/social
+git add public/social social/log.json
 if git diff --cached --quiet; then
   echo "nothing new to push for $DATE"
 else
