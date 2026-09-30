@@ -114,7 +114,9 @@ equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 9
 
 - **Never invent facts.** Every number, date, size, price, distance and amenity must
   come from the files above. No prices unless the project has `price` (and
-  `"on-request"` = "السعر عند الطلب"). No delivery dates that are not in the data.
+  `"on-request"` = "السعر عند الطلب"); per-layout prices are in `residences[].price`.
+  Any price in a post adds: VAT included, 4% title deed fee not included
+  (projectDetail.priceNote). No delivery dates that are not in the data.
 - **Wording:** HADARA is "your real estate partner in Istanbul" — general wording
   between development and marketing. Do **not** write "we build / we develop /
   developer" about HADARA. A project's own developer (e.g. Lotus Yapı) may be named
