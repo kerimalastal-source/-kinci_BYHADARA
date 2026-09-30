@@ -70,5 +70,37 @@
     "headlineAr": "فلل ⁦6+2⁩ جاهزة في بيوكجكمجة",
     "headlineEn": "Ready 6+2 villas in Büyükçekmece",
     "photo": "/images/projects/lotus-manzara-guzelce/villa-exterior.jpg"
+  },
+  {
+    "date": "2026-09-30",
+    "id": "diamond-marin-life",
+    "topic": "دايموند مارين · الحياة في المشروع",
+    "headlineAr": "حياة هادئة لـ 58 عائلة فقط",
+    "headlineEn": "Quiet living for only 58 families",
+    "photo": "/images/projects/diamond-marin/living-room.jpg"
+  },
+  {
+    "date": "2026-09-30",
+    "id": "blog-about-istanbul",
+    "topic": "مقال: إسطنبول: المدينة التي تلتقي فيها القارات",
+    "headlineAr": "إسطنبول: حيث تلتقي القارات",
+    "headlineEn": "Istanbul: where continents meet",
+    "photo": "/images/blog/about-istanbul.jpg"
+  },
+  {
+    "date": "2026-09-30",
+    "id": "pick-sea-nature-city",
+    "topic": "سؤال المساء: بحر، طبيعة، أم قلب المدينة؟",
+    "headlineAr": "بحر، طبيعة، أم قلب المدينة؟",
+    "headlineEn": "Sea, nature, or the heart of the city?",
+    "photo": "/images/projects/lotus-yali/view-from-sea.jpg"
+  },
+  {
+    "date": "2026-09-30",
+    "id": "diamond-marin-life-story",
+    "topic": "ستوري: دايموند مارين · الحياة في المشروع",
+    "headlineAr": "مسبح ونادٍ رياضي داخل المشروع",
+    "headlineEn": "A pool and a gym inside the complex",
+    "photo": "/images/projects/diamond-marin/fitness-center.jpg"
   }
 ]
