@@ -153,7 +153,7 @@ function projectIndex(): IndexedProject[] {
   });
   index = base.map((p) => ({
     ...p,
-    // A district name inside a project name ("Beylikdüzü Living") only breaks ties.
+    // A district name inside a project name ("Lotus Manzara Beylikdüzü") only breaks ties.
     words: new Set(p.names.flatMap((n) => n.split(" ")).filter((w) => !GENERIC.has(w) && !districtWords.has(w) && (w.length > 1 || /\d/.test(w))))
   }));
   return index;

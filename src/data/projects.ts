@@ -193,17 +193,17 @@ export const projects: Project[] = [
     timeline: "2026 – 2028",
     priority: 0,
     developer: "Lotus Yapı Proje",
-    coverImage: img("beylikduzu-living", "courtyard-gardens", 1193, 671, "Beylikdüzü Living landscaped courtyard between the residential blocks"),
+    coverImage: img("beylikduzu-living", "courtyard-gardens", 1193, 671, "Lotus Yaşam landscaped courtyard between the residential blocks"),
     gallery: [
-      img("beylikduzu-living", "street-facade", 1193, 612, "Beylikdüzü Living residential blocks from the street"),
-      img("beylikduzu-living", "garden-terrace", 1193, 671, "Beylikdüzü Living ground-floor garden terrace"),
-      img("beylikduzu-living", "living-room", 1191, 670, "Beylikdüzü Living living room"),
-      img("beylikduzu-living", "living-room-2", 1191, 670, "Beylikdüzü Living living room with media wall"),
-      img("beylikduzu-living", "entrance-hall", 1191, 670, "Beylikdüzü Living entrance hall"),
-      img("beylikduzu-living", "kitchen", 1191, 670, "Beylikdüzü Living kitchen and dining area"),
-      img("beylikduzu-living", "bathroom", 972, 843, "Beylikdüzü Living bathroom"),
-      img("beylikduzu-living", "site-plan", 1202, 864, "Beylikdüzü Living site plan with blocks A to F"),
-      img("beylikduzu-living", "aerial-view", 1193, 671, "Beylikdüzü Living aerial view towards the sea")
+      img("beylikduzu-living", "street-facade", 1193, 612, "Lotus Yaşam residential blocks from the street"),
+      img("beylikduzu-living", "garden-terrace", 1193, 671, "Lotus Yaşam ground-floor garden terrace"),
+      img("beylikduzu-living", "living-room", 1191, 670, "Lotus Yaşam living room"),
+      img("beylikduzu-living", "living-room-2", 1191, 670, "Lotus Yaşam living room with media wall"),
+      img("beylikduzu-living", "entrance-hall", 1191, 670, "Lotus Yaşam entrance hall"),
+      img("beylikduzu-living", "kitchen", 1191, 670, "Lotus Yaşam kitchen and dining area"),
+      img("beylikduzu-living", "bathroom", 972, 843, "Lotus Yaşam bathroom"),
+      img("beylikduzu-living", "site-plan", 1202, 864, "Lotus Yaşam site plan with blocks A to F"),
+      img("beylikduzu-living", "aerial-view", 1193, 671, "Lotus Yaşam aerial view towards the sea")
     ],
     stats: [
       { value: "21,000 m²", labelKey: "landArea" },
