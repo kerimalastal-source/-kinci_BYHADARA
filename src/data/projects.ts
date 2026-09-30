@@ -72,6 +72,8 @@ export interface Residence {
   garden?: string;
   floors?: number;
   planTypes?: number;
+  /** Price range as quoted by the team, shown as written (e.g. "$200,000 – $250,000"). */
+  price?: string;
 }
 
 /** Gross/net area of one level; its name and features live in projectsData.<slug>.floorPlan (same order). */
@@ -193,6 +195,8 @@ export const projects: Project[] = [
     timeline: "2026 – 2028",
     priority: 0,
     developer: "Lotus Yapı Proje",
+    // Prices from the owner on 2026-09-30 (VAT included, 4% title deed fee not included); per layout in residences.
+    price: "$200,000 – $420,000",
     coverImage: img("beylikduzu-living", "courtyard-gardens", 1193, 671, "Lotus Yaşam landscaped courtyard between the residential blocks"),
     gallery: [
       img("beylikduzu-living", "street-facade", 1193, 612, "Lotus Yaşam residential blocks from the street"),
@@ -212,9 +216,9 @@ export const projects: Project[] = [
       { value: "2+1 · 3+1 · 4+1", labelKey: "layout" }
     ],
     residences: [
-      { kind: "apartment", layout: "2+1", gross: "100 – 109 m²" },
-      { kind: "apartment", layout: "3+1", gross: "134 – 167 m²" },
-      { kind: "apartment", layout: "4+1", gross: "194 – 197 m²" }
+      { kind: "apartment", layout: "2+1", gross: "100 – 109 m²", price: "$200,000 – $250,000" },
+      { kind: "apartment", layout: "3+1", gross: "134 – 167 m²", price: "$250,000 – $300,000" },
+      { kind: "apartment", layout: "4+1", gross: "194 – 197 m²", price: "$350,000 – $420,000" }
     ],
     amenities: community(["playground", "sportsCourt", "joggingTrack"])
   },
@@ -515,7 +519,8 @@ export const projects: Project[] = [
     status: "delivered",
     lifestyle: ["sea"],
     timeline: "2024 – 2026",
-    price: "on-request",
+    // Prices from the owner on 2026-09-30 (VAT included, 4% title deed fee not included).
+    price: "$1,550,000 – $1,650,000",
     landing: true,
     // Confirmed by the owner on 2026-09-27 (no monthly fee answer, so no "aidat" row).
     verified: {

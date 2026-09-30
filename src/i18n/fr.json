@@ -296,6 +296,8 @@
     "developerLabel": "Promoteur",
     "priceLabel": "Prix",
     "priceOnRequest": "Sur demande",
+    "priceNote": "Prix TVA incluse, variables selon le mode de paiement. Les frais d'enregistrement du titre de propriété (4 %) ne sont pas inclus.",
+    "residencePriceNote": "Prix TVA incluse, variables selon l'étage, la vue et le mode de paiement. Les frais d'enregistrement du titre de propriété (4 %) ne sont pas inclus.",
     "addressLabel": "Adresse",
     "grossAreaLabel": "Surface brute",
     "netAreaLabel": "Surface nette",
@@ -2015,7 +2017,8 @@
       "legalNone": "Notre équipe peut vous communiquer sur demande le titre de propriété et les permis de {name}.",
       "verifiedOn": "Dernière vérification : {date}",
       "priceOnRequest": "Le prix de {name} est communiqué sur demande. Notre équipe vous enverra les détails sur WhatsApp.",
-      "priceText": "Les prix de {name} dépendent du logement, de l'étage et du plan de paiement : notre équipe vous envoie l'offre du jour sur WhatsApp."
+      "priceText": "Les prix de {name} dépendent du logement, de l'étage et du plan de paiement : notre équipe vous envoie l'offre du jour sur WhatsApp.",
+      "priceKnown": "{name} : {price}. Prix TVA incluse, variables selon le logement et le mode de paiement ; les frais de titre de propriété (4 %) ne sont pas inclus. Notre équipe vous envoie les options du jour sur WhatsApp."
     },
     "bubble": "Discutez avec nous",
     "title": "Assistant HADARA",
