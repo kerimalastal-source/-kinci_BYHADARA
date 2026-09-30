@@ -61,7 +61,8 @@ function fakeFetch(opts = {}) {
     }
     if (url.startsWith("https://rupload.facebook.com/video-upload/v21.0/")) {
       const h = new Headers(init?.headers);
-      calls[calls.length - 1].fileUrl = h.get("file_url");
+      calls[calls.length - 1].fileSize = h.get("file_size");
+      calls[calls.length - 1].bodyBytes = init?.body ? new Uint8Array(init.body).length : 0;
       calls[calls.length - 1].auth = h.get("authorization");
       return json({ success: true });
     }
@@ -209,9 +210,11 @@ test("a Reel: the video goes to Facebook Reels and Instagram Reels, with the ima
   const { deps, calls, photos, store } = setup({ posts, day: ["post-4.json"] });
   const day = await publishDay(deps, DATE);
   assert.deepEqual(day.results.map((r) => [r.post, r.facebook, r.instagram]), [["post-4", "published", "published"]]);
-  // Facebook: start, upload from the public video URL with the Page token, finish with the caption.
+  // Facebook: start, upload the video with the Page token, finish with the caption.
   const upload = calls.find((c) => c.url.startsWith("https://rupload.facebook.com/"));
-  assert.equal(upload.fileUrl, `https://blob.example/social/${DATE}/post-4.mp4`);
+  // The bytes go up directly (Facebook won't fetch from the Blob URL: robots.txt).
+  assert.equal(upload.fileSize, String(MP4.length));
+  assert.equal(upload.bodyBytes, MP4.length);
   assert.equal(upload.auth, "OAuth page-token");
   const finish = graphCalls(calls, "PAGE/video_reels").find((c) => c.body.upload_phase === "finish");
   assert.equal(finish.body.description, "FB reel");

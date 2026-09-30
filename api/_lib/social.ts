@@ -169,18 +169,20 @@ async function publishInstagram(deps: PublishDeps, meta: MetaConfig, imageUrl: s
 }
 
 /**
- * Facebook Reel: start an upload session on the Page, let Facebook fetch the video from its
- * public URL, then finish with the caption (published right away; Facebook processes it after).
+ * Facebook Reel: start an upload session on the Page, send the video bytes, then finish with
+ * the caption (published right away; Facebook processes it after). The bytes go up directly:
+ * Facebook refuses to fetch it from the Blob URL ("Restricted by robots.txt").
  */
-async function publishFacebookReel(deps: PublishDeps, meta: MetaConfig, videoUrl: string, caption: string): Promise<string> {
+async function publishFacebookReel(deps: PublishDeps, meta: MetaConfig, video: ArrayBuffer, caption: string): Promise<string> {
   const token = await pageToken(deps, meta);
   const start = await graph(deps, `${meta.pageId}/video_reels`, { upload_phase: "start" }, "POST", token);
   const videoId = String(start.video_id ?? "");
   if (!videoId) throw new Error("video_reels: no video_id");
   const upload = await deps.fetch(`https://rupload.facebook.com/video-upload/v21.0/${videoId}`, {
     method: "POST",
-    headers: { Authorization: `OAuth ${token}`, file_url: videoUrl },
-    signal: AbortSignal.timeout(30_000)
+    headers: { Authorization: `OAuth ${token}`, offset: "0", file_size: String(video.byteLength), "Content-Type": "application/octet-stream" },
+    body: video,
+    signal: AbortSignal.timeout(40_000)
   });
   const uploaded = (await upload.json().catch(() => ({}))) as { success?: boolean; debug_info?: { message?: string } };
   if (!upload.ok || !uploaded.success) throw new Error(`video upload: ${uploaded.debug_info?.message ?? `HTTP ${upload.status}`}`);
@@ -392,6 +394,7 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
     // Public copies of the image (and the Reel's video) for Meta and Telegram to fetch.
     let imageUrl: string;
     let videoUrl: string | null = null;
+    let videoBytes: ArrayBuffer | null = null;
     try {
       const image = await deps.fetch(`${base}/${post.image}`, { cache: "no-store", headers, signal: AbortSignal.timeout(20_000) });
       const bytes = image.ok ? await image.arrayBuffer() : null;
@@ -405,6 +408,7 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
         // An MP4 has "ftyp" at bytes 4-7 (a missing file comes back as the site's index.html).
         if (!data || new TextDecoder().decode(new Uint8Array(data.slice(4, 8))) !== "ftyp") throw new Error(`${post.video}: ليس فيديو MP4 (HTTP ${video.status})`);
         videoUrl = await deps.store.put(`social/${date}/${post.video}`, data, "video/mp4");
+        videoBytes = data;
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
@@ -415,11 +419,12 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
 
     if (meta) {
       const reel = videoUrl;
+      const reelBytes = videoBytes;
       const fb = await once(deps, date, name, "facebook", () =>
         post.story
           ? publishFacebookStory(deps, meta, imageUrl)
-          : reel
-            ? publishFacebookReel(deps, meta, reel, post.fb)
+          : reelBytes
+            ? publishFacebookReel(deps, meta, reelBytes, post.fb)
             : publishFacebook(deps, meta, imageUrl, post.fb)
       );
       result.facebook = fb.state;

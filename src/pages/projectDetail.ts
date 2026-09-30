@@ -56,6 +56,14 @@ function renderResidences(project: Project): string {
               <span>${t("projectDetail.grossAreaLabel")}</span>
             </p>
             ${
+              r.price
+                ? `<p class="residence-card__price">
+              <span>${t("projectDetail.priceLabel")}</span>
+              <strong dir="ltr">${r.price}</strong>
+            </p>`
+                : ""
+            }
+            ${
               meta.length
                 ? `<dl class="residence-card__meta">
               ${meta.map(([k, v]) => `<div><dt>${k}</dt><dd dir="ltr">${v}</dd></div>`).join("")}
@@ -66,6 +74,7 @@ function renderResidences(project: Project): string {
           })
           .join("")}
       </div>
+      ${project.residences.some((r) => r.price) ? `<p class="price-note">${t("projectDetail.residencePriceNote")}</p>` : ""}
     </section>`;
 }
 
@@ -419,7 +428,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
                 price
                   ? `<div>
                 <dt>${t("projectDetail.priceLabel")}</dt>
-                <dd>${price}</dd>
+                <dd>${price}${project.price === "on-request" ? "" : `<small class="price-note">${t("projectDetail.priceNote")}</small>`}</dd>
               </div>`
                   : ""
               }
