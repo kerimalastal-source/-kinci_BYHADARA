@@ -11,6 +11,11 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "gross-vs-net-area",
+    priority: -1,
+    coverImage: { src: "/images/blog/gross-vs-net-area.jpg", width: 1536, height: 1024 }
+  },
+  {
     slug: "real-estate-in-turkey",
     priority: 0,
     coverImage: { src: "/images/blog/real-estate-in-turkey.jpg", width: 1536, height: 1024 }
