@@ -2476,12 +2476,14 @@
           "votre pays et votre ville approximatifs, estimés par notre hébergeur (Vercel) à partir de votre connexion ;",
           "le nom de la campagne publicitaire, si vous êtes arrivé par un lien de l'une de nos publicités (par exemple utm_source et utm_campaign), afin de savoir quelle publicité a amené des visiteurs ;",
         "si vous avez accepté, refusé ou laissé sans réponse l’avis sur les cookies ;",
+        "le type d'appareil uniquement : téléphone, tablette ou ordinateur (ni son modèle ni aucun identifiant) ;",
+        "les principaux boutons sur lesquels vous avez cliqué et les formulaires commencés ou envoyés (WhatsApp, appel, « Je suis intéressé », enregistrement d'un projet, lecture d'une vidéo, agrandissement de la carte…), avec le projet concerné — jamais ce que vous avez saisi dans un formulaire ;",
         "un numéro de session aléatoire, ainsi que la date et l'heure."
         ],
         "after": [
           "Le numéro de session est créé par votre navigateur et conservé dans son stockage de session (sessionStorage), uniquement pour l'onglet en cours. Ce n'est pas un cookie, il n'est lié ni à votre nom ni à votre appareil, et votre navigateur le supprime à la fermeture de l'onglet.",
           "Nous ne conservons ni votre adresse IP ni aucune donnée personnelle dans ces statistiques, et nous ne les utilisons pas pour identifier qui que ce soit. Les pages des comptes vendeurs et d'administration ne sont pas enregistrées.",
-          "Les enregistrements de visite sont supprimés automatiquement après 30 jours. Lorsqu'une nouvelle visite commence, notre équipe reçoit une notification interne (via Telegram) contenant les mêmes informations anonymes : localisation approximative, page, langue et provenance. Cette notification est mise à jour pendant la visite (les pages ouvertes dans l'ordre, le temps approximatif passé sur chacune, le nombre de pages et la durée de la visite), et une notification distincte est envoyée lorsque le visiteur ouvre la page de contact ou un formulaire de demande."
+          "Les enregistrements de visite sont supprimés automatiquement après un an (12 mois) ; nous les utilisons de façon agrégée pour comprendre ce qui intéresse les visiteurs et améliorer le site. Lorsqu'une nouvelle visite commence, notre équipe reçoit une notification interne (via Telegram) contenant les mêmes informations anonymes : localisation approximative, page, langue et provenance. Cette notification est mise à jour pendant la visite (les pages ouvertes dans l'ordre, le temps approximatif passé sur chacune, le nombre de pages et la durée de la visite), et une notification distincte est envoyée lorsque le visiteur ouvre la page de contact ou un formulaire de demande."
         ]
       },
       {
@@ -2568,7 +2570,7 @@
       {
         "title": "Durée de conservation",
         "paragraphs": [
-          "Nous conservons vos données aussi longtemps que nécessaire pour répondre à votre demande et vous servir, puis pendant la durée imposée par la loi (par exemple pour les registres fiscaux et commerciaux). Vous pouvez nous demander de supprimer vos données à tout moment, sauf si la loi nous oblige à les conserver. Les enregistrements de visite anonymes sont supprimés automatiquement après 30 jours. Les réservations de visites sont supprimées automatiquement un an après la date de la visite. Les messages et demandes envoyés via les formulaires du Site sont supprimés automatiquement deux ans après leur dernière mise à jour. Les conversations du chat en direct sont supprimées automatiquement 90 jours après leur dernier message."
+          "Nous conservons vos données aussi longtemps que nécessaire pour répondre à votre demande et vous servir, puis pendant la durée imposée par la loi (par exemple pour les registres fiscaux et commerciaux). Vous pouvez nous demander de supprimer vos données à tout moment, sauf si la loi nous oblige à les conserver. Les enregistrements de visite anonymes sont supprimés automatiquement après un an (12 mois). Les réservations de visites sont supprimées automatiquement un an après la date de la visite. Les messages et demandes envoyés via les formulaires du Site sont supprimés automatiquement deux ans après leur dernière mise à jour. Les conversations du chat en direct sont supprimées automatiquement 90 jours après leur dernier message."
         ],
         "items": []
       },
@@ -2738,6 +2740,59 @@
     }
   },
   "adminStats": {
+    "limitedDays": "Seuls les {count} derniers jours sont affichés tant que la mise à jour 0017 de la base de données n'a pas été exécutée.",
+    "consentRecent": "30 derniers jours uniquement (les choix sont conservés 30 jours).",
+    "behavior": {
+      "title": "Ce que font les visiteurs",
+      "hint": "Clics sur les boutons et formulaires, comptés anonymement par visite — sans nom ni numéro.",
+      "unavailable": "Pas encore disponible — les mises à jour 0015 et 0016 de la base de données doivent être exécutées.",
+      "empty": "Aucune action enregistrée sur cette période pour l'instant.",
+      "contacted": "Visites qui nous ont contactés",
+      "contactedNote": "WhatsApp, appel, e-mail, « Je suis intéressé » ou formulaire envoyé",
+      "contactRate": "Taux de contact",
+      "contactRateNote": "de toutes les visites",
+      "devicesTitle": "Appareils",
+      "devicesNote": "{rate} ont pris contact",
+      "devices": {
+        "mobile": "Mobile",
+        "tablet": "Tablette",
+        "desktop": "Ordinateur",
+        "unknown": "Inconnu"
+      },
+      "actionsTitle": "Actions",
+      "actionsHint": "Visites ayant fait chaque action, et leur part de toutes les visites.",
+      "actions": {
+        "whatsapp": "WhatsApp",
+        "call": "Appel",
+        "email": "E-mail",
+        "interested": "Bouton « Je suis intéressé »",
+        "favorite": "Projet enregistré",
+        "video_play": "Vidéo d'un projet lue",
+        "map_open": "Carte agrandie",
+        "chat_open": "Chat ouvert",
+        "tour_link": "Visite vidéo ouverte",
+        "form_start": "Formulaire commencé",
+        "form_sent": "Formulaire envoyé"
+      },
+      "projectsTitle": "Intérêt par projet",
+      "projectsHint": "Visites par projet : contact (WhatsApp, appel, « Je suis intéressé »), enregistré, vidéo ou carte.",
+      "project": "Projet",
+      "contact": "Contact",
+      "saved": "Enregistré",
+      "viewed": "Vidéo et carte",
+      "formsTitle": "Formulaires : commencés / envoyés",
+      "formsHint": "Beaucoup de débuts et peu d'envois peut signifier un formulaire trop long ou peu clair.",
+      "form": "Formulaire",
+      "started": "Commencés",
+      "sent": "Envoyés",
+      "completion": "Terminés",
+      "forms": {
+        "contact": "Contact",
+        "property-request": "Demande de bien",
+        "consultancy": "Consultation design",
+        "video-tour": "Réservation de visite vidéo"
+      }
+    },
     "consentTitle": "Avis sur les cookies",
     "consentHint": "Sur {count} visites ayant vu l’avis. Meta et Google ne comptent que les visiteurs qui acceptent.",
     "consentAccepted": "Accepté",
@@ -2750,7 +2805,7 @@
     "period": "Période",
     "lastDays": "{count} derniers jours",
     "unavailable": "Les statistiques ne sont pas encore disponibles — la mise à jour 0008 de la base de données doit être exécutée.",
-    "note": "Chiffres issus des enregistrements de visite anonymes des 30 derniers jours (supprimés automatiquement ensuite). Un « visiteur » correspond à une visite du site ; la même personne peut revenir lors d'une autre visite. Les pages d'administration ne sont pas comptées.",
+    "note": "Les chiffres proviennent des visites anonymes, conservées un an (avant le 1er octobre 2026, elles l'étaient 30 jours seulement : les périodes plus longues se remplissent progressivement). Un « visiteur » correspond à une visite ; la même personne peut revenir lors d'une autre visite. Les pages d'administration ne sont pas comptées.",
     "empty": "Aucune donnée pour cette période.",
     "noLeads": "Aucun message ni aucune réservation sur cette période.",
     "noCampaigns": "Aucune visite issue d'un lien publicitaire (avec utm_campaign) sur cette période.",
@@ -2933,7 +2988,7 @@
     "delete": "Supprimer",
     "confirmDelete": "Supprimer cette dépense ?",
     "unavailable": "Disponible une fois la mise à jour 0010 de la base de données exécutée.",
-    "note": "Les visiteurs sont conservés 30 jours seulement ; les messages, réservations et ventes plus longtemps.",
+    "note": "Les visiteurs sont conservés un an (30 jours avant le 1er octobre 2026) ; les messages, réservations et ventes plus longtemps.",
     "form": {
       "source": "Source (utm_source)",
       "other": "Autre…",

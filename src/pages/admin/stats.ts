@@ -2,17 +2,25 @@ import { t, getLocale, getProjectContent, intlTag } from "../../i18n";
 import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
-import { fetchConsentStats, fetchVisitStats, type ConsentStats, type VisitStats } from "../../data/adminStats";
+import {
+  fetchBehaviorStats,
+  fetchConsentStats,
+  fetchVisitStats,
+  type BehaviorStats,
+  type ConsentStats,
+  type VisitStats
+} from "../../data/adminStats";
 import { adminHero, adminNav } from "./nav";
 
 /**
- * Visitor statistics (/admin/stats), from the anonymous visit records of the last 30 days
- * (admin_visit_stats(), supabase/migrations/0008): visitors per day, where they came from
- * (ads, search, direct), countries, the projects they looked at, and the messages and tour
- * bookings each source brought.
+ * Visitor statistics (/admin/stats), from the anonymous visit records (kept a year since
+ * migration 0015; admin_visit_stats(), supabase/migrations/0008 and 0017): visitors per day,
+ * where they came from (ads, search, direct), countries, the projects they looked at, and the
+ * messages and tour bookings each source brought. "What visitors do" (admin_behavior_stats(),
+ * 0016): devices, button presses, interest per project, and forms started vs sent.
  */
 
-const PERIODS = [7, 30] as const;
+const PERIODS = [7, 30, 90] as const;
 let period: (typeof PERIODS)[number] = 7;
 
 const tag = () => intlTag();
@@ -78,6 +86,8 @@ export function barList(rows: { label: string; value: number; note?: string }[],
 export function dailyChart(daily: VisitStats["daily"]): string {
   const max = Math.max(...daily.map((d) => d.visitors), 1);
   const dense = daily.length > 10;
+  // Every 3rd day under a month, every 7th for longer periods.
+  const every = daily.length > 31 ? 7 : 3;
   const dayLabel = (day: string, opts: Intl.DateTimeFormatOptions) =>
     new Intl.DateTimeFormat(tag(), { ...opts, timeZone: "UTC" }).format(Date.parse(`${day}T12:00:00Z`));
   const peak = daily.reduce((best, d, i) => (d.visitors > daily[best].visitors ? i : best), 0);
@@ -94,7 +104,7 @@ export function dailyChart(daily: VisitStats["daily"]): string {
         </span>
         <span class="day-chart__label">${
           dense
-            ? escapeHtml(i % 3 === (daily.length - 1) % 3 ? dayLabel(d.day, { day: "numeric", month: "numeric" }) : "")
+            ? escapeHtml(i % every === (daily.length - 1) % every ? dayLabel(d.day, { day: "numeric", month: "numeric" }) : "")
             : `<span class="day-chart__label-long">${escapeHtml(dayLabel(d.day, { weekday: "short" }))}</span><span class="day-chart__label-short">${escapeHtml(dayLabel(d.day, { day: "numeric" }))}</span>`
         }</span>
       </div>`;
@@ -123,10 +133,86 @@ function consentPanel(c: ConsentStats | null): string {
     { label: t("adminStats.consentDeclined"), value: c.denied },
     { label: t("adminStats.consentIgnored"), value: c.ignored }
   ].map((r) => ({ ...r, note: pct(r.value, c.shown) }));
-  return panel(t("adminStats.consentTitle"), `<p class="admin-panel__hint">${t("adminStats.consentHint", { count: num(c.shown) })}</p>${barList(rows, "")}`);
+  const recent = period > 30 ? ` ${t("adminStats.consentRecent")}` : "";
+  return panel(t("adminStats.consentTitle"), `<p class="admin-panel__hint">${t("adminStats.consentHint", { count: num(c.shown) })}${recent}</p>${barList(rows, "")}`);
 }
 
-function renderStats(s: VisitStats, consent: ConsentStats | null): string {
+const CONTACT_ACTIONS = new Set(["whatsapp", "call", "interested"]);
+const VIEW_ACTIONS = new Set(["video_play", "map_open"]);
+
+/** A dictionary label, or the raw value (escaped) when the dictionary has none. */
+function label(key: string, raw: string): string {
+  const text = t(key);
+  return text === key ? escapeHtml(raw) : text;
+}
+
+/** Contact rate, devices, each action, interest per project, and forms started vs sent. */
+function behaviorSection(b: BehaviorStats | null): string {
+  const head = `<h2 class="admin-stats__section">${t("adminStats.behavior.title")}</h2>
+    <p class="admin-stats__section-hint">${t("adminStats.behavior.hint")}</p>`;
+  if (!b) return `${head}<p class="admin-bookings__empty">${t("adminStats.behavior.unavailable")}</p>`;
+
+  const empty = t("adminStats.behavior.empty");
+  const devices = barList(
+    b.devices.map((d) => ({
+      label: label(`adminStats.behavior.devices.${d.device}`, d.device),
+      value: d.visits,
+      note: t("adminStats.behavior.devicesNote", { rate: pct(d.contacted, d.visits) })
+    })),
+    t("adminStats.empty")
+  );
+  const actions = barList(
+    b.actions.map((a) => ({ label: label(`adminStats.behavior.actions.${a.action}`, a.action), value: a.sessions, note: pct(a.sessions, b.visits) })),
+    empty
+  );
+
+  const perProject = new Map<string, { contact: number; saved: number; viewed: number }>();
+  for (const row of b.projects) {
+    if (!getProjectBySlug(row.slug)) continue;
+    const entry = perProject.get(row.slug) ?? { contact: 0, saved: 0, viewed: 0 };
+    if (CONTACT_ACTIONS.has(row.action)) entry.contact += row.sessions;
+    else if (row.action === "favorite") entry.saved += row.sessions;
+    else if (VIEW_ACTIONS.has(row.action)) entry.viewed += row.sessions;
+    perProject.set(row.slug, entry);
+  }
+  const projectRows = [...perProject]
+    .sort(([, a], [, b]) => b.contact - a.contact || b.saved - a.saved || b.viewed - a.viewed)
+    .slice(0, 12);
+  const projects = projectRows.length
+    ? `<div class="admin-table-fit"><table class="admin-table">
+        <thead><tr><th>${t("adminStats.behavior.project")}</th><th>${t("adminStats.behavior.contact")}</th><th>${t("adminStats.behavior.saved")}</th><th>${t("adminStats.behavior.viewed")}</th></tr></thead>
+        <tbody>${projectRows
+          .map(([slug, r]) => `<tr><td>${escapeHtml(getProjectContent(slug).name)}</td><td dir="ltr">${num(r.contact)}</td><td dir="ltr">${num(r.saved)}</td><td dir="ltr">${num(r.viewed)}</td></tr>`)
+          .join("")}</tbody>
+      </table></div>`
+    : `<p class="admin-stats__empty">${empty}</p>`;
+
+  const forms = b.forms.length
+    ? `<div class="admin-table-fit"><table class="admin-table">
+        <thead><tr><th>${t("adminStats.behavior.form")}</th><th>${t("adminStats.behavior.started")}</th><th>${t("adminStats.behavior.sent")}</th><th>${t("adminStats.behavior.completion")}</th></tr></thead>
+        <tbody>${b.forms
+          .map(
+            (r) =>
+              `<tr><td>${label(`adminStats.behavior.forms.${r.form}`, r.form)}</td><td dir="ltr">${num(r.started)}</td><td dir="ltr">${num(r.sent)}</td><td dir="ltr">${r.started ? pct(Math.min(r.sent, r.started), r.started) : "—"}</td></tr>`
+          )
+          .join("")}</tbody>
+      </table></div>`
+    : `<p class="admin-stats__empty">${empty}</p>`;
+
+  return `${head}
+    <div class="admin-kpis">
+      ${tile(t("adminStats.behavior.contacted"), num(b.contacted), t("adminStats.behavior.contactedNote"))}
+      ${tile(t("adminStats.behavior.contactRate"), pct(b.contacted, b.visits), t("adminStats.behavior.contactRateNote"))}
+    </div>
+    <div class="admin-panels">
+      ${panel(t("adminStats.behavior.actionsTitle"), `<p class="admin-panel__hint">${t("adminStats.behavior.actionsHint")}</p>${actions}`)}
+      ${panel(t("adminStats.behavior.devicesTitle"), devices)}
+      ${panel(t("adminStats.behavior.projectsTitle"), `<p class="admin-panel__hint">${t("adminStats.behavior.projectsHint")}</p>${projects}`)}
+      ${panel(t("adminStats.behavior.formsTitle"), `<p class="admin-panel__hint">${t("adminStats.behavior.formsHint")}</p>${forms}`)}
+    </div>`;
+}
+
+function renderStats(s: VisitStats, consent: ConsentStats | null, behavior: BehaviorStats | null): string {
   const leads = s.leads.inquiries + s.leads.bookings;
   const leadRows = s.lead_sources.length
     ? `<table class="admin-table">
@@ -137,7 +223,11 @@ function renderStats(s: VisitStats, consent: ConsentStats | null): string {
       </table>`
     : `<p class="admin-stats__empty">${t("adminStats.noLeads")}</p>`;
 
+  // Before migration 0017 the visit statistics stop at 30 days.
+  const limited = s.days < period ? `<p class="admin-stats__limited">${t("adminStats.limitedDays", { count: num(s.days) })}</p>` : "";
+
   return `
+    ${limited}
     <div class="admin-kpis">
       ${tile(t("adminStats.kpi.visitors"), num(s.totals.visitors))}
       ${tile(t("adminStats.kpi.pages"), num(s.totals.pages), t("adminStats.kpi.perVisit", { count: s.totals.visitors ? (s.totals.pages / s.totals.visitors).toFixed(1) : "0" }))}
@@ -156,6 +246,7 @@ function renderStats(s: VisitStats, consent: ConsentStats | null): string {
       ${panel(t("adminStats.localesTitle"), barList(s.locales.map((r) => ({ label: t(`lang.${r.locale}`), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
       ${consentPanel(consent)}
     </div>
+    ${behaviorSection(behavior)}
     <p class="admin-bookings__note">${t("adminStats.note")}</p>`;
 }
 
@@ -181,9 +272,9 @@ export function renderAdminStats(main: HTMLElement): void {
     periodsEl.innerHTML = PERIODS.map(
       (p) => `<button type="button" class="admin-stats__period" data-period="${p}" aria-pressed="${p === period}">${t("adminStats.lastDays", { count: p })}</button>`
     ).join("");
-    const [stats, consent] = await Promise.all([fetchVisitStats(period), fetchConsentStats(period)]);
+    const [stats, consent, behavior] = await Promise.all([fetchVisitStats(period), fetchConsentStats(period), fetchBehaviorStats(period)]);
     if (main.dataset.requestId !== requestId) return;
-    bodyEl.innerHTML = stats ? renderStats(stats, consent) : `<p class="admin-bookings__empty">${t("adminStats.unavailable")}</p>`;
+    bodyEl.innerHTML = stats ? renderStats(stats, consent, behavior) : `<p class="admin-bookings__empty">${t("adminStats.unavailable")}</p>`;
   };
 
   periodsEl.addEventListener("click", (e) => {

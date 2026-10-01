@@ -4304,6 +4304,45 @@ body.map-open .back-to-top {
   font-size: 0.9rem;
 }
 
+.admin-stats__section {
+  margin: var(--space-lg) 0 0.25rem;
+  color: var(--color-primary);
+  font-size: 1.3rem;
+}
+
+.admin-stats__section-hint {
+  margin: 0 0 var(--space-sm);
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.admin-stats__limited {
+  margin: 0 0 var(--space-sm);
+  padding: 0.6rem 0.9rem;
+  border: 1px solid #ecd9a8;
+  border-radius: var(--radius-md);
+  background: #fdf8ea;
+  color: var(--color-ink);
+  font-size: 0.9rem;
+}
+
+/* Tables in narrow panels scroll sideways instead of spilling out. */
+.admin-table-fit {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 480px) {
+  .admin-table-fit .admin-table th,
+  .admin-table-fit .admin-table td {
+    padding-inline: 0.25rem;
+  }
+
+  .admin-table-fit .admin-table th {
+    font-size: 0.78rem;
+  }
+}
+
 .admin-stats__empty {
   margin: 0;
   color: var(--color-muted);

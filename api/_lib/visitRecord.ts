@@ -59,7 +59,15 @@ export async function recordVisit(view: PageView, geo: Geo, origin: string, opti
     });
   }
 
-  // The session's first page decides whether it is automated (for a new session: this page).
+  // The visit's device, for the "what visitors do" statistics (0015; before it runs, the
+  // 404 is ignored).
+  if (state.is_new && view.device) {
+    await rpc("save_visit_device", { p_session_id: view.sessionId, p_device: view.device }).catch((error: unknown) => {
+      if (!(error instanceof RpcError && error.status === 404)) console.error(`track: save_visit_device failed: ${error instanceof Error ? error.message : "unknown"}`);
+    });
+  }
+
+    // The session's first page decides whether it is automated (for a new session: this page).
   const landing: Landing = state.is_new
     ? { path: view.path, locale: view.locale, referrer: view.referrer || null, country: geo.country, city: geo.city }
     : state.landing;

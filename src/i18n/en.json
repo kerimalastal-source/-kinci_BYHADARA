@@ -2476,12 +2476,14 @@
           "your approximate country and city, estimated by our hosting provider (Vercel) from your connection;",
           "the name of the ad campaign, if you arrived through a link in one of our ads (such as utm_source and utm_campaign), so we know which ad brought visitors;",
         "whether you accepted, declined or did not answer the cookie notice;",
+        "the type of device only: phone, tablet or computer (not its model or any identifier);",
+        "the main buttons you pressed and the forms you started or sent (such as WhatsApp, call, \"I'm interested\", saving a project, playing a video or enlarging the map), with the project concerned — never anything you typed into a form;",
         "a random session number, and the date and time."
         ],
         "after": [
           "The session number is created by your browser and kept in its session storage (sessionStorage), only for the current tab. It is not a cookie, it is not linked to your name or device, and your browser deletes it when you close the tab.",
           "We do not store your IP address or any personal information in these statistics, and we do not use them to identify anyone. Seller account and administration pages are not recorded.",
-          "Visit records are deleted automatically after 30 days. When a new visit starts, our team receives an internal notification (via Telegram) with the same anonymous details: approximate location, page, language and source. This notification is updated during the visit (the pages opened, in order, roughly how long each was viewed, the number of pages and the visit length), and a separate notification is sent when the visitor opens the contact page or a request form."
+          "Visit records are deleted automatically after one year (12 months); we use them in aggregate to understand what interests visitors and to improve the site. When a new visit starts, our team receives an internal notification (via Telegram) with the same anonymous details: approximate location, page, language and source. This notification is updated during the visit (the pages opened, in order, roughly how long each was viewed, the number of pages and the visit length), and a separate notification is sent when the visitor opens the contact page or a request form."
         ]
       },
       {
@@ -2568,7 +2570,7 @@
       {
         "title": "How long we keep your data",
         "paragraphs": [
-          "We keep your data for as long as it is needed to answer your enquiry and serve you, and afterwards for as long as the law requires (for example, for tax and commercial records). You can ask us to delete your data at any time, unless we are required to keep it by law. Anonymous visit records are deleted automatically after 30 days. Tour bookings are deleted automatically one year after the tour date. Messages and requests from the Website's forms are deleted automatically two years after they were last updated. Live chat conversations are deleted automatically 90 days after their last message."
+          "We keep your data for as long as it is needed to answer your enquiry and serve you, and afterwards for as long as the law requires (for example, for tax and commercial records). You can ask us to delete your data at any time, unless we are required to keep it by law. Anonymous visit records are deleted automatically after one year (12 months). Tour bookings are deleted automatically one year after the tour date. Messages and requests from the Website's forms are deleted automatically two years after they were last updated. Live chat conversations are deleted automatically 90 days after their last message."
         ],
         "items": []
       },
@@ -2738,6 +2740,59 @@
     }
   },
   "adminStats": {
+    "limitedDays": "Only the last {count} days are shown until database update 0017 is run.",
+    "consentRecent": "Last 30 days only (choices are kept for 30 days).",
+    "behavior": {
+      "title": "What visitors do",
+      "hint": "Button presses and forms, counted anonymously per visit — no names or numbers.",
+      "unavailable": "Not available yet — database updates 0015 and 0016 need to be run.",
+      "empty": "No recorded actions in this period yet.",
+      "contacted": "Visits that contacted us",
+      "contactedNote": "WhatsApp, call, email, \"I'm interested\" or a form sent",
+      "contactRate": "Contact rate",
+      "contactRateNote": "of all visits",
+      "devicesTitle": "Devices",
+      "devicesNote": "{rate} contacted",
+      "devices": {
+        "mobile": "Mobile",
+        "tablet": "Tablet",
+        "desktop": "Computer",
+        "unknown": "Unknown"
+      },
+      "actionsTitle": "Actions",
+      "actionsHint": "Visits that did each action, and their share of all visits.",
+      "actions": {
+        "whatsapp": "WhatsApp",
+        "call": "Phone call",
+        "email": "Email",
+        "interested": "\"I'm interested\" button",
+        "favorite": "Saved a project",
+        "video_play": "Played a project video",
+        "map_open": "Enlarged the map",
+        "chat_open": "Opened the chat",
+        "tour_link": "Opened the video tour",
+        "form_start": "Started a form",
+        "form_sent": "Sent a form"
+      },
+      "projectsTitle": "Interest per project",
+      "projectsHint": "Visits per project: contact (WhatsApp, call, \"I'm interested\"), saved, and video or map.",
+      "project": "Project",
+      "contact": "Contact",
+      "saved": "Saved",
+      "viewed": "Video & map",
+      "formsTitle": "Forms: started vs sent",
+      "formsHint": "Many starts with few sends can mean the form is too long or something is unclear.",
+      "form": "Form",
+      "started": "Started",
+      "sent": "Sent",
+      "completion": "Completed",
+      "forms": {
+        "contact": "Contact",
+        "property-request": "Request a property",
+        "consultancy": "Design consultation",
+        "video-tour": "Video tour booking"
+      }
+    },
     "consentTitle": "Cookie notice",
     "consentHint": "Of the {count} visits that saw the notice. Meta and Google only count the visitors who accept.",
     "consentAccepted": "Accepted",
@@ -2750,7 +2805,7 @@
     "period": "Period",
     "lastDays": "Last {count} days",
     "unavailable": "Statistics aren't available yet — database update 0008 needs to be run.",
-    "note": "Figures come from the anonymous visit records of the last 30 days (deleted automatically after that). A \"visitor\" is one visit to the site; the same person may come back in another visit. Admin pages aren't counted.",
+    "note": "Figures come from anonymous visit records, kept for a year (before 1 October 2026 they were kept for 30 days only, so longer periods fill up gradually). A \"visitor\" is one visit to the site; the same person may come back in another visit. Admin pages aren't counted.",
     "empty": "No data for this period.",
     "noLeads": "No messages or bookings in this period.",
     "noCampaigns": "No visits from ad links (with utm_campaign) in this period.",
@@ -2933,7 +2988,7 @@
     "delete": "Delete",
     "confirmDelete": "Delete this spend entry?",
     "unavailable": "Available once database update 0010 has been run.",
-    "note": "Visitor counts are kept for 30 days only; messages, bookings and sales are kept longer.",
+    "note": "Visitor counts are kept for a year (30 days before 1 October 2026); messages, bookings and sales are kept longer.",
     "form": {
       "source": "Source (utm_source)",
       "other": "Other…",

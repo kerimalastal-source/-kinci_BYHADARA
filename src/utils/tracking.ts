@@ -11,7 +11,7 @@
 //   - Schedule (+ generate_lead and the lead conversion) when a private video tour is requested;
 //   - Contact / contact (+ the optional Google Ads contact conversion) on WhatsApp, call and email links.
 import type { Route } from "../seo/routes";
-import { SKIPPED_ROUTES } from "./visitorTracker";
+import { SKIPPED_ROUTES, reportAction } from "./visitorTracker";
 
 const TAGS = {
   /** Meta Events Manager → Datasets → "HADARA Real Estate" (business portfolio "Hadara Real Estate"). Public, not a secret. */
@@ -182,6 +182,7 @@ export function trackPageView(route: Route, locale: string): void {
 
 /** An inquiry was sent: form is "contact", "property-request" or "consultancy"; detail names the projects/service. */
 export function trackLead(form: string, detail = ""): void {
+  reportAction("form_sent", form);
   meta("Lead", { content_category: form, ...(detail ? { content_name: detail } : {}) });
   google("generate_lead", { form_name: form, ...(detail ? { item_name: detail } : {}) });
   adsConversion(TAGS.adsLeadLabel);
@@ -189,6 +190,7 @@ export function trackLead(form: string, detail = ""): void {
 
 /** A private video tour was requested: Meta's Schedule event, counted as a lead in Analytics and Google Ads. */
 export function trackSchedule(projects: string): void {
+  reportAction("form_sent", "video-tour");
   meta("Schedule", { content_category: "video-tour", content_name: projects });
   google("generate_lead", { form_name: "video-tour", item_name: projects });
   adsConversion(TAGS.adsLeadLabel);

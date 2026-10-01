@@ -121,6 +121,16 @@ function referrer(): string {
   }
 }
 
+/** Phone, tablet or computer, from the browser's own description (iPads call themselves Macs). */
+function deviceType(): "mobile" | "tablet" | "desktop" {
+  const ua = navigator.userAgent;
+  if (/iPad|Tablet|PlayBook|Silk|Android(?!.*Mobile)/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) return "tablet";
+  if (/Mobi|iPhone|iPod|Android|IEMobile|Opera Mini/i.test(ua)) return "mobile";
+  return "desktop";
+}
+
+const isLocal = () => /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname);
+
 /** Called by the router after each render that changed the URL (title and locale are already set). */
 export function trackVisit(route: Route, locale: string): void {
   const path = window.location.pathname;
@@ -128,7 +138,7 @@ export function trackVisit(route: Route, locale: string): void {
   previousPath = path;
 
   if (SKIPPED_ROUTES.has(route.name)) return;
-  if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname)) return;
+  if (isLocal()) return;
 
   const id = sessionId();
   if (!id) return;
@@ -148,7 +158,8 @@ export function trackVisit(route: Route, locale: string): void {
     // Each page with the seconds since the visit's first page.
     trail: trail.steps.map((step) => ({ path: step.p, title: step.n, at: Math.max(0, Math.round((step.t - start) / 1000)) })),
     trailSkipped: trail.skipped,
-    campaign: campaignSource()
+    campaign: campaignSource(),
+    device: deviceType()
   });
 
   // keepalive lets the request finish even if the visitor leaves right away.
@@ -169,4 +180,114 @@ export function reportConsent(choice: "granted" | "denied" | "none"): void {
   fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {
     // Never affects the page.
   });
+}
+
+/** What the admin statistics count (visitor_actions, supabase/migrations/0015). */
+export type VisitAction =
+  | "whatsapp"
+  | "call"
+  | "email"
+  | "interested"
+  | "favorite"
+  | "video_play"
+  | "map_open"
+  | "chat_open"
+  | "tour_link"
+  | "form_start"
+  | "form_sent";
+
+/** Seller account and admin pages are never reported (same rule as page views). */
+const INTERNAL_PATH = /^\/(?:(?:ar|fa|fr|ru)\/)?(?:admin|account|login|register)(?:\/|$)/;
+
+/** The project whose page this is, or "". */
+function pageProject(): string {
+  return window.location.pathname.match(/^\/(?:(?:ar|fa|fr|ru)\/)?projects\/([a-z0-9-]+)/)?.[1] ?? "";
+}
+
+/** Actions counted once per page (opening the map twice is still one look at the map). */
+const reportedOnPage = new Set<string>();
+
+/**
+ * One button press or form start, anonymous like the page views (the same per-tab session
+ * id, no cookie): target is a project slug or a form name ("contact"...), "" when none.
+ */
+export function reportAction(action: VisitAction, target = pageProject(), oncePerPage = false): void {
+  const path = window.location.pathname;
+  if (isLocal() || INTERNAL_PATH.test(path)) return;
+  if (oncePerPage) {
+    const key = `${action}:${target}:${path}`;
+    if (reportedOnPage.has(key)) return;
+    reportedOnPage.add(key);
+  }
+  const id = sessionId();
+  if (!id) return;
+  const body = JSON.stringify({ type: "action", sessionId: id, action, target, path });
+  fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {
+    // Never affects the page.
+  });
+}
+
+/** Forms whose start is counted (sending them is reported by trackLead / trackSchedule). */
+const FORMS: [selector: string, name: string][] = [
+  ["#contact-form", "contact"],
+  ["#property-request-form", "property-request"],
+  ["#consultancy-form", "consultancy"],
+  [".tour-booking", "video-tour"]
+];
+
+function formStart(event: Event): void {
+  const target = event.target as Element | null;
+  if (!target?.closest) return;
+  for (const [selector, name] of FORMS) {
+    if (target.closest(selector)) {
+      reportAction("form_start", name, true);
+      return;
+    }
+  }
+}
+
+/** The first slug of a "?project=a,b" link, or the page's project. */
+function linkProject(href: string): string {
+  try {
+    const slug = new URL(href, window.location.origin).searchParams.get("project")?.split(",")[0] ?? "";
+    return /^[a-z0-9-]+$/.test(slug) ? slug : pageProject();
+  } catch {
+    return pageProject();
+  }
+}
+
+function actionClick(event: MouseEvent): void {
+  const target = event.target as Element | null;
+  if (!target?.closest) return;
+
+  const anchor = target.closest("a[href]");
+  if (anchor) {
+    const href = anchor.getAttribute("href") ?? "";
+    if (href.startsWith("https://wa.me/")) return reportAction("whatsapp");
+    if (href.startsWith("tel:")) return reportAction("call");
+    if (href.startsWith("mailto:")) return reportAction("email");
+    if (/\/video-tour(?:[/?#]|$)/.test(href)) return reportAction("tour_link", linkProject(href));
+    if (/\/contact\?/.test(href) && /[?&]project=/.test(href)) return reportAction("interested", linkProject(href));
+    return;
+  }
+
+  // Captured before the button reacts: aria-pressed / aria-expanded still show the old state.
+  const fav = target.closest<HTMLElement>("[data-fav]");
+  if (fav) {
+    if (fav.getAttribute("aria-pressed") !== "true" && /^[a-z0-9-]+$/.test(fav.dataset.fav ?? "")) reportAction("favorite", fav.dataset.fav);
+    return;
+  }
+  if (target.closest(".video-facade")) return reportAction("video_play", pageProject(), true);
+  if (target.closest(".project-map__expand, .project-map__canvas")) return reportAction("map_open", pageProject(), true);
+  const chat = target.closest("[data-chat-toggle]");
+  if (chat && chat.getAttribute("aria-expanded") !== "true") reportAction("chat_open", pageProject(), true);
+}
+
+/** One listener each for the whole site (capture phase, so it runs before the page's own handlers). */
+export function initVisitActions(): void {
+  document.addEventListener("click", actionClick, true);
+  document.addEventListener("focusin", formStart, true);
+  document.addEventListener("click", formStart, true);
+  // A new page is a new place to open the map or start a form again.
+  window.addEventListener("popstate", () => reportedOnPage.clear());
 }
