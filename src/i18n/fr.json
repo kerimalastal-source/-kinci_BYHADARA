@@ -1445,6 +1445,25 @@
     "otherArticlesTitle": "D'autres articles à lire"
   },
   "blogData": {
+    "gross-vs-net-area": {
+      "category": "Achat immobilier",
+      "title": "Surface brute ou nette et sens du 2+1 dans les annonces turques",
+      "excerpt": "Apprenez à lire les surfaces brute (brüt) et nette et le code 2+1, avec des exemples réels des projets de HADARA.",
+      "body": [
+        "Ouvrez n'importe quelle annonce immobilière à Istanbul et vous rencontrerez vite deux termes qui déroutent de nombreux primo-acquéreurs : brut et net. Ajoutez un code comme 2+1, et une brochure peut ressembler à un casse-tête. Ce guide explique ce que ces termes signifient et comment les utiliser pour comparer des logements, afin que les chiffres soient clairs avant même d'entrer dans un bureau de vente.",
+        "## Brut et net : quelle différence ?",
+        "La surface brute, appelée brüt en turc, est le chiffre le plus grand. Elle mesure l'appartement avec ses murs et, en général, une quote-part des parties communes de l'immeuble. La surface nette, appelée net, est l'espace utilisable à l'intérieur de l'appartement : celui que vous foulez, meublez et habitez réellement. Comme le brut inclut davantage, c'est toujours le chiffre le plus élevé, et les brochures et grilles de prix le citent très souvent en premier.",
+        "Aucun des deux chiffres n'est faux : ils répondent simplement à des questions différentes. Le brut indique comment le lot est mesuré et vendu sur le papier, tandis que le net indique l'espace dont vous disposerez vraiment chez vous. Quand vous comparez deux appartements, comparez toujours le brut avec le brut et le net avec le net, jamais le brut d'un projet avec le net d'un autre. Sinon, un logement plus petit peut paraître plus grand qu'il ne l'est.",
+        "## Que signifie 2+1 ?",
+        "Dans les annonces turques, le premier chiffre compte les pièces, généralement utilisées comme chambres, et le second compte les salons, appelés salon. Un 2+1 comprend donc deux chambres et un salon, la cuisine et les salles de bains étant comptées à part. Un 3+1 a trois chambres et un salon, et un 1+1 une chambre et un salon. Gardez à l'esprit que ce code ne dit rien de la taille : deux appartements 2+1 peuvent différer nettement en surface, alors lisez toujours les mètres carrés indiqués à côté de la typologie.",
+        "## Exemples réels de nos projets",
+        "Cadde Ispartakule propose des 2+1 de 106,30 – 108,56 m² bruts, soit 89,66 – 91,92 m² nets, et des 3+1 de 132,83 – 150,61 m² bruts, soit 116,19 – 133,97 m² nets. Dans tous les cas, le chiffre net est le plus petit, comme on peut s'y attendre. Lotus Şişli présente un 1+1 de 57,56 m² bruts et 43,41 m² nets, et un 2+1 de 83,75 m² bruts et 63,16 m² nets. Son catalogue indique aussi un troisième chiffre, la surface brute vendable (satışa esas brüt), de 75,97 m² et 110,53 m² pour ces deux types. C'est un bon rappel : demandez précisément sur quelle surface le prix est fondé.",
+        "Les villas suivent la même logique, niveau par niveau. Marmara Haven Villa donne le brut et le net de chaque étage : le sous-sol compte 138,62 m² bruts et 105,40 m² nets, le rez-de-chaussée 223,37 m² bruts et 108,60 m² nets, le premier étage 143,19 m² bruts et 126,21 m² nets, et le niveau toit-terrasse 103,66 m² bruts et 82,82 m² nets. L'écart entre les deux chiffres n'est pas le même à chaque niveau, ce qui montre qu'un seul chiffre global ne dit jamais tout. Lotus Yaşam, en revanche, indique des fourchettes brutes, par exemple 100 – 109 m² pour ses 2+1 : mieux vaut demander le chiffre net du lot précis qui vous plaît.",
+        "## Les questions à poser avant de décider",
+        "Demandez sur quelle surface le prix est fondé, si la surface nette figure sur le plan, et quelles parties sont comptées dans le chiffre brut. Demandez le plan du lot précis et comparez chaque pièce à votre façon de vivre : où iront le canapé, la table à manger et les lits. Un plan sur papier se juge plus facilement quand on voit les vraies pièces et l'appartement témoin, et une visite en vidéo est une façon pratique de commencer. Précisons que les chiffres ci-dessus proviennent des catalogues des projets et peuvent être mis à jour par les promoteurs.",
+        "HADARA, votre partenaire immobilier à Istanbul, vous accompagne volontiers dans la lecture des plans et vous explique chaque chiffre. Contactez-nous ou réservez une visite vidéo privée pour présélectionner les logements qui vous conviennent, puis venez à Istanbul les voir en personne."
+      ]
+    },
     "real-estate-in-turkey": {
       "category": "Immobilier",
       "title": "Comprendre le marché immobilier turc",

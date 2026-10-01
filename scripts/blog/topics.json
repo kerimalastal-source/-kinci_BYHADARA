@@ -1,0 +1,100 @@
+{
+ "topics": [
+  {
+   "slug": "gross-vs-net-area",
+   "brief": "Gross vs net area (brüt / net) and what '2+1' means in Turkish listings: how to read a floor plan, why brochures quote gross, common areas. Use the site's residences data (gross/net) as real examples (e.g. Marmara Haven Villa floorPlan gross/net per floor, Beylikdüzü Living 2+1 100–109 m² gross).",
+   "photo": "/images/projects/lotus-sisli/apartment-living.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "off-plan-or-ready",
+   "brief": "Off-plan (new launch / under construction) vs ready-to-move-in: pros and cons, payment plans vs immediate use, what to check. Examples from our projects' statuses (new-launch: Beylikdüzü Living, Diamond Marin; ongoing: Lotus Şişli; delivered: Lotus Yalı, Cadde Ispartakule...).",
+   "photo": "/images/projects/diamond-marin/street-view.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "beylikduzu-district-guide",
+   "brief": "Beylikdüzü district guide for foreign buyers: European side, west Istanbul by the Marmara Sea, what it is like to live there; nearby places and travel times ONLY from projectsData.diamond-marin.nearby / lotus-manzara-beylikduzu.nearby; our projects there.",
+   "photo": "/images/projects/beylikduzu-living/aerial-view.jpg",
+   "category": "About Istanbul"
+  },
+  {
+   "slug": "apartment-or-villa",
+   "brief": "Apartment in a residential compound or a villa? Space, privacy, amenities (community list), maintenance, budget. Examples: our villa projects (Lotus Manzara Güzelce 32 villas 6+2, Lotus Manzara Beylikdüzü 16 villas 5+2, Marmara Haven Villa) and compounds.",
+   "photo": "/images/projects/lotus-manzara-guzelce/villa-row.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "buyukcekmece-district-guide",
+   "brief": "Büyükçekmece district guide: coastline, lake, calmer pace; nearby places only from projectsData.lotus-yali.nearby / lotus-manzara-guzelce.nearby / marmara-haven-villa.nearby; our projects there.",
+   "photo": "/images/projects/lotus-yali/sunset-aerial.jpg",
+   "category": "About Istanbul"
+  },
+  {
+   "slug": "iskan-occupancy-permit",
+   "brief": "What the İskan (occupancy permit / iskan) is, why it matters for a completed property, and how it relates to the title deed; general explanation without fees or deadlines.",
+   "photo": "/images/projects/cadde-ispartakule/tower-park.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "video-tour-before-you-travel",
+   "brief": "Choosing your Istanbul home before you travel: how a private video tour works (videoTour.* texts), what to ask, then the visit to Istanbul to buy (videoTour.visitText). No remote purchase promises.",
+   "photo": "/images/projects/diamond-marin/living-room.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "sisli-district-guide",
+   "brief": "Şişli district guide: central European-side business and living district; nearby places only from projectsData.lotus-sisli.nearby; Lotus Şişli apartments and home offices.",
+   "photo": "/images/projects/lotus-sisli/aerial-city.jpg",
+   "category": "About Istanbul"
+  },
+  {
+   "slug": "buying-trip-checklist",
+   "brief": "Checklist for your buying trip to Istanbul: passport, Turkish tax number, bank account for the payment, translator at the title deed office, valuation report — general, well-known steps only, and the site's own steps (blogData.buying-property-and-tapu, citizenship.steps).",
+   "photo": "/images/projects/lotus-yali/view-from-sea.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "residential-compound-amenities",
+   "brief": "What life in a residential compound offers: separate pools for men and women, gym, covered parking, 24/7 security, cameras, gardens, backup generator (the site's COMMUNITY amenities) and why families choose them.",
+   "photo": "/images/projects/lotus-yali/aerial-sea-view.jpg",
+   "category": "Life in Turkey"
+  },
+  {
+   "slug": "earthquake-regulation-2018",
+   "brief": "Earthquake safety when buying in Istanbul: what the Turkish Building Earthquake Regulation (2018) means for newer buildings, what to ask (permit, completion year, structure) — general, no technical figures; mention the verified card on Marmara Haven Villa (verified.earthquake).",
+   "photo": "/images/projects/lotus-koru-2/residential-blocks.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "residence-permit-by-property",
+   "brief": "Short-term residence permit through property ownership: the values from citizenship.residence* (Istanbul and big cities vs other cities), who it suits, difference from citizenship. Add: conditions per current law, subject to change.",
+   "photo": "/images/blog/life-in-turkey.jpg",
+   "category": "Citizenship by Investment"
+  },
+  {
+   "slug": "monthly-fees-aidat",
+   "brief": "Monthly building fees (aidat): what they cover in a compound (security, cleaning, pools, gardens), why they differ between projects, what to ask before buying — no amounts.",
+   "photo": "/images/projects/cadde-ispartakule/garden-pond.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "renting-out-your-property",
+   "brief": "Renting out your Istanbul property: tenant types, furnished vs unfurnished, working with a manager, what makes a unit easy to rent (location, amenities) — no yield percentages.",
+   "photo": "/images/projects/cadde-ispartakule/terrace-view.jpg",
+   "category": "Real Estate"
+  },
+  {
+   "slug": "choosing-floor-and-view",
+   "brief": "Choosing the floor, orientation and view: sea view, garden floors with terraces, top floors and penthouses; examples from our projects (Diamond Marin garden terraces, Lotus Şişli penthouses, Marmara Haven Villa rooftop).",
+   "photo": "/images/projects/marmara-haven-villa/sea-view.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "payment-plans-explained",
+   "brief": "Paying for property in Turkey: cash vs installment plans offered by developers on new projects, deposits and schedules in general terms, currency — no rates or percentages; faq.categories[1].items[2].",
+   "photo": "/images/projects/beylikduzu-living/living-room.jpg",
+   "category": "Buying Property"
+  }
+ ]
+}

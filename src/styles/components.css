@@ -5599,6 +5599,17 @@ body.nav-open .back-to-top {
   margin-bottom: var(--space-md);
 }
 
+.blog-detail__heading {
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  line-height: 1.35;
+  margin-block: var(--space-lg) var(--space-sm);
+  text-wrap: balance;
+}
+
+.blog-detail__article > .blog-detail__heading:first-child {
+  margin-top: 0;
+}
+
 /* ---------- Project video tour ---------- */
 .project-video {
   background: var(--color-surface);

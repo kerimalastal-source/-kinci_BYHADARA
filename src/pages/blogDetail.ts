@@ -10,6 +10,11 @@ interface BlogArticleContent {
   body: string[];
 }
 
+// A body entry starting with "## " is a subheading; everything else is a paragraph.
+function articleBlock(text: string): string {
+  return text.startsWith("## ") ? `<h2 class="blog-detail__heading">${text.slice(3)}</h2>` : `<p>${text}</p>`;
+}
+
 export function renderBlogDetail(el: HTMLElement, slug: string): void {
   const post = getBlogPostBySlug(slug);
   if (!post) {
@@ -36,7 +41,7 @@ export function renderBlogDetail(el: HTMLElement, slug: string): void {
     <section class="section blog-detail">
       <div class="container narrow">
         <div class="blog-detail__article">
-          ${content.body.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+          ${content.body.map(articleBlock).join("")}
         </div>
       </div>
     </section>
