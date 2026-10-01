@@ -33,6 +33,7 @@ Work from the repository root (clone kerimalastal-source/-kinci_BYHADARA if need
 1. `git fetch origin main claude/stoic-cray-v5g7gv` and
    `git checkout -B laws-work origin/main` if `src/data/laws.ts` exists on main, otherwise
    `origin/claude/stoic-cray-v5g7gv`. Read-only: never commit or push.
+   Then `npm ci` (build-review.mjs needs esbuild from node_modules).
 2. Read the review page: Artifact `action: "read"`, `url` = REVIEW_URL, then
    `path: "drafts.json"` (saved locally) and, for each id in it, `path: "drafts/<id>.json"`
    into a `drafts/` folder next to it. Run
