@@ -29,6 +29,8 @@ export interface PageView {
   trailSkipped: number;
   /** The ad campaign the visit came from ("utm_source=facebook · utm_campaign=villa"), or "". */
   campaign: string;
+  /** "mobile", "tablet" or "desktop" (from the browser), or "" when unknown. Saved with the first page. */
+  device?: string;
 }
 
 /** A session's first page view, as record_visit_state() returns it. */

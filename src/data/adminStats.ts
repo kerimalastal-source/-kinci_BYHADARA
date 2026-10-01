@@ -46,3 +46,27 @@ export async function fetchConsentStats(days: number): Promise<ConsentStats | nu
   const stats = data as (ConsentStats & { error?: string }) | null;
   return stats && !stats.error ? stats : null;
 }
+
+/** What admin_behavior_stats() returns (supabase/migrations/0016): counts per visit, no personal data. */
+export interface BehaviorStats {
+  days: number;
+  visits: number;
+  /** Visits with a WhatsApp, call, email, "I'm interested" or sent form. */
+  contacted: number;
+  devices: { device: string; visits: number; contacted: number }[];
+  actions: { action: string; count: number; sessions: number }[];
+  projects: { slug: string; action: string; sessions: number }[];
+  forms: { form: string; started: number; sent: number }[];
+}
+
+/** Same period as fetchVisitStats, or null when 0015/0016 haven't run. */
+export async function fetchBehaviorStats(days: number): Promise<BehaviorStats | null> {
+  const { data, error } = await supabase.rpc("admin_behavior_stats", { p_days: days });
+  if (error) {
+    // Before migration 0016 the function doesn't exist; the section just says so.
+    if (error.code !== "PGRST202") console.error(error);
+    return null;
+  }
+  const stats = data as (BehaviorStats & { error?: string }) | null;
+  return stats && !stats.error ? stats : null;
+}
