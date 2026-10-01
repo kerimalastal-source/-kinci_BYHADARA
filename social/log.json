@@ -102,5 +102,37 @@
     "headlineAr": "مسبح ونادٍ رياضي داخل المشروع",
     "headlineEn": "A pool and a gym inside the complex",
     "photo": "/images/projects/diamond-marin/fitness-center.jpg"
+  },
+  {
+    "date": "2026-10-01",
+    "id": "lotus-sisli-overview",
+    "topic": "لوتس شيشلي · نظرة عامة",
+    "headlineAr": "لوتس شيشلي: برجان في قلب إسطنبول",
+    "headlineEn": "Lotus Şişli: two towers in the heart of Istanbul",
+    "photo": "/images/projects/lotus-sisli/twin-towers.jpg"
+  },
+  {
+    "date": "2026-10-01",
+    "id": "faq-why-istanbul",
+    "topic": "سؤال: لماذا إسطنبول؟",
+    "headlineAr": "لماذا الاستثمار العقاري في إسطنبول؟",
+    "headlineEn": "Why invest in real estate in Istanbul?",
+    "photo": "/images/projects/lotus-sisli/aerial-city.jpg"
+  },
+  {
+    "date": "2026-10-01",
+    "id": "area-beylikduzu",
+    "topic": "من إسطنبول: بيليكدوزو",
+    "headlineAr": "بيليكدوزو: بين البحر والمدينة",
+    "headlineEn": "Beylikdüzü: between the sea and the city",
+    "photo": "/images/projects/beylikduzu-living/aerial-view.jpg"
+  },
+  {
+    "date": "2026-10-01",
+    "id": "lotus-sisli-overview-story",
+    "topic": "ستوري: لوتس شيشلي · نظرة عامة",
+    "headlineAr": "خطوات من المترو والمتروبوس",
+    "headlineEn": "Steps from the metro and Metrobüs",
+    "photo": "/images/projects/lotus-sisli/tower-night.jpg"
   }
 ]
