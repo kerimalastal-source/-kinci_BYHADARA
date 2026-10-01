@@ -3,7 +3,8 @@ import { lookup } from "../i18n/dictionaries";
 import { getSortedProjects } from "../data/projects";
 import { getSortedBlogPosts } from "../data/blog";
 import { navigate } from "../router";
-import { consultancyPath } from "../seo/routes";
+import { consultancyPath, LAWS_SEGMENT } from "../seo/routes";
+import { LAWS_PAGE_LIVE } from "../data/laws";
 
 interface SearchResult {
   title: string;
@@ -66,6 +67,7 @@ function buildIndex(): SearchResult[] {
   results.push({ title: t("videoTour.nav"), snippet: t("videoTour.heroSubtitle"), route: "/video-tour" });
   results.push({ title: t("nav.blog"), snippet: t("blog.heroSubtitle"), route: "/blog" });
   results.push({ title: t("nav.faq"), snippet: t("faq.heroSubtitle"), route: "/faq" });
+  if (LAWS_PAGE_LIVE) results.push({ title: t("nav.laws"), snippet: t("laws.heroSubtitle"), route: `/${LAWS_SEGMENT}` });
   results.push({ title: t("nav.contact"), snippet: t("contact.heroSubtitle"), route: "/contact" });
 
   return results;

@@ -9,7 +9,7 @@
 // `lawsData.updates.<id>` ({title, summary, before?, after, affects, help}).
 
 /** The page (menu link, sitemap, prerendered pages) stays off until the owner approves it. */
-export const LAWS_PAGE_LIVE = false;
+export const LAWS_PAGE_LIVE = true;
 
 export const LAW_TOPICS = ["citizenship", "residence", "ownership", "taxes", "rent"] as const;
 export type LawTopic = (typeof LAW_TOPICS)[number];
@@ -66,14 +66,14 @@ export const lawRules: LawRule[] = [
       { key: "tkgm", url: "https://www.tkgm.gov.tr/yabancii-db/vatandaslik-icin-tasinmaz-edinimi-hakkinda-mevzuat" }
     ],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "residence-property",
     topic: "residence",
     sources: [{ key: "goc", url: "https://e-ikamet.goc.gov.tr/Ikamet/BasvuruIstenenBelgeler/BasvuruFormuIstenenBelgeler?tur=0" }],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "residence-closed-areas",
@@ -82,14 +82,14 @@ export const lawRules: LawRule[] = [
       { key: "goc", url: "https://www.goc.gov.tr/mahalle-kapatma-duyurusu-hk" }
     ],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "valuation-report",
     topic: "ownership",
     sources: [{ key: "tkgm", url: "https://tkgm.gov.tr/tr/icerik/yabanciya-konut-satisinda-degerleme-zorunlulugu" }],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "currency-certificate",
@@ -98,14 +98,14 @@ export const lawRules: LawRule[] = [
       { key: "tkgm", url: "https://www.tkgm.gov.tr/yabancilarin-gayrimenkul-aliminda-doviz-bozdurma-zorunlulugu-ile-ilgili-sikca-sorulan-sorular" }
     ],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "title-deed-fee",
     topic: "taxes",
     sources: [{ key: "mevzuat", url: "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.492.pdf" }],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "property-tax",
@@ -115,14 +115,14 @@ export const lawRules: LawRule[] = [
       { key: "mevzuat", url: "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.1319.pdf" }
     ],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "rent-increase",
     topic: "rent",
     sources: [{ key: "mevzuat", url: "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.6098.pdf" }],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   }
 ];
 
@@ -135,7 +135,7 @@ export const lawUpdates: LawUpdate[] = [
     stage: "proposal",
     sources: [{ key: "tbmm", url: "https://www.tbmm.gov.tr/Yasama/KanunTeklifi/9bf8033d-8af3-4dc7-ac99-019f1debe16f" }],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "secure-payment-system",
@@ -151,7 +151,7 @@ export const lawUpdates: LawUpdate[] = [
       }
     ],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "savings-finance-foreigners",
@@ -160,7 +160,7 @@ export const lawUpdates: LawUpdate[] = [
     reference: "TKGM Yabancı İşler Dairesi duyurusu",
     sources: [{ key: "tkgm", url: "https://www.tkgm.gov.tr/en/yabanci-isler-duyuru?page=1" }],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "valuable-housing-tax-2026",
@@ -175,7 +175,7 @@ export const lawUpdates: LawUpdate[] = [
       }
     ],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "property-tax-cap-2026",
@@ -185,7 +185,7 @@ export const lawUpdates: LawUpdate[] = [
     reference: "7566 sayılı Kanun · Resmî Gazete 33112",
     sources: [{ key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2025/12/20251219-1.htm" }],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "title-deed-declared-price",
@@ -194,7 +194,7 @@ export const lawUpdates: LawUpdate[] = [
     reference: "7566 sayılı Kanun · Resmî Gazete 33112",
     sources: [{ key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2025/12/20251219-1.htm" }],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   },
   {
     id: "citizenship-amount-certificate",
@@ -205,7 +205,7 @@ export const lawUpdates: LawUpdate[] = [
       { key: "tkgm", url: "https://www.tkgm.gov.tr/yabancii-db/turk-vatandasligi-kanunu-uygulama-yonetmeligi-hk-20244-sayili-genelge" }
     ],
     checked: "2026-10-01",
-    approved: false
+    approved: true
   }
 ];
 
