@@ -1,0 +1,1045 @@
+{
+ "name": "خطة المحتوى — أكتوبر 2026",
+ "start": "2026-09-29",
+ "end": "2026-10-28",
+ "days": [
+  {
+   "date": "2026-09-29",
+   "week": "التعريف والمشاريع الجديدة",
+   "weekEn": "Introduction & new launches",
+   "posts": [
+    {
+     "id": "beylikduzu-living-overview",
+     "kind": "project",
+     "slug": "beylikduzu-living",
+     "angle": "overview",
+     "path": "/projects/beylikduzu-living",
+     "photos": [
+      "/images/projects/beylikduzu-living/aerial-view.jpg",
+      "/images/projects/beylikduzu-living/courtyard-gardens.jpg"
+     ],
+     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats.",
+     "label": "لوتس ياشام · نظرة عامة"
+    },
+    {
+     "id": "blog-buying-property-and-tapu",
+     "kind": "article",
+     "slug": "buying-property-and-tapu",
+     "path": "/blog/buying-property-and-tapu",
+     "photos": [
+      "/images/blog/buying-property-and-tapu.jpg"
+     ],
+     "brief": "3-4 practical points from the article blogData.buying-property-and-tapu, then invite to read it.",
+     "label": "مقال: كيف تشتري عقاراً في تركيا وتوثقه في الطابو"
+    }
+   ]
+  },
+  {
+   "date": "2026-09-30",
+   "week": "التعريف والمشاريع الجديدة",
+   "weekEn": "Introduction & new launches",
+   "posts": [
+    {
+     "id": "diamond-marin-life",
+     "kind": "project",
+     "slug": "diamond-marin",
+     "angle": "life",
+     "path": "/projects/diamond-marin",
+     "photos": [
+      "/images/projects/diamond-marin/living-room.jpg",
+      "/images/projects/diamond-marin/master-bedroom.jpg"
+     ],
+     "brief": "Life in Diamond Marin: pool, gym, gardens, smart home, interiors; boutique building for 58 families.",
+     "label": "دايموند مارين · الحياة في المشروع",
+     "at": "09:00"
+    },
+    {
+     "id": "blog-about-istanbul",
+     "kind": "article",
+     "slug": "about-istanbul",
+     "path": "/blog/about-istanbul",
+     "photos": [
+      "/images/blog/about-istanbul.jpg"
+     ],
+     "brief": "3-4 practical points from the article blogData.about-istanbul, then invite to read it.",
+     "label": "مقال: إسطنبول: المدينة التي تلتقي فيها القارات",
+     "at": "14:00"
+    },
+    {
+     "id": "pick-sea-nature-city",
+     "kind": "page",
+     "angle": "question",
+     "path": "/projects",
+     "photos": [
+      "/images/projects/lotus-yali/sunset-aerial.jpg",
+      "/images/projects/lotus-sisli/twin-towers.jpg"
+     ],
+     "brief": "Evening, light and friendly: ask followers which life they prefer - sea view, nature, or the heart of the city - and name one available project for each, using only the 'lifestyle' tags in src/data/projects.ts (never soldOut). The 4 stat tiles: how many of our projects have each tag (sea / nature / city) and the number of projects on the site. Badge «سؤال لكم · Your pick». Invite them to answer in the comments.",
+     "label": "سؤال المساء: بحر، طبيعة، أم قلب المدينة؟",
+     "at": "21:00"
+    }
+   ],
+   "intensive": true
+  },
+  {
+   "date": "2026-10-01",
+   "week": "التعريف والمشاريع الجديدة",
+   "weekEn": "Introduction & new launches",
+   "posts": [
+    {
+     "id": "lotus-sisli-overview",
+     "kind": "project",
+     "slug": "lotus-sisli",
+     "angle": "overview",
+     "path": "/projects/lotus-sisli",
+     "photos": [
+      "/images/projects/lotus-sisli/twin-towers.jpg",
+      "/images/projects/lotus-sisli/tower-night.jpg"
+     ],
+     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats.",
+     "label": "لوتس شيشلي · نظرة عامة",
+     "at": "09:00"
+    },
+    {
+     "id": "faq-why-istanbul",
+     "kind": "page",
+     "path": "/faq",
+     "photos": [
+      "/images/projects/lotus-sisli/aerial-city.jpg"
+     ],
+     "brief": "Answer the FAQ question faq.categories[1].items[0] (question + clear short answer from the site's answer).",
+     "label": "سؤال: لماذا إسطنبول؟",
+     "at": "14:00"
+    },
+    {
+     "id": "area-beylikduzu",
+     "kind": "page",
+     "angle": "area",
+     "path": "/projects",
+     "photos": [
+      "/images/projects/diamond-marin/aerial-sea-view.jpg",
+      "/images/projects/beylikduzu-living/aerial-view.jpg"
+     ],
+     "brief": "Evening, light: Beylikdüzü as a place to live. Only facts from the site: which of our available projects are in Beylikdüzü (projects.ts district) and what is nearby from their projectsData.<slug>.nearby texts (ar/en). Badge «من إسطنبول · Istanbul life». No claims about prices, rents or growth.",
+     "label": "من إسطنبول: بيليكدوزو",
+     "at": "21:00"
+    }
+   ],
+   "intensive": true
+  },
+  {
+   "date": "2026-10-02",
+   "week": "التعريف والمشاريع الجديدة",
+   "weekEn": "Introduction & new launches",
+   "posts": [
+    {
+     "id": "beylikduzu-living-life",
+     "kind": "project",
+     "slug": "beylikduzu-living",
+     "angle": "life",
+     "path": "/projects/beylikduzu-living",
+     "photos": [
+      "/images/projects/beylikduzu-living/courtyard-gardens.jpg",
+      "/images/projects/beylikduzu-living/garden-terrace.jpg",
+      "/images/projects/beylikduzu-living/living-room.jpg"
+     ],
+     "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. Use the residences (2+1/3+1/4+1 sizes) too.",
+     "label": "لوتس ياشام · الحياة في المشروع",
+     "at": "09:00"
+    },
+    {
+     "id": "find-my-project",
+     "kind": "page",
+     "path": "/",
+     "photos": [
+      "/images/projects/lotus-yali/aerial-sea-view.jpg"
+     ],
+     "brief": "'Find my project' quiz on the home page (match.* texts): 4 quick questions (goal, home size, atmosphere, move-in) then matching projects. Invite to try it.",
+     "label": "اعثر على مشروعك",
+     "at": "14:00"
+    },
+    {
+     "id": "marmara-haven-villa-life",
+     "kind": "project",
+     "slug": "marmara-haven-villa",
+     "angle": "life",
+     "path": "/projects/marmara-haven-villa",
+     "photos": [
+      "/images/projects/marmara-haven-villa/private-pool.jpg",
+      "/images/projects/marmara-haven-villa/living-room.jpg",
+      "/images/projects/marmara-haven-villa/terrace.jpg"
+     ],
+     "brief": "Evening: everyday life in Marmara Haven Villa - the comfort features (elevator, smart home, underfloor heating, fireplace, the well, private spaces) from projects.ts and projectsData.marmara-haven-villa. Not the sizes/floors angle (later posts cover the overview, floors, sea view and verified card). Price 'on request' only. Badge «فلل · Villas».",
+     "label": "فيلا مرمرة هيفن · الحياة في الفيلا",
+     "at": "21:00"
+    }
+   ],
+   "intensive": true
+  },
+  {
+   "date": "2026-10-03",
+   "week": "التعريف والمشاريع الجديدة",
+   "weekEn": "Introduction & new launches",
+   "posts": [
+    {
+     "id": "diamond-marin-location",
+     "kind": "project",
+     "slug": "diamond-marin",
+     "angle": "location",
+     "path": "/projects/diamond-marin",
+     "photos": [
+      "/images/projects/diamond-marin/street-view.jpg",
+      "/images/projects/diamond-marin/facade.jpg"
+     ],
+     "brief": "Location: the nearby places and travel times (projectsData.<slug>.nearby) and the district.",
+     "label": "دايموند مارين · الموقع وما حوله",
+     "at": "09:00"
+    },
+    {
+     "id": "faq-foreigners-buy",
+     "kind": "page",
+     "path": "/faq",
+     "photos": [
+      "/images/projects/diamond-marin/facade.jpg"
+     ],
+     "brief": "Answer the FAQ question faq.categories[1].items[1] (question + clear short answer from the site's answer).",
+     "label": "سؤال: هل يمكن للأجانب الشراء؟",
+     "at": "14:00"
+    },
+    {
+     "id": "area-buyukcekmece",
+     "kind": "page",
+     "angle": "area",
+     "path": "/projects",
+     "photos": [
+      "/images/projects/lotus-yali/view-from-sea.jpg",
+      "/images/projects/lotus-manzara-guzelce/aerial-villas.jpg"
+     ],
+     "brief": "Evening, light: Büyükçekmece as a place to live (sea and lake). Only facts from the site: our available projects in Büyükçekmece (projects.ts district) and their projectsData.<slug>.nearby texts. Badge «من إسطنبول · Istanbul life».",
+     "label": "من إسطنبول: بيوكجكمجة",
+     "at": "21:00"
+    }
+   ],
+   "intensive": true
+  },
+  {
+   "date": "2026-10-04",
+   "week": "التعريف والمشاريع الجديدة",
+   "weekEn": "Introduction & new launches",
+   "posts": [
+    {
+     "id": "lotus-sisli-offices",
+     "kind": "project",
+     "slug": "lotus-sisli",
+     "angle": "offices",
+     "path": "/projects/lotus-sisli",
+     "photos": [
+      "/images/projects/lotus-sisli/office-interior.jpg",
+      "/images/projects/lotus-sisli/tower-day.jpg"
+     ],
+     "brief": "Şişli home offices and office units (residences with kind office, saleable areas) for investors and professionals; location in Şişli.",
+     "label": "لوتس شيشلي · المكاتب والـ Home Office",
+     "at": "09:00"
+    },
+    {
+     "id": "faq-payment-options",
+     "kind": "page",
+     "path": "/faq",
+     "photos": [
+      "/images/projects/beylikduzu-living/living-room-2.jpg"
+     ],
+     "brief": "Answer the FAQ question faq.categories[1].items[2] (question + clear short answer from the site's answer).",
+     "label": "سؤال: خيارات الدفع",
+     "at": "14:00"
+    },
+    {
+     "id": "ask-our-team",
+     "kind": "page",
+     "angle": "service",
+     "path": "/contact",
+     "photos": [
+      "/images/projects/diamond-marin/living-dining.jpg",
+      "/images/pages/hadara-monogram.jpg"
+     ],
+     "brief": "Evening, light: you can ask us anything, in your language - the chat on the site (talk to our team), WhatsApp, the free private video tour. Facts only from the site: the 5 site languages, office hours 9:00-18:00 Istanbul (videoTour.officeHours), video tour languages (Arabic/English/Turkish). Badge «خدماتنا · Our services».",
+     "label": "اسألنا ما تريد",
+     "at": "21:00"
+    }
+   ],
+   "intensive": true
+  },
+  {
+   "date": "2026-10-05",
+   "week": "التعريف والمشاريع الجديدة",
+   "weekEn": "Introduction & new launches",
+   "posts": [
+    {
+     "id": "beylikduzu-living-homes",
+     "kind": "project",
+     "slug": "beylikduzu-living",
+     "angle": "homes",
+     "path": "/projects/beylikduzu-living",
+     "photos": [
+      "/images/projects/beylikduzu-living/living-room.jpg",
+      "/images/projects/beylikduzu-living/kitchen.jpg",
+      "/images/projects/beylikduzu-living/entrance-hall.jpg"
+     ],
+     "brief": "The homes: 2+1, 3+1 and 4+1 with gross sizes (residences), interiors, flexible installment plans, delivery late 2028.",
+     "label": "لوتس ياشام · الشقق والمساحات",
+     "at": "09:00"
+    },
+    {
+     "id": "video-tour",
+     "kind": "page",
+     "path": "/video-tour",
+     "photos": [
+      "/images/projects/diamond-marin/master-bedroom.jpg"
+     ],
+     "brief": "Private video tour (videoTour.*): who it is for (buyers abroad), what you see, free, WhatsApp/FaceTime/Zoom/Meet, Arabic/English/Turkish. Different wording than the first video-tour post.",
+     "label": "الجولة عبر الفيديو",
+     "at": "14:00"
+    },
+    {
+     "id": "area-sisli",
+     "kind": "page",
+     "angle": "area",
+     "path": "/projects/lotus-sisli",
+     "photos": [
+      "/images/projects/lotus-sisli/tower-night.jpg",
+      "/images/projects/lotus-sisli/aerial-city.jpg"
+     ],
+     "brief": "Evening, light: Şişli, the city centre side of Istanbul. Only facts from the site: Lotus Şişli (projects.ts, projectsData.lotus-sisli incl. nearby). Different headline and angle from the Lotus Şişli overview (10-01) and offices (10-04) posts - here it is the neighbourhood and city life. Badge «من إسطنبول · Istanbul life».",
+     "label": "من إسطنبول: شيشلي",
+     "at": "21:00"
+    }
+   ],
+   "intensive": true
+  },
+  {
+   "date": "2026-10-06",
+   "week": "جاهز للسكن",
+   "weekEn": "Ready to move in",
+   "posts": [
+    {
+     "id": "lotus-yali-overview",
+     "kind": "project",
+     "slug": "lotus-yali",
+     "angle": "overview",
+     "path": "/projects/lotus-yali",
+     "photos": [
+      "/images/projects/lotus-yali/sunset-aerial.jpg",
+      "/images/projects/lotus-yali/aerial-sea-view.jpg"
+     ],
+     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats.",
+     "label": "لوتس يالي · نظرة عامة",
+     "at": "09:00"
+    },
+    {
+     "id": "blog-real-estate-in-turkey",
+     "kind": "article",
+     "slug": "real-estate-in-turkey",
+     "path": "/blog/real-estate-in-turkey",
+     "photos": [
+      "/images/blog/real-estate-in-turkey.jpg"
+     ],
+     "brief": "3-4 practical points from the article blogData.real-estate-in-turkey, then invite to read it.",
+     "label": "مقال: فهم سوق العقارات التركي",
+     "at": "14:00"
+    },
+    {
+     "id": "pick-home-size",
+     "kind": "page",
+     "angle": "question",
+     "path": "/projects",
+     "photos": [
+      "/images/projects/beylikduzu-living/living-room.jpg",
+      "/images/projects/lotus-manzara-guzelce/villa-exterior.jpg"
+     ],
+     "brief": "Evening, light and friendly: ask followers which home suits their family - 1+1, 2+1, 3+1 or a villa - and show that our available projects offer each (from residences in projects.ts; villas from the villa projects). The 4 tiles: the layouts. Badge «سؤال لكم · Your pick». Invite answers in the comments and point to 'Find my project' on the site.",
+     "label": "سؤال المساء: أي منزل يناسب عائلتك؟",
+     "at": "21:00"
+    }
+   ],
+   "intensive": true
+  },
+  {
+   "date": "2026-10-07",
+   "week": "جاهز للسكن",
+   "weekEn": "Ready to move in",
+   "posts": [
+    {
+     "id": "cadde-ispartakule-overview",
+     "kind": "project",
+     "slug": "cadde-ispartakule",
+     "angle": "overview",
+     "path": "/projects/cadde-ispartakule",
+     "photos": [
+      "/images/projects/cadde-ispartakule/tower-avenue.jpg",
+      "/images/projects/cadde-ispartakule/tower-park.jpg"
+     ],
+     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats. 78 apartments and 12 shops.",
+     "label": "جادّة إسبارتاكولي · نظرة عامة"
+    },
+    {
+     "id": "blog-taxes-and-tapu-fees",
+     "kind": "article",
+     "slug": "taxes-and-tapu-fees",
+     "path": "/blog/taxes-and-tapu-fees",
+     "photos": [
+      "/images/blog/taxes-and-tapu-fees.jpg"
+     ],
+     "brief": "3-4 practical points from the article blogData.taxes-and-tapu-fees, then invite to read it.",
+     "label": "مقال: فهم ضريبة العقار ورسوم الطابو في تركيا"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "week": "جاهز للسكن",
+   "weekEn": "Ready to move in",
+   "posts": [
+    {
+     "id": "lotus-koru-2-overview",
+     "kind": "project",
+     "slug": "lotus-koru-2",
+     "angle": "overview",
+     "path": "/projects/lotus-koru-2",
+     "photos": [
+      "/images/projects/lotus-koru-2/residential-blocks.jpg",
+      "/images/projects/lotus-koru-2/landscaped-grounds.jpg"
+     ],
+     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats.",
+     "label": "لوتس كورو 2 · نظرة عامة"
+    },
+    {
+     "id": "blog-real-estate-valuation",
+     "kind": "article",
+     "slug": "real-estate-valuation",
+     "path": "/blog/real-estate-valuation",
+     "photos": [
+      "/images/blog/real-estate-valuation.jpg"
+     ],
+     "brief": "3-4 practical points from the article blogData.real-estate-valuation, then invite to read it.",
+     "label": "مقال: لماذا يهم التقييم العقاري عند شراء عقار"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-09",
+   "week": "جاهز للسكن",
+   "weekEn": "Ready to move in",
+   "posts": [
+    {
+     "id": "lotus-yali-life",
+     "kind": "project",
+     "slug": "lotus-yali",
+     "angle": "life",
+     "path": "/projects/lotus-yali",
+     "photos": [
+      "/images/projects/lotus-yali/view-from-sea.jpg",
+      "/images/projects/lotus-yali/aerial-sea-view.jpg"
+     ],
+     "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. Separate indoor pools, 3+1 and 5+2 duplex.",
+     "label": "لوتس يالي · الحياة في المشروع"
+    },
+    {
+     "id": "property-request",
+     "kind": "page",
+     "path": "/property-request",
+     "photos": [
+      "/images/projects/lotus-istanbul/iconic-urban-development.jpg"
+     ],
+     "brief": "Custom property request (propertyRequest.*): tell us type, city/district, new or any, budget, floor; we search for you, even outside our projects.",
+     "label": "اطلب عقارك المخصص"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-10",
+   "week": "جاهز للسكن",
+   "weekEn": "Ready to move in",
+   "posts": [
+    {
+     "id": "cadde-ispartakule-life",
+     "kind": "project",
+     "slug": "cadde-ispartakule",
+     "angle": "life",
+     "path": "/projects/cadde-ispartakule",
+     "photos": [
+      "/images/projects/cadde-ispartakule/hamam.jpg",
+      "/images/projects/cadde-ispartakule/fitness.jpg",
+      "/images/projects/cadde-ispartakule/garden-pond.jpg"
+     ],
+     "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. Wellness (hamam, sauna, fitness), smart home, garden.",
+     "label": "جادّة إسبارتاكولي · الحياة في المشروع"
+    },
+    {
+     "id": "faq-rental-investment",
+     "kind": "page",
+     "path": "/faq",
+     "photos": [
+      "/images/projects/cadde-ispartakule/terrace-view.jpg"
+     ],
+     "brief": "Answer the FAQ question faq.categories[1].items[4] (question + clear short answer from the site's answer).",
+     "label": "سؤال: الاستثمار الإيجاري"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-11",
+   "week": "جاهز للسكن",
+   "weekEn": "Ready to move in",
+   "posts": [
+    {
+     "id": "lotus-koru-2-life",
+     "kind": "project",
+     "slug": "lotus-koru-2",
+     "angle": "life",
+     "path": "/projects/lotus-koru-2",
+     "photos": [
+      "/images/projects/lotus-koru-2/landscaped-grounds.jpg",
+      "/images/projects/lotus-koru-2/urban-living-concept.jpg"
+     ],
+     "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits.",
+     "label": "لوتس كورو 2 · الحياة في المشروع"
+    },
+    {
+     "id": "resale",
+     "kind": "page",
+     "path": "/resale",
+     "photos": [
+      "/images/projects/cadde-ispartakule/tower-park.jpg"
+     ],
+     "brief": "Resale market on the site: owners can list their property (reviewed before publishing), buyers browse approved listings.",
+     "label": "سوق إعادة البيع"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-12",
+   "week": "جاهز للسكن",
+   "weekEn": "Ready to move in",
+   "posts": [
+    {
+     "id": "lotus-yali-location",
+     "kind": "project",
+     "slug": "lotus-yali",
+     "angle": "location",
+     "path": "/projects/lotus-yali",
+     "photos": [
+      "/images/projects/lotus-yali/aerial-sea-view.jpg",
+      "/images/projects/lotus-yali/sunset-aerial.jpg"
+     ],
+     "brief": "Location: the nearby places and travel times (projectsData.<slug>.nearby) and the district.",
+     "label": "لوتس يالي · الموقع وما حوله"
+    },
+    {
+     "id": "why-hadara",
+     "kind": "page",
+     "path": "/about",
+     "photos": [
+      "/hero-istanbul.jpg"
+     ],
+     "brief": "Why HADARA (home.why + home.stats): your real estate partner in Istanbul, 12+ years, 11 projects, full guidance. General wording, never 'we build/develop'.",
+     "label": "لماذا حضارة"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-13",
+   "week": "الجنسية والاستثمار",
+   "weekEn": "Citizenship & investment",
+   "posts": [
+    {
+     "id": "beylikduzu-living-citizenship",
+     "kind": "project",
+     "slug": "beylikduzu-living",
+     "angle": "citizenship",
+     "path": "/projects/beylikduzu-living",
+     "photos": [
+      "/images/projects/beylikduzu-living/street-facade.jpg",
+      "/images/projects/beylikduzu-living/aerial-view.jpg"
+     ],
+     "brief": "Lotus Yaşam for citizenship buyers: highlights say eligible for Turkish citizenship by investment, flexible installments, delivery late 2028. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
+     "label": "لوتس ياشام · مناسب للجنسية"
+    },
+    {
+     "id": "citizenship-requirements",
+     "kind": "page",
+     "path": "/citizenship",
+     "photos": [
+      "/images/blog/citizenship-investment-laws.jpg"
+     ],
+     "brief": "Citizenship programme requirements (citizenship.requirements): minimum, valuation report, foreign currency payment, 3-year hold, conformity, off-plan. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
+     "label": "شروط الجنسية"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-14",
+   "week": "الجنسية والاستثمار",
+   "weekEn": "Citizenship & investment",
+   "posts": [
+    {
+     "id": "diamond-marin-limited",
+     "kind": "project",
+     "slug": "diamond-marin",
+     "angle": "limited",
+     "path": "/projects/diamond-marin",
+     "photos": [
+      "/images/projects/diamond-marin/aerial-sea-view.jpg",
+      "/images/projects/diamond-marin/street-view.jpg"
+     ],
+     "brief": "Diamond Marin: only 58 residences in two low-rise buildings (limited units), 3+1, delivery late 2027, 5 min to West Istanbul Marina. Different headline and photo crop than earlier Diamond Marin posts.",
+     "label": "دايموند مارين · وحدات محدودة"
+    },
+    {
+     "id": "citizenship-steps",
+     "kind": "page",
+     "path": "/citizenship",
+     "photos": [
+      "/images/blog/citizenship-by-real-estate.jpg"
+     ],
+     "brief": "The citizenship process step by step (citizenship.steps), as a numbered list. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
+     "label": "خطوات الجنسية"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-15",
+   "week": "الجنسية والاستثمار",
+   "weekEn": "Citizenship & investment",
+   "posts": [
+    {
+     "id": "lotus-sisli-life",
+     "kind": "project",
+     "slug": "lotus-sisli",
+     "angle": "life",
+     "path": "/projects/lotus-sisli",
+     "photos": [
+      "/images/projects/lotus-sisli/apartment-living.jpg",
+      "/images/projects/lotus-sisli/penthouse-terrace.jpg"
+     ],
+     "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. 1+1/2+1 apartments, penthouses, facilities from the data.",
+     "label": "لوتس شيشلي · الحياة في المشروع"
+    },
+    {
+     "id": "citizenship-benefits",
+     "kind": "page",
+     "path": "/citizenship",
+     "photos": [
+      "/images/projects/lotus-sisli/tower-night.jpg"
+     ],
+     "brief": "Benefits of Turkish citizenship (citizenship.benefits). Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
+     "label": "مزايا الجنسية"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-16",
+   "week": "الجنسية والاستثمار",
+   "weekEn": "Citizenship & investment",
+   "posts": [
+    {
+     "id": "cadde-ispartakule-shops",
+     "kind": "project",
+     "slug": "cadde-ispartakule",
+     "angle": "shops",
+     "path": "/projects/cadde-ispartakule",
+     "photos": [
+      "/images/projects/cadde-ispartakule/retail-avenue.jpg",
+      "/images/projects/cadde-ispartakule/tower-avenue.jpg"
+     ],
+     "brief": "The 12 shops and the avenue setting of Cadde Ispartakule, for investors (only facts from the data).",
+     "label": "جادّة إسبارتاكولي · المحلات التجارية"
+    },
+    {
+     "id": "blog-citizenship-investment-laws",
+     "kind": "article",
+     "slug": "citizenship-investment-laws",
+     "path": "/blog/citizenship-investment-laws",
+     "photos": [
+      "/images/blog/citizenship-investment-laws.jpg"
+     ],
+     "brief": "3-4 practical points from the article blogData.citizenship-investment-laws, then invite to read it.",
+     "label": "مقال: قوانين الجنسية التركية عبر الاستثمار، بالتفصيل"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-17",
+   "week": "الجنسية والاستثمار",
+   "weekEn": "Citizenship & investment",
+   "posts": [
+    {
+     "id": "lotus-koru-2-homes",
+     "kind": "project",
+     "slug": "lotus-koru-2",
+     "angle": "homes",
+     "path": "/projects/lotus-koru-2",
+     "photos": [
+      "/images/projects/lotus-koru-2/urban-living-concept.jpg",
+      "/images/projects/lotus-koru-2/central-location.jpg"
+     ],
+     "brief": "Lotus Koru 2: completed homes with available units; highlights and stats.",
+     "label": "لوتس كورو 2 · الشقق والمساحات"
+    },
+    {
+     "id": "citizenship-costs",
+     "kind": "page",
+     "path": "/citizenship",
+     "photos": [
+      "/images/blog/taxes-and-tapu-fees.jpg"
+     ],
+     "brief": "Documents and costs for citizenship (citizenship.documents + citizenship.costs, e.g. title deed fee). Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
+     "label": "وثائق وتكاليف الجنسية"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-18",
+   "week": "الجنسية والاستثمار",
+   "weekEn": "Citizenship & investment",
+   "posts": [
+    {
+     "id": "lotus-yali-homes",
+     "kind": "project",
+     "slug": "lotus-yali",
+     "angle": "homes",
+     "path": "/projects/lotus-yali",
+     "photos": [
+      "/images/projects/lotus-yali/aerial-sea-view.jpg",
+      "/images/projects/lotus-yali/view-from-sea.jpg"
+     ],
+     "brief": "Lotus Yalı homes: 48 apartments, 3+1 and 5+2 duplex in 8 blocks on 8,600 m²; completed with available units.",
+     "label": "لوتس يالي · الشقق والمساحات"
+    },
+    {
+     "id": "residence-permit",
+     "kind": "page",
+     "path": "/citizenship",
+     "photos": [
+      "/images/blog/life-in-turkey.jpg"
+     ],
+     "brief": "Real-estate residence permit (citizenship.residence*): minimum values in Istanbul vs other cities. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
+     "label": "الإقامة العقارية"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-19",
+   "week": "الجنسية والاستثمار",
+   "weekEn": "Citizenship & investment",
+   "posts": [
+    {
+     "id": "marmara-haven-villa-verified",
+     "kind": "project",
+     "slug": "marmara-haven-villa",
+     "angle": "verified",
+     "path": "/projects/marmara-haven-villa",
+     "photos": [
+      "/images/projects/marmara-haven-villa/exterior-facade.jpg",
+      "/images/projects/marmara-haven-villa/side-view.jpg"
+     ],
+     "brief": "Marmara Haven Villa's verified project card (projectsData.marmara-haven-villa.verified + projectDetail.verified.labels): items confirmed by the HADARA team, last update date; documents available on request.",
+     "label": "فيلا مرمرة هيفن · البطاقة الموثّقة"
+    },
+    {
+     "id": "faq-keep-nationality",
+     "kind": "page",
+     "path": "/faq",
+     "photos": [
+      "/images/blog/citizenship-investment-laws.jpg"
+     ],
+     "brief": "Answer the FAQ question faq.categories[2].items[4] (question + clear short answer from the site's answer). Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
+     "label": "سؤال: الاحتفاظ بجنسيتك"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-20",
+   "week": "الفلل وأسلوب الحياة",
+   "weekEn": "Villas & lifestyle",
+   "posts": [
+    {
+     "id": "marmara-haven-villa-overview",
+     "kind": "project",
+     "slug": "marmara-haven-villa",
+     "angle": "overview",
+     "path": "/projects/marmara-haven-villa",
+     "photos": [
+      "/images/projects/marmara-haven-villa/private-pool.jpg",
+      "/images/projects/marmara-haven-villa/sea-view.jpg"
+     ],
+     "brief": "Marmara Haven Villa again, new angle: ready to move in, private pool, sea view, 5 bedrooms, price as in projects.ts (from $1,550,000; VAT included, 4% title deed fee not included). Different headline than the first villa post.",
+     "label": "فيلا مرمرة هيفن · نظرة عامة"
+    },
+    {
+     "id": "blog-life-in-turkey",
+     "kind": "article",
+     "slug": "life-in-turkey",
+     "path": "/blog/life-in-turkey",
+     "photos": [
+      "/images/blog/life-in-turkey.jpg"
+     ],
+     "brief": "3-4 practical points from the article blogData.life-in-turkey, then invite to read it.",
+     "label": "مقال: كيف تبدو الحياة في تركيا"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-21",
+   "week": "الفلل وأسلوب الحياة",
+   "weekEn": "Villas & lifestyle",
+   "posts": [
+    {
+     "id": "lotus-manzara-guzelce-overview",
+     "kind": "project",
+     "slug": "lotus-manzara-guzelce",
+     "angle": "overview",
+     "path": "/projects/lotus-manzara-guzelce",
+     "photos": [
+      "/images/projects/lotus-manzara-guzelce/villa-exterior.jpg",
+      "/images/projects/lotus-manzara-guzelce/villa-row.jpg"
+     ],
+     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats. 32 villas 6+2.",
+     "label": "لوتس مانزارا غوزلجه · نظرة عامة"
+    },
+    {
+     "id": "blog-about-turkey",
+     "kind": "article",
+     "slug": "about-turkey",
+     "path": "/blog/about-turkey",
+     "photos": [
+      "/images/blog/about-turkey.jpg"
+     ],
+     "brief": "3-4 practical points from the article blogData.about-turkey, then invite to read it.",
+     "label": "مقال: التعرف على تركيا: بلد بين قارتين"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-22",
+   "week": "الفلل وأسلوب الحياة",
+   "weekEn": "Villas & lifestyle",
+   "posts": [
+    {
+     "id": "lotus-manzara-beylikduzu-overview",
+     "kind": "project",
+     "slug": "lotus-manzara-beylikduzu",
+     "angle": "overview",
+     "path": "/projects/lotus-manzara-beylikduzu",
+     "photos": [
+      "/images/projects/lotus-manzara-beylikduzu/aerial-sea-view.jpg",
+      "/images/projects/lotus-manzara-beylikduzu/villas-entrance.jpg"
+     ],
+     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats. 16 villas 5+2: 8 detached type A and 8 semi-detached type B.",
+     "label": "لوتس مانزارا بيليكدوزو · نظرة عامة"
+    },
+    {
+     "id": "design-service",
+     "kind": "page",
+     "path": "/engineering-architecture",
+     "photos": [
+      "/images/consultancy/hero-1680.webp"
+     ],
+     "brief": "Architectural & engineering design as one of HADARA's services (consultancy.*). Images are illustrative concepts: never present them as built HADARA projects, never name another company, no invented experience numbers.",
+     "label": "التصميم المعماري والهندسي"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-23",
+   "week": "الفلل وأسلوب الحياة",
+   "weekEn": "Villas & lifestyle",
+   "posts": [
+    {
+     "id": "marmara-haven-villa-floors",
+     "kind": "project",
+     "slug": "marmara-haven-villa",
+     "angle": "floors",
+     "path": "/projects/marmara-haven-villa",
+     "photos": [
+      "/images/projects/marmara-haven-villa/terrace.jpg",
+      "/images/projects/marmara-haven-villa/rooftop.jpg"
+     ],
+     "brief": "Marmara Haven Villa floor by floor (floorPlan + projectsData.marmara-haven-villa.floorPlan): 4 levels with gross/net areas and features; rooftop sea view.",
+     "label": "فيلا مرمرة هيفن · الطوابق الأربعة"
+    },
+    {
+     "id": "video-tour-villa",
+     "kind": "page",
+     "path": "/video-tour",
+     "photos": [
+      "/images/projects/marmara-haven-villa/living-room.jpg"
+     ],
+     "brief": "Book a private video tour of Marmara Haven Villa or any project (videoTour.*). Different wording than earlier video-tour posts.",
+     "label": "جولة فيديو للفلل"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-24",
+   "week": "الفلل وأسلوب الحياة",
+   "weekEn": "Villas & lifestyle",
+   "posts": [
+    {
+     "id": "lotus-manzara-guzelce-life",
+     "kind": "project",
+     "slug": "lotus-manzara-guzelce",
+     "angle": "life",
+     "path": "/projects/lotus-manzara-guzelce",
+     "photos": [
+      "/images/projects/lotus-manzara-guzelce/living-room.jpg",
+      "/images/projects/lotus-manzara-guzelce/villa-row.jpg"
+     ],
+     "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. Villa interiors, private parking (no pools in these villas).",
+     "label": "لوتس مانزارا غوزلجه · الحياة في المشروع"
+    },
+    {
+     "id": "blog-real-estate-market-trends",
+     "kind": "article",
+     "slug": "real-estate-market-trends",
+     "path": "/blog/real-estate-market-trends",
+     "photos": [
+      "/images/blog/real-estate-market-trends.jpg"
+     ],
+     "brief": "3-4 practical points from the article blogData.real-estate-market-trends, then invite to read it.",
+     "label": "مقال: اتجاهات عقارية تستحق المتابعة في إسطنبول"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-25",
+   "week": "الفلل وأسلوب الحياة",
+   "weekEn": "Villas & lifestyle",
+   "posts": [
+    {
+     "id": "lotus-manzara-beylikduzu-types",
+     "kind": "project",
+     "slug": "lotus-manzara-beylikduzu",
+     "angle": "types",
+     "path": "/projects/lotus-manzara-beylikduzu",
+     "photos": [
+      "/images/projects/lotus-manzara-beylikduzu/villa-type-a.jpg",
+      "/images/projects/lotus-manzara-beylikduzu/villa-type-b.jpg",
+      "/images/projects/lotus-manzara-beylikduzu/living-room.jpg"
+     ],
+     "brief": "The two villa types A (detached) and B (semi-detached), 5+2, interiors, private parking (no pools).",
+     "label": "لوتس مانزارا بيليكدوزو · نوعا الفلل"
+    },
+    {
+     "id": "find-my-project-villas",
+     "kind": "page",
+     "path": "/",
+     "photos": [
+      "/images/projects/lotus-manzara-guzelce/aerial-villas.jpg"
+     ],
+     "brief": "'Find my project' quiz (match.*): answer 4 questions and see matching villas or apartments.",
+     "label": "اعثر على فيلتك"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-26",
+   "week": "الفلل وأسلوب الحياة",
+   "weekEn": "Villas & lifestyle",
+   "posts": [
+    {
+     "id": "marmara-haven-villa-sea",
+     "kind": "project",
+     "slug": "marmara-haven-villa",
+     "angle": "sea",
+     "path": "/projects/marmara-haven-villa",
+     "photos": [
+      "/images/projects/marmara-haven-villa/sea-view.jpg",
+      "/images/projects/marmara-haven-villa/rooftop.jpg"
+     ],
+     "brief": "Marmara Haven Villa's sea view and location (nearby): swimming coast 5 min, E-5 3 min; rooftop living.",
+     "label": "فيلا مرمرة هيفن · إطلالة البحر"
+    },
+    {
+     "id": "blog-citizenship-by-real-estate",
+     "kind": "article",
+     "slug": "citizenship-by-real-estate",
+     "path": "/blog/citizenship-by-real-estate",
+     "photos": [
+      "/images/blog/citizenship-by-real-estate.jpg"
+     ],
+     "brief": "3-4 points from blogData.citizenship-by-real-estate, then invite to read it. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
+     "label": "مقال: كيف يقود الاستثمار العقاري إلى الجنسية التركية"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-27",
+   "week": "الختام",
+   "weekEn": "Wrap-up",
+   "posts": [
+    {
+     "id": "diamond-marin-recap",
+     "kind": "project",
+     "slug": "diamond-marin",
+     "angle": "recap",
+     "path": "/projects/diamond-marin",
+     "photos": [
+      "/images/projects/diamond-marin/facade.jpg",
+      "/images/projects/diamond-marin/aerial-sea-view.jpg"
+     ],
+     "brief": "Diamond Marin recap: new launch, limited units, key numbers. Fresh headline.",
+     "label": "دايموند مارين · تذكير"
+    },
+    {
+     "id": "hadara-in-numbers",
+     "kind": "page",
+     "path": "/about",
+     "photos": [
+      "/hero-istanbul.jpg"
+     ],
+     "brief": "HADARA in numbers (home.stats): 12+ years, 11 projects, 640+ residences, 420+ offices, 60+ shops, 4 districts; your real estate partner in Istanbul.",
+     "label": "حضارة بالأرقام"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-28",
+   "week": "الختام",
+   "weekEn": "Wrap-up",
+   "posts": [
+    {
+     "id": "beylikduzu-living-recap",
+     "kind": "project",
+     "slug": "beylikduzu-living",
+     "angle": "recap",
+     "path": "/projects/beylikduzu-living",
+     "photos": [
+      "/images/projects/beylikduzu-living/garden-terrace.jpg",
+      "/images/projects/beylikduzu-living/courtyard-gardens.jpg"
+     ],
+     "brief": "Lotus Yaşam recap: new launch, 18 blocks, sizes, delivery late 2028. Fresh headline.",
+     "label": "لوتس ياشام · تذكير"
+    },
+    {
+     "id": "faq-contact",
+     "kind": "page",
+     "path": "/faq",
+     "photos": [
+      "/images/projects/lotus-yali/sunset-aerial.jpg"
+     ],
+     "brief": "Answer the FAQ question faq.categories[0].items[3] (question + clear short answer from the site's answer). Include the contact channels: WhatsApp, live chat on the website, contact form, video tour booking.",
+     "label": "كيف تتواصل معنا"
+    }
+   ]
+  }
+ ],
+ "intensive": {
+  "from": "2026-09-30",
+  "to": "2026-10-06",
+  "times": [
+   "09:00",
+   "14:00",
+   "21:00"
+  ],
+  "note": "Owner's request 2026-09-29 (warm-up before paid ads): 3 posts a day at 09:00 (a project), 14:00 (useful information) and 21:00 (something lighter). After 2026-10-06 the owner decides; until then the days keep their 2 posts without times (published with the first run, 09:00)."
+ }
+}
