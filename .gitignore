@@ -3,6 +3,7 @@ dist/
 .DS_Store
 *.log
 .env
+.test-build/
 scripts/social/out/
 scripts/social/site/
 scripts/blog/out/

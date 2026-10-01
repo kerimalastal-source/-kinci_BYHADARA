@@ -111,7 +111,7 @@ const PAGE_NAMES: Record<string, string> = {
 
 /** Path without the language prefix or a trailing slash: "/ar/contact/" -> "/contact". */
 function basePath(path: string): string {
-  return path.replace(/^\/(?:ar|fr|ru)(?=\/|$)/, "").replace(/\/$/, "") || "/";
+  return path.replace(/^\/(?:ar|fa|fr|ru)(?=\/|$)/, "").replace(/\/$/, "") || "/";
 }
 
 /** A page's name for the visit trail: the project/listing/article title, else the page's Arabic name. */
@@ -156,7 +156,7 @@ function otherPages(count: number): string {
 
 /** What the visitor opened when it's a specific project, resale listing or article. */
 function pageSubject(path: string): string | null {
-  const match = path.match(/^\/(?:(?:ar|fr|ru)\/)?(projects|resale|blog)\/[^/]+\/?$/);
+  const match = path.match(/^\/(?:(?:ar|fa|fr|ru)\/)?(projects|resale|blog)\/[^/]+\/?$/);
   if (!match) return null;
   return { projects: "المشروع", resale: "العقار", blog: "المقال" }[match[1] as "projects" | "resale" | "blog"];
 }

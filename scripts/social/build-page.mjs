@@ -157,7 +157,7 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
       var a=el("a",null,"فتح الصورة بالحجم الكامل"); a.href=p.image; a.target="_blank"; a.rel="noopener";
       shot.appendChild(img); shot.appendChild(a); shot.appendChild(el("p","hint","على الموبايل: اضغط مطوّلاً على الصورة واختر حفظ."));
       var body=el("div","body");
-      body.appendChild(el("div","meta","المنشور "+(i+1)+(p.topic?" · "+p.topic:"")));
+      body.appendChild(el("div","meta","المنشور "+(i+1)+(p.at?" · الساعة "+p.at:"")+(p.topic?" · "+p.topic:"")));
       var tabs=el("div","tabs"); tabs.setAttribute("role","tablist");
       var box=el("div","caption"); var copy=el("button","copy","نسخ النص"); copy.type="button";
       var current="fb";

@@ -16,8 +16,8 @@ import { SKIPPED_ROUTES } from "./visitorTracker";
 const TAGS = {
   /** Meta Events Manager → Datasets → "HADARA Real Estate" (business portfolio "Hadara Real Estate"). Public, not a secret. */
   metaPixelId: import.meta.env.VITE_META_PIXEL_ID || "983229534799823",
-  /** Google Analytics → Admin → Data streams → Measurement ID ("G-..."). */
-  gaId: import.meta.env.VITE_GA_ID || "",
+  /** Google Analytics → Admin → Data streams → Measurement ID (property "hadararealestate.com"). Public, not a secret. */
+  gaId: import.meta.env.VITE_GA_ID || "G-LJHKMV096Q",
   /** Google Ads → Goals → Conversions → tag setup: the "AW-..." ID and each conversion's label. */
   adsId: import.meta.env.VITE_GOOGLE_ADS_ID || "",
   adsLeadLabel: import.meta.env.VITE_GOOGLE_ADS_LEAD_LABEL || "",

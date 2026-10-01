@@ -10,6 +10,7 @@ import { OPEN_STAGES, fetchCrmLeads, type CrmLead } from "../../data/crm";
 import { followUpWhen, stageTag } from "./crmForm";
 import { adminHero, adminNav } from "./nav";
 import { dailyChart, sourceLabel } from "./stats";
+import { publishSocialNow, type SocialPublishResult } from "../../data/socialPublish";
 
 /**
  * The admin home (/admin): the day at a glance — today's and tomorrow's video tours,
@@ -79,6 +80,21 @@ function list(items: string[], empty: string): string {
   return items.length ? `<ul class="admin-list">${items.join("")}</ul>` : `<p class="admin-stats__empty">${empty}</p>`;
 }
 
+/** One line about what the "publish now" button did. */
+function socialStatus(result: SocialPublishResult | null): string {
+  if (!result) return t("adminHome.social.error");
+  if (result.started) return t("adminHome.social.started");
+  if (result.error === "blob") return t("adminHome.social.blob");
+  if (result.error === "forbidden") return t("adminHome.social.forbidden");
+  if (result.error === "session") return t("adminHome.social.session");
+  if (result.error === "http") return t("adminHome.social.http", { status: String(result.status ?? "") });
+  if (result.error || !result.results) return t("adminHome.social.failed");
+  if (!result.found) return t("adminHome.social.missing");
+  if (result.results.some((r) => r.errors.length)) return t("adminHome.social.failed");
+  const published = result.results.filter((r) => r.facebook === "published" || r.instagram === "published").length;
+  return t("adminHome.social.done", { published: String(published), already: String(result.results.length - published) });
+}
+
 export function renderAdminOverview(main: HTMLElement): void {
   if (!requireAdmin(main)) return;
 
@@ -110,8 +126,24 @@ export function renderAdminOverview(main: HTMLElement): void {
           <div data-home-visits><p>${t("common.loading")}</p></div>
           <a class="admin-panel__more" href="${link("/admin/stats")}">${t("adminHome.allStats")}</a>
         </section>
+        <section class="admin-panel admin-panel--wide admin-social">
+          <h2 class="admin-panel__title">${t("adminHome.social.title")}</h2>
+          <p class="admin-panel__hint">${t("adminHome.social.hint")}</p>
+          <button type="button" class="btn btn--primary btn--small" data-social-publish>${t("adminHome.social.button")}</button>
+          <p class="admin-social__status" data-home-social role="status" aria-live="polite"></p>
+        </section>
       </div>
     </section>`;
+
+  main.querySelector<HTMLButtonElement>("[data-social-publish]")!.addEventListener("click", async (event) => {
+    const button = event.currentTarget as HTMLButtonElement;
+    const status = main.querySelector<HTMLElement>("[data-home-social]")!;
+    button.disabled = true;
+    status.textContent = t("adminHome.social.sending");
+    const result = await publishSocialNow();
+    button.disabled = false;
+    status.textContent = socialStatus(result);
+  });
 
   const requestId = crypto.randomUUID();
   main.dataset.requestId = requestId;

@@ -4274,6 +4274,27 @@ body.map-open .back-to-top {
   font-size: 0.85rem;
 }
 
+.admin-social > .btn {
+  align-self: flex-start;
+  justify-self: start;
+}
+
+@media (max-width: 640px) {
+  .admin-social > .btn {
+    align-self: stretch;
+    justify-self: stretch;
+  }
+}
+
+.admin-social__status {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+}
+
+.admin-social__status:empty {
+  display: none;
+}
+
 .admin-panel__more {
   align-self: flex-start;
   margin-top: auto;
@@ -11039,4 +11060,41 @@ body.map-open .cookie-consent {
   .chat-admin__list {
     max-height: 40vh;
   }
+}
+
+.residence-card__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin: var(--space-sm) 0 0;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.residence-card__price span {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.residence-card__price strong {
+  color: var(--color-accent-dark);
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+/* Price conditions under a quoted price (key facts, residence cards). */
+.price-note {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--color-ink-soft);
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.detail-block > .price-note {
+  margin-top: 1rem;
+  font-size: 0.9rem;
 }
