@@ -6,6 +6,8 @@ import { renderCitizenship } from "./pages/citizenship";
 import { renderConsultancy } from "./pages/consultancy";
 import { renderFaq } from "./pages/faq";
 import { renderPrivacy } from "./pages/privacy";
+import { renderLaws } from "./pages/laws";
+import { LAWS_PAGE_LIVE } from "./data/laws";
 import { renderBlog } from "./pages/blog";
 import { renderBlogDetail } from "./pages/blogDetail";
 import { renderPropertyRequest } from "./pages/propertyRequest";
@@ -110,6 +112,11 @@ function renderRoute(route: Route, main: HTMLElement): void {
       break;
     case "privacy":
       renderPrivacy(main);
+      break;
+    case "laws":
+      // Hidden until the owner approves the page; ?preview shows it for review.
+      if (LAWS_PAGE_LIVE || new URLSearchParams(location.search).has("preview")) renderLaws(main);
+      else renderNotFound(main);
       break;
     case "blog":
       renderBlog(main);

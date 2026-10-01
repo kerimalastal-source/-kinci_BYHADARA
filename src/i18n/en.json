@@ -15,6 +15,7 @@
     "propertyRequest": "Request a Property",
     "blog": "Blog",
     "faq": "FAQ",
+    "laws": "Property Laws",
     "resources": "Resources",
     "contact": "Contact",
     "getInTouch": "Get in Touch",
@@ -1444,6 +1445,146 @@
     "backLabel": "Back to Blog",
     "otherArticlesTitle": "More Articles to Read"
   },
+  "laws": {
+    "heroEyebrow": "Property Laws",
+    "heroTitle": "Turkish Property Law Updates",
+    "heroSubtitle": "A clear summary of the current rules and the latest decisions for anyone buying, owning or renting property in Turkey, with the official government source under every item.",
+    "promiseTitle": "From official sources only.",
+    "promiseText": "We only report what Turkish government bodies publish, such as the Official Gazette, the Land Registry, the Presidency of Migration Management and the Revenue Administration, never news sites or social media.",
+    "disclaimer": "This is general information, not legal advice, and the rules may change. Our team confirms the conditions in force before any purchase.",
+    "updated": "Page last updated: {date}",
+    "previewNote": "Preview: this page shows drafts and is not published yet.",
+    "rulesTitle": "The current rules in short",
+    "rulesSubtitle": "What you need to know today before you buy or rent.",
+    "updatesTitle": "Latest legal updates",
+    "updatesSubtitle": "The newest decisions and changes first.",
+    "filterLabel": "Filter by topic",
+    "filterAll": "All",
+    "empty": "No updates have been published yet.",
+    "before": "Before",
+    "after": "After",
+    "whatChanged": "What's new",
+    "affects": "Who it affects",
+    "effective": "Applies from",
+    "reference": "Official reference",
+    "howWeHelp": "How HADARA helps:",
+    "officialSource": "Official source:",
+    "checked": "Last checked: {date}",
+    "proposal": "Bill, not law yet",
+    "draft": "Draft",
+    "ctaTitle": "Have a question about a specific rule?",
+    "ctaText": "Talk to our team and we will explain what applies to your case before you take any step.",
+    "ctaButton": "Contact us",
+    "ctaWhatsapp": "Ask us on WhatsApp",
+    "whatsappMessage": "Hello, I have a question about property laws in Turkey.",
+    "topics": {
+      "citizenship": "Citizenship",
+      "residence": "Residence",
+      "ownership": "Buying & ownership",
+      "taxes": "Taxes & fees",
+      "rent": "Renting & tenant rights"
+    },
+    "sources": {
+      "resmiGazete": "Official Gazette (Resmî Gazete)",
+      "mevzuat": "Legislation portal (mevzuat.gov.tr)",
+      "tkgm": "Land Registry and Cadastre (TKGM)",
+      "gib": "Revenue Administration (GİB)",
+      "goc": "Presidency of Migration Management (Göç İdaresi)",
+      "ticaret": "Ministry of Trade (Ticaret Bakanlığı)",
+      "tbmm": "Grand National Assembly (TBMM)",
+      "nvi": "Population and Citizenship Affairs (NVİ)"
+    }
+  },
+  "lawsData": {
+    "rules": {
+      "citizenship-property": {
+        "title": "Citizenship by buying property from $400,000",
+        "text": "A foreigner can apply for Turkish citizenship after buying one or more properties worth at least US$400,000 or its equivalent, with a 3-year no-sale annotation on the title deed. It is also possible for a property under construction through a promise-to-sell contract signed before a notary, provided the full amount is paid upfront."
+      },
+      "residence-property": {
+        "title": "Residence permit through property",
+        "text": "Owning a home in Turkey allows you to apply for a short-term residence permit. The official list of documents of the Presidency of Migration Management requires the home to be worth at least US$200,000 or its equivalent in Turkish lira at the time of purchase, and to be used as your home, not rented out."
+      },
+      "residence-closed-areas": {
+        "title": "Neighbourhoods closed to new residence permits",
+        "text": "The Presidency of Migration Management closes some neighbourhoods and districts to new residence permit applications by foreigners, based on population density, and updates these lists from time to time. If a residence permit is your goal, check the address before you buy."
+      },
+      "valuation-report": {
+        "title": "Valuation report required in sales to foreigners",
+        "text": "Since 4 March 2019, the Land Registry has required a valuation report showing the market value of the property in every sale where a foreigner is the buyer or the seller."
+      },
+      "currency-certificate": {
+        "title": "Converting foreign currency through a Turkish bank",
+        "text": "When a foreigner buys property, the price is converted from foreign currency into Turkish lira through a bank in Turkey, and the currency purchase certificate issued by the bank (Döviz Alım Belgesi) is presented to the Land Registry."
+      },
+      "title-deed-fee": {
+        "title": "Title deed fee of 4%",
+        "text": "Under Fees Law No. 492, the title transfer fee (Tapu Harcı) is 2% for the buyer and 2% for the seller, a total of 4% of the declared sale value."
+      },
+      "property-tax": {
+        "title": "Annual property tax",
+        "text": "Property owners pay an annual property tax (Emlak Vergisi) to the municipality. Homes whose value exceeds a threshold set every year also pay the valuable housing tax (Değerli Konut Vergisi)."
+      },
+      "rent-increase": {
+        "title": "Limit on residential rent increases",
+        "text": "When a residential lease is renewed, the yearly increase may not exceed the 12-month average change in the consumer price index (TÜFE), under Article 344 of the Turkish Code of Obligations No. 6098."
+      }
+    },
+    "updates": {
+      "citizenship-amount-certificate": {
+        "title": "Citizenship amount certificate now valid for 6 months",
+        "summary": "The Land Registry amended its Circular No. 2024/4: the purchase amount for citizenship is now confirmed by an Amount Determination Certificate (Tutar Tespit Belgesi) issued by the valuation company GEDAŞ after an electronic comparison.",
+        "before": "The valuation report was valid for 3 months from its date of issue.",
+        "after": "Certificates issued after 9 December 2024 are valid for 6 months, and the value written on the certificate is used directly in the title deed transaction.",
+        "affects": "Foreigners buying property to obtain Turkish citizenship.",
+        "help": "We keep track of the certificate's validity with you so that the title transfer is completed in time."
+      },
+      "property-tax-cap-2026": {
+        "title": "A limit on the 2026 property tax increase",
+        "summary": "Law No. 7566, published in the Official Gazette, limits how much the value used for the annual property tax can rise in 2026.",
+        "after": "The 2026 tax value of buildings and land may not exceed twice their 2025 tax value.",
+        "affects": "Everyone who owns property in Turkey and pays the annual property tax.",
+        "help": "We explain the expected yearly taxes and fees of a property before you buy."
+      },
+      "title-deed-declared-price": {
+        "title": "Higher penalty for declaring a lower price at the land registry",
+        "summary": "Law No. 7566 increased the penalty when a sale is registered at the land registry at a price below the real price or below the property tax value.",
+        "before": "The tax-loss penalty on the unpaid fee difference was 25%.",
+        "after": "The penalty now equals the full unpaid fee difference (one-fold).",
+        "affects": "Buyers and sellers in any property sale.",
+        "help": "We always advise registering the real price at the land registry and accompany you through the title transfer."
+      },
+      "valuable-housing-tax-2026": {
+        "title": "2026 threshold for the valuable housing tax",
+        "summary": "The Revenue Administration updated the value from which the valuable housing tax (Değerli Konut Vergisi) applies.",
+        "before": "TRY 15,709,000 for 2025.",
+        "after": "TRY 17,711,000 for 2026.",
+        "affects": "Owners of homes whose tax value exceeds this threshold.",
+        "help": "We tell you whether the property you choose may be subject to this tax."
+      },
+      "savings-finance-foreigners": {
+        "title": "No purchases by foreigners with savings finance loans",
+        "summary": "The Land Registry announced that foreigners cannot acquire property with loans from savings finance companies (Tasarruf Finansman Şirketleri).",
+        "after": "A property purchase by a foreigner cannot be financed through these companies.",
+        "affects": "Foreigners planning to finance a purchase through a savings finance company.",
+        "help": "We help you plan a suitable payment method before you buy."
+      },
+      "secure-payment-system": {
+        "title": "Secure payment system mandatory in property sales from December 2026",
+        "summary": "The Ministry of Trade amended the Real Estate Trade Regulation and set 1 December 2026 as the start of mandatory use of the secure payment system in property sales.",
+        "after": "From 1 December 2026, the secure payment system becomes mandatory in property sales. It connects the Land Registry's systems with banks so that the payment and the title transfer are completed together.",
+        "affects": "Buyers and sellers of property in Turkey.",
+        "help": "We will walk you through the payment and title transfer steps under the new system when you buy."
+      },
+      "rent-regulation-board-bill": {
+        "title": "Bill to create a Rent Regulation Board",
+        "summary": "A bill amending the Mass Housing Law and the Turkish Code of Obligations was submitted to the Turkish parliament, proposing a Rent Regulation Board (Kira Düzenleme Kurulu).",
+        "after": "The bill proposes that the board set the conditions for benefiting from social housing and the maximum rents by province and region. It is still being discussed in committee and is not law yet.",
+        "affects": "Tenants and landlords, if the bill is passed.",
+        "help": "We follow the bill and will update this page if it is passed and published in the Official Gazette."
+      }
+    }
+  },
   "blogData": {
     "gross-vs-net-area": {
       "category": "Buying Property",
@@ -1912,6 +2053,10 @@
     "processTeaserCta": "See how we work"
   },
   "seo": {
+    "laws": {
+      "title": "Turkish Property Law Updates",
+      "description": "The current rules and latest official decisions on citizenship, residence, buying property, taxes and renting in Turkey, each with a link to its government source."
+    },
     "privacy": {
       "title": "Privacy Policy",
       "description": "How HADARA Real Estate collects, uses and protects your personal data under the Turkish KVKK and the GDPR, and how to exercise your rights."
