@@ -72,25 +72,25 @@ const css = `*{margin:0;box-sizing:border-box} body{font-family:Inter,sans-serif
 .ph:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,43,33,.7) 0%,rgba(15,43,33,.25) 12%,rgba(15,43,33,0) 24%,rgba(15,43,33,0) 70%,rgba(15,43,33,.95) 100%)}
 .top{position:absolute;top:44px;left:52px;right:52px;display:flex;justify-content:space-between;align-items:center;z-index:2}
 .brand{display:flex;align-items:center;gap:16px}.brand img{height:62px}
-.brand b{display:block;font-weight:700;font-size:30px;letter-spacing:3px;line-height:1}.brand i{display:block;font-style:normal;font-weight:600;font-size:12px;letter-spacing:6px;color:#c9a24b;margin-top:7px}
-.badge{background:#c9a24b;color:#0f2b21;border-radius:40px;padding:12px 24px;font-weight:700;font-size:21px;display:flex;gap:10px;align-items:center}
-.badge span[dir=rtl]{font-family:Plex;font-weight:700;font-size:22px}
-.cap{position:absolute;z-index:2;left:52px;top:846px;font-size:20px;font-weight:500;opacity:.9;display:flex;gap:10px;align-items:center}
+.brand b{display:block;font-weight:700;font-size:30px;letter-spacing:3px;line-height:1}.brand i{display:block;font-style:normal;font-weight:600;font-size:13px;letter-spacing:6px;color:#c9a24b;margin-top:7px}
+.badge{background:#c9a24b;color:#0f2b21;border-radius:40px;padding:13px 26px;font-weight:700;font-size:23px;box-shadow:0 4px 16px rgba(0,0,0,.25);display:flex;gap:10px;align-items:center}
+.badge span[dir=rtl]{font-family:Plex;font-weight:700;font-size:24px}
+.cap{position:absolute;z-index:2;left:52px;top:842px;font-size:24px;font-weight:600;text-shadow:0 2px 10px rgba(0,0,0,.65);display:flex;gap:10px;align-items:center}
 .cap:before{content:"";width:10px;height:10px;border-radius:50%;background:#c9a24b}
 .panel{position:absolute;left:0;right:0;top:888px;bottom:0;padding:0 52px}
-.ar{font-family:Plex;font-weight:700;line-height:1.3;text-align:right;direction:rtl}
+.ar{font-family:Plex;font-weight:700;line-height:1.35;text-align:right;direction:rtl;color:#fff}
 .sep{height:2px;margin:12px 0 10px;background:linear-gradient(90deg,rgba(201,162,75,0),#c9a24b 18%,#c9a24b 82%,rgba(201,162,75,0))}
-.en{font-weight:700;line-height:1.3;color:#f7f4ec;direction:ltr;text-align:left;white-space:nowrap}
+.en{font-weight:600;line-height:1.3;color:#eee6d3;letter-spacing:-.2px;direction:ltr;text-align:left;white-space:nowrap}
 .rule{height:0;margin:0 0 22px}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;direction:rtl}
-.st{background:rgba(247,244,236,.07);border:1px solid rgba(201,162,75,.35);border-radius:16px;padding:16px 10px 14px;text-align:center}
-.st .v{font-weight:700;font-size:34px;color:#c9a24b;line-height:1.1;white-space:nowrap}
-.st .v.t{font-family:Plex;font-size:30px}
-.st .a{font-family:Plex;font-weight:600;font-size:20px;margin-top:8px}
-.st .e{font-size:18px;font-weight:600;color:#f7f4ec;opacity:.9;margin-top:4px;direction:ltr}
-.foot{position:absolute;left:52px;right:52px;bottom:30px;padding-top:18px;border-top:1px solid rgba(201,162,75,.25);display:flex;justify-content:space-between;align-items:center;font-size:21px;font-weight:600;color:#e8e1cf}
+.st{background:rgba(247,244,236,.08);border:1px solid rgba(201,162,75,.45);border-radius:18px;padding:18px 8px 16px;text-align:center}
+.st .v{display:flex;align-items:center;justify-content:center;height:48px;font-weight:700;font-size:40px;color:#c9a24b;line-height:1.1;white-space:nowrap}
+.st .v.t{font-family:Plex;font-size:34px}
+.st .a{font-family:Plex;font-weight:600;font-size:24px;line-height:1.3;margin-top:8px;color:#fff}
+.st .e{font-size:19px;font-weight:500;color:#ddd4bd;margin-top:3px;direction:ltr}
+.foot{position:absolute;left:52px;right:52px;bottom:30px;padding-top:18px;border-top:1px solid rgba(201,162,75,.25);display:flex;justify-content:space-between;align-items:center;font-size:23px;font-weight:600;color:#efe8d6}
 .foot .wa{display:flex;gap:10px;align-items:center}.foot svg{width:26px;height:26px;fill:#c9a24b}
-.note{font-size:16px;color:#cfc6ad;text-align:center;margin-top:12px}.note span{font-family:Plex}
+.note{font-size:20px;color:#e2d9c2;text-align:center;margin-top:14px}.note span{font-family:Plex}
 /* Reel (1080x1920, 9:16): the same design, taller photo; the top 120px and the bottom 330px
    stay clear of Instagram's and Facebook's buttons and caption. */
 body.reel{height:1920px}
@@ -100,7 +100,7 @@ body.reel{height:1920px}
 .reel .panel{top:1148px}
 .reel .ar{margin-bottom:4px}
 .reel .foot{bottom:330px}
-.reel .note{font-size:19px;margin-top:16px}
+.reel .note{font-size:22px;margin-top:18px}
 /* Story (same 9:16 layout, still picture): the top 250px stay clear of the story bar and name. */
 .story .top{top:250px}`;
 
@@ -112,7 +112,7 @@ function imageHtml(p) {
   const im = p.image;
   const photo = im.photo.startsWith("/images/") || im.photo.startsWith("/hero") ? "public" + im.photo : im.photo;
   const items = (im.stats || []).map((s) => {
-    const textual = !/^[\d$€+.,\s–\-m²KkMm·:]+$/.test(s.value);
+    const textual = !/^[\d$€+.,\s–\-m²KkMm·:/]+$/.test(s.value);
     return `<div class="st"><div class="v${textual ? " t" : ""}" dir="${textual ? "rtl" : "ltr"}">${esc(s.value)}</div><div class="a">${esc(s.ar)}</div><div class="e">${esc(s.en)}</div></div>`;
   }).join("");
   return `<html><head><meta charset="utf-8"><style>${fonts}${css}</style></head><body${p.story ? ' class="reel story"' : p.reel ? ' class="reel"' : ""}>
@@ -138,6 +138,15 @@ for (const [i, p] of posts.entries()) {
   await page.goto("file://" + htmlPath, { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(300);
+  // A long stat value (e.g. "117–143 m²") shrinks until it fits its tile with room to spare.
+  await page.evaluate(() => {
+    const range = document.createRange();
+    for (const v of document.querySelectorAll(".st .v")) {
+      range.selectNodeContents(v);
+      let size = parseFloat(getComputedStyle(v).fontSize);
+      while (range.getBoundingClientRect().width > v.clientWidth - 16 && size > 24) v.style.fontSize = `${(size -= 1)}px`;
+    }
+  });
   const check = await page.evaluate(() => {
     const over = [...document.querySelectorAll(".st .v,.st .a,.st .e,.ar,.en,.note")].filter((e) => e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent);
     const panel = document.querySelector(".panel").lastElementChild.getBoundingClientRect().bottom;
