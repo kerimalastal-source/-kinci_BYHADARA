@@ -134,5 +134,37 @@
     "headlineAr": "خطوات من المترو والمتروبوس",
     "headlineEn": "Steps from the metro and Metrobüs",
     "photo": "/images/projects/lotus-sisli/tower-night.jpg"
+  },
+  {
+    "date": "2026-10-02",
+    "id": "beylikduzu-living-life",
+    "topic": "لوتس ياشام · الحياة في المشروع",
+    "headlineAr": "حدائق وملاعب بين 18 بلوكاً",
+    "headlineEn": "Gardens and play areas among 18 blocks",
+    "photo": "/images/projects/beylikduzu-living/courtyard-gardens.jpg"
+  },
+  {
+    "date": "2026-10-02",
+    "id": "find-my-project",
+    "topic": "اعثر على مشروعك",
+    "headlineAr": "اعثر على مشروعك خلال دقيقة",
+    "headlineEn": "Find your project in a minute",
+    "photo": "/images/projects/lotus-yali/aerial-sea-view.jpg"
+  },
+  {
+    "date": "2026-10-02",
+    "id": "marmara-haven-villa-life",
+    "topic": "فيلا مرمرة هيفن · الحياة في الفيلا",
+    "headlineAr": "راحة كل يوم في فيلا مرمرة هيفن",
+    "headlineEn": "Everyday comfort at Marmara Haven Villa",
+    "photo": "/images/projects/marmara-haven-villa/private-pool.jpg"
+  },
+  {
+    "date": "2026-10-02",
+    "id": "beylikduzu-living-life-story",
+    "topic": "ستوري: لوتس ياشام · الحياة في المشروع",
+    "headlineAr": "شقق من 100 إلى 197 م²",
+    "headlineEn": "Homes from 100 to 197 m²",
+    "photo": "/images/projects/beylikduzu-living/garden-terrace.jpg"
   }
 ]
