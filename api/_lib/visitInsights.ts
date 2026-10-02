@@ -202,7 +202,7 @@ export const VERDICT_LABEL: Record<Verdict, string> = {
   real: "🟢 حقيقي على الأرجح",
   unsure: "🟡 غير مؤكد",
   bot: "🔴 آلي على الأرجح",
-  pending: "⏳ التقييم بعد مغادرة الصفحة"
+  pending: "⏳ جارٍ التقييم…"
 };
 
 /** The alert line: "🧠 التقييم: 🟢 حقيقي على الأرجح (…)". */
