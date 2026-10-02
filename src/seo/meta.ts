@@ -7,6 +7,7 @@ import { blogPosts } from "../data/blog";
 import { placeKey } from "../utils/place";
 import { CONSULTANCY_PAGE_IMAGES } from "../data/consultancy";
 import { SOCIAL_LINKS } from "../data/social";
+import { LAWS_PAGE_LIVE } from "../data/laws";
 
 /** The live address: hadararealestate.com redirects here (308), so canonical/hreflang/sitemap URLs use www. */
 export const DEFAULT_SITE_URL = "https://www.hadararealestate.com";
@@ -50,6 +51,7 @@ const PAGE_KEYS: Partial<Record<Route["name"], string>> = {
   consultancy: "consultancy",
   faq: "faq",
   privacy: "privacy",
+  laws: "laws",
   blog: "blog",
   "property-request": "propertyRequest",
   "video-tour": "videoTour",
@@ -109,7 +111,8 @@ export function indexableRoutes(): Route[] {
     { name: "video-tour" },
     { name: "contact" },
     { name: "resale" },
-    { name: "privacy" }
+    { name: "privacy" },
+    ...(LAWS_PAGE_LIVE ? [{ name: "laws" } as Route] : [])
   ];
 }
 
@@ -316,6 +319,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
     "@type": "RealEstateAgent",
     "@id": `${siteUrl}/#organization`,
     name: brand,
+    legalName: "HADARA Investment İnşaat Sanayi ve Ticaret A.Ş.",
     alternateName: ["HADARA", "HADARA Real Estate", "حضارة للتطوير العقاري"],
     url: url("/"),
     logo: `${siteUrl}/favicon-512.png`,
@@ -336,7 +340,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
   }
 
   const path = routePath(pageRoute.name === "not-found" ? route : pageRoute);
-  const noindex = NOINDEX.includes(pageRoute.name);
+  const noindex = NOINDEX.includes(pageRoute.name) || (pageRoute.name === "laws" && !LAWS_PAGE_LIVE);
 
   return {
     locale,

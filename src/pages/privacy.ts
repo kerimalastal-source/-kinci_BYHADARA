@@ -9,7 +9,7 @@ interface PolicySection {
 }
 
 /** When the policy text last changed; shown at the top of the page. */
-const LAST_UPDATED = "2026-09-28";
+const LAST_UPDATED = "2026-10-02";
 
 const SITE_EMAIL = "info@byhadara.com";
 const SITE_PHONE = "+90 531 930 92 14";

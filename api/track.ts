@@ -9,6 +9,9 @@
 // request page (contact...) in a visit sends a separate 🔥 message as a reply to it.
 // Likely automated visits (data-center towns, same-page bursts: api/_lib/visitBots.ts)
 // get no Telegram message; the logic is in api/_lib/visitRecord.ts.
+// It also takes { type: "action" } (a button press or form start) and { type: "consent" }
+// bodies for the admin statistics; the visit's device (mobile/tablet/desktop) comes with
+// its first page.
 // The response (204) goes out at once; the database write and the alerts finish in the
 // background (waitUntil), so neither can slow down or break it.
 import { waitUntil } from "@vercel/functions";
@@ -43,6 +46,20 @@ export async function POST(request: Request): Promise<Response> {
     return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
   }
 
+  // A button press or form start (src/utils/visitorTracker.ts reportAction), for the admin
+  // "what visitors do" statistics. Until migration 0015 runs, the 404 is ignored.
+  if (body && typeof body === "object" && (body as Record<string, unknown>).type === "action") {
+    const action = parseAction(body);
+    if (action && !BOT_AGENT.test(userAgent)) {
+      waitUntil(
+        rpc("record_visit_action", { p_session_id: action.sessionId, p_action: action.action, p_target: action.target, p_path: action.path }).catch((error: unknown) => {
+          if (!(error instanceof RpcError && error.status === 404)) console.error(`track: record_visit_action failed: ${error instanceof Error ? error.message : "unknown"}`);
+        })
+      );
+    }
+    return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+  }
+
   const view = parsePageView(body);
 
   if (view && !INTERNAL_PATH.test(view.path) && !BOT_AGENT.test(userAgent)) {
@@ -62,7 +79,7 @@ export async function POST(request: Request): Promise<Response> {
         })
       );
     }
-    // ~1% of requests also clear visit events older than 30 days and tour bookings a
+    // ~1% of requests also clear visit records older than a year (30 days before migration 0015) and tour bookings a
     // year past their date; a failure here is only logged.
     if (Math.random() < 0.01) {
       for (const fn of ["purge_old_visitor_events", "purge_old_tour_bookings"]) {
@@ -115,8 +132,26 @@ function parsePageView(body: unknown): PageView | null {
     trail: parseTrail(data.trail),
     trailSkipped: Math.min(10_000, Math.max(0, Math.floor(Number(data.trailSkipped) || 0))),
     // "utm_source=facebook · utm_campaign=villa" from the ad link (src/utils/campaign.ts).
-    campaign: text(data.campaign, 300).replace(/[\u0000-\u001f<>]/g, "")
+    campaign: text(data.campaign, 300).replace(/[\u0000-\u001f<>]/g, ""),
+    device: DEVICES.find((value) => value === data.device) ?? ""
   };
+}
+
+const DEVICES = ["mobile", "tablet", "desktop"] as const;
+
+/** The actions migration 0015 accepts (visitor_actions.action). */
+const ACTIONS = ["whatsapp", "call", "email", "interested", "favorite", "video_play", "map_open", "chat_open", "tour_link", "form_start", "form_sent"] as const;
+
+/** { type: "action", sessionId, action, target, path } — dropped when malformed or sent from an internal page. */
+function parseAction(body: object): { sessionId: string; action: string; target: string; path: string } | null {
+  const data = body as Record<string, unknown>;
+  const sessionId = text(data.sessionId, 36);
+  const action = ACTIONS.find((value) => value === data.action);
+  const path = text(data.path, 300).split(/[?#]/)[0];
+  // A project slug or a form name: lowercase letters, digits and dashes only.
+  const target = text(data.target, 80);
+  if (!SESSION_ID.test(sessionId) || !action || !path.startsWith("/") || INTERNAL_PATH.test(path)) return null;
+  return { sessionId, action, target: /^[a-z0-9-]+$/.test(target) ? target : "", path };
 }
 
 const CONSENT_CHOICES = ["granted", "denied", "none"] as const;

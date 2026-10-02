@@ -15,6 +15,7 @@
     "propertyRequest": "Request a Property",
     "blog": "Blog",
     "faq": "FAQ",
+    "laws": "Property Laws",
     "resources": "Resources",
     "contact": "Contact",
     "getInTouch": "Get in Touch",
@@ -1444,7 +1445,166 @@
     "backLabel": "Back to Blog",
     "otherArticlesTitle": "More Articles to Read"
   },
+  "laws": {
+    "heroEyebrow": "Property Laws",
+    "heroTitle": "Turkish Property Law Updates",
+    "heroSubtitle": "A clear summary of the current rules and the latest decisions for anyone buying, owning or renting property in Turkey, with the official government source under every item.",
+    "promiseTitle": "From official sources only.",
+    "promiseText": "We only report what Turkish government bodies publish, such as the Official Gazette, the Land Registry, the Presidency of Migration Management and the Revenue Administration, never news sites or social media.",
+    "disclaimer": "This is general information, not legal advice, and the rules may change. Our team confirms the conditions in force before any purchase.",
+    "updated": "Page last updated: {date}",
+    "previewNote": "Preview: this page shows drafts and is not published yet.",
+    "rulesTitle": "The current rules in short",
+    "rulesSubtitle": "What you need to know today before you buy or rent.",
+    "updatesTitle": "Latest legal updates",
+    "updatesSubtitle": "The newest decisions and changes first.",
+    "filterLabel": "Filter by topic",
+    "filterAll": "All",
+    "empty": "No updates have been published yet.",
+    "before": "Before",
+    "after": "After",
+    "whatChanged": "What's new",
+    "affects": "Who it affects",
+    "effective": "Applies from",
+    "reference": "Official reference",
+    "howWeHelp": "How HADARA helps:",
+    "officialSource": "Official source:",
+    "checked": "Last checked: {date}",
+    "proposal": "Bill, not law yet",
+    "draft": "Draft",
+    "ctaTitle": "Have a question about a specific rule?",
+    "ctaText": "Talk to our team and we will explain what applies to your case before you take any step.",
+    "ctaButton": "Contact us",
+    "ctaWhatsapp": "Ask us on WhatsApp",
+    "whatsappMessage": "Hello, I have a question about property laws in Turkey.",
+    "topics": {
+      "citizenship": "Citizenship",
+      "residence": "Residence",
+      "ownership": "Buying & ownership",
+      "taxes": "Taxes & fees",
+      "rent": "Renting & tenant rights"
+    },
+    "sources": {
+      "resmiGazete": "Official Gazette (Resmî Gazete)",
+      "mevzuat": "Legislation portal (mevzuat.gov.tr)",
+      "tkgm": "Land Registry and Cadastre (TKGM)",
+      "gib": "Revenue Administration (GİB)",
+      "goc": "Presidency of Migration Management (Göç İdaresi)",
+      "ticaret": "Ministry of Trade (Ticaret Bakanlığı)",
+      "tbmm": "Grand National Assembly (TBMM)",
+      "nvi": "Population and Citizenship Affairs (NVİ)"
+    }
+  },
+  "lawsData": {
+    "rules": {
+      "citizenship-property": {
+        "title": "Citizenship by buying property from $400,000",
+        "text": "A foreigner can apply for Turkish citizenship after buying one or more properties worth at least US$400,000 or its equivalent, with a 3-year no-sale annotation on the title deed. It is also possible for a property under construction through a promise-to-sell contract signed before a notary, provided the full amount is paid upfront."
+      },
+      "residence-property": {
+        "title": "Residence permit through property",
+        "text": "Owning a home in Turkey allows you to apply for a short-term residence permit. The official list of documents of the Presidency of Migration Management requires the home to be worth at least US$200,000 or its equivalent in Turkish lira at the time of purchase, and to be used as your home, not rented out."
+      },
+      "residence-closed-areas": {
+        "title": "Neighbourhoods closed to new residence permits",
+        "text": "The Presidency of Migration Management closes some neighbourhoods and districts to new residence permit applications by foreigners, based on population density, and updates these lists from time to time. If a residence permit is your goal, check the address before you buy."
+      },
+      "valuation-report": {
+        "title": "Valuation report required in sales to foreigners",
+        "text": "Since 4 March 2019, the Land Registry has required a valuation report showing the market value of the property in every sale where a foreigner is the buyer or the seller."
+      },
+      "currency-certificate": {
+        "title": "Converting foreign currency through a Turkish bank",
+        "text": "When a foreigner buys property, the price is converted from foreign currency into Turkish lira through a bank in Turkey, and the currency purchase certificate issued by the bank (Döviz Alım Belgesi) is presented to the Land Registry."
+      },
+      "title-deed-fee": {
+        "title": "Title deed fee of 4%",
+        "text": "Under Fees Law No. 492, the title transfer fee (Tapu Harcı) is 2% for the buyer and 2% for the seller, a total of 4% of the declared sale value."
+      },
+      "property-tax": {
+        "title": "Annual property tax",
+        "text": "Property owners pay an annual property tax (Emlak Vergisi) to the municipality. Homes whose value exceeds a threshold set every year also pay the valuable housing tax (Değerli Konut Vergisi)."
+      },
+      "rent-increase": {
+        "title": "Limit on residential rent increases",
+        "text": "When a residential lease is renewed, the yearly increase may not exceed the 12-month average change in the consumer price index (TÜFE), under Article 344 of the Turkish Code of Obligations No. 6098."
+      }
+    },
+    "updates": {
+      "citizenship-amount-certificate": {
+        "title": "Citizenship amount certificate now valid for 6 months",
+        "summary": "The Land Registry amended its Circular No. 2024/4: the purchase amount for citizenship is now confirmed by an Amount Determination Certificate (Tutar Tespit Belgesi) issued by the valuation company GEDAŞ after an electronic comparison.",
+        "before": "The valuation report was valid for 3 months from its date of issue.",
+        "after": "Certificates issued after 9 December 2024 are valid for 6 months, and the value written on the certificate is used directly in the title deed transaction.",
+        "affects": "Foreigners buying property to obtain Turkish citizenship.",
+        "help": "We keep track of the certificate's validity with you so that the title transfer is completed in time."
+      },
+      "property-tax-cap-2026": {
+        "title": "A limit on the 2026 property tax increase",
+        "summary": "Law No. 7566, published in the Official Gazette, limits how much the value used for the annual property tax can rise in 2026.",
+        "after": "The 2026 tax value of buildings and land may not exceed twice their 2025 tax value.",
+        "affects": "Everyone who owns property in Turkey and pays the annual property tax.",
+        "help": "We explain the expected yearly taxes and fees of a property before you buy."
+      },
+      "title-deed-declared-price": {
+        "title": "Higher penalty for declaring a lower price at the land registry",
+        "summary": "Law No. 7566 increased the penalty when a sale is registered at the land registry at a price below the real price or below the property tax value.",
+        "before": "The tax-loss penalty on the unpaid fee difference was 25%.",
+        "after": "The penalty now equals the full unpaid fee difference (one-fold).",
+        "affects": "Buyers and sellers in any property sale.",
+        "help": "We always advise registering the real price at the land registry and accompany you through the title transfer."
+      },
+      "valuable-housing-tax-2026": {
+        "title": "2026 threshold for the valuable housing tax",
+        "summary": "The Revenue Administration updated the value from which the valuable housing tax (Değerli Konut Vergisi) applies.",
+        "before": "TRY 15,709,000 for 2025.",
+        "after": "TRY 17,711,000 for 2026.",
+        "affects": "Owners of homes whose tax value exceeds this threshold.",
+        "help": "We tell you whether the property you choose may be subject to this tax."
+      },
+      "savings-finance-foreigners": {
+        "title": "No purchases by foreigners with savings finance loans",
+        "summary": "The Land Registry announced that foreigners cannot acquire property with loans from savings finance companies (Tasarruf Finansman Şirketleri).",
+        "after": "A property purchase by a foreigner cannot be financed through these companies.",
+        "affects": "Foreigners planning to finance a purchase through a savings finance company.",
+        "help": "We help you plan a suitable payment method before you buy."
+      },
+      "secure-payment-system": {
+        "title": "Secure payment system mandatory in property sales from December 2026",
+        "summary": "The Ministry of Trade amended the Real Estate Trade Regulation and set 1 December 2026 as the start of mandatory use of the secure payment system in property sales.",
+        "after": "From 1 December 2026, the secure payment system becomes mandatory in property sales. It connects the Land Registry's systems with banks so that the payment and the title transfer are completed together.",
+        "affects": "Buyers and sellers of property in Turkey.",
+        "help": "We will walk you through the payment and title transfer steps under the new system when you buy."
+      },
+      "rent-regulation-board-bill": {
+        "title": "Bill to create a Rent Regulation Board",
+        "summary": "A bill amending the Mass Housing Law and the Turkish Code of Obligations was submitted to the Turkish parliament, proposing a Rent Regulation Board (Kira Düzenleme Kurulu).",
+        "after": "The bill proposes that the board set the conditions for benefiting from social housing and the maximum rents by province and region. It is still being discussed in committee and is not law yet.",
+        "affects": "Tenants and landlords, if the bill is passed.",
+        "help": "We follow the bill and will update this page if it is passed and published in the Official Gazette."
+      }
+    }
+  },
   "blogData": {
+    "gross-vs-net-area": {
+      "category": "Buying Property",
+      "title": "Gross vs Net Area and What 2+1 Means in Turkish Listings",
+      "excerpt": "Learn how to read gross (brüt) and net areas and the 2+1 layout code, with real examples from HADARA's projects.",
+      "body": [
+        "Open any property listing in Istanbul and you will quickly meet two words that confuse many first-time buyers: gross and net. Add a code such as 2+1, and a brochure can start to look like a puzzle. This guide explains what these terms mean and how to use them when you compare homes, so that the numbers on the page become clear before you ever step into a sales office.",
+        "## Gross and net: what is the difference?",
+        "Gross area, called brüt in Turkish, is the larger figure. It measures the apartment together with its walls and usually a share of the building's common parts. Net area, called net, is the usable floor space inside the apartment: the part you actually walk on, furnish and live in. Because gross includes more, it is always the bigger number, and brochures and price lists very often quote it first.",
+        "Neither figure is wrong. They simply answer different questions. Gross tells you how the unit is measured and sold on paper, while net tells you how much room you will really have at home. When you compare two apartments, always compare gross with gross and net with net, and never a gross figure from one project with a net figure from another. Otherwise a smaller home can look larger than it is.",
+        "## What does 2+1 mean?",
+        "In Turkish listings the first number counts the rooms, usually used as bedrooms, and the second number counts the living rooms, called salon. A 2+1 therefore has two bedrooms and one living room, with the kitchen and bathrooms counted separately. A 3+1 has three bedrooms and a living room, and a 1+1 has one bedroom and a living room. Keep in mind that the code says nothing about size: two 2+1 apartments can differ clearly in area, so always read the square metres printed beside the layout.",
+        "## Real examples from our projects",
+        "Cadde Ispartakule offers 2+1 apartments of 106.30 – 108.56 m² gross, with 89.66 – 91.92 m² net, and 3+1 apartments of 132.83 – 150.61 m² gross, with 116.19 – 133.97 m² net. In every case the net figure is the smaller one, exactly as you should expect. Lotus Şişli lists a 1+1 with 57.56 m² gross and 43.41 m² net, and a 2+1 with 83.75 m² gross and 63.16 m² net. Its catalog also quotes a third figure, the saleable gross area (satışa esas brüt), of 75.97 m² and 110.53 m² for those two types. It is a useful reminder to ask exactly which area the price is based on.",
+        "Villas follow the same logic, level by level. Marmara Haven Villa gives gross and net for each floor: the basement has 138.62 m² gross and 105.40 m² net, the ground floor 223.37 m² gross and 108.60 m² net, the first floor 143.19 m² gross and 126.21 m² net, and the rooftop level 103.66 m² gross and 82.82 m² net. The gap between the two figures is not the same on every level, which shows why one overall number never tells the whole story. Lotus Yaşam, by comparison, shows gross ranges, for example 100 – 109 m² for its 2+1 apartments, so it is worth asking for the net figure of the exact unit you like.",
+        "## Questions to ask before you decide",
+        "Ask which area the price is based on, whether the net area is shown on the floor plan, and which parts are counted inside the gross figure. Ask to see the floor plan of the exact unit, and compare each room with the way you plan to live: where the sofa, the dining table and the beds will go. A plan on paper is easier to judge once you can see the real rooms and the show apartment, and a video tour is a practical way to start. Please note that the figures above come from the project catalogs and may be updated by the developers.",
+        "HADARA, your real estate partner in Istanbul, is happy to go through floor plans with you and explain every number. Contact us or book a private video tour to shortlist the homes that suit you, then visit Istanbul to see them in person."
+      ]
+    },
     "real-estate-in-turkey": {
       "category": "Real Estate",
       "title": "Understanding the Turkish Real Estate Market",
@@ -1893,6 +2053,10 @@
     "processTeaserCta": "See how we work"
   },
   "seo": {
+    "laws": {
+      "title": "Turkish Property Law Updates",
+      "description": "The current rules and latest official decisions on citizenship, residence, buying property, taxes and renting in Turkey, each with a link to its government source."
+    },
     "privacy": {
       "title": "Privacy Policy",
       "description": "How HADARA Real Estate collects, uses and protects your personal data under the Turkish KVKK and the GDPR, and how to exercise your rights."
@@ -2446,7 +2610,7 @@
       {
         "title": "Who we are",
         "paragraphs": [
-          "HADARA Real Estate (“HADARA”, “we”) is a real estate development and sales company based in Istanbul. We are the data controller for the personal data collected through www.hadararealestate.com (the “Website”).",
+          "HADARA Real Estate (registered trade name: HADARA Investment İnşaat Sanayi ve Ticaret A.Ş.; “HADARA”, “we”) is a real estate development and sales company based in Istanbul. We are the data controller for the personal data collected through www.hadararealestate.com (the “Website”).",
           "This policy explains what information we collect, why we collect it, and the rights you have under the Turkish Personal Data Protection Law No. 6698 (KVKK) and, where it applies to you, the EU General Data Protection Regulation (GDPR)."
         ],
         "items": []
@@ -2476,12 +2640,14 @@
           "your approximate country and city, estimated by our hosting provider (Vercel) from your connection;",
           "the name of the ad campaign, if you arrived through a link in one of our ads (such as utm_source and utm_campaign), so we know which ad brought visitors;",
         "whether you accepted, declined or did not answer the cookie notice;",
+        "the type of device only: phone, tablet or computer (not its model or any identifier);",
+        "the main buttons you pressed and the forms you started or sent (such as WhatsApp, call, \"I'm interested\", saving a project, playing a video or enlarging the map), with the project concerned — never anything you typed into a form;",
         "a random session number, and the date and time."
         ],
         "after": [
           "The session number is created by your browser and kept in its session storage (sessionStorage), only for the current tab. It is not a cookie, it is not linked to your name or device, and your browser deletes it when you close the tab.",
           "We do not store your IP address or any personal information in these statistics, and we do not use them to identify anyone. Seller account and administration pages are not recorded.",
-          "Visit records are deleted automatically after 30 days. When a new visit starts, our team receives an internal notification (via Telegram) with the same anonymous details: approximate location, page, language and source. This notification is updated during the visit (the pages opened, in order, roughly how long each was viewed, the number of pages and the visit length), and a separate notification is sent when the visitor opens the contact page or a request form."
+          "Visit records are deleted automatically after one year (12 months); we use them in aggregate to understand what interests visitors and to improve the site. When a new visit starts, our team receives an internal notification (via Telegram) with the same anonymous details: approximate location, page, language and source. This notification is updated during the visit (the pages opened, in order, roughly how long each was viewed, the number of pages and the visit length), and a separate notification is sent when the visitor opens the contact page or a request form."
         ]
       },
       {
@@ -2568,7 +2734,7 @@
       {
         "title": "How long we keep your data",
         "paragraphs": [
-          "We keep your data for as long as it is needed to answer your enquiry and serve you, and afterwards for as long as the law requires (for example, for tax and commercial records). You can ask us to delete your data at any time, unless we are required to keep it by law. Anonymous visit records are deleted automatically after 30 days. Tour bookings are deleted automatically one year after the tour date. Messages and requests from the Website's forms are deleted automatically two years after they were last updated. Live chat conversations are deleted automatically 90 days after their last message."
+          "We keep your data for as long as it is needed to answer your enquiry and serve you, and afterwards for as long as the law requires (for example, for tax and commercial records). You can ask us to delete your data at any time, unless we are required to keep it by law. Anonymous visit records are deleted automatically after one year (12 months). Tour bookings are deleted automatically one year after the tour date. Messages and requests from the Website's forms are deleted automatically two years after they were last updated. Live chat conversations are deleted automatically 90 days after their last message."
         ],
         "items": []
       },
@@ -2738,6 +2904,59 @@
     }
   },
   "adminStats": {
+    "limitedDays": "Only the last {count} days are shown until database update 0017 is run.",
+    "consentRecent": "Last 30 days only (choices are kept for 30 days).",
+    "behavior": {
+      "title": "What visitors do",
+      "hint": "Button presses and forms, counted anonymously per visit — no names or numbers.",
+      "unavailable": "Not available yet — database updates 0015 and 0016 need to be run.",
+      "empty": "No recorded actions in this period yet.",
+      "contacted": "Visits that contacted us",
+      "contactedNote": "WhatsApp, call, email, \"I'm interested\" or a form sent",
+      "contactRate": "Contact rate",
+      "contactRateNote": "of all visits",
+      "devicesTitle": "Devices",
+      "devicesNote": "{rate} contacted",
+      "devices": {
+        "mobile": "Mobile",
+        "tablet": "Tablet",
+        "desktop": "Computer",
+        "unknown": "Unknown"
+      },
+      "actionsTitle": "Actions",
+      "actionsHint": "Visits that did each action, and their share of all visits.",
+      "actions": {
+        "whatsapp": "WhatsApp",
+        "call": "Phone call",
+        "email": "Email",
+        "interested": "\"I'm interested\" button",
+        "favorite": "Saved a project",
+        "video_play": "Played a project video",
+        "map_open": "Enlarged the map",
+        "chat_open": "Opened the chat",
+        "tour_link": "Opened the video tour",
+        "form_start": "Started a form",
+        "form_sent": "Sent a form"
+      },
+      "projectsTitle": "Interest per project",
+      "projectsHint": "Visits per project: contact (WhatsApp, call, \"I'm interested\"), saved, and video or map.",
+      "project": "Project",
+      "contact": "Contact",
+      "saved": "Saved",
+      "viewed": "Video & map",
+      "formsTitle": "Forms: started vs sent",
+      "formsHint": "Many starts with few sends can mean the form is too long or something is unclear.",
+      "form": "Form",
+      "started": "Started",
+      "sent": "Sent",
+      "completion": "Completed",
+      "forms": {
+        "contact": "Contact",
+        "property-request": "Request a property",
+        "consultancy": "Design consultation",
+        "video-tour": "Video tour booking"
+      }
+    },
     "consentTitle": "Cookie notice",
     "consentHint": "Of the {count} visits that saw the notice. Meta and Google only count the visitors who accept.",
     "consentAccepted": "Accepted",
@@ -2750,7 +2969,7 @@
     "period": "Period",
     "lastDays": "Last {count} days",
     "unavailable": "Statistics aren't available yet — database update 0008 needs to be run.",
-    "note": "Figures come from the anonymous visit records of the last 30 days (deleted automatically after that). A \"visitor\" is one visit to the site; the same person may come back in another visit. Admin pages aren't counted.",
+    "note": "Figures come from anonymous visit records, kept for a year (before 1 October 2026 they were kept for 30 days only, so longer periods fill up gradually). A \"visitor\" is one visit to the site; the same person may come back in another visit. Admin pages aren't counted.",
     "empty": "No data for this period.",
     "noLeads": "No messages or bookings in this period.",
     "noCampaigns": "No visits from ad links (with utm_campaign) in this period.",
@@ -2933,7 +3152,7 @@
     "delete": "Delete",
     "confirmDelete": "Delete this spend entry?",
     "unavailable": "Available once database update 0010 has been run.",
-    "note": "Visitor counts are kept for 30 days only; messages, bookings and sales are kept longer.",
+    "note": "Visitor counts are kept for a year (30 days before 1 October 2026); messages, bookings and sales are kept longer.",
     "form": {
       "source": "Source (utm_source)",
       "other": "Other…",
