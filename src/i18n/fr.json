@@ -15,6 +15,7 @@
     "propertyRequest": "Demander un bien",
     "blog": "Blog",
     "faq": "FAQ",
+    "laws": "Lois immobilières",
     "resources": "Ressources",
     "contact": "Contact",
     "getInTouch": "Nous contacter",
@@ -1444,6 +1445,146 @@
     "backLabel": "Retour au blog",
     "otherArticlesTitle": "D'autres articles à lire"
   },
+  "laws": {
+    "heroEyebrow": "Lois immobilières",
+    "heroTitle": "Actualité du droit immobilier en Turquie",
+    "heroSubtitle": "Un résumé clair des règles en vigueur et des dernières décisions pour toute personne qui achète, possède ou loue un bien en Turquie, avec la source gouvernementale officielle sous chaque information.",
+    "promiseTitle": "Uniquement des sources officielles.",
+    "promiseText": "Nous ne reprenons que ce que publient les autorités turques, comme le Journal officiel, le Cadastre, la Présidence de la gestion des migrations et l'Administration fiscale, jamais des sites d'information ni des réseaux sociaux.",
+    "disclaimer": "Ces informations sont générales et ne constituent pas un conseil juridique ; les règles peuvent évoluer. Notre équipe confirme les conditions en vigueur avant tout achat.",
+    "updated": "Dernière mise à jour de la page : {date}",
+    "previewNote": "Aperçu : cette page affiche des brouillons et n'est pas encore publiée.",
+    "rulesTitle": "Les règles en vigueur en bref",
+    "rulesSubtitle": "L'essentiel à savoir aujourd'hui avant d'acheter ou de louer.",
+    "updatesTitle": "Dernières évolutions juridiques",
+    "updatesSubtitle": "Les décisions et modifications les plus récentes d'abord.",
+    "filterLabel": "Filtrer par thème",
+    "filterAll": "Tout",
+    "empty": "Aucune actualité publiée pour le moment.",
+    "before": "Avant",
+    "after": "Désormais",
+    "whatChanged": "Ce qui change",
+    "affects": "Qui est concerné",
+    "effective": "Applicable à partir du",
+    "reference": "Référence officielle",
+    "howWeHelp": "Comment HADARA vous aide :",
+    "officialSource": "Source officielle :",
+    "checked": "Dernière vérification : {date}",
+    "proposal": "Proposition de loi, pas encore adoptée",
+    "draft": "Brouillon",
+    "ctaTitle": "Une question sur une règle précise ?",
+    "ctaText": "Contactez notre équipe : nous vous expliquerons ce qui s'applique à votre situation avant toute démarche.",
+    "ctaButton": "Nous contacter",
+    "ctaWhatsapp": "Nous écrire sur WhatsApp",
+    "whatsappMessage": "Bonjour, j'ai une question sur le droit immobilier en Turquie.",
+    "topics": {
+      "citizenship": "Citoyenneté",
+      "residence": "Résidence",
+      "ownership": "Achat et propriété",
+      "taxes": "Impôts et frais",
+      "rent": "Location et droits du locataire"
+    },
+    "sources": {
+      "resmiGazete": "Journal officiel (Resmî Gazete)",
+      "mevzuat": "Portail législatif (mevzuat.gov.tr)",
+      "tkgm": "Direction du cadastre et du registre foncier (TKGM)",
+      "gib": "Administration fiscale (GİB)",
+      "goc": "Présidence de la gestion des migrations (Göç İdaresi)",
+      "ticaret": "Ministère du Commerce (Ticaret Bakanlığı)",
+      "tbmm": "Grande Assemblée nationale (TBMM)",
+      "nvi": "Direction de la population et de la citoyenneté (NVİ)"
+    }
+  },
+  "lawsData": {
+    "rules": {
+      "citizenship-property": {
+        "title": "La citoyenneté par l'achat d'un bien de 400 000 $",
+        "text": "Un étranger peut demander la citoyenneté turque après l'achat d'un ou plusieurs biens d'une valeur d'au moins 400 000 USD ou l'équivalent, avec une mention d'interdiction de vente de 3 ans inscrite au titre de propriété. C'est également possible pour un bien en construction, par une promesse de vente signée devant notaire, à condition que la totalité du montant soit payée d'avance."
+      },
+      "residence-property": {
+        "title": "Le permis de séjour par la propriété",
+        "text": "Être propriétaire d'un logement en Turquie permet de demander un permis de séjour de courte durée. La liste officielle des documents de la Présidence de la gestion des migrations exige que le logement vaille au moins 200 000 USD ou l'équivalent en livres turques à la date d'achat, et qu'il serve d'habitation et non de location."
+      },
+      "residence-closed-areas": {
+        "title": "Quartiers fermés aux nouveaux permis de séjour",
+        "text": "La Présidence de la gestion des migrations ferme certains quartiers et districts aux nouvelles demandes de permis de séjour d'étrangers, selon la densité de population, et met ces listes à jour régulièrement. Si le permis de séjour est votre objectif, vérifiez l'adresse avant d'acheter."
+      },
+      "valuation-report": {
+        "title": "Rapport d'évaluation obligatoire pour les ventes aux étrangers",
+        "text": "Depuis le 4 mars 2019, le registre foncier exige un rapport d'évaluation indiquant la valeur de marché du bien pour toute vente où un étranger est acheteur ou vendeur."
+      },
+      "currency-certificate": {
+        "title": "Conversion des devises par une banque en Turquie",
+        "text": "Lorsqu'un étranger achète un bien, le prix est converti de devises en livres turques par une banque en Turquie, et le certificat d'achat de devises délivré par la banque (Döviz Alım Belgesi) est présenté au registre foncier."
+      },
+      "title-deed-fee": {
+        "title": "Droits de mutation de 4 %",
+        "text": "Selon la loi sur les droits n° 492, les droits de mutation (Tapu Harcı) s'élèvent à 2 % pour l'acheteur et 2 % pour le vendeur, soit 4 % de la valeur de vente déclarée."
+      },
+      "property-tax": {
+        "title": "Taxe foncière annuelle",
+        "text": "Les propriétaires paient chaque année une taxe foncière (Emlak Vergisi) à la municipalité. Les logements dont la valeur dépasse un seuil fixé chaque année paient aussi la taxe sur les logements de valeur (Değerli Konut Vergisi)."
+      },
+      "rent-increase": {
+        "title": "Plafond de hausse des loyers d'habitation",
+        "text": "Lors du renouvellement d'un bail d'habitation, la hausse annuelle ne peut pas dépasser la variation moyenne sur 12 mois de l'indice des prix à la consommation (TÜFE), selon l'article 344 du Code turc des obligations n° 6098."
+      }
+    },
+    "updates": {
+      "citizenship-amount-certificate": {
+        "title": "Le certificat de montant pour la citoyenneté valable 6 mois",
+        "summary": "Le Cadastre a modifié sa circulaire n° 2024/4 : le montant d'achat pour la citoyenneté est désormais confirmé par un certificat de détermination du montant (Tutar Tespit Belgesi) délivré par la société d'évaluation GEDAŞ après une comparaison électronique.",
+        "before": "Le rapport d'évaluation était valable 3 mois à compter de sa date d'émission.",
+        "after": "Les certificats émis après le 9 décembre 2024 sont valables 6 mois, et la valeur qui y figure est utilisée directement dans l'acte de transfert.",
+        "affects": "Les étrangers qui achètent un bien pour obtenir la citoyenneté turque.",
+        "help": "Nous suivons avec vous la validité du certificat pour que le transfert de propriété se fasse à temps."
+      },
+      "property-tax-cap-2026": {
+        "title": "Un plafond pour la hausse de la taxe foncière en 2026",
+        "summary": "La loi n° 7566, publiée au Journal officiel, limite la hausse de la valeur servant au calcul de la taxe foncière annuelle en 2026.",
+        "after": "La valeur fiscale 2026 des bâtiments et des terrains ne peut pas dépasser le double de leur valeur fiscale 2025.",
+        "affects": "Toute personne propriétaire d'un bien en Turquie qui paie la taxe foncière annuelle.",
+        "help": "Nous vous expliquons les impôts et frais annuels attendus d'un bien avant l'achat."
+      },
+      "title-deed-declared-price": {
+        "title": "Pénalité plus lourde en cas de prix sous-déclaré au registre foncier",
+        "summary": "La loi n° 7566 a alourdi la pénalité lorsqu'une vente est enregistrée au registre foncier à un prix inférieur au prix réel ou à la valeur fiscale du bien.",
+        "before": "La pénalité pour perte d'impôt sur la différence de droits impayés était de 25 %.",
+        "after": "La pénalité est désormais égale à la totalité de la différence de droits impayés (bir kat).",
+        "affects": "Les acheteurs et les vendeurs de toute vente immobilière.",
+        "help": "Nous conseillons toujours de déclarer le prix réel au registre foncier et vous accompagnons lors du transfert de propriété."
+      },
+      "valuable-housing-tax-2026": {
+        "title": "Seuil 2026 de la taxe sur les logements de valeur",
+        "summary": "L'Administration fiscale a mis à jour la valeur à partir de laquelle s'applique la taxe sur les logements de valeur (Değerli Konut Vergisi).",
+        "before": "15 709 000 TRY pour 2025.",
+        "after": "17 711 000 TRY pour 2026.",
+        "affects": "Les propriétaires de logements dont la valeur fiscale dépasse ce seuil.",
+        "help": "Nous vous indiquons si le bien que vous choisissez peut être soumis à cette taxe."
+      },
+      "savings-finance-foreigners": {
+        "title": "Pas d'achat par des étrangers avec un prêt de société de financement par l'épargne",
+        "summary": "Le Cadastre a annoncé que les étrangers ne peuvent pas acquérir un bien au moyen de prêts accordés par les sociétés de financement par l'épargne (Tasarruf Finansman Şirketleri).",
+        "after": "L'achat d'un bien par un étranger ne peut pas être financé par ces sociétés.",
+        "affects": "Les étrangers qui prévoient de financer leur achat par une société de financement par l'épargne.",
+        "help": "Nous vous aidons à prévoir un mode de paiement adapté avant l'achat."
+      },
+      "secure-payment-system": {
+        "title": "Système de paiement sécurisé obligatoire dans les ventes immobilières dès décembre 2026",
+        "summary": "Le ministère du Commerce a modifié le règlement sur le commerce immobilier et fixé au 1er décembre 2026 le début de l'utilisation obligatoire du système de paiement sécurisé dans les ventes immobilières.",
+        "after": "À partir du 1er décembre 2026, le système de paiement sécurisé devient obligatoire dans les ventes immobilières. Il relie les systèmes du registre foncier aux banques afin que le paiement et le transfert de propriété se fassent ensemble.",
+        "affects": "Les acheteurs et les vendeurs de biens en Turquie.",
+        "help": "Nous vous expliquerons les étapes du paiement et du transfert de propriété selon le nouveau système lors de votre achat."
+      },
+      "rent-regulation-board-bill": {
+        "title": "Proposition de loi pour créer un conseil de régulation des loyers",
+        "summary": "Une proposition de loi modifiant la loi sur le logement collectif et le Code turc des obligations a été déposée au parlement turc ; elle prévoit un conseil de régulation des loyers (Kira Düzenleme Kurulu).",
+        "after": "La proposition prévoit que ce conseil fixe les conditions d'accès au logement social et les loyers maximaux par province et par région. Elle est toujours examinée en commission et n'est pas encore une loi.",
+        "affects": "Les locataires et les bailleurs, si la proposition est adoptée.",
+        "help": "Nous suivons ce texte et mettrons cette page à jour s'il est adopté et publié au Journal officiel."
+      }
+    }
+  },
   "blogData": {
     "gross-vs-net-area": {
       "category": "Achat immobilier",
@@ -1912,6 +2053,10 @@
     "processTeaserCta": "Découvrir notre méthode"
   },
   "seo": {
+    "laws": {
+      "title": "Actualité du droit immobilier en Turquie",
+      "description": "Les règles en vigueur et les dernières décisions officielles sur la citoyenneté, la résidence, l'achat immobilier, les impôts et la location en Turquie, chacune avec le lien vers sa source gouvernementale."
+    },
     "privacy": {
       "title": "Politique de confidentialité",
       "description": "Comment HADARA Real Estate collecte, utilise et protège vos données personnelles conformément à la KVKK turque et au RGPD, et comment exercer vos droits."

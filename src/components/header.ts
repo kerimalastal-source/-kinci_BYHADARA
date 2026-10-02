@@ -6,7 +6,8 @@ import { escapeHtml } from "../utils/html";
 import { renderBrand } from "./brand";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "./floatingButtons";
 import { renderFavoritesLink } from "./favorites";
-import { CONSULTANCY_PAGES, consultancyPath, type ConsultancyPage } from "../seo/routes";
+import { CONSULTANCY_PAGES, LAWS_SEGMENT, consultancyPath, type ConsultancyPage } from "../seo/routes";
+import { LAWS_PAGE_LIVE } from "../data/laws";
 
 interface NavLink {
   route: string;
@@ -54,7 +55,8 @@ const NAV: NavEntry[] = [
     items: [
       { route: "/citizenship", key: "nav.citizenship", active: is("citizenship") },
       { route: "/blog", key: "nav.blog", active: is("blog", "blog-post") },
-      { route: "/faq", key: "nav.faq", active: is("faq") }
+      { route: "/faq", key: "nav.faq", active: is("faq") },
+      ...(LAWS_PAGE_LIVE ? [{ route: `/${LAWS_SEGMENT}`, key: "nav.laws", active: is("laws") }] : [])
     ]
   },
   { route: "/contact", key: "nav.contact", active: is("contact") }
