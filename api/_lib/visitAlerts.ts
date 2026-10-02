@@ -31,6 +31,14 @@ export interface PageView {
   campaign: string;
   /** "mobile", "tablet" or "desktop" (from the browser), or "" when unknown. Saved with the first page. */
   device?: string;
+  /** This page view's own id, so its engagement can be added later (supabase/migrations/0018). */
+  viewId?: string;
+  /** The browser's time zone, screen size and navigator.webdriver, and the system and browser read from the user agent. */
+  tz?: string;
+  screen?: string;
+  webdriver?: boolean | null;
+  os?: string | null;
+  browser?: string | null;
 }
 
 /** A session's first page view, as record_visit_state() returns it. */
@@ -186,11 +194,12 @@ function visitorLines(landing: Landing, title: string, origin: string, pageLabel
   return lines;
 }
 
-export function newVisitorMessage(view: PageView, geo: Geo, origin: string): string {
+/** `extra`: the device and verdict lines (api/_lib/visitInsights.ts alertInsightLines), already escaped. */
+export function newVisitorMessage(view: PageView, geo: Geo, origin: string, extra: string[] = []): string {
   const landing: Landing = { path: view.path, locale: view.locale, referrer: view.referrer, country: geo.country, city: geo.city };
   const lines = visitorLines(landing, view.title, origin, "الصفحة");
   if (view.campaign) lines.push(`📣 الإعلان: ${escapeHtml(view.campaign)}`);
-  return lines.join("\n");
+  return [...lines, ...extra].join("\n");
 }
 
 /** Visit length in Arabic, in whole minutes. */
@@ -205,7 +214,7 @@ export function visitLength(seconds: number): string {
 }
 
 /** The same alert once the visitor has moved on: first page, where they are now, and for how long. */
-export function visitUpdateMessage(view: PageView, state: VisitState, origin: string): string {
+export function visitUpdateMessage(view: PageView, state: VisitState, origin: string, extra: string[] = []): string {
   // The trail is shown when the browser sent one that ends on this page (an older cached
   // page sends none): otherwise only the current page, as before.
   const trail = view.trail.length > 1 && view.trail[view.trail.length - 1].path === view.path ? view.trail : null;
@@ -214,7 +223,8 @@ export function visitUpdateMessage(view: PageView, state: VisitState, origin: st
     // began before the browser remembered it).
     ...visitorLines(state.landing, view.landingPath === state.landing.path ? view.landingTitle : "", origin, "أول صفحة"),
     ...(trail ? trailLines(trail, view.trailSkipped) : [`👣 الآن: ${shownPath(view.path)}`]),
-    `🔢 عدد الصفحات: ${state.pages_before + 1} · مدة الزيارة: ${visitLength(state.seconds)}`
+    `🔢 عدد الصفحات: ${state.pages_before + 1} · مدة الزيارة: ${visitLength(state.seconds)}`,
+    ...extra
   ].join("\n");
 }
 

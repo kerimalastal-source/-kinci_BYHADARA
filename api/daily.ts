@@ -6,6 +6,10 @@
 //   2. Sends the team the morning summary on Telegram: today's tours, bookings waiting for
 //      confirmation, inquiries without an answer for more than 24 hours, listings to review,
 //      today's sales follow-ups, and yesterday's visitors.
+//   3. Sends the visitor report of the last 24 hours right after it: how many visits were
+//      people, unsure or automated, and for each likely person where they came from, what they
+//      looked at and what they are probably after (visit_report(), migration 0018;
+//      api/_lib/visitReport.ts). A failure there never affects the summary.
 //
 // Vercel calls it with "Authorization: Bearer <CRON_SECRET>". The same secret opens
 // daily_digest() in the database (supabase/migrations/0008), so CRON_SECRET in Vercel must be
@@ -17,6 +21,7 @@ import { TEAM_INBOX, visitorEmail, type App, type BookingDetails, type ContactMe
 import { PROJECT_NAMES } from "./_lib/projectNames.js";
 import { dailySummary, type Digest } from "./_lib/dailyMessages.js";
 import { followUpsToday, sendDueFollowUps } from "./_lib/followups.js";
+import { readVisits, visitReportMessage, type ReportRow } from "./_lib/visitReport.js";
 
 const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru"];
 /** Links in emails and alerts point at the public site, whatever URL the cron called. */
@@ -98,5 +103,18 @@ export async function GET(request: Request): Promise<Response> {
   // 2. Sales follow-ups that are due (usually already sent from page views), then the morning summary.
   await sendDueFollowUps(SITE, 0);
   const messageId = await sendTelegram(dailySummary(digest, SITE, { sent: sent.length, failed }, await followUpsToday()));
-  return json({ reminders: sent.length, failed: failed.length, summary: messageId !== null });
+  const report = await sendVisitReport(secret);
+  return json({ reminders: sent.length, failed: failed.length, summary: messageId !== null, report });
+}
+
+/** The morning visitor report; false when it couldn't be sent (or migration 0018 hasn't run). */
+async function sendVisitReport(secret: string): Promise<boolean> {
+  try {
+    const rows = await rpc("visit_report", { p_secret: secret, p_hours: 24 });
+    if (!Array.isArray(rows)) return false;
+    return (await sendTelegram(visitReportMessage(readVisits(rows as ReportRow[]), `${SITE}/ar/admin/stats`))) !== null;
+  } catch (error) {
+    if (!(error instanceof RpcError && error.status === 404)) console.error(`daily: visit report failed: ${error instanceof Error ? error.message : "unknown"}`);
+    return false;
+  }
 }
