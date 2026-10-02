@@ -11,13 +11,21 @@
 // get no Telegram message; the logic is in api/_lib/visitRecord.ts.
 // It also takes { type: "action" } (a button press or form start) and { type: "consent" }
 // bodies for the admin statistics; the visit's device (mobile/tablet/desktop) comes with
-// its first page.
+// its first page, together with the system and browser (read here from the user agent,
+// which itself is never stored), time zone, screen size and navigator.webdriver.
+// { type: "engagement" } reports how long a page was visible, how far it was scrolled and
+// for how many seconds there was touch/mouse/keyboard input (never what was typed), sent
+// after 15 and 45 seconds and when the page is hidden or left; each report re-reads the
+// visit and updates its Telegram alert with a verdict (person / unsure / automated:
+// api/_lib/visitInsights.ts, supabase/migrations/0018).
 // The response (204) goes out at once; the database write and the alerts finish in the
 // background (waitUntil), so neither can slow down or break it.
 import { waitUntil } from "@vercel/functions";
 import { rpc, RpcError } from "./_lib/supabase.js";
 import { sendDueFollowUps } from "./_lib/followups.js";
-import { recordVisit } from "./_lib/visitRecord.js";
+import { recordVisit, refreshAlert } from "./_lib/visitRecord.js";
+import { parseUserAgent, type Insight } from "./_lib/visitInsights.js";
+import { teamChatId } from "./_lib/telegram.js";
 import { LOCALES, type Geo, type Locale, type PageView, type TrailStep } from "./_lib/visitAlerts.js";
 
 const SESSION_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -60,7 +68,18 @@ export async function POST(request: Request): Promise<Response> {
     return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
   }
 
-  const view = parsePageView(body);
+  // How long a page was looked at (src/utils/visitorTracker.ts). Until migration 0018 runs,
+  // the 404 is ignored.
+  if (body && typeof body === "object" && (body as Record<string, unknown>).type === "engagement") {
+    const report = parseEngagement(body);
+    if (report && !BOT_AGENT.test(userAgent)) {
+      const view = parsePageView((body as Record<string, unknown>).view, userAgent);
+      waitUntil(saveEngagement(report, view && view.sessionId === report.sessionId ? view : null));
+    }
+    return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+  }
+
+  const view = parsePageView(body, userAgent);
 
   if (view && !INTERNAL_PATH.test(view.path) && !BOT_AGENT.test(userAgent)) {
     const geo = readGeo(request.headers);
@@ -103,7 +122,7 @@ function text(value: unknown, max: number): string {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
 }
 
-function parsePageView(body: unknown): PageView | null {
+function parsePageView(body: unknown, userAgent: string): PageView | null {
   if (!body || typeof body !== "object") return null;
   const data = body as Record<string, unknown>;
 
@@ -133,8 +152,59 @@ function parsePageView(body: unknown): PageView | null {
     trailSkipped: Math.min(10_000, Math.max(0, Math.floor(Number(data.trailSkipped) || 0))),
     // "utm_source=facebook · utm_campaign=villa" from the ad link (src/utils/campaign.ts).
     campaign: text(data.campaign, 300).replace(/[\u0000-\u001f<>]/g, ""),
-    device: DEVICES.find((value) => value === data.device) ?? ""
+    device: DEVICES.find((value) => value === data.device) ?? "",
+    viewId: VIEW_ID.test(text(data.viewId, 40)) ? text(data.viewId, 40) : "",
+    tz: /^[A-Za-z_]+(?:\/[A-Za-z0-9_+-]+){0,2}$|^UTC$/.test(text(data.tz, 60)) ? text(data.tz, 60) : "",
+    screen: /^\d{2,5}x\d{2,5}$/.test(text(data.screen, 12)) ? text(data.screen, 12) : "",
+    webdriver: typeof data.webdriver === "boolean" ? data.webdriver : null,
+    ...parseUserAgent(userAgent)
   };
+}
+
+/** A page view's own random id (src/utils/visitorTracker.ts). */
+const VIEW_ID = /^[a-z0-9-]{8,40}$/i;
+
+interface Engagement {
+  sessionId: string;
+  viewId: string;
+  path: string;
+  active: number;
+  scroll: number;
+  interactions: number;
+}
+
+/** { type: "engagement", sessionId, viewId, path, active, scroll, interactions, view } — dropped when malformed. */
+function parseEngagement(body: object): Engagement | null {
+  const data = body as Record<string, unknown>;
+  const sessionId = text(data.sessionId, 36);
+  const viewId = text(data.viewId, 40);
+  const path = text(data.path, 300).split(/[?#]/)[0];
+  if (!SESSION_ID.test(sessionId) || !VIEW_ID.test(viewId) || !path.startsWith("/") || INTERNAL_PATH.test(path)) return null;
+  const whole = (value: unknown, max: number) => Math.min(max, Math.max(0, Math.round(Number(value) || 0)));
+  return { sessionId, viewId, path, active: whole(data.active, 86_400), scroll: whole(data.scroll, 100), interactions: whole(data.interactions, 86_400) };
+}
+
+/** Saves the report (the database keeps the larger values) and updates the visit's alert. */
+async function saveEngagement(report: Engagement, view: PageView | null): Promise<void> {
+  let insight: Insight | null = null;
+  try {
+    insight = (await rpc("record_visit_engagement", {
+      p_session_id: report.sessionId,
+      p_view_id: report.viewId,
+      p_path: report.path,
+      p_active: report.active,
+      p_scroll: report.scroll,
+      p_interactions: report.interactions
+    })) as Insight | null;
+  } catch (error) {
+    if (!(error instanceof RpcError && error.status === 404)) console.error(`track: record_visit_engagement failed: ${error instanceof Error ? error.message : "unknown"}`);
+    return;
+  }
+  console.info(`[track-engagement] ${insight ? "saved" : "no matching visit"} active=${report.active}s scroll=${report.scroll}% input=${report.interactions}s`);
+  if (!insight || !view || !teamChatId()) return;
+  await refreshAlert(view, insight, SITE).catch((error: unknown) => {
+    console.error(`track: alert refresh failed: ${error instanceof Error ? error.message : "unknown"}`);
+  });
 }
 
 const DEVICES = ["mobile", "tablet", "desktop"] as const;
