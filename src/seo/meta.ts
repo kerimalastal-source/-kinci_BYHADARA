@@ -316,6 +316,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
     "@type": "RealEstateAgent",
     "@id": `${siteUrl}/#organization`,
     name: brand,
+    legalName: "HADARA Investment İnşaat Sanayi ve Ticaret A.Ş.",
     alternateName: ["HADARA", "HADARA Real Estate", "حضارة للتطوير العقاري"],
     url: url("/"),
     logo: `${siteUrl}/favicon-512.png`,
