@@ -102,13 +102,62 @@ body.reel{height:1920px}
 .reel .foot{bottom:330px}
 .reel .note{font-size:22px;margin-top:18px}
 /* Story (same 9:16 layout, still picture): the top 250px stay clear of the story bar and name. */
-.story .top{top:250px}`;
+.story .top{top:250px}
+/* Evening "tweet" (design B1, owner's choice 2026-10-03): a light card like a post on X. */
+body.tweet{background:radial-gradient(120% 80% at 50% 0%,#174234 0%,#0f2b21 60%)}
+.tw{position:absolute;left:70px;right:70px;top:0;display:flex;flex-direction:column;align-items:center;gap:56px}
+.card{width:100%;background:#f7f4ec;color:#0f2b21;border-radius:34px;padding:50px 54px 40px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.who{display:flex;align-items:center;gap:18px;direction:ltr}.av{width:86px;height:86px;border-radius:50%;background:#0f2b21;display:flex;align-items:center;justify-content:center}.av img{height:52px}
+.who b{display:block;font-size:30px;font-weight:700}.who span{font-size:23px;color:#6b7a73}
+.card .ar{color:#0f2b21;line-height:1.45;margin:40px 0 24px}
+.card .en{color:#3d5249;line-height:1.35;white-space:normal}
+.opts{display:flex;flex-wrap:wrap;gap:14px 24px;justify-content:space-between;direction:ltr;margin-top:32px;padding-top:26px;border-top:1px solid #e2dccd}
+.opts span{display:flex;gap:10px;align-items:center;font-size:24px;color:#4f6159;font-weight:600}.opts span b{font-family:Plex;font-weight:600}
+.opts i{font-style:normal;color:#c9a24b;font-size:28px}
+.ask{display:inline-flex;gap:12px;align-items:center;border:1.5px solid rgba(201,162,75,.7);border-radius:40px;padding:12px 26px;font-size:22px;font-weight:500;color:#efe8d6;white-space:nowrap}.ask span[dir=rtl]{font-family:Plex;font-weight:600;font-size:24px}
+/* Evening "this or that" (design B2): two photos side by side, "أم" in the middle. */
+.half{position:absolute;top:0;height:860px;width:540px;background-size:cover;background-position:center}
+.half.l{left:0}.half.r{right:0}.half:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,43,33,.75) 0%,rgba(15,43,33,0) 22%,rgba(15,43,33,0) 65%,rgba(15,43,33,.95) 100%)}
+.split{position:absolute;left:537px;top:0;height:860px;width:6px;background:#0f2b21;z-index:2}
+.vs{position:absolute;left:470px;top:390px;width:140px;height:140px;border-radius:50%;background:#c9a24b;color:#0f2b21;z-index:3;display:flex;align-items:center;justify-content:center;font-family:Plex;font-weight:700;font-size:44px;box-shadow:0 8px 30px rgba(0,0,0,.4);border:6px solid #0f2b21}
+.lab{position:absolute;top:690px;z-index:3;width:540px;text-align:center;padding:0 24px}.lab .la{font-family:Plex;font-weight:700;font-size:44px;line-height:1.2;white-space:nowrap}.lab .le{font-size:24px;color:#eee6d3;font-weight:600;margin-top:4px;white-space:nowrap}
+.lab .k{display:inline-block;width:54px;height:54px;line-height:54px;border-radius:50%;background:#c9a24b;color:#0f2b21;font-weight:700;font-size:28px;margin-bottom:10px}
+.cq{position:absolute;left:52px;right:52px;top:935px;text-align:center}
+.cq .ar,.cq .en{text-align:center;white-space:nowrap}.cq .en{margin-top:8px}.cq .ask{margin-top:40px}`;
 
 const WA_ICON = `<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>`;
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const fileUrl = (p) => "file://" + path.resolve(root, p.replace(/^\//, ""));
 
+// The two evening designs (owner's choice 2026-10-03): "tweet" (main) and "choice" (1-2 a week).
+const ASK = { ar: "شاركونا رأيكم في التعليقات", en: "Tell us in the comments" };
+const topBar = (im) => `<div class="top"><div class="brand" dir="ltr"><img src="${fileUrl("public/logo-light.png")}"><div><b>HADARA</b><i>REAL ESTATE</i></div></div>
+${im.badge ? `<div class="badge"><span dir="rtl">${esc(im.badge.ar)}</span><span>·</span><span>${esc(im.badge.en)}</span></div>` : ""}</div>`;
+const footer = () => `<div class="foot" dir="ltr"><span>www.hadararealestate.com</span><span class="wa">${WA_ICON}${PHONE}</span></div>`;
+const askPill = (a) => `<div class="ask"><span dir="rtl">${esc((a || ASK).ar)}</span><span>·</span><span>${esc((a || ASK).en)}</span></div>`;
+
+function tweetHtml(im) {
+  const opts = (im.options || []).map((o) => `<span>${o.icon ? `<i>${esc(o.icon)}</i>` : ""}${esc(o.en)} · <b dir="rtl">${esc(o.ar)}</b></span>`).join("");
+  return `<div class="tw"><div class="card"><div class="who"><div class="av"><img src="${fileUrl("public/logo-light.png")}"></div><div><b>HADARA Real Estate</b><span>@hadararealestate</span></div></div>
+<div class="ar" style="font-size:${im.arSize || 58}px">${esc(im.headlineAr)}</div><div class="en" style="font-size:${im.enSize || 34}px">${esc(im.headlineEn)}</div>
+${opts ? `<div class="opts">${opts}</div>` : ""}</div>${askPill(im.ask)}</div>`;
+}
+
+function choiceHtml(im) {
+  const side = (o, cls, key) => `<div class="half ${cls}" style="background-image:url('${fileUrl(publicPath(o.photo))}');background-position:${o.position || "center"}"></div>
+<div class="lab" style="${cls === "l" ? "left" : "right"}:0"><div class="k">${key}</div><div class="la" dir="rtl">${esc(o.ar)}</div><div class="le">${esc(o.en)}</div></div>`;
+  return `${side(im.a, "l", "A")}${side(im.b, "r", "B")}<div class="split"></div><div class="vs">أم</div>
+<div class="cq"><div class="ar" style="font-size:${im.arSize || 50}px">${esc(im.headlineAr)}</div><div class="en" style="font-size:${im.enSize || 30}px">${esc(im.headlineEn)}</div>${askPill(im.ask)}</div>`;
+}
+
+const publicPath = (photo) => (photo.startsWith("/images/") || photo.startsWith("/hero") ? "public" + photo : photo);
+
 function imageHtml(p) {
+  if (p.image.design === "tweet" || p.image.design === "choice") {
+    const im = p.image;
+    return `<html><head><meta charset="utf-8"><style>${fonts}${css}</style></head><body class="${im.design}">
+${topBar(im)}${im.design === "tweet" ? tweetHtml(im) : choiceHtml(im)}${footer()}</body></html>`;
+  }
   const im = p.image;
   const photo = im.photo.startsWith("/images/") || im.photo.startsWith("/hero") ? "public" + im.photo : im.photo;
   const items = (im.stats || []).map((s) => {
@@ -138,8 +187,33 @@ for (const [i, p] of posts.entries()) {
   await page.goto("file://" + htmlPath, { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(300);
+  const design = p.image.design || "A";
+  if (design === "tweet") {
+    // Centre the card + pill between the top bar and the footer; a long text shrinks
+    // (at most 3 Arabic lines) until everything fits.
+    await page.evaluate(() => {
+      const tw = document.querySelector(".tw"), ar = document.querySelector(".card .ar"), en = document.querySelector(".card .en");
+      const fit = () => {
+        const lines = Math.round(ar.getBoundingClientRect().height / (parseFloat(getComputedStyle(ar).fontSize) * 1.45));
+        return lines <= 3 && tw.getBoundingClientRect().height <= 1060;
+      };
+      for (let n = 0; n < 30 && !fit(); n++) {
+        ar.style.fontSize = `${parseFloat(getComputedStyle(ar).fontSize) - 2}px`;
+        en.style.fontSize = `${Math.max(26, parseFloat(getComputedStyle(en).fontSize) - 1)}px`;
+      }
+      tw.style.top = `${Math.round(150 + (1110 - tw.getBoundingClientRect().height) / 2)}px`;
+    });
+  } else if (design === "choice") {
+    // The question and the two labels stay on one line each: shrink them until they fit.
+    await page.evaluate(() => {
+      for (const e of document.querySelectorAll(".cq .ar,.cq .en,.lab .la,.lab .le")) {
+        let size = parseFloat(getComputedStyle(e).fontSize);
+        while (e.scrollWidth > e.clientWidth + 1 && size > 22) e.style.fontSize = `${(size -= 1)}px`;
+      }
+    });
+  }
   // A long stat value (e.g. "117–143 m²") shrinks until it fits its tile with room to spare.
-  await page.evaluate(() => {
+  if (design === "A") await page.evaluate(() => {
     const range = document.createRange();
     for (const v of document.querySelectorAll(".st .v")) {
       range.selectNodeContents(v);
@@ -147,7 +221,16 @@ for (const [i, p] of posts.entries()) {
       while (range.getBoundingClientRect().width > v.clientWidth - 16 && size > 24) v.style.fontSize = `${(size -= 1)}px`;
     }
   });
-  const check = await page.evaluate(() => {
+  const check = design !== "A" ? await page.evaluate((design) => {
+    const sel = design === "tweet" ? ".card .en,.opts span,.ask" : ".cq .ar,.cq .en,.lab .la,.lab .le,.ask";
+    const over = [...document.querySelectorAll(sel)].filter((e) => e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent);
+    const box = document.querySelector(design === "tweet" ? ".tw" : ".cq").getBoundingClientRect();
+    const top = document.querySelector(".top").getBoundingClientRect().bottom;
+    const foot = document.querySelector(".foot").getBoundingClientRect().top;
+    const ar = document.querySelector(design === "tweet" ? ".card .ar" : ".cq .ar");
+    const arLines = Math.round(ar.getBoundingClientRect().height / (parseFloat(getComputedStyle(ar).fontSize) * (design === "tweet" ? 1.45 : 1.35)));
+    return { over, clash: box.top < top + 8 || box.bottom > foot - 8, arLines, maxLines: design === "tweet" ? 3 : 1, fonts: [...document.fonts].filter((f) => f.status === "loaded").length };
+  }, design) : await page.evaluate(() => {
     const over = [...document.querySelectorAll(".st .v,.st .a,.st .e,.ar,.en,.note")].filter((e) => e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent);
     const panel = document.querySelector(".panel").lastElementChild.getBoundingClientRect().bottom;
     const foot = document.querySelector(".foot").getBoundingClientRect().top;
@@ -155,13 +238,17 @@ for (const [i, p] of posts.entries()) {
     const photoOk = getComputedStyle(document.querySelector(".ph")).backgroundImage !== "none";
     return { over, clash: panel > foot - 8, arLines, fonts: [...document.fonts].filter((f) => f.status === "loaded").length };
   });
-  const photoFile = path.resolve(root, (p.image.photo.startsWith("/") ? "public" + p.image.photo : p.image.photo));
+  const photos = design === "tweet" ? [] : design === "choice" ? [p.image.a?.photo, p.image.b?.photo] : [p.image.photo];
   const issues = [];
-  if (!fs.existsSync(photoFile)) issues.push("photo not found: " + photoFile);
+  for (const ph of photos) {
+    const photoFile = ph ? path.resolve(root, publicPath(ph)) : "";
+    if (!ph || !fs.existsSync(photoFile)) issues.push("photo not found: " + (photoFile || "(missing a/b photo)"));
+  }
   if (check.over.length) issues.push("text overflows: " + check.over.join(" | "));
-  if (check.clash) issues.push("panel overlaps footer (shorten text or lower arSize)");
-  if (check.over.some((t) => t === p.image.headlineEn)) issues.push("English headline too long for one line (shorten it or set enSize, e.g. 38-42)");
-  if (check.arLines > 1) issues.push(`Arabic headline wraps to ${check.arLines} lines (lower arSize, e.g. 44-48, or shorten it)`);
+  if (check.clash) issues.push(design === "A" ? "panel overlaps footer (shorten text or lower arSize)" : "text block overlaps the top bar or the footer (shorten the text)");
+  if (design === "A" && check.over.some((t) => t === p.image.headlineEn)) issues.push("English headline too long for one line (shorten it or set enSize, e.g. 38-42)");
+  if (check.arLines > (check.maxLines || 1)) issues.push(`Arabic text wraps to ${check.arLines} lines (max ${check.maxLines || 1}: shorten it or lower arSize)`);
+  if (design !== "A" && (p.story || p.reel)) issues.push(`design "${design}" is for feed posts only (no story/reel)`);
   if (check.fonts < 4) issues.push("fonts did not load");
   await page.screenshot({ path: path.join(outDir, `post-${n}.jpg`), type: "jpeg", quality: 90 });
   let video = null;

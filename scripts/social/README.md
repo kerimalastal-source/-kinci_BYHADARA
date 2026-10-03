@@ -31,9 +31,12 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
    `path`, suggested `photos` and, in the intensive week, `at`). Use each topic's `id` as
    the post `id`, its `label` as the post `topic`, and **copy its `at` unchanged** into the
    post (posts.json, in the same order); let the week's theme colour the wording.
-   In the intensive week the three times have three roles: **09:00 a project**, **14:00
-   useful information** (article, citizenship, FAQ, a site tool), **21:00 something
-   lighter** (an area of Istanbul, a question to followers, a service) — follow the brief.
+   The three times have three roles (owner's decision 2026-10-03, every day to 2026-10-28):
+   **09:00 a project** (design A), **14:00 useful real-estate information** (article,
+   citizenship, FAQ, a site tool; design A), **21:00 an interactive "tweet"** (`kind:
+   "evening"`, design `tweet`, or `choice` when the topic says so) — follow the brief and
+   the topic's `design` (see "Evening designs" below). **One feed post per time**: never two
+   posts with the same `at` (only the Story goes with the 09:00 post).
    **If it prints `"finished": true`, the month is over: make no posts, publish
    nothing, and end with the Arabic summary "انتهت خطة المحتوى لهذا الشهر — حان وقت
    مراجعة النتائج ووضع خطة جديدة مع Claude."** (`notStarted` → also make no posts.)
@@ -80,9 +83,31 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
    summary: at 10:00 the website then tells the owner on Telegram that today's posts
    weren't prepared. Commit nothing else (the outputs stay git-ignored).
 
+## Evening designs (approved by the owner 2026-10-03 — locked)
+
+The 21:00 post is a short interactive "tweet" in Arabic and English (equal weight, formal
+Arabic), same colours, fonts, logo, gold badge and footer as design A, 1080×1350 JPEG.
+Two designs, chosen by the plan topic's `design`:
+
+- **`tweet` (the main one)**: a light card like a post on X (HADARA avatar, "HADARA Real
+  Estate @hadararealestate"), the Arabic text big (max 3 lines; render.mjs shrinks it), the
+  English under it, optional 2–4 `options` (`{icon?, ar, en}`, short) on one line under a thin
+  rule, and the pill «شاركونا رأيكم في التعليقات · Tell us in the comments» under the card.
+  Types (the badge says which): «سؤال الليلة · Tonight's question», «صح أم خطأ؟ · True or
+  false?» (statement only on the image; the caption gives the answer at the end after
+  «الإجابة ⬇️ / Answer ⬇️»), «أكمل الجملة · Finish the sentence» (the sentence ends with «…»).
+- **`choice` («لو خُيّرت · Your pick», 1–2 times a week)**: two project photos side by side
+  (`a`, `b`: `{photo, position?, ar, en}`; sharp photos, never a plan or bathroom), "أم" in
+  a gold circle in the middle, labels A/B, and the question (one line in each language) under
+  them. Also set `image.photo` = `a.photo` (for the log).
+- Both: no stats, no price, facts only from the site (true/false answers from the FAQ or the
+  page the brief names), the citizenship note when it is about citizenship, no 4-byte emoji
+  in the image except the small `icon` of an option. Caption as usual (title = the question,
+  a short intro, the invitation to comment, cta + path). Feed posts only (never a Story/Reel).
+
 ## Design (approved by the owner 2026-09-29 — locked)
 
-Every post uses the **one approved template** that `render.mjs` draws ("design A"):
+Every post except the 21:00 evening post (above) uses the **one approved template** that `render.mjs` draws ("design A"):
 photo on top, dark green (`#0f2b21`) panel below, the HADARA logo top-left, a gold pill
 badge top-right (Arabic · English), **the Arabic headline and the English headline at the
 same weight, separated by a thin gold line** (Arabic right-aligned, English left-aligned,
@@ -103,8 +128,8 @@ equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 9
   New launch», under construction «قيد الإنشاء · Under construction», ready «جاهز للسكن ·
   Ready to move in», villas «فلل · Villas», citizenship «الجنسية التركية · Citizenship»,
   guides «دليل المشتري · Buyer's guide» (articles), service «خدماتنا · Our services»,
-  an area of Istanbul «من إسطنبول · Istanbul life», a question to followers «سؤال لكم ·
-  Your pick» (the evening posts).
+  an area of Istanbul «من إسطنبول · Istanbul life». (The 21:00 evening posts use their own
+  badges, see "Evening designs".)
 - Photos: sharp exterior/aerial/interior shots from `public/images/`; never a site plan,
   a bathroom or a blurry crop as the main photo.
 - The first 9 grid posts made on 2026-09-29 in the older full-photo style were **not
@@ -143,6 +168,10 @@ equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 9
   "at": "09:00",                          // from topics.mjs when the plan has it (Istanbul time)
   // "story": true  -> the day's Story: 9:16 picture, no "caption" (see step 1)
   // "reel": true   -> a Reel: 9:16 design + an 8-second video (only when the owner asks)
+  // evening post: "image": { "design": "tweet", "badge", "headlineAr", "headlineEn",
+  //   "options": [ { "icon": "🌊", "ar": "إطلالة بحرية", "en": "Sea view" } ] }   (no photo, no stats)
+  // or "image": { "design": "choice", "badge", "headlineAr", "headlineEn", "photo": <a.photo>,
+  //   "a": { "photo", "position", "ar", "en" }, "b": { … } }
   "topic": "لوتس يالي",                    // short Arabic label shown on the page
   "image": {
     "photo": "/images/projects/lotus-yali/sunset-aerial.jpg",
