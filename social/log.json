@@ -166,5 +166,37 @@
     "headlineAr": "شقق من 100 إلى 197 م²",
     "headlineEn": "Homes from 100 to 197 m²",
     "photo": "/images/projects/beylikduzu-living/garden-terrace.jpg"
+  },
+  {
+    "date": "2026-10-03",
+    "id": "diamond-marin-location",
+    "topic": "دايموند مارين · الموقع وما حوله",
+    "headlineAr": "دايموند مارين: 5 دقائق إلى المارينا",
+    "headlineEn": "Diamond Marin: 5 minutes to the marina",
+    "photo": "/images/projects/diamond-marin/street-view.jpg"
+  },
+  {
+    "date": "2026-10-03",
+    "id": "faq-foreigners-buy",
+    "topic": "سؤال: هل يمكن للأجانب الشراء؟",
+    "headlineAr": "هل يمكن للأجانب شراء عقار في تركيا؟",
+    "headlineEn": "Can foreigners buy property in Turkey?",
+    "photo": "/images/projects/diamond-marin/facade.jpg"
+  },
+  {
+    "date": "2026-10-03",
+    "id": "area-buyukcekmece",
+    "topic": "من إسطنبول: بيوكجكمجة",
+    "headlineAr": "بيوكجكمجة: الغابة والبحر",
+    "headlineEn": "Büyükçekmece: forest and sea",
+    "photo": "/images/projects/lotus-manzara-guzelce/aerial-villas.jpg"
+  },
+  {
+    "date": "2026-10-03",
+    "id": "diamond-marin-location-story",
+    "topic": "ستوري: دايموند مارين · الموقع وما حوله",
+    "headlineAr": "كل ما تحتاجه خلال 20 دقيقة",
+    "headlineEn": "Everything you need within 20 minutes",
+    "photo": "/images/projects/diamond-marin/balcony-pool-view.jpg"
   }
 ]
