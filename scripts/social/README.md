@@ -137,6 +137,15 @@ equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 9
 
 ## Content rules (from the owner — do not break)
 
+- **Nothing ever repeats (owner's rule 2026-10-03: «أهم شي المحتوى ما يتكرر»).** No topic,
+  angle, question, true/false statement, headline or photo that was already published (see
+  social/log.json) or that another post of the same day or of the plan covers. render.mjs
+  checks it automatically against social/log.json: a reused `id` or headline (Arabic or
+  English), a photo used by another post today or published in the last 2 days → PROBLEMS
+  (fix and re-run); an older photo reuse prints a `note:` — then prefer an unused photo of
+  the same project and mention the reuse in the summary. A plan topic that would repeat
+  something already published → keep the plan's subject but a clearly new angle, or say so.
+
 - **Never invent facts.** Every number, date, size, price, distance and amenity must
   come from the files above. No prices unless the project has `price` (and
   `"on-request"` = "السعر عند الطلب"); per-layout prices are in `residences[].price`.

@@ -7,6 +7,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
+const require_ = createRequire(import.meta.url);
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "../..");
@@ -175,6 +177,50 @@ ${im.note ? `<div class="note"><span dir="rtl">${esc(im.note.ar)}</span> · ${es
 <div class="foot" dir="ltr"><span>www.hadararealestate.com</span><span class="wa">${WA_ICON}${PHONE}</span></div></body></html>`;
 }
 
+// ---------- never repeat (owner's rule 2026-10-03: "the content must never repeat") ----------
+// Compares today's posts with social/log.json on the social-posts branch (everything already
+// published) and with each other: a reused id or headline stops the run; a photo used today
+// by another post or in the last 2 days stops it too; an older photo reuse is only reported.
+const day = path.basename(outDir);
+function publishedLog() {
+  try {
+    const { execFileSync } = require_("node:child_process");
+    execFileSync("git", ["fetch", "-q", "origin", "social-posts"], { cwd: root, stdio: "ignore" });
+    return JSON.parse(execFileSync("git", ["show", "origin/social-posts:social/log.json"], { cwd: root, encoding: "utf8" }));
+  } catch {
+    try { return JSON.parse(fs.readFileSync(path.join(here, "log-seed.json"), "utf8")); } catch { return []; }
+  }
+}
+const norm = (t) => String(t || "").normalize("NFKC").replace(/[\u064B-\u0652\u0640\u2066-\u2069\u200E\u200F]/g, "")
+  .replace(/[\s\p{P}\p{S}]+/gu, " ").trim().toLowerCase();
+const daysBetween = (a, b) => Math.round((Date.parse(a) - Date.parse(b)) / 86400000);
+const repeatProblems = new Map();
+{
+  const earlier = publishedLog().filter((e) => e.date !== day);
+  const addProblem = (id, msg) => repeatProblems.set(id, [...(repeatProblems.get(id) || []), msg]);
+  const todayHeads = new Map(), todayPhotos = new Map();
+  for (const p of posts) {
+    const im = p.image || {};
+    const prev = earlier.find((e) => e.id === p.id);
+    if (prev) addProblem(p.id, `id "${p.id}" was already published on ${prev.date} — use a new id and a new angle`);
+    for (const h of [im.headlineAr, im.headlineEn].filter(Boolean)) {
+      const n = norm(h);
+      const old = earlier.find((e) => norm(e.headlineAr) === n || norm(e.headlineEn) === n);
+      if (old) addProblem(p.id, `headline "${h}" was already published on ${old.date} (${old.id}) — write a new one`);
+      if (todayHeads.has(n)) addProblem(p.id, `headline "${h}" is also used by ${todayHeads.get(n)} today`);
+      todayHeads.set(n, p.id);
+    }
+    const photos = im.design === "choice" ? [im.a?.photo, im.b?.photo] : im.design === "tweet" ? [] : [im.photo];
+    for (const ph of photos.filter(Boolean)) {
+      if (todayPhotos.has(ph)) addProblem(p.id, `photo ${ph} is also used by ${todayPhotos.get(ph)} today — pick another`);
+      todayPhotos.set(ph, p.id);
+      const last = earlier.filter((e) => e.photo === ph).map((e) => e.date).sort().pop();
+      if (last && daysBetween(day, last) <= 2) addProblem(p.id, `photo ${ph} was published on ${last} — pick another`);
+      else if (last) console.log(`note: ${p.id} reuses photo ${ph} (last published ${last}); prefer an unused one if the project has it`);
+    }
+  }
+}
+
 const pw = await import(process.env.PLAYWRIGHT_MODULE || "/opt/node22/lib/node_modules/playwright/index.mjs").catch(() => import("playwright"));
 const browser = await pw.chromium.launch();
 let problems = 0;
@@ -248,6 +294,7 @@ for (const [i, p] of posts.entries()) {
   if (check.clash) issues.push(design === "A" ? "panel overlaps footer (shorten text or lower arSize)" : "text block overlaps the top bar or the footer (shorten the text)");
   if (design === "A" && check.over.some((t) => t === p.image.headlineEn)) issues.push("English headline too long for one line (shorten it or set enSize, e.g. 38-42)");
   if (check.arLines > (check.maxLines || 1)) issues.push(`Arabic text wraps to ${check.arLines} lines (max ${check.maxLines || 1}: shorten it or lower arSize)`);
+  issues.push(...(repeatProblems.get(p.id) || []));
   if (design !== "A" && (p.story || p.reel)) issues.push(`design "${design}" is for feed posts only (no story/reel)`);
   if (check.fonts < 4) issues.push("fonts did not load");
   await page.screenshot({ path: path.join(outDir, `post-${n}.jpg`), type: "jpeg", quality: 90 });
