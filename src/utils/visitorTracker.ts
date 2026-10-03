@@ -2,6 +2,12 @@
 // No cookie and nothing personal: a random session id kept in sessionStorage (it ends
 // when the tab closes), plus the page path, the site language and where the visit
 // came from (the referring site's host name only, never its full URL).
+//
+// To tell people from automated visits (2026-10-02), each page view also sends the
+// browser's time zone, the screen size and navigator.webdriver, and how the page was used:
+// seconds visible, deepest scroll and the number of seconds with touch, mouse or keyboard
+// input (never what was typed or where), after 15 and 45 seconds and when the page is left
+// or hidden (api/track.ts, api/_lib/visitInsights.ts).
 import type { Route } from "../seo/routes";
 import { campaignSource } from "./campaign";
 
@@ -131,11 +137,121 @@ function deviceType(): "mobile" | "tablet" | "desktop" {
 
 const isLocal = () => /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname);
 
+function timeZone(): string {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  } catch {
+    return "";
+  }
+}
+
+/** The page view being measured: the payload it was reported with, and how it's been used so far. */
+interface View {
+  payload: Record<string, unknown> & { sessionId: string; path: string; viewId: string };
+  visibleMs: number;
+  visibleSince: number | null;
+  maxScroll: number;
+  inputSeconds: Set<number>;
+  lastSent: string;
+  timers: number[];
+}
+
+let current: View | null = null;
+let engagementReady = false;
+
+function measureScroll(): void {
+  if (!current) return;
+  const height = document.documentElement.scrollHeight;
+  if (height > 0) current.maxScroll = Math.max(current.maxScroll, Math.min(100, Math.round(((window.scrollY + window.innerHeight) / height) * 100)));
+}
+
+function markInput(): void {
+  if (current && current.inputSeconds.size < 100_000) current.inputSeconds.add(Math.floor(performance.now() / 1000));
+}
+
+/**
+ * Reports how the current page was used, with running totals (the server keeps the larger
+ * values). leaving: the page is being left or hidden, so sendBeacon is used and the visible
+ * time stops counting. The page view itself rides along, so the server can rebuild the alert.
+ */
+function sendEngagement(leaving: boolean): void {
+  const view = current;
+  if (!view) return;
+  const now = performance.now();
+  const active = view.visibleMs + (view.visibleSince != null ? now - view.visibleSince : 0);
+  if (leaving && view.visibleSince != null) {
+    view.visibleMs = active;
+    view.visibleSince = null;
+  }
+  const report = {
+    sessionId: view.payload.sessionId,
+    viewId: view.payload.viewId,
+    path: view.payload.path,
+    active: Math.round(active / 1000),
+    scroll: view.maxScroll,
+    interactions: view.inputSeconds.size
+  };
+  const key = JSON.stringify(report);
+  if (key === view.lastSent) return;
+  view.lastSent = key;
+  const body = JSON.stringify({ type: "engagement", ...report, view: view.payload });
+  if (leaving && navigator.sendBeacon?.(ENDPOINT, new Blob([body], { type: "application/json" }))) return;
+  fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {
+    // Never affects the page.
+  });
+}
+
+/** Ends the previous page's measurement (a route change leaves it) and starts the next one's. */
+function startView(payload: View["payload"] | null): void {
+  if (current) {
+    sendEngagement(true);
+    current.timers.forEach((timer) => window.clearTimeout(timer));
+  }
+  current = null;
+  if (!payload) return;
+
+  if (!engagementReady) {
+    engagementReady = true;
+    window.addEventListener("scroll", measureScroll, { passive: true });
+    for (const type of ["pointerdown", "keydown", "touchstart", "wheel", "mousemove"]) {
+      window.addEventListener(type, markInput, { passive: true, capture: true });
+    }
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") sendEngagement(true);
+      else if (current) current.visibleSince = performance.now();
+    });
+    window.addEventListener("pagehide", () => sendEngagement(true));
+  }
+
+  const view: View = {
+    payload,
+    visibleMs: 0,
+    visibleSince: document.visibilityState === "visible" ? performance.now() : null,
+    maxScroll: 0,
+    inputSeconds: new Set(),
+    lastSent: "",
+    timers: []
+  };
+  current = view;
+  measureScroll();
+  // Some phones close a tab or the browser without a hide event; these keep a visit from
+  // never getting its reading (the same as HADARA Hospitality, 2026-10-02).
+  for (const delay of [15_000, 45_000]) {
+    view.timers.push(
+      window.setTimeout(() => {
+        if (current === view && document.visibilityState === "visible") sendEngagement(false);
+      }, delay)
+    );
+  }
+}
+
 /** Called by the router after each render that changed the URL (title and locale are already set). */
 export function trackVisit(route: Route, locale: string): void {
   const path = window.location.pathname;
   const from = referrer();
   previousPath = path;
+  // Leaving the previous page (also into an internal one) ends its measurement.
+  startView(null);
 
   if (SKIPPED_ROUTES.has(route.name)) return;
   if (isLocal()) return;
@@ -147,7 +263,7 @@ export function trackVisit(route: Route, locale: string): void {
   const landing = landingPage(path, title);
   const trail = visitTrail(path, title);
   const start = trail.steps[0]?.t ?? Date.now();
-  const body = JSON.stringify({
+  const payload = {
     sessionId: id,
     path,
     locale,
@@ -159,8 +275,14 @@ export function trackVisit(route: Route, locale: string): void {
     trail: trail.steps.map((step) => ({ path: step.p, title: step.n, at: Math.max(0, Math.round((step.t - start) / 1000)) })),
     trailSkipped: trail.skipped,
     campaign: campaignSource(),
-    device: deviceType()
-  });
+    device: deviceType(),
+    viewId: randomId(),
+    tz: timeZone(),
+    screen: `${window.screen.width}x${window.screen.height}`,
+    webdriver: navigator.webdriver === true
+  };
+  const body = JSON.stringify(payload);
+  startView(payload);
 
   // keepalive lets the request finish even if the visitor leaves right away.
   fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {

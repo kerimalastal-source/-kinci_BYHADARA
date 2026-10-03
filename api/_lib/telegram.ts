@@ -22,9 +22,12 @@ async function callTelegram(method: string, body: Record<string, unknown>, timeo
       signal: AbortSignal.timeout(timeoutMs)
     });
     if (!res.ok) {
+      const text = await res.text();
+      // An edit that changes nothing (a visit's alert rewritten with the same verdict) is not a problem.
+      if (text.includes("message is not modified")) return {};
       // Telegram's error text (e.g. "chat not found" before the bot was started, or
       // "message to edit not found" once the team deleted it); never the token.
-      console.error(`telegram: ${method} failed (${res.status}): ${(await res.text()).slice(0, 200)}`);
+      console.error(`telegram: ${method} failed (${res.status}): ${text.slice(0, 200)}`);
       return null;
     }
     const data = (await res.json().catch(() => null)) as { result?: { message_id?: number } } | null;

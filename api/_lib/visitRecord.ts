@@ -2,7 +2,8 @@
 // waitUntil, after the 204 went out). A new session sends the "new visitor" alert, later
 // pages edit it, and the first opening of a request page sends a 🔥 reply. Visits that
 // look automated (api/_lib/visitBots.ts) are saved but get no Telegram message at all.
-import { editTelegram, sendTelegram } from "./telegram.js";
+import { editTelegram, escapeHtml, sendTelegram } from "./telegram.js";
+import { alertInsightLines, insightFacts, type Insight, type VisitFacts } from "./visitInsights.js";
 import { rpc, RpcError } from "./supabase.js";
 import { botReason, burstFor, isDataCenterTown, SETTLE_MS } from "./visitBots.js";
 import {
@@ -67,6 +68,27 @@ export async function recordVisit(view: PageView, geo: Geo, origin: string, opti
     });
   }
 
+  // Who the visit looks like (system, browser, time zone, screen, automation flag), for
+  // the "is it a person" reading (0018; before it runs, the 404 is ignored).
+  if (state.is_new && (view.os || view.browser || view.tz || view.screen || view.webdriver != null)) {
+    await rpc("save_visit_profile", {
+      p_session_id: view.sessionId,
+      p_os: view.os ?? null,
+      p_browser: view.browser ?? null,
+      p_tz: view.tz || null,
+      p_screen: view.screen || null,
+      p_webdriver: view.webdriver ?? null
+    }).catch((error: unknown) => {
+      if (!(error instanceof RpcError && error.status === 404)) console.error(`track: save_visit_profile failed: ${error instanceof Error ? error.message : "unknown"}`);
+    });
+  }
+
+  // A browser that says it is driven by software gets no Telegram message either.
+  if (state.is_new && view.webdriver === true) {
+    console.info("track: no alert, likely automated: automated browser");
+    return;
+  }
+
     // The session's first page decides whether it is automated (for a new session: this page).
   const landing: Landing = state.is_new
     ? { path: view.path, locale: view.locale, referrer: view.referrer || null, country: geo.country, city: geo.city }
@@ -102,13 +124,73 @@ export async function recordVisit(view: PageView, geo: Geo, origin: string, opti
   }
 
   if (state.is_new) {
-    messageId = await sendTelegram(newVisitorMessage(view, geo, origin));
+    // A first page has no engagement yet: the verdict reads "⏳" until the page reports.
+    const facts: VisitFacts = {
+      city: geo.city,
+      country: geo.country,
+      referrer: view.referrer,
+      campaign: view.campaign,
+      device: view.device || null,
+      os: view.os ?? null,
+      browser: view.browser ?? null,
+      tz: view.tz || null,
+      screen: view.screen || null,
+      webdriver: view.webdriver ?? null,
+      pages: [{ path: view.path, at: 0 }]
+    };
+    messageId = await sendTelegram(newVisitorMessage(view, geo, origin, alertInsightLines(facts, escapeHtml)));
     if (messageId) await rpc("save_visitor_alert", { p_session_id: view.sessionId, p_message_id: messageId });
   } else if (messageId) {
     // A message the team deleted can't be edited: that is logged (by editTelegram) and
     // never stops the 🔥 message below.
-    await editTelegram(messageId, visitUpdateMessage(view, state, origin));
+    const insight = await visitInsight(view.sessionId);
+    const extra = insight ? alertInsightLines(insightFacts(insight), escapeHtml) : [];
+    await editTelegram(messageId, visitUpdateMessage(view, state, origin, extra));
   }
 
   if (request) await sendTelegram(request, messageId);
+}
+
+/** visit_insight() of a session, or null (before 0018 runs, or on any error). */
+async function visitInsight(sessionId: string): Promise<Insight | null> {
+  try {
+    return (await rpc("visit_insight", { p_session_id: sessionId })) as Insight | null;
+  } catch (error) {
+    if (!(error instanceof RpcError && error.status === 404)) console.error(`track: visit_insight failed: ${error instanceof Error ? error.message : "unknown"}`);
+    return null;
+  }
+}
+
+/**
+ * Rewrites a visit's alert after its engagement arrived (api/track.ts, { type:
+ * "engagement" }), so the verdict follows what the visitor did; an edit rings no
+ * notification. `insight` is what record_visit_engagement() returned; `view` is the page
+ * the browser was on (with its trail and titles). Nothing happens for a visit without an
+ * alert (automated, or a new tab opened from the site).
+ */
+export async function refreshAlert(view: PageView, insight: Insight, origin: string): Promise<void> {
+  const messageId = insight.message_id ? Number(insight.message_id) : null;
+  const landing = insight.landing;
+  if (!messageId || !landing || (landing.referrer ?? "").startsWith("/") || isDataCenterTown(landing)) return;
+  const pages = insight.pages?.length ?? 1;
+  // A report for a page the visitor has already left: the next page's own edit (which
+  // re-reads the visit) shows the newer state, so this one mustn't overwrite it.
+  if (pages > 1 && insight.pages[pages - 1]?.path !== view.path) return;
+  const extra = alertInsightLines(insightFacts(insight), escapeHtml);
+  let text: string;
+  if (pages > 1) {
+    const state: VisitState = {
+      is_new: false,
+      pages_before: pages - 1,
+      seconds: Number(insight.seconds) || 0,
+      seen_before: true,
+      landing,
+      message_id: messageId
+    };
+    text = visitUpdateMessage(view, state, origin, extra);
+  } else {
+    const first: PageView = { ...view, path: landing.path, locale: view.locale, referrer: landing.referrer ?? "" };
+    text = newVisitorMessage(first, { country: landing.country, city: landing.city }, origin, extra);
+  }
+  if (await editTelegram(messageId, text)) console.info("track: alert updated after engagement");
 }
