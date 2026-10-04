@@ -114,6 +114,7 @@ body.tweet{background:radial-gradient(120% 80% at 50% 0%,#174234 0%,#0f2b21 60%)
 .card .ar{color:#0f2b21;line-height:1.45;margin:40px 0 24px}
 .card .en{color:#3d5249;line-height:1.35;white-space:normal}
 .opts{display:flex;flex-wrap:wrap;gap:14px 24px;justify-content:space-between;direction:ltr;margin-top:32px;padding-top:26px;border-top:1px solid #e2dccd}
+.opts.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 28px}
 .opts span{display:flex;gap:10px;align-items:center;font-size:24px;color:#4f6159;font-weight:600}.opts span b{font-family:Plex;font-weight:600}
 .opts i{font-style:normal;color:#c9a24b;font-size:28px}
 .ask{display:inline-flex;gap:12px;align-items:center;border:1.5px solid rgba(201,162,75,.7);border-radius:40px;padding:12px 26px;font-size:22px;font-weight:500;color:#efe8d6;white-space:nowrap}.ask span[dir=rtl]{font-family:Plex;font-weight:600;font-size:24px}
@@ -142,7 +143,7 @@ function tweetHtml(im) {
   const opts = (im.options || []).map((o) => `<span>${o.icon ? `<i>${esc(o.icon)}</i>` : ""}${esc(o.en)} · <b dir="rtl">${esc(o.ar)}</b></span>`).join("");
   return `<div class="tw"><div class="card"><div class="who"><div class="av"><img src="${fileUrl("public/logo-light.png")}"></div><div><b>HADARA Real Estate</b><span>@hadararealestate</span></div></div>
 <div class="ar" style="font-size:${im.arSize || 58}px">${esc(im.headlineAr)}</div><div class="en" style="font-size:${im.enSize || 34}px">${esc(im.headlineEn)}</div>
-${opts ? `<div class="opts">${opts}</div>` : ""}</div>${askPill(im.ask)}</div>`;
+${opts ? `<div class="opts${(im.options || []).length === 4 ? " grid" : ""}">${opts}</div>` : ""}</div>${askPill(im.ask)}</div>`;
 }
 
 function choiceHtml(im) {
