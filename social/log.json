@@ -198,5 +198,37 @@
     "headlineAr": "كل ما تحتاجه خلال 20 دقيقة",
     "headlineEn": "Everything you need within 20 minutes",
     "photo": "/images/projects/diamond-marin/balcony-pool-view.jpg"
+  },
+  {
+    "date": "2026-10-04",
+    "id": "lotus-sisli-offices",
+    "topic": "لوتس شيشلي · المكاتب والـ Home Office",
+    "headlineAr": "مكاتب منزلية في قلب شيشلي",
+    "headlineEn": "Home offices in the heart of Şişli",
+    "photo": "/images/projects/lotus-sisli/office-interior.jpg"
+  },
+  {
+    "date": "2026-10-04",
+    "id": "faq-payment-options",
+    "topic": "سؤال: خيارات الدفع",
+    "headlineAr": "ما هي خيارات الدفع المتاحة؟",
+    "headlineEn": "What payment options are available?",
+    "photo": "/images/projects/beylikduzu-living/living-room-2.jpg"
+  },
+  {
+    "date": "2026-10-04",
+    "id": "evening-first-question",
+    "topic": "سؤال الليلة: أول ما تسأل عنه",
+    "headlineAr": "ما أول ما تسأل عنه عند شراء بيت في إسطنبول؟",
+    "headlineEn": "What's the first thing you ask about when buying a home in Istanbul?",
+    "photo": ""
+  },
+  {
+    "date": "2026-10-04",
+    "id": "lotus-sisli-offices-story",
+    "topic": "ستوري: لوتس شيشلي · المكاتب والـ Home Office",
+    "headlineAr": "مساحة مرنة تتسع عند الحاجة",
+    "headlineEn": "Flex space that grows when you need it",
+    "photo": "/images/projects/lotus-sisli/tower-day.jpg"
   }
 ]
