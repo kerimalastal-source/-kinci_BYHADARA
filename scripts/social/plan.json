@@ -253,16 +253,13 @@
      "at": "14:00"
     },
     {
-     "id": "ask-our-team",
-     "kind": "page",
-     "angle": "service",
-     "path": "/contact",
-     "photos": [
-      "/images/projects/diamond-marin/living-dining.jpg",
-      "/images/pages/hadara-monogram.jpg"
-     ],
-     "brief": "Evening, light: you can ask us anything, in your language - the chat on the site (talk to our team), WhatsApp, the free private video tour. Facts only from the site: the 5 site languages, office hours 9:00-18:00 Istanbul (videoTour.officeHours), video tour languages (Arabic/English/Turkish). Badge «خدماتنا · Our services».",
-     "label": "اسألنا ما تريد",
+     "id": "evening-first-question",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «سؤال الليلة · Tonight's question». «ما أول ما تسأل عنه عند شراء بيت في إسطنبول؟» with 4 options: الموقع/Location, المساحة/Size, الإطلالة/View, المرافق/Amenities.",
+     "label": "سؤال الليلة: أول ما تسأل عنه",
      "at": "21:00"
     }
    ],
@@ -300,16 +297,13 @@
      "at": "14:00"
     },
     {
-     "id": "area-sisli",
-     "kind": "page",
-     "angle": "area",
-     "path": "/projects/lotus-sisli",
-     "photos": [
-      "/images/projects/lotus-sisli/tower-night.jpg",
-      "/images/projects/lotus-sisli/aerial-city.jpg"
-     ],
-     "brief": "Evening, light: Şişli, the city centre side of Istanbul. Only facts from the site: Lotus Şişli (projects.ts, projectsData.lotus-sisli incl. nearby). Different headline and angle from the Lotus Şişli overview (10-01) and offices (10-04) posts - here it is the neighbourhood and city life. Badge «من إسطنبول · Istanbul life».",
-     "label": "من إسطنبول: شيشلي",
+     "id": "pick-complex-or-villa",
+     "kind": "evening",
+     "design": "choice",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «لو خُيّرت · Your pick». Design «choice»: A = an apartment in a complex with shared gardens (photo /images/projects/lotus-sisli/tower-garden.jpg), B = a standalone villa (photo /images/projects/lotus-manzara-beylikduzu/aerial-villas.jpg). The caption may say our available projects offer both, no prices.",
+     "label": "لو خُيّرت: شقة في مجمّع أم فيلا؟",
      "at": "21:00"
     }
    ],
@@ -347,16 +341,13 @@
      "at": "14:00"
     },
     {
-     "id": "pick-home-size",
-     "kind": "page",
-     "angle": "question",
-     "path": "/projects",
-     "photos": [
-      "/images/projects/beylikduzu-living/living-room.jpg",
-      "/images/projects/lotus-manzara-guzelce/villa-exterior.jpg"
-     ],
-     "brief": "Evening, light and friendly: ask followers which home suits their family - 1+1, 2+1, 3+1 or a villa - and show that our available projects offer each (from residences in projects.ts; villas from the villa projects). The 4 tiles: the layouts. Badge «سؤال لكم · Your pick». Invite answers in the comments and point to 'Find my project' on the site.",
-     "label": "سؤال المساء: أي منزل يناسب عائلتك؟",
+     "id": "tf-two-plus-one",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/blog/gross-vs-net-area",
+     "photos": [],
+     "brief": "Badge «صح أم خطأ؟ · True or false?». The image shows only the statement (no answer). The caption invites answers in the comments, then gives the answer at the end after a short line «الإجابة ⬇️ / Answer ⬇️», from the site source named here: statement «في الإعلانات العقارية التركية، تعني 2+1 غرفتي نوم وغرفة معيشة واحدة» / «In Turkish property listings, 2+1 means two bedrooms and one living room»; answer: true, from blogData.gross-vs-net-area (point to /blog/gross-vs-net-area).",
+     "label": "صح أم خطأ: معنى 2+1",
      "at": "21:00"
     }
    ],
@@ -378,7 +369,8 @@
       "/images/projects/cadde-ispartakule/tower-park.jpg"
      ],
      "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats. 78 apartments and 12 shops.",
-     "label": "جادّة إسبارتاكولي · نظرة عامة"
+     "label": "جادّة إسبارتاكولي · نظرة عامة",
+     "at": "09:00"
     },
     {
      "id": "blog-taxes-and-tapu-fees",
@@ -389,9 +381,21 @@
       "/images/blog/taxes-and-tapu-fees.jpg"
      ],
      "brief": "3-4 practical points from the article blogData.taxes-and-tapu-fees, then invite to read it.",
-     "label": "مقال: فهم ضريبة العقار ورسوم الطابو في تركيا"
+     "label": "مقال: فهم ضريبة العقار ورسوم الطابو في تركيا",
+     "at": "14:00"
+    },
+    {
+     "id": "finish-ideal-home",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «أكمل الجملة · Finish the sentence». The image shows the unfinished sentence ending with «…»; the caption asks followers to finish it in the comments. «البيت المثالي بالنسبة إليّ هو…» / «My ideal home is…».",
+     "label": "أكمل الجملة: البيت المثالي",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-08",
@@ -409,7 +413,8 @@
       "/images/projects/lotus-koru-2/landscaped-grounds.jpg"
      ],
      "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats.",
-     "label": "لوتس كورو 2 · نظرة عامة"
+     "label": "لوتس كورو 2 · نظرة عامة",
+     "at": "09:00"
     },
     {
      "id": "blog-real-estate-valuation",
@@ -420,9 +425,21 @@
       "/images/blog/real-estate-valuation.jpg"
      ],
      "brief": "3-4 practical points from the article blogData.real-estate-valuation, then invite to read it.",
-     "label": "مقال: لماذا يهم التقييم العقاري عند شراء عقار"
+     "label": "مقال: لماذا يهم التقييم العقاري عند شراء عقار",
+     "at": "14:00"
+    },
+    {
+     "id": "evening-where-from",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «سؤال الليلة · Tonight's question». «من أي مدينة تتابعوننا الليلة؟» / «Which city are you following us from tonight?» No options; invite followers to write their city in the comments.",
+     "label": "سؤال الليلة: من أين تتابعوننا؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-09",
@@ -440,7 +457,8 @@
       "/images/projects/lotus-yali/aerial-sea-view.jpg"
      ],
      "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. Separate indoor pools, 3+1 and 5+2 duplex.",
-     "label": "لوتس يالي · الحياة في المشروع"
+     "label": "لوتس يالي · الحياة في المشروع",
+     "at": "09:00"
     },
     {
      "id": "property-request",
@@ -450,9 +468,21 @@
       "/images/projects/lotus-istanbul/iconic-urban-development.jpg"
      ],
      "brief": "Custom property request (propertyRequest.*): tell us type, city/district, new or any, budget, floor; we search for you, even outside our projects.",
-     "label": "اطلب عقارك المخصص"
+     "label": "اطلب عقارك المخصص",
+     "at": "14:00"
+    },
+    {
+     "id": "pick-ready-or-offplan",
+     "kind": "evening",
+     "design": "choice",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «لو خُيّرت · Your pick». Design «choice»: A = ready to move in (photo /images/projects/cadde-ispartakule/garden-pond.jpg), B = a new project before delivery (photo /images/projects/diamond-marin/facade-side.jpg). Caption: one honest line on each (ready = move in now; new launch = choose your unit early, installments where the project offers them), no prices.",
+     "label": "لو خُيّرت: جاهز أم على الخارطة؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-10",
@@ -471,7 +501,8 @@
       "/images/projects/cadde-ispartakule/garden-pond.jpg"
      ],
      "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. Wellness (hamam, sauna, fitness), smart home, garden.",
-     "label": "جادّة إسبارتاكولي · الحياة في المشروع"
+     "label": "جادّة إسبارتاكولي · الحياة في المشروع",
+     "at": "09:00"
     },
     {
      "id": "faq-rental-investment",
@@ -481,9 +512,21 @@
       "/images/projects/cadde-ispartakule/terrace-view.jpg"
      ],
      "brief": "Answer the FAQ question faq.categories[1].items[4] (question + clear short answer from the site's answer).",
-     "label": "سؤال: الاستثمار الإيجاري"
+     "label": "سؤال: الاستثمار الإيجاري",
+     "at": "14:00"
+    },
+    {
+     "id": "evening-neighbourhood",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «سؤال الليلة · Tonight's question». «ما أهم ما تحتاجه قرب بيتك؟» with 4 options: مدرسة/School, مستشفى/Hospital, مركز تسوق/Mall, مواصلات/Transport.",
+     "label": "سؤال الليلة: ماذا تحتاج قرب بيتك؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-11",
@@ -501,7 +544,8 @@
       "/images/projects/lotus-koru-2/urban-living-concept.jpg"
      ],
      "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits.",
-     "label": "لوتس كورو 2 · الحياة في المشروع"
+     "label": "لوتس كورو 2 · الحياة في المشروع",
+     "at": "09:00"
     },
     {
      "id": "resale",
@@ -511,9 +555,21 @@
       "/images/projects/cadde-ispartakule/tower-park.jpg"
      ],
      "brief": "Resale market on the site: owners can list their property (reviewed before publishing), buyers browse approved listings.",
-     "label": "سوق إعادة البيع"
+     "label": "سوق إعادة البيع",
+     "at": "14:00"
+    },
+    {
+     "id": "tf-european-side",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «صح أم خطأ؟ · True or false?». The image shows only the statement (no answer). The caption invites answers in the comments, then gives the answer at the end after a short line «الإجابة ⬇️ / Answer ⬇️», from the site source named here: statement «تقع مشاريع حضارة الحالية كلها في الجانب الأوروبي من إسطنبول» / «All of HADARA's current projects are on Istanbul's European side»; answer: true (Beylikdüzü, Büyükçekmece, Avcılar and Şişli), from faq.categories[0].items[2].",
+     "label": "صح أم خطأ: مشاريعنا في الجانب الأوروبي",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-12",
@@ -531,7 +587,8 @@
       "/images/projects/lotus-yali/sunset-aerial.jpg"
      ],
      "brief": "Location: the nearby places and travel times (projectsData.<slug>.nearby) and the district.",
-     "label": "لوتس يالي · الموقع وما حوله"
+     "label": "لوتس يالي · الموقع وما حوله",
+     "at": "09:00"
     },
     {
      "id": "why-hadara",
@@ -541,9 +598,21 @@
       "/hero-istanbul.jpg"
      ],
      "brief": "Why HADARA (home.why + home.stats): your real estate partner in Istanbul, 12+ years, 11 projects, full guidance. General wording, never 'we build/develop'.",
-     "label": "لماذا حضارة"
+     "label": "لماذا حضارة",
+     "at": "14:00"
+    },
+    {
+     "id": "finish-first-thing-home",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «أكمل الجملة · Finish the sentence». The image shows the unfinished sentence ending with «…»; the caption asks followers to finish it in the comments. «أول ما سأفعله في بيتي الجديد في إسطنبول هو…» / «The first thing I'll do in my new Istanbul home is…».",
+     "label": "أكمل الجملة: أول ما سأفعله",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-13",
@@ -560,8 +629,9 @@
       "/images/projects/beylikduzu-living/street-facade.jpg",
       "/images/projects/beylikduzu-living/aerial-view.jpg"
      ],
-     "brief": "Lotus Yaşam for citizenship buyers: highlights say eligible for Turkish citizenship by investment, flexible installments, delivery late 2028. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "لوتس ياشام · مناسب للجنسية"
+     "brief": "Lotus Yaşam for buyers thinking about citizenship: a new launch with flexible installments, delivery late 2028 (from the data). IMPORTANT: not every unit qualifies; never say the project or all its units are eligible. Say only that units that meet the legal minimum value can qualify and that the HADARA team confirms which units do. No prices and no price ranges. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
+     "label": "لوتس ياشام · لمن يفكر في الجنسية",
+     "at": "09:00"
     },
     {
      "id": "citizenship-requirements",
@@ -571,9 +641,21 @@
       "/images/blog/citizenship-investment-laws.jpg"
      ],
      "brief": "Citizenship programme requirements (citizenship.requirements): minimum, valuation report, foreign currency payment, 3-year hold, conformity, off-plan. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "شروط الجنسية"
+     "label": "شروط الجنسية",
+     "at": "14:00"
+    },
+    {
+     "id": "tf-rent-increase",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/property-laws",
+     "photos": [],
+     "brief": "Badge «صح أم خطأ؟ · True or false?». The image shows only the statement (no answer). The caption invites answers in the comments, then gives the answer at the end after a short line «الإجابة ⬇️ / Answer ⬇️», from the site source named here: statement «عند تجديد عقد الإيجار السكني في تركيا، يستطيع المالك رفع الإيجار بأي نسبة يريدها» / «When a home rental contract in Turkey is renewed, the landlord can raise the rent by any amount»; answer: FALSE: the yearly increase may not exceed the average change of the consumer price index (TÜFE) over the previous 12 months, Article 344 of the Turkish Code of Obligations No. 6098, from lawsData.rules.rent-increase. Add the note «الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change» and point to the Property Laws page (path /property-laws).",
+     "label": "صح أم خطأ: زيادة الإيجار",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-14",
@@ -591,7 +673,8 @@
       "/images/projects/diamond-marin/street-view.jpg"
      ],
      "brief": "Diamond Marin: only 58 residences in two low-rise buildings (limited units), 3+1, delivery late 2027, 5 min to West Istanbul Marina. Different headline and photo crop than earlier Diamond Marin posts.",
-     "label": "دايموند مارين · وحدات محدودة"
+     "label": "دايموند مارين · وحدات محدودة",
+     "at": "09:00"
     },
     {
      "id": "citizenship-steps",
@@ -601,9 +684,21 @@
       "/images/blog/citizenship-by-real-estate.jpg"
      ],
      "brief": "The citizenship process step by step (citizenship.steps), as a numbered list. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "خطوات الجنسية"
+     "label": "خطوات الجنسية",
+     "at": "14:00"
+    },
+    {
+     "id": "evening-visited-istanbul",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «سؤال الليلة · Tonight's question». «هل زرتم إسطنبول من قبل؟» with 3 options: مرة واحدة/Once, أكثر من مرة/Many times, ليس بعد/Not yet.",
+     "label": "سؤال الليلة: هل زرتم إسطنبول؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-15",
@@ -621,7 +716,8 @@
       "/images/projects/lotus-sisli/penthouse-terrace.jpg"
      ],
      "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. 1+1/2+1 apartments, penthouses, facilities from the data.",
-     "label": "لوتس شيشلي · الحياة في المشروع"
+     "label": "لوتس شيشلي · الحياة في المشروع",
+     "at": "09:00"
     },
     {
      "id": "citizenship-benefits",
@@ -631,9 +727,21 @@
       "/images/projects/lotus-sisli/tower-night.jpg"
      ],
      "brief": "Benefits of Turkish citizenship (citizenship.benefits). Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "مزايا الجنسية"
+     "label": "مزايا الجنسية",
+     "at": "14:00"
+    },
+    {
+     "id": "finish-best-of-istanbul",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «أكمل الجملة · Finish the sentence». The image shows the unfinished sentence ending with «…»; the caption asks followers to finish it in the comments. «أجمل ما في إسطنبول بالنسبة إليّ هو…» / «For me, the best thing about Istanbul is…».",
+     "label": "أكمل الجملة: أجمل ما في إسطنبول",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-16",
@@ -651,7 +759,8 @@
       "/images/projects/cadde-ispartakule/tower-avenue.jpg"
      ],
      "brief": "The 12 shops and the avenue setting of Cadde Ispartakule, for investors (only facts from the data).",
-     "label": "جادّة إسبارتاكولي · المحلات التجارية"
+     "label": "جادّة إسبارتاكولي · المحلات التجارية",
+     "at": "09:00"
     },
     {
      "id": "blog-citizenship-investment-laws",
@@ -662,9 +771,21 @@
       "/images/blog/citizenship-investment-laws.jpg"
      ],
      "brief": "3-4 practical points from the article blogData.citizenship-investment-laws, then invite to read it.",
-     "label": "مقال: قوانين الجنسية التركية عبر الاستثمار، بالتفصيل"
+     "label": "مقال: قوانين الجنسية التركية عبر الاستثمار، بالتفصيل",
+     "at": "14:00"
+    },
+    {
+     "id": "evening-what-decides",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «سؤال الليلة · Tonight's question». «ما الذي يساعدك أكثر على اتخاذ قرار الشراء؟» with 4 options: زيارة المشروع/Site visit, جولة عبر الفيديو/Video tour, رأي العائلة/Family's opinion, خطة الدفع/Payment plan. No prices.",
+     "label": "سؤال الليلة: ما الذي يحسم قرارك؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-17",
@@ -682,7 +803,8 @@
       "/images/projects/lotus-koru-2/central-location.jpg"
      ],
      "brief": "Lotus Koru 2: completed homes with available units; highlights and stats.",
-     "label": "لوتس كورو 2 · الشقق والمساحات"
+     "label": "لوتس كورو 2 · الشقق والمساحات",
+     "at": "09:00"
     },
     {
      "id": "citizenship-costs",
@@ -692,9 +814,21 @@
       "/images/blog/taxes-and-tapu-fees.jpg"
      ],
      "brief": "Documents and costs for citizenship (citizenship.documents + citizenship.costs, e.g. title deed fee). Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "وثائق وتكاليف الجنسية"
+     "label": "وثائق وتكاليف الجنسية",
+     "at": "14:00"
+    },
+    {
+     "id": "pick-kitchen-or-living",
+     "kind": "evening",
+     "design": "choice",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «لو خُيّرت · Your pick». Design «choice»: A = a big kitchen (photo /images/projects/marmara-haven-villa/kitchen.jpg), B = a big living room (photo /images/projects/lotus-manzara-beylikduzu/living-room.jpg).",
+     "label": "لو خُيّرت: مطبخ واسع أم صالة واسعة؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-18",
@@ -712,7 +846,8 @@
       "/images/projects/lotus-yali/view-from-sea.jpg"
      ],
      "brief": "Lotus Yalı homes: 48 apartments, 3+1 and 5+2 duplex in 8 blocks on 8,600 m²; completed with available units.",
-     "label": "لوتس يالي · الشقق والمساحات"
+     "label": "لوتس يالي · الشقق والمساحات",
+     "at": "09:00"
     },
     {
      "id": "residence-permit",
@@ -722,9 +857,21 @@
       "/images/blog/life-in-turkey.jpg"
      ],
      "brief": "Real-estate residence permit (citizenship.residence*): minimum values in Istanbul vs other cities. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "الإقامة العقارية"
+     "label": "الإقامة العقارية",
+     "at": "14:00"
+    },
+    {
+     "id": "tf-currency-bank",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/property-laws",
+     "photos": [],
+     "brief": "Badge «صح أم خطأ؟ · True or false?». The image shows only the statement (no answer). The caption invites answers in the comments, then gives the answer at the end after a short line «الإجابة ⬇️ / Answer ⬇️», from the site source named here: statement «عندما يشتري الأجنبي عقاراً في تركيا، يُحوَّل ثمنه من العملة الأجنبية إلى الليرة التركية عبر بنك في تركيا» / «When a foreigner buys property in Turkey, the price is converted from foreign currency into Turkish lira through a bank in Turkey»; answer: true, and the bank's currency purchase document (Döviz Alım Belgesi) goes to the land registry, from lawsData.rules.currency-certificate. Add the note «الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change» and point to the Property Laws page (path /property-laws).",
+     "label": "صح أم خطأ: تحويل الثمن عبر بنك",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-19",
@@ -742,7 +889,8 @@
       "/images/projects/marmara-haven-villa/side-view.jpg"
      ],
      "brief": "Marmara Haven Villa's verified project card (projectsData.marmara-haven-villa.verified + projectDetail.verified.labels): items confirmed by the HADARA team, last update date; documents available on request.",
-     "label": "فيلا مرمرة هيفن · البطاقة الموثّقة"
+     "label": "فيلا مرمرة هيفن · البطاقة الموثّقة",
+     "at": "09:00"
     },
     {
      "id": "faq-keep-nationality",
@@ -752,9 +900,21 @@
       "/images/blog/citizenship-investment-laws.jpg"
      ],
      "brief": "Answer the FAQ question faq.categories[2].items[4] (question + clear short answer from the site's answer). Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "سؤال: الاحتفاظ بجنسيتك"
+     "label": "سؤال: الاحتفاظ بجنسيتك",
+     "at": "14:00"
+    },
+    {
+     "id": "evening-villa-priority",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «سؤال الليلة · Tonight's question». «ما الأهم لك في الفيلا؟» with 4 options: الحديقة/Garden, المسبح/Pool, الإطلالة/View, المساحة/Space.",
+     "label": "سؤال الليلة: ما الأهم في الفيلا؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-20",
@@ -772,7 +932,8 @@
       "/images/projects/marmara-haven-villa/sea-view.jpg"
      ],
      "brief": "Marmara Haven Villa again, new angle: ready to move in, private pool, sea view, 5 bedrooms, price as in projects.ts (from $1,550,000; VAT included, 4% title deed fee not included). Different headline than the first villa post.",
-     "label": "فيلا مرمرة هيفن · نظرة عامة"
+     "label": "فيلا مرمرة هيفن · نظرة عامة",
+     "at": "09:00"
     },
     {
      "id": "blog-life-in-turkey",
@@ -783,9 +944,21 @@
       "/images/blog/life-in-turkey.jpg"
      ],
      "brief": "3-4 practical points from the article blogData.life-in-turkey, then invite to read it.",
-     "label": "مقال: كيف تبدو الحياة في تركيا"
+     "label": "مقال: كيف تبدو الحياة في تركيا",
+     "at": "14:00"
+    },
+    {
+     "id": "finish-home-name",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «أكمل الجملة · Finish the sentence». The image shows the unfinished sentence ending with «…»; the caption asks followers to finish it in the comments. «لو كان لبيتي في إسطنبول اسم، لسمّيته…» / «If my Istanbul home had a name, I'd call it…».",
+     "label": "أكمل الجملة: لو كان لبيتي اسم",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-21",
@@ -803,7 +976,8 @@
       "/images/projects/lotus-manzara-guzelce/villa-row.jpg"
      ],
      "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats. 32 villas 6+2.",
-     "label": "لوتس مانزارا غوزلجه · نظرة عامة"
+     "label": "لوتس مانزارا غوزلجه · نظرة عامة",
+     "at": "09:00"
     },
     {
      "id": "blog-about-turkey",
@@ -814,9 +988,21 @@
       "/images/blog/about-turkey.jpg"
      ],
      "brief": "3-4 practical points from the article blogData.about-turkey, then invite to read it.",
-     "label": "مقال: التعرف على تركيا: بلد بين قارتين"
+     "label": "مقال: التعرف على تركيا: بلد بين قارتين",
+     "at": "14:00"
+    },
+    {
+     "id": "evening-who-decides",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «سؤال الليلة · Tonight's question». «مع من تختار بيتك عادةً؟» with 4 options: العائلة/Family, الأصدقاء/Friends, وحدي/On my own, مستشار عقاري/An advisor.",
+     "label": "سؤال الليلة: مع من تختار بيتك؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-22",
@@ -834,7 +1020,8 @@
       "/images/projects/lotus-manzara-beylikduzu/villas-entrance.jpg"
      ],
      "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats. 16 villas 5+2: 8 detached type A and 8 semi-detached type B.",
-     "label": "لوتس مانزارا بيليكدوزو · نظرة عامة"
+     "label": "لوتس مانزارا بيليكدوزو · نظرة عامة",
+     "at": "09:00"
     },
     {
      "id": "design-service",
@@ -844,9 +1031,21 @@
       "/images/consultancy/hero-1680.webp"
      ],
      "brief": "Architectural & engineering design as one of HADARA's services (consultancy.*). Images are illustrative concepts: never present them as built HADARA projects, never name another company, no invented experience numbers.",
-     "label": "التصميم المعماري والهندسي"
+     "label": "التصميم المعماري والهندسي",
+     "at": "14:00"
+    },
+    {
+     "id": "tf-gross-bigger",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/blog/gross-vs-net-area",
+     "photos": [],
+     "brief": "Badge «صح أم خطأ؟ · True or false?». The image shows only the statement (no answer). The caption invites answers in the comments, then gives the answer at the end after a short line «الإجابة ⬇️ / Answer ⬇️», from the site source named here: statement «المساحة الإجمالية (brüt) للشقة أكبر دائماً من مساحتها الصافية (net)» / «A flat's gross area (brüt) is always larger than its net area»; answer: true, because the gross includes the walls and usually a share of the common areas, from blogData.gross-vs-net-area. Different wording from the 2026-10-06 true/false post.",
+     "label": "صح أم خطأ: الإجمالية أكبر من الصافية",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-23",
@@ -864,7 +1063,8 @@
       "/images/projects/marmara-haven-villa/rooftop.jpg"
      ],
      "brief": "Marmara Haven Villa floor by floor (floorPlan + projectsData.marmara-haven-villa.floorPlan): 4 levels with gross/net areas and features; rooftop sea view.",
-     "label": "فيلا مرمرة هيفن · الطوابق الأربعة"
+     "label": "فيلا مرمرة هيفن · الطوابق الأربعة",
+     "at": "09:00"
     },
     {
      "id": "video-tour-villa",
@@ -874,9 +1074,21 @@
       "/images/projects/marmara-haven-villa/living-room.jpg"
      ],
      "brief": "Book a private video tour of Marmara Haven Villa or any project (videoTour.*). Different wording than earlier video-tour posts.",
-     "label": "جولة فيديو للفلل"
+     "label": "جولة فيديو للفلل",
+     "at": "14:00"
+    },
+    {
+     "id": "evening-buying-abroad",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «سؤال الليلة · Tonight's question». «ما أكثر ما يقلقك عند شراء بيت في إسطنبول وأنت خارج تركيا؟» with 4 options: الأوراق/Paperwork, المسافة/Distance, اختيار المنطقة/The area, اللغة/Language. The caption says our team guides buyers at every step (faq.categories[1].items[1]). Do not mention the video tour (the 14:00 post of the same day is about it).",
+     "label": "سؤال الليلة: ما الذي يقلقك عند الشراء من الخارج؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-24",
@@ -894,7 +1106,8 @@
       "/images/projects/lotus-manzara-guzelce/villa-row.jpg"
      ],
      "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. Villa interiors, private parking (no pools in these villas).",
-     "label": "لوتس مانزارا غوزلجه · الحياة في المشروع"
+     "label": "لوتس مانزارا غوزلجه · الحياة في المشروع",
+     "at": "09:00"
     },
     {
      "id": "blog-real-estate-market-trends",
@@ -905,9 +1118,21 @@
       "/images/blog/real-estate-market-trends.jpg"
      ],
      "brief": "3-4 practical points from the article blogData.real-estate-market-trends, then invite to read it.",
-     "label": "مقال: اتجاهات عقارية تستحق المتابعة في إسطنبول"
+     "label": "مقال: اتجاهات عقارية تستحق المتابعة في إسطنبول",
+     "at": "14:00"
+    },
+    {
+     "id": "pick-entrance-or-parking",
+     "kind": "evening",
+     "design": "choice",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «لو خُيّرت · Your pick». Design «choice»: A = a spacious entrance with an inner staircase (photo /images/projects/lotus-manzara-guzelce/entrance-staircase.jpg), B = a private parking space (photo /images/projects/lotus-manzara-guzelce/private-parking.jpg). Villa week.",
+     "label": "لو خُيّرت: مدخل فسيح أم موقف خاص؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-25",
@@ -926,7 +1151,8 @@
       "/images/projects/lotus-manzara-beylikduzu/living-room.jpg"
      ],
      "brief": "The two villa types A (detached) and B (semi-detached), 5+2, interiors, private parking (no pools).",
-     "label": "لوتس مانزارا بيليكدوزو · نوعا الفلل"
+     "label": "لوتس مانزارا بيليكدوزو · نوعا الفلل",
+     "at": "09:00"
     },
     {
      "id": "find-my-project-villas",
@@ -936,9 +1162,21 @@
       "/images/projects/lotus-manzara-guzelce/aerial-villas.jpg"
      ],
      "brief": "'Find my project' quiz (match.*): answer 4 questions and see matching villas or apartments.",
-     "label": "اعثر على فيلتك"
+     "label": "اعثر على فيلتك",
+     "at": "14:00"
+    },
+    {
+     "id": "pick-home-size",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «سؤال الليلة · Tonight's question». «أيّ مساحة تناسب عائلتك؟» with 4 options: 1+1, 2+1, 3+1, فيلا/Villa. The caption shows our available projects offer each layout (residences in projects.ts; villas from the villa projects) and points to «Find my project» on the site.",
+     "label": "سؤال الليلة: أيّ مساحة تناسب عائلتك؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-26",
@@ -956,7 +1194,8 @@
       "/images/projects/marmara-haven-villa/rooftop.jpg"
      ],
      "brief": "Marmara Haven Villa's sea view and location (nearby): swimming coast 5 min, E-5 3 min; rooftop living.",
-     "label": "فيلا مرمرة هيفن · إطلالة البحر"
+     "label": "فيلا مرمرة هيفن · إطلالة البحر",
+     "at": "09:00"
     },
     {
      "id": "blog-citizenship-by-real-estate",
@@ -967,9 +1206,21 @@
       "/images/blog/citizenship-by-real-estate.jpg"
      ],
      "brief": "3-4 points from blogData.citizenship-by-real-estate, then invite to read it. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "مقال: كيف يقود الاستثمار العقاري إلى الجنسية التركية"
+     "label": "مقال: كيف يقود الاستثمار العقاري إلى الجنسية التركية",
+     "at": "14:00"
+    },
+    {
+     "id": "evening-complex-facility",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «سؤال الليلة · Tonight's question». «ما أهم ميزة في المجمّع السكني بالنسبة إليك؟» with 4 options: المسبح/Pool, النادي الرياضي/Gym, الحدائق/Gardens, الأمن/Security.",
+     "label": "سؤال الليلة: أهم ميزة في المجمّع",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-27",
@@ -977,17 +1228,19 @@
    "weekEn": "Wrap-up",
    "posts": [
     {
-     "id": "diamond-marin-recap",
+     "id": "diamond-marin-interiors",
      "kind": "project",
      "slug": "diamond-marin",
-     "angle": "recap",
+     "angle": "interiors",
      "path": "/projects/diamond-marin",
      "photos": [
-      "/images/projects/diamond-marin/facade.jpg",
-      "/images/projects/diamond-marin/aerial-sea-view.jpg"
+      "/images/projects/diamond-marin/kids-bedroom.jpg",
+      "/images/projects/diamond-marin/dressing-room.jpg",
+      "/images/projects/diamond-marin/kitchen.jpg"
      ],
-     "brief": "Diamond Marin recap: new launch, limited units, key numbers. Fresh headline.",
-     "label": "دايموند مارين · تذكير"
+     "brief": "Inside the homes of Diamond Marin: layouts and sizes from residences, bedrooms, dressing room, kitchen (interior photos). A new angle: not its life, location or limited-units posts; fresh headline. No prices.",
+     "label": "دايموند مارين · من الداخل",
+     "at": "09:00"
     },
     {
      "id": "hadara-in-numbers",
@@ -997,9 +1250,21 @@
       "/hero-istanbul.jpg"
      ],
      "brief": "HADARA in numbers (home.stats): 12+ years, 11 projects, 640+ residences, 420+ offices, 60+ shops, 4 districts; your real estate partner in Istanbul.",
-     "label": "حضارة بالأرقام"
+     "label": "حضارة بالأرقام",
+     "at": "14:00"
+    },
+    {
+     "id": "evening-best-season",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «سؤال الليلة · Tonight's question». «في أي فصل تفضّلون زيارة إسطنبول؟» with 4 options: الربيع/Spring, الصيف/Summer, الخريف/Autumn, الشتاء/Winter.",
+     "label": "سؤال الليلة: أي فصل لزيارة إسطنبول؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   },
   {
    "date": "2026-10-28",
@@ -1007,17 +1272,17 @@
    "weekEn": "Wrap-up",
    "posts": [
     {
-     "id": "beylikduzu-living-recap",
+     "id": "lotus-koru-2-location",
      "kind": "project",
-     "slug": "beylikduzu-living",
-     "angle": "recap",
-     "path": "/projects/beylikduzu-living",
+     "slug": "lotus-koru-2",
+     "angle": "location",
+     "path": "/projects/lotus-koru-2",
      "photos": [
-      "/images/projects/beylikduzu-living/garden-terrace.jpg",
-      "/images/projects/beylikduzu-living/courtyard-gardens.jpg"
+      "/images/projects/lotus-koru-2/central-location.jpg"
      ],
-     "brief": "Lotus Yaşam recap: new launch, 18 blocks, sizes, delivery late 2028. Fresh headline.",
-     "label": "لوتس ياشام · تذكير"
+     "brief": "Location of Lotus Koru 2: the nearby places and travel times (projectsData.lotus-koru-2.nearby) and the district. No prices.",
+     "label": "لوتس كورو 2 · الموقع وما حوله",
+     "at": "09:00"
     },
     {
      "id": "faq-contact",
@@ -1027,19 +1292,31 @@
       "/images/projects/lotus-yali/sunset-aerial.jpg"
      ],
      "brief": "Answer the FAQ question faq.categories[0].items[3] (question + clear short answer from the site's answer). Include the contact channels: WhatsApp, live chat on the website, contact form, video tour booking.",
-     "label": "كيف تتواصل معنا"
+     "label": "كيف تتواصل معنا",
+     "at": "14:00"
+    },
+    {
+     "id": "evening-next-topics",
+     "kind": "evening",
+     "design": "tweet",
+     "path": "/projects",
+     "photos": [],
+     "brief": "Badge «سؤال الليلة · Tonight's question». «عن أي موضوع تحبون أن نكتب لكم الشهر القادم؟» / «What would you like us to post about next month?» No options; answers in the comments.",
+     "label": "سؤال الليلة: عمّ نكتب لكم؟",
+     "at": "21:00"
     }
-   ]
+   ],
+   "intensive": true
   }
  ],
  "intensive": {
   "from": "2026-09-30",
-  "to": "2026-10-06",
+  "to": "2026-10-28",
   "times": [
    "09:00",
    "14:00",
    "21:00"
   ],
-  "note": "Owner's request 2026-09-29 (warm-up before paid ads): 3 posts a day at 09:00 (a project), 14:00 (useful information) and 21:00 (something lighter). After 2026-10-06 the owner decides; until then the days keep their 2 posts without times (published with the first run, 09:00)."
+  "note": "Owner's request 2026-09-29, kept by the owner 2026-10-03: 3 posts a day, each at its own time, one feed post per time: 09:00 a project (design A), 14:00 useful real-estate information (design A), 21:00 an interactive 'tweet' (design «tweet»; design «choice» for «لو خُيّرت» photo questions 1-2 times a week). Plus the daily Story with the morning post."
  }
 }
