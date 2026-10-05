@@ -2,7 +2,9 @@ import { defineConfig, type Plugin } from "vite";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { buildMeta, indexableRoutes, renderHeadTags, isRtlLocale, DEFAULT_SITE_URL } from "./src/seo/meta";
-import { localizePath, routePath } from "./src/seo/routes";
+import { localizePath, routePath, type Route } from "./src/seo/routes";
+import { projects } from "./src/data/projects";
+import { blogPosts } from "./src/data/blog";
 import { locales } from "./src/i18n/dictionaries";
 
 /**
@@ -44,6 +46,7 @@ function seoPrerender(): Plugin {
               ...meta.alternates.map(
                 (a) => `    <xhtml:link rel="alternate" hreflang="${a.hreflang}" href="${escapeXml(a.href)}"/>`
               ),
+              ...pageImages(route).map((src) => `    <image:image><image:loc>${escapeXml(siteUrl + src)}</image:loc></image:image>`),
               "  </url>"
             ].join("\n")
           );
@@ -52,7 +55,15 @@ function seoPrerender(): Plugin {
 
       writeFileSync(
         resolve(outDir, "sitemap.xml"),
-        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${sitemapEntries.join("\n")}\n</urlset>\n`
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${sitemapEntries.join("\n")}\n</urlset>\n`
+      );
+
+      // Unknown addresses get a real 404 (vercel.json only sends app-only pages such as /login or /admin to the app);
+      // the app still renders its "page not found" view from the URL.
+      const notFound = buildMeta({ name: "not-found" }, "en", siteUrl);
+      writeFileSync(
+        resolve(outDir, "404.html"),
+        template.replace(/<title>[\s\S]*?<\/title>/, () => `<title>${escapeXml(notFound.title)}</title>\n    ${renderHeadTags(notFound)}`)
       );
 
       writeFileSync(
@@ -70,6 +81,20 @@ function seoPrerender(): Plugin {
       );
     }
   };
+}
+
+/** The photos shown on a page, listed in the sitemap so they can appear in Google Images. */
+function pageImages(route: Route): string[] {
+  const local = (src: string) => src.startsWith("/");
+  if (route.name === "project") {
+    const project = projects.find((p) => p.slug === route.slug);
+    return project ? [project.coverImage, ...project.gallery].map((g) => g.src).filter(local) : [];
+  }
+  if (route.name === "blog-post") {
+    const post = blogPosts.find((p) => p.slug === route.slug);
+    return post && local(post.coverImage.src) ? [post.coverImage.src] : [];
+  }
+  return [];
 }
 
 function escapeXml(value: string): string {

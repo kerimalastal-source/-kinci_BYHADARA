@@ -116,6 +116,26 @@ export function indexableRoutes(): Route[] {
   ];
 }
 
+/** What the page sells, in the search title ("Apartments for Sale in Beylikdüzü"), read from the project's own data. */
+function projectSeoKind(project: (typeof projects)[number]): string {
+  const has = (key: string) => project.stats.some((s) => s.labelKey === key);
+  const kinds = new Set((project.residences ?? []).map((r) => r.kind));
+  if (project.soldOut) return "completed";
+  if (project.slug.includes("villa")) return "villa"; // a single private villa (marmara-haven-villa)
+  if (kinds.has("villa") || has("villas")) return "villas";
+  if (kinds.has("office") || has("homeOffices")) return "homeOffices";
+  if (has("shops")) return "apartmentsShops";
+  return "apartments";
+}
+
+/** "Title | HADARA Real Estate" while it fits in a search result (~65 characters), then "| HADARA", then the title alone. */
+function withBrand(title: string, brand: string): string {
+  const full = `${title} | ${brand}`;
+  if (full.length <= 65) return full;
+  const short = `${title} | HADARA`;
+  return short.length <= 65 ? short : title;
+}
+
 function clip(text: string, max = 160): string {
   const clean = text.replace(/\s+/g, " ").trim();
   if (clean.length <= max) return clean;
@@ -150,7 +170,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
     const content = lookup(locale, `projectsData.${project.slug}`) as { name: string; tagline: string; shortDescription: string; longDescription: string };
     const district = String(lookup(locale, `places.${placeKey(project.district)}`) ?? project.district);
     const city = String(lookup(locale, `places.${placeKey(project.city)}`) ?? project.city);
-    title = tr("seo.projectTitle").replace("{name}", content.name).replace("{district}", district).replace("{city}", city);
+    title = tr(`seo.projectTitles.${projectSeoKind(project)}`).replace("{name}", content.name).replace("{district}", district).replace("{city}", city);
     description = clip(content.shortDescription);
     image = img(project.coverImage.src);
     imageAlt = content.name;
@@ -344,7 +364,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
 
   return {
     locale,
-    title: pageRoute.name === "home" ? title : `${title} | ${brand}`,
+    title: pageRoute.name === "home" ? title : withBrand(title, brand),
     description,
     canonical: url(path),
     alternates: noindex

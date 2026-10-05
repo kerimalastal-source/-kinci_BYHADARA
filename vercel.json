@@ -55,7 +55,19 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!api/).*)",
+      "source": "/(login|register|account|admin)(/.*)?",
+      "destination": "/"
+    },
+    {
+      "source": "/(ar|fa|fr|ru)/(login|register|account|admin)(/.*)?",
+      "destination": "/"
+    },
+    {
+      "source": "/resale/([^/]+)",
+      "destination": "/"
+    },
+    {
+      "source": "/(ar|fa|fr|ru)/resale/([^/]+)",
       "destination": "/"
     }
   ],

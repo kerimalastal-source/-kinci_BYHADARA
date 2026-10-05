@@ -2143,7 +2143,15 @@
       "title": "Page introuvable",
       "description": "La page que vous recherchez n'existe pas ou a été déplacée."
     },
-    "projectTitle": "{name} – {district}, {city}"
+    "projectTitle": "{name} – {district}, {city}",
+    "projectTitles": {
+      "apartments": "{name} : appartements à vendre à {district}, {city}",
+      "villas": "{name} : villas à vendre à {district}, {city}",
+      "villa": "{name} : villa à vendre à {district}, {city}",
+      "homeOffices": "{name} : home offices et appartements à {district}, {city}",
+      "apartmentsShops": "{name} : appartements et commerces à {district}, {city}",
+      "completed": "{name} : projet livré à {district}, {city}"
+    }
   },
   "chat": {
     "here": "Vous consultez {name}. Que souhaitez-vous savoir à son sujet ?",
