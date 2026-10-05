@@ -1,9 +1,6 @@
 // DOM-free translation core, shared by the browser app and the build-time SEO prerender.
-import en from "./en.json";
-import ar from "./ar.json";
-import fa from "./fa.json";
-import fr from "./fr.json";
-import ru from "./ru.json";
+// The dictionaries themselves are registered from outside: the browser loads only the languages
+// it needs (i18n/load.ts), the build registers all five (i18n/all.ts).
 
 export type Locale = "en" | "ar" | "fa" | "fr" | "ru";
 
@@ -16,7 +13,15 @@ export const rtlLocales: Locale[] = ["ar", "fa"];
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Dict = any;
 
-export const dictionaries: Record<Locale, Dict> = { en, ar, fa, fr, ru };
+const dictionaries: Partial<Record<Locale, Dict>> = {};
+
+export function registerDictionary(locale: Locale, dict: Dict): void {
+  dictionaries[locale] = dict;
+}
+
+export function hasDictionary(locale: Locale): boolean {
+  return dictionaries[locale] !== undefined;
+}
 
 /**
  * The Intl locale for dates and numbers: Latin digits everywhere, and the Gregorian
@@ -40,7 +45,7 @@ function resolve(dict: Dict, path: string): unknown {
   }, dict);
 }
 
-/** Looks up a key for a given locale, falling back to English. */
+/** Looks up a key for a given locale, falling back to English when it is loaded (all five share the same keys). */
 export function lookup(locale: Locale, key: string): unknown {
   const value = resolve(dictionaries[locale], key);
   return value === undefined ? resolve(dictionaries.en, key) : value;

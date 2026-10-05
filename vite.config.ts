@@ -1,5 +1,6 @@
 import { defineConfig, type Plugin } from "vite";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import "./src/i18n/all";
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { buildMeta, indexableRoutes, renderHeadTags, isRtlLocale, DEFAULT_SITE_URL } from "./src/seo/meta";
 import { localizePath, routePath, type Route } from "./src/seo/routes";
@@ -26,12 +27,26 @@ function seoPrerender(): Plugin {
       const today = new Date().toISOString().slice(0, 10);
       const sitemapEntries: string[] = [];
 
+      // Each language's dictionary is its own chunk (src/i18n/load.ts); every page asks for its own
+      // one right away instead of after the main script has run.
+      const dictChunks = Object.fromEntries(
+        readdirSync(resolve(outDir, "assets"))
+          .map((file) => file.match(/^(en|ar|fa|fr|ru)-[\w-]+\.js$/))
+          .filter((m): m is RegExpMatchArray => Boolean(m))
+          .map((m) => [m[1], `/assets/${m[0]}`])
+      );
+      const preload = (locale: string) =>
+        dictChunks[locale] ? `<link rel="modulepreload" crossorigin href="${dictChunks[locale]}">\n    ` : "";
+
       for (const route of indexableRoutes()) {
         for (const locale of locales) {
           const meta = buildMeta(route, locale, siteUrl);
           const html = template
             .replace(/<html[^>]*>/, `<html lang="${locale}" dir="${isRtlLocale(locale) ? "rtl" : "ltr"}">`)
-            .replace(/<title>[\s\S]*?<\/title>/, () => `<title>${escapeXml(meta.title)}</title>\n    ${renderHeadTags(meta)}`);
+            .replace(
+              /<title>[\s\S]*?<\/title>/,
+              () => `${preload(locale)}<title>${escapeXml(meta.title)}</title>\n    ${renderHeadTags(meta)}`
+            );
 
           const path = localizePath(routePath(route), locale);
           const file = resolve(outDir, path === "/" ? "index.html" : `${path.slice(1)}/index.html`);

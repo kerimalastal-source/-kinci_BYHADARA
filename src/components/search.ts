@@ -1,5 +1,6 @@
 import { t, tRaw, getProjectContent } from "../i18n";
 import { lookup } from "../i18n/dictionaries";
+import { ensureLocales } from "../i18n/load";
 import { getSortedProjects } from "../data/projects";
 import { getSortedBlogPosts } from "../data/blog";
 import { navigate } from "../router";
@@ -93,6 +94,7 @@ function runSearch(query: string): SearchResult[] {
 
 export function openSearch(): void {
   if (overlay) return;
+  void ensureLocales(["en"]); // English project names are search keywords on every page
 
   overlay = document.createElement("div");
   overlay.className = "search-overlay";

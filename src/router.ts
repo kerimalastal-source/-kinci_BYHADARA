@@ -14,26 +14,14 @@ import { renderPropertyRequest } from "./pages/propertyRequest";
 import { renderVideoTour } from "./pages/videoTour";
 import { renderContact } from "./pages/contact";
 import { renderNotFound } from "./pages/notFound";
-import { renderLogin } from "./pages/login";
-import { renderRegister } from "./pages/register";
-import { renderAccountDashboard } from "./pages/account/dashboard";
-import { renderSubmitListing } from "./pages/account/submitListing";
 import { renderResaleList } from "./pages/resale/list";
 import { renderResaleDetail } from "./pages/resale/detail";
-import { renderAdminDashboard } from "./pages/admin/dashboard";
-import { renderAdminReviewListing } from "./pages/admin/reviewListing";
-import { renderAdminBookings } from "./pages/admin/bookings";
-import { renderAdminInquiries } from "./pages/admin/inquiries";
-import { renderAdminOverview } from "./pages/admin/overview";
-import { renderAdminStats } from "./pages/admin/stats";
-import { renderAdminCustomers } from "./pages/admin/customers";
-import { renderAdminPipeline } from "./pages/admin/pipeline";
-import { renderAdminAds } from "./pages/admin/ads";
-import { renderAdminChats } from "./pages/admin/chats";
 import { renderHeader } from "./components/header";
 import { renderFooter } from "./components/footer";
 import { renderFloatingButtons } from "./components/floatingButtons";
-import { onLocaleChange, syncLocale, getPreferredLocale, link, type Locale } from "./i18n";
+import { onLocaleChange, syncLocale, getPreferredLocale, link, locales, type Locale } from "./i18n";
+import { hasDictionary } from "./i18n/dictionaries";
+import { ensureLocales } from "./i18n/load";
 import { parseRoute, splitLocale, localizePath, type Route } from "./seo/routes";
 import { applyMeta } from "./seo/head";
 import { onAuthChange } from "./auth/session";
@@ -42,6 +30,9 @@ import { trackPageView } from "./utils/tracking";
 import { trackVisit } from "./utils/visitorTracker";
 
 export type { Route };
+
+/** Pages with a form whose message also goes to the team in English and Arabic. */
+const FORM_ROUTES = new Set<Route["name"]>(["contact", "property-request", "video-tour", "consultancy"]);
 
 let rerender: () => void = () => {};
 let renderedPath = "";
@@ -87,7 +78,21 @@ function interceptLinks(event: MouseEvent): void {
   rerender();
 }
 
+let renderToken = 0;
+
+/**
+ * Login, account and admin pages are downloaded only when opened, so visitors never load their code.
+ * The token drops a page that arrives after the visitor has already moved on.
+ */
+function lazyPage<M>(load: () => Promise<M>, render: (page: M) => void): void {
+  const token = renderToken;
+  void load().then((page) => {
+    if (token === renderToken) render(page);
+  });
+}
+
 function renderRoute(route: Route, main: HTMLElement): void {
+  renderToken++;
   switch (route.name) {
     case "home":
       renderHome(main);
@@ -134,19 +139,19 @@ function renderRoute(route: Route, main: HTMLElement): void {
       renderContact(main);
       break;
     case "login":
-      renderLogin(main);
+      lazyPage(() => import("./pages/login"), (page) => page.renderLogin(main));
       break;
     case "register":
-      renderRegister(main);
+      lazyPage(() => import("./pages/register"), (page) => page.renderRegister(main));
       break;
     case "account":
-      renderAccountDashboard(main);
+      lazyPage(() => import("./pages/account/dashboard"), (page) => page.renderAccountDashboard(main));
       break;
     case "account-new-listing":
-      renderSubmitListing(main);
+      lazyPage(() => import("./pages/account/submitListing"), (page) => page.renderSubmitListing(main));
       break;
     case "account-edit-listing":
-      renderSubmitListing(main, route.id);
+      lazyPage(() => import("./pages/account/submitListing"), (page) => page.renderSubmitListing(main, route.id));
       break;
     case "resale":
       renderResaleList(main);
@@ -155,34 +160,34 @@ function renderRoute(route: Route, main: HTMLElement): void {
       renderResaleDetail(main, route.id);
       break;
     case "admin":
-      renderAdminOverview(main);
+      lazyPage(() => import("./pages/admin/overview"), (page) => page.renderAdminOverview(main));
       break;
     case "admin-listings":
-      renderAdminDashboard(main);
+      lazyPage(() => import("./pages/admin/dashboard"), (page) => page.renderAdminDashboard(main));
       break;
     case "admin-listing":
-      renderAdminReviewListing(main, route.id);
+      lazyPage(() => import("./pages/admin/reviewListing"), (page) => page.renderAdminReviewListing(main, route.id));
       break;
     case "admin-bookings":
-      renderAdminBookings(main);
+      lazyPage(() => import("./pages/admin/bookings"), (page) => page.renderAdminBookings(main));
       break;
     case "admin-inquiries":
-      renderAdminInquiries(main);
+      lazyPage(() => import("./pages/admin/inquiries"), (page) => page.renderAdminInquiries(main));
       break;
     case "admin-stats":
-      renderAdminStats(main);
+      lazyPage(() => import("./pages/admin/stats"), (page) => page.renderAdminStats(main));
       break;
     case "admin-customers":
-      renderAdminCustomers(main);
+      lazyPage(() => import("./pages/admin/customers"), (page) => page.renderAdminCustomers(main));
       break;
     case "admin-pipeline":
-      renderAdminPipeline(main);
+      lazyPage(() => import("./pages/admin/pipeline"), (page) => page.renderAdminPipeline(main));
       break;
     case "admin-ads":
-      renderAdminAds(main);
+      lazyPage(() => import("./pages/admin/ads"), (page) => page.renderAdminAds(main));
       break;
     case "admin-chats":
-      renderAdminChats(main);
+      lazyPage(() => import("./pages/admin/chats"), (page) => page.renderAdminChats(main));
       break;
     default:
       renderNotFound(main);
@@ -208,6 +213,17 @@ export function startRouter(root: HTMLElement): void {
   function renderAll(): void {
     closeSearch();
     const { locale, route } = currentRoute();
+    // Admin pages show customers' messages in their own languages, so they need every dictionary;
+    // the form pages also write the team's copy in English and Arabic.
+    const needed = route.name.startsWith("admin")
+      ? locales
+      : FORM_ROUTES.has(route.name)
+        ? [...new Set<Locale>([locale, "en", "ar"])]
+        : [locale];
+    if (needed.some((l) => !hasDictionary(l))) {
+      void ensureLocales(needed).then(renderAll);
+      return;
+    }
     syncLocale(locale);
     renderHeader(header, route);
     renderRoute(route, main);
