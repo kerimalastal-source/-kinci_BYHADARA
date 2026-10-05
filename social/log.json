@@ -230,5 +230,37 @@
     "headlineAr": "مساحة مرنة تتسع عند الحاجة",
     "headlineEn": "Flex space that grows when you need it",
     "photo": "/images/projects/lotus-sisli/tower-day.jpg"
+  },
+  {
+    "date": "2026-10-05",
+    "id": "beylikduzu-living-homes",
+    "topic": "لوتس ياشام · الشقق والمساحات",
+    "headlineAr": "شقق عائلية بثلاثة أحجام",
+    "headlineEn": "Family homes in three sizes",
+    "photo": "/images/projects/beylikduzu-living/living-room.jpg"
+  },
+  {
+    "date": "2026-10-05",
+    "id": "video-tour",
+    "topic": "الجولة عبر الفيديو",
+    "headlineAr": "جولة خاصة ومباشرة مع مستشارك",
+    "headlineEn": "A private live tour with your advisor",
+    "photo": "/images/projects/diamond-marin/master-bedroom.jpg"
+  },
+  {
+    "date": "2026-10-05",
+    "id": "pick-complex-or-villa",
+    "topic": "لو خُيّرت: شقة في مجمّع أم فيلا؟",
+    "headlineAr": "شقة في مجمّع بحدائق مشتركة أم فيلا مستقلة؟",
+    "headlineEn": "An apartment in a complex, or a standalone villa?",
+    "photo": "/images/projects/lotus-sisli/tower-garden.jpg"
+  },
+  {
+    "date": "2026-10-05",
+    "id": "beylikduzu-living-homes-story",
+    "topic": "ستوري: لوتس ياشام · الشقق والمساحات",
+    "headlineAr": "منزل جديد لأسلوب حياة عصري",
+    "headlineEn": "A new home for modern living",
+    "photo": "/images/projects/beylikduzu-living/kitchen.jpg"
   }
 ]
