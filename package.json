@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/gen-project-names.mjs && tsc && tsc -p api && vite build && node scripts/prerender/run.mjs",
+    "build": "node scripts/gen-project-names.mjs && tsc && tsc -p api && vite build && node scripts/prerender/run.mjs && node scripts/indexnow/run.mjs",
     "preview": "vite preview",
     "test": "tsc -p api --noEmit false --outDir .test-build && node --test tests/*.test.mjs"
   },
