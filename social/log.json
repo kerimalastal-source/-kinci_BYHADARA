@@ -262,5 +262,37 @@
     "headlineAr": "منزل جديد لأسلوب حياة عصري",
     "headlineEn": "A new home for modern living",
     "photo": "/images/projects/beylikduzu-living/kitchen.jpg"
+  },
+  {
+    "date": "2026-10-06",
+    "id": "lotus-yali-overview",
+    "topic": "لوتس يالي · نظرة عامة",
+    "headlineAr": "لوتس يالي: 48 منزلاً بين الطبيعة والبحر",
+    "headlineEn": "Lotus Yalı: 48 homes between nature and sea",
+    "photo": "/images/projects/lotus-yali/view-from-sea.jpg"
+  },
+  {
+    "date": "2026-10-06",
+    "id": "blog-real-estate-in-turkey",
+    "topic": "مقال: فهم سوق العقارات التركي",
+    "headlineAr": "فهم سوق العقارات التركي",
+    "headlineEn": "Understanding the Turkish property market",
+    "photo": "/images/blog/real-estate-in-turkey.jpg"
+  },
+  {
+    "date": "2026-10-06",
+    "id": "tf-two-plus-one",
+    "topic": "صح أم خطأ: معنى 2+1",
+    "headlineAr": "في الإعلانات العقارية التركية، تعني ⁦2+1⁩ غرفتي نوم وغرفة معيشة واحدة",
+    "headlineEn": "In Turkish property listings, 2+1 means two bedrooms and one living room",
+    "photo": ""
+  },
+  {
+    "date": "2026-10-06",
+    "id": "lotus-yali-overview-story",
+    "topic": "ستوري: لوتس يالي · نظرة عامة",
+    "headlineAr": "شقق ودوبلكس موجّهة نحو البحر",
+    "headlineEn": "Homes and duplexes facing the sea",
+    "photo": "/images/projects/lotus-yali/aerial-sea-view.jpg"
   }
 ]
