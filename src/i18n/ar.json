@@ -2143,7 +2143,15 @@
       "title": "الصفحة غير موجودة",
       "description": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها."
     },
-    "projectTitle": "{name} – {district}، {city}"
+    "projectTitle": "{name} – {district}، {city}",
+    "projectTitles": {
+      "apartments": "{name}: شقق للبيع في {district}، {city}",
+      "villas": "{name}: فلل للبيع في {district}، {city}",
+      "villa": "{name}: فيلا للبيع في {district}، {city}",
+      "homeOffices": "{name}: مكاتب منزلية وشقق للبيع في {district}، {city}",
+      "apartmentsShops": "{name}: شقق ومحلات للبيع في {district}، {city}",
+      "completed": "{name}: مشروع منجز في {district}، {city}"
+    }
   },
   "chat": {
     "here": "أنت تتصفح {name}. ماذا تود أن تعرف عنه؟",

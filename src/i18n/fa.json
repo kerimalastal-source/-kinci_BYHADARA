@@ -2222,7 +2222,15 @@
       "title": "صفحه پیدا نشد",
       "description": "صفحه‌ای که به دنبال آن هستید وجود ندارد یا منتقل شده است."
     },
-    "projectTitle": "{name} – {district}، {city}"
+    "projectTitle": "{name} – {district}، {city}",
+    "projectTitles": {
+      "apartments": "{name}: آپارتمان برای فروش در {district}، {city}",
+      "villas": "{name}: ویلا برای فروش در {district}، {city}",
+      "villa": "{name}: ویلا برای فروش در {district}، {city}",
+      "homeOffices": "{name}: دفتر خانگی و آپارتمان برای فروش در {district}، {city}",
+      "apartmentsShops": "{name}: آپارتمان و مغازه برای فروش در {district}، {city}",
+      "completed": "{name}: پروژه تکمیل‌شده در {district}، {city}"
+    }
   },
   "chat": {
     "here": "در حال مشاهده {name} هستید. چه چیزی را درباره آن می‌خواهید بدانید؟",

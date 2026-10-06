@@ -2143,7 +2143,15 @@
       "title": "Page Not Found",
       "description": "The page you are looking for does not exist or has been moved."
     },
-    "projectTitle": "{name} – {district}, {city}"
+    "projectTitle": "{name} – {district}, {city}",
+    "projectTitles": {
+      "apartments": "{name}: Apartments for Sale in {district}, {city}",
+      "villas": "{name}: Villas for Sale in {district}, {city}",
+      "villa": "{name}: Villa for Sale in {district}, {city}",
+      "homeOffices": "{name}: Home Offices & Apartments in {district}, {city}",
+      "apartmentsShops": "{name}: Apartments & Shops in {district}, {city}",
+      "completed": "{name}: Completed Project in {district}, {city}"
+    }
   },
   "chat": {
     "here": "You're viewing {name}. What would you like to know about it?",
