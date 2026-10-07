@@ -17,7 +17,8 @@ Work from the repository root (clone kerimalastal-source/-kinci_BYHADARA if need
    branch is gone). This checkout is only for reading; do not commit or push.
 2. Read the page: Artifact `action: "read"`, `url` = REVIEW_URL, then
    `path: "drafts.json"` (saved locally; if it does not exist, there are no drafts).
-   Run `node scripts/blog/build-review.mjs <that drafts.json>` → `pending`.
+   Run `node scripts/blog/build-review.mjs <that drafts.json>` → `pending` (new articles only;
+   expansions of published articles are listed under `updates` and do not count).
    If there are **4 or more** pending drafts, write nothing: end with
    "٤ مقالات بانتظار موافقتك — لن أكتب مقالاً جديداً قبل مراجعتها."
 3. Topic: the first entry of `scripts/blog/topics.json` whose `slug` is neither in
@@ -53,6 +54,15 @@ Owner says "انشر المقال …": Artifact read `path: "articles/<slug>.js
 + visual check (AR/EN, phone/desktop) → commit → then read `drafts.json` and republish the
 page with `node scripts/blog/build-review.mjs <drafts.json>` (published drafts drop off).
 The article goes live with the next "انشر" to `main`.
+
+## Expanding a published article (HADARA session)
+
+The ten original articles were short; their longer versions keep the same slug and cover.
+Write `scripts/blog/out/expand/<slug>.json` (same shape, no `cover`), check it with
+`python3 scripts/blog/add-article.py <file> --replace --draft` (copies the current cover next to
+it), and add it to the review page with `build-review.mjs <drafts.json> --add <file>` (shown as
+"توسيع مقال منشور"). After approval: `add-article.py <file> --replace` replaces `blogData.<slug>`
+in the five dictionaries; the draft leaves the page once the site's text matches it.
 
 ## Content rules (from the owner — do not break)
 

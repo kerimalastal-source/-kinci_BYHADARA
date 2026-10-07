@@ -6,6 +6,9 @@
 //
 // previous-drafts.json = the page's published drafts.json (Artifact read, path "drafts.json").
 // Drafts whose slug is already in src/data/blog.ts (published) are dropped.
+// An --add file whose slug is already on the site is a rewrite of that article (add-article.py
+// --replace): it stays on the page, marked as an expansion, until the site's text matches it.
+// "pending" counts new articles only (the weekly writer stops at 4); "updates" lists the rewrites.
 // Writes scripts/blog/site/{index.html,drafts.json} and prints the Artifact publish input.
 import fs from "node:fs";
 import path from "node:path";
@@ -28,8 +31,10 @@ const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Istanbul" }).
 
 const rel = (p) => path.relative(process.cwd(), p);
 const files = {};
+const siteEn = JSON.parse(fs.readFileSync(path.join(root, "src/i18n/en.json"), "utf8")).blogData;
+const isLive = (a) => JSON.stringify(siteEn[a.slug]?.body) === JSON.stringify(a.langs.en.body);
 let articles = prev.filter((a) => {
-  if (!onSite.has(a.slug)) return true;
+  if (!onSite.has(a.slug) || (a.update && !isLive(a))) return true;
   files[a.cover] = null;
   files[a.article] = null;
   return false;
@@ -44,6 +49,7 @@ for (const file of adds) {
     cover: `covers/${art.slug}.jpg`,
     article: `articles/${art.slug}.json`,
     words: art.en.body.join(" ").split(/\s+/).length,
+    ...(onSite.has(art.slug) ? { update: true, oldWords: (siteEn[art.slug]?.body ?? []).join(" ").split(/\s+/).length } : {}),
     langs: Object.fromEntries(LOCALES.map(([l]) => [l, art[l]])),
   };
   articles = [entry, ...articles.filter((a) => a.slug !== art.slug)];
@@ -56,7 +62,12 @@ fs.mkdirSync(siteDir, { recursive: true });
 fs.writeFileSync(path.join(siteDir, "drafts.json"), JSON.stringify(articles));
 fs.writeFileSync(path.join(siteDir, "index.html"), page(articles));
 files["drafts.json"] = rel(path.join(siteDir, "drafts.json"));
-console.log(JSON.stringify({ file_path: rel(path.join(siteDir, "index.html")), files, pending: articles.map((a) => a.slug) }, null, 2));
+console.log(JSON.stringify({
+  file_path: rel(path.join(siteDir, "index.html")),
+  files,
+  pending: articles.filter((a) => !a.update).map((a) => a.slug),
+  updates: articles.filter((a) => a.update).map((a) => a.slug)
+}, null, 2));
 
 function page(list) {
   const data = JSON.stringify({ list, locales: LOCALES }).replace(/</g, "\\u003c");
@@ -103,9 +114,9 @@ article p{margin:0 0 .9em}
   <header>
     <span class="eyebrow" dir="ltr">HADARA REAL ESTATE · BLOG</span>
     <h1>مسودات مدونة حضارة</h1>
-    <p class="lead">كل أسبوع يكتب كاتب المدونة مقالاً جديداً بخمس لغات. المقالات هنا لم تُنشر على الموقع بعد، وتنتظر موافقتك.</p>
+    <p class="lead">كل أسبوع يكتب كاتب المدونة مقالاً جديداً بخمس لغات، وهنا أيضاً النسخ الموسّعة من المقالات القديمة. لم يُنشر شيء منها على الموقع بعد، وكلها تنتظر موافقتك.</p>
   </header>
-  <div class="how"><b>للموافقة:</b> اكتب لـ Claude في جلسة موقع حضارة «انشر المقال» مع اسمه، أو اطلب أي تعديل. لن يُنشر أي مقال قبل موافقتك.</div>
+  <div class="how"><b>للموافقة:</b> اكتب لـ Claude في جلسة موقع حضارة «انشر المقال» مع اسمه (أو «انشر المقالات الموسّعة»)، أو اطلب أي تعديل. لن يُنشر أي مقال قبل موافقتك.</div>
   <main id="list" style="display:grid;gap:28px"></main>
 </div>
 <script type="application/json" id="data">${data}</script>
@@ -118,9 +129,9 @@ article p{margin:0 0 .9em}
   list.forEach(function(a){
     var card=el("section","card"); var img=el("img"); img.src=a.cover; img.alt=a.langs.ar.title; img.width=1536; img.height=1024; card.appendChild(img);
     var inner=el("div","inner");
-    var meta=el("div","meta"); meta.appendChild(el("span","pending","بانتظار الموافقة"));
+    var meta=el("div","meta"); meta.appendChild(el("span","pending",a.update?"توسيع مقال منشور — بانتظار الموافقة":"بانتظار الموافقة"));
     if(a.added) meta.appendChild(el("span",null,"كُتب في "+a.added));
-    meta.appendChild(el("span",null,a.words+" كلمة بالإنجليزية"));
+    meta.appendChild(el("span",null,a.update?("من "+a.oldWords+" إلى "+a.words+" كلمة بالإنجليزية"):(a.words+" كلمة بالإنجليزية")));
     var s=el("span",null,"/blog/"+a.slug); s.dir="ltr"; meta.appendChild(s);
     inner.appendChild(meta);
     var tabs=el("div","tabs"); tabs.setAttribute("role","tablist"); var art=el("article");

@@ -2,6 +2,7 @@
 
     python3 scripts/blog/add-article.py scripts/blog/out/<slug>.json            # add to the site
     python3 scripts/blog/add-article.py scripts/blog/out/<slug>.json --draft    # check + cover only
+    python3 scripts/blog/add-article.py <file> --replace [--draft]                # rewrite an existing article
 
 The JSON (written by the weekly blog session, see scripts/blog/README.md):
 {
@@ -17,6 +18,11 @@ Without it (the HADARA session, after the owner approves) it crops the cover to 
 public/images/blog/<slug>.jpg, makes the WebP copies,
 adds the post at the top of src/data/blog.ts and inserts blogData.<slug> into every
 dictionary without reformatting the rest of the file.
+
+With --replace the slug must already be on the site: the article keeps its cover and its place
+in src/data/blog.ts, and only blogData.<slug> is replaced in every dictionary (used to expand the
+older short articles). With --replace --draft it only validates and copies the current cover to
+scripts/blog/out/<slug>.jpg for the review page.
 """
 import json
 import re
@@ -37,8 +43,9 @@ def fail(msg: str) -> None:
 
 
 def main() -> None:
-    args = [a for a in sys.argv[1:] if a != "--draft"]
+    args = [a for a in sys.argv[1:] if a not in ("--draft", "--replace")]
     draft = "--draft" in sys.argv[1:]
+    replace = "--replace" in sys.argv[1:]
     if len(args) != 1:
         fail("usage: python3 scripts/blog/add-article.py <article.json> [--draft]")
     src_json = Path(args[0])
@@ -49,7 +56,9 @@ def main() -> None:
 
     blog_ts = ROOT / "src/data/blog.ts"
     ts = blog_ts.read_text(encoding="utf-8")
-    if f'slug: "{slug}"' in ts:
+    if replace and f'slug: "{slug}"' not in ts:
+        fail(f"{slug} is not on the site; --replace only rewrites an existing article")
+    if not replace and f'slug: "{slug}"' in ts:
         fail(f"{slug} already exists in src/data/blog.ts")
 
     for loc in LOCALES:
@@ -70,6 +79,28 @@ def main() -> None:
     heads = [sum(p.startswith("## ") for p in art[loc]["body"]) for loc in LOCALES]
     if len(set(heads)) != 1 or len({len(art[loc]["body"]) for loc in LOCALES}) != 1:
         fail(f"all languages need the same structure (paragraphs/subheadings): {heads}")
+
+    words = len(" ".join(art["en"]["body"]).split())
+    if replace:
+        if draft:
+            cover = ROOT / "public/images/blog" / f"{slug}.jpg"
+            (src_json.parent / f"{slug}.jpg").write_bytes(cover.read_bytes())
+            print(f"draft ok: {slug} (replaces the current article, keeps its cover), {words} English words")
+            return
+        decoder = json.JSONDecoder()
+        for loc in LOCALES:
+            path = ROOT / f"src/i18n/{loc}.json"
+            text = path.read_text(encoding="utf-8")
+            start = text.index('  "blogData": {\n')
+            key = f'\n    "{slug}": '
+            at = text.index(key, start) + len(key)
+            _, end = decoder.raw_decode(text, at)
+            block = json.dumps(art[loc], ensure_ascii=False, indent=2).replace("\n", "\n    ")
+            text = text[:at] + block + text[end:]
+            json.loads(text)  # still valid JSON
+            path.write_text(text, encoding="utf-8")
+        print(f"replaced {slug}: {words} English words")
+        return
 
     # Cover: crop to 3:2 around the vertical focus point, at most 1536 px wide.
     cover = art.get("cover", {})

@@ -1,5 +1,6 @@
 import { t, tRaw, link, getProjectContent, placeLine, onLocaleChange, locales, intlTag } from "../i18n";
 import { lookup } from "../i18n/dictionaries";
+import { ensureAllLocales } from "../i18n/load";
 import { getProjectBySlug, getSortedProjects, type Project, type Residence } from "../data/projects";
 import { projectStatusLabel } from "./projectCard";
 import { WHATSAPP_NUMBER, WHATSAPP_ICON } from "./floatingButtons";
@@ -796,6 +797,10 @@ function syncBubble(): void {
 }
 
 function openChat(): void {
+  // Project and district names are matched in all five languages; rebuild the index once they are here.
+  void ensureAllLocales().then(() => {
+    index = null;
+  });
   if (!panel) {
     panel = document.createElement("section");
     panel.className = "chat";
