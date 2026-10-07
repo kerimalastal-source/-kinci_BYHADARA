@@ -1,6 +1,6 @@
 # كاتب المدونة (weekly blog writer)
 
-Once a week a scheduled Claude session writes **one new blog article in the site's 5
+Twice a week (Monday and Friday) a scheduled Claude session writes **one new blog article in the site's 5
 languages** (en, ar, fa, fr, ru) with a cover photo, and saves it as a draft **on the
 owner's review page** on claude.ai (`REVIEW_URL` in `scripts/blog/config.json`):
 `drafts.json` + `articles/<slug>.json` + `covers/<slug>.jpg` are published with the page.
