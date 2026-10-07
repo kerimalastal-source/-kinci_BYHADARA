@@ -57,7 +57,7 @@ function seoPrerender(): Plugin {
             [
               "  <url>",
               `    <loc>${escapeXml(meta.canonical)}</loc>`,
-              `    <lastmod>${today}</lastmod>`,
+              `    <lastmod>${lastModified(route) ?? today}</lastmod>`,
               ...meta.alternates.map(
                 (a) => `    <xhtml:link rel="alternate" hreflang="${a.hreflang}" href="${escapeXml(a.href)}"/>`
               ),
@@ -96,6 +96,13 @@ function seoPrerender(): Plugin {
       );
     }
   };
+}
+
+/** An article's own date (last rewrite, else first publication) for the sitemap; other pages use the build date. */
+function lastModified(route: Route): string | undefined {
+  if (route.name !== "blog-post") return undefined;
+  const post = blogPosts.find((p) => p.slug === route.slug);
+  return post ? (post.updated ?? post.published) : undefined;
 }
 
 /** The photos shown on a page, listed in the sitemap so they can appear in Google Images. */

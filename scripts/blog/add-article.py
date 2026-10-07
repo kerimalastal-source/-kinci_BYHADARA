@@ -20,7 +20,7 @@ adds the post at the top of src/data/blog.ts and inserts blogData.<slug> into ev
 dictionary without reformatting the rest of the file.
 
 With --replace the slug must already be on the site: the article keeps its cover and its place
-in src/data/blog.ts, and only blogData.<slug> is replaced in every dictionary (used to expand the
+in src/data/blog.ts (its `updated` date becomes today), and blogData.<slug> is replaced in every dictionary (used to expand the
 older short articles). With --replace --draft it only validates and copies the current cover to
 scripts/blog/out/<slug>.jpg for the review page.
 """
@@ -28,6 +28,7 @@ import json
 import re
 import subprocess
 import sys
+from datetime import date
 from pathlib import Path
 
 from PIL import Image, ImageOps
@@ -99,7 +100,17 @@ def main() -> None:
             text = text[:at] + block + text[end:]
             json.loads(text)  # still valid JSON
             path.write_text(text, encoding="utf-8")
-        print(f"replaced {slug}: {words} English words")
+        # The rewrite is the article's new "updated" date (BlogPosting dateModified, sitemap lastmod).
+        today = date.today().isoformat()
+        entry_at = ts.index(f'slug: "{slug}",')
+        entry_end = ts.index("coverImage:", entry_at)
+        entry = ts[entry_at:entry_end]
+        if "updated:" in entry:
+            new_entry = re.sub(r'updated: "[0-9-]+",', f'updated: "{today}",', entry)
+        else:
+            new_entry = re.sub(r'(published: "[0-9-]+",\n)', rf'\1    updated: "{today}",\n', entry)
+        blog_ts.write_text(ts[:entry_at] + new_entry + ts[entry_end:], encoding="utf-8")
+        print(f"replaced {slug}: {words} English words, updated {today}")
         return
 
     # Cover: crop to 3:2 around the vertical focus point, at most 1536 px wide.
@@ -138,6 +149,7 @@ def main() -> None:
         "  {\n"
         f'    slug: "{slug}",\n'
         f"    priority: {prio},\n"
+        f'    published: "{date.today().isoformat()}",\n'
         f'    coverImage: {{ src: "/images/blog/{slug}.jpg", width: {im.width}, height: {im.height} }}\n'
         "  },\n"
     )

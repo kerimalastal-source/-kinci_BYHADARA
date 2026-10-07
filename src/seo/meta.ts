@@ -186,7 +186,7 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
       containedInPlace: { "@type": "City", name: project.city }
     });
   } else if (post) {
-    const content = lookup(locale, `blogData.${post.slug}`) as { category: string; title: string; excerpt: string };
+    const content = lookup(locale, `blogData.${post.slug}`) as { category: string; title: string; excerpt: string; body: string[] };
     title = content.title;
     description = clip(content.excerpt);
     image = img(post.coverImage.src);
@@ -201,6 +201,9 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
       articleSection: content.category,
       image: img(post.coverImage.src),
       inLanguage: locale,
+      datePublished: post.published,
+      dateModified: post.updated ?? post.published,
+      wordCount: content.body.join(" ").split(/\s+/).filter(Boolean).length,
       url: url(routePath(route)),
       mainEntityOfPage: url(routePath(route)),
       author: { "@id": `${siteUrl}/#organization` },
