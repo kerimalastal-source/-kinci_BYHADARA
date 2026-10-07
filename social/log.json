@@ -294,5 +294,37 @@
     "headlineAr": "شقق ودوبلكس موجّهة نحو البحر",
     "headlineEn": "Homes and duplexes facing the sea",
     "photo": "/images/projects/lotus-yali/aerial-sea-view.jpg"
+  },
+  {
+    "date": "2026-10-07",
+    "id": "cadde-ispartakule-overview",
+    "topic": "جادّة إسبارتاكولي · نظرة عامة",
+    "headlineAr": "جادّة إسبارتاكولي: جاهز للسكن",
+    "headlineEn": "Cadde Ispartakule: ready to move in",
+    "photo": "/images/projects/cadde-ispartakule/tower-avenue.jpg"
+  },
+  {
+    "date": "2026-10-07",
+    "id": "blog-taxes-and-tapu-fees",
+    "topic": "مقال: فهم ضريبة العقار ورسوم الطابو في تركيا",
+    "headlineAr": "ما بعد السعر: ماذا تحسب عند الشراء؟",
+    "headlineEn": "Beyond the price: what to budget for",
+    "photo": "/images/blog/taxes-and-tapu-fees.jpg"
+  },
+  {
+    "date": "2026-10-07",
+    "id": "finish-ideal-home",
+    "topic": "أكمل الجملة: البيت المثالي",
+    "headlineAr": "البيت المثالي بالنسبة إليّ هو…",
+    "headlineEn": "My ideal home is…",
+    "photo": ""
+  },
+  {
+    "date": "2026-10-07",
+    "id": "cadde-ispartakule-overview-story",
+    "topic": "ستوري: جادّة إسبارتاكولي · نظرة عامة",
+    "headlineAr": "إطلالات على البحر والبحيرة",
+    "headlineEn": "Sea and lake views",
+    "photo": "/images/projects/cadde-ispartakule/tower-park.jpg"
   }
 ]
