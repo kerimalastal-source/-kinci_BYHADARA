@@ -23,7 +23,7 @@ fs.mkdirSync(siteDir, { recursive: true });
 
 const today = fs.readdirSync(outDir).filter((f) => /^post-\d+\.json$/.test(f)).sort()
   .map((f) => JSON.parse(fs.readFileSync(path.join(outDir, f), "utf8")))
-  .map((p) => ({ ...p, image: `days/${date}/${p.image}` }));
+  .map((p) => ({ ...p, image: `days/${date}/${p.image}`, ...(p.slides ? { slides: p.slides.map((f) => `days/${date}/${f}`) } : {}) }));
 if (!today.length) { console.error("no post-*.json in " + outDir); process.exit(1); }
 
 const prev = prevPath && fs.existsSync(prevPath) ? JSON.parse(fs.readFileSync(prevPath, "utf8")) : [];
@@ -39,8 +39,8 @@ fs.writeFileSync(path.join(siteDir, "index.html"), page(kept, planSummary));
 
 const rel = (p) => path.relative(process.cwd(), p);
 const files = { "days.json": rel(path.join(siteDir, "days.json")) };
-for (const p of today) files[p.image] = rel(path.join(outDir, path.basename(p.image)));
-for (const d of dropped) for (const p of d.posts) files[p.image] = null;
+for (const p of today) for (const f of [p.image, ...(p.slides || [])]) files[f] = rel(path.join(outDir, path.basename(f)));
+for (const d of dropped) for (const p of d.posts) for (const f of [p.image, ...(p.slides || [])]) files[f] = null;
 console.log(JSON.stringify({ file_path: rel(path.join(siteDir, "index.html")), files }, null, 2));
 
 function page(days, plan) {
@@ -77,6 +77,7 @@ details.help li{margin-block:4px}
 .shot a{font-size:.85rem;color:var(--gold);text-decoration:none;font-weight:600}
 .shot a:hover,.shot a:focus-visible{text-decoration:underline}
 .hint{font-size:.8rem;color:var(--ink-soft);margin:0}
+.slides{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.slides button{padding:0;border:2px solid transparent;border-radius:6px;background:none;cursor:pointer;overflow:hidden}.slides button[aria-current]{border-color:var(--gold)}.slides img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
 .body{display:grid;gap:12px;min-width:0}
 .meta{font-size:.85rem;color:var(--ink-soft)}
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
@@ -155,7 +156,8 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
       var art=el("article","post");
       var shot=el("div","shot"); var img=el("img"); img.src=p.image; img.alt=p.topic||""; img.loading=i>1?"lazy":"eager"; img.width=1080; img.height=1350;
       var a=el("a",null,"فتح الصورة بالحجم الكامل"); a.href=p.image; a.target="_blank"; a.rel="noopener";
-      shot.appendChild(img); shot.appendChild(a); shot.appendChild(el("p","hint","على الموبايل: اضغط مطوّلاً على الصورة واختر حفظ."));
+      shot.appendChild(img); shot.appendChild(a);
+      if(p.slides&&p.slides.length){ var strip=el("div","slides"); p.slides.forEach(function(src,k){ var b=el("button"); b.type="button"; b.setAttribute("aria-label","الشريحة "+(k+1)); if(k===0) b.setAttribute("aria-current","true"); var t=el("img"); t.src=src; t.alt=""; t.loading="lazy"; b.appendChild(t); b.addEventListener("click",function(){ img.src=src; a.href=src; strip.querySelectorAll("button").forEach(function(x){x.removeAttribute("aria-current");}); b.setAttribute("aria-current","true"); }); strip.appendChild(b); }); shot.appendChild(el("p","hint","منشور شرائح: "+p.slides.length+" صور — اضغط على أي شريحة لعرضها.")); shot.appendChild(strip); } shot.appendChild(el("p","hint","على الموبايل: اضغط مطوّلاً على الصورة واختر حفظ."));
       var body=el("div","body");
       body.appendChild(el("div","meta","المنشور "+(i+1)+(p.at?" · الساعة "+p.at:"")+(p.topic?" · "+p.topic:"")));
       var tabs=el("div","tabs"); tabs.setAttribute("role","tablist");

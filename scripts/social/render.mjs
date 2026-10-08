@@ -129,7 +129,29 @@ body.tweet{background:radial-gradient(120% 80% at 50% 0%,#174234 0%,#0f2b21 60%)
 .lab{position:absolute;top:690px;z-index:3;width:540px;text-align:center;padding:0 24px}.lab .la{font-family:Plex;font-weight:700;font-size:44px;line-height:1.2;white-space:nowrap}.lab .le{font-size:24px;color:#eee6d3;font-weight:600;margin-top:4px;white-space:nowrap}
 .lab .k{display:inline-block;width:54px;height:54px;line-height:54px;border-radius:50%;background:#c9a24b;color:#0f2b21;font-weight:700;font-size:28px;margin-bottom:10px}
 .cq{position:absolute;left:52px;right:52px;top:935px;text-align:center}
-.cq .ar,.cq .en{text-align:center;white-space:nowrap}.cq .en{margin-top:8px}.cq .ask{margin-top:40px}`;
+.cq .ar,.cq .en{text-align:center;white-space:nowrap}.cq .en{margin-top:8px}.cq .ask{margin-top:40px}
+/* Evening carousel (owner's approval 2026-10-08): a cover with a photo, 2-step content slides
+   with big gold numbers, and an end slide (facts, call to action, the evening question). */
+.c-cnt{border:1.5px solid rgba(201,162,75,.6);border-radius:40px;padding:10px 22px;font-weight:700;font-size:22px;color:#c9a24b}
+.c-cover .ph{height:820px}.c-cover .ph:after{background:linear-gradient(180deg,rgba(15,43,33,.75) 0%,rgba(15,43,33,0) 22%,rgba(15,43,33,0) 50%,#0f2b21 100%)}
+.c-panel{position:absolute;left:60px;right:60px;bottom:120px;z-index:6}
+.c-ar{font-family:Plex;font-weight:700;color:#fff;direction:rtl;text-align:right;line-height:1.25}
+.c-en{font-weight:700;color:#efe6cf;line-height:1.2;margin-top:10px;white-space:nowrap;direction:ltr;text-align:left}
+.c-sub{font-family:Plex;font-weight:700;font-size:36px;color:#c9a24b;direction:rtl;text-align:right}.c-sube{font-size:22px;color:#d9cfb6;margin-top:6px;direction:ltr;text-align:left}
+.c-swipe{margin-top:34px;display:flex;justify-content:space-between;align-items:center;background:#c9a24b;color:#0f2b21;border-radius:14px;padding:18px 28px;font-weight:700;font-size:24px;direction:ltr}.c-swipe span[dir=rtl]{font-family:Plex;font-size:28px}
+.c-body{position:absolute;left:60px;right:60px;top:150px;bottom:165px;display:flex;flex-direction:column;justify-content:center;gap:30px;z-index:6}
+.c-ttl{direction:rtl;display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-bottom:1px solid rgba(201,162,75,.35);padding-bottom:18px}.c-ttl .a{font-family:Plex;font-weight:700;font-size:44px;color:#c9a24b;white-space:nowrap}.c-ttl .e{font-size:26px;color:#efe6cf;font-weight:700;white-space:nowrap;direction:ltr}
+.c-photo{height:420px;border-radius:10px;background-size:cover;background-position:center;flex:none}
+.c-st{display:flex;gap:28px;direction:rtl;background:rgba(255,255,255,.045);border-right:6px solid #c9a24b;padding:28px 30px;border-radius:4px}
+.c-st .n{font-size:104px;font-weight:700;color:#c9a24b;line-height:.9;min-width:120px;text-align:center;direction:ltr}
+.c-st .t{font-family:Plex;font-weight:700;font-size:58px;color:#fff;line-height:1.25}.c-st .d{font-family:Plex;font-weight:500;font-size:30px;line-height:1.5;color:#ece4cf;margin-top:10px}
+.c-st .e{direction:ltr;text-align:left;margin-top:16px;padding-top:14px;border-top:1px solid rgba(201,162,75,.2)}.c-st .e b{display:block;font-weight:700;font-size:28px;color:#efe6cf}.c-st .e span{display:block;font-size:20px;color:#cfc5ab;line-height:1.45;margin-top:4px}
+.c-dots{position:absolute;bottom:128px;left:0;right:0;display:flex;gap:10px;justify-content:center;z-index:6}.c-dots i{width:12px;height:12px;border-radius:50%;background:rgba(201,162,75,.3)}.c-dots i.on{background:#c9a24b;width:36px;border-radius:8px}
+.c-next{position:absolute;bottom:150px;right:60px;z-index:6;font-family:Plex;font-weight:700;color:#c9a24b;font-size:22px}
+.c-body .facts{margin-top:6px}
+.c-cta{background:#c9a24b;color:#0f2b21;border-radius:16px;padding:26px 30px;direction:rtl}.c-cta .a{font-family:Plex;font-weight:700;font-size:44px}.c-cta .e{direction:ltr;text-align:left;font-weight:700;font-size:24px;margin-top:6px}
+.c-ask{border:1.5px solid rgba(201,162,75,.7);border-radius:16px;padding:22px 28px;direction:rtl}.c-ask .a{font-family:Plex;font-weight:700;font-size:36px;color:#fff;line-height:1.35}.c-ask .e{direction:ltr;text-align:left;font-weight:600;font-size:22px;color:#d9cfb6;margin-top:6px}.c-ask .k{font-family:Plex;font-weight:700;color:#c9a24b;font-size:24px;margin-bottom:6px}
+.c-note{font-family:Plex;font-size:22px;color:#d9cfb6;direction:rtl;text-align:right}.c-note+.c-note{font-family:Inter;direction:ltr;text-align:left;font-size:18px;margin-top:-22px}`;
 
 const WA_ICON = `<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>`;
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -159,6 +181,39 @@ function choiceHtml(im) {
 <div class="lab" style="${cls === "l" ? "left" : "right"}:0"><div class="k">${key}</div><div class="la" dir="rtl">${esc(o.ar)}</div><div class="le">${esc(o.en)}</div></div>`;
   return `${side(im.a, "l", "A")}${side(im.b, "r", "B")}<div class="split"></div><div class="vs">أم</div>
 <div class="cq"><div class="ar" style="font-size:${im.arSize || 50}px">${esc(im.headlineAr)}</div><div class="en" style="font-size:${im.enSize || 30}px">${esc(im.headlineEn)}</div>${askPill(im.ask)}</div>`;
+}
+
+// Evening carousel (owner's approval 2026-10-08): 3-10 slides, Facebook album + Instagram
+// carousel. Slide 1 = cover (photo, big headline, "swipe"), then content slides of 1-2
+// numbered items (an optional photo band), then the end slide (facts, CTA, the question).
+function carouselPages(p) {
+  const im = p.image;
+  const total = 2 + (im.slides || []).length;
+  const counter = (k) => `<div class="top"><div class="brand" dir="ltr"><img src="${fileUrl("public/logo-light.png")}"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="c-cnt" dir="ltr">${k} / ${total}</div></div>`;
+  const dots = (k) => `<div class="c-dots">${Array.from({ length: total }, (_, i) => `<i${i + 1 === k ? ' class="on"' : ""}></i>`).join("")}</div>`;
+  const wrap = (body, cls = "") => `<html><head><meta charset="utf-8"><style>${fonts}${css}</style></head><body${cls ? ` class="${cls}"` : ""}>${FRAME}${body}${footer()}</body></html>`;
+  const title = im.sectionAr ? `<div class="c-ttl"><span class="a">${esc(im.sectionAr)}</span><span class="e">${esc(im.sectionEn || "")}</span></div>` : "";
+  const pages = [wrap(`<div class="ph" style="background-image:url('${fileUrl(publicPath(im.photo))}');background-position:${im.position || "center"}"></div>${topBar(im)}
+<div class="c-panel"><div class="c-ar" style="font-size:${im.arSize || 88}px">${esc(im.headlineAr)}</div><div class="c-en" style="font-size:${im.enSize || 40}px">${esc(im.headlineEn)}</div><div class="rule"></div>
+${im.subAr ? `<div class="c-sub">${esc(im.subAr)}</div><div class="c-sube">${esc(im.subEn || "")}</div>` : ""}
+<div class="c-swipe"><span>Swipe →</span><span dir="rtl">← ${esc(im.swipeAr || "اسحب للمزيد")}</span></div></div>${dots(1)}`, "c-cover")];
+  let n = 0;
+  for (const [k, sl] of (im.slides || []).entries()) {
+    const items = (sl.items || []).map((it) => {
+      n += 1;
+      return `<div class="c-st">${im.numbered === false ? "" : `<div class="n">${String(n).padStart(2, "0")}</div>`}<div><div class="t">${esc(it.titleAr)}</div>${it.textAr ? `<div class="d">${esc(it.textAr)}</div>` : ""}
+<div class="e"><b>${esc(it.titleEn)}</b>${it.textEn ? `<span>${esc(it.textEn)}</span>` : ""}</div></div></div>`;
+    }).join("");
+    const photo = sl.photo ? `<div class="c-photo" style="background-image:url('${fileUrl(publicPath(sl.photo))}');background-position:${sl.position || "center"}"></div>` : "";
+    pages.push(wrap(`${counter(k + 2)}<div class="c-body">${title}${photo}${items}</div><div class="c-next">التالي ←</div>${dots(k + 2)}`));
+  }
+  const end = im.end || {};
+  pages.push(wrap(`${counter(total)}<div class="c-body"><div><div class="c-ar" style="font-size:${end.arSize || 76}px">${esc(end.headlineAr)}</div><div class="c-en" style="font-size:${end.enSize || 40}px">${esc(end.headlineEn)}</div></div>
+${factTiles(end.stats)}
+${end.ask ? `<div class="c-ask"><div class="k">${esc(end.ask.labelAr || "سؤال الليلة")}</div><div class="a">${esc(end.ask.ar)}</div><div class="e">${esc(end.ask.en)}</div></div>` : ""}
+${end.cta ? `<div class="c-cta"><div class="a">${esc(end.cta.ar)}</div><div class="e">${esc(end.cta.en)}</div></div>` : ""}
+${end.note ? `<div class="c-note">${esc(end.note.ar)}</div><div class="c-note">${esc(end.note.en)}</div>` : ""}</div>${dots(total)}`));
+  return pages;
 }
 
 const publicPath = (photo) => (photo.startsWith("/images/") || photo.startsWith("/hero") ? "public" + photo : photo);
@@ -220,7 +275,7 @@ const repeatProblems = new Map();
       if (todayHeads.has(n)) addProblem(p.id, `headline "${h}" is also used by ${todayHeads.get(n)} today`);
       todayHeads.set(n, p.id);
     }
-    const photos = im.design === "choice" ? [im.a?.photo, im.b?.photo] : im.design === "tweet" ? [] : [im.photo];
+    const photos = im.design === "choice" ? [im.a?.photo, im.b?.photo] : im.design === "tweet" ? [] : im.design === "carousel" ? [im.photo, ...(im.slides || []).map((sl) => sl.photo)] : [im.photo];
     for (const ph of photos.filter(Boolean)) {
       if (todayPhotos.has(ph)) addProblem(p.id, `photo ${ph} is also used by ${todayPhotos.get(ph)} today — pick another`);
       todayPhotos.set(ph, p.id);
@@ -236,6 +291,69 @@ const browser = await pw.chromium.launch();
 let problems = 0;
 for (const [i, p] of posts.entries()) {
   const n = i + 1;
+  if (p.image?.design === "carousel") {
+    // One JPEG per slide (post-<n>-<k>.jpg) plus the cover as post-<n>.jpg (page, log, Telegram).
+    const issues = [];
+    const pages = carouselPages(p);
+    if (pages.length < 3 || pages.length > 10) issues.push(`a carousel has 3-10 slides, got ${pages.length}`);
+    if (p.story || p.reel) issues.push("a carousel is a feed post only (no story/reel)");
+    for (const ph of [p.image.photo, ...(p.image.slides || []).map((sl) => sl.photo)].filter((x) => x !== undefined)) {
+      if (!ph || !fs.existsSync(path.resolve(root, publicPath(ph)))) issues.push("photo not found: " + ph);
+    }
+    const slides = [];
+    for (const [k, html] of pages.entries()) {
+      const page = await browser.newPage({ viewport: { width: 1080, height: 1350 } });
+      const htmlPath = path.join(outDir, `post-${n}-${k + 1}.html`);
+      fs.writeFileSync(htmlPath, html);
+      await page.goto("file://" + htmlPath, { waitUntil: "networkidle" });
+      await page.evaluate(() => document.fonts.ready);
+      await page.waitForTimeout(200);
+      const check = await page.evaluate(() => {
+        // Long lines shrink to fit: fact values, the English headline, the section title.
+        const range = document.createRange();
+        for (const v of document.querySelectorAll(".fa .v")) {
+          range.selectNodeContents(v);
+          let size = parseFloat(getComputedStyle(v).fontSize);
+          while (range.getBoundingClientRect().width > v.clientWidth - 16 && size > 24) v.style.fontSize = `${(size -= 1)}px`;
+        }
+        for (const e of document.querySelectorAll(".c-en,.c-ttl .a,.c-ttl .e")) {
+          let size = parseFloat(getComputedStyle(e).fontSize);
+          while (e.scrollWidth > e.clientWidth + 1 && size > 22) e.style.fontSize = `${(size -= 1)}px`;
+        }
+        const cover = document.querySelector(".c-panel .c-ar");
+        if (cover) {
+          const lines = () => Math.round(cover.getBoundingClientRect().height / (parseFloat(getComputedStyle(cover).fontSize) * 1.25));
+          while (lines() > 2 && parseFloat(getComputedStyle(cover).fontSize) > 60) cover.style.fontSize = `${parseFloat(getComputedStyle(cover).fontSize) - 2}px`;
+        }
+        const over = [...document.querySelectorAll(".fa .v,.fa .a,.fa .e,.c-en,.c-ttl .a,.c-ttl .e")].filter((e) => e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent);
+        const top = document.querySelector(".top").getBoundingClientRect().bottom;
+        const box = (document.querySelector(".c-body") || document.querySelector(".c-panel")).getBoundingClientRect();
+        const body = document.querySelector(".c-body");
+        const kids = body ? [...body.children].map((c) => c.getBoundingClientRect()) : [];
+        const contentTop = kids.length ? Math.min(...kids.map((r) => r.top)) : box.top;
+        const contentBottom = kids.length ? Math.max(...kids.map((r) => r.bottom)) : box.bottom;
+        return { over, clash: contentTop < top + 20 || (body && contentBottom > 1350 - 170), coverLines: cover ? Math.round(cover.getBoundingClientRect().height / (parseFloat(getComputedStyle(cover).fontSize) * 1.25)) : 0, fonts: [...document.fonts].filter((f) => f.status === "loaded").length };
+      });
+      if (check.over.length) issues.push(`slide ${k + 1}: text overflows: ${check.over.join(" | ")}`);
+      if (check.clash) issues.push(`slide ${k + 1}: content does not fit between the top bar and the dots (shorten the text, or 1 item on this slide)`);
+      if (check.coverLines > 2) issues.push(`slide 1: the headline wraps to ${check.coverLines} lines (max 2: shorten it)`);
+      if (check.fonts < 4) issues.push(`slide ${k + 1}: fonts did not load`);
+      const file = `post-${n}-${k + 1}.jpg`;
+      await page.screenshot({ path: path.join(outDir, file), type: "jpeg", quality: 90 });
+      slides.push(file);
+      await page.close();
+      fs.unlinkSync(htmlPath);
+    }
+    fs.copyFileSync(path.join(outDir, slides[0]), path.join(outDir, `post-${n}.jpg`));
+    if (!p.caption) issues.push("a carousel needs a caption");
+    if (p.at !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(p.at)) issues.push(`"at" must be Istanbul time "HH:MM", got ${JSON.stringify(p.at)}`);
+    issues.push(...(repeatProblems.get(p.id) || []));
+    const result = { id: p.id, topic: p.topic, image: `post-${n}.jpg`, slides, fb: p.caption ? caption(p, "facebook") : "", ig: p.caption ? caption(p, "instagram") : "", ...(p.at ? { at: p.at } : {}) };
+    fs.writeFileSync(path.join(outDir, `post-${n}.json`), JSON.stringify(result, null, 2));
+    console.log(`post-${n} (${p.id}, carousel of ${slides.length}): ${issues.length ? "PROBLEMS\n  - " + issues.join("\n  - ") : "ok"}`);
+    problems += issues.length;
+    continue;
+  }
   const H = p.reel || p.story ? 1920 : 1350;
   const page = await browser.newPage({ viewport: { width: 1080, height: H } });
   const htmlPath = path.join(outDir, `post-${n}.html`);
