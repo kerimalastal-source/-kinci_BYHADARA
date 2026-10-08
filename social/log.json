@@ -326,5 +326,37 @@
     "headlineAr": "إطلالات على البحر والبحيرة",
     "headlineEn": "Sea and lake views",
     "photo": "/images/projects/cadde-ispartakule/tower-park.jpg"
+  },
+  {
+    "date": "2026-10-08",
+    "id": "lotus-koru-2-overview",
+    "topic": "لوتس كورو 2 · نظرة عامة",
+    "headlineAr": "204 شقق جاهزة للسكن في بيليكدوزو",
+    "headlineEn": "204 ready-to-move-in apartments in Beylikdüzü",
+    "photo": "/images/projects/lotus-koru-2/residential-blocks.jpg"
+  },
+  {
+    "date": "2026-10-08",
+    "id": "blog-real-estate-valuation",
+    "topic": "مقال: لماذا يهم التقييم العقاري عند شراء عقار",
+    "headlineAr": "ماذا يفحص تقرير التقييم العقاري؟",
+    "headlineEn": "What a property valuation report checks",
+    "photo": "/images/blog/real-estate-valuation.jpg"
+  },
+  {
+    "date": "2026-10-08",
+    "id": "evening-where-from",
+    "topic": "سؤال الليلة: من أين تتابعوننا؟",
+    "headlineAr": "من أي مدينة تتابعوننا الليلة؟",
+    "headlineEn": "Which city are you following us from tonight?",
+    "photo": ""
+  },
+  {
+    "date": "2026-10-08",
+    "id": "lotus-koru-2-overview-story",
+    "topic": "ستوري: لوتس كورو 2 · نظرة عامة",
+    "headlineAr": "17,500 م² من الخضرة حول منزلك",
+    "headlineEn": "17,500 m² of green around your home",
+    "photo": "/images/projects/lotus-koru-2/landscaped-grounds.jpg"
   }
 ]
