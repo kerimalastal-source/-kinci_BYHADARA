@@ -64,8 +64,8 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
    (bathroom, plan, blurry), pick a better one from the topic's `photos`.
 4. Write `scripts/social/out/<date>/posts.json` (shape below) and run
    `node scripts/social/render.mjs scripts/social/out/<date>/posts.json`.
-   It must print `ok` for every post (2 or 3, plus the Story) — fix any PROBLEMS (shorter text, `arSize`
-   44–48) and re-run. Then Read each `post-<n>.jpg` once to check it visually.
+   It must print `ok` for every post (2 or 3, plus the Story) — fix any PROBLEMS (shorter text, 3 stats, a shorter tip, `arSize`
+   56–60) and re-run. Then Read each `post-<n>.jpg` once to check it visually.
 5. Read the published page's `days.json` with the Artifact tool
    (`action: "read"`, `url` = ARTIFACT_URL, `path: "days.json"`), then run
    `node scripts/social/build-page.mjs <date> <that local days.json>`.
@@ -89,10 +89,12 @@ The 21:00 post is a short interactive "tweet" in Arabic and English (equal weigh
 Arabic), same colours, fonts, logo, gold badge and footer as design A, 1080×1350 JPEG.
 Two designs, chosen by the plan topic's `design`:
 
-- **`tweet` (the main one)**: a light card like a post on X (HADARA avatar, "HADARA Real
-  Estate @hadararealestate"), the Arabic text big (max 3 lines; render.mjs shrinks it), the
-  English under it, optional 2–4 `options` (`{icon?, ar, en}`, short) on one line under a thin
-  rule, and the pill «شاركونا رأيكم في التعليقات · Tell us in the comments» under the card.
+- **`tweet` (the main one, v2 2026-10-07)**: a light card with the Arabic question big (70px,
+  max 3 lines; render.mjs shrinks it) and the English under it, optional 2–4 `options`
+  (`{icon?, ar, en}`, short) under a thin rule; then **a useful fact** so the post still
+  teaches something: `fact` (`{ar, en}`, e.g. «هل تعلم؟ …») and optional 3 `facts` tiles
+  (`{value, ar, en}`, same as design A), and the gold line `ask` (default «شاركونا رأيكم في
+  التعليقات · Tell us in the comments»; set your own, e.g. «اكتبوا مدينتكم في التعليقات»).
   Types (the badge says which): «سؤال الليلة · Tonight's question», «صح أم خطأ؟ · True or
   false?» (statement only on the image; the caption gives the answer at the end after
   «الإجابة ⬇️ / Answer ⬇️»), «أكمل الجملة · Finish the sentence» (the sentence ends with «…»).
@@ -105,15 +107,27 @@ Two designs, chosen by the plan topic's `design`:
   in the image except the small `icon` of an option. Caption as usual (title = the question,
   a short intro, the invitation to comment, cta + path). Feed posts only (never a Story/Reel).
 
-## Design (approved by the owner 2026-09-29 — locked)
+## Design A v2 (approved by the owner 2026-10-07 — locked; trial week, then review)
 
-Every post except the 21:00 evening post (above) uses the **one approved template** that `render.mjs` draws ("design A"):
-photo on top, dark green (`#0f2b21`) panel below, the HADARA logo top-left, a gold pill
-badge top-right (Arabic · English), **the Arabic headline and the English headline at the
-same weight, separated by a thin gold line** (Arabic right-aligned, English left-aligned,
-each on one line), **exactly 4 stat tiles** (gold number, Arabic label, English label of
-equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 930 92 14.
-1080×1350 JPEG.
+The owner asked for bigger, clearer text and richer, more useful content ("the page must
+inform a buyer, not fill the feed"). Every post except the 21:00 evening post uses the
+**v2 template** that `render.mjs` draws: a thin gold frame, the photo on top fading into the
+dark green (`#0f2b21`) panel, the HADARA logo top-left and an **outlined** gold badge
+top-right (Arabic · English); in the panel: an eyebrow (`place` left, `placeAr` right, gold),
+a **big Arabic headline** (`arSize` 68 by default, up to 2 lines; render.mjs shrinks it to
+52 at most) and the English line under it (one line, shrinks to fit), a short gold rule,
+then **3 large fact tiles** (gold number 58px, Arabic label, English label; 4 still work but
+3 read better), and the gold **"معلومة" strip** (`tip`: one more useful fact, Arabic +
+English; `tip.labelAr` can change the word, e.g. «للجنسية» or «نصيحة»). Footer:
+www.hadararealestate.com + WhatsApp +90 531 930 92 14. 1080×1350 JPEG (stories 1080×1920).
+
+- **Guides / articles / FAQ / citizenship** may use `design: "list"`: a shorter photo band
+  and a numbered list of 3 `items` (`{ar, en}`, one line each in Arabic) instead of the
+  tiles, plus the `tip` strip.
+- The panel sits above the footer and grows upwards: if render.mjs says the panel reaches
+  the top bar, shorten the text, use 3 stats, or a shorter tip.
+- Content (owner, 2026-10-07): lead with a concrete, useful fact (a size, a distance, a
+  step, a document, a rule); no filler tiles ("للجميع", "معك"); formal Arabic (فصحى) only.
 
 - **Always bilingual, both languages equal (owner's rule 2026-09-29)**: every image has the
   full message in Arabic and in English; every caption has a complete Arabic part, then
@@ -121,9 +135,10 @@ equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 9
   this). Never a post in one language only, never the English as a small afterthought.
 
 - Never change the template, colours, fonts, layout or footer, and never make an image
-  any other way. Only the content changes: photo, badge, headline, 4 stats, note.
-- Headlines: short, factual, calm (no "best", "number one", no exclamation marks), at
-  most one line in Arabic when possible (`arSize` 44–52), the English line the same idea.
+  any other way. Only the content changes: photo, badge, eyebrow, headline, 3 stats (or the
+  3 list items), tip, note.
+- Headlines: specific, factual, calm (no "best", "number one", no exclamation marks), one
+  line in Arabic when possible (2 at most), the English line the same idea.
 - Badges come from a fixed set so the feed looks consistent: new launch «إطلاق جديد ·
   New launch», under construction «قيد الإنشاء · Under construction», ready «جاهز للسكن ·
   Ready to move in», villas «فلل · Villas», citizenship «الجنسية التركية · Citizenship»,
@@ -177,7 +192,7 @@ equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 9
   "at": "09:00",                          // from topics.mjs when the plan has it (Istanbul time)
   // "story": true  -> the day's Story: 9:16 picture, no "caption" (see step 1)
   // "reel": true   -> a Reel: 9:16 design + an 8-second video (only when the owner asks)
-  // evening post: "image": { "design": "tweet", "badge", "headlineAr", "headlineEn",
+  // evening post: "image": { "design": "tweet", "badge", "headlineAr", "headlineEn", "fact", "facts", "ask",
   //   "options": [ { "icon": "🌊", "ar": "إطلالة بحرية", "en": "Sea view" } ] }   (no photo, no stats)
   // or "image": { "design": "choice", "badge", "headlineAr", "headlineEn", "photo": <a.photo>,
   //   "a": { "photo", "position", "ar", "en" }, "b": { … } }
@@ -187,10 +202,12 @@ equal prominence), and the footer: www.hadararealestate.com + WhatsApp +90 531 9
     "position": "center 40%",             // CSS background-position (optional)
     "size": "cover",                      // optional, e.g. "auto 150%" to zoom
     "badge": { "ar": "جاهز للسكن", "en": "Ready to move in" },   // optional
-    "place": "Lotus Yalı · Büyükçekmece, Istanbul",              // optional caption on the photo
-    "headlineAr": "…", "headlineEn": "…", "arSize": 52,  // enSize optional (default arSize × 0.8)
-    "stats": [ { "value": "48", "ar": "شقة", "en": "Apartments" } ],   // exactly 4
-    "note": { "ar": "…", "en": "…" }     // optional small line under the stats
+    "place": "Lotus Yalı · Büyükçekmece",  "placeAr": "لوتس يالي · بيوكجكمجة",   // eyebrow (optional)
+    "headlineAr": "…", "headlineEn": "…", "arSize": 68,  // optional; enSize optional (default arSize × 0.6)
+    "stats": [ { "value": "48", "ar": "شقة", "en": "Apartments" } ],   // 3 (4 allowed)
+    "tip": { "ar": "…", "en": "…", "labelAr": "معلومة" },  // gold info strip (recommended)
+    "note": { "ar": "…", "en": "…" }     // optional small line under everything
+    // guides: "design": "list", "items": [ { "ar": "…", "en": "…" } x3 ] instead of "stats"
   },
   "caption": {
     "ar": { "title": "… 🌊", "intro": "…", "bullets": ["🏡 …", "📍 …"],
