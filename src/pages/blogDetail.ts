@@ -1,5 +1,7 @@
 import { t, tRaw, link } from "../i18n";
-import { getBlogPostBySlug, getSortedBlogPosts } from "../data/blog";
+import { getBlogPostBySlug, getSortedBlogPosts, type BlogPost } from "../data/blog";
+import { getProjectBySlug, getSortedProjects, type Project } from "../data/projects";
+import { renderProjectCard } from "../components/projectCard";
 import { renderNotFound } from "./notFound";
 import { photoAttrs, heroBackground } from "../utils/responsiveImage";
 
@@ -13,6 +15,40 @@ interface BlogArticleContent {
 // A body entry starting with "## " is a subheading; everything else is a paragraph.
 function articleBlock(text: string): string {
   return text.startsWith("## ") ? `<h2 class="blog-detail__heading">${text.slice(3)}</h2>` : `<p>${text}</p>`;
+}
+
+// The article's chosen projects (sold-out ones skipped), topped up with the first available projects.
+function relatedProjects(post: BlogPost): Project[] {
+  const picked = (post.relatedProjects ?? [])
+    .map((slug) => getProjectBySlug(slug))
+    .filter((p): p is Project => !!p && !p.soldOut);
+  for (const p of getSortedProjects()) {
+    if (picked.length >= 3) break;
+    if (!p.soldOut && !picked.includes(p)) picked.push(p);
+  }
+  return picked.slice(0, 3);
+}
+
+function renderRelatedProjects(post: BlogPost): string {
+  const projects = relatedProjects(post);
+  if (!projects.length) return "";
+  const inquiry = link(`/contact?project=${projects.map((p) => p.slug).join(",")}`);
+  return `
+    <section class="section other-projects blog-related">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">${t("blog.relatedProjectsEyebrow")}</p>
+            <h2 class="section-title">${t("blog.relatedProjectsTitle")}</h2>
+            <p class="section-subtitle">${t("blog.relatedProjectsSubtitle")}</p>
+          </div>
+          <a class="btn btn--primary" href="${inquiry}">${t("blog.relatedProjectsCta")}</a>
+        </div>
+        <div class="project-grid">
+          ${projects.map((p) => renderProjectCard(p)).join("")}
+        </div>
+      </div>
+    </section>`;
 }
 
 export function renderBlogDetail(el: HTMLElement, slug: string): void {
@@ -45,6 +81,8 @@ export function renderBlogDetail(el: HTMLElement, slug: string): void {
         </div>
       </div>
     </section>
+
+    ${renderRelatedProjects(post)}
 
     ${
       others.length

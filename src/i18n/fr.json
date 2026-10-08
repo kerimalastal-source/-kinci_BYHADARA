@@ -1443,7 +1443,11 @@
     "heroSubtitle": "Guides et analyses sur le marché immobilier turc, Istanbul, la vie en Turquie et la citoyenneté par investissement immobilier.",
     "readMore": "Lire l'article",
     "backLabel": "Retour au blog",
-    "otherArticlesTitle": "D'autres articles à lire"
+    "otherArticlesTitle": "D'autres articles à lire",
+    "relatedProjectsEyebrow": "Nos projets",
+    "relatedProjectsTitle": "Des projets qui pourraient vous intéresser",
+    "relatedProjectsSubtitle": "Une sélection de nos projets en lien avec cet article. Notre équipe répond volontiers à vos questions.",
+    "relatedProjectsCta": "Se renseigner sur ces projets"
   },
   "laws": {
     "heroEyebrow": "Lois immobilières",

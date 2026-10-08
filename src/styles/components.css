@@ -838,6 +838,11 @@
   }
 }
 
+/* "Projects you may like" at the end of a blog article: a soft band between the text and "more articles". */
+.blog-related {
+  background: var(--color-surface-alt);
+}
+
 /* ---------- Filter bar ---------- */
 .filter-bar {
   display: flex;

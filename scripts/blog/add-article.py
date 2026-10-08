@@ -8,6 +8,7 @@ The JSON (written by the weekly blog session, see scripts/blog/README.md):
 {
   "slug": "gross-vs-net-area",
   "cover": { "photo": "/images/projects/lotus-sisli/apartment-living.jpg", "focus": 0.5 },
+  "projects": ["beylikduzu-living", "lotus-sisli", "cadde-ispartakule"],
   "en": { "category": "...", "title": "...", "excerpt": "...", "body": ["...", "## Subheading", "..."] },
   "ar": {...}, "fa": {...}, "fr": {...}, "ru": {...}
 }
@@ -23,6 +24,10 @@ With --replace the slug must already be on the site: the article keeps its cover
 in src/data/blog.ts (its `updated` date becomes today), and blogData.<slug> is replaced in every dictionary (used to expand the
 older short articles). With --replace --draft it only validates and copies the current cover to
 scripts/blog/out/<slug>.jpg for the review page.
+
+"projects" (optional, up to 3 project slugs from src/data/projects.ts that are not sold out) fills the
+"Projects you may like" box under the article (`relatedProjects` in src/data/blog.ts); with --replace
+it replaces the article's current list only when given.
 """
 import json
 import re
@@ -41,6 +46,24 @@ MAX_W, RATIO = 1536, 3 / 2
 def fail(msg: str) -> None:
     print("ERROR: " + msg)
     sys.exit(1)
+
+
+def related_projects(art: dict) -> list[str] | None:
+    """The article's "projects" list, checked against src/data/projects.ts (None when not given)."""
+    projects = art.get("projects")
+    if projects is None:
+        return None
+    if not isinstance(projects, list) or not 1 <= len(projects) <= 3 or len(set(projects)) != len(projects):
+        fail('"projects" must list 1 to 3 different project slugs')
+    data = (ROOT / "src/data/projects.ts").read_text(encoding="utf-8")
+    blocks = re.split(r'\n    slug: "', data)[1:]
+    sold = {b.split('"', 1)[0]: "soldOut: true" in b for b in blocks}
+    for slug in projects:
+        if slug not in sold:
+            fail(f"unknown project {slug!r} in \"projects\"")
+        if sold[slug]:
+            fail(f"project {slug!r} is sold out; pick one with units for sale")
+    return projects
 
 
 def main() -> None:
@@ -81,6 +104,11 @@ def main() -> None:
     if len(set(heads)) != 1 or len({len(art[loc]["body"]) for loc in LOCALES}) != 1:
         fail(f"all languages need the same structure (paragraphs/subheadings): {heads}")
 
+    projects = related_projects(art)
+    projects_line = (
+        "    relatedProjects: [" + ", ".join(f'"{p}"' for p in projects) + "],\n" if projects else ""
+    )
+
     words = len(" ".join(art["en"]["body"]).split())
     if replace:
         if draft:
@@ -109,6 +137,9 @@ def main() -> None:
             new_entry = re.sub(r'updated: "[0-9-]+",', f'updated: "{today}",', entry)
         else:
             new_entry = re.sub(r'(published: "[0-9-]+",\n)', rf'\1    updated: "{today}",\n', entry)
+        if projects:
+            new_entry = re.sub(r"    relatedProjects: \[[^\]]*\],\n", "", new_entry)
+            new_entry = new_entry.rstrip(" ") + projects_line + "    "
         blog_ts.write_text(ts[:entry_at] + new_entry + ts[entry_end:], encoding="utf-8")
         print(f"replaced {slug}: {words} English words, updated {today}")
         return
@@ -150,6 +181,7 @@ def main() -> None:
         f'    slug: "{slug}",\n'
         f"    priority: {prio},\n"
         f'    published: "{date.today().isoformat()}",\n'
+        + projects_line +
         f'    coverImage: {{ src: "/images/blog/{slug}.jpg", width: {im.width}, height: {im.height} }}\n'
         "  },\n"
     )

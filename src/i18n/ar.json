@@ -1443,7 +1443,11 @@
     "heroSubtitle": "مقالات وإرشادات عن سوق العقارات التركي، إسطنبول، الحياة في تركيا، والجنسية التركية عبر الاستثمار العقاري.",
     "readMore": "اقرأ المقال",
     "backLabel": "الرجوع إلى المدونة",
-    "otherArticlesTitle": "مقالات أخرى تهمك"
+    "otherArticlesTitle": "مقالات أخرى تهمك",
+    "relatedProjectsEyebrow": "من مشاريعنا",
+    "relatedProjectsTitle": "مشاريع قد تهمك",
+    "relatedProjectsSubtitle": "مشاريع مختارة تتصل بموضوع هذا المقال، ويسعد فريقنا بالإجابة عن أسئلتك حولها.",
+    "relatedProjectsCta": "استفسر عن هذه المشاريع"
   },
   "laws": {
     "heroEyebrow": "قوانين العقار",

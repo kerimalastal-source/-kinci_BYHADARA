@@ -1443,7 +1443,11 @@
     "heroSubtitle": "Guides and insights on the Turkish property market, Istanbul, life in Turkey, and citizenship by real estate investment.",
     "readMore": "Read Article",
     "backLabel": "Back to Blog",
-    "otherArticlesTitle": "More Articles to Read"
+    "otherArticlesTitle": "More Articles to Read",
+    "relatedProjectsEyebrow": "From our projects",
+    "relatedProjectsTitle": "Projects You May Like",
+    "relatedProjectsSubtitle": "A few of our projects that relate to this article. Our team is happy to answer your questions about them.",
+    "relatedProjectsCta": "Ask About These Projects"
   },
   "laws": {
     "heroEyebrow": "Property Laws",

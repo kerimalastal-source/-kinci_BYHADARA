@@ -41,6 +41,9 @@ Work from the repository root (clone kerimalastal-source/-kinci_BYHADARA if need
      video tour (plain text, no links, no HTML, no emoji).
    - `cover.photo`: the topic's `photo` (or a better one from `public/images/projects/`),
      `cover.focus` 0–1 = which part of the height to keep (0 top, 0.5 middle, 1 bottom).
+   - `projects`: 3 project slugs from `src/data/projects.ts` that fit the topic (not
+     `soldOut`), shown as "Projects you may like" under the article — e.g. villas for a
+     villa topic, projects in the district of a district guide, ready homes vs. new launches.
 6. `python3 scripts/blog/add-article.py scripts/blog/out/<slug>.json --draft` must print
    `draft ok` (fix and re-run otherwise). Look at `scripts/blog/out/<slug>.jpg` once.
 7. `node scripts/blog/build-review.mjs <drafts.json from step 2> --add scripts/blog/out/<slug>.json`
