@@ -79,23 +79,23 @@ const css = `*{margin:0;box-sizing:border-box} body{font-family:Inter,sans-serif
 .badge{border:1.5px solid #c9a24b;color:#c9a24b;background:rgba(15,43,33,.6);border-radius:40px;padding:11px 24px;font-weight:700;font-size:21px;display:flex;gap:12px;align-items:center}
 .badge span[dir=rtl]{font-family:Plex;font-weight:700;font-size:23px}
 .panel{position:absolute;left:60px;right:60px;bottom:116px;z-index:6}
-.eyebrow{text-shadow:0 2px 10px rgba(0,0,0,.6);display:flex;justify-content:space-between;align-items:center;color:#c9a24b;font-weight:600;font-size:22px;margin-bottom:14px;direction:ltr}.eyebrow .a{font-family:Plex;font-size:24px}
+.eyebrow{text-shadow:0 2px 10px rgba(0,0,0,.6);display:flex;justify-content:space-between;align-items:center;color:#c9a24b;font-weight:700;font-size:24px;margin-bottom:14px;direction:ltr}.eyebrow .a{font-family:Plex;font-weight:700;font-size:26px}
 .ar{font-family:Plex;font-weight:700;line-height:1.28;text-align:right;direction:rtl;color:#fff}
-.en{font-weight:700;line-height:1.2;color:#efe6cf;letter-spacing:-.4px;direction:ltr;text-align:left;white-space:nowrap;margin-top:10px}
+.en{font-weight:700;line-height:1.2;color:#fff;letter-spacing:-.2px;direction:ltr;text-align:left;white-space:nowrap;margin-top:10px}
 .rule{height:3px;width:140px;background:#c9a24b;margin:22px 0 22px auto}
 .facts{display:grid;gap:16px;direction:rtl}
 .fa{border-top:3px solid #c9a24b;background:rgba(255,255,255,.05);padding:20px 10px 18px;text-align:center}
 .fa .v{direction:ltr;font-size:58px;font-weight:700;color:#c9a24b;line-height:1;white-space:nowrap}.fa .v.t{font-family:Plex;font-size:46px;direction:rtl}
-.fa .a{font-family:Plex;font-weight:600;font-size:27px;margin-top:12px;color:#fff}.fa .e{font-size:20px;color:#d9cfb6;margin-top:4px;font-weight:500;direction:ltr}
+.fa .a{font-family:Plex;font-weight:700;font-size:29px;margin-top:12px;color:#fff}.fa .e{font-size:22px;color:#efe6cf;margin-top:4px;font-weight:600;direction:ltr}
 .tip{margin-top:22px;display:flex;gap:18px;align-items:flex-start;background:rgba(201,162,75,.12);border-right:6px solid #c9a24b;padding:16px 22px;direction:rtl}
-.tip .k{font-family:Plex;font-weight:700;color:#c9a24b;font-size:24px;white-space:nowrap}
-.tip .t{font-family:Plex;font-weight:600;font-size:25px;line-height:1.4;color:#fff}.tip .te{font-size:19px;color:#d9cfb6;direction:ltr;text-align:left;margin-top:4px}
+.tip .k{font-family:Plex;font-weight:700;color:#c9a24b;font-size:26px;white-space:nowrap}
+.tip .t{font-family:Plex;font-weight:700;font-size:27px;line-height:1.4;color:#fff}.tip .te{font-size:21px;font-weight:600;color:#efe6cf;direction:ltr;text-align:left;margin-top:4px}
 .list{direction:rtl}.it{display:flex;gap:24px;align-items:flex-start;padding:24px 0;border-bottom:1px solid rgba(201,162,75,.22)}.it:last-child{border-bottom:0}
 .it .n{font-size:64px;font-weight:700;color:#c9a24b;line-height:.95;min-width:64px;text-align:center}
-.it .a{font-family:Plex;font-weight:700;font-size:36px;line-height:1.3;color:#fff}.it .e{font-size:22px;color:#d9cfb6;direction:ltr;text-align:left;margin-top:6px;font-weight:500}
+.it .a{font-family:Plex;font-weight:700;font-size:40px;line-height:1.3;color:#fff}.it .e{font-size:24px;color:#efe6cf;direction:ltr;text-align:left;margin-top:6px;font-weight:600}
 .foot{position:absolute;left:60px;right:60px;bottom:48px;padding-top:18px;border-top:1px solid rgba(201,162,75,.3);display:flex;justify-content:space-between;align-items:center;font-size:24px;font-weight:600;color:#efe8d6;z-index:6}
 .foot .wa{display:flex;gap:10px;align-items:center}.foot svg{width:26px;height:26px;fill:#c9a24b}
-.note{font-size:20px;color:#e2d9c2;text-align:center;margin-top:14px}.note span{font-family:Plex}
+.note{font-size:22px;font-weight:600;color:#efe6cf;text-align:center;margin-top:14px}.note span{font-family:Plex;font-weight:600}
 body.lst .ph{height:560px}
 /* Reel / Story (1080x1920, 9:16): the same design, taller photo; the top 120px (250px for a
    story) and the bottom 330px stay clear of Instagram's and Facebook's buttons and caption. */
@@ -112,21 +112,21 @@ body.tweet{background:radial-gradient(120% 80% at 50% 0%,#174234 0%,#0f2b21 60%)
 .tw{position:absolute;left:60px;right:60px;top:0;display:flex;flex-direction:column;gap:0}
 .card{width:100%;background:#f7f4ec;color:#0f2b21;border-radius:26px;padding:56px 56px 48px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
 .card .ar{color:#0f2b21;line-height:1.35}
-.card .en{color:#3c4a42;line-height:1.3;white-space:normal;margin-top:16px}
+.card .en{color:#1f2d26;line-height:1.3;white-space:normal;margin-top:16px}
 .opts{display:flex;flex-wrap:wrap;gap:14px 24px;justify-content:space-between;direction:ltr;margin-top:30px;padding-top:24px;border-top:1px solid #e2dccd}
 .opts.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 28px}
-.opts span{display:flex;gap:10px;align-items:center;font-size:25px;color:#3c4a42;font-weight:600}.opts span b{font-family:Plex;font-weight:700}
+.opts span{display:flex;gap:10px;align-items:center;font-size:27px;color:#1f2d26;font-weight:700}.opts span b{font-family:Plex;font-weight:700}
 .opts i{font-style:normal;color:#c9a24b;font-size:28px}
-.dyk{margin-top:48px}.dyk .ar{color:#c9a24b;font-size:36px;line-height:1.35}.dyk .en{font-size:26px;font-weight:600;white-space:normal;margin-top:8px}
+.dyk{margin-top:48px}.dyk .ar{color:#c9a24b;font-size:40px;line-height:1.35}.dyk .en{font-size:28px;font-weight:700;color:#fff;white-space:normal;margin-top:8px}
 .tw .facts{margin-top:30px}
-.ask{margin-top:44px;text-align:center;color:#c9a24b;font-size:27px;font-weight:600;white-space:nowrap}.ask span[dir=rtl]{font-family:Plex;font-weight:700;font-size:29px}
-.choice .ask{display:inline-flex;gap:12px;align-items:center;border:1.5px solid rgba(201,162,75,.7);border-radius:40px;padding:12px 26px;font-size:22px;font-weight:500;color:#efe8d6}
+.ask{margin-top:44px;text-align:center;color:#c9a24b;font-size:28px;font-weight:700;white-space:nowrap}.ask span[dir=rtl]{font-family:Plex;font-weight:700;font-size:29px}
+.choice .ask{display:inline-flex;gap:12px;align-items:center;border:1.5px solid rgba(201,162,75,.7);border-radius:40px;padding:12px 26px;font-size:24px;font-weight:700;color:#fff}
 /* Evening "this or that" (design B2): two photos side by side, "أم" in the middle. */
 .half{position:absolute;top:0;height:860px;width:540px;background-size:cover;background-position:center}
 .half.l{left:0}.half.r{right:0}.half:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,43,33,.75) 0%,rgba(15,43,33,0) 22%,rgba(15,43,33,0) 65%,rgba(15,43,33,.95) 100%)}
 .split{position:absolute;left:537px;top:0;height:860px;width:6px;background:#0f2b21;z-index:2}
 .vs{position:absolute;left:470px;top:390px;width:140px;height:140px;border-radius:50%;background:#c9a24b;color:#0f2b21;z-index:3;display:flex;align-items:center;justify-content:center;font-family:Plex;font-weight:700;font-size:44px;box-shadow:0 8px 30px rgba(0,0,0,.4);border:6px solid #0f2b21}
-.lab{position:absolute;top:690px;z-index:3;width:540px;text-align:center;padding:0 24px}.lab .la{font-family:Plex;font-weight:700;font-size:44px;line-height:1.2;white-space:nowrap}.lab .le{font-size:24px;color:#eee6d3;font-weight:600;margin-top:4px;white-space:nowrap}
+.lab{position:absolute;top:690px;z-index:3;width:540px;text-align:center;padding:0 24px}.lab .la{font-family:Plex;font-weight:700;font-size:44px;line-height:1.2;white-space:nowrap}.lab .le{font-size:26px;color:#fff;font-weight:700;margin-top:4px;white-space:nowrap}
 .lab .k{display:inline-block;width:54px;height:54px;line-height:54px;border-radius:50%;background:#c9a24b;color:#0f2b21;font-weight:700;font-size:28px;margin-bottom:10px}
 .cq{position:absolute;left:52px;right:52px;top:935px;text-align:center}
 .cq .ar,.cq .en{text-align:center;white-space:nowrap}.cq .en{margin-top:8px}.cq .ask{margin-top:40px}
@@ -137,21 +137,21 @@ body.tweet{background:radial-gradient(120% 80% at 50% 0%,#174234 0%,#0f2b21 60%)
 .c-panel{position:absolute;left:60px;right:60px;bottom:120px;z-index:6}
 .c-ar{font-family:Plex;font-weight:700;color:#fff;direction:rtl;text-align:right;line-height:1.25}
 .c-en{font-weight:700;color:#efe6cf;line-height:1.2;margin-top:10px;white-space:nowrap;direction:ltr;text-align:left}
-.c-sub{font-family:Plex;font-weight:700;font-size:36px;color:#c9a24b;direction:rtl;text-align:right}.c-sube{font-size:22px;color:#d9cfb6;margin-top:6px;direction:ltr;text-align:left}
+.c-sub{font-family:Plex;font-weight:700;font-size:36px;color:#c9a24b;direction:rtl;text-align:right}.c-sube{font-size:24px;font-weight:700;color:#efe6cf;margin-top:6px;direction:ltr;text-align:left}
 .c-swipe{margin-top:34px;display:flex;justify-content:space-between;align-items:center;background:#c9a24b;color:#0f2b21;border-radius:14px;padding:18px 28px;font-weight:700;font-size:24px;direction:ltr}.c-swipe span[dir=rtl]{font-family:Plex;font-size:28px}
 .c-body{position:absolute;left:60px;right:60px;top:150px;bottom:165px;display:flex;flex-direction:column;justify-content:center;gap:30px;z-index:6}
 .c-ttl{direction:rtl;display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-bottom:1px solid rgba(201,162,75,.35);padding-bottom:18px}.c-ttl .a{font-family:Plex;font-weight:700;font-size:44px;color:#c9a24b;white-space:nowrap}.c-ttl .e{font-size:26px;color:#efe6cf;font-weight:700;white-space:nowrap;direction:ltr}
 .c-photo{height:420px;border-radius:10px;background-size:cover;background-position:center;flex:none}
 .c-st{display:flex;gap:28px;direction:rtl;background:rgba(255,255,255,.045);border-right:6px solid #c9a24b;padding:28px 30px;border-radius:4px}
 .c-st .n{font-size:104px;font-weight:700;color:#c9a24b;line-height:.9;min-width:120px;text-align:center;direction:ltr}
-.c-st .t{font-family:Plex;font-weight:700;font-size:58px;color:#fff;line-height:1.25}.c-st .d{font-family:Plex;font-weight:500;font-size:30px;line-height:1.5;color:#ece4cf;margin-top:10px}
-.c-st .e{direction:ltr;text-align:left;margin-top:16px;padding-top:14px;border-top:1px solid rgba(201,162,75,.2)}.c-st .e b{display:block;font-weight:700;font-size:28px;color:#efe6cf}.c-st .e span{display:block;font-size:20px;color:#cfc5ab;line-height:1.45;margin-top:4px}
+.c-st .t{font-family:Plex;font-weight:700;font-size:58px;color:#fff;line-height:1.25}.c-st .d{font-family:Plex;font-weight:600;font-size:31px;line-height:1.5;color:#fff;margin-top:10px}
+.c-st .e{direction:ltr;text-align:left;margin-top:16px;padding-top:14px;border-top:1px solid rgba(201,162,75,.2)}.c-st .e b{display:block;font-weight:700;font-size:28px;color:#efe6cf}.c-st .e span{display:block;font-size:22px;font-weight:600;color:#efe6cf;line-height:1.45;margin-top:4px}
 .c-dots{position:absolute;bottom:128px;left:0;right:0;display:flex;gap:10px;justify-content:center;z-index:6}.c-dots i{width:12px;height:12px;border-radius:50%;background:rgba(201,162,75,.3)}.c-dots i.on{background:#c9a24b;width:36px;border-radius:8px}
 .c-next{position:absolute;bottom:150px;right:60px;z-index:6;font-family:Plex;font-weight:700;color:#c9a24b;font-size:22px}
 .c-body .facts{margin-top:6px}
 .c-cta{background:#c9a24b;color:#0f2b21;border-radius:16px;padding:26px 30px;direction:rtl}.c-cta .a{font-family:Plex;font-weight:700;font-size:44px}.c-cta .e{direction:ltr;text-align:left;font-weight:700;font-size:24px;margin-top:6px}
-.c-ask{border:1.5px solid rgba(201,162,75,.7);border-radius:16px;padding:22px 28px;direction:rtl}.c-ask .a{font-family:Plex;font-weight:700;font-size:36px;color:#fff;line-height:1.35}.c-ask .e{direction:ltr;text-align:left;font-weight:600;font-size:22px;color:#d9cfb6;margin-top:6px}.c-ask .k{font-family:Plex;font-weight:700;color:#c9a24b;font-size:24px;margin-bottom:6px}
-.c-note{font-family:Plex;font-size:22px;color:#d9cfb6;direction:rtl;text-align:right}.c-note+.c-note{font-family:Inter;direction:ltr;text-align:left;font-size:18px;margin-top:-22px}`;
+.c-ask{border:1.5px solid rgba(201,162,75,.7);border-radius:16px;padding:22px 28px;direction:rtl}.c-ask .a{font-family:Plex;font-weight:700;font-size:36px;color:#fff;line-height:1.35}.c-ask .e{direction:ltr;text-align:left;font-weight:700;font-size:24px;color:#efe6cf;margin-top:6px}.c-ask .k{font-family:Plex;font-weight:700;color:#c9a24b;font-size:24px;margin-bottom:6px}
+.c-note{font-family:Plex;font-weight:600;font-size:23px;color:#efe6cf;direction:rtl;text-align:right}.c-note+.c-note{font-family:Inter;direction:ltr;text-align:left;font-size:20px;margin-top:-22px}`;
 
 const WA_ICON = `<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>`;
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -172,7 +172,7 @@ const tipBox = (tip) => tip ? `<div class="tip"><div class="k">${esc(tip.labelAr
 function tweetHtml(im) {
   const opts = (im.options || []).map((o) => `<span>${o.icon ? `<i>${esc(o.icon)}</i>` : ""}${esc(o.en)} · <b dir="rtl">${esc(o.ar)}</b></span>`).join("");
   const dyk = im.fact ? `<div class="dyk"><div class="ar">${esc(im.fact.ar)}</div><div class="en">${esc(im.fact.en)}</div></div>` : "";
-  return `<div class="tw"><div class="card"><div class="ar" style="font-size:${im.arSize || 70}px">${esc(im.headlineAr)}</div><div class="en" style="font-size:${im.enSize || 36}px">${esc(im.headlineEn)}</div>
+  return `<div class="tw"><div class="card"><div class="ar" style="font-size:${im.arSize || 76}px">${esc(im.headlineAr)}</div><div class="en" style="font-size:${im.enSize || 40}px">${esc(im.headlineEn)}</div>
 ${opts ? `<div class="opts${(im.options || []).length === 4 ? " grid" : ""}">${opts}</div>` : ""}</div>${dyk}${factTiles(im.facts)}${askPill(im.ask)}</div>`;
 }
 
@@ -236,7 +236,7 @@ ${FRAME}${topBar(im)}${im.design === "tweet" ? tweetHtml(im) : choiceHtml(im)}${
 <div class="ph" style="background-image:url('${fileUrl(photo)}');background-position:${im.position || "center"};background-size:${im.size || "cover"}"></div>
 ${topBar(im)}
 <div class="panel">${im.place || im.placeAr ? `<div class="eyebrow"><span>${esc(im.place || "")}</span><span class="a" dir="rtl">${esc(im.placeAr || "")}</span></div>` : ""}
-<div class="ar" style="font-size:${im.arSize || 68}px">${esc(im.headlineAr)}</div><div class="en" style="font-size:${im.enSize || Math.round((im.arSize || 68) * 0.6)}px">${esc(im.headlineEn)}</div><div class="rule"></div>
+<div class="ar" style="font-size:${im.arSize || 74}px">${esc(im.headlineAr)}</div><div class="en" style="font-size:${im.enSize || Math.round((im.arSize || 74) * 0.6)}px">${esc(im.headlineEn)}</div><div class="rule"></div>
 ${body}${tipBox(im.tip)}
 ${im.note ? `<div class="note"><span dir="rtl">${esc(im.note.ar)}</span> · ${esc(im.note.en)}</div>` : ""}</div>
 ${footer()}</body></html>`;
@@ -332,7 +332,7 @@ for (const [i, p] of posts.entries()) {
         const kids = body ? [...body.children].map((c) => c.getBoundingClientRect()) : [];
         const contentTop = kids.length ? Math.min(...kids.map((r) => r.top)) : box.top;
         const contentBottom = kids.length ? Math.max(...kids.map((r) => r.bottom)) : box.bottom;
-        return { over, clash: contentTop < top + 20 || (body && contentBottom > 1350 - 170), coverLines: cover ? Math.round(cover.getBoundingClientRect().height / (parseFloat(getComputedStyle(cover).fontSize) * 1.25)) : 0, fonts: [...document.fonts].filter((f) => f.status === "loaded").length };
+        return { over, clash: contentTop < top + 20 || (body && contentBottom > 1350 - 170), coverLines: cover ? Math.round(cover.getBoundingClientRect().height / (parseFloat(getComputedStyle(cover).fontSize) * 1.25)) : 0, fonts: ["Inter", "Plex"].every((fam) => [...document.fonts].some((f) => f.family.replace(/"/g, "") === fam && f.status === "loaded")) ? 4 : 0 };
       });
       if (check.over.length) issues.push(`slide ${k + 1}: text overflows: ${check.over.join(" | ")}`);
       if (check.clash) issues.push(`slide ${k + 1}: content does not fit between the top bar and the dots (shorten the text, or 1 item on this slide)`);
@@ -414,14 +414,14 @@ for (const [i, p] of posts.entries()) {
     const foot = document.querySelector(".foot").getBoundingClientRect().top;
     const ar = document.querySelector(design === "tweet" ? ".card .ar" : ".cq .ar");
     const arLines = Math.round(ar.getBoundingClientRect().height / (parseFloat(getComputedStyle(ar).fontSize) * 1.35));
-    return { over, clash: box.top < top + 8 || box.bottom > foot - 8, arLines, maxLines: design === "tweet" ? 3 : 1, fonts: [...document.fonts].filter((f) => f.status === "loaded").length };
+    return { over, clash: box.top < top + 8 || box.bottom > foot - 8, arLines, maxLines: design === "tweet" ? 3 : 1, fonts: ["Inter", "Plex"].every((fam) => [...document.fonts].some((f) => f.family.replace(/"/g, "") === fam && f.status === "loaded")) ? 4 : 0 };
   }, design) : await page.evaluate(() => {
     const over = [...document.querySelectorAll(".fa .v,.fa .a,.fa .e,.it .a,.it .e,.tip .t,.tip .te,.en,.note")].filter((e) => e.scrollWidth > e.clientWidth + 1).map((e) => e.textContent);
     const panel = document.querySelector(".panel").getBoundingClientRect();
     const top = document.querySelector(".top").getBoundingClientRect().bottom;
     const ar = document.querySelector(".panel .ar");
     const arLines = Math.round(ar.getBoundingClientRect().height / (parseFloat(getComputedStyle(ar).fontSize) * 1.28));
-    return { over, clash: panel.top < top + 30, arLines, maxLines: 2, fonts: [...document.fonts].filter((f) => f.status === "loaded").length };
+    return { over, clash: panel.top < top + 30, arLines, maxLines: 2, fonts: ["Inter", "Plex"].every((fam) => [...document.fonts].some((f) => f.family.replace(/"/g, "") === fam && f.status === "loaded")) ? 4 : 0 };
   });
   const photos = design === "tweet" ? [] : design === "choice" ? [p.image.a?.photo, p.image.b?.photo] : [p.image.photo];
   const issues = [];
