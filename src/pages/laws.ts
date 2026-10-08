@@ -31,20 +31,20 @@ const SHIELD =
   '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>';
 
 /** Turkish/Latin terms in parentheses keep their direction inside Arabic and Persian text. */
-const iso = (text: string) => text.replace(/\(([^()]*[A-Za-z][^()]*)\)/g, '(<bdi dir="ltr">$1</bdi>)');
+export const iso = (text: string) => text.replace(/\(([^()]*[A-Za-z][^()]*)\)/g, '(<bdi dir="ltr">$1</bdi>)');
 
 /** Drafts are visible only with ?preview (for the owner's review). */
 function isPreview(): boolean {
   return new URLSearchParams(location.search).has("preview");
 }
 
-function formatDate(iso: string): string {
+export function formatDate(iso: string): string {
   const [y, m, d] = iso.split("-").map(Number);
   return new Intl.DateTimeFormat(intlTag(), { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(Date.UTC(y, m - 1, d));
 }
 
 /** Official-source links: the publisher's translated name + the link. */
-function sourceLinks(sources: LawSource[]): string {
+export function sourceLinks(sources: LawSource[]): string {
   return `
             <p class="law-sources">
               <span class="law-sources__label">${t("laws.officialSource")}</span>
@@ -57,7 +57,7 @@ function sourceLinks(sources: LawSource[]): string {
             </p>`;
 }
 
-const topicBadge = (topic: LawTopic) => `<span class="law-topic law-topic--${topic}">${t(`laws.topics.${topic}`)}</span>`;
+export const topicBadge = (topic: LawTopic) => `<span class="law-topic law-topic--${topic}">${t(`laws.topics.${topic}`)}</span>`;
 const draftBadge = (approved: boolean) => (approved ? "" : `<span class="law-draft">${t("laws.draft")}</span>`);
 
 function updateCard(u: LawUpdate, i: number): string {

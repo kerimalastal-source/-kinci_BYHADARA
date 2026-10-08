@@ -558,7 +558,11 @@
     "ctaTitle": "Prêt à explorer vos options ?",
     "ctaText": "Nos conseillers vous présenteront les projets éligibles et l'ensemble de la procédure de citoyenneté.",
     "ctaButton": "Parler à un conseiller",
-    "ctaSecondary": "Découvrir nos projets"
+    "ctaSecondary": "Découvrir nos projets",
+    "lawsEyebrow": "Sources gouvernementales officielles",
+    "lawsTitle": "Dernières mises à jour juridiques",
+    "lawsSubtitle": "Les décisions récentes sur la citoyenneté, le permis de séjour et l'achat immobilier par les étrangers, chacune avec le lien vers sa source gouvernementale officielle.",
+    "lawsMore": "Voir toutes les mises à jour juridiques"
   },
   "faq": {
     "heroEyebrow": "Assistance",

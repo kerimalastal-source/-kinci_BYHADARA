@@ -558,7 +558,11 @@
     "ctaTitle": "Ready to Explore Your Options?",
     "ctaText": "Our advisors will walk you through eligible projects and the full citizenship process.",
     "ctaButton": "Speak With an Advisor",
-    "ctaSecondary": "Browse Our Projects"
+    "ctaSecondary": "Browse Our Projects",
+    "lawsEyebrow": "From official government sources",
+    "lawsTitle": "Latest Legal Updates",
+    "lawsSubtitle": "Recent decisions on citizenship, residence and property purchases by foreigners, each with a link to its official government source.",
+    "lawsMore": "See All Legal Updates"
   },
   "faq": {
     "heroEyebrow": "Support",

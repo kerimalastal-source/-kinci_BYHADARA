@@ -1,6 +1,8 @@
 import { t, tRaw, link } from "../i18n";
 import { statIcon } from "../components/statIcons";
 import { initScrollReveal } from "../components/scrollReveal";
+import { LAWS_PAGE_LIVE, lawUpdates, sortedLawUpdates, visibleLawItems, type LawTopic } from "../data/laws";
+import { formatDate, iso, sourceLinks, topicBadge } from "./laws";
 
 interface TextItem {
   title: string;
@@ -54,6 +56,47 @@ function infoCards(items: TextItem[], icons: string[], modifier = ""): string {
             )
             .join("")}
         </ul>`;
+}
+
+/** Topics from the Property Laws page that matter to a citizenship / residence buyer. */
+const LAW_BOX_TOPICS: LawTopic[] = ["citizenship", "residence", "ownership"];
+
+/** "Latest legal updates": the 3 newest approved updates on those topics, each with its official source. */
+function latestLaws(): string {
+  if (!LAWS_PAGE_LIVE) return "";
+  const updates = sortedLawUpdates(visibleLawItems(lawUpdates, false))
+    .filter((u) => LAW_BOX_TOPICS.includes(u.topic))
+    .slice(0, 3);
+  if (!updates.length) return "";
+  return `
+    <section class="section cz-laws">
+      <div class="container">
+        <p class="eyebrow eyebrow--center">${t("citizenship.lawsEyebrow")}</p>
+        ${head(t("citizenship.lawsTitle"), t("citizenship.lawsSubtitle"))}
+        <ul class="cz-laws__list">
+          ${updates
+            .map((u, i) => {
+              const text = tRaw<{ title: string; summary: string }>(`lawsData.updates.${u.id}`);
+              return `
+          <li class="cz-law" ${reveal(i)}>
+            <div class="cz-law__top">
+              <time datetime="${u.decided}">${formatDate(u.decided)}</time>
+              ${topicBadge(u.topic)}
+            </div>
+            <h3>${iso(text.title)}</h3>
+            <p class="cz-law__summary">${iso(text.summary)}</p>
+            ${sourceLinks(u.sources)}
+            <p class="law-checked">${t("laws.checked", { date: formatDate(u.checked) })}</p>
+          </li>`;
+            })
+            .join("")}
+        </ul>
+        <div class="cz-laws__foot">
+          <p>${t("laws.disclaimer")}</p>
+          <a class="btn btn--outline" href="${link("/property-laws")}">${t("citizenship.lawsMore")}</a>
+        </div>
+      </div>
+    </section>`;
 }
 
 export function renderCitizenship(el: HTMLElement): void {
@@ -224,6 +267,8 @@ export function renderCitizenship(el: HTMLElement): void {
     </section>`
         : ""
     }
+
+    ${latestLaws()}
 
     <section class="section final-cta">
       <div class="container final-cta__inner">
