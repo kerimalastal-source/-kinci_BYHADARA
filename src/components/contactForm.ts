@@ -394,7 +394,7 @@ export function initContactForm(container: ParentNode): void {
     setSending(submitButton, false);
     if (result.status === "limit") return showLimit(successBox);
 
-    trackLead("contact", [...englishNames, ...englishTopics].join(", "));
+    trackLead("contact", [...englishNames, ...englishTopics].join(", "), { email, phone, name });
     if (result.status === "sent") {
       showSent(successBox, result.reference);
     } else {
