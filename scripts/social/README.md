@@ -65,7 +65,7 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
 4. Write `scripts/social/out/<date>/posts.json` (shape below) and run
    `node scripts/social/render.mjs scripts/social/out/<date>/posts.json`.
    It must print `ok` for every post (2 or 3, plus the Story) — fix any PROBLEMS (shorter text, 3 stats, a shorter tip, `arSize`
-   56–60) and re-run. Then Read each `post-<n>.jpg` once to check it visually.
+   56–60; an Instagram caption over 2200 characters or 30 hashtags → shorten the caption bullets) and re-run. Then Read each `post-<n>.jpg` once to check it visually.
 5. Read the published page's `days.json` with the Artifact tool
    (`action: "read"`, `url` = ARTIFACT_URL, `path: "days.json"`), then run
    `node scripts/social/build-page.mjs <date> <that local days.json>`.

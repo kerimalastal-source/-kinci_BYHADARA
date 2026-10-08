@@ -345,6 +345,12 @@ for (const [i, p] of posts.entries()) {
   fs.unlinkSync(htmlPath);
   if (p.at !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(p.at)) issues.push(`"at" must be Istanbul time "HH:MM", got ${JSON.stringify(p.at)}`);
   const result = { id: p.id, topic: p.topic, image: `post-${n}.jpg`, fb: p.caption ? caption(p, "facebook") : "", ig: p.caption ? caption(p, "instagram") : "", ...(p.at ? { at: p.at } : {}), ...(video ? { video } : {}), ...(p.story ? { story: true } : {}) };
+  // Instagram refuses captions over 2200 characters or 30 hashtags; the site then skips Instagram
+  // for that post (2026-10-08 post-2 was 2247 and went to Facebook only), so catch it here.
+  const igChars = [...result.ig].length;
+  const igTags = (result.ig.match(/#[\p{L}\p{N}_]+/gu) ?? []).length;
+  if (igChars > 2200) issues.push(`Instagram caption is ${igChars} characters (max 2200): shorten the Arabic/English text`);
+  if (igTags > 30) issues.push(`Instagram caption has ${igTags} hashtags (max 30)`);
   fs.writeFileSync(path.join(outDir, `post-${n}.json`), JSON.stringify(result, null, 2));
   console.log(`post-${n} (${p.id}): ${issues.length ? "PROBLEMS\n  - " + issues.join("\n  - ") : "ok"}`);
   problems += issues.length;
