@@ -92,7 +92,7 @@
     }
   },
   "footer": {
-    "description": "HADARA Immobilier est une société de développement et d'investissement immobilier basée à Istanbul, livrant des villas de luxe et des projets résidentiels haut de gamme depuis 2014.",
+    "description": "HADARA, votre partenaire immobilier à Istanbul depuis 2014, vous accompagne du choix du bon logement ou investissement jusqu'à la remise des clés.",
     "quickLinks": "Liens rapides",
     "getInTouch": "Nous contacter",
     "followUs": "Suivez-nous",
@@ -525,8 +525,8 @@
     "residenceText": "Si la citoyenneté n'est pas votre objectif pour l'instant, l'achat d'un logement en Turquie donne aussi droit à un permis de séjour renouvelable.",
     "residence": [
       {
-        "title": "Dès 200 000 $ à Istanbul",
-        "desc": "Le bien doit valoir au moins 200 000 USD dans les grandes métropoles comme Istanbul, et 100 000 USD dans les autres provinces."
+        "title": "Dès 200 000 $",
+        "desc": "Selon la liste officielle des documents de la Présidence de la gestion des migrations, le logement doit valoir au moins 200 000 USD ou l'équivalent en livres turques à la date d'achat, et servir d'habitation et non de location."
       },
       {
         "title": "Renouvelable",
@@ -558,7 +558,11 @@
     "ctaTitle": "Prêt à explorer vos options ?",
     "ctaText": "Nos conseillers vous présenteront les projets éligibles et l'ensemble de la procédure de citoyenneté.",
     "ctaButton": "Parler à un conseiller",
-    "ctaSecondary": "Découvrir nos projets"
+    "ctaSecondary": "Découvrir nos projets",
+    "lawsEyebrow": "Sources gouvernementales officielles",
+    "lawsTitle": "Dernières mises à jour juridiques",
+    "lawsSubtitle": "Les décisions récentes sur la citoyenneté, le permis de séjour et l'achat immobilier par les étrangers, chacune avec le lien vers sa source gouvernementale officielle.",
+    "lawsMore": "Voir toutes les mises à jour juridiques"
   },
   "faq": {
     "heroEyebrow": "Assistance",
@@ -1443,7 +1447,11 @@
     "heroSubtitle": "Guides et analyses sur le marché immobilier turc, Istanbul, la vie en Turquie et la citoyenneté par investissement immobilier.",
     "readMore": "Lire l'article",
     "backLabel": "Retour au blog",
-    "otherArticlesTitle": "D'autres articles à lire"
+    "otherArticlesTitle": "D'autres articles à lire",
+    "relatedProjectsEyebrow": "Nos projets",
+    "relatedProjectsTitle": "Des projets qui pourraient vous intéresser",
+    "relatedProjectsSubtitle": "Une sélection de nos projets en lien avec cet article. Notre équipe répond volontiers à vos questions.",
+    "relatedProjectsCta": "Se renseigner sur ces projets"
   },
   "laws": {
     "heroEyebrow": "Lois immobilières",
@@ -1586,6 +1594,25 @@
     }
   },
   "blogData": {
+    "off-plan-or-ready": {
+      "category": "Achat immobilier",
+      "title": "Sur plan ou prêt à habiter ? Bien choisir à Istanbul",
+      "excerpt": "Une comparaison claire entre l'achat d'un logement en cours de construction et d'un logement déjà achevé, avec des exemples des projets HADARA.",
+      "body": [
+        "L'une des premières décisions d'un acheteur à Istanbul ne concerne ni le quartier ni la répartition des pièces, mais le stade d'avancement de l'immeuble. Certains logements sont vendus avant d'être terminés, d'autres sont achevés et utilisables immédiatement. Les deux voies sont courantes et aucune n'est meilleure dans tous les cas. Ce guide explique la différence et les questions à poser, pour que votre choix corresponde à vos propres projets.",
+        "## Que signifient « sur plan » et « prêt » ?",
+        "Acheter sur plan, c'est-à-dire en vente avant achèvement ou pendant la construction, signifie que vous choisissez un logement à partir des plans, d'une maquette et d'un appartement témoin alors que l'immeuble est neuf ou encore en train de s'élever. Un logement prêt, ou livré, est dans un immeuble terminé, dont les résidences sont disponibles en l'état. Entre les deux se trouve le nouveau lancement : un projet tout juste présenté au marché, dont la livraison est encore à venir.",
+        "Notre portefeuille illustre les trois stades. Lotus Yaşam à Beylikdüzü et Diamond Marin sont de nouveaux lancements. Lotus Şişli est en construction et ses unités sont actuellement en vente. Lotus Yalı à Büyükçekmece et Cadde Ispartakule sont achevés et prêts à habiter, avec des résidences encore disponibles à la vente.",
+        "## Les atouts de l'achat sur plan",
+        "Le premier avantage est le choix. Au lancement d'un projet, vous pouvez examiner plus d'unités et décider de l'étage, de la disposition et de l'emplacement qui vous conviennent le mieux. Le deuxième est le temps : le plan de paiement est généralement étalé sur la période de construction au lieu d'être exigible en une seule fois. Lotus Yaşam, par exemple, propose des options de paiement échelonné flexibles, avec une livraison prévue fin 2028, et la livraison de Diamond Marin est prévue fin 2027. Le troisième est que vous achetez un logement neuf, jamais habité.",
+        "La contrepartie est l'attente et l'incertitude. Vous jugez le logement sur des dessins et un appartement témoin, non sur les pièces terminées, et la date de livraison est un plan, pas une garantie. Certains promoteurs n'ont même pas publié de dates de début ou de livraison : demandez toujours ce qui a été officiellement annoncé. Si vous devez emménager cette année, un immeuble inachevé ne conviendra pas.",
+        "## Les atouts d'un logement prêt",
+        "Un projet achevé vous permet de voir exactement ce que vous achetez : la lumière réelle du séjour, la vue depuis le balcon, la finition de la cuisine, l'état des parties communes. Vous pouvez comparer l'immeuble avec ce qui était promis, et emménager ou louer sans attendre. À Lotus Yalı, les 48 résidences sont réparties en huit blocs de trois étages face à la mer, et à Cadde Ispartakule la tour compte 78 résidences et 12 commerces en rez-de-chaussée : vous jugez donc le cadre réel. La contrepartie est qu'un immeuble terminé offre moins d'unités au choix, et que le paiement se rapproche en général du moment de l'achat. Les meilleurs étages ou les plus belles vues peuvent déjà être pris ; la disponibilité compte donc ici plus qu'ailleurs.",
+        "## Ce qu'il faut vérifier avant de décider",
+        "Quel que soit le stade, posez les mêmes questions. Qui est le promoteur et quels autres projets a-t-il livrés ? Que comprend exactement le prix, et sur quelle surface est-il fondé ? Que disent le contrat et l'échéancier de paiement sur la date de livraison ? Quels documents pouvez-vous consulter, et des copies peuvent-elles vous être envoyées ? Comparez surface brute avec surface brute et nette avec nette, et lisez les équipements de la résidence comme une liste, non comme un slogan. Si vous choisissez un projet en construction, demandez à voir l'avancement sur site et la maquette au bureau de vente.",
+        "Enfin, souvenez-vous qu'une visite vidéo peut vous aider à présélectionner un projet et un logement avant le voyage, mais que l'achat lui-même se conclut lors d'une visite à Istanbul, où vous voyez le projet en personne. HADARA, votre partenaire immobilier à Istanbul, vous explique volontiers le stade de chaque projet et ce qu'il signifie pour vos plans. Contactez-nous ou réservez une visite vidéo privée pour comparer un projet sur plan et un logement prêt, puis venez à Istanbul les voir par vous-même."
+      ]
+    },
     "gross-vs-net-area": {
       "category": "Achat immobilier",
       "title": "Surface brute ou nette et sens du 2+1 dans les annonces turques",
