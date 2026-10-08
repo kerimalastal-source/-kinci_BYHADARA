@@ -2834,7 +2834,7 @@
           "Your sign-in session, if you use a resale portal account.",
           "Your cookie choice (accept or decline), so that we do not ask you again on every visit."
         ],
-        "after": "We use Meta Pixel (Facebook and Instagram), Google Analytics and Google Ads to count visits and measure which ads bring enquiries, but only if you choose “Accept” in the cookie notice. These tools may set cookies and collect your IP address and browsing data. If you choose “Decline”, they are not loaded at all. You can change your choice at any time through “Cookie settings” at the bottom of every page, and you can also block or delete cookies in your browser settings. The Website keeps working either way."
+        "after": "We use Meta Pixel (Facebook and Instagram), Google Analytics and Google Ads to count visits, measure which ads bring enquiries and show our ads on Facebook, Instagram and Google to people who have visited the Website, but only if you choose “Accept” in the cookie notice. These tools may set cookies and collect your IP address and browsing data. If you choose “Decline”, they are not loaded at all. You can change your choice at any time through “Cookie settings” at the bottom of every page, and you can also block or delete cookies in your browser settings. The Website keeps working either way."
       },
       {
         "title": "Who we share your data with",
@@ -2842,7 +2842,7 @@
           "We share personal data only when it is needed, and only the data that is needed:"
         ],
         "items": [
-          "Service providers who run the Website for us: Vercel (hosting, and the approximate location of visits), Supabase (resale portal database and sign-in, messages from the Website's forms, tour bookings, and anonymous visit statistics), Google (fonts, analytics, advertising and YouTube videos) and Meta (WhatsApp and ad measurement). The map on our contact page is provided by OpenStreetMap.",
+          "Service providers who run the Website for us: Vercel (hosting, and the approximate location of visits), Supabase (resale portal database and sign-in, messages from the Website's forms, tour bookings, and anonymous visit statistics), Google (fonts, analytics, advertising and YouTube videos) and Meta (WhatsApp, ad measurement and showing our ads, and the details you send us through a form or a WhatsApp message inside one of our Facebook or Instagram ads). The map on our contact page is provided by OpenStreetMap.",
           "Telegram and email, which deliver internal notifications to our team: new visits (with anonymous details only), new messages and requests, and tour bookings. Confirmation emails to you are sent through the email service Resend.",
           "Project developers, when it is needed to complete your request, for example to reserve a unit or complete a purchase.",
           "In the resale portal: buyers' messages are shared with the owner of the listing, and approved listings are published on the Website.",
