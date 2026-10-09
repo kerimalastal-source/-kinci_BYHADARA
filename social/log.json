@@ -358,5 +358,37 @@
     "headlineAr": "17,500 م² من الخضرة حول منزلك",
     "headlineEn": "17,500 m² of green around your home",
     "photo": "/images/projects/lotus-koru-2/landscaped-grounds.jpg"
+  },
+  {
+    "date": "2026-10-09",
+    "id": "lotus-yali-life",
+    "topic": "لوتس يالي · الحياة في المشروع",
+    "headlineAr": "حياة هادئة بين الحدائق والبحر",
+    "headlineEn": "A calm life between gardens and sea",
+    "photo": "/images/projects/lotus-yali/sunset-aerial.jpg"
+  },
+  {
+    "date": "2026-10-09",
+    "id": "property-request",
+    "topic": "اطلب عقارك المخصص",
+    "headlineAr": "لم تجده بعد؟ نبحث عنه لك",
+    "headlineEn": "Not found it yet? We search for you",
+    "photo": "/images/projects/lotus-istanbul/iconic-urban-development.jpg"
+  },
+  {
+    "date": "2026-10-09",
+    "id": "pick-ready-or-offplan",
+    "topic": "لو خُيّرت: جاهز أم على الخارطة؟ (شرائح)",
+    "headlineAr": "جاهز أم على المخطط؟",
+    "headlineEn": "Ready to move in or off-plan?",
+    "photo": "/images/projects/cadde-ispartakule/garden-pond.jpg"
+  },
+  {
+    "date": "2026-10-09",
+    "id": "lotus-yali-life-story",
+    "topic": "ستوري: لوتس يالي · الحياة في المشروع",
+    "headlineAr": "مسابح داخلية وساونا وحمّام تركي",
+    "headlineEn": "Indoor pools, sauna and Turkish bath",
+    "photo": "/images/projects/lotus-yali/view-from-sea.jpg"
   }
 ]
