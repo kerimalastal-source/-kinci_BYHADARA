@@ -878,7 +878,7 @@ export function initVideoTourBooking(root: HTMLElement): void {
     setSending(false);
 
     if (status === 200 && result.reference) {
-      trackSchedule(englishNames(state.projects));
+      trackSchedule(englishNames(state.projects), { email: state.email, phone: state.phone, name: state.name });
       taken.add(slotUtc(state.date!, state.hour!));
       return update({ ...state, reference: result.reference, step: 3 });
     }

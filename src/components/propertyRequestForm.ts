@@ -278,7 +278,7 @@ export function initPropertyRequestForm(container: ParentNode): void {
     setSending(submitButton, false);
     if (result.status === "limit") return showLimit(successBox);
 
-    trackLead("property-request", propertyType);
+    trackLead("property-request", propertyType, { email, phone, name });
     if (result.status === "sent") {
       showSent(successBox, result.reference);
     } else {

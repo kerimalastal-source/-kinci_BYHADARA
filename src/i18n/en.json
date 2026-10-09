@@ -1594,6 +1594,23 @@
     }
   },
   "blogData": {
+    "beylikduzu-district-guide": {
+      "category": "About Istanbul",
+      "title": "Beylikdüzü District Guide for Overseas Buyers",
+      "excerpt": "Where Beylikdüzü lies, what daily life by the Marmara Sea looks like, and which homes HADARA offers in the district.",
+      "body": [
+        "Beylikdüzü is one of the Istanbul districts that overseas buyers hear about most often, and for good reason: it combines a coastline on the Sea of Marmara with a well-organised, modern neighbourhood. This guide explains where the district lies, what daily life looks like there and which projects in our portfolio you can find in it, using only the distances and details published on our site.",
+        "## Where Beylikdüzü lies",
+        "Beylikdüzü sits on the European side of Istanbul, in the west of the city, along the shore of the Sea of Marmara. The Bosphorus divides Istanbul into a European and an Asian side, and the western part of the European side has grown into a series of complete residential districts strung along the coast and the main roads. The E-5 highway and the Metrobüs line run through this part of the city, which gives Beylikdüzü a direct link to the rest of Istanbul. Because the district is an established part of the European side, it offers the services of a complete urban area, from marinas and parks to shopping centres and hospitals, rather than a purely seasonal seaside setting.",
+        "## Daily life by the sea and the green",
+        "The sea is the first thing that defines the district. West Istanbul Marina and the Gürpınar coastline are close to the projects described below, and Beylikdüzü Yaşam Vadisi, a long green valley, gives residents a place to walk and exercise. For shopping, the MarmaraPark and Torium malls serve the area, and several private hospitals are nearby, among them Medicana International Istanbul, Medilife Beylikdüzü and Kolan Beylikdüzü.",
+        "To give a sense of distances, our site lists the following from Diamond Marin: West Istanbul Marina and Beylikdüzü Yaşam Vadisi are 5 minutes away, the Metrobüs 10 minutes, MarmaraPark mall and Medicana International Istanbul Hospital 15 minutes, and Ambarlı Port and Büyükçekmece beach 20 minutes. Other projects have their own distances, so always ask for the figures from the exact address you are considering.",
+        "## Homes in Beylikdüzü",
+        "Two new launches show the range of apartments in the district. Diamond Marin is a boutique, low-rise project for 58 families in two blocks, with 3+1 apartments from 117.60 m² to 143.08 m² gross, a swimming pool, a fitness centre and 24/7 private security; delivery is scheduled for the end of 2027. Lotus Yaşam is a larger community on 21,000 m² with 18 residential blocks around landscaped courtyards, a children's playground, a sports court and a walking track. Its 2+1 homes measure about 100 to 109 m², its 3+1 homes 134 to 167 m² and its 4+1 homes 194 to 197 m² gross, with flexible installment plans and delivery scheduled for the end of 2028.",
+        "For those who want more space, Lotus Manzara Beylikdüzü offers 16 villas on 5,500 m², eight detached and eight twin, all of them 5+2 homes over three levels with 303.40 to 322.15 m² gross and private gardens. The project is complete and ready to move in, with villas still available for sale. Residents also have a fitness studio, a sauna and a Turkish bath. Each villa also has a covered garage for two cars, a sea-view terrace and a garden terrace.",
+        "The right choice depends on your plans. A ready villa suits someone who wants to move in now, while a new launch suits someone who is comfortable waiting for delivery and spreading payments over time. Remember that a delivery date is a plan, not a guarantee. Before you decide, ask about the floor plan, the gross and net areas, the amenities and the monthly costs of the community. HADARA, your real estate partner in Istanbul, can help you compare these options. Contact us or book a private video tour to explore them, then visit Istanbul to see your shortlist in person."
+      ]
+    },
     "off-plan-or-ready": {
       "category": "Buying Property",
       "title": "Off-Plan or Ready to Move In? How to Choose in Istanbul",
@@ -2834,7 +2851,7 @@
           "Your sign-in session, if you use a resale portal account.",
           "Your cookie choice (accept or decline), so that we do not ask you again on every visit."
         ],
-        "after": "We use Meta Pixel (Facebook and Instagram), Google Analytics and Google Ads to count visits and measure which ads bring enquiries, but only if you choose “Accept” in the cookie notice. These tools may set cookies and collect your IP address and browsing data. If you choose “Decline”, they are not loaded at all. You can change your choice at any time through “Cookie settings” at the bottom of every page, and you can also block or delete cookies in your browser settings. The Website keeps working either way."
+        "after": "We use Meta Pixel (Facebook and Instagram), Google Analytics and Google Ads to count visits, measure which ads bring enquiries and show our ads on Facebook, Instagram and Google to people who have visited the Website, but only if you choose “Accept” in the cookie notice. These tools may set cookies and collect your IP address and browsing data. Once you accept, our server also sends the same Meta events directly to Meta (the Conversions API) so they are counted reliably; when you send a form or book a tour, your email address, phone number and name go with them only in encrypted (hashed) form, so that Meta can match the event to your Facebook or Instagram account. If you choose “Decline”, they are not loaded at all. You can change your choice at any time through “Cookie settings” at the bottom of every page, and you can also block or delete cookies in your browser settings. The Website keeps working either way."
       },
       {
         "title": "Who we share your data with",
@@ -2842,7 +2859,7 @@
           "We share personal data only when it is needed, and only the data that is needed:"
         ],
         "items": [
-          "Service providers who run the Website for us: Vercel (hosting, and the approximate location of visits), Supabase (resale portal database and sign-in, messages from the Website's forms, tour bookings, and anonymous visit statistics), Google (fonts, analytics, advertising and YouTube videos) and Meta (WhatsApp and ad measurement). The map on our contact page is provided by OpenStreetMap.",
+          "Service providers who run the Website for us: Vercel (hosting, and the approximate location of visits), Supabase (resale portal database and sign-in, messages from the Website's forms, tour bookings, and anonymous visit statistics), Google (fonts, analytics, advertising and YouTube videos) and Meta (WhatsApp, ad measurement and showing our ads, and the details you send us through a form or a WhatsApp message inside one of our Facebook or Instagram ads). The map on our contact page is provided by OpenStreetMap.",
           "Telegram and email, which deliver internal notifications to our team: new visits (with anonymous details only), new messages and requests, and tour bookings. Confirmation emails to you are sent through the email service Resend.",
           "Project developers, when it is needed to complete your request, for example to reserve a unit or complete a purchase.",
           "In the resale portal: buyers' messages are shared with the owner of the listing, and approved listings are published on the Website.",

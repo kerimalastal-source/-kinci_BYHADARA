@@ -73,9 +73,11 @@ function fakeFetch(opts = {}) {
         if (body.upload_phase === "start") return json({ video_id: `reel${calls.filter((c) => c.body.upload_phase === "start").length}`, upload_url: "x" });
         if (body.upload_phase === "finish") return json({ success: true });
       }
+      if (path === "PAGE/feed") return json({ id: `PAGE_feed_${Object.keys(body).filter((k) => k.startsWith("attached_media")).length}` });
       if (path === "PAGE/photo_stories") return json({ success: true, post_id: `story_${body.photo_id}` });
       if (path === "PAGE/photos") {
         if (opts.failFacebook) return json({ error: { message: "Invalid parameter" } }, 400);
+        if (body.published === "false" && body.url?.includes("-")) return json({ id: `photo_${body.url.split("/").pop()}` });
         return json({ id: "photo", post_id: `PAGE_${calls.filter((c) => c.url.endsWith("/photos")).length}` });
       }
       if (path === "IGUSER/media") {
@@ -394,6 +396,46 @@ test("the time of day is Istanbul's", () => {
 test("the day is Istanbul's", () => {
   assert.equal(istanbulDate(new Date("2026-09-29T21:30:00Z")), "2026-09-30");
   assert.equal(istanbulDate(new Date("2026-09-30T20:59:00Z")), "2026-09-30");
+});
+
+test("a carousel goes out as one Facebook post with its photos and one Instagram carousel", async () => {
+  const slides = ["post-3-1.jpg", "post-3-2.jpg", "post-3-3.jpg"];
+  const posts = { "post-3": { id: "steps", topic: "خطوات", image: "post-3.jpg", slides, fb: "FB carousel", ig: "IG carousel #HADARA", at: "21:00" } };
+  const { deps, calls, photos, store } = setup({ day: ["post-3.json"], posts });
+  const day = await publishDay(deps, DATE, "21:05");
+  assert.deepEqual(day.results.map((r) => [r.facebook, r.instagram]), [["published", "published"]]);
+  // Facebook: every slide uploaded unpublished (in order), then one post with all of them attached.
+  const uploads = graphCalls(calls, "PAGE/photos");
+  assert.deepEqual(uploads.map((c) => [c.body.published, c.body.url]), slides.map((f) => ["false", `https://blob.example/social/${DATE}/${f}`]));
+  const feed = graphCalls(calls, "PAGE/feed");
+  assert.equal(feed.length, 1);
+  assert.equal(feed[0].body.message, "FB carousel");
+  assert.equal(feed[0].body.access_token, "page-token");
+  assert.deepEqual([0, 1, 2].map((i) => JSON.parse(feed[0].body[`attached_media[${i}]`]).media_fbid), slides.map((f) => `photo_${f}`));
+  // Instagram: an item container per slide, then the carousel container with the caption, then publish.
+  const media = graphCalls(calls, "IGUSER/media").filter((c) => c.url.endsWith("/media"));
+  assert.equal(media.length, 4);
+  assert.deepEqual(media.slice(0, 3).map((c) => [c.body.is_carousel_item, c.body.image_url]), slides.map((f) => ["true", `https://blob.example/social/${DATE}/${f}`]));
+  const parent = media[3].body;
+  assert.equal(parent.media_type, "CAROUSEL");
+  assert.equal(parent.caption, "IG carousel #HADARA");
+  assert.equal(parent.children.split(",").length, 3);
+  assert.equal(graphCalls(calls, "IGUSER/media_publish").length, 1);
+  assert.match(photos[0].caption, /🎠 شرائح \(3\)/);
+  // A second run publishes nothing again.
+  const again = await publishDay(deps, DATE, "21:30");
+  assert.deepEqual(again.results.map((r) => [r.facebook, r.instagram]), [["already", "already"]]);
+  assert.equal(graphCalls(calls, "PAGE/feed").length, 1);
+  assert.ok(store.files.has(`social-state/${DATE}/post-3/instagram.done`));
+});
+
+test("a carousel with a bad slide list or a missing slide is not published", async () => {
+  const bad = { "post-3": { id: "x", topic: "x", image: "post-3.jpg", slides: ["post-3-1.jpg"], fb: "a", ig: "b" } };
+  const one = setup({ day: ["post-3.json"], posts: bad });
+  const r1 = await publishDay(one.deps, DATE);
+  assert.deepEqual(r1.results.map((r) => [r.facebook, r.instagram]), [["failed", "failed"]]);
+  assert.equal(graphCalls(one.calls, "PAGE/feed").length, 0);
+  assert.match(one.texts.join("\n"), /الشرائح/);
 });
 
 test("/api/social-publish: the cron needs CRON_SECRET, the button needs an admin, and no Blob means no publishing", async () => {

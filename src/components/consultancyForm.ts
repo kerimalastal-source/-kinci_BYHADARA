@@ -259,7 +259,7 @@ export function initConsultancyForm(container: ParentNode): void {
     setSending(submitButton, false);
     if (result.status === "limit") return showLimit(successBox);
 
-    trackLead("consultancy", selectedText(form, "service"));
+    trackLead("consultancy", selectedText(form, "service"), { email: value(form, "email"), phone: getPhoneValue(form, PHONE_ID), name: value(form, "name") });
     if (result.status === "sent") {
       showSent(successBox, result.reference);
     } else {

@@ -18,6 +18,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "beylikduzu-district-guide",
+    priority: -3,
+    published: "2026-10-09",
+    relatedProjects: ["diamond-marin", "beylikduzu-living", "lotus-manzara-beylikduzu"],
+    coverImage: { src: "/images/blog/beylikduzu-district-guide.jpg", width: 1006, height: 671 }
+  },
+  {
     slug: "off-plan-or-ready",
     priority: -2,
     published: "2026-10-07",

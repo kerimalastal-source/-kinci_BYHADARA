@@ -33,9 +33,10 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
    post (posts.json, in the same order); let the week's theme colour the wording.
    The three times have three roles (owner's decision 2026-10-03, every day to 2026-10-28):
    **09:00 a project** (design A), **14:00 useful real-estate information** (article,
-   citizenship, FAQ, a site tool; design A), **21:00 an interactive "tweet"** (`kind:
-   "evening"`, design `tweet`, or `choice` when the topic says so) — follow the brief and
-   the topic's `design` (see "Evening designs" below). **One feed post per time**: never two
+   citizenship, FAQ, a site tool; design A), **21:00 a carousel** (owner's decision
+   2026-10-08, every evening from 2026-10-09: design `carousel`, see "Evening carousel"
+   below) built on the plan's evening topic — the topic's `design` (`tweet`/`choice`) and
+   brief now give the subject and the question, not the layout. **One feed post per time**: never two
    posts with the same `at` (only the Story goes with the 09:00 post).
    **If it prints `"finished": true`, the month is over: make no posts, publish
    nothing, and end with the Arabic summary "انتهت خطة المحتوى لهذا الشهر — حان وقت
@@ -83,7 +84,48 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
    summary: at 10:00 the website then tells the owner on Telegram that today's posts
    weren't prepared. Commit nothing else (the outputs stay git-ignored).
 
-## Evening designs (approved by the owner 2026-10-03 — locked)
+## Owner's standing rules (2026-10-08 — always)
+
+- **Bold, clear text in every design, Arabic and English** («حافظ دائماً أن يكون الخط عريضاً
+  واضحاً»): never make the text thinner, smaller or paler than render.mjs draws it now.
+  Calm, comfortable colours (the approved green, gold and cream only).
+- **Rich, useful, varied content**: a visitor interested in buying property in Turkey must
+  feel the page gives them real information they can use, which leads them to contact us.
+  Vary the subjects and angles (projects, costs, documents, steps, areas, tools of the site).
+- **Contact posts in the schedule**: the plan has regular «how to contact HADARA» posts
+  (2026-10-11 all channels, 2026-10-19 what happens after you write, 2026-10-25 visit us or
+  by video, 2026-10-28 FAQ). Each one lists the real channels with their links: WhatsApp
+  https://wa.me/905319309214, phone +90 531 930 92 14, email info@byhadara.com, the contact
+  form (/contact), the custom property request (/property-request), the video tour booking
+  (/video-tour), the live chat on the website, Instagram @hadararealestate and the Facebook
+  page, and the office in Adnan Kahveci Mah., Beylikdüzü. When you write the next month's
+  plan, keep about one contact post a week.
+
+## Evening carousel (approved by the owner 2026-10-08 — locked; every evening from 2026-10-09)
+
+The 21:00 post is a **carousel** ("منشور شرائح"): 4–8 slides of 1080×1350 (10 at most), posted
+by the website as one Facebook post with all the photos and one Instagram carousel. Same
+colours, fonts, logo, frame and footer as design A, **big bold headlines** (owner's request).
+`render.mjs` draws it from `"image": { "design": "carousel", … }` and writes `post-<n>-<k>.jpg`
+(each slide) plus `post-<n>.jpg` (the cover, for the page, the log and Telegram):
+
+- **Slide 1, cover**: `photo` (+ `position`), `badge`, `headlineAr`/`headlineEn` (big, 2 Arabic
+  lines max), optional `subAr`/`subEn`, and the gold "swipe" bar (`swipeAr`, default «اسحب للمزيد»).
+- **Content slides** (`slides`: 2–6): each `{ items: [ {titleAr, textAr, titleEn, textEn} ] }`
+  with **1 or 2 items** (numbered 01, 02 … across the slides; `"numbered": false` to hide the
+  numbers), optional `photo` (+ `position`) for a photo band (then 1 item). `sectionAr`/
+  `sectionEn` = the gold title over every content slide. Keep `textAr` to 2 lines.
+- **Last slide**: `end: { headlineAr, headlineEn, stats (up to 3), ask {ar, en, labelAr?},
+  cta {ar, en}?, note {ar, en}? }` — `ask` is **the plan's evening question** (so the post
+  still invites comments), `labelAr` defaults to «سؤال الليلة».
+- Content: turn the evening topic into something a buyer learns from — e.g. «لو خُيّرت: جاهز أم
+  على الخارطة؟» → slides comparing the two from the site's article, then the question at the
+  end; a true/false topic → the facts slide by slide, the answer in the caption. Every fact
+  from the site, formal Arabic, no prices, the citizenship note when relevant.
+- Caption as usual (title, intro, 4–6 bullets, tip, cta + path); render.mjs prints `ok` only
+  when every slide fits. No Story/Reel in this design.
+
+## Evening designs (approved 2026-10-03; replaced by the carousel from 2026-10-09)
 
 The 21:00 post is a short interactive "tweet" in Arabic and English (equal weight, formal
 Arabic), same colours, fonts, logo, gold badge and footer as design A, 1080×1350 JPEG.
@@ -196,6 +238,10 @@ www.hadararealestate.com + WhatsApp +90 531 930 92 14. 1080×1350 JPEG (stories 
   //   "options": [ { "icon": "🌊", "ar": "إطلالة بحرية", "en": "Sea view" } ] }   (no photo, no stats)
   // or "image": { "design": "choice", "badge", "headlineAr", "headlineEn", "photo": <a.photo>,
   //   "a": { "photo", "position", "ar", "en" }, "b": { … } }
+  // evening carousel (from 2026-10-09): "image": { "design": "carousel", "photo", "badge",
+  //   "headlineAr", "headlineEn", "subAr", "subEn", "swipeAr", "sectionAr", "sectionEn",
+  //   "slides": [ { "items": [ { "titleAr", "textAr", "titleEn", "textEn" } ], "photo"? } ],
+  //   "end": { "headlineAr", "headlineEn", "stats": [...], "ask": { "ar", "en" }, "cta"?, "note"? } }
   "topic": "لوتس يالي",                    // short Arabic label shown on the page
   "image": {
     "photo": "/images/projects/lotus-yali/sunset-aerial.jpg",
