@@ -24,7 +24,9 @@ OWNER_EMAIL="kerim.alastal@gmail.com"
 shopt -s nullglob
 images=("$OUT"/post-*.jpg)
 posts=("$OUT"/post-*.json)
-[ ${#images[@]} -gt 0 ] && [ ${#images[@]} -eq ${#posts[@]} ] || { echo "no rendered posts in $OUT (run render.mjs first)" >&2; exit 1; }
+# Carousel slides (post-<n>-<k>.jpg) come with their post's cover (post-<n>.jpg).
+covers=("$OUT"/post-[0-9].jpg "$OUT"/post-[0-9][0-9].jpg)
+[ ${#covers[@]} -gt 0 ] && [ ${#covers[@]} -eq ${#posts[@]} ] || { echo "no rendered posts in $OUT (run render.mjs first)" >&2; exit 1; }
 
 cd "$ROOT"
 # Enough history for the merge (the clone may be shallow).
