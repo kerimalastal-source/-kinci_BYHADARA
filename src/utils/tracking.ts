@@ -10,8 +10,12 @@
 //   - Lead / generate_lead (+ the Google Ads lead conversion) when an inquiry form is sent;
 //   - Schedule (+ generate_lead and the lead conversion) when a private video tour is requested;
 //   - Contact / contact (+ the optional Google Ads contact conversion) on WhatsApp, call and email links.
+// Meta's ViewContent, Lead, Schedule and Contact also go to our server (/api/meta-event), which
+// forwards them to Meta's Conversions API with the same event ID, so Meta counts each one once
+// even when the browser blocks the Pixel. Only after consent, like the Pixel itself.
 import type { Route } from "../seo/routes";
 import { SKIPPED_ROUTES, reportAction } from "./visitorTracker";
+import { campaignSource } from "./campaign";
 
 const TAGS = {
   /** Meta Events Manager → Datasets → "HADARA Real Estate" (business portfolio "Hadara Real Estate"). Public, not a secret. */
@@ -144,10 +148,52 @@ function startTags(): void {
   if (lastPage) trackPageView(lastPage.route, lastPage.locale);
 }
 
-function meta(event: string, params?: Params): void {
-  if (!active) return;
-  if (params) window.fbq?.("track", event, params);
-  else window.fbq?.("track", event);
+/** Contact details for Meta's matching on a sent form (the server hashes them; never stored). */
+export type LeadUser = { email?: string; phone?: string; name?: string };
+
+/** Events also sent server-side through the Conversions API (see api/meta-event.ts). */
+const SERVER_EVENTS = new Set(["ViewContent", "Lead", "Schedule", "Contact"]);
+
+function newEventId(): string {
+  try {
+    return crypto.randomUUID();
+  } catch {
+    return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
+  }
+}
+
+function cookie(name: string): string {
+  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : "";
+}
+
+/** Meta's click ID: the _fbc cookie, or built from the fbclid of the ad link (kept by campaign.ts). */
+function clickId(): string {
+  const fbc = cookie("_fbc");
+  if (fbc) return fbc;
+  const fbclid = new URLSearchParams(window.location.search).get("fbclid") ?? campaignSource().match(/fbclid=([^\s·]+)/)?.[1];
+  return fbclid ? `fb.1.${Date.now()}.${fbclid}` : "";
+}
+
+function sendServerEvent(event: string, eventId: string, params: Params | undefined, user: LeadUser | undefined): void {
+  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") return;
+  const body = JSON.stringify({
+    event,
+    eventId,
+    url: window.location.href,
+    fbp: cookie("_fbp"),
+    fbc: clickId(),
+    params: params ?? {},
+    user: user ?? {}
+  });
+  fetch("/api/meta-event", { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => undefined);
+}
+
+function meta(event: string, params?: Params, user?: LeadUser): void {
+  if (!active || !TAGS.metaPixelId) return;
+  const eventId = newEventId();
+  window.fbq?.("track", event, params ?? {}, { eventID: eventId });
+  if (SERVER_EVENTS.has(event)) sendServerEvent(event, eventId, params, user);
 }
 
 function google(event: string, params?: Params): void {
@@ -181,17 +227,17 @@ export function trackPageView(route: Route, locale: string): void {
 }
 
 /** An inquiry was sent: form is "contact", "property-request" or "consultancy"; detail names the projects/service. */
-export function trackLead(form: string, detail = ""): void {
+export function trackLead(form: string, detail = "", user?: LeadUser): void {
   reportAction("form_sent", form);
-  meta("Lead", { content_category: form, ...(detail ? { content_name: detail } : {}) });
+  meta("Lead", { content_category: form, ...(detail ? { content_name: detail } : {}) }, user);
   google("generate_lead", { form_name: form, ...(detail ? { item_name: detail } : {}) });
   adsConversion(TAGS.adsLeadLabel);
 }
 
 /** A private video tour was requested: Meta's Schedule event, counted as a lead in Analytics and Google Ads. */
-export function trackSchedule(projects: string): void {
+export function trackSchedule(projects: string, user?: LeadUser): void {
   reportAction("form_sent", "video-tour");
-  meta("Schedule", { content_category: "video-tour", content_name: projects });
+  meta("Schedule", { content_category: "video-tour", content_name: projects }, user);
   google("generate_lead", { form_name: "video-tour", item_name: projects });
   adsConversion(TAGS.adsLeadLabel);
 }

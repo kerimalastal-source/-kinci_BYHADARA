@@ -548,14 +548,15 @@
      "at": "09:00"
     },
     {
-     "id": "resale",
+     "id": "contact-channels",
      "kind": "page",
-     "path": "/resale",
+     "path": "/contact",
      "photos": [
-      "/images/projects/cadde-ispartakule/tower-park.jpg"
+      "/images/projects/lotus-sisli/aerial-city.jpg",
+      "/hero-istanbul.jpg"
      ],
-     "brief": "Resale market on the site: owners can list their property (reviewed before publishing), buyers browse approved listings.",
-     "label": "سوق إعادة البيع",
+     "brief": "HOW TO CONTACT HADARA (owner's request 2026-10-08, a regular contact post): every real channel from the site, clearly: WhatsApp (wa.me/905319309214), phone +90 531 930 92 14, email info@byhadara.com, the contact form on /contact (choose several projects; a reference number HQ-… and a confirmation email), the live chat on the website («تحدّث مع فريقنا هنا»), Instagram @hadararealestate and the Facebook page, the office in Beylikdüzü (Adnan Kahveci Mah.). Office hours from videoTour.officeHours (9:00–18:00 Istanbul). Design A (design \"list\" fits: 3 channels) with a tip. Caption: each channel on its own bullet with its link.",
+     "label": "كيف تتواصل مع حضارة: كل القنوات",
      "at": "14:00"
     },
     {
@@ -893,14 +894,15 @@
      "at": "09:00"
     },
     {
-     "id": "faq-keep-nationality",
+     "id": "contact-after-message",
      "kind": "page",
-     "path": "/faq",
+     "path": "/contact",
      "photos": [
-      "/images/blog/citizenship-investment-laws.jpg"
+      "/images/projects/diamond-marin/facade-side.jpg",
+      "/images/projects/lotus-koru-2/landscaped-grounds.jpg"
      ],
-     "brief": "Answer the FAQ question faq.categories[2].items[4] (question + clear short answer from the site's answer). Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "سؤال: الاحتفاظ بجنسيتك",
+     "brief": "CONTACT POST, new angle (owner's request 2026-10-08): what happens after you write to us, from the site only: the contact form (name, email, phone required; pick projects and topics such as citizenship or residence), the reference number HQ-… and the confirmation email in your language; the custom property request form (/property-request) when you want something outside our projects; booking a video tour (/video-tour) is confirmed instantly by email with a calendar file. Design \"list\" (3 ways) + tip. Different headline from earlier contact posts.",
+     "label": "ماذا يحدث بعد أن تراسلنا؟",
      "at": "14:00"
     },
     {
@@ -1155,14 +1157,15 @@
      "at": "09:00"
     },
     {
-     "id": "find-my-project-villas",
+     "id": "contact-visit-office",
      "kind": "page",
-     "path": "/",
+     "path": "/contact",
      "photos": [
-      "/images/projects/lotus-manzara-guzelce/aerial-villas.jpg"
+      "/images/projects/lotus-manzara-guzelce/aerial-villas.jpg",
+      "/images/projects/marmara-haven-villa/terrace.jpg"
      ],
-     "brief": "'Find my project' quiz (match.*): answer 4 questions and see matching villas or apartments.",
-     "label": "اعثر على فيلتك",
+     "brief": "CONTACT POST, new angle (owner's request 2026-10-08): meet us in person or by video: the office in Adnan Kahveci Mah., Beylikdüzü, Istanbul (office hours from videoTour.officeHours), or a private video tour from home (free, 30–45 min, WhatsApp/FaceTime/Zoom/Google Meet, Arabic/English/Turkish), and when you are ready to buy we arrange your visit to Istanbul (videoTour.visitText). Stats/tiles with real facts; WhatsApp and the form in the caption. Different headline from earlier contact posts.",
+     "label": "زورونا في إسطنبول أو عبر الفيديو",
      "at": "14:00"
     },
     {

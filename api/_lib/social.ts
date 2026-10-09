@@ -31,6 +31,12 @@ export interface SocialPost {
   video?: string;
   /** A Story (24 hours, no caption): `image` is a 9:16 picture posted as a Facebook Page story and an Instagram story. */
   story?: boolean;
+  /**
+   * A carousel (owner's request 2026-10-08): 2-10 JPEGs next to post-<n>.json
+   * (post-<n>-<k>.jpg, in order) posted as one Facebook post with several photos and one
+   * Instagram carousel; `image` is the cover (the Telegram report).
+   */
+  slides?: string[];
 }
 
 export interface MetaConfig {
@@ -233,6 +239,45 @@ async function publishInstagramReel(
   return String(published.id);
 }
 
+/** Facebook post with several photos: each is uploaded unpublished, then attached to one post. */
+async function publishFacebookCarousel(deps: PublishDeps, meta: MetaConfig, imageUrls: string[], caption: string): Promise<string> {
+  const token = await pageToken(deps, meta);
+  const ids = await Promise.all(
+    imageUrls.map(async (url) => String((await graph(deps, `${meta.pageId}/photos`, { url, published: "false" }, "POST", token)).id))
+  );
+  const attached = Object.fromEntries(ids.map((id, i) => [`attached_media[${i}]`, JSON.stringify({ media_fbid: id })]));
+  const post = await graph(deps, `${meta.pageId}/feed`, { message: caption, ...attached }, "POST", token);
+  return String(post.id);
+}
+
+/** Waits until an Instagram container is FINISHED (at most `attempts` checks). */
+async function igReady(deps: PublishDeps, meta: MetaConfig, id: string, attempts: number): Promise<void> {
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    const status = await graph(deps, id, { fields: "status_code" }, "GET", meta.token);
+    if (status.status_code === "FINISHED") return;
+    if (status.status_code === "ERROR" || status.status_code === "EXPIRED") throw new Error(`media: ${status.status_code}`);
+    await new Promise((resolve) => setTimeout(resolve, deps.pollMs ?? 2000));
+  }
+  throw new Error(`media: not ready after ${attempts} checks`);
+}
+
+/** Instagram carousel: one item container per slide, then the carousel container, then publish. */
+async function publishInstagramCarousel(deps: PublishDeps, meta: MetaConfig, imageUrls: string[], caption: string): Promise<string> {
+  const children = await Promise.all(
+    imageUrls.map(async (url) => {
+      const item = await graph(deps, `${meta.igUserId}/media`, { image_url: url, is_carousel_item: "true" }, "POST", meta.token);
+      const id = String(item.id);
+      await igReady(deps, meta, id, 10);
+      return id;
+    })
+  );
+  const container = await graph(deps, `${meta.igUserId}/media`, { media_type: "CAROUSEL", children: children.join(","), caption }, "POST", meta.token);
+  const id = String(container.id);
+  await igReady(deps, meta, id, 10);
+  const published = await graph(deps, `${meta.igUserId}/media_publish`, { creation_id: id }, "POST", meta.token);
+  return String(published.id);
+}
+
 /** Facebook Page story: the photo is uploaded unpublished, then posted as a story. */
 async function publishFacebookStory(deps: PublishDeps, meta: MetaConfig, imageUrl: string): Promise<string> {
   const token = await pageToken(deps, meta);
@@ -395,6 +440,7 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
     let imageUrl: string;
     let videoUrl: string | null = null;
     let videoBytes: ArrayBuffer | null = null;
+    let slideUrls: string[] | null = null;
     try {
       const image = await deps.fetch(`${base}/${post.image}`, { cache: "no-store", headers, signal: AbortSignal.timeout(20_000) });
       const bytes = image.ok ? await image.arrayBuffer() : null;
@@ -410,6 +456,21 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
         videoUrl = await deps.store.put(`social/${date}/${post.video}`, data, "video/mp4");
         videoBytes = data;
       }
+      if (post.slides !== undefined) {
+        const files = Array.isArray(post.slides) ? post.slides : [];
+        if (files.length < 2 || files.length > 10 || files.some((f) => !/^post-\d+-\d+\.jpe?g$/.test(String(f)))) {
+          throw new Error("الشرائح: من 2 إلى 10 صور post-<n>-<k>.jpg");
+        }
+        slideUrls = await Promise.all(
+          files.map(async (file) => {
+            const slide = await deps.fetch(`${base}/${file}`, { cache: "no-store", headers, signal: AbortSignal.timeout(20_000) });
+            const data = slide.ok ? await slide.arrayBuffer() : null;
+            const start = data ? new Uint8Array(data.slice(0, 3)) : null;
+            if (!data || !start || start[0] !== 0xff || start[1] !== 0xd8 || start[2] !== 0xff) throw new Error(`${file}: ليست صورة JPEG (HTTP ${slide.status})`);
+            return deps.store.put(`social/${date}/${file}`, data, "image/jpeg");
+          })
+        );
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       result.facebook = result.instagram = "failed";
@@ -420,10 +481,13 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
     if (meta) {
       const reel = videoUrl;
       const reelBytes = videoBytes;
+      const album = slideUrls;
       const fb = await once(deps, date, name, "facebook", () =>
         post.story
           ? publishFacebookStory(deps, meta, imageUrl)
-          : reelBytes
+          : album
+            ? publishFacebookCarousel(deps, meta, album, post.fb)
+            : reelBytes
             ? publishFacebookReel(deps, meta, reelBytes, post.fb)
             : publishFacebook(deps, meta, imageUrl, post.fb)
       );
@@ -433,7 +497,9 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
         const ig = await once(deps, date, name, "instagram", () =>
           post.story
             ? publishInstagramStory(deps, meta, imageUrl)
-            : reel
+            : album
+              ? publishInstagramCarousel(deps, meta, album, post.ig)
+              : reel
               ? publishInstagramReel(deps, meta, reel, imageUrl, post.ig, markers(date, name, "instagram.container"))
               : publishInstagram(deps, meta, imageUrl, post.ig)
         );
@@ -451,7 +517,7 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
     }
     const firstReport = !telegramDone;
     const report = async () => {
-      const caption = `${post.story ? "📱 ستوري · " : post.video ? "🎬 ريلز · " : ""}🗓 ${escapeHtml(date)} · ${escapeHtml(post.topic)}\n\n${statusLines(result, igProblem, Boolean(meta), Boolean(meta?.igUserId))}`;
+      const caption = `${post.story ? "📱 ستوري · " : post.video ? "🎬 ريلز · " : slideUrls ? `🎠 شرائح (${slideUrls.length}) · ` : ""}🗓 ${escapeHtml(date)} · ${escapeHtml(post.topic)}\n\n${statusLines(result, igProblem, Boolean(meta), Boolean(meta?.igUserId))}`;
       const sent = await deps.telegramPhoto(imageUrl, caption);
       // The captions that weren't published automatically, to post by hand (once).
       if (firstReport && !post.story) {
