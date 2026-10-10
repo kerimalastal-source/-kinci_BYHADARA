@@ -2384,6 +2384,12 @@ body.map-open .back-to-top {
   text-align: end;
 }
 
+/* Ad landing pages show the contact card inside the main column on phones and
+   tablets (right after the highlights) instead of at the end of the sidebar. */
+.cta-card--inline {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .project-detail__grid {
     grid-template-columns: 1fr;
@@ -2391,6 +2397,15 @@ body.map-open .back-to-top {
 
   .project-detail__sidebar {
     position: static;
+  }
+
+  .cta-card--inline {
+    display: block;
+    margin-bottom: var(--space-lg);
+  }
+
+  .cta-card--aside {
+    display: none;
   }
 }
 

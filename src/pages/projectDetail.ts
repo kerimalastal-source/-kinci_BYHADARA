@@ -313,6 +313,22 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           <a class="btn btn--primary" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a>
           <a class="btn btn--whatsapp" href="${whatsappHref}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("projectDetail.whatsappButton")}</a>`;
 
+  // Ad landing pages repeat this card after the highlights; on phones the sidebar
+  // falls to the very end of the page, so CSS shows that copy there instead.
+  const ctaCard = (modifier: string) => `
+          <div class="cta-card${modifier}">
+            <h3>${t("projectDetail.ctaTitle")}</h3>
+            <p>${t("projectDetail.ctaText")}</p>
+            <div class="cta-card__actions">
+              <a class="btn btn--primary btn--block" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a>
+              <a class="btn btn--whatsapp btn--block" href="${whatsappHref}" target="_blank" rel="noopener">
+                ${WHATSAPP_ICON}
+                ${t("projectDetail.whatsappButton")}
+              </a>
+              ${project.soldOut ? "" : `<a class="btn btn--tour btn--block" href="${videoTourHref([project.slug])}">${VIDEO_TOUR_ICON}${t("videoTour.cardButton")}</a>`}
+            </div>
+          </div>`;
+
   el.innerHTML = `
     <section class="project-hero" style="${heroBackground(project.coverImage, "linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88))")}">
       <div class="container project-hero__inner">
@@ -371,6 +387,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
               ${content.highlights.map((h, i) => `<li ${reveal(i, 8)}>${h}</li>`).join("")}
             </ul>
           </section>
+
+          ${project.landing ? ctaCard(" cta-card--inline") : ""}
 
           ${renderVerified(project, content.name, content.verified)}
 
@@ -443,18 +461,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
             </dl>
           </div>
 
-          <div class="cta-card">
-            <h3>${t("projectDetail.ctaTitle")}</h3>
-            <p>${t("projectDetail.ctaText")}</p>
-            <div class="cta-card__actions">
-              <a class="btn btn--primary btn--block" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a>
-              <a class="btn btn--whatsapp btn--block" href="${whatsappHref}" target="_blank" rel="noopener">
-                ${WHATSAPP_ICON}
-                ${t("projectDetail.whatsappButton")}
-              </a>
-              ${project.soldOut ? "" : `<a class="btn btn--tour btn--block" href="${videoTourHref([project.slug])}">${VIDEO_TOUR_ICON}${t("videoTour.cardButton")}</a>`}
-            </div>
-          </div>
+          ${ctaCard(project.landing ? " cta-card--aside" : "")}
         </aside>
       </div>
     </section>
