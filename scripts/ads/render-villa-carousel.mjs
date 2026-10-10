@@ -63,7 +63,7 @@ const cover = () => `<!doctype html><html><head><meta charset="utf-8"><style>${B
 
 // ---------- Feature slides ----------
 const FEATURES = [
-  { photo: "balcony-pool", pos: "center 38%", ar: "إطلالة مفتوحة على بحر مرمرة", en: "Open views over the Sea of Marmara", chip: "وساحل السباحة على بُعد 5 دقائق" },
+  { photo: "terrace", pos: "center 47%", ar: "إطلالة مفتوحة على بحر مرمرة", en: "Open views over the Sea of Marmara", chip: "وساحل السباحة على بُعد 5 دقائق" },
   { photo: "garden-wide", pos: "center 62%", ar: "مسبح خاص وحديقة", en: "A private pool and garden", chip: "على أرض بمساحة 637 متراً مربعاً" },
   { photo: "bedroom-sea", pos: "center 58%", ar: "خمس غرف نوم وسبعة حمّامات", en: "Five bedrooms and seven bathrooms", chip: "576 متراً مربعاً على أربعة طوابق" },
   { photo: "living-sea", pos: "center 62%", ar: "صالون واسع ومطبخ مجهّز", en: "A spacious living room and fitted kitchen", chip: "يفتحان على تراس الحديقة" },
