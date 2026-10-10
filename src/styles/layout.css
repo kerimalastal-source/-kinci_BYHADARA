@@ -646,18 +646,17 @@
 }
 
 /* The brand column sits on the left in RTL too, so its description and social
-   icons line up under the logo instead of drifting to the column's far edge. */
+   icons stay in a block under the logo, but Arabic and Persian text inside that
+   block is right-aligned like every other paragraph (owner, 2026-10-10). */
 [dir="rtl"] .site-footer__brand {
-  text-align: left;
+  text-align: right;
 }
 
-[dir="rtl"] .site-footer__desc {
+[dir="rtl"] .site-footer__desc,
+[dir="rtl"] .site-footer__brand .social-links {
+  max-width: 360px;
   margin-left: 0;
   margin-right: auto;
-}
-
-[dir="rtl"] .site-footer__brand .social-links {
-  direction: ltr;
 }
 
 .site-footer__desc {
