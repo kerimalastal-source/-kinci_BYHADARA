@@ -19,11 +19,11 @@ const ADS = [
     ar: "الجنسية التركية<br>عبر الاستثمار العقاري",
     en: "Turkish citizenship through real estate",
     points: [
-      ["عقار بقيمة 400 ألف دولار فما فوق حسب القانون", "Property of US$400,000+ as required by law"],
+      ["عقار أو أكثر بقيمة إجمالية 400 ألف دولار فما فوق", "One or more properties worth US$400,000+ in total"],
       ["لك ولزوجتك وأبنائك دون 18 عاماً", "For you, your spouse and children under 18"],
       ["نرافقك من اختيار العقار حتى استلام مفتاحك", "We guide you from choosing to your keys"],
     ],
-    note: "الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law",
+    note: "حسب القانون التركي الحالي والشروط قابلة للتغيير · As required by current Turkish law",
   },
   {
     id: "residence",
