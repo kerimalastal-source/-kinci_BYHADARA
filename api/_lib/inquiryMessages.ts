@@ -119,9 +119,9 @@ const VISITOR: Record<SiteLocale, VisitorText> = {
     site: "Visit our website"
   },
   ar: {
-    subject: "وصلتنا رسالتك — حضارة للتطوير العقاري ({ref})",
+    subject: "وصلتنا رسالتك — حضارة العقارية ({ref})",
     hello: "مرحباً {name}،",
-    intro: "شكراً لتواصلك مع حضارة للتطوير العقاري. وصلت رسالتك إلى فريقنا.",
+    intro: "شكراً لتواصلك مع حضارة العقارية. وصلت رسالتك إلى فريقنا.",
     reference: "رقم طلبك: {ref}",
     next: "سيتواصل معك أحد مستشارينا قريباً.",
     yourMessage: "رسالتك",

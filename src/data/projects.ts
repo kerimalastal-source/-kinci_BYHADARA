@@ -519,6 +519,8 @@ export const projects: Project[] = [
     status: "delivered",
     lifestyle: ["sea"],
     timeline: "2024 – 2026",
+    // The one project HADARA developed itself (owner, 2026-10-10); every other project is marketed for its developer.
+    developer: "HADARA Real Estate",
     // Prices from the owner on 2026-09-30 (VAT included, 4% title deed fee not included).
     price: "$1,550,000 – $1,650,000",
     landing: true,

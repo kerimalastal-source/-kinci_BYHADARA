@@ -102,14 +102,14 @@
   },
   "home": {
     "heroEyebrow": "Your Real Estate Partner in Istanbul",
-    "heroTitle": "Crafting Landmark Living Across Istanbul",
+    "heroTitle": "Your Path to Landmark Living in Istanbul",
     "heroSubtitle": "From choosing the right home or investment to receiving your keys, HADARA stands by you at every step in Istanbul's fastest-growing districts — built on trust, precision and long-term value.",
     "heroCtaPrimary": "Explore Our Projects",
     "heroCtaSecondary": "Talk to Our Team",
     "statsTitle": "HADARA in Numbers",
     "stats": [
       { "value": "12+", "label": "Years of Excellence", "icon": "years" },
-      { "value": "11", "label": "Landmark Developments", "icon": "projects" },
+      { "value": "11", "label": "Landmark Projects", "icon": "projects" },
       { "value": "640+", "label": "Residential Units", "icon": "apartments" },
       { "value": "420+", "label": "Office Units", "icon": "offices" },
       { "value": "60+", "label": "Commercial Units", "icon": "shops" },
@@ -119,9 +119,9 @@
     "partnersTitle": "Our Success Partners",
     "partnersSubtitle": "HADARA works alongside leading regional developers and holding groups to deliver projects our clients can rely on.",
     "aboutEyebrow": "Who We Are",
-    "aboutTitle": "A Boutique Developer With an Istanbul Signature",
-    "aboutText1": "Since 2014, HADARA Real Estate has been shaping residential and mixed-use developments across Istanbul, with a focus on Beylikdüzü, Büyükçekmece, Avcılar and Şişli — among the city's most dynamic growth corridors.",
-    "aboutText2": "From private luxury villas to large-scale residential communities, every HADARA project is guided by thoughtful architecture, quality construction and a genuine understanding of how people want to live.",
+    "aboutTitle": "Real Estate Development & Marketing Partner in Istanbul",
+    "aboutText1": "Since 2014, HADARA Real Estate has worked as a real estate development and marketing partner in Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects by leading developers in Beylikdüzü, Büyükçekmece, Avcılar and Şişli — among the city's most dynamic growth corridors.",
+    "aboutText2": "From private luxury villas to large-scale residential communities, we choose the projects we offer for thoughtful architecture, quality construction and a genuine understanding of how people want to live.",
     "aboutCta": "More About HADARA",
     "spotlightEyebrow": "New Launch",
     "spotlightLimited": "Limited number of units available",
@@ -135,7 +135,7 @@
     "servicesTitle": "End-to-End Real Estate Expertise",
     "services": [
       {
-        "title": "Residential Development",
+        "title": "Residential Projects",
         "desc": "Master-planned apartment communities designed around comfort, security and everyday convenience."
       },
       {
@@ -162,10 +162,10 @@
     "whyEyebrow": "Why HADARA",
     "whyTitle": "Built on Trust, Delivered With Precision",
     "why": [
-      { "title": "Proven Track Record", "desc": "12+ years delivering residential and mixed-use projects across Istanbul." },
-      { "title": "Prime Locations", "desc": "Every development is anchored in high-growth districts with strong infrastructure and connectivity." },
+      { "title": "Proven Track Record", "desc": "12+ years in Istanbul real estate, with residential, mixed-use and villa projects across the city." },
+      { "title": "Prime Locations", "desc": "Every project we offer is anchored in high-growth districts with strong infrastructure and connectivity." },
       { "title": "Investor-Ready", "desc": "Flexible payment plans and full support for Turkish citizenship by investment." },
-      { "title": "Quality You Can See", "desc": "From structural planning to interior finishes, every detail is built to last." }
+      { "title": "Quality You Can See", "desc": "We offer projects where every detail, from structural planning to interior finishes, is built to last." }
     ],
     "citizenshipTitle": "Turkish Citizenship Through Real Estate Investment",
     "citizenshipText": "HADARA guides international investors through every step of acquiring Turkish citizenship by investing in one of our qualifying residential projects.",
@@ -176,29 +176,29 @@
   },
   "about": {
     "heroEyebrow": "About HADARA",
-    "heroTitle": "An Istanbul Developer Built on Craft and Trust",
-    "heroSubtitle": "HADARA Real Estate is a boutique development and investment company delivering luxury villas and high-quality residential projects designed for modern living and long-term value.",
+    "heroTitle": "An Istanbul Real Estate Development & Marketing Partner Built on Trust",
+    "heroSubtitle": "HADARA Real Estate is a real estate development and marketing partner. We developed Marmara Haven Villa in Büyükçekmece, and we market selected residential, mixed-use and villa projects by leading Istanbul developers, designed for modern living and long-term value.",
     "storyEyebrow": "Our Story",
     "storyTitle": "From a Single Vision to a Growing Portfolio",
-    "storyText1": "Founded in 2014 and headquartered in Beylikdüzü, Istanbul, HADARA Real Estate was built on a simple idea: that thoughtful design and honest construction create lasting value for the people who live in — and invest in — our projects.",
-    "storyText2": "Over the past decade, that idea has grown into a portfolio of residential communities, mixed-use landmarks and private villas across Beylikdüzü, Büyükçekmece, Avcılar and Şişli, among the most sought-after growth corridors on Istanbul's European side. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
+    "storyText1": "Founded in 2014 and headquartered in Beylikdüzü, Istanbul, HADARA Real Estate was built on a simple idea: that careful project selection and honest advice create lasting value for the people who live in — and invest in — the homes we offer.",
+    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş and MH Grup to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar and Şişli, among the most sought-after growth corridors on Istanbul's European side, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
     "missionTitle": "Our Mission",
-    "missionText": "To design and deliver residential and mixed-use developments that combine architectural quality, everyday comfort and dependable long-term value for residents and investors alike.",
+    "missionText": "To connect residents and investors with carefully selected residential and mixed-use projects that combine architectural quality, everyday comfort and dependable long-term value, and to guide them clearly at every step.",
     "visionTitle": "Our Vision",
-    "visionText": "To be recognized as Istanbul's most trusted boutique developer — known for precision, transparency and developments that stand the test of time.",
+    "visionText": "To be recognized as Istanbul's most trusted real estate development and marketing partner — known for precision, transparency and projects that stand the test of time.",
     "valuesTitle": "What Guides Us",
     "values": [
       { "title": "Integrity", "desc": "Clear pricing, honest timelines and transparent communication with every buyer and partner." },
-      { "title": "Craftsmanship", "desc": "Every project reflects careful architectural planning and meticulous construction standards." },
-      { "title": "Community", "desc": "We design neighborhoods, not just buildings — with green space and amenities that bring people together." },
+      { "title": "Careful Selection", "desc": "We work with projects built on careful architectural planning and meticulous construction standards." },
+      { "title": "Community", "desc": "We look for neighborhoods, not just buildings — with green space and amenities that bring people together." },
       { "title": "Long-Term Value", "desc": "From location selection to finishing materials, every decision protects our clients' investment." }
     ],
     "timelineTitle": "Our Journey",
     "timeline": [
       { "year": "2014", "text": "HADARA Real Estate is founded in Beylikdüzü, Istanbul." },
-      { "year": "2022", "text": "Groundbreaking of Lotus Koru 1 and Lotus İstanbul, our first large-scale residential and mixed-use developments." },
+      { "year": "2022", "text": "Groundbreaking of Lotus Koru 1 and Lotus İstanbul, two large-scale residential and mixed-use projects marketed by HADARA." },
       { "year": "2023", "text": "Launch of Lotus Koru 2, a 204-apartment community set within 17,500 m² of green and park space." },
-      { "year": "2024", "text": "Delivery of Lotus Koru 1 and start of Marmara Haven Villa, our flagship private residence in Büyükçekmece." },
+      { "year": "2024", "text": "Delivery of Lotus Koru 1, and HADARA begins developing Marmara Haven Villa, its own private residence in Büyükçekmece." },
       { "year": "2026", "text": "Launch of Lotus Yaşam, a new 21,000 m² residential development for delivery in 2028." }
     ],
     "statsTitle": "Our Track Record",
@@ -206,13 +206,13 @@
       { "value": "12+", "label": "Years in Business", "icon": "years" },
       { "value": "11", "label": "Landmark Projects", "icon": "projects" },
       { "value": "1,100+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
-      { "value": "60,000+ m²", "label": "Land Developed", "icon": "landArea" }
+      { "value": "60,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
     ]
   },
   "projects": {
     "heroEyebrow": "Our Portfolio",
     "heroTitle": "Projects Shaping Istanbul",
-    "heroSubtitle": "From private villas to large residential communities, explore the developments in HADARA's portfolio across Beylikdüzü, Büyükçekmece, Avcılar and Şişli.",
+    "heroSubtitle": "From private villas to large residential communities, explore the projects HADARA developed and markets across Beylikdüzü, Büyükçekmece, Avcılar and Şişli.",
     "filterAll": "All Projects",
     "filterNewLaunch": "New Launch",
     "filterOngoing": "Under Construction",
@@ -574,15 +574,15 @@
         "items": [
           {
             "q": "Who is HADARA Real Estate?",
-            "a": "HADARA Real Estate is a boutique real estate development and investment company founded in 2014, headquartered in Beylikdüzü, Istanbul. We design, build and deliver residential and mixed-use developments and private villas across Beylikdüzü and Büyükçekmece."
+            "a": "HADARA Real Estate is a real estate development and marketing partner founded in 2014 and headquartered in Beylikdüzü, Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects and villas by leading developers across Beylikdüzü, Büyükçekmece, Avcılar and Şişli."
           },
           {
-            "q": "What types of projects does HADARA develop?",
-            "a": "Our portfolio spans master-planned residential communities, mixed-use developments combining residences, offices and retail, and bespoke luxury villas — each built with quality construction and long-term value in mind."
+            "q": "What types of projects does HADARA offer?",
+            "a": "The projects we offer span master-planned residential communities, mixed-use developments combining residences, offices and retail, and luxury villas, including Marmara Haven Villa, developed by HADARA. Each project page shows its developer."
           },
           {
             "q": "Where are HADARA's projects located?",
-            "a": "All of our current developments are located on Istanbul's European side, in the fast-growing districts of Beylikdüzü, Büyükçekmece, Avcılar and Şişli."
+            "a": "All of the projects we currently offer are located on Istanbul's European side, in the fast-growing districts of Beylikdüzü, Büyükçekmece, Avcılar and Şişli."
           },
           {
             "q": "How can I get in touch with HADARA's team?",
@@ -1619,7 +1619,7 @@
         "One of the first decisions an Istanbul buyer faces is not the district or the layout, but the stage of the building. Some homes are sold before they are finished, while others are complete and can be used straight away. Both routes are common, and neither is better in every case. This guide explains the difference and the questions to ask, so you can match the choice to your own plans.",
         "## What off-plan and ready mean",
         "Off-plan, in Turkish satış öncesi or under-construction sales, means you choose a home from plans, a scale model and a show apartment while the building is new or still rising. Ready, or delivered, means the building is finished and the residences are available as they stand. Between the two sits the new launch, a project that has just been presented to the market, with delivery still some time away.",
-        "Our own portfolio shows all three stages. Lotus Yaşam in Beylikdüzü and Diamond Marin are new launches. Lotus Şişli is under construction, with units currently on sale. Lotus Yalı in Büyükçekmece and Cadde Ispartakule are complete and ready to move in, with residences still available for sale.",
+        "The projects we offer show all three stages. Lotus Yaşam in Beylikdüzü and Diamond Marin are new launches. Lotus Şişli is under construction, with units currently on sale. Lotus Yalı in Büyükçekmece and Cadde Ispartakule are complete and ready to move in, with residences still available for sale.",
         "## The case for buying off-plan",
         "The first advantage is choice. When a project launches, you can look at more units and decide which floor, layout and position suit you best. The second is time: the payment plan is usually spread across the construction period instead of being due all at once. Lotus Yaşam, for example, lists flexible installment payment options, with delivery scheduled for late 2028, and Diamond Marin has delivery scheduled for the end of 2027. The third is that you buy a new home that nobody has lived in.",
         "The trade-off is waiting and uncertainty. You judge the home from drawings and a show apartment, not from the finished rooms, and the delivery date is a plan, not a guarantee. Some developers have not published start or delivery dates at all, so always ask what has been officially announced. If you need to move in this year, an unfinished building will not fit.",
@@ -2229,8 +2229,8 @@
       "description": "Explore HADARA's residential, mixed-use and villa projects in Beylikdüzü, Büyükçekmece, Avcılar and Şişli, Istanbul — new launches, projects under construction and delivered homes."
     },
     "about": {
-      "title": "About HADARA – Istanbul Developer Since 2014",
-      "description": "Learn about HADARA Real Estate: our story, mission and values, and more than 12 years developing quality homes in Istanbul's fastest-growing districts."
+      "title": "About HADARA – Development & Marketing Partner Since 2014",
+      "description": "Learn about HADARA Real Estate, a real estate development and marketing partner in Istanbul since 2014: our story, mission and values, and the projects we offer in the city's fastest-growing districts."
     },
     "citizenship": {
       "title": "Turkish Citizenship by Real Estate Investment",
@@ -2751,7 +2751,7 @@
       {
         "title": "Who we are",
         "paragraphs": [
-          "HADARA Real Estate (registered trade name: HADARA Investment İnşaat Sanayi ve Ticaret A.Ş.; “HADARA”, “we”) is a real estate development and sales company based in Istanbul. We are the data controller for the personal data collected through www.hadararealestate.com (the “Website”).",
+          "HADARA Real Estate (registered trade name: HADARA Investment İnşaat Sanayi ve Ticaret A.Ş.; “HADARA”, “we”) is a real estate development and marketing company based in Istanbul. We are the data controller for the personal data collected through www.hadararealestate.com (the “Website”).",
           "This policy explains what information we collect, why we collect it, and the rights you have under the Turkish Personal Data Protection Law No. 6698 (KVKK) and, where it applies to you, the EU General Data Protection Regulation (GDPR)."
         ],
         "items": []
