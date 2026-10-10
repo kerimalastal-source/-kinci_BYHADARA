@@ -568,7 +568,7 @@ export const projects: Project[] = [
     video: {
       youtubeId: "kvru16nD3a4",
       vertical: true,
-      poster: img("marmara-haven-villa", "private-pool", 1500, 2000, "Marmara Haven Villa video tour")
+      poster: img("marmara-haven-villa", "drone-front", 2000, 1500, "Marmara Haven Villa video tour")
     },
     floorPlan: [
       { gross: "138.62 m²", net: "105.40 m²", image: img("marmara-haven-villa", "basement-room", 1500, 2000, "Marmara Haven Villa basement level") },

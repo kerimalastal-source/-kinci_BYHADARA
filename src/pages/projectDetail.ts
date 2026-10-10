@@ -23,6 +23,11 @@ const countsUp = (value: string, labelKey: string) => labelKey !== "delivery" &&
  * On desktop the cover takes a 2×2 block beside two images, then rows of three.
  * A last row with a single image stretches it into a panorama, so no photo sits alone.
  */
+// Ad landing pages keep the top of the hero photo clear so the property shows at
+// first glance; the shade only deepens behind the text at the bottom.
+const LANDING_SHADE =
+  "linear-gradient(180deg, rgba(15,20,18,.28) 0%, rgba(15,20,18,0) 22%, rgba(15,20,18,.08) 40%, rgba(15,20,18,.72) 66%, rgba(15,20,18,.9) 100%)";
+
 function galleryTail(total: number): string {
   return total > 3 && (total - 3) % 3 === 1 ? " gallery-grid__item--panorama" : "";
 }
@@ -330,7 +335,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           </div>`;
 
   el.innerHTML = `
-    <section class="project-hero" style="${heroBackground(project.coverImage, "linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88))")}">
+    <section class="project-hero${project.landing ? " project-hero--landing" : ""}" style="${heroBackground(project.coverImage, project.landing ? LANDING_SHADE : "linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88))")}">
       <div class="container project-hero__inner">
         <a class="back-link" href="${link("/projects")}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>

@@ -937,6 +937,21 @@
   margin-bottom: var(--space-sm);
 }
 
+/* Ad landing pages sit a little shorter on wide screens, so the hero's button stays
+   clear of the floating chat/WhatsApp/call buttons on laptop-height windows. */
+.project-hero--landing {
+  padding-top: 4.5rem;
+}
+
+/* Ad landing pages: the light top of the shade shows the property, so the text
+   on it gets a soft shadow. */
+.project-hero--landing .back-link,
+.project-hero--landing h1,
+.project-hero--landing .project-hero__tagline,
+.project-hero--landing .project-hero__location {
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
+}
+
 /* ---------- Heroes on tablets and phones ---------- */
 @media (max-width: 900px) {
   .hero {
@@ -983,7 +998,27 @@
     padding: 4.5rem 0 2rem;
   }
 
+  /* Leave the upper part of the photo (the villa) clear above the text, but keep
+     the hero's button above the floating chat/WhatsApp/call buttons. Ad visitors
+     don't need "Back to projects" here; the header menu covers it. */
+  .project-hero--landing {
+    padding-top: clamp(4.5rem, calc(100vh - 610px), 210px);
+    padding-top: clamp(4.5rem, calc(100svh - 610px), 210px);
+  }
+
+  .project-hero--landing .back-link {
+    display: none;
+  }
+
   .back-link {
     padding-block: 0.4rem;
+  }
+}
+
+/* Short phones (iPhone SE and the like): drop the tagline so the hero's button
+   still clears the floating buttons. */
+@media (max-width: 640px) and (max-height: 700px) {
+  .project-hero--landing .project-hero__tagline {
+    display: none;
   }
 }
