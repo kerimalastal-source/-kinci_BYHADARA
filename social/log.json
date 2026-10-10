@@ -390,5 +390,37 @@
     "headlineAr": "مسابح داخلية وساونا وحمّام تركي",
     "headlineEn": "Indoor pools, sauna and Turkish bath",
     "photo": "/images/projects/lotus-yali/view-from-sea.jpg"
+  },
+  {
+    "date": "2026-10-10",
+    "id": "cadde-ispartakule-life",
+    "topic": "جادّة إسبارتاكولي · الحياة في المشروع",
+    "headlineAr": "حمّام تركي وساونا وصالة رياضية في مبناك",
+    "headlineEn": "Turkish bath, sauna and gym in your building",
+    "photo": "/images/projects/cadde-ispartakule/hamam.jpg"
+  },
+  {
+    "date": "2026-10-10",
+    "id": "faq-rental-investment",
+    "topic": "سؤال: الاستثمار الإيجاري",
+    "headlineAr": "هل يصلح العقار في تركيا للتأجير؟",
+    "headlineEn": "Is property in Turkey good to rent out?",
+    "photo": "/hero-istanbul.jpg"
+  },
+  {
+    "date": "2026-10-10",
+    "id": "evening-neighbourhood",
+    "topic": "سؤال الليلة: ماذا تحتاج قرب بيتك؟ (شرائح)",
+    "headlineAr": "ماذا يوجد قرب بيتك الجديد؟",
+    "headlineEn": "What is near your new home?",
+    "photo": "/images/projects/lotus-sisli/aerial-city.jpg"
+  },
+  {
+    "date": "2026-10-10",
+    "id": "cadde-ispartakule-life-story",
+    "topic": "ستوري: جادّة إسبارتاكولي · الحياة في المشروع",
+    "headlineAr": "صالة رياضية ونظام منزل ذكي",
+    "headlineEn": "A gym and a smart home system",
+    "photo": "/images/projects/cadde-ispartakule/fitness.jpg"
   }
 ]
