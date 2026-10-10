@@ -65,7 +65,7 @@ const ADS = [
     en: "Istanbul is just a video call away",
     points: [
       ["شاهد الشقة النموذجية والمشروع على أرض الواقع", "See the show apartment and the project on site, live"],
-      ["بالعربية أو الإنجليزية أو التركية، عبر واتساب أو زوم", "In Arabic, English or Turkish, on WhatsApp or Zoom"],
+      ["بالعربية أو الإنجليزية، عبر واتساب أو زوم", "In Arabic or English, on WhatsApp or Zoom"],
       ["مجانية تماماً ودون أي التزام", "Completely free, no obligation"],
     ],
     note: '<span dir="rtl">يومياً من <bdi dir="ltr">9:00</bdi> حتى <bdi dir="ltr">18:30</bdi> بتوقيت إسطنبول، وهو توقيت الرياض والدوحة نفسه</span><br><span dir="ltr">Daily 9:00–18:30 Istanbul time, the same as Riyadh and Doha</span>',
