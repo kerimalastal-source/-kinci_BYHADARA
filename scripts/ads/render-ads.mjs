@@ -53,6 +53,23 @@ const ADS = [
     ],
     note: "",
   },
+  {
+    id: "videotour",
+    photo: `file://${REPO}/public/hero-istanbul.jpg`,
+    phone: img("diamond-marin/living-room.jpg"),
+    // The Bosphorus is a thin band low in this wide photo: enlarge it so the band sits beside the phone.
+    photoBox: (story) => (story ? { top: -246, height: 1300 } : { top: -320, height: 1130 }),
+    badgeAr: "جولة خاصة عبر الفيديو",
+    badgeEn: "Private Video Tour",
+    ar: "إسطنبول<br>على بُعد مكالمة فيديو",
+    en: "Istanbul is just a video call away",
+    points: [
+      ["شاهد الشقة النموذجية والمشروع على أرض الواقع", "See the show apartment and the project on site, live"],
+      ["بالعربية أو الإنجليزية أو التركية، عبر واتساب أو زوم", "In Arabic, English or Turkish, on WhatsApp or Zoom"],
+      ["مجانية تماماً ودون أي التزام", "Completely free, no obligation"],
+    ],
+    note: '<span dir="rtl">يومياً من <bdi dir="ltr">9:00</bdi> حتى <bdi dir="ltr">18:30</bdi> بتوقيت إسطنبول، وهو توقيت الرياض والدوحة نفسه</span><br><span dir="ltr">Daily 9:00–18:30 Istanbul time, the same as Riyadh and Doha</span>',
+  },
 ];
 
 const css = (w, h, story) => `
@@ -81,11 +98,21 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#0f2b21;font-family:I
 .foot{margin-top:30px;padding-top:22px;border-top:2px solid rgba(201,162,75,.6);display:flex;justify-content:space-between;align-items:center;gap:20px}
 .foot .w{font-weight:700;font-size:26px;color:#e4c574;direction:ltr}
 .foot .p{font-family:Plex;font-weight:700;font-size:28px;direction:rtl}
-.note{margin-top:14px;font-family:Plex;font-weight:600;font-size:20px;color:#cfc6ae;text-align:center}
+.phone{position:absolute;left:78px;top:${story ? 380 : 168}px;width:${story ? 300 : 262}px;aspect-ratio:9/18.5;padding:11px;border-radius:46px;background:linear-gradient(160deg,#1d2622,#070b09);border:2px solid rgba(255,255,255,.18);box-shadow:0 40px 80px rgba(0,0,0,.55);transform:rotate(-4deg)}
+.phone .s{position:relative;height:100%;overflow:hidden;border-radius:36px;background-size:cover;background-position:42% center}
+.phone .s::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,transparent 26%,transparent 60%,rgba(0,0,0,.6) 100%)}
+.phone .live{position:absolute;z-index:1;top:18px;left:16px;display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;background:rgba(0,0,0,.55);font-family:Plex;font-weight:700;font-size:19px}
+.phone .live i{width:10px;height:10px;border-radius:50%;background:#ff4d4d;box-shadow:0 0 0 5px rgba(255,77,77,.3)}
+.phone .pip{position:absolute;z-index:1;top:16px;right:16px;width:74px;height:100px;border-radius:16px;background:linear-gradient(160deg,#1f4a3a,#0b1f17);border:2px solid rgba(228,197,116,.75);display:grid;place-items:center;align-content:center;gap:4px;color:#e4c574;font-family:Plex;font-weight:700;font-size:14px}
+.phone .ctl{position:absolute;z-index:1;left:0;right:0;bottom:24px;display:flex;justify-content:center;gap:16px}
+.phone .ctl span{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center}
+.phone .ctl span.end{background:#e5484d}
+.note{margin-top:14px;line-height:1.5;font-family:Plex;font-weight:600;font-size:20px;color:#cfc6ae;text-align:center}
 `;
 
 const html = (a, w, h, story) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body>
-<div class="ph" style="background-image:url('${a.photo}')"></div><div class="sh"></div>
+<div class="ph" style="background-image:url('${a.photo}')${a.photoBox ? `;inset:auto;left:50%;transform:translateX(-50%);top:${a.photoBox(story).top}px;height:${a.photoBox(story).height}px;width:${Math.round(a.photoBox(story).height * 2200 / 1300)}px;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent)` : ""}"></div><div class="sh"></div>
+${a.phone ? `<div class="phone"><div class="s" style="background-image:url('${a.phone}')"><span class="live"><i></i>مباشر</span><span class="pip"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6"/></svg><span>مستشارك</span></span><span class="ctl"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span><span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.5 6-3.5v10l-6-3.5"/></svg></span><span class="end"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 14.5c4.8-4.3 12.2-4.3 17 0l-1.9 2.4-3.4-1.3v-2.2a11 11 0 0 0-7 0v2.2l-3.4 1.3z"/></svg></span></span></div></div>` : ""}
 <div class="top"><div class="brand"><img src="file://${REPO}/public/logo-light.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div>
 <div class="badge"><span class="a">${a.badgeAr}</span><span>·</span><span>${a.badgeEn}</span></div></div>
 <div class="body">
@@ -96,7 +123,8 @@ ${a.note ? `<div class="note">${a.note}</div>` : ""}
 </div></body></html>`;
 
 const b = await chromium.launch();
-for (const a of ADS) {
+const only = process.argv.slice(2);
+for (const a of ADS.filter((x) => !only.length || only.includes(x.id))) {
   for (const [w, h, story, suffix] of [[1080, 1350, false, "feed"], [1080, 1920, true, "story"]]) {
     const p = await b.newPage({ viewport: { width: w, height: h } });
     const f = path.join(OUT, `ad-${a.id}-${suffix}.html`);
@@ -105,7 +133,8 @@ for (const a of ADS) {
     await p.waitForTimeout(400);
     const over = await p.evaluate(() => {
       const b = document.querySelector(".body").getBoundingClientRect(), t = document.querySelector(".top").getBoundingClientRect();
-      return { bodyTop: Math.round(b.top), topBottom: Math.round(t.bottom) };
+      const ph = document.querySelector(".phone")?.getBoundingClientRect();
+      return { bodyTop: Math.round(b.top), topBottom: Math.round(t.bottom), phoneBottom: ph ? Math.round(ph.bottom) : null };
     });
     await p.screenshot({ path: path.join(OUT, `ad-${a.id}-${suffix}.jpg`), type: "jpeg", quality: 90 });
     console.log(a.id, suffix, JSON.stringify(over));
