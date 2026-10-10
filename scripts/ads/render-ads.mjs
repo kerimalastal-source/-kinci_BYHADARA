@@ -13,7 +13,7 @@ const img = (p) => `file://${REPO}/public/images/projects/${p}`;
 const ADS = [
   {
     id: "citizenship",
-    photo: img("marmara-haven-villa/private-pool.jpg"),
+    photo: img("beylikduzu-living/courtyard-gardens.jpg"),
     badgeAr: "الجنسية التركية",
     badgeEn: "Turkish Citizenship",
     ar: "الجنسية التركية<br>عبر الاستثمار العقاري",
