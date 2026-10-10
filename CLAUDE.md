@@ -268,6 +268,14 @@
 - **متغيرات Vercel (مشروع `kinci-byhadara`، Production + Preview)**: `META_PAGE_ID`، `META_IG_USER_ID`، `META_ACCESS_TOKEN` (**Sensitive — ممنوع بالكود أو بأي ملف أو commit**)، `BLOB_READ_WRITE_TOKEN` (من ربط Blob store)، `VERCEL_AUTOMATION_BYPASS_SECRET` (من Deployment Protection → Protection Bypass for Automation)، و`CRON_SECRET` (موجود). **أداة Vercel بهالبيئة بتشوف بس مشروع الضيافة** — المستخدم بيضيفهم بإيده، وبعدها Redeploy.
 - **اختبارات**: `tests/social.test.mjs` (فيسبوك بمفتاح الصفحة، إنستغرام بعد FINISHED، فيسبوك نجح وإنستغرام فشل ← الإعادة لإنستغرام بس، والعكس، ما في ملف ← تحذير واحد، ما في نشر مرتين حتى بتشغيلين بنفس اللحظة، تيليجرام بس بدون Meta، بدون `META_IG_USER_ID`، نص إنستغرام طويل/هاشتاغات كتير، قفل جلسة ماتت، تاريخ إسطنبول، وصلاحيات الـ endpoint).
 
+## 4.18 أول حملة إعلانات ممولة — الخليج (2026-10-09/10، موقوفة لحد ما يقول المستخدم «شغّل»)
+
+- **قرارات المستخدم**: 450 ليرة باليوم (~10$) للكل؛ الدوحة والرياض وجدة والمدينة المنورة والطائف (الساكنين فيها، `location_types: home`، دوائر 25–40 كم)؛ عمر 28–65؛ عربي + إنجليزي بنفس النص؛ **ولا سعر** إلا «الجنسية من 400 ألف دولار فما فوق حسب القانون»؛ الإقامة بدون رقم؛ الرد على واتساب دايماً موجود.
+- **حساب الإعلانات** `1849383063080287` (TRY، فيه طريقة دفع)، الصفحة `1330927120105949`، إنستغرام `17841418931390002` (انربط بحساب الإعلانات 2026-10-09 من Business Settings ← Instagram hesapları ← Bağlı Varlıklar). تصنيف «السكن» الخاص مش مطلوب للخليج.
+- **حملتين بميزانية على مستوى الحملة**: «Gulf · WhatsApp …» `52504022725079` (300 ليرة، Engagement → CONVERSATIONS، وجهة WHATSAPP، 3 إعلانات بزر WHATSAPP_MESSAGE) و«Gulf · Website …» `52504023190079` (150 ليرة، Traffic → LANDING_PAGE_VIEWS، روابط بـ UTM: الجنسية ← `/ar/citizenship?…utm_campaign=gulf-citizenship`، الإقامة ← `/ar/projects?…gulf-residence`، الاستثمار ← `/ar/projects/diamond-marin?…gulf-investment`).
+- **الصور**: `scripts/ads/render-ads.mjs` ← `scripts/ads/gulf-2026-10/ad-<citizenship|residence|investment>-<feed|story>.jpg` (4:5 + 9:16، نفس خطوط التصميم A). انرفعت لـ Meta من رابط raw.githubusercontent (الريبو عام) لـ commit `4fda182`. كل إعلان بـ placement_customizations: صورة 4:5 للفيد وصورة 9:16 للستوري/الريلز.
+- **باقي**: المستخدم يراجع بـ Ads Manager ويقول «شغّل الحملتين» (التشغيل بـ `ads_activate_entity`)، واقتراح إضافة منشور فيسبوك موجود لحملة واتساب (بانتظار رده). بعد التشغيل: مصروف كل حملة بـ `/admin/ads`، والتقييم بعد 7 و14 يوم.
+
 ## 4.17 هل هو شخص؟ الجهاز والتفاعل وتقرير الزوار الصباحي (أُضيف 2026-10-02، طلب المستخدم: "نفس الشي اللي بـ HADARA Hospitality"، migration `0018_visit_insights.sql` — ✅ **انتشر الكود 2026-10-02** (PR #2، commit `9882114`، Production) و✅ **انشغّلت نفس اليوم** على `khibypqmvnxuetmvjcnn` ("Success. No rows returned"))
 
 - **الفكرة**: كل زيارة بتنقرا تلقائياً بدل ما المستخدم يسأل عن كل زائر بتيليجرام. نفس تصميم HADARA Hospitality (`src/lib/visit-insights.ts` و`visit-report.ts` هناك)، منقول لهون.
