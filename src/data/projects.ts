@@ -538,7 +538,9 @@ export const projects: Project[] = [
     coverImage: img("marmara-haven-villa", "dusk-pool", 1200, 1600, "Marmara Haven Villa at dusk with its private pool"),
     gallery: [
       img("marmara-haven-villa", "drone", 2000, 1500, "Marmara Haven Villa aerial view with pool and terrace"),
+      img("marmara-haven-villa", "aerial-top", 2000, 1500, "Marmara Haven Villa plot seen from above"),
       img("marmara-haven-villa", "sunset", 1500, 2000, "Sunset over the Sea of Marmara from Marmara Haven Villa"),
+      img("marmara-haven-villa", "entrance", 1500, 2000, "Marmara Haven Villa entrance with marble floor"),
       img("marmara-haven-villa", "living-sea", 1500, 2000, "Marmara Haven Villa living room opening onto the terrace"),
       img("marmara-haven-villa", "living-fireplace", 1500, 2000, "Marmara Haven Villa living room with fireplace"),
       img("marmara-haven-villa", "kitchen-island", 1500, 2000, "Marmara Haven Villa kitchen with island"),
@@ -547,8 +549,12 @@ export const projects: Project[] = [
       img("marmara-haven-villa", "bathroom", 1500, 2000, "Marmara Haven Villa bathroom"),
       img("marmara-haven-villa", "hall", 1500, 2000, "Marmara Haven Villa entrance hall"),
       img("marmara-haven-villa", "attic", 1200, 1600, "Marmara Haven Villa roof floor room with sea view"),
+      img("marmara-haven-villa", "roof-terrace", 1200, 1600, "Marmara Haven Villa rooftop terrace"),
       img("marmara-haven-villa", "balcony-pool", 1500, 2000, "Marmara Haven Villa pool and sea view from the balcony"),
+      img("marmara-haven-villa", "pool-deck", 1200, 1600, "Marmara Haven Villa wooden deck by the pool"),
       img("marmara-haven-villa", "garden-wide", 2000, 1500, "Marmara Haven Villa garden and pool"),
+      img("marmara-haven-villa", "drone-front", 2000, 1500, "Marmara Haven Villa front with pool, aerial view"),
+      img("marmara-haven-villa", "side-entrance", 1200, 1600, "Marmara Haven Villa side entrance with a glimpse of the sea"),
       img("marmara-haven-villa", "exterior-facade", 1200, 1600, "Marmara Haven Villa exterior facade"),
       img("marmara-haven-villa", "private-pool", 1500, 2000, "Marmara Haven Villa private pool")
     ],
