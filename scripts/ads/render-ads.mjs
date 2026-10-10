@@ -21,23 +21,22 @@ const ADS = [
     points: [
       ["عقار أو أكثر بقيمة إجمالية 400 ألف دولار فما فوق", "One or more properties worth US$400,000+ in total"],
       ["لك ولزوجتك وأبنائك دون 18 عاماً", "For you, your spouse and children under 18"],
-      ["نرافقك من اختيار العقار حتى استلام مفتاحك", "We guide you from choosing to your keys"],
     ],
-    note: "حسب القانون التركي الحالي والشروط قابلة للتغيير · As required by current Turkish law",
+    note: '<span dir="rtl">حسب القانون التركي الحالي، والشروط قابلة للتغيير</span><br><span dir="ltr">As required by current Turkish law, subject to change</span>',
   },
   {
     id: "residence",
     photo: img("lotus-yali/aerial-sea-view.jpg"),
-    badgeAr: "الإقامة العقارية",
-    badgeEn: "Residence Permit",
-    ar: "بيتك في إسطنبول<br>وإقامتك فيها",
-    en: "Your home in Istanbul, your residence too",
+    badgeAr: "سكن في إسطنبول",
+    badgeEn: "Live in Istanbul",
+    ar: "بيتك القادم<br>في إسطنبول",
+    en: "Your next home in Istanbul",
     points: [
-      ["تملّك منزلاً للسكن وتقدّم بطلب الإقامة العقارية", "Own a home and apply for a residence permit"],
       ["مجمّعات بمسابح ونادٍ رياضي وحراسة <bdi dir=\"ltr\">24/7</bdi>", "Pools, gym and 24/7 security"],
       ["جولة خاصة عبر الفيديو قبل سفرك", "Private video tour before you travel"],
     ],
-    note: "وفق شروط رئاسة إدارة الهجرة التركية · Per Turkish migration rules",
+    // Advertisers asked: no promise of a permit in the headline; the condition lives in this line only.
+    note: '<span dir="rtl">يمكن التقدّم بطلب الإقامة العقارية وفق شروط رئاسة إدارة الهجرة التركية</span><br><span dir="ltr">A residence permit application is subject to Turkish migration rules</span>',
   },
   {
     id: "investment",
@@ -48,7 +47,6 @@ const ADS = [
     en: "Invest in Istanbul with a partner who knows the market",
     points: [
       ["مشاريع حديثة الإطلاق وأخرى جاهزة للسكن", "New launches and ready-to-move-in homes"],
-      ["بيليكدوزو · بيوكجكمجة · شيشلي", "Beylikdüzü · Büyükçekmece · Şişli"],
       ["فريق يتحدث العربية في كل خطوة", "An Arabic-speaking team at every step"],
     ],
     note: "",
@@ -65,10 +63,9 @@ const ADS = [
     en: "Istanbul is just a video call away",
     points: [
       ["شاهد الشقة النموذجية والمشروع على أرض الواقع", "See the show apartment and the project on site, live"],
-      ["بالعربية أو الإنجليزية، عبر واتساب أو زوم", "In Arabic or English, on WhatsApp or Zoom"],
-      ["مجانية تماماً ودون أي التزام", "Completely free, no obligation"],
+      ["بالعربية أو الإنجليزية، مجانية ودون التزام", "In Arabic or English, free with no obligation"],
     ],
-    note: '<span dir="rtl">يومياً من <bdi dir="ltr">9:00</bdi> حتى <bdi dir="ltr">18:30</bdi> بتوقيت إسطنبول، وهو توقيت الرياض والدوحة نفسه</span><br><span dir="ltr">Daily 9:00–18:30 Istanbul time, the same as Riyadh and Doha</span>',
+    note: "",
   },
 ];
 
@@ -89,12 +86,12 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#0f2b21;font-family:I
 .body{position:absolute;left:60px;right:60px;bottom:${story ? 300 : 70}px}
 .ar{font-family:Plex;font-weight:700;font-size:${story ? 76 : 70}px;line-height:1.25;text-align:right;direction:rtl;text-shadow:0 3px 14px rgba(0,0,0,.55)}
 .en{font-weight:700;font-size:${story ? 36 : 34}px;line-height:1.25;margin-top:14px;color:#efe6cf;direction:ltr}
-.pts{margin-top:30px;display:grid;gap:16px}
-.pt{display:grid;grid-template-columns:1fr 46px;gap:16px;align-items:start;direction:ltr}
-.pt .c{width:46px;height:46px;border-radius:50%;background:#c9a24b;color:#0f2b21;display:grid;place-items:center;font-size:28px;font-weight:700}
+.pts{margin-top:32px;display:grid;gap:22px}
+.pt{display:grid;grid-template-columns:1fr 50px;gap:16px;align-items:start;direction:ltr}
+.pt .c{width:50px;height:50px;border-radius:50%;background:#c9a24b;color:#0f2b21;display:grid;place-items:center;font-size:28px;font-weight:700}
 .pt .t{text-align:right}
-.pt .t b{display:block;font-family:Plex;font-weight:700;font-size:${story ? 36 : 33}px;line-height:1.3;direction:rtl}
-.pt .t span{display:block;font-weight:600;font-size:${story ? 24 : 22}px;color:#d9cfb6;direction:ltr;margin-top:2px}
+.pt .t b{display:block;font-family:Plex;font-weight:700;font-size:${story ? 42 : 38}px;line-height:1.3;direction:rtl}
+.pt .t span{display:block;font-weight:600;font-size:${story ? 27 : 25}px;color:#d9cfb6;direction:ltr;margin-top:2px}
 .foot{margin-top:30px;padding-top:22px;border-top:2px solid rgba(201,162,75,.6);display:flex;justify-content:space-between;align-items:center;gap:20px}
 .foot .w{font-weight:700;font-size:26px;color:#e4c574;direction:ltr}
 .foot .p{font-family:Plex;font-weight:700;font-size:28px;direction:rtl}
