@@ -130,6 +130,10 @@ const MUTED_ICON =
   '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="m16 9 6 6M22 9l-6 6"/></svg>';
 const PAUSE_ICON =
   '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+const EXPAND_ICON =
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+const SHRINK_ICON =
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>';
 const SMALL_PLAY_ICON =
   '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>';
 
@@ -160,7 +164,10 @@ function renderVideo(project: Project, content: ReturnType<typeof getProjectCont
             <button type="button" class="video-player__btn video-player__sound" data-video-sound aria-pressed="false">
               <span class="video-player__icon">${MUTED_ICON}</span><span class="video-player__sound-text">${t("projectDetail.videoSoundOn")}</span>
             </button>
-            <button type="button" class="video-player__btn video-player__toggle" data-video-toggle aria-label="${t("projectDetail.videoPause")}">${PAUSE_ICON}</button>
+            <div class="video-player__group">
+              <button type="button" class="video-player__btn video-player__round" data-video-toggle aria-label="${t("projectDetail.videoPause")}">${PAUSE_ICON}</button>
+              <button type="button" class="video-player__btn video-player__round" data-video-fullscreen aria-label="${t("projectDetail.videoFullscreen")}">${EXPAND_ICON}</button>
+            </div>
           </div>
         </div>
         <div class="project-video__actions">${actions}</div>
@@ -176,7 +183,8 @@ function initVideo(el: HTMLElement): void {
     const start = player.querySelector<HTMLButtonElement>("[data-video-start]");
     const sound = player.querySelector<HTMLButtonElement>("[data-video-sound]");
     const toggle = player.querySelector<HTMLButtonElement>("[data-video-toggle]");
-    if (!video || !start || !sound || !toggle) return;
+    const full = player.querySelector<HTMLButtonElement>("[data-video-fullscreen]");
+    if (!video || !start || !sound || !toggle || !full) return;
 
     // Data saver and reduced motion: nothing loads or moves until the visitor asks.
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
@@ -249,6 +257,48 @@ function initVideo(el: HTMLElement): void {
         video.pause();
       }
     });
+    // Full screen: the whole player (so our buttons stay), or the iPhone's own video viewer,
+    // which is the only full-screen mode iPhones allow.
+    const appleVideo = video as HTMLVideoElement & { webkitEnterFullscreen?: () => void; webkitDisplayingFullscreen?: boolean };
+    const applePlayer = player as HTMLElement & { webkitRequestFullscreen?: () => void };
+    const fullscreenDoc = document as Document & { webkitFullscreenElement?: Element | null; webkitExitFullscreen?: () => void };
+    const isFull = (): boolean =>
+      (document.fullscreenElement ?? fullscreenDoc.webkitFullscreenElement) === player || Boolean(appleVideo.webkitDisplayingFullscreen);
+    const canFull = Boolean(player.requestFullscreen || applePlayer.webkitRequestFullscreen || appleVideo.webkitEnterFullscreen);
+    full.hidden = !canFull;
+    const syncFull = (): void => {
+      const on = isFull();
+      player.classList.toggle("is-fullscreen", on);
+      full.innerHTML = on ? SHRINK_ICON : EXPAND_ICON;
+      full.setAttribute("aria-label", t(on ? "projectDetail.videoExitFullscreen" : "projectDetail.videoFullscreen"));
+    };
+    full.addEventListener("click", () => {
+      if (isFull()) {
+        if (document.exitFullscreen) void document.exitFullscreen().catch(() => undefined);
+        else fullscreenDoc.webkitExitFullscreen?.();
+        return;
+      }
+      if (video.paused) {
+        pausedByVisitor = false;
+        play();
+      }
+      if (player.requestFullscreen) void player.requestFullscreen().catch(() => appleVideo.webkitEnterFullscreen?.());
+      else if (applePlayer.webkitRequestFullscreen) applePlayer.webkitRequestFullscreen();
+      else appleVideo.webkitEnterFullscreen?.();
+    });
+    const onFullChange = (): void => {
+      if (!player.isConnected) {
+        document.removeEventListener("fullscreenchange", onFullChange);
+        document.removeEventListener("webkitfullscreenchange", onFullChange);
+        return;
+      }
+      syncFull();
+    };
+    document.addEventListener("fullscreenchange", onFullChange);
+    document.addEventListener("webkitfullscreenchange", onFullChange);
+    video.addEventListener("webkitbeginfullscreen", syncFull);
+    video.addEventListener("webkitendfullscreen", syncFull);
+
     // Tapping the picture itself turns the sound on (what most people expect), then pauses/resumes.
     video.addEventListener("click", () => (video.muted ? sound : toggle).click());
 
@@ -271,7 +321,7 @@ function initVideo(el: HTMLElement): void {
         if (!player.isConnected) return observer.disconnect();
         visible = entries.some((e) => e.isIntersecting);
         if (visible && autoplay && !pausedByVisitor && video.paused) play();
-        else if (!visible && !video.paused) video.pause();
+        else if (!visible && !video.paused && !isFull()) video.pause();
       },
       { threshold: 0.5 }
     ).observe(player);

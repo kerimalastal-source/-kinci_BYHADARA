@@ -5760,10 +5760,37 @@ body.nav-open .back-to-top {
   color: var(--color-primary);
 }
 
-.video-player__toggle {
+.video-player__group {
+  display: flex;
+  gap: 8px;
+}
+
+.video-player__round {
   justify-content: center;
   width: 40px;
   padding: 0;
+}
+
+/* Full screen (the whole player, so the buttons stay): the vertical video sits on black, uncropped. */
+.video-player.is-fullscreen {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.video-player.is-fullscreen .video-player__video,
+.video-player.is-fullscreen .video-player__poster {
+  object-fit: contain;
+}
+
+/* Wider screens leave black space beside the vertical video: the cover photo must not show there. */
+.video-player.is-fullscreen.is-playing .video-player__poster {
+  display: none;
+}
+
+.video-player.is-fullscreen .video-player__controls {
+  top: auto;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  inset-inline: max(20px, env(safe-area-inset-left));
 }
 
 .video-player__btn:focus-visible {

@@ -312,6 +312,8 @@
     "videoSoundOff": "كتم الصوت",
     "videoPause": "إيقاف الفيديو مؤقتاً",
     "videoResume": "تشغيل الفيديو",
+    "videoFullscreen": "ملء الشاشة",
+    "videoExitFullscreen": "الخروج من ملء الشاشة",
     "residenceApartment": "شقة {layout}",
     "residenceVilla": "فيلا {layout}",
     "officeClosed": "مكتب مغلق",

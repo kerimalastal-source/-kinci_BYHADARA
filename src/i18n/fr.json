@@ -312,6 +312,8 @@
     "videoSoundOff": "Couper le son",
     "videoPause": "Mettre la vidéo en pause",
     "videoResume": "Lire la vidéo",
+    "videoFullscreen": "Plein écran",
+    "videoExitFullscreen": "Quitter le plein écran",
     "residenceApartment": "Appartement {layout}",
     "residenceVilla": "Villa {layout}",
     "officeClosed": "Bureau fermé",

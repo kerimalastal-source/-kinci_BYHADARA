@@ -391,6 +391,8 @@
     "videoSoundOff": "قطع صدا",
     "videoPause": "توقف موقت ویدیو",
     "videoResume": "پخش ویدیو",
+    "videoFullscreen": "تمام‌صفحه",
+    "videoExitFullscreen": "خروج از حالت تمام‌صفحه",
     "residenceApartment": "آپارتمان {layout}",
     "residenceVilla": "ویلای {layout}",
     "officeClosed": "دفتر اداری بسته",

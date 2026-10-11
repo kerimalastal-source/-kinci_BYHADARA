@@ -312,6 +312,8 @@
     "videoSoundOff": "Mute",
     "videoPause": "Pause video",
     "videoResume": "Play video",
+    "videoFullscreen": "Full screen",
+    "videoExitFullscreen": "Exit full screen",
     "residenceApartment": "{layout} Apartment",
     "residenceVilla": "{layout} Villa",
     "officeClosed": "Closed Office",

@@ -312,6 +312,8 @@
     "videoSoundOff": "Выключить звук",
     "videoPause": "Поставить видео на паузу",
     "videoResume": "Продолжить видео",
+    "videoFullscreen": "Во весь экран",
+    "videoExitFullscreen": "Выйти из полноэкранного режима",
     "residenceApartment": "Квартира {layout}",
     "residenceVilla": "Вилла {layout}",
     "officeClosed": "Закрытый офис",
