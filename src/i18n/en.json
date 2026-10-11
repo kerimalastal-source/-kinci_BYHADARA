@@ -308,6 +308,10 @@
     "floorPlanTitle": "Floor by Floor",
     "videoEyebrow": "Video Tour",
     "videoPlay": "Play video",
+    "videoSoundOn": "Turn sound on",
+    "videoSoundOff": "Mute",
+    "videoPause": "Pause video",
+    "videoResume": "Play video",
     "residenceApartment": "{layout} Apartment",
     "residenceVilla": "{layout} Villa",
     "officeClosed": "Closed Office",
@@ -2859,7 +2863,7 @@
           "We share personal data only when it is needed, and only the data that is needed:"
         ],
         "items": [
-          "Service providers who run the Website for us: Vercel (hosting, and the approximate location of visits), Supabase (resale portal database and sign-in, messages from the Website's forms, tour bookings, and anonymous visit statistics), Google (fonts, analytics, advertising and YouTube videos) and Meta (WhatsApp, ad measurement and showing our ads, and the details you send us through a form or a WhatsApp message inside one of our Facebook or Instagram ads). The map on our contact page is provided by OpenStreetMap.",
+          "Service providers who run the Website for us: Vercel (hosting, and the approximate location of visits), Supabase (resale portal database and sign-in, messages from the Website's forms, tour bookings, and anonymous visit statistics), Google (fonts, analytics and advertising) and Meta (WhatsApp, ad measurement and showing our ads, and the details you send us through a form or a WhatsApp message inside one of our Facebook or Instagram ads). The map on our contact page is provided by OpenStreetMap.",
           "Telegram and email, which deliver internal notifications to our team: new visits (with anonymous details only), new messages and requests, and tour bookings. Confirmation emails to you are sent through the email service Resend.",
           "Project developers, when it is needed to complete your request, for example to reserve a unit or complete a purchase.",
           "In the resale portal: buyers' messages are shared with the owner of the listing, and approved listings are published on the Website.",

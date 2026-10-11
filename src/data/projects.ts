@@ -78,8 +78,9 @@ export interface Residence {
 
 /** Gross/net area of one level; its name and features live in projectsData.<slug>.floorPlan (same order). */
 export interface ProjectVideo {
-  youtubeId: string;
-  /** Shorts and phone footage (9:16). */
+  /** Self-hosted MP4s under public/videos/<slug>/: a light one for phones, a sharper one for larger screens. */
+  sources: { small: string; large: string };
+  /** Phone footage (9:16). */
   vertical?: boolean;
   poster: ProjectImage;
 }
@@ -142,7 +143,7 @@ export interface Project {
   residences?: Residence[];
   /** Level-by-level breakdown, shown as a "Floor by Floor" section. */
   floorPlan?: FloorLevel[];
-  /** Video tour hosted on YouTube; `poster` shows until the visitor presses play. */
+  /** Video tour, served from the site itself; `poster` shows until the video starts. */
   video?: ProjectVideo;
   amenities?: AmenityKey[];
   /** "Verified Project Card": facts confirmed by the team (never filled in from marketing copy). */
@@ -566,7 +567,10 @@ export const projects: Project[] = [
       { value: "4", labelKey: "floors" }
     ],
     video: {
-      youtubeId: "kvru16nD3a4",
+      sources: {
+        small: "/videos/marmara-haven-villa/tour-540.mp4",
+        large: "/videos/marmara-haven-villa/tour-720.mp4"
+      },
       vertical: true,
       poster: img("marmara-haven-villa", "drone-front", 2000, 1500, "Marmara Haven Villa video tour")
     },

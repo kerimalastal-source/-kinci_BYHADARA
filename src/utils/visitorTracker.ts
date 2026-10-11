@@ -399,7 +399,7 @@ function actionClick(event: MouseEvent): void {
     if (fav.getAttribute("aria-pressed") !== "true" && /^[a-z0-9-]+$/.test(fav.dataset.fav ?? "")) reportAction("favorite", fav.dataset.fav);
     return;
   }
-  if (target.closest(".video-facade")) return reportAction("video_play", pageProject(), true);
+  if (target.closest("[data-video-start], [data-video-sound]")) return reportAction("video_play", pageProject(), true);
   if (target.closest(".project-map__expand, .project-map__canvas")) return reportAction("map_open", pageProject(), true);
   const chat = target.closest("[data-chat-toggle]");
   if (chat && chat.getAttribute("aria-expanded") !== "true") reportAction("chat_open", pageProject(), true);

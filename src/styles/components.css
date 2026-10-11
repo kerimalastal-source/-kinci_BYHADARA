@@ -5691,12 +5691,92 @@ body.nav-open .back-to-top {
   width: 100%;
 }
 
-.project-video__frame iframe {
+/* Self-hosted player: the poster photo stays until the first frame plays, then fades out. */
+.video-player__poster,
+.video-player__video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  border: 0;
+  object-fit: cover;
+}
+
+.video-player__video {
+  opacity: 0;
+  transition: opacity 500ms ease;
+  cursor: pointer;
+}
+
+.video-player.is-playing .video-player__video {
+  opacity: 1;
+}
+
+.video-player__controls {
+  position: absolute;
+  inset-inline: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 300ms ease, visibility 300ms;
+}
+
+.video-player.is-playing:not(.is-waiting) .video-player__controls {
+  opacity: 1;
+  visibility: visible;
+}
+
+.video-player__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  background: rgba(15, 43, 33, 0.72);
+  color: #fff;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.video-player__btn svg {
+  flex: 0 0 auto;
+}
+
+/* Gold while muted, so the way to hear the video stands out. */
+.video-player__sound[aria-pressed="false"] {
+  border-color: transparent;
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.video-player__toggle {
+  justify-content: center;
+  width: 40px;
+  padding: 0;
+}
+
+.video-player__btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Phones: the floating WhatsApp/chat column sits over the bottom-right of the video, so the buttons go on top. */
+@media (max-width: 640px) {
+  .video-player__controls {
+    top: 12px;
+    bottom: auto;
+  }
 }
 
 .video-facade {
@@ -5708,13 +5788,6 @@ body.nav-open .back-to-top {
   background: none;
   cursor: pointer;
   color: #fff;
-}
-
-.video-facade img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 600ms ease;
 }
 
 .video-facade::after {
@@ -5806,10 +5879,6 @@ body.nav-open .back-to-top {
 }
 
 @media (hover: hover) {
-  .video-facade:hover img {
-    transform: scale(1.04);
-  }
-
   .video-facade:hover .video-facade__play {
     transform: translate(-50%, -50%) scale(1.08);
   }
