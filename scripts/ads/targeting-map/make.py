@@ -37,7 +37,7 @@ circles = [
  ("buy",41.0288,28.5275,3),("buy",41.0692,28.5811,3),("buy",41.0513,28.4442,3),("buy",41.0198,28.593,3),("buy",41.1007,28.593,3),("buy",41.0782,28.5335,3),
  ("buy",41.0333,28.4858,3),("buy",41.0603,28.4144,3),("buy",41.0019,28.5275,3),("buy",41.0468,28.593,3),("buy",41.0917,28.605,2.5),("buy",41.0827,28.5275,3),
  ("bey",40.9835,28.654,3),("bey",40.988,28.6242,3),("bey",40.979,28.6659,3),("bey",40.9925,28.6301,3),
- ("bah",41.075,28.69,2),("isp",41.05,28.712,2),("kay",41.108,28.77,2.5),("arn",41.185,28.74,4),("flo",40.978,28.788,2),("yes",40.963,28.823,2),
+ ("bah",41.075,28.69,2),("isp",41.05,28.712,2),("kay",41.108,28.77,2.5),("arn",41.185,28.74,4),("flo",40.978,28.788,2),("yes",40.963,28.823,2),("bsk",41.095,28.800,2.5),
 ]
 for _, la, lo, r in circles:
     x, y = P(lo, la)
@@ -58,6 +58,7 @@ labels = [
  label(28.735, 41.030, "إسبارتاكوله", "Ispartakule", dx=40, dy=5),
  label(28.77, 41.137, "كايا شهير", "Kayaşehir", dy=-5),
  label(28.74, 41.228, "أرناؤوط كوي", "Arnavutköy"),
+ label(28.835, 41.090, "مركز باشاك شهير", "Başakşehir", dx=30),
  label(28.785, 41.000, "فلوريا", "Florya", dx=-10, dy=-12),
  label(28.86, 40.995, "يشيل كوي", "Yeşilköy"),
  label(28.662, 41.045, "إسنيورت (مستبعدة)", "Esenyurt", muted=True),
@@ -76,13 +77,13 @@ html,body{{margin:0;background:#dfe9ec}}
 {''.join(labels)}
 <rect x="0" y="0" width="{W}" height="{TOP}" fill="#0f2b21"/>
 <text x="{W-40}" y="66" text-anchor="end" font-family="Plex" font-weight="700" font-size="44" fill="#ffffff">المجموعة الأولى: بيوكجكمجة وغرب إسطنبول</text>
-<text x="{W-40}" y="118" text-anchor="end" font-family="Plex" font-weight="500" font-size="28" fill="#e6d3a3">‏22 دائرة على أماكن السكن · 225 ليرة باليوم · فيلا مرمرة هيفن</text>
+<text x="{W-40}" y="118" text-anchor="end" font-family="Plex" font-weight="500" font-size="28" fill="#e6d3a3">‏23 دائرة على أماكن السكن · 225 ليرة باليوم · فيلا مرمرة هيفن</text>
 <rect x="0" y="{H+TOP}" width="{W}" height="90" fill="#ffffff"/>
 <circle cx="{W-60}" cy="{H+TOP+45}" r="16" fill="#c9a24b" fill-opacity="0.35" stroke="#a8822f" stroke-width="2.2"/>
 <text x="{W-90}" y="{H+TOP+55}" text-anchor="end" font-family="Plex" font-weight="500" font-size="26" fill="#0f2b21">دائرة إعلانية (2–4 كم)</text>
 <rect x="{W-560}" y="{H+TOP+29}" width="34" height="32" fill="#d9d4c7" stroke="#b5ad99"/>
 <text x="{W-540-50}" y="{H+TOP+55}" text-anchor="end" font-family="Plex" font-weight="500" font-size="26" fill="#0f2b21">إسنيورت (غير مشمولة)</text>
-<text x="40" y="{H+TOP+55}" font-family="Plex" font-weight="500" font-size="22" fill="#7a7466">‏22 دائرة · الحدود تقريبية</text>
+<text x="40" y="{H+TOP+55}" font-family="Plex" font-weight="500" font-size="22" fill="#7a7466">‏23 دائرة · الحدود تقريبية</text>
 </svg></body></html>'''
 open(out, "w").write(html)
 print(W, H+TOP+90)
