@@ -1415,6 +1415,14 @@
             "Salle de bain",
             "Terrasse sur le toit de 24,49 m²"
           ]
+        },
+        {
+          "name": "Vue mer depuis le toit",
+          "features": [
+            "Terrasse sur le toit de 24,49 m²",
+            "Vue dégagée sur la mer de Marmara",
+            "Donne sur le salon et la cuisine du toit-terrasse"
+          ]
         }
       ],
       "nearby": [

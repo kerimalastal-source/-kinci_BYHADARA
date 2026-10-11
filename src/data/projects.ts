@@ -86,8 +86,9 @@ export interface ProjectVideo {
 }
 
 export interface FloorLevel {
-  gross: string;
-  net: string;
+  /** Left out for a card that shows a view rather than a level (e.g. the rooftop sea view). */
+  gross?: string;
+  net?: string;
   /** Photo shown at the top of the level's card. */
   image?: ProjectImage;
   /** Adds a "sea view" tag on the photo. */
@@ -582,6 +583,10 @@ export const projects: Project[] = [
         gross: "103.66 m²",
         net: "82.82 m²",
         image: img("marmara-haven-villa", "attic", 1200, 1600, "Marmara Haven Villa roof floor with sea view"),
+        seaView: true
+      },
+      {
+        image: img("marmara-haven-villa", "terrace", 1200, 1600, "Marmara Sea in daylight seen from the Marmara Haven Villa roof terrace"),
         seaView: true
       }
     ],

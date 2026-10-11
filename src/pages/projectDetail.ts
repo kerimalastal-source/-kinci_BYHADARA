@@ -107,10 +107,14 @@ function renderFloorPlan(project: Project, levels: ReturnType<typeof getProjectC
               <span class="floor-card__index" dir="ltr">${String(i + 1).padStart(2, "0")}</span>
               <h3>${text.name}</h3>
             </header>
-            <dl class="floor-card__areas">
+            ${
+              level.gross && level.net
+                ? `<dl class="floor-card__areas">
               <div><dt>${t("projectDetail.grossAreaLabel")}</dt><dd dir="ltr">${level.gross}</dd></div>
               <div><dt>${t("projectDetail.netAreaLabel")}</dt><dd dir="ltr">${level.net}</dd></div>
-            </dl>
+            </dl>`
+                : ""
+            }
             <ul class="floor-card__features">
               ${text.features.map((f) => `<li>${f}</li>`).join("")}
             </ul>

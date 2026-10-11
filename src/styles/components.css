@@ -1421,6 +1421,51 @@
   }
 }
 
+/* A lone last card with a photo spans the row: photo on one side, text centered on the other. */
+@media (min-width: 721px) {
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    grid-template-rows: 1fr auto auto auto 1fr;
+    column-gap: var(--space-lg);
+  }
+
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) > * {
+    grid-column: 2;
+  }
+
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) .floor-card__head {
+    grid-row: 2;
+  }
+
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) .floor-card__areas {
+    grid-row: 3;
+  }
+
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) .floor-card__features {
+    grid-row: 4;
+  }
+
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) .floor-card__media {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    width: calc(100% + var(--space-md));
+    height: calc(100% + 2 * var(--space-md));
+    min-height: 340px;
+    margin: calc(-1 * var(--space-md)) 0;
+    margin-inline-start: calc(-1 * var(--space-md));
+    aspect-ratio: auto;
+  }
+
+  /* Portrait photos in a landscape box: favour the lower part (sea and terrace over open sky). */
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) .floor-card__media img {
+    position: absolute;
+    inset: 0;
+    object-position: center 68%;
+  }
+}
+
 /* Amenities */
 /* Flex (not grid) so an incomplete last row sits centered. */
 .amenity-grid {
