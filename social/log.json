@@ -422,5 +422,37 @@
     "headlineAr": "صالة رياضية ونظام منزل ذكي",
     "headlineEn": "A gym and a smart home system",
     "photo": "/images/projects/cadde-ispartakule/fitness.jpg"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "lotus-koru-2-life",
+    "topic": "لوتس كورو 2 · الحياة في المشروع",
+    "headlineAr": "9 خدمات مشتركة داخل المجمّع",
+    "headlineEn": "9 shared services inside the complex",
+    "photo": "/images/projects/lotus-koru-2/urban-living-concept.jpg"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "contact-channels",
+    "topic": "كيف تتواصل مع حضارة: كل القنوات",
+    "headlineAr": "كيف تتواصل مع حضارة؟",
+    "headlineEn": "How to reach HADARA",
+    "photo": "/images/projects/marmara-haven-villa/sea-view.jpg"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "tf-european-side",
+    "topic": "صح أم خطأ: مشاريعنا في الجانب الأوروبي (شرائح)",
+    "headlineAr": "كل مشاريعنا الحالية في الجانب الأوروبي",
+    "headlineEn": "All our current projects are on the European side",
+    "photo": "/images/projects/lotus-manzara-beylikduzu/aerial-sea-view.jpg"
+  },
+  {
+    "date": "2026-10-11",
+    "id": "lotus-koru-2-life-story",
+    "topic": "ستوري: لوتس كورو 2 · الحياة في المشروع",
+    "headlineAr": "موقع مركزي في قلب بيليكدوزو",
+    "headlineEn": "A central spot in the heart of Beylikdüzü",
+    "photo": "/images/projects/lotus-koru-2/central-location.jpg"
   }
 ]
