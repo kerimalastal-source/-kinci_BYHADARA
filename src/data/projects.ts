@@ -78,15 +78,17 @@ export interface Residence {
 
 /** Gross/net area of one level; its name and features live in projectsData.<slug>.floorPlan (same order). */
 export interface ProjectVideo {
-  youtubeId: string;
-  /** Shorts and phone footage (9:16). */
+  /** Self-hosted MP4s under public/videos/<slug>/: a light one for phones, a sharper one for larger screens. */
+  sources: { small: string; large: string };
+  /** Phone footage (9:16). */
   vertical?: boolean;
   poster: ProjectImage;
 }
 
 export interface FloorLevel {
-  gross: string;
-  net: string;
+  /** Left out for a card that shows a view rather than a level (e.g. the rooftop sea view). */
+  gross?: string;
+  net?: string;
   /** Photo shown at the top of the level's card. */
   image?: ProjectImage;
   /** Adds a "sea view" tag on the photo. */
@@ -142,7 +144,7 @@ export interface Project {
   residences?: Residence[];
   /** Level-by-level breakdown, shown as a "Floor by Floor" section. */
   floorPlan?: FloorLevel[];
-  /** Video tour hosted on YouTube; `poster` shows until the visitor presses play. */
+  /** Video tour, served from the site itself; `poster` shows until the video starts. */
   video?: ProjectVideo;
   amenities?: AmenityKey[];
   /** "Verified Project Card": facts confirmed by the team (never filled in from marketing copy). */
@@ -444,6 +446,7 @@ export const projects: Project[] = [
     slug: "lotus-koru-2",
     district: "Beylikdüzü",
     city: "Istanbul",
+    developer: "Lotus Yapı Proje",
     status: "delivered",
     lifestyle: ["nature", "city"],
     unitsAvailable: true,
@@ -467,6 +470,7 @@ export const projects: Project[] = [
     slug: "lotus-istanbul",
     district: "Beylikdüzü",
     city: "Istanbul",
+    developer: "Lotus Yapı Proje",
     status: "delivered",
     lifestyle: ["city"],
     soldOut: true,
@@ -492,6 +496,7 @@ export const projects: Project[] = [
     slug: "lotus-koru-1",
     district: "Beylikdüzü",
     city: "Istanbul",
+    developer: "Lotus Yapı Proje",
     status: "delivered",
     lifestyle: ["nature"],
     soldOut: true,
@@ -519,6 +524,8 @@ export const projects: Project[] = [
     status: "delivered",
     lifestyle: ["sea"],
     timeline: "2024 – 2026",
+    // The one project HADARA developed itself (owner, 2026-10-10); every other project is marketed for its developer.
+    developer: "HADARA Real Estate",
     // Prices from the owner on 2026-09-30 (VAT included, 4% title deed fee not included).
     price: "$1,550,000 – $1,650,000",
     landing: true,
@@ -529,17 +536,29 @@ export const projects: Project[] = [
       documents: true
     },
     priority: 10,
-    coverImage: img("marmara-haven-villa", "exterior-facade", 1200, 1600, "Marmara Haven Villa exterior facade"),
+    // Owner's photos, 2026-10-10: the page opens on the same dusk shot as the villa's ads.
+    coverImage: img("marmara-haven-villa", "dusk-pool", 1200, 1600, "Marmara Haven Villa at dusk with its private pool"),
     gallery: [
-      img("marmara-haven-villa", "main-facade", 2000, 1500, "Marmara Haven Villa main facade"),
-      img("marmara-haven-villa", "side-view", 1500, 2000, "Marmara Haven Villa side view"),
-      img("marmara-haven-villa", "private-pool", 1500, 2000, "Marmara Haven Villa private pool"),
-      img("marmara-haven-villa", "living-room", 1500, 2000, "Marmara Haven Villa living room"),
-      img("marmara-haven-villa", "kitchen", 1500, 2000, "Marmara Haven Villa kitchen"),
-      img("marmara-haven-villa", "master-bedroom", 1500, 2000, "Marmara Haven Villa master bedroom"),
-      img("marmara-haven-villa", "rooftop", 1200, 1600, "Marmara Haven Villa rooftop"),
-      img("marmara-haven-villa", "terrace", 1200, 1600, "Marmara Haven Villa terrace"),
-      img("marmara-haven-villa", "sea-view", 1200, 1600, "Marmara Haven Villa sea view")
+      img("marmara-haven-villa", "drone", 2000, 1500, "Marmara Haven Villa aerial view with pool and terrace"),
+      img("marmara-haven-villa", "aerial-top", 2000, 1500, "Marmara Haven Villa plot seen from above"),
+      img("marmara-haven-villa", "sunset", 1500, 2000, "Sunset over the Sea of Marmara from Marmara Haven Villa"),
+      img("marmara-haven-villa", "entrance", 1500, 2000, "Marmara Haven Villa entrance with marble floor"),
+      img("marmara-haven-villa", "living-sea", 1500, 2000, "Marmara Haven Villa living room opening onto the terrace"),
+      img("marmara-haven-villa", "living-fireplace", 1500, 2000, "Marmara Haven Villa living room with fireplace"),
+      img("marmara-haven-villa", "kitchen-island", 1500, 2000, "Marmara Haven Villa kitchen with island"),
+      img("marmara-haven-villa", "bedroom-sea", 1500, 2000, "Marmara Haven Villa bedroom with sea view"),
+      img("marmara-haven-villa", "bedroom-2", 1500, 2000, "Marmara Haven Villa bedroom"),
+      img("marmara-haven-villa", "bathroom", 1500, 2000, "Marmara Haven Villa bathroom"),
+      img("marmara-haven-villa", "hall", 1500, 2000, "Marmara Haven Villa entrance hall"),
+      img("marmara-haven-villa", "attic", 1200, 1600, "Marmara Haven Villa roof floor room with sea view"),
+      img("marmara-haven-villa", "roof-terrace", 1200, 1600, "Marmara Haven Villa rooftop terrace"),
+      img("marmara-haven-villa", "balcony-pool", 1500, 2000, "Marmara Haven Villa pool and sea view from the balcony"),
+      img("marmara-haven-villa", "pool-deck", 1200, 1600, "Marmara Haven Villa wooden deck by the pool"),
+      img("marmara-haven-villa", "garden-wide", 2000, 1500, "Marmara Haven Villa garden and pool"),
+      img("marmara-haven-villa", "drone-front", 2000, 1500, "Marmara Haven Villa front with pool, aerial view"),
+      img("marmara-haven-villa", "side-entrance", 1200, 1600, "Marmara Haven Villa side entrance with a glimpse of the sea"),
+      img("marmara-haven-villa", "exterior-facade", 1200, 1600, "Marmara Haven Villa exterior facade"),
+      img("marmara-haven-villa", "private-pool", 1500, 2000, "Marmara Haven Villa private pool")
     ],
     stats: [
       { value: "637 m²", labelKey: "landArea" },
@@ -549,18 +568,25 @@ export const projects: Project[] = [
       { value: "4", labelKey: "floors" }
     ],
     video: {
-      youtubeId: "kvru16nD3a4",
+      sources: {
+        small: "/videos/marmara-haven-villa/tour-540.mp4",
+        large: "/videos/marmara-haven-villa/tour-720.mp4"
+      },
       vertical: true,
-      poster: img("marmara-haven-villa", "private-pool", 1500, 2000, "Marmara Haven Villa video tour")
+      poster: img("marmara-haven-villa", "drone-front", 2000, 1500, "Marmara Haven Villa video tour")
     },
     floorPlan: [
-      { gross: "138.62 m²", net: "105.40 m²", image: img("marmara-haven-villa", "side-view", 1500, 2000, "Marmara Haven Villa basement level") },
-      { gross: "223.37 m²", net: "108.60 m²", image: img("marmara-haven-villa", "living-room", 1500, 2000, "Marmara Haven Villa ground floor living room") },
-      { gross: "143.19 m²", net: "126.21 m²", image: img("marmara-haven-villa", "master-bedroom", 1500, 2000, "Marmara Haven Villa first floor bedroom") },
+      { gross: "138.62 m²", net: "105.40 m²", image: img("marmara-haven-villa", "basement-room", 1500, 2000, "Marmara Haven Villa basement level") },
+      { gross: "223.37 m²", net: "108.60 m²", image: img("marmara-haven-villa", "living-sea", 1500, 2000, "Marmara Haven Villa ground floor living room") },
+      { gross: "143.19 m²", net: "126.21 m²", image: img("marmara-haven-villa", "bedroom-sea", 1500, 2000, "Marmara Haven Villa first floor bedroom") },
       {
         gross: "103.66 m²",
         net: "82.82 m²",
-        image: img("marmara-haven-villa", "terrace", 1200, 1600, "Marmara Haven Villa rooftop terrace with sea view"),
+        image: img("marmara-haven-villa", "attic", 1200, 1600, "Marmara Haven Villa roof floor with sea view"),
+        seaView: true
+      },
+      {
+        image: img("marmara-haven-villa", "terrace", 1200, 1600, "Marmara Sea in daylight seen from the Marmara Haven Villa roof terrace"),
         seaView: true
       }
     ],

@@ -23,6 +23,11 @@ const countsUp = (value: string, labelKey: string) => labelKey !== "delivery" &&
  * On desktop the cover takes a 2×2 block beside two images, then rows of three.
  * A last row with a single image stretches it into a panorama, so no photo sits alone.
  */
+// Ad landing pages keep the top of the hero photo clear so the property shows at
+// first glance; the shade only deepens behind the text at the bottom.
+const LANDING_SHADE =
+  "linear-gradient(180deg, rgba(15,20,18,.28) 0%, rgba(15,20,18,0) 22%, rgba(15,20,18,.08) 40%, rgba(15,20,18,.72) 66%, rgba(15,20,18,.9) 100%)";
+
 function galleryTail(total: number): string {
   return total > 3 && (total - 3) % 3 === 1 ? " gallery-grid__item--panorama" : "";
 }
@@ -102,10 +107,14 @@ function renderFloorPlan(project: Project, levels: ReturnType<typeof getProjectC
               <span class="floor-card__index" dir="ltr">${String(i + 1).padStart(2, "0")}</span>
               <h3>${text.name}</h3>
             </header>
-            <dl class="floor-card__areas">
+            ${
+              level.gross && level.net
+                ? `<dl class="floor-card__areas">
               <div><dt>${t("projectDetail.grossAreaLabel")}</dt><dd dir="ltr">${level.gross}</dd></div>
               <div><dt>${t("projectDetail.netAreaLabel")}</dt><dd dir="ltr">${level.net}</dd></div>
-            </dl>
+            </dl>`
+                : ""
+            }
             <ul class="floor-card__features">
               ${text.features.map((f) => `<li>${f}</li>`).join("")}
             </ul>
@@ -119,9 +128,23 @@ function renderFloorPlan(project: Project, levels: ReturnType<typeof getProjectC
 const PLAY_ICON =
   '<svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>';
 
+const SOUND_ON_ICON =
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+const MUTED_ICON =
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="m16 9 6 6M22 9l-6 6"/></svg>';
+const PAUSE_ICON =
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+const EXPAND_ICON =
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+const SHRINK_ICON =
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>';
+const SMALL_PLAY_ICON =
+  '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>';
+
 /**
- * Video tour. Only the poster loads with the page; the YouTube player replaces it on
- * the first tap, which keeps the landing page fast on phones.
+ * Video tour, served from the site itself (no YouTube branding, suggestions or cookies).
+ * Nothing but the poster loads with the page: the file is fetched once the section comes
+ * near the screen, then plays muted and looped while visible. Phones get the lighter file.
  */
 function renderVideo(project: Project, content: ReturnType<typeof getProjectContent>, actions: string): string {
   const video = project.video;
@@ -134,28 +157,184 @@ function renderVideo(project: Project, content: ReturnType<typeof getProjectCont
           <h2 id="project-video-title">${content.videoTitle ?? content.name}</h2>
           ${content.videoText ? `<p class="project-video__text">${content.videoText}</p>` : ""}
         </div>
-        <div class="project-video__frame">
-          <button type="button" class="video-facade" data-youtube-id="${video.youtubeId}" aria-label="${t("projectDetail.videoPlay")}">
-            <img ${photoAttrs(video.poster, "(max-width: 640px) calc(100vw - 32px), 420px")} alt="${video.poster.alt}" width="${video.poster.width}" height="${video.poster.height}" loading="lazy" />
+        <div class="project-video__frame video-player" data-video-small="${video.sources.small}" data-video-large="${video.sources.large}">
+          <img class="video-player__poster" ${photoAttrs(video.poster, "(max-width: 640px) calc(100vw - 32px), 420px")} alt="${video.poster.alt}" width="${video.poster.width}" height="${video.poster.height}" loading="lazy" />
+          <video class="video-player__video" muted playsinline loop preload="none" disablepictureinpicture aria-label="${content.videoTitle ?? content.name}"></video>
+          <button type="button" class="video-facade video-player__start" data-video-start aria-label="${t("projectDetail.videoPlay")}">
             <span class="video-facade__play">${PLAY_ICON}</span>
             <span class="video-facade__label">${t("projectDetail.videoPlay")}</span>
           </button>
+          <div class="video-player__controls">
+            <button type="button" class="video-player__btn video-player__sound" data-video-sound aria-pressed="false">
+              <span class="video-player__icon">${MUTED_ICON}</span><span class="video-player__sound-text">${t("projectDetail.videoSoundOn")}</span>
+            </button>
+            <div class="video-player__group">
+              <button type="button" class="video-player__btn video-player__round" data-video-toggle aria-label="${t("projectDetail.videoPause")}">${PAUSE_ICON}</button>
+              <button type="button" class="video-player__btn video-player__round" data-video-fullscreen aria-label="${t("projectDetail.videoFullscreen")}">${EXPAND_ICON}</button>
+            </div>
+          </div>
         </div>
         <div class="project-video__actions">${actions}</div>
       </div>
     </section>`;
 }
 
-function initVideo(el: HTMLElement, title: string): void {
-  el.querySelectorAll<HTMLButtonElement>(".video-facade").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const iframe = document.createElement("iframe");
-      iframe.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.youtubeId}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
-      iframe.title = title;
-      iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
-      iframe.allowFullscreen = true;
-      btn.replaceWith(iframe);
+const SMALL_VIDEO_QUERY = "(max-width: 640px)";
+
+function initVideo(el: HTMLElement): void {
+  el.querySelectorAll<HTMLElement>(".video-player").forEach((player) => {
+    const video = player.querySelector<HTMLVideoElement>("video");
+    const start = player.querySelector<HTMLButtonElement>("[data-video-start]");
+    const sound = player.querySelector<HTMLButtonElement>("[data-video-sound]");
+    const toggle = player.querySelector<HTMLButtonElement>("[data-video-toggle]");
+    const full = player.querySelector<HTMLButtonElement>("[data-video-fullscreen]");
+    if (!video || !start || !sound || !toggle || !full) return;
+
+    // Data saver and reduced motion: nothing loads or moves until the visitor asks.
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    const autoplay = !connection?.saveData && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let visible = false;
+    let pausedByVisitor = false;
+
+    const load = (): void => {
+      if (video.getAttribute("src")) return;
+      const small = window.matchMedia(SMALL_VIDEO_QUERY).matches;
+      video.src = (small ? player.dataset.videoSmall : player.dataset.videoLarge) ?? "";
+      video.preload = "auto";
+    };
+    const showStart = (on: boolean): void => {
+      player.classList.toggle("is-waiting", on);
+      start.hidden = !on;
+    };
+    const play = (): void => {
+      load();
+      video.play().then(() => showStart(false)).catch(() => showStart(true));
+    };
+    const syncSound = (): void => {
+      sound.setAttribute("aria-pressed", String(!video.muted));
+      sound.querySelector(".video-player__icon")!.innerHTML = video.muted ? MUTED_ICON : SOUND_ON_ICON;
+      sound.querySelector(".video-player__sound-text")!.textContent = t(video.muted ? "projectDetail.videoSoundOn" : "projectDetail.videoSoundOff");
+    };
+    const syncToggle = (): void => {
+      const paused = video.paused;
+      toggle.innerHTML = paused ? SMALL_PLAY_ICON : PAUSE_ICON;
+      toggle.setAttribute("aria-label", t(paused ? "projectDetail.videoResume" : "projectDetail.videoPause"));
+    };
+
+    video.addEventListener("playing", () => player.classList.add("is-playing"));
+    // A file that can't play: keep the poster, without buttons that would do nothing.
+    video.addEventListener("error", () => {
+      player.classList.remove("is-playing", "is-waiting");
+      start.hidden = true;
     });
+    video.addEventListener("play", syncToggle);
+    video.addEventListener("pause", syncToggle);
+    video.addEventListener("volumechange", syncSound);
+
+    // The big button: the visitor chose to watch, so play from the start with sound.
+    start.addEventListener("click", () => {
+      pausedByVisitor = false;
+      load();
+      video.muted = false;
+      video.currentTime = 0;
+      play();
+    });
+    sound.addEventListener("click", () => {
+      const turningOn = video.muted;
+      video.muted = !turningOn;
+      // First time the sound comes on: start over so the visitor hears it from the beginning.
+      if (turningOn && !player.dataset.heard) {
+        player.dataset.heard = "1";
+        video.currentTime = 0;
+      }
+      if (video.paused) {
+        pausedByVisitor = false;
+        play();
+      }
+    });
+    toggle.addEventListener("click", () => {
+      if (video.paused) {
+        pausedByVisitor = false;
+        play();
+      } else {
+        pausedByVisitor = true;
+        video.pause();
+      }
+    });
+    // Full screen: the whole player (so our buttons stay), or the iPhone's own video viewer,
+    // which is the only full-screen mode iPhones allow.
+    const appleVideo = video as HTMLVideoElement & { webkitEnterFullscreen?: () => void; webkitDisplayingFullscreen?: boolean };
+    const applePlayer = player as HTMLElement & { webkitRequestFullscreen?: () => void };
+    const fullscreenDoc = document as Document & { webkitFullscreenElement?: Element | null; webkitExitFullscreen?: () => void };
+    const isFull = (): boolean =>
+      (document.fullscreenElement ?? fullscreenDoc.webkitFullscreenElement) === player || Boolean(appleVideo.webkitDisplayingFullscreen);
+    const canFull = Boolean(player.requestFullscreen || applePlayer.webkitRequestFullscreen || appleVideo.webkitEnterFullscreen);
+    full.hidden = !canFull;
+    const syncFull = (): void => {
+      const on = isFull();
+      player.classList.toggle("is-fullscreen", on);
+      full.innerHTML = on ? SHRINK_ICON : EXPAND_ICON;
+      full.setAttribute("aria-label", t(on ? "projectDetail.videoExitFullscreen" : "projectDetail.videoFullscreen"));
+    };
+    full.addEventListener("click", () => {
+      if (isFull()) {
+        if (document.exitFullscreen) void document.exitFullscreen().catch(() => undefined);
+        else fullscreenDoc.webkitExitFullscreen?.();
+        return;
+      }
+      if (video.paused) {
+        pausedByVisitor = false;
+        play();
+      }
+      if (player.requestFullscreen) void player.requestFullscreen().catch(() => appleVideo.webkitEnterFullscreen?.());
+      else if (applePlayer.webkitRequestFullscreen) applePlayer.webkitRequestFullscreen();
+      else appleVideo.webkitEnterFullscreen?.();
+    });
+    const onFullChange = (): void => {
+      if (!player.isConnected) {
+        document.removeEventListener("fullscreenchange", onFullChange);
+        document.removeEventListener("webkitfullscreenchange", onFullChange);
+        return;
+      }
+      syncFull();
+    };
+    document.addEventListener("fullscreenchange", onFullChange);
+    document.addEventListener("webkitfullscreenchange", onFullChange);
+    video.addEventListener("webkitbeginfullscreen", syncFull);
+    video.addEventListener("webkitendfullscreen", syncFull);
+
+    // Tapping the picture itself turns the sound on (what most people expect), then pauses/resumes.
+    video.addEventListener("click", () => (video.muted ? sound : toggle).click());
+
+    showStart(!autoplay);
+    if (!("IntersectionObserver" in window)) {
+      if (autoplay) play();
+      return;
+    }
+    // Fetch the file a little before the section arrives; play only while half of it is on screen.
+    new IntersectionObserver(
+      (entries, observer) => {
+        if (!entries.some((e) => e.isIntersecting) || !autoplay) return;
+        load();
+        observer.disconnect();
+      },
+      { rootMargin: "400px 0px" }
+    ).observe(player);
+    new IntersectionObserver(
+      (entries, observer) => {
+        if (!player.isConnected) return observer.disconnect();
+        visible = entries.some((e) => e.isIntersecting);
+        if (visible && autoplay && !pausedByVisitor && video.paused) play();
+        else if (!visible && !video.paused && !isFull()) video.pause();
+      },
+      { threshold: 0.5 }
+    ).observe(player);
+    const onVisibility = (): void => {
+      if (!player.isConnected) return document.removeEventListener("visibilitychange", onVisibility);
+      if (document.hidden && !video.paused) video.pause();
+      else if (!document.hidden && visible && autoplay && !pausedByVisitor && video.paused && player.classList.contains("is-playing")) play();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
   });
 }
 
@@ -313,8 +492,24 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           <a class="btn btn--primary" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a>
           <a class="btn btn--whatsapp" href="${whatsappHref}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("projectDetail.whatsappButton")}</a>`;
 
+  // Ad landing pages repeat this card after the highlights; on phones the sidebar
+  // falls to the very end of the page, so CSS shows that copy there instead.
+  const ctaCard = (modifier: string) => `
+          <div class="cta-card${modifier}">
+            <h3>${t("projectDetail.ctaTitle")}</h3>
+            <p>${t("projectDetail.ctaText")}</p>
+            <div class="cta-card__actions">
+              <a class="btn btn--primary btn--block" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a>
+              <a class="btn btn--whatsapp btn--block" href="${whatsappHref}" target="_blank" rel="noopener">
+                ${WHATSAPP_ICON}
+                ${t("projectDetail.whatsappButton")}
+              </a>
+              ${project.soldOut ? "" : `<a class="btn btn--tour btn--block" href="${videoTourHref([project.slug])}">${VIDEO_TOUR_ICON}${t("videoTour.cardButton")}</a>`}
+            </div>
+          </div>`;
+
   el.innerHTML = `
-    <section class="project-hero" style="${heroBackground(project.coverImage, "linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88))")}">
+    <section class="project-hero${project.landing ? " project-hero--landing" : ""}" style="${heroBackground(project.coverImage, project.landing ? LANDING_SHADE : "linear-gradient(180deg, rgba(15,20,18,.35), rgba(15,20,18,.88))")}">
       <div class="container project-hero__inner">
         <a class="back-link" href="${link("/projects")}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -371,6 +566,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
               ${content.highlights.map((h, i) => `<li ${reveal(i, 8)}>${h}</li>`).join("")}
             </ul>
           </section>
+
+          ${project.landing ? ctaCard(" cta-card--inline") : ""}
 
           ${renderVerified(project, content.name, content.verified)}
 
@@ -443,18 +640,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
             </dl>
           </div>
 
-          <div class="cta-card">
-            <h3>${t("projectDetail.ctaTitle")}</h3>
-            <p>${t("projectDetail.ctaText")}</p>
-            <div class="cta-card__actions">
-              <a class="btn btn--primary btn--block" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a>
-              <a class="btn btn--whatsapp btn--block" href="${whatsappHref}" target="_blank" rel="noopener">
-                ${WHATSAPP_ICON}
-                ${t("projectDetail.whatsappButton")}
-              </a>
-              ${project.soldOut ? "" : `<a class="btn btn--tour btn--block" href="${videoTourHref([project.slug])}">${VIDEO_TOUR_ICON}${t("videoTour.cardButton")}</a>`}
-            </div>
-          </div>
+          ${ctaCard(project.landing ? " cta-card--aside" : "")}
         </aside>
       </div>
     </section>
@@ -477,7 +663,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   initStatCounters(el);
   initScrollReveal(el);
   initProjectMap(el);
-  initVideo(el, content.name);
+  initVideo(el);
   initReadMore(el);
 
   const floorImages = (project.floorPlan ?? []).flatMap((f) => (f.image ? [f.image] : []));

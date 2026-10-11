@@ -460,7 +460,9 @@ function renderInfo(slug: string, topic: InfoTopic): string {
         )}`;
       } else if (p.floorPlan?.length && content.floorPlan?.length) {
         body = `<p>${t("chat.info.floorsIntro", { name })}</p>${factList(
-          p.floorPlan.map((f, i) => [content.floorPlan![i]?.name ?? "", `<bdi dir="ltr">${f.gross}</bdi> <small>${t("projectDetail.grossAreaLabel")}</small>`])
+          p.floorPlan.flatMap((f, i) =>
+            f.gross ? [[content.floorPlan![i]?.name ?? "", `<bdi dir="ltr">${f.gross}</bdi> <small>${t("projectDetail.grossAreaLabel")}</small>`] as [string, string]] : []
+          )
         )}`;
       } else body = `<p>${t("chat.info.unitsAsk")}</p>`;
       const figures = p.stats.filter((s) => s.labelKey !== "delivery").slice(0, 4);

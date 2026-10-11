@@ -1421,6 +1421,51 @@
   }
 }
 
+/* A lone last card with a photo spans the row: photo on one side, text centered on the other. */
+@media (min-width: 721px) {
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    grid-template-rows: 1fr auto auto auto 1fr;
+    column-gap: var(--space-lg);
+  }
+
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) > * {
+    grid-column: 2;
+  }
+
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) .floor-card__head {
+    grid-row: 2;
+  }
+
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) .floor-card__areas {
+    grid-row: 3;
+  }
+
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) .floor-card__features {
+    grid-row: 4;
+  }
+
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) .floor-card__media {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    width: calc(100% + var(--space-md));
+    height: calc(100% + 2 * var(--space-md));
+    min-height: 340px;
+    margin: calc(-1 * var(--space-md)) 0;
+    margin-inline-start: calc(-1 * var(--space-md));
+    aspect-ratio: auto;
+  }
+
+  /* Portrait photos in a landscape box: favour the lower part (sea and terrace over open sky). */
+  .floor-grid > .floor-card--media:last-child:nth-child(odd) .floor-card__media img {
+    position: absolute;
+    inset: 0;
+    object-position: center 68%;
+  }
+}
+
 /* Amenities */
 /* Flex (not grid) so an incomplete last row sits centered. */
 .amenity-grid {
@@ -2384,6 +2429,12 @@ body.map-open .back-to-top {
   text-align: end;
 }
 
+/* Ad landing pages show the contact card inside the main column on phones and
+   tablets (right after the highlights) instead of at the end of the sidebar. */
+.cta-card--inline {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .project-detail__grid {
     grid-template-columns: 1fr;
@@ -2391,6 +2442,15 @@ body.map-open .back-to-top {
 
   .project-detail__sidebar {
     position: static;
+  }
+
+  .cta-card--inline {
+    display: block;
+    margin-bottom: var(--space-lg);
+  }
+
+  .cta-card--aside {
+    display: none;
   }
 }
 
@@ -5676,12 +5736,119 @@ body.nav-open .back-to-top {
   width: 100%;
 }
 
-.project-video__frame iframe {
+/* Self-hosted player: the poster photo stays until the first frame plays, then fades out. */
+.video-player__poster,
+.video-player__video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  border: 0;
+  object-fit: cover;
+}
+
+.video-player__video {
+  opacity: 0;
+  transition: opacity 500ms ease;
+  cursor: pointer;
+}
+
+.video-player.is-playing .video-player__video {
+  opacity: 1;
+}
+
+.video-player__controls {
+  position: absolute;
+  inset-inline: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 300ms ease, visibility 300ms;
+}
+
+.video-player.is-playing:not(.is-waiting) .video-player__controls {
+  opacity: 1;
+  visibility: visible;
+}
+
+.video-player__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  background: rgba(15, 43, 33, 0.72);
+  color: #fff;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.video-player__btn svg {
+  flex: 0 0 auto;
+}
+
+/* Gold while muted, so the way to hear the video stands out. */
+.video-player__sound[aria-pressed="false"] {
+  border-color: transparent;
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.video-player__group {
+  display: flex;
+  gap: 8px;
+}
+
+.video-player__round {
+  justify-content: center;
+  width: 40px;
+  padding: 0;
+}
+
+/* Full screen (the whole player, so the buttons stay): the vertical video sits on black, uncropped. */
+.video-player.is-fullscreen {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.video-player.is-fullscreen .video-player__video,
+.video-player.is-fullscreen .video-player__poster {
+  object-fit: contain;
+}
+
+/* Wider screens leave black space beside the vertical video: the cover photo must not show there. */
+.video-player.is-fullscreen.is-playing .video-player__poster {
+  display: none;
+}
+
+.video-player.is-fullscreen .video-player__controls {
+  top: auto;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  inset-inline: max(20px, env(safe-area-inset-left));
+}
+
+.video-player__btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Phones: the floating WhatsApp/chat column sits over the bottom-right of the video, so the buttons go on top. */
+@media (max-width: 640px) {
+  .video-player__controls {
+    top: 12px;
+    bottom: auto;
+  }
 }
 
 .video-facade {
@@ -5693,13 +5860,6 @@ body.nav-open .back-to-top {
   background: none;
   cursor: pointer;
   color: #fff;
-}
-
-.video-facade img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 600ms ease;
 }
 
 .video-facade::after {
@@ -5791,10 +5951,6 @@ body.nav-open .back-to-top {
 }
 
 @media (hover: hover) {
-  .video-facade:hover img {
-    transform: scale(1.04);
-  }
-
   .video-facade:hover .video-facade__play {
     transform: translate(-50%, -50%) scale(1.08);
   }
@@ -11136,6 +11292,12 @@ body.map-open .cookie-consent {
   font-size: 0.82rem;
   font-weight: 400;
   line-height: 1.5;
+}
+
+/* A wrapped note reads as a paragraph: start-aligned (right in Arabic), not
+   pushed to the value's far edge like the short value above it. */
+.fact-list dd .price-note {
+  text-align: start;
 }
 
 .detail-block > .price-note {
