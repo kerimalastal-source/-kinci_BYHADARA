@@ -46,11 +46,14 @@ function fakeFetch(opts = {}) {
   const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers: { "content-type": "application/json" } });
   let igCalls = 0;
   const published = new Set(opts.published ?? []);
+  // What the account's feed shows: {id, caption}, newest first.
+  const feed = [...(opts.feed ?? [])];
+  const captions = new Map();
   const fn = async (input, init) => {
     const url = String(input);
     const body = init?.body instanceof URLSearchParams ? Object.fromEntries(init.body) : {};
     const query = Object.fromEntries(new URL(url).searchParams);
-    calls.push({ url, body, query, bypass: new Headers(init?.headers).get("x-vercel-protection-bypass") });
+    calls.push({ url, body, query, method: init?.method ?? "GET", bypass: new Headers(init?.headers).get("x-vercel-protection-bypass") });
     if (url.startsWith("https://branch.example/")) {
       // A missing file falls through the site's rewrite to index.html with a 200.
       if (opts.missing) return new Response("<!doctype html><title>HADARA</title>", { status: 200, headers: { "content-type": "text/html" } });
@@ -81,9 +84,14 @@ function fakeFetch(opts = {}) {
         if (body.published === "false" && body.url?.includes("-")) return json({ id: `photo_${body.url.split("/").pop()}` });
         return json({ id: "photo", post_id: `PAGE_${calls.filter((c) => c.url.endsWith("/photos")).length}` });
       }
+      if (path === "IGUSER/media" && (init?.method ?? "GET") === "GET") {
+        if (opts.feedDown) return json({ error: { message: "Application request limit reached" } }, 400);
+        return json({ data: feed });
+      }
       if (path === "IGUSER/media") {
         igCalls++;
         if (opts.failInstagram) return json({ error: { message: "The image could not be downloaded" } }, 400);
+        captions.set(`container${igCalls}`, body.caption ?? "");
         return json({ id: `container${igCalls}` });
       }
       if (path.startsWith("container")) {
@@ -94,12 +102,16 @@ function fakeFetch(opts = {}) {
         return json({ status_code: checks > 1 ? "FINISHED" : "IN_PROGRESS" });
       }
       if (path === "IGUSER/media_publish") {
+        const post = () => feed.unshift({ id: `ig_${body.creation_id}_${feed.length}`, caption: captions.get(body.creation_id) ?? "" });
         if (opts.publishErrors) {
-          // Meta's quirk: the post goes out, the answer is an error (when publishErrors is "published").
-          if (opts.publishErrors === "published") published.add(body.creation_id);
+          // Meta's quirk: the post goes out, the answer is an error ("published"); with "silent"
+          // the container status doesn't show it either (2026-10-12) — only the feed does.
+          if (opts.publishErrors === "published") (published.add(body.creation_id), post());
+          if (opts.publishErrors === "silent") post();
           return json({ error: { message: "Application request limit reached" } }, 400);
         }
         published.add(body.creation_id);
+        post();
         return json({ id: `ig_${body.creation_id}` });
       }
     }
@@ -148,8 +160,10 @@ test("Facebook is published with the Page's own token, Instagram after FINISHED,
   assert.equal(fb[0].body.message, "Facebook caption 1");
   assert.equal(fb[0].body.url, `https://blob.example/social/${DATE}/post-1.jpg`);
   // Instagram: container with the ig caption, status checked until FINISHED, then published.
-  const media = graphCalls(calls, "IGUSER/media");
-  assert.equal(media.filter((c) => c.url.endsWith("/media")).length, 2);
+  // First the feed is checked (the post isn't there yet), then the container is made.
+  assert.ok(graphCalls(calls, "IGUSER/media?").every((c) => c.method === "GET" && c.query.fields === "id,caption"));
+  const media = graphCalls(calls, "IGUSER/media").filter((c) => c.method === "POST" && c.url.endsWith("/media"));
+  assert.equal(media.length, 2);
   assert.equal(media[0].body.caption, "Instagram caption 1 #HADARA");
   assert.equal(media[0].body.image_url, `https://blob.example/social/${DATE}/post-1.jpg`);
   assert.equal(media[0].body.access_token, "system-user-token");
@@ -337,7 +351,7 @@ test("a real media_publish error is retried with the same container, and an alre
   const retry = setup({ store: first.store });
   const again = await publishDay(retry.deps, DATE);
   assert.deepEqual(again.results.map((r) => r.instagram), ["published", "published"]);
-  assert.equal(graphCalls(retry.calls, "IGUSER/media?").length + retry.calls.filter((c) => c.url.endsWith("/IGUSER/media")).length, 0, "no new container");
+  assert.equal(retry.calls.filter((c) => c.url.endsWith("/IGUSER/media") && c.method === "POST").length, 0, "no new container");
   assert.ok(graphCalls(retry.calls, "IGUSER/media_publish").some((c) => c.body.creation_id === kept));
 
   // A kept container Instagram already published: done without posting anything.
@@ -347,6 +361,32 @@ test("a real media_publish error is retried with the same container, and an alre
   const result = await publishDay(done.deps, DATE);
   assert.equal(result.results[0].instagram, "published");
   assert.equal(graphCalls(done.calls, "IGUSER/media_publish").length, 0);
+});
+
+test("Instagram publishes with an error and the container still looks unpublished: the feed says it's done", async () => {
+  // 2026-10-12: the 09:00 post went out with "Application request limit reached", its container
+  // didn't read PUBLISHED, and the 14:00 run published the same container a second time.
+  const first = setup({ publishErrors: "silent", day: ["post-1.json"] });
+  const day = await publishDay(first.deps, DATE);
+  assert.equal(day.results[0].instagram, "published");
+  assert.equal(graphCalls(first.calls, "IGUSER/media_publish").length, 1);
+
+  // Even when the first run gave up (error marker), the next one finds the post in the feed.
+  const store = memoryStore();
+  await store.put(`social-state/${DATE}/post-1/instagram.container`, JSON.stringify({ id: "container97" }));
+  const caption = POSTS["post-1"].ig;
+  const later = setup({ store, feed: [{ id: "ig_live", caption: `${caption}\n` }], day: ["post-1.json"] });
+  const result = await publishDay(later.deps, DATE);
+  assert.equal(result.results[0].instagram, "published");
+  assert.equal(graphCalls(later.calls, "IGUSER/media_publish").length, 0, "not posted again");
+  assert.equal(later.calls.filter((c) => c.url.endsWith("/IGUSER/media") && c.method === "POST").length, 0);
+});
+
+test("if Instagram's latest posts can't be read, nothing is posted", async () => {
+  const run = setup({ feedDown: true, day: ["post-1.json"] });
+  const result = await publishDay(run.deps, DATE);
+  assert.equal(result.results[0].instagram, "failed");
+  assert.equal(graphCalls(run.calls, "IGUSER/media_publish").length, 0);
 });
 
 test("if the earlier Instagram attempt can't be checked, nothing new is posted", async () => {

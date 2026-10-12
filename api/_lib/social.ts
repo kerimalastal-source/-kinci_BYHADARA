@@ -179,14 +179,35 @@ async function igSent(deps: PublishDeps, meta: MetaConfig, sentPath: string): Pr
   return code === "ERROR" || code === "EXPIRED" ? null : { id, status: code };
 }
 
+/** First 200 characters with spaces collapsed: enough to tell our posts apart, robust to trailing changes. */
+const captionKey = (caption: string) => caption.replace(/\s+/g, " ").trim().slice(0, 200);
+
+/**
+ * The account's own recent post with this caption, if there is one. The container status can't
+ * be trusted on its own: on 2026-10-12 a post Instagram published (with an error answer) still
+ * read as not published, and the next run published the same container again. So the feed
+ * itself is checked first. Throws if Instagram can't be asked, so nothing is posted blind.
+ */
+async function igPosted(deps: PublishDeps, meta: MetaConfig, caption: string): Promise<string | null> {
+  const key = captionKey(caption);
+  if (!key) return null;
+  const data = await graph(deps, `${meta.igUserId}/media`, { fields: "id,caption", limit: "15" }, "GET", meta.token).catch(() => null);
+  if (!data) throw new Error("could not check Instagram's latest posts — the next run tries again");
+  const items = Array.isArray(data.data) ? (data.data as Array<{ id?: unknown; caption?: unknown }>) : [];
+  const hit = items.find((m) => typeof m.caption === "string" && captionKey(m.caption) === key);
+  return hit ? String(hit.id) : null;
+}
+
 /** media_publish, remembering the container first and double-checking Instagram after an error. */
-async function igPublish(deps: PublishDeps, meta: MetaConfig, id: string, sentPath: string): Promise<string> {
+async function igPublish(deps: PublishDeps, meta: MetaConfig, id: string, sentPath: string, caption = ""): Promise<string> {
   await deps.store.put(sentPath, JSON.stringify({ id }), "application/json").catch(() => undefined);
   try {
     const published = await graph(deps, `${meta.igUserId}/media_publish`, { creation_id: id }, "POST", meta.token);
     return String(published.id);
   } catch (error) {
-    await sleep(deps.pollMs ?? 3000);
+    await sleep(deps.pollMs ?? 5000);
+    const posted = caption ? await igPosted(deps, meta, caption).catch(() => null) : null;
+    if (posted) return posted;
     const status = await graph(deps, id, { fields: "status_code" }, "GET", meta.token).catch(() => null);
     if (status?.status_code === "PUBLISHED") return id;
     throw error;
@@ -194,9 +215,11 @@ async function igPublish(deps: PublishDeps, meta: MetaConfig, id: string, sentPa
 }
 
 async function publishInstagram(deps: PublishDeps, meta: MetaConfig, imageUrl: string, caption: string, sentPath: string): Promise<string> {
+  const posted = await igPosted(deps, meta, caption);
+  if (posted) return posted;
   const sent = await igSent(deps, meta, sentPath);
   if (sent?.status === "PUBLISHED") return sent.id;
-  if (sent) return igReady(deps, meta, sent.id, 10).then(() => igPublish(deps, meta, sent.id, sentPath));
+  if (sent) return igReady(deps, meta, sent.id, 10).then(() => igPublish(deps, meta, sent.id, sentPath, caption));
   const container = await graph(deps, `${meta.igUserId}/media`, { image_url: imageUrl, caption }, "POST", meta.token);
   const id = String(container.id);
   // Instagram downloads and processes the image first; publishing before FINISHED fails.
@@ -208,7 +231,7 @@ async function publishInstagram(deps: PublishDeps, meta: MetaConfig, imageUrl: s
     else await new Promise((resolve) => setTimeout(resolve, deps.pollMs ?? 2000));
   }
   if (!finished) throw new Error("media: not ready after 40 seconds");
-  return igPublish(deps, meta, id, sentPath);
+  return igPublish(deps, meta, id, sentPath, caption);
 }
 
 /**
@@ -246,6 +269,8 @@ async function publishInstagramReel(
   caption: string,
   containerPath: string
 ): Promise<string> {
+  const posted = await igPosted(deps, meta, caption);
+  if (posted) return posted;
   let id = "";
   const kept = await deps.store.read(containerPath).catch(() => null);
   if (kept) {
@@ -274,7 +299,7 @@ async function publishInstagramReel(
     else await new Promise((resolve) => setTimeout(resolve, deps.pollMs ?? 3000));
   }
   if (!finished) throw new Error("Instagram is still processing the video — the next run publishes it");
-  return igPublish(deps, meta, id, containerPath);
+  return igPublish(deps, meta, id, containerPath, caption);
 }
 
 /** Facebook post with several photos: each is uploaded unpublished, then attached to one post. */
@@ -301,9 +326,11 @@ async function igReady(deps: PublishDeps, meta: MetaConfig, id: string, attempts
 
 /** Instagram carousel: one item container per slide, then the carousel container, then publish. */
 async function publishInstagramCarousel(deps: PublishDeps, meta: MetaConfig, imageUrls: string[], caption: string, sentPath: string): Promise<string> {
+  const posted = await igPosted(deps, meta, caption);
+  if (posted) return posted;
   const sent = await igSent(deps, meta, sentPath);
   if (sent?.status === "PUBLISHED") return sent.id;
-  if (sent) return igReady(deps, meta, sent.id, 10).then(() => igPublish(deps, meta, sent.id, sentPath));
+  if (sent) return igReady(deps, meta, sent.id, 10).then(() => igPublish(deps, meta, sent.id, sentPath, caption));
   const children = await Promise.all(
     imageUrls.map(async (url) => {
       const item = await graph(deps, `${meta.igUserId}/media`, { image_url: url, is_carousel_item: "true" }, "POST", meta.token);
@@ -315,7 +342,7 @@ async function publishInstagramCarousel(deps: PublishDeps, meta: MetaConfig, ima
   const container = await graph(deps, `${meta.igUserId}/media`, { media_type: "CAROUSEL", children: children.join(","), caption }, "POST", meta.token);
   const id = String(container.id);
   await igReady(deps, meta, id, 10);
-  return igPublish(deps, meta, id, sentPath);
+  return igPublish(deps, meta, id, sentPath, caption);
 }
 
 /** Facebook Page story: the photo is uploaded unpublished, then posted as a story. */
