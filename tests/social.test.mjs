@@ -45,6 +45,7 @@ function fakeFetch(opts = {}) {
   const calls = [];
   const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers: { "content-type": "application/json" } });
   let igCalls = 0;
+  const published = new Set(opts.published ?? []);
   const fn = async (input, init) => {
     const url = String(input);
     const body = init?.body instanceof URLSearchParams ? Object.fromEntries(init.body) : {};
@@ -86,11 +87,21 @@ function fakeFetch(opts = {}) {
         return json({ id: `container${igCalls}` });
       }
       if (path.startsWith("container")) {
+        if (opts.statusDown) return json({ error: { message: "Application request limit reached" } }, 400);
+        if (published.has(path)) return json({ status_code: "PUBLISHED" });
         // IN_PROGRESS once, then FINISHED.
         const checks = calls.filter((c) => c.url.includes(`/${path}?`)).length;
         return json({ status_code: checks > 1 ? "FINISHED" : "IN_PROGRESS" });
       }
-      if (path === "IGUSER/media_publish") return json({ id: `ig_${body.creation_id}` });
+      if (path === "IGUSER/media_publish") {
+        if (opts.publishErrors) {
+          // Meta's quirk: the post goes out, the answer is an error (when publishErrors is "published").
+          if (opts.publishErrors === "published") published.add(body.creation_id);
+          return json({ error: { message: "Application request limit reached" } }, 400);
+        }
+        published.add(body.creation_id);
+        return json({ id: `ig_${body.creation_id}` });
+      }
     }
     return json({ error: { message: `unexpected ${url}` } }, 500);
   };
@@ -302,6 +313,50 @@ test("Facebook ok and Instagram failed: the next run retries Instagram only", as
   assert.equal(graphCalls(retry.calls, "PAGE/photos").length, 0, "Facebook isn't posted again");
   assert.equal(graphCalls(retry.calls, "IGUSER/media_publish").length, 2);
   assert.match(retry.photos[0].caption, /✅ <b>نُشر على فيسبوك وإنستغرام<\/b>/);
+});
+
+test("Instagram answers media_publish with an error but publishes: counted as done, never posted again", async () => {
+  const first = setup({ publishErrors: "published" });
+  const day = await publishDay(first.deps, DATE);
+  assert.deepEqual(day.results.map((r) => r.instagram), ["published", "published"]);
+  assert.equal(graphCalls(first.calls, "IGUSER/media_publish").length, 2);
+  assert.equal(first.store.files.has(`social-state/${DATE}/post-1/instagram.error`), false);
+
+  const again = setup({ store: first.store });
+  await publishDay(again.deps, DATE);
+  assert.equal(graphCalls(again.calls, "IGUSER/media").length + graphCalls(again.calls, "IGUSER/media_publish").length, 0);
+});
+
+test("a real media_publish error is retried with the same container, and an already published one isn't re-posted", async () => {
+  const first = setup({ publishErrors: "failed" });
+  const day = await publishDay(first.deps, DATE);
+  assert.deepEqual(day.results.map((r) => r.instagram), ["failed", "failed"]);
+  const kept = JSON.parse(String(first.store.files.get(`social-state/${DATE}/post-1/instagram.container`).body)).id;
+
+  // Next run: the kept container is FINISHED, so it is published as it is (no new container).
+  const retry = setup({ store: first.store });
+  const again = await publishDay(retry.deps, DATE);
+  assert.deepEqual(again.results.map((r) => r.instagram), ["published", "published"]);
+  assert.equal(graphCalls(retry.calls, "IGUSER/media?").length + retry.calls.filter((c) => c.url.endsWith("/IGUSER/media")).length, 0, "no new container");
+  assert.ok(graphCalls(retry.calls, "IGUSER/media_publish").some((c) => c.body.creation_id === kept));
+
+  // A kept container Instagram already published: done without posting anything.
+  const store = memoryStore();
+  await store.put(`social-state/${DATE}/post-1/instagram.container`, JSON.stringify({ id: "container99" }));
+  const done = setup({ store, published: ["container99"], day: ["post-1.json"] });
+  const result = await publishDay(done.deps, DATE);
+  assert.equal(result.results[0].instagram, "published");
+  assert.equal(graphCalls(done.calls, "IGUSER/media_publish").length, 0);
+});
+
+test("if the earlier Instagram attempt can't be checked, nothing new is posted", async () => {
+  const store = memoryStore();
+  await store.put(`social-state/${DATE}/post-1/instagram.container`, JSON.stringify({ id: "container98" }));
+  const run = setup({ store, statusDown: true, day: ["post-1.json"] });
+  const result = await publishDay(run.deps, DATE);
+  assert.equal(result.results[0].instagram, "failed");
+  assert.equal(run.calls.filter((c) => c.url.endsWith("/IGUSER/media")).length, 0);
+  assert.equal(graphCalls(run.calls, "IGUSER/media_publish").length, 0);
 });
 
 test("a Facebook error is reported per platform and retried later", async () => {
