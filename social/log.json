@@ -454,5 +454,37 @@
     "headlineAr": "موقع مركزي في قلب بيليكدوزو",
     "headlineEn": "A central spot in the heart of Beylikdüzü",
     "photo": "/images/projects/lotus-koru-2/central-location.jpg"
+  },
+  {
+    "date": "2026-10-12",
+    "id": "lotus-yali-location",
+    "topic": "لوتس يالي · الموقع وما حوله",
+    "headlineAr": "3 مراسٍ لليخوت قرب لوتس يالي",
+    "headlineEn": "3 marinas near Lotus Yalı",
+    "photo": "/images/projects/lotus-yali/aerial-sea-view.jpg"
+  },
+  {
+    "date": "2026-10-12",
+    "id": "why-hadara",
+    "topic": "لماذا حضارة",
+    "headlineAr": "أكثر من 12 عاماً في عقارات إسطنبول",
+    "headlineEn": "12+ years in Istanbul real estate",
+    "photo": "/images/projects/marmara-haven-villa/sunset.jpg"
+  },
+  {
+    "date": "2026-10-12",
+    "id": "finish-first-thing-home",
+    "topic": "أكمل الجملة: أول ما سأفعله (شرائح)",
+    "headlineAr": "بيتك الجديد في إسطنبول: 7 خطوات أولى",
+    "headlineEn": "Your new Istanbul home: 7 first steps",
+    "photo": "/images/projects/diamond-marin/kitchen.jpg"
+  },
+  {
+    "date": "2026-10-12",
+    "id": "lotus-yali-location-story",
+    "topic": "ستوري: لوتس يالي · الموقع وما حوله",
+    "headlineAr": "على ساحل بحر مرمرة",
+    "headlineEn": "On the Marmara coast",
+    "photo": "/images/projects/lotus-yali/view-from-sea.jpg"
   }
 ]
