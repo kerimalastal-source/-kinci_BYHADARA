@@ -68,19 +68,20 @@ const ADS = [
     note: "",
   },
   {
-    // Gulf v6 (2026-10-13): investment framing, English first (owner: buyers who can afford it read English), Arabic second.
-    id: "invest400",
+    // Gulf v6 (2026-10-13, owner): open to buyers from US$200,000 (homes at 200-350k); citizenship = one or more
+    // properties totalling US$400,000+. English first, Arabic second.
+    id: "home200",
     primary: "en",
-    photo: img("sea-pearl-atakoy/aerial-coast.jpg"),
-    badgeEn: "For Investors",
-    badgeAr: "للمستثمرين",
-    en: "Invest in Istanbul real estate<br>from US$400,000",
-    ar: "استثمار عقاري في إسطنبول من 400 ألف دولار",
+    photo: img("beylikduzu-living/courtyard-gardens.jpg"),
+    badgeEn: "Buy in Istanbul",
+    badgeAr: "تملّك في إسطنبول",
+    en: "Your home in Istanbul<br>from US$200,000",
+    ar: "بيتك في إسطنبول من 200 ألف دولار",
     points: [
-      ["Premium projects by the sea and in the city", "مشاريع راقية على البحر وفي قلب المدينة"],
-      ["Turkish citizenship option under current law", "مع إمكانية الحصول على الجنسية التركية وفق القانون"],
+      ["New launches and ready-to-move-in homes", "مشاريع جديدة وأخرى جاهزة للسكن"],
+      ["Turkish citizenship with one or more properties totalling US$400,000+", "الجنسية التركية بعقار أو أكثر بقيمة إجمالية 400 ألف دولار فأكثر"],
     ],
-    qualifier: ["For investors with a budget of US$400,000+", "مخصّص للمستثمرين بميزانية 400 ألف دولار فأكثر"],
+    qualifier: ["For buyers with a budget from US$200,000", "للمشترين بميزانية تبدأ من 200 ألف دولار"],
   },
   {
     // Owner 2026-10-13: no budget line here; there are homes from lower budgets too.
@@ -126,7 +127,7 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#0f2b21;font-family:I
 .foot{margin-top:30px;padding-top:22px;border-top:2px solid rgba(201,162,75,.6);display:flex;justify-content:space-between;align-items:center;gap:20px}
 .foot .w{font-weight:700;font-size:26px;color:#e4c574;direction:ltr}
 .foot .p{font-family:Plex;font-weight:700;font-size:28px;direction:rtl}
-.phone{position:absolute;left:78px;top:${story ? 380 : 168}px;width:${story ? 300 : 262}px;aspect-ratio:9/18.5;padding:11px;border-radius:46px;background:linear-gradient(160deg,#1d2622,#070b09);border:2px solid rgba(255,255,255,.18);box-shadow:0 40px 80px rgba(0,0,0,.55);transform:rotate(-4deg)}
+.phone{position:absolute;left:78px;top:${story ? 345 : 158}px;width:${story ? 300 : 262}px;aspect-ratio:9/18.5;padding:11px;border-radius:46px;background:linear-gradient(160deg,#1d2622,#070b09);border:2px solid rgba(255,255,255,.18);box-shadow:0 40px 80px rgba(0,0,0,.55);transform:rotate(-4deg)}
 .phone .s{position:relative;height:100%;overflow:hidden;border-radius:36px;background-size:cover;background-position:42% center}
 .phone .s::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,transparent 26%,transparent 60%,rgba(0,0,0,.6) 100%)}
 .phone .live{position:absolute;z-index:1;top:18px;left:16px;display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;background:rgba(0,0,0,.55);font-family:Plex;font-weight:700;font-size:19px}
@@ -137,13 +138,13 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#0f2b21;font-family:I
 .phone .ctl span.end{background:#e5484d}
 .qual{margin-top:30px;border:2px solid #c9a24b;background:rgba(201,162,75,.16);border-radius:18px;padding:16px 22px;font-family:Plex;font-weight:700;font-size:${story ? 38 : 34}px;color:#f3dc9f;text-align:center;direction:rtl}
 .hen{font-weight:700;font-size:${story ? 66 : 60}px;line-height:1.15;letter-spacing:-.5px;direction:ltr;text-align:left;text-shadow:0 3px 14px rgba(0,0,0,.55)}
-.har{font-family:Plex;font-weight:700;font-size:${story ? 38 : 34}px;color:#efe6cf;direction:rtl;text-align:right;margin-top:14px}
+.har{font-family:Plex;font-weight:700;font-size:${story ? 48 : 44}px;color:#efe6cf;direction:rtl;text-align:right;margin-top:14px}
 .pe{display:grid;grid-template-columns:50px 1fr;gap:16px;align-items:start;direction:ltr}
 .pe .c{width:50px;height:50px;border-radius:50%;background:#c9a24b;color:#0f2b21;display:grid;place-items:center;font-size:28px;font-weight:700}
 .pe b{display:block;font-weight:700;font-size:${story ? 36 : 33}px;line-height:1.25}
-.pe span{display:block;font-family:Plex;font-weight:600;font-size:${story ? 30 : 27}px;color:#d9cfb6;direction:rtl;text-align:right;margin-top:4px}
+.pe span{display:block;font-family:Plex;font-weight:700;font-size:${story ? 36 : 33}px;color:#e6dcc2;direction:rtl;text-align:right;margin-top:4px}
 .qual b{display:block;font-family:Inter;font-weight:700;direction:ltr}
-.qual span{display:block;font-size:.78em;color:#efe6cf;margin-top:4px}
+.qual span{display:block;font-size:.95em;color:#efe6cf;margin-top:4px}
 .sh.strong{background:linear-gradient(180deg,rgba(8,26,20,.5) 0%,rgba(8,26,20,0) 20%,rgba(8,26,20,.25) 34%,rgba(8,26,20,.86) 47%,rgba(8,26,20,.97) 100%)}
 .note{margin-top:14px;line-height:1.5;font-family:Plex;font-weight:600;font-size:20px;color:#cfc6ae;text-align:center}
 `;
