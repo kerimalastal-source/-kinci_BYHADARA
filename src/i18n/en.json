@@ -1735,6 +1735,25 @@
     }
   },
   "blogData": {
+    "net-vs-brut-area-turkey": {
+      "category": "Buying Property",
+      "title": "Net or Brüt? How Apartment Area Is Measured in Turkey",
+      "excerpt": "What net, brüt, total brüt and the saleable area really mean in a Turkish property listing, based on the official zoning rules and real examples.",
+      "body": [
+        "A listing says 120 m², the floor plan shows 98 m², and the price list mentions yet another figure. For many buyers in Istanbul this is the most confusing part of comparing homes. The reason is simple: Turkish rules measure an apartment in more than one way, and each number answers a different question. Once you know which is which, you can compare projects fairly and understand exactly what you are paying for. This guide follows the definitions in the Planned Areas Zoning Regulation (Planlı Alanlar İmar Yönetmeliği), the national rulebook published by the Ministry of Environment, Urbanisation and Climate Change.",
+        "## Net area: the space you actually live in",
+        "The net area (net alan) is the clean floor area between the inner walls of the home. According to the regulation, it leaves out the walls themselves, columns, chimneys and service shafts, and door and window thresholds. It also leaves out open projections, balconies, terraces, gardens and every common area of the building. In other words, the net area is the floor you walk on inside your front door: the bedrooms, living room, kitchen, bathrooms and hallways. When you want to know whether your sofa, dining table and beds will fit, this is the number that matters.",
+        "## Brüt area: the home with its walls",
+        "The brüt area (brüt alan) of an independent unit is the area enclosed by its outer outline. It therefore includes the home's walls. Where a wall is shared with a neighbour or a corridor rather than facing outside, the outline is drawn along the middle of that wall, so each side counts half of it. Shafts, light wells, air ducts and gallery voids are not counted. The regulation also defines a total brüt area (toplam brüt alan): the brüt area of the unit plus the brüt area of any annex (eklenti) that belongs only to that unit but sits outside it.",
+        "## General brüt and the saleable area",
+        "There is one more step. The general brüt area (genel brüt alan) adds to the unit's area its share of the building's common areas, such as entrance halls, stairs and corridors. This is why sales catalogues in Turkey often quote a third figure, frequently called the saleable area (satışa esas alan), which includes these shares. The difference can be large. In Lotus Şişli, for example, a 1+1 home has a net area of 43.41 m², a brüt area of 57.56 m² and a saleable area of 75.97 m². In Cadde Ispartakule, the 2+1 homes measure 106.30 to 108.56 m² brüt and 89.66 to 91.92 m² net. Each figure is correct; they simply measure different things.",
+        "The gap between net and brüt is not the same in every project. Thicker walls, more columns and larger balconies widen it, and a building with many shared spaces adds more to the saleable figure. So two homes advertised at the same size can feel very different inside. The only fair comparison is net with net, brüt with brüt and saleable with saleable.",
+        "## Questions to ask before you decide",
+        "First, ask which area the price is based on, because a price per square metre means little until you know which square metre it refers to. Second, ask for the net area of the exact unit you are considering. The regulation requires the projects attached to a building permit to show the net and brüt areas of every independent unit, so this information exists and the developer should be able to share it. Third, ask what the larger figures include: balconies, terraces, an annex such as a storage room, or a share of the common areas. Finally, read the floor plan room by room and picture how you will live in it.",
+        "These definitions follow the current regulation and may change. The figures in a specific project always come from its own approved plans, which is why it is worth checking them for the unit you choose.",
+        "HADARA is your real estate partner in Istanbul, and our team will gladly go through floor plans and area tables with you in your language. Contact us, or book a private video tour to see the homes and ask about every number before you travel."
+      ]
+    },
     "emlak-konut-vs-toki": {
       "category": "Buying Property",
       "title": "Emlak Konut or TOKİ? The Difference Every Buyer Should Know",

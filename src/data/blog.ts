@@ -18,6 +18,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "net-vs-brut-area-turkey",
+    priority: -6,
+    published: "2026-10-13",
+    relatedProjects: ["lotus-sisli", "cadde-ispartakule", "diamond-marin"],
+    coverImage: { src: "/images/blog/net-vs-brut-area-turkey.jpg", width: 1536, height: 1024 }
+  },
+  {
     slug: "emlak-konut-vs-toki",
     priority: -5,
     published: "2026-10-13",
