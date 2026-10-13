@@ -18,6 +18,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "monthly-fees-aidat",
+    priority: -7,
+    published: "2026-10-13",
+    relatedProjects: ["beylikduzu-living", "sea-pearl-atakoy", "lotus-yali"],
+    coverImage: { src: "/images/blog/monthly-fees-aidat.jpg", width: 1536, height: 1024 }
+  },
+  {
     slug: "net-vs-brut-area-turkey",
     priority: -6,
     published: "2026-10-13",
