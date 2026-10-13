@@ -67,7 +67,13 @@ const PATHS: Record<AmenityKey, string> = {
   seismicDesign:
     '<path d="M3 11 12 3.5l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M2 15h3l1.5-2.5 2 5 2-6 2 6 2-4 1.5 1.5h6"/>',
   palaceGardens:
-    '<path d="M12 3v6M9 5.5c1-1 2-1.5 3-1.5s2 .5 3 1.5"/><path d="M6 12.5h12M7.5 12.5c0 2.5 2 4 4.5 4s4.5-1.5 4.5-4"/><path d="M12 16.5v2M3 21.5h18M6 21.5c0-1.7 2.7-3 6-3s6 1.3 6 3"/>'
+    '<path d="M12 3v6M9 5.5c1-1 2-1.5 3-1.5s2 .5 3 1.5"/><path d="M6 12.5h12M7.5 12.5c0 2.5 2 4 4.5 4s4.5-1.5 4.5-4"/><path d="M12 16.5v2M3 21.5h18M6 21.5c0-1.7 2.7-3 6-3s6 1.3 6 3"/>',
+  // Footbridge from the homes over the coast road to the shore.
+  seaBridge:
+    '<path d="M2 12.5h20M4 12.5c2.5-4 13.5-4 16 0M7 12.5v-3.2M12 12.5v-4.2M17 12.5v-3.2"/><path d="M2 18c1.7 0 1.7-1.2 3.3-1.2s1.7 1.2 3.4 1.2 1.7-1.2 3.3-1.2 1.7 1.2 3.3 1.2 1.7-1.2 3.4-1.2 1.6 1.2 3.3 1.2"/>',
+  // Theatre and cinema halls (curtain over a stage).
+  cultureCentre:
+    '<path d="M3 4h18v14H3z"/><path d="M3 4c2 3 5 4 7 4M21 4c-2 3-5 4-7 4M6 21h12M9 18v3M15 18v3"/>'
 };
 
 export function amenityIcon(key: AmenityKey): string {

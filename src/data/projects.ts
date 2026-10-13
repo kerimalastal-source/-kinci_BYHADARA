@@ -61,7 +61,9 @@ export type AmenityKey =
   | "hotelServices"
   | "yachtMooring"
   | "seismicDesign"
-  | "palaceGardens";
+  | "palaceGardens"
+  | "seaBridge"
+  | "cultureCentre";
 
 /** One residence type, shown as a card in the project's "Residences" section. */
 export interface Residence {
@@ -323,6 +325,60 @@ export const projects: Project[] = [
       "hotelServices",
       "seismicDesign",
       "playground"
+    ]
+  },
+  {
+    slug: "buyukyali",
+    district: "Zeytinburnu",
+    city: "Istanbul",
+    status: "delivered",
+    lifestyle: ["sea", "city"],
+    unitsAvailable: true,
+    // Right after Sea Pearl Ataköy (owner, 2026-10-13: another project to market).
+    priority: 1.6,
+    developer: "Özak GYO · Ziylan · Yenigün",
+    // No price list from the developer yet.
+    price: "on-request",
+    address: "Kazlıçeşme, Kennedy Cad. No:52, Zeytinburnu / İstanbul",
+    // Facts from the developer's catalog and project page (ozakgyo.com/tr/proje/buyukyali, 2026-10-13); photos from both.
+    coverImage: img("buyukyali", "sea-skyline", 1573, 790, "Büyükyalı towers on the Kazlıçeşme coast seen across the water"),
+    gallery: [
+      img("buyukyali", "fisekhane-entrance", 1560, 720, "Büyükyalı entrance and the restored Fişekhane building"),
+      img("buyukyali", "gardens-aerial", 1550, 750, "Büyükyalı landscaped gardens and courtyards from above"),
+      img("buyukyali", "sea-gardens", 1550, 750, "Büyükyalı gardens running down towards the Marmara Sea"),
+      img("buyukyali", "pool-sea", 1657, 948, "Büyükyalı outdoor pool and gardens facing the sea"),
+      img("buyukyali", "facade-sea", 1550, 750, "Büyükyalı block facade above the coast and the sea"),
+      img("buyukyali", "promenade", 1570, 864, "Büyükyalı pedestrian promenade and blocks with sea views"),
+      img("buyukyali", "fisekhane-square", 1158, 945, "Büyükyalı square in front of the historic Fişekhane"),
+      img("buyukyali", "loft-living", 1550, 750, "Büyükyalı loft living room inside the restored Fişekhane"),
+      img("buyukyali", "loft-courtyard", 1036, 948, "Büyükyalı loft terrace opening onto the courtyard"),
+      img("buyukyali", "fendi-pool", 750, 670, "Infinity pool on the roof terrace of the Büyükyalı FENDI Casa block"),
+      img("buyukyali", "fendi-living", 999, 948, "Büyükyalı furnished by FENDI Casa living room with sea view"),
+      img("buyukyali", "balcony-sea", 1657, 948, "Büyükyalı apartment balcony overlooking the Marmara Sea"),
+      img("buyukyali", "living-sea", 1657, 948, "Büyükyalı apartment living room with sea view"),
+      img("buyukyali", "garden-pool", 1550, 750, "Büyükyalı garden pool and seating area")
+    ],
+    stats: [
+      { value: "1,540", labelKey: "apartments" },
+      { value: "15", labelKey: "blocks" },
+      { value: "111,000 m²", labelKey: "landArea" },
+      { value: "59", labelKey: "shops" },
+      { value: "1+1 – 5+1", labelKey: "layout" }
+    ],
+    // Developer's site: a residents-only bridge to the shore, Büyükyalı Club (pools, hamam, sauna, tennis), 7/24 concierge, Fişekhane culture centre.
+    amenities: [
+      "seaBridge",
+      "seaView",
+      "outdoorPool",
+      "indoorPool",
+      "spa",
+      "sportsCourt",
+      "concierge",
+      "cultureCentre",
+      "landscaping",
+      "retail",
+      "playground",
+      "seismicDesign"
     ]
   },
   {
