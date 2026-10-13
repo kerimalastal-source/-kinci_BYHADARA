@@ -1,5 +1,5 @@
 import { t, tRaw, link, getProjectContent, placeLine } from "../i18n";
-import { getSortedProjects, getProjectBySlug, type Project } from "../data/projects";
+import { getProjectBySlug, type Project } from "../data/projects";
 import { partners } from "../data/partners";
 import { renderProjectCard } from "../components/projectCard";
 import { initStatCounters, renderStatTiles, type StatTile } from "../components/statCounter";
@@ -20,6 +20,8 @@ const SPOTLIGHT_SIZES = "(max-width: 900px) calc(100vw - 32px), 640px";
 const SPOTLIGHT_SLUG = "diamond-marin";
 const SPOTLIGHT_STATS = ["apartments", "layout", "grossArea", "delivery"];
 const SPOTLIGHT_THUMBS = 3;
+// "Featured projects" grid, in order. The spotlight project is never listed here.
+const FEATURED_SLUGS = ["beylikduzu-living", "lotus-sisli", "marmara-haven-villa"];
 
 /* Where each "What We Do" card leads, in the order of `home.services`. */
 const SERVICE_LINKS = ["/projects", "/projects", "/projects", consultancyPath(), "/citizenship", "/property-request"];
@@ -35,9 +37,9 @@ export function renderHome(el: HTMLElement): void {
   const why = tRaw<ServiceItem[]>("home.why");
   const spotlight = getProjectBySlug(SPOTLIGHT_SLUG);
   // The spotlight project sits right above the grid, so the grid skips it.
-  const featured = getSortedProjects()
-    .filter((p) => p.slug !== spotlight?.slug)
-    .slice(0, 3);
+  const featured = FEATURED_SLUGS.filter((slug) => slug !== spotlight?.slug)
+    .map((slug) => getProjectBySlug(slug))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   el.innerHTML = `
     <section class="hero" style="${heroBackground(HERO_IMAGE, "linear-gradient(180deg, rgba(15,20,18,.55), rgba(15,20,18,.82))")}">
