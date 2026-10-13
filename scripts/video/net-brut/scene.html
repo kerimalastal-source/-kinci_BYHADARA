@@ -1,0 +1,325 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Inter;font-weight:500;src:url(../../social/fonts/inter-500.ttf)}
+@font-face{font-family:Inter;font-weight:600;src:url(../../social/fonts/inter-600.ttf)}
+@font-face{font-family:Inter;font-weight:700;src:url(../../social/fonts/inter-700.ttf)}
+@font-face{font-family:Plex;font-weight:500;src:url(../../social/fonts/plex-500.ttf)}
+@font-face{font-family:Plex;font-weight:600;src:url(../../social/fonts/plex-600.ttf)}
+@font-face{font-family:Plex;font-weight:700;src:url(../../social/fonts/plex-700.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0b231b}
+body{font-family:Inter,sans-serif;color:#f7f4ec;position:relative}
+#bg{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 40%,#173d30 0%,#0f2b21 45%,#08190f 100%)}
+#glow{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(201,162,75,.22),rgba(201,162,75,0) 65%);left:0;top:0}
+#grid{position:absolute;inset:0;opacity:.07;background-image:linear-gradient(#c9a24b 1px,transparent 1px),linear-gradient(90deg,#c9a24b 1px,transparent 1px);background-size:60px 60px}
+.frame{position:absolute;inset:44px;border:1.5px solid rgba(201,162,75,.35);border-radius:6px}
+.abs{position:absolute;left:0;right:0}
+.ar{font-family:Plex;font-weight:700;direction:rtl;text-align:center;color:#fff}
+.en{font-weight:600;direction:ltr;text-align:center;color:#e9dfc4;letter-spacing:.3px}
+.gold{color:#c9a24b}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+#brand{position:absolute;top:150px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:22px;direction:ltr}
+#brand img{height:96px}
+#brand b{display:block;font-weight:700;font-size:40px;letter-spacing:7px;line-height:1}
+#brand i{display:block;font-style:normal;font-weight:600;font-size:15px;letter-spacing:9px;color:#c9a24b;margin-top:10px}
+#progress{position:absolute;top:290px;left:340px;width:400px;height:4px;background:rgba(255,255,255,.12);border-radius:4px;overflow:hidden}
+#progress div{height:100%;width:0;background:#c9a24b}
+.chip{display:inline-flex;align-items:center;gap:18px;border:2px solid #c9a24b;border-radius:60px;padding:14px 34px;background:rgba(8,25,15,.55)}
+.chip .n{width:52px;height:52px;border-radius:50%;background:#c9a24b;color:#0f2b21;font-weight:700;font-size:30px;display:flex;align-items:center;justify-content:center}
+.chip .a{font-family:Plex;font-weight:700;font-size:44px;color:#fff;direction:rtl}
+.chip .e{font-weight:700;font-size:30px;color:#c9a24b;letter-spacing:3px}
+.card{background:rgba(8,25,15,.62);border:1.5px solid rgba(201,162,75,.45);border-radius:28px;padding:34px 44px}
+svg text{font-family:Plex;font-weight:600}
+.bar{position:absolute;right:150px;height:96px;border-radius:14px;background:linear-gradient(270deg,#b8913f,#e2c27a)}
+.barlab{position:absolute;right:150px;left:150px;display:flex;justify-content:space-between;align-items:center;direction:rtl}
+.barlab .a{font-family:Plex;font-weight:700;font-size:40px;color:#fff}
+.barlab .a small{font-family:Inter;font-weight:600;font-size:26px;color:#e9dfc4;margin-inline-start:12px}
+.barval{position:absolute;right:176px;height:96px;display:flex;align-items:center;font-weight:700;font-size:46px;color:#0f2b21;direction:ltr}
+.check{display:flex;align-items:center;gap:26px;direction:rtl;margin-bottom:46px}
+.check .c{flex:none;width:70px;height:70px;border-radius:50%;background:#c9a24b;color:#0f2b21;font-size:42px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.check .a{font-family:Plex;font-weight:700;font-size:46px;color:#fff;line-height:1.3}
+.check .e{font-weight:600;font-size:28px;color:#e9dfc4;direction:ltr;text-align:right}
+</style></head>
+<body>
+<div id="bg"></div><div id="glow"></div><div id="grid"></div><div class="frame"></div>
+<div id="brand"><img src="../../../public/logo-light.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div>
+<div id="progress"><div></div></div>
+
+<!-- S1 hook -->
+<div id="s1" class="abs" style="top:520px">
+  <div id="n120" class="abs" style="top:0;text-align:center;font-weight:700;font-size:230px;line-height:1;direction:ltr">120 <span style="font-size:110px">m²</span></div>
+  <div id="n98" class="abs" style="top:290px;text-align:center;font-weight:700;font-size:230px;line-height:1;direction:ltr;color:#c9a24b">98 <span style="font-size:110px">m²</span></div>
+  <div id="s1q" class="abs" style="top:640px">
+    <div class="ar" style="font-size:66px;line-height:1.35">أيُّ رقمٍ هو مساحةُ<br>شقتك الحقيقية؟</div>
+    <div class="en" style="font-size:36px;margin-top:22px">Which number is your home's real size?</div>
+  </div>
+</div>
+
+<!-- S2 title -->
+<div id="s2" class="abs" style="top:430px">
+  <div class="ar gold" style="font-size:38px">دليل حضارة العقاري</div>
+  <div class="ar" style="font-size:112px;line-height:1.25;margin-top:26px">الصافي<br>أم الإجمالي؟</div>
+  <div id="s2line" style="height:4px;background:#c9a24b;width:0;margin:44px auto 40px;border-radius:4px"></div>
+  <div class="en" style="font-size:66px;font-weight:700;color:#fff;letter-spacing:4px">NET <span class="gold">vs</span> BRÜT</div>
+  <div class="ar" style="font-size:46px;margin-top:40px;font-weight:600;color:#efe6cf">كيف تُقاس الشقة في تركيا</div>
+  <div class="en" style="font-size:32px;margin-top:14px">How apartments are measured in Türkiye</div>
+</div>
+
+<!-- Floor plan (S3-S5) -->
+<svg id="plan" width="900" height="700" viewBox="0 0 900 700" style="position:absolute;left:90px;top:640px;overflow:visible">
+  <defs>
+    <clipPath id="sweep"><rect id="sweepRect" x="900" y="0" width="0" height="700"/></clipPath>
+    <pattern id="hatch" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="16" stroke="rgba(233,223,196,.25)" stroke-width="4"/></pattern>
+  </defs>
+  <g id="neighbour" opacity="0">
+    <rect x="790" y="60" width="90" height="440" fill="url(#hatch)"/>
+    <text x="835" y="290" text-anchor="middle" fill="#e9dfc4" font-size="26" transform="rotate(90 835 290)">الجار · Neighbour</text>
+  </g>
+  <rect id="netfill" x="78" y="78" width="694" height="404" fill="#c9a24b" opacity="0" clip-path="url(#sweep)"/>
+  <g id="balcony">
+    <rect x="160" y="500" width="380" height="110" fill="none" stroke="#e9dfc4" stroke-width="5" stroke-dasharray="14 10" pathLength="1"/>
+    <text x="350" y="568" text-anchor="middle" fill="#e9dfc4" font-size="32">شرفة · Balcony</text>
+  </g>
+  <g id="balconyX" opacity="0"><line x1="175" y1="515" x2="525" y2="595" stroke="#e46a5e" stroke-width="7" stroke-linecap="round"/><line x1="525" y1="515" x2="175" y2="595" stroke="#e46a5e" stroke-width="7" stroke-linecap="round"/></g>
+  <g id="walls" fill="none" stroke="#f7f4ec" stroke-linejoin="miter">
+    <path id="w-outer" d="M60 60 H790 V500 H60 Z M78 78 V482 H772 V78 Z" stroke-width="3" fill="rgba(247,244,236,.9)" fill-rule="evenodd" pathLength="1"/>
+    <path id="w-in1" d="M500 78 V180 M500 250 V330" stroke-width="12" pathLength="1"/>
+    <path id="w-in2" d="M500 330 H560 M640 330 H772" stroke-width="12" pathLength="1"/>
+    <path id="w-in3" d="M650 330 V482" stroke-width="10" pathLength="1"/>
+  </g>
+  <rect id="outline" x="60" y="60" width="721" height="440" fill="none" stroke="#c9a24b" stroke-width="6" stroke-dasharray="22 14" opacity="0"/>
+  <g id="half" opacity="0">
+    <line x1="781" y1="30" x2="781" y2="530" stroke="#c9a24b" stroke-width="3"/>
+    <circle cx="781" cy="560" r="34" fill="#c9a24b"/><text x="781" y="572" text-anchor="middle" fill="#0f2b21" font-size="32" font-family="Inter" font-weight="700">½</text>
+  </g>
+  <g id="labels" fill="#d9ceb0" font-size="30" text-anchor="middle">
+    <text x="290" y="290">صالون ومطبخ</text><text x="290" y="326" font-size="22" font-family="Inter">Living · Kitchen</text>
+    <text x="636" y="200">غرفة نوم</text><text x="636" y="234" font-size="22" font-family="Inter">Bedroom</text>
+    <text x="575" y="415" font-size="26">مدخل</text>
+    <text x="711" y="415" font-size="26">حمام</text>
+  </g>
+</svg>
+
+<!-- Building (S5) -->
+<svg id="bld" width="900" height="760" viewBox="0 0 900 760" style="position:absolute;left:90px;top:600px;overflow:visible;opacity:0">
+  <g id="floors"></g>
+  <rect id="core" x="400" y="80" width="100" height="600" fill="#c9a24b" opacity=".0"/>
+  <rect id="lobby" x="150" y="600" width="600" height="80" fill="#c9a24b" opacity=".0"/>
+  <rect id="unit" x="510" y="240" width="230" height="80" fill="#c9a24b" opacity="0"/>
+  <g id="dots"></g>
+  <text id="tLobby" x="450" y="652" text-anchor="middle" fill="#0f2b21" font-size="30" opacity="0">المدخل · Lobby</text>
+  <text id="tCore" x="450" y="60" text-anchor="middle" fill="#e9dfc4" font-size="28" opacity="0">الدرج والمصاعد · Stairs</text>
+  <text id="tUnit" x="625" y="290" text-anchor="middle" fill="#0f2b21" font-size="28" opacity="0">شقتك</text>
+</svg>
+
+<!-- Scene captions -->
+<div id="c3" class="abs" style="top:400px;text-align:center">
+  <div class="chip"><span class="a">المساحة الصافية</span><span class="e">NET</span><span class="n">1</span></div>
+</div>
+<div id="c3d" class="abs" style="top:1370px;padding:0 110px">
+  <div class="ar" style="font-size:54px;line-height:1.35">الأرضية بين الجدران من الداخل</div>
+  <div class="en" style="font-size:32px;margin-top:12px">The floor area inside the walls</div>
+  <div id="c3x" class="ar" style="font-size:38px;margin-top:40px;color:#f0b0a8;font-weight:600">لا تشمل الجدران ولا الشرفة ولا الأجزاء المشتركة</div>
+  <div id="c3xe" class="en" style="font-size:28px;margin-top:10px;color:#e9c7c1">Walls, balcony and common areas are not included</div>
+</div>
+
+<div id="c4" class="abs" style="top:400px;text-align:center">
+  <div class="chip"><span class="a">المساحة الإجمالية</span><span class="e">BRÜT</span><span class="n">2</span></div>
+</div>
+<div id="c4d" class="abs" style="top:1370px;padding:0 110px">
+  <div class="ar" style="font-size:54px;line-height:1.35">الشقة مع جدرانها</div>
+  <div class="en" style="font-size:32px;margin-top:12px">The home including its walls</div>
+  <div id="c4x" class="ar" style="font-size:40px;margin-top:40px;color:#e2c27a;font-weight:600">الجدار المشترك مع الجار يُحتسب نصفه</div>
+  <div id="c4xe" class="en" style="font-size:28px;margin-top:10px">A wall shared with a neighbour counts by half</div>
+</div>
+
+<div id="c5" class="abs" style="top:400px;text-align:center">
+  <div class="chip"><span class="a">المعتمدة للبيع</span><span class="e" style="font-size:24px">SATIŞA ESAS</span><span class="n">3</span></div>
+</div>
+<div id="c5d" class="abs" style="top:1420px;padding:0 100px">
+  <div class="ar" style="font-size:50px;line-height:1.4">الإجمالية + حصتك من<br>المدخل والدرج والممرات</div>
+  <div class="en" style="font-size:30px;margin-top:14px">Brüt + your share of the lobby, stairs and corridors</div>
+</div>
+
+<!-- S6 bars -->
+<div id="s6" class="abs" style="top:400px">
+  <div class="ar gold" style="font-size:40px">مثال حقيقي من مشاريعنا</div>
+  <div class="ar" style="font-size:76px;margin-top:14px">لوتس شيشلي · <span class="ltr">1+1</span></div>
+  <div class="en" style="font-size:32px;margin-top:10px">Real example · Lotus Şişli 1+1</div>
+</div>
+<div id="bars">
+  <div class="barlab" id="l1" style="top:800px"><span class="a">الصافية<small>Net</small></span></div>
+  <div class="bar" id="b1" style="top:870px"></div><div class="barval" id="v1" style="top:870px"></div>
+  <div class="barlab" id="l2" style="top:1050px"><span class="a">الإجمالية<small>Brüt</small></span></div>
+  <div class="bar" id="b2" style="top:1120px"></div><div class="barval" id="v2" style="top:1120px"></div>
+  <div class="barlab" id="l3" style="top:1300px"><span class="a">المعتمدة للبيع<small>Saleable</small></span></div>
+  <div class="bar" id="b3" style="top:1370px"></div><div class="barval" id="v3" style="top:1370px"></div>
+  <div id="s6n" class="abs" style="top:1530px;padding:0 120px">
+    <div class="ar" style="font-size:42px;font-weight:600;color:#efe6cf">الشقة نفسها… وثلاثة أرقام صحيحة</div>
+    <div class="en" style="font-size:28px;margin-top:10px">Same home, three correct numbers</div>
+  </div>
+</div>
+
+<!-- S7 tips -->
+<div id="s7" class="abs" style="top:420px;padding:0 110px">
+  <div class="ar gold" style="font-size:44px;margin-bottom:12px">قبل أن تقارن</div>
+  <div class="en" style="font-size:30px;margin-bottom:80px">Before you compare</div>
+  <div class="check" id="k1"><span class="c">✓</span><div><div class="a">قارن الصافي بالصافي</div><div class="e">Compare net with net</div></div></div>
+  <div class="check" id="k2"><span class="c">✓</span><div><div class="a">اسأل: السعر على أيّ مساحة؟</div><div class="e">Which area is the price based on?</div></div></div>
+  <div class="check" id="k3"><span class="c">✓</span><div><div class="a">اطلب المساحة الصافية للوحدة نفسها</div><div class="e">Ask for the net area of the exact unit</div></div></div>
+</div>
+
+<!-- S8 CTA -->
+<div id="s8" class="abs" style="top:560px;text-align:center">
+  <img id="s8logo" src="../../../public/logo-light.png" style="height:230px">
+  <div style="direction:ltr;margin-top:30px"><b style="font-size:64px;letter-spacing:12px">HADARA</b><div style="font-weight:600;font-size:22px;letter-spacing:14px;color:#c9a24b;margin-top:12px">REAL ESTATE</div></div>
+  <div class="ar" style="font-size:52px;margin-top:70px">شريكك العقاري في إسطنبول</div>
+  <div class="en" style="font-size:32px;margin-top:12px">Your real estate partner in Istanbul</div>
+  <div class="card" style="display:inline-block;margin-top:70px">
+    <div class="ar" style="font-size:40px;font-weight:600">اقرأ المقال كاملاً على موقعنا</div>
+    <div style="font-weight:700;font-size:44px;color:#c9a24b;margin-top:14px;direction:ltr">hadararealestate.com</div>
+  </div>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const clamp = (x) => Math.max(0, Math.min(1, x));
+const ease = (x) => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const out = (x) => 1 - Math.pow(1 - clamp(x), 3);
+const p = (t, a, b) => clamp((t - a) / (b - a));
+// Fade/slide an element in at `a` and out at `b`.
+function show(el, t, a, b, dy = 50, dur = .7) {
+  const i = out(p(t, a, a + dur)), o = 1 - ease(p(t, b - .5, b));
+  const v = Math.min(i, o);
+  el.style.opacity = v;
+  el.style.transform = `translateY(${(1 - i) * dy - (1 - o) * 20}px)`;
+  el.style.visibility = v <= 0.001 ? "hidden" : "visible";
+  return v;
+}
+const T = 48;
+// Building floors
+(function () {
+  const g = $("floors"); let h = "";
+  for (let i = 0; i < 7; i++) {
+    const y = 80 + i * 80;
+    h += `<rect x="150" y="${y}" width="600" height="80" fill="rgba(247,244,236,.05)" stroke="rgba(247,244,236,.55)" stroke-width="2"/>`;
+    h += `<line x1="270" y1="${y}" x2="270" y2="${y + 80}" stroke="rgba(247,244,236,.25)"/><line x1="630" y1="${y}" x2="630" y2="${y + 80}" stroke="rgba(247,244,236,.25)"/>`;
+  }
+  h += `<path d="M130 80 L450 0 L770 80" fill="none" stroke="rgba(247,244,236,.55)" stroke-width="2"/>`;
+  g.innerHTML = h;
+  let d = "";
+  for (let i = 0; i < 10; i++) d += `<circle r="9" fill="#e2c27a"/>`;
+  $("dots").innerHTML = d;
+})();
+
+function render(t) {
+  // background motion
+  $("glow").style.transform = `translate(${90 + Math.sin(t * .25) * 160}px, ${380 + Math.cos(t * .19) * 260}px)`;
+  $("grid").style.backgroundPosition = `${t * 6}px ${t * 10}px`;
+  $("progress").firstElementChild.style.width = (clamp(t / T) * 100) + "%";
+  const brandV = show($("brand"), t, .1, T - 5.4, -30);
+  $("progress").style.opacity = brandV;
+
+  // S1 hook 0-5
+  const n120 = $("n120"), n98 = $("n98");
+  show(n120, t, .3, 5, 60);
+  n120.style.transform += ` scale(${1 + .05 * Math.sin(t * 2)})`;
+  show(n98, t, 1.3, 5, 60);
+  // strike-through on 120 at 2.4s then dim
+  n120.style.color = t > 2.4 ? `rgba(255,255,255,${1 - .55 * p(t, 2.4, 3)})` : "#fff";
+  show($("s1q"), t, 2.3, 5, 40);
+
+  // S2 title 5-11
+  show($("s2"), t, 5.1, 10.6, 50);
+  $("s2line").style.width = (ease(p(t, 5.6, 6.6)) * 520) + "px";
+
+  // Floor plan 9.6-25.5 (drawn during S2 end, then scenes 3-4)
+  const plan = $("plan");
+  const planIn = out(p(t, 10.4, 11.2)), planOut = 1 - ease(p(t, 25, 25.8));
+  plan.style.opacity = Math.min(planIn, planOut);
+  const draw = ease(p(t, 10.6, 12.6));
+  for (const id of ["w-in1", "w-in2", "w-in3"]) {
+    const el = $(id); el.style.strokeDasharray = "1"; el.style.strokeDashoffset = 1 - ease(p(t, 11.6, 12.8));
+  }
+  const outer = $("w-outer");
+  outer.style.strokeDasharray = "1"; outer.style.strokeDashoffset = 1 - draw;
+  outer.style.fillOpacity = ease(p(t, 12.2, 12.9));
+  const bal = $("balcony"); bal.style.opacity = ease(p(t, 12.4, 13));
+  $("labels").style.opacity = ease(p(t, 12.6, 13.2)) * (1 - .4 * p(t, 18.4, 19));
+  // S3 NET 11-18.4
+  show($("c3"), t, 11, 18.4, -30);
+  show($("c3d"), t, 13.3, 18.4, 40);
+  const sw = ease(p(t, 13, 14.6));
+  $("sweepRect").setAttribute("x", 772 - 694 * sw); $("sweepRect").setAttribute("width", 694 * sw + 6);
+  $("netfill").setAttribute("opacity", (.42 + .08 * Math.sin(t * 3)) * (1 - ease(p(t, 18.4, 19.2))));
+  $("c3x").style.opacity = $("c3xe").style.opacity = ease(p(t, 15.4, 16));
+  $("balconyX").setAttribute("opacity", ease(p(t, 15.6, 16)) * (1 - ease(p(t, 18.2, 18.7))));
+  // S4 BRÜT 18.4-25.5
+  show($("c4"), t, 18.6, 25.4, -30);
+  show($("c4d"), t, 19.4, 25.4, 40);
+  const wallGold = ease(p(t, 19, 19.8));
+  const wcol = `rgb(${Math.round(247 + (226 - 247) * wallGold)},${Math.round(244 + (194 - 244) * wallGold)},${Math.round(236 + (122 - 236) * wallGold)})`;
+  outer.style.fill = wcol; outer.style.stroke = wcol;
+  for (const id of ["w-in1", "w-in2", "w-in3"]) $(id).style.stroke = wcol;
+  const ol = $("outline");
+  ol.setAttribute("opacity", ease(p(t, 19.8, 20.4)));
+  ol.setAttribute("stroke-dashoffset", -t * 40);
+  $("neighbour").setAttribute("opacity", ease(p(t, 21.2, 21.8)));
+  $("half").setAttribute("opacity", ease(p(t, 21.8, 22.3)) * (.75 + .25 * Math.sin(t * 5)));
+  $("c4x").style.opacity = $("c4xe").style.opacity = ease(p(t, 21.8, 22.4));
+
+  // S5 saleable 25.4-31.5
+  show($("c5"), t, 25.6, 31.4, -30);
+  show($("c5d"), t, 27, 31.4, 40);
+  const b = $("bld"); const bi = out(p(t, 25.5, 26.4)), bo = 1 - ease(p(t, 31, 31.6));
+  b.style.opacity = Math.min(bi, bo);
+  b.style.transform = `scale(${.92 + .08 * bi})`;
+  b.style.transformOrigin = "50% 50%";
+  $("unit").setAttribute("opacity", ease(p(t, 26.2, 26.8)));
+  $("tUnit").setAttribute("opacity", ease(p(t, 26.4, 27)));
+  $("lobby").setAttribute("opacity", .55 * ease(p(t, 27, 27.6)));
+  $("tLobby").setAttribute("opacity", ease(p(t, 27.2, 27.8)));
+  $("core").setAttribute("opacity", .35 * ease(p(t, 27.6, 28.2)));
+  $("tCore").setAttribute("opacity", ease(p(t, 27.8, 28.4)));
+  // dots flow lobby -> core -> unit
+  [...$("dots").children].forEach((c, i) => {
+    const k = ((t - 28.2) * .55 + i / 10) % 1;
+    const on = t > 28.2 ? 1 : 0;
+    let x, y;
+    if (k < .35) { const q = k / .35; x = 200 + (450 - 200) * q; y = 640; }
+    else if (k < .75) { const q = (k - .35) / .4; x = 450; y = 640 - (640 - 280) * q; }
+    else { const q = (k - .75) / .25; x = 450 + (600 - 450) * q; y = 280; }
+    c.setAttribute("cx", x); c.setAttribute("cy", y);
+    c.setAttribute("opacity", on * Math.sin(Math.PI * k) * ease(p(t, 28.2, 28.8)));
+  });
+
+  // S6 bars 31.5-38.5
+  show($("s6"), t, 31.6, 38.4, 40);
+  const vals = [43.41, 57.56, 75.97], max = 780;
+  vals.forEach((v, i) => {
+    const a = 32.8 + i * 1.1;
+    const g = ease(p(t, a, a + 1.2));
+    const fadeOut = 1 - ease(p(t, 38, 38.5));
+    const w = max * v / 75.97 * g;
+    $("b" + (i + 1)).style.width = w + "px";
+    $("b" + (i + 1)).style.opacity = fadeOut;
+    $("l" + (i + 1)).style.opacity = ease(p(t, a - .3, a + .2)) * fadeOut;
+    const val = $("v" + (i + 1));
+    val.textContent = (v * g).toFixed(2) + " m²";
+    val.style.opacity = clamp((w - 250) / 60) * fadeOut;
+  });
+  show($("s6n"), t, 36.2, 38.4, 30);
+
+  // S7 tips 38.5-43.5
+  show($("s7"), t, 38.6, 43.5, 40);
+  ["k1", "k2", "k3"].forEach((k, i) => show($(k), t, 39.3 + i * .8, 99, 40));
+
+  // S8 CTA 43.5-48
+  show($("s8"), t, 43.7, 99, 40);
+  $("s8logo").style.transform = `scale(${.85 + .15 * out(p(t, 43.7, 44.7))})`;
+}
+window.render = render; window.TOTAL = T;
+render(0);
+</script>
+</body></html>
