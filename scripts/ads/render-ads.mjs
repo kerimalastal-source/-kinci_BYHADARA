@@ -68,34 +68,35 @@ const ADS = [
     note: "",
   },
   {
-    // Gulf v6 (2026-10-13): investment framing for Arabic-only audiences, with a budget qualifier.
+    // Gulf v6 (2026-10-13): investment framing, English first (owner: buyers who can afford it read English), Arabic second.
     id: "invest400",
+    primary: "en",
     photo: img("sea-pearl-atakoy/aerial-coast.jpg"),
+    badgeEn: "For Investors",
     badgeAr: "للمستثمرين",
-    badgeEn: "",
-    ar: "استثمار عقاري في إسطنبول<br>من 400 ألف دولار",
-    en: "",
+    en: "Invest in Istanbul real estate<br>from US$400,000",
+    ar: "استثمار عقاري في إسطنبول من 400 ألف دولار",
     points: [
-      ["مشاريع راقية على البحر وفي قلب المدينة", ""],
-      ["مع إمكانية الحصول على الجنسية التركية وفق القانون", ""],
+      ["Premium projects by the sea and in the city", "مشاريع راقية على البحر وفي قلب المدينة"],
+      ["Turkish citizenship option under current law", "مع إمكانية الحصول على الجنسية التركية وفق القانون"],
     ],
-    qualifier: "مخصّص للمستثمرين بميزانية 400 ألف دولار فأكثر",
-    note: "",
+    qualifier: ["For investors with a budget of US$400,000+", "مخصّص للمستثمرين بميزانية 400 ألف دولار فأكثر"],
   },
   {
+    // Owner 2026-10-13: no budget line here; there are homes from lower budgets too.
     id: "videotour6",
+    primary: "en",
     photo: `file://${REPO}/public/hero-istanbul.jpg`,
     phone: img("diamond-marin/living-room.jpg"),
     photoBox: (story) => (story ? { top: -246, height: 1300 } : { top: -320, height: 1130 }),
+    badgeEn: "Private Video Tour",
     badgeAr: "جولة خاصة عبر الفيديو",
-    badgeEn: "",
-    ar: "إسطنبول<br>على بُعد مكالمة فيديو",
-    en: "",
+    en: "Istanbul is just<br>a video call away",
+    ar: "إسطنبول على بُعد مكالمة فيديو",
     points: [
-      ["شاهد الشقة النموذجية والمشروع على أرض الواقع", ""],
-      ["بالعربية، مجانية ودون التزام", ""],
+      ["See the show apartment and the project on site, live", "شاهد الشقة النموذجية والمشروع على أرض الواقع"],
+      ["In English or Arabic, free with no obligation", "بالإنجليزية أو العربية، مجانية ودون التزام"],
     ],
-    note: "",
   },
 ];
 
@@ -135,18 +136,31 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#0f2b21;font-family:I
 .phone .ctl span{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center}
 .phone .ctl span.end{background:#e5484d}
 .qual{margin-top:30px;border:2px solid #c9a24b;background:rgba(201,162,75,.16);border-radius:18px;padding:16px 22px;font-family:Plex;font-weight:700;font-size:${story ? 38 : 34}px;color:#f3dc9f;text-align:center;direction:rtl}
+.hen{font-weight:700;font-size:${story ? 66 : 60}px;line-height:1.15;letter-spacing:-.5px;direction:ltr;text-align:left;text-shadow:0 3px 14px rgba(0,0,0,.55)}
+.har{font-family:Plex;font-weight:700;font-size:${story ? 38 : 34}px;color:#efe6cf;direction:rtl;text-align:right;margin-top:14px}
+.pe{display:grid;grid-template-columns:50px 1fr;gap:16px;align-items:start;direction:ltr}
+.pe .c{width:50px;height:50px;border-radius:50%;background:#c9a24b;color:#0f2b21;display:grid;place-items:center;font-size:28px;font-weight:700}
+.pe b{display:block;font-weight:700;font-size:${story ? 36 : 33}px;line-height:1.25}
+.pe span{display:block;font-family:Plex;font-weight:600;font-size:${story ? 30 : 27}px;color:#d9cfb6;direction:rtl;text-align:right;margin-top:4px}
+.qual b{display:block;font-family:Inter;font-weight:700;direction:ltr}
+.qual span{display:block;font-size:.78em;color:#efe6cf;margin-top:4px}
+.sh.strong{background:linear-gradient(180deg,rgba(8,26,20,.5) 0%,rgba(8,26,20,0) 20%,rgba(8,26,20,.25) 34%,rgba(8,26,20,.86) 47%,rgba(8,26,20,.97) 100%)}
 .note{margin-top:14px;line-height:1.5;font-family:Plex;font-weight:600;font-size:20px;color:#cfc6ae;text-align:center}
 `;
 
+// English-first layout: English is the main line, Arabic sits under it (right-aligned, smaller).
+const enBody = (a) => `<div class="hen">${a.en}</div><div class="har">${a.ar}</div>
+<div class="pts">${a.points.map(([en, ar]) => `<div class="pe"><div class="c">✓</div><div><b>${en}</b><span>${ar}</span></div></div>`).join("")}</div>
+${a.qualifier ? `<div class="qual"><b>${a.qualifier[0]}</b><span>${a.qualifier[1]}</span></div>` : ""}`;
+
 const html = (a, w, h, story) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body>
-<div class="ph" style="background-image:url('${a.photo}')${a.photoBox ? `;inset:auto;left:50%;transform:translateX(-50%);top:${a.photoBox(story).top}px;height:${a.photoBox(story).height}px;width:${Math.round(a.photoBox(story).height * 2200 / 1300)}px;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent)` : ""}"></div><div class="sh"></div>
+<div class="ph" style="background-image:url('${a.photo}')${a.photoBox ? `;inset:auto;left:50%;transform:translateX(-50%);top:${a.photoBox(story).top}px;height:${a.photoBox(story).height}px;width:${Math.round(a.photoBox(story).height * 2200 / 1300)}px;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent)` : ""}"></div><div class="sh${a.primary === "en" && !a.phone ? " strong" : ""}"></div>
 ${a.phone ? `<div class="phone"><div class="s" style="background-image:url('${a.phone}')"><span class="live"><i></i>مباشر</span><span class="pip"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6"/></svg><span>مستشارك</span></span><span class="ctl"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span><span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.5 6-3.5v10l-6-3.5"/></svg></span><span class="end"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 14.5c4.8-4.3 12.2-4.3 17 0l-1.9 2.4-3.4-1.3v-2.2a11 11 0 0 0-7 0v2.2l-3.4 1.3z"/></svg></span></span></div></div>` : ""}
 <div class="top"><div class="brand"><img src="file://${REPO}/public/logo-light.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div>
-<div class="badge"><span class="a">${a.badgeAr}</span>${a.badgeEn ? `<span>·</span><span>${a.badgeEn}</span>` : ""}</div></div>
+<div class="badge">${a.primary === "en" ? `<span>${a.badgeEn}</span><span>·</span><span class="a">${a.badgeAr}</span>` : `<span class="a">${a.badgeAr}</span>${a.badgeEn ? `<span>·</span><span>${a.badgeEn}</span>` : ""}`}</div></div>
 <div class="body">
-<div class="ar">${a.ar}</div>${a.en ? `<div class="en">${a.en}</div>` : ""}
-<div class="pts">${a.points.map(([ar, en]) => `<div class="pt"><div class="t"><b>${ar}</b>${en ? `<span>${en}</span>` : ""}</div><div class="c">✓</div></div>`).join("")}</div>
-${a.qualifier ? `<div class="qual">${a.qualifier}</div>` : ""}
+${a.primary === "en" ? enBody(a) : `<div class="ar">${a.ar}</div>${a.en ? `<div class="en">${a.en}</div>` : ""}
+<div class="pts">${a.points.map(([ar, en]) => `<div class="pt"><div class="t"><b>${ar}</b>${en ? `<span>${en}</span>` : ""}</div><div class="c">✓</div></div>`).join("")}</div>`}
 <div class="foot"><div class="w">hadararealestate.com</div><div class="p">حضارة · شريكك العقاري في إسطنبول</div></div>
 ${a.note ? `<div class="note">${a.note}</div>` : ""}
 </div></body></html>`;
