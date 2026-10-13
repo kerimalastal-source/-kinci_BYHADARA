@@ -486,5 +486,37 @@
     "headlineAr": "على ساحل بحر مرمرة",
     "headlineEn": "On the Marmara coast",
     "photo": "/images/projects/lotus-yali/view-from-sea.jpg"
+  },
+  {
+    "date": "2026-10-13",
+    "id": "beylikduzu-living-citizenship",
+    "topic": "لوتس ياشام · لمن يفكر في الجنسية",
+    "headlineAr": "عقار على الخارطة يمكن أن يؤهّلك للجنسية",
+    "headlineEn": "An off-plan home can qualify you for citizenship",
+    "photo": "/images/projects/beylikduzu-living/street-facade.jpg"
+  },
+  {
+    "date": "2026-10-13",
+    "id": "citizenship-requirements",
+    "topic": "شروط الجنسية",
+    "headlineAr": "6 شروط للجنسية التركية عبر العقار",
+    "headlineEn": "6 conditions for citizenship through property",
+    "photo": "/images/blog/citizenship-investment-laws.jpg"
+  },
+  {
+    "date": "2026-10-13",
+    "id": "tf-rent-increase",
+    "topic": "صح أم خطأ: زيادة الإيجار (شرائح)",
+    "headlineAr": "يرفع المالك الإيجار بأي نسبة يريدها؟",
+    "headlineEn": "Can a landlord raise the rent by any amount?",
+    "photo": "/images/projects/lotus-sisli/living-room.jpg"
+  },
+  {
+    "date": "2026-10-13",
+    "id": "beylikduzu-living-citizenship-story",
+    "topic": "ستوري: لوتس ياشام · لمن يفكر في الجنسية",
+    "headlineAr": "تقسيط مرن وتسليم في 2028",
+    "headlineEn": "Flexible installments, delivery in 2028",
+    "photo": "/images/projects/beylikduzu-living/aerial-view.jpg"
   }
 ]
