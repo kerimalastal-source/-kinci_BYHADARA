@@ -8,6 +8,7 @@ import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "./floatingButtons";
 import { renderFavoritesLink } from "./favorites";
 import { CONSULTANCY_PAGES, GUIDE_SEGMENT, LAWS_SEGMENT, consultancyPath, type ConsultancyPage } from "../seo/routes";
 import { LAWS_PAGE_LIVE } from "../data/laws";
+import { RESALE_LIVE } from "../data/resale";
 
 interface NavLink {
   route: string;
@@ -38,7 +39,7 @@ const NAV: NavEntry[] = [
     items: [
       { route: "/projects", key: "nav.allProjects", active: is("projects", "project") },
       { route: "/video-tour", key: "videoTour.nav", active: is("video-tour") },
-      { route: "/resale", key: "nav.resale", active: is("resale", "resale-listing") },
+      ...(RESALE_LIVE ? [{ route: "/resale", key: "nav.resale", active: is("resale", "resale-listing") }] : []),
       { route: "/property-request", key: "nav.propertyRequest", active: is("property-request") }
     ]
   },
