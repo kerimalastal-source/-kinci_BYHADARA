@@ -1,0 +1,129 @@
+{
+  "posts": [
+    {
+      "id": "buyukyali-intro",
+      "topic": "بيوك يالي",
+      "image": {
+        "photo": "/images/projects/buyukyali/sea-gardens.jpg",
+        "position": "center 55%",
+        "badge": {
+          "ar": "مؤهّل للجنسية التركية",
+          "en": "Citizenship eligible"
+        },
+        "place": "Büyükyalı · Zeytinburnu",
+        "placeAr": "بيوك يالي · زيتون بورنو",
+        "headlineAr": "حيّ بحري جديد في قلب إسطنبول",
+        "headlineEn": "Istanbul's new seaside district",
+        "stats": [
+          {
+            "value": "1,540",
+            "ar": "شقة سكنية",
+            "en": "Apartments"
+          },
+          {
+            "value": "111,000 m²",
+            "ar": "مساحة الأرض",
+            "en": "Land area"
+          },
+          {
+            "value": "15",
+            "ar": "مبنى",
+            "en": "Blocks"
+          }
+        ],
+        "tip": {
+          "ar": "جسر خاص بالسكان إلى الشاطئ، والرصيف على بُعد دقيقة سيراً",
+          "en": "A residents-only bridge to the shore, the pier a minute's walk away"
+        }
+      },
+      "caption": {
+        "ar": {
+          "title": "بيوك يالي: حيّ بحري جديد في قلب إسطنبول 🌊",
+          "intro": "مشروع سكني مكتمل على ساحل قازلي تشيشمه في زيتون بورنو، عند مدخل البوسفور حيث تلتقي أسوار إسطنبول التاريخية بالبحر، وهو مؤهّل للحصول على الجنسية التركية.",
+          "bullets": [
+            "🌉 جسر خاص بالسكان يصل إلى الطريق الساحلي، والرصيف البحري على بُعد دقيقة سيراً",
+            "🏛️ 23 شقة لوفت داخل مبنى فيشكهانه التاريخي المرمَّم",
+            "🛋️ مبنى بتأثيث FENDI Casa، الأول للعلامة في إسطنبول، مع مسبح لا متناهٍ على سطحه",
+            "🏊 نادٍ للسكان فيه مسابح مفتوحة ومغلقة وحمّام تركي وساونا وتنس",
+            "🎭 مركز ثقافي بمسرحين وست قاعات سينما ومطاعم وسوق للمنتجات العضوية",
+            "🚆 محطة مرمراي زيتون بورنو على مسافة قريبة سيراً، ونفق أوراسيا على مقربة"
+          ],
+          "closing": [
+            "1,540 مسكناً من 1+1 إلى 5+1، إضافة إلى شقق بنتهاوس ولوفت. تواصل معنا لمعرفة الوحدات المتاحة والخيار الأنسب لهدفك."
+          ],
+          "cta": "تفاصيل المشروع",
+          "path": "/projects/buyukyali"
+        },
+        "en": {
+          "title": "Büyükyalı: Istanbul's new seaside district",
+          "intro": "A completed community on the Kazlıçeşme coast in Zeytinburnu, at the entrance to the Bosphorus where Istanbul's historic walls meet the sea, and eligible for Turkish citizenship.",
+          "bullets": [
+            "🌉 A residents-only bridge to the coast road, with the pier a minute's walk away",
+            "🏛️ 23 lofts inside the restored historic Fişekhane building",
+            "🛋️ A FENDI Casa block, the brand's first in Istanbul, with a rooftop infinity pool",
+            "🏊 A residents' club with outdoor and indoor pools, hamam, sauna and tennis",
+            "🎭 A culture centre with 2 theatres, 6 cinemas, restaurants and an organic market",
+            "🚆 Marmaray's Zeytinburnu station within walking distance, the Eurasia Tunnel close by"
+          ],
+          "closing": [
+            "1,540 homes from 1+1 to 5+1, plus penthouses and lofts. Contact us to see what is available and what fits your goal."
+          ],
+          "cta": "Project details",
+          "path": "/projects/buyukyali"
+        },
+        "hashtags": [
+          "#Buyukyali",
+          "#Zeytinburnu",
+          "#Istanbul",
+          "#TurkishCitizenship",
+          "#HadaraRealEstate"
+        ]
+      },
+      "at": "09:00"
+    },
+    {
+      "id": "buyukyali-intro-story",
+      "story": true,
+      "at": "09:00",
+      "topic": "ستوري: بيوك يالي",
+      "image": {
+        "photo": "/images/projects/buyukyali/loft-courtyard.jpg",
+        "position": "center 40%",
+        "badge": {
+          "ar": "مؤهّل للجنسية التركية",
+          "en": "Citizenship eligible"
+        },
+        "place": "Büyükyalı · Zeytinburnu",
+        "placeAr": "بيوك يالي · زيتون بورنو",
+        "headlineAr": "لوفت تاريخي على ساحل إسطنبول",
+        "headlineEn": "Historic lofts on Istanbul's coast",
+        "stats": [
+          {
+            "value": "1,540",
+            "ar": "شقة سكنية",
+            "en": "Apartments"
+          },
+          {
+            "value": "23",
+            "ar": "لوفت تاريخي",
+            "en": "Historic lofts"
+          },
+          {
+            "value": "59",
+            "ar": "محلاً تجارياً",
+            "en": "Shops"
+          },
+          {
+            "value": "1",
+            "ar": "دقيقة سيراً إلى الرصيف",
+            "en": "Minute's walk to the pier"
+          }
+        ],
+        "note": {
+          "ar": "مبنى بتأثيث FENDI Casa على ساحل البحر",
+          "en": "A FENDI Casa block by the sea"
+        }
+      }
+    }
+  ]
+}
