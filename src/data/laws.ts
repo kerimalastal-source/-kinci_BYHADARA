@@ -128,6 +128,20 @@ export const lawRules: LawRule[] = [
 
 export const lawUpdates: LawUpdate[] = [
   {
+    id: "law-7579-site-fees",
+    topic: "ownership",
+    decided: "2026-05-22",
+    effective: "2026-05-22",
+    reference: "7579 sayılı Kanun · Resmî Gazete 33261",
+    sources: [
+      { key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2026/05/20260522-1.htm" },
+      { key: "mevzuat", url: "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.634.pdf" },
+      { key: "tbmm", url: "https://www.tbmm.gov.tr/Haber/Detay?Id=aa080044-527c-4f57-9c9e-019bc3003b80" }
+    ],
+    checked: "2026-10-14",
+    approved: true
+  },
+  {
     id: "rent-regulation-board-bill",
     topic: "rent",
     decided: "2026-07-01",

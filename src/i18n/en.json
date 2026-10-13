@@ -1680,6 +1680,14 @@
       }
     },
     "updates": {
+      "law-7579-site-fees": {
+        "title": "A cap on increases in residential complex fees (Law No. 7579)",
+        "summary": "Law No. 7579 amended the Condominium Law to curb excessive management fees (aidat) in apartment buildings and residential complexes, and added new building-safety rules.",
+        "before": "The law set no limit on the yearly increase of the provisional operating budget prepared by the manager, and changing the management plan of a large complex required a four-fifths vote.",
+        "after": "Where an operating budget is in force, the new provisional budget prepared by the manager may not rise by more than the official annual revaluation rate, and it must be put to the owners' general meeting and decided within three months at the latest. The management plan of a large complex can now be changed by a two-thirds vote, and plan provisions that contradict this rule do not apply. The law also introduces periodic fire-safety checks for occupied buildings and, from 31 December 2026, requires soil and foundation surveys to be carried out by firms licensed by the Ministry.",
+        "affects": "Owners and buyers of apartments in buildings and residential complexes in Turkey.",
+        "help": "Before you buy, we tell you the current management fee of the project and what it covers."
+      },
       "citizenship-amount-certificate": {
         "title": "Citizenship amount certificate now valid for 6 months",
         "summary": "The Land Registry amended its Circular No. 2024/4: the purchase amount for citizenship is now confirmed by an Amount Determination Certificate (Tutar Tespit Belgesi) issued by the valuation company GEDAŞ after an electronic comparison.",

@@ -1680,6 +1680,14 @@
       }
     },
     "updates": {
+      "law-7579-site-fees": {
+        "title": "Un plafond pour la hausse des charges des résidences (loi n° 7579)",
+        "summary": "La loi n° 7579 a modifié la loi sur la copropriété afin de limiter les charges de gestion excessives (aidat) dans les immeubles et résidences, et a ajouté de nouvelles règles de sécurité des bâtiments.",
+        "before": "La loi ne limitait pas la hausse annuelle du budget de fonctionnement provisoire préparé par le gestionnaire, et la modification du règlement de gestion d'une grande résidence exigeait un vote des quatre cinquièmes.",
+        "after": "Lorsqu'un budget de fonctionnement est en vigueur, le nouveau budget provisoire préparé par le gestionnaire ne peut pas augmenter de plus que le taux officiel de réévaluation annuel ; il doit être soumis à l'assemblée générale des copropriétaires et tranché dans un délai de trois mois au plus. Le règlement de gestion d'une grande résidence peut désormais être modifié par un vote des deux tiers, et les clauses contraires à cette règle ne s'appliquent pas. La loi instaure aussi des contrôles périodiques de sécurité incendie pour les bâtiments occupés et, à partir du 31 décembre 2026, impose que les études de sol et de fondations soient réalisées par des entreprises agréées par le ministère.",
+        "affects": "Les propriétaires et acheteurs d'appartements dans les immeubles et résidences en Turquie.",
+        "help": "Avant l'achat, nous vous indiquons les charges de gestion actuelles du projet et ce qu'elles couvrent."
+      },
       "citizenship-amount-certificate": {
         "title": "Le certificat de montant pour la citoyenneté valable 6 mois",
         "summary": "Le Cadastre a modifié sa circulaire n° 2024/4 : le montant d'achat pour la citoyenneté est désormais confirmé par un certificat de détermination du montant (Tutar Tespit Belgesi) délivré par la société d'évaluation GEDAŞ après une comparaison électronique.",
