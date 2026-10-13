@@ -1691,7 +1691,7 @@
       "property-tax-cap-2026": {
         "title": "A limit on the 2026 property tax increase",
         "summary": "Law No. 7566, published in the Official Gazette, limits how much the value used for the annual property tax can rise in 2026.",
-        "after": "The 2026 tax value of buildings and land may not exceed twice their 2025 tax value.",
+        "after": "The 2026 tax value of buildings and land may rise by no more than two-fold over their 2025 value, meaning at most three times the 2025 value (an increase of up to 200%).",
         "affects": "Everyone who owns property in Turkey and pays the annual property tax.",
         "help": "We explain the expected yearly taxes and fees of a property before you buy."
       },

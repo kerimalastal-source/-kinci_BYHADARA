@@ -65,7 +65,7 @@ export const lawRules: LawRule[] = [
       { key: "mevzuat", url: "https://www.mevzuat.gov.tr/MevzuatMetin/21.5.2010139.pdf" },
       { key: "tkgm", url: "https://www.tkgm.gov.tr/yabancii-db/vatandaslik-icin-tasinmaz-edinimi-hakkinda-mevzuat" }
     ],
-    checked: "2026-10-01",
+    checked: "2026-10-14",
     approved: true
   },
   {
@@ -104,7 +104,7 @@ export const lawRules: LawRule[] = [
     id: "title-deed-fee",
     topic: "taxes",
     sources: [{ key: "mevzuat", url: "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.492.pdf" }],
-    checked: "2026-10-01",
+    checked: "2026-10-14",
     approved: true
   },
   {
@@ -114,14 +114,14 @@ export const lawRules: LawRule[] = [
       { key: "gib", url: "https://www.gib.gov.tr/vergi-konulari/1_bireysel/6_emlak_vergisi/6" },
       { key: "mevzuat", url: "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.1319.pdf" }
     ],
-    checked: "2026-10-01",
+    checked: "2026-10-14",
     approved: true
   },
   {
     id: "rent-increase",
     topic: "rent",
     sources: [{ key: "mevzuat", url: "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.6098.pdf" }],
-    checked: "2026-10-01",
+    checked: "2026-10-14",
     approved: true
   }
 ];
@@ -183,8 +183,11 @@ export const lawUpdates: LawUpdate[] = [
     decided: "2025-12-19",
     effective: "2026-01-01",
     reference: "7566 sayılı Kanun · Resmî Gazete 33112",
-    sources: [{ key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2025/12/20251219-1.htm" }],
-    checked: "2026-10-01",
+    sources: [
+      { key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2025/12/20251219-1.htm" },
+      { key: "mevzuat", url: "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.1319.pdf" }
+    ],
+    checked: "2026-10-14",
     approved: true
   },
   {
@@ -192,8 +195,11 @@ export const lawUpdates: LawUpdate[] = [
     topic: "taxes",
     decided: "2025-12-19",
     reference: "7566 sayılı Kanun · Resmî Gazete 33112",
-    sources: [{ key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2025/12/20251219-1.htm" }],
-    checked: "2026-10-01",
+    sources: [
+      { key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2025/12/20251219-1.htm" },
+      { key: "mevzuat", url: "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.492.pdf" }
+    ],
+    checked: "2026-10-14",
     approved: true
   },
   {

@@ -1691,7 +1691,7 @@
       "property-tax-cap-2026": {
         "title": "Un plafond pour la hausse de la taxe foncière en 2026",
         "summary": "La loi n° 7566, publiée au Journal officiel, limite la hausse de la valeur servant au calcul de la taxe foncière annuelle en 2026.",
-        "after": "La valeur fiscale 2026 des bâtiments et des terrains ne peut pas dépasser le double de leur valeur fiscale 2025.",
+        "after": "La valeur fiscale 2026 des bâtiments et des terrains ne peut pas augmenter de plus de deux fois leur valeur fiscale 2025, soit au maximum trois fois cette valeur (une hausse de 200 % au plus).",
         "affects": "Toute personne propriétaire d'un bien en Turquie qui paie la taxe foncière annuelle.",
         "help": "Nous vous expliquons les impôts et frais annuels attendus d'un bien avant l'achat."
       },
