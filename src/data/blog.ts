@@ -18,6 +18,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "emlak-konut-vs-toki",
+    priority: -5,
+    published: "2026-10-13",
+    relatedProjects: ["buyukyali", "sea-pearl-atakoy", "beylikduzu-living"],
+    coverImage: { src: "/images/blog/emlak-konut-vs-toki.jpg", width: 1125, height: 750 }
+  },
+  {
     slug: "apartment-or-villa",
     priority: -4,
     published: "2026-10-12",
