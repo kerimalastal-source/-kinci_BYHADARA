@@ -79,7 +79,7 @@ const ADS = [
     ar: "بيتك في إسطنبول من 200 ألف دولار",
     points: [
       ["New launches and ready-to-move-in homes", "مشاريع جديدة وأخرى جاهزة للسكن"],
-      ["Turkish citizenship with one or more properties totalling US$400,000+", "الجنسية التركية بعقار أو أكثر بقيمة إجمالية 400 ألف دولار فأكثر"],
+      ["Citizenship: one or more homes totalling US$400k+", "الجنسية التركية بعقار أو أكثر بقيمة إجمالية 400 ألف دولار فأكثر"],
     ],
     qualifier: ["For buyers with a budget from US$200,000", "للمشترين بميزانية تبدأ من 200 ألف دولار"],
   },
