@@ -2,7 +2,7 @@ import { t, link, getLocale, getProjectContent, intlTag, listSep } from "../../i
 import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
-import { fetchInquiries, updateInquiry, type Inquiry, type InquiryKind, type InquiryStatus } from "../../data/inquiries";
+import { fetchInquiries, inquiryKindKey, updateInquiry, type Inquiry, type InquiryKind, type InquiryStatus } from "../../data/inquiries";
 import { adminNav, queryParam } from "./nav";
 import { customerLink, whatsappReplies } from "./replies";
 
@@ -20,7 +20,7 @@ const ISTANBUL = "Europe/Istanbul";
 
 /** Form answers saved as option keys: [detail key, label key, option labels group]. */
 const DETAIL_FIELDS: Record<InquiryKind, [string, string, string | null][]> = {
-  contact: [],
+  contact: [["stage", "guide.ask.stageLabel", "guide.ask.stages"]],
   property_request: [
     ["propertyType", "propertyRequest.propertyTypeLabel", "propertyRequest.propertyTypes"],
     ["city", "propertyRequest.cityLabel", null],
@@ -112,7 +112,7 @@ function renderCard(inquiry: Inquiry): string {
     <article class="booking-card inquiry-card inquiry-card--${inquiry.status}" data-inquiry-id="${escapeHtml(inquiry.id)}">
       <header class="booking-card__head">
         <div class="booking-card__when">
-          <p class="inquiry-card__kind inquiry-card__kind--${inquiry.kind}">${t(`adminInquiries.kinds.${inquiry.kind}`)}</p>
+          <p class="inquiry-card__kind inquiry-card__kind--${inquiry.kind}">${t(`adminInquiries.kinds.${inquiryKindKey(inquiry)}`)}</p>
           <p class="inquiry-card__received">${escapeHtml(when.day)} · <span dir="ltr">${escapeHtml(when.time)}</span></p>
         </div>
         <div class="booking-card__meta">

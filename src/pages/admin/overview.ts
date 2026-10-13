@@ -3,7 +3,7 @@ import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
 import { fetchTourBookings, type TourBooking } from "../../data/tourBookings";
-import { fetchInquiries, type Inquiry } from "../../data/inquiries";
+import { fetchInquiries, inquiryKindKey, type Inquiry } from "../../data/inquiries";
 import { fetchPendingListings } from "../../data/listings";
 import { fetchVisitStats } from "../../data/adminStats";
 import { OPEN_STAGES, fetchCrmLeads, type CrmLead } from "../../data/crm";
@@ -59,7 +59,7 @@ function tourRow(b: TourBooking): string {
 function inquiryRow(i: Inquiry): string {
   const stale = Date.now() - Date.parse(i.created_at) > STALE_MS;
   return `<li class="admin-list__item">
-    <span class="admin-list__main"><strong dir="auto">${escapeHtml(i.name)}</strong><small>${t(`adminInquiries.kinds.${i.kind}`)}</small></span>
+    <span class="admin-list__main"><strong dir="auto">${escapeHtml(i.name)}</strong><small>${t(`adminInquiries.kinds.${inquiryKindKey(i)}`)}</small></span>
     <span class="admin-tag${stale ? " admin-tag--late" : ""}">${escapeHtml(ago(i.created_at))}</span>
     <a class="admin-list__open" href="${link(`/admin/inquiries?q=${encodeURIComponent(i.reference)}`)}">${t("adminHome.open")}</a>
   </li>`;

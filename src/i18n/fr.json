@@ -2835,7 +2835,7 @@
       {
         "title": "Comment vos messages nous parviennent",
         "paragraphs": [
-          "Les messages et demandes que vous envoyez via les formulaires du Site (contact, recherche de bien sur mesure et consultation en conception) sont enregistrés directement dans notre système. Notre équipe en reçoit une notification interne par Telegram et par e-mail, et vous recevez un e-mail de confirmation avec votre numéro de demande. Seule notre équipe les traite, en y notant leur état de suivi et des remarques internes afin de vous servir. Si notre système est inaccessible pour une raison technique, votre messagerie s'ouvre à la place avec un message prêt, et les informations ne nous parviennent alors que lorsque vous envoyez vous-même ce message. Les réservations de visites vidéo privées sont elles aussi enregistrées dans notre système (voir la section 5). Les messages envoyés via WhatsApp sont soumis à la politique de confidentialité de WhatsApp.", "Lorsque vous utilisez « Discuter avec l'équipe » dans la fenêtre de l'assistant, vos messages et les réponses de notre équipe sont enregistrés dans notre système, avec le nom et le moyen de contact que vous choisissez d'ajouter, la page depuis laquelle vous avez écrit, la langue du site, votre pays et votre ville approximatifs (jamais votre adresse IP) et la source publicitaire, le cas échéant. Vos messages parviennent à notre équipe sur Telegram afin qu'elle puisse vous répondre, et un code secret de la conversation est conservé uniquement dans votre navigateur (stockage local) pour que vous retrouviez les réponses à votre retour."
+          "Les messages et demandes que vous envoyez via les formulaires du Site (contact, recherche de bien sur mesure, consultation en conception et questions du guide de l'acheteur) sont enregistrés directement dans notre système. Notre équipe en reçoit une notification interne par Telegram et par e-mail, et vous recevez un e-mail de confirmation avec votre numéro de demande. Seule notre équipe les traite, en y notant leur état de suivi et des remarques internes afin de vous servir. Si notre système est inaccessible pour une raison technique, votre messagerie s'ouvre à la place avec un message prêt, et les informations ne nous parviennent alors que lorsque vous envoyez vous-même ce message. Les réservations de visites vidéo privées sont elles aussi enregistrées dans notre système (voir la section 5). Les messages envoyés via WhatsApp sont soumis à la politique de confidentialité de WhatsApp.", "Lorsque vous utilisez « Discuter avec l'équipe » dans la fenêtre de l'assistant, vos messages et les réponses de notre équipe sont enregistrés dans notre système, avec le nom et le moyen de contact que vous choisissez d'ajouter, la page depuis laquelle vous avez écrit, la langue du site, votre pays et votre ville approximatifs (jamais votre adresse IP) et la source publicitaire, le cas échéant. Vos messages parviennent à notre équipe sur Telegram afin qu'elle puisse vous répondre, et un code secret de la conversation est conservé uniquement dans votre navigateur (stockage local) pour que vous retrouviez les réponses à votre retour."
         ],
         "items": []
       },
@@ -2994,6 +2994,7 @@
     "noResults": "Aucun résultat pour cette recherche.",
     "searchPlaceholder": "Rechercher par nom, téléphone, e-mail ou numéro de demande",
     "kinds": {
+      "guide": "Question du guide de l'acheteur",
       "contact": "Formulaire de contact",
       "property_request": "Recherche de bien sur mesure",
       "consultation": "Consultation en conception"
@@ -3133,6 +3134,7 @@
       "sent": "Envoyés",
       "completion": "Terminés",
       "forms": {
+        "guide-question": "Question du guide de l'acheteur",
         "contact": "Contact",
         "property-request": "Demande de bien",
         "consultancy": "Consultation design",
@@ -3509,6 +3511,30 @@
     "ctaText": "Indiquez-nous votre objectif et votre budget : nous vous proposerons des logements adaptés et vous accompagnerons à chaque étape jusqu'à la remise des clés.",
     "ctaWhatsapp": "Écrivez-nous sur WhatsApp",
     "ctaTour": "Réserver une visite vidéo",
-    "whatsappMessage": "Bonjour, j'ai lu le guide de l'acheteur sur votre site et j'aimerais être aidé pour choisir un bien à Istanbul."
+    "whatsappMessage": "Bonjour, j'ai lu le guide de l'acheteur sur votre site et j'aimerais être aidé pour choisir un bien à Istanbul.",
+    "ask": {
+      "eyebrow": "Besoin d'aide ?",
+      "title": "Une question sur une étape ou une démarche ? Demandez à notre équipe",
+      "text": "Vous bloquez sur une étape, vous hésitez sur une démarche ou une transaction, ou il vous manque une information ? Écrivez-nous ici : votre question parvient directement à notre équipe.",
+      "points": [
+        "Votre question arrive directement à l'équipe compétente",
+        "Un numéro de demande et un e-mail de confirmation immédiatement",
+        "Nous revenons vers vous par téléphone ou avec l'information demandée"
+      ],
+      "stageLabel": "Votre question concerne quelle étape ?",
+      "stages": {
+        "before": "Avant l'achat",
+        "purchase": "L'achat",
+        "after": "Après la remise des clés",
+        "other": "Autre sujet"
+      },
+      "messageLabel": "Votre question ou la difficulté rencontrée",
+      "messagePlaceholder": "Décrivez l'étape, la démarche ou l'information dont vous avez besoin…",
+      "messageRequired": "Veuillez écrire votre question (10 caractères au moins).",
+      "submit": "Envoyer ma question",
+      "note": "Nos réponses sont des informations générales, et non un conseil juridique.",
+      "sentTitle": "Merci, nous avons bien reçu votre demande.",
+      "sentText": "Elle sera examinée par l'équipe compétente, et nous reviendrons vers vous par téléphone ou avec l'information demandée. Un e-mail de confirmation vous a été envoyé."
+    }
   }
 }

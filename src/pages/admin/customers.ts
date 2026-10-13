@@ -3,7 +3,7 @@ import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
 import { fetchTourBookings, type TourBooking } from "../../data/tourBookings";
-import { fetchInquiries, type Inquiry } from "../../data/inquiries";
+import { fetchInquiries, inquiryKindKey, type Inquiry } from "../../data/inquiries";
 import { adminHero, adminNav, queryParam } from "./nav";
 import { whatsappReplies } from "./replies";
 import { sourceLabel } from "./stats";
@@ -112,7 +112,7 @@ function entryHtml(e: Entry): string {
     const message = i.message ? `<p class="customer-entry__text" dir="auto">${escapeHtml(i.message.length > 280 ? `${i.message.slice(0, 280)}…` : i.message)}</p>` : "";
     const notes = i.notes ? `<p class="customer-entry__notes"><strong>${t("adminInquiries.notesLabel")}:</strong> <span dir="auto">${escapeHtml(i.notes)}</span></p>` : "";
     return `<li class="customer-entry">
-      <p class="customer-entry__head">📩 <strong>${t(`adminInquiries.kinds.${i.kind}`)}</strong>
+      <p class="customer-entry__head">📩 <strong>${t(`adminInquiries.kinds.${inquiryKindKey(i)}`)}</strong>
         <span class="booking-status inquiry-status--${i.status}">${t(`adminInquiries.status.${i.status}`)}</span>
         <span class="customer-entry__date">${escapeHtml(when(i.created_at))}</span>
         <a href="${link(`/admin/inquiries?q=${encodeURIComponent(i.reference)}`)}" dir="ltr">${escapeHtml(i.reference)}</a></p>
