@@ -22,6 +22,8 @@ const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const PHONE = /^\+?[0-9][0-9 ()-]{5,28}$/;
 const SLUG = /^[a-z0-9-]{1,60}$/;
 const DETAIL_KEY = /^[a-zA-Z]{1,30}$/;
+/** Stages of the Buyer's Guide question box (details.form = "guide"). */
+const GUIDE_STAGES = ["before", "purchase", "after", "other"];
 const BOT_AGENT = /bot|crawl|spider|slurp|headless|lighthouse/i;
 /** A person needs far longer than this to fill in a form. */
 const MIN_FILL_MS = 3000;
@@ -100,6 +102,9 @@ function parse(body: unknown): Parsed | null {
     if (label && value) summaryAr.push([label, value]);
   }
 
+  // A Buyer's Guide question is a contact message with details.form = "guide" and a known stage.
+  if (details.form && (details.form !== "guide" || kind !== "contact" || !GUIDE_STAGES.includes(details.stage ?? ""))) return null;
+
   const page = text(d.page, 200);
   return {
     kind,
@@ -160,6 +165,7 @@ export async function POST(request: Request): Promise<Response> {
   const details: InquiryDetails = {
     reference: result.reference,
     kind: inquiry.kind,
+    guideStage: inquiry.details.form === "guide" ? inquiry.details.stage : undefined,
     name: inquiry.name,
     email: inquiry.email,
     phone: inquiry.phone,

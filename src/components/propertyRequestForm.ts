@@ -17,11 +17,32 @@ function optionsHtml(values: string[], labels: Record<string, string>, placehold
   `;
 }
 
-function placeOptionsHtml(items: { value: string; label: string }[], placeholder: string): string {
+function placeOptionsHtml(items: { value: string; label: string }[], placeholder: string, selected = ""): string {
   return `
-    <option value="" disabled selected>${placeholder}</option>
-    ${items.map((i) => `<option value="${i.value}">${i.label}</option>`).join("")}
+    <option value="" disabled${selected ? "" : " selected"}>${placeholder}</option>
+    ${items.map((i) => `<option value="${i.value}"${i.value === selected ? " selected" : ""}>${i.label}</option>`).join("")}
   `;
+}
+
+/** Most requests are for Istanbul, so it is chosen from the start (the visitor can change it). */
+const DEFAULT_CITY = "istanbul";
+
+/** One choice out of a few, shown as tappable chips (radio buttons). */
+function chipsHtml(name: string, label: string, values: string[], labels: Record<string, string>): string {
+  return `
+      <fieldset class="form-field req-choice">
+        <legend>${label}</legend>
+        <div class="req-chips">
+          ${values
+            .map((v) => `<label class="req-chip"><input type="radio" name="${name}" value="${v}" /><span>${labels[v] ?? v}</span></label>`)
+            .join("")}
+        </div>
+        <p class="form-field__error" data-error-for="${name}"></p>
+      </fieldset>`;
+}
+
+function groupTitle(n: number, key: string): string {
+  return `<h3 class="req-group__title"><span dir="ltr">${n}</span>${t(`propertyRequest.groups.${key}`)}</h3>`;
 }
 
 export function renderPropertyRequestForm(): string {
@@ -34,60 +55,31 @@ export function renderPropertyRequestForm(): string {
     <form class="contact-form property-request-form" id="property-request-form" novalidate>
       <p class="contact-form__subtitle">${t("propertyRequest.formSubtitle")}</p>
 
-      <div class="form-field">
-        <label for="pr-name">${t("propertyRequest.nameLabel")}</label>
-        <input type="text" id="pr-name" name="name" placeholder="${t("propertyRequest.namePlaceholder")}" autocomplete="name" />
-        <p class="form-field__error" data-error-for="name"></p>
+      <div class="req-group">
+        ${groupTitle(1, "property")}
+        ${chipsHtml("propertyType", t("propertyRequest.propertyTypeLabel"), propertyTypeOptions, propertyTypeLabels)}
+        ${chipsHtml("condition", t("propertyRequest.conditionLabel"), conditionOptions, conditionLabels)}
+        ${chipsHtml("floor", t("propertyRequest.floorLabel"), floorOptions, floorLabels)}
       </div>
 
-      <div class="form-row">
-        <div class="form-field">
-          <label for="pr-email">${t("propertyRequest.emailLabel")}</label>
-          <input dir="ltr" type="email" id="pr-email" name="email" placeholder="${t("propertyRequest.emailPlaceholder")}" autocomplete="email" />
-          <p class="form-field__error" data-error-for="email"></p>
+      <div class="req-group">
+        ${groupTitle(2, "location")}
+        <div class="form-row">
+          <div class="form-field">
+            <label for="pr-city">${t("propertyRequest.cityLabel")}</label>
+            <select id="pr-city" name="city">
+              ${placeOptionsHtml(turkeyProvinces, t("propertyRequest.cityPlaceholder"), DEFAULT_CITY)}
+            </select>
+            <p class="form-field__error" data-error-for="city"></p>
+          </div>
+          <div class="form-field">
+            <label for="pr-district">${t("propertyRequest.districtLabel")}</label>
+            <select id="pr-district" name="district" disabled>
+              <option value="" disabled selected>${t("propertyRequest.districtPlaceholder")}</option>
+            </select>
+            <p class="form-field__error" data-error-for="district"></p>
+          </div>
         </div>
-        <div class="form-field">
-          <label for="${PHONE_ID}-number">${t("propertyRequest.phoneLabel")}</label>
-          ${renderPhoneInput(PHONE_ID, "phone")}
-          <p class="form-field__error" data-error-for="phone"></p>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-field">
-          <label for="pr-property-type">${t("propertyRequest.propertyTypeLabel")}</label>
-          <select id="pr-property-type" name="propertyType">
-            ${optionsHtml(propertyTypeOptions, propertyTypeLabels, t("propertyRequest.propertyTypePlaceholder"))}
-          </select>
-          <p class="form-field__error" data-error-for="propertyType"></p>
-        </div>
-        <div class="form-field">
-          <label for="pr-condition">${t("propertyRequest.conditionLabel")}</label>
-          <select id="pr-condition" name="condition">
-            ${optionsHtml(conditionOptions, conditionLabels, t("propertyRequest.conditionPlaceholder"))}
-          </select>
-          <p class="form-field__error" data-error-for="condition"></p>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-field">
-          <label for="pr-city">${t("propertyRequest.cityLabel")}</label>
-          <select id="pr-city" name="city">
-            ${placeOptionsHtml(turkeyProvinces, t("propertyRequest.cityPlaceholder"))}
-          </select>
-          <p class="form-field__error" data-error-for="city"></p>
-        </div>
-        <div class="form-field">
-          <label for="pr-district">${t("propertyRequest.districtLabel")}</label>
-          <select id="pr-district" name="district" disabled>
-            <option value="" disabled selected>${t("propertyRequest.districtPlaceholder")}</option>
-          </select>
-          <p class="form-field__error" data-error-for="district"></p>
-        </div>
-      </div>
-
-      <div class="form-row">
         <div class="form-field">
           <label for="pr-budget">${t("propertyRequest.budgetLabel")}</label>
           <select id="pr-budget" name="budget">
@@ -96,17 +88,30 @@ export function renderPropertyRequestForm(): string {
           <p class="form-field__error" data-error-for="budget"></p>
         </div>
         <div class="form-field">
-          <label for="pr-floor">${t("propertyRequest.floorLabel")}</label>
-          <select id="pr-floor" name="floor">
-            ${optionsHtml(floorOptions, floorLabels, t("propertyRequest.floorPlaceholder"))}
-          </select>
-          <p class="form-field__error" data-error-for="floor"></p>
+          <label for="pr-notes">${t("propertyRequest.notesLabel")}</label>
+          <textarea id="pr-notes" name="notes" rows="3" placeholder="${t("propertyRequest.notesPlaceholder")}"></textarea>
         </div>
       </div>
 
-      <div class="form-field">
-        <label for="pr-notes">${t("propertyRequest.notesLabel")}</label>
-        <textarea id="pr-notes" name="notes" rows="4" placeholder="${t("propertyRequest.notesPlaceholder")}"></textarea>
+      <div class="req-group">
+        ${groupTitle(3, "contact")}
+        <div class="form-row">
+          <div class="form-field">
+            <label for="pr-name">${t("propertyRequest.nameLabel")}</label>
+            <input type="text" id="pr-name" name="name" placeholder="${t("propertyRequest.namePlaceholder")}" autocomplete="name" />
+            <p class="form-field__error" data-error-for="name"></p>
+          </div>
+          <div class="form-field">
+            <label for="pr-email">${t("propertyRequest.emailLabel")}</label>
+            <input dir="ltr" type="email" id="pr-email" name="email" placeholder="${t("propertyRequest.emailPlaceholder")}" autocomplete="email" />
+            <p class="form-field__error" data-error-for="email"></p>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="${PHONE_ID}-number">${t("propertyRequest.phoneLabel")}</label>
+          ${renderPhoneInput(PHONE_ID, "phone")}
+          <p class="form-field__error" data-error-for="phone"></p>
+        </div>
       </div>
 
       ${honeypotField()}
@@ -125,6 +130,8 @@ function setError(form: HTMLFormElement, field: string, message: string): void {
   const input = form.querySelector<HTMLElement>(`[name="${field}"]`);
   if (errorEl) errorEl.textContent = message;
   if (input) input.setAttribute("aria-invalid", message ? "true" : "false");
+  // Chip groups mark the whole group.
+  errorEl?.closest(".req-choice")?.classList.toggle("is-invalid", Boolean(message));
 }
 
 function requireValue(form: HTMLFormElement, field: string, errorKey: string): boolean {
@@ -190,7 +197,7 @@ export function initPropertyRequestForm(container: ParentNode): void {
   const citySelect = form.querySelector<HTMLSelectElement>("#pr-city")!;
   const districtSelect = form.querySelector<HTMLSelectElement>("#pr-district")!;
 
-  citySelect.addEventListener("change", () => {
+  const fillDistricts = () => {
     const province = turkeyProvinces.find((p) => p.value === citySelect.value);
     setError(form, "district", "");
     if (!province) {
@@ -200,6 +207,14 @@ export function initPropertyRequestForm(container: ParentNode): void {
     }
     districtSelect.disabled = false;
     districtSelect.innerHTML = placeOptionsHtml(province.districts, t("propertyRequest.districtSelectPlaceholder"));
+  };
+  citySelect.addEventListener("change", fillDistricts);
+  fillDistricts();
+
+  // A chosen chip clears its group's error.
+  form.addEventListener("change", (e) => {
+    const input = e.target as HTMLInputElement;
+    if (input.type === "radio") setError(form, input.name, "");
   });
 
   const successBox = form.querySelector<HTMLElement>("#pr-success")!;
@@ -287,7 +302,6 @@ export function initPropertyRequestForm(container: ParentNode): void {
       showMailtoSent(successBox);
     }
     form.reset();
-    districtSelect.innerHTML = `<option value="" disabled selected>${t("propertyRequest.districtPlaceholder")}</option>`;
-    districtSelect.disabled = true;
+    fillDistricts();
   });
 }

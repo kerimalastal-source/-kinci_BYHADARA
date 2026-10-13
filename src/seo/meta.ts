@@ -8,6 +8,7 @@ import { placeKey } from "../utils/place";
 import { CONSULTANCY_PAGE_IMAGES } from "../data/consultancy";
 import { SOCIAL_LINKS } from "../data/social";
 import { LAWS_PAGE_LIVE } from "../data/laws";
+import { RESALE_LIVE } from "../data/resale";
 
 /** The live address: hadararealestate.com redirects here (308), so canonical/hreflang/sitemap URLs use www. */
 export const DEFAULT_SITE_URL = "https://www.hadararealestate.com";
@@ -52,6 +53,7 @@ const PAGE_KEYS: Partial<Record<Route["name"], string>> = {
   faq: "faq",
   privacy: "privacy",
   laws: "laws",
+  "buyers-guide": "guide",
   blog: "blog",
   "property-request": "propertyRequest",
   "video-tour": "videoTour",
@@ -110,8 +112,9 @@ export function indexableRoutes(): Route[] {
     { name: "property-request" },
     { name: "video-tour" },
     { name: "contact" },
-    { name: "resale" },
+    ...(RESALE_LIVE ? [{ name: "resale" } as Route] : []),
     { name: "privacy" },
+    { name: "buyers-guide" },
     ...(LAWS_PAGE_LIVE ? [{ name: "laws" } as Route] : [])
   ];
 }
@@ -363,7 +366,10 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
   }
 
   const path = routePath(pageRoute.name === "not-found" ? route : pageRoute);
-  const noindex = NOINDEX.includes(pageRoute.name) || (pageRoute.name === "laws" && !LAWS_PAGE_LIVE);
+  const noindex =
+    NOINDEX.includes(pageRoute.name) ||
+    (pageRoute.name === "laws" && !LAWS_PAGE_LIVE) ||
+    ((pageRoute.name === "resale" || pageRoute.name === "resale-listing") && !RESALE_LIVE);
 
   return {
     locale,

@@ -1,6 +1,7 @@
 import { t, link } from "../../i18n";
 import { requireAuth, getCurrentProfile } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
+import { RESALE_LIVE } from "../../data/resale";
 import {
   fetchMyListings,
   fetchCoverPhotos,
@@ -30,7 +31,7 @@ function renderRow(listing: Listing, coverPath: string | undefined): string {
         ${listing.status === "rejected" && listing.rejection_reason ? `<p class="listing-row__rejection"><strong>${t("account.rejectionReasonLabel")}:</strong> ${escapeHtml(listing.rejection_reason)}</p>` : ""}
       </div>
       <div class="listing-row__actions">
-        ${listing.status === "approved" ? `<a class="btn btn--outline btn--small" href="${link(`/resale/${listing.id}`)}">${t("account.viewButton")}</a>` : ""}
+        ${RESALE_LIVE && listing.status === "approved" ? `<a class="btn btn--outline btn--small" href="${link(`/resale/${listing.id}`)}">${t("account.viewButton")}</a>` : ""}
         ${canEdit ? `<a class="btn btn--outline btn--small" href="${link(`/account/listings/${listing.id}/edit`)}">${t("account.editButton")}</a>` : ""}
         ${canWithdraw ? `<button type="button" class="btn btn--outline btn--small" data-withdraw="${listing.id}">${t("account.withdrawButton")}</button>` : ""}
       </div>

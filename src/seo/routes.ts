@@ -26,6 +26,9 @@ export function consultancyPath(page: ConsultancyPage = "overview"): string {
 /** URL segment of the "Property Laws" page. */
 export const LAWS_SEGMENT = "property-laws";
 
+/** URL segment of the "Buyer's Guide" page. */
+export const GUIDE_SEGMENT = "buyers-guide";
+
 export type Route =
   | { name: "home" }
   | { name: "projects" }
@@ -36,6 +39,7 @@ export type Route =
   | { name: "faq" }
   | { name: "privacy" }
   | { name: "laws" }
+  | { name: "buyers-guide" }
   | { name: "blog" }
   | { name: "blog-post"; slug: string }
   | { name: "property-request" }
@@ -91,6 +95,7 @@ export function parseRoute(path: string): Route {
   if (segment === "faq") return { name: "faq" };
   if (segment === "privacy" && !p1) return { name: "privacy" };
   if (segment === LAWS_SEGMENT && !p1) return { name: "laws" };
+  if (segment === GUIDE_SEGMENT && !p1) return { name: "buyers-guide" };
   if (segment === "blog" && p1) return { name: "blog-post", slug: p1 };
   if (segment === "blog") return { name: "blog" };
   if (segment === "property-request") return { name: "property-request" };
@@ -155,6 +160,8 @@ export function routePath(route: Route): string {
       return "/admin/chats";
     case "laws":
       return `/${LAWS_SEGMENT}`;
+    case "buyers-guide":
+      return `/${GUIDE_SEGMENT}`;
     case "consultancy":
       return consultancyPath(route.page);
     case "not-found":

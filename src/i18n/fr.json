@@ -16,6 +16,7 @@
     "blog": "Blog",
     "faq": "FAQ",
     "laws": "Lois immobilières",
+    "guide": "Guide de l'acheteur",
     "resources": "Ressources",
     "contact": "Contact",
     "getInTouch": "Nous contacter",
@@ -155,8 +156,8 @@
         "desc": "Un accompagnement complet pour les acheteurs internationaux souhaitant obtenir la citoyenneté turque par l'immobilier."
       },
       {
-        "title": "Recherche de biens et revente",
-        "desc": "Dites-nous ce que vous cherchez et nous le trouverons, ou parcourez les biens en revente validés."
+        "title": "Recherche de biens",
+        "desc": "Dites-nous ce que vous cherchez, et nous trouverons le bien qui vous convient."
       }
     ],
     "whyEyebrow": "Pourquoi HADARA",
@@ -653,9 +654,31 @@
     ]
   },
   "propertyRequest": {
+    "heroCta": "Commencer ma demande",
+    "heroWhatsapp": "Écrire sur WhatsApp",
+    "trust": ["Istanbul et toutes les villes de Turquie", "Notre équipe parle arabe, anglais et turc", "Votre demande arrive directement à notre équipe, avec un numéro de demande"],
+    "mock": {"title": "Votre demande", "status": "Recherche en cours"},
+    "howEyebrow": "Comment ça marche",
+    "howTitle": "De votre demande à vos clés, en quatre étapes",
+    "how": [{"title": "Dites-nous ce que vous cherchez", "text": "Remplissez le formulaire en deux minutes : type de bien, quartier, budget et étage."}, {"title": "Nous étudions votre demande", "text": "Notre équipe étudie votre demande et peut vous contacter pour bien comprendre votre objectif : résidence, investissement ou citoyenneté."}, {"title": "Nous vous présentons une sélection", "text": "Nous vous envoyons les options adaptées parmi nos projets et ceux des promoteurs avec lesquels nous travaillons, avec leurs détails."}, {"title": "À vos côtés jusqu'aux clés", "text": "Nous organisons une visite en vidéo ou sur place, et vous accompagnons dans l'achat jusqu'à la remise des clés."}],
+    "groups": {"property": "Le bien recherché", "location": "Lieu et budget", "contact": "Vos coordonnées"},
+    "asideTitle": "Que se passe-t-il après l'envoi ?",
+    "aside": ["Vous recevez un e-mail de confirmation avec votre numéro de demande.", "Notre équipe étudie votre demande et vous contacte par téléphone, WhatsApp ou e-mail.", "Nous vous présentons les options adaptées, et vous choisissez celles à visiter."],
+    "asideWhatsappTitle": "Vous préférez parler directement ?",
+    "asideWhatsapp": "Écrivez-nous sur WhatsApp",
+    "unsureTitle": "Pas encore sûr de ce que vous voulez ?",
+    "unsure": {"match": "Trouvez votre projet en 4 questions", "guide": "Guide de l'acheteur : toutes les étapes jusqu'aux clés", "tour": "Visite privée en vidéo"},
+    "whyEyebrow": "Pourquoi HADARA",
+    "whyTitle": "Votre partenaire immobilier dans votre recherche",
+    "why": [{"title": "Plus d'options que nos annonces", "text": "Nous cherchons parmi nos projets, ceux des promoteurs avec lesquels nous travaillons et, si besoin, les biens prêts à habiter."}, {"title": "Des informations claires avant de décider", "text": "Nous vous expliquons la surface brute et nette, l'état de la construction et ce qui concerne la citoyenneté et le titre de séjour, avant votre décision."}, {"title": "À vos côtés jusqu'à la remise des clés", "text": "Des visites au titre de propriété et à la livraison, notre équipe vous accompagne à chaque étape."}],
+    "ctaTitle": "Vous préférez parler à un conseiller maintenant ?",
+    "ctaText": "Écrivez-nous sur WhatsApp ou réservez une visite privée en vidéo : nous répondrons à vos questions.",
+    "ctaWhatsapp": "Écrivez-nous sur WhatsApp",
+    "ctaTour": "Réserver une visite vidéo",
+    "whatsappMessage": "Bonjour, je cherche un bien en Turquie et j'aimerais l'aide de l'équipe HADARA.",
     "heroEyebrow": "Recherche immobilière personnalisée",
-    "heroTitle": "Demander un bien sur mesure",
-    "heroSubtitle": "Vous cherchez un bien précis qui ne figure pas parmi nos projets actuels ? Dites-nous exactement ce dont vous avez besoin, et nos conseillers vous aideront à le trouver.",
+    "heroTitle": "Dites-nous ce que vous cherchez, nous trouvons les bonnes options",
+    "heroSubtitle": "Vous n'avez pas trouvé votre bien parmi nos projets ? Indiquez le type de bien, le quartier et le budget : notre équipe recherche les options adaptées et vous les présente.",
     "formTitle": "Dites-nous ce que vous recherchez",
     "formSubtitle": "Tous les champs ci-dessous sont obligatoires afin que nos conseillers puissent trouver l'offre qui vous correspond.",
     "nameLabel": "Nom complet *",
@@ -1608,6 +1631,27 @@
     }
   },
   "blogData": {
+    "apartment-or-villa": {
+      "category": "Achat immobilier",
+      "title": "Appartement ou villa à Istanbul ? Comment choisir",
+      "excerpt": "Une comparaison pratique entre vivre dans un appartement d'une résidence ou dans une villa privée, avec des exemples réels des projets de HADARA.",
+      "body": [
+        "Beaucoup d'acheteurs à Istanbul arrivent tôt à la même croisée des chemins : un appartement moderne dans une résidence sécurisée ou une villa bien à eux. Les deux peuvent être un excellent choix, et aucun n'est meilleur pour tout le monde. La réponse dépend de votre façon de vivre, de l'espace dont vous avez besoin et de l'ambiance que vous voulez pour vos journées. Ce guide passe en revue les points essentiels pour décider sereinement avant votre visite.",
+        "## Espace et agencement",
+        "La première différence est l'espace. Les appartements de Lotus Yaşam à Beylikdüzü, par exemple, sont des 2+1 d'environ 100 à 109 m² bruts, des 3+1 de 134 à 167 m² et des 4+1 de 194 à 197 m² bruts. Une villa change d'échelle. Les villas 6+2 de Lotus Manzara Güzelce mesurent 343,15 m² bruts (298,43 m² nets) sur trois niveaux, et les villas 5+2 de Lotus Manzara Beylikdüzü de 303,40 à 322,15 m² bruts. Marmara Haven Villa à Büyükçekmece offre 576,63 m² bruts sur quatre niveaux, sur un terrain de 637 m². Une villa apporte aussi un jardin, une terrasse et souvent un garage privé, que l'appartement partage ou n'a pas.",
+        "## Intimité et vie quotidienne",
+        "Dans une villa, les murs, l'escalier et le jardin n'appartiennent qu'à vous. Pas de voisins au-dessus ou en dessous, et c'est vous qui décidez de l'usage de l'espace extérieur. Dans une résidence d'appartements, vous vivez parmi d'autres, ce qui a de vrais avantages : des cours intérieures, un quartier animé et le sentiment que quelqu'un est toujours à proximité. Si vous voyagez souvent et laissez le logement vide pendant de longues périodes, beaucoup de propriétaires trouvent un appartement dans une résidence gérée plus confortable qu'une villa qui demande une attention régulière.",
+        "## Équipements et services partagés",
+        "Les résidences d'appartements partagent généralement leurs équipements entre de nombreux logements. D'après les données des projets du site, ces résidences proposent notamment une salle de sport, la sécurité, des caméras de surveillance, le nettoyage, des espaces paysagers et un groupe électrogène de secours, et Lotus Yaşam y ajoute une aire de jeux pour enfants, un terrain de sport et un parcours de marche autour de ses 18 blocs. Les résidences de villas comme Lotus Manzara Güzelce et Lotus Manzara Beylikdüzü partagent une salle de fitness, un sauna et un hammam, avec sécurité, caméras et groupe électrogène, tandis que chaque villa garde son propre garage couvert pour deux voitures. Marmara Haven Villa place les équipements dans la maison elle-même, avec une piscine privée de 26 m², un ascenseur desservant tous les niveaux et un système de maison connectée.",
+        "## Entretien et coûts courants",
+        "Une maison plus grande avec jardin demande plus de soin, quel que soit le projet. Jardins, terrasses, piscines et plusieurs niveaux exigent un entretien régulier, et un grand volume coûte plus cher à chauffer et à nettoyer. Dans une résidence, beaucoup de ces tâches sont assurées collectivement et financées par des charges mensuelles, qui font normalement partie de la propriété dans une copropriété bien gérée. Renseignez-vous sur ce que ces charges couvrent avant de décider, car cela varie d'un projet à l'autre.",
+        "## Budget et stade du projet",
+        "Le budget compte, mais le calendrier aussi. Parmi les projets de notre site, Lotus Yaşam est un nouveau lancement dont la livraison est prévue en 2028, tandis que les projets de villas cités ici sont achevés et prêts à habiter, avec des villas encore disponibles au moment de la rédaction. Si vous voulez emménager bientôt, un logement prêt supprime l'attente. Si vous pouvez patienter, un nouveau lancement peut convenir à un plan de paiement souple. Demandez à HADARA la disponibilité et le prix actuels de toute unité, car les deux peuvent changer.",
+        "## Quelques questions à vous poser",
+        "Combien de personnes vivront dans le logement, et à quelle fréquence ? Voulez-vous un jardin, ou préférez-vous ne pas en entretenir un ? Y serez-vous toute l'année ou une partie seulement ? La vue sur la mer compte-t-elle pour vous ? L'aspect juridique est-il important, comme l'éligibilité à la citoyenneté turque par l'immobilier ? Les données du site montrent que l'éligibilité dépend du projet et des conditions en vigueur, lesquelles relèvent de la loi actuelle et peuvent changer ; vérifiez-les donc toujours pour le bien que vous choisissez.",
+        "Il n'y a pas de réponse unique, seulement celle qui convient à votre vie. HADARA, votre partenaire immobilier à Istanbul, compare volontiers les options avec vous. Contactez-nous ou réservez une visite vidéo privée pour présélectionner un appartement et une villa côte à côte, puis venez à Istanbul les voir en personne, car l'achat lui-même se conclut lors d'une visite."
+      ]
+    },
     "beylikduzu-district-guide": {
       "category": "À propos d'Istanbul",
       "title": "Guide du quartier de Beylikdüzü pour acheteurs étrangers",
@@ -2200,9 +2244,13 @@
     "processTeaserCta": "Découvrir notre méthode"
   },
   "seo": {
+    "guide": {
+      "title": "Guide de l'acheteur : acheter un bien à Istanbul étape par étape",
+      "description": "Acheter à Istanbul en tant qu'étranger : avant l'achat, l'achat et le titre de propriété, puis l'après-remise des clés, expliqués clairement par HADARA."
+    },
     "laws": {
       "title": "Actualité du droit immobilier en Turquie",
-      "description": "Les règles en vigueur et les dernières décisions officielles sur la citoyenneté, la résidence, l'achat immobilier, les impôts et la location en Turquie, chacune avec le lien vers sa source gouvernementale."
+      "description": "Règles en vigueur et dernières décisions officielles en Turquie : citoyenneté, résidence, achat, impôts et location, avec le lien vers la source officielle."
     },
     "privacy": {
       "title": "Politique de confidentialité",
@@ -2210,7 +2258,7 @@
     },
     "videoTour": {
       "title": "Visites privées en vidéo de nos projets à Istanbul",
-      "description": "Réservez une visite vidéo gratuite et en direct avec un conseiller HADARA : appartement témoin, maquette et projet sur place — en arabe, anglais ou turc, tous les jours de 9 h à 19 h."
+      "description": "Visite vidéo gratuite en direct avec un conseiller HADARA : appartement témoin, maquette et chantier, en arabe, anglais ou turc, tous les jours de 9 h à 19 h."
     },
     "consultancy": {
       "title": "Conseil en ingénierie et architecture",
@@ -2236,15 +2284,15 @@
     },
     "home": {
       "title": "HADARA Immobilier | Votre partenaire immobilier à Istanbul, Turquie",
-      "description": "Votre partenaire immobilier à Istanbul depuis 2014 : villas de luxe, appartements et projets mixtes à Beylikdüzü, Büyükçekmece, Avcılar et Şişli, avec accompagnement vers la citoyenneté turque."
+      "description": "Partenaire immobilier à Istanbul depuis 2014 : villas, appartements et projets mixtes à Beylikdüzü, Büyükçekmece, Avcılar et Şişli, et aide à la citoyenneté."
     },
     "projects": {
       "title": "Nos projets à Istanbul – Appartements et villas",
-      "description": "Découvrez les projets résidentiels, mixtes et villas de HADARA à Beylikdüzü, Büyükçekmece, Avcılar et Şişli, Istanbul : nouveaux lancements, chantiers en cours et biens livrés."
+      "description": "Projets résidentiels, mixtes et villas HADARA à Beylikdüzü, Büyükçekmece, Avcılar et Şişli, Istanbul : nouveaux lancements, chantiers en cours et biens livrés."
     },
     "about": {
       "title": "À propos de HADARA – Développement et commercialisation depuis 2014",
-      "description": "Découvrez HADARA Immobilier, partenaire de développement et de commercialisation immobilière à Istanbul depuis 2014 : notre histoire, notre mission, nos valeurs et les projets que nous proposons dans les quartiers dynamiques de la ville."
+      "description": "HADARA Immobilier, partenaire de développement et de commercialisation immobilière à Istanbul depuis 2014 : notre histoire, nos valeurs et nos projets."
     },
     "citizenship": {
       "title": "Citoyenneté turque par investissement immobilier",
@@ -2809,7 +2857,7 @@
       {
         "title": "Comment vos messages nous parviennent",
         "paragraphs": [
-          "Les messages et demandes que vous envoyez via les formulaires du Site (contact, recherche de bien sur mesure et consultation en conception) sont enregistrés directement dans notre système. Notre équipe en reçoit une notification interne par Telegram et par e-mail, et vous recevez un e-mail de confirmation avec votre numéro de demande. Seule notre équipe les traite, en y notant leur état de suivi et des remarques internes afin de vous servir. Si notre système est inaccessible pour une raison technique, votre messagerie s'ouvre à la place avec un message prêt, et les informations ne nous parviennent alors que lorsque vous envoyez vous-même ce message. Les réservations de visites vidéo privées sont elles aussi enregistrées dans notre système (voir la section 5). Les messages envoyés via WhatsApp sont soumis à la politique de confidentialité de WhatsApp.", "Lorsque vous utilisez « Discuter avec l'équipe » dans la fenêtre de l'assistant, vos messages et les réponses de notre équipe sont enregistrés dans notre système, avec le nom et le moyen de contact que vous choisissez d'ajouter, la page depuis laquelle vous avez écrit, la langue du site, votre pays et votre ville approximatifs (jamais votre adresse IP) et la source publicitaire, le cas échéant. Vos messages parviennent à notre équipe sur Telegram afin qu'elle puisse vous répondre, et un code secret de la conversation est conservé uniquement dans votre navigateur (stockage local) pour que vous retrouviez les réponses à votre retour."
+          "Les messages et demandes que vous envoyez via les formulaires du Site (contact, recherche de bien sur mesure, consultation en conception et questions du guide de l'acheteur) sont enregistrés directement dans notre système. Notre équipe en reçoit une notification interne par Telegram et par e-mail, et vous recevez un e-mail de confirmation avec votre numéro de demande. Seule notre équipe les traite, en y notant leur état de suivi et des remarques internes afin de vous servir. Si notre système est inaccessible pour une raison technique, votre messagerie s'ouvre à la place avec un message prêt, et les informations ne nous parviennent alors que lorsque vous envoyez vous-même ce message. Les réservations de visites vidéo privées sont elles aussi enregistrées dans notre système (voir la section 5). Les messages envoyés via WhatsApp sont soumis à la politique de confidentialité de WhatsApp.", "Lorsque vous utilisez « Discuter avec l'équipe » dans la fenêtre de l'assistant, vos messages et les réponses de notre équipe sont enregistrés dans notre système, avec le nom et le moyen de contact que vous choisissez d'ajouter, la page depuis laquelle vous avez écrit, la langue du site, votre pays et votre ville approximatifs (jamais votre adresse IP) et la source publicitaire, le cas échéant. Vos messages parviennent à notre équipe sur Telegram afin qu'elle puisse vous répondre, et un code secret de la conversation est conservé uniquement dans votre navigateur (stockage local) pour que vous retrouviez les réponses à votre retour."
         ],
         "items": []
       },
@@ -2968,6 +3016,7 @@
     "noResults": "Aucun résultat pour cette recherche.",
     "searchPlaceholder": "Rechercher par nom, téléphone, e-mail ou numéro de demande",
     "kinds": {
+      "guide": "Question du guide de l'acheteur",
       "contact": "Formulaire de contact",
       "property_request": "Recherche de bien sur mesure",
       "consultation": "Consultation en conception"
@@ -3107,6 +3156,7 @@
       "sent": "Envoyés",
       "completion": "Terminés",
       "forms": {
+        "guide-question": "Question du guide de l'acheteur",
         "contact": "Contact",
         "property-request": "Demande de bien",
         "consultancy": "Consultation design",
@@ -3180,7 +3230,8 @@
       "resale": "Revente",
       "property-request": "Demande de bien",
       "engineering-architecture": "Conception",
-      "privacy": "Confidentialité"
+      "privacy": "Confidentialité",
+      "buyers-guide": "Guide de l'acheteur"
     }
   },
   "adminCustomers": {
@@ -3372,5 +3423,140 @@
     "telegramUnknown": "Impossible de vérifier les réponses Telegram pour le moment.",
     "telegramNoBot": "Le bot Telegram n’est pas configuré (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID dans Vercel).",
     "telegramNoSecret": "CRON_SECRET n’est pas défini dans Vercel : les réponses Telegram ne peuvent pas être activées."
+  },
+  "guide": {
+    "heroEyebrow": "Guide de l'acheteur",
+    "heroTitle": "Acheter votre logement à Istanbul, étape par étape",
+    "heroSubtitle": "De votre première question jusqu'à la remise des clés et votre installation : tout le parcours en trois étapes claires, avec HADARA à vos côtés à chaque pas.",
+    "stagesLabel": "Les étapes du parcours d'achat",
+    "stepsCount": "{count} étapes",
+    "more": "En savoir plus",
+    "stages": [
+      {
+        "label": "Avant l'achat",
+        "title": "Avant d'acheter",
+        "intro": "Précisez vos besoins et vérifiez soigneusement le bien avant de vous engager.",
+        "steps": [
+          {
+            "title": "Définir votre objectif et votre budget",
+            "text": "Une résidence, un investissement ou une voie vers le titre de séjour ou la citoyenneté : votre objectif oriente le quartier, la surface et le budget. En plus du prix, prévoyez les droits d'enregistrement de 4 % et les charges courantes."
+          },
+          {
+            "title": "Choisir le quartier et le type de logement",
+            "text": "La mer, la nature ou le cœur de la ville ; un appartement en résidence ou une villa avec jardin. Imaginer la semaine type de votre famille rend le choix bien plus simple."
+          },
+          {
+            "title": "Bien lire l'annonce",
+            "text": "Connaissez la différence entre surface brute et surface nette, et le sens des typologies comme 2+1 ou 3+1, pour comparer les logements équitablement."
+          },
+          {
+            "title": "Sur plan ou prêt à habiter",
+            "text": "Un nouveau projet offre généralement plus de choix et un paiement étalé sur la durée des travaux ; un logement achevé peut être habité tout de suite. Comparez-les selon votre calendrier."
+          },
+          {
+            "title": "Voir le logement avant de décider",
+            "text": "Venez à Istanbul, ou commencez par une visite privée gratuite en vidéo de l'appartement témoin et du projet sur place, sans engagement."
+          },
+          {
+            "title": "Vérifier les documents",
+            "text": "Renseignez-vous sur le type de titre de propriété, le permis de construire, le certificat de conformité (İskan) d'un immeuble achevé et toute hypothèque ou saisie. Si vous comptez y résider, vérifiez que le quartier est ouvert aux nouvelles inscriptions de résidents étrangers."
+          }
+        ]
+      },
+      {
+        "label": "L'achat",
+        "title": "Finaliser l'achat",
+        "intro": "Une suite d'étapes bien définie, de la réservation jusqu'au titre de propriété à votre nom.",
+        "steps": [
+          {
+            "title": "Réserver le logement",
+            "text": "Le contrat de réservation vous garantit le logement et fixe le prix convenu, le mode de paiement et les étapes suivantes. Un logement en construction est généralement vendu par promesse de vente notariée."
+          },
+          {
+            "title": "Numéro fiscal et compte bancaire",
+            "text": "Avant de payer, il vous faut un numéro fiscal turc et un compte dans une banque locale. Les deux s'obtiennent facilement, et notre équipe vous accompagne."
+          },
+          {
+            "title": "Préparer vos documents",
+            "text": "Un passeport valide ; tout document délivré à l'étranger nécessite une apostille ou une légalisation consulaire et une traduction turque assermentée. Beaucoup d'étapes peuvent se faire par procuration : un court séjour suffit généralement."
+          },
+          {
+            "title": "Le rapport d'évaluation officiel",
+            "text": "L'acheteur étranger a besoin d'un rapport d'évaluation établi par une société agréée par le Conseil des marchés de capitaux (SPK). Pour la citoyenneté, la valeur indiquée dans ce rapport doit atteindre le minimum légal."
+          },
+          {
+            "title": "Payer par virement bancaire",
+            "text": "Le prix est réglé par virement selon l'échéancier de votre contrat. Pour la citoyenneté, le paiement se fait en devises, converties dans une banque turque contre un certificat d'achat de devises (DAB). Conservez tous les justificatifs."
+          },
+          {
+            "title": "Le rendez-vous au cadastre",
+            "text": "À l'office du cadastre, un traducteur assermenté vous explique les documents si vous ne parlez pas turc, les droits de 4 % sont réglés et le titre de propriété (Tapu) est établi à votre nom."
+          }
+        ]
+      },
+      {
+        "label": "Après la remise des clés",
+        "title": "Une fois les clés en main",
+        "intro": "Des démarches pratiques qui facilitent la vie quotidienne dans votre nouveau logement.",
+        "steps": [
+          {
+            "title": "Ouvrir vos abonnements",
+            "text": "Électricité, eau, gaz naturel et internet, qui peuvent impliquer des frais de raccordement ou des dépôts de garantie."
+          },
+          {
+            "title": "L'assurance séisme DASK",
+            "text": "Assurance tremblement de terre obligatoire pour les logements en Turquie, renouvelée chaque année."
+          },
+          {
+            "title": "La taxe foncière annuelle",
+            "text": "Payée à la municipalité une fois le bien enregistré à votre nom ; renseignez-vous sur son montant actuel pour votre logement."
+          },
+          {
+            "title": "Les charges « aidat »",
+            "text": "Dans une résidence, une charge mensuelle couvre la sécurité, le ménage, les jardins et les piscines ; elle varie d'un projet à l'autre."
+          },
+          {
+            "title": "Votre titre de séjour immobilier",
+            "text": "Renouvelable tant que vous êtes propriétaire, et votre conjoint ainsi que vos enfants de moins de 18 ans peuvent aussi l'obtenir."
+          },
+          {
+            "title": "S'installer au quotidien",
+            "text": "Écoles, santé, transports et rythme de votre nouveau quartier : notre guide pour les familles vous aide à vous installer."
+          }
+        ]
+      }
+    ],
+    "tipTitle": "Notre conseil",
+    "tipText": "Avant d'acheter, demandez une estimation écrite de tous les coûts pour le logement précis que vous envisagez : droits d'enregistrement, rapport d'évaluation, traductions et frais de notaire, et charges courantes prévues.",
+    "note": "Informations générales selon la loi en vigueur, susceptible d'évoluer ; elles ne constituent pas un conseil juridique. Notre équipe vérifie les conditions applicables avant tout achat.",
+    "ctaTitle": "Souhaitez-vous être accompagné à chaque étape ?",
+    "ctaText": "Indiquez-nous votre objectif et votre budget : nous vous proposerons des logements adaptés et vous accompagnerons à chaque étape jusqu'à la remise des clés.",
+    "ctaWhatsapp": "Écrivez-nous sur WhatsApp",
+    "ctaTour": "Réserver une visite vidéo",
+    "whatsappMessage": "Bonjour, j'ai lu le guide de l'acheteur sur votre site et j'aimerais être aidé pour choisir un bien à Istanbul.",
+    "ask": {
+      "eyebrow": "Besoin d'aide ?",
+      "title": "Une question sur une étape ou une démarche ? Demandez à notre équipe",
+      "text": "Vous bloquez sur une étape, vous hésitez sur une démarche ou une transaction, ou il vous manque une information ? Écrivez-nous ici : votre question parvient directement à notre équipe.",
+      "points": [
+        "Votre question arrive directement à l'équipe compétente",
+        "Un numéro de demande et un e-mail de confirmation immédiatement",
+        "Nous revenons vers vous par téléphone ou avec l'information demandée"
+      ],
+      "stageLabel": "Votre question concerne quelle étape ?",
+      "stages": {
+        "before": "Avant l'achat",
+        "purchase": "L'achat",
+        "after": "Après la remise des clés",
+        "other": "Autre sujet"
+      },
+      "messageLabel": "Votre question ou la difficulté rencontrée",
+      "messagePlaceholder": "Décrivez l'étape, la démarche ou l'information dont vous avez besoin…",
+      "messageRequired": "Veuillez écrire votre question (10 caractères au moins).",
+      "submit": "Envoyer ma question",
+      "note": "Nos réponses sont des informations générales, et non un conseil juridique.",
+      "sentTitle": "Merci, nous avons bien reçu votre demande.",
+      "sentText": "Elle sera examinée par l'équipe compétente, et nous reviendrons vers vous par téléphone ou avec l'information demandée. Un e-mail de confirmation vous a été envoyé."
+    }
   }
 }

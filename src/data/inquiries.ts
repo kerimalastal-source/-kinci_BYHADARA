@@ -43,3 +43,8 @@ export async function updateInquiry(id: string, changes: { status?: InquiryStatu
   }
   return data as Inquiry;
 }
+
+/** The key under adminInquiries.kinds.*: a Buyer's Guide question (details.form = "guide") or the form's kind. */
+export function inquiryKindKey(inquiry: { kind: string; details?: Record<string, string> | null }): string {
+  return inquiry.details?.form === "guide" ? "guide" : inquiry.kind;
+}

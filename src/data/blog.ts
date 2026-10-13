@@ -18,6 +18,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "apartment-or-villa",
+    priority: -4,
+    published: "2026-10-12",
+    relatedProjects: ["lotus-manzara-guzelce", "lotus-manzara-beylikduzu", "beylikduzu-living"],
+    coverImage: { src: "/images/blog/apartment-or-villa.jpg", width: 960, height: 640 }
+  },
+  {
     slug: "beylikduzu-district-guide",
     priority: -3,
     published: "2026-10-09",

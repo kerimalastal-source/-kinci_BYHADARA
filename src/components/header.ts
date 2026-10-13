@@ -6,8 +6,9 @@ import { escapeHtml } from "../utils/html";
 import { renderBrand } from "./brand";
 import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "./floatingButtons";
 import { renderFavoritesLink } from "./favorites";
-import { CONSULTANCY_PAGES, LAWS_SEGMENT, consultancyPath, type ConsultancyPage } from "../seo/routes";
+import { CONSULTANCY_PAGES, GUIDE_SEGMENT, LAWS_SEGMENT, consultancyPath, type ConsultancyPage } from "../seo/routes";
 import { LAWS_PAGE_LIVE } from "../data/laws";
+import { RESALE_LIVE } from "../data/resale";
 
 interface NavLink {
   route: string;
@@ -38,7 +39,7 @@ const NAV: NavEntry[] = [
     items: [
       { route: "/projects", key: "nav.allProjects", active: is("projects", "project") },
       { route: "/video-tour", key: "videoTour.nav", active: is("video-tour") },
-      { route: "/resale", key: "nav.resale", active: is("resale", "resale-listing") },
+      ...(RESALE_LIVE ? [{ route: "/resale", key: "nav.resale", active: is("resale", "resale-listing") }] : []),
       { route: "/property-request", key: "nav.propertyRequest", active: is("property-request") }
     ]
   },
@@ -54,6 +55,7 @@ const NAV: NavEntry[] = [
     key: "nav.resources",
     items: [
       { route: "/citizenship", key: "nav.citizenship", active: is("citizenship") },
+      { route: `/${GUIDE_SEGMENT}`, key: "nav.guide", active: is("buyers-guide") },
       { route: "/blog", key: "nav.blog", active: is("blog", "blog-post") },
       { route: "/faq", key: "nav.faq", active: is("faq") },
       ...(LAWS_PAGE_LIVE ? [{ route: `/${LAWS_SEGMENT}`, key: "nav.laws", active: is("laws") }] : [])

@@ -7,7 +7,9 @@ import { renderConsultancy } from "./pages/consultancy";
 import { renderFaq } from "./pages/faq";
 import { renderPrivacy } from "./pages/privacy";
 import { renderLaws } from "./pages/laws";
+import { renderBuyersGuide } from "./pages/buyersGuide";
 import { LAWS_PAGE_LIVE } from "./data/laws";
+import { RESALE_LIVE } from "./data/resale";
 import { renderBlog } from "./pages/blog";
 import { renderBlogDetail } from "./pages/blogDetail";
 import { renderPropertyRequest } from "./pages/propertyRequest";
@@ -123,6 +125,9 @@ function renderRoute(route: Route, main: HTMLElement): void {
       if (LAWS_PAGE_LIVE || new URLSearchParams(location.search).has("preview")) renderLaws(main);
       else renderNotFound(main);
       break;
+    case "buyers-guide":
+      renderBuyersGuide(main);
+      break;
     case "blog":
       renderBlog(main);
       break;
@@ -154,10 +159,12 @@ function renderRoute(route: Route, main: HTMLElement): void {
       lazyPage(() => import("./pages/account/submitListing"), (page) => page.renderSubmitListing(main, route.id));
       break;
     case "resale":
-      renderResaleList(main);
+      if (RESALE_LIVE) renderResaleList(main);
+      else renderNotFound(main);
       break;
     case "resale-listing":
-      renderResaleDetail(main, route.id);
+      if (RESALE_LIVE) renderResaleDetail(main, route.id);
+      else renderNotFound(main);
       break;
     case "admin":
       lazyPage(() => import("./pages/admin/overview"), (page) => page.renderAdminOverview(main));

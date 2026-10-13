@@ -8,6 +8,8 @@ export type InquiryKind = "contact" | "property_request" | "consultation";
 export interface InquiryDetails {
   reference: string;
   kind: InquiryKind;
+  /** Set for a question from the Buyer's Guide page: the stage the visitor picked. */
+  guideStage?: string;
   name: string;
   email: string;
   phone: string;
@@ -29,6 +31,17 @@ const KIND_AR: Record<InquiryKind, string> = {
   consultation: "طلب استشارة التصميم الهندسي"
 };
 
+const GUIDE_AR = "سؤال من دليل المشتري";
+const GUIDE_STAGE_AR: Record<string, string> = {
+  before: "قبل الشراء",
+  purchase: "عند الشراء",
+  after: "بعد استلام المفتاح",
+  other: "موضوع آخر"
+};
+
+/** The request's name for the team: a Buyer's Guide question, or the form it came from. */
+const kindAr = (d: InquiryDetails) => (d.guideStage ? GUIDE_AR : KIND_AR[d.kind]);
+
 /** Telegram allows 4096 characters; the full message is always in the inbox. */
 const TELEGRAM_MESSAGE_MAX = 1200;
 
@@ -40,6 +53,7 @@ function teamRows(d: InquiryDetails): [string, string][] {
     ["الاسم", d.name],
     ["الهاتف", d.phone],
     ["الإيميل", d.email],
+    ...(d.guideStage ? ([["المرحلة", GUIDE_STAGE_AR[d.guideStage] ?? d.guideStage]] as [string, string][]) : []),
     ...(d.projects.length ? ([["المشاريع", d.projects.map((p) => p.nameAr).join("، ")]] as [string, string][]) : []),
     ...(d.interestsAr.length ? ([["الاهتمامات", d.interestsAr.join("، ")]] as [string, string][]) : []),
     ...d.summaryAr,
@@ -50,7 +64,7 @@ function teamRows(d: InquiryDetails): [string, string][] {
 }
 
 export function teamTelegram(d: InquiryDetails): string {
-  const lines = [`<b>📩 حضارة للعقار — ${KIND_AR[d.kind]}</b>`];
+  const lines = [`<b>📩 حضارة للعقار — ${kindAr(d)}</b>`];
   for (const [label, value] of teamRows(d)) {
     if (label === "المشاريع") {
       lines.push(`${label}: ${d.projects.map((p) => `<a href="${escapeHtml(p.url)}">${escapeHtml(p.nameAr)}</a>`).join("، ")}`);
@@ -81,7 +95,7 @@ export function teamEmail(d: InquiryDetails): { subject: string; html: string; t
 
   const html = layout(
     `
-      <p style="margin:0 0 14px;font-size:17px;color:#0f2b21;font-weight:700">📩 ${KIND_AR[d.kind]}</p>
+      <p style="margin:0 0 14px;font-size:17px;color:#0f2b21;font-weight:700">📩 ${kindAr(d)}</p>
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border:1px solid #eee7d8;border-radius:10px;border-collapse:separate;overflow:hidden">${rowsHtml(rows, true)}</table>
       ${message}
       <p style="margin:16px 0 6px">الرد على هذا الإيميل بيوصل مباشرة للزبون.</p>
@@ -90,10 +104,10 @@ export function teamEmail(d: InquiryDetails): { subject: string; html: string; t
     "ar"
   );
 
-  const text = [KIND_AR[d.kind], "", ...teamRows(d).map(([l, v]) => `${l}: ${v}`), "", d.message, "", `صندوق الاستفسارات: ${inboxUrl(d.origin)}`]
+  const text = [kindAr(d), "", ...teamRows(d).map(([l, v]) => `${l}: ${v}`), "", d.message, "", `صندوق الاستفسارات: ${inboxUrl(d.origin)}`]
     .filter((line, i, all) => line || all[i - 1])
     .join("\n");
-  return { subject: `${KIND_AR[d.kind]}: ${d.name} (${d.reference})`, html, text };
+  return { subject: `${kindAr(d)}: ${d.name} (${d.reference})`, html, text };
 }
 
 interface VisitorText {
@@ -160,8 +174,42 @@ const VISITOR: Record<SiteLocale, VisitorText> = {
   }
 };
 
+/** A Buyer's Guide question: "we received your request; the relevant team will get back to you". */
+const VISITOR_GUIDE: Record<SiteLocale, Pick<VisitorText, "subject" | "intro" | "next" | "yourMessage">> = {
+  en: {
+    subject: "We received your request — HADARA Real Estate ({ref})",
+    intro: "Thank you, we have received your request.",
+    next: "It will be reviewed by the relevant team, and we will get back to you with a call or the information you need as soon as possible.",
+    yourMessage: "Your question"
+  },
+  ar: {
+    subject: "تم استلام طلبك — حضارة العقارية ({ref})",
+    intro: "شكراً لك، تم استلام طلبك.",
+    next: "سيُعرض طلبك على الفريق المختص، وسنعود إليك باتصال أو بالمعلومة المطلوبة في أقرب وقت.",
+    yourMessage: "سؤالك"
+  },
+  fa: {
+    subject: "درخواست شما دریافت شد — املاک حضارا ({ref})",
+    intro: "سپاسگزاریم، درخواست شما دریافت شد.",
+    next: "درخواست شما به تیم مربوط ارجاع داده می‌شود و در اسرع وقت با تماس یا اطلاعات مورد نیاز به شما پاسخ می‌دهیم.",
+    yourMessage: "پرسش شما"
+  },
+  fr: {
+    subject: "Nous avons bien reçu votre demande — HADARA Real Estate ({ref})",
+    intro: "Merci, nous avons bien reçu votre demande.",
+    next: "Elle sera examinée par l'équipe compétente, et nous reviendrons vers vous par téléphone ou avec l'information demandée dans les meilleurs délais.",
+    yourMessage: "Votre question"
+  },
+  ru: {
+    subject: "Мы получили ваш запрос — HADARA Real Estate ({ref})",
+    intro: "Спасибо, ваш запрос получен.",
+    next: "Его рассмотрит профильная команда, и мы свяжемся с вами по телефону или пришлём нужную информацию в ближайшее время.",
+    yourMessage: "Ваш вопрос"
+  }
+};
+
 export function visitorEmail(d: InquiryDetails): { subject: string; html: string; text: string } {
-  const t = VISITOR[d.locale];
+  const t = d.guideStage ? { ...VISITOR[d.locale], ...VISITOR_GUIDE[d.locale] } : VISITOR[d.locale];
   const rtl = d.locale === "ar" || d.locale === "fa";
   const site = d.locale === "en" ? d.origin : `${d.origin}/${d.locale}`;
   const message = d.message

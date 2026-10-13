@@ -14,15 +14,9 @@
   direction: rtl;
 }
 
-[dir="rtl"] .stat-tile,
 [dir="rtl"] .benefits-list li,
 [dir="rtl"] .steps-list__item {
   text-align: start;
-}
-
-/* The tile's icon follows its start-aligned text. */
-[dir="rtl"] .stat-tile__icon {
-  margin-inline: 0 auto;
 }
 
 /* Arabic script (Arabic and Persian) is cursive: letter-spacing pulls the joined letters apart, and
