@@ -78,6 +78,50 @@
         ]
       },
       "at": "14:00"
+    },
+    {
+      "id": "sea-pearl-atakoy-story",
+      "story": true,
+      "at": "14:00",
+      "topic": "ستوري: سي بيرل أتاكوي",
+      "image": {
+        "photo": "/images/projects/sea-pearl-atakoy/gardens-night.jpg",
+        "position": "center 45%",
+        "badge": {
+          "ar": "جاهز للسكن",
+          "en": "Ready to move in"
+        },
+        "place": "Sea Pearl Ataköy · Bakırköy",
+        "placeAr": "سي بيرل أتاكوي · باكركوي",
+        "headlineAr": "حدائق القصور تطلّ على البحر",
+        "headlineEn": "Palace gardens that open onto the sea",
+        "stats": [
+          {
+            "value": "1.2 km",
+            "ar": "واجهة بحرية للسكان",
+            "en": "Residents' seafront"
+          },
+          {
+            "value": "631",
+            "ar": "شقة سكنية",
+            "en": "Apartments"
+          },
+          {
+            "value": "33,000 m²",
+            "ar": "حدائق وبحيرة",
+            "en": "Gardens & lake"
+          },
+          {
+            "value": "1 km",
+            "ar": "إلى مارينا أتاكوي",
+            "en": "To Ataköy Marina"
+          }
+        ],
+        "note": {
+          "ar": "نحو 200 شقة متاحة بإطلالة بحرية مباشرة",
+          "en": "About 200 sea-view apartments available"
+        }
+      }
     }
   ]
 }
