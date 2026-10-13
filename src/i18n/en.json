@@ -208,7 +208,7 @@
       { "value": "12+", "label": "Years in Business", "icon": "years" },
       { "value": "12", "label": "Landmark Projects", "icon": "projects" },
       { "value": "1,700+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
-      { "value": "190,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
+      { "value": "115,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
     ]
   },
   "projects": {
@@ -349,13 +349,11 @@
       "meetingRooms": "Meeting Rooms",
       "cafe": "Café & Vitamin Bar",
       "cinemaRoom": "Private Cinema Room",
-      "seafront": "Directly on the Seafront",
-      "hotelServices": "Hotel Services for Residents",
-      "swimmingPool": "Swimming Pool",
-      "steamRoom": "Steam Room",
-      "spaCenter": "Spa",
-      "tennisCourt": "Tennis Court",
-      "palaceGardens": "Palace-Style Gardens & Lagoon",
+      "seafront": "Residents-Only Seafront",
+      "hotelServices": "JW Marriott Service Offers",
+      "palaceGardens": "Ottoman-Style Gardens & Lake",
+      "yachtMooring": "Yacht Mooring & Sea Transport",
+      "seismicDesign": "Built to Türkiye's Seismic Code",
       "gameRoom": "PlayStation Room",
       "separatePools": "Separate Pools for Men & Women",
       "cctv": "CCTV Surveillance",
@@ -1286,52 +1284,54 @@
         }
       ]
     },
-    "seapearl-istanbul": {
-      "name": "SeaPearl İstanbul",
-      "tagline": "Istanbul's pearl on the sea — seafront living in Ataköy.",
-      "shortDescription": "SeaPearl İstanbul is a seafront community of 631 residences in four blocks on the Marmara coast in Ataköy, Bakırköy, with a 1,200 m coastline, sea views from every home and hotel services for residents.",
-      "longDescription": "SeaPearl İstanbul stands directly on the Marmara Sea in Ataköy, in the Bakırköy district, with a 1,200-metre coastline, and its developer describes it as Istanbul's only premium project set right on the seafront. Its 631 residences, from 1+1 to 4.5+1, are arranged in four blocks — Sunrise, Sunset, Blue Palace and Green Palace — whose earthy tones on the lower floors turn to grey and blue as the towers rise. Every residence has an uninterrupted sea view, and most rooms look out over the water through wide balconies and terraces. Between the blocks, 33,000 m² of car-free landscaping brings baroque gardens inspired by Ottoman and French palaces together with a lagoon, a natural park, a tennis court, a streetball court and a children's playground. One of Istanbul's leading hotels stands next to the project, and residents can use its pool, Turkish bath, steam room, spa and gym whenever they wish, alongside its boutique shops and restaurants. Ataköy Marina and the E-5 (D-100) highway are about 2 km away, Atatürk Airport 7 km and the Historical Peninsula 12 km, with easy access to the Eurasia Tunnel. Developed by Kuzu Grup in partnership with KAT, the project is complete and ready to move in, and residences are still available for sale.",
+    "sea-pearl-atakoy": {
+      "name": "Sea Pearl Ataköy",
+      "tagline": "A residents-only seafront, Ottoman-style gardens and sea views in Ataköy.",
+      "shortDescription": "Sea Pearl Ataköy is a seafront community of 631 apartments in four 20-storey blocks in Ataköy, Bakırköy, with a 1.2 km seafront reserved for residents and about 60% of its 55,000 m² site given over to green space.",
+      "longDescription": "Sea Pearl Ataköy is one of the standout residential projects in Ataköy, developed by Kuzu İnşaat, a company known for major real estate and construction projects in Türkiye and for its work on infrastructure. The project covers about 55,000 m², around 60% of which, some 33,000 m², is given over to green space, with landscaping inspired by Ottoman gardens and a carefully chosen selection of plants and roses imported from Japan. An artificial lake adds calm places to rest and unwind, and a 1.2 km seafront is reserved for residents, who can also use yacht mooring and sea transport towards Ataköy Marina, about 1 km away. Four blocks of 20 floors, each with two entrances and its own residents' gym, hold 631 apartments from 1+1 to 4.5+1, ranging from 88 m² to 398 m², and around 200 apartments with direct sea views are currently available. Residents also benefit from special offers and reduced annual fees for some services of the JW Marriott hotel. Given its seafront setting, the project was built to modern construction standards and in line with Türkiye's seismic code, and it is complete and ready to move in. Ataköy is one of Istanbul's most refined and sought-after residential districts: A Plus mall is a minute away, Galleria about 3 minutes and Florya's shopping centre about 10 minutes, Medicana hospital stands right next to the project, Acıbadem hospital is about 6 minutes away, the Eurasia Tunnel about 5 minutes, and the Marmaray and M9 metro stations about a 10-minute walk.",
       "highlights": [
-        "Directly on the Marmara Sea with a 1,200 m coastline in Ataköy, Bakırköy",
-        "Uninterrupted sea views from every residence",
-        "631 residences from 1+1 to 4.5+1 in four blocks",
-        "33,000 m² of car-free palace-style gardens with a lagoon",
-        "Hotel pool, Turkish bath, steam room, spa and gym reserved for residents",
-        "Completed and ready to move in — residences available for sale",
-        "Eligible for Turkish citizenship, according to the developer",
-        "Developed by Kuzu Grup in partnership with KAT"
+        "A 1.2 km seafront reserved for residents, in Ataköy, Bakırköy",
+        "About 55,000 m² site, with around 60% (some 33,000 m²) given to Ottoman-inspired gardens",
+        "Plants and roses imported from Japan, and an artificial lake to relax by",
+        "631 apartments from 1+1 to 4.5+1 (88 – 398 m²) in four 20-storey blocks",
+        "Around 200 apartments with direct sea views currently available",
+        "Yacht mooring and sea transport to Ataköy Marina, about 1 km away",
+        "A residents' gym in every block, plus special offers at the JW Marriott hotel",
+        "Built to modern standards and Türkiye's seismic code; ready to move in",
+        "Eligible for Turkish citizenship, according to the developer"
       ],
       "nearby": [
         {
+          "place": "A Plus Mall",
+          "time": "1 min"
+        },
+        {
+          "place": "Galleria Mall",
+          "time": "3 min"
+        },
+        {
+          "place": "Florya shopping centre",
+          "time": "10 min"
+        },
+        {
+          "place": "Medicana Hospital",
+          "time": "Next to the project"
+        },
+        {
+          "place": "Acıbadem Hospital",
+          "time": "6 min"
+        },
+        {
+          "place": "Eurasia Tunnel",
+          "time": "5 min"
+        },
+        {
+          "place": "Marmaray & M9 metro stations",
+          "time": "10 min walk"
+        },
+        {
           "place": "Ataköy Marina",
-          "time": "2 km"
-        },
-        {
-          "place": "E-5 (D-100) Highway",
-          "time": "2 km"
-        },
-        {
-          "place": "Eurasia Tunnel"
-        },
-        {
-          "place": "Atatürk Airport",
-          "time": "7 km"
-        },
-        {
-          "place": "Historical Peninsula",
-          "time": "12 km"
-        },
-        {
-          "place": "18 shopping centres",
-          "time": "14 min drive"
-        },
-        {
-          "place": "15 hospitals",
-          "time": "9 min drive"
-        },
-        {
-          "place": "40 private schools",
-          "time": "19 min drive"
+          "time": "1 km"
         }
       ]
     },

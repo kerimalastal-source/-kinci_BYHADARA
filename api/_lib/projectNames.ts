@@ -42,12 +42,12 @@ export const PROJECT_NAMES: Record<string, Record<"en" | "ar" | "fa" | "fr" | "r
     "fr": "Cadde Ispartakule",
     "ru": "Cadde Ispartakule"
   },
-  "seapearl-istanbul": {
-    "en": "SeaPearl İstanbul",
-    "ar": "سي بيرل إسطنبول",
-    "fa": "سی‌پرل استانبول",
-    "fr": "SeaPearl İstanbul",
-    "ru": "SeaPearl İstanbul"
+  "sea-pearl-atakoy": {
+    "en": "Sea Pearl Ataköy",
+    "ar": "سي بيرل أتاكوي",
+    "fa": "سی‌پرل آتاکوی",
+    "fr": "Sea Pearl Ataköy",
+    "ru": "Sea Pearl Ataköy"
   },
   "lotus-sisli": {
     "en": "Lotus Şişli",

@@ -208,7 +208,7 @@
       { "value": "12+", "label": "années d'activité", "icon": "years" },
       { "value": "12", "label": "projets emblématiques", "icon": "projects" },
       { "value": "1 700+", "label": "logements, bureaux et commerces", "icon": "apartments" },
-      { "value": "190 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
+      { "value": "115 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
     ]
   },
   "projects": {
@@ -349,13 +349,11 @@
       "meetingRooms": "Salles de réunion",
       "cafe": "Café & bar à vitamines",
       "cinemaRoom": "Salle de cinéma privée",
-      "seafront": "Directement en bord de mer",
-      "hotelServices": "Services hôteliers pour les résidents",
-      "swimmingPool": "Piscine",
-      "steamRoom": "Bain de vapeur",
-      "spaCenter": "Spa",
-      "tennisCourt": "Court de tennis",
-      "palaceGardens": "Jardins de palais et lagune",
+      "seafront": "Front de mer réservé aux résidents",
+      "hotelServices": "Offres de l'hôtel JW Marriott",
+      "palaceGardens": "Jardins ottomans et lac",
+      "yachtMooring": "Amarrage de yachts et navettes maritimes",
+      "seismicDesign": "Conforme au code sismique turc",
       "gameRoom": "Salle PlayStation",
       "separatePools": "Piscines séparées hommes / femmes",
       "cctv": "Vidéosurveillance",
@@ -1286,52 +1284,54 @@
         }
       ]
     },
-    "seapearl-istanbul": {
-      "name": "SeaPearl İstanbul",
-      "tagline": "La perle d'Istanbul sur la mer — vivre en bord de mer à Ataköy.",
-      "shortDescription": "SeaPearl İstanbul est une résidence en bord de mer de 631 logements répartis dans quatre bâtiments sur la côte de la mer de Marmara, à Ataköy (Bakırköy), avec 1 200 m de littoral, une vue sur la mer depuis chaque logement et des services hôteliers pour les résidents.",
-      "longDescription": "Implantée directement sur la mer de Marmara à Ataköy, dans le district de Bakırköy, avec 1 200 mètres de littoral, SeaPearl İstanbul est présentée par son promoteur comme le seul projet haut de gamme d'Istanbul situé au bord même de la mer. Ses 631 logements, du 1+1 au 4.5+1, se répartissent dans quatre bâtiments — Sunrise, Sunset, Blue Palace et Green Palace — dont les tons terre des étages inférieurs passent au gris et au bleu à mesure qu'ils s'élèvent. Chaque logement bénéficie d'une vue dégagée sur la mer, et la plupart des pièces donnent sur l'eau grâce à de larges balcons et terrasses. Entre les bâtiments, 33 000 m² d'espaces paysagers sans voitures associent des jardins baroques inspirés des palais ottomans et français à une lagune, un parc naturel, un court de tennis, un terrain de streetball et une aire de jeux pour enfants. L'un des hôtels les plus réputés d'Istanbul se trouve à côté du projet : les résidents peuvent profiter à tout moment de sa piscine, de son hammam, de son bain de vapeur, de son spa et de sa salle de sport, ainsi que de ses boutiques et restaurants. Ataköy Marina et l'autoroute E-5 (D-100) sont à environ 2 km, l'aéroport Atatürk à 7 km et la péninsule historique à 12 km, avec un accès facile au tunnel Eurasia. Développé par Kuzu Grup en partenariat avec KAT, le projet est achevé et prêt à habiter, et des logements sont toujours disponibles à la vente.",
+    "sea-pearl-atakoy": {
+      "name": "Sea Pearl Ataköy",
+      "tagline": "Un front de mer réservé aux résidents, des jardins ottomans et la mer à Ataköy.",
+      "shortDescription": "Sea Pearl Ataköy est une résidence en bord de mer de 631 appartements répartis dans quatre bâtiments de 20 étages à Ataköy (Bakırköy), avec un front de mer de 1,2 km réservé aux résidents et environ 60 % de ses 55 000 m² consacrés aux espaces verts.",
+      "longDescription": "Sea Pearl Ataköy compte parmi les résidences les plus remarquables d'Ataköy. Il a été réalisé par Kuzu İnşaat, entreprise connue pour ses grands projets immobiliers et de construction en Turquie et pour sa participation à plusieurs projets d'infrastructure. Le projet s'étend sur environ 55 000 m², dont près de 60 % — quelque 33 000 m² — sont consacrés aux espaces verts, avec un paysage inspiré des jardins ottomans et une sélection soignée de plantes et de roses importées du Japon. Un lac artificiel offre des lieux calmes pour se détendre, et un front de mer de 1,2 km est réservé aux résidents, qui peuvent aussi profiter d'un service d'amarrage de yachts et de navettes maritimes vers Ataköy Marina, à environ 1 km. Les quatre bâtiments de 20 étages, chacun doté de deux entrées et d'une salle de sport réservée aux résidents, réunissent 631 appartements du 1+1 au 4.5+1, de 88 m² à 398 m² ; environ 200 appartements avec vue directe sur la mer sont actuellement disponibles. Les résidents bénéficient en outre d'offres spéciales et de cotisations annuelles réduites pour certains services de l'hôtel JW Marriott. Construit selon des normes modernes adaptées à son emplacement en bord de mer et conformément au code sismique turc, le projet est achevé et prêt à habiter. Ataköy est l'un des quartiers résidentiels les plus prisés d'Istanbul : le centre commercial A Plus est à une minute, Galleria à environ 3 minutes et le centre commercial de Florya à environ 10 minutes ; l'hôpital Medicana se trouve juste à côté du projet, l'hôpital Acıbadem à environ 6 minutes, le tunnel Eurasia à environ 5 minutes, et les stations Marmaray et du métro M9 à environ 10 minutes à pied.",
       "highlights": [
-        "Directement sur la mer de Marmara, avec 1 200 m de littoral à Ataköy (Bakırköy)",
-        "Vue dégagée sur la mer depuis chaque logement",
-        "631 logements du 1+1 au 4.5+1 dans quatre bâtiments",
-        "33 000 m² de jardins de style palais sans voitures, avec une lagune",
-        "Piscine, hammam, bain de vapeur, spa et salle de sport de l'hôtel réservés aux résidents",
-        "Achevé et prêt à habiter — logements disponibles à la vente",
-        "Éligible à la citoyenneté turque, selon le promoteur",
-        "Développé par Kuzu Grup en partenariat avec KAT"
+        "Front de mer de 1,2 km réservé aux résidents, à Ataköy (Bakırköy)",
+        "Environ 55 000 m², dont près de 60 % (environ 33 000 m²) de jardins inspirés des jardins ottomans",
+        "Plantes et roses importées du Japon, et un lac artificiel pour se détendre",
+        "631 appartements du 1+1 au 4.5+1 (88 à 398 m²) dans quatre bâtiments de 20 étages",
+        "Environ 200 appartements avec vue directe sur la mer actuellement disponibles",
+        "Amarrage de yachts et navettes maritimes vers Ataköy Marina, à environ 1 km",
+        "Une salle de sport réservée aux résidents dans chaque bâtiment, et des offres spéciales à l'hôtel JW Marriott",
+        "Construit selon des normes modernes et le code sismique turc ; prêt à habiter",
+        "Éligible à la citoyenneté turque, selon le promoteur"
       ],
       "nearby": [
         {
+          "place": "Centre commercial A Plus",
+          "time": "1 min"
+        },
+        {
+          "place": "Centre commercial Galleria",
+          "time": "3 min"
+        },
+        {
+          "place": "Centre commercial de Florya",
+          "time": "10 min"
+        },
+        {
+          "place": "Hôpital Medicana",
+          "time": "À côté du projet"
+        },
+        {
+          "place": "Hôpital Acıbadem",
+          "time": "6 min"
+        },
+        {
+          "place": "Tunnel Eurasia",
+          "time": "5 min"
+        },
+        {
+          "place": "Stations Marmaray et métro M9",
+          "time": "10 min à pied"
+        },
+        {
           "place": "Ataköy Marina",
-          "time": "2 km"
-        },
-        {
-          "place": "Autoroute E-5 (D-100)",
-          "time": "2 km"
-        },
-        {
-          "place": "Tunnel Eurasia"
-        },
-        {
-          "place": "Aéroport Atatürk",
-          "time": "7 km"
-        },
-        {
-          "place": "Péninsule historique",
-          "time": "12 km"
-        },
-        {
-          "place": "18 centres commerciaux",
-          "time": "14 min en voiture"
-        },
-        {
-          "place": "15 hôpitaux",
-          "time": "9 min en voiture"
-        },
-        {
-          "place": "40 écoles privées",
-          "time": "19 min en voiture"
+          "time": "1 km"
         }
       ]
     },
