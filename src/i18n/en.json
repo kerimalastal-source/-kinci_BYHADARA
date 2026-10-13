@@ -16,6 +16,7 @@
     "blog": "Blog",
     "faq": "FAQ",
     "laws": "Property Laws",
+    "guide": "Buyer's Guide",
     "resources": "Resources",
     "contact": "Contact",
     "getInTouch": "Get in Touch",
@@ -2221,6 +2222,10 @@
     "processTeaserCta": "See how we work"
   },
   "seo": {
+    "guide": {
+      "title": "Buyer's Guide: Buying Property in Istanbul Step by Step",
+      "description": "Buying a home in Istanbul as a foreigner: the steps before you buy, the purchase and the title deed, and life after you receive the keys, explained clearly by HADARA."
+    },
     "laws": {
       "title": "Turkish Property Law Updates",
       "description": "The current rules and latest official decisions on citizenship, residence, buying property, taxes and renting in Turkey, each with a link to its government source."
@@ -3201,7 +3206,8 @@
       "resale": "Resale",
       "property-request": "Request a property",
       "engineering-architecture": "Engineering design",
-      "privacy": "Privacy policy"
+      "privacy": "Privacy policy",
+      "buyers-guide": "Buyer's guide"
     }
   },
   "adminCustomers": {
@@ -3393,5 +3399,116 @@
     "telegramUnknown": "Couldn't check Telegram replies right now.",
     "telegramNoBot": "The Telegram bot isn't set up (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID in Vercel).",
     "telegramNoSecret": "CRON_SECRET isn't set in Vercel, so Telegram replies can't be switched on."
+  },
+  "guide": {
+    "heroEyebrow": "Buyer's Guide",
+    "heroTitle": "Buying Your Home in Istanbul, Step by Step",
+    "heroSubtitle": "From your first question to the day you receive your keys and settle in: the whole journey in three clear stages, with HADARA by your side at every step.",
+    "stagesLabel": "Stages of the buying journey",
+    "stepsCount": "{count} steps",
+    "more": "Learn more",
+    "stages": [
+      {
+        "label": "Before buying",
+        "title": "Before you buy",
+        "intro": "Clarify what you need and check the property carefully before you commit.",
+        "steps": [
+          {
+            "title": "Define your goal and budget",
+            "text": "A home to live in, an investment, or a path to residence or citizenship: your goal shapes the district, the size and the budget. Alongside the price, plan for the 4% title deed fee and the running costs."
+          },
+          {
+            "title": "Choose the district and the type of home",
+            "text": "The sea, nature or the heart of the city; an apartment in a complex or a villa with a garden. Picturing your family's usual week makes the choice much easier."
+          },
+          {
+            "title": "Read the listing correctly",
+            "text": "Know the difference between gross and net area, and what layouts such as 2+1 or 3+1 mean, so you can compare homes fairly."
+          },
+          {
+            "title": "Off-plan or ready to move in",
+            "text": "A new project usually offers more choice and a payment plan spread over the construction period, while a completed home can be lived in right away. Weigh both against your timeline."
+          },
+          {
+            "title": "See the home before you decide",
+            "text": "Visit Istanbul, or start with a free private video tour of the show apartment and the project on site, with no obligation."
+          },
+          {
+            "title": "Check the documents",
+            "text": "Ask about the type of title deed, the building permit, the occupancy permit (İskan) for a completed building and any mortgage or lien. If you plan to live here, confirm the neighbourhood is open to new residence registrations for foreigners."
+          }
+        ]
+      },
+      {
+        "label": "The purchase",
+        "title": "Completing the purchase",
+        "intro": "A set sequence of steps, from the reservation to the title deed in your name.",
+        "steps": [
+          {
+            "title": "Reserve the home",
+            "text": "A reservation agreement secures the home and records the agreed price, the payment method and the next steps. A home under construction is usually sold through a notarised promise-to-sell agreement."
+          },
+          {
+            "title": "Get a tax number and a bank account",
+            "text": "Before you pay, you need a Turkish tax number and an account at a local bank. Both are simple to obtain, and our team helps you with them."
+          },
+          {
+            "title": "Prepare your documents",
+            "text": "A valid passport; any document issued abroad needs an apostille or consular legalisation and a sworn Turkish translation. Many steps can be handled through a power of attorney, so a short visit is usually enough."
+          },
+          {
+            "title": "The official valuation report",
+            "text": "A foreign buyer needs a valuation report from an appraisal company licensed by the Capital Markets Board (SPK). For citizenship, the value in this report must meet the legal minimum."
+          },
+          {
+            "title": "Pay by bank transfer",
+            "text": "The price is paid by bank transfer following the schedule in your agreement. For citizenship, the payment is made in foreign currency and converted at a Turkish bank against a Foreign Currency Purchase Certificate (DAB). Keep every receipt."
+          },
+          {
+            "title": "The title deed appointment",
+            "text": "At the Land Registry Office, a sworn translator explains the documents if you do not speak Turkish, the 4% title deed fee is paid, and the title deed (Tapu) is issued in your name."
+          }
+        ]
+      },
+      {
+        "label": "After the keys",
+        "title": "After you receive your keys",
+        "intro": "Practical steps that make daily life easier in your new home.",
+        "steps": [
+          {
+            "title": "Open your utility subscriptions",
+            "text": "Electricity, water, natural gas and internet, which may involve connection fees or deposits."
+          },
+          {
+            "title": "DASK earthquake insurance",
+            "text": "Compulsory earthquake insurance for homes in Turkey, renewed every year."
+          },
+          {
+            "title": "The annual property tax",
+            "text": "Paid to the municipality once the home is registered in your name; ask for the current amount for your home."
+          },
+          {
+            "title": "The aidat management fee",
+            "text": "In a residential complex, a monthly fee covers security, cleaning, gardens and pools; it differs from one project to another."
+          },
+          {
+            "title": "Your property residence permit",
+            "text": "Renewable for as long as you own the home, and your spouse and children under 18 can obtain one too."
+          },
+          {
+            "title": "Settle into daily life",
+            "text": "Schools, health care, transport and the rhythm of your new neighbourhood: our guide for families helps you settle in."
+          }
+        ]
+      }
+    ],
+    "tipTitle": "Our advice",
+    "tipText": "Before you buy, ask for a written estimate of all the costs for the exact home you are considering: the title deed fee, the valuation report, translation and notary costs, and the expected running costs.",
+    "note": "General information based on current law, which may change; it is not legal advice. Our team confirms the requirements in force before any purchase.",
+    "ctaTitle": "Would you like us with you at every step?",
+    "ctaText": "Tell us your goal and budget, and we will suggest suitable homes and guide you through every stage until you receive your keys.",
+    "ctaWhatsapp": "Message us on WhatsApp",
+    "ctaTour": "Book a video tour",
+    "whatsappMessage": "Hello, I read the Buyer's Guide on your website and would like help choosing a property in Istanbul."
   }
 }

@@ -16,6 +16,7 @@
     "blog": "Blog",
     "faq": "FAQ",
     "laws": "Lois immobilières",
+    "guide": "Guide de l'acheteur",
     "resources": "Ressources",
     "contact": "Contact",
     "getInTouch": "Nous contacter",
@@ -2221,6 +2222,10 @@
     "processTeaserCta": "Découvrir notre méthode"
   },
   "seo": {
+    "guide": {
+      "title": "Guide de l'acheteur : acheter un bien à Istanbul étape par étape",
+      "description": "Acheter un logement à Istanbul en tant qu'étranger : les étapes avant l'achat, l'achat et le titre de propriété, puis la vie après la remise des clés, expliqués clairement par HADARA."
+    },
     "laws": {
       "title": "Actualité du droit immobilier en Turquie",
       "description": "Les règles en vigueur et les dernières décisions officielles sur la citoyenneté, la résidence, l'achat immobilier, les impôts et la location en Turquie, chacune avec le lien vers sa source gouvernementale."
@@ -3201,7 +3206,8 @@
       "resale": "Revente",
       "property-request": "Demande de bien",
       "engineering-architecture": "Conception",
-      "privacy": "Confidentialité"
+      "privacy": "Confidentialité",
+      "buyers-guide": "Guide de l'acheteur"
     }
   },
   "adminCustomers": {
@@ -3393,5 +3399,116 @@
     "telegramUnknown": "Impossible de vérifier les réponses Telegram pour le moment.",
     "telegramNoBot": "Le bot Telegram n’est pas configuré (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID dans Vercel).",
     "telegramNoSecret": "CRON_SECRET n’est pas défini dans Vercel : les réponses Telegram ne peuvent pas être activées."
+  },
+  "guide": {
+    "heroEyebrow": "Guide de l'acheteur",
+    "heroTitle": "Acheter votre logement à Istanbul, étape par étape",
+    "heroSubtitle": "De votre première question jusqu'à la remise des clés et votre installation : tout le parcours en trois étapes claires, avec HADARA à vos côtés à chaque pas.",
+    "stagesLabel": "Les étapes du parcours d'achat",
+    "stepsCount": "{count} étapes",
+    "more": "En savoir plus",
+    "stages": [
+      {
+        "label": "Avant l'achat",
+        "title": "Avant d'acheter",
+        "intro": "Précisez vos besoins et vérifiez soigneusement le bien avant de vous engager.",
+        "steps": [
+          {
+            "title": "Définir votre objectif et votre budget",
+            "text": "Une résidence, un investissement ou une voie vers le titre de séjour ou la citoyenneté : votre objectif oriente le quartier, la surface et le budget. En plus du prix, prévoyez les droits d'enregistrement de 4 % et les charges courantes."
+          },
+          {
+            "title": "Choisir le quartier et le type de logement",
+            "text": "La mer, la nature ou le cœur de la ville ; un appartement en résidence ou une villa avec jardin. Imaginer la semaine type de votre famille rend le choix bien plus simple."
+          },
+          {
+            "title": "Bien lire l'annonce",
+            "text": "Connaissez la différence entre surface brute et surface nette, et le sens des typologies comme 2+1 ou 3+1, pour comparer les logements équitablement."
+          },
+          {
+            "title": "Sur plan ou prêt à habiter",
+            "text": "Un nouveau projet offre généralement plus de choix et un paiement étalé sur la durée des travaux ; un logement achevé peut être habité tout de suite. Comparez-les selon votre calendrier."
+          },
+          {
+            "title": "Voir le logement avant de décider",
+            "text": "Venez à Istanbul, ou commencez par une visite privée gratuite en vidéo de l'appartement témoin et du projet sur place, sans engagement."
+          },
+          {
+            "title": "Vérifier les documents",
+            "text": "Renseignez-vous sur le type de titre de propriété, le permis de construire, le certificat de conformité (İskan) d'un immeuble achevé et toute hypothèque ou saisie. Si vous comptez y résider, vérifiez que le quartier est ouvert aux nouvelles inscriptions de résidents étrangers."
+          }
+        ]
+      },
+      {
+        "label": "L'achat",
+        "title": "Finaliser l'achat",
+        "intro": "Une suite d'étapes bien définie, de la réservation jusqu'au titre de propriété à votre nom.",
+        "steps": [
+          {
+            "title": "Réserver le logement",
+            "text": "Le contrat de réservation vous garantit le logement et fixe le prix convenu, le mode de paiement et les étapes suivantes. Un logement en construction est généralement vendu par promesse de vente notariée."
+          },
+          {
+            "title": "Numéro fiscal et compte bancaire",
+            "text": "Avant de payer, il vous faut un numéro fiscal turc et un compte dans une banque locale. Les deux s'obtiennent facilement, et notre équipe vous accompagne."
+          },
+          {
+            "title": "Préparer vos documents",
+            "text": "Un passeport valide ; tout document délivré à l'étranger nécessite une apostille ou une légalisation consulaire et une traduction turque assermentée. Beaucoup d'étapes peuvent se faire par procuration : un court séjour suffit généralement."
+          },
+          {
+            "title": "Le rapport d'évaluation officiel",
+            "text": "L'acheteur étranger a besoin d'un rapport d'évaluation établi par une société agréée par le Conseil des marchés de capitaux (SPK). Pour la citoyenneté, la valeur indiquée dans ce rapport doit atteindre le minimum légal."
+          },
+          {
+            "title": "Payer par virement bancaire",
+            "text": "Le prix est réglé par virement selon l'échéancier de votre contrat. Pour la citoyenneté, le paiement se fait en devises, converties dans une banque turque contre un certificat d'achat de devises (DAB). Conservez tous les justificatifs."
+          },
+          {
+            "title": "Le rendez-vous au cadastre",
+            "text": "À l'office du cadastre, un traducteur assermenté vous explique les documents si vous ne parlez pas turc, les droits de 4 % sont réglés et le titre de propriété (Tapu) est établi à votre nom."
+          }
+        ]
+      },
+      {
+        "label": "Après la remise des clés",
+        "title": "Une fois les clés en main",
+        "intro": "Des démarches pratiques qui facilitent la vie quotidienne dans votre nouveau logement.",
+        "steps": [
+          {
+            "title": "Ouvrir vos abonnements",
+            "text": "Électricité, eau, gaz naturel et internet, qui peuvent impliquer des frais de raccordement ou des dépôts de garantie."
+          },
+          {
+            "title": "L'assurance séisme DASK",
+            "text": "Assurance tremblement de terre obligatoire pour les logements en Turquie, renouvelée chaque année."
+          },
+          {
+            "title": "La taxe foncière annuelle",
+            "text": "Payée à la municipalité une fois le bien enregistré à votre nom ; renseignez-vous sur son montant actuel pour votre logement."
+          },
+          {
+            "title": "Les charges « aidat »",
+            "text": "Dans une résidence, une charge mensuelle couvre la sécurité, le ménage, les jardins et les piscines ; elle varie d'un projet à l'autre."
+          },
+          {
+            "title": "Votre titre de séjour immobilier",
+            "text": "Renouvelable tant que vous êtes propriétaire, et votre conjoint ainsi que vos enfants de moins de 18 ans peuvent aussi l'obtenir."
+          },
+          {
+            "title": "S'installer au quotidien",
+            "text": "Écoles, santé, transports et rythme de votre nouveau quartier : notre guide pour les familles vous aide à vous installer."
+          }
+        ]
+      }
+    ],
+    "tipTitle": "Notre conseil",
+    "tipText": "Avant d'acheter, demandez une estimation écrite de tous les coûts pour le logement précis que vous envisagez : droits d'enregistrement, rapport d'évaluation, traductions et frais de notaire, et charges courantes prévues.",
+    "note": "Informations générales selon la loi en vigueur, susceptible d'évoluer ; elles ne constituent pas un conseil juridique. Notre équipe vérifie les conditions applicables avant tout achat.",
+    "ctaTitle": "Souhaitez-vous être accompagné à chaque étape ?",
+    "ctaText": "Indiquez-nous votre objectif et votre budget : nous vous proposerons des logements adaptés et vous accompagnerons à chaque étape jusqu'à la remise des clés.",
+    "ctaWhatsapp": "Écrivez-nous sur WhatsApp",
+    "ctaTour": "Réserver une visite vidéo",
+    "whatsappMessage": "Bonjour, j'ai lu le guide de l'acheteur sur votre site et j'aimerais être aidé pour choisir un bien à Istanbul."
   }
 }

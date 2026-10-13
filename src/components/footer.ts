@@ -35,6 +35,7 @@ export function renderFooter(el: HTMLElement): void {
           <li><a href="${link(`/${CONSULTANCY_SEGMENT}`)}">${t("nav.consultancy")}</a></li>
           <li><a href="${link("/about")}">${t("nav.about")}</a></li>
           <li><a href="${link("/citizenship")}">${t("nav.citizenship")}</a></li>
+          <li><a href="${link("/buyers-guide")}">${t("nav.guide")}</a></li>
           <li><a href="${link("/property-request")}">${t("nav.propertyRequest")}</a></li>
           <li><a href="${link("/blog")}">${t("nav.blog")}</a></li>
           <li><a href="${link("/faq")}">${t("nav.faq")}</a></li>

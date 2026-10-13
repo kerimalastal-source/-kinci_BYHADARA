@@ -111,6 +111,7 @@ const PAGE_NAMES: Record<string, string> = {
   "/resale": "إعادة البيع",
   "/privacy": "سياسة الخصوصية",
   "/property-laws": "قوانين العقار",
+  "/buyers-guide": "دليل المشتري",
   "/login": "تسجيل الدخول",
   "/register": "حساب جديد",
   "/engineering-architecture": "الاستشارات الهندسية",

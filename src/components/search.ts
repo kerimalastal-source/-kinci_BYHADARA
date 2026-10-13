@@ -4,7 +4,7 @@ import { ensureLocales } from "../i18n/load";
 import { getSortedProjects } from "../data/projects";
 import { getSortedBlogPosts } from "../data/blog";
 import { navigate } from "../router";
-import { consultancyPath, LAWS_SEGMENT } from "../seo/routes";
+import { consultancyPath, GUIDE_SEGMENT, LAWS_SEGMENT } from "../seo/routes";
 import { LAWS_PAGE_LIVE } from "../data/laws";
 
 interface SearchResult {
@@ -64,6 +64,7 @@ function buildIndex(): SearchResult[] {
     });
   }
   results.push({ title: t("nav.citizenship"), snippet: t("citizenship.heroSubtitle"), route: "/citizenship" });
+  results.push({ title: t("nav.guide"), snippet: t("guide.heroSubtitle"), route: `/${GUIDE_SEGMENT}` });
   results.push({ title: t("nav.propertyRequest"), snippet: t("propertyRequest.heroSubtitle"), route: "/property-request" });
   results.push({ title: t("videoTour.nav"), snippet: t("videoTour.heroSubtitle"), route: "/video-tour" });
   results.push({ title: t("nav.blog"), snippet: t("blog.heroSubtitle"), route: "/blog" });

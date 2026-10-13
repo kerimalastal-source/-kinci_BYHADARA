@@ -7,6 +7,7 @@ import { renderConsultancy } from "./pages/consultancy";
 import { renderFaq } from "./pages/faq";
 import { renderPrivacy } from "./pages/privacy";
 import { renderLaws } from "./pages/laws";
+import { renderBuyersGuide } from "./pages/buyersGuide";
 import { LAWS_PAGE_LIVE } from "./data/laws";
 import { renderBlog } from "./pages/blog";
 import { renderBlogDetail } from "./pages/blogDetail";
@@ -122,6 +123,9 @@ function renderRoute(route: Route, main: HTMLElement): void {
       // Hidden until the owner approves the page; ?preview shows it for review.
       if (LAWS_PAGE_LIVE || new URLSearchParams(location.search).has("preview")) renderLaws(main);
       else renderNotFound(main);
+      break;
+    case "buyers-guide":
+      renderBuyersGuide(main);
       break;
     case "blog":
       renderBlog(main);

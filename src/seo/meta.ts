@@ -52,6 +52,7 @@ const PAGE_KEYS: Partial<Record<Route["name"], string>> = {
   faq: "faq",
   privacy: "privacy",
   laws: "laws",
+  "buyers-guide": "guide",
   blog: "blog",
   "property-request": "propertyRequest",
   "video-tour": "videoTour",
@@ -112,6 +113,7 @@ export function indexableRoutes(): Route[] {
     { name: "contact" },
     { name: "resale" },
     { name: "privacy" },
+    { name: "buyers-guide" },
     ...(LAWS_PAGE_LIVE ? [{ name: "laws" } as Route] : [])
   ];
 }
