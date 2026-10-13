@@ -1,6 +1,6 @@
 import { t, tRaw, link, getProjectContent, placeLine } from "../i18n";
 import { getProjectBySlug, type Project } from "../data/projects";
-import { partners } from "../data/partners";
+import { partners, partnerLogoSize, type Partner } from "../data/partners";
 import { renderProjectCard } from "../components/projectCard";
 import { initStatCounters, renderStatTiles, type StatTile } from "../components/statCounter";
 import { initScrollReveal } from "../components/scrollReveal";
@@ -25,6 +25,12 @@ const FEATURED_SLUGS = ["beylikduzu-living", "lotus-sisli", "marmara-haven-villa
 
 /* Where each "What We Do" card leads, in the order of `home.services`. */
 const SERVICE_LINKS = ["/projects", "/projects", "/projects", consultancyPath(), "/citizenship", "/property-request"];
+
+/** Width/height attributes plus the same size as CSS variables (scaled down on small screens). */
+function logoSize(p: Partner): string {
+  const { width, height } = partnerLogoSize(p);
+  return `width="${width}" height="${height}" style="--logo-w: ${width}px; --logo-h: ${height}px"`;
+}
 
 interface ServiceItem {
   title: string;
@@ -73,7 +79,7 @@ export function renderHome(el: HTMLElement): void {
             .map(
               (p, i) => `
             <div class="partner-logo" data-reveal data-reveal-index="${i}">
-              <img src="${p.logo}" alt="${p.name}" loading="lazy" />
+              <img src="${p.logo}" alt="${p.name}" loading="lazy" ${logoSize(p)} />
             </div>`
             )
             .join("")}
