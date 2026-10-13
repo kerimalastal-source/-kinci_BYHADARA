@@ -3,10 +3,10 @@
     python3 -I scripts/ads/targeting-map/gulf_cover.py <districts.json> <city_id> <max_circles> "Name A" "Name B" ...
 
 districts.json = homaily/Saudi-Arabia-Regions-Cities-and-Districts json/districts.json
-(boundaries are [[lat, lon], ...] rings). Every circle keeps >= 80% of its area inside the chosen
+(boundaries are [[lat, lon], ...] rings). Small districts: relax with env GOOD=0.6 OTHER=0.2. Every circle keeps >= 80% of its area inside the chosen
 districts and <= 8% inside any other named district; the rest may be roads or unnamed land.
 """
-import json, math, sys
+import json, math, os, sys
 
 data = json.load(open(sys.argv[1]))
 city = int(sys.argv[2]); maxn = int(sys.argv[3]); wanted = set(sys.argv[4:])
@@ -78,7 +78,7 @@ for i in target[::2]:
         for l in labs:
             if l and l not in wanted:
                 other[l] = other.get(l, 0) + 1
-        if good < .80 or (other and max(other.values()) / len(m) > .08):
+        if good < float(os.environ.get("GOOD", .80)) or (other and max(other.values()) / len(m) > float(os.environ.get("OTHER", .08))):
             continue
         cands.append(((round(la, 4), round(lo, 4), r), {j for j in m if samples[j][2] in wanted}))
 covered = set(); chosen = []
