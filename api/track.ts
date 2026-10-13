@@ -23,6 +23,7 @@
 import { waitUntil } from "@vercel/functions";
 import { rpc, RpcError } from "./_lib/supabase.js";
 import { sendDueFollowUps } from "./_lib/followups.js";
+import { checkMetaLeads } from "./_lib/metaLeadsRun.js";
 import { recordVisit, refreshAlert } from "./_lib/visitRecord.js";
 import { parseUserAgent, type Insight } from "./_lib/visitInsights.js";
 import { teamChatId } from "./_lib/telegram.js";
@@ -95,6 +96,15 @@ export async function POST(request: Request): Promise<Response> {
       waitUntil(
         sendDueFollowUps(SITE, 120).catch((error: unknown) => {
           console.error(`track: followups failed: ${error instanceof Error ? error.message : "unknown error"}`);
+        })
+      );
+    }
+    // New leads from Meta's lead-form ads (filled in inside Facebook/Instagram, so they never
+    // reach the site): announced on Telegram within a minute or two while the site has visitors.
+    if (Math.random() < 0.3) {
+      waitUntil(
+        checkMetaLeads(60_000).catch((error: unknown) => {
+          console.error(`track: meta leads failed: ${error instanceof Error ? error.message : "unknown error"}`);
         })
       );
     }

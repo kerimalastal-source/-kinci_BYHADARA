@@ -3065,7 +3065,7 @@
         ],
         "items": [
           "Les prestataires qui font fonctionner le Site pour nous : Vercel (hébergement, et localisation approximative des visites), Supabase (base de données et connexion du portail de revente, messages des formulaires du Site, réservations de visites, et statistiques de visite anonymes), Google (polices, mesure d'audience et publicité) et Meta (WhatsApp, mesure et diffusion publicitaires, et les informations que vous nous envoyez via un formulaire ou un message WhatsApp dans l’une de nos publicités Facebook ou Instagram). La carte de notre page de contact est fournie par OpenStreetMap.",
-          "Telegram et l'e-mail, qui transmettent à notre équipe des notifications internes : nouvelles visites (avec des informations anonymes uniquement), nouveaux messages et demandes, et réservations de visites. Les e-mails de confirmation qui vous sont adressés sont envoyés via le service d'e-mail Resend.",
+          "Telegram et l'e-mail, qui transmettent à notre équipe des notifications internes : nouvelles visites (avec des informations anonymes uniquement), nouveaux messages et demandes (y compris les demandes envoyées via un formulaire intégré à l'une de nos publicités Facebook ou Instagram), et réservations de visites. Les e-mails de confirmation qui vous sont adressés sont envoyés via le service d'e-mail Resend.",
           "Les promoteurs des projets, lorsque c'est nécessaire pour traiter votre demande, par exemple pour réserver un logement ou finaliser un achat.",
           "Dans le portail de revente : les messages des acheteurs sont transmis au propriétaire de l'annonce, et les annonces approuvées sont publiées sur le Site.",
           "Les autorités publiques, lorsque la loi l'exige."

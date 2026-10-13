@@ -3065,7 +3065,7 @@
         ],
         "items": [
           "Service providers who run the Website for us: Vercel (hosting, and the approximate location of visits), Supabase (resale portal database and sign-in, messages from the Website's forms, tour bookings, and anonymous visit statistics), Google (fonts, analytics and advertising) and Meta (WhatsApp, ad measurement and showing our ads, and the details you send us through a form or a WhatsApp message inside one of our Facebook or Instagram ads). The map on our contact page is provided by OpenStreetMap.",
-          "Telegram and email, which deliver internal notifications to our team: new visits (with anonymous details only), new messages and requests, and tour bookings. Confirmation emails to you are sent through the email service Resend.",
+          "Telegram and email, which deliver internal notifications to our team: new visits (with anonymous details only), new messages and requests (including requests sent through a form inside one of our Facebook or Instagram ads), and tour bookings. Confirmation emails to you are sent through the email service Resend.",
           "Project developers, when it is needed to complete your request, for example to reserve a unit or complete a purchase.",
           "In the resale portal: buyers' messages are shared with the owner of the listing, and approved listings are published on the Website.",
           "Public authorities, when the law requires it."
