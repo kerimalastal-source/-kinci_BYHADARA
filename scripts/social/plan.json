@@ -732,13 +732,16 @@
      "at": "14:00"
     },
     {
-     "id": "finish-best-of-istanbul",
+     "id": "carousel-aidat",
      "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «أكمل الجملة · Finish the sentence». The image shows the unfinished sentence ending with «…»; the caption asks followers to finish it in the comments. «أجمل ما في إسطنبول بالنسبة إليّ هو…» / «For me, the best thing about Istanbul is…».",
-     "label": "أكمل الجملة: أجمل ما في إسطنبول",
+     "design": "carousel",
+     "path": "/blog/monthly-fees-aidat",
+     "photos": [
+      "/images/blog/monthly-fees-aidat.jpg",
+      "/images/projects/cadde-ispartakule/garden-pond.jpg"
+     ],
+     "brief": "Carousel (owner's request 2026-10-14) from the article blogData.monthly-fees-aidat ONLY (every fact is from the Condominium Law text on mevzuat.gov.tr; add nothing else). Cover: «الأيدات في تركيا: مقابل ماذا تدفع شهرياً؟» / «Aidat in Turkey: what do you pay for each month?», badge «معلومة عقارية · Property tip». Content slides (1-2 items each): 1) what aidat is: a regular contribution of every owner to run the shared parts, not a tax, collected by the building management; 2) what it pays for: staff (doorman, heating, gardener, security) and the building as a whole (insurance, maintenance and repair of common areas, manager's fee, lifts, cleaning, lighting and water of common areas; in complexes also pools, gym, gardens, car park, cameras, generator), so fees differ between projects; 3) how it is calculated: a yearly operating budget approved by the owners' general meeting and paid in instalments (usually monthly); unless agreed otherwise, staff costs are shared equally and the rest by each unit's land share (arsa payı) on the title deed; 4) what changed in 2026 (Law No. 7579): the manager's new provisional budget may not rise more than the official annual revaluation rate and must go to the general meeting within three months; 5) before you buy: ask the current fee and what it covers, the approved budget and management plan, and written confirmation of no unpaid fees. Last slide: ask «هل تسأل عن قيمة الأيدات قبل أن تختار شقتك؟» / «Do you ask about the aidat before choosing a flat?», cta to read the full article, note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'. NO amounts in lira, no prices, no percentages except the law's own words if needed.",
+     "label": "شرائح: الأيدات — مقابل ماذا تدفع شهرياً؟",
      "at": "21:00"
     }
    ],
