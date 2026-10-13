@@ -1,0 +1,83 @@
+{
+  "posts": [
+    {
+      "id": "sea-pearl-atakoy",
+      "topic": "سي بيرل أتاكوي",
+      "image": {
+        "photo": "/images/projects/sea-pearl-atakoy/dusk-coast.jpg",
+        "position": "center 55%",
+        "badge": {
+          "ar": "جاهز للسكن",
+          "en": "Ready to move in"
+        },
+        "place": "Sea Pearl Ataköy · Bakırköy",
+        "placeAr": "سي بيرل أتاكوي · باكركوي",
+        "headlineAr": "على بحر مرمرة مباشرةً في أتاكوي",
+        "headlineEn": "Right on the Marmara Sea in Ataköy",
+        "stats": [
+          {
+            "value": "1.2 km",
+            "ar": "واجهة بحرية للسكان",
+            "en": "Residents' seafront"
+          },
+          {
+            "value": "631",
+            "ar": "شقة سكنية",
+            "en": "Apartments"
+          },
+          {
+            "value": "60%",
+            "ar": "مساحات خضراء",
+            "en": "Green space"
+          }
+        ],
+        "tip": {
+          "ar": "نحو 200 شقة متاحة حالياً بإطلالة بحرية مباشرة",
+          "en": "About 200 apartments with direct sea views available now"
+        }
+      },
+      "caption": {
+        "ar": {
+          "title": "سي بيرل أتاكوي: حياة على بحر مرمرة 🌊",
+          "intro": "مشروع سكني مكتمل وجاهز للسكن في أتاكوي، من أرقى المناطق السكنية في إسطنبول، بواجهة بحرية خاصة بسكانه تمتد 1.2 كم.",
+          "bullets": [
+            "🌊 رسوّ لليخوت وتنقّل بحري إلى مارينا أتاكوي على بُعد نحو كيلومتر واحد",
+            "🌳 نحو 60% من مساحة المشروع البالغة 55,000 م² حدائق على الطراز العثماني، مع بحيرة صناعية وورود مستوردة من اليابان",
+            "🏢 631 شقة من 1+1 إلى 4.5+1 بمساحات من 88 إلى 398 م² في أربعة مبانٍ من 20 طابقاً",
+            "🏋️ صالة رياضية للمقيمين في كل مبنى، وعروض خاصة في فندق JW Marriott",
+            "📍 مول A Plus على بُعد دقيقة، ومستشفى Medicana بجوار المشروع، ونفق أوراسيا نحو 5 دقائق"
+          ],
+          "closing": [
+            "تتوفر حالياً نحو 200 شقة بإطلالات بحرية مباشرة، وفريقنا يساعدك على اختيار ما يناسب هدفك."
+          ],
+          "cta": "تفاصيل المشروع",
+          "path": "/projects/sea-pearl-atakoy"
+        },
+        "en": {
+          "title": "Sea Pearl Ataköy: life on the Marmara Sea",
+          "intro": "A completed, ready-to-move-in community in Ataköy, one of Istanbul's most sought-after districts, with a 1.2 km seafront reserved for residents.",
+          "bullets": [
+            "🌊 Yacht mooring and sea transport to Ataköy Marina, about 1 km away",
+            "🌳 About 60% of the 55,000 m² site is Ottoman-style gardens, with an artificial lake and roses from Japan",
+            "🏢 631 apartments from 1+1 to 4.5+1, 88 – 398 m², in four 20-storey blocks",
+            "🏋️ A residents' gym in every block, plus special offers at the JW Marriott hotel",
+            "📍 A Plus mall 1 minute away, Medicana hospital next door, the Eurasia Tunnel about 5 minutes"
+          ],
+          "closing": [
+            "About 200 apartments with direct sea views are available now, and our team will help you choose the right one."
+          ],
+          "cta": "Project details",
+          "path": "/projects/sea-pearl-atakoy"
+        },
+        "hashtags": [
+          "#SeaPearlAtakoy",
+          "#Atakoy",
+          "#Bakirkoy",
+          "#SeafrontLiving",
+          "#HadaraRealEstate"
+        ]
+      },
+      "at": "14:00"
+    }
+  ]
+}
