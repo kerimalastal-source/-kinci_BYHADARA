@@ -56,7 +56,14 @@ export type AmenityKey =
   | "meetingRooms"
   | "cafe"
   | "cinemaRoom"
-  | "gameRoom";
+  | "gameRoom"
+  | "seafront"
+  | "hotelServices"
+  | "swimmingPool"
+  | "steamRoom"
+  | "spaCenter"
+  | "tennisCourt"
+  | "palaceGardens";
 
 /** One residence type, shown as a card in the project's "Residences" section. */
 export interface Residence {
@@ -260,6 +267,69 @@ export const projects: Project[] = [
     ],
     residences: [{ kind: "apartment", layout: "3+1", gross: "117.60 – 143.08 m²", planTypes: 5 }],
     amenities: community(["smartHome", "airConditioning", "insulation"])
+  },
+  {
+    slug: "seapearl-istanbul",
+    district: "Bakırköy",
+    city: "Istanbul",
+    status: "delivered",
+    lifestyle: ["sea", "city"],
+    unitsAvailable: true,
+    // Between Diamond Marin and Lotus Şişli in the list (owner, 2026-10-13: a new luxury project to market).
+    priority: 1.5,
+    developer: "Kuzu Grup",
+    // The developer's 2023 price list excludes VAT and may be out of date, so the page asks for the price until the owner confirms one.
+    price: "on-request",
+    address: "Zeytinlik Mah., Rauf Orbay Cad., Ataköy Sahil Yolu No:1, Bakırköy / İstanbul",
+    // From the developer's catalog and photo folders (shared by the owner on 2026-10-13).
+    coverImage: img("seapearl-istanbul", "dusk-coast", 2000, 1333, "SeaPearl İstanbul towers on the Marmara coast at dusk"),
+    gallery: [
+      img("seapearl-istanbul", "aerial-coast", 2000, 1213, "SeaPearl İstanbul aerial view with its coastline, lagoon and gardens"),
+      img("seapearl-istanbul", "palace-gardens", 2000, 1454, "SeaPearl İstanbul palace-style gardens opening onto the sea"),
+      img("seapearl-istanbul", "gardens-night", 2000, 1243, "SeaPearl İstanbul gardens and lagoon lit at night"),
+      img("seapearl-istanbul", "night-aerial", 2000, 1333, "SeaPearl İstanbul blocks and gardens at night, aerial view"),
+      img("seapearl-istanbul", "balcony-view", 2000, 1333, "View from a SeaPearl İstanbul balcony over the gardens to the sea"),
+      img("seapearl-istanbul", "terrace-sea", 2000, 1335, "SeaPearl İstanbul garden terrace above the Marmara Sea"),
+      img("seapearl-istanbul", "terrace-dinner", 2000, 1333, "Dinner on a SeaPearl İstanbul terrace at sunset"),
+      img("seapearl-istanbul", "living-room", 2000, 1335, "SeaPearl İstanbul 4.5+1 living room with sea view"),
+      img("seapearl-istanbul", "master-bedroom", 2000, 1335, "SeaPearl İstanbul master bedroom opening onto a sea-view terrace"),
+      img("seapearl-istanbul", "bedroom-sea", 2000, 1335, "SeaPearl İstanbul bedroom with the sea beyond the garden"),
+      img("seapearl-istanbul", "dining-room", 2000, 1335, "SeaPearl İstanbul dining room facing the sea"),
+      img("seapearl-istanbul", "open-kitchen", 2000, 1335, "SeaPearl İstanbul open kitchen and living area with sea view"),
+      img("seapearl-istanbul", "sea-terrace", 2000, 931, "SeaPearl İstanbul wide terrace above the shore"),
+      img("seapearl-istanbul", "from-the-sea", 1474, 1243, "SeaPearl İstanbul seen from the Marmara Sea")
+    ],
+    stats: [
+      { value: "631", labelKey: "apartments" },
+      { value: "1,200 m", labelKey: "coastline" },
+      { value: "127,600 m²", labelKey: "landArea" },
+      { value: "4", labelKey: "blocks" },
+      { value: "1+1 – 4.5+1", labelKey: "layout" }
+    ],
+    // Areas from the developer's price list (smallest and largest unit of each type).
+    residences: [
+      { kind: "apartment", layout: "1+1", gross: "88 – 104 m²" },
+      { kind: "apartment", layout: "2+1", gross: "117 – 270 m²" },
+      { kind: "apartment", layout: "3+1", gross: "193 – 204 m²" },
+      { kind: "apartment", layout: "3.5+1", gross: "235 – 277 m²" },
+      { kind: "apartment", layout: "4+1", gross: "237 – 276 m²" },
+      { kind: "apartment", layout: "4.5+1", gross: "248 – 375 m²" }
+    ],
+    // The catalog's facilities: hotel services reserved for residents, sports and the palace gardens.
+    amenities: [
+      "seafront",
+      "seaView",
+      "hotelServices",
+      "swimmingPool",
+      "hamam",
+      "steamRoom",
+      "spaCenter",
+      "fitness",
+      "tennisCourt",
+      "sportsCourt",
+      "playground",
+      "palaceGardens"
+    ]
   },
   {
     slug: "lotus-sisli",

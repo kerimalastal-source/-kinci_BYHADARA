@@ -70,6 +70,7 @@
     "searchResultsFor": "Search results for",
     "loading": "Loading...",
     "statLabels": {
+      "coastline": "Coastline",
       "landArea": "Land Area",
       "delivery": "Delivery Year",
       "apartments": "Apartments",
@@ -110,18 +111,18 @@
     "statsTitle": "HADARA in Numbers",
     "stats": [
       { "value": "12+", "label": "Years of Excellence", "icon": "years" },
-      { "value": "11", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "640+", "label": "Residential Units", "icon": "apartments" },
+      { "value": "12", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "1,270+", "label": "Residential Units", "icon": "apartments" },
       { "value": "420+", "label": "Office Units", "icon": "offices" },
       { "value": "60+", "label": "Commercial Units", "icon": "shops" },
-      { "value": "4", "label": "Prime Istanbul Districts", "icon": "districts" }
+      { "value": "5", "label": "Prime Istanbul Districts", "icon": "districts" }
     ],
     "partnersEyebrow": "Trusted Network",
     "partnersTitle": "Our Success Partners",
     "partnersSubtitle": "HADARA works alongside leading regional developers and holding groups to deliver projects our clients can rely on.",
     "aboutEyebrow": "Who We Are",
     "aboutTitle": "Real Estate Development & Marketing Partner in Istanbul",
-    "aboutText1": "Since 2014, HADARA Real Estate has worked as a real estate development and marketing partner in Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects by leading developers in Beylikdüzü, Büyükçekmece, Avcılar and Şişli — among the city's most dynamic growth corridors.",
+    "aboutText1": "Since 2014, HADARA Real Estate has worked as a real estate development and marketing partner in Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects by leading developers in Beylikdüzü, Büyükçekmece, Avcılar, Şişli and Bakırköy — among the city's most dynamic growth corridors.",
     "aboutText2": "From private luxury villas to large-scale residential communities, we choose the projects we offer for thoughtful architecture, quality construction and a genuine understanding of how people want to live.",
     "aboutCta": "More About HADARA",
     "spotlightEyebrow": "New Launch",
@@ -131,7 +132,7 @@
     "spotlightWhatsappMessage": "Hello, I would like more information about the {name} project.",
     "projectsEyebrow": "Our Portfolio",
     "projectsTitle": "Featured Projects",
-    "projectsSubtitle": "A closer look at the developments shaping Istanbul's Beylikdüzü, Büyükçekmece, Avcılar and Şişli districts.",
+    "projectsSubtitle": "A closer look at the developments shaping Istanbul's Beylikdüzü, Büyükçekmece, Avcılar, Şişli and Bakırköy districts.",
     "servicesEyebrow": "What We Do",
     "servicesTitle": "End-to-End Real Estate Expertise",
     "services": [
@@ -182,7 +183,7 @@
     "storyEyebrow": "Our Story",
     "storyTitle": "From a Single Vision to a Growing Portfolio",
     "storyText1": "Founded in 2014 and headquartered in Beylikdüzü, Istanbul, HADARA Real Estate was built on a simple idea: that careful project selection and honest advice create lasting value for the people who live in — and invest in — the homes we offer.",
-    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş and MH Grup to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar and Şişli, among the most sought-after growth corridors on Istanbul's European side, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
+    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş, MH Grup and Kuzu Grup to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar, Şişli and Bakırköy, among the most sought-after growth corridors on Istanbul's European side, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
     "missionTitle": "Our Mission",
     "missionText": "To connect residents and investors with carefully selected residential and mixed-use projects that combine architectural quality, everyday comfort and dependable long-term value, and to guide them clearly at every step.",
     "visionTitle": "Our Vision",
@@ -205,15 +206,15 @@
     "statsTitle": "Our Track Record",
     "stats": [
       { "value": "12+", "label": "Years in Business", "icon": "years" },
-      { "value": "11", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "1,100+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
-      { "value": "60,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
+      { "value": "12", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "1,700+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
+      { "value": "190,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
     ]
   },
   "projects": {
     "heroEyebrow": "Our Portfolio",
     "heroTitle": "Projects Shaping Istanbul",
-    "heroSubtitle": "From private villas to large residential communities, explore the projects HADARA developed and markets across Beylikdüzü, Büyükçekmece, Avcılar and Şişli.",
+    "heroSubtitle": "From private villas to large residential communities, explore the projects HADARA developed and markets across Beylikdüzü, Büyükçekmece, Avcılar, Şişli and Bakırköy.",
     "filterAll": "All Projects",
     "filterNewLaunch": "New Launch",
     "filterOngoing": "Under Construction",
@@ -225,6 +226,7 @@
     "notFoundCtaButton": "Request a Custom Property"
   },
   "places": {
+    "bakirkoy": "Bakırköy",
     "istanbul": "Istanbul",
     "beylikduzu": "Beylikdüzü",
     "buyukcekmece": "Büyükçekmece",
@@ -347,6 +349,13 @@
       "meetingRooms": "Meeting Rooms",
       "cafe": "Café & Vitamin Bar",
       "cinemaRoom": "Private Cinema Room",
+      "seafront": "Directly on the Seafront",
+      "hotelServices": "Hotel Services for Residents",
+      "swimmingPool": "Swimming Pool",
+      "steamRoom": "Steam Room",
+      "spaCenter": "Spa",
+      "tennisCourt": "Tennis Court",
+      "palaceGardens": "Palace-Style Gardens & Lagoon",
       "gameRoom": "PlayStation Room",
       "separatePools": "Separate Pools for Men & Women",
       "cctv": "CCTV Surveillance",
@@ -581,7 +590,7 @@
         "items": [
           {
             "q": "Who is HADARA Real Estate?",
-            "a": "HADARA Real Estate is a real estate development and marketing partner founded in 2014 and headquartered in Beylikdüzü, Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects and villas by leading developers across Beylikdüzü, Büyükçekmece, Avcılar and Şişli."
+            "a": "HADARA Real Estate is a real estate development and marketing partner founded in 2014 and headquartered in Beylikdüzü, Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects and villas by leading developers across Beylikdüzü, Büyükçekmece, Avcılar, Şişli and Bakırköy."
           },
           {
             "q": "What types of projects does HADARA offer?",
@@ -589,7 +598,7 @@
           },
           {
             "q": "Where are HADARA's projects located?",
-            "a": "All of the projects we currently offer are located on Istanbul's European side, in the fast-growing districts of Beylikdüzü, Büyükçekmece, Avcılar and Şişli."
+            "a": "All of the projects we currently offer are located on Istanbul's European side, in the fast-growing districts of Beylikdüzü, Büyükçekmece, Avcılar, Şişli and Bakırköy."
           },
           {
             "q": "How can I get in touch with HADARA's team?",
@@ -1274,6 +1283,55 @@
         },
         {
           "place": "Başakşehir City Hospital"
+        }
+      ]
+    },
+    "seapearl-istanbul": {
+      "name": "SeaPearl İstanbul",
+      "tagline": "Istanbul's pearl on the sea — seafront living in Ataköy.",
+      "shortDescription": "SeaPearl İstanbul is a seafront community of 631 residences in four blocks on the Marmara coast in Ataköy, Bakırköy, with a 1,200 m coastline, sea views from every home and hotel services for residents.",
+      "longDescription": "SeaPearl İstanbul stands directly on the Marmara Sea in Ataköy, in the Bakırköy district, with a 1,200-metre coastline, and its developer describes it as Istanbul's only premium project set right on the seafront. Its 631 residences, from 1+1 to 4.5+1, are arranged in four blocks — Sunrise, Sunset, Blue Palace and Green Palace — whose earthy tones on the lower floors turn to grey and blue as the towers rise. Every residence has an uninterrupted sea view, and most rooms look out over the water through wide balconies and terraces. Between the blocks, 33,000 m² of car-free landscaping brings baroque gardens inspired by Ottoman and French palaces together with a lagoon, a natural park, a tennis court, a streetball court and a children's playground. One of Istanbul's leading hotels stands next to the project, and residents can use its pool, Turkish bath, steam room, spa and gym whenever they wish, alongside its boutique shops and restaurants. Ataköy Marina and the E-5 (D-100) highway are about 2 km away, Atatürk Airport 7 km and the Historical Peninsula 12 km, with easy access to the Eurasia Tunnel. Developed by Kuzu Grup in partnership with KAT, the project is complete and ready to move in, and residences are still available for sale.",
+      "highlights": [
+        "Directly on the Marmara Sea with a 1,200 m coastline in Ataköy, Bakırköy",
+        "Uninterrupted sea views from every residence",
+        "631 residences from 1+1 to 4.5+1 in four blocks",
+        "33,000 m² of car-free palace-style gardens with a lagoon",
+        "Hotel pool, Turkish bath, steam room, spa and gym reserved for residents",
+        "Completed and ready to move in — residences available for sale",
+        "Eligible for Turkish citizenship, according to the developer",
+        "Developed by Kuzu Grup in partnership with KAT"
+      ],
+      "nearby": [
+        {
+          "place": "Ataköy Marina",
+          "time": "2 km"
+        },
+        {
+          "place": "E-5 (D-100) Highway",
+          "time": "2 km"
+        },
+        {
+          "place": "Eurasia Tunnel"
+        },
+        {
+          "place": "Atatürk Airport",
+          "time": "7 km"
+        },
+        {
+          "place": "Historical Peninsula",
+          "time": "12 km"
+        },
+        {
+          "place": "18 shopping centres",
+          "time": "14 min drive"
+        },
+        {
+          "place": "15 hospitals",
+          "time": "9 min drive"
+        },
+        {
+          "place": "40 private schools",
+          "time": "19 min drive"
         }
       ]
     },
@@ -2284,11 +2342,11 @@
     },
     "home": {
       "title": "HADARA Real Estate | Your Real Estate Partner in Istanbul, Turkey",
-      "description": "Your real estate partner in Istanbul since 2014: villas, apartments and mixed-use projects in Beylikdüzü, Büyükçekmece, Avcılar and Şişli, and citizenship help."
+      "description": "Your Istanbul real estate partner since 2014: villas and apartments in Beylikdüzü, Büyükçekmece, Avcılar, Şişli and Bakırköy, plus citizenship help."
     },
     "projects": {
       "title": "Our Projects in Istanbul – Apartments & Villas",
-      "description": "HADARA's apartment, villa and mixed-use projects in Beylikdüzü, Büyükçekmece, Avcılar and Şişli, Istanbul: new launches, under construction and ready homes."
+      "description": "HADARA's apartment, villa and mixed-use projects in Beylikdüzü, Büyükçekmece, Avcılar, Şişli and Bakırköy: new launches and ready homes."
     },
     "about": {
       "title": "About HADARA – Development & Marketing Partner Since 2014",
