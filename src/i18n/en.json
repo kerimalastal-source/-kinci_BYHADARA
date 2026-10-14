@@ -70,6 +70,7 @@
     "searchResultsFor": "Search results for",
     "loading": "Loading...",
     "statLabels": {
+      "coastline": "Coastline",
       "landArea": "Land Area",
       "delivery": "Delivery Year",
       "apartments": "Apartments",
@@ -110,18 +111,18 @@
     "statsTitle": "HADARA in Numbers",
     "stats": [
       { "value": "12+", "label": "Years of Excellence", "icon": "years" },
-      { "value": "11", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "640+", "label": "Residential Units", "icon": "apartments" },
+      { "value": "13", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "2,800+", "label": "Residential Units", "icon": "apartments" },
       { "value": "420+", "label": "Office Units", "icon": "offices" },
-      { "value": "60+", "label": "Commercial Units", "icon": "shops" },
-      { "value": "4", "label": "Prime Istanbul Districts", "icon": "districts" }
+      { "value": "110+", "label": "Commercial Units", "icon": "shops" },
+      { "value": "6", "label": "Prime Istanbul Districts", "icon": "districts" }
     ],
     "partnersEyebrow": "Trusted Network",
     "partnersTitle": "Our Success Partners",
     "partnersSubtitle": "HADARA works alongside leading regional developers and holding groups to deliver projects our clients can rely on.",
     "aboutEyebrow": "Who We Are",
     "aboutTitle": "Real Estate Development & Marketing Partner in Istanbul",
-    "aboutText1": "Since 2014, HADARA Real Estate has worked as a real estate development and marketing partner in Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects by leading developers in Beylikdüzü, Büyükçekmece, Avcılar and Şişli — among the city's most dynamic growth corridors.",
+    "aboutText1": "Since 2014, HADARA Real Estate has worked as a real estate development and marketing partner in Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects by leading developers in Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy and Zeytinburnu — among the city's most dynamic growth corridors.",
     "aboutText2": "From private luxury villas to large-scale residential communities, we choose the projects we offer for thoughtful architecture, quality construction and a genuine understanding of how people want to live.",
     "aboutCta": "More About HADARA",
     "spotlightEyebrow": "New Launch",
@@ -131,7 +132,7 @@
     "spotlightWhatsappMessage": "Hello, I would like more information about the {name} project.",
     "projectsEyebrow": "Our Portfolio",
     "projectsTitle": "Featured Projects",
-    "projectsSubtitle": "A closer look at the developments shaping Istanbul's Beylikdüzü, Büyükçekmece, Avcılar and Şişli districts.",
+    "projectsSubtitle": "A closer look at the developments shaping Istanbul's Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy and Zeytinburnu districts.",
     "servicesEyebrow": "What We Do",
     "servicesTitle": "End-to-End Real Estate Expertise",
     "services": [
@@ -182,7 +183,7 @@
     "storyEyebrow": "Our Story",
     "storyTitle": "From a Single Vision to a Growing Portfolio",
     "storyText1": "Founded in 2014 and headquartered in Beylikdüzü, Istanbul, HADARA Real Estate was built on a simple idea: that careful project selection and honest advice create lasting value for the people who live in — and invest in — the homes we offer.",
-    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş and MH Grup to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar and Şişli, among the most sought-after growth corridors on Istanbul's European side, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
+    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup and Özak GYO to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy and Zeytinburnu, among the most sought-after growth corridors on Istanbul's European side, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
     "missionTitle": "Our Mission",
     "missionText": "To connect residents and investors with carefully selected residential and mixed-use projects that combine architectural quality, everyday comfort and dependable long-term value, and to guide them clearly at every step.",
     "visionTitle": "Our Vision",
@@ -205,15 +206,15 @@
     "statsTitle": "Our Track Record",
     "stats": [
       { "value": "12+", "label": "Years in Business", "icon": "years" },
-      { "value": "11", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "1,100+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
-      { "value": "60,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
+      { "value": "13", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "3,300+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
+      { "value": "225,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
     ]
   },
   "projects": {
     "heroEyebrow": "Our Portfolio",
     "heroTitle": "Projects Shaping Istanbul",
-    "heroSubtitle": "From private villas to large residential communities, explore the projects HADARA developed and markets across Beylikdüzü, Büyükçekmece, Avcılar and Şişli.",
+    "heroSubtitle": "From private villas to large residential communities, explore the projects HADARA developed and markets across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy and Zeytinburnu.",
     "filterAll": "All Projects",
     "filterNewLaunch": "New Launch",
     "filterOngoing": "Under Construction",
@@ -225,6 +226,7 @@
     "notFoundCtaButton": "Request a Custom Property"
   },
   "places": {
+    "bakirkoy": "Bakırköy",
     "istanbul": "Istanbul",
     "beylikduzu": "Beylikdüzü",
     "buyukcekmece": "Büyükçekmece",
@@ -296,6 +298,8 @@
       "swipe": "Swipe to explore the map"
     },
     "developerLabel": "Developer",
+    "paymentPlanLabel": "Payment plan",
+    "paymentPlanValue": "{down} down payment, the balance over {months} months",
     "priceLabel": "Price",
     "priceOnRequest": "On Request",
     "priceNote": "Prices include VAT and vary by payment method. The 4% title deed registration fee is not included.",
@@ -347,6 +351,13 @@
       "meetingRooms": "Meeting Rooms",
       "cafe": "Café & Vitamin Bar",
       "cinemaRoom": "Private Cinema Room",
+      "seafront": "Residents-Only Seafront",
+      "hotelServices": "JW Marriott Service Offers",
+      "palaceGardens": "Ottoman-Style Gardens & Lake",
+      "seaBridge": "Residents' Bridge to the Shore",
+      "cultureCentre": "Theatres & Cinemas",
+      "yachtMooring": "Yacht Mooring & Sea Transport",
+      "seismicDesign": "Built to Türkiye's Seismic Code",
       "gameRoom": "PlayStation Room",
       "separatePools": "Separate Pools for Men & Women",
       "cctv": "CCTV Surveillance",
@@ -581,7 +592,7 @@
         "items": [
           {
             "q": "Who is HADARA Real Estate?",
-            "a": "HADARA Real Estate is a real estate development and marketing partner founded in 2014 and headquartered in Beylikdüzü, Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects and villas by leading developers across Beylikdüzü, Büyükçekmece, Avcılar and Şişli."
+            "a": "HADARA Real Estate is a real estate development and marketing partner founded in 2014 and headquartered in Beylikdüzü, Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects and villas by leading developers across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy and Zeytinburnu."
           },
           {
             "q": "What types of projects does HADARA offer?",
@@ -589,7 +600,7 @@
           },
           {
             "q": "Where are HADARA's projects located?",
-            "a": "All of the projects we currently offer are located on Istanbul's European side, in the fast-growing districts of Beylikdüzü, Büyükçekmece, Avcılar and Şişli."
+            "a": "All of the projects we currently offer are located on Istanbul's European side, in the fast-growing districts of Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy and Zeytinburnu."
           },
           {
             "q": "How can I get in touch with HADARA's team?",
@@ -1277,6 +1288,101 @@
         }
       ]
     },
+    "buyukyali": {
+      "name": "Büyükyalı",
+      "tagline": "Istanbul's new sea district on the Kazlıçeşme coast, with historic lofts and a FENDI Casa block.",
+      "shortDescription": "Büyükyalı is a seafront district of 1,540 homes in 15 blocks on a 111,000 m² site on the Kazlıçeşme coast in Zeytinburnu, with a residents-only bridge to the shore, lofts in a restored historic factory and a FENDI Casa block.",
+      "longDescription": "Büyükyalı rises on the Kazlıçeşme coast in Zeytinburnu, at the entrance to the Bosphorus, where Istanbul's historic city walls open onto the sea. Built by a partnership of Özak GYO, Ziylan Gayrimenkul and Yenigün İnşaat with the assurance of Emlak Konut GYO, it was conceived as a new sea district: its master plan, by the international architects Chapman Taylor, keeps traffic below ground and leaves the surface to pedestrian squares, courtyards and gardens, where monumental trees more than 100 years old were preserved in place. The 111,000 m² site holds 1,540 homes in 15 blocks of 17 to 23 floors, from 1+1 to 5+1, along with penthouses and lofts, and the U-shaped blocks turn the homes towards the Marmara Sea and the Historic Peninsula. Homes come in three concepts: Limited, the project's luxury apartments; Loft, 23 two-storey lofts in the 180-metre historic Fişekhane cartridge factory, restored with its original walls and suited to family life or a home office; and FENDI Casa, a block furnished by the Italian brand in its first Istanbul project after Miami and Dubai, with a rooftop infinity pool reserved for its residents. A residents-only bridge leads to the coast road, so the pier is a minute's walk from home. Büyükyalı Club offers outdoor and indoor pools, a hamam, sauna and steam room, and tennis and swimming with coaches, while the Fişekhane culture centre brings two theatres, six cinemas, exhibitions, concerts, restaurants and an organic market open around the clock, alongside 59 shops and a 24/7 concierge. According to the developer, the blocks were designed above the legally required level of seismic safety, based on detailed soil studies, and residents have been living in Büyükyalı since 2019. Marmaray's Zeytinburnu station is within walking distance, and the Eurasia Tunnel, the TEM and E-5 highways and the Yenikapı ferry pier are all close by. The project is eligible for Turkish citizenship.",
+      "highlights": [
+        "A new sea district on the Kazlıçeşme coast in Zeytinburnu, where the historic city walls meet the sea",
+        "1,540 homes from 1+1 to 5+1, plus penthouses and lofts, in 15 blocks on a 111,000 m² site",
+        "A residents-only bridge to the coast road: the pier is a minute's walk away",
+        "23 lofts in the restored historic Fişekhane factory, suited to family life or a home office",
+        "A FENDI Casa block, the brand's first in Istanbul, with a rooftop infinity pool for its residents",
+        "Büyükyalı Club: outdoor and indoor pools, hamam, sauna, steam room and tennis",
+        "Fişekhane culture centre with 2 theatres, 6 cinemas, restaurants and an organic market",
+        "Master plan by Chapman Taylor, with traffic below ground and pedestrian squares above",
+        "59 shops, a 24/7 concierge, and a community lived in since 2019",
+        "Eligible for Turkish citizenship"
+      ],
+      "nearby": [
+        {
+          "place": "Coast road and pier (via the residents' bridge)",
+          "time": "1 min walk"
+        },
+        {
+          "place": "Marmaray Zeytinburnu station",
+          "time": "About 500 m"
+        },
+        {
+          "place": "Fişekhane culture centre and restaurants",
+          "time": "Inside the project"
+        },
+        {
+          "place": "Organic market, cinemas and theatres",
+          "time": "5 min"
+        },
+        {
+          "place": "Eurasia Tunnel, TEM and E-5",
+          "time": "Direct road links"
+        },
+        {
+          "place": "Historic Peninsula and Grand Bazaar",
+          "time": "Close by"
+        }
+      ]
+    },
+    "sea-pearl-atakoy": {
+      "name": "Sea Pearl Ataköy",
+      "tagline": "A residents-only seafront, Ottoman-style gardens and sea views in Ataköy.",
+      "shortDescription": "Sea Pearl Ataköy is a seafront community of 631 apartments in four 20-storey blocks in Ataköy, Bakırköy, with a 1.2 km seafront reserved for residents and about 60% of its 55,000 m² site given over to green space.",
+      "longDescription": "Sea Pearl Ataköy is one of the standout residential projects in Ataköy, developed by Kuzu İnşaat, a company known for major real estate and construction projects in Türkiye and for its work on infrastructure. The project covers about 55,000 m², around 60% of which, some 33,000 m², is given over to green space, with landscaping inspired by Ottoman gardens and a carefully chosen selection of plants and roses imported from Japan. An artificial lake adds calm places to rest and unwind, and a 1.2 km seafront is reserved for residents, who can also use yacht mooring and sea transport towards Ataköy Marina, about 1 km away. Four blocks of 20 floors, each with two entrances and its own residents' gym, hold 631 apartments from 1+1 to 4.5+1, ranging from 88 m² to 398 m², and around 200 apartments with direct sea views are currently available. Residents also benefit from special offers and reduced annual fees for some services of the JW Marriott hotel. Given its seafront setting, the project was built to modern construction standards and in line with Türkiye's seismic code, and it is complete and ready to move in. Ataköy is one of Istanbul's most refined and sought-after residential districts, popular with Turkish residents and the city's elite: A Plus mall is a minute away, Galleria about 3 minutes and Florya's shopping centre about 10 minutes, Medicana hospital, built by the same construction company, stands right next to the project, Acıbadem hospital is about 6 minutes away, the Eurasia Tunnel about 5 minutes, and the Marmaray and M9 metro stations about a 10-minute walk.",
+      "highlights": [
+        "A 1.2 km seafront reserved for residents, in Ataköy, Bakırköy",
+        "About 55,000 m² site, with around 60% (some 33,000 m²) given to Ottoman-inspired gardens",
+        "Plants and roses imported from Japan, and an artificial lake to relax by",
+        "631 apartments from 1+1 to 4.5+1 (88 – 398 m²) in four 20-storey blocks",
+        "Around 200 apartments with direct sea views currently available",
+        "Yacht mooring and sea transport to Ataköy Marina, about 1 km away",
+        "A residents' gym in every block, plus special offers at the JW Marriott hotel",
+        "Built to modern standards and Türkiye's seismic code; ready to move in",
+        "Eligible for Turkish citizenship, according to the developer"
+      ],
+      "nearby": [
+        {
+          "place": "A Plus Mall",
+          "time": "1 min"
+        },
+        {
+          "place": "Galleria Mall",
+          "time": "3 min"
+        },
+        {
+          "place": "Florya shopping centre",
+          "time": "10 min"
+        },
+        {
+          "place": "Medicana Hospital",
+          "time": "Next to the project"
+        },
+        {
+          "place": "Acıbadem Hospital",
+          "time": "6 min"
+        },
+        {
+          "place": "Eurasia Tunnel",
+          "time": "5 min"
+        },
+        {
+          "place": "Marmaray & M9 metro stations",
+          "time": "10 min walk"
+        },
+        {
+          "place": "Ataköy Marina",
+          "time": "1 km"
+        }
+      ]
+    },
     "lotus-sisli": {
       "name": "Lotus Şişli",
       "tagline": "An innovative mixed-use landmark in the heart of Istanbul.",
@@ -1576,6 +1682,14 @@
       }
     },
     "updates": {
+      "law-7579-site-fees": {
+        "title": "A cap on increases in residential complex fees (Law No. 7579)",
+        "summary": "Law No. 7579 amended the Condominium Law to curb excessive management fees (aidat) in apartment buildings and residential complexes, and added new building-safety rules.",
+        "before": "The law set no limit on the yearly increase of the provisional operating budget prepared by the manager, and changing the management plan of a large complex required a four-fifths vote.",
+        "after": "Where an operating budget is in force, the new provisional budget prepared by the manager may not rise by more than the official annual revaluation rate, and it must be put to the owners' general meeting and decided within three months at the latest. The management plan of a large complex can now be changed by a two-thirds vote, and plan provisions that contradict this rule do not apply. The law also introduces periodic fire-safety checks for occupied buildings and, from 31 December 2026, requires soil and foundation surveys to be carried out by firms licensed by the Ministry.",
+        "affects": "Owners and buyers of apartments in buildings and residential complexes in Turkey.",
+        "help": "Before you buy, we tell you the current management fee of the project and what it covers."
+      },
       "citizenship-amount-certificate": {
         "title": "Citizenship amount certificate now valid for 6 months",
         "summary": "The Land Registry amended its Circular No. 2024/4: the purchase amount for citizenship is now confirmed by an Amount Determination Certificate (Tutar Tespit Belgesi) issued by the valuation company GEDAŞ after an electronic comparison.",
@@ -1587,7 +1701,7 @@
       "property-tax-cap-2026": {
         "title": "A limit on the 2026 property tax increase",
         "summary": "Law No. 7566, published in the Official Gazette, limits how much the value used for the annual property tax can rise in 2026.",
-        "after": "The 2026 tax value of buildings and land may not exceed twice their 2025 tax value.",
+        "after": "The 2026 tax value of buildings and land may rise by no more than two-fold over their 2025 value, meaning at most three times the 2025 value (an increase of up to 200%).",
         "affects": "Everyone who owns property in Turkey and pays the annual property tax.",
         "help": "We explain the expected yearly taxes and fees of a property before you buy."
       },
@@ -1631,6 +1745,66 @@
     }
   },
   "blogData": {
+    "monthly-fees-aidat": {
+      "category": "Buying Property",
+      "title": "Aidat in Turkey: what the monthly fee covers and how it is set",
+      "excerpt": "What the monthly building fee (aidat) in Turkey pays for, how each owner's share is calculated under the Condominium Law, and what changed in 2026.",
+      "body": [
+        "When you buy an apartment in Turkey, the price is not the only number to ask about. Every owner in a building or residential complex also pays a regular contribution to run the shared parts of the property. Turks call it aidat. It is not a tax and it does not go to the state: it is collected by the building's management and spent on the building itself. The rules come from the Condominium Law (Kat Mülkiyeti Kanunu, No. 634), which sets who pays, for what, and in what proportion.",
+        "## What your monthly fee pays for",
+        "The law lists the costs that owners share. The first group is staff: the doorman (kapıcı), the person who runs the central heating, the gardener and the security guards. The second group covers the building as a whole: the insurance of the building, the maintenance, protection, strengthening and repair of all common areas, the manager's fee, and the operating costs of shared facilities. In practice this means electricity and water for corridors, gardens and car parks, cleaning of common areas, and the upkeep of lifts. The law also makes the manager responsible for the monthly maintenance and yearly inspection of the lifts.",
+        "In a residential complex the list grows with the facilities. Separate swimming pools, a gym, landscaped gardens, a closed car park, 24-hour security with cameras, a backup generator and daily cleaning all have running costs, and the aidat pays for them. This is why two apartments of the same size can have very different fees: a small building with a lift and a doorman costs far less to run than a complex with pools, gardens and round-the-clock security.",
+        "## How the fee is calculated",
+        "The starting point is the operating budget (işletme projesi). It estimates the income and expenses of the building for one year, shows each owner's share of the total, and sets the advance that each owner pays. The budget is approved by the owners' general meeting. The yearly amount is then collected in instalments on the dates set in the building's management plan (yönetim planı); in most buildings this is a monthly payment.",
+        "Unless the owners have agreed otherwise, the law splits the costs in two ways. Staff costs (doorman, heating staff, gardener and guards) are shared equally between the units. All other costs, such as insurance, repairs, the manager's fee and the running of shared facilities, are shared according to each unit's land share (arsa payı), the share of the plot recorded on the title deed, which reflects the value of the unit within the building. A larger or more valuable apartment therefore usually pays more. An owner cannot refuse to pay by saying that they do not use the pool or the garden.",
+        "Owners also have the right to see where the money goes. The manager must present the accounts to the owners every year, and if half of the owners ask, the accounts must be shown at any other time as well. The accounts are audited every three months unless the management plan sets a different schedule.",
+        "## What changed in 2026",
+        "Law No. 7579, published in the Official Gazette on 22 May 2026, was passed to curb excessive fees. When a building already has an operating budget in force, the new provisional budget prepared by the manager may not rise by more than the official annual revaluation rate, and it must be put to the owners' general meeting and decided within three months at the latest. In large residential complexes, the management plan can now be changed with a two-thirds vote, and plan provisions that contradict this rule do not apply.",
+        "## Late payment, tenants and buying",
+        "An owner who does not pay on time owes a delay compensation of five percent per month, and the manager or any other owner can take legal action. If the debt still cannot be collected, a legal mortgage can be registered on the unit in favour of the other owners. If the apartment is rented out, the tenant is also responsible towards the building, up to the amount of the rent, and any payment the tenant makes is deducted from the rent. Who pays the aidat between landlord and tenant is set in the rental contract.",
+        "Before you buy, ask for the current monthly fee and what it covers, a copy of the approved operating budget and the management plan, and written confirmation that the apartment has no unpaid fees. These conditions follow the current law and may change.",
+        "If you are considering one of the projects we market in Istanbul, our team can tell you the current fee of the project and what it includes before you decide. Contact HADARA, or book a private video tour to see the shared facilities for yourself."
+      ]
+    },
+    "net-vs-brut-area-turkey": {
+      "category": "Buying Property",
+      "title": "Net or Brüt? How Apartment Area Is Measured in Turkey",
+      "excerpt": "What net, brüt, total brüt and the saleable area really mean in a Turkish property listing, based on the official zoning rules and real examples.",
+      "body": [
+        "A listing says 120 m², the floor plan shows 98 m², and the price list mentions yet another figure. For many buyers in Istanbul this is the most confusing part of comparing homes. The reason is simple: Turkish rules measure an apartment in more than one way, and each number answers a different question. Once you know which is which, you can compare projects fairly and understand exactly what you are paying for. This guide follows the definitions in the Planned Areas Zoning Regulation (Planlı Alanlar İmar Yönetmeliği), the national rulebook published by the Ministry of Environment, Urbanisation and Climate Change.",
+        "## Net area: the space you actually live in",
+        "The net area (net alan) is the clean floor area between the inner walls of the home. According to the regulation, it leaves out the walls themselves, columns, chimneys and service shafts, and door and window thresholds. It also leaves out open projections, balconies, terraces, gardens and every common area of the building. In other words, the net area is the floor you walk on inside your front door: the bedrooms, living room, kitchen, bathrooms and hallways. When you want to know whether your sofa, dining table and beds will fit, this is the number that matters.",
+        "## Brüt area: the home with its walls",
+        "The brüt area (brüt alan) of an independent unit is the area enclosed by its outer outline. It therefore includes the home's walls. Where a wall is shared with a neighbour or a corridor rather than facing outside, the outline is drawn along the middle of that wall, so each side counts half of it. Shafts, light wells, air ducts and gallery voids are not counted. The regulation also defines a total brüt area (toplam brüt alan): the brüt area of the unit plus the brüt area of any annex (eklenti) that belongs only to that unit but sits outside it.",
+        "## General brüt and the saleable area",
+        "There is one more step. The general brüt area (genel brüt alan) adds to the unit's area its share of the building's common areas, such as entrance halls, stairs and corridors. This is why sales catalogues in Turkey often quote a third figure, frequently called the saleable area (satışa esas alan), which includes these shares. The difference can be large. In Lotus Şişli, for example, a 1+1 home has a net area of 43.41 m², a brüt area of 57.56 m² and a saleable area of 75.97 m². In Cadde Ispartakule, the 2+1 homes measure 106.30 to 108.56 m² brüt and 89.66 to 91.92 m² net. Each figure is correct; they simply measure different things.",
+        "The gap between net and brüt is not the same in every project. Thicker walls, more columns and larger balconies widen it, and a building with many shared spaces adds more to the saleable figure. So two homes advertised at the same size can feel very different inside. The only fair comparison is net with net, brüt with brüt and saleable with saleable.",
+        "## Questions to ask before you decide",
+        "First, ask which area the price is based on, because a price per square metre means little until you know which square metre it refers to. Second, ask for the net area of the exact unit you are considering. The regulation requires the projects attached to a building permit to show the net and brüt areas of every independent unit, so this information exists and the developer should be able to share it. Third, ask what the larger figures include: balconies, terraces, an annex such as a storage room, or a share of the common areas. Finally, read the floor plan room by room and picture how you will live in it.",
+        "These definitions follow the current regulation and may change. The figures in a specific project always come from its own approved plans, which is why it is worth checking them for the unit you choose.",
+        "HADARA is your real estate partner in Istanbul, and our team will gladly go through floor plans and area tables with you in your language. Contact us, or book a private video tour to see the homes and ask about every number before you travel."
+      ]
+    },
+    "emlak-konut-vs-toki": {
+      "category": "Buying Property",
+      "title": "Emlak Konut or TOKİ? The Difference Every Buyer Should Know",
+      "excerpt": "Two names appear on many housing projects across Istanbul and Turkey; here is what each one is, how they work together and what that means for a foreign buyer.",
+      "body": [
+        "Anyone who starts looking at property in Istanbul soon meets two names: TOKİ and Emlak Konut. They appear on billboards, in project brochures and in news about new neighbourhoods across Turkey, and they are often mentioned together. Many foreign buyers assume they are the same organisation, or that any project linked to them is open to everyone. In fact they are two very different bodies with different roles, and knowing the difference helps you understand which projects you can actually buy and what the names on a brochure really mean. This guide is based on the information the two institutions publish themselves and on the Mass Housing Law.",
+        "## TOKİ: the state's housing administration",
+        "TOKİ stands for Toplu Konut İdaresi Başkanlığı, the Mass Housing Administration of the Republic of Türkiye. It is a public body, not a company. It was created under the Mass Housing Law (Law No. 2985) of 1984 and today operates under the Ministry of Environment, Urbanisation and Climate Change. Its official role is to support housing for the public: it produces homes for low and middle-income families, supplies land for housing areas, provides housing loans, builds homes in disaster areas and takes part in urban renewal projects. It works as a non-profit public administration, and its income and spending are audited by the state.",
+        "TOKİ's best-known work is social housing. These projects are offered through official application campaigns, usually via the e-Devlet government portal, and homes are allocated by public lottery with long-term instalment plans. The conditions are set separately for each campaign and typically include Turkish citizenship, a minimum age, an income limit and not already owning a home. TOKİ's own application forms state that when one spouse is a foreign national, only the spouse who is a Turkish citizen may apply. In other words, TOKİ's social housing is designed for Turkish families, and a foreign buyer cannot apply for it.",
+        "## Emlak Konut: a listed company with TOKİ as its main shareholder",
+        "Emlak Konut GYO (Emlak Konut Gayrimenkul Yatırım Ortaklığı A.Ş.) is something else: a real estate investment trust, a joint-stock company whose shares have traded on Borsa Istanbul since 2010. Its roots go back to 1953, and it took its current form as a real estate investment trust in 2001. TOKİ is its main shareholder, which is why the two names are so closely linked, but Emlak Konut is run as a commercial company that aims to make a profit and reports to its investors.",
+        "Emlak Konut's main source of land is TOKİ. Rather than building most projects itself, it tenders them to private developers under two models. In the revenue-sharing model, a developer builds on Emlak Konut's land at its own cost and the sales revenue is shared between the developer and Emlak Konut at rates set in the contract. In the turnkey model, Emlak Konut pays a contractor to build the project and sells the homes itself. Its projects mostly target the middle and upper-middle segments of the market, and they range from apartment compounds to large mixed-use neighbourhoods with shops, offices and leisure areas.",
+        "## How the two work together",
+        "The link between them explains why the names so often appear side by side. TOKİ owns land across the country. Part of it is developed for higher-value homes, often through Emlak Konut and the revenue-sharing model, and TOKİ states that it uses the income from its revenue-sharing projects for its social housing projects. So the two serve different buyers but belong to the same system: one side produces homes sold at market conditions, the other produces social housing for families who qualify.",
+        "## What this means for a foreign buyer",
+        "For a foreigner, the practical difference is simple. TOKİ's social housing is not open to you, so a sign that says TOKİ does not mean the homes are for sale to the public. Projects developed with Emlak Konut, on the other hand, are sold on the open market, and foreign nationals can buy in them under the same rules that apply to any property purchase in Turkey. Emlak Konut's own forms for foreign buyers, for example, ask for a passport and a foreign exchange purchase certificate (DAB) at the land registry. If you are buying with Turkish citizenship in mind, a project linked to Emlak Konut follows exactly the same citizenship conditions as any other property; the name gives no special route. These conditions are per current law and may change.",
+        "When a brochure says a project is built on Emlak Konut land or under the guarantee of Emlak Konut, it is worth asking a few clear questions: who the developer is, which company you will sign the sales contract with, what the guarantee covers and when the title deed will be issued in your name. Büyükyalı in Zeytinburnu is one example: it is developed by Özak GYO, Ziylan and Yenigün under the guarantee of Emlak Konut GYO, and the developers are named clearly in the project details.",
+        "If you would like help reading a brochure or comparing projects in Istanbul, the HADARA team is happy to explain the details in your language, as your real estate partner in Istanbul. Contact us, or book a private video tour to see the projects and ask your questions before you travel."
+      ]
+    },
     "apartment-or-villa": {
       "category": "Buying Property",
       "title": "Apartment or Villa in Istanbul? How to Decide",
@@ -2284,11 +2458,11 @@
     },
     "home": {
       "title": "HADARA Real Estate | Your Real Estate Partner in Istanbul, Turkey",
-      "description": "Your real estate partner in Istanbul since 2014: villas, apartments and mixed-use projects in Beylikdüzü, Büyükçekmece, Avcılar and Şişli, and citizenship help."
+      "description": "Istanbul real estate partner since 2014: villas and apartments in Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy and Zeytinburnu, plus citizenship help."
     },
     "projects": {
       "title": "Our Projects in Istanbul – Apartments & Villas",
-      "description": "HADARA's apartment, villa and mixed-use projects in Beylikdüzü, Büyükçekmece, Avcılar and Şişli, Istanbul: new launches, under construction and ready homes."
+      "description": "HADARA's apartment, villa and mixed-use projects in Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy and Zeytinburnu: new launches and ready homes."
     },
     "about": {
       "title": "About HADARA – Development & Marketing Partner Since 2014",
@@ -2922,7 +3096,7 @@
         ],
         "items": [
           "Service providers who run the Website for us: Vercel (hosting, and the approximate location of visits), Supabase (resale portal database and sign-in, messages from the Website's forms, tour bookings, and anonymous visit statistics), Google (fonts, analytics and advertising) and Meta (WhatsApp, ad measurement and showing our ads, and the details you send us through a form or a WhatsApp message inside one of our Facebook or Instagram ads). The map on our contact page is provided by OpenStreetMap.",
-          "Telegram and email, which deliver internal notifications to our team: new visits (with anonymous details only), new messages and requests, and tour bookings. Confirmation emails to you are sent through the email service Resend.",
+          "Telegram and email, which deliver internal notifications to our team: new visits (with anonymous details only), new messages and requests (including requests sent through a form inside one of our Facebook or Instagram ads), and tour bookings. Confirmation emails to you are sent through the email service Resend.",
           "Project developers, when it is needed to complete your request, for example to reserve a unit or complete a purchase.",
           "In the resale portal: buyers' messages are shared with the owner of the listing, and approved listings are published on the Website.",
           "Public authorities, when the law requires it."

@@ -520,6 +520,13 @@ function renderInfo(slug: string, topic: InfoTopic): string {
             ? t("chat.info.priceKnown", { name, price: `<bdi dir="ltr">${p.price}</bdi>` })
             : t("chat.info.priceText", { name })
       }</p>`;
+      if (p.paymentPlan && !p.soldOut) {
+        const plan = t("projectDetail.paymentPlanValue", {
+          down: `<bdi dir="ltr">${p.paymentPlan.downPercent}%</bdi>`,
+          months: `<bdi dir="ltr">${p.paymentPlan.months}</bdi>`
+        });
+        body += `<p>${t("projectDetail.paymentPlanLabel")}: ${plan}</p>`;
+      }
       actions = p.soldOut
         ? `<a class="chat-action chat-action--wa" href="${whatsappHref(`${t("chat.waSimilar", { name })}\n${url}`)}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("chat.actions.similar")}</a>`
         : `<a class="chat-action chat-action--wa" href="${whatsappHref(`${t("chat.waPrice", { name })}\n${url}`)}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("chat.actions.price")}</a>`;

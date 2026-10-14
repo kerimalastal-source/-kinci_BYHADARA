@@ -56,7 +56,14 @@ export type AmenityKey =
   | "meetingRooms"
   | "cafe"
   | "cinemaRoom"
-  | "gameRoom";
+  | "gameRoom"
+  | "seafront"
+  | "hotelServices"
+  | "yachtMooring"
+  | "seismicDesign"
+  | "palaceGardens"
+  | "seaBridge"
+  | "cultureCentre";
 
 /** One residence type, shown as a card in the project's "Residences" section. */
 export interface Residence {
@@ -132,6 +139,8 @@ export interface Project {
   developer?: string;
   /** "on-request" shows "Price: On request"; any other value is shown as written (e.g. "$1,250,000"). */
   price?: string;
+  /** Instalment plan confirmed by the owner (2026-10-14): down payment % and the months the balance is spread over. */
+  paymentPlan?: { downPercent: number; months: number };
   /** Setting, taken from the project's own description: by the sea (or sea views), green and calm, or city. Used by "Find My Project". */
   lifestyle?: Lifestyle[];
   /** Ad landing page: adds an "I'm interested" button to the hero. */
@@ -193,6 +202,7 @@ export const projects: Project[] = [
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "new-launch",
+    paymentPlan: { downPercent: 30, months: 30 },
     lifestyle: ["city"],
     timeline: "2026 – 2028",
     priority: 0,
@@ -229,6 +239,7 @@ export const projects: Project[] = [
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "new-launch",
+    paymentPlan: { downPercent: 30, months: 30 },
     lifestyle: ["sea"],
     priority: 1,
     developer: "Yıltaş × Lotus Yapı",
@@ -262,10 +273,124 @@ export const projects: Project[] = [
     amenities: community(["smartHome", "airConditioning", "insulation"])
   },
   {
+    slug: "sea-pearl-atakoy",
+    district: "Bakırköy",
+    city: "Istanbul",
+    status: "delivered",
+    lifestyle: ["sea", "city"],
+    unitsAvailable: true,
+    // Between Diamond Marin and Lotus Şişli in the list (owner, 2026-10-13: a new luxury project to market).
+    priority: 1.5,
+    developer: "Kuzu İnşaat",
+    // The developer's 2023 price list excludes VAT and may be out of date, so the page asks for the price until the owner confirms one.
+    price: "on-request",
+    address: "Zeytinlik Mah., Rauf Orbay Cad., Ataköy Sahil Yolu No:1, Bakırköy / İstanbul",
+    // Facts from the owner's project notes (2026-10-13) over the developer's older catalog; photos from the developer's folders.
+    coverImage: img("sea-pearl-atakoy", "dusk-coast", 2000, 1333, "Sea Pearl Ataköy towers on the Marmara coast at dusk"),
+    gallery: [
+      img("sea-pearl-atakoy", "aerial-coast", 2000, 1213, "Sea Pearl Ataköy aerial view with its coastline, lagoon and gardens"),
+      img("sea-pearl-atakoy", "palace-gardens", 2000, 1454, "Sea Pearl Ataköy Ottoman-style gardens opening onto the sea"),
+      img("sea-pearl-atakoy", "gardens-night", 2000, 1243, "Sea Pearl Ataköy gardens and lagoon lit at night"),
+      img("sea-pearl-atakoy", "night-aerial", 2000, 1333, "Sea Pearl Ataköy blocks and gardens at night, aerial view"),
+      img("sea-pearl-atakoy", "balcony-view", 2000, 1333, "View from a Sea Pearl Ataköy balcony over the gardens to the sea"),
+      img("sea-pearl-atakoy", "terrace-sea", 2000, 1335, "Sea Pearl Ataköy garden terrace above the Marmara Sea"),
+      img("sea-pearl-atakoy", "terrace-dinner", 2000, 1333, "Dinner on a Sea Pearl Ataköy terrace at sunset"),
+      img("sea-pearl-atakoy", "living-room", 2000, 1335, "Sea Pearl Ataköy 4.5+1 living room with sea view"),
+      img("sea-pearl-atakoy", "master-bedroom", 2000, 1335, "Sea Pearl Ataköy master bedroom opening onto a sea-view terrace"),
+      img("sea-pearl-atakoy", "bedroom-sea", 2000, 1335, "Sea Pearl Ataköy bedroom with the sea beyond the garden"),
+      img("sea-pearl-atakoy", "dining-room", 2000, 1335, "Sea Pearl Ataköy dining room facing the sea"),
+      img("sea-pearl-atakoy", "open-kitchen", 2000, 1335, "Sea Pearl Ataköy open kitchen and living area with sea view"),
+      img("sea-pearl-atakoy", "sea-terrace", 2000, 931, "Sea Pearl Ataköy wide terrace above the shore"),
+      img("sea-pearl-atakoy", "from-the-sea", 1474, 1243, "Sea Pearl Ataköy seen from the Marmara Sea")
+    ],
+    stats: [
+      { value: "631", labelKey: "apartments" },
+      { value: "1,200 m", labelKey: "coastline" },
+      { value: "4 × 20", labelKey: "blocksFloors" },
+      { value: "55,000 m²", labelKey: "landArea" },
+      { value: "1+1 – 4.5+1", labelKey: "layout" }
+    ],
+    // Areas from the developer's price list; the largest 4.5+1 (398 m²) from the owner's notes.
+    residences: [
+      { kind: "apartment", layout: "1+1", gross: "88 – 104 m²" },
+      { kind: "apartment", layout: "2+1", gross: "117 – 270 m²" },
+      { kind: "apartment", layout: "3+1", gross: "193 – 204 m²" },
+      { kind: "apartment", layout: "3.5+1", gross: "235 – 277 m²" },
+      { kind: "apartment", layout: "4+1", gross: "237 – 276 m²" },
+      { kind: "apartment", layout: "4.5+1", gross: "248 – 398 m²" }
+    ],
+    // Owner's notes: residents-only seafront, yacht mooring, a gym in every block, JW Marriott offers (not free use).
+    amenities: [
+      "seafront",
+      "seaView",
+      "yachtMooring",
+      "palaceGardens",
+      "fitness",
+      "hotelServices",
+      "seismicDesign",
+      "playground"
+    ]
+  },
+  {
+    slug: "buyukyali",
+    district: "Zeytinburnu",
+    city: "Istanbul",
+    status: "delivered",
+    lifestyle: ["sea", "city"],
+    unitsAvailable: true,
+    // Right after Sea Pearl Ataköy (owner, 2026-10-13: another project to market).
+    priority: 1.6,
+    developer: "Özak GYO · Ziylan · Yenigün",
+    // No price list from the developer yet.
+    price: "on-request",
+    address: "Kazlıçeşme, Kennedy Cad. No:52, Zeytinburnu / İstanbul",
+    // Facts from the developer's catalog and project page (ozakgyo.com/tr/proje/buyukyali, 2026-10-13); photos from both.
+    coverImage: img("buyukyali", "sea-skyline", 1573, 790, "Büyükyalı towers on the Kazlıçeşme coast seen across the water"),
+    gallery: [
+      img("buyukyali", "fisekhane-entrance", 1560, 720, "Büyükyalı entrance and the restored Fişekhane building"),
+      img("buyukyali", "gardens-aerial", 1550, 750, "Büyükyalı landscaped gardens and courtyards from above"),
+      img("buyukyali", "sea-gardens", 1550, 750, "Büyükyalı gardens running down towards the Marmara Sea"),
+      img("buyukyali", "pool-sea", 1657, 948, "Büyükyalı outdoor pool and gardens facing the sea"),
+      img("buyukyali", "facade-sea", 1550, 750, "Büyükyalı block facade above the coast and the sea"),
+      img("buyukyali", "promenade", 1570, 864, "Büyükyalı pedestrian promenade and blocks with sea views"),
+      img("buyukyali", "fisekhane-square", 1158, 945, "Büyükyalı square in front of the historic Fişekhane"),
+      img("buyukyali", "loft-living", 1550, 750, "Büyükyalı loft living room inside the restored Fişekhane"),
+      img("buyukyali", "loft-courtyard", 1036, 948, "Büyükyalı loft terrace opening onto the courtyard"),
+      img("buyukyali", "fendi-pool", 750, 670, "Infinity pool on the roof terrace of the Büyükyalı FENDI Casa block"),
+      img("buyukyali", "fendi-living", 999, 948, "Büyükyalı furnished by FENDI Casa living room with sea view"),
+      img("buyukyali", "balcony-sea", 1657, 948, "Büyükyalı apartment balcony overlooking the Marmara Sea"),
+      img("buyukyali", "living-sea", 1657, 948, "Büyükyalı apartment living room with sea view"),
+      img("buyukyali", "garden-pool", 1550, 750, "Büyükyalı garden pool and seating area")
+    ],
+    stats: [
+      { value: "1,540", labelKey: "apartments" },
+      { value: "15", labelKey: "blocks" },
+      { value: "111,000 m²", labelKey: "landArea" },
+      { value: "59", labelKey: "shops" },
+      { value: "1+1 – 5+1", labelKey: "layout" }
+    ],
+    // Developer's site: a residents-only bridge to the shore, Büyükyalı Club (pools, hamam, sauna, tennis), 7/24 concierge, Fişekhane culture centre.
+    amenities: [
+      "seaBridge",
+      "seaView",
+      "outdoorPool",
+      "indoorPool",
+      "spa",
+      "sportsCourt",
+      "concierge",
+      "cultureCentre",
+      "landscaping",
+      "retail",
+      "playground",
+      "seismicDesign"
+    ]
+  },
+  {
     slug: "lotus-sisli",
     district: "Şişli",
     city: "Istanbul",
     status: "ongoing",
+    paymentPlan: { downPercent: 30, months: 30 },
     lifestyle: ["city"],
     unitsAvailable: true,
     priority: 2,

@@ -1,0 +1,420 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Inter;font-weight:500;src:url(../../social/fonts/inter-500.ttf)}
+@font-face{font-family:Inter;font-weight:600;src:url(../../social/fonts/inter-600.ttf)}
+@font-face{font-family:Inter;font-weight:700;src:url(../../social/fonts/inter-700.ttf)}
+@font-face{font-family:Plex;font-weight:500;src:url(../../social/fonts/plex-500.ttf)}
+@font-face{font-family:Plex;font-weight:600;src:url(../../social/fonts/plex-600.ttf)}
+@font-face{font-family:Plex;font-weight:700;src:url(../../social/fonts/plex-700.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0b231b}
+body{font-family:Inter,sans-serif;color:#f7f4ec;position:relative}
+#bg{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 40%,#173d30 0%,#0f2b21 45%,#08190f 100%)}
+#glow{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(201,162,75,.2),rgba(201,162,75,0) 65%);left:0;top:0}
+#grid{position:absolute;inset:0;opacity:.06;background-image:linear-gradient(#c9a24b 1px,transparent 1px),linear-gradient(90deg,#c9a24b 1px,transparent 1px);background-size:60px 60px}
+.frame{position:absolute;inset:44px;border:1.5px solid rgba(201,162,75,.35);border-radius:6px}
+.abs{position:absolute;left:0;right:0}
+.ar{font-family:Plex;font-weight:700;direction:rtl;text-align:center;color:#fff}
+.en{font-weight:600;direction:ltr;text-align:center;color:#e9dfc4;letter-spacing:.3px}
+.gold{color:#c9a24b}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+#brand{position:absolute;top:140px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:22px;direction:ltr}
+#brand img{height:90px}
+#brand b{display:block;font-weight:700;font-size:38px;letter-spacing:7px;line-height:1}
+#brand i{display:block;font-style:normal;font-weight:600;font-size:14px;letter-spacing:9px;color:#c9a24b;margin-top:10px}
+#progress{position:absolute;top:270px;left:300px;width:480px;height:5px;background:rgba(255,255,255,.12);border-radius:4px;overflow:hidden}
+#progress div{height:100%;width:0;background:#c9a24b}
+#step{position:absolute;top:290px;left:0;right:0;text-align:center;font-weight:600;font-size:22px;letter-spacing:4px;color:#c9a24b;direction:ltr}
+.chip{display:inline-flex;align-items:center;gap:18px;border:2px solid #c9a24b;border-radius:60px;padding:14px 34px;background:rgba(8,25,15,.6)}
+.chip .n{width:54px;height:54px;border-radius:50%;background:#c9a24b;color:#0f2b21;font-weight:700;font-size:30px;display:flex;align-items:center;justify-content:center}
+.chip .a{font-family:Plex;font-weight:700;font-size:46px;color:#fff;direction:rtl}
+.chip .e{font-weight:700;font-size:28px;color:#c9a24b;letter-spacing:3px}
+.panel{position:absolute;left:80px;right:80px;background:rgba(8,25,15,.7);border:1.5px solid rgba(201,162,75,.45);border-radius:30px;padding:34px 44px;direction:rtl}
+.row{display:flex;align-items:flex-start;gap:22px;margin-bottom:22px}
+.row:last-child{margin-bottom:0}
+.ic{flex:none;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:32px;margin-top:4px}
+.ic.ok{background:#c9a24b;color:#0f2b21}.ic.no{background:#c8574c;color:#fff}
+.row .a{font-family:Plex;font-weight:700;font-size:42px;line-height:1.35;color:#fff}
+.row .e{font-weight:600;font-size:26px;color:#e9dfc4;direction:ltr;text-align:right;margin-top:4px}
+.pills{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px}
+.pill{font-family:Plex;font-weight:700;font-size:36px;padding:8px 26px;border-radius:40px;border:2px solid #c8574c;color:#fff;background:rgba(200,87,76,.18)}
+.pill.on{background:#c8574c}
+.formula{font-family:Plex;font-weight:700;font-size:46px;line-height:1.5;color:#fff;text-align:center}
+.formula .op{color:#c9a24b;padding:0 10px}
+.formula .box{display:inline-block;border:2px solid #c9a24b;border-radius:16px;padding:2px 20px;margin:4px 0}
+svg text{font-family:Plex;font-weight:600}
+.bar{position:absolute;height:100px;border-radius:14px}
+.seg1{background:linear-gradient(270deg,#b8913f,#e2c27a)}
+.seg2{background:repeating-linear-gradient(135deg,rgba(226,194,122,.55) 0 14px,rgba(226,194,122,.28) 14px 28px);border:2px solid #e2c27a}
+.barlab{position:absolute;right:120px;left:120px;display:flex;justify-content:space-between;align-items:baseline;direction:rtl}
+.barlab .a{font-family:Plex;font-weight:700;font-size:42px;color:#fff}
+.barlab .a small{font-family:Inter;font-weight:600;font-size:26px;color:#e9dfc4;margin-inline-start:12px}
+.barval{position:absolute;right:146px;height:100px;display:flex;align-items:center;font-weight:700;font-size:46px;color:#0f2b21;direction:ltr}
+.diff{position:absolute;right:120px;left:120px;font-family:Plex;font-weight:700;font-size:34px;color:#e2c27a;direction:rtl;text-align:right}
+.diff span{font-family:Inter;direction:ltr;unicode-bidi:isolate}
+.check{display:flex;align-items:center;gap:26px;direction:rtl;margin-bottom:40px}
+.check .c{flex:none;width:68px;height:68px;border-radius:50%;background:#c9a24b;color:#0f2b21;font-size:40px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.check .a{font-family:Plex;font-weight:700;font-size:44px;color:#fff;line-height:1.3}
+.check .e{font-weight:600;font-size:27px;color:#e9dfc4;direction:ltr;text-align:right}
+</style></head>
+<body>
+<div id="bg"></div><div id="glow"></div><div id="grid"></div><div class="frame"></div>
+<div id="brand"><img src="../../../public/logo-light.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div>
+<div id="progress"><div></div></div>
+
+<!-- S1 hook -->
+<div id="s1" class="abs" style="top:500px">
+  <div id="n120" class="abs" style="top:0;text-align:center;font-weight:700;font-size:230px;line-height:1;direction:ltr">120 <span style="font-size:110px">m²</span></div>
+  <div id="n98" class="abs" style="top:290px;text-align:center;font-weight:700;font-size:230px;line-height:1;direction:ltr;color:#c9a24b">98 <span style="font-size:110px">m²</span></div>
+  <div id="s1q" class="abs" style="top:650px">
+    <div class="ar" style="font-size:56px;line-height:1.35">الإعلان يقول رقماً… والمخطط رقماً آخر</div>
+    <div class="ar gold" style="font-size:58px;margin-top:18px">أيُّهما مساحة شقتك؟</div>
+    <div class="en" style="font-size:34px;margin-top:22px">Which number is your home's real size?</div>
+  </div>
+</div>
+
+<!-- S2 title -->
+<div id="s2" class="abs" style="top:430px">
+  <div class="ar gold" style="font-size:38px">دليل حضارة العقاري</div>
+  <div class="ar" style="font-size:112px;line-height:1.25;margin-top:26px">الصافي<br>أم الإجمالي؟</div>
+  <div id="s2line" style="height:4px;background:#c9a24b;width:0;margin:44px auto 40px;border-radius:4px"></div>
+  <div class="en" style="font-size:66px;font-weight:700;color:#fff;letter-spacing:4px">NET <span class="gold">vs</span> BRÜT</div>
+  <div class="ar" style="font-size:46px;margin-top:40px;font-weight:600;color:#efe6cf">كيف تُقاس الشقة في تركيا</div>
+  <div class="en" style="font-size:32px;margin-top:14px">How apartments are measured in Türkiye</div>
+</div>
+
+<!-- S3 overview: nested boxes -->
+<div id="s3" class="abs" style="top:380px">
+  <div class="ar" style="font-size:62px">ثلاثة أرقام للشقة نفسها</div>
+  <div class="en" style="font-size:32px;margin-top:10px">Three numbers for the same home</div>
+</div>
+<svg id="nest" width="900" height="900" viewBox="0 0 900 900" style="position:absolute;left:90px;top:600px;overflow:visible">
+  <g id="nb3"><rect x="30" y="30" width="840" height="840" rx="36" fill="rgba(201,162,75,.06)" stroke="#e2c27a" stroke-width="4" stroke-dasharray="20 14"/>
+    <text x="450" y="100" text-anchor="middle" fill="#e2c27a" font-size="44" font-weight="700">3 · المعتمدة للبيع</text>
+    <text x="450" y="140" text-anchor="middle" fill="#e9dfc4" font-size="26" font-family="Inter">Saleable · satışa esas alan</text></g>
+  <g id="nb2"><rect x="120" y="190" width="660" height="640" rx="28" fill="rgba(201,162,75,.10)" stroke="#c9a24b" stroke-width="5"/>
+    <text x="450" y="258" text-anchor="middle" fill="#c9a24b" font-size="44" font-weight="700">2 · الإجمالية</text>
+    <text x="450" y="298" text-anchor="middle" fill="#e9dfc4" font-size="26" font-family="Inter">Brüt</text></g>
+  <g id="nb1"><rect x="210" y="350" width="480" height="430" rx="22" fill="#c9a24b"/>
+    <text x="450" y="560" text-anchor="middle" fill="#0f2b21" font-size="54" font-weight="700">1 · الصافية</text>
+    <text x="450" y="610" text-anchor="middle" fill="#0f2b21" font-size="30" font-family="Inter" font-weight="700">Net</text></g>
+</svg>
+<div id="s3n" class="abs" style="top:1560px;padding:0 120px">
+  <div class="ar" style="font-size:40px;font-weight:600;color:#efe6cf">كل رقم يحتوي الرقم الذي قبله ويزيد عليه</div>
+  <div class="en" style="font-size:28px;margin-top:10px">Each number contains the one before it, and adds more</div>
+</div>
+
+<!-- Chips -->
+<div id="c4" class="abs" style="top:350px;text-align:center"><div class="chip"><span class="a">المساحة الصافية</span><span class="e">NET</span><span class="n">1</span></div></div>
+<div id="c5" class="abs" style="top:350px;text-align:center"><div class="chip"><span class="a">المساحة الإجمالية</span><span class="e">BRÜT</span><span class="n">2</span></div></div>
+<div id="c6" class="abs" style="top:350px;text-align:center"><div class="chip"><span class="a">الإجمالية الكلية</span><span class="e" style="font-size:24px">TOPLAM BRÜT</span><span class="n">+</span></div></div>
+<div id="c7" class="abs" style="top:350px;text-align:center"><div class="chip"><span class="a">المعتمدة للبيع</span><span class="e" style="font-size:24px">SATIŞA ESAS</span><span class="n">3</span></div></div>
+
+<!-- Floor plan -->
+<svg id="plan" width="960" height="700" viewBox="0 0 900 656" style="position:absolute;left:60px;top:470px;overflow:visible">
+  <defs>
+    <clipPath id="sweep"><rect id="sweepRect" x="900" y="0" width="0" height="700"/></clipPath>
+    <pattern id="hatch" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="16" stroke="rgba(233,223,196,.28)" stroke-width="4"/></pattern>
+    <marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="context-stroke"/></marker>
+  </defs>
+  <g id="neighbour" opacity="0">
+    <rect x="790" y="60" width="100" height="440" fill="url(#hatch)"/>
+    <text x="840" y="280" text-anchor="middle" fill="#e9dfc4" font-size="28" transform="rotate(90 840 280)">شقة الجار · Neighbour</text>
+  </g>
+  <g id="corridor" opacity="0">
+    <rect x="580" y="512" width="210" height="80" rx="6" fill="url(#hatch)" stroke="rgba(233,223,196,.5)" stroke-width="2"/>
+    <text x="685" y="560" text-anchor="middle" fill="#e9dfc4" font-size="26">ممر البناء</text>
+  </g>
+  <rect id="corridorHi" x="580" y="512" width="210" height="80" rx="6" fill="#c8574c" opacity="0"/>
+  <rect id="netfill" x="78" y="78" width="694" height="404" fill="#c9a24b" opacity="0" clip-path="url(#sweep)"/>
+  <g id="balcony">
+    <rect x="160" y="500" width="380" height="110" fill="none" stroke="#e9dfc4" stroke-width="5" stroke-dasharray="14 10"/>
+    <text x="350" y="568" text-anchor="middle" fill="#e9dfc4" font-size="32">شرفة · Balcony</text>
+  </g>
+  <g id="balconyX" opacity="0"><line x1="175" y1="515" x2="525" y2="595" stroke="#e46a5e" stroke-width="7" stroke-linecap="round"/><line x1="525" y1="515" x2="175" y2="595" stroke="#e46a5e" stroke-width="7" stroke-linecap="round"/></g>
+  <g id="walls" fill="none" stroke="#f7f4ec" stroke-linejoin="miter">
+    <path id="w-outer" d="M60 60 H790 V500 H60 Z M78 78 V482 H772 V78 Z" stroke-width="3" fill="rgba(247,244,236,.9)" fill-rule="evenodd" pathLength="1"/>
+    <path id="w-in1" d="M500 78 V180 M500 250 V330" stroke-width="12" pathLength="1"/>
+    <path id="w-in2" d="M500 330 H560 M640 330 H772" stroke-width="12" pathLength="1"/>
+    <path id="w-in3" d="M650 330 V482" stroke-width="10" pathLength="1"/>
+  </g>
+  <g id="cols" fill="#f7f4ec"><rect x="78" y="78" width="26" height="26"/><rect x="746" y="78" width="26" height="26"/><rect x="78" y="456" width="26" height="26"/><rect x="487" y="318" width="26" height="26"/></g>
+  <g id="shaft" opacity="0"><rect x="712" y="420" width="44" height="44" fill="#0f2b21" stroke="#e9dfc4" stroke-width="3"/><path d="M712 420 L756 464 M756 420 L712 464" stroke="#e9dfc4" stroke-width="3"/></g>
+  <g id="wallsRed" opacity="0" fill="none" stroke="#c8574c">
+    <rect x="69" y="69" width="712" height="422" stroke-width="18"/>
+    <path d="M500 78 V180 M500 250 V330 M500 330 H560 M640 330 H772 M650 330 V482" stroke-width="12"/>
+  </g>
+  <rect id="outline" x="60" y="60" width="721" height="440" fill="none" stroke="#c9a24b" stroke-width="6" stroke-dasharray="22 14" opacity="0"/>
+  <g id="half" opacity="0">
+    <line x1="781" y1="24" x2="781" y2="530" stroke="#c9a24b" stroke-width="3"/>
+    <circle cx="781" cy="630" r="34" fill="#c9a24b"/><text x="781" y="642" text-anchor="middle" fill="#0f2b21" font-size="32" font-family="Inter" font-weight="700">½</text>
+  </g>
+  <g id="dimNet" opacity="0">
+    <line x1="84" y1="440" x2="766" y2="440" stroke="#0f2b21" stroke-width="4" marker-start="url(#arr)" marker-end="url(#arr)"/>
+    <rect x="300" y="404" width="250" height="44" rx="22" fill="#0f2b21"/>
+    <text x="425" y="435" text-anchor="middle" fill="#e2c27a" font-size="26">قياس من الداخل</text>
+  </g>
+  <g id="dimBrut" opacity="0">
+    <line x1="60" y1="24" x2="781" y2="24" stroke="#c9a24b" stroke-width="4" marker-start="url(#arr)" marker-end="url(#arr)"/>
+    <rect x="300" y="-6" width="250" height="44" rx="22" fill="#0f2b21" stroke="#c9a24b" stroke-width="2"/>
+    <text x="425" y="25" text-anchor="middle" fill="#e2c27a" font-size="26">قياس من الخارج</text>
+  </g>
+  <g id="labels" fill="#d9ceb0" font-size="30" text-anchor="middle">
+    <text x="290" y="270">صالون ومطبخ</text><text x="290" y="306" font-size="22" font-family="Inter">Living · Kitchen</text>
+    <text x="636" y="200">غرفة نوم</text><text x="636" y="234" font-size="22" font-family="Inter">Bedroom</text>
+    <text x="575" y="400" font-size="26">مدخل</text>
+    <text x="700" y="395" font-size="26">حمام</text>
+  </g>
+  <g id="annex" opacity="0">
+    <rect x="0" y="520" width="140" height="110" rx="6" fill="#e2c27a" stroke="#c9a24b" stroke-width="4"/>
+    <text x="70" y="572" text-anchor="middle" fill="#0f2b21" font-size="28" font-weight="700">مخزن</text>
+    <text x="70" y="606" text-anchor="middle" fill="#0f2b21" font-size="20" font-family="Inter" font-weight="700">eklenti</text>
+  </g>
+</svg>
+
+<!-- Panels -->
+<div id="p4" class="panel" style="top:1230px">
+  <div class="row" id="p4ok"><span class="ic ok">✓</span><div><div class="a">الغرف والصالون والمطبخ والحمام والممرات</div><div class="e">Rooms, living room, kitchen, bathroom, hallways</div></div></div>
+  <div class="row" id="p4no"><span class="ic no">✗</span><div style="flex:1"><div class="a">لا يشمل:</div>
+    <div class="pills"><span class="pill" id="pw">الجدران</span><span class="pill" id="pc">الأعمدة</span><span class="pill" id="pb">الشرفة</span><span class="pill" id="pk">الأجزاء المشتركة</span></div></div></div>
+</div>
+<div id="p5" class="panel" style="top:1230px">
+  <div class="row" id="p5a"><span class="ic ok">✓</span><div><div class="a">الجدران الخارجية والداخلية</div><div class="e">Outer and inner walls</div></div></div>
+  <div class="row" id="p5b"><span class="ic ok">½</span><div><div class="a">نصف الجدار المشترك مع الجار أو الممر</div><div class="e">Half of a wall shared with a neighbour</div></div></div>
+  <div class="row" id="p5c"><span class="ic no">✗</span><div><div class="a">المناور ومجاري التمديدات</div><div class="e">Shafts and light wells are not counted</div></div></div>
+</div>
+<div id="p6" class="panel" style="top:1250px">
+  <div class="formula"><span class="box">الإجمالية الكلية</span><span class="op">=</span><br><span class="box">الإجمالية</span><span class="op">+</span><span class="box">ملحق خاص بالشقة</span></div>
+  <div class="en" style="font-size:28px;margin-top:16px">Total brüt = brüt + an annex that belongs only to the unit</div>
+</div>
+
+<!-- Building (S7) -->
+<svg id="bld" width="900" height="760" viewBox="0 0 900 760" style="position:absolute;left:90px;top:470px;overflow:visible;opacity:0">
+  <g id="floors"></g>
+  <rect id="corr" x="150" y="240" width="360" height="80" fill="#c9a24b" opacity="0"/>
+  <rect id="core" x="400" y="80" width="100" height="600" fill="#c9a24b" opacity="0"/>
+  <rect id="lobby" x="150" y="600" width="600" height="80" fill="#c9a24b" opacity="0"/>
+  <rect id="unit" x="510" y="240" width="230" height="80" fill="#e2c27a" opacity="0"/>
+  <g id="dots"></g>
+  <text id="tLobby" x="450" y="652" text-anchor="middle" fill="#0f2b21" font-size="32" opacity="0">المدخل · Lobby</text>
+  <text id="tCore" x="450" y="60" text-anchor="middle" fill="#e9dfc4" font-size="30" opacity="0">الدرج والمصاعد · Stairs</text>
+  <text id="tCorr" x="270" y="290" text-anchor="middle" fill="#0f2b21" font-size="28" opacity="0">الممر</text>
+  <text id="tUnit" x="625" y="290" text-anchor="middle" fill="#0f2b21" font-size="32" font-weight="700" opacity="0">شقتك</text>
+</svg>
+<div id="p7" class="panel" style="top:1290px">
+  <div class="formula"><span class="box">المعتمدة للبيع</span><span class="op">=</span><br><span class="box">الإجمالية</span><span class="op">+</span><span class="box">حصتك من الأجزاء المشتركة</span></div>
+  <div class="en" style="font-size:28px;margin-top:16px">Saleable = brüt + your share of the common areas</div>
+</div>
+
+<!-- S8 example -->
+<div id="s8" class="abs" style="top:360px">
+  <div class="ar gold" style="font-size:40px">مثال حقيقي من مشاريعنا</div>
+  <div class="ar" style="font-size:76px;margin-top:14px">لوتس شيشلي · <span class="ltr">1+1</span></div>
+  <div class="en" style="font-size:32px;margin-top:10px">Real example · Lotus Şişli 1+1</div>
+</div>
+<div id="bars">
+  <div class="barlab" id="l1" style="top:700px"><span class="a">الصافية<small>Net</small></span></div>
+  <div class="bar seg1" id="b1" style="top:770px"></div><div class="barval" id="v1" style="top:770px"></div>
+  <div class="barlab" id="l2" style="top:960px"><span class="a">الإجمالية<small>Brüt</small></span></div>
+  <div class="bar seg1" id="b2a" style="top:1030px"></div><div class="bar seg2" id="b2b" style="top:1030px"></div><div class="barval" id="v2" style="top:1030px"></div>
+  <div class="diff" id="d2" style="top:1145px">+ <span>14.15 m²</span> الجدران</div>
+  <div class="barlab" id="l3" style="top:1250px"><span class="a">المعتمدة للبيع<small>Saleable</small></span></div>
+  <div class="bar seg1" id="b3a" style="top:1320px"></div><div class="bar seg2" id="b3b" style="top:1320px"></div><div class="barval" id="v3" style="top:1320px"></div>
+  <div class="diff" id="d3" style="top:1435px">+ <span>18.41 m²</span> حصة الأجزاء المشتركة</div>
+  <div id="s8n" class="abs" style="top:1560px;padding:0 120px">
+    <div class="ar" style="font-size:42px;font-weight:600;color:#efe6cf">الشقة نفسها… وثلاثة أرقام صحيحة</div>
+    <div class="en" style="font-size:28px;margin-top:10px">Same home, three correct numbers · source: project catalogue</div>
+  </div>
+</div>
+
+<!-- S9 tips -->
+<div id="s9" class="abs" style="top:380px;padding:0 100px">
+  <div class="ar gold" style="font-size:48px;margin-bottom:10px">قبل أن تقارن بين شقتين</div>
+  <div class="en" style="font-size:30px;margin-bottom:70px">Before you compare two homes</div>
+  <div class="check" id="k1"><span class="c">1</span><div><div class="a">قارن الصافي بالصافي، والإجمالي بالإجمالي</div><div class="e">Compare net with net, brüt with brüt</div></div></div>
+  <div class="check" id="k2"><span class="c">2</span><div><div class="a">اسأل: السعر محسوب على أيّ مساحة؟</div><div class="e">Which area is the price based on?</div></div></div>
+  <div class="check" id="k3"><span class="c">3</span><div><div class="a">اطلب المساحة الصافية للوحدة نفسها</div><div class="e">Ask for the net area of the exact unit</div></div></div>
+  <div class="check" id="k4"><span class="c">4</span><div><div class="a">مخططات رخصة البناء تذكر الصافي والإجمالي لكل وحدة</div><div class="e">Permit plans list net and brüt for every unit</div></div></div>
+</div>
+
+<!-- S10 CTA -->
+<div id="s10" class="abs" style="top:540px;text-align:center">
+  <img id="s10logo" src="../../../public/logo-light.png" style="height:230px">
+  <div style="direction:ltr;margin-top:30px"><b style="font-size:64px;letter-spacing:12px">HADARA</b><div style="font-weight:600;font-size:22px;letter-spacing:14px;color:#c9a24b;margin-top:12px">REAL ESTATE</div></div>
+  <div class="ar" style="font-size:52px;margin-top:70px">شريكك العقاري في إسطنبول</div>
+  <div class="en" style="font-size:32px;margin-top:12px">Your real estate partner in Istanbul</div>
+  <div class="panel" style="position:relative;left:auto;right:auto;display:inline-block;margin-top:70px;text-align:center">
+    <div class="ar" style="font-size:40px;font-weight:600">اقرأ المقال كاملاً على موقعنا</div>
+    <div style="font-weight:700;font-size:44px;color:#c9a24b;margin-top:14px;direction:ltr">hadararealestate.com</div>
+  </div>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const clamp = (x) => Math.max(0, Math.min(1, x));
+const ease = (x) => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const out = (x) => 1 - Math.pow(1 - clamp(x), 3);
+const p = (t, a, b) => clamp((t - a) / (b - a));
+const vis = (el, v) => { el.style.opacity = v; el.style.visibility = v <= .001 ? "hidden" : "visible"; };
+const svgOp = (id, v) => $(id).setAttribute("opacity", v);
+// Fade/slide an element in at `a` and out at `b`.
+function show(el, t, a, b, dy = 50, dur = .7) {
+  const i = out(p(t, a, a + dur)), o = 1 - ease(p(t, b - .5, b));
+  const v = Math.min(i, o);
+  vis(el, v);
+  el.style.transform = `translateY(${(1 - i) * dy - (1 - o) * 20}px)`;
+  return v;
+}
+// Pulse 0..1..0 over [a, b] (for "this one is meant" flashes).
+const pulse = (t, a, b) => { const k = p(t, a, b); return k <= 0 || k >= 1 ? 0 : Math.sin(Math.PI * k); };
+
+const T = 74;
+(function () {
+  const g = $("floors"); let h = "";
+  for (let i = 0; i < 7; i++) {
+    const y = 80 + i * 80;
+    h += `<rect x="150" y="${y}" width="600" height="80" fill="rgba(247,244,236,.05)" stroke="rgba(247,244,236,.55)" stroke-width="2"/>`;
+    h += `<line x1="270" y1="${y}" x2="270" y2="${y + 80}" stroke="rgba(247,244,236,.25)"/><line x1="630" y1="${y}" x2="630" y2="${y + 80}" stroke="rgba(247,244,236,.25)"/>`;
+  }
+  h += `<path d="M130 80 L450 0 L770 80" fill="none" stroke="rgba(247,244,236,.55)" stroke-width="2"/>`;
+  g.innerHTML = h;
+  $("dots").innerHTML = Array.from({ length: 12 }, () => `<circle r="10" fill="#f3dc9f"/>`).join("");
+})();
+
+function render(t) {
+  $("glow").style.transform = `translate(${90 + Math.sin(t * .25) * 160}px, ${380 + Math.cos(t * .19) * 260}px)`;
+  $("grid").style.backgroundPosition = `${t * 6}px ${t * 10}px`;
+  $("progress").firstElementChild.style.width = (clamp(t / T) * 100) + "%";
+  const brandV = show($("brand"), t, .1, T - 5.2, -30);
+  vis($("progress"), brandV);
+
+  // S1 hook 0-5.2
+  const n120 = $("n120");
+  show(n120, t, .3, 5.2, 60);
+  n120.style.transform += ` scale(${1 + .05 * Math.sin(t * 2)})`;
+  n120.style.color = `rgba(255,255,255,${1 - .55 * p(t, 2.4, 3)})`;
+  show($("n98"), t, 1.3, 5.2, 60);
+  show($("s1q"), t, 2.3, 5.2, 40);
+
+  // S2 title 5.2-10
+  show($("s2"), t, 5.3, 10, 50);
+  $("s2line").style.width = (ease(p(t, 5.8, 6.8)) * 520) + "px";
+
+  // S3 overview 10-17
+  show($("s3"), t, 10.2, 17, -30);
+  const nest = $("nest"); vis(nest, Math.min(out(p(t, 10.3, 11)), 1 - ease(p(t, 16.5, 17))));
+  [["nb1", 11], ["nb2", 12.4], ["nb3", 13.8]].forEach(([id, a]) => {
+    const v = out(p(t, a, a + .7)); const g = $(id);
+    g.setAttribute("opacity", v);
+    g.setAttribute("transform", `translate(450 450) scale(${.85 + .15 * v}) translate(-450 -450)`);
+  });
+  show($("s3n"), t, 14.6, 17, 30);
+
+  // Step indicator via progress label is enough; chips per scene
+  show($("c4"), t, 17.2, 29, -30);
+  show($("c5"), t, 29.2, 40, -30);
+  show($("c6"), t, 40.2, 46, -30);
+  show($("c7"), t, 46.2, 54, -30);
+
+  // Plan 17-46
+  const plan = $("plan");
+  vis(plan, Math.min(out(p(t, 17.2, 18)), 1 - ease(p(t, 45.5, 46.2))));
+  const outer = $("w-outer");
+  outer.style.strokeDasharray = "1"; outer.style.strokeDashoffset = 1 - ease(p(t, 17.4, 19.2));
+  outer.style.fillOpacity = ease(p(t, 18.8, 19.5));
+  for (const id of ["w-in1", "w-in2", "w-in3"]) { const el = $(id); el.style.strokeDasharray = "1"; el.style.strokeDashoffset = 1 - ease(p(t, 18.4, 19.6)); }
+  $("cols").setAttribute("opacity", ease(p(t, 19.2, 19.6)));
+  $("balcony").setAttribute("opacity", ease(p(t, 19.2, 19.8)));
+  svgOp("corridor", ease(p(t, 19.4, 20)));
+  $("labels").setAttribute("opacity", ease(p(t, 19.6, 20.2)) * (1 - .45 * p(t, 29.5, 30)));
+
+  // NET 17-29
+  const sw = ease(p(t, 20, 21.6));
+  $("sweepRect").setAttribute("x", 772 - 694 * sw); $("sweepRect").setAttribute("width", 694 * sw + 6);
+  svgOp("netfill", (.45 + .07 * Math.sin(t * 3)) * (1 - ease(p(t, 29.2, 30))));
+  svgOp("dimNet", ease(p(t, 21.6, 22.2)) * (1 - ease(p(t, 28.6, 29.2))));
+  show($("p4"), t, 22.2, 29, 40);
+  show($("p4ok"), t, 22.4, 99, 20);
+  show($("p4no"), t, 23.8, 99, 20);
+  const pills = [["pw", 24.4], ["pc", 25.5], ["pb", 26.5], ["pk", 27.5]];
+  pills.forEach(([id, a]) => { const el = $(id); show(el, t, a, 99, 16, .4); el.classList.toggle("on", t >= a && t < a + 1.0); });
+  svgOp("wallsRed", .9 * pulse(t, 24.4, 25.5));
+  $("cols").style.fill = t >= 25.5 && t < 26.5 ? "#e46a5e" : "#f7f4ec";
+  svgOp("balconyX", ease(p(t, 26.5, 26.9)) * (1 - ease(p(t, 28.6, 29.2))));
+  svgOp("corridorHi", .75 * pulse(t, 27.5, 28.8));
+
+  // BRÜT 29-40
+  const wg = ease(p(t, 29.6, 30.4));
+  const wcol = `rgb(${Math.round(247 + (226 - 247) * wg)},${Math.round(244 + (194 - 244) * wg)},${Math.round(236 + (122 - 236) * wg)})`;
+  outer.style.fill = wcol; outer.style.stroke = wcol;
+  for (const id of ["w-in1", "w-in2", "w-in3"]) $(id).style.stroke = wcol;
+  if (t > 29.6) $("cols").style.fill = wcol;
+  const ol = $("outline");
+  svgOp("outline", ease(p(t, 30.4, 31)) * (1 - ease(p(t, 45.5, 46))));
+  ol.setAttribute("stroke-dashoffset", -t * 40);
+  svgOp("dimBrut", ease(p(t, 31, 31.6)) * (1 - ease(p(t, 39.4, 40))));
+  show($("p5"), t, 31.4, 40, 40);
+  show($("p5a"), t, 31.6, 99, 20);
+  show($("p5b"), t, 33.6, 99, 20);
+  svgOp("neighbour", ease(p(t, 33.4, 34)));
+  svgOp("half", ease(p(t, 34, 34.5)) * (.75 + .25 * Math.sin(t * 5)) * (1 - ease(p(t, 39.4, 40))));
+  show($("p5c"), t, 36.4, 99, 20);
+  svgOp("shaft", ease(p(t, 36.4, 36.9)) * (1 - ease(p(t, 39.4, 40))));
+  // light-well flash
+  $("shaft").setAttribute("transform", `translate(734 442) scale(${1 + .25 * pulse(t, 36.6, 37.8)}) translate(-734 -442)`);
+
+  // TOPLAM BRÜT 40-46
+  svgOp("annex", out(p(t, 40.8, 41.6)));
+  $("annex").setAttribute("transform", `translate(0 ${(1 - out(p(t, 40.8, 41.6))) * 60})`);
+  show($("p6"), t, 41.6, 46, 40);
+
+  // SALEABLE 46-54
+  const b = $("bld"); const bi = out(p(t, 46.2, 47)), bo = 1 - ease(p(t, 53.5, 54));
+  vis(b, Math.min(bi, bo));
+  b.style.transform = `scale(${.92 + .08 * bi})`; b.style.transformOrigin = "50% 50%";
+  svgOp("unit", ease(p(t, 46.8, 47.3))); svgOp("tUnit", ease(p(t, 47, 47.5)));
+  svgOp("lobby", .55 * ease(p(t, 47.6, 48.1))); svgOp("tLobby", ease(p(t, 47.7, 48.2)));
+  svgOp("core", .35 * ease(p(t, 48.2, 48.7))); svgOp("tCore", ease(p(t, 48.3, 48.8)));
+  svgOp("corr", .45 * ease(p(t, 48.8, 49.3))); svgOp("tCorr", ease(p(t, 48.9, 49.4)));
+  [...$("dots").children].forEach((c, i) => {
+    const k = ((t - 49.3) * .5 + i / 12) % 1;
+    let x, y;
+    if (k < .3) { const q = k / .3; x = 200 + 250 * q; y = 640; }
+    else if (k < .7) { const q = (k - .3) / .4; x = 450; y = 640 - 360 * q; }
+    else { const q = (k - .7) / .3; x = 450 + 160 * q; y = 280; }
+    c.setAttribute("cx", x); c.setAttribute("cy", y);
+    c.setAttribute("opacity", (t > 49.3 ? 1 : 0) * Math.sin(Math.PI * k) * ease(p(t, 49.3, 49.9)));
+  });
+  show($("p7"), t, 49.6, 54, 40);
+
+  // S8 example 54-63.5
+  show($("s8"), t, 54.2, 63.5, 40);
+  const S = 840 / 75.97, fo = 1 - ease(p(t, 63, 63.5));
+  const grow = (a) => ease(p(t, a, a + 1.1));
+  const setBar = (id, right, w) => { const el = $(id); el.style.right = right + "px"; el.style.width = Math.max(0, w) + "px"; el.style.opacity = fo; el.style.visibility = w > 2 && fo > 0 ? "visible" : "hidden"; };
+  const g1 = grow(55.2), g2a = grow(56.8), g2b = grow(57.9), g3a = grow(59.4), g3b = grow(60.5);
+  setBar("b1", 120, 43.41 * S * g1);
+  setBar("b2a", 120, 43.41 * S * g2a); setBar("b2b", 120 + 43.41 * S, 14.15 * S * g2b);
+  setBar("b3a", 120, 57.56 * S * g3a); setBar("b3b", 120 + 57.56 * S, 18.41 * S * g3b);
+  [["l1", 54.9], ["l2", 56.5], ["l3", 59.1]].forEach(([id, a]) => { $(id).style.opacity = ease(p(t, a, a + .4)) * fo; });
+  const val = (id, v, show_) => { const el = $(id); el.textContent = v.toFixed(2) + " m²"; el.style.opacity = show_ * fo; };
+  val("v1", 43.41 * g1, clamp((43.41 * S * g1 - 250) / 60));
+  val("v2", 43.41 * g2a + 14.15 * g2b, clamp((43.41 * S * g2a - 250) / 60));
+  val("v3", 57.56 * g3a + 18.41 * g3b, clamp((57.56 * S * g3a - 250) / 60));
+  $("d2").style.opacity = ease(p(t, 58.4, 58.9)) * fo;
+  $("d3").style.opacity = ease(p(t, 61, 61.5)) * fo;
+  show($("s8n"), t, 61.6, 63.5, 30);
+
+  // S9 tips 63.5-69.2
+  show($("s9"), t, 63.6, 69.2, 40);
+  ["k1", "k2", "k3", "k4"].forEach((k, i) => show($(k), t, 64.2 + i * .9, 99, 40));
+
+  // S10 CTA
+  show($("s10"), t, 69.3, 99, 40);
+  $("s10logo").style.transform = `scale(${.85 + .15 * out(p(t, 69.3, 70.3))})`;
+}
+window.render = render; window.TOTAL = T;
+render(0);
+</script>
+</body></html>

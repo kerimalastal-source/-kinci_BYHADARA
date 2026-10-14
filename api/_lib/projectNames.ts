@@ -42,6 +42,20 @@ export const PROJECT_NAMES: Record<string, Record<"en" | "ar" | "fa" | "fr" | "r
     "fr": "Cadde Ispartakule",
     "ru": "Cadde Ispartakule"
   },
+  "buyukyali": {
+    "en": "Büyükyalı",
+    "ar": "بيوك يالي",
+    "fa": "بویوک‌یالی",
+    "fr": "Büyükyalı",
+    "ru": "Büyükyalı"
+  },
+  "sea-pearl-atakoy": {
+    "en": "Sea Pearl Ataköy",
+    "ar": "سي بيرل أتاكوي",
+    "fa": "سی‌پرل آتاکوی",
+    "fr": "Sea Pearl Ataköy",
+    "ru": "Sea Pearl Ataköy"
+  },
   "lotus-sisli": {
     "en": "Lotus Şişli",
     "ar": "لوتس شيشلي",

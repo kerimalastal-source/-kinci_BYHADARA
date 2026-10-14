@@ -486,6 +486,12 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
       : project.price
         ? `<span dir="ltr">${project.price}</span>`
         : "";
+  const plan = project.paymentPlan
+    ? t("projectDetail.paymentPlanValue", {
+        down: `<bdi dir="ltr">${project.paymentPlan.downPercent}%</bdi>`,
+        months: `<bdi dir="ltr">${project.paymentPlan.months}</bdi>`
+      })
+    : "";
   const inquiryHref = `${link("/contact")}?project=${project.slug}`;
   const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("projectDetail.whatsappMessage", { name: content.name }))}`;
   const contactActions = `
@@ -525,6 +531,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
         <p class="project-hero__tagline">${content.tagline}</p>
         <p class="project-hero__location">${place}${project.timeline ? ` · <span dir="ltr">${project.timeline}</span>` : ""}</p>
         ${price ? `<p class="project-hero__price">${t("projectDetail.priceLabel")}: ${price}</p>` : ""}
+        ${plan ? `<p class="project-hero__price project-hero__plan">${t("projectDetail.paymentPlanLabel")}: ${plan}</p>` : ""}
         ${
           project.landing
             ? `<div class="project-hero__actions"><a class="btn btn--primary" href="${inquiryHref}">${t("projectDetail.ctaButton")}</a></div>`
@@ -626,6 +633,14 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
                   ? `<div>
                 <dt>${t("projectDetail.priceLabel")}</dt>
                 <dd>${price}${project.price === "on-request" ? "" : `<small class="price-note">${t("projectDetail.priceNote")}</small>`}</dd>
+              </div>`
+                  : ""
+              }
+              ${
+                plan
+                  ? `<div>
+                <dt>${t("projectDetail.paymentPlanLabel")}</dt>
+                <dd>${plan}</dd>
               </div>`
                   : ""
               }
