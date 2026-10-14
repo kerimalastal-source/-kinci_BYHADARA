@@ -90,10 +90,11 @@ const ADS = [
     photo: img("beylikduzu-living/courtyard-gardens.jpg"),
     badgeEn: "Buy in Istanbul",
     badgeAr: "تملّك في إسطنبول",
-    en: "Your home in Istanbul<br>from US$200,000",
-    ar: "بيتك في إسطنبول من 200 ألف دولار",
+    // Owner 2026-10-14: the payment plan is the headline ("it's what attracts people most").
+    en: "Pay 30% now,<br>the rest over 30 months",
+    ar: "ادفع 30% الآن والباقي على 30 شهراً",
     points: [
-      ["Pay 30% now, the balance over 30 months", "ادفع 30% والباقي على 30 شهراً"],
+      ["Homes in Istanbul from US$200,000", "مساكن في إسطنبول تبدأ من 200 ألف دولار"],
       ["Citizenship: one or more homes totalling US$400k+", "الجنسية التركية بعقار أو أكثر بقيمة إجمالية 400 ألف دولار فأكثر"],
     ],
     qualifier: ["Payment plan on new launches and projects under construction", "خطة الدفع في المشاريع الجديدة وقيد الإنشاء"],
