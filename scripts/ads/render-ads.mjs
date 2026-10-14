@@ -84,6 +84,21 @@ const ADS = [
     qualifier: ["For buyers with a budget from US$200,000", "للمشترين بميزانية تبدأ من 200 ألف دولار"],
   },
   {
+    // Owner 2026-10-14: new-launch and under-construction projects pay 30% down, the rest over 30 months.
+    id: "home200plan",
+    primary: "en",
+    photo: img("beylikduzu-living/courtyard-gardens.jpg"),
+    badgeEn: "Buy in Istanbul",
+    badgeAr: "تملّك في إسطنبول",
+    en: "Your home in Istanbul<br>from US$200,000",
+    ar: "بيتك في إسطنبول من 200 ألف دولار",
+    points: [
+      ["Pay 30% now, the balance over 30 months", "ادفع 30% والباقي على 30 شهراً"],
+      ["Citizenship: one or more homes totalling US$400k+", "الجنسية التركية بعقار أو أكثر بقيمة إجمالية 400 ألف دولار فأكثر"],
+    ],
+    qualifier: ["Payment plan on new launches and projects under construction", "خطة الدفع في المشاريع الجديدة وقيد الإنشاء"],
+  },
+  {
     // Owner 2026-10-13: no budget line here; there are homes from lower budgets too.
     id: "videotour6",
     primary: "en",
