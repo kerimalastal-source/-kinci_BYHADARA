@@ -518,5 +518,45 @@
     "headlineAr": "تقسيط مرن وتسليم في 2028",
     "headlineEn": "Flexible installments, delivery in 2028",
     "photo": "/images/projects/beylikduzu-living/aerial-view.jpg"
+  },
+  {
+    "date": "2026-10-14",
+    "id": "diamond-marin-limited",
+    "topic": "دايموند مارين · وحدات محدودة",
+    "headlineAr": "58 شقة فقط في مبنيين منخفضين",
+    "headlineEn": "Only 58 homes in two low-rise blocks",
+    "photo": "/images/projects/diamond-marin/aerial-sea-view.jpg"
+  },
+  {
+    "date": "2026-10-14",
+    "id": "sea-pearl-atakoy",
+    "topic": "سي بيرل أتاكوي",
+    "headlineAr": "على بحر مرمرة مباشرةً في أتاكوي",
+    "headlineEn": "Right on the Marmara Sea in Ataköy",
+    "photo": "/images/projects/sea-pearl-atakoy/dusk-coast.jpg"
+  },
+  {
+    "date": "2026-10-14",
+    "id": "evening-visited-istanbul",
+    "topic": "سؤال الليلة: هل زرتم إسطنبول؟ (شرائح)",
+    "headlineAr": "تخطط لزيارة إسطنبول لشراء منزل؟",
+    "headlineEn": "Planning to visit Istanbul to buy a home?",
+    "photo": "/hero-istanbul.jpg"
+  },
+  {
+    "date": "2026-10-14",
+    "id": "diamond-marin-limited-story",
+    "topic": "ستوري: دايموند مارين · وحدات محدودة",
+    "headlineAr": "سكن بوتيكي لـ 58 عائلة",
+    "headlineEn": "Boutique living for 58 families",
+    "photo": "/images/projects/diamond-marin/kids-bedroom.jpg"
+  },
+  {
+    "date": "2026-10-14",
+    "id": "sea-pearl-atakoy-story",
+    "topic": "ستوري: سي بيرل أتاكوي",
+    "headlineAr": "حيث تلتقي الحدائق بالبحر",
+    "headlineEn": "Where the gardens meet the sea",
+    "photo": "/images/projects/sea-pearl-atakoy/gardens-night.jpg"
   }
 ]
