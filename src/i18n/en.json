@@ -298,6 +298,8 @@
       "swipe": "Swipe to explore the map"
     },
     "developerLabel": "Developer",
+    "paymentPlanLabel": "Payment plan",
+    "paymentPlanValue": "{down} down payment, the balance over {months} months",
     "priceLabel": "Price",
     "priceOnRequest": "On Request",
     "priceNote": "Prices include VAT and vary by payment method. The 4% title deed registration fee is not included.",

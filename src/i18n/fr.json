@@ -298,6 +298,8 @@
       "swipe": "Faites glisser pour explorer la carte"
     },
     "developerLabel": "Promoteur",
+    "paymentPlanLabel": "Plan de paiement",
+    "paymentPlanValue": "{down} d'acompte, le solde sur {months} mois",
     "priceLabel": "Prix",
     "priceOnRequest": "Sur demande",
     "priceNote": "Prix TVA incluse, variables selon le mode de paiement. Les frais d'enregistrement du titre de propriété (4 %) ne sont pas inclus.",

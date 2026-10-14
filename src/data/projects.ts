@@ -139,6 +139,8 @@ export interface Project {
   developer?: string;
   /** "on-request" shows "Price: On request"; any other value is shown as written (e.g. "$1,250,000"). */
   price?: string;
+  /** Instalment plan confirmed by the owner (2026-10-14): down payment % and the months the balance is spread over. */
+  paymentPlan?: { downPercent: number; months: number };
   /** Setting, taken from the project's own description: by the sea (or sea views), green and calm, or city. Used by "Find My Project". */
   lifestyle?: Lifestyle[];
   /** Ad landing page: adds an "I'm interested" button to the hero. */
@@ -200,6 +202,7 @@ export const projects: Project[] = [
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "new-launch",
+    paymentPlan: { downPercent: 30, months: 30 },
     lifestyle: ["city"],
     timeline: "2026 – 2028",
     priority: 0,
@@ -236,6 +239,7 @@ export const projects: Project[] = [
     district: "Beylikdüzü",
     city: "Istanbul",
     status: "new-launch",
+    paymentPlan: { downPercent: 30, months: 30 },
     lifestyle: ["sea"],
     priority: 1,
     developer: "Yıltaş × Lotus Yapı",
@@ -386,6 +390,7 @@ export const projects: Project[] = [
     district: "Şişli",
     city: "Istanbul",
     status: "ongoing",
+    paymentPlan: { downPercent: 30, months: 30 },
     lifestyle: ["city"],
     unitsAvailable: true,
     priority: 2,

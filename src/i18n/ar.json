@@ -298,6 +298,8 @@
       "swipe": "اسحب لتصفّح الخريطة"
     },
     "developerLabel": "المطوّر",
+    "paymentPlanLabel": "خطة الدفع",
+    "paymentPlanValue": "دفعة أولى {down} والباقي على {months} شهراً",
     "priceLabel": "السعر",
     "priceOnRequest": "عند الطلب",
     "priceNote": "الأسعار شاملة الضريبة وتختلف حسب طريقة الدفع، ولا تشمل رسوم تسجيل الطابو (4%).",
