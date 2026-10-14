@@ -43,7 +43,11 @@ const SOURCE_KEYS: Record<string, string> = {
   "bing.com": "bing",
   youtube: "youtube",
   "youtube.com": "youtube",
-  whatsapp: "whatsapp"
+  whatsapp: "whatsapp",
+  // Customers added by hand on the pipeline page (migration 0019).
+  social: "social",
+  website: "website",
+  referral: "referral"
 };
 
 export function sourceLabel(source: string): string {

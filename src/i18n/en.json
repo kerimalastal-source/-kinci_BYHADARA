@@ -3190,6 +3190,7 @@
     "noResults": "Nothing matches your search.",
     "searchPlaceholder": "Search by name, phone, email or request number",
     "kinds": {
+      "manual": "Added by hand",
       "guide": "Buyer's Guide question",
       "contact": "Contact form",
       "property_request": "Custom property request",
@@ -3380,6 +3381,9 @@
       "conversionNote": "messages and bookings ÷ visitors"
     },
     "sources": {
+      "social": "Our social posts",
+      "website": "Website",
+      "referral": "Recommendation",
       "direct": "Direct (no source)",
       "none": "No ad",
       "googleAds": "Google Ads",
@@ -3457,6 +3461,43 @@
     "more": "Privacy Policy"
   },
   "adminCrm": {
+    "add": {
+      "open": "+ Add a customer",
+      "title": "Add a customer by hand",
+      "intro": "For a customer who reached you on WhatsApp, by phone or at the office without filling in a form on the site.",
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email (optional)",
+      "country": "Country",
+      "countryNone": "Not specified",
+      "channel": "How did they contact us?",
+      "channels": {
+        "whatsapp": "WhatsApp",
+        "call": "Phone call",
+        "office": "Office visit",
+        "other": "Other"
+      },
+      "source": "Where did they come from?",
+      "sources": {
+        "gulf": "Gulf ad (WhatsApp)",
+        "villa": "Villa ad (Facebook form)",
+        "otherAd": "Another Facebook or Instagram ad",
+        "social": "Our posts (no ad)",
+        "website": "The website or a Google search",
+        "referral": "Recommended by someone",
+        "none": "Other / not known"
+      },
+      "value": "Budget / deal value",
+      "note": "Summary of the conversation",
+      "notePlaceholder": "e.g. looking for a 3+1 with a sea view, for citizenship…",
+      "submit": "Add the customer",
+      "cancel": "Cancel",
+      "required": "Enter the name and a valid phone number.",
+      "emailError": "The email address is not valid.",
+      "added": "{name} was added ({reference}).",
+      "unavailable": "Adding customers works once database update 0019 has been run.",
+      "error": "Could not add the customer, please try again."
+    },
     "heroTitle": "Sales pipeline",
     "heroSubtitle": "Every customer by sales stage. Move a card to its new stage; open the record for the deal and the next follow-up.",
     "stages": {
@@ -3490,7 +3531,7 @@
     "moveTo": "Move to",
     "openRecord": "Open record",
     "emptyStage": "No customers",
-    "boardNote": "Customers come from the inquiries and tour bookings. Won and lost deals stay on the board for {days} days.",
+    "boardNote": "Customers come from inquiries, video tour bookings and the customers you add by hand. Won and lost deals stay on the board for {days} days.",
     "kpi": {
       "open": "Customers in progress",
       "pipelineValue": "Deals in progress",

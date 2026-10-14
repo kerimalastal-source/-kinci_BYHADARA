@@ -3190,6 +3190,7 @@
     "noResults": "Aucun résultat pour cette recherche.",
     "searchPlaceholder": "Rechercher par nom, téléphone, e-mail ou numéro de demande",
     "kinds": {
+      "manual": "Ajouté manuellement",
       "guide": "Question du guide de l'acheteur",
       "contact": "Formulaire de contact",
       "property_request": "Recherche de bien sur mesure",
@@ -3380,6 +3381,9 @@
       "conversionNote": "messages et réservations ÷ visiteurs"
     },
     "sources": {
+      "social": "Nos publications",
+      "website": "Site web",
+      "referral": "Recommandation",
       "direct": "Accès direct (sans source)",
       "none": "Sans publicité",
       "googleAds": "Google Ads",
@@ -3457,6 +3461,43 @@
     "more": "Politique de confidentialité"
   },
   "adminCrm": {
+    "add": {
+      "open": "+ Ajouter un client",
+      "title": "Ajouter un client manuellement",
+      "intro": "Pour un client qui vous a contactés par WhatsApp, par téléphone ou au bureau sans remplir de formulaire sur le site.",
+      "name": "Nom",
+      "phone": "Téléphone",
+      "email": "E-mail (facultatif)",
+      "country": "Pays",
+      "countryNone": "Non précisé",
+      "channel": "Comment nous a-t-il contactés ?",
+      "channels": {
+        "whatsapp": "WhatsApp",
+        "call": "Appel téléphonique",
+        "office": "Visite au bureau",
+        "other": "Autre"
+      },
+      "source": "D'où vient-il ?",
+      "sources": {
+        "gulf": "Publicité Golfe (WhatsApp)",
+        "villa": "Publicité villa (formulaire Facebook)",
+        "otherAd": "Autre publicité Facebook ou Instagram",
+        "social": "Nos publications (sans publicité)",
+        "website": "Le site ou une recherche Google",
+        "referral": "Recommandé par quelqu'un",
+        "none": "Autre / inconnu"
+      },
+      "value": "Budget / valeur de la vente",
+      "note": "Résumé de l'échange",
+      "notePlaceholder": "ex. cherche un 3+1 avec vue sur la mer, pour la citoyenneté…",
+      "submit": "Ajouter le client",
+      "cancel": "Annuler",
+      "required": "Indiquez le nom et un numéro de téléphone valide.",
+      "emailError": "L'adresse e-mail n'est pas valide.",
+      "added": "{name} a été ajouté ({reference}).",
+      "unavailable": "L'ajout de clients fonctionne après la mise à jour 0019 de la base de données.",
+      "error": "Impossible d'ajouter le client, veuillez réessayer."
+    },
     "heroTitle": "Pipeline de ventes",
     "heroSubtitle": "Chaque client selon son étape de vente. Déplacez une carte vers sa nouvelle étape ; ouvrez la fiche pour l’affaire et la prochaine relance.",
     "stages": {
@@ -3490,7 +3531,7 @@
     "moveTo": "Déplacer vers",
     "openRecord": "Ouvrir la fiche",
     "emptyStage": "Aucun client",
-    "boardNote": "Les clients viennent des demandes et des réservations de visite. Les affaires gagnées et perdues restent {days} jours sur le tableau.",
+    "boardNote": "Les clients proviennent des demandes, des réservations de visites vidéo et des clients ajoutés manuellement. Les ventes conclues et perdues restent sur le tableau {days} jours.",
     "kpi": {
       "open": "Clients en cours",
       "pipelineValue": "Affaires en cours",

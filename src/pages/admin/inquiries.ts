@@ -36,6 +36,10 @@ const DETAIL_FIELDS: Record<InquiryKind, [string, string, string | null][]> = {
     ["country", "consultancy.form.countryLabel", null],
     ["location", "consultancy.form.locationLabel", null],
     ["area", "consultancy.form.areaLabel", null]
+  ],
+  manual: [
+    ["channel", "adminCrm.add.channel", "adminCrm.add.channels"],
+    ["country", "adminCrm.add.country", null]
   ]
 };
 
@@ -126,7 +130,7 @@ function renderCard(inquiry: Inquiry): string {
           L("phone"),
           `<a href="tel:+${phoneDigits}" dir="ltr">${escapeHtml(inquiry.phone)}</a> · <a href="https://wa.me/${phoneDigits}" target="_blank" rel="noopener">${t("adminBookings.whatsapp")}</a>`
         )}
-        ${row(L("email"), `<a href="mailto:${escapeHtml(inquiry.email)}" dir="ltr">${escapeHtml(inquiry.email)}</a>`)}
+        ${inquiry.email ? row(L("email"), `<a href="mailto:${escapeHtml(inquiry.email)}" dir="ltr">${escapeHtml(inquiry.email)}</a>`) : ""}
         ${row(L("projects"), projectLinks(inquiry.projects ?? []))}
         ${row(L("interests"), (inquiry.interests ?? []).map((k) => optionLabel("contact.topics", `${k}.label`)).join(sep()))}
         ${detailRows(inquiry)}
@@ -158,7 +162,7 @@ function renderCard(inquiry: Inquiry): string {
           projects: inquiry.projects,
           topic: inquiry.kind === "property_request" ? "request" : inquiry.kind === "consultation" ? "consultation" : "general"
         })}
-        ${customerLink(inquiry.email)}
+        ${customerLink(inquiry.email || inquiry.phone)}
       </div>
     </article>`;
 }

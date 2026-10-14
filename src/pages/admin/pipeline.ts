@@ -7,11 +7,13 @@ import { OPEN_STAGES, STAGES, fetchCrmLeads, leadFor, saveCrmLead, type CrmLead,
 import { adminHero, adminNav } from "./nav";
 import { groupCustomers, type Customer } from "./customers";
 import { followUpTag, money, projectName, stageLabel } from "./crmForm";
+import { addCustomerHtml, initAddCustomer } from "./addCustomer";
 
 /**
  * Sales pipeline (/admin/pipeline): every customer (from the inquiries and tour bookings,
  * grouped as on the customers page) in a column per sales stage. A card's menu moves it to
  * another stage; "Open record" goes to the customer's history for the deal and follow-up.
+ * "Add a customer" adds someone who reached the team on WhatsApp, by phone or at the office.
  * Won and lost deals stay on the board for 60 days.
  */
 
@@ -62,6 +64,7 @@ export function renderAdminPipeline(main: HTMLElement): void {
     <section class="section admin-pipeline">
       <div class="container">
         ${adminNav("pipeline")}
+        ${addCustomerHtml()}
         <div class="admin-kpis" data-pipeline-kpis></div>
         <div class="pipeline-board" data-pipeline-board aria-live="polite"><p>${t("common.loading")}</p></div>
         <p class="admin-bookings__note">${t("adminCrm.boardNote", { days: CLOSED_DAYS })}</p>
@@ -107,19 +110,22 @@ export function renderAdminPipeline(main: HTMLElement): void {
     }).join("");
   };
 
-  Promise.all([fetchInquiries().catch(() => [] as Inquiry[]), fetchTourBookings().catch(() => [] as TourBooking[]), fetchCrmLeads()]).then(
-    ([inquiries, bookings, crm]) => {
-      if (main.dataset.requestId !== requestId) return;
-      if (!crm) {
-        kpis.innerHTML = "";
-        board.innerHTML = `<p class="admin-bookings__empty">${t("adminCrm.unavailable")}</p>`;
-        return;
+  const load = () =>
+    Promise.all([fetchInquiries().catch(() => [] as Inquiry[]), fetchTourBookings().catch(() => [] as TourBooking[]), fetchCrmLeads()]).then(
+      ([inquiries, bookings, crm]) => {
+        if (main.dataset.requestId !== requestId) return;
+        if (!crm) {
+          kpis.innerHTML = "";
+          board.innerHTML = `<p class="admin-bookings__empty">${t("adminCrm.unavailable")}</p>`;
+          return;
+        }
+        customers = groupCustomers(inquiries, bookings);
+        leads = crm;
+        paint();
       }
-      customers = groupCustomers(inquiries, bookings);
-      leads = crm;
-      paint();
-    }
-  );
+    );
+  void load();
+  initAddCustomer(main, () => leads, load);
 
   board.addEventListener("change", async (e) => {
     const select = (e.target as Element).closest<HTMLSelectElement>("[data-pipeline-stage]");

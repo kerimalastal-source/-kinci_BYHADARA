@@ -1,7 +1,8 @@
 import { supabase } from "../lib/supabase";
 
 export type InquiryStatus = "new" | "contacted" | "interested" | "closed";
-export type InquiryKind = "contact" | "property_request" | "consultation";
+/** "manual": a customer the team added by hand on the pipeline page (migration 0019). */
+export type InquiryKind = "contact" | "property_request" | "consultation" | "manual";
 
 /** A message from the site's forms (public.inquiries, supabase/migrations/0007). Admins only. */
 export interface Inquiry {
@@ -9,6 +10,7 @@ export interface Inquiry {
   reference: string;
   kind: InquiryKind;
   name: string;
+  /** "" for a customer added by hand without an email. */
   email: string;
   phone: string;
   subject: string | null;
@@ -47,4 +49,44 @@ export async function updateInquiry(id: string, changes: { status?: InquiryStatu
 /** The key under adminInquiries.kinds.*: a Buyer's Guide question (details.form = "guide") or the form's kind. */
 export function inquiryKindKey(inquiry: { kind: string; details?: Record<string, string> | null }): string {
   return inquiry.details?.form === "guide" ? "guide" : inquiry.kind;
+}
+
+/** How the team first spoke with a customer they add by hand. */
+export const MANUAL_CHANNELS = ["whatsapp", "call", "office", "other"] as const;
+export type ManualChannel = (typeof MANUAL_CHANNELS)[number];
+
+export interface ManualCustomer {
+  name: string;
+  phone: string;
+  email: string;
+  /** ISO 3166 code, or "". */
+  country: string;
+  channel: ManualChannel;
+  /** Campaign string as the site's forms save it ("utm_source=facebook · utm_campaign=gulf-whatsapp"), or "". */
+  source: string;
+  projects: string[];
+  note: string;
+}
+
+/**
+ * Adds a customer by hand (a WhatsApp chat, a call, an office visit) as an inquiry of kind
+ * "manual" (admin_add_customer(), migration 0019). "unavailable" until 0019 has run.
+ */
+export async function addManualCustomer(c: ManualCustomer): Promise<{ reference: string } | { error: "forbidden" | "invalid" | "unavailable" | "failed" }> {
+  const { data, error } = await supabase.rpc("admin_add_customer", {
+    p_name: c.name,
+    p_phone: c.phone,
+    p_email: c.email,
+    p_country: c.country,
+    p_channel: c.channel,
+    p_source: c.source,
+    p_projects: c.projects,
+    p_note: c.note
+  });
+  if (error) {
+    console.error(error);
+    return { error: error.code === "PGRST202" || error.code === "42883" ? "unavailable" : "failed" };
+  }
+  const result = data as { reference?: string; error?: "forbidden" | "invalid" };
+  return result.reference ? { reference: result.reference } : { error: result.error ?? "failed" };
 }
