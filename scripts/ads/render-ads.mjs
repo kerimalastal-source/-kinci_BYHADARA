@@ -84,6 +84,24 @@ const ADS = [
     qualifier: ["For buyers with a budget from US$200,000", "للمشترين بميزانية تبدأ من 200 ألف دولار"],
   },
   {
+    // Owner 2026-10-14: new-launch and under-construction projects pay 30% down, the rest over 30 months.
+    id: "home200plan",
+    primary: "en",
+    photo: img("beylikduzu-living/courtyard-gardens.jpg"),
+    badgeEn: "Buy in Istanbul",
+    badgeAr: "تملّك في إسطنبول",
+    // Owner 2026-10-14: the payment plan is the headline ("it's what attracts people most").
+    en: "Pay 30% now,<br>the rest over 30 months",
+    ar: "ادفع 30% الآن والباقي على 30 شهراً",
+    points: [
+      ["Homes in Istanbul from US$200,000", "مساكن في إسطنبول تبدأ من 200 ألف دولار"],
+      ["Citizenship: one or more homes totalling US$400k+", "الجنسية التركية بعقار أو أكثر بقيمة إجمالية 400 ألف دولار فأكثر"],
+    ],
+    qualifier: ["On new launches & projects under construction", "خطة الدفع في المشاريع الجديدة وقيد الإنشاء"],
+    // Owner 2026-10-14: bigger Arabic headline, and the story text fills its free space.
+    big: true,
+  },
+  {
     // Owner 2026-10-13: no budget line here; there are homes from lower budgets too.
     id: "videotour6",
     primary: "en",
@@ -146,6 +164,12 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#0f2b21;font-family:I
 .qual b{display:block;font-family:Inter;font-weight:700;direction:ltr}
 .qual span{display:block;font-size:.95em;color:#efe6cf;margin-top:4px}
 .sh.strong{background:linear-gradient(180deg,rgba(8,26,20,.5) 0%,rgba(8,26,20,0) 20%,rgba(8,26,20,.25) 34%,rgba(8,26,20,.86) 47%,rgba(8,26,20,.97) 100%)}
+.big .har{font-size:${story ? 62 : 54}px;line-height:1.3;margin-top:16px}
+.big .hen{font-size:${story ? 76 : 62}px}
+.big.story .body{bottom:270px}
+.big.story .pts{margin-top:40px;gap:28px}
+.big.story .pe b{font-size:34px}.big.story .pe span{font-size:35px}
+.big.story .qual{font-size:37px;margin-top:36px}
 .note{margin-top:14px;line-height:1.5;font-family:Plex;font-weight:600;font-size:20px;color:#cfc6ae;text-align:center}
 `;
 
@@ -154,7 +178,7 @@ const enBody = (a) => `<div class="hen">${a.en}</div><div class="har">${a.ar}</d
 <div class="pts">${a.points.map(([en, ar]) => `<div class="pe"><div class="c">✓</div><div><b>${en}</b><span>${ar}</span></div></div>`).join("")}</div>
 ${a.qualifier ? `<div class="qual"><b>${a.qualifier[0]}</b><span>${a.qualifier[1]}</span></div>` : ""}`;
 
-const html = (a, w, h, story) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body>
+const html = (a, w, h, story) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body class="${a.big ? "big" : ""}${story ? " story" : ""}">
 <div class="ph" style="background-image:url('${a.photo}')${a.photoBox ? `;inset:auto;left:50%;transform:translateX(-50%);top:${a.photoBox(story).top}px;height:${a.photoBox(story).height}px;width:${Math.round(a.photoBox(story).height * 2200 / 1300)}px;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent)` : ""}"></div><div class="sh${a.primary === "en" && !a.phone ? " strong" : ""}"></div>
 ${a.phone ? `<div class="phone"><div class="s" style="background-image:url('${a.phone}')"><span class="live"><i></i>مباشر</span><span class="pip"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6"/></svg><span>مستشارك</span></span><span class="ctl"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span><span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.5 6-3.5v10l-6-3.5"/></svg></span><span class="end"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 14.5c4.8-4.3 12.2-4.3 17 0l-1.9 2.4-3.4-1.3v-2.2a11 11 0 0 0-7 0v2.2l-3.4 1.3z"/></svg></span></span></div></div>` : ""}
 <div class="top"><div class="brand"><img src="file://${REPO}/public/logo-light.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div>

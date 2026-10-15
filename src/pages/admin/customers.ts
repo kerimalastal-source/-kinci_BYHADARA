@@ -81,7 +81,7 @@ export function groupCustomers(inquiries: Inquiry[], bookings: TourBooking[]): C
     .map((rs) => {
       const sorted = [...rs].sort((a, b) => Date.parse(b.entry.at) - Date.parse(a.entry.at));
       const latest = sorted[0];
-      const emails = [...new Set(sorted.map((r) => r.email.trim().toLowerCase()))];
+      const emails = [...new Set(sorted.map((r) => r.email.trim().toLowerCase()).filter(Boolean))];
       const phones = [...new Map(sorted.map((r) => [phoneKey(r.phone), r.phone.trim()])).values()];
       return {
         id: phoneKey(latest.phone) || latest.email.toLowerCase(),
@@ -152,7 +152,7 @@ function renderCustomer(c: Customer, open: boolean, lead: CrmLead | null | undef
     <summary class="customer-card__summary">
       <span class="customer-card__who">
         <strong dir="auto">${escapeHtml(c.name)}</strong>
-        <small><span dir="ltr">${escapeHtml(c.phones[0] ?? "")}</span> · <span dir="ltr">${escapeHtml(c.emails[0] ?? "")}</span></small>
+        <small><span dir="ltr">${escapeHtml(c.phones[0] ?? "")}</span>${c.emails[0] ? ` · <span dir="ltr">${escapeHtml(c.emails[0])}</span>` : ""}</small>
       </span>
       <span class="customer-card__counts">
         ${inquiries ? `<span class="admin-tag">${t("adminCustomers.inquiries", { count: inquiries })}</span>` : ""}
@@ -165,7 +165,7 @@ function renderCustomer(c: Customer, open: boolean, lead: CrmLead | null | undef
     <div class="customer-card__body">
       <dl class="booking-card__details">
         <div><dt>${t("adminInquiries.labels.phone")}</dt><dd>${c.phones.map((p) => `<a href="tel:+${p.replace(/\D/g, "")}" dir="ltr">${escapeHtml(p)}</a>`).join(" · ")}</dd></div>
-        <div><dt>${t("adminInquiries.labels.email")}</dt><dd>${c.emails.map((e) => `<a href="mailto:${escapeHtml(e)}" dir="ltr">${escapeHtml(e)}</a>`).join(" · ")}</dd></div>
+        ${c.emails.length ? `<div><dt>${t("adminInquiries.labels.email")}</dt><dd>${c.emails.map((e) => `<a href="mailto:${escapeHtml(e)}" dir="ltr">${escapeHtml(e)}</a>`).join(" · ")}</dd></div>` : ""}
         ${projects.length ? `<div><dt>${t("adminInquiries.labels.projects")}</dt><dd>${escapeHtml(projectNames(projects))}</dd></div>` : ""}
         ${c.locale ? `<div><dt>${t("adminInquiries.labels.siteLanguage")}</dt><dd>${t(`lang.${c.locale}`)}</dd></div>` : ""}
         ${c.sources.length ? `<div><dt>${t("adminInquiries.labels.source")}</dt><dd>${[...new Set(c.sources.map(campaignSource))].map(sourceLabel).join(sep())}</dd></div>` : ""}
