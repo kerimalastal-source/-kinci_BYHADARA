@@ -43,7 +43,12 @@ function block(c, lang, id, platform) {
     if (c.cta && c.path) paras.push(`${mark(c.cta + " 👇")}\n${url(lang, c.path, id, "facebook")}`);
     paras.push(`${mark(ltr ? "Chat with us on WhatsApp 👇" : "راسلنا على واتساب 👇")}\n${WHATSAPP}`);
   } else {
-    if (c.cta && c.path) paras.push(mark(ltr ? `🔗 ${c.cta}: link in bio` : `🔗 ${c.cta}: الرابط في البايو`));
+    // Owner's rule 2026-10-15: the link is written in the post itself (Instagram does not make
+    // it clickable, so the bio link stays as the tap-through).
+    if (c.cta && c.path) {
+      const plain = url(lang, c.path, id, "instagram").replace(/^https:\/\//, "").replace(/\?.*$/, ""); // short, to read or copy
+      paras.push(ltr ? `${LRM}🔗 ${c.cta}: ${plain}\n${LRM}(link in bio)` : `🔗 ${c.cta}:\n⁦${plain}⁩\n(الرابط أيضاً في البايو)`);
+    }
     paras.push(ltr ? `${LRM}WhatsApp: ${PHONE}` : `واتساب: ⁦${PHONE}⁩`);
   }
   return paras.join("\n\n");
@@ -55,6 +60,29 @@ function caption(p, platform) {
   // Arabic first, then a clear divider, then English: two complete, separate parts.
   const divider = `${LRM}━━━━━━━━  English  ━━━━━━━━`;
   return [block(p.caption.ar, "ar", p.id, platform), divider, block(p.caption.en, "en", p.id, platform), tags.join(" ")].join("\n\n") + "\n";
+}
+
+// Owner's rule 2026-10-15 ("بلاش نحط نص طويل… نبذة ورابط"): a caption is a short summary and
+// the link to the full page; the details live on the image (or slides) and on the site. A post
+// whose Instagram caption was too long went to Facebook only (2026-10-08, 2026-10-15).
+const CAPTION_MAX = 1300; // whole Instagram caption, both languages + hashtags
+const INTRO_MAX = 300; // per language
+function captionIssues(p, result) {
+  if (!p.caption) return [];
+  const issues = [];
+  for (const lang of ["ar", "en"]) {
+    const c = p.caption[lang] || {};
+    if (c.bullets?.length) issues.push(`caption.${lang}: no bullets (short captions: title, a 1–2 sentence summary, at most two short closing lines, the link)`);
+    if ((c.closing || []).length > 2) issues.push(`caption.${lang}: at most two closing lines`);
+    for (const line of c.closing || []) if ([...line].length > 160) issues.push(`caption.${lang}: closing line over 160 characters`);
+    if (c.intro && [...c.intro].length > INTRO_MAX) issues.push(`caption.${lang}.intro is ${[...c.intro].length} characters (max ${INTRO_MAX})`);
+    if (!c.cta || !c.path) issues.push(`caption.${lang}: needs cta + path (the link to read the rest on the site)`);
+  }
+  const igChars = [...result.ig].length;
+  const igTags = (result.ig.match(/#[\p{L}\p{N}_]+/gu) ?? []).length;
+  if (igChars > CAPTION_MAX) issues.push(`Instagram caption is ${igChars} characters (max ${CAPTION_MAX}; Instagram's own limit is 2200): shorten the summary`);
+  if (igTags > 30) issues.push(`Instagram caption has ${igTags} hashtags (max 30)`);
+  return issues;
 }
 
 // ---------- image ----------
@@ -349,6 +377,7 @@ for (const [i, p] of posts.entries()) {
     if (p.at !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(p.at)) issues.push(`"at" must be Istanbul time "HH:MM", got ${JSON.stringify(p.at)}`);
     issues.push(...(repeatProblems.get(p.id) || []));
     const result = { id: p.id, topic: p.topic, image: `post-${n}.jpg`, slides, fb: p.caption ? caption(p, "facebook") : "", ig: p.caption ? caption(p, "instagram") : "", ...(p.at ? { at: p.at } : {}) };
+    issues.push(...captionIssues(p, result));
     fs.writeFileSync(path.join(outDir, `post-${n}.json`), JSON.stringify(result, null, 2));
     console.log(`post-${n} (${p.id}, carousel of ${slides.length}): ${issues.length ? "PROBLEMS\n  - " + issues.join("\n  - ") : "ok"}`);
     problems += issues.length;
@@ -463,12 +492,7 @@ for (const [i, p] of posts.entries()) {
   fs.unlinkSync(htmlPath);
   if (p.at !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(p.at)) issues.push(`"at" must be Istanbul time "HH:MM", got ${JSON.stringify(p.at)}`);
   const result = { id: p.id, topic: p.topic, image: `post-${n}.jpg`, fb: p.caption ? caption(p, "facebook") : "", ig: p.caption ? caption(p, "instagram") : "", ...(p.at ? { at: p.at } : {}), ...(video ? { video } : {}), ...(p.story ? { story: true } : {}) };
-  // Instagram refuses captions over 2200 characters or 30 hashtags; the site then skips Instagram
-  // for that post (2026-10-08 post-2 was 2247 and went to Facebook only), so catch it here.
-  const igChars = [...result.ig].length;
-  const igTags = (result.ig.match(/#[\p{L}\p{N}_]+/gu) ?? []).length;
-  if (igChars > 2200) issues.push(`Instagram caption is ${igChars} characters (max 2200): shorten the Arabic/English text`);
-  if (igTags > 30) issues.push(`Instagram caption has ${igTags} hashtags (max 30)`);
+  issues.push(...captionIssues(p, result));
   fs.writeFileSync(path.join(outDir, `post-${n}.json`), JSON.stringify(result, null, 2));
   console.log(`post-${n} (${p.id}): ${issues.length ? "PROBLEMS\n  - " + issues.join("\n  - ") : "ok"}`);
   problems += issues.length;
