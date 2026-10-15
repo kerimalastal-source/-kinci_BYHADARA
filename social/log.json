@@ -558,5 +558,37 @@
     "headlineAr": "حيث تلتقي الحدائق بالبحر",
     "headlineEn": "Where the gardens meet the sea",
     "photo": "/images/projects/sea-pearl-atakoy/gardens-night.jpg"
+  },
+  {
+    "date": "2026-10-15",
+    "id": "lotus-sisli-life",
+    "topic": "لوتس شيشلي · الحياة في المشروع",
+    "headlineAr": "مسبح داخلي وسبا في قلب شيشلي",
+    "headlineEn": "An indoor pool and spa in central Şişli",
+    "photo": "/images/projects/lotus-sisli/apartment-living.jpg"
+  },
+  {
+    "date": "2026-10-15",
+    "id": "citizenship-benefits",
+    "topic": "مزايا الجنسية",
+    "headlineAr": "8 مزايا للجنسية التركية عبر العقار",
+    "headlineEn": "8 benefits of Turkish citizenship by property",
+    "photo": "/images/projects/lotus-sisli/tower-night.jpg"
+  },
+  {
+    "date": "2026-10-15",
+    "id": "carousel-aidat",
+    "topic": "شرائح: الأيدات — مقابل ماذا تدفع شهرياً؟",
+    "headlineAr": "الأيدات في تركيا: مقابل ماذا تدفع شهرياً؟",
+    "headlineEn": "Aidat in Turkey: what do you pay for each month?",
+    "photo": "/images/blog/monthly-fees-aidat.jpg"
+  },
+  {
+    "date": "2026-10-15",
+    "id": "lotus-sisli-life-story",
+    "topic": "ستوري: لوتس شيشلي · الحياة في المشروع",
+    "headlineAr": "نيشانتاشي على بُعد كيلومترين",
+    "headlineEn": "Nişantaşı just 2 km away",
+    "photo": "/images/projects/lotus-sisli/tower-garden.jpg"
   }
 ]
