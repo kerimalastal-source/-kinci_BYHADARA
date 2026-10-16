@@ -14,6 +14,10 @@ const SITE_PHONE = "+90 531 930 92 14";
 const SITE_PHONE_HREF = "+905319309214";
 const SITE_EMAIL = "info@byhadara.com";
 
+// The parent group's LinkedIn page. Not the company's own profile, so it stays out of SOCIAL_LINKS.
+const GROUP_NAME = "BYHADARA Group";
+const GROUP_LINKEDIN = "https://www.linkedin.com/company/146747112/";
+
 export function renderFooter(el: HTMLElement): void {
   el.className = "site-footer";
   el.innerHTML = `
@@ -24,6 +28,10 @@ export function renderFooter(el: HTMLElement): void {
         <div class="social-links" aria-label="${t("footer.followUs")}">
           ${SOCIAL_LINKS.map((s) => `<a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.label}">${SOCIAL_ICONS[s.network]}</a>`).join("")}
         </div>
+        <p class="site-footer__group">
+          <span>${t("footer.groupCompany").replace("{group}", `<bdi dir="ltr" translate="no">${GROUP_NAME}</bdi>`)}</span>
+          <a href="${GROUP_LINKEDIN}" target="_blank" rel="noopener" aria-label="${t("footer.groupLinkedin")}" title="${t("footer.groupLinkedin")}">${SOCIAL_ICONS.linkedin}</a>
+        </p>
       </div>
 
       <div class="site-footer__col">
