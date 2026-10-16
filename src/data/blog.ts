@@ -18,6 +18,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "buyukcekmece-district-guide",
+    priority: -8,
+    published: "2026-10-16",
+    relatedProjects: ["lotus-yali", "lotus-manzara-guzelce", "marmara-haven-villa"],
+    coverImage: { src: "/images/blog/buyukcekmece-district-guide.jpg", width: 1500, height: 1000 }
+  },
+  {
     slug: "monthly-fees-aidat",
     priority: -7,
     published: "2026-10-13",
