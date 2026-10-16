@@ -46,8 +46,10 @@ function block(c, lang, id, platform) {
     // Owner's rule 2026-10-15: the link is written in the post itself (Instagram does not make
     // it clickable, so the bio link stays as the tap-through).
     if (c.cta && c.path) {
+      // The address stands alone on its line with no bidi marks around it: Instagram turned a
+      // trailing U+2069 into part of the link, and the page opened as "not found" (2026-10-16).
       const plain = url(lang, c.path, id, "instagram").replace(/^https:\/\//, "").replace(/\?.*$/, ""); // short, to read or copy
-      paras.push(ltr ? `${LRM}🔗 ${c.cta}: ${plain}\n${LRM}(link in bio)` : `🔗 ${c.cta}:\n⁦${plain}⁩\n(الرابط أيضاً في البايو)`);
+      paras.push(ltr ? `${LRM}🔗 ${c.cta}: ${plain}\n${LRM}(link in bio)` : `🔗 ${c.cta}:\n${plain}\n(الرابط أيضاً في البايو)`);
     }
     paras.push(ltr ? `${LRM}WhatsApp: ${PHONE}` : `واتساب: ⁦${PHONE}⁩`);
   }
