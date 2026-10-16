@@ -590,5 +590,37 @@
     "headlineAr": "نيشانتاشي على بُعد كيلومترين",
     "headlineEn": "Nişantaşı just 2 km away",
     "photo": "/images/projects/lotus-sisli/tower-garden.jpg"
+  },
+  {
+    "date": "2026-10-16",
+    "id": "cadde-ispartakule-shops",
+    "topic": "جادّة إسبارتاكولي · المحلات التجارية",
+    "headlineAr": "12 محلاً تجارياً على الشارع في إسبارتاكولي",
+    "headlineEn": "12 street-level shops in Ispartakule",
+    "photo": "/images/projects/cadde-ispartakule/retail-avenue.jpg"
+  },
+  {
+    "date": "2026-10-16",
+    "id": "blog-citizenship-investment-laws",
+    "topic": "مقال: قوانين الجنسية التركية عبر الاستثمار، بالتفصيل",
+    "headlineAr": "3 وثائق تُثبت استثمارك في ملف الجنسية",
+    "headlineEn": "3 documents that prove your citizenship investment",
+    "photo": "/images/blog/citizenship-investment-laws.jpg"
+  },
+  {
+    "date": "2026-10-16",
+    "id": "evening-what-decides",
+    "topic": "سؤال الليلة: ما الذي يحسم قرارك؟ (شرائح)",
+    "headlineAr": "ما الذي يحسم قرار شراء منزلك؟",
+    "headlineEn": "What settles your decision to buy?",
+    "photo": "/images/projects/diamond-marin/living-dining.jpg"
+  },
+  {
+    "date": "2026-10-16",
+    "id": "cadde-ispartakule-shops-story",
+    "topic": "ستوري: جادّة إسبارتاكولي · المحلات التجارية",
+    "headlineAr": "قرب مطار إسطنبول وطريقين سريعين",
+    "headlineEn": "Near Istanbul Airport and two motorways",
+    "photo": "/images/projects/cadde-ispartakule/terrace-view.jpg"
   }
 ]
