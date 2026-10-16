@@ -1,8 +1,9 @@
 // Ad and analytics tags (Meta Pixel, Google Analytics 4, Google Ads).
 // Each tag is off until its ID is filled in below (or set as a Vercel env var),
 // so the site ships nothing to Meta/Google until the IDs exist.
-// Nothing loads until the visitor accepts the cookie notice (components/cookieConsent.ts);
-// the choice is kept in localStorage ("hadara-consent") for a year.
+// Nothing loads until the visitor accepts the cookie notice (components/cookieConsent.ts), which
+// can also be customised: "analytics" = Google Analytics, "ads" = Meta Pixel (+ Conversions API)
+// and Google Ads. The choice is kept in localStorage ("hadara-consent") for a year.
 //
 // Events sent:
 //   - a page view on every route change (the site is a single-page app);
@@ -56,6 +57,13 @@ function whenIdle(task: () => void): void {
 }
 
 export type Consent = "granted" | "denied";
+/** What the visitor allowed: Google Analytics, and the advertising tags (Meta Pixel, Conversions API, Google Ads). */
+export type ConsentChoice = { analytics: boolean; ads: boolean };
+
+/** One word for the consent statistics: "granted" when anything was allowed. */
+export function consentSummary(choice: ConsentChoice): Consent {
+  return choice.analytics || choice.ads ? "granted" : "denied";
+}
 
 const CONSENT_KEY = "hadara-consent";
 const CONSENT_MS = 365 * 86_400_000;
@@ -65,87 +73,123 @@ export function trackingConfigured(): boolean {
   return Boolean(TAGS.metaPixelId || googleId);
 }
 
-/** The visitor's choice from the cookie notice, or null if they haven't chosen (or it is over a year old). */
-export function storedConsent(): Consent | null {
+/**
+ * The visitor's choice from the cookie notice, or null if they haven't chosen (or it is over a year old).
+ * Saved as v = "granted" | "denied" | "custom" (+ analytics/ads for "custom").
+ */
+export function storedConsent(): ConsentChoice | null {
   try {
-    const saved = JSON.parse(localStorage.getItem(CONSENT_KEY) ?? "null") as { v?: string; at?: string } | null;
-    if ((saved?.v === "granted" || saved?.v === "denied") && Date.now() - Date.parse(saved.at ?? "") < CONSENT_MS) return saved.v;
+    const saved = JSON.parse(localStorage.getItem(CONSENT_KEY) ?? "null") as { v?: string; at?: string; analytics?: boolean; ads?: boolean } | null;
+    if (!saved || !(Date.now() - Date.parse(saved.at ?? "") < CONSENT_MS)) return null;
+    if (saved.v === "granted") return { analytics: true, ads: true };
+    if (saved.v === "denied") return { analytics: false, ads: false };
+    if (saved.v === "custom") return { analytics: saved.analytics === true, ads: saved.ads === true };
   } catch {
     /* storage blocked or corrupt: ask again */
   }
   return null;
 }
 
-/** Saves the choice; accepting loads the tags now (and counts the current page), declining stops them. */
-export function setConsent(choice: Consent): void {
+/** Saves the choice and applies it now: newly allowed tags start (and count the current page), withdrawn ones stop. */
+export function setConsent(choice: ConsentChoice): void {
+  const v = choice.analytics && choice.ads ? "granted" : !choice.analytics && !choice.ads ? "denied" : "custom";
   try {
-    localStorage.setItem(CONSENT_KEY, JSON.stringify({ v: choice, at: new Date().toISOString() }));
+    localStorage.setItem(CONSENT_KEY, JSON.stringify({ v, ...(v === "custom" ? choice : {}), at: new Date().toISOString() }));
   } catch {
     /* still applies for this page view */
   }
-  if (choice === "granted") startTags();
-  else stopTags();
+  applyConsent(choice);
 }
 
-let started = false;
-let active = false;
+let allowed: ConsentChoice = { analytics: false, ads: false };
+let metaStarted = false;
+let googleStarted = false;
+let gaConfigured = false;
+let adsConfigured = false;
 let lastPage: { route: Route; locale: string } | null = null;
 
-/** Wires the contact-link listener and starts the tags if the visitor already accepted. */
+/** Wires the contact-link listener and starts the tags the visitor already allowed. */
 export function initTracking(): void {
   if (!trackingConfigured()) return;
   document.addEventListener("click", trackContactClick, true);
-  if (storedConsent() === "granted") startTags();
+  const saved = storedConsent();
+  if (saved) applyConsent(saved);
 }
 
-function stopTags(): void {
-  if (!active) return;
-  active = false;
-  window.fbq?.("consent", "revoke");
-  window.gtag?.("consent", "update", { ad_storage: "denied", analytics_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
+/** Google's consent mode, matching the visitor's choice. */
+function googleConsent(): Record<string, string> {
+  const ads = allowed.ads ? "granted" : "denied";
+  return { analytics_storage: allowed.analytics ? "granted" : "denied", ad_storage: ads, ad_user_data: ads, ad_personalization: ads };
 }
 
-/** Sets up the queues right away (events fired early are kept) and loads the vendor scripts once idle. */
-function startTags(): void {
-  if (active) return;
-  active = true;
-  if (started) {
-    window.fbq?.("consent", "grant");
-    window.gtag?.("consent", "update", { ad_storage: "granted", analytics_storage: "granted", ad_user_data: "granted", ad_personalization: "granted" });
-    return;
-  }
-  started = true;
+function applyConsent(choice: ConsentChoice): void {
+  const before = allowed;
+  allowed = { ...choice };
+
   if (TAGS.metaPixelId) {
-    // Meta's standard stub: calls queue up until fbevents.js takes over.
-    const fbq = function (this: unknown) {
-      // eslint-disable-next-line prefer-rest-params
-      if (fbq.callMethod) fbq.callMethod.apply(fbq, arguments as unknown as unknown[]);
-      // eslint-disable-next-line prefer-rest-params
-      else fbq.queue!.push(arguments);
-    } as NonNullable<Window["fbq"]>;
-    Object.assign(fbq, { push: fbq, loaded: true, version: "2.0", queue: [] });
-    window.fbq = fbq;
-    window._fbq = fbq;
-    fbq("init", TAGS.metaPixelId);
-    whenIdle(() => loadScript("https://connect.facebook.net/en_US/fbevents.js"));
+    if (allowed.ads && !metaStarted) startMeta();
+    else if (allowed.ads && !before.ads) window.fbq?.("consent", "grant");
+    else if (!allowed.ads && before.ads) window.fbq?.("consent", "revoke");
   }
 
-  if (googleId) {
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function gtag() {
-      // gtag.js expects the arguments object itself, not an array.
-      // eslint-disable-next-line prefer-rest-params
-      window.dataLayer!.push(arguments);
-    };
-    window.gtag("js", new Date());
-    // Page views are sent by hand on each route change (see trackPageView).
-    if (TAGS.gaId) window.gtag("config", TAGS.gaId, { send_page_view: false });
-    if (TAGS.adsId) window.gtag("config", TAGS.adsId, { send_page_view: false });
-    whenIdle(() => loadScript(`https://www.googletagmanager.com/gtag/js?id=${googleId}`));
+  const googleWanted = (allowed.analytics && Boolean(TAGS.gaId)) || (allowed.ads && Boolean(TAGS.adsId));
+  if (googleStarted) {
+    window.gtag?.("consent", "update", googleConsent());
+    configureGoogle();
+  } else if (googleWanted) {
+    startGoogle();
   }
 
-  // The page the visitor accepted on hasn't been counted yet.
-  if (lastPage) trackPageView(lastPage.route, lastPage.locale);
+  // The page the visitor chose on hasn't been counted yet by the tags they just allowed.
+  if (lastPage) {
+    sendPageView(lastPage.route, lastPage.locale, {
+      meta: allowed.ads && !before.ads,
+      ga: allowed.analytics && !before.analytics
+    });
+  }
+}
+
+/** Meta's standard stub: calls queue up until fbevents.js takes over (loaded once idle). */
+function startMeta(): void {
+  metaStarted = true;
+  const fbq = function (this: unknown) {
+    // eslint-disable-next-line prefer-rest-params
+    if (fbq.callMethod) fbq.callMethod.apply(fbq, arguments as unknown as unknown[]);
+    // eslint-disable-next-line prefer-rest-params
+    else fbq.queue!.push(arguments);
+  } as NonNullable<Window["fbq"]>;
+  Object.assign(fbq, { push: fbq, loaded: true, version: "2.0", queue: [] });
+  window.fbq = fbq;
+  window._fbq = fbq;
+  fbq("init", TAGS.metaPixelId);
+  whenIdle(() => loadScript("https://connect.facebook.net/en_US/fbevents.js"));
+}
+
+/** gtag's queue with consent mode set first; gtag.js itself loads once idle. */
+function startGoogle(): void {
+  googleStarted = true;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function gtag() {
+    // gtag.js expects the arguments object itself, not an array.
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer!.push(arguments);
+  };
+  window.gtag("consent", "default", googleConsent());
+  window.gtag("js", new Date());
+  configureGoogle();
+  whenIdle(() => loadScript(`https://www.googletagmanager.com/gtag/js?id=${googleId}`));
+}
+
+/** Configures Analytics and Ads once each, only when allowed. Page views are sent by hand (see trackPageView). */
+function configureGoogle(): void {
+  if (allowed.analytics && TAGS.gaId && !gaConfigured) {
+    gaConfigured = true;
+    window.gtag?.("config", TAGS.gaId, { send_page_view: false });
+  }
+  if (allowed.ads && TAGS.adsId && !adsConfigured) {
+    adsConfigured = true;
+    window.gtag?.("config", TAGS.adsId, { send_page_view: false });
+  }
 }
 
 /** Contact details for Meta's matching on a sent form (the server hashes them; never stored). */
@@ -190,19 +234,21 @@ function sendServerEvent(event: string, eventId: string, params: Params | undefi
 }
 
 function meta(event: string, params?: Params, user?: LeadUser): void {
-  if (!active || !TAGS.metaPixelId) return;
+  if (!allowed.ads || !TAGS.metaPixelId) return;
   const eventId = newEventId();
   window.fbq?.("track", event, params ?? {}, { eventID: eventId });
   if (SERVER_EVENTS.has(event)) sendServerEvent(event, eventId, params, user);
 }
 
+/** A Google Analytics event (only to the Analytics tag, so the advertising choice is kept apart). */
 function google(event: string, params?: Params): void {
-  if (!active) return;
-  window.gtag?.("event", event, params);
+  if (!allowed.analytics || !TAGS.gaId) return;
+  window.gtag?.("event", event, { send_to: TAGS.gaId, ...params });
 }
 
 function adsConversion(label: string, params?: Params): void {
-  if (TAGS.adsId && label) google("conversion", { send_to: `${TAGS.adsId}/${label}`, ...params });
+  if (!allowed.ads || !TAGS.adsId || !label) return;
+  window.gtag?.("event", "conversion", { send_to: `${TAGS.adsId}/${label}`, ...params });
 }
 
 /** Called by the router after each render that changed the URL (title and locale are already set). */
@@ -210,18 +256,20 @@ export function trackPageView(route: Route, locale: string): void {
   // Seller account and admin pages are ours, not ad traffic.
   if (SKIPPED_ROUTES.has(route.name)) return;
   lastPage = { route, locale };
-  if (!active) return;
-  meta("PageView");
-  if (TAGS.gaId) {
+  sendPageView(route, locale, { meta: true, ga: true });
+}
+
+function sendPageView(route: Route, locale: string, to: { meta: boolean; ga: boolean }): void {
+  if (to.meta) meta("PageView");
+  if (to.ga) {
     google("page_view", {
-      send_to: TAGS.gaId,
       page_location: window.location.href,
       page_path: window.location.pathname + window.location.search,
       page_title: document.title,
       language: locale
     });
   }
-  if (route.name === "project") {
+  if (to.meta && route.name === "project") {
     meta("ViewContent", { content_type: "product", content_ids: [route.slug], content_name: route.slug });
   }
 }
