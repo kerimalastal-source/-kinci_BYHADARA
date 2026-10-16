@@ -10,8 +10,11 @@ import { escapeHtml } from "./telegram.js";
 import { ISTANBUL } from "./bookingMessages.js";
 
 const GRAPH = "https://graph.facebook.com/v21.0";
-/** The villa lead forms (Arabic/English and Russian), unless META_LEAD_FORM_IDS lists others. */
-export const DEFAULT_FORMS = ["2435699266837249", "1348770123836883"];
+/**
+ * The villa lead forms (Arabic/English and Russian), unless META_LEAD_FORM_IDS lists others:
+ * the lighter v2 forms (2026-10-16) first, then the first ones while their ads still run.
+ */
+export const DEFAULT_FORMS = ["1475106064461512", "3428892427410306", "2435699266837249", "1348770123836883"];
 /** Leads older than this are never announced (the first check after setup, or a long gap). */
 const LOOKBACK_SECONDS = 2 * 24 * 3600;
 
