@@ -66,7 +66,8 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
 4. Write `scripts/social/out/<date>/posts.json` (shape below) and run
    `node scripts/social/render.mjs scripts/social/out/<date>/posts.json`.
    It must print `ok` for every post (2 or 3, plus the Story) — fix any PROBLEMS (shorter text, 3 stats, a shorter tip, `arSize`
-   56–60; an Instagram caption over 2200 characters or 30 hashtags → shorten the caption bullets) and re-run. Then Read each `post-<n>.jpg` once to check it visually.
+   56–60; a caption with bullets, more than two closing lines, an intro over 300 characters, or an Instagram
+   caption over 1300 characters → shorten it to the summary, see "Short captions" below) and re-run. Then Read each `post-<n>.jpg` once to check it visually.
 5. Read the published page's `days.json` with the Artifact tool
    (`action: "read"`, `url` = ARTIFACT_URL, `path: "days.json"`), then run
    `node scripts/social/build-page.mjs <date> <that local days.json>`.
@@ -122,8 +123,9 @@ colours, fonts, logo, frame and footer as design A, **big bold headlines** (owne
   على الخارطة؟» → slides comparing the two from the site's article, then the question at the
   end; a true/false topic → the facts slide by slide, the answer in the caption. Every fact
   from the site, formal Arabic, no prices, the citizenship note when relevant.
-- Caption as usual (title, intro, 4–6 bullets, tip, cta + path); render.mjs prints `ok` only
-  when every slide fits. No Story/Reel in this design.
+- Caption short (see "Short captions"): the slides already say everything; the caption is the
+  title, a 1–2 sentence summary, at most two short closing lines (the legal note, the night's question) and the
+  link to the full article/page. render.mjs prints `ok` only when every slide fits. No Story/Reel in this design.
 
 ## Evening designs (approved 2026-10-03; replaced by the carousel from 2026-10-09)
 
@@ -226,6 +228,22 @@ www.hadararealestate.com + WhatsApp +90 531 930 92 14. 1080×1350 JPEG (stories 
   was published before them.
 - No 4-byte emoji inside the image text. Emoji in captions are fine (like the examples).
 
+## Short captions (owner's rule 2026-10-15)
+
+«بلاش نحط نص طويل، نحط نبذة عن الموضوع ونحط رابط في المنشور لاستكمال القراءة من الموقع» —
+after an Instagram caption of 2845 characters went to Facebook only (2026-10-15, the aidat
+carousel). Every post, every design:
+
+- Each language: `title`, `intro` = a 1–2 sentence summary (max 300 characters), at most **two**
+  short `closing` lines (max 160 characters each: the legal note, the night's question), and `cta` + `path`
+  (the article or page to read the rest). **No `bullets`.** The details belong on the image/slides
+  and on the site.
+- The link is in the post on both platforms: Facebook gets the tracked clickable link,
+  Instagram gets the same address written out (Instagram does not make it clickable) plus
+  "link in bio".
+- render.mjs refuses (PROBLEMS) bullets, a third or long closing line, a long intro, a missing link,
+  or an Instagram caption over 1300 characters (Instagram's own limit is 2200).
+
 ## posts.json shape
 
 ```json
@@ -256,9 +274,9 @@ www.hadararealestate.com + WhatsApp +90 531 930 92 14. 1080×1350 JPEG (stories 
     // guides: "design": "list", "items": [ { "ar": "…", "en": "…" } x3 ] instead of "stats"
   },
   "caption": {
-    "ar": { "title": "… 🌊", "intro": "…", "bullets": ["🏡 …", "📍 …"],
-            "closing": ["…"], "cta": "تفاصيل المشروع", "path": "/projects/lotus-yali" },
-    "en": { "title": "…", "intro": "…", "bullets": ["🏡 …"], "closing": ["…"],
+    "ar": { "title": "… 🌊", "intro": "نبذة من جملة أو جملتين", "closing": ["…"],   // no bullets
+            "cta": "تفاصيل المشروع", "path": "/projects/lotus-yali" },
+    "en": { "title": "…", "intro": "A one- or two-sentence summary", "closing": ["…"],
             "cta": "Project details", "path": "/projects/lotus-yali" },
     "hashtags": ["#LotusYali", "#Buyukcekmece"]
   }
