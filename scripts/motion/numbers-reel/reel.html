@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HADARA in numbers · reel</title>
+<style>
+@font-face{font-family:Inter;font-weight:500;src:url(../../social/fonts/inter-500.ttf)}
+@font-face{font-family:Inter;font-weight:600;src:url(../../social/fonts/inter-600.ttf)}
+@font-face{font-family:Inter;font-weight:700;src:url(../../social/fonts/inter-700.ttf)}
+:root{--bg:#090f0c;--panel:#161c19;--control:#232a26;--line:#2f3832;--ink:#f7f4ec;--soft:#a9b2ac;--gold:#c9a24b}
+*{margin:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+body{font-family:Inter,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden}
+#world{position:absolute;left:0;top:0;width:1080px;height:2600px;transform-origin:0 0}
+#grid{position:absolute;left:-2000px;top:-2000px;width:5080px;height:6600px;
+  background-image:radial-gradient(circle,rgba(247,244,236,.09) 1.6px,transparent 2px);background-size:40px 40px}
+.abs{position:absolute}
+.panel{position:absolute;background:var(--panel);border:1.5px solid var(--line);border-radius:30px}
+/* toggle row */
+#row .t{position:absolute;left:44px;top:26px;font-weight:700;font-size:38px;letter-spacing:-.4px}
+#row .s{position:absolute;left:44px;top:76px;font-weight:600;font-size:21px;color:var(--soft)}
+#track{position:absolute;border-radius:60px}
+/* slider */
+#slider .lab{position:absolute;left:60px;top:182px;font-weight:600;font-size:24px;color:var(--soft)}
+#slider .lab2{position:absolute;right:60px;top:182px;font-weight:600;font-size:24px;color:var(--soft)}
+#rail,#fill{position:absolute;height:14px;border-radius:7px}
+#rail{background:var(--control)}#fill{background:var(--gold)}
+#knob{position:absolute;width:56px;height:56px;border-radius:50%;background:var(--control);border:3px solid var(--gold)}
+#bubble{position:absolute;padding:10px 22px;border-radius:16px;background:var(--gold);color:#0f1a14;font-weight:700;font-size:34px;white-space:nowrap;transform:translate(-50%,-100%)}
+#bubble:after{content:"";position:absolute;left:50%;bottom:-9px;margin-left:-10px;border:10px solid transparent;border-bottom:0;border-top-color:var(--gold)}
+/* cards */
+.card .ic{position:absolute;left:36px;top:30px;width:72px;height:72px;border-radius:20px;background:var(--control);display:grid;place-items:center}
+.card .ic svg{width:40px;height:40px}
+.card .ti{position:absolute;left:132px;top:28px;font-weight:700;font-size:30px}
+.card .bo{position:absolute;left:132px;top:72px;font-weight:600;font-size:27px;color:#d9ddd8;white-space:nowrap}
+.card .no{position:absolute;right:34px;top:30px;font-weight:600;font-size:22px;color:var(--soft)}
+#pill{position:absolute;border-radius:28px;background:var(--control);border:1.5px solid var(--line);overflow:hidden;white-space:nowrap}
+#pill .lbl{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-weight:700;font-size:25px}
+#pill .typed{position:absolute;left:30px;top:50%;transform:translateY(-50%);font-weight:600;font-size:32px}
+#pill .caret{display:inline-block;width:3px;height:34px;background:var(--gold);vertical-align:-6px;margin-left:3px}
+#send{position:absolute;width:88px;height:88px;border-radius:50%;display:grid;place-items:center}
+#send svg{width:40px;height:40px}
+#msg{position:absolute;padding:20px 30px;border-radius:30px 30px 8px 30px;background:var(--gold);color:#0f1a14;font-weight:700;font-size:32px;white-space:nowrap;transform-origin:100% 100%}
+/* keyboard */
+#kb{position:absolute;left:40px;width:1000px;height:560px;border-radius:34px;background:#121714;border:1.5px solid var(--line)}
+.key{position:absolute;height:110px;border-radius:16px;background:var(--control);display:grid;place-items:center;font-weight:600;font-size:38px;color:var(--ink)}
+.key.sm{font-size:26px;color:var(--soft)}
+/* ball + cursor */
+#ball{position:absolute;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:#fff;box-shadow:0 10px 18px rgba(0,0,0,.45)}
+#cursor{position:absolute;width:46px;height:62px;transform-origin:0 0}
+/* screen overlay */
+#brand{position:absolute;left:0;right:0;top:1395px;display:flex;flex-direction:column;align-items:center;gap:14px}
+#brand img{height:110px}
+#brand .n{font-weight:700;font-size:40px;letter-spacing:9px}
+#brand .tg{font-weight:600;font-size:18px;letter-spacing:9px;color:var(--gold);margin-top:-6px}
+#brand .u{font-weight:600;font-size:30px;color:var(--ink);margin-top:8px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="world">
+    <div id="grid"></div>
+
+    <div class="panel" id="row" style="left:160px;top:350px;width:760px;height:140px">
+      <div class="t">HADARA in numbers</div>
+      <div class="s">Real Estate Development &amp; Marketing Partner</div>
+    </div>
+    <div id="track"></div>
+
+    <div class="panel" id="slider" style="left:160px;top:690px;width:760px;height:240px">
+      <div class="lab">Residential units</div><div class="lab2">Istanbul</div>
+    </div>
+    <div id="rail"></div><div id="fill"></div><div id="knob"></div><div id="bubble">0</div>
+
+    <div class="panel card" id="c1"><div class="ic">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c9a24b" stroke-width="2" stroke-linejoin="round"><path d="M4 21V7l6-3v17M10 21V9l10 3v9M2 21h20M7 10v.01M7 14v.01M14 14v.01M17 14v.01M14 18v.01M17 18v.01"/></svg>
+    </div><div class="ti">Projects</div><div class="bo">13 projects across Istanbul</div><div class="no">now</div></div>
+    <div class="panel card" id="c2"><div class="ic">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c9a24b" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+    </div><div class="ti">Units</div><div class="bo">420+ offices · 110+ shops</div><div class="no">now</div></div>
+    <div class="panel card" id="c3"><div class="ic">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#c9a24b" stroke-width="2" stroke-linejoin="round"><path d="M3 11l9-7 9 7v10H3z"/><path d="M9 21v-6h6v6"/></svg>
+    </div><div class="ti">HADARA</div><div class="bo">Ready to find your home?</div><div class="no">now</div></div>
+
+    <div id="pill"><div class="lbl">Reply</div><div class="typed"><span id="txt"></span><span class="caret" id="caret"></span></div></div>
+    <div id="send"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+    <div id="msg">Book a video tour</div>
+
+    <div id="kb"></div>
+
+    <div id="ball"></div>
+    <svg id="cursor" viewBox="0 0 23 31"><path d="M1.5 1.5v24l6.2-6 4.2 9.6 4-1.7-4.1-9.4h8.7z" fill="#fff" stroke="#0b0f0d" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  </div>
+
+  <div id="brand">
+    <img src="../../../public/logo-light.png" alt="">
+    <div class="n">HADARA</div><div class="tg">REAL ESTATE</div>
+    <div class="u">hadararealestate.com</div>
+  </div>
+</div>
+
+<script>
+// Every frame is computed from t alone (seek); nothing carries over between frames.
+const DUR = 14;
+const TEXT = "Book a video tour";
+const MAX = 2800;
+const $ = (id) => document.getElementById(id);
+
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, k) => a + (b - a) * k;
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const io = (k) => (k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
+const out = (k) => 1 - Math.pow(1 - k, 3);
+const inn = (k) => k * k * k;
+// Closed-form damped spring 0 -> 1 (small overshoot).
+function spring(dt, w = 20, z = 0.62) {
+  if (dt <= 0) return 0;
+  const wd = w * Math.sqrt(1 - z * z);
+  return 1 - Math.exp(-z * w * dt) * (Math.cos(wd * dt) + (z * w / wd) * Math.sin(wd * dt));
+}
+
+/* ---------- layout (world px) ---------- */
+const TOG = { x: 700, y: 372, w: 180, h: 96 };        // switch track
+const KNOB_OFF = { x: 748, y: 420 }, KNOB_ON = { x: 832, y: 420 };
+const RAIL = { x0: 230, x1: 850, y: 810 };
+const CARDS = [
+  { id: "c1", y: 1040, h: 132 },
+  { id: "c2", y: 1196, h: 132 },
+  { id: "c3", y: 1352, h: 196 },
+];
+const ICON = (i) => ({ x: 232, y: CARDS[i].y + 66 });
+const PILL0 = { x: 728, y: 1468, w: 152, h: 56 };       // "Reply" inside card 3
+const FIELD = { x: 160, y: 1588, w: 646, h: 96 };       // reply text field
+const SEND = { x: 868, y: 1636 };
+const KB = { y: 1730 };
+const ROW_Y = [1800, 1926, 2052, 2178];
+
+// keyboard geometry
+const KEYS = {};
+"QWERTYUIOP".split("").forEach((c, i) => (KEYS[c] = { x: 90 + i * 100, y: ROW_Y[0], w: 88 }));
+"ASDFGHJKL".split("").forEach((c, i) => (KEYS[c] = { x: 140 + i * 100, y: ROW_Y[1], w: 88 }));
+"ZXCVBNM".split("").forEach((c, i) => (KEYS[c] = { x: 240 + i * 100, y: ROW_Y[2], w: 88 }));
+KEYS.SHIFT = { x: 112, y: ROW_Y[2], w: 132, label: "⇧", sm: 1 };
+KEYS.DEL = { x: 968, y: ROW_Y[2], w: 132, label: "⌫", sm: 1 };
+KEYS.NUM = { x: 128, y: ROW_Y[3], w: 164, label: "123", sm: 1 };
+KEYS.SPACE = { x: 520, y: ROW_Y[3], w: 600, label: "space", sm: 1 };
+KEYS.RET = { x: 916, y: ROW_Y[3], w: 228, label: "return", sm: 1 };
+
+/* ---------- timeline (s) ---------- */
+const T = {
+  click: 0.45, launch: 0.8, land1: 1.75,
+  drag0: 1.95, drag1: 3.95, hop: 4.2,
+  card: [4.45, 4.95, 5.45], cardLand: [4.8, 5.3, 5.8], pillLand: 6.3,
+  morph0: 6.45, morph1: 6.95, kb0: 6.6, kb1: 7.2,
+  type0: 7.45, step: 0.15,                           // 17 key taps
+  ret: 10.1, msg0: 10.2, msg1: 10.6, leave: 10.5,
+  back1: 11.3, back2: 12.0, rewind0: 12.1, rewind1: 12.7,
+  home: 13.2, off0: 13.45,
+  kbDown0: 11.6, kbDown1: 12.1, clear0: 11.9,
+};
+const PRESSES = TEXT.split("").map((ch, i) => ({
+  t: T.type0 + i * T.step,
+  key: ch === " " ? "SPACE" : ch.toUpperCase(),
+  ch,
+}));
+PRESSES.push({ t: T.ret, key: "RET", ch: "" });
+
+/* ---------- ball route ---------- */
+function keyPos(k, t) {
+  const key = KEYS[k];
+  const dx = k === "SPACE" ? ((PRESSES.findIndex((p) => p.t === t) % 3) - 1) * 70 : 0;
+  return { x: key.x + dx, y: key.y - 14 };
+}
+const slidePos = (k) => ({ x: lerp(RAIL.x0, RAIL.x1, k), y: RAIL.y });
+
+// segments: {a,b, from, to, h (arc height), land}
+const SEG = [];
+const add = (a, b, from, to, h) => SEG.push({ a, b, from, to, h });
+add(T.launch, T.land1, KNOB_ON, slidePos(0), 300);
+add(T.hop, T.cardLand[0], slidePos(1), ICON(0), 260);
+add(T.cardLand[0], T.cardLand[1], ICON(0), ICON(1), 120);
+add(T.cardLand[1], T.cardLand[2], ICON(1), ICON(2), 120);
+add(T.cardLand[2], T.pillLand, ICON(2), { x: PILL0.x + PILL0.w / 2, y: PILL0.y + PILL0.h / 2 }, 40);
+// pill -> send button ride happens in morph; then hop to the first key
+add(T.morph1 + 0.25, PRESSES[0].t, SEND, keyPos(PRESSES[0].key, PRESSES[0].t), 140);
+for (let i = 1; i < PRESSES.length; i++) {
+  const p = PRESSES[i - 1], q = PRESSES[i];
+  const A = keyPos(p.key, p.t), B = keyPos(q.key, q.t);
+  add(p.t, q.t, A, B, 40 + Math.hypot(B.x - A.x, B.y - A.y) * 0.18);
+}
+add(T.leave, T.back1, keyPos("RET", T.ret), ICON(1), 520);
+add(T.back1, T.back2, ICON(1), slidePos(1), 300);
+add(T.rewind1 + 0.05, T.home, slidePos(0), KNOB_ON, 260);
+
+function arc(s, t) {
+  const k = prog(t, s.a, s.b);
+  const x = lerp(s.from.x, s.to.x, k);
+  const y = lerp(s.from.y, s.to.y, k) - s.h * 4 * k * (1 - k);
+  return { x, y };
+}
+const LANDINGS = [T.land1, T.cardLand[0], T.cardLand[1], T.cardLand[2], T.pillLand,
+  ...PRESSES.map((p) => p.t), T.back1, T.back2, T.home];
+
+function ball(t) {
+  // in the switch: off -> on
+  if (t < T.launch) {
+    const k = spring(t - T.click, 22, 0.6);
+    return { x: lerp(KNOB_OFF.x, KNOB_ON.x, k), y: KNOB_OFF.y };
+  }
+  for (const s of SEG) if (t >= s.a && t < s.b) return arc(s, t);
+  if (t < T.drag0) return slidePos(0);
+  if (t < T.hop) return slidePos(io(prog(t, T.drag0, T.drag1)));
+  if (t < T.pillLand) return ICON(2);
+  if (t < T.morph1 + 0.25) {               // ride the reply pill out to the send button
+    const k = io(prog(t, T.morph0, T.morph1));
+    const from = { x: PILL0.x + PILL0.w / 2, y: PILL0.y + PILL0.h / 2 };
+    return { x: lerp(from.x, SEND.x, k), y: lerp(from.y, SEND.y, k) - 60 * Math.sin(Math.PI * k) };
+  }
+  if (t < T.leave) return keyPos("RET", T.ret);
+  if (t < T.rewind0) return slidePos(1);
+  if (t < T.rewind1 + 0.05) return slidePos(1 - io(prog(t, T.rewind0, T.rewind1)));
+  if (t < T.off0) return KNOB_ON;
+  const k = spring(t - T.off0, 22, 0.6);
+  return { x: lerp(KNOB_ON.x, KNOB_OFF.x, k), y: KNOB_ON.y };
+}
+function squash(t) {
+  let e = 0;
+  for (const l of LANDINGS) if (t >= l && t < l + 0.22) e = Math.max(e, Math.exp(-(t - l) * 22) * 0.28);
+  return e;
+}
+function sliderK(t) {
+  if (t < T.drag0) return 0;
+  if (t < T.drag1) return io(prog(t, T.drag0, T.drag1));
+  if (t < T.rewind0) return 1;
+  if (t < T.rewind1) return 1 - io(prog(t, T.rewind0, T.rewind1));
+  return 0;
+}
+
+/* ---------- camera ---------- */
+// keyframes: t, cx, cy, zoom, screen anchor y
+const CAM = [
+  [0, 540, 560, 1.32, 900],
+  [0.85, 540, 560, 1.32, 900],
+  [1.75, 540, 805, 1.32, 900],
+  [4.15, 540, 805, 1.32, 900],
+  [5.05, 540, 1270, 1.16, 900],
+  [6.2, 540, 1330, 1.16, 900],
+  [7.15, 540, 1835, 1.0, 900],
+  [10.35, 540, 1835, 1.0, 900],
+  [11.2, 540, 1320, 0.58, 780],
+  [12.15, 540, 1320, 0.58, 780],
+  [13.6, 540, 560, 1.32, 900],
+  [DUR, 540, 560, 1.32, 900],
+];
+function camera(t) {
+  for (let i = 0; i < CAM.length - 1; i++) {
+    const [t0, x0, y0, z0, a0] = CAM[i], [t1, x1, y1, z1, a1] = CAM[i + 1];
+    if (t >= t0 && t <= t1) {
+      const k = io(prog(t, t0, t1));
+      return { x: lerp(x0, x1, k), y: lerp(y0, y1, k), z: Math.exp(lerp(Math.log(z0), Math.log(z1), k)), a: lerp(a0, a1, k) };
+    }
+  }
+  const [, x, y, z, a] = CAM[0];
+  return { x, y, z, a };
+}
+
+/* ---------- build static DOM once ---------- */
+const kb = $("kb");
+for (const [name, k] of Object.entries(KEYS)) {
+  const el = document.createElement("div");
+  el.className = "key" + (k.sm ? " sm" : "");
+  el.id = "k-" + name;
+  el.textContent = k.label || name;
+  el.style.left = (k.x - k.w / 2 - 40) + "px";
+  el.style.top = (k.y - 55 - KB.y) + "px";
+  el.style.width = k.w + "px";
+  kb.appendChild(el);
+}
+CARDS.forEach((c) => {
+  const el = $(c.id);
+  el.style.left = "160px"; el.style.top = c.y + "px"; el.style.width = "760px"; el.style.height = c.h + "px";
+});
+
+/* ---------- seek ---------- */
+const fmt = (n) => n.toLocaleString("en-US");
+function seek(t) {
+  t = ((t % DUR) + DUR) % DUR;
+
+  // camera
+  const c = camera(t);
+  $("world").style.transform = `translate(${540 - c.x * c.z}px, ${c.a - c.y * c.z}px) scale(${c.z})`;
+
+  // switch
+  const onK = t < T.off0 ? spring(t - T.click, 22, 0.6) : 1 - spring(t - T.off0, 22, 0.6);
+  const g = clamp(onK);
+  const tr = $("track");
+  Object.assign(tr.style, { left: TOG.x + "px", top: TOG.y + "px", width: TOG.w + "px", height: TOG.h + "px" });
+  tr.style.background = `rgb(${lerp(35, 201, g)},${lerp(42, 162, g)},${lerp(38, 75, g)})`;
+
+  // slider
+  const k = sliderK(t);
+  const kx = lerp(RAIL.x0, RAIL.x1, k);
+  Object.assign($("rail").style, { left: RAIL.x0 + "px", top: RAIL.y - 7 + "px", width: RAIL.x1 - RAIL.x0 + "px" });
+  Object.assign($("fill").style, { left: RAIL.x0 + "px", top: RAIL.y - 7 + "px", width: kx - RAIL.x0 + "px" });
+  Object.assign($("knob").style, { left: kx - 28 + "px", top: RAIL.y - 28 + "px" });
+  const val = Math.round(k * MAX);
+  const bub = $("bubble");
+  bub.textContent = k >= 0.999 ? "2,800+" : fmt(val);
+  bub.style.left = kx + "px";
+  bub.style.top = RAIL.y - 52 + "px";
+  bub.style.opacity = clamp(k * 25);
+
+  // cards in / out
+  CARDS.forEach((cd, i) => {
+    const el = $(cd.id);
+    const inK = spring(t - T.card[i], 16, 0.7);
+    const outK = inn(prog(t, T.clear0 + i * 0.1, T.clear0 + i * 0.1 + 0.45));
+    const x = (1 - inK) * 560 + outK * 900;
+    el.style.transform = `translateX(${x}px)`;
+    el.style.opacity = clamp(inK * 1.6) * (1 - outK);
+  });
+  const c3 = { x: (1 - spring(t - T.card[2], 16, 0.7)) * 560 + inn(prog(t, T.clear0 + 0.2, T.clear0 + 0.65)) * 900 };
+
+  // reply pill -> text field -> message
+  const m = io(prog(t, T.morph0, T.morph1));
+  const pill = $("pill");
+  const px = lerp(PILL0.x + c3.x, FIELD.x, m), py = lerp(PILL0.y, FIELD.y, m);
+  const pw = lerp(PILL0.w, FIELD.w, m), ph = lerp(PILL0.h, FIELD.h, m);
+  const send = io(prog(t, T.msg0, T.msg1));
+  Object.assign(pill.style, { left: px + "px", top: py + "px", width: pw + "px", height: ph + "px", borderRadius: lerp(28, 48, m) + "px" });
+  pill.querySelector(".lbl").style.opacity = 1 - clamp(m * 2.5);
+  const typed = pill.querySelector(".typed");
+  typed.style.opacity = clamp((m - 0.5) * 3) * (1 - clamp(send * 3));
+  const n = PRESSES.filter((p) => p.key !== "RET" && p.t <= t).length;
+  $("txt").textContent = t < T.msg0 ? TEXT.slice(0, n) : TEXT;
+  $("caret").style.opacity = (t < T.ret && Math.floor(t * 2.2) % 2 === 0) || (t >= T.type0 - 0.3 && t < T.ret && n > 0) ? 1 : 0;
+  pill.style.opacity = (t < T.card[2] ? 0 : clamp((t - T.card[2]) * 4)) * (1 - clamp(send * 1.4)) *
+    (t < T.morph0 ? 1 - inn(prog(t, T.clear0 + 0.2, T.clear0 + 0.65)) : 1);
+
+  // send button
+  const sb = $("send");
+  const active = t >= T.ret && t < T.msg1 + 0.2 ? 1 : 0;
+  const sOn = clamp((m - 0.6) * 3) * (1 - inn(prog(t, T.clear0 + 0.2, T.clear0 + 0.6)));
+  Object.assign(sb.style, { left: SEND.x - 44 + "px", top: SEND.y - 44 + "px", opacity: sOn });
+  const press = t >= T.ret && t < T.ret + 0.18 ? 0.9 : 1;
+  sb.style.transform = `scale(${press})`;
+  sb.style.background = active ? "#c9a24b" : "#232a26";
+  sb.querySelector("svg").style.stroke = active ? "#0f1a14" : "#6d766f";
+
+  // message bubble
+  const msg = $("msg");
+  const mk = spring(t - T.msg0, 18, 0.7);
+  const mOut = inn(prog(t, T.clear0 + 0.25, T.clear0 + 0.7));
+  Object.assign(msg.style, { left: "auto", right: 1080 - 806 + "px", top: FIELD.y + 6 + "px" });
+  msg.style.opacity = t < T.msg0 ? 0 : clamp(mk * 2) * (1 - mOut);
+  msg.style.transform = `translateX(${mOut * 900}px) scale(${lerp(0.6, 1, clamp(mk))})`;
+
+  // keyboard up / down
+  const up = out(prog(t, T.kb0, T.kb1)) * (1 - io(prog(t, T.kbDown0, T.kbDown1)));
+  Object.assign(kb.style, { top: KB.y + (1 - up) * 700 + "px", opacity: clamp(up * 1.5) });
+  for (const name of Object.keys(KEYS)) {
+    const el = $("k-" + name);
+    const hit = PRESSES.find((p) => p.key === name && t >= p.t && t < p.t + 0.12);
+    el.style.background = hit ? "#c9a24b" : name === "RET" && t >= T.ret ? "#3a443e" : "#232a26";
+    el.style.color = hit ? "#0f1a14" : "";
+    el.style.transform = hit ? "scale(.92)" : "none";
+  }
+
+  // ball
+  const b = ball(t);
+  const e = squash(t);
+  const bl = $("ball");
+  bl.style.left = b.x + "px";
+  bl.style.top = b.y + "px";
+  bl.style.transform = `scale(${1 + e}, ${1 - e})`;
+
+  // cursor: rests at P0, clicks the switch, leaves; comes back for the loop
+  const P0 = { x: 930, y: 560 }, HIT = { x: 812, y: 440 }, AWAY = { x: 1010, y: 660 };
+  let cp, cop = 1, cs = 1;
+  if (t < T.click) { const q = io(prog(t, 0.05, T.click)); cp = { x: lerp(P0.x, HIT.x, q), y: lerp(P0.y, HIT.y, q) }; }
+  else if (t < 0.9) { cp = HIT; cs = 1 - 0.12 * Math.sin(Math.PI * prog(t, T.click, T.click + 0.16)); }
+  else if (t < 1.5) { const q = io(prog(t, 0.9, 1.5)); cp = { x: lerp(HIT.x, AWAY.x, q), y: lerp(HIT.y, AWAY.y, q) }; cop = 1 - q; }
+  else if (t < 13.1) { cp = AWAY; cop = 0; }
+  else { const q = io(prog(t, 13.1, 13.95)); cp = { x: lerp(AWAY.x, P0.x, q), y: lerp(AWAY.y, P0.y, q) }; cop = q; }
+  const cur = $("cursor");
+  Object.assign(cur.style, { left: cp.x + "px", top: cp.y + "px", opacity: cop, transform: `scale(${cs})` });
+
+  // brand overlay (screen space) during the pull-back
+  const br = clamp(prog(t, 10.9, 11.3)) * (1 - prog(t, 11.95, 12.3));
+  $("brand").style.opacity = br;
+  $("brand").style.transform = `translateY(${(1 - br) * 24}px)`;
+}
+window.seek = seek;
+window.DUR = DUR;
+window.PRESSES = PRESSES;
+window.LANDINGS = LANDINGS;
+window.T = T;
+seek(0);
+</script>
+</body>
+</html>
