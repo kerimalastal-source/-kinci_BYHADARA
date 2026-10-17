@@ -55,6 +55,12 @@ body{font-family:Inter,sans-serif;color:var(--ink);-webkit-font-smoothing:antial
 #brand .n{font-weight:700;font-size:40px;letter-spacing:9px}
 #brand .tg{font-weight:600;font-size:18px;letter-spacing:9px;color:var(--gold);margin-top:-6px}
 #brand .u{font-weight:600;font-size:30px;color:var(--ink);margin-top:8px}
+#fade{position:absolute;left:0;right:0;top:0;height:560px;background:linear-gradient(var(--bg) 0,var(--bg) 62%,rgba(9,15,12,0) 100%);opacity:0}
+.cap{position:absolute;left:70px;right:70px;top:175px;opacity:0}
+.cap h2{font-weight:700;font-size:66px;line-height:1.08;letter-spacing:-1px;color:var(--ink)}
+.cap h2 em{font-style:normal;color:var(--gold)}
+.cap p{margin-top:18px;font-weight:600;font-size:34px;line-height:1.3;color:#cfd5d0}
+body.long #brand{top:1418px;gap:10px}body.long #brand img{height:78px}body.long #brand .n{font-size:32px}
 </style>
 </head>
 <body>
@@ -93,6 +99,7 @@ body{font-family:Inter,sans-serif;color:var(--ink);-webkit-font-smoothing:antial
     <svg id="cursor" viewBox="0 0 23 31"><path d="M1.5 1.5v24l6.2-6 4.2 9.6 4-1.7-4.1-9.4h8.7z" fill="#fff" stroke="#0b0f0d" stroke-width="1.6" stroke-linejoin="round"/></svg>
   </div>
 
+  <div id="fade"></div><div id="caps"></div>
   <div id="brand">
     <img src="../../../public/logo-light.png" alt="">
     <div class="n">HADARA</div><div class="tg">REAL ESTATE</div>
@@ -102,7 +109,42 @@ body{font-family:Inter,sans-serif;color:var(--ink);-webkit-font-smoothing:antial
 
 <script>
 // Every frame is computed from t alone (seek); nothing carries over between frames.
-const DUR = 14;
+const STORY = 14;
+const Q = new URLSearchParams(location.search);
+const LONG = Q.get("long") === "1";
+if (LONG) document.body.classList.add("long");
+// Long cut: the same story, played slower, with reading pauses where the ball is at rest.
+// knots: [story time, real time]
+const KNOTS = LONG
+  ? (() => {
+      const k = [[0, 0]];
+      const go = (s, speed) => { const [s0, r0] = k[k.length - 1]; k.push([s, r0 + (s - s0) / speed]); };
+      const hold = (sec) => { const [s0, r0] = k[k.length - 1]; k.push([s0, r0 + sec]); };
+      go(0.72, 0.8); hold(2.6);      // switch on: payment plan
+      go(4.05, 0.75); hold(2.4);     // slider full: land
+      go(6.38, 0.7); hold(2.8);      // all three cards in
+      go(10.45, 0.75); hold(1.4);    // message sent
+      go(11.45, 0.75); hold(3.4);    // pulled back: call to action
+      go(STORY, 0.8);
+      return k;
+    })()
+  : [[0, 0], [STORY, STORY]];
+const DUR = KNOTS[KNOTS.length - 1][1];
+function storyOf(r) {
+  for (let i = 0; i < KNOTS.length - 1; i++) {
+    const [s0, r0] = KNOTS[i], [s1, r1] = KNOTS[i + 1];
+    if (r >= r0 && r <= r1) return r1 === r0 ? s0 : s0 + (s1 - s0) * (r - r0) / (r1 - r0);
+  }
+  return STORY;
+}
+function realOf(s) {
+  if (s <= 0) return s;
+  for (let i = 0; i < KNOTS.length - 1; i++) {
+    const [s0, r0] = KNOTS[i], [s1, r1] = KNOTS[i + 1];
+    if (s >= s0 && s <= s1 && s1 > s0) return r0 + (s - s0) / (s1 - s0) * (r1 - r0);
+  }
+  return DUR + (s - STORY);
+}
 const $ = (id) => document.getElementById(id);
 
 // Content per reel (?v=2 picks the second one); the motion is the same.
@@ -229,7 +271,7 @@ for (let i = 1; i < PRESSES.length; i++) {
   add(p.t, q.t, A, B, 40 + Math.hypot(B.x - A.x, B.y - A.y) * 0.18);
 }
 add(T.leave, T.back1, keyPos("RET", T.ret), ICON(1), 520);
-add(T.back1, T.back2, ICON(1), slidePos(1), 300);
+add(T.back1 + 0.3, T.back2, ICON(1), slidePos(1), 300);
 add(T.rewind1 + 0.05, T.home, slidePos(0), KNOB_ON, 260);
 
 function arc(s, t) {
@@ -257,6 +299,7 @@ function ball(t) {
     return { x: lerp(from.x, SEND.x, k), y: lerp(from.y, SEND.y, k) - 60 * Math.sin(Math.PI * k) };
   }
   if (t < T.leave) return keyPos("RET", T.ret);
+  if (t < T.back1 + 0.3) return ICON(1);
   if (t < T.rewind0) return slidePos(1);
   if (t < T.rewind1 + 0.05) return slidePos(1 - io(prog(t, T.rewind0, T.rewind1)));
   if (t < T.off0) return KNOB_ON;
@@ -287,8 +330,8 @@ const CAM = [
   [6.2, 540, 1330, 1.16, 900],
   [7.15, 540, 1835, 1.0, 900],
   [10.35, 540, 1835, 1.0, 900],
-  [11.2, 540, 1320, 0.58, 780],
-  [12.15, 540, 1320, 0.58, 780],
+  [11.2, 540, 1320, LONG ? 0.5 : 0.58, LONG ? 900 : 780],
+  [12.15, 540, 1320, LONG ? 0.5 : 0.58, LONG ? 900 : 780],
   [13.6, 540, 560, 1.32, 900],
   [DUR, 540, 560, 1.32, 900],
 ];
@@ -321,10 +364,40 @@ CARDS.forEach((c) => {
   el.style.left = "160px"; el.style.top = c.y + "px"; el.style.width = "760px"; el.style.height = c.h + "px";
 });
 
+/* ---------- captions (long cut) ---------- */
+const CAPS = LONG ? [
+  [-1, 1.9, "Flexible <em>payment plan</em>", "On new launches and projects under construction"],
+  [1.9, 4.2, "<em>225,000+ m²</em> of land", "Across our projects in 6 Istanbul districts"],
+  [4.2, 6.45, "Pay <em>30%</em> now, the rest over <em>30 months</em>", "Backed by 12+ years in Istanbul real estate"],
+  [6.45, 10.55, "Tell us what you <em>need</em>", "We match you with the right project"],
+  [10.55, 12.4, "Book a free <em>video tour</em>", "WhatsApp +90 531 930 92 14"],
+  [13.2, 99, "Flexible <em>payment plan</em>", "On new launches and projects under construction"],
+] : [];
+const capEls = CAPS.map(([, , h, p]) => {
+  const el = document.createElement("div");
+  el.className = "cap";
+  el.innerHTML = `<h2>${h}</h2><p>${p}</p>`;
+  $("caps").appendChild(el);
+  return el;
+});
+function captions(r) {
+  let any = 0;
+  CAPS.forEach(([s0, s1], i) => {
+    const r0 = realOf(s0), r1 = realOf(s1);
+    const o = clamp((r - r0) / 0.35) * clamp((r1 - r) / 0.35);
+    capEls[i].style.opacity = o;
+    capEls[i].style.transform = `translateY(${(1 - o) * 22}px)`;
+    any = Math.max(any, o);
+  });
+  $("fade").style.opacity = LONG ? 1 : 0;
+}
+
 /* ---------- seek ---------- */
 const fmt = (n) => n.toLocaleString("en-US");
-function seek(t) {
-  t = ((t % DUR) + DUR) % DUR;
+function seek(r) {
+  r = ((r % DUR) + DUR) % DUR;
+  const t = storyOf(r);
+  captions(r);
 
   // camera
   const c = camera(t);
@@ -435,6 +508,7 @@ function seek(t) {
 }
 window.seek = seek;
 window.DUR = DUR;
+window.realOf = realOf;
 window.PRESSES = PRESSES;
 window.LANDINGS = LANDINGS;
 window.T = T;

@@ -34,12 +34,15 @@ if (mode === "stills") {
     await shot(i / FPS, path.join(frames, `f${String(i).padStart(4, "0")}.png`));
     if (i % 120 === 0) console.log(`frame ${i}/${total}`);
   }
-  const events = await page.evaluate(() => ({
-    landings: window.LANDINGS,
-    keys: window.PRESSES.map((p) => p.t),
-    click: window.T.click,
-    send: window.T.ret,
-  }));
+  const events = await page.evaluate(() => {
+    const r = window.realOf;
+    return {
+      landings: window.LANDINGS.map(r),
+      keys: window.PRESSES.map((p) => r(p.t)),
+      click: r(window.T.click),
+      send: r(window.T.ret),
+    };
+  });
   await browser.close();
   const ffmpeg = process.env.FFMPEG || "ffmpeg";
   // One short tone per contact: click, landings (soft), key taps (tick), send (two-note chime).
