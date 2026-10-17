@@ -622,5 +622,37 @@
     "headlineAr": "قرب مطار إسطنبول وطريقين سريعين",
     "headlineEn": "Near Istanbul Airport and two motorways",
     "photo": "/images/projects/cadde-ispartakule/terrace-view.jpg"
+  },
+  {
+    "date": "2026-10-17",
+    "id": "lotus-koru-2-homes",
+    "topic": "لوتس كورو 2 · الشقق والمساحات",
+    "headlineAr": "13 مبنى من 5 طوابق فقط في بيليكدوزو",
+    "headlineEn": "13 blocks of only 5 storeys in Beylikdüzü",
+    "photo": "/images/projects/lotus-koru-2/residential-blocks.jpg"
+  },
+  {
+    "date": "2026-10-17",
+    "id": "citizenship-costs",
+    "topic": "وثائق وتكاليف الجنسية",
+    "headlineAr": "3 تكاليف تُضاف إلى ثمن العقار في ملف الجنسية",
+    "headlineEn": "3 costs on top of the price in a citizenship file",
+    "photo": "/images/blog/taxes-and-tapu-fees.jpg"
+  },
+  {
+    "date": "2026-10-17",
+    "id": "pick-kitchen-or-living",
+    "topic": "لو خُيّرت: مطبخ واسع أم صالة واسعة؟ (شرائح)",
+    "headlineAr": "مطبخ واسع أم صالة واسعة؟",
+    "headlineEn": "A big kitchen or a big living room?",
+    "photo": "/images/projects/marmara-haven-villa/kitchen.jpg"
+  },
+  {
+    "date": "2026-10-17",
+    "id": "lotus-koru-2-homes-story",
+    "topic": "ستوري: لوتس كورو 2 · الشقق والمساحات",
+    "headlineAr": "مجمّع مكتمل ووحدات متاحة الآن",
+    "headlineEn": "Completed, with homes available now",
+    "photo": "/images/projects/lotus-koru-2/landscaped-grounds.jpg"
   }
 ]
