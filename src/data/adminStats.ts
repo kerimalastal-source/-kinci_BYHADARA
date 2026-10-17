@@ -70,3 +70,22 @@ export async function fetchBehaviorStats(days: number): Promise<BehaviorStats | 
   const stats = data as (BehaviorStats & { error?: string }) | null;
   return stats && !stats.error ? stats : null;
 }
+
+/** What admin_real_visitor_stats() returns (supabase/migrations/0020): per Istanbul day, counts only. */
+export interface RealVisitorStats {
+  days: number;
+  /** total = all visits; automated = left out as bots; contacted = pressed a contact button. */
+  daily: { day: string; total: number; automated: number; contacted: number }[];
+}
+
+/** Same period as fetchVisitStats, or null when 0020 hasn't run. */
+export async function fetchRealVisitorStats(days: number): Promise<RealVisitorStats | null> {
+  const { data, error } = await supabase.rpc("admin_real_visitor_stats", { p_days: days });
+  if (error) {
+    // Before migration 0020 the function doesn't exist; the panel just says so.
+    if (error.code !== "PGRST202") console.error(error);
+    return null;
+  }
+  const stats = data as (RealVisitorStats & { error?: string }) | null;
+  return stats && !stats.error ? stats : null;
+}

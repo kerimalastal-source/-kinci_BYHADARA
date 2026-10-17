@@ -4624,6 +4624,246 @@ body.map-open .back-to-top {
   display: none;
 }
 
+/* Real visitors per day (admin stats): a line over the days, all visits dashed behind it,
+   the visits that got in touch as gold numbers under the axis; numbers on hover / focus. */
+.real-chart {
+  --real-line: #13845c;
+  --real-total: #a7a092;
+  position: relative;
+}
+
+.real-chart__totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.6rem;
+  margin: 0 0 0.6rem;
+}
+
+.real-chart__figure {
+  margin: 0;
+  color: var(--color-ink-soft);
+  font-size: 0.92rem;
+}
+
+.real-chart__figure b {
+  color: var(--color-primary);
+  font-size: 1.35rem;
+}
+
+.real-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.2rem;
+  margin: 0 0 0.3rem;
+  padding: 0;
+  color: var(--color-ink-soft);
+  font-size: 0.82rem;
+  list-style: none;
+}
+
+.real-chart__legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.real-chart__swatch {
+  width: 22px;
+  border-top: 3px solid #13845c;
+}
+
+.real-chart__swatch--total {
+  border-top: 2px dashed #a7a092;
+}
+
+.real-chart__swatch--contact {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+}
+
+.real-chart__max {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+
+.real-chart__plot {
+  position: relative;
+  height: 200px;
+  border-top: 1px dashed var(--color-border);
+  border-bottom: 1px solid var(--color-muted);
+}
+
+.real-chart__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.real-chart__area {
+  fill: rgba(19, 132, 92, 0.12);
+}
+
+.real-chart__line,
+.real-chart__total {
+  fill: none;
+  stroke-linejoin: round;
+}
+
+.real-chart__line {
+  stroke: var(--real-line);
+  stroke-width: 2.5px;
+}
+
+.real-chart__total {
+  stroke: var(--real-total);
+  stroke-width: 1.5px;
+  stroke-dasharray: 5 4;
+}
+
+.real-chart__cols {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.real-chart__col {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  outline: none;
+}
+
+.real-chart__guide {
+  position: absolute;
+  inset: 0 auto 0 50%;
+  border-left: 1px solid var(--color-border);
+  opacity: 0;
+}
+
+.real-chart__dot {
+  position: absolute;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--color-surface);
+  border-radius: 50%;
+  background: var(--real-line);
+  opacity: 0;
+  transform: translate(-50%, 50%);
+}
+
+.real-chart__value {
+  position: absolute;
+  left: 50%;
+  margin-bottom: 0.45rem;
+  color: var(--color-ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.real-chart__col:last-child .real-chart__value {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.real-chart__col:hover .real-chart__dot,
+.real-chart__col:focus-visible .real-chart__dot,
+.real-chart__col.is-active .real-chart__dot,
+.real-chart__col:hover .real-chart__guide,
+.real-chart__col:focus-visible .real-chart__guide,
+.real-chart__col.is-active .real-chart__guide {
+  opacity: 1;
+}
+
+.real-chart__readout {
+  min-height: 2.9em;
+  margin: 0.2rem 0 0.4rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+  color: var(--color-ink);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.real-chart__row {
+  display: flex;
+}
+
+.real-chart__row > span {
+  flex: 1;
+  min-width: 0;
+}
+
+.real-chart__note {
+  margin: 0.9rem 0 0;
+}
+
+.real-chart__contacts > span {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.3rem;
+}
+
+.real-chart__contacts b {
+  display: grid;
+  place-items: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.2rem;
+  border: 2px solid var(--color-accent);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-accent-dark);
+  font-size: 0.72rem;
+}
+
+@media (max-width: 640px) {
+  .real-chart .day-chart__label-long {
+    display: none;
+  }
+
+  .real-chart .day-chart__label-short {
+    display: inline;
+  }
+
+  .real-chart__plot {
+    height: 170px;
+  }
+
+  .real-chart__label--minor {
+    visibility: hidden;
+  }
+}
+
+/* Narrow days (a phone, or 90 days): the contact counts lose their circles so they don't overlap. */
+@media (max-width: 640px) {
+  .real-chart__contacts b {
+    min-width: 0;
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: 0.72rem;
+  }
+}
+
+.real-chart--long .real-chart__contacts b {
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
 @media (max-width: 640px) {
   .day-chart:not(.day-chart--dense) .day-chart__label-long {
     display: none;

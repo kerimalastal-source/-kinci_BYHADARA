@@ -5,9 +5,11 @@ import { getProjectBySlug } from "../../data/projects";
 import {
   fetchBehaviorStats,
   fetchConsentStats,
+  fetchRealVisitorStats,
   fetchVisitStats,
   type BehaviorStats,
   type ConsentStats,
+  type RealVisitorStats,
   type VisitStats
 } from "../../data/adminStats";
 import { adminHero, adminNav } from "./nav";
@@ -17,7 +19,8 @@ import { adminHero, adminNav } from "./nav";
  * migration 0015; admin_visit_stats(), supabase/migrations/0008 and 0017): visitors per day,
  * where they came from (ads, search, direct), countries, the projects they looked at, and the
  * messages and tour bookings each source brought. "What visitors do" (admin_behavior_stats(),
- * 0016): devices, button presses, interest per project, and forms started vs sent.
+ * 0016): devices, button presses, interest per project, and forms started vs sent. "Real visitors
+ * per day" (admin_real_visitor_stats(), 0020): the same days without automated visits.
  */
 
 const PERIODS = [7, 30, 90] as const;
@@ -86,14 +89,24 @@ export function barList(rows: { label: string; value: number; note?: string }[],
     .join("")}</ul>`;
 }
 
+const dayLabel = (day: string, opts: Intl.DateTimeFormatOptions) =>
+  new Intl.DateTimeFormat(tag(), { ...opts, timeZone: "UTC" }).format(Date.parse(`${day}T12:00:00Z`));
+
+/** The label under day i of n: every 3rd day under a month, every 7th for longer periods; weekdays for a week. */
+function axisLabel(day: string, i: number, n: number): string {
+  if (n <= 10) {
+    return `<span class="day-chart__label-long">${escapeHtml(dayLabel(day, { weekday: "short" }))}</span><span class="day-chart__label-short">${escapeHtml(dayLabel(day, { day: "numeric" }))}</span>`;
+  }
+  const every = n > 31 ? 7 : 3;
+  // "3/10" built by hand: Intl's Arabic day/month carries direction marks that scramble it in the LTR axis.
+  const [, month, date] = day.split("-").map(Number);
+  return i % every === (n - 1) % every ? `${date}/${month}` : "";
+}
+
 /** Visitors per day as columns; each shows its numbers on hover or focus. */
 export function dailyChart(daily: VisitStats["daily"]): string {
   const max = Math.max(...daily.map((d) => d.visitors), 1);
   const dense = daily.length > 10;
-  // Every 3rd day under a month, every 7th for longer periods.
-  const every = daily.length > 31 ? 7 : 3;
-  const dayLabel = (day: string, opts: Intl.DateTimeFormatOptions) =>
-    new Intl.DateTimeFormat(tag(), { ...opts, timeZone: "UTC" }).format(Date.parse(`${day}T12:00:00Z`));
   const peak = daily.reduce((best, d, i) => (d.visitors > daily[best].visitors ? i : best), 0);
   const columns = daily
     .map((d, i) => {
@@ -106,11 +119,7 @@ export function dailyChart(daily: VisitStats["daily"]): string {
           ${showValue ? `<span class="day-chart__value">${num(d.visitors)}</span>` : ""}
           <span class="day-chart__bar${d.visitors ? "" : " day-chart__bar--zero"}" style="height:${(d.visitors / max) * 100}%"></span>
         </span>
-        <span class="day-chart__label">${
-          dense
-            ? escapeHtml(i % every === (daily.length - 1) % every ? dayLabel(d.day, { day: "numeric", month: "numeric" }) : "")
-            : `<span class="day-chart__label-long">${escapeHtml(dayLabel(d.day, { weekday: "short" }))}</span><span class="day-chart__label-short">${escapeHtml(dayLabel(d.day, { day: "numeric" }))}</span>`
-        }</span>
+        <span class="day-chart__label">${axisLabel(d.day, i, daily.length)}</span>
       </div>`;
     })
     .join("");
@@ -118,6 +127,87 @@ export function dailyChart(daily: VisitStats["daily"]): string {
     <span class="day-chart__max" aria-hidden="true">${num(max)}</span>
     <div class="day-chart__cols">${columns}</div>
   </div>`;
+}
+
+/**
+ * Real visitors per day as a line, all visits before filtering as a dashed line behind it,
+ * and the visits that got in touch as numbers under the axis. The line above the chart reads
+ * out the day under the pointer or focus (the busiest day at first); it stays inside the
+ * panel on a phone, where a tooltip over a narrow column would not.
+ */
+export function realChart(daily: RealVisitorStats["daily"]): string {
+  const rows = daily.map((d) => ({ ...d, real: Math.max(0, d.total - d.automated) }));
+  const n = rows.length;
+  const max = Math.max(...rows.map((d) => d.total), 1);
+  const x = (i: number) => (((i + 0.5) / n) * 1000).toFixed(1);
+  const y = (v: number) => (200 - (v / max) * 200).toFixed(1);
+  const line = (key: "real" | "total") => rows.map((d, i) => `${x(i)},${y(d[key])}`).join(" ");
+  const peak = rows.reduce((best, d, i) => (d.real > rows[best].real ? i : best), 0);
+  const height = (v: number) => `${((v / max) * 100).toFixed(2)}%`;
+  const tips = rows.map((d) => {
+    const full = dayLabel(d.day, { weekday: "long", day: "numeric", month: "long" });
+    return `${full}: ${t("adminStats.real.tip", { real: num(d.real), automated: num(d.automated), contacted: num(d.contacted) })}`;
+  });
+  const cols = rows
+    .map((d, i) => {
+      const tip = escapeHtml(tips[i]);
+      const showValue = d.real > 0 && (i === peak || i === n - 1);
+      return `<div class="real-chart__col${i === peak ? " is-active" : ""}" tabindex="0" role="img" aria-label="${tip}" data-tip="${tip}">
+        <span class="real-chart__guide" aria-hidden="true"></span>
+        <span class="real-chart__dot" style="bottom:${height(d.real)}" aria-hidden="true"></span>
+        ${showValue ? `<span class="real-chart__value" style="bottom:${height(d.real)}" aria-hidden="true">${num(d.real)}</span>` : ""}
+      </div>`;
+    })
+    .join("");
+  // Every other date label hides on a phone, where they would run into each other.
+  const every = n > 31 ? 7 : 3;
+  const minor = (i: number) => n > 10 && ((n - 1 - i) / every) % 2 === 1;
+  const labels = rows
+    .map((d, i) => `<span class="day-chart__label${minor(i) ? " real-chart__label--minor" : ""}">${axisLabel(d.day, i, n)}</span>`)
+    .join("");
+  const contacts = rows.map((d) => `<span>${d.contacted ? `<b>${num(d.contacted)}</b>` : ""}</span>`).join("");
+  return `<div class="real-chart${n > 31 ? " real-chart--long" : ""}" dir="ltr">
+    <p class="real-chart__readout" dir="auto" aria-hidden="true">${escapeHtml(tips[peak])}</p>
+    <span class="real-chart__max" aria-hidden="true">${num(max)}</span>
+    <div class="real-chart__plot">
+      <svg class="real-chart__svg" viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <polygon class="real-chart__area" points="${x(0)},200 ${line("real")} ${x(n - 1)},200"/>
+        <polyline class="real-chart__total" points="${line("total")}" vector-effect="non-scaling-stroke"/>
+        <polyline class="real-chart__line" points="${line("real")}" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <div class="real-chart__cols">${cols}</div>
+    </div>
+    <div class="real-chart__row">${labels}</div>
+    ${rows.some((d) => d.contacted) ? `<div class="real-chart__row real-chart__contacts" aria-hidden="true">${contacts}</div>` : ""}
+  </div>`;
+}
+
+/** The real-visitors panel: the period's totals, the legend and the chart. */
+function realPanel(r: RealVisitorStats | null): string {
+  const title = t("adminStats.real.title");
+  if (!r) return panel(title, `<p class="admin-stats__empty">${t("adminStats.real.unavailable")}</p>`, true);
+  const total = r.daily.reduce((s, d) => s + d.total, 0);
+  const automated = r.daily.reduce((s, d) => s + d.automated, 0);
+  const contacted = r.daily.reduce((s, d) => s + d.contacted, 0);
+  const early = r.daily.some((d) => d.total > 0 && d.day < "2026-10-02") ? `<p class="admin-panel__hint real-chart__note">${t("adminStats.real.early")}</p>` : "";
+  const figure = (value: string, text: string) => `<p class="real-chart__figure"><b dir="ltr">${value}</b> ${text}</p>`;
+  return panel(
+    title,
+    `<p class="admin-panel__hint">${t("adminStats.real.hint")}</p>
+    <div class="real-chart__totals">
+      ${figure(num(total - automated), t("adminStats.real.real"))}
+      ${figure(num(automated), `${t("adminStats.real.automated")} <span dir="ltr">(${pct(automated, total)})</span>`)}
+      ${figure(num(contacted), t("adminStats.real.contacted"))}
+    </div>
+    <ul class="real-chart__legend">
+      <li><i class="real-chart__swatch"></i>${t("adminStats.real.legendReal")}</li>
+      <li><i class="real-chart__swatch real-chart__swatch--total"></i>${t("adminStats.real.legendAll")}</li>
+      <li><i class="real-chart__swatch real-chart__swatch--contact"></i>${t("adminStats.real.legendContact")}</li>
+    </ul>
+    ${realChart(r.daily)}
+    ${early}`,
+    true
+  );
 }
 
 function tile(label: string, value: string, note = ""): string {
@@ -216,7 +306,7 @@ function behaviorSection(b: BehaviorStats | null): string {
     </div>`;
 }
 
-function renderStats(s: VisitStats, consent: ConsentStats | null, behavior: BehaviorStats | null): string {
+function renderStats(s: VisitStats, consent: ConsentStats | null, behavior: BehaviorStats | null, real: RealVisitorStats | null): string {
   const leads = s.leads.inquiries + s.leads.bookings;
   const leadRows = s.lead_sources.length
     ? `<table class="admin-table">
@@ -239,6 +329,7 @@ function renderStats(s: VisitStats, consent: ConsentStats | null, behavior: Beha
       ${tile(t("adminStats.kpi.leads"), num(leads), t("adminStats.kpi.leadsNote", { inquiries: num(s.leads.inquiries), bookings: num(s.leads.bookings) }))}
       ${tile(t("adminStats.kpi.conversion"), pct(leads, s.totals.visitors), t("adminStats.kpi.conversionNote"))}
     </div>
+    ${realPanel(real)}
     ${panel(t("adminStats.dailyTitle"), dailyChart(s.daily), true)}
     <div class="admin-panels">
       ${panel(t("adminStats.sourcesTitle"), barList(s.sources.map((r) => ({ label: sourceLabel(r.source), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
@@ -276,10 +367,27 @@ export function renderAdminStats(main: HTMLElement): void {
     periodsEl.innerHTML = PERIODS.map(
       (p) => `<button type="button" class="admin-stats__period" data-period="${p}" aria-pressed="${p === period}">${t("adminStats.lastDays", { count: p })}</button>`
     ).join("");
-    const [stats, consent, behavior] = await Promise.all([fetchVisitStats(period), fetchConsentStats(period), fetchBehaviorStats(period)]);
+    const [stats, consent, behavior, real] = await Promise.all([
+      fetchVisitStats(period),
+      fetchConsentStats(period),
+      fetchBehaviorStats(period),
+      fetchRealVisitorStats(period)
+    ]);
     if (main.dataset.requestId !== requestId) return;
-    bodyEl.innerHTML = stats ? renderStats(stats, consent, behavior) : `<p class="admin-bookings__empty">${t("adminStats.unavailable")}</p>`;
+    bodyEl.innerHTML = stats ? renderStats(stats, consent, behavior, real) : `<p class="admin-bookings__empty">${t("adminStats.unavailable")}</p>`;
   };
+
+  // The real-visitors chart reads out the day under the pointer or focus.
+  const showDay = (e: Event) => {
+    const col = (e.target as Element).closest<HTMLElement>(".real-chart__col");
+    const chart = col?.closest(".real-chart");
+    if (!col || !chart) return;
+    chart.querySelector(".real-chart__col.is-active")?.classList.remove("is-active");
+    col.classList.add("is-active");
+    chart.querySelector(".real-chart__readout")!.textContent = col.dataset.tip ?? "";
+  };
+  bodyEl.addEventListener("pointerover", showDay);
+  bodyEl.addEventListener("focusin", showDay);
 
   periodsEl.addEventListener("click", (e) => {
     const button = (e.target as Element).closest<HTMLButtonElement>("[data-period]");
