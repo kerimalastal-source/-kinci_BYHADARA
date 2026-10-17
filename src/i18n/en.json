@@ -3106,9 +3106,9 @@
           "The advertising source of your visit (kept only until you close the browser tab).",
           "A random session number, sent only with our anonymous visit statistics (see section 3) and deleted when you close the browser tab.",
           "Your sign-in session, if you use a resale portal account.",
-          "Your cookie choice (accept or decline), so that we do not ask you again on every visit."
+          "Your cookie choice (accept, decline, or your choice for each type), so that we do not ask you again on every visit."
         ],
-        "after": "We use Meta Pixel (Facebook and Instagram), Google Analytics and Google Ads to count visits, measure which ads bring enquiries and show our ads on Facebook, Instagram and Google to people who have visited the Website, but only if you choose “Accept” in the cookie notice. These tools may set cookies and collect your IP address and browsing data. Once you accept, our server also sends the same Meta events directly to Meta (the Conversions API) so they are counted reliably; when you send a form or book a tour, your email address, phone number and name go with them only in encrypted (hashed) form, so that Meta can match the event to your Facebook or Instagram account. If you choose “Decline”, they are not loaded at all. You can change your choice at any time through “Cookie settings” at the bottom of every page, and you can also block or delete cookies in your browser settings. The Website keeps working either way."
+        "after": "We use Meta Pixel (Facebook and Instagram), Google Analytics and Google Ads to count visits, measure which ads bring enquiries and show our ads on Facebook, Instagram and Google to people who have visited the Website, but only if you choose “Accept” in the cookie notice. These tools may set cookies and collect your IP address and browsing data. Once you accept, our server also sends the same Meta events directly to Meta (the Conversions API) so they are counted reliably; when you send a form or book a tour, your email address, phone number and name go with them only in encrypted (hashed) form, so that Meta can match the event to your Facebook or Instagram account. If you choose “Decline”, they are not loaded at all. You can change your choice at any time through “Cookie settings” at the bottom of every page, and you can also block or delete cookies in your browser settings. The Website keeps working either way. Through “Customise” in the cookie notice you can also allow them separately: “Analytics” loads only Google Analytics, and “Advertising” loads only the Meta Pixel, the Conversions API and Google Ads."
       },
       {
         "title": "Who we share your data with",
@@ -3479,7 +3479,19 @@
     "text": "We use cookies from Meta and Google to measure our ads and show you more relevant ones. They load only if you accept, and the site works fully either way.",
     "accept": "Accept",
     "decline": "Decline",
-    "more": "Privacy Policy"
+    "more": "Privacy Policy",
+    "customize": "Customise",
+    "settingsTitle": "Cookie settings",
+    "settingsIntro": "Choose which cookies we may use. You can change this at any time through “Cookie settings” at the bottom of every page.",
+    "essentialTitle": "Essential",
+    "essentialText": "Keep the site working: your language, saved projects and this choice. They stay in your browser.",
+    "alwaysOn": "Always on",
+    "analyticsTitle": "Analytics",
+    "analyticsText": "Google Analytics, to count visits and see which pages are useful.",
+    "adsTitle": "Advertising",
+    "adsText": "Meta (Facebook and Instagram) and Google Ads, to measure our ads and show you more relevant ones.",
+    "save": "Save my choices",
+    "declineAll": "Decline all"
   },
   "adminCrm": {
     "add": {

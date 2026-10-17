@@ -55,8 +55,18 @@ function currentRoute(): { locale: Locale; route: Route } {
 }
 
 /** Moves legacy "#/projects" links to "/projects", and sends returning visitors to their language. */
+/** Invisible direction and zero-width marks that apps sometimes glue to a pasted or linkified URL. */
+const INVISIBLE_MARKS = /%E2%80%8[B-F]|%E2%80%A[A-E]|%E2%81%A[6-9]|%EF%BB%BF/gi;
+
 function normalizeInitialUrl(): void {
-  const { hash, pathname, search } = window.location;
+  const { hash, search } = window.location;
+  let { pathname } = window.location;
+  const cleaned = pathname.replace(INVISIBLE_MARKS, "");
+  if (cleaned !== pathname) {
+    // e.g. Instagram linkified "…/citizenship-investment-laws⁩" with the U+2069 inside the link.
+    history.replaceState(null, "", cleaned + search + hash);
+    pathname = cleaned;
+  }
   const { prefixed, path } = splitLocale(pathname);
   if (hash.startsWith("#/")) {
     history.replaceState(null, "", localizePath(hash.slice(1), getPreferredLocale()) + search);
