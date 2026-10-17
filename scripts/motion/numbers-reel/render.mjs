@@ -14,7 +14,7 @@ fs.mkdirSync(outDir, { recursive: true });
 
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || "/opt/pw-browsers/chromium" });
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
-await page.goto("file://" + path.join(here, "reel.html"));
+await page.goto("file://" + path.join(here, "reel.html") + (process.env.REEL ? "?v=" + process.env.REEL : ""));
 await page.evaluate(() => document.fonts.ready);
 await page.waitForFunction(() => [...document.images].every((i) => i.complete));
 

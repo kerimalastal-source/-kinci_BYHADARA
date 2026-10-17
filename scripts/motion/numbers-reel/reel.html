@@ -28,7 +28,7 @@ body{font-family:Inter,sans-serif;color:var(--ink);-webkit-font-smoothing:antial
 #rail{background:var(--control)}#fill{background:var(--gold)}
 #knob{position:absolute;width:56px;height:56px;border-radius:50%;background:var(--control);border:3px solid var(--gold)}
 #bubble{position:absolute;padding:10px 22px;border-radius:16px;background:var(--gold);color:#0f1a14;font-weight:700;font-size:34px;white-space:nowrap;transform:translate(-50%,-100%)}
-#bubble:after{content:"";position:absolute;left:50%;bottom:-9px;margin-left:-10px;border:10px solid transparent;border-bottom:0;border-top-color:var(--gold)}
+#bubble:after{content:"";position:absolute;left:calc(50% + var(--arrow,0px));bottom:-9px;margin-left:-10px;border:10px solid transparent;border-bottom:0;border-top-color:var(--gold)}
 /* cards */
 .card .ic{position:absolute;left:36px;top:30px;width:72px;height:72px;border-radius:20px;background:var(--control);display:grid;place-items:center}
 .card .ic svg{width:40px;height:40px}
@@ -103,9 +103,48 @@ body{font-family:Inter,sans-serif;color:var(--ink);-webkit-font-smoothing:antial
 <script>
 // Every frame is computed from t alone (seek); nothing carries over between frames.
 const DUR = 14;
-const TEXT = "Book a video tour";
-const MAX = 2800;
 const $ = (id) => document.getElementById(id);
+
+// Content per reel (?v=2 picks the second one); the motion is the same.
+const ICONS = {
+  building: '<path d="M4 21V7l6-3v17M10 21V9l10 3v9M2 21h20M7 10v.01M7 14v.01M14 14v.01M17 14v.01M14 18v.01M17 18v.01"/>',
+  grid: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  home: '<path d="M3 11l9-7 9 7v10H3z"/><path d="M9 21v-6h6v6"/>',
+  calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3M8 17h6"/>',
+  award: '<circle cx="12" cy="9" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/>',
+};
+const CONTENT = {
+  1: {
+    row: ["HADARA in numbers", "Real Estate Development & Marketing Partner"],
+    slider: ["Residential units", "Istanbul"], max: 2800, done: "2,800+", unit: "",
+    cards: [["building", "Projects", "13 projects across Istanbul"],
+            ["grid", "Units", "420+ offices · 110+ shops"],
+            ["home", "HADARA", "Ready to find your home?"]],
+    text: "Book a video tour",
+  },
+  2: {
+    row: ["Payment plan", "New launches & projects under construction"],
+    slider: ["Land across our projects", "6 districts"], max: 225000, done: "225,000+ m²", unit: " m²",
+    cards: [["calendar", "Pay 30% now", "The rest over 30 months"],
+            ["award", "12+ years", "In Istanbul real estate"],
+            ["home", "HADARA", "Where should we start?"]],
+    text: "Show me projects",
+  },
+};
+const C = CONTENT[new URLSearchParams(location.search).get("v")] || CONTENT[1];
+const TEXT = C.text;
+const MAX = C.max;
+$("row").querySelector(".t").textContent = C.row[0];
+$("row").querySelector(".s").textContent = C.row[1];
+$("slider").querySelector(".lab").textContent = C.slider[0];
+$("slider").querySelector(".lab2").textContent = C.slider[1];
+["c1", "c2", "c3"].forEach((id, i) => {
+  const [icon, ti, bo] = C.cards[i], el = $(id);
+  el.querySelector("svg").innerHTML = ICONS[icon];
+  el.querySelector(".ti").textContent = ti;
+  el.querySelector(".bo").textContent = bo;
+});
+$("msg").textContent = TEXT;
 
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const lerp = (a, b, k) => a + (b - a) * k;
@@ -306,8 +345,11 @@ function seek(t) {
   Object.assign($("knob").style, { left: kx - 28 + "px", top: RAIL.y - 28 + "px" });
   const val = Math.round(k * MAX);
   const bub = $("bubble");
-  bub.textContent = k >= 0.999 ? "2,800+" : fmt(val);
-  bub.style.left = kx + "px";
+  bub.textContent = k >= 0.999 ? C.done : fmt(val) + C.unit;
+  // keep the bubble inside the panel; its arrow stays on the knob
+  const bw = bub.offsetWidth, bx = clamp(kx, 172 + bw / 2, 908 - bw / 2);
+  bub.style.left = bx + "px";
+  bub.style.setProperty("--arrow", kx - bx + "px");
   bub.style.top = RAIL.y - 52 + "px";
   bub.style.opacity = clamp(k * 25);
 
