@@ -1290,6 +1290,34 @@
         }
       ]
     },
+    "casablu-vadi": {
+      "name": "CasaBlu Vadi",
+      "tagline": "Where the sea meets the valley — 71 select homes beside Beylikdüzü Yaşam Vadisi.",
+      "shortDescription": "CasaBlu Vadi is a boutique project of 71 homes from 2+1 to 6+1 in Beylikdüzü, where the valley meets the sea, with sea-view terraces, garden floors and a full set of residents' facilities.",
+      "longDescription": "CasaBlu Vadi stands in Beylikdüzü at the point where Yaşam Vadisi, the district's green valley park, meets the sea. Designed with modern low-rise architecture across seven blocks, it brings together only 71 homes, from 2+1 to 6+1, so that every family enjoys a calm and private setting. Homes open onto panoramic views of the sea and the valley, with sea-view terraces on the upper floors and garden floors at ground level, while the largest 6+1 residences spread over two levels with a roof floor and generous terraces. The project covers 17,263 m² of total construction area, set within landscaped gardens with children's play areas, walking paths, a cycling track running through the site and quiet seating corners. Residents' facilities include an indoor swimming pool, a modern fitness centre, a Turkish bath, sauna and spa, an entrance lobby, a spacious car park and high-level security throughout. The walking trails of Yaşam Vadisi are just a few steps away, and West Istanbul Marina, with its cafés along the water, is a short drive. CasaBlu Vadi is developed by Mutlu İnşaat, a company founded in 1974 that builds its projects with its own capital. The project is under construction, with delivery scheduled for November 2027, a payment plan of 30% down and the balance over 30 months, and it is eligible for Turkish citizenship.",
+      "highlights": [
+        "A boutique project of only 71 homes in 7 low-rise blocks",
+        "Homes from 2+1 to 6+1, with sea-view terraces and garden floors",
+        "Panoramic views of the sea and of Yaşam Vadisi",
+        "Indoor swimming pool, fitness centre, Turkish bath, sauna and spa",
+        "Landscaped gardens, children's play areas, walking paths and a cycling track",
+        "A few steps from Yaşam Vadisi, a short drive from West Istanbul Marina",
+        "Developed by Mutlu İnşaat, building since 1974",
+        "Payment plan: 30% down and the balance over 30 months",
+        "Eligible for Turkish citizenship",
+        "Under construction, delivery scheduled for November 2027"
+      ],
+      "nearby": [
+        {
+          "place": "Beylikdüzü Yaşam Vadisi",
+          "time": "Walking distance"
+        },
+        {
+          "place": "West Istanbul Marina",
+          "time": "A few minutes by car"
+        }
+      ]
+    },
     "buyukyali": {
       "name": "Büyükyalı",
       "tagline": "Istanbul's new sea district on the Kazlıçeşme coast, with historic lofts and a FENDI Casa block.",
