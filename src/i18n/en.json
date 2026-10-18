@@ -3334,6 +3334,72 @@
     }
   },
   "adminStats": {
+    "top": {
+      "year": "12 months",
+      "modeLabel": "Which visits",
+      "modeReal": "Real visitors only",
+      "modeAll": "All visits",
+      "export": "Export CSV",
+      "excludedReal": "Automated visits left out: {automated} · Test requests left out: {tests}",
+      "excludedAll": "Numbers include automated visits ({automated}) · Test requests left out: {tests}",
+      "allNote": "“All visits” changes the cards and the sources table only; the chart and the folded sections show real visitors.",
+      "recordedFrom": "Visit recording started on {date}, so the numbers start from that date.",
+      "unavailable": "These numbers appear once update 0024 has been run.",
+      "cards": {
+        "visitorsReal": "Real visitors",
+        "visitorsAll": "All visits",
+        "leads": "Requests and inquiries",
+        "leadsNote": "Messages: {inquiries} · Tour bookings: {bookings}",
+        "conversion": "Visit-to-request rate",
+        "clicks": "WhatsApp and call presses"
+      },
+      "delta": {
+        "vsPrev": "vs. previous period",
+        "same": "No change from the previous period",
+        "up": "up",
+        "down": "down",
+        "requests": "requests",
+        "points": "percentage points",
+        "noCompare": "No comparison yet: recording started on {date}"
+      },
+      "waiting": {
+        "title": "Awaiting your reply",
+        "hint": "Every message nobody has contacted yet, from any date, oldest first.",
+        "late": "Over 24 hours",
+        "open": "Open",
+        "done": "Contacted",
+        "saving": "Saving…",
+        "error": "Could not save, please try again.",
+        "empty": "No messages are waiting for a reply.",
+        "more": "Show all ({count})",
+        "less": "Show less",
+        "inBox": "See all in the inquiries box ({count})",
+        "fallback": "Until update 0024 is run, test requests are listed here too.",
+        "unavailable": "The messages could not be loaded."
+      },
+      "sources": {
+        "title": "Sources and campaigns",
+        "hint": "Visits by the source of each visit’s first page. Requests carry only the ad name, so a request that came without an ad is in the “No ad” row.",
+        "source": "Source",
+        "campaign": "Campaign",
+        "visits": "Visits",
+        "leads": "Requests",
+        "clicks": "WhatsApp / call",
+        "rate": "Conversion",
+        "more": "Show all sources ({count})",
+        "less": "Show less",
+        "details": "More details: landing pages and the previous lists",
+        "empty": "No visits in this period."
+      },
+      "more": "More statistics",
+      "csv": {
+        "period": "Period",
+        "mode": "Which visits",
+        "metric": "Metric",
+        "current": "This period",
+        "previous": "Previous period"
+      }
+    },
     "limitedDays": "Only the last {count} days are shown until database update 0017 is run.",
     "consentRecent": "Last 30 days only (choices are kept for 30 days).",
     "behavior": {

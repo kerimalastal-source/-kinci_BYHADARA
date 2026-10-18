@@ -6,14 +6,19 @@ import {
   fetchBehaviorStats,
   fetchConsentStats,
   fetchRealVisitorStats,
+  fetchStatsOverview,
   fetchVisitStats,
+  fetchWaitingInquiries,
   type BehaviorStats,
   type ConsentStats,
   type RealVisitorStats,
-  type VisitStats
+  type StatsOverview,
+  type VisitStats,
+  type WaitingInquiry
 } from "../../data/adminStats";
 import { adminHero, adminNav } from "./nav";
 import { initVisitorsChart, visitorsChart } from "./visitorsChart";
+import { downloadCsv, excludedLine, initSourcesPanel, initWaitingPanel, sourcesPanel, statsCards, waitingPanel, type VisitMode } from "./statsTop";
 
 /**
  * Visitor statistics (/admin/stats), from the anonymous visit records (kept a year since
@@ -22,11 +27,14 @@ import { initVisitorsChart, visitorsChart } from "./visitorsChart";
  * messages and tour bookings each source brought. "What visitors do" (admin_behavior_stats(),
  * 0016): devices, button presses, interest per project, and forms started vs sent. "Real visitors
  * per day" (admin_real_visitor_stats(), 0020/0021) leads the page; since 0021-0023 every number on
- * it leaves automated visits out.
+ * it leaves automated visits out. Since 0024 (owner's redesign 2026-10-18, phase 1) the page
+ * opens with four cards against the previous period, the inquiries awaiting a reply and the
+ * source x campaign table (statsTop.ts); the older lists are folded below.
  */
 
-const PERIODS = [7, 30, 90] as const;
-let period: (typeof PERIODS)[number] = 7;
+const PERIODS = [7, 30, 90, 365] as const;
+let period: (typeof PERIODS)[number] = 30;
+let mode: VisitMode = "real";
 
 const tag = () => intlTag();
 const num = (n: number) => new Intl.NumberFormat(tag()).format(n);
@@ -267,42 +275,73 @@ function behaviorSection(b: BehaviorStats | null): string {
     </div>`;
 }
 
-function renderStats(s: VisitStats, consent: ConsentStats | null, behavior: BehaviorStats | null, real: RealVisitorStats | null): string {
-  const leads = s.leads.inquiries + s.leads.bookings;
+/** The folded details under the sources table: the former source, campaign, request and landing lists. */
+function sourceDetails(s: VisitStats | null): string {
+  if (!s) return `<p class="admin-stats__empty">${t("adminStats.unavailable")}</p>`;
   const leadRows = s.lead_sources.length
-    ? `<table class="admin-table">
+    ? `<div class="admin-table-fit"><table class="admin-table">
         <thead><tr><th>${t("adminStats.source")}</th><th>${t("adminStats.inquiries")}</th><th>${t("adminStats.bookings")}</th></tr></thead>
         <tbody>${s.lead_sources
           .map((r) => `<tr><td>${sourceLabel(r.source)}</td><td dir="ltr">${num(r.inquiries)}</td><td dir="ltr">${num(r.bookings)}</td></tr>`)
           .join("")}</tbody>
-      </table>`
+      </table></div>`
     : `<p class="admin-stats__empty">${t("adminStats.noLeads")}</p>`;
+  return `<div class="admin-panels">
+    ${panel(t("adminStats.sourcesTitle"), barList(s.sources.map((r) => ({ label: sourceLabel(r.source), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
+    ${panel(t("adminStats.leadsTitle"), `<p class="admin-panel__hint">${t("adminStats.leadsHint")}</p>${leadRows}`)}
+    ${panel(t("adminStats.campaignsTitle"), barList(s.campaigns.map((r) => ({ label: `${sourceLabel(r.source)} · <span dir="ltr">${escapeHtml(r.campaign)}</span>`, value: r.visitors })), t("adminStats.noCampaigns")))}
+    ${panel(t("adminStats.landingsTitle"), barList(s.landings.map((r) => ({ label: pageLabel(r.page), value: r.visitors })), t("adminStats.empty")))}
+  </div>`;
+}
 
+/** Everything else, folded at the bottom: pages per visit, projects, countries, languages, cookies, behaviour. */
+function moreSection(s: VisitStats | null, consent: ConsentStats | null, behavior: BehaviorStats | null): string {
+  const visits = s
+    ? `<div class="admin-kpis">
+        ${tile(t("adminStats.kpi.pages"), num(s.totals.pages), t("adminStats.kpi.perVisit", { count: s.totals.visitors ? (s.totals.pages / s.totals.visitors).toFixed(1) : "0" }))}
+        ${tile(t("adminStats.kpi.engaged"), pct(s.totals.multi_page, s.totals.visitors), t("adminStats.kpi.engagedNote"))}
+      </div>
+      <div class="admin-panels">
+        ${panel(t("adminStats.projectsTitle"), barList(s.projects.filter((p) => getProjectBySlug(p.slug)).map((p) => ({ label: escapeHtml(getProjectContent(p.slug).name), value: p.visitors })), t("adminStats.empty")))}
+        ${panel(t("adminStats.countriesTitle"), barList(s.countries.map((r) => ({ label: countryLabel(r.country), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
+        ${panel(t("adminStats.localesTitle"), barList(s.locales.map((r) => ({ label: t(`lang.${r.locale}`), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
+        ${consentPanel(consent)}
+      </div>`
+    : `<p class="admin-stats__empty">${t("adminStats.unavailable")}</p>`;
+  return `<details class="stats-fold"><summary>${t("adminStats.top.more")}</summary><div class="stats-fold__body">${visits}${behaviorSection(behavior)}</div></details>`;
+}
+
+interface Loaded {
+  stats: VisitStats | null;
+  consent: ConsentStats | null;
+  behavior: BehaviorStats | null;
+  real: RealVisitorStats | null;
+  overview: StatsOverview | null;
+  waiting: WaitingInquiry[] | null;
+  waitingTotal: number;
+}
+
+/** The page in the owner's order: cards, awaiting reply, the chart, sources; the rest folded below. */
+function renderStats(d: Loaded): string {
   // Before migration 0017 the visit statistics stop at 30 days.
-  const limited = s.days < period ? `<p class="admin-stats__limited">${t("adminStats.limitedDays", { count: num(s.days) })}</p>` : "";
-
+  const limited = d.stats && d.stats.days < period ? `<p class="admin-stats__limited">${t("adminStats.limitedDays", { count: num(d.stats.days) })}</p>` : "";
   return `
     ${limited}
-    <div class="admin-kpis">
-      ${tile(t("adminStats.kpi.visitors"), num(s.totals.visitors))}
-      ${tile(t("adminStats.kpi.pages"), num(s.totals.pages), t("adminStats.kpi.perVisit", { count: s.totals.visitors ? (s.totals.pages / s.totals.visitors).toFixed(1) : "0" }))}
-      ${tile(t("adminStats.kpi.engaged"), pct(s.totals.multi_page, s.totals.visitors), t("adminStats.kpi.engagedNote"))}
-      ${tile(t("adminStats.kpi.leads"), num(leads), t("adminStats.kpi.leadsNote", { inquiries: num(s.leads.inquiries), bookings: num(s.leads.bookings) }))}
-      ${tile(t("adminStats.kpi.conversion"), pct(leads, s.totals.visitors), t("adminStats.kpi.conversionNote"))}
-    </div>
-    ${visitorsPanel(real)}
-    <div class="admin-panels">
-      ${panel(t("adminStats.sourcesTitle"), barList(s.sources.map((r) => ({ label: sourceLabel(r.source), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
-      ${panel(t("adminStats.leadsTitle"), `<p class="admin-panel__hint">${t("adminStats.leadsHint")}</p>${leadRows}`)}
-      ${panel(t("adminStats.projectsTitle"), barList(s.projects.filter((p) => getProjectBySlug(p.slug)).map((p) => ({ label: escapeHtml(getProjectContent(p.slug).name), value: p.visitors })), t("adminStats.empty")))}
-      ${panel(t("adminStats.countriesTitle"), barList(s.countries.map((r) => ({ label: countryLabel(r.country), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
-      ${panel(t("adminStats.campaignsTitle"), barList(s.campaigns.map((r) => ({ label: `${sourceLabel(r.source)} · <span dir="ltr">${escapeHtml(r.campaign)}</span>`, value: r.visitors })), t("adminStats.noCampaigns")))}
-      ${panel(t("adminStats.landingsTitle"), barList(s.landings.map((r) => ({ label: pageLabel(r.page), value: r.visitors })), t("adminStats.empty")))}
-      ${panel(t("adminStats.localesTitle"), barList(s.locales.map((r) => ({ label: t(`lang.${r.locale}`), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
-      ${consentPanel(consent)}
-    </div>
-    ${behaviorSection(behavior)}
+    <p class="stats-excluded">${excludedLine(d.overview, mode)}</p>
+    ${mode === "all" ? `<p class="stats-excluded">${t("adminStats.top.allNote")}</p>` : ""}
+    ${statsCards(d.overview, mode)}
+    ${waitingPanel(d.waiting, d.waitingTotal, !d.overview)}
+    ${visitorsPanel(d.real)}
+    ${sourcesPanel(d.overview, mode, sourceLabel, sourceDetails(d.stats))}
+    ${moreSection(d.stats, d.consent, d.behavior)}
     <p class="admin-bookings__note">${t("adminStats.note")}</p>`;
+}
+
+/** A source's name as plain text (for the CSV file). */
+function sourceText(source: string): string {
+  const el = document.createElement("span");
+  el.innerHTML = sourceLabel(source);
+  return el.textContent ?? source;
 }
 
 export function renderAdminStats(main: HTMLElement): void {
@@ -313,7 +352,11 @@ export function renderAdminStats(main: HTMLElement): void {
     <section class="section admin-stats">
       <div class="container">
         ${adminNav("stats")}
-        <div class="admin-stats__periods" role="group" aria-label="${t("adminStats.period")}"></div>
+        <div class="stats-toolbar">
+          <div class="admin-stats__periods" role="group" aria-label="${t("adminStats.period")}"></div>
+          <div class="admin-stats__periods" role="group" aria-label="${t("adminStats.top.modeLabel")}" data-modes></div>
+          <button type="button" class="btn btn--outline btn--small stats-export" data-export disabled>${t("adminStats.top.export")}</button>
+        </div>
         <div class="admin-stats__body" aria-live="polite"><p>${t("common.loading")}</p></div>
       </div>
     </section>`;
@@ -321,21 +364,46 @@ export function renderAdminStats(main: HTMLElement): void {
   const requestId = crypto.randomUUID();
   main.dataset.requestId = requestId;
   const periodsEl = main.querySelector<HTMLElement>(".admin-stats__periods")!;
+  const modesEl = main.querySelector<HTMLElement>("[data-modes]")!;
+  const exportEl = main.querySelector<HTMLButtonElement>("[data-export]")!;
   const bodyEl = main.querySelector<HTMLElement>(".admin-stats__body")!;
+  let loaded: Loaded | null = null;
+
+  const drawButtons = () => {
+    periodsEl.innerHTML = PERIODS.map(
+      (p) =>
+        `<button type="button" class="admin-stats__period" data-period="${p}" aria-pressed="${p === period}">${p === 365 ? t("adminStats.top.year") : t("adminStats.lastDays", { count: p })}</button>`
+    ).join("");
+    modesEl.innerHTML = (["real", "all"] as const)
+      .map((m) => `<button type="button" class="admin-stats__period" data-mode="${m}" aria-pressed="${m === mode}">${t(`adminStats.top.mode${m === "real" ? "Real" : "All"}`)}</button>`)
+      .join("");
+  };
+
+  const draw = () => {
+    if (!loaded) return;
+    const open = [...bodyEl.querySelectorAll<HTMLDetailsElement>("details")].map((d) => d.open);
+    bodyEl.innerHTML = renderStats(loaded);
+    bodyEl.querySelectorAll<HTMLDetailsElement>("details").forEach((d, i) => (d.open = open[i] ?? false));
+    exportEl.disabled = !loaded.overview;
+    initVisitorsChart(bodyEl);
+    initWaitingPanel(bodyEl);
+    initSourcesPanel(bodyEl);
+  };
 
   const load = async () => {
-    periodsEl.innerHTML = PERIODS.map(
-      (p) => `<button type="button" class="admin-stats__period" data-period="${p}" aria-pressed="${p === period}">${t("adminStats.lastDays", { count: p })}</button>`
-    ).join("");
-    const [stats, consent, behavior, real] = await Promise.all([
+    drawButtons();
+    const [stats, consent, behavior, real, overview] = await Promise.all([
       fetchVisitStats(period),
       fetchConsentStats(period),
       fetchBehaviorStats(period),
-      fetchRealVisitorStats(period)
+      fetchRealVisitorStats(period),
+      fetchStatsOverview(period)
     ]);
+    // Before 0024 the waiting list comes straight from the inquiries table.
+    const waiting = overview ? overview.waiting : await fetchWaitingInquiries();
     if (main.dataset.requestId !== requestId) return;
-    bodyEl.innerHTML = stats ? renderStats(stats, consent, behavior, real) : `<p class="admin-bookings__empty">${t("adminStats.unavailable")}</p>`;
-    initVisitorsChart(bodyEl);
+    loaded = { stats, consent, behavior, real, overview, waiting, waitingTotal: overview ? overview.waiting_total : (waiting?.length ?? 0) };
+    draw();
   };
 
   periodsEl.addEventListener("click", (e) => {
@@ -344,6 +412,18 @@ export function renderAdminStats(main: HTMLElement): void {
     period = Number(button.dataset.period) as (typeof PERIODS)[number];
     bodyEl.style.opacity = "0.5";
     void load().then(() => (bodyEl.style.opacity = ""));
+  });
+
+  modesEl.addEventListener("click", (e) => {
+    const button = (e.target as Element).closest<HTMLButtonElement>("[data-mode]");
+    if (!button) return;
+    mode = button.dataset.mode as VisitMode;
+    drawButtons();
+    draw();
+  });
+
+  exportEl.addEventListener("click", () => {
+    if (loaded?.overview) downloadCsv(loaded.overview, mode, sourceText);
   });
 
   void load();

@@ -3334,6 +3334,72 @@
     }
   },
   "adminStats": {
+    "top": {
+      "year": "12 mois",
+      "modeLabel": "Visites prises en compte",
+      "modeReal": "Visiteurs réels uniquement",
+      "modeAll": "Toutes les visites",
+      "export": "Exporter en CSV",
+      "excludedReal": "Visites automatisées exclues : {automated} · Demandes de test exclues : {tests}",
+      "excludedAll": "Les chiffres incluent les visites automatisées ({automated}) · Demandes de test exclues : {tests}",
+      "allNote": "« Toutes les visites » ne modifie que les cartes et le tableau des sources ; le graphique et les sections repliées montrent les visiteurs réels.",
+      "recordedFrom": "L’enregistrement des visites a commencé le {date} : les chiffres partent de cette date.",
+      "unavailable": "Ces chiffres apparaissent après l’exécution de la mise à jour 0024.",
+      "cards": {
+        "visitorsReal": "Visiteurs réels",
+        "visitorsAll": "Toutes les visites",
+        "leads": "Demandes et messages",
+        "leadsNote": "Messages : {inquiries} · Visites vidéo réservées : {bookings}",
+        "conversion": "Taux visite → demande",
+        "clicks": "Clics WhatsApp et appel"
+      },
+      "delta": {
+        "vsPrev": "par rapport à la période précédente",
+        "same": "Aucun changement par rapport à la période précédente",
+        "up": "hausse",
+        "down": "baisse",
+        "requests": "demandes",
+        "points": "points de pourcentage",
+        "noCompare": "Pas encore de comparaison : l’enregistrement a commencé le {date}"
+      },
+      "waiting": {
+        "title": "En attente de votre réponse",
+        "hint": "Chaque message dont l’auteur n’a pas encore été contacté, quelle que soit sa date, du plus ancien au plus récent.",
+        "late": "Plus de 24 heures",
+        "open": "Ouvrir",
+        "done": "Contacté",
+        "saving": "Enregistrement…",
+        "error": "Échec de l’enregistrement, veuillez réessayer.",
+        "empty": "Aucun message n’attend de réponse.",
+        "more": "Tout afficher ({count})",
+        "less": "Afficher moins",
+        "inBox": "Tout voir dans la boîte des demandes ({count})",
+        "fallback": "Tant que la mise à jour 0024 n’est pas exécutée, les demandes de test apparaissent aussi ici.",
+        "unavailable": "Impossible de charger les messages."
+      },
+      "sources": {
+        "title": "Sources et campagnes",
+        "hint": "Visites selon la source de la première page de chaque visite. Les demandes ne portent que le nom de l’annonce : une demande arrivée sans annonce figure dans la ligne « Sans publicité ».",
+        "source": "Source",
+        "campaign": "Campagne",
+        "visits": "Visites",
+        "leads": "Demandes",
+        "clicks": "WhatsApp / appel",
+        "rate": "Conversion",
+        "more": "Afficher toutes les sources ({count})",
+        "less": "Afficher moins",
+        "details": "Plus de détails : pages d’entrée et anciennes listes",
+        "empty": "Aucune visite sur cette période."
+      },
+      "more": "Plus de statistiques",
+      "csv": {
+        "period": "Période",
+        "mode": "Visites prises en compte",
+        "metric": "Indicateur",
+        "current": "Cette période",
+        "previous": "Période précédente"
+      }
+    },
     "limitedDays": "Seuls les {count} derniers jours sont affichés tant que la mise à jour 0017 de la base de données n'a pas été exécutée.",
     "consentRecent": "30 derniers jours uniquement (les choix sont conservés 30 jours).",
     "behavior": {

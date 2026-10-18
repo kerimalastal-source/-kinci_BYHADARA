@@ -101,3 +101,86 @@ export async function fetchRealVisitorStats(days: number): Promise<RealVisitorSt
   const automated = raw.automated ?? raw.daily.reduce((n, d) => n + (d.automated ?? 0), 0);
   return { days: raw.days, automated, daily };
 }
+
+/** One period's figures in admin_stats_overview() (supabase/migrations/0024). */
+export interface OverviewPeriod {
+  real: { visitors: number; clicks: number };
+  all: { visitors: number; clicks: number };
+  inquiries: number;
+  bookings: number;
+}
+
+/** A source x campaign row: visits (real and all), requests, and WhatsApp/call presses. */
+export interface OverviewSource {
+  source: string;
+  /** "" when the visits came without an ad campaign. */
+  campaign: string;
+  real_visits: number;
+  all_visits: number;
+  leads: number;
+  real_clicks: number;
+  all_clicks: number;
+}
+
+/** An inquiry still marked "new" (any date), as the inquiries box already shows it. */
+export interface WaitingInquiry {
+  id: string;
+  reference: string;
+  kind: string;
+  /** "guide" for a Buyer's Guide question, otherwise "". */
+  form: string;
+  name: string;
+  projects: string[];
+  created_at: string;
+}
+
+/** What admin_stats_overview() returns: this period and the one before it, tests left out. */
+export interface StatsOverview {
+  days: number;
+  since: string;
+  prev_since: string;
+  /** When recording of visits, button presses and requests started (null: nothing yet). */
+  started: { visits: string | null; actions: string | null; leads: string | null };
+  automated: number;
+  tests: number;
+  current: OverviewPeriod;
+  previous: OverviewPeriod;
+  sources: OverviewSource[];
+  waiting_total: number;
+  waiting: WaitingInquiry[];
+}
+
+/** The last `days` days and the `days` before them, or null when 0024 hasn't run. */
+export async function fetchStatsOverview(days: number): Promise<StatsOverview | null> {
+  const { data, error } = await supabase.rpc("admin_stats_overview", { p_days: days });
+  if (error) {
+    // Before migration 0024 the function doesn't exist; the sections just say so.
+    if (error.code !== "PGRST202") console.error(error);
+    return null;
+  }
+  const stats = data as (StatsOverview & { error?: string }) | null;
+  return stats && !stats.error ? stats : null;
+}
+
+/** Inquiries still marked "new", oldest first: the fallback before 0024 (tests not filtered). */
+export async function fetchWaitingInquiries(): Promise<WaitingInquiry[] | null> {
+  const { data, error } = await supabase
+    .from("inquiries")
+    .select("id, reference, kind, details, name, projects, created_at")
+    .eq("status", "new")
+    .order("created_at", { ascending: true })
+    .limit(50);
+  if (error) {
+    console.error(error);
+    return null;
+  }
+  return (data ?? []).map((r: { details?: Record<string, string> | null } & Omit<WaitingInquiry, "form">) => ({
+    id: r.id,
+    reference: r.reference,
+    kind: r.kind,
+    form: r.details?.form ?? "",
+    name: r.name,
+    projects: r.projects ?? [],
+    created_at: r.created_at
+  }));
+}
