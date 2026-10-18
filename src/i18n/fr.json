@@ -113,7 +113,7 @@
     "statsTitle": "HADARA en chiffres",
     "stats": [
       { "value": "12+", "label": "années d'excellence", "icon": "years" },
-      { "value": "13", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "14", "label": "projets emblématiques", "icon": "projects" },
       { "value": "2 800+", "label": "unités résidentielles", "icon": "apartments" },
       { "value": "420+", "label": "bureaux", "icon": "offices" },
       { "value": "110+", "label": "locaux commerciaux", "icon": "shops" },
@@ -185,7 +185,7 @@
     "storyEyebrow": "Notre histoire",
     "storyTitle": "D'une vision unique à un portefeuille en pleine croissance",
     "storyText1": "Fondée en 2014 et basée à Beylikdüzü, Istanbul, HADARA Immobilier est née d'une idée simple : une sélection rigoureuse des projets et des conseils honnêtes créent une valeur durable pour ceux qui vivent dans les biens que nous proposons, comme pour ceux qui y investissent.",
-    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup et Özak GYO pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy et Zeytinburnu, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
+    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO et Mutlu İnşaat pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy et Zeytinburnu, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
     "missionTitle": "Notre mission",
     "missionText": "Relier résidents et investisseurs à des projets résidentiels et mixtes soigneusement sélectionnés, qui allient qualité architecturale, confort quotidien et valeur durable, et les accompagner clairement à chaque étape.",
     "visionTitle": "Notre vision",
@@ -208,8 +208,8 @@
     "statsTitle": "Notre bilan",
     "stats": [
       { "value": "12+", "label": "années d'activité", "icon": "years" },
-      { "value": "13", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "3 300+", "label": "logements, bureaux et commerces", "icon": "apartments" },
+      { "value": "14", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "3 400+", "label": "logements, bureaux et commerces", "icon": "apartments" },
       { "value": "225 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
     ]
   },
@@ -1294,28 +1294,29 @@
       "name": "CasaBlu Vadi",
       "tagline": "Là où la mer rencontre la vallée — 71 résidences d'exception à côté de Yaşam Vadisi, à Beylikdüzü.",
       "shortDescription": "CasaBlu Vadi est un projet boutique de 71 logements du 2+1 au 6+1 à Beylikdüzü, là où la vallée rejoint la mer, avec des terrasses vue mer, des rez-de-jardin et des équipements complets pour les résidents.",
-      "longDescription": "CasaBlu Vadi se situe à Beylikdüzü, à l'endroit où Yaşam Vadisi, le grand parc vert du quartier, rejoint la mer. Conçu dans une architecture moderne de faible hauteur répartie sur sept bâtiments, il ne réunit que 71 logements, du 2+1 au 6+1, afin que chaque famille profite d'un cadre calme et privé. Les logements s'ouvrent sur des vues panoramiques sur la mer et la vallée, avec des terrasses vue mer aux étages supérieurs et des rez-de-jardin, tandis que les plus grands 6+1 se déploient sur deux niveaux avec un étage sous toit et de vastes terrasses. Le projet totalise 17 263 m² de surface construite, au cœur de jardins paysagers avec aires de jeux pour enfants, chemins de promenade, une piste cyclable qui traverse le site et des coins de repos tranquilles. Les équipements comprennent une piscine intérieure, une salle de fitness moderne, un hammam, un sauna et un spa, un hall d'accueil, un vaste parking et une sécurité de haut niveau dans tout le projet. Les sentiers de Yaşam Vadisi sont à quelques pas, et West Istanbul Marina, avec ses cafés au bord de l'eau, à quelques minutes en voiture. CasaBlu Vadi est développé par Mutlu İnşaat, société fondée en 1974 qui réalise ses projets sur fonds propres. Le projet est en construction, avec une livraison prévue en novembre 2027, un plan de paiement de 30 % d'acompte et le solde sur 30 mois, et il est éligible à la citoyenneté turque.",
+      "longDescription": "CasaBlu Vadi se situe à Beylikdüzü, à l'endroit où Yaşam Vadisi, le grand parc vert du quartier, rejoint la mer. Conçu dans une architecture horizontale moderne répartie sur sept bâtiments, il ne réunit que 71 logements, du 2+1 au 6+1, afin que chaque famille profite d'un cadre calme et privé. Les logements s'ouvrent sur des vues panoramiques sur la mer et la vallée, avec des terrasses vue mer aux étages supérieurs et des rez-de-jardin, tandis que les plus grands 6+1 se déploient sur deux niveaux avec un étage sous toit et de vastes terrasses. Le projet totalise 17 263 m² de surface construite, au cœur de jardins paysagers avec aires de jeux pour enfants, chemins de promenade, une piste cyclable qui traverse le site et des coins de repos tranquilles. Les équipements comprennent une piscine intérieure, une salle de fitness moderne, un hammam, un sauna et un spa, un hall d'accueil, un vaste parking et une sécurité de haut niveau dans tout le projet. Yaşam Vadisi n'est qu'à 50 mètres, la mer à 300 mètres et la plage à 500 mètres, tandis que West Istanbul Marina et ses cafés au bord de l'eau sont à 5 minutes en voiture, le Metrobüs et l'E-5 à 11 minutes et le centre commercial MarmaraPark à 13 minutes. CasaBlu Vadi est développé par Mutlu İnşaat, société fondée en 1974 qui réalise ses projets sur fonds propres. Le projet est en construction, avec une livraison prévue en novembre 2027, un plan de paiement de 30 % d'acompte et le solde sur 30 mois, et il est éligible à la citoyenneté turque.",
       "highlights": [
-        "Un projet boutique de seulement 71 logements dans 7 bâtiments de faible hauteur",
+        "Un projet boutique de seulement 71 logements dans 7 bâtiments",
         "Logements du 2+1 au 6+1, avec terrasses vue mer et rez-de-jardin",
         "Vues panoramiques sur la mer et sur Yaşam Vadisi",
         "Piscine intérieure, salle de fitness, hammam, sauna et spa",
         "Jardins paysagers, aires de jeux, chemins de promenade et piste cyclable",
-        "À quelques pas de Yaşam Vadisi, à quelques minutes en voiture de West Istanbul Marina",
+        "À 50 m de Yaşam Vadisi, à 300 m de la mer et à 5 minutes de West Istanbul Marina",
         "Développé par Mutlu İnşaat, constructeur depuis 1974",
         "Plan de paiement : 30 % d'acompte et le solde sur 30 mois",
         "Éligible à la citoyenneté turque",
         "En construction, livraison prévue en novembre 2027"
       ],
       "nearby": [
-        {
-          "place": "Beylikdüzü Yaşam Vadisi",
-          "time": "À pied"
-        },
-        {
-          "place": "West Istanbul Marina",
-          "time": "Quelques minutes en voiture"
-        }
+        { "place": "Beylikdüzü Yaşam Vadisi", "time": "50 m" },
+        { "place": "La mer", "time": "300 m" },
+        { "place": "Plage", "time": "500 m · 2 min" },
+        { "place": "West Istanbul Marina", "time": "5 min" },
+        { "place": "Centre commercial Migros", "time": "10 min" },
+        { "place": "Metrobüs", "time": "11 min" },
+        { "place": "Autoroute E-5", "time": "11 min" },
+        { "place": "Centre commercial MarmaraPark", "time": "13 min" },
+        { "place": "Port d'Ambarlı", "time": "15 min" }
       ]
     },
     "buyukyali": {
