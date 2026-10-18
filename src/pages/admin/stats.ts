@@ -176,6 +176,7 @@ export function realChart(daily: RealVisitorStats["daily"]): string {
         <polyline class="real-chart__line" points="${line("real")}" vector-effect="non-scaling-stroke"/>
       </svg>
       <div class="real-chart__cols">${cols}</div>
+      <div class="real-chart__tip" role="presentation" aria-hidden="true" hidden></div>
     </div>
     <div class="real-chart__row">${labels}</div>
     ${rows.some((d) => d.contacted) ? `<div class="real-chart__row real-chart__contacts" aria-hidden="true">${contacts}</div>` : ""}
@@ -377,7 +378,8 @@ export function renderAdminStats(main: HTMLElement): void {
     bodyEl.innerHTML = stats ? renderStats(stats, consent, behavior, real) : `<p class="admin-bookings__empty">${t("adminStats.unavailable")}</p>`;
   };
 
-  // The real-visitors chart reads out the day under the pointer or focus.
+  // The real-visitors chart reads out the day under the pointer or focus, and a small
+  // card with the same numbers follows the pointer over the day.
   const showDay = (e: Event) => {
     const col = (e.target as Element).closest<HTMLElement>(".real-chart__col");
     const chart = col?.closest(".real-chart");
@@ -385,8 +387,22 @@ export function renderAdminStats(main: HTMLElement): void {
     chart.querySelector(".real-chart__col.is-active")?.classList.remove("is-active");
     col.classList.add("is-active");
     chart.querySelector(".real-chart__readout")!.textContent = col.dataset.tip ?? "";
+    const tip = chart.querySelector<HTMLElement>(".real-chart__tip");
+    const plot = chart.querySelector<HTMLElement>(".real-chart__plot");
+    if (!tip || !plot || !(e instanceof PointerEvent) || e.pointerType === "touch") return;
+    tip.textContent = col.dataset.tip ?? "";
+    tip.hidden = false;
+    const box = plot.getBoundingClientRect();
+    const left = Math.min(Math.max(e.clientX - box.left, tip.offsetWidth / 2), box.width - tip.offsetWidth / 2);
+    tip.style.left = `${left}px`;
+    tip.style.top = `${Math.max(e.clientY - box.top - tip.offsetHeight - 14, 4)}px`;
   };
   bodyEl.addEventListener("pointerover", showDay);
+  bodyEl.addEventListener("pointermove", showDay);
+  bodyEl.addEventListener("pointerout", (e) => {
+    const plot = (e.target as Element).closest(".real-chart__plot");
+    if (plot && !plot.contains(e.relatedTarget as Node | null)) plot.querySelector<HTMLElement>(".real-chart__tip")!.hidden = true;
+  });
   bodyEl.addEventListener("focusin", showDay);
 
   periodsEl.addEventListener("click", (e) => {

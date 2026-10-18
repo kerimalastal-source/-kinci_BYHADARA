@@ -4783,6 +4783,28 @@ body.map-open .back-to-top {
   opacity: 1;
 }
 
+.real-chart__plot { position: relative; }
+.real-chart__tip {
+  position: absolute;
+  z-index: 3;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 90%;
+  padding: 8px 12px;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  text-align: center;
+  white-space: normal;
+  pointer-events: none;
+  box-shadow: 0 6px 18px rgba(15, 43, 33, 0.25);
+}
+.real-chart__tip[hidden] { display: none; }
+@media (hover: none) {
+  .real-chart__tip { display: none; }
+}
 .real-chart__readout {
   min-height: 2.9em;
   margin: 0.2rem 0 0.4rem;
