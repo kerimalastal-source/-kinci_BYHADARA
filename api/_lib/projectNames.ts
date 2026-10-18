@@ -42,6 +42,13 @@ export const PROJECT_NAMES: Record<string, Record<"en" | "ar" | "fa" | "fr" | "r
     "fr": "Cadde Ispartakule",
     "ru": "Cadde Ispartakule"
   },
+  "casablu-vadi": {
+    "en": "CasaBlu Vadi",
+    "ar": "كازا بلو وادي",
+    "fa": "کازا بلو وادی",
+    "fr": "CasaBlu Vadi",
+    "ru": "CasaBlu Vadi"
+  },
   "buyukyali": {
     "en": "Büyükyalı",
     "ar": "بيوك يالي",

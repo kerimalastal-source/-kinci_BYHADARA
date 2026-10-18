@@ -113,7 +113,7 @@
     "statsTitle": "HADARA in Numbers",
     "stats": [
       { "value": "12+", "label": "Years of Excellence", "icon": "years" },
-      { "value": "13", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "14", "label": "Landmark Projects", "icon": "projects" },
       { "value": "2,800+", "label": "Residential Units", "icon": "apartments" },
       { "value": "420+", "label": "Office Units", "icon": "offices" },
       { "value": "110+", "label": "Commercial Units", "icon": "shops" },
@@ -185,7 +185,7 @@
     "storyEyebrow": "Our Story",
     "storyTitle": "From a Single Vision to a Growing Portfolio",
     "storyText1": "Founded in 2014 and headquartered in Beylikdüzü, Istanbul, HADARA Real Estate was built on a simple idea: that careful project selection and honest advice create lasting value for the people who live in — and invest in — the homes we offer.",
-    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup and Özak GYO to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy and Zeytinburnu, among the most sought-after growth corridors on Istanbul's European side, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
+    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO and Mutlu İnşaat to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy and Zeytinburnu, among the most sought-after growth corridors on Istanbul's European side, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
     "missionTitle": "Our Mission",
     "missionText": "To connect residents and investors with carefully selected residential and mixed-use projects that combine architectural quality, everyday comfort and dependable long-term value, and to guide them clearly at every step.",
     "visionTitle": "Our Vision",
@@ -208,8 +208,8 @@
     "statsTitle": "Our Track Record",
     "stats": [
       { "value": "12+", "label": "Years in Business", "icon": "years" },
-      { "value": "13", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "3,300+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
+      { "value": "14", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "3,400+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
       { "value": "225,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
     ]
   },
@@ -1288,6 +1288,35 @@
         {
           "place": "Başakşehir City Hospital"
         }
+      ]
+    },
+    "casablu-vadi": {
+      "name": "CasaBlu Vadi",
+      "tagline": "Where the sea meets the valley — 71 select homes beside Beylikdüzü Yaşam Vadisi.",
+      "shortDescription": "CasaBlu Vadi is a boutique project of 71 homes from 2+1 to 6+1 in Beylikdüzü, where the valley meets the sea, with sea-view terraces, garden floors and a full set of residents' facilities.",
+      "longDescription": "CasaBlu Vadi stands in Beylikdüzü at the point where Yaşam Vadisi, the district's green valley park, meets the sea. Designed with modern horizontal architecture across seven blocks, it brings together only 71 homes, from 2+1 to 6+1, so that every family enjoys a calm and private setting. Homes open onto panoramic views of the sea and the valley, with sea-view terraces on the upper floors and garden floors at ground level, while the largest 6+1 residences spread over two levels with a roof floor and generous terraces. The project covers 17,263 m² of total construction area, set within landscaped gardens with children's play areas, walking paths, a cycling track running through the site and quiet seating corners. Residents' facilities include an indoor swimming pool, a modern fitness centre, a Turkish bath, sauna and spa, an entrance lobby, a spacious car park and high-level security throughout. Yaşam Vadisi is only 50 metres away, the sea 300 metres and the beach 500 metres, while West Istanbul Marina, with its cafés along the water, is 5 minutes by car, the Metrobüs and the E-5 11 minutes, and MarmaraPark Mall 13 minutes. CasaBlu Vadi is developed by Mutlu İnşaat, a company founded in 1974 that builds its projects with its own capital. The project is under construction, with delivery scheduled for November 2027, a payment plan of 30% down and the balance over 30 months, and it is eligible for Turkish citizenship.",
+      "highlights": [
+        "A boutique project of only 71 homes in 7 blocks",
+        "Homes from 2+1 to 6+1, with sea-view terraces and garden floors",
+        "Panoramic views of the sea and of Yaşam Vadisi",
+        "Indoor swimming pool, fitness centre, Turkish bath, sauna and spa",
+        "Landscaped gardens, children's play areas, walking paths and a cycling track",
+        "50 m from Yaşam Vadisi, 300 m from the sea and 5 minutes from West Istanbul Marina",
+        "Developed by Mutlu İnşaat, building since 1974",
+        "Payment plan: 30% down and the balance over 30 months",
+        "Eligible for Turkish citizenship",
+        "Under construction, delivery scheduled for November 2027"
+      ],
+      "nearby": [
+        { "place": "Beylikdüzü Yaşam Vadisi", "time": "50 m" },
+        { "place": "The sea", "time": "300 m" },
+        { "place": "Beach", "time": "500 m · 2 min" },
+        { "place": "West Istanbul Marina", "time": "5 min" },
+        { "place": "Migros shopping mall", "time": "10 min" },
+        { "place": "Metrobüs", "time": "11 min" },
+        { "place": "E-5 highway", "time": "11 min" },
+        { "place": "MarmaraPark Mall", "time": "13 min" },
+        { "place": "Ambarlı Port", "time": "15 min" }
       ]
     },
     "buyukyali": {
@@ -3305,6 +3334,139 @@
     }
   },
   "adminStats": {
+    "details": {
+      "unavailable": "The visitor journey, audience, projects and latest requests appear once update 0025 has been run.",
+      "chart": {
+        "hintAll": "These numbers include every visit, automated ones too.",
+        "legendCurrent": "This period",
+        "legendPrevious": "Previous period (dashed)",
+        "legendContacted": "Visits that got in touch (gold numbers under the axis)",
+        "tipPrevious": "Previous period",
+        "noPrevious": "The previous-period line is hidden because recording started on {date}.",
+        "tableShow": "Show as a table",
+        "tableHide": "Hide the table",
+        "tableDate": "Day"
+      },
+      "funnel": {
+        "title": "Visitor journey",
+        "hint": "The first share is of all visits; the one in brackets is of the step before.",
+        "ofPrev": "of the step before",
+        "sentNote": "“Sent a request” counts the form’s send button on the site, recorded since {date}.",
+        "steps": {
+          "visits": "Visited the site",
+          "project": "Viewed a project",
+          "request_page": "Opened a contact or request page",
+          "sent": "Sent a request"
+        }
+      },
+      "audience": {
+        "title": "Audience",
+        "countries": "Countries",
+        "devices": "Devices",
+        "languages": "Entry language",
+        "regions": {
+          "all": "All",
+          "gulf": "Gulf",
+          "mena": "Rest of Middle East & North Africa",
+          "turkey": "Türkiye",
+          "europe": "Europe",
+          "cis": "Russia, Central Asia & Caucasus",
+          "other": "Other regions"
+        }
+      },
+      "projects": {
+        "title": "Projects: views against requests",
+        "hint": "Views count how often a project page was opened; visitors count the visits that opened it. Every project with a request in this period is listed even with few views, and one request can name several projects.",
+        "project": "Project",
+        "views": "Views",
+        "visitors": "Visitors",
+        "requests": "Requests",
+        "requested": "Has requests",
+        "more": "Show all projects ({count})",
+        "less": "Show less",
+        "empty": "No project views or requests in this period."
+      },
+      "recent": {
+        "title": "Latest requests",
+        "hint": "The last 12 requests in this period, test requests left out. Select a name to open the request.",
+        "date": "Date",
+        "name": "Name",
+        "type": "Type",
+        "projects": "Projects",
+        "source": "Source",
+        "status": "Status",
+        "booking": "Video tour booking",
+        "openInquiries": "Inquiries box",
+        "openBookings": "Tour bookings",
+        "empty": "No requests in this period."
+      }
+    },
+    "top": {
+      "year": "12 months",
+      "modeLabel": "Which visits",
+      "modeReal": "Real visitors only",
+      "modeAll": "All visits",
+      "export": "Export CSV",
+      "excludedReal": "Automated visits left out: {automated} · Test requests left out: {tests}",
+      "excludedAll": "Numbers include automated visits ({automated}) · Test requests left out: {tests}",
+      "allNote": "“All visits” includes automated visits in every section except the folded ones at the bottom.",
+      "recordedFrom": "Visit recording started on {date}, so the numbers start from that date.",
+      "unavailable": "These numbers appear once update 0024 has been run.",
+      "cards": {
+        "visitorsReal": "Real visitors",
+        "visitorsAll": "All visits",
+        "leads": "Requests and inquiries",
+        "leadsNote": "Messages: {inquiries} · Tour bookings: {bookings}",
+        "conversion": "Visit-to-request rate",
+        "clicks": "WhatsApp and call presses"
+      },
+      "delta": {
+        "vsPrev": "vs. previous period",
+        "same": "No change from the previous period",
+        "up": "up",
+        "down": "down",
+        "requests": "requests",
+        "points": "percentage points",
+        "noCompare": "No comparison yet: recording started on {date}"
+      },
+      "waiting": {
+        "title": "Awaiting your reply",
+        "hint": "Every message nobody has contacted yet, from any date, oldest first.",
+        "late": "Over 24 hours",
+        "open": "Open",
+        "done": "Contacted",
+        "saving": "Saving…",
+        "error": "Could not save, please try again.",
+        "empty": "No messages are waiting for a reply.",
+        "more": "Show all ({count})",
+        "less": "Show less",
+        "inBox": "See all in the inquiries box ({count})",
+        "fallback": "Until update 0024 is run, test requests are listed here too.",
+        "unavailable": "The messages could not be loaded."
+      },
+      "sources": {
+        "title": "Sources and campaigns",
+        "hint": "Visits by the source of each visit’s first page. Requests carry only the ad name, so a request that came without an ad is in the “No ad” row.",
+        "source": "Source",
+        "campaign": "Campaign",
+        "visits": "Visits",
+        "leads": "Requests",
+        "clicks": "WhatsApp / call",
+        "rate": "Conversion",
+        "more": "Show all sources ({count})",
+        "less": "Show less",
+        "details": "More details: landing pages and the previous lists",
+        "empty": "No visits in this period."
+      },
+      "more": "More statistics",
+      "csv": {
+        "period": "Period",
+        "mode": "Which visits",
+        "metric": "Metric",
+        "current": "This period",
+        "previous": "Previous period"
+      }
+    },
     "limitedDays": "Only the last {count} days are shown until database update 0017 is run.",
     "consentRecent": "Last 30 days only (choices are kept for 30 days).",
     "behavior": {
@@ -3382,6 +3544,23 @@
     "tipVisitors": "{count} visitors",
     "tipPages": "{count} pages",
     "dailyTitle": "Visitors per day",
+    "real": {
+      "title": "Visitors per day",
+      "hint": "Every number on this page leaves out automated visits and bots (link checks from data centers, several visits opening the same page at once, software-driven browsers).",
+      "excluded": "{count} automated visits were left out in this period.",
+      "visitors": "Visitors",
+      "average": "Daily average",
+      "best": "Best day",
+      "contacted": "Got in touch",
+      "legendVisitors": "Visitors",
+      "legendContact": "Day with contact",
+      "tipVisitors": "Visitors",
+      "tipPages": "Pages viewed",
+      "tipContacted": "Got in touch",
+      "chartLabel": "Chart of visitors per day",
+      "early": "Before 2 October 2026 the device and on-page activity were not recorded, so filtering on those days is less precise.",
+      "unavailable": "Available after running database update 0020."
+    },
     "sourcesTitle": "Traffic sources",
     "leadsTitle": "Messages and bookings by ad",
     "leadsHint": "\"No ad\" = a customer who came without an ad link (search, direct or other).",

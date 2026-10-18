@@ -113,7 +113,7 @@
     "statsTitle": "HADARA en chiffres",
     "stats": [
       { "value": "12+", "label": "années d'excellence", "icon": "years" },
-      { "value": "13", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "14", "label": "projets emblématiques", "icon": "projects" },
       { "value": "2 800+", "label": "unités résidentielles", "icon": "apartments" },
       { "value": "420+", "label": "bureaux", "icon": "offices" },
       { "value": "110+", "label": "locaux commerciaux", "icon": "shops" },
@@ -185,7 +185,7 @@
     "storyEyebrow": "Notre histoire",
     "storyTitle": "D'une vision unique à un portefeuille en pleine croissance",
     "storyText1": "Fondée en 2014 et basée à Beylikdüzü, Istanbul, HADARA Immobilier est née d'une idée simple : une sélection rigoureuse des projets et des conseils honnêtes créent une valeur durable pour ceux qui vivent dans les biens que nous proposons, comme pour ceux qui y investissent.",
-    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup et Özak GYO pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy et Zeytinburnu, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
+    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO et Mutlu İnşaat pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy et Zeytinburnu, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
     "missionTitle": "Notre mission",
     "missionText": "Relier résidents et investisseurs à des projets résidentiels et mixtes soigneusement sélectionnés, qui allient qualité architecturale, confort quotidien et valeur durable, et les accompagner clairement à chaque étape.",
     "visionTitle": "Notre vision",
@@ -208,8 +208,8 @@
     "statsTitle": "Notre bilan",
     "stats": [
       { "value": "12+", "label": "années d'activité", "icon": "years" },
-      { "value": "13", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "3 300+", "label": "logements, bureaux et commerces", "icon": "apartments" },
+      { "value": "14", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "3 400+", "label": "logements, bureaux et commerces", "icon": "apartments" },
       { "value": "225 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
     ]
   },
@@ -1288,6 +1288,35 @@
         {
           "place": "Hôpital municipal de Başakşehir"
         }
+      ]
+    },
+    "casablu-vadi": {
+      "name": "CasaBlu Vadi",
+      "tagline": "Là où la mer rencontre la vallée — 71 résidences d'exception à côté de Yaşam Vadisi, à Beylikdüzü.",
+      "shortDescription": "CasaBlu Vadi est un projet boutique de 71 logements du 2+1 au 6+1 à Beylikdüzü, là où la vallée rejoint la mer, avec des terrasses vue mer, des rez-de-jardin et des équipements complets pour les résidents.",
+      "longDescription": "CasaBlu Vadi se situe à Beylikdüzü, à l'endroit où Yaşam Vadisi, le grand parc vert du quartier, rejoint la mer. Conçu dans une architecture horizontale moderne répartie sur sept bâtiments, il ne réunit que 71 logements, du 2+1 au 6+1, afin que chaque famille profite d'un cadre calme et privé. Les logements s'ouvrent sur des vues panoramiques sur la mer et la vallée, avec des terrasses vue mer aux étages supérieurs et des rez-de-jardin, tandis que les plus grands 6+1 se déploient sur deux niveaux avec un étage sous toit et de vastes terrasses. Le projet totalise 17 263 m² de surface construite, au cœur de jardins paysagers avec aires de jeux pour enfants, chemins de promenade, une piste cyclable qui traverse le site et des coins de repos tranquilles. Les équipements comprennent une piscine intérieure, une salle de fitness moderne, un hammam, un sauna et un spa, un hall d'accueil, un vaste parking et une sécurité de haut niveau dans tout le projet. Yaşam Vadisi n'est qu'à 50 mètres, la mer à 300 mètres et la plage à 500 mètres, tandis que West Istanbul Marina et ses cafés au bord de l'eau sont à 5 minutes en voiture, le Metrobüs et l'E-5 à 11 minutes et le centre commercial MarmaraPark à 13 minutes. CasaBlu Vadi est développé par Mutlu İnşaat, société fondée en 1974 qui réalise ses projets sur fonds propres. Le projet est en construction, avec une livraison prévue en novembre 2027, un plan de paiement de 30 % d'acompte et le solde sur 30 mois, et il est éligible à la citoyenneté turque.",
+      "highlights": [
+        "Un projet boutique de seulement 71 logements dans 7 bâtiments",
+        "Logements du 2+1 au 6+1, avec terrasses vue mer et rez-de-jardin",
+        "Vues panoramiques sur la mer et sur Yaşam Vadisi",
+        "Piscine intérieure, salle de fitness, hammam, sauna et spa",
+        "Jardins paysagers, aires de jeux, chemins de promenade et piste cyclable",
+        "À 50 m de Yaşam Vadisi, à 300 m de la mer et à 5 minutes de West Istanbul Marina",
+        "Développé par Mutlu İnşaat, constructeur depuis 1974",
+        "Plan de paiement : 30 % d'acompte et le solde sur 30 mois",
+        "Éligible à la citoyenneté turque",
+        "En construction, livraison prévue en novembre 2027"
+      ],
+      "nearby": [
+        { "place": "Beylikdüzü Yaşam Vadisi", "time": "50 m" },
+        { "place": "La mer", "time": "300 m" },
+        { "place": "Plage", "time": "500 m · 2 min" },
+        { "place": "West Istanbul Marina", "time": "5 min" },
+        { "place": "Centre commercial Migros", "time": "10 min" },
+        { "place": "Metrobüs", "time": "11 min" },
+        { "place": "Autoroute E-5", "time": "11 min" },
+        { "place": "Centre commercial MarmaraPark", "time": "13 min" },
+        { "place": "Port d'Ambarlı", "time": "15 min" }
       ]
     },
     "buyukyali": {
@@ -3305,6 +3334,139 @@
     }
   },
   "adminStats": {
+    "details": {
+      "unavailable": "Le parcours du visiteur, l’audience, les projets et les dernières demandes apparaissent après l’exécution de la mise à jour 0025.",
+      "chart": {
+        "hintAll": "Ces chiffres incluent toutes les visites, y compris automatisées.",
+        "legendCurrent": "Cette période",
+        "legendPrevious": "Période précédente (pointillés)",
+        "legendContacted": "Visites ayant pris contact (chiffres dorés sous l’axe)",
+        "tipPrevious": "Période précédente",
+        "noPrevious": "La ligne de la période précédente est masquée, car l’enregistrement a commencé le {date}.",
+        "tableShow": "Afficher en tableau",
+        "tableHide": "Masquer le tableau",
+        "tableDate": "Jour"
+      },
+      "funnel": {
+        "title": "Parcours du visiteur",
+        "hint": "La première part est calculée sur toutes les visites ; celle entre parenthèses sur l’étape précédente.",
+        "ofPrev": "de l’étape précédente",
+        "sentNote": "« A envoyé une demande » compte le bouton d’envoi des formulaires du site, enregistré depuis le {date}.",
+        "steps": {
+          "visits": "A visité le site",
+          "project": "A consulté un projet",
+          "request_page": "A ouvert une page de contact ou de demande",
+          "sent": "A envoyé une demande"
+        }
+      },
+      "audience": {
+        "title": "Audience",
+        "countries": "Pays",
+        "devices": "Appareils",
+        "languages": "Langue d’entrée",
+        "regions": {
+          "all": "Tous",
+          "gulf": "Golfe",
+          "mena": "Reste du Moyen-Orient et Afrique du Nord",
+          "turkey": "Turquie",
+          "europe": "Europe",
+          "cis": "Russie, Asie centrale et Caucase",
+          "other": "Autres régions"
+        }
+      },
+      "projects": {
+        "title": "Projets : vues et demandes",
+        "hint": "Les vues comptent les ouvertures de la page du projet ; les visiteurs, les visites qui l’ont ouverte. Tout projet ayant reçu une demande sur la période est listé, même avec peu de vues, et une demande peut citer plusieurs projets.",
+        "project": "Projet",
+        "views": "Vues",
+        "visitors": "Visiteurs",
+        "requests": "Demandes",
+        "requested": "A des demandes",
+        "more": "Afficher tous les projets ({count})",
+        "less": "Afficher moins",
+        "empty": "Aucune vue ni demande de projet sur cette période."
+      },
+      "recent": {
+        "title": "Dernières demandes",
+        "hint": "Les 12 dernières demandes de la période, hors demandes de test. Sélectionnez un nom pour ouvrir la demande.",
+        "date": "Date",
+        "name": "Nom",
+        "type": "Type",
+        "projects": "Projets",
+        "source": "Source",
+        "status": "Statut",
+        "booking": "Réservation de visite vidéo",
+        "openInquiries": "Boîte des demandes",
+        "openBookings": "Réservations de visites",
+        "empty": "Aucune demande sur cette période."
+      }
+    },
+    "top": {
+      "year": "12 mois",
+      "modeLabel": "Visites prises en compte",
+      "modeReal": "Visiteurs réels uniquement",
+      "modeAll": "Toutes les visites",
+      "export": "Exporter en CSV",
+      "excludedReal": "Visites automatisées exclues : {automated} · Demandes de test exclues : {tests}",
+      "excludedAll": "Les chiffres incluent les visites automatisées ({automated}) · Demandes de test exclues : {tests}",
+      "allNote": "« Toutes les visites » inclut les visites automatisées dans toutes les sections, sauf celles repliées en bas de page.",
+      "recordedFrom": "L’enregistrement des visites a commencé le {date} : les chiffres partent de cette date.",
+      "unavailable": "Ces chiffres apparaissent après l’exécution de la mise à jour 0024.",
+      "cards": {
+        "visitorsReal": "Visiteurs réels",
+        "visitorsAll": "Toutes les visites",
+        "leads": "Demandes et messages",
+        "leadsNote": "Messages : {inquiries} · Visites vidéo réservées : {bookings}",
+        "conversion": "Taux visite → demande",
+        "clicks": "Clics WhatsApp et appel"
+      },
+      "delta": {
+        "vsPrev": "par rapport à la période précédente",
+        "same": "Aucun changement par rapport à la période précédente",
+        "up": "hausse",
+        "down": "baisse",
+        "requests": "demandes",
+        "points": "points de pourcentage",
+        "noCompare": "Pas encore de comparaison : l’enregistrement a commencé le {date}"
+      },
+      "waiting": {
+        "title": "En attente de votre réponse",
+        "hint": "Chaque message dont l’auteur n’a pas encore été contacté, quelle que soit sa date, du plus ancien au plus récent.",
+        "late": "Plus de 24 heures",
+        "open": "Ouvrir",
+        "done": "Contacté",
+        "saving": "Enregistrement…",
+        "error": "Échec de l’enregistrement, veuillez réessayer.",
+        "empty": "Aucun message n’attend de réponse.",
+        "more": "Tout afficher ({count})",
+        "less": "Afficher moins",
+        "inBox": "Tout voir dans la boîte des demandes ({count})",
+        "fallback": "Tant que la mise à jour 0024 n’est pas exécutée, les demandes de test apparaissent aussi ici.",
+        "unavailable": "Impossible de charger les messages."
+      },
+      "sources": {
+        "title": "Sources et campagnes",
+        "hint": "Visites selon la source de la première page de chaque visite. Les demandes ne portent que le nom de l’annonce : une demande arrivée sans annonce figure dans la ligne « Sans publicité ».",
+        "source": "Source",
+        "campaign": "Campagne",
+        "visits": "Visites",
+        "leads": "Demandes",
+        "clicks": "WhatsApp / appel",
+        "rate": "Conversion",
+        "more": "Afficher toutes les sources ({count})",
+        "less": "Afficher moins",
+        "details": "Plus de détails : pages d’entrée et anciennes listes",
+        "empty": "Aucune visite sur cette période."
+      },
+      "more": "Plus de statistiques",
+      "csv": {
+        "period": "Période",
+        "mode": "Visites prises en compte",
+        "metric": "Indicateur",
+        "current": "Cette période",
+        "previous": "Période précédente"
+      }
+    },
     "limitedDays": "Seuls les {count} derniers jours sont affichés tant que la mise à jour 0017 de la base de données n'a pas été exécutée.",
     "consentRecent": "30 derniers jours uniquement (les choix sont conservés 30 jours).",
     "behavior": {
@@ -3382,6 +3544,23 @@
     "tipVisitors": "{count} visiteurs",
     "tipPages": "{count} pages",
     "dailyTitle": "Visiteurs par jour",
+    "real": {
+      "title": "Visiteurs par jour",
+      "hint": "Tous les chiffres de cette page excluent les visites automatisées et les robots (vérifications de liens depuis des centres de données, visites simultanées de la même page, navigateurs pilotés par logiciel).",
+      "excluded": "{count} visites automatisées ont été exclues sur cette période.",
+      "visitors": "Visiteurs",
+      "average": "Moyenne par jour",
+      "best": "Meilleur jour",
+      "contacted": "Ont pris contact",
+      "legendVisitors": "Visiteurs",
+      "legendContact": "Jour avec contact",
+      "tipVisitors": "Visiteurs",
+      "tipPages": "Pages vues",
+      "tipContacted": "Ont pris contact",
+      "chartLabel": "Graphique des visiteurs par jour",
+      "early": "Avant le 2 octobre 2026, l’appareil et l’activité sur la page n’étaient pas enregistrés : le filtrage de ces jours est donc moins précis.",
+      "unavailable": "Disponible après l’exécution de la mise à jour 0020 de la base de données."
+    },
     "sourcesTitle": "Sources de trafic",
     "leadsTitle": "Messages et réservations par publicité",
     "leadsHint": "« Sans publicité » = client venu sans lien publicitaire (recherche, accès direct ou autre).",

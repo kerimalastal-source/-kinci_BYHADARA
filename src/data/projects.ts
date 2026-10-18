@@ -386,6 +386,60 @@ export const projects: Project[] = [
     ]
   },
   {
+    slug: "casablu-vadi",
+    district: "Beylikdüzü",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-10-18: under construction, delivery November 2027, 30/30 instalments, eligible for citizenship.
+    paymentPlan: { downPercent: 30, months: 30 },
+    lifestyle: ["sea", "nature"],
+    unitsAvailable: true,
+    priority: 1.7,
+    developer: "Mutlu İnşaat",
+    price: "on-request",
+    // Facts, areas and images from the developer's catalog ("CasaBlu Vadi Katolog", Drive).
+    coverImage: img("casablu-vadi", "project-aerial", 2000, 855, "CasaBlu Vadi blocks beside Beylikdüzü Yaşam Vadisi and the Marmara Sea, aerial view"),
+    gallery: [
+      img("casablu-vadi", "aerial-valley-sea", 2000, 1415, "CasaBlu Vadi between Yaşam Vadisi and the Marmara Sea, with Ambarlı in the distance"),
+      img("casablu-vadi", "living-sea-sunset", 2000, 1100, "CasaBlu Vadi living room opening onto a sea-view terrace at sunset"),
+      img("casablu-vadi", "living-terrace", 2000, 1146, "CasaBlu Vadi living room and terrace above the sea"),
+      img("casablu-vadi", "bedroom-sea", 1179, 657, "CasaBlu Vadi bedroom with sea view and walk-in wardrobe"),
+      img("casablu-vadi", "kitchen-dining", 1179, 657, "CasaBlu Vadi kitchen and dining area with sea view"),
+      img("casablu-vadi", "indoor-pool", 727, 668, "CasaBlu Vadi indoor swimming pool"),
+      img("casablu-vadi", "fitness", 748, 1023, "CasaBlu Vadi fitness centre"),
+      img("casablu-vadi", "hamam", 750, 919, "CasaBlu Vadi Turkish bath")
+    ],
+    stats: [
+      { value: "71", labelKey: "apartments" },
+      { value: "2027", labelKey: "delivery" },
+      { value: "7", labelKey: "blocks" },
+      { value: "17,263 m²", labelKey: "constructionArea" },
+      { value: "2+1 – 6+1", labelKey: "layout" }
+    ],
+    // Catalog plan pages: "satışa esas brüt" as gross, and net area. The 5+1 type and one 4+1 type are on catalog
+    // pages not read yet; one 6+1 type's saleable area is cut off in the catalog itself (hence "+").
+    residences: [
+      { kind: "apartment", layout: "2+1", gross: "102.51 – 192.56 m²", net: "56.80 – 98.25 m²", planTypes: 7 },
+      { kind: "apartment", layout: "3+1", gross: "155.94 – 250.92 m²", net: "100.00 – 148.15 m²", planTypes: 13 },
+      { kind: "apartment", layout: "4+1", gross: "194.15 – 382.87 m²", net: "126.25 – 223.15 m²" },
+      { kind: "apartment", layout: "6+1", gross: "363.80 m²+", net: "215.40 – 240.85 m²", planTypes: 2 }
+    ],
+    amenities: [
+      "seaView",
+      "seaViewTerrace",
+      "privateGarden",
+      "indoorPool",
+      "fitness",
+      "hamam",
+      "sauna",
+      "playground",
+      "joggingTrack",
+      "landscaping",
+      "indoorParking",
+      "security"
+    ]
+  },
+  {
     slug: "lotus-sisli",
     district: "Şişli",
     city: "Istanbul",

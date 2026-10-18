@@ -5,23 +5,39 @@ import { getProjectBySlug } from "../../data/projects";
 import {
   fetchBehaviorStats,
   fetchConsentStats,
+  fetchRealVisitorStats,
+  fetchStatsDetails,
+  fetchStatsOverview,
   fetchVisitStats,
+  fetchWaitingInquiries,
   type BehaviorStats,
   type ConsentStats,
-  type VisitStats
+  type RealVisitorStats,
+  type StatsDetails,
+  type StatsOverview,
+  type VisitStats,
+  type WaitingInquiry
 } from "../../data/adminStats";
 import { adminHero, adminNav } from "./nav";
+import { initVisitorsChart, visitorsChart } from "./visitorsChart";
+import { audiencePanel, chartPanel, funnelPanel, initDetails, projectsPanel, recentPanel, type DayFormat } from "./statsDetails";
+import { downloadCsv, excludedLine, initSourcesPanel, initWaitingPanel, shortDate, sourcesPanel, statsCards, waitingPanel, type VisitMode } from "./statsTop";
 
 /**
  * Visitor statistics (/admin/stats), from the anonymous visit records (kept a year since
  * migration 0015; admin_visit_stats(), supabase/migrations/0008 and 0017): visitors per day,
  * where they came from (ads, search, direct), countries, the projects they looked at, and the
  * messages and tour bookings each source brought. "What visitors do" (admin_behavior_stats(),
- * 0016): devices, button presses, interest per project, and forms started vs sent.
+ * 0016): devices, button presses, interest per project, and forms started vs sent. "Real visitors
+ * per day" (admin_real_visitor_stats(), 0020/0021) leads the page; since 0021-0023 every number on
+ * it leaves automated visits out. Since 0024 (owner's redesign 2026-10-18, phase 1) the page
+ * opens with four cards against the previous period, the inquiries awaiting a reply and the
+ * source x campaign table (statsTop.ts); the older lists are folded below.
  */
 
-const PERIODS = [7, 30, 90] as const;
-let period: (typeof PERIODS)[number] = 7;
+const PERIODS = [7, 30, 90, 365] as const;
+let period: (typeof PERIODS)[number] = 30;
+let mode: VisitMode = "real";
 
 const tag = () => intlTag();
 const num = (n: number) => new Intl.NumberFormat(tag()).format(n);
@@ -86,14 +102,24 @@ export function barList(rows: { label: string; value: number; note?: string }[],
     .join("")}</ul>`;
 }
 
+const dayLabel = (day: string, opts: Intl.DateTimeFormatOptions) =>
+  new Intl.DateTimeFormat(tag(), { ...opts, timeZone: "UTC" }).format(Date.parse(`${day}T12:00:00Z`));
+
+/** The label under day i of n: every 3rd day under a month, every 7th for longer periods; weekdays for a week. */
+function axisLabel(day: string, i: number, n: number): string {
+  if (n <= 10) {
+    return `<span class="day-chart__label-long">${escapeHtml(dayLabel(day, { weekday: "short" }))}</span><span class="day-chart__label-short">${escapeHtml(dayLabel(day, { day: "numeric" }))}</span>`;
+  }
+  const every = n > 31 ? 7 : 3;
+  // "3/10" built by hand: Intl's Arabic day/month carries direction marks that scramble it in the LTR axis.
+  const [, month, date] = day.split("-").map(Number);
+  return i % every === (n - 1) % every ? `${date}/${month}` : "";
+}
+
 /** Visitors per day as columns; each shows its numbers on hover or focus. */
 export function dailyChart(daily: VisitStats["daily"]): string {
   const max = Math.max(...daily.map((d) => d.visitors), 1);
   const dense = daily.length > 10;
-  // Every 3rd day under a month, every 7th for longer periods.
-  const every = daily.length > 31 ? 7 : 3;
-  const dayLabel = (day: string, opts: Intl.DateTimeFormatOptions) =>
-    new Intl.DateTimeFormat(tag(), { ...opts, timeZone: "UTC" }).format(Date.parse(`${day}T12:00:00Z`));
   const peak = daily.reduce((best, d, i) => (d.visitors > daily[best].visitors ? i : best), 0);
   const columns = daily
     .map((d, i) => {
@@ -106,11 +132,7 @@ export function dailyChart(daily: VisitStats["daily"]): string {
           ${showValue ? `<span class="day-chart__value">${num(d.visitors)}</span>` : ""}
           <span class="day-chart__bar${d.visitors ? "" : " day-chart__bar--zero"}" style="height:${(d.visitors / max) * 100}%"></span>
         </span>
-        <span class="day-chart__label">${
-          dense
-            ? escapeHtml(i % every === (daily.length - 1) % every ? dayLabel(d.day, { day: "numeric", month: "numeric" }) : "")
-            : `<span class="day-chart__label-long">${escapeHtml(dayLabel(d.day, { weekday: "short" }))}</span><span class="day-chart__label-short">${escapeHtml(dayLabel(d.day, { day: "numeric" }))}</span>`
-        }</span>
+        <span class="day-chart__label">${axisLabel(d.day, i, daily.length)}</span>
       </div>`;
     })
     .join("");
@@ -118,6 +140,46 @@ export function dailyChart(daily: VisitStats["daily"]): string {
     <span class="day-chart__max" aria-hidden="true">${num(max)}</span>
     <div class="day-chart__cols">${columns}</div>
   </div>`;
+}
+
+/** The visitors panel: the period's figures, the legend and the chart (automated visits left out). */
+function visitorsPanel(r: RealVisitorStats | null): string {
+  const title = t("adminStats.real.title");
+  if (!r) return panel(title, `<p class="admin-stats__empty">${t("adminStats.real.unavailable")}</p>`, true);
+  const total = r.daily.reduce((s, d) => s + d.visitors, 0);
+  const contacted = r.daily.reduce((s, d) => s + d.contacted, 0);
+  const best = r.daily.reduce((b, d) => (d.visitors > b.visitors ? d : b), r.daily[0]);
+  const average = r.daily.length ? total / r.daily.length : 0;
+  const early = r.daily.some((d) => d.visitors > 0 && d.day < "2026-10-02") ? `<p class="admin-panel__hint vchart-note">${t("adminStats.real.early")}</p>` : "";
+  const figure = (label: string, value: string, note = "") =>
+    `<div class="vchart-figure"><p class="vchart-figure__label">${label}</p><p class="vchart-figure__value"><span dir="ltr">${value}</span></p>${note ? `<p class="vchart-figure__note">${note}</p>` : ""}</div>`;
+  const chart = visitorsChart(r.daily, {
+    date: (day) => dayLabel(day, { weekday: "long", day: "numeric", month: "long" }),
+    axis: axisLabel,
+    minor: (i, n) => n > 10 && ((n - 1 - i) / (n > 31 ? 7 : 3)) % 2 === 1,
+    num,
+    visitors: t("adminStats.real.tipVisitors"),
+    pages: t("adminStats.real.tipPages"),
+    contacted: t("adminStats.real.tipContacted"),
+    label: t("adminStats.real.chartLabel")
+  });
+  return panel(
+    title,
+    `<p class="admin-panel__hint">${t("adminStats.real.hint")} ${r.automated ? t("adminStats.real.excluded", { count: num(r.automated) }) : ""}</p>
+    <div class="vchart-figures">
+      ${figure(t("adminStats.real.visitors"), num(total))}
+      ${figure(t("adminStats.real.average"), new Intl.NumberFormat(tag(), { maximumFractionDigits: 1 }).format(average))}
+      ${figure(t("adminStats.real.best"), num(best?.visitors ?? 0), best?.visitors ? escapeHtml(dayLabel(best.day, { day: "numeric", month: "long" })) : "")}
+      ${figure(t("adminStats.real.contacted"), num(contacted))}
+    </div>
+    <ul class="vchart-legend">
+      <li><i class="vchart-legend__line"></i>${t("adminStats.real.legendVisitors")}</li>
+      <li><i class="vchart-legend__mark"></i>${t("adminStats.real.legendContact")}</li>
+    </ul>
+    ${chart}
+    ${early}`,
+    true
+  );
 }
 
 function tile(label: string, value: string, note = ""): string {
@@ -216,42 +278,89 @@ function behaviorSection(b: BehaviorStats | null): string {
     </div>`;
 }
 
-function renderStats(s: VisitStats, consent: ConsentStats | null, behavior: BehaviorStats | null): string {
-  const leads = s.leads.inquiries + s.leads.bookings;
+/** The folded details under the sources table: the former source, campaign, request and landing lists. */
+function sourceDetails(s: VisitStats | null): string {
+  if (!s) return `<p class="admin-stats__empty">${t("adminStats.unavailable")}</p>`;
   const leadRows = s.lead_sources.length
-    ? `<table class="admin-table">
+    ? `<div class="admin-table-fit"><table class="admin-table">
         <thead><tr><th>${t("adminStats.source")}</th><th>${t("adminStats.inquiries")}</th><th>${t("adminStats.bookings")}</th></tr></thead>
         <tbody>${s.lead_sources
           .map((r) => `<tr><td>${sourceLabel(r.source)}</td><td dir="ltr">${num(r.inquiries)}</td><td dir="ltr">${num(r.bookings)}</td></tr>`)
           .join("")}</tbody>
-      </table>`
+      </table></div>`
     : `<p class="admin-stats__empty">${t("adminStats.noLeads")}</p>`;
+  return `<div class="admin-panels">
+    ${panel(t("adminStats.sourcesTitle"), barList(s.sources.map((r) => ({ label: sourceLabel(r.source), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
+    ${panel(t("adminStats.leadsTitle"), `<p class="admin-panel__hint">${t("adminStats.leadsHint")}</p>${leadRows}`)}
+    ${panel(t("adminStats.campaignsTitle"), barList(s.campaigns.map((r) => ({ label: `${sourceLabel(r.source)} · <span dir="ltr">${escapeHtml(r.campaign)}</span>`, value: r.visitors })), t("adminStats.noCampaigns")))}
+    ${panel(t("adminStats.landingsTitle"), barList(s.landings.map((r) => ({ label: pageLabel(r.page), value: r.visitors })), t("adminStats.empty")))}
+  </div>`;
+}
 
+/** Everything else, folded at the bottom: pages per visit, projects, countries, languages, cookies, behaviour. */
+function moreSection(s: VisitStats | null, consent: ConsentStats | null, behavior: BehaviorStats | null, withLists: boolean): string {
+  const visits = s
+    ? `<div class="admin-kpis">
+        ${tile(t("adminStats.kpi.pages"), num(s.totals.pages), t("adminStats.kpi.perVisit", { count: s.totals.visitors ? (s.totals.pages / s.totals.visitors).toFixed(1) : "0" }))}
+        ${tile(t("adminStats.kpi.engaged"), pct(s.totals.multi_page, s.totals.visitors), t("adminStats.kpi.engagedNote"))}
+      </div>
+      <div class="admin-panels">
+        ${
+          withLists
+            ? `${panel(t("adminStats.projectsTitle"), barList(s.projects.filter((p) => getProjectBySlug(p.slug)).map((p) => ({ label: escapeHtml(getProjectContent(p.slug).name), value: p.visitors })), t("adminStats.empty")))}
+        ${panel(t("adminStats.countriesTitle"), barList(s.countries.map((r) => ({ label: countryLabel(r.country), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
+        ${panel(t("adminStats.localesTitle"), barList(s.locales.map((r) => ({ label: t(`lang.${r.locale}`), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}`
+            : ""
+        }
+        ${consentPanel(consent)}
+      </div>`
+    : `<p class="admin-stats__empty">${t("adminStats.unavailable")}</p>`;
+  return `<details class="stats-fold"><summary>${t("adminStats.top.more")}</summary><div class="stats-fold__body">${visits}${behaviorSection(behavior)}</div></details>`;
+}
+
+interface Loaded {
+  stats: VisitStats | null;
+  consent: ConsentStats | null;
+  behavior: BehaviorStats | null;
+  real: RealVisitorStats | null;
+  overview: StatsOverview | null;
+  waiting: WaitingInquiry[] | null;
+  waitingTotal: number;
+  details: StatsDetails | null;
+}
+
+/** The date helpers the phase 2 sections share with the older chart. */
+const DAY_FORMAT: DayFormat = {
+  date: (day) => dayLabel(day, { weekday: "long", day: "numeric", month: "long" }),
+  axis: axisLabel,
+  minor: (i, n) => n > 10 && ((n - 1 - i) / (n > 31 ? 7 : 3)) % 2 === 1,
+  short: shortDate
+};
+
+/** The page in the owner's order: cards, awaiting reply, the chart, the journey, sources, audience,
+ * projects, latest requests; the rest folded below. Before 0025 the older chart and lists stay. */
+function renderStats(d: Loaded): string {
   // Before migration 0017 the visit statistics stop at 30 days.
-  const limited = s.days < period ? `<p class="admin-stats__limited">${t("adminStats.limitedDays", { count: num(s.days) })}</p>` : "";
-
+  const limited = d.stats && d.stats.days < period ? `<p class="admin-stats__limited">${t("adminStats.limitedDays", { count: num(d.stats.days) })}</p>` : "";
   return `
     ${limited}
-    <div class="admin-kpis">
-      ${tile(t("adminStats.kpi.visitors"), num(s.totals.visitors))}
-      ${tile(t("adminStats.kpi.pages"), num(s.totals.pages), t("adminStats.kpi.perVisit", { count: s.totals.visitors ? (s.totals.pages / s.totals.visitors).toFixed(1) : "0" }))}
-      ${tile(t("adminStats.kpi.engaged"), pct(s.totals.multi_page, s.totals.visitors), t("adminStats.kpi.engagedNote"))}
-      ${tile(t("adminStats.kpi.leads"), num(leads), t("adminStats.kpi.leadsNote", { inquiries: num(s.leads.inquiries), bookings: num(s.leads.bookings) }))}
-      ${tile(t("adminStats.kpi.conversion"), pct(leads, s.totals.visitors), t("adminStats.kpi.conversionNote"))}
-    </div>
-    ${panel(t("adminStats.dailyTitle"), dailyChart(s.daily), true)}
-    <div class="admin-panels">
-      ${panel(t("adminStats.sourcesTitle"), barList(s.sources.map((r) => ({ label: sourceLabel(r.source), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
-      ${panel(t("adminStats.leadsTitle"), `<p class="admin-panel__hint">${t("adminStats.leadsHint")}</p>${leadRows}`)}
-      ${panel(t("adminStats.projectsTitle"), barList(s.projects.filter((p) => getProjectBySlug(p.slug)).map((p) => ({ label: escapeHtml(getProjectContent(p.slug).name), value: p.visitors })), t("adminStats.empty")))}
-      ${panel(t("adminStats.countriesTitle"), barList(s.countries.map((r) => ({ label: countryLabel(r.country), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
-      ${panel(t("adminStats.campaignsTitle"), barList(s.campaigns.map((r) => ({ label: `${sourceLabel(r.source)} · <span dir="ltr">${escapeHtml(r.campaign)}</span>`, value: r.visitors })), t("adminStats.noCampaigns")))}
-      ${panel(t("adminStats.landingsTitle"), barList(s.landings.map((r) => ({ label: pageLabel(r.page), value: r.visitors })), t("adminStats.empty")))}
-      ${panel(t("adminStats.localesTitle"), barList(s.locales.map((r) => ({ label: t(`lang.${r.locale}`), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
-      ${consentPanel(consent)}
-    </div>
-    ${behaviorSection(behavior)}
+    <p class="stats-excluded">${excludedLine(d.overview, mode)}</p>
+    ${mode === "all" ? `<p class="stats-excluded">${t("adminStats.top.allNote")}</p>` : ""}
+    ${statsCards(d.overview, mode)}
+    ${waitingPanel(d.waiting, d.waitingTotal, !d.overview)}
+    ${d.details ? chartPanel(d.details, mode, DAY_FORMAT) : visitorsPanel(d.real)}
+    ${d.details ? funnelPanel(d.details, mode, DAY_FORMAT) : `<p class="admin-stats__empty stats-unavailable">${t("adminStats.details.unavailable")}</p>`}
+    ${sourcesPanel(d.overview, mode, sourceLabel, sourceDetails(d.stats))}
+    ${d.details ? `${audiencePanel(d.details, mode)}${projectsPanel(d.details, mode)}${recentPanel(d.details, sourceLabel)}` : ""}
+    ${moreSection(d.stats, d.consent, d.behavior, !d.details)}
     <p class="admin-bookings__note">${t("adminStats.note")}</p>`;
+}
+
+/** A source's name as plain text (for the CSV file). */
+function sourceText(source: string): string {
+  const el = document.createElement("span");
+  el.innerHTML = sourceLabel(source);
+  return el.textContent ?? source;
 }
 
 export function renderAdminStats(main: HTMLElement): void {
@@ -262,7 +371,11 @@ export function renderAdminStats(main: HTMLElement): void {
     <section class="section admin-stats">
       <div class="container">
         ${adminNav("stats")}
-        <div class="admin-stats__periods" role="group" aria-label="${t("adminStats.period")}"></div>
+        <div class="stats-toolbar">
+          <div class="admin-stats__periods" role="group" aria-label="${t("adminStats.period")}"></div>
+          <div class="admin-stats__periods" role="group" aria-label="${t("adminStats.top.modeLabel")}" data-modes></div>
+          <button type="button" class="btn btn--outline btn--small stats-export" data-export disabled>${t("adminStats.top.export")}</button>
+        </div>
         <div class="admin-stats__body" aria-live="polite"><p>${t("common.loading")}</p></div>
       </div>
     </section>`;
@@ -270,15 +383,48 @@ export function renderAdminStats(main: HTMLElement): void {
   const requestId = crypto.randomUUID();
   main.dataset.requestId = requestId;
   const periodsEl = main.querySelector<HTMLElement>(".admin-stats__periods")!;
+  const modesEl = main.querySelector<HTMLElement>("[data-modes]")!;
+  const exportEl = main.querySelector<HTMLButtonElement>("[data-export]")!;
   const bodyEl = main.querySelector<HTMLElement>(".admin-stats__body")!;
+  let loaded: Loaded | null = null;
+
+  const drawButtons = () => {
+    periodsEl.innerHTML = PERIODS.map(
+      (p) =>
+        `<button type="button" class="admin-stats__period" data-period="${p}" aria-pressed="${p === period}">${p === 365 ? t("adminStats.top.year") : t("adminStats.lastDays", { count: p })}</button>`
+    ).join("");
+    modesEl.innerHTML = (["real", "all"] as const)
+      .map((m) => `<button type="button" class="admin-stats__period" data-mode="${m}" aria-pressed="${m === mode}">${t(`adminStats.top.mode${m === "real" ? "Real" : "All"}`)}</button>`)
+      .join("");
+  };
+
+  const draw = () => {
+    if (!loaded) return;
+    const open = [...bodyEl.querySelectorAll<HTMLDetailsElement>("details")].map((d) => d.open);
+    bodyEl.innerHTML = renderStats(loaded);
+    bodyEl.querySelectorAll<HTMLDetailsElement>("details").forEach((d, i) => (d.open = open[i] ?? false));
+    exportEl.disabled = !loaded.overview;
+    initVisitorsChart(bodyEl);
+    initWaitingPanel(bodyEl);
+    initSourcesPanel(bodyEl);
+    initDetails(bodyEl);
+  };
 
   const load = async () => {
-    periodsEl.innerHTML = PERIODS.map(
-      (p) => `<button type="button" class="admin-stats__period" data-period="${p}" aria-pressed="${p === period}">${t("adminStats.lastDays", { count: p })}</button>`
-    ).join("");
-    const [stats, consent, behavior] = await Promise.all([fetchVisitStats(period), fetchConsentStats(period), fetchBehaviorStats(period)]);
+    drawButtons();
+    const [stats, consent, behavior, real, overview, details] = await Promise.all([
+      fetchVisitStats(period),
+      fetchConsentStats(period),
+      fetchBehaviorStats(period),
+      fetchRealVisitorStats(period),
+      fetchStatsOverview(period),
+      fetchStatsDetails(period)
+    ]);
+    // Before 0024 the waiting list comes straight from the inquiries table.
+    const waiting = overview ? overview.waiting : await fetchWaitingInquiries();
     if (main.dataset.requestId !== requestId) return;
-    bodyEl.innerHTML = stats ? renderStats(stats, consent, behavior) : `<p class="admin-bookings__empty">${t("adminStats.unavailable")}</p>`;
+    loaded = { stats, consent, behavior, real, overview, waiting, waitingTotal: overview ? overview.waiting_total : (waiting?.length ?? 0), details };
+    draw();
   };
 
   periodsEl.addEventListener("click", (e) => {
@@ -287,6 +433,18 @@ export function renderAdminStats(main: HTMLElement): void {
     period = Number(button.dataset.period) as (typeof PERIODS)[number];
     bodyEl.style.opacity = "0.5";
     void load().then(() => (bodyEl.style.opacity = ""));
+  });
+
+  modesEl.addEventListener("click", (e) => {
+    const button = (e.target as Element).closest<HTMLButtonElement>("[data-mode]");
+    if (!button) return;
+    mode = button.dataset.mode as VisitMode;
+    drawButtons();
+    draw();
+  });
+
+  exportEl.addEventListener("click", () => {
+    if (loaded?.overview) downloadCsv(loaded.overview, mode, sourceText);
   });
 
   void load();
