@@ -654,5 +654,37 @@
     "headlineAr": "مجمّع مكتمل ووحدات متاحة الآن",
     "headlineEn": "Completed, with homes available now",
     "photo": "/images/projects/lotus-koru-2/landscaped-grounds.jpg"
+  },
+  {
+    "date": "2026-10-18",
+    "id": "buyukyali-intro",
+    "topic": "بيوك يالي",
+    "headlineAr": "حيّ بحري جديد في قلب إسطنبول",
+    "headlineEn": "Istanbul's new seaside district",
+    "photo": "/images/projects/buyukyali/sea-gardens.jpg"
+  },
+  {
+    "date": "2026-10-18",
+    "id": "residence-permit",
+    "topic": "الإقامة العقارية",
+    "headlineAr": "إقامة قابلة للتجديد عبر شراء منزل في تركيا",
+    "headlineEn": "A renewable residence permit through buying a home",
+    "photo": "/images/blog/life-in-turkey.jpg"
+  },
+  {
+    "date": "2026-10-18",
+    "id": "tf-currency-bank",
+    "topic": "صح أم خطأ: تحويل الثمن عبر بنك (شرائح)",
+    "headlineAr": "يُحوَّل ثمن العقار إلى الليرة عبر بنك في تركيا",
+    "headlineEn": "The price is converted to lira through a bank in Türkiye",
+    "photo": "/images/blog/buying-property-and-tapu.jpg"
+  },
+  {
+    "date": "2026-10-18",
+    "id": "buyukyali-intro-story",
+    "topic": "ستوري: بيوك يالي",
+    "headlineAr": "لوفت تاريخي على ساحل إسطنبول",
+    "headlineEn": "Historic lofts on Istanbul's coast",
+    "photo": "/images/projects/buyukyali/loft-courtyard.jpg"
   }
 ]
