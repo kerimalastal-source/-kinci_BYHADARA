@@ -3334,6 +3334,73 @@
     }
   },
   "adminStats": {
+    "details": {
+      "unavailable": "The visitor journey, audience, projects and latest requests appear once update 0025 has been run.",
+      "chart": {
+        "hintAll": "These numbers include every visit, automated ones too.",
+        "legendCurrent": "This period",
+        "legendPrevious": "Previous period (dashed)",
+        "legendContacted": "Visits that got in touch (gold numbers under the axis)",
+        "tipPrevious": "Previous period",
+        "noPrevious": "The previous-period line is hidden because recording started on {date}.",
+        "tableShow": "Show as a table",
+        "tableHide": "Hide the table",
+        "tableDate": "Day"
+      },
+      "funnel": {
+        "title": "Visitor journey",
+        "hint": "The first share is of all visits; the one in brackets is of the step before.",
+        "ofPrev": "of the step before",
+        "sentNote": "“Sent a request” counts the form’s send button on the site, recorded since {date}.",
+        "steps": {
+          "visits": "Visited the site",
+          "project": "Viewed a project",
+          "request_page": "Opened a contact or request page",
+          "sent": "Sent a request"
+        }
+      },
+      "audience": {
+        "title": "Audience",
+        "countries": "Countries",
+        "devices": "Devices",
+        "languages": "Entry language",
+        "regions": {
+          "all": "All",
+          "gulf": "Gulf",
+          "mena": "Rest of Middle East & North Africa",
+          "turkey": "Türkiye",
+          "europe": "Europe",
+          "cis": "Russia, Central Asia & Caucasus",
+          "other": "Other regions"
+        }
+      },
+      "projects": {
+        "title": "Projects: views against requests",
+        "hint": "Views count how often a project page was opened; visitors count the visits that opened it. Every project with a request in this period is listed even with few views, and one request can name several projects.",
+        "project": "Project",
+        "views": "Views",
+        "visitors": "Visitors",
+        "requests": "Requests",
+        "requested": "Has requests",
+        "more": "Show all projects ({count})",
+        "less": "Show less",
+        "empty": "No project views or requests in this period."
+      },
+      "recent": {
+        "title": "Latest requests",
+        "hint": "The last 12 requests in this period, test requests left out. Select a name to open the request.",
+        "date": "Date",
+        "name": "Name",
+        "type": "Type",
+        "projects": "Projects",
+        "source": "Source",
+        "status": "Status",
+        "booking": "Video tour booking",
+        "openInquiries": "Inquiries box",
+        "openBookings": "Tour bookings",
+        "empty": "No requests in this period."
+      }
+    },
     "top": {
       "year": "12 months",
       "modeLabel": "Which visits",
@@ -3342,7 +3409,7 @@
       "export": "Export CSV",
       "excludedReal": "Automated visits left out: {automated} · Test requests left out: {tests}",
       "excludedAll": "Numbers include automated visits ({automated}) · Test requests left out: {tests}",
-      "allNote": "“All visits” changes the cards and the sources table only; the chart and the folded sections show real visitors.",
+      "allNote": "“All visits” includes automated visits in every section except the folded ones at the bottom.",
       "recordedFrom": "Visit recording started on {date}, so the numbers start from that date.",
       "unavailable": "These numbers appear once update 0024 has been run.",
       "cards": {

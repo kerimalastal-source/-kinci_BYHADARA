@@ -13545,3 +13545,206 @@ body.map-open .cookie-consent {
 .stats-waiting__who small span[dir="ltr"] {
   white-space: nowrap;
 }
+
+/* Phase 2: the previous period (grey, dashed: told apart by shape as well as colour) and the
+   contact counts under the axis. */
+.vchart__prev {
+  fill: none;
+  stroke: #9a948a;
+  stroke-width: 1.75px;
+  stroke-dasharray: 6 5;
+}
+
+.vchart__tip-row--previous span::before {
+  background: #9a948a;
+}
+
+.vchart__counts {
+  display: flex;
+  padding-top: 0.2rem;
+}
+
+.vchart__counts span {
+  flex: 1;
+  min-width: 0;
+  color: var(--color-accent-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.vchart-legend__prev {
+  width: 22px;
+  height: 0;
+  border-top: 2px dashed #9a948a;
+}
+
+.vchart-legend__count {
+  color: var(--color-accent-dark);
+  font-weight: 700;
+}
+
+.stats-table-toggle {
+  align-self: flex-start;
+  margin-top: 0.9rem;
+}
+
+.stats-chart-table {
+  margin-top: 0.75rem;
+}
+
+/* The visit journey: one bar per step, as long as its share of all visits. */
+.stats-funnel {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stats-funnel__step {
+  display: grid;
+  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) minmax(0, 13rem);
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.stats-funnel__label {
+  font-weight: 600;
+}
+
+.stats-funnel__track {
+  height: 26px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--color-surface-alt);
+}
+
+.stats-funnel__bar {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+  background: #13845c;
+}
+
+.stats-funnel__value {
+  color: var(--color-ink-soft);
+  font-size: 0.88rem;
+}
+
+.stats-funnel__value b {
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+.stats-funnel__value small {
+  color: var(--color-muted);
+}
+
+@media (max-width: 720px) {
+  .stats-funnel__step {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .stats-funnel__track {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    height: 18px;
+  }
+}
+
+/* Audience: countries (with region chips) beside devices and entry language. */
+.stats-audience {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-md);
+}
+
+.stats-audience .admin-panel__subtitle {
+  margin-top: 0;
+}
+
+.stats-audience__countries .bar-list {
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.stats-audience__countries [hidden] {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .stats-audience {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .stats-audience__col--wide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .stats-audience {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.stats-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.stats-chip {
+  min-height: 34px;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-ink-soft);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.stats-chip span {
+  color: var(--color-muted);
+}
+
+.stats-chip[aria-pressed="true"] {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.stats-chip[aria-pressed="true"] span {
+  color: inherit;
+}
+
+.stats-projects tr[hidden] {
+  display: none;
+}
+
+.stats-recent__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin: 0.75rem 0 0;
+}
+
+.stats-recent__links .admin-panel__more {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* On a phone, a month of daily contact counts runs together: the gold marks and the table stay. */
+@media (max-width: 640px) {
+  .vchart__counts--dense {
+    display: none;
+  }
+
+  .stats-funnel__value small {
+    display: block;
+  }
+}

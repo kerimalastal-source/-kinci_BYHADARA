@@ -6,19 +6,22 @@ import {
   fetchBehaviorStats,
   fetchConsentStats,
   fetchRealVisitorStats,
+  fetchStatsDetails,
   fetchStatsOverview,
   fetchVisitStats,
   fetchWaitingInquiries,
   type BehaviorStats,
   type ConsentStats,
   type RealVisitorStats,
+  type StatsDetails,
   type StatsOverview,
   type VisitStats,
   type WaitingInquiry
 } from "../../data/adminStats";
 import { adminHero, adminNav } from "./nav";
 import { initVisitorsChart, visitorsChart } from "./visitorsChart";
-import { downloadCsv, excludedLine, initSourcesPanel, initWaitingPanel, sourcesPanel, statsCards, waitingPanel, type VisitMode } from "./statsTop";
+import { audiencePanel, chartPanel, funnelPanel, initDetails, projectsPanel, recentPanel, type DayFormat } from "./statsDetails";
+import { downloadCsv, excludedLine, initSourcesPanel, initWaitingPanel, shortDate, sourcesPanel, statsCards, waitingPanel, type VisitMode } from "./statsTop";
 
 /**
  * Visitor statistics (/admin/stats), from the anonymous visit records (kept a year since
@@ -295,16 +298,20 @@ function sourceDetails(s: VisitStats | null): string {
 }
 
 /** Everything else, folded at the bottom: pages per visit, projects, countries, languages, cookies, behaviour. */
-function moreSection(s: VisitStats | null, consent: ConsentStats | null, behavior: BehaviorStats | null): string {
+function moreSection(s: VisitStats | null, consent: ConsentStats | null, behavior: BehaviorStats | null, withLists: boolean): string {
   const visits = s
     ? `<div class="admin-kpis">
         ${tile(t("adminStats.kpi.pages"), num(s.totals.pages), t("adminStats.kpi.perVisit", { count: s.totals.visitors ? (s.totals.pages / s.totals.visitors).toFixed(1) : "0" }))}
         ${tile(t("adminStats.kpi.engaged"), pct(s.totals.multi_page, s.totals.visitors), t("adminStats.kpi.engagedNote"))}
       </div>
       <div class="admin-panels">
-        ${panel(t("adminStats.projectsTitle"), barList(s.projects.filter((p) => getProjectBySlug(p.slug)).map((p) => ({ label: escapeHtml(getProjectContent(p.slug).name), value: p.visitors })), t("adminStats.empty")))}
+        ${
+          withLists
+            ? `${panel(t("adminStats.projectsTitle"), barList(s.projects.filter((p) => getProjectBySlug(p.slug)).map((p) => ({ label: escapeHtml(getProjectContent(p.slug).name), value: p.visitors })), t("adminStats.empty")))}
         ${panel(t("adminStats.countriesTitle"), barList(s.countries.map((r) => ({ label: countryLabel(r.country), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
-        ${panel(t("adminStats.localesTitle"), barList(s.locales.map((r) => ({ label: t(`lang.${r.locale}`), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}
+        ${panel(t("adminStats.localesTitle"), barList(s.locales.map((r) => ({ label: t(`lang.${r.locale}`), value: r.visitors, note: pct(r.visitors, s.totals.visitors) })), t("adminStats.empty")))}`
+            : ""
+        }
         ${consentPanel(consent)}
       </div>`
     : `<p class="admin-stats__empty">${t("adminStats.unavailable")}</p>`;
@@ -319,9 +326,19 @@ interface Loaded {
   overview: StatsOverview | null;
   waiting: WaitingInquiry[] | null;
   waitingTotal: number;
+  details: StatsDetails | null;
 }
 
-/** The page in the owner's order: cards, awaiting reply, the chart, sources; the rest folded below. */
+/** The date helpers the phase 2 sections share with the older chart. */
+const DAY_FORMAT: DayFormat = {
+  date: (day) => dayLabel(day, { weekday: "long", day: "numeric", month: "long" }),
+  axis: axisLabel,
+  minor: (i, n) => n > 10 && ((n - 1 - i) / (n > 31 ? 7 : 3)) % 2 === 1,
+  short: shortDate
+};
+
+/** The page in the owner's order: cards, awaiting reply, the chart, the journey, sources, audience,
+ * projects, latest requests; the rest folded below. Before 0025 the older chart and lists stay. */
 function renderStats(d: Loaded): string {
   // Before migration 0017 the visit statistics stop at 30 days.
   const limited = d.stats && d.stats.days < period ? `<p class="admin-stats__limited">${t("adminStats.limitedDays", { count: num(d.stats.days) })}</p>` : "";
@@ -331,9 +348,11 @@ function renderStats(d: Loaded): string {
     ${mode === "all" ? `<p class="stats-excluded">${t("adminStats.top.allNote")}</p>` : ""}
     ${statsCards(d.overview, mode)}
     ${waitingPanel(d.waiting, d.waitingTotal, !d.overview)}
-    ${visitorsPanel(d.real)}
+    ${d.details ? chartPanel(d.details, mode, DAY_FORMAT) : visitorsPanel(d.real)}
+    ${d.details ? funnelPanel(d.details, mode, DAY_FORMAT) : `<p class="admin-stats__empty stats-unavailable">${t("adminStats.details.unavailable")}</p>`}
     ${sourcesPanel(d.overview, mode, sourceLabel, sourceDetails(d.stats))}
-    ${moreSection(d.stats, d.consent, d.behavior)}
+    ${d.details ? `${audiencePanel(d.details, mode)}${projectsPanel(d.details, mode)}${recentPanel(d.details, sourceLabel)}` : ""}
+    ${moreSection(d.stats, d.consent, d.behavior, !d.details)}
     <p class="admin-bookings__note">${t("adminStats.note")}</p>`;
 }
 
@@ -388,21 +407,23 @@ export function renderAdminStats(main: HTMLElement): void {
     initVisitorsChart(bodyEl);
     initWaitingPanel(bodyEl);
     initSourcesPanel(bodyEl);
+    initDetails(bodyEl);
   };
 
   const load = async () => {
     drawButtons();
-    const [stats, consent, behavior, real, overview] = await Promise.all([
+    const [stats, consent, behavior, real, overview, details] = await Promise.all([
       fetchVisitStats(period),
       fetchConsentStats(period),
       fetchBehaviorStats(period),
       fetchRealVisitorStats(period),
-      fetchStatsOverview(period)
+      fetchStatsOverview(period),
+      fetchStatsDetails(period)
     ]);
     // Before 0024 the waiting list comes straight from the inquiries table.
     const waiting = overview ? overview.waiting : await fetchWaitingInquiries();
     if (main.dataset.requestId !== requestId) return;
-    loaded = { stats, consent, behavior, real, overview, waiting, waitingTotal: overview ? overview.waiting_total : (waiting?.length ?? 0) };
+    loaded = { stats, consent, behavior, real, overview, waiting, waitingTotal: overview ? overview.waiting_total : (waiting?.length ?? 0), details };
     draw();
   };
 

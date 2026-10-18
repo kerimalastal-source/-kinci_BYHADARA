@@ -4,7 +4,9 @@ import { escapeHtml } from "../../utils/html";
  * Visitors per day on the admin statistics page: a smooth line with a soft fill, round
  * gridlines, gold marks on the days someone got in touch, and a card that follows the
  * pointer (or the arrow keys) with the day's numbers. The chart reads left to right in
- * every language; the card follows the page's direction.
+ * every language; the card follows the page's direction. Since the statistics redesign
+ * (phase 2) it can also draw the previous period as a grey dashed line on the same scale and
+ * write the number of visits that got in touch under the axis.
  */
 
 export interface ChartDay {
@@ -14,6 +16,8 @@ export interface ChartDay {
   /** Null before migration 0021 (the old function gave no pages). */
   pages: number | null;
   contacted: number;
+  /** The same day of the previous period, when that period was fully recorded. */
+  prev?: number;
 }
 
 export interface ChartText {
@@ -28,6 +32,8 @@ export interface ChartText {
   pages: string;
   contacted: string;
   label: string;
+  /** The card's row for the previous period. */
+  previous?: string;
 }
 
 const W = 1000;
@@ -65,14 +71,17 @@ function monotonePath(pts: [number, number][]): string {
 
 export function visitorsChart(days: ChartDay[], text: ChartText): string {
   const n = days.length;
+  const hasPrev = days.some((d) => d.prev !== undefined);
   const busiest = Math.max(...days.map((d) => d.visitors), 0);
-  const step = niceStep(busiest);
-  const top = Math.max(step, Math.ceil(busiest / step) * step);
+  const scaleMax = Math.max(busiest, ...days.map((d) => d.prev ?? 0));
+  const step = niceStep(scaleMax);
+  const top = Math.max(step, Math.ceil(scaleMax / step) * step);
   const xPct = (i: number) => ((i + 0.5) / n) * 100;
   const yPct = (v: number) => (v / top) * 100;
   const pts: [number, number][] = days.map((d, i) => [(xPct(i) / 100) * W, H - (yPct(d.visitors) / 100) * H]);
   const line = monotonePath(pts);
   const area = line ? `${line}L${pts[n - 1][0].toFixed(1)},${H}L${pts[0][0].toFixed(1)},${H}Z` : "";
+  const prevLine = hasPrev ? monotonePath(days.map((d, i) => [(xPct(i) / 100) * W, H - (yPct(d.prev ?? 0) / 100) * H])) : "";
   const peak = days.reduce((best, d, i) => (d.visitors > days[best].visitors ? i : best), 0);
 
   const ticks = [];
@@ -88,11 +97,17 @@ export function visitorsChart(days: ChartDay[], text: ChartText): string {
   const axis = days
     .map((d, i) => `<span class="vchart__label${text.minor(i, n) ? " vchart__label--minor" : ""}">${text.axis(d.day, i, n)}</span>`)
     .join("");
+  // How many visits got in touch, under the axis (only when the days are wide enough to read).
+  const counts =
+    n <= 31 && days.some((d) => d.contacted)
+      ? `<div class="vchart__counts${n > 14 ? " vchart__counts--dense" : ""}" aria-hidden="true">${days.map((d) => `<span>${d.contacted ? escapeHtml(text.num(d.contacted)) : ""}</span>`).join("")}</div>`
+      : "";
   // What the card shows for each day, ready-made so the script needs no dictionary.
   const card = days.map((d) => ({
     date: text.date(d.day),
     rows: [
       ["visitors", text.visitors, text.num(d.visitors)],
+      ...(d.prev === undefined || !text.previous ? [] : [["previous", text.previous, text.num(d.prev)]]),
       ...(d.pages === null ? [] : [["pages", text.pages, text.num(d.pages)]]),
       ["contacted", text.contacted, text.num(d.contacted)]
     ],
@@ -110,6 +125,7 @@ export function visitorsChart(days: ChartDay[], text: ChartText): string {
           </linearGradient>
         </defs>
         <path class="vchart__area" d="${area}" fill="url(#vchart-fill)"/>
+        ${prevLine ? `<path class="vchart__prev" d="${prevLine}" vector-effect="non-scaling-stroke"/>` : ""}
         <path class="vchart__line" d="${line}" vector-effect="non-scaling-stroke"/>
       </svg>
       <div class="vchart__marks" aria-hidden="true">${marks}${peakLabel}</div>
@@ -118,6 +134,7 @@ export function visitorsChart(days: ChartDay[], text: ChartText): string {
       <div class="vchart__tip" aria-hidden="true"></div>
     </div>
     <div class="vchart__axis" aria-hidden="true">${axis}</div>
+    ${counts}
   </div>`;
 }
 

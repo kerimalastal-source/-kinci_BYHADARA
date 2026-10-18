@@ -3334,6 +3334,73 @@
     }
   },
   "adminStats": {
+    "details": {
+      "unavailable": "Le parcours du visiteur, l’audience, les projets et les dernières demandes apparaissent après l’exécution de la mise à jour 0025.",
+      "chart": {
+        "hintAll": "Ces chiffres incluent toutes les visites, y compris automatisées.",
+        "legendCurrent": "Cette période",
+        "legendPrevious": "Période précédente (pointillés)",
+        "legendContacted": "Visites ayant pris contact (chiffres dorés sous l’axe)",
+        "tipPrevious": "Période précédente",
+        "noPrevious": "La ligne de la période précédente est masquée, car l’enregistrement a commencé le {date}.",
+        "tableShow": "Afficher en tableau",
+        "tableHide": "Masquer le tableau",
+        "tableDate": "Jour"
+      },
+      "funnel": {
+        "title": "Parcours du visiteur",
+        "hint": "La première part est calculée sur toutes les visites ; celle entre parenthèses sur l’étape précédente.",
+        "ofPrev": "de l’étape précédente",
+        "sentNote": "« A envoyé une demande » compte le bouton d’envoi des formulaires du site, enregistré depuis le {date}.",
+        "steps": {
+          "visits": "A visité le site",
+          "project": "A consulté un projet",
+          "request_page": "A ouvert une page de contact ou de demande",
+          "sent": "A envoyé une demande"
+        }
+      },
+      "audience": {
+        "title": "Audience",
+        "countries": "Pays",
+        "devices": "Appareils",
+        "languages": "Langue d’entrée",
+        "regions": {
+          "all": "Tous",
+          "gulf": "Golfe",
+          "mena": "Reste du Moyen-Orient et Afrique du Nord",
+          "turkey": "Turquie",
+          "europe": "Europe",
+          "cis": "Russie, Asie centrale et Caucase",
+          "other": "Autres régions"
+        }
+      },
+      "projects": {
+        "title": "Projets : vues et demandes",
+        "hint": "Les vues comptent les ouvertures de la page du projet ; les visiteurs, les visites qui l’ont ouverte. Tout projet ayant reçu une demande sur la période est listé, même avec peu de vues, et une demande peut citer plusieurs projets.",
+        "project": "Projet",
+        "views": "Vues",
+        "visitors": "Visiteurs",
+        "requests": "Demandes",
+        "requested": "A des demandes",
+        "more": "Afficher tous les projets ({count})",
+        "less": "Afficher moins",
+        "empty": "Aucune vue ni demande de projet sur cette période."
+      },
+      "recent": {
+        "title": "Dernières demandes",
+        "hint": "Les 12 dernières demandes de la période, hors demandes de test. Sélectionnez un nom pour ouvrir la demande.",
+        "date": "Date",
+        "name": "Nom",
+        "type": "Type",
+        "projects": "Projets",
+        "source": "Source",
+        "status": "Statut",
+        "booking": "Réservation de visite vidéo",
+        "openInquiries": "Boîte des demandes",
+        "openBookings": "Réservations de visites",
+        "empty": "Aucune demande sur cette période."
+      }
+    },
     "top": {
       "year": "12 mois",
       "modeLabel": "Visites prises en compte",
@@ -3342,7 +3409,7 @@
       "export": "Exporter en CSV",
       "excludedReal": "Visites automatisées exclues : {automated} · Demandes de test exclues : {tests}",
       "excludedAll": "Les chiffres incluent les visites automatisées ({automated}) · Demandes de test exclues : {tests}",
-      "allNote": "« Toutes les visites » ne modifie que les cartes et le tableau des sources ; le graphique et les sections repliées montrent les visiteurs réels.",
+      "allNote": "« Toutes les visites » inclut les visites automatisées dans toutes les sections, sauf celles repliées en bas de page.",
       "recordedFrom": "L’enregistrement des visites a commencé le {date} : les chiffres partent de cette date.",
       "unavailable": "Ces chiffres apparaissent après l’exécution de la mise à jour 0024.",
       "cards": {

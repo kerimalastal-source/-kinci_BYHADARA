@@ -184,3 +184,63 @@ export async function fetchWaitingInquiries(): Promise<WaitingInquiry[] | null> 
     created_at: r.created_at
   }));
 }
+
+/** One day in admin_stats_details() (supabase/migrations/0025), with the same day of the previous period. */
+export interface DetailsDay {
+  day: string;
+  real: number;
+  all: number;
+  pages_real: number;
+  pages_all: number;
+  contacted: number;
+  prev_real: number;
+  prev_all: number;
+}
+
+export interface FunnelCounts {
+  visits: number;
+  project: number;
+  request_page: number;
+  sent: number;
+}
+
+export interface DetailsRequest {
+  type: "inquiry" | "booking";
+  id: string;
+  reference: string;
+  kind: string;
+  form: string;
+  name: string;
+  projects: string[];
+  status: string;
+  created_at: string;
+  source: string;
+  campaign: string;
+}
+
+/** What admin_stats_details() returns: the chart, journey, audience, projects and latest requests. */
+export interface StatsDetails {
+  days: number;
+  since: string;
+  prev_since: string;
+  started: { visits: string | null; actions: string | null };
+  daily: DetailsDay[];
+  funnel: { real: FunnelCounts; all: FunnelCounts };
+  countries: { country: string; real: number; all: number; contacted: number }[];
+  devices: { device: string; real: number; all: number }[];
+  locales: { locale: string; real: number; all: number }[];
+  projects: { slug: string; views_real: number; views_all: number; visitors_real: number; visitors_all: number; requests: number }[];
+  recent: DetailsRequest[];
+}
+
+/** Same period as fetchStatsOverview, or null when 0025 hasn't run. */
+export async function fetchStatsDetails(days: number): Promise<StatsDetails | null> {
+  const { data, error } = await supabase.rpc("admin_stats_details", { p_days: days });
+  if (error) {
+    // Before migration 0025 the function doesn't exist; the page keeps its older sections.
+    if (error.code !== "PGRST202") console.error(error);
+    return null;
+  }
+  const stats = data as (StatsDetails & { error?: string }) | null;
+  return stats && !stats.error ? stats : null;
+}
