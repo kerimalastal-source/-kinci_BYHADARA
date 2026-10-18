@@ -71,14 +71,18 @@ export async function fetchBehaviorStats(days: number): Promise<BehaviorStats | 
   return stats && !stats.error ? stats : null;
 }
 
-/** What admin_real_visitor_stats() returns (supabase/migrations/0020): per Istanbul day, counts only. */
+/** Real visitors per Istanbul day (admin_real_visitor_stats(), supabase/migrations/0020 and 0021). */
 export interface RealVisitorStats {
   days: number;
-  /** total = all visits; automated = left out as bots; contacted = pressed a contact button. */
-  daily: { day: string; total: number; automated: number; contacted: number }[];
+  /** Automated visits left out in the period. */
+  automated: number;
+  /** pages is null before 0021, whose version also counts the pages. */
+  daily: { day: string; visitors: number; pages: number | null; contacted: number }[];
 }
 
-/** Same period as fetchVisitStats, or null when 0020 hasn't run. */
+type RawDay = { day: string; visitors?: number; pages?: number; total?: number; automated?: number; contacted?: number };
+
+/** Same period as fetchVisitStats, or null when 0020 hasn't run. Reads the 0020 and the 0021 shape alike. */
 export async function fetchRealVisitorStats(days: number): Promise<RealVisitorStats | null> {
   const { data, error } = await supabase.rpc("admin_real_visitor_stats", { p_days: days });
   if (error) {
@@ -86,6 +90,14 @@ export async function fetchRealVisitorStats(days: number): Promise<RealVisitorSt
     if (error.code !== "PGRST202") console.error(error);
     return null;
   }
-  const stats = data as (RealVisitorStats & { error?: string }) | null;
-  return stats && !stats.error ? stats : null;
+  const raw = data as { days: number; automated?: number; daily: RawDay[]; error?: string } | null;
+  if (!raw || raw.error) return null;
+  const daily = raw.daily.map((d) => ({
+    day: d.day,
+    visitors: d.visitors ?? Math.max(0, (d.total ?? 0) - (d.automated ?? 0)),
+    pages: d.pages ?? null,
+    contacted: d.contacted ?? 0
+  }));
+  const automated = raw.automated ?? raw.daily.reduce((n, d) => n + (d.automated ?? 0), 0);
+  return { days: raw.days, automated, daily };
 }

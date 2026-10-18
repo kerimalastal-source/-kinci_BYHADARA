@@ -1,5 +1,6 @@
-// Real visitors per day without automated visits (admin_real_visitor_stats(),
-// supabase/migrations/0020_real_visitors.sql), on a real Postgres (PGlite).
+// Automated visits left out of the admin statistics: visit_verdicts() and
+// admin_real_visitor_stats() (supabase/migrations/0020, 0021), admin_visit_stats() (0022),
+// admin_behavior_stats() and admin_consent_stats() (0023), on a real Postgres (PGlite).
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
@@ -16,7 +17,9 @@ async function database() {
     await db.exec(readFileSync(new URL(file, MIGRATIONS), "utf8"));
   }
   // Re-runnable.
-  await db.exec(readFileSync(new URL("0020_real_visitors.sql", MIGRATIONS), "utf8"));
+  for (const file of ["0021_automated_visits.sql", "0022_clean_visit_stats.sql", "0023_clean_behavior_consent.sql"]) {
+    await db.exec(readFileSync(new URL(file, MIGRATIONS), "utf8"));
+  }
   return db;
 }
 
@@ -60,14 +63,37 @@ test("each kind of visit is counted where it belongs", async () => {
   // Older than the period.
   await visit(db, 9, "/", await day(10));
 
+  // The cookie notice: the person and a link check both saw it.
+  await db.query("insert into public.visitor_consent (session_id, choice) values ($1, 'granted'), ($2, 'none')", [id(1), id(3)]);
+
   const r = await stats(db, 7);
   assert.equal(r.days, 7);
   assert.equal(r.daily.length, 7);
+  assert.equal(r.automated, 5);
   const [d2, d1, d0] = r.daily.slice(-3);
-  assert.deepEqual(d2, { day: d2.day, total: 2, automated: 1, contacted: 0 });
-  assert.deepEqual(d1, { day: d1.day, total: 5, automated: 4, contacted: 1 });
-  assert.deepEqual(d0, { day: d0.day, total: 0, automated: 0, contacted: 0 });
-  assert.equal(r.daily.reduce((n, d) => n + d.total, 0), 7);
+  assert.deepEqual(d2, { day: d2.day, visitors: 1, pages: 2, contacted: 0 });
+  assert.deepEqual(d1, { day: d1.day, visitors: 1, pages: 1, contacted: 1 });
+  assert.deepEqual(d0, { day: d0.day, visitors: 0, pages: 0, contacted: 0 });
+
+  // Every number on the statistics page counts the two people only.
+  const visits = (await db.query("select public.admin_visit_stats(7) as r")).rows[0].r;
+  assert.equal(visits.totals.visitors, 2);
+  assert.equal(visits.totals.pages, 3);
+  assert.deepEqual(visits.countries.map((c) => c.country).sort(), ["TR", "US"]);
+  assert.ok(!visits.landings.some((l) => l.page.startsWith("/projects/")));
+  const behavior = (await db.query("select public.admin_behavior_stats(7) as r")).rows[0].r;
+  assert.equal(behavior.visits, 2);
+  assert.equal(behavior.contacted, 1);
+  const consent = (await db.query("select public.admin_consent_stats(7) as r")).rows[0].r;
+  assert.deepEqual(consent, { shown: 1, granted: 1, denied: 0, ignored: 0 });
+});
+
+test("only the statistics functions can read the verdicts", async () => {
+  const db = await database();
+  const grants = (await db.query(
+    "select has_function_privilege('anon', 'public.visit_verdicts(timestamptz)', 'execute') as anon, has_function_privilege('authenticated', 'public.visit_verdicts(timestamptz)', 'execute') as auth"
+  )).rows[0];
+  assert.deepEqual(grants, { anon: false, auth: false });
 });
 
 test("the period is capped and only admins get numbers", async () => {
@@ -78,7 +104,8 @@ test("the period is capped and only admins get numbers", async () => {
   assert.deepEqual(await stats(db, 7), { error: "forbidden" });
 });
 
-test("the migration is ASCII only (the Supabase SQL editor cuts other characters)", () => {
-  const sql = readFileSync(new URL("0020_real_visitors.sql", MIGRATIONS), "utf8");
-  assert.ok(/^[\x00-\x7f]*$/.test(sql));
+test("the migrations are ASCII only (the Supabase SQL editor cuts other characters)", () => {
+  for (const file of ["0020_real_visitors.sql", "0021_automated_visits.sql", "0022_clean_visit_stats.sql", "0023_clean_behavior_consent.sql"]) {
+    assert.ok(/^[\x00-\x7f]*$/.test(readFileSync(new URL(file, MIGRATIONS), "utf8")), file);
+  }
 });

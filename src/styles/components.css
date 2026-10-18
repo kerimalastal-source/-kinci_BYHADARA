@@ -4624,79 +4624,119 @@ body.map-open .back-to-top {
   display: none;
 }
 
-/* Real visitors per day (admin stats): a line over the days, all visits dashed behind it,
-   the visits that got in touch as gold numbers under the axis; numbers on hover / focus. */
-.real-chart {
-  --real-line: #13845c;
-  --real-total: #a7a092;
-  position: relative;
+/* Visitors per day (admin stats, visitorsChart.ts): a smooth line with a soft fill, gridlines
+   with values, gold marks on days with contact, and a card that follows the pointer. */
+.vchart-figures {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0.4rem 0 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
 }
 
-.real-chart__totals {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 1.6rem;
-  margin: 0 0 0.6rem;
+.vchart-figure {
+  min-width: 0;
+  padding: 0.85rem 1.1rem;
 }
 
-.real-chart__figure {
+.vchart-figure + .vchart-figure {
+  border-inline-start: 1px solid var(--color-border);
+}
+
+.vchart-figure__label,
+.vchart-figure__note {
   margin: 0;
-  color: var(--color-ink-soft);
-  font-size: 0.92rem;
+  color: var(--color-muted);
+  font-size: 0.8rem;
 }
 
-.real-chart__figure b {
+.vchart-figure__value {
+  margin: 0.15rem 0 0;
   color: var(--color-primary);
-  font-size: 1.35rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: start;
 }
 
-.real-chart__legend {
+.vchart-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.3rem 1.2rem;
-  margin: 0 0 0.3rem;
+  gap: 0.3rem 1.4rem;
+  margin: 0 0 0.6rem;
   padding: 0;
   color: var(--color-ink-soft);
   font-size: 0.82rem;
   list-style: none;
 }
 
-.real-chart__legend li {
+.vchart-legend li {
   display: flex;
   align-items: center;
   gap: 0.45rem;
 }
 
-.real-chart__swatch {
+.vchart-legend__line {
   width: 22px;
-  border-top: 3px solid #13845c;
+  height: 3px;
+  border-radius: 2px;
+  background: #13845c;
 }
 
-.real-chart__swatch--total {
-  border-top: 2px dashed #a7a092;
-}
-
-.real-chart__swatch--contact {
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--color-accent);
+.vchart-legend__mark {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--color-surface);
   border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent);
 }
 
-.real-chart__max {
-  display: block;
-  color: var(--color-muted);
-  font-size: 0.75rem;
+.vchart {
+  --vchart-line: #13845c;
+  padding: 0.9rem 0 0 2.6rem;
 }
 
-.real-chart__plot {
+.vchart__plot {
   position: relative;
-  height: 200px;
-  border-top: 1px dashed var(--color-border);
-  border-bottom: 1px solid var(--color-muted);
+  height: 280px;
+  outline: none;
+  cursor: crosshair;
+  touch-action: pan-y;
 }
 
-.real-chart__svg {
+.vchart__plot:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-accent);
+  border-radius: 4px;
+}
+
+.vchart__grid {
+  position: absolute;
+  inset: 0;
+}
+
+.vchart__tick {
+  position: absolute;
+  inset-inline: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.vchart__tick--base {
+  border-top-color: #b9b3a6;
+}
+
+.vchart__tick b {
+  position: absolute;
+  right: calc(100% + 0.6rem);
+  transform: translateY(-50%);
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.vchart__svg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -4704,164 +4744,198 @@ body.map-open .back-to-top {
   overflow: visible;
 }
 
-.real-chart__area {
-  fill: rgba(19, 132, 92, 0.12);
-}
-
-.real-chart__line,
-.real-chart__total {
+.vchart__line {
   fill: none;
-  stroke-linejoin: round;
-}
-
-.real-chart__line {
-  stroke: var(--real-line);
+  stroke: var(--vchart-line);
   stroke-width: 2.5px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
 }
 
-.real-chart__total {
-  stroke: var(--real-total);
-  stroke-width: 1.5px;
-  stroke-dasharray: 5 4;
-}
-
-.real-chart__cols {
+.vchart__marks {
   position: absolute;
   inset: 0;
-  display: flex;
+  pointer-events: none;
 }
 
-.real-chart__col {
-  position: relative;
-  flex: 1;
-  min-width: 0;
-  outline: none;
-}
-
-.real-chart__guide {
+.vchart__mark,
+.vchart__dot {
   position: absolute;
-  inset: 0 auto 0 50%;
-  border-left: 1px solid var(--color-border);
-  opacity: 0;
-}
-
-.real-chart__dot {
-  position: absolute;
-  left: 50%;
-  width: 9px;
-  height: 9px;
-  border: 2px solid var(--color-surface);
   border-radius: 50%;
-  background: var(--real-line);
-  opacity: 0;
   transform: translate(-50%, 50%);
 }
 
-.real-chart__value {
+.vchart__mark {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--color-surface);
+  background: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent-dark);
+}
+
+.vchart__peak {
   position: absolute;
-  left: 50%;
-  margin-bottom: 0.45rem;
-  color: var(--color-ink);
-  font-size: 0.78rem;
+  margin-bottom: 0.7rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: 0.72rem;
   font-weight: 700;
   transform: translateX(-50%);
   white-space: nowrap;
 }
 
-.real-chart__col:last-child .real-chart__value {
-  left: auto;
-  right: 0;
-  transform: none;
+.vchart__cross {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 1px dashed #9a948a;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.real-chart__col:hover .real-chart__dot,
-.real-chart__col:focus-visible .real-chart__dot,
-.real-chart__col.is-active .real-chart__dot,
-.real-chart__col:hover .real-chart__guide,
-.real-chart__col:focus-visible .real-chart__guide,
-.real-chart__col.is-active .real-chart__guide {
+.vchart__dot {
+  z-index: 1;
+  width: 13px;
+  height: 13px;
+  border: 3px solid var(--color-surface);
+  background: var(--vchart-line);
+  box-shadow: 0 0 0 4px rgba(19, 132, 92, 0.2);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.vchart__tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  min-width: 170px;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: 0 10px 28px rgba(15, 43, 33, 0.16);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease, transform 90ms ease-out;
+}
+
+.vchart.is-active .vchart__cross,
+.vchart.is-active .vchart__dot,
+.vchart.is-active .vchart__tip {
   opacity: 1;
 }
 
-.real-chart__readout {
-  min-height: 2.9em;
-  margin: 0.2rem 0 0.4rem;
-  padding: 0.45rem 0.7rem;
-  border-radius: var(--radius-sm);
-  background: var(--color-surface-alt);
-  color: var(--color-ink);
-  font-size: 0.85rem;
-  line-height: 1.45;
+.vchart.is-active .vchart__peak {
+  opacity: 0.25;
 }
 
-.real-chart__row {
+.vchart__tip-date {
+  margin: 0 0 0.4rem;
+  color: var(--color-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.vchart__tip-row {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.15rem 0 0;
+  color: var(--color-ink-soft);
+  font-size: 0.8rem;
+  white-space: nowrap;
 }
 
-.real-chart__row > span {
+.vchart__tip-row span {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.vchart__tip-row span::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border);
+}
+
+.vchart__tip-row--visitors span::before {
+  background: var(--vchart-line);
+}
+
+.vchart__tip-row--contacted span::before {
+  background: var(--color-accent);
+}
+
+.vchart__tip-row b {
+  color: var(--color-ink);
+  font-size: 0.9rem;
+}
+
+.vchart__axis {
+  display: flex;
+  padding-top: 0.45rem;
+}
+
+.vchart__label {
   flex: 1;
   min-width: 0;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  text-align: center;
+  white-space: nowrap;
 }
 
-.real-chart__note {
+.vchart__label .day-chart__label-short {
+  display: none;
+}
+
+.vchart-note {
   margin: 0.9rem 0 0;
 }
 
-.real-chart__contacts > span {
-  display: flex;
-  justify-content: center;
-  padding-top: 0.3rem;
-}
-
-.real-chart__contacts b {
-  display: grid;
-  place-items: center;
-  min-width: 1.5rem;
-  height: 1.5rem;
-  padding: 0 0.2rem;
-  border: 2px solid var(--color-accent);
-  border-radius: 999px;
-  background: var(--color-surface);
-  color: var(--color-accent-dark);
-  font-size: 0.72rem;
-}
-
 @media (max-width: 640px) {
-  .real-chart .day-chart__label-long {
+  .vchart-figures {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vchart-figure:nth-child(3) {
+    border-inline-start: 0;
+  }
+
+  .vchart-figure:nth-child(n + 3) {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .vchart-figure__value {
+    font-size: 1.3rem;
+  }
+
+  .vchart {
+    padding-left: 2.2rem;
+  }
+
+  .vchart__plot {
+    height: 210px;
+  }
+
+  .vchart__label--minor {
+    visibility: hidden;
+  }
+
+  .vchart__label .day-chart__label-long {
     display: none;
   }
 
-  .real-chart .day-chart__label-short {
+  .vchart__label .day-chart__label-short {
     display: inline;
   }
-
-  .real-chart__plot {
-    height: 170px;
-  }
-
-  .real-chart__label--minor {
-    visibility: hidden;
-  }
-}
-
-/* Narrow days (a phone, or 90 days): the contact counts lose their circles so they don't overlap. */
-@media (max-width: 640px) {
-  .real-chart__contacts b {
-    min-width: 0;
-    height: auto;
-    padding: 0;
-    border: 0;
-    background: none;
-    font-size: 0.72rem;
-  }
-}
-
-.real-chart--long .real-chart__contacts b {
-  min-width: 0;
-  height: auto;
-  padding: 0;
-  border: 0;
-  background: none;
 }
 
 @media (max-width: 640px) {
