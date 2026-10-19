@@ -686,5 +686,37 @@
     "headlineAr": "لوفت تاريخي على ساحل إسطنبول",
     "headlineEn": "Historic lofts on Istanbul's coast",
     "photo": "/images/projects/buyukyali/loft-courtyard.jpg"
+  },
+  {
+    "date": "2026-10-19",
+    "id": "marmara-haven-villa-verified",
+    "topic": "فيلا مرمرة هيفن · البطاقة الموثّقة",
+    "headlineAr": "9 معلومات قانونية وفنية مؤكَّدة عن الفيلا",
+    "headlineEn": "9 confirmed legal and technical facts",
+    "photo": "/images/projects/marmara-haven-villa/exterior-facade.jpg"
+  },
+  {
+    "date": "2026-10-19",
+    "id": "contact-after-message",
+    "topic": "ماذا يحدث بعد أن تراسلنا؟",
+    "headlineAr": "ماذا يحدث بعد أن تراسلنا؟ 3 طرق ونتيجة كل منها",
+    "headlineEn": "What happens after you write to us?",
+    "photo": "/images/projects/diamond-marin/facade-side.jpg"
+  },
+  {
+    "date": "2026-10-19",
+    "id": "evening-villa-priority",
+    "topic": "سؤال الليلة: ما الأهم في الفيلا؟ (شرائح)",
+    "headlineAr": "الحديقة أم المسبح أم الإطلالة أم المساحة؟",
+    "headlineEn": "Garden, pool, view or space?",
+    "photo": "/images/projects/marmara-haven-villa/garden-wide.jpg"
+  },
+  {
+    "date": "2026-10-19",
+    "id": "marmara-haven-villa-verified-story",
+    "topic": "ستوري: فيلا مرمرة هيفن الموثّقة",
+    "headlineAr": "مستندات الفيلا متاحة لك عند الطلب",
+    "headlineEn": "The villa's documents, on request",
+    "photo": "/images/projects/marmara-haven-villa/dusk-pool.jpg"
   }
 ]
