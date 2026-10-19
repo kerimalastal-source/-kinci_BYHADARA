@@ -18,6 +18,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "iskan-occupancy-permit",
+    priority: -9,
+    published: "2026-10-19",
+    relatedProjects: ["cadde-ispartakule", "lotus-yali", "marmara-haven-villa"],
+    coverImage: { src: "/images/blog/iskan-occupancy-permit.jpg", width: 1536, height: 1024 }
+  },
+  {
     slug: "buyukcekmece-district-guide",
     priority: -8,
     published: "2026-10-16",
