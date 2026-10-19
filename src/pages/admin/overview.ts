@@ -11,6 +11,7 @@ import { followUpWhen, stageTag } from "./crmForm";
 import { adminHero, adminNav } from "./nav";
 import { dailyChart, sourceLabel } from "./stats";
 import { publishSocialNow, type SocialPublishResult } from "../../data/socialPublish";
+import { checkLeadFormsNow, type LeadCheckResult } from "../../data/metaLeads";
 
 /**
  * The admin home (/admin): the day at a glance — today's and tomorrow's video tours,
@@ -81,6 +82,31 @@ function list(items: string[], empty: string): string {
 }
 
 /** One line about what the "publish now" button did. */
+/** The lead-forms check result: one line per form, then a summary (Meta's texts escaped). */
+function leadsStatus(result: LeadCheckResult | null): string {
+  if (!result) return `<p>${t("adminHome.leads.error")}</p>`;
+  if (result.missing) return `<p>${t("adminHome.leads.missing", { missing: escapeHtml(result.missing) })}</p>`;
+  if (result.error === "forbidden") return `<p>${t("adminHome.leads.forbidden")}</p>`;
+  if (result.error === "session") return `<p>${t("adminHome.leads.session")}</p>`;
+  if (result.error || !result.forms) return `<p>${t("adminHome.leads.http", { status: String(result.status ?? 500) })}</p>`;
+  const rows = result.forms
+    .map((form) => {
+      const detail = form.error
+        ? t("adminHome.leads.formError", { error: `<bdi dir="ltr">${escapeHtml(form.error)}</bdi>` })
+        : form.found
+          ? t("adminHome.leads.form", { found: String(form.found), sent: String(form.sent), already: String(form.already) }) +
+            (form.failed ? t("adminHome.leads.failedSend", { failed: String(form.failed) }) : "")
+          : t("adminHome.leads.none");
+      return `<li class="admin-leads__form${form.error ? " admin-leads__form--error" : ""}"><b><bdi>${escapeHtml(form.name)}</bdi></b><span>${detail}</span></li>`;
+    })
+    .join("");
+  const notes = [
+    result.pageToken === false ? `<p>${t("adminHome.leads.noPageToken")}</p>` : "",
+    result.sent ? `<p>${t("adminHome.leads.sentNow", { sent: String(result.sent) })}</p>` : ""
+  ].join("");
+  return `<ul class="admin-leads__forms">${rows}</ul>${notes}`;
+}
+
 function socialStatus(result: SocialPublishResult | null): string {
   if (!result) return t("adminHome.social.error");
   if (result.started) return t("adminHome.social.started");
@@ -132,6 +158,12 @@ export function renderAdminOverview(main: HTMLElement): void {
           <button type="button" class="btn btn--primary btn--small" data-social-publish>${t("adminHome.social.button")}</button>
           <p class="admin-social__status" data-home-social role="status" aria-live="polite"></p>
         </section>
+        <section class="admin-panel admin-panel--wide admin-social">
+          <h2 class="admin-panel__title">${t("adminHome.leads.title")}</h2>
+          <p class="admin-panel__hint">${t("adminHome.leads.hint")}</p>
+          <button type="button" class="btn btn--primary btn--small" data-leads-check>${t("adminHome.leads.button")}</button>
+          <div class="admin-social__status admin-leads" data-home-leads role="status" aria-live="polite"></div>
+        </section>
       </div>
     </section>`;
 
@@ -143,6 +175,16 @@ export function renderAdminOverview(main: HTMLElement): void {
     const result = await publishSocialNow();
     button.disabled = false;
     status.textContent = socialStatus(result);
+  });
+
+  main.querySelector<HTMLButtonElement>("[data-leads-check]")!.addEventListener("click", async (event) => {
+    const button = event.currentTarget as HTMLButtonElement;
+    const status = main.querySelector<HTMLElement>("[data-home-leads]")!;
+    button.disabled = true;
+    status.innerHTML = `<p>${t("adminHome.leads.sending")}</p>`;
+    const result = await checkLeadFormsNow();
+    button.disabled = false;
+    status.innerHTML = leadsStatus(result);
   });
 
   const requestId = crypto.randomUUID();

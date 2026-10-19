@@ -3317,6 +3317,23 @@
       "session": "Votre session a expiré — reconnectez-vous puis réessayez.",
       "http": "Le serveur a renvoyé une erreur (code {status}). Réessayez dans une minute."
     },
+    "leads": {
+      "title": "Formulaires de prospects des annonces",
+      "hint": "Les prospects des formulaires publicitaires Facebook et Instagram arrivent automatiquement sur Telegram. Si Meta vous signale un nouveau prospect par e-mail sans alerte, vérifiez ici : le bouton interroge Meta sur les prospects des deux derniers jours, envoie sur Telegram ceux qui ne l’ont pas encore été et affiche le résultat de chaque formulaire.",
+      "button": "Vérifier les formulaires maintenant",
+      "sending": "Interrogation de Meta…",
+      "form": "{found} prospects sur les deux derniers jours : {sent} envoyés maintenant, {already} déjà envoyés",
+      "failedSend": ", {failed} non envoyés sur Telegram (nouvel essai plus tard)",
+      "none": "Aucun prospect sur les deux derniers jours",
+      "formError": "Erreur de Meta : {error}",
+      "noPageToken": "Remarque : le jeton de la page n’a pas pu être lu, le jeton de l’utilisateur système a été utilisé directement.",
+      "sentNow": "{sent} prospects envoyés sur Telegram maintenant.",
+      "missing": "La vérification est désactivée : le réglage « {missing} » manque dans Vercel.",
+      "error": "Impossible de joindre le serveur. Veuillez réessayer.",
+      "forbidden": "Ce bouton est réservé aux administrateurs.",
+      "session": "Votre session a expiré. Veuillez vous reconnecter.",
+      "http": "Le serveur a répondu par une erreur ({status})."
+    },
     "followUpsToday": "Relances à faire",
     "noFollowUps": "Aucune relance aujourd’hui.",
     "allPipeline": "Pipeline de ventes →",

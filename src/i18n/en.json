@@ -3317,6 +3317,23 @@
       "session": "Your session expired — sign in again and retry.",
       "http": "The server returned an error (code {status}). Try again in a minute."
     },
+    "leads": {
+      "title": "Ad lead forms",
+      "hint": "Leads from Facebook and Instagram lead-form ads reach Telegram automatically. If Meta emails you about a new lead and no alert arrived, check here: the button asks Meta now for the last two days' leads, sends any not yet sent to Telegram, and shows what each form returned.",
+      "button": "Check lead forms now",
+      "sending": "Asking Meta…",
+      "form": "{found} leads in the last two days: {sent} sent now, {already} sent earlier",
+      "failedSend": ", {failed} could not be sent to Telegram (retried later)",
+      "none": "No leads in the last two days",
+      "formError": "Error from Meta: {error}",
+      "noPageToken": "Note: the page token could not be read, so the system user's token was used directly.",
+      "sentNow": "{sent} leads sent to Telegram now.",
+      "missing": "The check is off: the “{missing}” setting is missing in Vercel.",
+      "error": "Could not reach the server. Please try again.",
+      "forbidden": "This button is for admins only.",
+      "session": "Your session has ended. Please sign in again.",
+      "http": "The server answered with an error ({status})."
+    },
     "followUpsToday": "Sales follow-ups due",
     "noFollowUps": "No follow-ups due today.",
     "allPipeline": "Sales pipeline →",
