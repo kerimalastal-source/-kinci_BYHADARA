@@ -265,7 +265,10 @@ export const projects: Project[] = [
       { src: "/images/projects/diamond-marin/master-bedroom.jpg", width: 1920, height: 1366, alt: "Diamond Marin master bedroom" },
       { src: "/images/projects/diamond-marin/kids-bedroom.jpg", width: 775, height: 429, alt: "Diamond Marin bedroom with study corner" },
       { src: "/images/projects/diamond-marin/dressing-room.jpg", width: 1159, height: 632, alt: "Diamond Marin dressing room" },
-      { src: "/images/projects/diamond-marin/fitness-center.jpg", width: 509, height: 362, alt: "Diamond Marin fitness center" }
+      { src: "/images/projects/diamond-marin/fitness-center.jpg", width: 509, height: 362, alt: "Diamond Marin fitness center" },
+      { src: "/images/projects/diamond-marin/facade-sunset.jpg", width: 1700, height: 1141, alt: "Diamond Marin facade at sunset" },
+      { src: "/images/projects/diamond-marin/entrance-gate.jpg", width: 1700, height: 1141, alt: "Diamond Marin entrance between the two blocks" },
+      { src: "/images/projects/diamond-marin/aerial-district.jpg", width: 1700, height: 1141, alt: "Diamond Marin aerial view of the neighbourhood and the sea" }
     ],
     stats: [
       { value: "58", labelKey: "apartments" },
@@ -452,6 +455,8 @@ export const projects: Project[] = [
     paymentPlan: { downPercent: 30, months: 30 },
     lifestyle: ["city"],
     unitsAvailable: true,
+    // December 2024 to December 2026 and 3 street shops: the developer's page (2026-10-19).
+    timeline: "2024 – 2026",
     priority: 2,
     developer: "Lotus Yapı Proje",
     address: "Kaptan Paşa Mah., Piyale Paşa Blv., Okmeydanı Cad., Şişli / İstanbul",
@@ -464,13 +469,17 @@ export const projects: Project[] = [
       img("lotus-sisli", "apartment-living", 1600, 1068, "Lotus Şişli apartment living room and kitchen"),
       img("lotus-sisli", "living-room", 1600, 670, "Lotus Şişli apartment interior"),
       img("lotus-sisli", "penthouse-terrace", 1600, 671, "Lotus Şişli penthouse terrace over the city"),
-      img("lotus-sisli", "office-interior", 1600, 671, "Lotus Şişli office interior")
+      img("lotus-sisli", "office-interior", 1600, 671, "Lotus Şişli office interior"),
+      img("lotus-sisli", "aerial-towers", 1920, 1200, "Lotus Şişli towers from above in the Şişli skyline"),
+      img("lotus-sisli", "rooftop-night", 1920, 960, "Lotus Şişli rooftop at night"),
+      img("lotus-sisli", "meeting-room", 1920, 1080, "Lotus Şişli meeting room")
     ],
     stats: [
       { value: "320", labelKey: "homeOffices" },
       { value: "2 × 18", labelKey: "blocksFloors" },
       { value: "35,342 m²", labelKey: "constructionArea" },
-      { value: "1+1 · 2+1", labelKey: "layout" }
+      { value: "1+1 · 2+1", labelKey: "layout" },
+      { value: "2026", labelKey: "delivery" }
     ],
     residences: [
       { kind: "apartment", layout: "1+1", gross: "57.56 m²", net: "43.41 m²", saleable: "75.97 m²" },
@@ -503,11 +512,16 @@ export const projects: Project[] = [
     status: "delivered",
     lifestyle: ["sea", "nature"],
     unitsAvailable: true,
+    // October 2023 to December 2025 and ~12,000 m² built: the developer's page (2026-10-19).
+    timeline: "2023 – 2025",
     priority: 3,
     developer: "Lotus Yapı Proje",
     address: "Güzelce Mah., Hukukçular Cad. No:14, Büyükçekmece / İstanbul",
     coverImage: img("lotus-manzara-guzelce", "villa-exterior", 1166, 640, "Lotus Manzara Güzelce detached villa exterior"),
     gallery: [
+      img("lotus-manzara-guzelce", "completed-villas", 1920, 1080, "Lotus Manzara Güzelce completed villas, photographed on site"),
+      img("lotus-manzara-guzelce", "completed-garden-lane", 1920, 1080, "Lotus Manzara Güzelce completed villas and garden lane"),
+      img("lotus-manzara-guzelce", "completed-villa-row", 1920, 1080, "Lotus Manzara Güzelce row of completed villas"),
       img("lotus-manzara-guzelce", "aerial-villas", 1500, 640, "Lotus Manzara Güzelce aerial view of the villas"),
       img("lotus-manzara-guzelce", "aerial-masterplan", 1335, 640, "Lotus Manzara Güzelce masterplan among the trees"),
       img("lotus-manzara-guzelce", "villa-row", 1331, 640, "Lotus Manzara Güzelce villas with private gardens"),
@@ -524,7 +538,8 @@ export const projects: Project[] = [
       { value: "32", labelKey: "villas" },
       { value: "12,855 m²", labelKey: "landArea" },
       { value: "6+2", labelKey: "villaLayout" },
-      { value: "343 m²", labelKey: "grossArea" }
+      { value: "343 m²", labelKey: "grossArea" },
+      { value: "12,000 m²", labelKey: "constructionArea" }
     ],
     residences: [{ kind: "villa", layout: "6+2", gross: "343.15 m²", net: "298.43 m²", floors: 3 }],
     amenities: community(["seaViewTerrace", "privateGarden", "spa"], VILLA_SWAP)
@@ -536,11 +551,16 @@ export const projects: Project[] = [
     status: "delivered",
     lifestyle: ["sea"],
     unitsAvailable: true,
+    // 5,600 m² land, ~5,500 m² built, January to December 2023: the developer's page (2026-10-19).
+    timeline: "2023",
     priority: 4,
     developer: "Lotus Yapı Proje",
     address: "Dereağzı Mah., Şenyurt Cad. No:35, Beylikdüzü / İstanbul",
     coverImage: img("lotus-manzara-beylikduzu", "villas-entrance", 1920, 955, "Lotus Manzara Beylikdüzü villas and gated entrance"),
     gallery: [
+      img("lotus-manzara-beylikduzu", "completed-aerial", 1920, 1280, "Lotus Manzara Beylikdüzü completed villas from the air"),
+      img("lotus-manzara-beylikduzu", "twin-villas", 1778, 1000, "Lotus Manzara Beylikdüzü twin villas"),
+      img("lotus-manzara-beylikduzu", "aerial-render", 1778, 1000, "Lotus Manzara Beylikdüzü villas among the trees"),
       img("lotus-manzara-beylikduzu", "aerial-sea-view", 1920, 1121, "Lotus Manzara Beylikdüzü villas from above with the Marmara Sea"),
       img("lotus-manzara-beylikduzu", "aerial-villas", 1920, 693, "Lotus Manzara Beylikdüzü aerial view of the villas"),
       img("lotus-manzara-beylikduzu", "villa-type-a", 1043, 1036, "Lotus Manzara Beylikdüzü type A detached villa"),
@@ -555,9 +575,10 @@ export const projects: Project[] = [
     ],
     stats: [
       { value: "16", labelKey: "villas" },
-      { value: "5,500 m²", labelKey: "landArea" },
+      { value: "5,600 m²", labelKey: "landArea" },
       { value: "5+2", labelKey: "villaLayout" },
-      { value: "303 – 322 m²", labelKey: "grossArea" }
+      { value: "303 – 322 m²", labelKey: "grossArea" },
+      { value: "5,500 m²", labelKey: "constructionArea" }
     ],
     residences: [
       { kind: "villa", layout: "5+2", variant: "A", gross: "322.15 m²", garden: "247 m²", floors: 3 },
@@ -572,6 +593,8 @@ export const projects: Project[] = [
     status: "delivered",
     lifestyle: ["sea", "nature"],
     unitsAvailable: true,
+    // Seafront, ~10,000 m² built, October 2023 to June 2025: the developer's page (2026-10-19).
+    timeline: "2023 – 2025",
     priority: 5,
     developer: "Lotus Yapı Proje",
     address: "Mimarsinan Mah., İnönü 2 Cad. No:111, Büyükçekmece / İstanbul",
@@ -585,7 +608,8 @@ export const projects: Project[] = [
       { value: "48", labelKey: "apartments" },
       { value: "8,600 m²", labelKey: "landArea" },
       { value: "8", labelKey: "blocks" },
-      { value: "3+1 · 5+2", labelKey: "layout" }
+      { value: "3+1 · 5+2", labelKey: "layout" },
+      { value: "10,000 m²", labelKey: "constructionArea" }
     ],
     residences: [
       { kind: "apartment", layout: "3+1", gross: "137.30 – 146.35 m²" },
@@ -658,7 +682,8 @@ export const projects: Project[] = [
     status: "delivered",
     lifestyle: ["city"],
     soldOut: true,
-    timeline: "2022 – 2024",
+    // February 2021 to December 2023, 6,800 m² land, ~35,200 m² built, 3 blocks × 11 floors: the developer's page (2026-10-19).
+    timeline: "2021 – 2023",
     priority: 8,
     coverImage: img("lotus-istanbul", "mixed-use-development", 1707, 1280, "Lotus Istanbul mixed-use development"),
     gallery: [
@@ -672,7 +697,9 @@ export const projects: Project[] = [
     stats: [
       { value: "102", labelKey: "offices" },
       { value: "62", labelKey: "apartments" },
-      { value: "47", labelKey: "shops" }
+      { value: "47", labelKey: "shops" },
+      { value: "3 × 11", labelKey: "blocksFloors" },
+      { value: "35,200 m²", labelKey: "constructionArea" }
     ],
     amenities: community()
   },
@@ -693,11 +720,17 @@ export const projects: Project[] = [
       img("lotus-koru-1", "nature-inspired-residences", 2000, 1429, "Lotus Koru 1 nature-inspired residences"),
       img("lotus-koru-1", "landscape-focused-housing", 1600, 1142, "Lotus Koru 1 landscape-focused housing"),
       img("lotus-koru-1", "green-focused-residential-project", 1600, 800, "Lotus Koru 1 green-focused residential project"),
-      img("lotus-koru-1", "modern-green-community", 1600, 1142, "Lotus Koru 1 modern green community")
+      img("lotus-koru-1", "modern-green-community", 1600, 1142, "Lotus Koru 1 modern green community"),
+      img("lotus-koru-1", "gardens-pool", 1733, 1000, "Lotus Koru 1 gardens and pool between the blocks"),
+      img("lotus-koru-1", "sports-court", 1733, 1000, "Lotus Koru 1 sports court, pool and walking path")
     ],
     stats: [
+      // 10,500 m² land (6,500 m² landscaped + 7,000 m² park), 10 blocks × 5 floors, 27 shops, ~33,000 m² built: the developer's page (2026-10-19).
       { value: "144", labelKey: "apartments" },
-      { value: "5", labelKey: "floors" }
+      { value: "27", labelKey: "shops" },
+      { value: "10 × 5", labelKey: "blocksFloors" },
+      { value: "33,000 m²", labelKey: "constructionArea" },
+      { value: "13,500 m²", labelKey: "greenAndParkArea" }
     ],
     amenities: community()
   },

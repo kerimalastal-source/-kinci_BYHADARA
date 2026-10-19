@@ -116,7 +116,7 @@
       { "value": "14", "label": "projets emblématiques", "icon": "projects" },
       { "value": "3 100+", "label": "unités résidentielles", "icon": "apartments" },
       { "value": "420+", "label": "bureaux", "icon": "offices" },
-      { "value": "200+", "label": "locaux commerciaux", "icon": "shops" },
+      { "value": "230+", "label": "locaux commerciaux", "icon": "shops" },
       { "value": "6", "label": "quartiers phares d'Istanbul", "icon": "districts" }
     ],
     "partnersEyebrow": "Réseau de confiance",
@@ -1146,7 +1146,7 @@
       "name": "Lotus Manzara Güzelce",
       "tagline": "32 villas individuelles entre forêt et mer à Büyükçekmece.",
       "shortDescription": "Lotus Manzara Güzelce est un domaine exclusif de 32 villas individuelles sur 12 855 m² à Güzelce, Büyükçekmece, pensé pour vivre toute l'année entre la verdure et la mer de Marmara.",
-      "longDescription": "Pensé comme une échappée loin de la ville aujourd'hui et au cœur de la vie demain, Lotus Manzara Güzelce est un domaine exclusif de seulement 32 villas individuelles sur 12 855 m² à Güzelce, Büyükçekmece. Chaque villa 6+2 se déploie sur trois niveaux — environ 343 m² bruts — avec terrasse vue mer, terrasse-jardin, jardin privatif paysager et garage couvert pour deux voitures. Les intérieurs se distinguent par de larges baies vitrées, des matériaux raffinés et des plans ergonomiques, des espaces de vie ouverts à la suite parentale avec dressing. Les résidents partagent une salle de sport, un sauna et un hammam, avec systèmes de sécurité et de vidéosurveillance et groupe électrogène. La marina de Güzelce, le littoral et les parcs de la ville sont tout proches. Développé par Lotus Yapı Proje, le projet est achevé et prêt à habiter, avec encore une sélection de villas disponibles à la vente.",
+      "longDescription": "Pensé comme une échappée loin de la ville aujourd'hui et au cœur de la vie demain, Lotus Manzara Güzelce est un domaine exclusif de seulement 32 villas individuelles sur 12 855 m² à Güzelce, Büyükçekmece. Chaque villa 6+2 se déploie sur trois niveaux — environ 343 m² bruts — avec terrasse vue mer, terrasse-jardin, jardin privatif paysager et garage couvert pour deux voitures. Les intérieurs se distinguent par de larges baies vitrées, des matériaux raffinés et des plans ergonomiques, des espaces de vie ouverts à la suite parentale avec dressing. Les résidents partagent une salle de sport, un sauna et un hammam, avec systèmes de sécurité et de vidéosurveillance et groupe électrogène. La marina de Güzelce, le littoral et les parcs de la ville sont tout proches. Développé par Lotus Yapı Proje, le projet est achevé et prêt à habiter, avec encore une sélection de villas disponibles à la vente. Les villas totalisent environ 12 000 m² de surface construite et ont été bâties entre octobre 2023 et décembre 2025.",
       "highlights": [
         "Projet achevé, prêt à habiter — villas disponibles à la vente",
         "Seulement 32 villas individuelles sur 12 855 m²",
@@ -1155,7 +1155,8 @@
         "Garage couvert privatif pour deux voitures par villa",
         "Salle de sport, sauna et hammam",
         "Sécurité, vidéosurveillance et groupe électrogène",
-        "À deux pas de la marina de Güzelce et du littoral"
+        "À deux pas de la marina de Güzelce et du littoral",
+        "Environ 12 000 m² de surface construite, achevé en décembre 2025"
       ],
       "nearby": [
         {
@@ -1178,16 +1179,17 @@
     "lotus-manzara-beylikduzu": {
       "name": "Lotus Manzara Beylikdüzü",
       "tagline": "16 villas privées avec vue mer, entre littoral et nature à Beylikdüzü.",
-      "shortDescription": "Lotus Manzara Beylikdüzü est un domaine exclusif de seulement 16 villas individuelles et jumelées sur 5 500 m² à Beylikdüzü, pensé pour vivre toute l'année près de la West Istanbul Marina et du littoral.",
-      "longDescription": "Une échappée loin de la ville aujourd'hui, au cœur de la vie demain : Lotus Manzara Beylikdüzü est un domaine exclusif de seulement 16 villas sur 5 500 m² à Beylikdüzü, conçu par Lotus Yapı Proje comme résidence d'été comme de toute l'année. Deux types de villas sont proposés : huit villas individuelles de type A de 322,15 m² bruts avec jardin de 247 m², et huit villas jumelées de type B de 303,40 m² bruts avec jardin de 178 m². Chaque villa 5+2 se déploie sur trois niveaux, avec terrasse vue mer, terrasse-jardin, jardin privatif paysager et garage couvert pour deux voitures. Les intérieurs se distinguent par de larges baies vitrées, des matériaux raffinés et des plans ergonomiques, des espaces de vie ouverts à la suite parentale avec dressing et salle de bain. Les résidents profitent d'une salle de sport, d'un sauna et d'un hammam, avec systèmes de sécurité et de vidéosurveillance et groupe électrogène. La West Istanbul Marina, le littoral de Gürpınar et le Yaşam Vadisi de Beylikdüzü sont tout proches. Le projet est achevé et prêt à habiter, avec des villas encore disponibles à la vente.",
+      "shortDescription": "Lotus Manzara Beylikdüzü est un domaine exclusif de seulement 16 villas individuelles et jumelées sur 5 600 m² à Beylikdüzü, pensé pour vivre toute l'année près de la West Istanbul Marina et du littoral.",
+      "longDescription": "Une échappée loin de la ville aujourd'hui, au cœur de la vie demain : Lotus Manzara Beylikdüzü est un domaine exclusif de seulement 16 villas sur 5 600 m² à Beylikdüzü, conçu par Lotus Yapı Proje comme résidence d'été comme de toute l'année. Deux types de villas sont proposés : huit villas individuelles de type A de 322,15 m² bruts avec jardin de 247 m², et huit villas jumelées de type B de 303,40 m² bruts avec jardin de 178 m². Chaque villa 5+2 se déploie sur trois niveaux, avec terrasse vue mer, terrasse-jardin, jardin privatif paysager et garage couvert pour deux voitures. Les intérieurs se distinguent par de larges baies vitrées, des matériaux raffinés et des plans ergonomiques, des espaces de vie ouverts à la suite parentale avec dressing et salle de bain. Les résidents profitent d'une salle de sport, d'un sauna et d'un hammam, avec systèmes de sécurité et de vidéosurveillance et groupe électrogène. La West Istanbul Marina, le littoral de Gürpınar et le Yaşam Vadisi de Beylikdüzü sont tout proches. Le projet est achevé et prêt à habiter, avec des villas encore disponibles à la vente. Les villas totalisent environ 5 500 m² de surface construite et ont été achevées en 2023.",
       "highlights": [
         "Projet achevé, prêt à habiter — villas disponibles à la vente",
-        "Seulement 16 villas sur 5 500 m² : 8 individuelles (type A) et 8 jumelées (type B)",
+        "Seulement 16 villas sur 5 600 m² : 8 individuelles (type A) et 8 jumelées (type B)",
         "Villas 5+2 sur trois niveaux — de 303,40 à 322,15 m² bruts",
         "Jardins privatifs de 178 à 247 m², terrasse vue mer et terrasse-jardin",
         "Garage couvert privatif pour deux voitures par villa",
         "Salle de sport, sauna et hammam",
-        "Proche de la West Istanbul Marina et du littoral de Gürpınar"
+        "Proche de la West Istanbul Marina et du littoral de Gürpınar",
+        "Environ 5 500 m² de surface construite, achevé en 2023"
       ],
       "nearby": [
         {
@@ -1220,14 +1222,16 @@
       "name": "Lotus Yalı",
       "tagline": "Une vie de conte entre le vert de la nature et le bleu de la mer à Büyükçekmece.",
       "shortDescription": "Lotus Yalı est une résidence de charme de 48 logements répartis dans huit bâtiments de trois étages sur 8 600 m² à Büyükçekmece, orientés vers la mer au cœur de jardins couvrant 75 % du terrain.",
-      "longDescription": "Inspirée par la nature et pensée pour une vie calme et sûre, loin du rythme effréné d'Istanbul, Lotus Yalı est une résidence de charme de seulement 48 logements sur 8 600 m² à Büyükçekmece, développée par Lotus Yapı Proje. Huit bâtiments de trois étages sont orientés vers la mer, et 75 % du terrain est consacré aux espaces paysagers, où bassins et végétation variée placent le vert et le bleu au cœur du quotidien. Les logements comprennent des 3+1 en rez-de-jardin de 146,35 m² bruts avec terrasse privative, des 3+1 aux étages de 137,30 m² bruts et de vastes duplex 5+2 de 247,65 m² bruts, tous avec dressing, salle de bain parentale et buanderie. De grandes baies ouvrent sur la mer, tandis que des matériaux raffinés, des cuisines modernes et des salles de bain soignées complètent un design sobre et élégant. Les résidents profitent de piscines intérieures séparées pour hommes et femmes, d'une salle de sport, d'un sauna et d'un hammam. Le projet est achevé et prêt à habiter, avec des logements encore disponibles à la vente.",
+      "longDescription": "Inspirée par la nature et pensée pour une vie calme et sûre, loin du rythme effréné d'Istanbul, Lotus Yalı est une résidence de charme de seulement 48 logements sur 8 600 m² à Büyükçekmece, développée par Lotus Yapı Proje. Huit bâtiments de trois étages sont orientés vers la mer, et 75 % du terrain est consacré aux espaces paysagers, où bassins et végétation variée placent le vert et le bleu au cœur du quotidien. Les logements comprennent des 3+1 en rez-de-jardin de 146,35 m² bruts avec terrasse privative, des 3+1 aux étages de 137,30 m² bruts et de vastes duplex 5+2 de 247,65 m² bruts, tous avec dressing, salle de bain parentale et buanderie. De grandes baies ouvrent sur la mer, tandis que des matériaux raffinés, des cuisines modernes et des salles de bain soignées complètent un design sobre et élégant. Les résidents profitent de piscines intérieures séparées pour hommes et femmes, d'une salle de sport, d'un sauna et d'un hammam. Le projet est achevé et prêt à habiter, avec des logements encore disponibles à la vente. Lotus Yalı se trouve directement en bord de mer, avec environ 10 000 m² de surface construite, bâtie entre octobre 2023 et juin 2025.",
       "highlights": [
         "Projet achevé, prêt à habiter — logements disponibles à la vente",
         "Seulement 48 logements dans 8 bâtiments de 3 étages sur 8 600 m²",
         "Bâtiments orientés vers la mer, 75 % du terrain en espaces paysagers",
         "3+1 en rez-de-jardin (146,35 m²) et aux étages (137,30 m²), et duplex 5+2 (247,65 m² bruts)",
         "Piscines intérieures séparées hommes / femmes, salle de sport, sauna et hammam",
-        "Suites parentales avec dressing et salle de bain"
+        "Suites parentales avec dressing et salle de bain",
+        "Directement en bord de mer",
+        "Environ 10 000 m² de surface construite, achevé en juin 2025"
       ],
       "nearby": [
         {
@@ -1420,7 +1424,7 @@
       "name": "Lotus Şişli",
       "tagline": "Un projet mixte novateur au cœur d'Istanbul.",
       "shortDescription": "Lotus Şişli réunit 320 home offices, des appartements, des penthouses et des commerces sur rue dans deux tours de 18 étages sur le boulevard Piyalepaşa, au cœur du quartier d'affaires de Şişli.",
-      "longDescription": "Au cœur d'Istanbul, Lotus Şişli s'apprête à devenir l'une des adresses les plus prestigieuses de Şişli. Conçu par l'architecte Hakan Saçık pour Lotus Yapı Proje, le projet totalise 35 342 m² de surface construite répartis sur deux blocs de 18 étages, réunissant 320 home offices, des appartements, des penthouses et des commerces sur rue. Les home offices peuvent servir de bureau, de logement ou des deux, avec des appartements 1+1 et 2+1 et des bureaux fermés ou en open space, tandis que les penthouses couronnent les tours de vastes terrasses sur la ville. Le concept « flex space » permet d'ajouter de l'espace à son logement uniquement en cas de besoin, sans frais tant qu'il n'est pas utilisé. Les résidents profitent d'un service de conciergerie, d'un lounge, d'une piscine intérieure, d'une salle de sport, d'un studio de Pilates Reformer et d'un spa avec hammam, sauna, bain finlandais et salles de massage, ainsi que de salles de réunion, d'un café et bar à vitamines, d'une salle de cinéma et d'une salle PlayStation, complétés par un vaste parking, une sécurité privée et un système de caméras. À quelques pas du métro, du Metrobüs et de l'E-5, entouré d'hôpitaux, d'hôtels, du palais de justice d'Istanbul et de centres commerciaux, Lotus Şişli est en construction, avec des unités actuellement en vente.",
+      "longDescription": "Au cœur d'Istanbul, Lotus Şişli s'apprête à devenir l'une des adresses les plus prestigieuses de Şişli. Conçu par l'architecte Hakan Saçık pour Lotus Yapı Proje, le projet totalise 35 342 m² de surface construite répartis sur deux blocs de 18 étages, réunissant 320 home offices, des appartements, des penthouses et des commerces sur rue. Les home offices peuvent servir de bureau, de logement ou des deux, avec des appartements 1+1 et 2+1 et des bureaux fermés ou en open space, tandis que les penthouses couronnent les tours de vastes terrasses sur la ville. Le concept « flex space » permet d'ajouter de l'espace à son logement uniquement en cas de besoin, sans frais tant qu'il n'est pas utilisé. Les résidents profitent d'un service de conciergerie, d'un lounge, d'une piscine intérieure, d'une salle de sport, d'un studio de Pilates Reformer et d'un spa avec hammam, sauna, bain finlandais et salles de massage, ainsi que de salles de réunion, d'un café et bar à vitamines, d'une salle de cinéma et d'une salle PlayStation, complétés par un vaste parking, une sécurité privée et un système de caméras. À quelques pas du métro, du Metrobüs et de l'E-5, entouré d'hôpitaux, d'hôtels, du palais de justice d'Istanbul et de centres commerciaux, Lotus Şişli est en construction, avec des unités actuellement en vente. Selon le promoteur, le projet comprend également 3 commerces sur rue, avec une livraison prévue en décembre 2026.",
       "highlights": [
         "En construction — unités actuellement en vente",
         "320 home offices, ainsi que des appartements, penthouses et commerces sur rue",
@@ -1428,7 +1432,9 @@
         "Emplacement de choix à Şişli, boulevard Piyalepaşa, à deux pas du métro et du Metrobüs",
         "Conciergerie, piscine intérieure, salle de sport, studio de Pilates et spa complet",
         "Flex space : agrandissez votre logement uniquement quand vous en avez besoin",
-        "Conçu par l'architecte Hakan Saçık pour Lotus Yapı Proje"
+        "Conçu par l'architecte Hakan Saçık pour Lotus Yapı Proje",
+        "3 commerces sur rue en rez-de-chaussée",
+        "Livraison prévue en décembre 2026 (selon le promoteur)"
       ],
       "nearby": [
         {
@@ -1490,26 +1496,30 @@
       "name": "Lotus İstanbul",
       "tagline": "Un site emblématique à usage mixte du côté européen d'Istanbul.",
       "shortDescription": "Lotus İstanbul est un développement à usage mixte moderne situé à Beylikdüzü, réunissant résidences, bureaux et commerces dans une architecture emblématique.",
-      "longDescription": "Lotus İstanbul est un développement à usage mixte moderne situé à Beylikdüzü, réunissant résidences, bureaux et commerces dans une architecture emblématique. Le projet combine 102 bureaux, 62 appartements résidentiels et 47 commerces au sein d'un site unique, stratégiquement situé du côté européen d'Istanbul — conçu pour un fort potentiel locatif autant que pour un quotidien confortable et bien connecté. Le projet est achevé et entièrement vendu.",
+      "longDescription": "Lotus İstanbul est un développement à usage mixte moderne situé à Beylikdüzü, réunissant résidences, bureaux et commerces dans une architecture emblématique. Le projet combine 102 bureaux, 62 appartements résidentiels et 47 commerces au sein d'un site unique, stratégiquement situé du côté européen d'Istanbul — conçu pour un fort potentiel locatif autant que pour un quotidien confortable et bien connecté. Le projet est achevé et entièrement vendu. Bâti sur un terrain de 6 800 m² avec environ 35 200 m² de surface construite, Lotus İstanbul compte 3 bâtiments de 11 étages et a été construit entre février 2021 et décembre 2023.",
       "highlights": [
         "Projet achevé — entièrement vendu",
         "102 bureaux, 62 résidences et 47 commerces",
         "Site emblématique à usage mixte du côté européen d'Istanbul",
         "Fort potentiel locatif et de revente",
-        "À proximité immédiate des commodités quotidiennes de Beylikdüzü"
+        "À proximité immédiate des commodités quotidiennes de Beylikdüzü",
+        "3 bâtiments de 11 étages sur un terrain de 6 800 m²",
+        "Environ 35 200 m² de surface construite, achevé en décembre 2023"
       ]
     },
     "lotus-koru-1": {
       "name": "Lotus Koru 1",
       "tagline": "Une résidence à taille humaine entourée de nature, au cœur de Beylikdüzü.",
       "shortDescription": "Lotus Koru 1 est un projet résidentiel bien pensé offrant de vastes espaces paysagers, des bâtiments bas et un cadre de vie confortable à Beylikdüzü.",
-      "longDescription": "Lotus Koru 1 est un projet résidentiel bien pensé offrant de vastes espaces paysagers, des bâtiments bas et un cadre de vie confortable à Beylikdüzü. Les bâtiments de cinq étages de la résidence s'intègrent dans de larges espaces paysagers et des commerces intégrés, offrant aux résidents un équilibre de vie dans un cadre calme et familial — une résidence achevée de 144 appartements, entièrement vendue.",
+      "longDescription": "Lotus Koru 1 est un projet résidentiel bien pensé offrant de vastes espaces paysagers, des bâtiments bas et un cadre de vie confortable à Beylikdüzü. Les bâtiments de cinq étages de la résidence s'intègrent dans de larges espaces paysagers et des commerces intégrés, offrant aux résidents un équilibre de vie dans un cadre calme et familial — une résidence achevée de 144 appartements, entièrement vendue. Bâti sur un terrain de 10 500 m², dont 6 500 m² paysagers, avec un parc municipal de 7 000 m² devant le projet, Lotus Koru 1 compte 10 bâtiments de 5 étages réunissant 144 appartements et 27 commerces sur environ 33 000 m² de surface construite, bâtis entre janvier 2022 et mai 2024.",
       "highlights": [
         "Projet achevé — entièrement vendu",
         "144 appartements répartis dans des bâtiments de cinq étages",
         "Vastes espaces paysagers",
         "Commerces intégrés au site",
-        "Cadre calme et familial à Beylikdüzü"
+        "Cadre calme et familial à Beylikdüzü",
+        "10 bâtiments de 5 étages avec 144 appartements et 27 commerces",
+        "Terrain de 10 500 m², dont 6 500 m² paysagers, et un parc de 7 000 m² devant le projet"
       ]
     },
     "marmara-haven-villa": {
@@ -1909,7 +1919,7 @@
         "Pour donner une idée des distances, notre site indique depuis Diamond Marin : West Istanbul Marina et Beylikdüzü Yaşam Vadisi à 5 minutes, le Metrobüs à 10 minutes, le centre commercial MarmaraPark et l'hôpital Medicana International Istanbul à 15 minutes, le port d'Ambarlı et la plage de Büyükçekmece à 20 minutes. Les autres projets ont leurs propres distances ; demandez donc toujours les chiffres de l'adresse exacte que vous envisagez.",
         "## Des logements à Beylikdüzü",
         "Deux nouveaux lancements illustrent la variété des appartements du quartier. Diamond Marin est un projet boutique de faible hauteur conçu pour 58 familles réparties en deux blocs, avec des appartements 3+1 de 117,60 m² à 143,08 m² bruts, une piscine, une salle de sport et une sécurité privée 24 h/24 ; la livraison est prévue pour fin 2027. Lotus Yaşam est une résidence plus vaste sur 21 000 m², avec 18 blocs résidentiels autour de cours paysagères, une aire de jeux pour enfants, un terrain de sport et un parcours de marche. Ses logements 2+1 mesurent environ 100 à 109 m², ses 3+1 de 134 à 167 m² et ses 4+1 de 194 à 197 m² bruts, avec des facilités de paiement flexibles et une livraison prévue pour fin 2028.",
-        "Pour ceux qui recherchent plus d'espace, Lotus Manzara Beylikdüzü propose 16 villas sur 5 500 m², huit individuelles et huit jumelées, toutes en 5+2 sur trois niveaux, de 303,40 à 322,15 m² bruts, avec jardin privatif. Le projet est terminé et prêt à habiter, et des villas restent disponibles à la vente. Les résidents disposent aussi d'une salle de sport, d'un sauna et d'un hammam. Chaque villa dispose aussi d'un garage couvert pour deux voitures, d'une terrasse avec vue sur la mer et d'une terrasse côté jardin.",
+        "Pour ceux qui recherchent plus d'espace, Lotus Manzara Beylikdüzü propose 16 villas sur 5 600 m², huit individuelles et huit jumelées, toutes en 5+2 sur trois niveaux, de 303,40 à 322,15 m² bruts, avec jardin privatif. Le projet est terminé et prêt à habiter, et des villas restent disponibles à la vente. Les résidents disposent aussi d'une salle de sport, d'un sauna et d'un hammam. Chaque villa dispose aussi d'un garage couvert pour deux voitures, d'une terrasse avec vue sur la mer et d'une terrasse côté jardin.",
         "Le bon choix dépend de vos projets. Une villa prête convient à celui qui souhaite emménager tout de suite, tandis qu'un nouveau lancement convient à celui qui accepte d'attendre la livraison et d'étaler ses paiements dans le temps. N'oubliez pas qu'une date de livraison est un plan, pas une garantie. Avant de décider, renseignez-vous sur le plan, les surfaces brute et nette, les équipements et les charges mensuelles de la résidence. HADARA, votre partenaire immobilier à Istanbul, peut vous aider à comparer ces options. Contactez-nous ou réservez une visite privée en vidéo pour les explorer, puis venez à Istanbul voir votre sélection en personne."
       ]
     },
