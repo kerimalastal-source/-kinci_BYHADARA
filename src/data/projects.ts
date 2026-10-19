@@ -204,28 +204,33 @@ export const projects: Project[] = [
     status: "new-launch",
     paymentPlan: { downPercent: 30, months: 30 },
     lifestyle: ["city"],
-    timeline: "2026 – 2028",
+    timeline: "2025 – 2028",
     priority: 0,
     developer: "Lotus Yapı Proje",
     // Prices from the owner on 2026-09-30 (VAT included, 4% title deed fee not included); per layout in residences.
     price: "$200,000 – $420,000",
-    coverImage: img("beylikduzu-living", "courtyard-gardens", 1193, 671, "Lotus Yaşam landscaped courtyard between the residential blocks"),
+    // Renders from the developer's project page (lotusyapiproje.com, owner's request 2026-10-19).
+    coverImage: img("beylikduzu-living", "aerial-main", 1920, 1080, "Lotus Yaşam aerial view of the blocks and landscaped courtyard in Beylikdüzü"),
     gallery: [
-      img("beylikduzu-living", "street-facade", 1193, 612, "Lotus Yaşam residential blocks from the street"),
-      img("beylikduzu-living", "garden-terrace", 1193, 671, "Lotus Yaşam ground-floor garden terrace"),
-      img("beylikduzu-living", "living-room", 1191, 670, "Lotus Yaşam living room"),
-      img("beylikduzu-living", "living-room-2", 1191, 670, "Lotus Yaşam living room with media wall"),
-      img("beylikduzu-living", "entrance-hall", 1191, 670, "Lotus Yaşam entrance hall"),
-      img("beylikduzu-living", "kitchen", 1191, 670, "Lotus Yaşam kitchen and dining area"),
-      img("beylikduzu-living", "bathroom", 972, 843, "Lotus Yaşam bathroom"),
-      img("beylikduzu-living", "site-plan", 1202, 864, "Lotus Yaşam site plan with blocks A to F"),
-      img("beylikduzu-living", "aerial-view", 1193, 671, "Lotus Yaşam aerial view towards the sea")
+      img("beylikduzu-living", "street-entrance", 1920, 1080, "Lotus Yaşam main entrance and street shops"),
+      img("beylikduzu-living", "central-garden", 1920, 1080, "Lotus Yaşam central garden between the blocks"),
+      img("beylikduzu-living", "garden-pergola", 1920, 1080, "Lotus Yaşam garden terrace with pergola and water feature"),
+      img("beylikduzu-living", "playground", 1300, 731, "Lotus Yaşam children's play area and lawns"),
+      img("beylikduzu-living", "street-shops", 1300, 731, "Lotus Yaşam street shops on the ground floor"),
+      img("beylikduzu-living", "night-view", 1920, 871, "Lotus Yaşam blocks and shops at night"),
+      img("beylikduzu-living", "balcony", 1920, 1079, "Lotus Yaşam balcony overlooking the courtyard"),
+      img("beylikduzu-living", "living-room-new", 1300, 731, "Lotus Yaşam living room"),
+      img("beylikduzu-living", "kitchen-new", 1300, 731, "Lotus Yaşam kitchen and dining area"),
+      img("beylikduzu-living", "master-bedroom", 1300, 731, "Lotus Yaşam master bedroom"),
+      img("beylikduzu-living", "aerial-sea", 1920, 1080, "Lotus Yaşam aerial view towards the Sea of Marmara")
     ],
     stats: [
-      { value: "21,000 m²", labelKey: "landArea" },
+      // 308 homes and 82 street shops, October 2025 to June 2028: the developer's project page (2026-10-19).
+      { value: "308", labelKey: "apartments" },
       { value: "2028", labelKey: "delivery" },
+      { value: "82", labelKey: "shops" },
       { value: "18", labelKey: "blocks" },
-      { value: "2+1 · 3+1 · 4+1", labelKey: "layout" }
+      { value: "21,000 m²", labelKey: "landArea" }
     ],
     residences: [
       { kind: "apartment", layout: "2+1", gross: "100 – 109 m²", price: "$200,000 – $250,000" },

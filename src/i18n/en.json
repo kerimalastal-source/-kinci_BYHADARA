@@ -114,9 +114,9 @@
     "stats": [
       { "value": "12+", "label": "Years of Excellence", "icon": "years" },
       { "value": "14", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "2,800+", "label": "Residential Units", "icon": "apartments" },
+      { "value": "3,100+", "label": "Residential Units", "icon": "apartments" },
       { "value": "420+", "label": "Office Units", "icon": "offices" },
-      { "value": "110+", "label": "Commercial Units", "icon": "shops" },
+      { "value": "200+", "label": "Commercial Units", "icon": "shops" },
       { "value": "6", "label": "Prime Istanbul Districts", "icon": "districts" }
     ],
     "partnersEyebrow": "Trusted Network",
@@ -209,7 +209,7 @@
     "stats": [
       { "value": "12+", "label": "Years in Business", "icon": "years" },
       { "value": "14", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "3,400+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
+      { "value": "3,800+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
       { "value": "225,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
     ]
   },
@@ -1084,14 +1084,16 @@
       "name": "Lotus Yaşam",
       "tagline": "A newly launched residential project designed for modern living.",
       "shortDescription": "Built on a 21,000 m² land area, Lotus Yaşam offers a well-planned selection of residential units supported by comprehensive social amenities, creating a balanced environment for daily life.",
-      "longDescription": "Built on a 21,000 m² land area, Lotus Yaşam offers a well-planned selection of residential units supported by comprehensive social amenities, creating a balanced environment for daily life. The community comprises 18 residential blocks around landscaped courtyards with a children's playground, sports court and walking track, offering 2+1 homes of about 100–109 m², 3+1 homes of 134–167 m² and spacious 4+1 homes of 194–197 m² gross, many with a dressing room, laundry room and generous balconies. Flexible installment payment options enhance accessibility, while eligibility for Turkish citizenship through real estate investment adds long-term value. With delivery scheduled for the end of 2028, the project stands as a strong choice for both comfortable living and sustainable investment in Istanbul.",
+      "longDescription": "Built on a 21,000 m² land area, Lotus Yaşam offers a well-planned selection of residential units supported by comprehensive social amenities, creating a balanced environment for daily life. The community brings together 308 homes and 82 street shops in 18 blocks around landscaped courtyards with a children's playground, sports court and walking track, offering 2+1 homes of about 100–109 m², 3+1 homes of 134–167 m² and spacious 4+1 homes of 194–197 m² gross, many with a dressing room, laundry room and generous balconies. Flexible installment payment options enhance accessibility, while eligibility for Turkish citizenship through real estate investment adds long-term value. Set in Beylikdüzü's private schools district near the Yaşam Vadisi (Life Valley) park, the project keeps schools, public transport, shops and daily needs within easy reach. With delivery scheduled for June 2028 according to the developer, the project stands as a strong choice for both comfortable living and sustainable investment in Istanbul.",
       "highlights": [
         "21,000 m² master-planned land area",
-        "18 residential blocks with 2+1, 3+1 and 4+1 homes from about 100 to 197 m² gross",
+        "308 homes in 18 blocks: 2+1, 3+1 and 4+1 from about 100 to 197 m² gross",
+        "82 street shops on the ground floor",
+        "Central location in Beylikdüzü's private schools district, near Yaşam Vadisi (Life Valley)",
         "Comprehensive social amenities",
         "Flexible installment payment plans",
         "Eligible for Turkish citizenship by investment",
-        "Delivery scheduled for late 2028"
+        "Delivery scheduled for June 2028 (according to the developer)"
       ]
     },
     "diamond-marin": {
