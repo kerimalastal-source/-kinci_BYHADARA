@@ -33,29 +33,39 @@ html,body{width:720px;height:1280px;background:transparent;overflow:hidden}
 .en{font-family:Inter;font-weight:700;font-size:26px;color:#f3d98e;margin-top:6px}
 </style></head><body><div class="box"><div class="ar">فيلا بإطلالة بحرية في إسطنبول</div><div class="en">A sea-view villa in Istanbul</div></div></body></html>`;
 
-// Closing card: the facts the ads already use (price, rooms, pool, sea view, citizenship).
-const end = `<!doctype html><html><head><meta charset="utf-8"><style>${FONTS}
+// Closing card: the villa's confirmed figures (src/data/projects.ts, owner-supplied).
+const FACTS = [
+  ["637 m²", "مساحة الأرض", "Plot"],
+  ["576 m²", "مساحة الفيلا", "Villa area"],
+  ["4", "طوابق", "Floors"],
+  ["5", "غرف نوم", "Bedrooms"],
+  ["7", "حمّامات", "Bathrooms"],
+  ["✓", "مسبح خاص", "Private pool"],
+];
+const end =`<!doctype html><html><head><meta charset="utf-8"><style>${FONTS}
 html,body{width:720px;height:1280px;overflow:hidden;background:#0f2b21;color:#fff}
-.ph{position:absolute;left:0;right:0;top:0;height:560px;background:url('${PHOTO}') center 58%/cover}
+.ph{position:absolute;left:0;right:0;top:0;height:470px;background:url('${PHOTO}') center 58%/cover}
 .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,43,33,0) 55%,#0f2b21 100%)}
 .brand{position:absolute;left:40px;top:150px;display:flex;align-items:center;gap:12px;background:rgba(10,30,23,.62);border-radius:16px;padding:8px 16px 8px 12px}
 .brand img{height:40px}.brand b{display:block;font-family:Inter;font-weight:700;font-size:22px;letter-spacing:4px;line-height:1}.brand i{display:block;font-style:normal;font-family:Inter;font-weight:700;font-size:10px;letter-spacing:5px;color:#e4c574;margin-top:6px}
-.body{position:absolute;left:40px;right:40px;top:540px;text-align:center}
+.body{position:absolute;left:40px;right:40px;top:430px;text-align:center}
 .ar{font-family:Plex;font-weight:700;font-size:46px;direction:rtl}
 .en{font-family:Inter;font-weight:700;font-size:26px;color:#e8dcbc;margin-top:4px}
 .price{display:inline-block;margin-top:22px;padding:12px 26px;border-radius:18px;border:2px solid #c9a24b;background:rgba(201,162,75,.16)}
 .price .a{font-family:Plex;font-weight:700;font-size:36px;color:#f3d98e;direction:rtl;display:block}
 .price .e{font-family:Inter;font-weight:700;font-size:22px;color:#efe6cf;display:block}
-.facts{margin-top:20px;font-family:Plex;font-weight:700;font-size:28px;direction:rtl;color:#fff}
-.facts2{font-family:Inter;font-weight:700;font-size:20px;color:#cfc6ae;margin-top:4px}
+.grid{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;direction:rtl}
+.f{border:1.5px solid rgba(201,162,75,.55);border-radius:16px;padding:12px 6px;background:rgba(255,255,255,.04)}
+.f b{display:block;font-family:Inter;font-weight:700;font-size:30px;color:#f3d98e;direction:ltr}
+.f i{display:block;font-style:normal;font-family:Plex;font-weight:700;font-size:21px;margin-top:2px}
+.f s{display:block;text-decoration:none;font-family:Inter;font-weight:700;font-size:15px;color:#cfc6ae;margin-top:2px}
 </style></head><body>
 <div class="ph"></div>
 <div class="brand"><img src="${LOGO}"><div><b>HADARA</b><i>REAL ESTATE</i></div></div>
 <div class="body">
 <div class="ar">فيلا مرمرة هيفن</div><div class="en">Marmara Haven Villa · Büyükçekmece</div>
 <div class="price"><span class="a">السعر من 1.55 مليون دولار</span><span class="e">From US$1.55M</span></div>
-<div class="facts">5 غرف نوم · مسبح خاص · إطلالة بحرية</div>
-<div class="facts2">5 bedrooms · Private pool · Sea view</div>
+<div class="grid">${FACTS.map(([v, a, e]) => `<div class="f"><b>${v}</b><i>${a}</i><s>${e}</s></div>`).join("")}</div>
 </div></body></html>`;
 
 const b = await chromium.launch();
