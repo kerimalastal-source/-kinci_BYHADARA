@@ -127,15 +127,43 @@ export function leadMessage(lead: Lead, form: Form, pageId: string): string {
 /** Today's date in Istanbul, for the once-a-day warning marker. */
 const istanbulDay = (ms: number) => new Intl.DateTimeFormat("en-CA", { timeZone: ISTANBUL }).format(ms);
 
-/** Announces the new leads of every form; returns how many were sent. */
-export async function checkLeads(deps: LeadDeps): Promise<number> {
-  let sent = 0;
-  try {
-    const page = await graph(deps, deps.pageId, { fields: "access_token" }, deps.token).catch(() => ({}) as Record<string, unknown>);
-    const token = typeof page.access_token === "string" && page.access_token ? page.access_token : deps.token;
-    const since = Math.floor(deps.now() / 1000) - LOOKBACK_SECONDS;
-    for (const id of deps.forms) {
+/** What one check found for one form (the admin "check now" button shows it). */
+export interface FormReport {
+  id: string;
+  name: string;
+  /** Leads of the last two days Meta returned. */
+  found: number;
+  /** Announced on Telegram by this check. */
+  sent: number;
+  /** Announced by an earlier check. */
+  already: number;
+  /** Their Telegram message failed (retried by the next check). */
+  failed: number;
+  error?: string;
+}
+
+export interface LeadReport {
+  /** Whether the page token was read (otherwise the system user's own token was used). */
+  pageToken: boolean;
+  forms: FormReport[];
+  sent: number;
+}
+
+/** Announces the new leads of every form and reports what each form returned. */
+export async function inspectLeads(deps: LeadDeps): Promise<LeadReport> {
+  const page = await graph(deps, deps.pageId, { fields: "access_token" }, deps.token).catch(() => ({}) as Record<string, unknown>);
+  const pageToken = typeof page.access_token === "string" && page.access_token ? page.access_token : "";
+  const token = pageToken || deps.token;
+  const since = Math.floor(deps.now() / 1000) - LOOKBACK_SECONDS;
+  const report: LeadReport = { pageToken: Boolean(pageToken), forms: [], sent: 0 };
+  let graphError: GraphError | null = null;
+  // One form failing (an archived form, a Blob hiccup) must not hide the leads of the others.
+  for (const id of deps.forms) {
+    const result: FormReport = { id, name: id, found: 0, sent: 0, already: 0, failed: 0 };
+    report.forms.push(result);
+    try {
       const form = await readForm(deps, id, token);
+      result.name = form.name;
       const data = await graph(
         deps,
         `${id}/leads`,
@@ -147,22 +175,36 @@ export async function checkLeads(deps: LeadDeps): Promise<number> {
         token
       );
       const leads = (Array.isArray(data.data) ? (data.data as Lead[]) : []).filter((lead) => typeof lead.id === "string");
+      result.found = leads.length;
       // Oldest first, so the chat reads in order.
       leads.sort((a, b) => (leadTime(a.created_time) ?? 0) - (leadTime(b.created_time) ?? 0));
       for (const lead of leads) {
         const marker = `meta-leads/${lead.id}.sent`;
-        if (!(await deps.store.claim(marker))) continue;
-        if (await deps.telegram(leadMessage(lead, form, deps.pageId))) sent++;
-        else await deps.store.remove(marker).catch(() => undefined);
+        if (!(await deps.store.claim(marker))) {
+          result.already++;
+          continue;
+        }
+        if (await deps.telegram(leadMessage(lead, form, deps.pageId))) result.sent++;
+        else {
+          result.failed++;
+          await deps.store.remove(marker).catch(() => undefined);
+        }
       }
+    } catch (error) {
+      result.error = (error instanceof Error ? error.message : "unknown error").slice(0, 300);
+      console.error(`meta-leads: form ${id}: ${result.error}`);
+      if (error instanceof GraphError) graphError ??= error;
     }
-  } catch (error) {
-    if (!(error instanceof GraphError)) throw error;
-    // Usually a token without leads_retrieval: say so on Telegram once a day.
-    console.error(`meta-leads: ${error.message}`);
-    if (await deps.store.claim(`meta-leads/warning-${istanbulDay(deps.now())}`).catch(() => false)) {
-      await deps.telegram(`<b>⚠️ تعذّر قراءة طلبات نماذج الإعلانات من Meta</b>\n${escapeHtml(error.message)}\nالطلبات محفوظة في Meta Business Suite، ولن تصل إلى تيليجرام حتى يُحلّ الخطأ.`);
-    }
+    report.sent += result.sent;
   }
-  return sent;
+  // Usually a token without leads_retrieval: say so on Telegram once a day.
+  if (graphError && (await deps.store.claim(`meta-leads/warning-${istanbulDay(deps.now())}`).catch(() => false))) {
+    await deps.telegram(`<b>⚠️ تعذّر قراءة طلبات نماذج الإعلانات من Meta</b>\n${escapeHtml(graphError.message)}\nالطلبات محفوظة في Meta Business Suite، ولن تصل إلى تيليجرام حتى يُحلّ الخطأ.`);
+  }
+  return report;
+}
+
+/** Announces the new leads of every form; returns how many were sent. */
+export async function checkLeads(deps: LeadDeps): Promise<number> {
+  return (await inspectLeads(deps)).sent;
 }

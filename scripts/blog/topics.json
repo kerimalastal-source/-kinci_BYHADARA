@@ -37,9 +37,9 @@
    "category": "Buying Property"
   },
   {
-   "slug": "video-tour-before-you-travel",
-   "brief": "Choosing your Istanbul home before you travel: how a private video tour works (videoTour.* texts), what to ask, then the visit to Istanbul to buy (videoTour.visitText). No remote purchase promises.",
-   "photo": "/images/projects/diamond-marin/living-room.jpg",
+   "slug": "monthly-fees-aidat",
+   "brief": "Monthly building fees (aidat): what they cover in a compound (security, cleaning, pools, gardens), why they differ between projects, what to ask before buying — no amounts.",
+   "photo": "/images/projects/cadde-ispartakule/garden-pond.jpg",
    "category": "Buying Property"
   },
   {
@@ -49,9 +49,69 @@
    "category": "About Istanbul"
   },
   {
-   "slug": "buying-trip-checklist",
-   "brief": "Checklist for your buying trip to Istanbul: passport, Turkish tax number, bank account for the payment, translator at the title deed office, valuation report — general, well-known steps only, and the site's own steps (blogData.buying-property-and-tapu, citizenship.steps).",
-   "photo": "/images/projects/lotus-yali/view-from-sea.jpg",
+   "slug": "kat-irtifaki-vs-kat-mulkiyeti",
+   "brief": "Kat İrtifakı vs Kat Mülkiyeti on a Turkish title deed (tapu): what each means, why a building under construction usually has kat irtifakı and a completed one with occupancy permit gets kat mülkiyeti, what a buyer should check on the deed. Connect it to the published İskan article (blogData.iskan-occupancy-permit). Put the Turkish terms first in every language's title. General, well-established explanation only: no fees, amounts, percentages, rates or deadlines that are not on the site; add 'the conditions are per current law and may change'.",
+   "photo": "/images/projects/casablu-vadi/project-aerial.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "bakirkoy-atakoy-district-guide",
+   "brief": "Bakırköy and Ataköy district guide for foreign buyers: seafront European-side district near the airport road and the marina, what it is like to live there; nearby places and times ONLY from projectsData.sea-pearl-atakoy.nearby; Sea Pearl Ataköy as the example. If residence permits come up, use only lawsData.rules.residence-closed-areas wording (check the address before buying) — never say the district is open or closed.",
+   "photo": "/images/projects/sea-pearl-atakoy/aerial-coast.jpg",
+   "category": "About Istanbul"
+  },
+  {
+   "slug": "payment-plans-explained",
+   "brief": "Paying for property in Turkey: cash vs installment plans offered by developers on new projects, deposits and schedules in general terms, currency — no rates or percentages; faq.categories[1].items[2].",
+   "photo": "/images/projects/beylikduzu-living/living-room.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "dask-earthquake-insurance",
+   "brief": "DASK, Turkey's compulsory earthquake insurance for homes: what it is, who needs it, how it relates to the title deed and to buying a home, what it does not cover compared with a private home insurance. Put 'DASK' first in every language's title. Different angle from the planned earthquake-regulation-2018 topic (that one is about building design). General, well-established explanation only: no fees, amounts, percentages, rates or deadlines that are not on the site; add 'the conditions are per current law and may change'.",
+   "photo": "/images/projects/diamond-marin/facade.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "zeytinburnu-district-guide",
+   "brief": "Zeytinburnu district guide (Kazlıçeşme coast): where the historic city walls meet the Marmara Sea, transport links, what it is like to live there; nearby places ONLY from projectsData.buyukyali.nearby and its descriptions; Büyükyalı as the example (no unit sizes or prices — none are published). Residence permits: only lawsData.rules.residence-closed-areas wording.",
+   "photo": "/images/projects/buyukyali/sea-skyline.jpg",
+   "category": "About Istanbul"
+  },
+  {
+   "slug": "emlak-vergisi-property-tax",
+   "brief": "Emlak Vergisi, the annual property tax in Turkey: who pays it, paid to the municipality, how it relates to the property's value, and the valuable housing tax (Değerli Konut Vergisi) — only what lawsData.rules.property-tax and the approved lawsData.updates say; no rates or thresholds that are not on the site. Put 'Emlak Vergisi' first in every language's title. General, well-established explanation only: no fees, amounts, percentages, rates or deadlines that are not on the site; add 'the conditions are per current law and may change'.",
+   "photo": "/images/projects/lotus-sisli/tower-day.jpg",
+   "category": "Taxes & Fees"
+  },
+  {
+   "slug": "residence-permit-by-property",
+   "brief": "Short-term residence permit through property ownership: the values from citizenship.residence* (Istanbul and big cities vs other cities), who it suits, difference from citizenship. Add: conditions per current law, subject to change.",
+   "photo": "/images/blog/life-in-turkey.jpg",
+   "category": "Citizenship by Investment"
+  },
+  {
+   "slug": "yapi-denetim-building-inspection",
+   "brief": "Yapı Denetim, Turkey's building inspection system: independent licensed inspection firms supervise construction on behalf of the state, what this means for a buyer of a new or off-plan home, what to ask (the inspection firm, permit, occupancy permit). Put 'Yapı Denetim' first in every language's title. General, well-established explanation only: no fees, amounts, percentages, rates or deadlines that are not on the site; add 'the conditions are per current law and may change'.",
+   "photo": "/images/projects/diamond-marin/street-view.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "earthquake-regulation-2018",
+   "brief": "Earthquake safety when buying in Istanbul: what the Turkish Building Earthquake Regulation (2018) means for newer buildings, what to ask (permit, completion year, structure) — general, no technical figures; mention the verified card on Marmara Haven Villa (verified.earthquake).",
+   "photo": "/images/projects/lotus-koru-2/residential-blocks.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "video-tour-before-you-travel",
+   "brief": "Choosing your Istanbul home before you travel: how a private video tour works (videoTour.* texts), what to ask, then the visit to Istanbul to buy (videoTour.visitText). No remote purchase promises.",
+   "photo": "/images/projects/diamond-marin/living-room.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "choosing-floor-and-view",
+   "brief": "Choosing the floor, orientation and view: sea view, garden floors with terraces, top floors and penthouses; examples from our projects (Diamond Marin garden terraces, Lotus Şişli penthouses, Marmara Haven Villa rooftop).",
+   "photo": "/images/projects/marmara-haven-villa/sea-view.jpg",
    "category": "Buying Property"
   },
   {
@@ -61,21 +121,9 @@
    "category": "Life in Turkey"
   },
   {
-   "slug": "earthquake-regulation-2018",
-   "brief": "Earthquake safety when buying in Istanbul: what the Turkish Building Earthquake Regulation (2018) means for newer buildings, what to ask (permit, completion year, structure) — general, no technical figures; mention the verified card on Marmara Haven Villa (verified.earthquake).",
-   "photo": "/images/projects/lotus-koru-2/residential-blocks.jpg",
-   "category": "Buying Property"
-  },
-  {
-   "slug": "residence-permit-by-property",
-   "brief": "Short-term residence permit through property ownership: the values from citizenship.residence* (Istanbul and big cities vs other cities), who it suits, difference from citizenship. Add: conditions per current law, subject to change.",
-   "photo": "/images/blog/life-in-turkey.jpg",
-   "category": "Citizenship by Investment"
-  },
-  {
-   "slug": "monthly-fees-aidat",
-   "brief": "Monthly building fees (aidat): what they cover in a compound (security, cleaning, pools, gardens), why they differ between projects, what to ask before buying — no amounts.",
-   "photo": "/images/projects/cadde-ispartakule/garden-pond.jpg",
+   "slug": "buying-trip-checklist",
+   "brief": "Checklist for your buying trip to Istanbul: passport, Turkish tax number, bank account for the payment, translator at the title deed office, valuation report — general, well-known steps only, and the site's own steps (blogData.buying-property-and-tapu, citizenship.steps).",
+   "photo": "/images/projects/lotus-yali/view-from-sea.jpg",
    "category": "Buying Property"
   },
   {
@@ -83,18 +131,6 @@
    "brief": "Renting out your Istanbul property: tenant types, furnished vs unfurnished, working with a manager, what makes a unit easy to rent (location, amenities) — no yield percentages.",
    "photo": "/images/projects/cadde-ispartakule/terrace-view.jpg",
    "category": "Real Estate"
-  },
-  {
-   "slug": "choosing-floor-and-view",
-   "brief": "Choosing the floor, orientation and view: sea view, garden floors with terraces, top floors and penthouses; examples from our projects (Diamond Marin garden terraces, Lotus Şişli penthouses, Marmara Haven Villa rooftop).",
-   "photo": "/images/projects/marmara-haven-villa/sea-view.jpg",
-   "category": "Buying Property"
-  },
-  {
-   "slug": "payment-plans-explained",
-   "brief": "Paying for property in Turkey: cash vs installment plans offered by developers on new projects, deposits and schedules in general terms, currency — no rates or percentages; faq.categories[1].items[2].",
-   "photo": "/images/projects/beylikduzu-living/living-room.jpg",
-   "category": "Buying Property"
   }
  ]
 }

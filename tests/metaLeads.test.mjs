@@ -2,7 +2,7 @@
 // No network: a fake fetch plays Meta's Graph API, an in-memory store plays Vercel Blob.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { checkLeads, leadMessage, leadTime } from "../.test-build/_lib/metaLeads.js";
+import { checkLeads, inspectLeads, leadMessage, leadTime } from "../.test-build/_lib/metaLeads.js";
 
 const NOW = Date.parse("2026-10-14T09:00:00Z");
 const FORM = {
@@ -119,4 +119,31 @@ test("leadMessage works without phone, answers or time", () => {
   const html = leadMessage({ id: "X", field_data: [{ name: "full_name", values: ["Only Name"] }] }, { name: "Form", questions: [] }, "PAGE");
   assert.match(html, /Only Name/);
   assert.doesNotMatch(html, /wa\.me/);
+});
+
+test("inspectLeads reports each form, and one failing form does not hide the others", async () => {
+  const { deps, sent } = setup({ leads: { F1: [lead("L1", 5)], BAD: [], F2: [lead("L2", 3), lead("L3", 2)] } });
+  const base = deps.fetch;
+  deps.fetch = async (url) => {
+    if (new URL(url).pathname.includes("/BAD")) return new Response(JSON.stringify({ error: { code: 100, message: "Unsupported get request" } }), { status: 400 });
+    return base(url);
+  };
+  await checkLeads({ ...deps, forms: ["F2"] }); // L2 and L3 are announced earlier
+  sent.length = 0;
+  const report = await inspectLeads(deps);
+  assert.equal(report.pageToken, true);
+  assert.equal(report.sent, 1);
+  assert.deepEqual(
+    report.forms.map((f) => [f.id, f.found, f.sent, f.already, Boolean(f.error)]),
+    [
+      ["F1", 1, 1, 0, false],
+      ["BAD", 0, 0, 0, true],
+      ["F2", 2, 0, 2, false]
+    ]
+  );
+  assert.match(report.forms[1].error, /Unsupported get request/);
+  assert.equal(report.forms[0].name, "Villa Marmara Haven · EN/AR");
+  // The lead plus the once-a-day warning about the failing form.
+  assert.equal(sent.length, 2);
+  assert.match(sent[1], /Unsupported get request/);
 });

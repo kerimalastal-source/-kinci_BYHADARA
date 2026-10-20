@@ -10,6 +10,10 @@
 //      people, unsure or automated, and for each likely person where they came from, what they
 //      looked at and what they are probably after (visit_report(), migration 0018;
 //      api/_lib/visitReport.ts). A failure there never affects the summary.
+//   4. Saves our Instagram account's and Facebook page's statistics in Supabase
+//      (api/_lib/igInsightsRun.ts, migrations 0026 and 0027), last of all so nothing above
+//      waits for Meta. Here and not in its own function: the free Vercel plan allows 12
+//      functions per deployment.
 //
 // Vercel calls it with "Authorization: Bearer <CRON_SECRET>". The same secret opens
 // daily_digest() in the database (supabase/migrations/0008), so CRON_SECRET in Vercel must be
@@ -21,8 +25,10 @@ import { TEAM_INBOX, visitorEmail, type App, type BookingDetails, type ContactMe
 import { PROJECT_NAMES } from "./_lib/projectNames.js";
 import { dailySummary, type Digest } from "./_lib/dailyMessages.js";
 import { followUpsToday, sendDueFollowUps } from "./_lib/followups.js";
+import { sendOpsReports } from "./_lib/opsReports.js";
 import { checkMetaLeads } from "./_lib/metaLeadsRun.js";
 import { readVisits, visitReportMessage, type ReportRow } from "./_lib/visitReport.js";
+import { saveFacebookInsights, saveInstagramInsights } from "./_lib/igInsightsRun.js";
 
 const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru"];
 /** Links in emails and alerts point at the public site, whatever URL the cron called. */
@@ -103,13 +109,16 @@ export async function GET(request: Request): Promise<Response> {
 
   // 2. Sales follow-ups that are due (usually already sent from page views), then the morning summary.
   await sendDueFollowUps(SITE, 0);
+  // A work-system check report not sent yet (usually already sent from page views).
+  await sendOpsReports(0);
   // Lead-form ad leads not yet announced (usually already sent from page views).
   await checkMetaLeads().catch((error: unknown) => {
     console.error(`daily: meta leads failed: ${error instanceof Error ? error.message : "unknown"}`);
   });
   const messageId = await sendTelegram(dailySummary(digest, SITE, { sent: sent.length, failed }, await followUpsToday()));
   const report = await sendVisitReport(secret);
-  return json({ reminders: sent.length, failed: failed.length, summary: messageId !== null, report });
+  const [instagram, facebook] = await Promise.all([saveInstagramInsights(), saveFacebookInsights()]);
+  return json({ reminders: sent.length, failed: failed.length, summary: messageId !== null, report, instagram, facebook });
 }
 
 /** The morning visitor report; false when it couldn't be sent (or migration 0018 hasn't run). */

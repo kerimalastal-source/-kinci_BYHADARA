@@ -82,6 +82,12 @@
     },
     "api/social-publish.ts": {
       "maxDuration": 60
+    },
+    "api/meta-leads.ts": {
+      "maxDuration": 30
+    },
+    "api/daily.ts": {
+      "maxDuration": 60
     }
   },
   "crons": [
