@@ -86,7 +86,7 @@
     "api/meta-leads.ts": {
       "maxDuration": 30
     },
-    "api/ig-insights.ts": {
+    "api/daily.ts": {
       "maxDuration": 60
     }
   },
@@ -106,10 +106,6 @@
     {
       "path": "/api/social-publish",
       "schedule": "0 18 * * *"
-    },
-    {
-      "path": "/api/ig-insights",
-      "schedule": "0 5 * * *"
     }
   ]
 }

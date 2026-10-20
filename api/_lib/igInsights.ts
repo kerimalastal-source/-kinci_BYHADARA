@@ -1,6 +1,6 @@
 // Reads the statistics of our Instagram account (@hadararealestate) from Meta's Graph API:
 // the account's numbers for each of the last 28 days and every post of the last 30 days.
-// Instagram keeps most of these for about 30 days only, so api/ig-insights.ts saves them
+// Instagram keeps most of these for about 30 days only, so the morning job (api/daily.ts) saves them
 // every morning (save_ig_insights(), migration 0026) and the history builds up in Supabase.
 // Only our own account's totals; nothing about any visitor.
 //
