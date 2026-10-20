@@ -8,6 +8,28 @@
 import { collectFacebook } from "./fbInsights.js";
 import { collectInsights } from "./igInsights.js";
 import { hasSupabase, rpc, RpcError } from "./supabase.js";
+import { escapeHtml, sendTelegram } from "./telegram.js";
+
+/** How long the Instagram step may keep starting requests (the job has 60 s in all). */
+const INSTAGRAM_BUDGET_MS = 35_000;
+
+/**
+ * The team's Telegram note when a step saved nothing or Meta refused part of it: the free
+ * Vercel plan keeps logs for an hour only, so the reason has to reach a person. Meta's own
+ * messages only, never the token.
+ */
+export function insightsWarning(network: "instagram" | "facebook", status: string, errors: readonly string[]): string | null {
+  if (!errors.length && !/^(failed|0 days|missing|migration)/.test(status)) return null;
+  const name = network === "instagram" ? "إنستغرام" : "فيسبوك";
+  const lines = [`<b>⚠️ أرقام ${name} — حضارة للعقار</b>`, `النتيجة: ${escapeHtml(status)}`];
+  for (const error of errors.slice(0, 6)) lines.push(`• ${escapeHtml(error)}`);
+  return lines.join("\n");
+}
+
+async function warn(network: "instagram" | "facebook", status: string, errors: readonly string[]): Promise<void> {
+  const text = insightsWarning(network, status, errors);
+  if (text) await sendTelegram(text).catch(() => null);
+}
 
 /** The first setting still missing, or null when the collector can run. */
 export function insightsMissing(): "token" | "account" | "supabase" | "secret" | null {
@@ -31,7 +53,8 @@ export async function runInsights(): Promise<InsightsRun> {
     fetch,
     token: process.env.META_INSIGHTS_TOKEN!,
     igUserId: process.env.META_IG_USER_ID!,
-    now: Date.now
+    now: Date.now,
+    deadline: Date.now() + INSTAGRAM_BUDGET_MS
   });
   const saved = (await rpc("save_ig_insights", {
     p_secret: process.env.CRON_SECRET,
@@ -49,10 +72,13 @@ export async function saveInstagramInsights(): Promise<string> {
     const result = await runInsights();
     const status = result.saved.error ?? `${result.days} days, ${result.media} posts`;
     console.log(`daily: instagram ${status}${result.errors.length ? `; ${result.errors.join(" | ")}` : ""}`);
+    await warn("instagram", status, result.errors);
     return status;
   } catch (error) {
     if (error instanceof RpcError && error.status === 404) return "migration 0026 not run";
-    console.error(`daily: instagram failed: ${error instanceof Error ? error.message : "unknown error"}`);
+    const message = error instanceof Error ? error.message : "unknown error";
+    console.error(`daily: instagram failed: ${message}`);
+    await warn("instagram", "failed", [message.slice(0, 220)]);
     return "failed";
   }
 }
@@ -76,10 +102,13 @@ export async function saveFacebookInsights(): Promise<string> {
     })) ?? {}) as { error?: string };
     const status = saved.error ?? `${result.days.length} days, ${result.posts.length} posts`;
     console.log(`daily: facebook ${status}${result.errors.length ? `; ${result.errors.join(" | ")}` : ""}`);
+    await warn("facebook", status, result.errors);
     return status;
   } catch (error) {
     if (error instanceof RpcError && error.status === 404) return "migration 0027 not run";
-    console.error(`daily: facebook failed: ${error instanceof Error ? error.message : "unknown error"}`);
+    const message = error instanceof Error ? error.message : "unknown error";
+    console.error(`daily: facebook failed: ${message}`);
+    await warn("facebook", "failed", [message.slice(0, 220)]);
     return "failed";
   }
 }

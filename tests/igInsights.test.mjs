@@ -5,6 +5,7 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { PGlite } from "@electric-sql/pglite";
 import { collectInsights, graphDay, istanbulDay, lastDays } from "../.test-build/_lib/igInsights.js";
+import { insightsWarning } from "../.test-build/_lib/igInsightsRun.js";
 
 const NOW = Date.parse("2026-10-20T06:00:00Z");
 const IG = "17841418931390002";
@@ -123,6 +124,27 @@ async function database() {
 
 const save = async (db, secret, days, media) =>
   (await db.query("select public.save_ig_insights($1, $2::jsonb, $3::jsonb) as r", [secret, JSON.stringify(days), JSON.stringify(media)])).rows[0].r;
+
+test("past the time limit no new request starts; what was read is kept", async () => {
+  const graph = fakeGraph();
+  let clock = NOW;
+  const slow = { ...deps(graph), now: () => clock, deadline: NOW + 1000, fetch: async (url) => ((clock += 300), graph.fetch(url)) };
+  const r = await collectInsights(slow);
+  assert.ok(r.errors.some((e) => e.startsWith("time limit:")), r.errors.join(" | "));
+  assert.ok(graph.calls.length < 20);
+  // The posts are still listed, with or without their numbers.
+  assert.deepEqual(r.media.map((m) => m.media_id), ["M2", "M1"]);
+});
+
+test("insightsWarning: only when something went wrong, escaped", () => {
+  assert.equal(insightsWarning("instagram", "28 days, 40 posts", []), null);
+  const empty = insightsWarning("instagram", "0 days, 0 posts", []);
+  assert.match(empty, /إنستغرام/);
+  const refused = insightsWarning("facebook", "28 days, 0 posts", ["posts: 10: (#10) needs <pages_read_user_content>"]);
+  assert.match(refused, /فيسبوك/);
+  assert.match(refused, /&lt;pages_read_user_content&gt;/);
+  assert.ok(!refused.includes("TOKEN"));
+});
 
 test("save_ig_insights: secret, upsert, a missing value keeps the saved one", async () => {
   const db = await database();
