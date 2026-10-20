@@ -718,5 +718,37 @@
     "headlineAr": "مستندات الفيلا متاحة لك عند الطلب",
     "headlineEn": "The villa's documents, on request",
     "photo": "/images/projects/marmara-haven-villa/dusk-pool.jpg"
+  },
+  {
+    "date": "2026-10-20",
+    "id": "marmara-haven-villa-overview",
+    "topic": "فيلا مرمرة هيفن · نظرة عامة",
+    "headlineAr": "فيلا بمسبح خاص على بُعد 5 دقائق من ساحل السباحة",
+    "headlineEn": "A villa with a private pool, 5 minutes from the beach",
+    "photo": "/images/projects/marmara-haven-villa/drone.jpg"
+  },
+  {
+    "date": "2026-10-20",
+    "id": "blog-life-in-turkey",
+    "topic": "مقال: الحياة في تركيا للعائلات الأجنبية",
+    "headlineAr": "4 قرارات عملية قبل أن تستقر عائلتك في إسطنبول",
+    "headlineEn": "4 practical choices before your family settles in Istanbul",
+    "photo": "/images/blog/about-turkey.jpg"
+  },
+  {
+    "date": "2026-10-20",
+    "id": "finish-home-name",
+    "topic": "أكمل الجملة: لو كان لبيتي اسم (شرائح)",
+    "headlineAr": "لو كان لبيتي في إسطنبول اسم، لسمّيته…",
+    "headlineEn": "If my Istanbul home had a name, I'd call it…",
+    "photo": "/images/projects/sea-pearl-atakoy/sea-terrace.jpg"
+  },
+  {
+    "date": "2026-10-20",
+    "id": "marmara-haven-villa-overview-story",
+    "topic": "ستوري: فيلا مرمرة هيفن من الداخل",
+    "headlineAr": "الطابق الأرضي: صالون ومطبخ وتراس ومسبح",
+    "headlineEn": "The ground floor: living, kitchen, terrace and pool",
+    "photo": "/images/projects/marmara-haven-villa/living-sea.jpg"
   }
 ]
