@@ -105,7 +105,7 @@ export function lastDays(now: number, count = DAYS): string[] {
 }
 
 /** Runs `task` over `items`, at most `limit` at a time. */
-async function pool<T>(items: readonly T[], limit: number, task: (item: T) => Promise<void>): Promise<void> {
+export async function pool<T>(items: readonly T[], limit: number, task: (item: T) => Promise<void>): Promise<void> {
   let next = 0;
   const worker = async () => {
     while (next < items.length) await task(items[next++]);

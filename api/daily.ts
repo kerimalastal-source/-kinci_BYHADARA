@@ -10,9 +10,10 @@
 //      people, unsure or automated, and for each likely person where they came from, what they
 //      looked at and what they are probably after (visit_report(), migration 0018;
 //      api/_lib/visitReport.ts). A failure there never affects the summary.
-//   4. Saves our Instagram account's statistics in Supabase (api/_lib/igInsightsRun.ts,
-//      migration 0026), last of all so nothing above waits for Meta. Here and not in its own
-//      function: the free Vercel plan allows 12 functions per deployment.
+//   4. Saves our Instagram account's and Facebook page's statistics in Supabase
+//      (api/_lib/igInsightsRun.ts, migrations 0026 and 0027), last of all so nothing above
+//      waits for Meta. Here and not in its own function: the free Vercel plan allows 12
+//      functions per deployment.
 //
 // Vercel calls it with "Authorization: Bearer <CRON_SECRET>". The same secret opens
 // daily_digest() in the database (supabase/migrations/0008), so CRON_SECRET in Vercel must be
@@ -26,7 +27,7 @@ import { dailySummary, type Digest } from "./_lib/dailyMessages.js";
 import { followUpsToday, sendDueFollowUps } from "./_lib/followups.js";
 import { checkMetaLeads } from "./_lib/metaLeadsRun.js";
 import { readVisits, visitReportMessage, type ReportRow } from "./_lib/visitReport.js";
-import { saveInstagramInsights } from "./_lib/igInsightsRun.js";
+import { saveFacebookInsights, saveInstagramInsights } from "./_lib/igInsightsRun.js";
 
 const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru"];
 /** Links in emails and alerts point at the public site, whatever URL the cron called. */
@@ -113,8 +114,8 @@ export async function GET(request: Request): Promise<Response> {
   });
   const messageId = await sendTelegram(dailySummary(digest, SITE, { sent: sent.length, failed }, await followUpsToday()));
   const report = await sendVisitReport(secret);
-  const instagram = await saveInstagramInsights();
-  return json({ reminders: sent.length, failed: failed.length, summary: messageId !== null, report, instagram });
+  const [instagram, facebook] = await Promise.all([saveInstagramInsights(), saveFacebookInsights()]);
+  return json({ reminders: sent.length, failed: failed.length, summary: messageId !== null, report, instagram, facebook });
 }
 
 /** The morning visitor report; false when it couldn't be sent (or migration 0018 hasn't run). */
