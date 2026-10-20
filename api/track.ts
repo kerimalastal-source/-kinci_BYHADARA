@@ -23,6 +23,7 @@
 import { waitUntil } from "@vercel/functions";
 import { rpc, RpcError } from "./_lib/supabase.js";
 import { sendDueFollowUps } from "./_lib/followups.js";
+import { sendOpsReports } from "./_lib/opsReports.js";
 import { checkMetaLeads } from "./_lib/metaLeadsRun.js";
 import { recordVisit, refreshAlert } from "./_lib/visitRecord.js";
 import { parseUserAgent, type Insight } from "./_lib/visitInsights.js";
@@ -96,6 +97,12 @@ export async function POST(request: Request): Promise<Response> {
       waitUntil(
         sendDueFollowUps(SITE, 120).catch((error: unknown) => {
           console.error(`track: followups failed: ${error instanceof Error ? error.message : "unknown error"}`);
+        })
+      );
+      // The daily check of the work system, written by Claude's scheduled task (0028).
+      waitUntil(
+        sendOpsReports(120).catch((error: unknown) => {
+          console.error(`track: ops reports failed: ${error instanceof Error ? error.message : "unknown error"}`);
         })
       );
     }

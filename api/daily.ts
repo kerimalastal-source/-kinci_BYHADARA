@@ -25,6 +25,7 @@ import { TEAM_INBOX, visitorEmail, type App, type BookingDetails, type ContactMe
 import { PROJECT_NAMES } from "./_lib/projectNames.js";
 import { dailySummary, type Digest } from "./_lib/dailyMessages.js";
 import { followUpsToday, sendDueFollowUps } from "./_lib/followups.js";
+import { sendOpsReports } from "./_lib/opsReports.js";
 import { checkMetaLeads } from "./_lib/metaLeadsRun.js";
 import { readVisits, visitReportMessage, type ReportRow } from "./_lib/visitReport.js";
 import { saveFacebookInsights, saveInstagramInsights } from "./_lib/igInsightsRun.js";
@@ -108,6 +109,8 @@ export async function GET(request: Request): Promise<Response> {
 
   // 2. Sales follow-ups that are due (usually already sent from page views), then the morning summary.
   await sendDueFollowUps(SITE, 0);
+  // A work-system check report not sent yet (usually already sent from page views).
+  await sendOpsReports(0);
   // Lead-form ad leads not yet announced (usually already sent from page views).
   await checkMetaLeads().catch((error: unknown) => {
     console.error(`daily: meta leads failed: ${error instanceof Error ? error.message : "unknown"}`);
