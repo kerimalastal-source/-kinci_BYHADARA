@@ -16,7 +16,7 @@ const SITE_EMAIL = "info@byhadara.com";
 
 // The parent group's LinkedIn page. Not the company's own profile, so it stays out of SOCIAL_LINKS.
 const GROUP_NAME = "BYHADARA Group";
-const GROUP_LINKEDIN = "https://www.linkedin.com/company/146747112/";
+export const GROUP_LINKEDIN = "https://www.linkedin.com/company/146747112/";
 
 export function renderFooter(el: HTMLElement): void {
   el.className = "site-footer";
