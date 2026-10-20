@@ -36,7 +36,17 @@ Work from the repository root (clone kerimalastal-source/-kinci_BYHADARA if need
      Arabic = formal MSA, Persian = formal Persian).
    - `category`: reuse an existing category and its translations when one fits
      (see the other articles' `category` in each dictionary).
-   - `title` ≤ 70 characters, `excerpt` one sentence (it is also the Google description).
+   - `title` ≤ 60 characters **in every language**, and it **starts with the term people
+     type into Google in that language** (owner's rule, 2026-10-20, from Search Console:
+     term-first articles reach Google's first page, long generic titles get no clicks).
+     E.g. ru «Площадь брутто и нетто в Турции: что это и что значит 2+1», not «Брутто и
+     нетто: площадь и значение 2+1 в турецких объявлениях». A Turkish term (Kat İrtifakı,
+     DASK, Emlak Vergisi, Yapı Denetim, İskan) stays in Latin letters at the start of
+     every language's title, followed by that language's own words for it.
+   - `excerpt` one sentence, ≤ 155 characters (it is also the Google description): it
+     repeats the term and says what the reader will learn.
+   - Prefer specific questions over broad ones: Google already shows our term and district
+     articles near the top, while broad titles ("investing in Turkey") rank on page 6–10.
    - End with a short paragraph inviting the reader to contact HADARA or book a private
      video tour (plain text, no links, no HTML, no emoji).
    - `cover.photo`: the topic's `photo` (or a better one from `public/images/projects/`),
