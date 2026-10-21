@@ -4,7 +4,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { PGlite } from "@electric-sql/pglite";
-import { collectInsights, graphDay, istanbulDay, lastDays } from "../.test-build/_lib/igInsights.js";
+import { clip, collectInsights, graphDay, istanbulDay, lastDays } from "../.test-build/_lib/igInsights.js";
 import { insightsWarning } from "../.test-build/_lib/igInsightsRun.js";
 
 const NOW = Date.parse("2026-10-20T06:00:00Z");
@@ -168,4 +168,17 @@ test("save_ig_insights: secret, upsert, a missing value keeps the saved one", as
       has_function_privilege('anon', 'public.save_ig_insights(text, jsonb, jsonb)', 'execute') as anon_exec,
       has_function_privilege('authenticated', 'public.save_ig_insights(text, jsonb, jsonb)', 'execute') as auth_exec`)).rows[0];
   assert.deepEqual(grants, { anon_read: false, anon_exec: true, auth_exec: false });
+});
+
+test("clip never leaves half an emoji, so the saved JSON stays valid (2026-10-21)", async () => {
+  const caption = "a".repeat(299) + "📲 link";
+  assert.equal(caption.slice(0, 300).isWellFormed(), false); // the old cut
+  const cut = clip(caption, 300);
+  assert.equal(cut.isWellFormed(), true);
+  assert.equal(cut, "a".repeat(299) + "📲");
+  assert.equal(clip("ok 📲 🏠", 10), "ok 📲 🏠");
+  assert.equal(clip("bad \ud83d end", 50), "bad � end");
+  const db = new PGlite();
+  const row = await db.query("select $1::jsonb as j", [JSON.stringify({ caption: cut })]);
+  assert.equal(row.rows[0].j.caption, cut);
 });
