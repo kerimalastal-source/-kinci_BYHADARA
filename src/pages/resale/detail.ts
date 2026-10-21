@@ -4,7 +4,7 @@ import { openLightbox } from "../../components/lightbox";
 import { renderPhoneInput, getPhoneValue, isPhoneFilled, isPhoneValid, setPhoneInvalid } from "../../components/phoneInput";
 import { escapeHtml } from "../../utils/html";
 import {
-  fetchListingById,
+  fetchPublicListing,
   fetchListingPhotos,
   listingPhotoUrl,
   submitInquiry,
@@ -21,7 +21,7 @@ export function renderResaleDetail(el: HTMLElement, id: string): void {
   const requestId = crypto.randomUUID();
   el.dataset.requestId = requestId;
 
-  Promise.all([fetchListingById(id), fetchListingPhotos(id)])
+  Promise.all([fetchPublicListing(id), fetchListingPhotos(id)])
     .then(([listing, photos]) => {
       if (el.dataset.requestId !== requestId) return;
       if (!listing || listing.status !== "approved") {
