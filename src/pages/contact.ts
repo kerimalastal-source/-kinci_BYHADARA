@@ -1,5 +1,7 @@
 import { t } from "../i18n";
 import { renderContactForm, initContactForm } from "../components/contactForm";
+import { GROUP_LINKEDIN, SOCIAL_ICONS } from "../components/footer";
+import { SOCIAL_LINKS } from "../data/social";
 
 const SITE_PHONE = "+90 531 930 92 14";
 const SITE_PHONE_HREF = "+905319309214";
@@ -43,6 +45,13 @@ export function renderContact(el: HTMLElement): void {
             <li>
               <span class="info-list__label">${t("contact.hoursTitle")}</span>
               <span>${t("contact.hoursText")}</span>
+            </li>
+            <li>
+              <span class="info-list__label">${t("footer.followUs")}</span>
+              <span class="contact-social">
+                ${SOCIAL_LINKS.map((s) => `<a class="contact-social__link" href="${s.url}" target="_blank" rel="noopener" lang="en" dir="ltr">${SOCIAL_ICONS[s.network]}<span>${s.label}</span></a>`).join("")}
+                <a class="contact-social__link" href="${GROUP_LINKEDIN}" target="_blank" rel="noopener" lang="en" dir="ltr" title="${t("footer.groupLinkedin")}" aria-label="${t("footer.groupLinkedin")}">${SOCIAL_ICONS.linkedin}<span>LinkedIn</span></a>
+              </span>
             </li>
           </ul>
 

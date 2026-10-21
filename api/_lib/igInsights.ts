@@ -40,6 +40,8 @@ export interface IgDeps {
   token: string;
   igUserId: string;
   now: () => number;
+  /** Stop starting new requests after this time (ms); what was read by then is kept. */
+  deadline?: number;
 }
 
 export type IgDay = { day: string; followers?: number; follows?: number; media_count?: number; new_followers?: number } & Partial<Record<DayMetric, number>>;
@@ -82,6 +84,8 @@ function graph(deps: IgDeps, path: string, params: Record<string, string>): Prom
   const query = new URLSearchParams({ ...params, access_token: deps.token });
   return getJson(deps, `${GRAPH}/${path}?${query}`);
 }
+
+const late = (deps: IgDeps) => deps.deadline !== undefined && deps.now() > deps.deadline;
 
 const short = (error: unknown) => (error instanceof Error ? error.message : "unknown error").slice(0, 220);
 
@@ -156,7 +160,12 @@ async function collectDays(deps: IgDeps, errors: string[]): Promise<IgDay[]> {
   }
   if (metrics.length) {
     let failed = 0;
+    let skipped = 0;
     await pool(days.slice(1), 5, async (day) => {
+      if (late(deps)) {
+        skipped++;
+        return;
+      }
       try {
         Object.assign(rows.get(day)!, await dayTotals(deps, day, metrics));
       } catch (error) {
@@ -164,6 +173,7 @@ async function collectDays(deps: IgDeps, errors: string[]): Promise<IgDay[]> {
       }
     });
     if (failed > 1) errors.push(`${failed} days failed in all`);
+    if (skipped) errors.push(`time limit: ${skipped} days skipped`);
   }
 
   // New followers per day (Meta answers only for accounts with 100+ followers).
@@ -224,7 +234,7 @@ async function collectMedia(deps: IgDeps, errors: string[]): Promise<IgMedia[]> 
       const last = batch[batch.length - 1]?.timestamp;
       const next = (page.paging as { next?: string } | undefined)?.next;
       if (!next || !last || Date.parse(last) < cutoff) break;
-      if (!next.startsWith(`${GRAPH}/`)) break;
+      if (!next.startsWith(`${GRAPH}/`) || late(deps)) break;
       page = await getJson(deps, next);
     }
   } catch (error) {
@@ -234,6 +244,7 @@ async function collectMedia(deps: IgDeps, errors: string[]): Promise<IgMedia[]> 
   const recent = items.filter((item) => item.id && item.timestamp && Date.parse(item.timestamp) >= cutoff);
   const media: IgMedia[] = [];
   let failed = 0;
+  let skipped = 0;
   await pool(recent, 5, async (item) => {
     const row: IgMedia = {
       media_id: item.id!,
@@ -246,6 +257,11 @@ async function collectMedia(deps: IgDeps, errors: string[]): Promise<IgMedia[]> 
       comments: num(item.comments_count)
     };
     let values: Record<string, number> | null = null;
+    if (late(deps)) {
+      skipped++;
+      media.push(row);
+      return;
+    }
     try {
       values = insightValues(await graph(deps, `${item.id}/insights`, { metric: MEDIA_METRICS.join(",") }));
     } catch {
@@ -267,6 +283,7 @@ async function collectMedia(deps: IgDeps, errors: string[]): Promise<IgMedia[]> 
     media.push(row);
   });
   if (failed > 1) errors.push(`${failed} posts without insights`);
+  if (skipped) errors.push(`time limit: ${skipped} posts without insights`);
   media.sort((a, b) => (a.posted_at ?? "").localeCompare(b.posted_at ?? ""));
   return media;
 }

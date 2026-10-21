@@ -19,15 +19,19 @@ export interface Listing {
   bathrooms: number | null;
   asking_price: number | null;
   currency: string;
-  original_purchase_year: number | null;
-  title_deed_number: string | null;
-  admin_notes: string | null;
-  rejection_reason: string | null;
+  original_purchase_year?: number | null;
+  rejection_reason?: string | null;
   created_at: string;
   updated_at: string;
-  reviewed_at: string | null;
-  reviewed_by: string | null;
+  reviewed_at?: string | null;
+  reviewed_by?: string | null;
 }
+
+// Column lists instead of "*": since migration 0029 visitors may read only the columns the public
+// pages show, and title_deed_number / admin_notes are readable by nobody through the API.
+const PUBLIC_COLUMNS =
+  "id, owner_id, status, title, description, city, district, property_type, size_m2, bedrooms, bathrooms, asking_price, currency, created_at, updated_at";
+const ACCOUNT_COLUMNS = `${PUBLIC_COLUMNS}, address_line, original_purchase_year, rejection_reason, reviewed_at, reviewed_by`;
 
 export interface ListingPhoto {
   id: string;
@@ -60,15 +64,23 @@ export function listingPhotoUrl(storagePath: string): string {
 export async function fetchApprovedListings(): Promise<Listing[]> {
   const { data, error } = await supabase
     .from("listings")
-    .select("*")
+    .select(PUBLIC_COLUMNS)
     .eq("status", "approved")
     .order("created_at", { ascending: false });
   if (error) throw error;
   return data as Listing[];
 }
 
+/** A listing for its owner or an admin (account and review pages). */
 export async function fetchListingById(id: string): Promise<Listing | null> {
-  const { data, error } = await supabase.from("listings").select("*").eq("id", id).maybeSingle();
+  const { data, error } = await supabase.from("listings").select(ACCOUNT_COLUMNS).eq("id", id).maybeSingle();
+  if (error) throw error;
+  return data as Listing | null;
+}
+
+/** A listing as the public resale page shows it (works for visitors who aren't signed in). */
+export async function fetchPublicListing(id: string): Promise<Listing | null> {
+  const { data, error } = await supabase.from("listings").select(PUBLIC_COLUMNS).eq("id", id).maybeSingle();
   if (error) throw error;
   return data as Listing | null;
 }
@@ -78,7 +90,7 @@ export async function fetchMyListings(): Promise<Listing[]> {
   if (!userId) return [];
   const { data, error } = await supabase
     .from("listings")
-    .select("*")
+    .select(ACCOUNT_COLUMNS)
     .eq("owner_id", userId)
     .order("created_at", { ascending: false });
   if (error) throw error;
@@ -88,7 +100,7 @@ export async function fetchMyListings(): Promise<Listing[]> {
 export async function fetchPendingListings(): Promise<Listing[]> {
   const { data, error } = await supabase
     .from("listings")
-    .select("*")
+    .select(ACCOUNT_COLUMNS)
     .eq("status", "pending_review")
     .order("created_at", { ascending: true });
   if (error) throw error;
@@ -101,7 +113,7 @@ export async function createDraftListing(input: NewListingInput): Promise<Listin
   const { data, error } = await supabase
     .from("listings")
     .insert({ ...input, owner_id: userId, status: "draft" })
-    .select("*")
+    .select(ACCOUNT_COLUMNS)
     .single();
   if (error) throw error;
   return data as Listing;
