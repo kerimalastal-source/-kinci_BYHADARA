@@ -750,5 +750,37 @@
     "headlineAr": "الطابق الأرضي: صالون ومطبخ وتراس ومسبح",
     "headlineEn": "The ground floor: living, kitchen, terrace and pool",
     "photo": "/images/projects/marmara-haven-villa/living-sea.jpg"
+  },
+  {
+    "date": "2026-10-21",
+    "id": "lotus-manzara-guzelce-overview",
+    "topic": "لوتس مانزارا غوزلجه · نظرة عامة",
+    "headlineAr": "32 فيلا مستقلة فقط بين الغابة والبحر",
+    "headlineEn": "Only 32 detached villas between forest and sea",
+    "photo": "/images/projects/lotus-manzara-guzelce/villa-row.jpg"
+  },
+  {
+    "date": "2026-10-21",
+    "id": "citizenship-steps",
+    "topic": "خطوات الجنسية التركية عبر العقار",
+    "headlineAr": "8 خطوات من الاستشارة إلى جواز السفر التركي",
+    "headlineEn": "8 steps from consultation to a Turkish passport",
+    "photo": "/images/blog/citizenship-by-real-estate.jpg"
+  },
+  {
+    "date": "2026-10-21",
+    "id": "evening-who-decides",
+    "topic": "سؤال الليلة: مع من تختار بيتك؟ (شرائح)",
+    "headlineAr": "مع من تختار بيتك عادةً؟",
+    "headlineEn": "Who do you usually choose your home with?",
+    "photo": "/images/projects/lotus-manzara-guzelce/living-room.jpg"
+  },
+  {
+    "date": "2026-10-21",
+    "id": "lotus-manzara-guzelce-overview-story",
+    "topic": "ستوري: لوتس مانزارا غوزلجه",
+    "headlineAr": "فيلا بحديقة خاصة ومرآب لسيارتين",
+    "headlineEn": "A villa with a private garden and 2-car garage",
+    "photo": "/images/projects/lotus-manzara-guzelce/private-parking.jpg"
   }
 ]
