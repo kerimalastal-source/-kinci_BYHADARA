@@ -21,6 +21,8 @@ const ADS = [
     ar: "فيلا بإطلالة بحرية كاملة<br>في إسطنبول",
     en: "Full Sea View Villa in Istanbul",
     label: "MARMARA HAVEN VILLA",
+    // Owner 2026-10-22: the total area beside the headline, as an eye-catching seal.
+    badge: { num: "576", unit: "m²", ar: "المساحة الإجمالية", en: "TOTAL AREA" },
     photos: [
       { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
       { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
@@ -70,6 +72,13 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .en{margin-top:${story ? 18 : 12}px;padding:0 50px;font-weight:600;line-height:1.25;font-size:${story ? 46 : 40}px;letter-spacing:-.3px;text-align:center}
 .label{margin:${story ? "30px 56px 34px" : "20px 56px 24px"};display:flex;align-items:center;gap:22px;color:#a8853a;font-weight:600;font-size:${story ? 23 : 21}px;letter-spacing:5px;white-space:nowrap}
 .lab{display:flex;align-items:center;gap:14px}.lab svg{height:${story ? 26 : 24}px;width:auto;border-radius:3px;box-shadow:0 0 0 1px rgba(15,43,33,.12)}
+.hero{display:flex;align-items:center;gap:${story ? 22 : 18}px;padding:0 0 0 56px;margin-top:${story ? 34 : 22}px}
+.hero .ht{flex:1;min-width:0}.hero .ar{margin-top:0;padding:0 44px 0 0}.hero .en{padding:0 44px 0 0}
+.seal{flex:none;width:${story ? 236 : 206}px;height:${story ? 236 : 206}px;border-radius:50%;background:#0f2b21;color:#f7f5f0;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 0 ${story ? 7 : 6}px #f7f5f0,0 0 0 ${story ? 10 : 9}px #c9a24b,0 14px 30px rgba(15,43,33,.28)}
+.seal .sa{font-family:Plex;font-weight:700;font-size:${story ? 23 : 20}px;color:#e4c574;line-height:1.2}
+.seal b{font-weight:700;font-size:${story ? 74 : 64}px;line-height:1;letter-spacing:-1.5px;margin:${story ? 6 : 4}px 0}
+.seal b i{font-style:normal;font-weight:600;font-size:.42em;margin-left:4px;vertical-align:.95em;letter-spacing:0}
+.seal .se{font-weight:600;font-size:${story ? 15 : 13}px;letter-spacing:3px;color:#e4c574}
 .label::before,.label::after{content:"";flex:1;height:2px;background:#c9a24b;opacity:.75}
 .photos{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:0}
 .photos div{background-size:cover}
@@ -85,7 +94,7 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 const FLAG = '<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#e30a17"/><circle cx="425" cy="400" r="200" fill="#fff"/><circle cx="475" cy="400" r="160" fill="#e30a17"/><path fill="#fff" d="M583.334 400l180.901 58.779-111.804-153.885v190.212l111.804-153.885z"/></svg>';
 const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body>
 <div class="head"><div class="brand"><img src="file://${REPO}/public/logo-dark.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="rule"></div></div>
-<div class="ar">${a.ar}</div><div class="en">${a.en}</div>
+${a.badge ? `<div class="hero"><div class="seal"><span class="sa">${a.badge.ar}</span><b dir="ltr">${a.badge.num}<i>${a.badge.unit}</i></b><span class="se">${a.badge.en}</span></div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : `<div class="ar">${a.ar}</div><div class="en">${a.en}</div>`}
 <div class="label">${a.flag ? `<span class="lab">${FLAG}<span>${a.label}</span></span>` : a.label}</div>
 <div class="photos"${a.photos.length === 1 ? ' style="grid-template-columns:1fr"' : ""}>${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
 <div class="foot"><span class="w">hadararealestate.com</span><span class="sep"></span><span class="c"><span class="a">${a.cta[1]}</span><span class="bar">|</span><span>${a.cta[0]}</span></span></div>
