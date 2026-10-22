@@ -37,7 +37,8 @@ const ADS = [
     ar: "شقتك في إسطنبول<br>ادفع 30% والباقي على 30 شهراً",
     en: "Istanbul homes: 30% now, the rest over 30 months",
     // Owner 2026-10-22: only "from US$200,000" in big type, and no Istanbul/flag line (the headline says Istanbul).
-    price: { ar: "تبدأ من 200 ألف دولار", en: "From US$200,000", big: true },
+    // Owner 2026-10-22: the down payment as the filter.
+    price: { ar: "دفعة أولى تبدأ من 100 ألف دولار", en: "Down payment from US$100,000", big: true, stack: true },
     photos: [
       // Owner 2026-10-22: one wide photo of the project with its garden, so it shows properly.
       { src: img("beylikduzu-living/central-garden.jpg"), pos: "42% center" },
@@ -89,6 +90,9 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .price.big .pa{font-size:48px}
 .price.big .pe{font-size:40px;letter-spacing:0}
 .price.big .pb{height:46px}
+.price.stack{flex-direction:column;gap:2px;border-radius:30px;padding:${story ? "14px 50px 16px" : "12px 46px 14px"}}
+.price.stack .pb{display:none}
+.price.stack .pe{font-size:34px;font-weight:600}
 .price .pb{width:2px;height:${story ? 34 : 30}px;background:#c9a24b}
 .label::before,.label::after{content:"";flex:1;height:2px;background:#c9a24b;opacity:.75}
 .photos{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:0}
@@ -106,7 +110,7 @@ const FLAG = '<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><re
 const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body>
 <div class="head"><div class="brand"><img src="file://${REPO}/public/logo-dark.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="rule"></div></div>
 ${a.badge ? `<div class="hero"><div class="seal"><span class="sa">${a.badge.ar}</span><b dir="ltr">${a.badge.num}<i>${a.badge.unit}</i></b><span class="se">${a.badge.en}</span></div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : `<div class="ar">${a.ar}</div><div class="en">${a.en}</div>`}
-${a.price ? `<div class="price${a.price.big ? " big" : ""}"><span class="pa">${a.price.ar}</span>${a.price.en ? `<span class="pb"></span><span class="pe">${a.price.en}</span>` : ""}</div>` : ""}
+${a.price ? `<div class="price${a.price.big ? " big" : ""}${a.price.stack ? " stack" : ""}"><span class="pa">${a.price.ar}</span>${a.price.en ? `<span class="pb"></span><span class="pe">${a.price.en}</span>` : ""}</div>` : ""}
 ${a.label ? `<div class="label">${a.flag ? `<span class="lab">${FLAG}<span>${a.label}</span></span>` : a.label}</div>` : ""}
 <div class="photos"${a.photos.length === 1 ? ' style="grid-template-columns:1fr"' : ""}>${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
 <div class="foot"><span class="w">hadararealestate.com</span><span class="sep"></span><span class="c"><span class="a">${a.cta[1]}</span><span class="bar">|</span><span>${a.cta[0]}</span></span></div>
@@ -152,7 +156,7 @@ for (const a of ADS.filter((x) => !only.length || only.includes(x.id))) {
       fit(document.querySelector(".en"), 1);
     });
     // Fail loudly if a line wraps or overflows (the label and footer must stay on one line).
-    const bad = await p.evaluate(() => [...document.querySelectorAll(".label,.foot,.price")].filter((e) => e.scrollWidth > e.clientWidth + 1 || [...e.children].some((c) => c.getClientRects().length > 1 || c.offsetHeight > 90)).map((e) => e.className));
+    const bad = await p.evaluate(() => [...document.querySelectorAll(".label,.foot,.price")].filter((e) => (e.classList.contains("price") && (e.getBoundingClientRect().left < 40 || e.getBoundingClientRect().right > innerWidth - 40)) || e.scrollWidth > e.clientWidth + 1 || [...e.children].some((c) => c.getClientRects().length > 1 || c.offsetHeight > 90)).map((e) => e.className));
     if (bad.length) console.log("OVERFLOW", a.id, suffix, bad);
     const boxes = await p.evaluate(() => [...document.querySelectorAll(".photos > div")].map((d) => { const r = d.getBoundingClientRect(); return { w: r.width, h: r.height, src: d.dataset.src, pos: d.dataset.pos, size: d.dataset.size }; }));
     const jobs = boxes.map((x, i) => ({ src: x.src, out: path.join(PREP, `${a.id}-${suffix}-${i}.jpg`), box: crop(x.src, x.pos, x.size, x), size: [Math.round(x.w * SCALE), Math.round(x.h * SCALE)] }));
