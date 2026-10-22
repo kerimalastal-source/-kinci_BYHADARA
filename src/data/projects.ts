@@ -448,6 +448,64 @@ export const projects: Project[] = [
     ]
   },
   {
+    slug: "vadi-panorama",
+    district: "Başakşehir",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-10-22: delivery December 2028, 40% down and the balance over 48 months, price on request;
+    // developer as on Emlak Konut's project page ("Emlak Konut güvencesiyle, Binbay & Enam iş birliği").
+    paymentPlan: { downPercent: 40, months: 48 },
+    lifestyle: ["nature", "city"],
+    unitsAvailable: true,
+    priority: 1.8,
+    developer: "Emlak Konut · Binbay · Enam",
+    address: "Vadi Panorama Evleri, Kayabaşı, Başakşehir, İstanbul",
+    price: "on-request",
+    // Facts from emlakkonut.com.tr (project 20366) and vadipanoramaevleri.com; images from the project site.
+    coverImage: img("vadi-panorama", "aerial-site", 1680, 945, "Vadi Panorama aerial view: towers, low-rise blocks, 12 villas and the central garden in Başakşehir"),
+    gallery: [
+      img("vadi-panorama", "valley-panorama", 1680, 900, "Vadi Panorama towers and terraced blocks above the valley"),
+      img("vadi-panorama", "central-garden", 1680, 927, "Vadi Panorama central garden with children's play area and walking track"),
+      img("vadi-panorama", "towers-dusk", 1680, 798, "Vadi Panorama towers at dusk"),
+      img("vadi-panorama", "garden-terrace", 1680, 945, "Vadi Panorama garden-floor homes with private lawns"),
+      img("vadi-panorama", "low-rise-block", 1680, 945, "Vadi Panorama low-rise block with terraces"),
+      img("vadi-panorama", "living-room", 1680, 916, "Vadi Panorama living room"),
+      img("vadi-panorama", "master-bedroom", 1680, 865, "Vadi Panorama master bedroom"),
+      img("vadi-panorama", "kitchen-dining", 1411, 1024, "Vadi Panorama kitchen with dining corner"),
+      img("vadi-panorama", "kitchen", 1410, 1027, "Vadi Panorama kitchen with built-in appliances"),
+      img("vadi-panorama", "private-hamam", 1920, 1080, "Vadi Panorama private hamam basin inside the apartment bathroom"),
+      img("vadi-panorama", "bedroom-suite", 1920, 1080, "Vadi Panorama bedroom suite")
+    ],
+    stats: [
+      { value: "268", labelKey: "apartments" },
+      { value: "2028", labelKey: "delivery" },
+      { value: "12", labelKey: "villas" },
+      { value: "26", labelKey: "shops" },
+      { value: "2+1 – 5+1", labelKey: "layout" }
+    ],
+    // Floor plans on vadipanoramaevleri.com (Emlak Konut, Kayabaşı parcel 970-2): net excludes balconies;
+    // gross is "satışa esas brüt". The 5+1 villa plans are villas no. 1-6 (basement, ground and first floor).
+    residences: [
+      { kind: "apartment", layout: "2+1", gross: "125.69 – 128.65 m²", net: "78.50 – 80.12 m²", planTypes: 2 },
+      { kind: "apartment", layout: "3+1", gross: "158.09 – 194.21 m²", net: "100.30 – 124.10 m²", planTypes: 4 },
+      { kind: "apartment", layout: "4+1", gross: "201.09 – 205.04 m²", net: "130.14 – 133.50 m²", planTypes: 2 },
+      { kind: "apartment", layout: "5+1", gross: "251.41 m²", net: "180.82 m²" },
+      { kind: "villa", layout: "5+1", gross: "268.49 m²", net: "210.05 m²", garden: "175.03 – 248.72 m²", floors: 3 }
+    ],
+    amenities: [
+      "privateGarden",
+      "smartHome",
+      "underfloorHeating",
+      "hamam",
+      "equippedKitchen",
+      "playground",
+      "sportsCourt",
+      "joggingTrack",
+      "landscaping",
+      "retail"
+    ]
+  },
+  {
     slug: "lotus-sisli",
     district: "Şişli",
     city: "Istanbul",
