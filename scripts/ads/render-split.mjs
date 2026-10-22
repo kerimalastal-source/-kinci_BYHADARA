@@ -21,7 +21,7 @@ const ADS = [
     ar: "فيلا بإطلالة بحرية كاملة<br>في إسطنبول",
     en: "Full Sea View Villa in Istanbul",
     label: "MARMARA HAVEN VILLA",
-    // Owner 2026-10-22: the total area beside the headline, as an eye-catching seal.
+    // Owner 2026-10-22: the total area beside the headline, eye-catching but without a circle.
     badge: { num: "576", unit: "m²", ar: "المساحة الإجمالية", en: "TOTAL AREA" },
     photos: [
       { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
@@ -74,11 +74,11 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .lab{display:flex;align-items:center;gap:14px}.lab svg{height:${story ? 26 : 24}px;width:auto;border-radius:3px;box-shadow:0 0 0 1px rgba(15,43,33,.12)}
 .hero{display:flex;align-items:center;gap:${story ? 22 : 18}px;padding:0 0 0 56px;margin-top:${story ? 34 : 22}px}
 .hero .ht{flex:1;min-width:0}.hero .ar{margin-top:0;padding:0 44px 0 0}.hero .en{padding:0 44px 0 0}
-.seal{flex:none;width:${story ? 236 : 206}px;height:${story ? 236 : 206}px;border-radius:50%;background:#0f2b21;color:#f7f5f0;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 0 ${story ? 7 : 6}px #f7f5f0,0 0 0 ${story ? 10 : 9}px #c9a24b,0 14px 30px rgba(15,43,33,.28)}
-.seal .sa{font-family:Plex;font-weight:700;font-size:${story ? 23 : 20}px;color:#e4c574;line-height:1.2}
-.seal b{font-weight:700;font-size:${story ? 74 : 64}px;line-height:1;letter-spacing:-1.5px;margin:${story ? 6 : 4}px 0}
-.seal b i{font-style:normal;font-weight:600;font-size:.42em;margin-left:4px;vertical-align:.95em;letter-spacing:0}
-.seal .se{font-weight:600;font-size:${story ? 15 : 13}px;letter-spacing:3px;color:#e4c574}
+.seal{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:${story ? "6px 34px 6px 0" : "4px 30px 4px 0"};border-right:3px solid #c9a24b;color:#0f2b21}
+.seal .sa{font-family:Plex;font-weight:700;font-size:${story ? 26 : 23}px;color:#a8853a;line-height:1.2}
+.seal b{font-weight:700;font-size:${story ? 96 : 84}px;line-height:1;letter-spacing:-2px;margin:${story ? 8 : 6}px 0}
+.seal b i{font-style:normal;font-weight:600;font-size:.4em;margin-left:5px;vertical-align:1.05em;letter-spacing:0}
+.seal .se{font-weight:600;font-size:${story ? 16 : 14}px;letter-spacing:4px;color:#a8853a}
 .label::before,.label::after{content:"";flex:1;height:2px;background:#c9a24b;opacity:.75}
 .photos{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:0}
 .photos div{background-size:cover}
