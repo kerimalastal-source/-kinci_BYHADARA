@@ -17,6 +17,8 @@ import { photoAttrs, photoSrcset, heroBackground } from "../utils/responsiveImag
 const reveal = (i: number, perRow = 4) => `data-reveal data-reveal-index="${i % perRow}"`;
 
 /** Plain counts and areas ("78", "21,000 m²") count up; years and ranges stay as written. */
+/** Values that overflow a phone's half-width stat box: long text, or a range of layouts such as "2+1 – 6.5+1". */
+const isLongStat = (value: string) => value.length > 12 || (value.includes("–") && value.length > 10);
 const countsUp = (value: string, labelKey: string) => labelKey !== "delivery" && /^\d[\d,.]*( m²)?$/.test(value);
 
 /**
@@ -546,7 +548,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
           ${project.stats
             .map(
               (s) => `
-            <div class="project-stats__item${s.value.length > 12 ? " project-stats__item--long" : ""}">
+            <div class="project-stats__item${isLongStat(s.value) ? " project-stats__item--long" : ""}">
               <dt><span class="project-stats__icon">${statIcon(s.labelKey)}</span>${t(`common.statLabels.${s.labelKey}`)}</dt>
               <dd dir="ltr"${countsUp(s.value, s.labelKey) ? ` data-stat-value="${s.value}"` : ""}>${s.value}</dd>
             </div>`

@@ -506,6 +506,65 @@ export const projects: Project[] = [
     ]
   },
   {
+    slug: "mesa-yenikent",
+    district: "Başakşehir",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-10-22: no delivery date (not published by the developer), no payment plan, price on request,
+    // eligible for citizenship. Mesa does not publish a unit count, so the stats use the township areas.
+    lifestyle: ["nature", "city"],
+    unitsAvailable: true,
+    priority: 1.9,
+    developer: "Mesa Mesken",
+    address: "Mesa Yenikent, Başakşehir, İstanbul",
+    price: "on-request",
+    // Facts from mesayenikent.com, its e-catalogue and the 2026 investor brochure; images from the project site.
+    coverImage: img("mesa-yenikent", "cover-park", 1680, 950, "Mesa Yenikent central park with ponds and walking paths between low-rise blocks in Başakşehir"),
+    gallery: [
+      img("mesa-yenikent", "central-park", 1680, 950, "Mesa Yenikent landscaped park with pond and seating terraces"),
+      img("mesa-yenikent", "terrace-view", 1680, 945, "Mesa Yenikent terrace overlooking the gardens and ponds"),
+      img("mesa-yenikent", "garden-floor", 1680, 945, "Mesa Yenikent garden-floor home with a private lawn"),
+      img("mesa-yenikent", "buildings-gardens", 1680, 1050, "Mesa Yenikent low-rise blocks with balconies and gardens"),
+      img("mesa-yenikent", "water-walkway", 1680, 1050, "Mesa Yenikent walkway beside a landscaped pond"),
+      img("mesa-yenikent", "street-cafes", 1680, 1050, "Mesa Yenikent street with cafés and shops at ground level"),
+      img("mesa-yenikent", "evening-terrace", 1680, 1200, "Mesa Yenikent terrace in the evening above the lit gardens"),
+      img("mesa-yenikent", "indoor-pool", 1600, 893, "Mesa Yenikent indoor swimming pool"),
+      img("mesa-yenikent", "living-room", 1680, 934, "Mesa Yenikent living room with wide windows"),
+      img("mesa-yenikent", "bedroom", 1680, 840, "Mesa Yenikent bedroom opening onto the balcony"),
+      img("mesa-yenikent", "sunset-balcony", 1680, 950, "Mesa Yenikent balcony view over the gardens at sunset")
+    ],
+    stats: [
+      { value: "2,000,000 m²", labelKey: "landArea" },
+      { value: "1,500,000 m²", labelKey: "constructionArea" },
+      { value: "1,000,000 m²", labelKey: "greenAndParkArea" },
+      { value: "2+1 – 6.5+1", labelKey: "layout" }
+    ],
+    // Floor plans: Ladin phase from the e-catalogue (2026), Çınar (new phase) from the plans page. Net includes
+    // balconies ("Net Alan (Balkon Dahil)"); gross is "satışa esas brüt". 4.5+2 and 6.5+1 are two-level homes.
+    residences: [
+      { kind: "apartment", layout: "2+1", gross: "83.54 – 118.33 m²", net: "52.59 – 80.85 m²", planTypes: 2 },
+      { kind: "apartment", layout: "3+1", gross: "143.10 – 264.96 m²", net: "90.09 – 181.03 m²", planTypes: 4 },
+      { kind: "apartment", layout: "3.5+1", gross: "229.51 m²", net: "156.81 m²" },
+      { kind: "apartment", layout: "4+1", gross: "230.47 – 233.17 m²", net: "157.47 – 159.31 m²", planTypes: 2 },
+      { kind: "apartment", layout: "4.5+2", gross: "305.94 m²", net: "209.03 m²", floors: 2 },
+      { kind: "apartment", layout: "6.5+1", gross: "410.67 m²", net: "280.59 m²", floors: 2 }
+    ],
+    amenities: [
+      "privateGarden",
+      "smartHome",
+      "indoorPool",
+      "fitness",
+      "sauna",
+      "playground",
+      "sportsCourt",
+      "joggingTrack",
+      "landscaping",
+      "evCharging",
+      "retail",
+      "seismicDesign"
+    ]
+  },
+  {
     slug: "lotus-sisli",
     district: "Şişli",
     city: "Istanbul",

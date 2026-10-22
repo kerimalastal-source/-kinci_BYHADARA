@@ -113,7 +113,7 @@
     "statsTitle": "HADARA en chiffres",
     "stats": [
       { "value": "12+", "label": "années d'excellence", "icon": "years" },
-      { "value": "15", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "16", "label": "projets emblématiques", "icon": "projects" },
       { "value": "3 400+", "label": "unités résidentielles", "icon": "apartments" },
       { "value": "420+", "label": "bureaux", "icon": "offices" },
       { "value": "250+", "label": "locaux commerciaux", "icon": "shops" },
@@ -185,7 +185,7 @@
     "storyEyebrow": "Notre histoire",
     "storyTitle": "D'une vision unique à un portefeuille en pleine croissance",
     "storyText1": "Fondée en 2014 et basée à Beylikdüzü, Istanbul, HADARA Immobilier est née d'une idée simple : une sélection rigoureuse des projets et des conseils honnêtes créent une valeur durable pour ceux qui vivent dans les biens que nous proposons, comme pour ceux qui y investissent.",
-    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat et Emlak Konut pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
+    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut et Mesa pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
     "missionTitle": "Notre mission",
     "missionText": "Relier résidents et investisseurs à des projets résidentiels et mixtes soigneusement sélectionnés, qui allient qualité architecturale, confort quotidien et valeur durable, et les accompagner clairement à chaque étape.",
     "visionTitle": "Notre vision",
@@ -208,7 +208,7 @@
     "statsTitle": "Notre bilan",
     "stats": [
       { "value": "12+", "label": "années d'activité", "icon": "years" },
-      { "value": "15", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "16", "label": "projets emblématiques", "icon": "projects" },
       { "value": "4 100+", "label": "logements, bureaux et commerces", "icon": "apartments" },
       { "value": "225 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
     ]
@@ -1370,6 +1370,58 @@
         },
         {
           "place": "Route d'accès à l'aéroport d'Istanbul"
+        }
+      ]
+    },
+    "mesa-yenikent": {
+      "name": "Mesa Yenikent",
+      "tagline": "Une nouvelle ville entièrement planifiée à Başakşehir, signée Mesa, bâtisseur depuis 1969.",
+      "shortDescription": "Mesa Yenikent est une nouvelle ville intégrée à Başakşehir, réalisée par Mesa Mesken : des immeubles de faible hauteur au milieu d'un million de mètres carrés d'espaces paysagers, des logements du 2+1 au 6.5+1 avec jardins, terrasses et grands balcons, ainsi qu'écoles, commerces et équipements sportifs et sociaux sur place.",
+      "longDescription": "Mesa Yenikent prend forme à Başakşehir, le quartier planifié du nord de la rive européenne d'Istanbul, sous la signature de Mesa Mesken, l'un des promoteurs résidentiels les plus connus de Turquie. Plutôt qu'une simple résidence, c'est une ville complète : une zone d'habitation de 2 000 000 m², 1 500 000 m² de construction, 1 000 000 m² d'espaces paysagers et un équipement social de 10 000 m², où logements, commerces, écoles et espaces de vie sont pensés ensemble. L'architecture est horizontale et de faible hauteur, pour que les immeubles restent proches des jardins, avec des logements en rez-de-jardin, des toits-terrasses, de grands balcons, de larges fenêtres qui laissent entrer la lumière et des systèmes domotiques. Les logements vont du 2+1 au 6.5+1, dont des duplex 4.5+2 et 6.5+1, et sont proposés par phases nommées Sedir, Ladin, Zeytin et Çınar, la plus récente. Les résidents disposent de parcs, de chemins de promenade et de pistes cyclables, d'aires de jeux, d'espaces pour animaux, d'une piscine couverte, d'une salle de sport, d'un sauna et de hammams, de terrains de basket, de mini-football et de padel, de restaurants, de cafés, de commerces, d'écoles et de bornes de recharge pour voitures électriques. La station de métro Kayaşehir et l'hôpital Çam et Sakura de Başakşehir sont à environ 6 km, le stade olympique Atatürk à 8 km, le Mall of Istanbul à 10 km et l'aéroport d'Istanbul à 32 km, avec un accès à l'autoroute du Nord de Marmara, à la TEM et à la D-100. Fondée en 1969, Mesa a livré plus de 135 000 logements dans plus de 500 projets achevés, avec une garantie de satisfaction client inconditionnelle et un service après livraison. Le projet est en construction, le prix est communiqué sur demande, et il est éligible à la citoyenneté turque.",
+      "highlights": [
+        "Une ville nouvelle complète signée Mesa Mesken, bâtisseur depuis 1969",
+        "2 000 000 m² de zone d'habitation, dont 1 000 000 m² d'espaces paysagers",
+        "Immeubles de faible hauteur avec rez-de-jardin, toits-terrasses et grands balcons",
+        "Logements du 2+1 au 6.5+1, dont des duplex",
+        "Piscine couverte, salle de sport, sauna et hammams",
+        "Terrains de basket, de mini-football et de padel, promenades et pistes cyclables",
+        "Écoles, commerces, restaurants et cafés dans la ville",
+        "Garantie de satisfaction client inconditionnelle et service après livraison de Mesa",
+        "À environ 6 km du métro Kayaşehir et de l'hôpital de Başakşehir",
+        "Éligible à la citoyenneté turque"
+      ],
+      "nearby": [
+        {
+          "place": "Station de métro Kayaşehir",
+          "time": "6 km"
+        },
+        {
+          "place": "Hôpital Çam et Sakura de Başakşehir",
+          "time": "6 km"
+        },
+        {
+          "place": "Stade olympique Atatürk",
+          "time": "8 km"
+        },
+        {
+          "place": "Tema World",
+          "time": "8 km"
+        },
+        {
+          "place": "Étang de Bahçeşehir",
+          "time": "9,4 km"
+        },
+        {
+          "place": "Mall of Istanbul",
+          "time": "10 km"
+        },
+        {
+          "place": "Florentia Village",
+          "time": "25 km"
+        },
+        {
+          "place": "Aéroport d'Istanbul",
+          "time": "32 km"
         }
       ]
     },
