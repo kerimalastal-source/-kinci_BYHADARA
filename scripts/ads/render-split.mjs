@@ -25,8 +25,11 @@ const ADS = [
     badge: { num: "576", unit: "m²", ar: "المساحة الإجمالية", en: "TOTAL AREA" },
     photos: [
       { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
-      { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
+      // Owner 2026-10-22: sharper iPhone photo of the sea from the roof terrace (cropped above the floor).
+      { src: `file://${REPO}/scripts/ads/villa-2026-10/photos/terrace-sea-iphone.jpg`, pos: "80% 37%", size: "auto 217%" },
     ],
+    // The sea photo is landscape, so it gets the wider column to show more water and less roof.
+    cols: "2fr 3fr",
     cta: ["Book a Private Viewing", "احجز معاينة خاصة"],
   },
   {
@@ -96,7 +99,7 @@ const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta char
 <div class="head"><div class="brand"><img src="file://${REPO}/public/logo-dark.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="rule"></div></div>
 ${a.badge ? `<div class="hero"><div class="seal"><span class="sa">${a.badge.ar}</span><b dir="ltr">${a.badge.num}<i>${a.badge.unit}</i></b><span class="se">${a.badge.en}</span></div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : `<div class="ar">${a.ar}</div><div class="en">${a.en}</div>`}
 <div class="label">${a.flag ? `<span class="lab">${FLAG}<span>${a.label}</span></span>` : a.label}</div>
-<div class="photos"${a.photos.length === 1 ? ' style="grid-template-columns:1fr"' : ""}>${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
+<div class="photos"${a.photos.length === 1 ? ' style="grid-template-columns:1fr"' : a.cols ? ` style="grid-template-columns:${a.cols}"` : ""}>${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
 <div class="foot"><span class="w">hadararealestate.com</span><span class="sep"></span><span class="c"><span class="a">${a.cta[1]}</span><span class="bar">|</span><span>${a.cta[0]}</span></span></div>
 </body></html>`;
 
