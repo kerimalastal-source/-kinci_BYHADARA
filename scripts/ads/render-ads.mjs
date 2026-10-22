@@ -117,6 +117,23 @@ const ADS = [
       ["In English or Arabic, free with no obligation", "بالإنجليزية أو العربية، مجانية ودون التزام"],
     ],
   },
+  {
+    // Round 2 (2026-10-22 plan): same 30/30 headline on a photo the Gulf audience has not seen,
+    // and the "two homes" citizenship route competitors leave out.
+    id: "plan9",
+    primary: "en",
+    photo: img("beylikduzu-living/central-garden.jpg"),
+    badgeEn: "Buy in Istanbul",
+    badgeAr: "تملّك في إسطنبول",
+    en: "Pay 30% now,<br>the rest over 30 months",
+    ar: "ادفع 30% الآن والباقي على 30 شهراً",
+    points: [
+      ["Homes in Istanbul from US$200,000", "مساكن في إسطنبول تبدأ من 200 ألف دولار"],
+      ["Citizenship with one or more homes totalling US$400k+, e.g. two apartments", "الجنسية التركية بعقار أو أكثر بقيمة إجمالية 400 ألف دولار فأكثر، كشقتين مثلاً"],
+    ],
+    qualifier: ["On new launches & projects under construction", "خطة الدفع في المشاريع الجديدة وقيد الإنشاء"],
+    big: true,
+  },
 ];
 
 const css = (w, h, story) => `
