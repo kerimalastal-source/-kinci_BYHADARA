@@ -114,7 +114,7 @@
     "stats": [
       { "value": "12+", "label": "années d'excellence", "icon": "years" },
       { "value": "16", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "3 400+", "label": "unités résidentielles", "icon": "apartments" },
+      { "value": "4 300+", "label": "unités résidentielles", "icon": "apartments" },
       { "value": "420+", "label": "bureaux", "icon": "offices" },
       { "value": "250+", "label": "locaux commerciaux", "icon": "shops" },
       { "value": "7", "label": "quartiers phares d'Istanbul", "icon": "districts" }
@@ -209,7 +209,7 @@
     "stats": [
       { "value": "12+", "label": "années d'activité", "icon": "years" },
       { "value": "16", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "4 100+", "label": "logements, bureaux et commerces", "icon": "apartments" },
+      { "value": "4 900+", "label": "logements, bureaux et commerces", "icon": "apartments" },
       { "value": "225 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
     ]
   },
@@ -1377,9 +1377,10 @@
       "name": "Mesa Yenikent",
       "tagline": "Une nouvelle ville entièrement planifiée à Başakşehir, signée Mesa, bâtisseur depuis 1969.",
       "shortDescription": "Mesa Yenikent est une nouvelle ville intégrée à Başakşehir, réalisée par Mesa Mesken : des immeubles de faible hauteur au milieu d'un million de mètres carrés d'espaces paysagers, des logements du 2+1 au 6.5+1 avec jardins, terrasses et grands balcons, ainsi qu'écoles, commerces et équipements sportifs et sociaux sur place.",
-      "longDescription": "Mesa Yenikent prend forme à Başakşehir, le quartier planifié du nord de la rive européenne d'Istanbul, sous la signature de Mesa Mesken, l'un des promoteurs résidentiels les plus connus de Turquie. Plutôt qu'une simple résidence, c'est une ville complète : une zone d'habitation de 2 000 000 m², 1 500 000 m² de construction, 1 000 000 m² d'espaces paysagers et un équipement social de 10 000 m², où logements, commerces, écoles et espaces de vie sont pensés ensemble. L'architecture est horizontale et de faible hauteur, pour que les immeubles restent proches des jardins, avec des logements en rez-de-jardin, des toits-terrasses, de grands balcons, de larges fenêtres qui laissent entrer la lumière et des systèmes domotiques. Les logements vont du 2+1 au 6.5+1, dont des duplex 4.5+2 et 6.5+1, et sont proposés par phases nommées Sedir, Ladin, Zeytin et Çınar, la plus récente. Les résidents disposent de parcs, de chemins de promenade et de pistes cyclables, d'aires de jeux, d'espaces pour animaux, d'une piscine couverte, d'une salle de sport, d'un sauna et de hammams, de terrains de basket, de mini-football et de padel, de restaurants, de cafés, de commerces, d'écoles et de bornes de recharge pour voitures électriques. La station de métro Kayaşehir et l'hôpital Çam et Sakura de Başakşehir sont à environ 6 km, le stade olympique Atatürk à 8 km, le Mall of Istanbul à 10 km et l'aéroport d'Istanbul à 32 km, avec un accès à l'autoroute du Nord de Marmara, à la TEM et à la D-100. Fondée en 1969, Mesa a livré plus de 135 000 logements dans plus de 500 projets achevés, avec une garantie de satisfaction client inconditionnelle et un service après livraison. Le projet est en construction, le prix est communiqué sur demande, et il est éligible à la citoyenneté turque.",
+      "longDescription": "Mesa Yenikent prend forme à Başakşehir, le quartier planifié du nord de la rive européenne d'Istanbul, sous la signature de Mesa Mesken, l'un des promoteurs résidentiels les plus connus de Turquie. Plutôt qu'une simple résidence, c'est une ville complète : une zone d'habitation de 2 000 000 m², 1 500 000 m² de construction, 1 000 000 m² d'espaces paysagers et un équipement social de 10 000 m², où logements, commerces, écoles et espaces de vie sont pensés ensemble. L'architecture est horizontale et de faible hauteur, pour que les immeubles restent proches des jardins, avec des logements en rez-de-jardin, des toits-terrasses, de grands balcons, de larges fenêtres qui laissent entrer la lumière et des systèmes domotiques. Les logements vont du 2+1 au 6.5+1, dont des duplex 4.5+2 et 6.5+1, et sont proposés par phases nommées Sedir, Ladin, Zeytin et Çınar, la plus récente. Les résidents disposent de parcs, de chemins de promenade et de pistes cyclables, d'aires de jeux, d'espaces pour animaux, d'une piscine couverte, d'une salle de sport, d'un sauna et de hammams, de terrains de basket, de mini-football et de padel, de restaurants, de cafés, de commerces, d'écoles et de bornes de recharge pour voitures électriques. La station de métro Kayaşehir et l'hôpital Çam et Sakura de Başakşehir sont à environ 6 km, le stade olympique Atatürk à 8 km, le Mall of Istanbul à 10 km et l'aéroport d'Istanbul à 32 km, avec un accès à l'autoroute du Nord de Marmara, à la TEM et à la D-100. Fondée en 1969, Mesa a livré plus de 135 000 logements dans plus de 500 projets achevés, avec une garantie de satisfaction client inconditionnelle et un service après livraison. La ville est prévue pour environ 4 000 logements en cinq phases ; selon le promoteur, la livraison de la première phase (843 logements) est prévue en juin 2028. Le projet est en construction, le prix est communiqué sur demande, et il est éligible à la citoyenneté turque.",
       "highlights": [
         "Une ville nouvelle complète signée Mesa Mesken, bâtisseur depuis 1969",
+        "Environ 4 000 logements en cinq phases ; livraison de la première phase prévue en juin 2028",
         "2 000 000 m² de zone d'habitation, dont 1 000 000 m² d'espaces paysagers",
         "Immeubles de faible hauteur avec rez-de-jardin, toits-terrasses et grands balcons",
         "Logements du 2+1 au 6.5+1, dont des duplex",

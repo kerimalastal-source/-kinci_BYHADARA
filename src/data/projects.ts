@@ -510,8 +510,9 @@ export const projects: Project[] = [
     district: "Başakşehir",
     city: "Istanbul",
     status: "ongoing",
-    // Owner, 2026-10-22: no delivery date (not published by the developer), no payment plan, price on request,
-    // eligible for citizenship. Mesa does not publish a unit count, so the stats use the township areas.
+    // Owner, 2026-10-22: no payment plan, price on request, eligible for citizenship. Mesa's press release
+    // (21 Oct 2026, carried by Emlak Kulisi, Yeni Şafak, Konut Trend...): about 4,000 homes in 5 phases, phase 1 of
+    // 843 homes planned for delivery in June 2028; the new phase (Çınar, 300 homes) has no published date.
     lifestyle: ["nature", "city"],
     unitsAvailable: true,
     priority: 1.9,
@@ -534,8 +535,9 @@ export const projects: Project[] = [
       img("mesa-yenikent", "sunset-balcony", 1680, 950, "Mesa Yenikent balcony view over the gardens at sunset")
     ],
     stats: [
+      { value: "4,000", labelKey: "apartments" },
+      { value: "2028", labelKey: "delivery" },
       { value: "2,000,000 m²", labelKey: "landArea" },
-      { value: "1,500,000 m²", labelKey: "constructionArea" },
       { value: "1,000,000 m²", labelKey: "greenAndParkArea" },
       { value: "2+1 – 6.5+1", labelKey: "layout" }
     ],

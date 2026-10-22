@@ -114,7 +114,7 @@
     "stats": [
       { "value": "12+", "label": "Years of Excellence", "icon": "years" },
       { "value": "16", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "3,400+", "label": "Residential Units", "icon": "apartments" },
+      { "value": "4,300+", "label": "Residential Units", "icon": "apartments" },
       { "value": "420+", "label": "Office Units", "icon": "offices" },
       { "value": "250+", "label": "Commercial Units", "icon": "shops" },
       { "value": "7", "label": "Prime Istanbul Districts", "icon": "districts" }
@@ -209,7 +209,7 @@
     "stats": [
       { "value": "12+", "label": "Years in Business", "icon": "years" },
       { "value": "16", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "4,100+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
+      { "value": "4,900+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
       { "value": "225,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
     ]
   },
@@ -1377,9 +1377,10 @@
       "name": "Mesa Yenikent",
       "tagline": "A new, fully planned town in Başakşehir by Mesa, building homes since 1969.",
       "shortDescription": "Mesa Yenikent is a new integrated town in Başakşehir by Mesa Mesken: low-rise blocks set in one million square metres of landscaping, homes from 2+1 to 6.5+1 with gardens, terraces and wide balconies, and schools, shops, sports and social facilities on site.",
-      "longDescription": "Mesa Yenikent is a new town taking shape in Başakşehir, the planned district in the north of Istanbul's European side, built by Mesa Mesken, one of Turkey's best-known housing developers. Rather than a single complex, it is planned as a complete town: a settlement area of 2,000,000 m², 1,500,000 m² of construction, 1,000,000 m² of landscaping and a 10,000 m² social facility, with homes, shops, education and social spaces designed to work together. The architecture is low-rise and horizontal, so the blocks stay close to the gardens, with garden-floor homes, roof terraces, wide balconies and large windows that bring in daylight, and smart home systems inside. Homes range from 2+1 to 6.5+1, including two-level 4.5+2 and 6.5+1 residences, and are sold in phases named Sedir, Ladin, Zeytin and Çınar, the newest. Residents have parks, walking and cycling paths, children's play areas, pet walking points, an indoor swimming pool, a fitness centre, sauna and steam rooms, basketball, mini football and padel courts, restaurants, cafés, shops, schools and electric car charging points. Kayaşehir metro station and Başakşehir Çam and Sakura City Hospital are about 6 km away, the Atatürk Olympic Stadium 8 km, Mall of Istanbul 10 km and Istanbul Airport 32 km, with links to the North Marmara Motorway, the TEM and the D-100. Mesa was founded in 1969 and has delivered more than 135,000 homes in over 500 completed projects, handing over its buildings with an unconditional customer satisfaction guarantee and an after-sales service. The project is under construction, the price is available on request, and it is eligible for Turkish citizenship.",
+      "longDescription": "Mesa Yenikent is a new town taking shape in Başakşehir, the planned district in the north of Istanbul's European side, built by Mesa Mesken, one of Turkey's best-known housing developers. Rather than a single complex, it is planned as a complete town: a settlement area of 2,000,000 m², 1,500,000 m² of construction, 1,000,000 m² of landscaping and a 10,000 m² social facility, with homes, shops, education and social spaces designed to work together. The architecture is low-rise and horizontal, so the blocks stay close to the gardens, with garden-floor homes, roof terraces, wide balconies and large windows that bring in daylight, and smart home systems inside. Homes range from 2+1 to 6.5+1, including two-level 4.5+2 and 6.5+1 residences, and are sold in phases named Sedir, Ladin, Zeytin and Çınar, the newest. Residents have parks, walking and cycling paths, children's play areas, pet walking points, an indoor swimming pool, a fitness centre, sauna and steam rooms, basketball, mini football and padel courts, restaurants, cafés, shops, schools and electric car charging points. Kayaşehir metro station and Başakşehir Çam and Sakura City Hospital are about 6 km away, the Atatürk Olympic Stadium 8 km, Mall of Istanbul 10 km and Istanbul Airport 32 km, with links to the North Marmara Motorway, the TEM and the D-100. Mesa was founded in 1969 and has delivered more than 135,000 homes in over 500 completed projects, handing over its buildings with an unconditional customer satisfaction guarantee and an after-sales service. The town is planned as about 4,000 homes in five phases, and according to the developer the first phase of 843 homes is scheduled for delivery in June 2028. The project is under construction, the price is available on request, and it is eligible for Turkish citizenship.",
       "highlights": [
         "A complete new town by Mesa Mesken, building homes since 1969",
+        "About 4,000 homes in five phases; first-phase delivery planned for June 2028",
         "2,000,000 m² settlement area with 1,000,000 m² of landscaping",
         "Low-rise blocks with garden-floor homes, roof terraces and wide balconies",
         "Homes from 2+1 to 6.5+1, including two-level residences",
