@@ -8,7 +8,7 @@
 // accepts is used. A number none of them gives is left out; the rest is still collected.
 // Reach, views and page views need the read_insights permission; followers, reactions,
 // comments and shares only pages_read_engagement.
-import { graphDay, istanbulDay, lastDays, pool } from "./igInsights.js";
+import { clip, graphDay, istanbulDay, lastDays, pool } from "./igInsights.js";
 
 const GRAPH = "https://graph.facebook.com/v22.0";
 const MEDIA_DAYS = 30;
@@ -179,7 +179,7 @@ async function collectPosts(deps: FbDeps, token: string, errors: string[]): Prom
     post_id: item.id!,
     posted_at: new Date(Date.parse(item.created_time!)).toISOString(),
     post_type: item.status_type ?? null,
-    message: item.message ? item.message.slice(0, 300) : null,
+    message: item.message ? clip(item.message, 300) : null,
     permalink: item.permalink_url ?? null,
     reactions: num(item.reactions?.summary?.total_count),
     comments: num(item.comments?.summary?.total_count),

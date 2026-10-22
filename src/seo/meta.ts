@@ -125,7 +125,8 @@ function projectSeoKind(project: (typeof projects)[number]): string {
   const kinds = new Set((project.residences ?? []).map((r) => r.kind));
   if (project.soldOut) return "completed";
   if (project.slug.includes("villa")) return "villa"; // a single private villa (marmara-haven-villa)
-  if (kinds.has("villa") || has("villas")) return "villas";
+  // Mixed projects (apartments plus a few villas, like vadi-panorama) are titled by their apartments.
+  if ((kinds.has("villa") || has("villas")) && !kinds.has("apartment") && !has("apartments")) return "villas";
   if (kinds.has("office") || has("homeOffices")) return "homeOffices";
   if (has("shops")) return "apartmentsShops";
   return "apartments";

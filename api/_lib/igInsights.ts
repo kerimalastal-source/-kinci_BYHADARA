@@ -91,6 +91,12 @@ const short = (error: unknown) => (error instanceof Error ? error.message : "unk
 
 const num = (value: unknown): number | undefined => (typeof value === "number" && Number.isFinite(value) ? Math.round(value) : undefined);
 
+/** The first `max` characters of a caption, never cutting an emoji in half: half an emoji (a lone
+ *  surrogate) makes the whole JSON body invalid and Supabase rejects the save (seen 2026-10-21). */
+export function clip(text: string, max: number): string {
+  return Array.from(text).slice(0, max).join("").replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g, "\uFFFD");
+}
+
 /** The calendar day (UTC date) a Graph value belongs to, from its end_time. */
 export function graphDay(endTime: string): string {
   return new Date(Date.parse(endTime) - 12 * 3600_000).toISOString().slice(0, 10);
@@ -251,7 +257,7 @@ async function collectMedia(deps: IgDeps, errors: string[]): Promise<IgMedia[]> 
       posted_at: item.timestamp ? new Date(Date.parse(item.timestamp)).toISOString() : null,
       media_type: item.media_type ?? null,
       product_type: item.media_product_type ?? null,
-      caption: item.caption ? item.caption.slice(0, 300) : null,
+      caption: item.caption ? clip(item.caption, 300) : null,
       permalink: item.permalink ?? null,
       likes: num(item.like_count),
       comments: num(item.comments_count)
