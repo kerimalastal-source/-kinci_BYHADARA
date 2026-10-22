@@ -5,6 +5,7 @@
 import { createRequire } from "module";
 import path from "path";
 import fs from "fs";
+import { execFileSync } from "child_process";
 const require = createRequire(process.env.GLOBAL_NM + "/");
 const { chromium } = require("playwright");
 
@@ -77,20 +78,38 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .foot .c .bar{color:#c9a24b}
 `;
 
-const html = (a, w, h, story) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body>
+const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body>
 <div class="head"><div class="brand"><img src="file://${REPO}/public/logo-dark.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="rule"></div></div>
 <div class="ar">${a.ar}</div><div class="en">${a.en}</div>
 <div class="label">${a.label}</div>
-<div class="photos">${a.photos.map((p) => `<div style="background-image:url('${p.src}');background-position:${p.pos}${p.size ? `;background-size:${p.size}` : ""}"></div>`).join("")}</div>
+<div class="photos">${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
 <div class="foot"><span class="w">hadararealestate.com</span><span class="sep"></span><span class="c"><span class="a">${a.cta[1]}</span><span class="bar">|</span><span>${a.cta[0]}</span></span></div>
 </body></html>`;
 
-fs.mkdirSync(OUT, { recursive: true });
+// High resolution (owner 2026-10-22: "highest quality"): render at 2x (2160 wide) and feed each photo
+// pre-cropped to its exact pixel size, so the browser never stretches a photo.
+const SCALE = 2;
+const PREP = path.join(OUT, "_prep");
+fs.mkdirSync(PREP, { recursive: true });
+const imgSize = (f) => execFileSync("python3", ["-I", "-c", "import sys;from PIL import Image;print(*Image.open(sys.argv[1]).size)", f]).toString().trim().split(" ").map(Number);
+// CSS background math: where the photo sits in its box, turned into a crop of the source image.
+function crop(src, pos, size, box) {
+  const [iw, ih] = imgSize(src);
+  const pct = (v) => (v === "center" ? 50 : parseFloat(v));
+  const [px, py] = pos.split(" ").map(pct);
+  let rw, rh;
+  if (size) { rh = (box.h * parseFloat(size.split(" ")[1])) / 100; rw = (iw * rh) / ih; }
+  else { const k = Math.max(box.w / iw, box.h / ih); rw = iw * k; rh = ih * k; }
+  const k = rw / iw;
+  const ox = ((box.w - rw) * px) / 100, oy = ((box.h - rh) * py) / 100;
+  return [-ox / k, -oy / k, box.w / k, box.h / k];
+}
+
 const b = await chromium.launch();
 const only = process.argv.slice(2);
 for (const a of ADS.filter((x) => !only.length || only.includes(x.id))) {
   for (const [w, h, story, suffix] of [[1080, 1350, false, "feed"], [1080, 1920, true, "story"]]) {
-    const p = await b.newPage({ viewport: { width: w, height: h } });
+    const p = await b.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: SCALE });
     const f = path.join(OUT, `${a.id}-${suffix}.html`);
     fs.writeFileSync(f, html(a, w, h, story));
     await p.goto("file://" + f);
@@ -98,10 +117,19 @@ for (const a of ADS.filter((x) => !only.length || only.includes(x.id))) {
     // Fail loudly if a line wraps or overflows (the label and footer must stay on one line).
     const bad = await p.evaluate(() => [...document.querySelectorAll(".label,.foot")].filter((e) => e.scrollWidth > e.clientWidth + 1 || [...e.children].some((c) => c.getClientRects().length > 1 || c.offsetHeight > 60)).map((e) => e.className));
     if (bad.length) console.log("OVERFLOW", a.id, suffix, bad);
-    await p.screenshot({ path: path.join(OUT, `${a.id}-${suffix}.jpg`), type: "jpeg", quality: 90 });
+    const boxes = await p.evaluate(() => [...document.querySelectorAll(".photos > div")].map((d) => { const r = d.getBoundingClientRect(); return { w: r.width, h: r.height, src: d.dataset.src, pos: d.dataset.pos, size: d.dataset.size }; }));
+    const jobs = boxes.map((x, i) => ({ src: x.src, out: path.join(PREP, `${a.id}-${suffix}-${i}.jpg`), box: crop(x.src, x.pos, x.size, x), size: [Math.round(x.w * SCALE), Math.round(x.h * SCALE)] }));
+    const jf = path.join(PREP, "jobs.json");
+    fs.writeFileSync(jf, JSON.stringify(jobs));
+    console.log(execFileSync("python3", ["-I", path.join(HERE, "prep-photos.py"), jf]).toString().trim());
+    fs.writeFileSync(f, html(a, w, h, story, jobs.map((j) => j.out)));
+    await p.goto("file://" + f);
+    await p.waitForTimeout(500);
+    await p.screenshot({ path: path.join(OUT, `${a.id}-${suffix}.jpg`), type: "jpeg", quality: 95 });
     fs.unlinkSync(f);
     await p.close();
   }
   console.log("done", a.id);
 }
 await b.close();
+fs.rmSync(PREP, { recursive: true, force: true });
