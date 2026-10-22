@@ -37,7 +37,7 @@ const ADS = [
     ar: "شقتك في إسطنبول<br>ادفع 30% والباقي على 30 شهراً",
     en: "Istanbul homes: 30% now, the rest over 30 months",
     // Owner 2026-10-22: only "from US$200,000" in big type, and no Istanbul/flag line (the headline says Istanbul).
-    price: { ar: "تبدأ من 200 ألف دولار", big: true },
+    price: { ar: "تبدأ من 200 ألف دولار", en: "From US$200,000", big: true },
     photos: [
       // Owner 2026-10-22: one wide photo of the project with its garden, so it shows properly.
       { src: img("beylikduzu-living/central-garden.jpg"), pos: "42% center" },
@@ -85,8 +85,10 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .price{align-self:center;margin-top:${story ? 30 : 20}px;display:flex;align-items:center;gap:${story ? 20 : 18}px;padding:${story ? "12px 34px" : "10px 30px"};border:2px solid #c9a24b;border-radius:99px;background:#fbf3df;white-space:nowrap}
 .price .pa{font-family:Plex;font-weight:700;font-size:${story ? 34 : 30}px;line-height:1.3;direction:rtl}
 .price .pe{font-weight:700;font-size:${story ? 27 : 24}px;letter-spacing:1px}
-.price.big{margin:${story ? "34px 0 40px" : "22px 0 28px"};padding:${story ? "14px 52px" : "12px 46px"}}
-.price.big .pa{font-size:${story ? 54 : 48}px}
+.price.big{margin:${story ? "34px 0 40px" : "22px 0 28px"};padding:${story ? "14px 46px" : "12px 46px"}}
+.price.big .pa{font-size:48px}
+.price.big .pe{font-size:40px;letter-spacing:0}
+.price.big .pb{height:46px}
 .price .pb{width:2px;height:${story ? 34 : 30}px;background:#c9a24b}
 .label::before,.label::after{content:"";flex:1;height:2px;background:#c9a24b;opacity:.75}
 .photos{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:0}
