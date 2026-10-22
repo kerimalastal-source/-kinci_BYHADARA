@@ -17,7 +17,7 @@ async function database() {
     await db.exec(readFileSync(new URL(file, MIGRATIONS), "utf8"));
   }
   // Re-runnable.
-  for (const file of ["0021_automated_visits.sql", "0022_clean_visit_stats.sql", "0023_clean_behavior_consent.sql"]) {
+  for (const file of ["0021_automated_visits.sql", "0022_clean_visit_stats.sql", "0023_clean_behavior_consent.sql", "0030_datacenter_contacts.sql"]) {
     await db.exec(readFileSync(new URL(file, MIGRATIONS), "utf8"));
   }
   return db;
@@ -55,9 +55,12 @@ test("each kind of visit is counted where it belongs", async () => {
   // A driven browser.
   await visit(db, 6, "/", plus(oneAgo, 600));
   await db.query("insert into public.visitor_profiles (session_id, webdriver) values ($1, true)", [id(6)]);
-  // From a data-center town, but pressed WhatsApp: a person.
+  // From a data-center town and pressed WhatsApp: an ad review system, still automated (0030).
   await visit(db, 7, "/", plus(oneAgo, 1200), { city: "Ashburn", country: "US" });
   await db.query("insert into public.visitor_actions (session_id, action, target) values ($1, 'whatsapp', 'contact')", [id(7)]);
+  // A person in Riyadh who pressed WhatsApp.
+  await visit(db, 10, "/", plus(oneAgo, 1300), { city: "Riyadh", country: "SA" });
+  await db.query("insert into public.visitor_actions (session_id, action, target) values ($1, 'whatsapp', 'contact')", [id(10)]);
   // A new tab opened from the site is not a visit.
   await visit(db, 8, "/about", plus(oneAgo, 1800), { referrer: "/ar" });
   // Older than the period.
@@ -69,7 +72,7 @@ test("each kind of visit is counted where it belongs", async () => {
   const r = await stats(db, 7);
   assert.equal(r.days, 7);
   assert.equal(r.daily.length, 7);
-  assert.equal(r.automated, 5);
+  assert.equal(r.automated, 6);
   const [d2, d1, d0] = r.daily.slice(-3);
   assert.deepEqual(d2, { day: d2.day, visitors: 1, pages: 2, contacted: 0 });
   assert.deepEqual(d1, { day: d1.day, visitors: 1, pages: 1, contacted: 1 });
@@ -79,7 +82,7 @@ test("each kind of visit is counted where it belongs", async () => {
   const visits = (await db.query("select public.admin_visit_stats(7) as r")).rows[0].r;
   assert.equal(visits.totals.visitors, 2);
   assert.equal(visits.totals.pages, 3);
-  assert.deepEqual(visits.countries.map((c) => c.country).sort(), ["TR", "US"]);
+  assert.deepEqual(visits.countries.map((c) => c.country).sort(), ["SA", "TR"]);
   assert.ok(!visits.landings.some((l) => l.page.startsWith("/projects/")));
   const behavior = (await db.query("select public.admin_behavior_stats(7) as r")).rows[0].r;
   assert.equal(behavior.visits, 2);

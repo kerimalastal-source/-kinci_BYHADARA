@@ -187,8 +187,12 @@ export function classifyVisit(f: VisitFacts): VerdictResult {
   const h = human.reduce((n, [w]) => n + w, 0);
   const byWeight = (list: [number, string][]) => [...list].sort((x, y) => y[0] - x[0]).map(([, r]) => r);
 
+  // A data-center town or a driven browser is automated even when it presses a contact
+  // button (ad review systems do); visit_verdicts() in migration 0030 does the same.
+  const hardBot = !!f.webdriver || f.automated === "data-center town";
   let verdict: Verdict;
-  if (contacted) verdict = "real";
+  if (contacted && hardBot) verdict = "bot";
+  else if (contacted) verdict = "real";
   else if (b >= 3 && h < 3) verdict = "bot";
   else if (h >= 2.5 && b <= 1.5) verdict = "real";
   else if (!reported && !actions.length && b < 1.5 && pages.length === 1) verdict = "pending";
