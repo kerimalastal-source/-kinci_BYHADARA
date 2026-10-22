@@ -35,9 +35,8 @@ const ADS = [
     label: "ISTANBUL, TÜRKİYE · NEW LAUNCHES",
     flag: true,
     photos: [
-      // Owner 2026-10-22: the project with its garden, and beside it the living room.
-      { src: img("beylikduzu-living/central-garden.jpg"), pos: "30% center" },
-      { src: img("beylikduzu-living/living-room-new.jpg"), pos: "center center" },
+      // Owner 2026-10-22: one wide photo of the project with its garden, so it shows properly.
+      { src: img("beylikduzu-living/central-garden.jpg"), pos: "42% center" },
     ],
     cta: ["Message us on WhatsApp", "راسلنا عبر واتساب"],
   },
