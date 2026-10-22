@@ -29,9 +29,11 @@ const ADS = [
   },
   {
     id: "plan",
-    ar: "ادفع 30% الآن<br>والباقي على 30 شهراً",
-    en: "Pay 30% now, the rest over 30 months",
-    label: "NEW LAUNCHES · UNDER CONSTRUCTION",
+    // Owner 2026-10-22: a 30/30 plan exists nowhere else, so the ad must say where (Istanbul + the flag).
+    ar: "شقتك في إسطنبول<br>ادفع 30% والباقي على 30 شهراً",
+    en: "Istanbul homes: 30% now, the rest over 30 months",
+    label: "ISTANBUL, TÜRKİYE · NEW LAUNCHES",
+    flag: true,
     photos: [
       { src: img("beylikduzu-living/central-garden.jpg"), pos: "30% center" },
       { src: img("beylikduzu-living/street-entrance.jpg"), pos: "center center" },
@@ -65,8 +67,9 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .brand i{display:block;font-style:normal;font-weight:600;font-size:${story ? 14 : 12}px;letter-spacing:6px;color:#a8853a;margin-top:8px}
 .rule{flex:1;height:2px;background:linear-gradient(90deg,#c9a24b,rgba(201,162,75,.35))}
 .ar{margin-top:${story ? 40 : 26}px;padding:0 50px;font-family:Plex;font-weight:700;font-size:${story ? 88 : 76}px;line-height:1.22;text-align:center;direction:rtl}
-.en{margin-top:${story ? 18 : 12}px;padding:0 50px;font-weight:600;font-size:${story ? 46 : 40}px;letter-spacing:-.3px;text-align:center}
+.en{margin-top:${story ? 18 : 12}px;padding:0 50px;font-weight:600;line-height:1.25;font-size:${story ? 46 : 40}px;letter-spacing:-.3px;text-align:center}
 .label{margin:${story ? "30px 56px 34px" : "20px 56px 24px"};display:flex;align-items:center;gap:22px;color:#a8853a;font-weight:600;font-size:${story ? 23 : 21}px;letter-spacing:5px;white-space:nowrap}
+.lab{display:flex;align-items:center;gap:14px}.lab svg{height:${story ? 26 : 24}px;width:auto;border-radius:3px;box-shadow:0 0 0 1px rgba(15,43,33,.12)}
 .label::before,.label::after{content:"";flex:1;height:2px;background:#c9a24b;opacity:.75}
 .photos{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:0}
 .photos div{background-size:cover}
@@ -78,10 +81,12 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .foot .c .bar{color:#c9a24b}
 `;
 
+// Turkish flag (official proportions).
+const FLAG = '<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#e30a17"/><circle cx="425" cy="400" r="200" fill="#fff"/><circle cx="475" cy="400" r="160" fill="#e30a17"/><path fill="#fff" d="M583.334 400l180.901 58.779-111.804-153.885v190.212l111.804-153.885z"/></svg>';
 const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body>
 <div class="head"><div class="brand"><img src="file://${REPO}/public/logo-dark.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="rule"></div></div>
 <div class="ar">${a.ar}</div><div class="en">${a.en}</div>
-<div class="label">${a.label}</div>
+<div class="label">${a.flag ? `<span class="lab">${FLAG}<span>${a.label}</span></span>` : a.label}</div>
 <div class="photos">${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
 <div class="foot"><span class="w">hadararealestate.com</span><span class="sep"></span><span class="c"><span class="a">${a.cta[1]}</span><span class="bar">|</span><span>${a.cta[0]}</span></span></div>
 </body></html>`;
@@ -114,6 +119,17 @@ for (const a of ADS.filter((x) => !only.length || only.includes(x.id))) {
     fs.writeFileSync(f, html(a, w, h, story));
     await p.goto("file://" + f);
     await p.waitForTimeout(400);
+    // Shrink a headline that wraps: the Arabic keeps its own line breaks, the English stays on one line.
+    await p.evaluate(() => {
+      const fit = (el, lines) => {
+        const lh = () => parseFloat(getComputedStyle(el).lineHeight);
+        let size = parseFloat(getComputedStyle(el).fontSize);
+        while (el.getBoundingClientRect().height > lh() * lines + 2 && size > 24) el.style.fontSize = `${--size}px`;
+      };
+      const ar = document.querySelector(".ar");
+      fit(ar, ar.querySelectorAll("br").length + 1);
+      fit(document.querySelector(".en"), 1);
+    });
     // Fail loudly if a line wraps or overflows (the label and footer must stay on one line).
     const bad = await p.evaluate(() => [...document.querySelectorAll(".label,.foot")].filter((e) => e.scrollWidth > e.clientWidth + 1 || [...e.children].some((c) => c.getClientRects().length > 1 || c.offsetHeight > 60)).map((e) => e.className));
     if (bad.length) console.log("OVERFLOW", a.id, suffix, bad);
@@ -123,8 +139,10 @@ for (const a of ADS.filter((x) => !only.length || only.includes(x.id))) {
     fs.writeFileSync(jf, JSON.stringify(jobs));
     console.log(execFileSync("python3", ["-I", path.join(HERE, "prep-photos.py"), jf]).toString().trim());
     fs.writeFileSync(f, html(a, w, h, story, jobs.map((j) => j.out)));
+    const sizes = await p.evaluate(() => [".ar", ".en"].map((q) => document.querySelector(q).style.fontSize));
     await p.goto("file://" + f);
     await p.waitForTimeout(500);
+    await p.evaluate((z) => [".ar", ".en"].forEach((q, i) => { if (z[i]) document.querySelector(q).style.fontSize = z[i]; }), sizes);
     await p.screenshot({ path: path.join(OUT, `${a.id}-${suffix}.jpg`), type: "jpeg", quality: 95 });
     fs.unlinkSync(f);
     await p.close();
