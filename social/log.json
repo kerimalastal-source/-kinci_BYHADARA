@@ -782,5 +782,37 @@
     "headlineAr": "فيلا بحديقة خاصة ومرآب لسيارتين",
     "headlineEn": "A villa with a private garden and 2-car garage",
     "photo": "/images/projects/lotus-manzara-guzelce/private-parking.jpg"
+  },
+  {
+    "date": "2026-10-22",
+    "id": "lotus-manzara-beylikduzu-overview",
+    "topic": "لوتس مانزارا بيليكدوزو · نظرة عامة",
+    "headlineAr": "16 فيلا فقط: 8 مستقلة و8 توأم",
+    "headlineEn": "Only 16 villas: 8 detached and 8 semi-detached",
+    "photo": "/images/projects/lotus-manzara-beylikduzu/villa-type-a.jpg"
+  },
+  {
+    "date": "2026-10-22",
+    "id": "design-service",
+    "topic": "التصميم المعماري والهندسي",
+    "headlineAr": "من الفكرة إلى التسليم: 4 من خدمات التصميم لدينا",
+    "headlineEn": "From idea to handover: 4 of our design services",
+    "photo": "/images/consultancy/hero-1680.webp"
+  },
+  {
+    "date": "2026-10-22",
+    "id": "tf-gross-bigger",
+    "topic": "صح أم خطأ: الإجمالية أكبر من الصافية (شرائح)",
+    "headlineAr": "المساحة الإجمالية للشقة أكبر دائماً من الصافية",
+    "headlineEn": "A flat's gross area is always larger than its net",
+    "photo": "/images/blog/gross-vs-net-area.jpg"
+  },
+  {
+    "date": "2026-10-22",
+    "id": "lotus-manzara-beylikduzu-overview-story",
+    "topic": "ستوري: لوتس مانزارا بيليكدوزو",
+    "headlineAr": "حديقة خاصة تصل إلى 247 م²",
+    "headlineEn": "A private garden of up to 247 m²",
+    "photo": "/images/projects/lotus-manzara-beylikduzu/villas-entrance.jpg"
   }
 ]
