@@ -35,8 +35,8 @@ const ADS = [
     label: "ISTANBUL, TÜRKİYE · NEW LAUNCHES",
     flag: true,
     photos: [
-      { src: img("beylikduzu-living/central-garden.jpg"), pos: "30% center" },
-      { src: img("beylikduzu-living/street-entrance.jpg"), pos: "center center" },
+      // Owner 2026-10-22: one wide photo of the project with its garden, so it shows properly.
+      { src: img("beylikduzu-living/central-garden.jpg"), pos: "42% center" },
     ],
     cta: ["Message us on WhatsApp", "راسلنا عبر واتساب"],
   },
@@ -87,7 +87,7 @@ const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta char
 <div class="head"><div class="brand"><img src="file://${REPO}/public/logo-dark.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="rule"></div></div>
 <div class="ar">${a.ar}</div><div class="en">${a.en}</div>
 <div class="label">${a.flag ? `<span class="lab">${FLAG}<span>${a.label}</span></span>` : a.label}</div>
-<div class="photos">${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
+<div class="photos"${a.photos.length === 1 ? ' style="grid-template-columns:1fr"' : ""}>${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
 <div class="foot"><span class="w">hadararealestate.com</span><span class="sep"></span><span class="c"><span class="a">${a.cta[1]}</span><span class="bar">|</span><span>${a.cta[0]}</span></span></div>
 </body></html>`;
 
