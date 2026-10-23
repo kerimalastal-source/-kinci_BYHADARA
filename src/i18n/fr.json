@@ -222,6 +222,26 @@
     "heroEyebrow": "Notre portefeuille",
     "heroTitle": "Des projets qui façonnent Istanbul",
     "heroSubtitle": "Des villas privées aux grands ensembles résidentiels, découvrez les projets développés et commercialisés par HADARA à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir.",
+    "atlas": {
+      "title": "Nos projets sur la carte d'Istanbul",
+      "projects": {
+        "one": "{count} projet",
+        "many": "{count} projets",
+        "other": "{count} projets"
+      },
+      "districts": {
+        "one": "{count} district",
+        "many": "{count} districts",
+        "other": "{count} districts"
+      },
+      "legendProjects": "Projets HADARA (nombre par district)",
+      "legend": {
+        "airport": "Aéroport",
+        "mall": "Centre commercial",
+        "hospital": "Hôpital"
+      },
+      "close": "Fermer la liste des projets"
+    },
     "filterAll": "Tous les projets",
     "filterNewLaunch": "Nouveau lancement",
     "filterOngoing": "En construction",
@@ -307,6 +327,15 @@
       "florya": "Florya",
       "taksim": "Taksim",
       "sultanahmet": "Sultanahmet",
+      "istinyePark": "İstinye Park",
+      "zorluCenter": "Zorlu Center",
+      "galleriaAtakoy": "Galleria Ataköy",
+      "akbati": "Centre Akbatı",
+      "emaarSquare": "Emaar Square Mall",
+      "basaksehirHospital": "Hôpital urbain de Başakşehir",
+      "memorialSisli": "Hôpital Memorial Şişli",
+      "acibademMaslak": "Hôpital Acıbadem Maslak",
+      "goztepeHospital": "Hôpital urbain de Göztepe",
       "roads": {
         "e5": "E-5 (D-100)",
         "e80": "TEM (E80)",

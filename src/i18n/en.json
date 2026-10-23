@@ -222,6 +222,24 @@
     "heroEyebrow": "Our Portfolio",
     "heroTitle": "Projects Shaping Istanbul",
     "heroSubtitle": "From private villas to large residential communities, explore the projects HADARA developed and markets across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu and Başakşehir.",
+    "atlas": {
+      "title": "Our projects on the map of Istanbul",
+      "projects": {
+        "one": "{count} project",
+        "other": "{count} projects"
+      },
+      "districts": {
+        "one": "{count} district",
+        "other": "{count} districts"
+      },
+      "legendProjects": "HADARA projects (number per district)",
+      "legend": {
+        "airport": "Airport",
+        "mall": "Shopping mall",
+        "hospital": "Hospital"
+      },
+      "close": "Close the project list"
+    },
     "filterAll": "All Projects",
     "filterNewLaunch": "New Launch",
     "filterOngoing": "Under Construction",
@@ -307,6 +325,15 @@
       "florya": "Florya",
       "taksim": "Taksim",
       "sultanahmet": "Sultanahmet",
+      "istinyePark": "İstinye Park",
+      "zorluCenter": "Zorlu Center",
+      "galleriaAtakoy": "Galleria Ataköy",
+      "akbati": "Akbatı Mall",
+      "emaarSquare": "Emaar Square Mall",
+      "basaksehirHospital": "Başakşehir City Hospital",
+      "memorialSisli": "Memorial Şişli Hospital",
+      "acibademMaslak": "Acıbadem Maslak Hospital",
+      "goztepeHospital": "Göztepe City Hospital",
       "roads": {
         "e5": "E-5 (D-100)",
         "e80": "TEM (E80)",

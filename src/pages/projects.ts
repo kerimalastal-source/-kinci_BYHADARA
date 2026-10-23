@@ -1,6 +1,7 @@
 import { t, link, getProjectContent, placeLine } from "../i18n";
 import { getSortedProjects, hasVillas, type Project, type ProjectStatus, type Residence } from "../data/projects";
 import { renderProjectCard, projectStatusLabel } from "../components/projectCard";
+import { renderProjectsAtlas, initProjectsAtlas } from "../components/projectsAtlas";
 import { openLightbox } from "../components/lightbox";
 import { photoAttrs, photoSrcset } from "../utils/responsiveImage";
 
@@ -125,11 +126,14 @@ export function renderProjects(el: HTMLElement): void {
   const filters = allFilters.filter((f) => allProjects.some((p) => matches(p, f.key)));
 
   el.innerHTML = `
-    <section class="page-hero">
-      <div class="container">
-        <p class="eyebrow eyebrow--on-dark">${t("projects.heroEyebrow")}</p>
-        <h1>${t("projects.heroTitle")}</h1>
-        <p class="page-hero__subtitle">${t("projects.heroSubtitle")}</p>
+    <section class="page-hero page-hero--atlas">
+      <div class="container page-hero__split">
+        <div class="page-hero__text">
+          <p class="eyebrow eyebrow--on-dark">${t("projects.heroEyebrow")}</p>
+          <h1>${t("projects.heroTitle")}</h1>
+          <p class="page-hero__subtitle">${t("projects.heroSubtitle")}</p>
+        </div>
+        ${renderProjectsAtlas(allProjects)}
       </div>
     </section>
 
@@ -161,6 +165,7 @@ export function renderProjects(el: HTMLElement): void {
     </section>
   `;
 
+  initProjectsAtlas(el, allProjects);
   const filterBar = el.querySelector<HTMLElement>("#filter-bar")!;
   const grid = el.querySelector<HTMLElement>("#project-grid")!;
   const showcase = el.querySelector<HTMLElement>("#villa-showcase")!;

@@ -222,6 +222,28 @@
     "heroEyebrow": "Наш портфель",
     "heroTitle": "Проекты, формирующие облик Стамбула",
     "heroSubtitle": "От частных вилл до крупных жилых комплексов — ознакомьтесь с проектами, которые HADARA реализовала и продвигает в районах Бейликдюзю, Бююкчекмедже, Авджылар, Шишли, Бакыркёй, Зейтинбурну и Башакшехир.",
+    "atlas": {
+      "title": "Наши проекты на карте Стамбула",
+      "projects": {
+        "one": "{count} проект",
+        "few": "{count} проекта",
+        "many": "{count} проектов",
+        "other": "{count} проекта"
+      },
+      "districts": {
+        "one": "{count} район",
+        "few": "{count} района",
+        "many": "{count} районов",
+        "other": "{count} района"
+      },
+      "legendProjects": "Проекты HADARA (число в районе)",
+      "legend": {
+        "airport": "Аэропорт",
+        "mall": "Торговый центр",
+        "hospital": "Больница"
+      },
+      "close": "Закрыть список проектов"
+    },
     "filterAll": "Все проекты",
     "filterNewLaunch": "Старт продаж",
     "filterOngoing": "Строится",
@@ -307,6 +329,15 @@
       "florya": "Флорья",
       "taksim": "Таксим",
       "sultanahmet": "Султанахмет",
+      "istinyePark": "ТЦ İstinye Park",
+      "zorluCenter": "ТЦ Zorlu Center",
+      "galleriaAtakoy": "ТЦ Galleria Ataköy",
+      "akbati": "ТЦ Akbatı",
+      "emaarSquare": "ТЦ Emaar Square",
+      "basaksehirHospital": "Городская больница Башакшехир",
+      "memorialSisli": "Больница Memorial Şişli",
+      "acibademMaslak": "Больница Acıbadem Maslak",
+      "goztepeHospital": "Городская больница Гёзтепе",
       "roads": {
         "e5": "E-5 (D-100)",
         "e80": "TEM (E80)",
