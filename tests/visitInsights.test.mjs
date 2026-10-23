@@ -98,9 +98,17 @@ test("parseUserAgent, time zones", () => {
   assert.equal(timeZoneMismatch("America/New_York", "SA"), true);
 });
 
-test("classifyVisit: contact always real, automation bot, one silent page pending", () => {
+test("classifyVisit: contact real unless from a data-center town or a driven browser, automation bot, one silent page pending", () => {
   const base = { pages: [{ path: "/ar/projects/diamond-marin", at: 0 }], country: "SA", tz: "Asia/Riyadh" };
-  assert.equal(classifyVisit({ ...base, webdriver: true, actions: [{ action: "whatsapp", target: null }] }).verdict, "real");
+  const whatsapp = [{ action: "whatsapp", target: null }];
+  assert.equal(classifyVisit({ ...base, actions: whatsapp }).verdict, "real");
+  assert.equal(classifyVisit({ ...base, automated: "same-page burst", actions: whatsapp }).verdict, "real");
+  assert.equal(classifyVisit({ ...base, webdriver: true, actions: whatsapp }).verdict, "bot");
+  assert.equal(classifyVisit({ ...base, automated: "data-center town", actions: whatsapp }).verdict, "bot");
+  assert.equal(classifyVisit({ ...base, screen: "2000x2000", actions: whatsapp }).verdict, "bot");
+  const reading = [{ path: "/", active: 40, scroll: 80, interactions: 6 }];
+  assert.equal(classifyVisit({ ...base, screen: "2000x2000", engagement: reading }).verdict, "bot");
+  assert.equal(classifyVisit({ ...base, screen: "412x915", engagement: reading }).verdict, "real");
   assert.equal(classifyVisit({ ...base, webdriver: true }).verdict, "bot");
   assert.equal(classifyVisit(base).verdict, "pending");
   assert.equal(classifyVisit({ ...base, engagement: [{ path: "/", active: 40, scroll: 80, interactions: 6 }] }).verdict, "real");

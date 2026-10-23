@@ -149,6 +149,8 @@ export interface Project {
   address?: string;
   coverImage: ProjectImage;
   gallery: ProjectImage[];
+  /** Villa photos (exterior first) for the "Villas" filter on the projects page; only for projects that sell villas. */
+  villaPhotos?: ProjectImage[];
   stats: ProjectStat[];
   residences?: Residence[];
   /** Level-by-level breakdown, shown as a "Floor by Floor" section. */
@@ -195,6 +197,11 @@ const img = (slug: string, file: string, width: number, height: number, alt: str
   height,
   alt
 });
+
+/** Projects that sell villas: the single private villa, villa communities and mixed projects with a villa type. */
+export function hasVillas(p: Project): boolean {
+  return p.slug.includes("villa") || !!p.residences?.some((r) => r.kind === "villa");
+}
 
 export const projects: Project[] = [
   {
@@ -476,6 +483,13 @@ export const projects: Project[] = [
       img("vadi-panorama", "private-hamam", 1920, 1080, "Vadi Panorama private hamam basin inside the apartment bathroom"),
       img("vadi-panorama", "bedroom-suite", 1920, 1080, "Vadi Panorama bedroom suite")
     ],
+    villaPhotos: [
+      img("vadi-panorama", "villas-front", 1130, 445, "Vadi Panorama 5+1 detached villas with private gardens"),
+      img("vadi-panorama", "villas-aerial", 660, 430, "Vadi Panorama villa lane seen from above"),
+      img("vadi-panorama", "villa-plan-ground", 804, 852, "Vadi Panorama 5+1 villa ground floor plan with garden"),
+      img("vadi-panorama", "villa-plan-first", 691, 748, "Vadi Panorama 5+1 villa first floor plan"),
+      img("vadi-panorama", "villas-row", 1923, 445, "Vadi Panorama row of 5+1 detached villas with private gardens")
+    ],
     stats: [
       { value: "268", labelKey: "apartments" },
       { value: "2028", labelKey: "delivery" },
@@ -653,6 +667,13 @@ export const projects: Project[] = [
       img("lotus-manzara-guzelce", "bathroom", 1285, 640, "Lotus Manzara Güzelce bathroom"),
       img("lotus-manzara-guzelce", "site-plan", 1160, 640, "Lotus Manzara Güzelce site plan from above")
     ],
+    villaPhotos: [
+      img("lotus-manzara-guzelce", "completed-villas", 1920, 1080, "Lotus Manzara Güzelce completed villas, photographed on site"),
+      img("lotus-manzara-guzelce", "villa-row", 1331, 640, "Lotus Manzara Güzelce villas with private gardens"),
+      img("lotus-manzara-guzelce", "aerial-villas", 1500, 640, "Lotus Manzara Güzelce aerial view of the villas"),
+      img("lotus-manzara-guzelce", "living-room", 1286, 640, "Lotus Manzara Güzelce living room"),
+      img("lotus-manzara-guzelce", "kitchen", 1286, 640, "Lotus Manzara Güzelce kitchen")
+    ],
     stats: [
       { value: "32", labelKey: "villas" },
       { value: "12,855 m²", labelKey: "landArea" },
@@ -691,6 +712,13 @@ export const projects: Project[] = [
       img("lotus-manzara-beylikduzu", "kitchen", 1920, 992, "Lotus Manzara Beylikdüzü kitchen"),
       img("lotus-manzara-beylikduzu", "entrance-staircase", 1920, 992, "Lotus Manzara Beylikdüzü entrance and staircase"),
       img("lotus-manzara-beylikduzu", "site-plan", 1273, 728, "Lotus Manzara Beylikdüzü site plan with villas A1–A8 and B1–B8")
+    ],
+    villaPhotos: [
+      img("lotus-manzara-beylikduzu", "completed-aerial", 1920, 1280, "Lotus Manzara Beylikdüzü completed villas from the air"),
+      img("lotus-manzara-beylikduzu", "villa-type-a", 1043, 1036, "Lotus Manzara Beylikdüzü type A detached villa"),
+      img("lotus-manzara-beylikduzu", "villa-type-b", 1043, 1012, "Lotus Manzara Beylikdüzü type B twin villas"),
+      img("lotus-manzara-beylikduzu", "twin-villas", 1778, 1000, "Lotus Manzara Beylikdüzü twin villas"),
+      img("lotus-manzara-beylikduzu", "living-room", 1920, 993, "Lotus Manzara Beylikdüzü living room")
     ],
     stats: [
       { value: "16", labelKey: "villas" },
@@ -894,6 +922,13 @@ export const projects: Project[] = [
       img("marmara-haven-villa", "drone-front", 2000, 1500, "Marmara Haven Villa front with pool, aerial view"),
       img("marmara-haven-villa", "side-entrance", 1200, 1600, "Marmara Haven Villa side entrance with a glimpse of the sea"),
       img("marmara-haven-villa", "exterior-facade", 1200, 1600, "Marmara Haven Villa exterior facade"),
+      img("marmara-haven-villa", "private-pool", 1500, 2000, "Marmara Haven Villa private pool")
+    ],
+    villaPhotos: [
+      img("marmara-haven-villa", "drone", 2000, 1500, "Marmara Haven Villa aerial view with pool and terrace"),
+      img("marmara-haven-villa", "dusk-pool", 1200, 1600, "Marmara Haven Villa at dusk with its private pool"),
+      img("marmara-haven-villa", "living-sea", 1500, 2000, "Marmara Haven Villa living room opening onto the terrace"),
+      img("marmara-haven-villa", "roof-terrace", 1200, 1600, "Marmara Haven Villa rooftop terrace"),
       img("marmara-haven-villa", "private-pool", 1500, 2000, "Marmara Haven Villa private pool")
     ],
     stats: [

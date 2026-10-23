@@ -117,6 +117,57 @@ const ADS = [
       ["In English or Arabic, free with no obligation", "بالإنجليزية أو العربية، مجانية ودون التزام"],
     ],
   },
+  {
+    // Round 2 (2026-10-22 plan): same 30/30 headline on a photo the Gulf audience has not seen,
+    // and the "two homes" citizenship route competitors leave out.
+    id: "plan9",
+    primary: "en",
+    photo: img("beylikduzu-living/central-garden.jpg"),
+    badgeEn: "Buy in Istanbul",
+    badgeAr: "تملّك في إسطنبول",
+    en: "Pay 30% now,<br>the rest over 30 months",
+    ar: "ادفع 30% الآن والباقي على 30 شهراً",
+    points: [
+      ["Homes in Istanbul from US$200,000", "مساكن في إسطنبول تبدأ من 200 ألف دولار"],
+      ["Citizenship with one or more homes totalling US$400k+, e.g. two apartments", "الجنسية التركية بعقار أو أكثر بقيمة إجمالية 400 ألف دولار فأكثر، كشقتين مثلاً"],
+    ],
+    qualifier: ["On new launches & projects under construction", "خطة الدفع في المشاريع الجديدة وقيد الإنشاء"],
+    big: true,
+  },
+  {
+    // New Gulf+Kuwait campaign (owner 2026-10-22: "30/30 + an ad for the villa + citizenship").
+    // Villa: price allowed in villa ads; citizenship eligibility is on the villa's verified card.
+    id: "villa9",
+    primary: "en",
+    photo: img("marmara-haven-villa/balcony-pool.jpg"),
+    // 3:4 photo: slide it up so the sea and the pool sit above the text.
+    photoShift: (story) => (story ? -430 : -560),
+    badgeEn: "Private Villa · Istanbul",
+    badgeAr: "فيلا خاصة في إسطنبول",
+    en: "A sea-view villa<br>in Istanbul",
+    ar: "فيلا بإطلالة بحرية في إسطنبول",
+    points: [
+      ["576 m² on 4 floors · 5 bedrooms · private pool", "576 متراً مربعاً على 4 طوابق، 5 غرف نوم ومسبح خاص"],
+      ["Ready to move in · eligible for Turkish citizenship", "جاهزة للسكن ومؤهّلة للجنسية التركية"],
+    ],
+    qualifier: ["From US$1,550,000", "السعر يبدأ من 1,550,000 دولار"],
+    big: true,
+  },
+  {
+    id: "citizen9",
+    primary: "en",
+    photo: img("sea-pearl-atakoy/aerial-coast.jpg"),
+    badgeEn: "Turkish Citizenship",
+    badgeAr: "الجنسية التركية",
+    en: "Turkish citizenship<br>through real estate",
+    ar: "الجنسية التركية عبر الاستثمار العقاري",
+    points: [
+      ["One or more homes totalling US$400k+, e.g. two apartments", "عقار أو أكثر بقيمة إجمالية 400 ألف دولار فأكثر، كشقتين مثلاً"],
+      ["For you, your spouse and children under 18", "لك ولزوجتك وأبنائك دون 18 عاماً"],
+    ],
+    qualifier: ["Under current Turkish law, subject to change", "حسب القانون التركي الحالي، والشروط قابلة للتغيير"],
+    big: true,
+  },
 ];
 
 const css = (w, h, story) => `
@@ -179,7 +230,7 @@ const enBody = (a) => `<div class="hen">${a.en}</div><div class="har">${a.ar}</d
 ${a.qualifier ? `<div class="qual"><b>${a.qualifier[0]}</b><span>${a.qualifier[1]}</span></div>` : ""}`;
 
 const html = (a, w, h, story) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body class="${a.big ? "big" : ""}${story ? " story" : ""}">
-<div class="ph" style="background-image:url('${a.photo}')${a.photoBox ? `;inset:auto;left:50%;transform:translateX(-50%);top:${a.photoBox(story).top}px;height:${a.photoBox(story).height}px;width:${Math.round(a.photoBox(story).height * 2200 / 1300)}px;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent)` : ""}"></div><div class="sh${a.primary === "en" && !a.phone ? " strong" : ""}"></div>
+<div class="ph" style="background-image:url('${a.photo}')${a.photoBox ? `;inset:auto;left:50%;transform:translateX(-50%);top:${a.photoBox(story).top}px;height:${a.photoBox(story).height}px;width:${Math.round(a.photoBox(story).height * 2200 / 1300)}px;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent)` : ""}${a.photoShift ? `;inset:auto;left:0;width:100%;top:${a.photoShift(story)}px;height:1440px` : ""}"></div><div class="sh${a.primary === "en" && !a.phone ? " strong" : ""}"></div>
 ${a.phone ? `<div class="phone"><div class="s" style="background-image:url('${a.phone}')"><span class="live"><i></i>مباشر</span><span class="pip"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6"/></svg><span>مستشارك</span></span><span class="ctl"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span><span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.5 6-3.5v10l-6-3.5"/></svg></span><span class="end"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 14.5c4.8-4.3 12.2-4.3 17 0l-1.9 2.4-3.4-1.3v-2.2a11 11 0 0 0-7 0v2.2l-3.4 1.3z"/></svg></span></span></div></div>` : ""}
 <div class="top"><div class="brand"><img src="file://${REPO}/public/logo-light.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div>
 <div class="badge">${a.primary === "en" ? `<span>${a.badgeEn}</span><span>·</span><span class="a">${a.badgeAr}</span>` : `<span class="a">${a.badgeAr}</span>${a.badgeEn ? `<span>·</span><span>${a.badgeEn}</span>` : ""}`}</div></div>

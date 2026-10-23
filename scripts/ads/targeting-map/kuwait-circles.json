@@ -1,0 +1,5 @@
+{
+  "note": "Kuwait upscale residential areas for the next Gulf round (planned 2026-10-22, not live). Boundaries: geoBoundaries KWT ADM2 (media.githubusercontent.com/media/wmgeolab/geoBoundaries/main/releaseData/gbOpen/KWT/ADM2/geoBoundaries-KWT-ADM2.geojson). Built with gulf_cover.py (OTHER=0.03) after converting the geojson to [lat, lon] rings. Every circle is >= 94% inside the chosen areas; Hawalli, Khaitan, Salmiya, Farwaniya, Jleeb and Mahboula stay out.",
+  "areas": ["Abdulla_Al-Salem", "Shamiya", "Kifan", "Adailiya", "Nuzha", "Faiha", "Mansouriya", "Qadsiya", "Daiya", "Rawda", "Khaldiya", "Yarmouk", "Surra", "Qortuba", "Salwa", "Mishrift", "Bayan", "Siddiq", "Shuhada", "Hitteen", "Salam", "Zahra", "MubarakAlAbdullah_MishriftWest"],
+  "circles_lat_lon_km": [[29.2885, 48.0172, 2.5], [29.3294, 47.9812, 2.5], [29.2853, 48.0641, 2.5], [29.2979, 48.0064, 2.5], [29.3388, 47.9739, 2.5], [29.2885, 48.0461, 2.5], [29.3514, 47.9992, 1.0], [29.2822, 48.0064, 2.0], [29.3199, 47.9884, 2.5], [29.2853, 48.028, 2.5], [29.3011, 48.0749, 1.0]]
+}

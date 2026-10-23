@@ -162,7 +162,8 @@ export function classifyVisit(f: VisitFacts): VerdictResult {
 
   if (f.webdriver) bot.push([5, "متصفح مُدار آلياً"]);
   else if (f.automated) bot.push([5, f.automated === "data-center town" ? "من مدينة مراكز بيانات" : "ضمن دفعة زيارات متزامنة"]);
-  if (f.screen === "800x600") bot.push([1.5, "شاشة بمقاس افتراضي للخوادم"]);
+  if (f.screen === "2000x2000") bot.push([5, "شاشة 2000×2000 (فحص آلي من Meta)"]);
+  else if (f.screen === "800x600") bot.push([1.5, "شاشة بمقاس افتراضي للخوادم"]);
   if (isUtcZone(f.tz)) bot.push([1.5, "منطقة زمنية UTC"]);
   else if (timeZoneMismatch(f.tz, f.country)) bot.push([1, "المنطقة الزمنية لا تطابق البلد"]);
   if (f.device === "desktop" && f.os === "Linux") bot.push([0.5, "حاسوب Linux"]);
@@ -187,8 +188,13 @@ export function classifyVisit(f: VisitFacts): VerdictResult {
   const h = human.reduce((n, [w]) => n + w, 0);
   const byWeight = (list: [number, string][]) => [...list].sort((x, y) => y[0] - x[0]).map(([, r]) => r);
 
+  // Sure signs: a driven browser, a data-center town or a 2000x2000 screen (Meta's link and
+  // ad checks) make a visit automated whatever it pressed or read, as visit_verdicts() does
+  // (migrations 0030, 0031).
+  const hardBot = !!f.webdriver || f.automated === "data-center town" || f.screen === "2000x2000";
   let verdict: Verdict;
-  if (contacted) verdict = "real";
+  if (hardBot) verdict = "bot";
+  else if (contacted) verdict = "real";
   else if (b >= 3 && h < 3) verdict = "bot";
   else if (h >= 2.5 && b <= 1.5) verdict = "real";
   else if (!reported && !actions.length && b < 1.5 && pages.length === 1) verdict = "pending";

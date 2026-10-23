@@ -1,7 +1,7 @@
 import { t, tRaw, link, getProjectContent, placeLine, onLocaleChange, locales, intlTag } from "../i18n";
 import { lookup } from "../i18n/dictionaries";
 import { ensureAllLocales } from "../i18n/load";
-import { getProjectBySlug, getSortedProjects, type Project, type Residence } from "../data/projects";
+import { getProjectBySlug, getSortedProjects, hasVillas, type Project, type Residence } from "../data/projects";
 import { projectStatusLabel } from "./projectCard";
 import { WHATSAPP_NUMBER, WHATSAPP_ICON } from "./floatingButtons";
 import { HEART_ICON, isFavorite } from "./favorites";
@@ -282,10 +282,6 @@ const contextSlug = () => pageProject() ?? lastProjectSlug();
 const whatsappHref = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 const projectUrl = (slug: string) => `${window.location.origin}${link(`/projects/${slug}`)}`;
 
-function isVillaProject(p: Project): boolean {
-  return p.slug.includes("villa") || !!p.residences?.some((r) => r.kind === "villa");
-}
-
 function filterProjects(filter: Filter): Project[] {
   const all = getSortedProjects();
   switch (filter) {
@@ -294,7 +290,7 @@ function filterProjects(filter: Filter): Project[] {
     case "ready":
       return all.filter((p) => p.status === "delivered" && !p.soldOut);
     case "villas":
-      return all.filter(isVillaProject);
+      return all.filter(hasVillas);
     default:
       // Sold-out projects stay reachable, listed last.
       return [...all.filter((p) => !p.soldOut), ...all.filter((p) => p.soldOut)];
