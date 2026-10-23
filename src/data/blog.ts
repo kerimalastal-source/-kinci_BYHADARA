@@ -18,6 +18,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "sisli-district-guide",
+    priority: -10,
+    published: "2026-10-23",
+    relatedProjects: ["lotus-sisli", "beylikduzu-living", "cadde-ispartakule"],
+    coverImage: { src: "/images/blog/sisli-district-guide.jpg", width: 1265, height: 843 }
+  },
+  {
     slug: "iskan-occupancy-permit",
     priority: -9,
     published: "2026-10-19",
