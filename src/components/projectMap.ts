@@ -67,7 +67,7 @@ function legend(): string {
 export function renderProjectMap(project: Project, name: string): string {
   const place = placeLine(project.district, project.city);
   return `
-      <figure class="project-map" data-district="${project.district}" data-name="${name}" data-place="${place}" data-maps="${mapsHref(project, name)}">
+      <figure class="project-map" data-district="${project.mapDistrict ?? project.district}" data-label="${placeName(project.district)}" data-name="${name}" data-place="${place}" data-maps="${mapsHref(project, name)}">
         <div class="project-map__canvas" role="img" aria-label="${t("projectDetail.mapAlt", { name, place })}"></div>
         <button type="button" class="project-map__expand" aria-haspopup="dialog">${EXPAND_ICON}<span>${t("projectDetail.map.enlarge")}</span></button>
         ${legend()}
@@ -95,7 +95,7 @@ const loadMap = () => (mapData ??= import("../data/istanbulMap"));
  * Draws the map into `canvas` (sized by CSS to `width` × MAP_HEIGHT map units): a `width`-wide
  * slice around the district, or the whole province when `width` is MAP_WIDTH.
  */
-function drawMap(canvas: HTMLElement, map: MapData, district: string, width: number): void {
+function drawMap(canvas: HTMLElement, map: MapData, district: string, width: number, label = placeName(district)): void {
   const { MAP_HEIGHT, MAP_WIDTH, DISTRICT_PATHS, DISTRICT_CENTERS } = map;
   const center = DISTRICT_CENTERS[district];
   const x0 = Math.min(Math.max(center[0] - width / 2, 0), MAP_WIDTH - width);
@@ -117,7 +117,7 @@ function drawMap(canvas: HTMLElement, map: MapData, district: string, width: num
     probe.remove();
     return width;
   };
-  const pinLabel = measure("project-map__label", placeName(district)) / 2 + 4;
+  const pinLabel = measure("project-map__label", label) / 2 + 4;
   // The pin's marker and pulse, and its name chip above it.
   const taken: Box[] = [
     { left: pin.x - 20, right: pin.x + 20, top: pin.y - 40, bottom: pin.y + 14 },
@@ -219,7 +219,7 @@ function drawMap(canvas: HTMLElement, map: MapData, district: string, width: num
       <span class="project-map__pulse"></span>
       <span class="project-map__pulse project-map__pulse--late"></span>
       <svg class="project-map__marker" width="30" height="38" viewBox="0 0 30 38" aria-hidden="true"><path d="M15 37s13-11.6 13-22A13 13 0 0 0 2 15c0 10.4 13 22 13 22z"/><circle cx="15" cy="15" r="5"/></svg>
-      <span class="project-map__label">${placeName(district)}</span>
+      <span class="project-map__label">${label}</span>
     </span>`;
 }
 
@@ -264,7 +264,7 @@ function openViewer(figure: HTMLElement, map: MapData, opener: HTMLElement): voi
     ? Math.round(scroll.clientHeight * ratio)
     : Math.floor(Math.min(scroll.clientWidth, (window.innerHeight - 48 - chrome) * ratio));
   canvas.style.width = `${width}px`;
-  drawMap(canvas, map, district, map.MAP_WIDTH);
+  drawMap(canvas, map, district, map.MAP_WIDTH, figure.dataset.label);
   const center = map.DISTRICT_CENTERS[district];
   if (center) scroll.scrollLeft = (center[0] / map.MAP_WIDTH) * width - scroll.clientWidth / 2;
   // The swipe hint shows only where the map is wider than the screen, until the first swipe.
@@ -323,7 +323,7 @@ export function initProjectMap(root: ParentNode): void {
       figure.remove();
       return;
     }
-    drawMap(canvas, map, district, window.matchMedia(PHONE_QUERY).matches ? VIEW_WIDTH_PHONE : VIEW_WIDTH);
+    drawMap(canvas, map, district, window.matchMedia(PHONE_QUERY).matches ? VIEW_WIDTH_PHONE : VIEW_WIDTH, figure.dataset.label);
     figure.classList.add("is-ready");
   };
 

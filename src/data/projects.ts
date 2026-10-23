@@ -126,6 +126,8 @@ export interface ProjectVerified {
 export interface Project {
   slug: string;
   district: string;
+  /** The Istanbul district drawn on the location map when `district` is a neighbourhood (e.g. Ispartakule in Avcılar). */
+  mapDistrict?: string;
   city: string;
   status: ProjectStatus;
   /** Omitted when the developer has not published start/delivery dates. */
@@ -582,7 +584,9 @@ export const projects: Project[] = [
   },
   {
     slug: "tual-comfort",
-    district: "Avcılar",
+    // Shown as Ispartakule (owner, 2026-10-23); the map draws its district, Avcılar.
+    district: "Ispartakule",
+    mapDistrict: "Avcılar",
     city: "Istanbul",
     status: "delivered",
     // Owner, 2026-10-23: ready to move in, title deeds ready, eligible for citizenship; prices per layout below.
@@ -592,7 +596,7 @@ export const projects: Project[] = [
     developer: "Dağ Holding",
     address: "Tual Comfort, Ispartakule, Avcılar, İstanbul",
     // Prices from the owner on 2026-10-23 (by view and size).
-    price: "$200,000 – $450,000",
+    price: "$150,000 – $450,000",
     // Facts and images from the developer's site (tualcomfort.com); 480 homes in 6 blocks of up to 21 floors from
     // its listing (Emlak Platform), the blocks A1, A2, B1, B2, C and D from the site plans on the floor plans.
     coverImage: img("tual-comfort", "towers-entrance", 1680, 1228, "Tual Comfort residential towers and entrance in Ispartakule"),
@@ -610,11 +614,12 @@ export const projects: Project[] = [
       { value: "480", labelKey: "apartments" },
       { value: "6", labelKey: "blocks" },
       { value: "21", labelKey: "floors" },
-      { value: "2+1 – 4+1", labelKey: "layout" }
+      { value: "1+1 – 4+1", labelKey: "layout" }
     ],
-    // Floor plans on tualcomfort.com, rounded: gross is "satışa esas brüt" (2+1 103.93–130.42, 3+1 162.18–171.42,
-    // 4+1 188.54), net 3+1 104.87–107.93 and 4+1 123.80. The 1+1 is left out (no price from the owner).
+    // Floor plans on tualcomfort.com, rounded: gross is "satışa esas brüt" (1+1 69.54, 2+1 103.93–130.42,
+    // 3+1 162.18–171.42, 4+1 188.54), net 1+1 39.66, 3+1 104.87–107.93 and 4+1 123.80.
     residences: [
+      { kind: "apartment", layout: "1+1", gross: "70 m²", net: "40 m²", price: "$150,000 – $200,000" },
       { kind: "apartment", layout: "2+1", gross: "104 – 130 m²", planTypes: 3, price: "$200,000 – $250,000" },
       { kind: "apartment", layout: "3+1", gross: "162 – 171 m²", net: "105 – 108 m²", planTypes: 3, price: "$250,000 – $300,000" },
       { kind: "apartment", layout: "4+1", gross: "189 m²", net: "124 m²", price: "$300,000 – $450,000" }
