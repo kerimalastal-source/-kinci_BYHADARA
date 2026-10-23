@@ -707,18 +707,17 @@ export const projects: Project[] = [
     district: "Eyüpsultan",
     city: "Istanbul",
     status: "ongoing",
-    // Owner, 2026-10-23: add this Emlak Konut project. Price, payment plan, citizenship and delivery not given yet,
-    // so none of them is shown.
+    // Owner, 2026-10-23: add this Emlak Konut project; eligible for citizenship, no price shown, no known delivery date.
     lifestyle: ["nature"],
     unitsAvailable: true,
     priority: 1.97,
     developer: "Emlak Konut · Ziraat GYO",
     address: "Göktürk Kemer Evleri, Göktürk Merkez Mah., Eyüpsultan, İstanbul",
     price: "on-request",
-    // Facts from emlakkonut.com.tr (Göktürk Mahallesi, 329,321.30 m², low-rise horizontal architecture, 414 homes)
-    // and Emlak Konut's sales announcement as reported in the press (414 homes and 81 villas, with Ziraat Bankası
-    // and Ziraat GYO; homes 1+1 to 5+1, villas 5+1 and 6+1 on basement, ground and first floors). Renders from
-    // the Emlak Konut project page; its construction photos were left out.
+    // Facts from the project site gokturkkemerevleri.emlakkonut.com.tr (414 homes and 81 villas on 329,321.30 m²,
+    // 1+1 to 5+1 homes and 5+1 / 6+1 villas, amenities, Istanbul Airport 15 minutes) and emlakkonut.com.tr; the
+    // Ziraat Bankası and Ziraat GYO partnership from Emlak Konut's sales announcement. Renders from the Emlak Konut
+    // project page; its construction photos were left out.
     coverImage: img("gokturk-kemer-evleri", "pond-blocks", 1680, 790, "Göktürk Kemer Evleri low-rise blocks around a landscaped pond"),
     gallery: [
       img("gokturk-kemer-evleri", "entrance-avenue", 1680, 790, "Göktürk Kemer Evleri main entrance and tree-lined avenue"),
@@ -749,10 +748,16 @@ export const projects: Project[] = [
       { value: "329,321 m²", labelKey: "landArea" },
       { value: "1+1 – 5+1", labelKey: "layout" }
     ],
-    // The developer has not published areas; villa layouts and floors from Emlak Konut's villa plans.
+    // From the floor plans on the project site: "satışa esas brüt" as gross and the net area without balconies or
+    // terraces; villa gardens include the pool and pergola. Villas: plan Tip 1-A (5+1) and Tip 4 (6+1).
     residences: [
-      { kind: "villa", layout: "5+1", floors: 3 },
-      { kind: "villa", layout: "6+1", floors: 3 }
+      { kind: "apartment", layout: "1+1", gross: "71.12 – 72.28 m²", net: "47.02 – 47.84 m²", planTypes: 2 },
+      { kind: "apartment", layout: "2+1", gross: "90.66 – 147.03 m²", net: "62.02 – 102.34 m²", planTypes: 7 },
+      { kind: "apartment", layout: "3+1", gross: "151.65 – 210.60 m²", net: "102.10 – 148.55 m²", planTypes: 10 },
+      { kind: "apartment", layout: "4+1", gross: "201.24 – 265.67 m²", net: "142.16 – 185.91 m²", planTypes: 3 },
+      { kind: "apartment", layout: "5+1", gross: "248.20 – 401.76 m²", net: "173.90 – 263.45 m²", planTypes: 3 },
+      { kind: "villa", layout: "5+1", gross: "375.52 m²", net: "289.22 m²", garden: "359 – 636 m²", floors: 3 },
+      { kind: "villa", layout: "6+1", gross: "536.96 m²", net: "424.74 m²", garden: "680 – 702 m²", floors: 3 }
     ],
     amenities: [
       "outdoorPool",
@@ -765,7 +770,7 @@ export const projects: Project[] = [
       "landscaping",
       "privatePool",
       "privateGarden",
-      "security"
+      "indoorParking"
     ]
   },
   {

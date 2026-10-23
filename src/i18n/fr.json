@@ -1672,18 +1672,22 @@
     "gokturk-kemer-evleri": {
       "name": "Göktürk Kemer Evleri",
       "tagline": "Des logements de faible hauteur et des villas près de la forêt de Belgrade à Göktürk, avec la garantie d'Emlak Konut.",
-      "shortDescription": "Göktürk Kemer Evleri est un projet résidentiel de faible hauteur en construction à Göktürk, dans le district d'Eyüpsultan, porté par Emlak Konut GYO avec Ziraat Bankası et Ziraat GYO : 414 logements du 1+1 au 5+1 et 81 villas sur environ 329 321 m², près de la forêt de Belgrade et du golf de Kemer Country, avec piscine, salle de sport, hammam et sauna pour les résidents.",
-      "longDescription": "Göktürk Kemer Evleri s'élève à Göktürk, dans le district d'Eyüpsultan, sur la lisière verte du nord de la rive européenne d'Istanbul. Il est développé par Emlak Konut GYO, la société d'investissement immobilier soutenue par l'État, avec Ziraat Bankası et Ziraat GYO, et vendu avec la garantie d'Emlak Konut. Le projet couvre environ 329 321 m² et suit une architecture horizontale de faible hauteur : des immeubles de quelques étages seulement autour de jardins paysagers et d'un étang, pour que la nature reste au cœur du quotidien. Il réunit 414 logements, du 1+1 au 5+1, dont des duplex et des rez-de-jardin avec de larges terrasses, et 81 villas de 5+1 et 6+1 sur sous-sol, rez-de-chaussée et premier étage, chacune avec son jardin et certaines avec une piscine privée. Les résidents disposent d'une piscine, d'une salle de sport, d'un hammam, d'un sauna, d'un café, d'aires de jeux pour enfants et de chemins de promenade. Le projet borde la forêt de Belgrade, la forêt de Fatih, le parc naturel du barrage d'Ayvat et le golf de Kemer Country, l'un des cadres les plus calmes et les plus verts d'Istanbul. Le projet est en construction et les ventes sont en cours.",
+      "shortDescription": "Göktürk Kemer Evleri est un projet résidentiel de faible hauteur en construction à Göktürk, dans le district d'Eyüpsultan, porté par Emlak Konut GYO avec Ziraat Bankası et Ziraat GYO : 414 logements du 1+1 au 5+1 et 81 villas avec piscine privée sur environ 329 321 m², près de la forêt de Belgrade et du golf de Kemer Country, à 15 minutes de l'aéroport d'Istanbul. Éligible à la citoyenneté turque.",
+      "longDescription": "Göktürk Kemer Evleri s'élève à Göktürk, dans le district d'Eyüpsultan, sur la lisière verte du nord de la rive européenne d'Istanbul. Il est développé par Emlak Konut GYO, la société d'investissement immobilier soutenue par l'État, avec Ziraat Bankası et Ziraat GYO, et vendu avec la garantie d'Emlak Konut. Le projet couvre environ 329 321 m² et suit une architecture horizontale de faible hauteur : des immeubles de quelques étages seulement autour de jardins paysagers et d'un étang, pour que la nature reste au cœur du quotidien. Il réunit 414 logements, du 1+1 d'environ 71 m² aux duplex 5+1 d'environ 400 m², dont beaucoup en rez-de-jardin avec un jardin privatif ou avec de larges terrasses, et 81 villas de 5+1 et 6+1 sur sous-sol, rez-de-chaussée et premier étage, chacune avec une piscine privée et un jardin d'environ 360 à 700 m². Les résidents disposent de piscines, de salles de sport, d'un hammam, d'un sauna, d'un café et d'un restaurant, d'aires de jeux pour enfants, de chemins de promenade et d'un parking couvert, et des écoles se trouvent juste à côté du projet. Les bâtiments utilisent l'énergie solaire pour l'éclairage, récupèrent l'eau de pluie, recyclent les eaux grises et trient leurs déchets. Le projet borde la forêt de Belgrade, la forêt de Fatih, le parc naturel du barrage d'Ayvat et le golf de Kemer Country, avec un accès à l'autoroute du Nord de Marmara et l'aéroport d'Istanbul à environ 15 minutes. Le projet est en construction, les ventes sont en cours et il est éligible à la citoyenneté turque.",
       "highlights": [
         "En construction, avec la garantie d'Emlak Konut",
+        "Éligible à la citoyenneté turque",
+        "Plans de paiement échelonné sans intérêts d'Emlak Konut ; contactez-nous pour les détails",
         "Par Emlak Konut GYO avec Ziraat Bankası et Ziraat GYO",
         "414 logements et 81 villas sur environ 329 321 m²",
         "Architecture horizontale de faible hauteur autour de jardins et d'un étang",
         "Logements du 1+1 au 5+1, dont des duplex et des rez-de-jardin",
-        "Villas 5+1 et 6+1 sur trois niveaux avec jardin privé, certaines avec piscine privée",
+        "Villas 5+1 et 6+1 sur trois niveaux avec piscine et jardin privés",
         "À côté de la forêt de Belgrade et du golf de Kemer Country",
-        "Piscine, salle de sport, hammam et sauna pour les résidents",
-        "Aires de jeux pour enfants et chemins de promenade"
+        "À environ 15 minutes de l'aéroport d'Istanbul, avec accès à l'autoroute du Nord de Marmara",
+        "Piscine, salle de sport, hammam, sauna, café et restaurant",
+        "Écoles juste à côté du projet",
+        "Éclairage solaire, récupération de l'eau de pluie et recyclage des eaux grises"
       ],
       "nearby": [
         {
@@ -1697,6 +1701,13 @@
         },
         {
           "place": "Golf de Kemer Country"
+        },
+        {
+          "place": "Autoroute du Nord de Marmara"
+        },
+        {
+          "place": "Aéroport d'Istanbul",
+          "time": "15 min"
         }
       ]
     },
