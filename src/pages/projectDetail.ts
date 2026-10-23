@@ -62,7 +62,7 @@ function renderResidences(project: Project): string {
             ${
               r.gross
                 ? `<p class="residence-card__area">
-              <strong dir="ltr">${r.gross}</strong>
+              <strong dir="ltr" style="--len:${r.gross.length}">${r.gross}</strong>
               <span>${t("projectDetail.grossAreaLabel")}</span>
             </p>`
                 : ""

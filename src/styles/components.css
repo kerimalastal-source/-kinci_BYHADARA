@@ -156,6 +156,7 @@
 }
 
 .stat-tile {
+  container-type: inline-size;
   text-align: center;
   padding: var(--space-md);
   border-radius: var(--radius-md);
@@ -190,12 +191,28 @@
   }
 }
 
+/* A figure never breaks across lines ("4,70+ / 0"): it stays on one line and
+   shrinks with the tile, whatever the font the device falls back to. */
 .stat-tile__value {
   display: block;
   font-family: var(--font-heading);
+  --value-size: clamp(1.15rem, 19cqi, 2.6rem);
   font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-size: var(--value-size);
+  line-height: calc(var(--value-size) * 1.25);
   font-weight: 700;
   color: var(--color-primary);
+  white-space: nowrap;
+}
+
+/* Longer figures such as "640,000+ m²". */
+.stat-tile__value--long {
+  font-size: clamp(1.05rem, 13cqi, 2.6rem);
+}
+
+/* A price never breaks inside the figure ("$150,000 – $450,000"). */
+.price-value {
+  white-space: nowrap;
 }
 
 /* Unit after a counted figure ("m²"), set smaller than the number. */
@@ -235,10 +252,16 @@
     background: var(--color-surface);
   }
 
-  /* Scales with the screen so "60,000+ m²" stays on one line in a half-width tile. */
+  /* Scales with the tile so "640,000+ m²" stays on one line in a half-width tile. */
   .stat-tile__value {
+    --value-size: min(1.75rem, 19cqi);
     font-size: min(1.75rem, 6.4vw);
-    white-space: nowrap;
+    font-size: var(--value-size);
+  }
+
+  .stat-tile__value--long {
+    font-size: min(1.75rem, 6.4vw);
+    font-size: min(1.75rem, 15cqi);
   }
 
   .stat-tile__label {
@@ -530,6 +553,7 @@
 
 .spotlight__stat dd {
   margin: 0;
+  white-space: nowrap;
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-primary);
@@ -732,7 +756,9 @@
 
 .project-card__meta {
   display: flex;
-  gap: var(--space-md);
+  flex-wrap: wrap;
+  column-gap: var(--space-md);
+  row-gap: 0.6rem;
   padding: 0.75rem 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
@@ -777,6 +803,7 @@
 }
 
 .project-card__stat strong {
+  white-space: nowrap;
   font-family: var(--font-heading);
   color: var(--color-primary);
   /* Keeps a figure like "117 – 143 m²" on its start edge in RTL (dir="ltr" alone would flip it). */
@@ -1041,8 +1068,10 @@
 
 .villa-option__facts div {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 0.75rem;
+  column-gap: 0.75rem;
+  row-gap: 0.1rem;
   font-size: 0.9rem;
 }
 
@@ -1052,8 +1081,10 @@
 
 .villa-option__facts dd {
   margin: 0;
+  margin-inline-start: auto;
   font-weight: 600;
   color: var(--color-ink);
+  white-space: nowrap;
 }
 
 .villa-item__price {
@@ -1416,6 +1447,7 @@
 }
 
 .residence-card {
+  container-type: inline-size;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-top: 3px solid var(--color-accent);
@@ -1443,10 +1475,14 @@
   margin: 0;
 }
 
+/* One line always: a long range such as "248.20 – 401.76 m²" shrinks to the
+   card's width (--len = its length in characters, set by the page). */
 .residence-card__area strong {
   font-size: 1.5rem;
+  font-size: min(1.5rem, calc(100cqi / (var(--len, 10) * 0.6)));
   color: var(--color-primary);
   text-align: start;
+  white-space: nowrap;
 }
 
 [dir="rtl"] .residence-card__area strong {
@@ -1468,8 +1504,10 @@
 
 .residence-card__meta div {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 1rem;
+  column-gap: 1rem;
+  row-gap: 0.1rem;
   font-size: 0.9rem;
 }
 
@@ -1479,8 +1517,10 @@
 
 .residence-card__meta dd {
   margin: 0;
+  margin-inline-start: auto;
   font-weight: 600;
   color: var(--color-primary);
+  white-space: nowrap;
 }
 
 /* A single residence type keeps a card's width instead of spanning the column. */

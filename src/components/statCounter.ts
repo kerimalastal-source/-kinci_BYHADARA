@@ -94,7 +94,7 @@ export function renderStatTiles(stats: StatTile[]): string {
               (s) => `
             <div class="stat-tile">
               ${s.icon ? `<span class="stat-tile__icon">${statIcon(s.icon)}</span>` : ""}
-              <span class="stat-tile__value" data-stat-value="${s.value}">0</span>
+              <span class="stat-tile__value${s.value.length > 7 ? " stat-tile__value--long" : ""}" data-stat-value="${s.value}">0</span>
               <span class="stat-tile__label">${s.label}</span>
             </div>`
             )
