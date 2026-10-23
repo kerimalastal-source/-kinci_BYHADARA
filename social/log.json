@@ -814,5 +814,37 @@
     "headlineAr": "حديقة خاصة تصل إلى 247 م²",
     "headlineEn": "A private garden of up to 247 m²",
     "photo": "/images/projects/lotus-manzara-beylikduzu/villas-entrance.jpg"
+  },
+  {
+    "date": "2026-10-23",
+    "id": "marmara-haven-villa-floors",
+    "topic": "فيلا مرمرة هيفن · الطوابق الأربعة",
+    "headlineAr": "4 طوابق: المساحة الصافية طابقاً بطابق",
+    "headlineEn": "4 floors: the net area, floor by floor",
+    "photo": "/images/projects/marmara-haven-villa/rooftop.jpg"
+  },
+  {
+    "date": "2026-10-23",
+    "id": "video-tour-villa",
+    "topic": "جولة فيديو للفلل",
+    "headlineAr": "تجوّل في الفيلا من منزلك خلال 30 إلى 45 دقيقة",
+    "headlineEn": "Walk through the villa from home in 30 to 45 minutes",
+    "photo": "/images/projects/marmara-haven-villa/living-fireplace.jpg"
+  },
+  {
+    "date": "2026-10-23",
+    "id": "evening-buying-abroad",
+    "topic": "سؤال الليلة: ما الذي يقلقك عند الشراء من الخارج؟ (شرائح)",
+    "headlineAr": "ما أكثر ما يقلقك عند شراء بيت في إسطنبول من الخارج؟",
+    "headlineEn": "What worries you most about buying in Istanbul from abroad?",
+    "photo": "/images/projects/marmara-haven-villa/aerial-top.jpg"
+  },
+  {
+    "date": "2026-10-23",
+    "id": "marmara-haven-villa-floors-story",
+    "topic": "ستوري: الطابق الأول في فيلا مرمرة هيفن",
+    "headlineAr": "الطابق الأول: 4 غرف نوم و3 شرفات",
+    "headlineEn": "First floor: 4 bedrooms and 3 balconies",
+    "photo": "/images/projects/marmara-haven-villa/bedroom-sea.jpg"
   }
 ]
