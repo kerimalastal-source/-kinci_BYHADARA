@@ -18,12 +18,19 @@ interface View {
   w: number;
   h: number;
 }
-/** Map units shown: a wide band from Büyükçekmece to the Bosphorus and Istanbul Airport; phones get a closer slice around the projects. */
-const VIEW: View = { x: 226, y: 196, w: 484, h: 242 };
+/** Phones get a closer slice around the projects; wider screens see more of the city (`wideView`). */
 const VIEW_PHONE: View = { x: 256, y: 196, w: 316, h: 276 };
 const PHONE_QUERY = "(max-width: 640px)";
 /** Below this canvas width the project list opens under the map instead of beside the pin. */
 const PANEL_BELOW = 600;
+/** The full-width map: a fixed band from Istanbul Airport down to Sabiha Gökçen, as wide as the screen allows (and never taller than ~600px). */
+function wideView(width: number): View {
+  const h = 272;
+  const height = Math.min(600, Math.max(360, width * 0.45));
+  const w = Math.min(1000, (h * width) / height);
+  const x = Math.min(Math.max(0, 470 - w / 2), 1000 - w);
+  return { x, y: 192, w, h };
+}
 const MARMARA_LABEL = { x: 404, y: 428 };
 /** When two landmarks would sit on top of each other, the one earlier here stays. */
 const KIND_ORDER: Record<string, number> = { airport: 0, hospital: 1, mall: 2, landmark: 3 };
@@ -253,7 +260,7 @@ export function initProjectsAtlas(root: ParentNode, projects: Project[]): void {
   let active: string | null = null;
   let drawnWidth = 0;
 
-  const view = () => (window.matchMedia(PHONE_QUERY).matches ? VIEW_PHONE : VIEW);
+  const view = () => (window.matchMedia(PHONE_QUERY).matches ? VIEW_PHONE : wideView(canvas.clientWidth));
 
   const placePanel = () => {
     const group = groups.find((g) => g.district === active);

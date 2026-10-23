@@ -133,8 +133,8 @@ export function renderProjects(el: HTMLElement): void {
           <h1>${t("projects.heroTitle")}</h1>
           <p class="page-hero__subtitle">${t("projects.heroSubtitle")}</p>
         </div>
-        ${renderProjectsAtlas(allProjects)}
       </div>
+      ${renderProjectsAtlas(allProjects)}
     </section>
 
     <section class="section">
