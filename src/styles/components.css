@@ -3702,16 +3702,105 @@ body.map-open .back-to-top {
   gap: 0.5rem;
 }
 
+/* The real <select> stays for the value; visitors use the searchable field next to it. */
+.phone-field {
+  position: relative;
+}
+
 .phone-field__country {
-  flex: 0 1 170px;
-  min-width: 120px;
+  display: none;
+}
+
+.phone-field__picker {
+  flex: 0 1 190px;
+  min-width: 130px;
+}
+
+.phone-field__code {
+  width: 100%;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  padding: 0.75rem 0.4rem;
+  padding: 0.75rem 1.9rem 0.75rem 0.6rem;
   font-family: inherit;
-  font-size: 0.8rem;
-  background: var(--color-surface);
+  font-size: 0.85rem;
+  text-overflow: ellipsis;
+  background: var(--color-surface)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23887f70' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E")
+    no-repeat right 0.65rem center;
   color: var(--color-ink);
+  cursor: pointer;
+}
+
+.phone-field__code[aria-expanded="true"] {
+  cursor: text;
+}
+
+.phone-field__code::placeholder {
+  color: var(--color-ink-soft);
+  opacity: 0.8;
+}
+
+/* The list spans the whole phone row under the fields. */
+.phone-field__menu {
+  position: absolute;
+  inset-inline: 0;
+  top: calc(100% + 4px);
+  z-index: 30;
+  max-height: min(280px, 50vh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin: 0;
+  padding: 0.3rem;
+  list-style: none;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 12px 28px rgba(15, 43, 33, 0.14);
+}
+
+.phone-field__menu li[data-index] {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+}
+
+.phone-field__menu li.is-active {
+  background: var(--color-surface-alt, #f1ece4);
+}
+
+.phone-field__menu li[aria-selected="true"] {
+  font-weight: 600;
+}
+
+.phone-field__flag {
+  flex: none;
+  width: 1.4em;
+  text-align: center;
+}
+
+.phone-field__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.phone-field__dial {
+  flex: none;
+  color: var(--color-ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.phone-field__empty {
+  padding: 0.7rem;
+  color: var(--color-ink-soft);
+  font-size: 0.9rem;
 }
 
 .phone-field__number {
@@ -3727,7 +3816,7 @@ body.map-open .back-to-top {
 }
 
 .phone-field__number:focus,
-.phone-field__country:focus {
+.phone-field__code:focus {
   outline: none;
   border-color: var(--color-accent-dark);
 }
@@ -3738,7 +3827,7 @@ body.map-open .back-to-top {
 
 /* Phones: country code and number each take a full row. */
 @media (max-width: 480px) {
-  .phone-field__country,
+  .phone-field__picker,
   .phone-field__number {
     flex: 1 1 100%;
   }
@@ -3749,7 +3838,7 @@ body.map-open .back-to-top {
   .form-field input,
   .form-field select,
   .form-field textarea,
-  .phone-field__country,
+  .phone-field__code,
   .phone-field__number {
     font-size: 1rem;
   }

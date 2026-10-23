@@ -42,6 +42,11 @@
     "ru": "Русский",
     "fa": "فارسی"
   },
+  "phoneInput": {
+    "label": "Country code",
+    "search": "Search country or code",
+    "noResults": "No matching country"
+  },
   "favorites": {
     "add": "Save {name} to your list",
     "remove": "Remove {name} from your list",

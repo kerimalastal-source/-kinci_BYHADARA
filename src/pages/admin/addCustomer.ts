@@ -133,6 +133,7 @@ function linkCountryToPhone(form: HTMLFormElement): void {
         .sort((a, b) => b.dial.length - a.dial.length)[0];
       if (match && digits.length > match.dial.length) {
         dial.selectedIndex = match.i;
+        dial.dispatchEvent(new Event("change", { bubbles: true }));
         number.value = digits.slice(match.dial.length);
       }
     }

@@ -42,6 +42,11 @@
     "ru": "Русский",
     "fa": "فارسی"
   },
+  "phoneInput": {
+    "label": "Indicatif du pays",
+    "search": "Rechercher un pays ou un indicatif",
+    "noResults": "Aucun pays trouvé"
+  },
   "favorites": {
     "add": "Enregistrer {name} dans votre liste",
     "remove": "Retirer {name} de votre liste",
