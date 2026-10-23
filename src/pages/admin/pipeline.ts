@@ -3,7 +3,7 @@ import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { fetchTourBookings, type TourBooking } from "../../data/tourBookings";
 import { fetchInquiries, type Inquiry } from "../../data/inquiries";
-import { OPEN_STAGES, STAGES, fetchCrmLeads, leadFor, saveCrmLead, type CrmLead, type Stage } from "../../data/crm";
+import { OPEN_STAGES, STAGES, budgetLabel, fetchCrmLeads, leadFor, saveCrmLead, type CrmLead, type Stage } from "../../data/crm";
 import { adminHero, adminNav } from "./nav";
 import { groupCustomers, type Customer } from "./customers";
 import { followUpTag, money, projectName, stageLabel } from "./crmForm";
@@ -44,6 +44,7 @@ function cardHtml(card: Card): string {
     <p class="pipeline-card__name"><strong dir="auto">${escapeHtml(c.name)}</strong></p>
     ${project ? `<p class="pipeline-card__meta">${escapeHtml(projectName(project))}</p>` : ""}
     ${lead?.deal_value ? `<p class="pipeline-card__value" dir="ltr">${escapeHtml(money(Number(lead.deal_value), lead.currency))}</p>` : ""}
+    ${lead?.budget ? `<p class="pipeline-card__meta">${t("adminCrm.budget")}: <span dir="ltr">${escapeHtml(budgetLabel(lead.budget))}</span></p>` : ""}
     ${card.stage === "lost" && lead?.lost_reason ? `<p class="pipeline-card__meta" dir="auto">${escapeHtml(lead.lost_reason)}</p>` : ""}
     <p class="pipeline-card__tags">${followUpTag(lead)}<span class="pipeline-card__date">${t("adminCrm.lastActivity", { date: shortDate(c.last) })}</span></p>
     <div class="pipeline-card__actions">
@@ -139,10 +140,10 @@ export function renderAdminPipeline(main: HTMLElement): void {
       { keys: customer.keys, name: customer.name, email: customer.emails[0] ?? null, phone: customer.phones[0] ?? null },
       { stage: select.value as Stage }
     );
-    if (!saved) {
+    if (!saved || saved === "needs0032") {
       select.disabled = false;
       select.value = existing?.stage ?? "new";
-      window.alert(t("adminCrm.saveError"));
+      window.alert(t(saved ? "adminCrm.needs0032" : "adminCrm.saveError"));
       return;
     }
     leads = [saved, ...leads.filter((l) => l.id !== saved.id)];

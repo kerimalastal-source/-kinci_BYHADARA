@@ -95,3 +95,19 @@ test("a won deal from a hand-added customer counts for its ad in the report", as
   assert.deepEqual(report.leads, [{ source: "facebook", campaign: "gulf-whatsapp", inquiries: 1, bookings: 0 }]);
   await db.close();
 });
+
+test("0032 adds the 'no reply' stage and the budget range, and rejects anything else", async () => {
+  const db = await database();
+  const insert = (stage, budget) =>
+    db.query("insert into public.crm_leads (keys, name, stage, budget) values ($1, 'Test', $2, $3)", [["p:501234567"], stage, budget]);
+  await assert.rejects(db.query("select budget from public.crm_leads"), /budget/);
+  await db.exec(readFileSync(new URL("0032_crm_budget_noreply.sql", MIGRATIONS), "utf8"));
+  // Twice, as when someone runs it again.
+  await db.exec(readFileSync(new URL("0032_crm_budget_noreply.sql", MIGRATIONS), "utf8"));
+  await insert("no_reply", "400-500");
+  await insert("contacted", null);
+  await assert.rejects(insert("ghosted", null), /crm_leads_stage_check/);
+  await assert.rejects(insert("new", "650plus"), /crm_leads_budget_check/);
+  const rows = (await db.query("select stage, budget from public.crm_leads order by stage desc")).rows;
+  assert.deepEqual(rows, [{ stage: "no_reply", budget: "400-500" }, { stage: "contacted", budget: null }]);
+});

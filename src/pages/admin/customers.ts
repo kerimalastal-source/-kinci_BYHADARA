@@ -253,8 +253,8 @@ export function renderAdminCustomers(main: HTMLElement): void {
       read.changes
     );
     button.disabled = false;
-    if (!saved) {
-      notice.textContent = t("adminCrm.saveError");
+    if (!saved || saved === "needs0032") {
+      notice.textContent = t(saved ? "adminCrm.needs0032" : "adminCrm.saveError");
       notice.classList.remove("booking-card__error--ok");
       return;
     }

@@ -11427,6 +11427,7 @@ body.map-open .cookie-consent {
 }
 
 .crm-stage--contacted { background: #e7eef9; color: #24508f; }
+.crm-stage--no_reply { background: #f1ece4; color: #7a5b33; }
 .crm-stage--tour { background: #efe9f8; color: #5b3d8f; }
 .crm-stage--visit { background: #fbf3df; color: #7a5a12; }
 .crm-stage--negotiation { background: #fdebdc; color: #8a4a12; }
@@ -11484,6 +11485,7 @@ body.map-open .cookie-consent {
   text-align: center;
 }
 
+.pipeline-column--no_reply .pipeline-column__title { color: #7a5b33; }
 .pipeline-column--won .pipeline-column__title { color: #1f6b44; }
 .pipeline-column--lost .pipeline-column__title { color: #8f2a2a; }
 
