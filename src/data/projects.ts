@@ -703,6 +703,72 @@ export const projects: Project[] = [
     ]
   },
   {
+    slug: "gokturk-kemer-evleri",
+    district: "Eyüpsultan",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-10-23: add this Emlak Konut project. Price, payment plan, citizenship and delivery not given yet,
+    // so none of them is shown.
+    lifestyle: ["nature"],
+    unitsAvailable: true,
+    priority: 1.97,
+    developer: "Emlak Konut · Ziraat GYO",
+    address: "Göktürk Kemer Evleri, Göktürk Merkez Mah., Eyüpsultan, İstanbul",
+    price: "on-request",
+    // Facts from emlakkonut.com.tr (Göktürk Mahallesi, 329,321.30 m², low-rise horizontal architecture, 414 homes)
+    // and Emlak Konut's sales announcement as reported in the press (414 homes and 81 villas, with Ziraat Bankası
+    // and Ziraat GYO; homes 1+1 to 5+1, villas 5+1 and 6+1 on basement, ground and first floors). Renders from
+    // the Emlak Konut project page; its construction photos were left out.
+    coverImage: img("gokturk-kemer-evleri", "pond-blocks", 1680, 790, "Göktürk Kemer Evleri low-rise blocks around a landscaped pond"),
+    gallery: [
+      img("gokturk-kemer-evleri", "entrance-avenue", 1680, 790, "Göktürk Kemer Evleri main entrance and tree-lined avenue"),
+      img("gokturk-kemer-evleri", "street-blocks", 1680, 790, "Göktürk Kemer Evleri low-rise apartment blocks along a green street"),
+      img("gokturk-kemer-evleri", "pond-view", 1680, 790, "Göktürk Kemer Evleri blocks and gardens by the pond"),
+      img("gokturk-kemer-evleri", "villa-pool", 1600, 1000, "Göktürk Kemer Evleri villa with a private pool and garden"),
+      img("gokturk-kemer-evleri", "villa-stone-pool", 1600, 1000, "Göktürk Kemer Evleri stone-clad villa with a pool and pergola"),
+      img("gokturk-kemer-evleri", "villa-white-pool", 1600, 1000, "Göktürk Kemer Evleri white villa with a garden pool"),
+      img("gokturk-kemer-evleri", "villa-front", 1600, 1000, "Göktürk Kemer Evleri villa street front"),
+      img("gokturk-kemer-evleri", "living-room", 1600, 1000, "Göktürk Kemer Evleri living room with a fireplace"),
+      img("gokturk-kemer-evleri", "kitchen", 1600, 1000, "Göktürk Kemer Evleri kitchen with an island"),
+      img("gokturk-kemer-evleri", "bedroom", 1600, 1000, "Göktürk Kemer Evleri bedroom"),
+      img("gokturk-kemer-evleri", "bathroom", 1600, 1000, "Göktürk Kemer Evleri bathroom with a freestanding bath")
+    ],
+    villaPhotos: [
+      img("gokturk-kemer-evleri", "villa-pool", 1600, 1000, "Göktürk Kemer Evleri villa with a private pool and garden"),
+      img("gokturk-kemer-evleri", "villa-stone-pool", 1600, 1000, "Göktürk Kemer Evleri stone-clad villa with a pool and pergola"),
+      img("gokturk-kemer-evleri", "villa-terrace-pool", 1600, 1000, "Göktürk Kemer Evleri villa terrace and pool"),
+      img("gokturk-kemer-evleri", "villa-white-pool", 1600, 1000, "Göktürk Kemer Evleri white villa with a garden pool"),
+      img("gokturk-kemer-evleri", "villa-front", 1600, 1000, "Göktürk Kemer Evleri villa street front"),
+      img("gokturk-kemer-evleri", "villa-garden", 1600, 1000, "Göktürk Kemer Evleri villa garden and terrace"),
+      img("gokturk-kemer-evleri", "villa-hall", 1600, 1000, "Göktürk Kemer Evleri villa entrance hall and staircase"),
+      img("gokturk-kemer-evleri", "living-room", 1600, 1000, "Göktürk Kemer Evleri living room with a fireplace")
+    ],
+    stats: [
+      { value: "414", labelKey: "apartments" },
+      { value: "81", labelKey: "villas" },
+      { value: "329,321 m²", labelKey: "landArea" },
+      { value: "1+1 – 5+1", labelKey: "layout" }
+    ],
+    // The developer has not published areas; villa layouts and floors from Emlak Konut's villa plans.
+    residences: [
+      { kind: "villa", layout: "5+1", floors: 3 },
+      { kind: "villa", layout: "6+1", floors: 3 }
+    ],
+    amenities: [
+      "outdoorPool",
+      "fitness",
+      "hamam",
+      "sauna",
+      "cafe",
+      "playground",
+      "joggingTrack",
+      "landscaping",
+      "privatePool",
+      "privateGarden",
+      "security"
+    ]
+  },
+  {
     slug: "lotus-sisli",
     district: "Şişli",
     city: "Istanbul",

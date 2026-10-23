@@ -91,6 +91,13 @@ export const PROJECT_NAMES: Record<string, Record<"en" | "ar" | "fa" | "fr" | "r
     "fr": "Tual Comfort",
     "ru": "Tual Comfort"
   },
+  "gokturk-kemer-evleri": {
+    "en": "Göktürk Kemer Evleri",
+    "ar": "غوكتورك كمر إيفلري",
+    "fa": "گوکتورک کمر اولری",
+    "fr": "Göktürk Kemer Evleri",
+    "ru": "Göktürk Kemer Evleri"
+  },
   "lotus-sisli": {
     "en": "Lotus Şişli",
     "ar": "لوتس شيشلي",
