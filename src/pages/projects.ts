@@ -138,7 +138,7 @@ export function renderProjects(el: HTMLElement): void {
       ${renderProjectsAtlas(allProjects)}
     </section>
 
-    <section class="section">
+    <section class="section project-list" id="project-list">
       <div class="container">
         <div class="filter-bar" id="filter-bar">
           ${filters

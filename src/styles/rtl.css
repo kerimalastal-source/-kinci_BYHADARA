@@ -41,3 +41,8 @@
 :lang(fa) .floor-card__tag {
   font-size: 0.85rem;
 }
+
+:lang(ar) .nav-group__heading,
+:lang(fa) .nav-group__heading {
+  font-size: 0.82rem;
+}

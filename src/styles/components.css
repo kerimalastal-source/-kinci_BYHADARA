@@ -14682,3 +14682,14 @@ body.map-open .cookie-consent {
     line-height: 22px;
   }
 }
+
+/* Menu links to a project category land on the filter bar, just under the sticky header. */
+.project-list {
+  scroll-margin-top: 40px;
+}
+
+@media (max-width: 640px) {
+  .project-list {
+    scroll-margin-top: 40px;
+  }
+}
