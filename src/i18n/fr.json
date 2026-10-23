@@ -118,8 +118,8 @@
     "statsTitle": "HADARA en chiffres",
     "stats": [
       { "value": "12+", "label": "années d'excellence", "icon": "years" },
-      { "value": "16", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "4 300+", "label": "unités résidentielles", "icon": "apartments" },
+      { "value": "17", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "4 700+", "label": "unités résidentielles", "icon": "apartments" },
       { "value": "420+", "label": "bureaux", "icon": "offices" },
       { "value": "250+", "label": "locaux commerciaux", "icon": "shops" },
       { "value": "7", "label": "quartiers phares d'Istanbul", "icon": "districts" }
@@ -190,7 +190,7 @@
     "storyEyebrow": "Notre histoire",
     "storyTitle": "D'une vision unique à un portefeuille en pleine croissance",
     "storyText1": "Fondée en 2014 et basée à Beylikdüzü, Istanbul, HADARA Immobilier est née d'une idée simple : une sélection rigoureuse des projets et des conseils honnêtes créent une valeur durable pour ceux qui vivent dans les biens que nous proposons, comme pour ceux qui y investissent.",
-    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut et Mesa pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
+    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut, Mesa et Dağ Holding pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
     "missionTitle": "Notre mission",
     "missionText": "Relier résidents et investisseurs à des projets résidentiels et mixtes soigneusement sélectionnés, qui allient qualité architecturale, confort quotidien et valeur durable, et les accompagner clairement à chaque étape.",
     "visionTitle": "Notre vision",
@@ -213,8 +213,8 @@
     "statsTitle": "Notre bilan",
     "stats": [
       { "value": "12+", "label": "années d'activité", "icon": "years" },
-      { "value": "16", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "4 900+", "label": "logements, bureaux et commerces", "icon": "apartments" },
+      { "value": "17", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "5 400+", "label": "logements, bureaux et commerces", "icon": "apartments" },
       { "value": "225 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
     ]
   },
@@ -1533,6 +1533,45 @@
         {
           "place": "Ataköy Marina",
           "time": "1 km"
+        }
+      ]
+    },
+    "tual-comfort": {
+      "name": "Tual Comfort",
+      "tagline": "Des logements prêts à habiter, titres de propriété disponibles, à Ispartakule, par Dağ Holding.",
+      "shortDescription": "Tual Comfort est une résidence achevée de Dağ Holding à Ispartakule : six immeubles jusqu'à 21 étages, des logements du 2+1 au 4+1 avec vue vers le lac de Küçükçekmece, piscine intérieure, spa et espaces sportifs, et commerces sur l'avenue principale. Prêt à habiter, titres de propriété disponibles.",
+      "longDescription": "Tual Comfort s'élève à Ispartakule, sur la rive européenne d'Istanbul, au croisement de la TEM, de l'autoroute du Nord de Marmara et des routes vers l'aéroport d'Istanbul, à côté du tracé du Kanal Istanbul et du marché de gros alimentaire d'Istanbul. Il est réalisé par Dağ Holding, un groupe immobilier présent dans le secteur depuis plus de 30 ans, qui a livré plus de 30 000 logements, des projets résidentiels et mixtes aux centres commerciaux, hôpitaux et projets de renouvellement urbain. La résidence s'étend sur environ 20 000 m² et compte six immeubles, A1, A2, B1, B2, C et D, qui montent jusqu'à 21 étages autour d'un jardin central paysager, avec une architecture moderne qui préserve la vue ; depuis de nombreuses fenêtres et balcons, les logements regardent vers le lac de Küçükçekmece. Les logements vont du 2+1 au 4+1, avec des séjours lumineux, des cuisines équipées et, dans de nombreux plans, une suite parentale avec sa propre salle de bains. Les résidents disposent d'une piscine intérieure, de salles de fitness et de pilates, d'un spa avec sauna, salle de vapeur et hammam, de terrasses communes sur les toits, de salles de loisirs et d'ateliers, d'espaces sportifs en plein air, d'aires de jeux intérieures et extérieures pour les enfants et de jardins paysagers. Chaque logement a sa place de stationnement dans les parkings extérieurs ou couverts, avec des bornes de recharge pour voitures électriques, et les commerces de l'avenue principale, dont un marché bio, sont séparés des logements. Un système de recyclage des eaux de pluie réutilise l'eau sur le site. Les logements sont prêts à habiter, les titres de propriété sont disponibles et le projet est éligible à la citoyenneté turque.",
+      "highlights": [
+        "Prêt à habiter, titres de propriété disponibles",
+        "Éligible à la citoyenneté turque",
+        "Par Dağ Holding, plus de 30 000 logements livrés",
+        "Six immeubles jusqu'à 21 étages autour d'un jardin central",
+        "Logements du 2+1 au 4+1, beaucoup avec suite parentale",
+        "Vue vers le lac de Küçükçekmece depuis de nombreux logements",
+        "Piscine intérieure, salles de fitness et de pilates, sauna, salle de vapeur et hammam",
+        "Terrasses communes sur les toits, salles de loisirs et ateliers",
+        "Une place de stationnement par logement, avec recharge pour voitures électriques",
+        "Commerces et marché bio sur l'avenue principale",
+        "Proche de la TEM, de l'autoroute du Nord de Marmara et de l'aéroport d'Istanbul"
+      ],
+      "nearby": [
+        {
+          "place": "Lac de Küçükçekmece"
+        },
+        {
+          "place": "Autoroute TEM"
+        },
+        {
+          "place": "Autoroute du Nord de Marmara"
+        },
+        {
+          "place": "Aéroport d'Istanbul"
+        },
+        {
+          "place": "Kanal Istanbul"
+        },
+        {
+          "place": "Marché de gros alimentaire d'Istanbul"
         }
       ]
     },

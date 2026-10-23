@@ -118,8 +118,8 @@
     "statsTitle": "HADARA in Numbers",
     "stats": [
       { "value": "12+", "label": "Years of Excellence", "icon": "years" },
-      { "value": "16", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "4,300+", "label": "Residential Units", "icon": "apartments" },
+      { "value": "17", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "4,700+", "label": "Residential Units", "icon": "apartments" },
       { "value": "420+", "label": "Office Units", "icon": "offices" },
       { "value": "250+", "label": "Commercial Units", "icon": "shops" },
       { "value": "7", "label": "Prime Istanbul Districts", "icon": "districts" }
@@ -190,7 +190,7 @@
     "storyEyebrow": "Our Story",
     "storyTitle": "From a Single Vision to a Growing Portfolio",
     "storyText1": "Founded in 2014 and headquartered in Beylikdüzü, Istanbul, HADARA Real Estate was built on a simple idea: that careful project selection and honest advice create lasting value for the people who live in — and invest in — the homes we offer.",
-    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut and Mesa to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu and Başakşehir, among the most sought-after growth corridors on Istanbul's European side, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
+    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut, Mesa and Dağ Holding to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu and Başakşehir, among the most sought-after growth corridors on Istanbul's European side, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
     "missionTitle": "Our Mission",
     "missionText": "To connect residents and investors with carefully selected residential and mixed-use projects that combine architectural quality, everyday comfort and dependable long-term value, and to guide them clearly at every step.",
     "visionTitle": "Our Vision",
@@ -213,8 +213,8 @@
     "statsTitle": "Our Track Record",
     "stats": [
       { "value": "12+", "label": "Years in Business", "icon": "years" },
-      { "value": "16", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "4,900+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
+      { "value": "17", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "5,400+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
       { "value": "225,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
     ]
   },
@@ -1533,6 +1533,45 @@
         {
           "place": "Ataköy Marina",
           "time": "1 km"
+        }
+      ]
+    },
+    "tual-comfort": {
+      "name": "Tual Comfort",
+      "tagline": "Ready-to-move-in homes with title deeds in Ispartakule, by Dağ Holding.",
+      "shortDescription": "Tual Comfort is a completed residential community by Dağ Holding in Ispartakule: six blocks of up to 21 floors, homes from 2+1 to 4+1 with views towards Lake Küçükçekmece, an indoor pool, spa and sports areas, and shops on the main avenue. Ready to move in, title deeds ready.",
+      "longDescription": "Tual Comfort rises in Ispartakule on Istanbul's European side, at the meeting point of the TEM, the North Marmara Motorway and the roads to Istanbul Airport, next to the Kanal Istanbul route and the Istanbul Food Wholesalers' Site. It is built by Dağ Holding, a real estate group with more than 30 years in the sector that has delivered over 30,000 homes, from residential and mixed-use projects to shopping centres, hospitals and urban renewal. The community covers about 20,000 m² and is made up of six blocks, A1, A2, B1, B2, C and D, rising to 21 floors around a landscaped central garden, with a modern design that keeps the views open, and from many windows and balconies the homes look towards Lake Küçükçekmece. Homes range from 2+1 to 4+1, with bright living rooms, fitted kitchens and, in many layouts, a master suite with its own bathroom. Residents have an indoor swimming pool, fitness and pilates halls, a spa with sauna, steam room and Turkish bath, shared roof terraces, hobby rooms and workshops, outdoor sports areas, indoor and outdoor children's play areas, and landscaped gardens. Every home has its own parking space in the open or covered car parks, with electric car charging points, and the shops on the main avenue, including an organic market, sit apart from the homes. A rainwater recycling system reuses water across the site. The homes are ready to move in, the title deeds are ready, and the project is eligible for Turkish citizenship.",
+      "highlights": [
+        "Ready to move in, with title deeds ready",
+        "Eligible for Turkish citizenship",
+        "By Dağ Holding, with over 30,000 homes delivered",
+        "Six blocks rising to 21 floors around a central garden",
+        "Homes from 2+1 to 4+1, many with a master suite",
+        "Views towards Lake Küçükçekmece from many homes",
+        "Indoor pool, fitness and pilates halls, sauna, steam room and Turkish bath",
+        "Shared roof terraces, hobby rooms and workshops",
+        "A parking space for every home, with electric car charging",
+        "Shops and an organic market on the main avenue",
+        "Close to the TEM, the North Marmara Motorway and Istanbul Airport"
+      ],
+      "nearby": [
+        {
+          "place": "Lake Küçükçekmece"
+        },
+        {
+          "place": "TEM Motorway"
+        },
+        {
+          "place": "North Marmara Motorway"
+        },
+        {
+          "place": "Istanbul Airport"
+        },
+        {
+          "place": "Kanal Istanbul"
+        },
+        {
+          "place": "Istanbul Food Wholesalers' Site"
         }
       ]
     },
