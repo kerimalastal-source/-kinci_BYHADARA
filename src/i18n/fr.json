@@ -118,18 +118,18 @@
     "statsTitle": "HADARA en chiffres",
     "stats": [
       { "value": "12+", "label": "années d'excellence", "icon": "years" },
-      { "value": "17", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "4 700+", "label": "unités résidentielles", "icon": "apartments" },
+      { "value": "18", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "6 100+", "label": "unités résidentielles", "icon": "apartments" },
       { "value": "420+", "label": "bureaux", "icon": "offices" },
-      { "value": "250+", "label": "locaux commerciaux", "icon": "shops" },
-      { "value": "7", "label": "quartiers phares d'Istanbul", "icon": "districts" }
+      { "value": "300+", "label": "locaux commerciaux", "icon": "shops" },
+      { "value": "8", "label": "quartiers phares d'Istanbul", "icon": "districts" }
     ],
     "partnersEyebrow": "Réseau de confiance",
     "partnersTitle": "Nos partenaires",
     "partnersSubtitle": "HADARA collabore avec des promoteurs et groupes d'investissement régionaux de premier plan pour livrer des projets sur lesquels nos clients peuvent compter.",
     "aboutEyebrow": "Qui sommes-nous",
     "aboutTitle": "Partenaire de développement et de commercialisation immobilière à Istanbul",
-    "aboutText1": "Depuis 2014, HADARA Immobilier est un partenaire de développement et de commercialisation immobilière à Istanbul. Nous avons développé Marmara Haven Villa, une résidence privée à Büyükçekmece, et nous commercialisons des projets résidentiels et mixtes de promoteurs reconnus à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir — parmi les axes de croissance les plus dynamiques de la ville.",
+    "aboutText1": "Depuis 2014, HADARA Immobilier est un partenaire de développement et de commercialisation immobilière à Istanbul. Nous avons développé Marmara Haven Villa, une résidence privée à Büyükçekmece, et nous commercialisons des projets résidentiels et mixtes de promoteurs reconnus à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir et Küçükçekmece — parmi les axes de croissance les plus dynamiques de la ville.",
     "aboutText2": "Des villas privées de luxe aux grands ensembles résidentiels, nous choisissons les projets que nous proposons pour leur architecture soignée, la qualité de leur construction et une réelle compréhension des attentes de nos clients.",
     "aboutCta": "En savoir plus sur HADARA",
     "spotlightEyebrow": "Nouveau lancement",
@@ -139,7 +139,7 @@
     "spotlightWhatsappMessage": "Bonjour, je souhaiterais obtenir plus d'informations sur le projet {name}.",
     "projectsEyebrow": "Notre portefeuille",
     "projectsTitle": "Projets phares",
-    "projectsSubtitle": "Un aperçu des développements qui façonnent les quartiers de Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir à Istanbul.",
+    "projectsSubtitle": "Un aperçu des développements qui façonnent les quartiers de Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir et Küçükçekmece à Istanbul.",
     "servicesEyebrow": "Notre expertise",
     "servicesTitle": "Une expertise immobilière complète",
     "services": [
@@ -190,7 +190,7 @@
     "storyEyebrow": "Notre histoire",
     "storyTitle": "D'une vision unique à un portefeuille en pleine croissance",
     "storyText1": "Fondée en 2014 et basée à Beylikdüzü, Istanbul, HADARA Immobilier est née d'une idée simple : une sélection rigoureuse des projets et des conseils honnêtes créent une valeur durable pour ceux qui vivent dans les biens que nous proposons, comme pour ceux qui y investissent.",
-    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut, Mesa et Dağ Holding pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
+    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut, Mesa et Dağ Holding pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir et Küçükçekmece, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
     "missionTitle": "Notre mission",
     "missionText": "Relier résidents et investisseurs à des projets résidentiels et mixtes soigneusement sélectionnés, qui allient qualité architecturale, confort quotidien et valeur durable, et les accompagner clairement à chaque étape.",
     "visionTitle": "Notre vision",
@@ -213,15 +213,15 @@
     "statsTitle": "Notre bilan",
     "stats": [
       { "value": "12+", "label": "années d'activité", "icon": "years" },
-      { "value": "17", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "5 400+", "label": "logements, bureaux et commerces", "icon": "apartments" },
-      { "value": "225 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
+      { "value": "18", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "6 800+", "label": "logements, bureaux et commerces", "icon": "apartments" },
+      { "value": "320 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
     ]
   },
   "projects": {
     "heroEyebrow": "Notre portefeuille",
     "heroTitle": "Des projets qui façonnent Istanbul",
-    "heroSubtitle": "Des villas privées aux grands ensembles résidentiels, découvrez les projets développés et commercialisés par HADARA à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir.",
+    "heroSubtitle": "Des villas privées aux grands ensembles résidentiels, découvrez les projets développés et commercialisés par HADARA à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir et Küçükçekmece.",
     "atlas": {
       "title": "Nos projets sur la carte d'Istanbul",
       "projects": {
@@ -267,6 +267,7 @@
     "istanbul": "Istanbul",
     "beylikduzu": "Beylikdüzü",
     "buyukcekmece": "Büyükçekmece",
+    "kucukcekmece": "Küçükçekmece",
     "avcilar": "Avcılar",
     "ispartakule": "Ispartakule",
     "sisli": "Şişli",
@@ -350,6 +351,7 @@
     "paymentPlanValue": "{down} d'acompte, le solde sur {months} mois",
     "priceLabel": "Prix",
     "priceOnRequest": "Sur demande",
+    "priceFrom": "À partir de {price}",
     "priceNote": "Prix TVA incluse, variables selon le mode de paiement. Les frais d'enregistrement du titre de propriété (4 %) ne sont pas inclus.",
     "residencePriceNote": "Prix TVA incluse, variables selon l'étage, la vue et le mode de paiement. Les frais d'enregistrement du titre de propriété (4 %) ne sont pas inclus.",
     "addressLabel": "Adresse",
@@ -640,7 +642,7 @@
         "items": [
           {
             "q": "Qui est HADARA Immobilier ?",
-            "a": "HADARA Immobilier est un partenaire de développement et de commercialisation immobilière fondé en 2014, basé à Beylikdüzü, Istanbul. Nous avons développé Marmara Haven Villa, une résidence privée à Büyükçekmece, et nous commercialisons des projets résidentiels, mixtes et des villas de promoteurs reconnus à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir."
+            "a": "HADARA Immobilier est un partenaire de développement et de commercialisation immobilière fondé en 2014, basé à Beylikdüzü, Istanbul. Nous avons développé Marmara Haven Villa, une résidence privée à Büyükçekmece, et nous commercialisons des projets résidentiels, mixtes et des villas de promoteurs reconnus à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir et Küçükçekmece."
           },
           {
             "q": "Quels types de projets HADARA propose-t-elle ?",
@@ -648,7 +650,7 @@
           },
           {
             "q": "Où sont situés les projets de HADARA ?",
-            "a": "Tous les projets que nous proposons actuellement sont situés du côté européen d'Istanbul, dans les quartiers en forte croissance de Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir."
+            "a": "Tous les projets que nous proposons actuellement sont situés du côté européen d'Istanbul, dans les quartiers en forte croissance de Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir et Küçükçekmece."
           },
           {
             "q": "Comment puis-je contacter l'équipe de HADARA ?",
@@ -1563,6 +1565,67 @@
         {
           "place": "Ataköy Marina",
           "time": "1 km"
+        }
+      ]
+    },
+    "hayat-flora": {
+      "name": "Hayat Flora",
+      "tagline": "Un nouveau quartier avec vue sur la mer et le lac à Halkalı, par Özak GYO avec la garantie d'Emlak Konut.",
+      "shortDescription": "Hayat Flora est un nouveau quartier résidentiel en construction à Halkalı, Küçükçekmece, réalisé par Özak GYO avec la garantie d'Emlak Konut : 1 382 logements du 1+1 au 4+1 et 46 commerces sur rue répartis dans 21 immeubles, avec vue sur la mer de Marmara et le lac de Küçükçekmece, de vastes jardins paysagers et la gare Marmaray de Halkalı à 500 m. Éligible à la citoyenneté turque.",
+      "longDescription": "Hayat Flora s'élève à Halkalı, dans l'arrondissement de Küçükçekmece, sur la rive européenne d'Istanbul, entre la mer de Marmara et le lac de Küçükçekmece. Il est réalisé par Özak GYO, promoteur de Büyükyalı, avec la garantie d'Emlak Konut GYO, la société d'investissement immobilier soutenue par l'État, selon son modèle de partage des revenus. Le projet s'étend sur environ 92 440 m² et forme un nouveau quartier en trois parties, chacune avec son propre parc paysager ; jusqu'à 70 % du terrain est consacré aux jardins, aux allées piétonnes, aux aires de jeux, aux espaces sportifs et aux coins de repos. Ses 21 immeubles, d'un rez-de-chaussée et de 13 étages, comptent 1 382 logements du 1+1 au 4+1, dont des logements en rez-de-jardin et des duplex avec jardin ou terrasse, beaucoup avec vue sur la mer et le lac, et 46 commerces bordent les trois avenues du projet. Les résidents disposent de piscines extérieures, d'une salle de fitness, d'un salon des résidents, d'une entrée sécurisée et d'un parking de 2 318 places. La gare Marmaray de Halkalı et la ligne de métro M11 vers l'aéroport d'Istanbul sont à environ 500 m, Florya est à 10 minutes et Ataköy à 19 minutes en Marmaray, et les autoroutes E-5 et TEM à 10 minutes en voiture. Les immeubles sont conçus selon le code sismique turc de 2018, avec des calculs de structure vérifiés par l'Université technique d'Istanbul et Emlak Konut, des fondations en radier et 1 710 pieux. Les ventes se font en deux phases, et le promoteur prévoit la remise des clés en février 2029. Le projet est éligible à la citoyenneté turque.",
+      "highlights": [
+        "En construction, livraison prévue en février 2029 selon le promoteur",
+        "Éligible à la citoyenneté turque",
+        "Par Özak GYO, avec la garantie d'Emlak Konut",
+        "1 382 logements et 46 commerces sur rue dans 21 immeubles",
+        "Logements du 1+1 au 4+1, dont des duplex avec jardin ou terrasse",
+        "Vue sur la mer de Marmara et le lac de Küçükçekmece",
+        "Jusqu'à 70 % du terrain en jardins paysagers",
+        "À environ 500 m de la gare Marmaray de Halkalı et de la ligne de métro M11 vers l'aéroport d'Istanbul",
+        "Autoroutes E-5 et TEM à 10 minutes",
+        "Parking de 2 318 places",
+        "Conçu selon le code sismique turc de 2018, calculs vérifiés par l'Université technique d'Istanbul"
+      ],
+      "nearby": [
+        {
+          "place": "Gare Marmaray de Halkalı",
+          "time": "500 m"
+        },
+        {
+          "place": "Ligne de métro M11 Halkalı – aéroport d'Istanbul",
+          "time": "500 m"
+        },
+        {
+          "place": "Parc Atatürk",
+          "time": "600 m"
+        },
+        {
+          "place": "Jardin de la Nation de Halkalı",
+          "time": "1,4 km"
+        },
+        {
+          "place": "Parc Kanarya",
+          "time": "3 km"
+        },
+        {
+          "place": "Forêt Atatürk de Florya",
+          "time": "7,6 km"
+        },
+        {
+          "place": "Autoroutes E-5 et TEM",
+          "time": "10 min"
+        },
+        {
+          "place": "Florya en Marmaray",
+          "time": "10 min"
+        },
+        {
+          "place": "Ataköy en Marmaray",
+          "time": "19 min"
+        },
+        {
+          "place": "Üsküdar en Marmaray",
+          "time": "35 min"
         }
       ]
     },
@@ -2742,11 +2805,11 @@
     },
     "home": {
       "title": "HADARA Immobilier | Votre partenaire immobilier à Istanbul, Turquie",
-      "description": "Partenaire immobilier à Istanbul depuis 2014 : logements à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir, aide à la citoyenneté."
+      "description": "Partenaire immobilier à Istanbul depuis 2014 : logements à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir et Küçükçekmece."
     },
     "projects": {
       "title": "Nos projets à Istanbul – Appartements et villas",
-      "description": "Projets résidentiels, mixtes et villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir : lancements et biens livrés."
+      "description": "Résidences, projets mixtes et villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir et Küçükçekmece : neufs et livrés."
     },
     "about": {
       "title": "À propos de HADARA – Développement et commercialisation depuis 2014",

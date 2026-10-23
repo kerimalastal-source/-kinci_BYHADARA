@@ -72,7 +72,8 @@ export interface Residence {
   layout: string;
   /** Plan variant letter from the catalog, e.g. "A". */
   variant?: string;
-  gross: string;
+  /** Omitted when the developer has not published the plans (the card then shows the layout and price only). */
+  gross?: string;
   net?: string;
   /** Saleable gross area (Turkish "satışa esas brüt"), when the catalog quotes it. */
   saleable?: string;
@@ -81,6 +82,8 @@ export interface Residence {
   planTypes?: number;
   /** Price range as quoted by the team, shown as written (e.g. "$200,000 – $250,000"). */
   price?: string;
+  /** `price` is a starting price: shown as "From $380,000". */
+  priceFrom?: boolean;
 }
 
 /** Gross/net area of one level; its name and features live in projectsData.<slug>.floorPlan (same order). */
@@ -141,6 +144,8 @@ export interface Project {
   developer?: string;
   /** "on-request" shows "Price: On request"; any other value is shown as written (e.g. "$1,250,000"). */
   price?: string;
+  /** `price` is a starting price: shown as "From $380,000". */
+  priceFrom?: boolean;
   /** Instalment plan confirmed by the owner (2026-10-14): down payment % and the months the balance is spread over. */
   paymentPlan?: { downPercent: number; months: number };
   /** Setting, taken from the project's own description: by the sea (or sea views), green and calm, or city. Used by "Find My Project". */
@@ -634,6 +639,65 @@ export const projects: Project[] = [
       "indoorParking",
       "evCharging",
       "retail"
+    ]
+  },
+  {
+    slug: "hayat-flora",
+    district: "Küçükçekmece",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-10-23: under construction, Emlak Konut guarantee, eligible for citizenship, starting prices per
+    // layout below (by view and size). Delivery February 2029 from the developer's FAQ (ozakgyo.com).
+    lifestyle: ["sea", "city"],
+    unitsAvailable: true,
+    priority: 1.96,
+    developer: "Özak GYO · Emlak Konut",
+    address: "Hayat Flora, İstasyon Mah., Halkalı, Küçükçekmece, İstanbul",
+    price: "$380,000",
+    priceFrom: true,
+    // Facts from emlakkonut.com.tr (Hayat Flora: 1,382 homes, 46 shops, 1,428 units), ozakgyo.com (21 blocks of
+    // ground + 13 floors on about 92,440 m², 2,318 parking spaces, revenue-sharing model) and its catalogue;
+    // images from the developer's site and landing page.
+    coverImage: img("hayat-flora", "aerial-sea", 1680, 1047, "Hayat Flora aerial view in Halkalı, Küçükçekmece, with the Sea of Marmara and Lake Küçükçekmece behind"),
+    gallery: [
+      img("hayat-flora", "aerial-night", 1680, 1066, "Hayat Flora blocks at night above Lake Küçükçekmece and the sea"),
+      img("hayat-flora", "entrance-gate", 1680, 1047, "Hayat Flora main entrance and security gate"),
+      img("hayat-flora", "pool", 1680, 1260, "Hayat Flora outdoor swimming pool with sun loungers"),
+      img("hayat-flora", "pool-evening", 1680, 1047, "Hayat Flora poolside terrace in the evening"),
+      img("hayat-flora", "gardens-aerial", 1680, 1120, "Hayat Flora landscaped gardens, pool and play areas seen from above"),
+      img("hayat-flora", "playground", 1680, 1047, "Hayat Flora children's playground between the blocks"),
+      img("hayat-flora", "street-avenue", 1550, 750, "Hayat Flora blocks with shops on the avenue"),
+      img("hayat-flora", "garden-homes", 1550, 750, "Hayat Flora ground-floor homes with private gardens"),
+      img("hayat-flora", "rooftop-terrace", 1680, 945, "Hayat Flora terrace home looking towards the sea"),
+      img("hayat-flora", "living-room", 1680, 909, "Hayat Flora living and dining room with lake and sea views"),
+      img("hayat-flora", "bedroom", 1550, 750, "Hayat Flora bedroom with a view of the lake")
+    ],
+    stats: [
+      { value: "1,382", labelKey: "apartments" },
+      { value: "2029", labelKey: "delivery" },
+      { value: "46", labelKey: "shops" },
+      { value: "92,440 m²", labelKey: "landArea" },
+      { value: "1+1 – 4+1", labelKey: "layout" }
+    ],
+    // Starting prices from the owner (2026-10-23); the developer has not published floor plans or areas.
+    residences: [
+      { kind: "apartment", layout: "2+1", price: "$380,000", priceFrom: true },
+      { kind: "apartment", layout: "3+1", price: "$450,000", priceFrom: true },
+      { kind: "apartment", layout: "4+1", price: "$500,000", priceFrom: true }
+    ],
+    amenities: [
+      "outdoorPool",
+      "fitness",
+      "lounge",
+      "playground",
+      "sportsCourt",
+      "joggingTrack",
+      "landscaping",
+      "privateGarden",
+      "indoorParking",
+      "security",
+      "retail",
+      "seismicDesign"
     ]
   },
   {

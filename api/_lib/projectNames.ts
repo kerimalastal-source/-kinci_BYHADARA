@@ -77,6 +77,13 @@ export const PROJECT_NAMES: Record<string, Record<"en" | "ar" | "fa" | "fr" | "r
     "fr": "Sea Pearl Ataköy",
     "ru": "Sea Pearl Ataköy"
   },
+  "hayat-flora": {
+    "en": "Hayat Flora",
+    "ar": "حياة فلورا",
+    "fa": "حیات فلورا",
+    "fr": "Hayat Flora",
+    "ru": "Hayat Flora"
+  },
   "tual-comfort": {
     "en": "Tual Comfort",
     "ar": "توال كومفورت",

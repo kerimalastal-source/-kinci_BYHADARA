@@ -12,6 +12,7 @@ import { renderProjectMap, initProjectMap } from "../components/projectMap";
 import { renderVideoTourInvite, videoTourHref, VIDEO_TOUR_ICON } from "../components/videoTourInvite";
 import { renderNotFound } from "./notFound";
 import { photoAttrs, photoSrcset, heroBackground } from "../utils/responsiveImage";
+import { priceHtml } from "../utils/price";
 
 /** Scroll-reveal attributes; the stagger restarts every row so long grids don't lag. */
 const reveal = (i: number, perRow = 4) => `data-reveal data-reveal-index="${i % perRow}"`;
@@ -58,15 +59,19 @@ function renderResidences(project: Project): string {
           <article class="residence-card" ${reveal(i, 3)}>
             ${r.variant ? `<p class="residence-card__eyebrow">${t("projectDetail.residenceVariant", { variant: r.variant })}</p>` : ""}
             <h3 class="residence-card__title">${residenceTitle(r)}</h3>
-            <p class="residence-card__area">
+            ${
+              r.gross
+                ? `<p class="residence-card__area">
               <strong dir="ltr">${r.gross}</strong>
               <span>${t("projectDetail.grossAreaLabel")}</span>
-            </p>
+            </p>`
+                : ""
+            }
             ${
               r.price
                 ? `<p class="residence-card__price">
               <span>${t("projectDetail.priceLabel")}</span>
-              <strong dir="ltr">${r.price}</strong>
+              <strong>${priceHtml(r.price, r.priceFrom)}</strong>
             </p>`
                 : ""
             }
@@ -486,7 +491,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
     project.price === "on-request"
       ? t("projectDetail.priceOnRequest")
       : project.price
-        ? `<span dir="ltr">${project.price}</span>`
+        ? priceHtml(project.price, project.priceFrom)
         : "";
   const plan = project.paymentPlan
     ? t("projectDetail.paymentPlanValue", {

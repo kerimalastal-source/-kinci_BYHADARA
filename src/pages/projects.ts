@@ -4,6 +4,7 @@ import { renderProjectCard, projectStatusLabel } from "../components/projectCard
 import { renderProjectsAtlas, initProjectsAtlas } from "../components/projectsAtlas";
 import { openLightbox } from "../components/lightbox";
 import { photoAttrs, photoSrcset } from "../utils/responsiveImage";
+import { priceHtml } from "../utils/price";
 
 type FilterKey = "all" | "available" | "villas" | ProjectStatus;
 
@@ -38,7 +39,7 @@ function villaOptions(project: Project): string {
         ]
           .filter(Boolean)
           .join(" · ");
-        const rows: [string, string][] = [[t("projectDetail.grossAreaLabel"), r.gross]];
+        const rows: [string, string][] = r.gross ? [[t("projectDetail.grossAreaLabel"), r.gross]] : [];
         if (r.net) rows.push([t("projectDetail.netAreaLabel"), r.net]);
         if (r.garden) rows.push([t("projectDetail.gardenLabel"), r.garden]);
         if (r.floors) rows.push([t("projectDetail.floorsLabel"), String(r.floors)]);
@@ -59,7 +60,7 @@ function renderVillaShowcase(project: Project, index: number): string {
   const [main, ...thumbs] = photos;
   const price =
     project.price && project.price !== "on-request"
-      ? `<strong dir="ltr">${project.price}</strong>`
+      ? `<strong>${priceHtml(project.price, project.priceFrom)}</strong>`
       : `<strong>${t("projectDetail.priceOnRequest")}</strong>`;
   const single = !project.stats.some((s) => s.labelKey === "villas");
 

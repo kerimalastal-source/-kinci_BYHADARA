@@ -11,6 +11,7 @@ import { placeKey } from "../utils/place";
 import { consultancyPath, parseRoute, splitLocale } from "../seo/routes";
 import { videoTourHref, VIDEO_TOUR_ICON } from "./videoTourInvite";
 import { photoAttrs } from "../utils/responsiveImage";
+import { priceHtml } from "../utils/price";
 import {
   hasLiveChat,
   liveDetails,
@@ -343,7 +344,7 @@ function renderProject(slug: string): string {
     facts.push(
       p.price === "on-request"
         ? { label: t("projectDetail.priceLabel"), value: t("projectDetail.priceOnRequest") }
-        : { label: t("projectDetail.priceLabel"), value: p.price, ltr: true }
+        : { label: t("projectDetail.priceLabel"), value: priceHtml(p.price, p.priceFrom) }
     );
   }
 
@@ -451,7 +452,11 @@ function renderInfo(slug: string, topic: InfoTopic): string {
         body = `<p>${t("chat.info.unitsIntro", { name })}</p>${factList(
           p.residences.map((r) => [
             `${residenceTitle(r)}${r.variant ? ` · ${t("projectDetail.residenceVariant", { variant: r.variant })}` : ""}`,
-            `<bdi dir="ltr">${r.gross}</bdi> <small>${t("projectDetail.grossAreaLabel")}</small>`
+            r.gross
+              ? `<bdi dir="ltr">${r.gross}</bdi> <small>${t("projectDetail.grossAreaLabel")}</small>`
+              : r.price
+                ? priceHtml(r.price, r.priceFrom)
+                : ""
           ])
         )}`;
       } else if (p.floorPlan?.length && content.floorPlan?.length) {
@@ -513,7 +518,7 @@ function renderInfo(slug: string, topic: InfoTopic): string {
         p.price === "on-request"
           ? t("chat.info.priceOnRequest", { name })
           : p.price
-            ? t("chat.info.priceKnown", { name, price: `<bdi dir="ltr">${p.price}</bdi>` })
+            ? t("chat.info.priceKnown", { name, price: priceHtml(p.price, p.priceFrom) })
             : t("chat.info.priceText", { name })
       }</p>`;
       if (p.paymentPlan && !p.soldOut) {
