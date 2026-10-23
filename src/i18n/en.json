@@ -3849,8 +3849,11 @@
       },
       "source": "Where did they come from?",
       "sources": {
-        "gulf": "Gulf ad (WhatsApp)",
-        "villa": "Villa ad (Facebook form)",
+        "gulfPlan": "Gulf & Kuwait ad: 30/30 plan",
+        "gulfCitizenship": "Gulf & Kuwait ad: citizenship",
+        "gulfVilla": "Gulf & Kuwait ad: villa",
+        "gulf": "Old Gulf ad (until 22/10)",
+        "villa": "Old villa ad (Facebook form)",
         "otherAd": "Another Facebook or Instagram ad",
         "social": "Our posts (no ad)",
         "website": "The website or a Google search",

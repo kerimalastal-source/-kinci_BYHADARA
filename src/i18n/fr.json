@@ -3849,8 +3849,11 @@
       },
       "source": "D'où vient-il ?",
       "sources": {
-        "gulf": "Publicité Golfe (WhatsApp)",
-        "villa": "Publicité villa (formulaire Facebook)",
+        "gulfPlan": "Pub Golfe et Koweït : plan 30/30",
+        "gulfCitizenship": "Pub Golfe et Koweït : citoyenneté",
+        "gulfVilla": "Pub Golfe et Koweït : villa",
+        "gulf": "Ancienne publicité Golfe (jusqu'au 22/10)",
+        "villa": "Ancienne publicité villa (formulaire Facebook)",
         "otherAd": "Autre publicité Facebook ou Instagram",
         "social": "Nos publications (sans publicité)",
         "website": "Le site ou une recherche Google",
