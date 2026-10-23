@@ -647,7 +647,9 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "ongoing",
     // Owner, 2026-10-23: under construction, Emlak Konut guarantee, eligible for citizenship, starting prices per
-    // layout below (by view and size). Delivery February 2029 from the developer's FAQ (ozakgyo.com).
+    // layout below (by view and size), prices include VAT; 30% down and the balance over 30 months (owner, same day).
+    // Delivery February 2029 from the developer's FAQ (ozakgyo.com).
+    paymentPlan: { downPercent: 30, months: 30 },
     lifestyle: ["sea", "city"],
     unitsAvailable: true,
     priority: 1.96,
