@@ -3795,6 +3795,18 @@
     }
   },
   "adminCustomers": {
+    "edit": {
+      "open": "Modifier les coordonnées",
+      "title": "Modifier les coordonnées du client",
+      "hint": "La modification est enregistrée sur tous les dossiers de ce client (messages, demandes, visites) et sur sa fiche dans le pipeline.",
+      "hintMany": "Ce client a plusieurs numéros ou e-mails : seuls ceux affichés ici changent, les autres restent tels quels.",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "saved": "Coordonnées du client enregistrées ✓",
+      "error": "Impossible d'enregistrer, veuillez réessayer.",
+      "unavailable": "La modification fonctionne après l'exécution de la mise à jour 0033.",
+      "emailNeeded": "Ce client a une visite réservée : son e-mail ne peut pas être supprimé, seulement corrigé."
+    },
     "heroTitle": "Clients",
     "heroSubtitle": "Chaque client avec son historique complet : messages, demandes, visites et notes de l'équipe. Même e-mail ou même numéro de téléphone = même client.",
     "searchPlaceholder": "Rechercher par nom, téléphone, e-mail ou numéro de demande",

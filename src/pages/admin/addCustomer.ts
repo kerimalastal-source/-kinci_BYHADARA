@@ -17,7 +17,7 @@ import { budgetSelect, projectName, stageLabel } from "./crmForm";
  */
 
 /** Where the customer came from, saved in the same "utm_source=… · utm_campaign=…" form as the site's leads. */
-const SOURCES: Record<string, string> = {
+export const SOURCES: Record<string, string> = {
   // The Gulf + Kuwait campaign from 2026-10-23, one campaign name per ad so /admin/ads compares them.
   gulfPlan: "utm_source=facebook · utm_campaign=gulf-kw-plan",
   gulfCitizenship: "utm_source=facebook · utm_campaign=gulf-kw-citizenship",
@@ -34,7 +34,7 @@ const SOURCES: Record<string, string> = {
 const PHONE_ID = "add-customer-phone";
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-function countryOptions(): string {
+export function countryOptions(selected = ""): string {
   let names: Intl.DisplayNames | null = null;
   try {
     names = new Intl.DisplayNames([getLocale()], { type: "region" });
@@ -44,7 +44,7 @@ function countryOptions(): string {
   return countries
     .map((c) => ({ code: c.iso2, name: names?.of(c.iso2) ?? c.name }))
     .sort((a, b) => a.name.localeCompare(b.name, getLocale()))
-    .map((c) => `<option value="${c.code}">${escapeHtml(c.name)}</option>`)
+    .map((c) => `<option value="${c.code}"${c.code === selected ? " selected" : ""}>${escapeHtml(c.name)}</option>`)
     .join("");
 }
 
@@ -108,12 +108,13 @@ export function addCustomerHtml(): string {
  * The country follows the phone's dialling code: picking a code (or typing or pasting a number
  * that starts with + or 00) selects that country, until the employee picks a country by hand.
  */
-function linkCountryToPhone(form: HTMLFormElement): void {
-  const dial = form.querySelector<HTMLSelectElement>(`#${PHONE_ID}-country`);
-  const number = form.querySelector<HTMLInputElement>(`#${PHONE_ID}-number`);
+export function linkCountryToPhone(form: HTMLFormElement, phoneId = PHONE_ID): void {
+  const dial = form.querySelector<HTMLSelectElement>(`#${phoneId}-country`);
+  const number = form.querySelector<HTMLInputElement>(`#${phoneId}-number`);
   const country = form.querySelector<HTMLSelectElement>('select[name="country"]');
   if (!dial || !number || !country) return;
-  let picked = false;
+  // A country already filled in (editing a customer) counts as picked by hand.
+  let picked = country.value !== "";
   // The dial menu lists the countries in the same order, so its selected index names the
   // country even for shared codes (+1, +7).
   const follow = () => {

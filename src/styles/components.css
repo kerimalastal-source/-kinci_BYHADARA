@@ -5478,6 +5478,21 @@ body.map-open .back-to-top {
   font-size: 1rem;
 }
 
+/* "Edit customer details" button and its form (hidden until opened). */
+.customer-card__edit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.customer-edit.ads-form {
+  margin-block: 0;
+}
+
+.customer-edit[hidden] {
+  display: none;
+}
+
 .customer-entries {
   display: grid;
   gap: 0.5rem;

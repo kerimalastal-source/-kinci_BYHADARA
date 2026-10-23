@@ -275,6 +275,35 @@ export function initPhoneInputs(): void {
   });
 }
 
+/**
+ * Fills a phone field from a saved number ("+974 3345 6789"): the longest dialling code it
+ * starts with picks the country (the first one for shared codes such as +1), the rest is the
+ * number. A number without a code goes in as it is.
+ */
+export function setPhoneValue(container: ParentNode, idPrefix: string, phone: string): void {
+  const select = container.querySelector<HTMLSelectElement>(`#${idPrefix}-country`);
+  const input = container.querySelector<HTMLInputElement>(`#${idPrefix}-number`);
+  if (!select || !input) return;
+  const intl = phone.trim().match(/^(?:\+|00)\s*(\d[\d\s-]*)$/);
+  const digits = intl ? intl[1].replace(/\D/g, "") : "";
+  const match = countries
+    .map((c, i) => ({ dial: c.dial.replace(/\D/g, ""), i }))
+    .filter((c) => c.dial && digits.startsWith(c.dial) && digits.length > c.dial.length)
+    .sort((a, b) => b.dial.length - a.dial.length)[0];
+  if (!intl || !match) {
+    input.value = phone.trim();
+    return;
+  }
+  select.selectedIndex = match.i;
+  select.dispatchEvent(new Event("change", { bubbles: true }));
+  // Keep the team's spacing after the code ("+974 3345 6789" -> "3345 6789").
+  const rest = intl[1].replace(/^\s*/, "");
+  let seen = 0;
+  let cut = 0;
+  while (cut < rest.length && seen < match.dial.length) if (/\d/.test(rest[cut++])) seen++;
+  input.value = rest.slice(cut).trim();
+}
+
 /** Combined "+<dial> <number>" value, or "" if the national number is empty. */
 export function getPhoneValue(container: ParentNode, idPrefix: string): string {
   const dial = container.querySelector<HTMLSelectElement>(`#${idPrefix}-country`)?.value ?? "";

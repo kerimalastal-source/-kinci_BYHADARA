@@ -111,3 +111,54 @@ test("0032 adds the 'no reply' stage and the budget range, and rejects anything 
   const rows = (await db.query("select stage, budget from public.crm_leads order by stage desc")).rows;
   assert.deepEqual(rows, [{ stage: "no_reply", budget: "400-500" }, { stage: "contacted", budget: null }]);
 });
+
+test("0033 edits a customer on all their records and keeps their pipeline row linked", async () => {
+  const db = await database();
+  for (const f of ["0032_crm_budget_noreply.sql", "0033_edit_customer.sql"]) await db.exec(readFileSync(new URL(f, MIGRATIONS), "utf8"));
+  const r = await add(db);
+  const manual = (await db.query("select id from public.inquiries where reference = $1", [r.reference])).rows[0].id;
+  // A second message from the same phone, and a second phone of theirs that must stay.
+  const other = (
+    await db.query(
+      "insert into public.inquiries (reference, kind, name, email, phone) values ('HQ-AAAAAA', 'contact', 'Abu Fahd', 'old@example.com', '00966501234567') returning id"
+    )
+  ).rows[0].id;
+  const second = (
+    await db.query("insert into public.inquiries (reference, kind, name, email, phone) values ('HQ-BBBBBB', 'contact', 'A F', '', '+974 3333 4444') returning id")
+  ).rows[0].id;
+  const lead = (
+    await db.query("insert into public.crm_leads (keys, name, phone, stage) values ('{p:501234567}', 'Abu Fahd', '+966 50 123 4567', 'contacted') returning id")
+  ).rows[0].id;
+  const edit = (o = {}) => {
+    const a = {
+      inquiries: [manual, other, second], bookings: [], lead, oldPhone: "+966 50 123 4567", oldEmail: "old@example.com",
+      name: "Fahd Al-Otaibi", phone: "+966 55 999 8888", email: "Fahd@Example.com", manual,
+      country: "QA", channel: "call", source: "utm_source=facebook · utm_campaign=gulf-kw-plan", ...o
+    };
+    return db
+      .query("select public.admin_update_customer($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) as r", [
+        a.inquiries, a.bookings, a.lead, a.oldPhone, a.oldEmail, a.name, a.phone, a.email, a.manual, a.country, a.channel, a.source
+      ])
+      .then((x) => x.rows[0].r);
+  };
+  assert.deepEqual(await edit({ email: "bad" }), { error: "invalid" });
+  assert.deepEqual(await edit(), { ok: true });
+  const rows = (await db.query("select reference, name, phone, email, details, source from public.inquiries order by reference")).rows;
+  const by = Object.fromEntries(rows.map((x) => [x.reference.slice(0, 2) === "HM" ? "manual" : x.reference, x]));
+  assert.equal(by.manual.name, "Fahd Al-Otaibi");
+  assert.equal(by.manual.phone, "+966 55 999 8888");
+  assert.equal(by.manual.email, ""); // its email was not the old main one
+  assert.deepEqual(by.manual.details, { form: "manual", channel: "call", country: "QA" });
+  assert.equal(by.manual.source, "utm_source=facebook · utm_campaign=gulf-kw-plan");
+  assert.equal(by["HQ-AAAAAA"].phone, "+966 55 999 8888"); // same old phone, written differently
+  assert.equal(by["HQ-AAAAAA"].email, "fahd@example.com");
+  assert.equal(by["HQ-BBBBBB"].phone, "+974 3333 4444"); // their other phone stays
+  assert.equal(by["HQ-BBBBBB"].name, "Fahd Al-Otaibi");
+  const row = (await db.query("select keys, name, phone, email from public.crm_leads where id = $1", [lead])).rows[0];
+  assert.deepEqual([...row.keys].sort(), ["e:fahd@example.com", "p:501234567", "p:559998888"]);
+  assert.equal(row.phone, "+966 55 999 8888");
+  assert.equal(row.email, "fahd@example.com");
+  await db.exec("set test.admin = 'false'");
+  assert.deepEqual(await edit(), { error: "forbidden" });
+  await db.close();
+});

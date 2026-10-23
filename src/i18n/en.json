@@ -3795,6 +3795,18 @@
     }
   },
   "adminCustomers": {
+    "edit": {
+      "open": "Edit customer details",
+      "title": "Edit customer details",
+      "hint": "The change is saved on all of this customer's records (messages, requests, tours) and on their pipeline card.",
+      "hintMany": "This customer has more than one phone or email: only the ones shown here change, the others stay as they are.",
+      "save": "Save details",
+      "cancel": "Cancel",
+      "saved": "Customer details saved ✓",
+      "error": "Couldn't save the details, please try again.",
+      "unavailable": "Editing details works after update 0033 has been run.",
+      "emailNeeded": "This customer has a booked tour, so their email can't be removed; you can only correct it."
+    },
     "heroTitle": "Customers",
     "heroSubtitle": "Every customer with their full history: messages, requests, tours and the team's notes. The same email or phone number = the same customer.",
     "searchPlaceholder": "Search by name, phone, email or request number",
