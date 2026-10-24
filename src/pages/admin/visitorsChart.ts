@@ -191,3 +191,107 @@ export function initVisitorsChart(root: ParentNode): void {
     });
   });
 }
+
+/* ---------- Real visitors without paid ads (owner's request 2026-10-24) ---------- */
+
+export const ORGANIC_SOURCES = ["search", "direct", "posts", "social", "referral"] as const;
+export type OrganicSource = (typeof ORGANIC_SOURCES)[number];
+
+export interface OrganicChartDay {
+  day: string;
+  counts: Record<OrganicSource, number>;
+  contacted: number;
+  /** Real visits from paid ads the same day, shown in the card for comparison. */
+  paid: number;
+}
+
+export interface OrganicChartText {
+  date: (day: string) => string;
+  axis: (day: string, i: number, n: number) => string;
+  minor: (i: number, n: number) => boolean;
+  num: (n: number) => string;
+  /** The average with one decimal. */
+  avg: (n: number) => string;
+  source: (s: OrganicSource) => string;
+  total: string;
+  average: string;
+  contacted: string;
+  paid: string;
+  label: string;
+}
+
+const dayTotal = (d: OrganicChartDay) => ORGANIC_SOURCES.reduce((s, k) => s + d.counts[k], 0);
+
+/** The 7-day moving average (fewer days at the start of the period). */
+export function movingAverage(values: number[], span = 7): number[] {
+  return values.map((_, i) => {
+    const part = values.slice(Math.max(0, i - span + 1), i + 1);
+    return part.reduce((s, v) => s + v, 0) / part.length;
+  });
+}
+
+/** One stacked column per day, coloured by source, with the 7-day average as a dashed line.
+ * Same frame, card and keyboard as visitorsChart (initVisitorsChart drives both). */
+export function organicChart(days: OrganicChartDay[], text: OrganicChartText): string {
+  const n = days.length;
+  const totals = days.map(dayTotal);
+  const avg = movingAverage(totals);
+  const scaleMax = Math.max(...totals, ...avg, 0);
+  const step = niceStep(scaleMax);
+  const top = Math.max(step, Math.ceil(scaleMax / step) * step);
+  const xPct = (i: number) => ((i + 0.5) / n) * 100;
+  const yPct = (v: number) => (v / top) * 100;
+  const avgLine = monotonePath(avg.map((v, i) => [(xPct(i) / 100) * W, H - (yPct(v) / 100) * H]));
+
+  const ticks = [];
+  for (let v = 0; v <= top; v += step) {
+    ticks.push(`<span class="vchart__tick${v === 0 ? " vchart__tick--base" : ""}" style="bottom:${yPct(v)}%"><b>${escapeHtml(text.num(v))}</b></span>`);
+  }
+  const width = Math.min(80, Math.max(30, 100 - n));
+  const bars = days
+    .map((d, i) => {
+      let base = 0;
+      const parts = ORGANIC_SOURCES.filter((k) => d.counts[k])
+        .map((k) => {
+          const part = `<i class="ochart__part ochart__part--${k}" style="bottom:${yPct(base)}%;height:${yPct(d.counts[k])}%"></i>`;
+          base += d.counts[k];
+          return part;
+        })
+        .join("");
+      return parts ? `<span class="ochart__bar" style="left:${xPct(i)}%;width:${width / n}%">${parts}</span>` : "";
+    })
+    .join("");
+  const marks = days
+    .map((d, i) => (d.contacted ? `<span class="vchart__mark ochart__mark" style="left:${xPct(i)}%;bottom:${yPct(totals[i])}%"></span>` : ""))
+    .join("");
+  const axis = days
+    .map((d, i) => `<span class="vchart__label${text.minor(i, n) ? " vchart__label--minor" : ""}">${text.axis(d.day, i, n)}</span>`)
+    .join("");
+  const card = days.map((d, i) => ({
+    date: text.date(d.day),
+    rows: [
+      ["total", text.total, text.num(totals[i])],
+      ...ORGANIC_SOURCES.filter((k) => d.counts[k]).map((k) => [k, text.source(k), text.num(d.counts[k])]),
+      ["average", text.average, text.avg(avg[i])],
+      ...(d.contacted ? [["contacted", text.contacted, text.num(d.contacted)]] : []),
+      ...(d.paid ? [["paid", text.paid, text.num(d.paid)]] : [])
+    ],
+    y: yPct(totals[i])
+  }));
+  const peak = totals.reduce((best, v, i) => (v > totals[best] ? i : best), 0);
+
+  return `<div class="vchart ochart" dir="ltr" data-chart="${escapeHtml(JSON.stringify(card))}" data-peak="${peak}">
+    <div class="vchart__plot" tabindex="0" role="img" aria-label="${escapeHtml(text.label)}">
+      <div class="vchart__grid" aria-hidden="true">${ticks.join("")}</div>
+      <div class="ochart__bars" aria-hidden="true">${bars}</div>
+      <svg class="vchart__svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path class="ochart__avg" d="${avgLine}" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <div class="vchart__marks" aria-hidden="true">${marks}</div>
+      <span class="vchart__cross" aria-hidden="true"></span>
+      <span class="vchart__dot" aria-hidden="true"></span>
+      <div class="vchart__tip" aria-hidden="true"></div>
+    </div>
+    <div class="vchart__axis" aria-hidden="true">${axis}</div>
+  </div>`;
+}

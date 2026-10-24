@@ -3900,6 +3900,27 @@
     "tipVisitors": "{count} visitors",
     "tipPages": "{count} pages",
     "dailyTitle": "Visitors per day",
+    "organic": {
+      "title": "Real visitors without paid ads",
+      "hint": "Only real visitors (automated visits left out), and none that came from a paid ad. Each column is one day, coloured by where the visitors came from; the dashed line is the 7-day average.",
+      "total": "Visitors without ads",
+      "share": "Share of all real visitors",
+      "tipTotal": "Without ads",
+      "tipAverage": "7-day average",
+      "tipPaid": "For comparison: from ads",
+      "legendAverage": "7-day average",
+      "legendContacted": "Day with a contact",
+      "empty": "No real visitors without ads in this period yet.",
+      "unavailable": "Available after running database update 0034.",
+      "note": "A visit counts as coming from an ad when its link carries utm_medium=paid (or a Google Ads click), so every new ad that links to the site needs that tag.",
+      "sources": {
+        "search": "Search engines",
+        "direct": "Direct",
+        "posts": "Our posts",
+        "social": "Social links",
+        "referral": "Other websites"
+      }
+    },
     "real": {
       "title": "Visitors per day",
       "hint": "Every number on this page leaves out automated visits and bots (link checks from data centers, several visits opening the same page at once, software-driven browsers).",

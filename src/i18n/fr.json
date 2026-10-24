@@ -3902,6 +3902,27 @@
     "tipVisitors": "{count} visiteurs",
     "tipPages": "{count} pages",
     "dailyTitle": "Visiteurs par jour",
+    "organic": {
+      "title": "Visiteurs réels sans publicité payante",
+      "hint": "Uniquement les visiteurs réels (visites automatiques exclues), et aucune visite venue d'une publicité payante. Chaque colonne est un jour, colorée selon la provenance ; la ligne pointillée est la moyenne sur 7 jours.",
+      "total": "Visiteurs sans publicité",
+      "share": "Part de tous les visiteurs réels",
+      "tipTotal": "Sans publicité",
+      "tipAverage": "Moyenne sur 7 jours",
+      "tipPaid": "Pour comparer : via la publicité",
+      "legendAverage": "Moyenne sur 7 jours",
+      "legendContacted": "Jour avec un contact",
+      "empty": "Aucun visiteur réel sans publicité sur cette période pour l'instant.",
+      "unavailable": "Disponible après la mise à jour 0034 de la base de données.",
+      "note": "Une visite est comptée comme publicitaire quand son lien porte utm_medium=paid (ou un clic Google Ads) : toute nouvelle publicité menant au site doit porter ce marqueur.",
+      "sources": {
+        "search": "Moteurs de recherche",
+        "direct": "Direct",
+        "posts": "Nos publications",
+        "social": "Liens des réseaux sociaux",
+        "referral": "Autres sites"
+      }
+    },
     "real": {
       "title": "Visiteurs par jour",
       "hint": "Tous les chiffres de cette page excluent les visites automatisées et les robots (vérifications de liens depuis des centres de données, visites simultanées de la même page, navigateurs pilotés par logiciel).",
