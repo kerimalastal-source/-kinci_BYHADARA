@@ -15,7 +15,7 @@ const SEA_LABELS = [
   { key: "marmara", x: 330, y: 478 }
 ];
 /** Road number shields, and the order the legend lists the roads in. */
-const ROADS = [
+export const ROADS = [
   { key: "e5", shield: "E5" },
   { key: "e80", shield: "E80" },
   { key: "o7", shield: "O-7" }
@@ -23,12 +23,13 @@ const ROADS = [
 
 const MAPS_ICON =
   '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6.5v13.5L9 17.5l6 2.5 6-2.5V4l-6 2.5z"/><path d="M9 4v13.5M15 6.5V20"/></svg>';
-const POI_ICONS: Record<string, string> = {
+export const POI_ICONS: Record<string, string> = {
   airport: '<path d="M21 15.5v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V8.5l-8 5v2l8-2.5V18l-2.5 1.8V21.5L11.5 20.5l4 1v-1.7L13 18v-5z" fill="currentColor" stroke="none"/>',
   mall: '<path d="M5.5 8h13l-1 13h-11z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/>',
-  landmark: '<circle cx="12" cy="12" r="4.5" fill="currentColor" stroke="none"/>'
+  landmark: '<circle cx="12" cy="12" r="4.5" fill="currentColor" stroke="none"/>',
+  hospital: '<path d="M12 6v12M6 12h12" stroke-width="3.2"/>'
 };
-const BRIDGE_ICON =
+export const BRIDGE_ICON =
   '<svg width="18" height="12" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M1 11h22M5 11V3M19 11V3M5 3c2.5 5 11.5 5 14 0M9 11V7.3M15 11V7.3"/></svg>';
 
 const EXPAND_ICON =
@@ -39,7 +40,7 @@ const CLOSE_ICON =
 const SWIPE_ICON =
   '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 8 3 12l4 4M17 8l4 4-4 4M3 12h18"/></svg>';
 
-const icon = (paths: string, size = 14) =>
+export const icon = (paths: string, size = 14) =>
   `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
 
 /** Google Maps search for the project (its address when known, otherwise its name and district). */
@@ -67,7 +68,7 @@ function legend(): string {
 export function renderProjectMap(project: Project, name: string): string {
   const place = placeLine(project.district, project.city);
   return `
-      <figure class="project-map" data-district="${project.district}" data-name="${name}" data-place="${place}" data-maps="${mapsHref(project, name)}">
+      <figure class="project-map" data-district="${project.mapDistrict ?? project.district}" data-label="${placeName(project.district)}" data-name="${name}" data-place="${place}" data-maps="${mapsHref(project, name)}">
         <div class="project-map__canvas" role="img" aria-label="${t("projectDetail.mapAlt", { name, place })}"></div>
         <button type="button" class="project-map__expand" aria-haspopup="dialog">${EXPAND_ICON}<span>${t("projectDetail.map.enlarge")}</span></button>
         ${legend()}
@@ -78,24 +79,24 @@ export function renderProjectMap(project: Project, name: string): string {
       </figure>`;
 }
 
-interface Box {
+export interface Box {
   left: number;
   right: number;
   top: number;
   bottom: number;
 }
 /** Boxes may touch by up to 1px: labels are padded, so a hair of overlap is invisible. */
-const overlaps = (a: Box, b: Box) => a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1;
+export const overlaps = (a: Box, b: Box) => a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1;
 
-type MapData = typeof import("../data/istanbulMap");
+export type MapData = typeof import("../data/istanbulMap");
 let mapData: Promise<MapData> | null = null;
-const loadMap = () => (mapData ??= import("../data/istanbulMap"));
+export const loadMap = () => (mapData ??= import("../data/istanbulMap"));
 
 /**
  * Draws the map into `canvas` (sized by CSS to `width` × MAP_HEIGHT map units): a `width`-wide
  * slice around the district, or the whole province when `width` is MAP_WIDTH.
  */
-function drawMap(canvas: HTMLElement, map: MapData, district: string, width: number): void {
+function drawMap(canvas: HTMLElement, map: MapData, district: string, width: number, label = placeName(district)): void {
   const { MAP_HEIGHT, MAP_WIDTH, DISTRICT_PATHS, DISTRICT_CENTERS } = map;
   const center = DISTRICT_CENTERS[district];
   const x0 = Math.min(Math.max(center[0] - width / 2, 0), MAP_WIDTH - width);
@@ -117,7 +118,7 @@ function drawMap(canvas: HTMLElement, map: MapData, district: string, width: num
     probe.remove();
     return width;
   };
-  const pinLabel = measure("project-map__label", placeName(district)) / 2 + 4;
+  const pinLabel = measure("project-map__label", label) / 2 + 4;
   // The pin's marker and pulse, and its name chip above it.
   const taken: Box[] = [
     { left: pin.x - 20, right: pin.x + 20, top: pin.y - 40, bottom: pin.y + 14 },
@@ -129,7 +130,7 @@ function drawMap(canvas: HTMLElement, map: MapData, district: string, width: num
     b.left >= 4 && b.right <= frame.width - 4 && b.top >= 4 && b.bottom <= frame.height - 4 && !taken.slice(from).some((o) => overlaps(o, b));
 
   // Landmark icons first, then their names (in the data's order of importance), then road shields.
-  const spots = map.LANDMARKS.filter((l) => inView(l.x)).flatMap((l) => {
+  const spots = map.LANDMARKS.filter((l) => !l.overview && inView(l.x)).flatMap((l) => {
     const p = px(l.x, l.y);
     const r = l.kind === "landmark" ? 7 : 11;
     const dot: Box = { left: p.x - r, right: p.x + r, top: p.y - r, bottom: p.y + r };
@@ -219,7 +220,7 @@ function drawMap(canvas: HTMLElement, map: MapData, district: string, width: num
       <span class="project-map__pulse"></span>
       <span class="project-map__pulse project-map__pulse--late"></span>
       <svg class="project-map__marker" width="30" height="38" viewBox="0 0 30 38" aria-hidden="true"><path d="M15 37s13-11.6 13-22A13 13 0 0 0 2 15c0 10.4 13 22 13 22z"/><circle cx="15" cy="15" r="5"/></svg>
-      <span class="project-map__label">${placeName(district)}</span>
+      <span class="project-map__label">${label}</span>
     </span>`;
 }
 
@@ -264,7 +265,7 @@ function openViewer(figure: HTMLElement, map: MapData, opener: HTMLElement): voi
     ? Math.round(scroll.clientHeight * ratio)
     : Math.floor(Math.min(scroll.clientWidth, (window.innerHeight - 48 - chrome) * ratio));
   canvas.style.width = `${width}px`;
-  drawMap(canvas, map, district, map.MAP_WIDTH);
+  drawMap(canvas, map, district, map.MAP_WIDTH, figure.dataset.label);
   const center = map.DISTRICT_CENTERS[district];
   if (center) scroll.scrollLeft = (center[0] / map.MAP_WIDTH) * width - scroll.clientWidth / 2;
   // The swipe hint shows only where the map is wider than the screen, until the first swipe.
@@ -323,7 +324,7 @@ export function initProjectMap(root: ParentNode): void {
       figure.remove();
       return;
     }
-    drawMap(canvas, map, district, window.matchMedia(PHONE_QUERY).matches ? VIEW_WIDTH_PHONE : VIEW_WIDTH);
+    drawMap(canvas, map, district, window.matchMedia(PHONE_QUERY).matches ? VIEW_WIDTH_PHONE : VIEW_WIDTH, figure.dataset.label);
     figure.classList.add("is-ready");
   };
 

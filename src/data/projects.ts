@@ -72,7 +72,8 @@ export interface Residence {
   layout: string;
   /** Plan variant letter from the catalog, e.g. "A". */
   variant?: string;
-  gross: string;
+  /** Omitted when the developer has not published the plans (the card then shows the layout and price only). */
+  gross?: string;
   net?: string;
   /** Saleable gross area (Turkish "satışa esas brüt"), when the catalog quotes it. */
   saleable?: string;
@@ -81,6 +82,8 @@ export interface Residence {
   planTypes?: number;
   /** Price range as quoted by the team, shown as written (e.g. "$200,000 – $250,000"). */
   price?: string;
+  /** `price` is a starting price: shown as "From $380,000". */
+  priceFrom?: boolean;
 }
 
 /** Gross/net area of one level; its name and features live in projectsData.<slug>.floorPlan (same order). */
@@ -126,6 +129,8 @@ export interface ProjectVerified {
 export interface Project {
   slug: string;
   district: string;
+  /** The Istanbul district drawn on the location map when `district` is a neighbourhood (e.g. Ispartakule in Avcılar). */
+  mapDistrict?: string;
   city: string;
   status: ProjectStatus;
   /** Omitted when the developer has not published start/delivery dates. */
@@ -139,6 +144,8 @@ export interface Project {
   developer?: string;
   /** "on-request" shows "Price: On request"; any other value is shown as written (e.g. "$1,250,000"). */
   price?: string;
+  /** `price` is a starting price: shown as "From $380,000". */
+  priceFrom?: boolean;
   /** Instalment plan confirmed by the owner (2026-10-14): down payment % and the months the balance is spread over. */
   paymentPlan?: { downPercent: number; months: number };
   /** Setting, taken from the project's own description: by the sea (or sea views), green and calm, or city. Used by "Find My Project". */
@@ -578,6 +585,192 @@ export const projects: Project[] = [
       "evCharging",
       "retail",
       "seismicDesign"
+    ]
+  },
+  {
+    slug: "tual-comfort",
+    // Shown as Ispartakule (owner, 2026-10-23); the map draws its district, Avcılar.
+    district: "Ispartakule",
+    mapDistrict: "Avcılar",
+    city: "Istanbul",
+    status: "delivered",
+    // Owner, 2026-10-23: ready to move in, title deeds ready, eligible for citizenship; prices per layout below.
+    lifestyle: ["nature", "city"],
+    unitsAvailable: true,
+    priority: 1.95,
+    developer: "Dağ Holding",
+    address: "Tual Comfort, Ispartakule, Avcılar, İstanbul",
+    // Prices from the owner on 2026-10-23 (by view and size).
+    price: "$150,000 – $450,000",
+    // Facts and images from the developer's site (tualcomfort.com); 480 homes in 6 blocks of up to 21 floors from
+    // its listing (Emlak Platform), the blocks A1, A2, B1, B2, C and D from the site plans on the floor plans.
+    coverImage: img("tual-comfort", "towers-entrance", 1680, 1228, "Tual Comfort residential towers and entrance in Ispartakule"),
+    gallery: [
+      img("tual-comfort", "central-garden", 1680, 1228, "Tual Comfort central garden and playgrounds between the blocks"),
+      img("tual-comfort", "towers-park", 1680, 1228, "Tual Comfort towers seen from the park"),
+      img("tual-comfort", "gate", 1680, 1228, "Tual Comfort main gate and security entrance"),
+      img("tual-comfort", "courtyard-balcony", 1680, 1228, "Tual Comfort view from a balcony over the landscaped courtyard"),
+      img("tual-comfort", "living-room", 1680, 945, "Tual Comfort living and dining room"),
+      img("tual-comfort", "kitchen", 1680, 945, "Tual Comfort fitted kitchen"),
+      img("tual-comfort", "bedroom", 1680, 945, "Tual Comfort master bedroom"),
+      img("tual-comfort", "kids-room", 1680, 945, "Tual Comfort children's bedroom")
+    ],
+    stats: [
+      { value: "480", labelKey: "apartments" },
+      { value: "6", labelKey: "blocks" },
+      { value: "21", labelKey: "floors" },
+      { value: "1+1 – 4+1", labelKey: "layout" }
+    ],
+    // Floor plans on tualcomfort.com, rounded: gross is "satışa esas brüt" (1+1 69.54, 2+1 103.93–130.42,
+    // 3+1 162.18–171.42, 4+1 188.54), net 1+1 39.66, 3+1 104.87–107.93 and 4+1 123.80.
+    residences: [
+      { kind: "apartment", layout: "1+1", gross: "70 m²", net: "40 m²", price: "$150,000 – $200,000" },
+      { kind: "apartment", layout: "2+1", gross: "104 – 130 m²", planTypes: 3, price: "$200,000 – $250,000" },
+      { kind: "apartment", layout: "3+1", gross: "162 – 171 m²", net: "105 – 108 m²", planTypes: 3, price: "$250,000 – $300,000" },
+      { kind: "apartment", layout: "4+1", gross: "189 m²", net: "124 m²", price: "$300,000 – $450,000" }
+    ],
+    amenities: [
+      "indoorPool",
+      "fitness",
+      "spa",
+      "playground",
+      "sportsCourt",
+      "landscaping",
+      "indoorParking",
+      "evCharging",
+      "retail"
+    ]
+  },
+  {
+    slug: "hayat-flora",
+    district: "Küçükçekmece",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-10-23: under construction, Emlak Konut guarantee, eligible for citizenship, starting prices per
+    // layout below (by view and size), prices include VAT; 30% down and the balance over 30 months (owner, same day).
+    // Delivery February 2029 from the developer's FAQ (ozakgyo.com).
+    paymentPlan: { downPercent: 30, months: 30 },
+    lifestyle: ["sea", "city"],
+    unitsAvailable: true,
+    priority: 1.96,
+    developer: "Özak GYO · Emlak Konut",
+    address: "Hayat Flora, İstasyon Mah., Halkalı, Küçükçekmece, İstanbul",
+    price: "$380,000",
+    priceFrom: true,
+    // Facts from emlakkonut.com.tr (Hayat Flora: 1,382 homes, 46 shops, 1,428 units), ozakgyo.com (21 blocks of
+    // ground + 13 floors on about 92,440 m², 2,318 parking spaces, revenue-sharing model) and its catalogue;
+    // images from the developer's site and landing page.
+    coverImage: img("hayat-flora", "aerial-sea", 1680, 1047, "Hayat Flora aerial view in Halkalı, Küçükçekmece, with the Sea of Marmara and Lake Küçükçekmece behind"),
+    gallery: [
+      img("hayat-flora", "aerial-night", 1680, 1066, "Hayat Flora blocks at night above Lake Küçükçekmece and the sea"),
+      img("hayat-flora", "entrance-gate", 1680, 1047, "Hayat Flora main entrance and security gate"),
+      img("hayat-flora", "pool", 1680, 1260, "Hayat Flora outdoor swimming pool with sun loungers"),
+      img("hayat-flora", "pool-evening", 1680, 1047, "Hayat Flora poolside terrace in the evening"),
+      img("hayat-flora", "gardens-aerial", 1680, 1120, "Hayat Flora landscaped gardens, pool and play areas seen from above"),
+      img("hayat-flora", "playground", 1680, 1047, "Hayat Flora children's playground between the blocks"),
+      img("hayat-flora", "street-avenue", 1550, 750, "Hayat Flora blocks with shops on the avenue"),
+      img("hayat-flora", "garden-homes", 1550, 750, "Hayat Flora ground-floor homes with private gardens"),
+      img("hayat-flora", "rooftop-terrace", 1680, 945, "Hayat Flora terrace home looking towards the sea"),
+      img("hayat-flora", "living-room", 1680, 909, "Hayat Flora living and dining room with lake and sea views"),
+      img("hayat-flora", "bedroom", 1550, 750, "Hayat Flora bedroom with a view of the lake")
+    ],
+    stats: [
+      { value: "1,382", labelKey: "apartments" },
+      { value: "2029", labelKey: "delivery" },
+      { value: "46", labelKey: "shops" },
+      { value: "92,440 m²", labelKey: "landArea" },
+      { value: "1+1 – 4+1", labelKey: "layout" }
+    ],
+    // Starting prices from the owner (2026-10-23); the developer has not published floor plans or areas.
+    residences: [
+      { kind: "apartment", layout: "2+1", price: "$380,000", priceFrom: true },
+      { kind: "apartment", layout: "3+1", price: "$450,000", priceFrom: true },
+      { kind: "apartment", layout: "4+1", price: "$500,000", priceFrom: true }
+    ],
+    amenities: [
+      "outdoorPool",
+      "fitness",
+      "lounge",
+      "playground",
+      "sportsCourt",
+      "joggingTrack",
+      "landscaping",
+      "privateGarden",
+      "indoorParking",
+      "security",
+      "retail",
+      "seismicDesign"
+    ]
+  },
+  {
+    slug: "gokturk-kemer-evleri",
+    district: "Eyüpsultan",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-10-23: add this Emlak Konut project; eligible for citizenship, no price shown, no known delivery date.
+    lifestyle: ["nature"],
+    unitsAvailable: true,
+    priority: 1.97,
+    developer: "Emlak Konut · Ziraat GYO",
+    address: "Göktürk Kemer Evleri, Göktürk Merkez Mah., Eyüpsultan, İstanbul",
+    price: "on-request",
+    // Facts from the project site gokturkkemerevleri.emlakkonut.com.tr (414 homes and 81 villas on 329,321.30 m²,
+    // 1+1 to 5+1 homes and 5+1 / 6+1 villas, amenities, Istanbul Airport 15 minutes) and emlakkonut.com.tr; the
+    // Ziraat Bankası and Ziraat GYO partnership from Emlak Konut's sales announcement. Renders from the Emlak Konut
+    // project page; its construction photos were left out.
+    coverImage: img("gokturk-kemer-evleri", "pond-blocks", 1680, 790, "Göktürk Kemer Evleri low-rise blocks around a landscaped pond"),
+    gallery: [
+      img("gokturk-kemer-evleri", "entrance-avenue", 1680, 790, "Göktürk Kemer Evleri main entrance and tree-lined avenue"),
+      img("gokturk-kemer-evleri", "street-blocks", 1680, 790, "Göktürk Kemer Evleri low-rise apartment blocks along a green street"),
+      img("gokturk-kemer-evleri", "pond-view", 1680, 790, "Göktürk Kemer Evleri blocks and gardens by the pond"),
+      img("gokturk-kemer-evleri", "villa-pool", 1600, 1000, "Göktürk Kemer Evleri villa with a private pool and garden"),
+      img("gokturk-kemer-evleri", "villa-stone-pool", 1600, 1000, "Göktürk Kemer Evleri stone-clad villa with a pool and pergola"),
+      img("gokturk-kemer-evleri", "villa-white-pool", 1600, 1000, "Göktürk Kemer Evleri white villa with a garden pool"),
+      img("gokturk-kemer-evleri", "villa-front", 1600, 1000, "Göktürk Kemer Evleri villa street front"),
+      img("gokturk-kemer-evleri", "living-room", 1600, 1000, "Göktürk Kemer Evleri living room with a fireplace"),
+      img("gokturk-kemer-evleri", "kitchen", 1600, 1000, "Göktürk Kemer Evleri kitchen with an island"),
+      img("gokturk-kemer-evleri", "bedroom", 1600, 1000, "Göktürk Kemer Evleri bedroom"),
+      img("gokturk-kemer-evleri", "bathroom", 1600, 1000, "Göktürk Kemer Evleri bathroom with a freestanding bath")
+    ],
+    villaPhotos: [
+      img("gokturk-kemer-evleri", "villa-pool", 1600, 1000, "Göktürk Kemer Evleri villa with a private pool and garden"),
+      img("gokturk-kemer-evleri", "villa-stone-pool", 1600, 1000, "Göktürk Kemer Evleri stone-clad villa with a pool and pergola"),
+      img("gokturk-kemer-evleri", "villa-terrace-pool", 1600, 1000, "Göktürk Kemer Evleri villa terrace and pool"),
+      img("gokturk-kemer-evleri", "villa-white-pool", 1600, 1000, "Göktürk Kemer Evleri white villa with a garden pool"),
+      img("gokturk-kemer-evleri", "villa-front", 1600, 1000, "Göktürk Kemer Evleri villa street front"),
+      img("gokturk-kemer-evleri", "villa-garden", 1600, 1000, "Göktürk Kemer Evleri villa garden and terrace"),
+      img("gokturk-kemer-evleri", "villa-hall", 1600, 1000, "Göktürk Kemer Evleri villa entrance hall and staircase"),
+      img("gokturk-kemer-evleri", "living-room", 1600, 1000, "Göktürk Kemer Evleri living room with a fireplace")
+    ],
+    stats: [
+      { value: "414", labelKey: "apartments" },
+      { value: "81", labelKey: "villas" },
+      { value: "329,321 m²", labelKey: "landArea" },
+      { value: "1+1 – 5+1", labelKey: "layout" }
+    ],
+    // From the floor plans on the project site: "satışa esas brüt" as gross and the net area without balconies or
+    // terraces; villa gardens include the pool and pergola. Villas: plan Tip 1-A (5+1) and Tip 4 (6+1).
+    residences: [
+      { kind: "apartment", layout: "1+1", gross: "71.12 – 72.28 m²", net: "47.02 – 47.84 m²", planTypes: 2 },
+      { kind: "apartment", layout: "2+1", gross: "90.66 – 147.03 m²", net: "62.02 – 102.34 m²", planTypes: 7 },
+      { kind: "apartment", layout: "3+1", gross: "151.65 – 210.60 m²", net: "102.10 – 148.55 m²", planTypes: 10 },
+      { kind: "apartment", layout: "4+1", gross: "201.24 – 265.67 m²", net: "142.16 – 185.91 m²", planTypes: 3 },
+      { kind: "apartment", layout: "5+1", gross: "248.20 – 401.76 m²", net: "173.90 – 263.45 m²", planTypes: 3 },
+      { kind: "villa", layout: "5+1", gross: "375.52 m²", net: "289.22 m²", garden: "359 – 636 m²", floors: 3 },
+      { kind: "villa", layout: "6+1", gross: "536.96 m²", net: "424.74 m²", garden: "680 – 702 m²", floors: 3 }
+    ],
+    amenities: [
+      "outdoorPool",
+      "fitness",
+      "hamam",
+      "sauna",
+      "cafe",
+      "playground",
+      "joggingTrack",
+      "landscaping",
+      "privatePool",
+      "privateGarden",
+      "indoorParking"
     ]
   },
   {

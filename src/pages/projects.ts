@@ -1,8 +1,10 @@
 import { t, link, getProjectContent, placeLine } from "../i18n";
 import { getSortedProjects, hasVillas, type Project, type ProjectStatus, type Residence } from "../data/projects";
 import { renderProjectCard, projectStatusLabel } from "../components/projectCard";
+import { renderProjectsAtlas, initProjectsAtlas } from "../components/projectsAtlas";
 import { openLightbox } from "../components/lightbox";
 import { photoAttrs, photoSrcset } from "../utils/responsiveImage";
+import { priceHtml } from "../utils/price";
 
 type FilterKey = "all" | "available" | "villas" | ProjectStatus;
 
@@ -37,7 +39,7 @@ function villaOptions(project: Project): string {
         ]
           .filter(Boolean)
           .join(" · ");
-        const rows: [string, string][] = [[t("projectDetail.grossAreaLabel"), r.gross]];
+        const rows: [string, string][] = r.gross ? [[t("projectDetail.grossAreaLabel"), r.gross]] : [];
         if (r.net) rows.push([t("projectDetail.netAreaLabel"), r.net]);
         if (r.garden) rows.push([t("projectDetail.gardenLabel"), r.garden]);
         if (r.floors) rows.push([t("projectDetail.floorsLabel"), String(r.floors)]);
@@ -58,7 +60,7 @@ function renderVillaShowcase(project: Project, index: number): string {
   const [main, ...thumbs] = photos;
   const price =
     project.price && project.price !== "on-request"
-      ? `<strong dir="ltr">${project.price}</strong>`
+      ? `<strong>${priceHtml(project.price, project.priceFrom)}</strong>`
       : `<strong>${t("projectDetail.priceOnRequest")}</strong>`;
   const single = !project.stats.some((s) => s.labelKey === "villas");
 
@@ -125,15 +127,18 @@ export function renderProjects(el: HTMLElement): void {
   const filters = allFilters.filter((f) => allProjects.some((p) => matches(p, f.key)));
 
   el.innerHTML = `
-    <section class="page-hero">
-      <div class="container">
-        <p class="eyebrow eyebrow--on-dark">${t("projects.heroEyebrow")}</p>
-        <h1>${t("projects.heroTitle")}</h1>
-        <p class="page-hero__subtitle">${t("projects.heroSubtitle")}</p>
+    <section class="page-hero page-hero--atlas">
+      <div class="container page-hero__split">
+        <div class="page-hero__text">
+          <p class="eyebrow eyebrow--on-dark">${t("projects.heroEyebrow")}</p>
+          <h1>${t("projects.heroTitle")}</h1>
+          <p class="page-hero__subtitle">${t("projects.heroSubtitle")}</p>
+        </div>
       </div>
+      ${renderProjectsAtlas(allProjects)}
     </section>
 
-    <section class="section">
+    <section class="section project-list" id="project-list">
       <div class="container">
         <div class="filter-bar" id="filter-bar">
           ${filters
@@ -161,6 +166,7 @@ export function renderProjects(el: HTMLElement): void {
     </section>
   `;
 
+  initProjectsAtlas(el, allProjects);
   const filterBar = el.querySelector<HTMLElement>("#filter-bar")!;
   const grid = el.querySelector<HTMLElement>("#project-grid")!;
   const showcase = el.querySelector<HTMLElement>("#villa-showcase")!;

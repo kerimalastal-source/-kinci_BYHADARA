@@ -3,12 +3,15 @@ import { requireAdmin } from "../../auth/session";
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
 import { fetchTourBookings, type TourBooking } from "../../data/tourBookings";
-import { fetchInquiries, inquiryKindKey, type Inquiry } from "../../data/inquiries";
+import { MANUAL_CHANNELS, fetchInquiries, inquiryKindKey, updateCustomer, type Inquiry, type ManualChannel } from "../../data/inquiries";
 import { adminHero, adminNav, queryParam } from "./nav";
 import { whatsappReplies } from "./replies";
 import { sourceLabel } from "./stats";
 import { fetchCrmLeads, leadFor, personKeys, phoneKey, saveCrmLead, type CrmLead } from "../../data/crm";
 import { crmFormHtml, followUpTag, readCrmForm, stageTag, syncCrmForm } from "./crmForm";
+import { SOURCES, countryOptions, linkCountryToPhone } from "./addCustomer";
+import { getPhoneValue, isPhoneValid, renderPhoneInput, setPhoneInvalid, setPhoneValue } from "../../components/phoneInput";
+import { toWesternDigits } from "../../utils/numbers";
 
 /**
  * Customers (/admin/customers): every inquiry and video tour booking grouped by person —
@@ -130,6 +133,61 @@ function entryHtml(e: Entry): string {
   </li>`;
 }
 
+const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+/** Unique ids for the phone fields of the edit forms (customer ids hold "@" and "."). */
+let editCount = 0;
+
+/** The customer's latest hand-added inquiry (the one that holds country, channel and source). */
+const manualOf = (c: Customer) =>
+  c.entries.find((e): e is Extract<Entry, { type: "inquiry" }> => e.type === "inquiry" && e.item.kind === "manual")?.item;
+
+function countryName(code: string): string {
+  try {
+    return new Intl.DisplayNames([intlTag()], { type: "region" }).of(code) ?? code;
+  } catch {
+    return code;
+  }
+}
+
+/** "Edit customer details": name, main phone and email, and for a hand-added customer the country, channel and source. */
+function editFormHtml(c: Customer): string {
+  const A = (key: string) => t(`adminCrm.add.${key}`);
+  const E = (key: string) => t(`adminCustomers.edit.${key}`);
+  const phoneId = `customer-edit-${++editCount}`;
+  const manual = manualOf(c);
+  const sourceKey = manual ? Object.keys(SOURCES).find((k) => SOURCES[k] === (manual.source ?? "")) : undefined;
+  const manualFields = manual
+    ? `<label class="inquiry-card__field"><span>${A("country")}</span>
+        <select name="country"><option value="">${A("countryNone")}</option>${countryOptions(manual.details?.country ?? "")}</select>
+      </label>
+      <label class="inquiry-card__field"><span>${A("channel")}</span>
+        <select name="channel">${MANUAL_CHANNELS.map((ch) => `<option value="${ch}"${ch === manual.details?.channel ? " selected" : ""}>${A(`channels.${ch}`)}</option>`).join("")}</select>
+      </label>
+      <label class="inquiry-card__field"><span>${A("source")}</span>
+        <select name="source">${
+          sourceKey === undefined
+            ? `<option value="__keep" selected dir="auto">${escapeHtml(manual.source ?? "")}</option>`
+            : ""
+        }${Object.keys(SOURCES).map((k) => `<option value="${k}"${k === sourceKey ? " selected" : ""}>${A(`sources.${k}`)}</option>`).join("")}</select>
+      </label>`
+    : "";
+  return `<form class="ads-form customer-edit" data-customer-edit="${escapeHtml(c.id)}" data-phone-id="${phoneId}" novalidate hidden>
+    <h3 class="customer-card__history">${E("title")}</h3>
+    <div class="ads-form__grid">
+      <label class="inquiry-card__field"><span>${A("name")}</span><input name="name" type="text" dir="auto" maxlength="100" autocomplete="off" value="${escapeHtml(c.name)}" required /></label>
+      <div class="inquiry-card__field add-customer__phone"><span>${A("phone")}</span>${renderPhoneInput(phoneId, "phone")}</div>
+      <label class="inquiry-card__field"><span>${A("email")}</span><input name="email" type="email" dir="ltr" maxlength="254" autocomplete="off" value="${escapeHtml(c.emails[0] ?? "")}" /></label>
+      ${manualFields}
+    </div>
+    <p class="crm-form__hint">${E(c.phones.length > 1 || c.emails.length > 1 ? "hintMany" : "hint")}</p>
+    <p class="booking-card__error" role="status" data-customer-edit-notice></p>
+    <div class="booking-card__actions">
+      <button type="submit" class="btn btn--primary btn--small">${E("save")}</button>
+      <button type="button" class="btn btn--outline btn--small" data-customer-edit-cancel>${E("cancel")}</button>
+    </div>
+  </form>`;
+}
+
 /** `lead` is the customer's pipeline row (null: none yet; undefined: pipeline not set up — 0010). */
 function renderCustomer(c: Customer, open: boolean, lead: CrmLead | null | undefined): string {
   const inquiries = c.entries.filter((e) => e.type === "inquiry").length;
@@ -167,9 +225,16 @@ function renderCustomer(c: Customer, open: boolean, lead: CrmLead | null | undef
         <div><dt>${t("adminInquiries.labels.phone")}</dt><dd>${c.phones.map((p) => `<a href="tel:+${p.replace(/\D/g, "")}" dir="ltr">${escapeHtml(p)}</a>`).join(" · ")}</dd></div>
         ${c.emails.length ? `<div><dt>${t("adminInquiries.labels.email")}</dt><dd>${c.emails.map((e) => `<a href="mailto:${escapeHtml(e)}" dir="ltr">${escapeHtml(e)}</a>`).join(" · ")}</dd></div>` : ""}
         ${projects.length ? `<div><dt>${t("adminInquiries.labels.projects")}</dt><dd>${escapeHtml(projectNames(projects))}</dd></div>` : ""}
+        ${manualOf(c)?.details?.country ? `<div><dt>${t("adminCrm.add.country")}</dt><dd>${escapeHtml(countryName(manualOf(c)!.details.country))}</dd></div>` : ""}
+        ${manualOf(c)?.details?.channel ? `<div><dt>${t("adminCrm.add.channel")}</dt><dd>${t(`adminCrm.add.channels.${manualOf(c)!.details.channel}`)}</dd></div>` : ""}
         ${c.locale ? `<div><dt>${t("adminInquiries.labels.siteLanguage")}</dt><dd>${t(`lang.${c.locale}`)}</dd></div>` : ""}
         ${c.sources.length ? `<div><dt>${t("adminInquiries.labels.source")}</dt><dd>${[...new Set(c.sources.map(campaignSource))].map(sourceLabel).join(sep())}</dd></div>` : ""}
       </dl>
+      <p class="booking-card__error booking-card__error--ok" role="status" data-customer-saved></p>
+      <div class="customer-card__edit">
+        <button type="button" class="btn btn--outline btn--small" data-customer-edit-open aria-expanded="false">${t("adminCustomers.edit.open")}</button>
+      </div>
+      ${editFormHtml(c)}
       ${lead !== undefined ? crmFormHtml(c.id, lead, projects) : `<p class="admin-panel__hint">${t("adminCrm.unavailable")}</p>`}
       <h3 class="customer-card__history">${t("adminCustomers.history")}</h3>
       <ol class="customer-entries">${c.entries.map(entryHtml).join("")}</ol>
@@ -205,26 +270,112 @@ export function renderAdminCustomers(main: HTMLElement): void {
   let leads: CrmLead[] | null = null;
   const leadOf = (c: Customer) => (leads ? leadFor(leads, c.keys) : undefined);
 
-  const paint = () => {
-    const found = customers.filter((c) => matches(c, query.trim()));
+  /** `openEntry`: keep the customer holding this record open (after editing their details). */
+  const paint = (openEntry?: string) => {
+    const found = customers.filter((c) => matches(c, query.trim()) || (openEntry && c.entries.some((e) => e.item.id === openEntry)));
     countEl.textContent = t("adminCustomers.count", { count: found.length });
     // One match (e.g. from a card's "Customer history" link) opens straight away.
     listEl.innerHTML = found.length
-      ? found.map((c) => renderCustomer(c, found.length === 1, leadOf(c))).join("")
+      ? found.map((c) => renderCustomer(c, found.length === 1 || (!!openEntry && c.entries.some((e) => e.item.id === openEntry)), leadOf(c))).join("")
       : `<p class="admin-bookings__empty">${t(query.trim() ? "adminInquiries.noResults" : "adminCustomers.empty")}</p>`;
   };
 
-  Promise.all([fetchInquiries().catch(() => [] as Inquiry[]), fetchTourBookings().catch(() => [] as TourBooking[]), fetchCrmLeads()])
-    .then(([inquiries, bookings, crm]) => {
-      if (main.dataset.requestId !== requestId) return;
-      customers = groupCustomers(inquiries, bookings);
-      leads = crm;
-      paint();
-    })
-    .catch((err) => {
-      console.error(err);
-      if (main.dataset.requestId === requestId) listEl.innerHTML = `<p class="admin-bookings__empty">${t("adminInquiries.loadError")}</p>`;
+  const load = (openEntry?: string) =>
+    Promise.all([fetchInquiries().catch(() => [] as Inquiry[]), fetchTourBookings().catch(() => [] as TourBooking[]), fetchCrmLeads()]).then(
+      ([inquiries, bookings, crm]) => {
+        if (main.dataset.requestId !== requestId) return;
+        customers = groupCustomers(inquiries, bookings);
+        leads = crm;
+        paint(openEntry);
+      }
+    );
+
+  load().catch((err) => {
+    console.error(err);
+    if (main.dataset.requestId === requestId) listEl.innerHTML = `<p class="admin-bookings__empty">${t("adminInquiries.loadError")}</p>`;
+  });
+
+  // "Edit customer details": open / close the form (filled in the first time it opens).
+  listEl.addEventListener("click", (e) => {
+    const target = e.target as Element;
+    const opener = target.closest<HTMLButtonElement>("[data-customer-edit-open]");
+    const cancel = target.closest<HTMLButtonElement>("[data-customer-edit-cancel]");
+    const body = (opener ?? cancel)?.closest<HTMLElement>(".customer-card__body");
+    const form = body?.querySelector<HTMLFormElement>("[data-customer-edit]");
+    const button = body?.querySelector<HTMLButtonElement>("[data-customer-edit-open]");
+    if (!form || !button) return;
+    const show = !!opener && form.hidden;
+    if (show && !form.dataset.ready) {
+      const customer = customers.find((c) => c.id === form.dataset.customerEdit);
+      const phoneId = form.dataset.phoneId!;
+      setPhoneValue(form, phoneId, customer?.phones[0] ?? "");
+      linkCountryToPhone(form, phoneId);
+      form.dataset.ready = "1";
+    }
+    form.hidden = !show;
+    button.setAttribute("aria-expanded", String(show));
+    if (show) form.querySelector<HTMLInputElement>('input[name="name"]')?.focus();
+    else if (cancel) button.focus();
+  });
+
+  listEl.addEventListener("submit", async (e) => {
+    const form = (e.target as Element).closest<HTMLFormElement>("[data-customer-edit]");
+    if (!form) return;
+    e.preventDefault();
+    const customer = customers.find((c) => c.id === form.dataset.customerEdit);
+    const notice = form.querySelector<HTMLElement>("[data-customer-edit-notice]")!;
+    const say = (key: string) => {
+      notice.textContent = t(key);
+      notice.classList.remove("booking-card__error--ok");
+    };
+    if (!customer) return;
+    const data = new FormData(form);
+    const text = (name: string) => toWesternDigits(String(data.get(name) ?? "")).trim();
+    const phoneId = form.dataset.phoneId!;
+    const phoneOk = isPhoneValid(form, phoneId);
+    setPhoneInvalid(form, phoneId, !phoneOk);
+    const name = text("name");
+    const email = text("email").toLowerCase();
+    if (!name || !phoneOk) return say("adminCrm.add.required");
+    if (email && !EMAIL_RE.test(email)) return say("adminCrm.add.emailError");
+    // A tour booking always needs an email (its reminder goes there).
+    const hasTour = customer.entries.some((en) => en.type === "tour");
+    if (!email && customer.emails[0] && hasTour) return say("adminCustomers.edit.emailNeeded");
+
+    const manual = manualOf(customer);
+    const sourceKey = text("source");
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    submit.disabled = true;
+    notice.textContent = "";
+    const result = await updateCustomer({
+      inquiryIds: customer.entries.filter((en) => en.type === "inquiry").map((en) => en.item.id),
+      bookingIds: customer.entries.filter((en) => en.type === "tour").map((en) => en.item.id),
+      leadId: leads ? leadFor(leads, customer.keys)?.id ?? null : null,
+      oldPhone: customer.phones[0] ?? "",
+      oldEmail: customer.emails[0] ?? "",
+      name,
+      phone: getPhoneValue(form, phoneId).replace(/\s+/g, " "),
+      email,
+      manualId: manual?.id ?? null,
+      country: manual ? text("country") : "",
+      channel: manual ? ((MANUAL_CHANNELS as readonly string[]).includes(text("channel")) ? (text("channel") as ManualChannel) : "other") : "",
+      source: manual ? (sourceKey === "__keep" ? manual.source ?? "" : SOURCES[sourceKey] ?? "") : ""
     });
+    submit.disabled = false;
+    if ("error" in result) {
+      return say(
+        result.error === "unavailable" ? "adminCustomers.edit.unavailable" : result.error === "invalid" ? "adminCrm.add.required" : "adminCustomers.edit.error"
+      );
+    }
+    // Reload everything (the customer may now group differently) and keep their card open.
+    const anchor = customer.entries[0].item.id;
+    await load(anchor).catch(() => undefined);
+    const card = [...listEl.querySelectorAll<HTMLElement>(".customer-card")].find((el) =>
+      customers.some((c) => c.entries.some((en) => en.item.id === anchor) && el.querySelector(`[data-customer-edit="${CSS.escape(c.id)}"]`))
+    );
+    const saved = card?.querySelector<HTMLElement>("[data-customer-saved]");
+    if (saved) saved.textContent = t("adminCustomers.edit.saved");
+  });
 
   listEl.addEventListener("change", (e) => {
     const form = (e.target as Element).closest<HTMLFormElement>("[data-crm-form]");
@@ -253,8 +404,8 @@ export function renderAdminCustomers(main: HTMLElement): void {
       read.changes
     );
     button.disabled = false;
-    if (!saved) {
-      notice.textContent = t("adminCrm.saveError");
+    if (!saved || saved === "needs0032") {
+      notice.textContent = t(saved ? "adminCrm.needs0032" : "adminCrm.saveError");
       notice.classList.remove("booking-card__error--ok");
       return;
     }

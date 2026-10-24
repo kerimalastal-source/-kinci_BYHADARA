@@ -9,6 +9,7 @@ import { PROJECT_NAMES } from "./projectNames.js";
 export const STAGE_AR: Record<string, string> = {
   new: "جديد",
   contacted: "تم التواصل",
+  no_reply: "لم يرد",
   tour: "جولة فيديو",
   visit: "زيارة إسطنبول",
   negotiation: "تفاوض",

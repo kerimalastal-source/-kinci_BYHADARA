@@ -77,6 +77,18 @@ LANDMARKS = [
   ("taksim", "landmark", 41.0370, 28.9850),
   ("sultanahmet", "landmark", 41.0086, 28.9802),
 ]
+# Only on the projects page overview map (projectsAtlas.ts): more malls and the big hospitals.
+OVERVIEW = [
+  ("istinyePark", "mall", 41.1103, 29.0327),
+  ("zorluCenter", "mall", 41.0668, 29.0170),
+  ("galleriaAtakoy", "mall", 40.9781, 28.8741),
+  ("akbati", "mall", 41.0570, 28.6640),
+  ("emaarSquare", "mall", 41.0110, 29.0715),
+  ("basaksehirHospital", "hospital", 41.1060, 28.7880),
+  ("memorialSisli", "hospital", 41.0570, 28.9764),
+  ("acibademMaslak", "hospital", 41.1091, 29.0226),
+  ("goztepeHospital", "hospital", 40.9870, 29.0610),
+]
 SHIELDS = {
   "e5": [(41.040,28.45),(41.005,28.88),(40.930,29.15)],
   "e80": [(41.090,28.55),(41.100,28.99),(40.975,29.22)],
@@ -94,10 +106,13 @@ ts += ["};", "", "/** The three Bosphorus bridges (15 July, Fatih Sultan Mehmet,
        "export const BRIDGES: [[number, number], [number, number]][] = ["]
 for k, (a, b) in BRIDGES.items():
     ts.append(f"  [[{P(*a)[0]}, {P(*a)[1]}], [{P(*b)[0]}, {P(*b)[1]}]], // {k}")
-ts += ["];", "", "/** Points of interest, most important first (labels are placed in this order); the label is `projectDetail.map.<key>`. */",
-       'export const LANDMARKS: { key: string; kind: "airport" | "mall" | "landmark"; x: number; y: number }[] = [']
+ts += ["];", "", "/** Points of interest, most important first (labels are placed in this order); the label is `projectDetail.map.<key>`.",
+       " *  `overview`: shown only on the projects page map, not on a project's own map. */",
+       'export const LANDMARKS: { key: string; kind: "airport" | "mall" | "landmark" | "hospital"; x: number; y: number; overview?: true }[] = [']
 for k, kind, la, lo in LANDMARKS:
     x, y = P(la, lo); ts.append(f'  {{ key: "{k}", kind: "{kind}", x: {x}, y: {y} }},')
+for k, kind, la, lo in OVERVIEW:
+    x, y = P(la, lo); ts.append(f'  {{ key: "{k}", kind: "{kind}", x: {x}, y: {y}, overview: true }},')
 bx, by = P(41.13, 29.08)
 a = P(41.045, 29.03); b = P(41.20, 29.11)
 ang = round(math.degrees(math.atan2(b[1]-a[1], b[0]-a[0])))

@@ -2,7 +2,7 @@ import { t, getProjectContent, intlTag } from "../../i18n";
 import { escapeHtml } from "../../utils/html";
 import { toWesternDigits } from "../../utils/numbers";
 import { getProjectBySlug, projects as allProjects } from "../../data/projects";
-import { CURRENCIES, STAGES, fromIstanbulInput, toIstanbulInput, type CrmChanges, type CrmLead, type Currency, type Stage } from "../../data/crm";
+import { BUDGETS, CURRENCIES, STAGES, budgetLabel, fromIstanbulInput, toIstanbulInput, type Budget, type CrmChanges, type CrmLead, type Currency, type Stage } from "../../data/crm";
 
 /**
  * The sales block on a customer's record (stage, deal, next follow-up) and the small
@@ -41,6 +41,13 @@ export function money(value: number, currency: string): string {
   }
 }
 
+/** The budget-range menu (US dollars); the ranges read left to right in every language. */
+export function budgetSelect(selected: Budget | null | undefined): string {
+  return `<select name="budget" dir="ltr" aria-label="${t("adminCrm.budget")}"><option value="">${t("adminCrm.budgetNone")}</option>${BUDGETS.map(
+    (b) => `<option value="${b}"${b === selected ? " selected" : ""}>${budgetLabel(b)}</option>`
+  ).join("")}</select>`;
+}
+
 export const projectName = (slug: string) => (getProjectBySlug(slug) ? getProjectContent(slug).name : slug);
 
 /** The form; `projects` (the customer's own) are listed first in the project menu. */
@@ -65,6 +72,7 @@ export function crmFormHtml(id: string, lead: CrmLead | null, projects: string[]
           <select name="currency" aria-label="${t("adminCrm.currency")}">${CURRENCIES.map((c) => `<option value="${c}"${c === (lead?.currency ?? "USD") ? " selected" : ""}>${c}</option>`).join("")}</select>
         </span>
       </div>
+      <label class="inquiry-card__field"><span>${t("adminCrm.budget")}</span>${budgetSelect(lead?.budget)}</label>
       <label class="inquiry-card__field crm-form__lost"${stage === "lost" ? "" : " hidden"}><span>${t("adminCrm.lostReason")}</span>
         <input name="lost_reason" type="text" dir="auto" maxlength="500" value="${escapeHtml(lead?.lost_reason ?? "")}" placeholder="${t("adminCrm.lostPlaceholder")}" />
       </label>
@@ -97,6 +105,7 @@ export function readCrmForm(form: HTMLFormElement): { changes: CrmChanges } | { 
       project: text("project") || null,
       deal_value: dealValue,
       currency: (CURRENCIES as readonly string[]).includes(text("currency")) ? (text("currency") as Currency) : "USD",
+      budget: (BUDGETS as readonly string[]).includes(text("budget")) ? (text("budget") as Budget) : null,
       lost_reason: stage === "lost" ? text("lost_reason") || null : null,
       follow_up_at: fromIstanbulInput(text("follow_up_at")),
       follow_up_note: text("follow_up_note") || null

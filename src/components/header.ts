@@ -14,6 +14,8 @@ interface NavLink {
   route: string;
   key: string;
   active: (route: Route) => boolean;
+  /** Draws a thin line above this link, closing the section before it. */
+  divider?: boolean;
 }
 
 interface NavGroup {
@@ -21,6 +23,8 @@ interface NavGroup {
   key: string;
   /** Shorter label for the one-line desktop bar; the full `key` label shows in the mobile menu. */
   shortKey?: string;
+  /** Small label above the first links of the menu. */
+  heading?: string;
   items: NavLink[];
 }
 
@@ -29,6 +33,14 @@ type NavEntry = NavLink | NavGroup;
 const is = (...names: Route["name"][]) => (route: Route) => names.includes(route.name);
 const consultancyPage = (page: ConsultancyPage) => (route: Route) => route.name === "consultancy" && route.page === page;
 
+/* The project categories open the projects page on that filter, scrolled to the list. */
+const projectFilter = () => (typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("filter") ?? "");
+const projectCategory = (filter: string, key: string): NavLink => ({
+  route: `/projects?filter=${filter}#project-list`,
+  key,
+  active: (route) => route.name === "projects" && projectFilter() === filter
+});
+
 /* Four entries on the desktop bar (Home is the logo, Contact the button beside it);
    everything else sits in a dropdown so the bar fits laptop screens in every language. */
 const NAV: NavEntry[] = [
@@ -36,9 +48,14 @@ const NAV: NavEntry[] = [
   {
     id: "projects",
     key: "nav.projects",
+    heading: "nav.projectCategories",
     items: [
-      { route: "/projects", key: "nav.allProjects", active: is("projects", "project") },
-      { route: "/video-tour", key: "videoTour.nav", active: is("video-tour") },
+      { route: "/projects", key: "nav.allProjects", active: (route) => route.name === "project" || (route.name === "projects" && ["", "all"].includes(projectFilter())) },
+      projectCategory("new-launch", "projects.filterNewLaunch"),
+      projectCategory("ongoing", "projects.filterOngoing"),
+      projectCategory("delivered", "projects.filterDelivered"),
+      projectCategory("villas", "projects.filterVillas"),
+      { route: "/video-tour", key: "videoTour.nav", active: is("video-tour"), divider: true },
       ...(RESALE_LIVE ? [{ route: "/resale", key: "nav.resale", active: is("resale", "resale-listing") }] : []),
       { route: "/property-request", key: "nav.propertyRequest", active: is("property-request") }
     ]
@@ -87,10 +104,12 @@ function renderNavEntry(entry: NavEntry, route: Route): string {
               ${CHEVRON}
             </button>
             <ul class="nav-group__menu" id="${entry.id}-menu" hidden>
+              ${entry.heading ? `<li class="nav-group__heading" aria-hidden="true">${t(entry.heading)}</li>` : ""}
               ${entry.items
                 .map((item) => {
                   const on = item.active(route);
-                  return `<li><a class="nav-group__link${on ? " is-active" : ""}" href="${link(item.route)}"${on ? ' aria-current="page"' : ""}>${t(item.key)}</a></li>`;
+                  const divider = item.divider ? '<li class="nav-group__divider" role="separator"></li>' : "";
+                  return `${divider}<li><a class="nav-group__link${on ? " is-active" : ""}" href="${link(item.route)}"${on ? ' aria-current="page"' : ""}>${t(item.key)}</a></li>`;
                 })
                 .join("")}
             </ul>

@@ -110,8 +110,9 @@ export const BRIDGES: [[number, number], [number, number]][] = [
   [[560.5, 261.8], [580.2, 261.8]], // yss
 ];
 
-/** Points of interest, most important first (labels are placed in this order); the label is `projectDetail.map.<key>`. */
-export const LANDMARKS: { key: string; kind: "airport" | "mall" | "landmark"; x: number; y: number }[] = [
+/** Points of interest, most important first (labels are placed in this order); the label is `projectDetail.map.<key>`.
+ *  `overview`: shown only on the projects page map, not on a project's own map. */
+export const LANDMARKS: { key: string; kind: "airport" | "mall" | "landmark" | "hospital"; x: number; y: number; overview?: true }[] = [
   { key: "istAirport", kind: "airport", x: 395.4, y: 213.8 },
   { key: "sawAirport", kind: "airport", x: 669.2, y: 459.1 },
   { key: "mallOfIstanbul", kind: "mall", x: 423.5, y: 351.7 },
@@ -119,6 +120,15 @@ export const LANDMARKS: { key: string; kind: "airport" | "mall" | "landmark"; x:
   { key: "florya", kind: "landmark", x: 411.7, y: 408.7 },
   { key: "taksim", kind: "landmark", x: 509.9, y: 369.0 },
   { key: "sultanahmet", kind: "landmark", x: 507.6, y: 387.5 },
+  { key: "istinyePark", kind: "mall", x: 533.4, y: 321.2, overview: true },
+  { key: "zorluCenter", kind: "mall", x: 525.7, y: 349.6, overview: true },
+  { key: "galleriaAtakoy", kind: "mall", x: 455.5, y: 407.4, overview: true },
+  { key: "akbati", kind: "mall", x: 352.2, y: 356.0, overview: true },
+  { key: "emaarSquare", kind: "mall", x: 552.4, y: 385.9, overview: true },
+  { key: "basaksehirHospital", kind: "hospital", x: 413.2, y: 324.0, overview: true },
+  { key: "memorialSisli", kind: "hospital", x: 505.7, y: 356.0, overview: true },
+  { key: "acibademMaslak", kind: "hospital", x: 528.4, y: 322.0, overview: true },
+  { key: "goztepeHospital", kind: "hospital", x: 547.3, y: 401.6, overview: true },
 ];
 
 /** Where the Bosphorus label sits, and its angle along the strait. */

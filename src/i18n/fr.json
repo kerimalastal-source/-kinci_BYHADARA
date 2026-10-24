@@ -8,6 +8,7 @@
     "home": "Accueil",
     "projects": "Projets",
     "allProjects": "Tous les projets",
+    "projectCategories": "Par catégorie",
     "consultancy": "Conseil en ingénierie et architecture",
     "consultancyShort": "Ingénierie",
     "about": "À propos",
@@ -41,6 +42,11 @@
     "fr": "Français",
     "ru": "Русский",
     "fa": "فارسی"
+  },
+  "phoneInput": {
+    "label": "Indicatif du pays",
+    "search": "Rechercher un pays ou un indicatif",
+    "noResults": "Aucun pays trouvé"
   },
   "favorites": {
     "add": "Enregistrer {name} dans votre liste",
@@ -113,18 +119,18 @@
     "statsTitle": "HADARA en chiffres",
     "stats": [
       { "value": "12+", "label": "années d'excellence", "icon": "years" },
-      { "value": "16", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "4 300+", "label": "unités résidentielles", "icon": "apartments" },
+      { "value": "19", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "6 600+", "label": "unités résidentielles", "icon": "apartments" },
       { "value": "420+", "label": "bureaux", "icon": "offices" },
-      { "value": "250+", "label": "locaux commerciaux", "icon": "shops" },
-      { "value": "7", "label": "quartiers phares d'Istanbul", "icon": "districts" }
+      { "value": "300+", "label": "locaux commerciaux", "icon": "shops" },
+      { "value": "9", "label": "quartiers phares d'Istanbul", "icon": "districts" }
     ],
     "partnersEyebrow": "Réseau de confiance",
     "partnersTitle": "Nos partenaires",
     "partnersSubtitle": "HADARA collabore avec des promoteurs et groupes d'investissement régionaux de premier plan pour livrer des projets sur lesquels nos clients peuvent compter.",
     "aboutEyebrow": "Qui sommes-nous",
     "aboutTitle": "Partenaire de développement et de commercialisation immobilière à Istanbul",
-    "aboutText1": "Depuis 2014, HADARA Immobilier est un partenaire de développement et de commercialisation immobilière à Istanbul. Nous avons développé Marmara Haven Villa, une résidence privée à Büyükçekmece, et nous commercialisons des projets résidentiels et mixtes de promoteurs reconnus à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir — parmi les axes de croissance les plus dynamiques de la ville.",
+    "aboutText1": "Depuis 2014, HADARA Immobilier est un partenaire de développement et de commercialisation immobilière à Istanbul. Nous avons développé Marmara Haven Villa, une résidence privée à Büyükçekmece, et nous commercialisons des projets résidentiels et mixtes de promoteurs reconnus à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan — parmi les axes de croissance les plus dynamiques de la ville.",
     "aboutText2": "Des villas privées de luxe aux grands ensembles résidentiels, nous choisissons les projets que nous proposons pour leur architecture soignée, la qualité de leur construction et une réelle compréhension des attentes de nos clients.",
     "aboutCta": "En savoir plus sur HADARA",
     "spotlightEyebrow": "Nouveau lancement",
@@ -134,7 +140,7 @@
     "spotlightWhatsappMessage": "Bonjour, je souhaiterais obtenir plus d'informations sur le projet {name}.",
     "projectsEyebrow": "Notre portefeuille",
     "projectsTitle": "Projets phares",
-    "projectsSubtitle": "Un aperçu des développements qui façonnent les quartiers de Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir à Istanbul.",
+    "projectsSubtitle": "Un aperçu des développements qui façonnent les quartiers de Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan à Istanbul.",
     "servicesEyebrow": "Notre expertise",
     "servicesTitle": "Une expertise immobilière complète",
     "services": [
@@ -185,7 +191,7 @@
     "storyEyebrow": "Notre histoire",
     "storyTitle": "D'une vision unique à un portefeuille en pleine croissance",
     "storyText1": "Fondée en 2014 et basée à Beylikdüzü, Istanbul, HADARA Immobilier est née d'une idée simple : une sélection rigoureuse des projets et des conseils honnêtes créent une valeur durable pour ceux qui vivent dans les biens que nous proposons, comme pour ceux qui y investissent.",
-    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut et Mesa pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
+    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut, Mesa et Dağ Holding pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
     "missionTitle": "Notre mission",
     "missionText": "Relier résidents et investisseurs à des projets résidentiels et mixtes soigneusement sélectionnés, qui allient qualité architecturale, confort quotidien et valeur durable, et les accompagner clairement à chaque étape.",
     "visionTitle": "Notre vision",
@@ -208,15 +214,35 @@
     "statsTitle": "Notre bilan",
     "stats": [
       { "value": "12+", "label": "années d'activité", "icon": "years" },
-      { "value": "16", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "4 900+", "label": "logements, bureaux et commerces", "icon": "apartments" },
-      { "value": "225 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
+      { "value": "19", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "7 300+", "label": "logements, bureaux et commerces", "icon": "apartments" },
+      { "value": "640 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
     ]
   },
   "projects": {
     "heroEyebrow": "Notre portefeuille",
     "heroTitle": "Des projets qui façonnent Istanbul",
-    "heroSubtitle": "Des villas privées aux grands ensembles résidentiels, découvrez les projets développés et commercialisés par HADARA à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir.",
+    "heroSubtitle": "Des villas privées aux grands ensembles résidentiels, découvrez les projets développés et commercialisés par HADARA à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan.",
+    "atlas": {
+      "title": "Nos projets sur la carte d'Istanbul",
+      "projects": {
+        "one": "{count} projet",
+        "many": "{count} projets",
+        "other": "{count} projets"
+      },
+      "districts": {
+        "one": "{count} district",
+        "many": "{count} districts",
+        "other": "{count} districts"
+      },
+      "legendProjects": "Projets HADARA (nombre par district)",
+      "legend": {
+        "airport": "Aéroport",
+        "mall": "Centre commercial",
+        "hospital": "Hôpital"
+      },
+      "close": "Fermer la liste des projets"
+    },
     "filterAll": "Tous les projets",
     "filterNewLaunch": "Nouveau lancement",
     "filterOngoing": "En construction",
@@ -242,7 +268,10 @@
     "istanbul": "Istanbul",
     "beylikduzu": "Beylikdüzü",
     "buyukcekmece": "Büyükçekmece",
+    "kucukcekmece": "Küçükçekmece",
+    "eyupsultan": "Eyüpsultan",
     "avcilar": "Avcılar",
+    "ispartakule": "Ispartakule",
     "sisli": "Şişli",
     "zeytinburnu": "Zeytinburnu",
     "basaksehir": "Başakşehir",
@@ -301,6 +330,15 @@
       "florya": "Florya",
       "taksim": "Taksim",
       "sultanahmet": "Sultanahmet",
+      "istinyePark": "İstinye Park",
+      "zorluCenter": "Zorlu Center",
+      "galleriaAtakoy": "Galleria Ataköy",
+      "akbati": "Centre Akbatı",
+      "emaarSquare": "Emaar Square Mall",
+      "basaksehirHospital": "Hôpital urbain de Başakşehir",
+      "memorialSisli": "Hôpital Memorial Şişli",
+      "acibademMaslak": "Hôpital Acıbadem Maslak",
+      "goztepeHospital": "Hôpital urbain de Göztepe",
       "roads": {
         "e5": "E-5 (D-100)",
         "e80": "TEM (E80)",
@@ -315,6 +353,7 @@
     "paymentPlanValue": "{down} d'acompte, le solde sur {months} mois",
     "priceLabel": "Prix",
     "priceOnRequest": "Sur demande",
+    "priceFrom": "À partir de {price}",
     "priceNote": "Prix TVA incluse, variables selon le mode de paiement. Les frais d'enregistrement du titre de propriété (4 %) ne sont pas inclus.",
     "residencePriceNote": "Prix TVA incluse, variables selon l'étage, la vue et le mode de paiement. Les frais d'enregistrement du titre de propriété (4 %) ne sont pas inclus.",
     "addressLabel": "Adresse",
@@ -605,7 +644,7 @@
         "items": [
           {
             "q": "Qui est HADARA Immobilier ?",
-            "a": "HADARA Immobilier est un partenaire de développement et de commercialisation immobilière fondé en 2014, basé à Beylikdüzü, Istanbul. Nous avons développé Marmara Haven Villa, une résidence privée à Büyükçekmece, et nous commercialisons des projets résidentiels, mixtes et des villas de promoteurs reconnus à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir."
+            "a": "HADARA Immobilier est un partenaire de développement et de commercialisation immobilière fondé en 2014, basé à Beylikdüzü, Istanbul. Nous avons développé Marmara Haven Villa, une résidence privée à Büyükçekmece, et nous commercialisons des projets résidentiels, mixtes et des villas de promoteurs reconnus à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan."
           },
           {
             "q": "Quels types de projets HADARA propose-t-elle ?",
@@ -613,7 +652,7 @@
           },
           {
             "q": "Où sont situés les projets de HADARA ?",
-            "a": "Tous les projets que nous proposons actuellement sont situés du côté européen d'Istanbul, dans les quartiers en forte croissance de Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir."
+            "a": "Tous les projets que nous proposons actuellement sont situés du côté européen d'Istanbul, dans les quartiers en forte croissance de Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan."
           },
           {
             "q": "Comment puis-je contacter l'équipe de HADARA ?",
@@ -1531,6 +1570,148 @@
         }
       ]
     },
+    "hayat-flora": {
+      "name": "Hayat Flora",
+      "tagline": "Un nouveau quartier avec vue sur la mer et le lac à Halkalı, par Özak GYO avec la garantie d'Emlak Konut.",
+      "shortDescription": "Hayat Flora est un nouveau quartier résidentiel en construction à Halkalı, Küçükçekmece, réalisé par Özak GYO avec la garantie d'Emlak Konut : 1 382 logements du 1+1 au 4+1 et 46 commerces sur rue répartis dans 21 immeubles, avec vue sur la mer de Marmara et le lac de Küçükçekmece, de vastes jardins paysagers et la gare Marmaray de Halkalı à 500 m. Éligible à la citoyenneté turque.",
+      "longDescription": "Hayat Flora s'élève à Halkalı, dans l'arrondissement de Küçükçekmece, sur la rive européenne d'Istanbul, entre la mer de Marmara et le lac de Küçükçekmece. Il est réalisé par Özak GYO, promoteur de Büyükyalı, avec la garantie d'Emlak Konut GYO, la société d'investissement immobilier soutenue par l'État, selon son modèle de partage des revenus. Le projet s'étend sur environ 92 440 m² et forme un nouveau quartier en trois parties, chacune avec son propre parc paysager ; jusqu'à 70 % du terrain est consacré aux jardins, aux allées piétonnes, aux aires de jeux, aux espaces sportifs et aux coins de repos. Ses 21 immeubles, d'un rez-de-chaussée et de 13 étages, comptent 1 382 logements du 1+1 au 4+1, dont des logements en rez-de-jardin et des duplex avec jardin ou terrasse, beaucoup avec vue sur la mer et le lac, et 46 commerces bordent les trois avenues du projet. Les résidents disposent de piscines extérieures, d'une salle de fitness, d'un salon des résidents, d'une entrée sécurisée et d'un parking de 2 318 places. La gare Marmaray de Halkalı et la ligne de métro M11 vers l'aéroport d'Istanbul sont à environ 500 m, Florya est à 10 minutes et Ataköy à 19 minutes en Marmaray, et les autoroutes E-5 et TEM à 10 minutes en voiture. Les immeubles sont conçus selon le code sismique turc de 2018, avec des calculs de structure vérifiés par l'Université technique d'Istanbul et Emlak Konut, des fondations en radier et 1 710 pieux. Les ventes se font en deux phases, et le promoteur prévoit la remise des clés en février 2029. Le projet est éligible à la citoyenneté turque.",
+      "highlights": [
+        "En construction, livraison prévue en février 2029 selon le promoteur",
+        "Éligible à la citoyenneté turque",
+        "Par Özak GYO, avec la garantie d'Emlak Konut",
+        "1 382 logements et 46 commerces sur rue dans 21 immeubles",
+        "Logements du 1+1 au 4+1, dont des duplex avec jardin ou terrasse",
+        "Vue sur la mer de Marmara et le lac de Küçükçekmece",
+        "Jusqu'à 70 % du terrain en jardins paysagers",
+        "À environ 500 m de la gare Marmaray de Halkalı et de la ligne de métro M11 vers l'aéroport d'Istanbul",
+        "Autoroutes E-5 et TEM à 10 minutes",
+        "Parking de 2 318 places",
+        "Conçu selon le code sismique turc de 2018, calculs vérifiés par l'Université technique d'Istanbul"
+      ],
+      "nearby": [
+        {
+          "place": "Gare Marmaray de Halkalı",
+          "time": "500 m"
+        },
+        {
+          "place": "Ligne de métro M11 Halkalı – aéroport d'Istanbul",
+          "time": "500 m"
+        },
+        {
+          "place": "Parc Atatürk",
+          "time": "600 m"
+        },
+        {
+          "place": "Jardin de la Nation de Halkalı",
+          "time": "1,4 km"
+        },
+        {
+          "place": "Parc Kanarya",
+          "time": "3 km"
+        },
+        {
+          "place": "Forêt Atatürk de Florya",
+          "time": "7,6 km"
+        },
+        {
+          "place": "Autoroutes E-5 et TEM",
+          "time": "10 min"
+        },
+        {
+          "place": "Florya en Marmaray",
+          "time": "10 min"
+        },
+        {
+          "place": "Ataköy en Marmaray",
+          "time": "19 min"
+        },
+        {
+          "place": "Üsküdar en Marmaray",
+          "time": "35 min"
+        }
+      ]
+    },
+    "tual-comfort": {
+      "name": "Tual Comfort",
+      "tagline": "Des logements prêts à habiter, titres de propriété disponibles, à Ispartakule, par Dağ Holding.",
+      "shortDescription": "Tual Comfort est une résidence achevée de Dağ Holding à Ispartakule : six immeubles jusqu'à 21 étages, des logements du 1+1 au 4+1 avec vue vers le lac de Küçükçekmece, piscine intérieure, spa et espaces sportifs, et commerces sur l'avenue principale. Prêt à habiter, titres de propriété disponibles.",
+      "longDescription": "Tual Comfort s'élève à Ispartakule, sur la rive européenne d'Istanbul, au croisement de la TEM, de l'autoroute du Nord de Marmara et des routes vers l'aéroport d'Istanbul, à côté du tracé du Kanal Istanbul et du marché de gros alimentaire d'Istanbul. Il est réalisé par Dağ Holding, un groupe immobilier présent dans le secteur depuis plus de 30 ans, qui a livré plus de 30 000 logements, des projets résidentiels et mixtes aux centres commerciaux, hôpitaux et projets de renouvellement urbain. La résidence s'étend sur environ 20 000 m² et compte six immeubles, A1, A2, B1, B2, C et D, qui montent jusqu'à 21 étages autour d'un jardin central paysager, avec une architecture moderne qui préserve la vue ; depuis de nombreuses fenêtres et balcons, les logements regardent vers le lac de Küçükçekmece. Les logements vont du 1+1 au 4+1, avec des séjours lumineux, des cuisines équipées et, dans de nombreux plans, une suite parentale avec sa propre salle de bains. Les résidents disposent d'une piscine intérieure, de salles de fitness et de pilates, d'un spa avec sauna, salle de vapeur et hammam, de terrasses communes sur les toits, de salles de loisirs et d'ateliers, d'espaces sportifs en plein air, d'aires de jeux intérieures et extérieures pour les enfants et de jardins paysagers. Chaque logement a sa place de stationnement dans les parkings extérieurs ou couverts, avec des bornes de recharge pour voitures électriques, et les commerces de l'avenue principale, dont un marché bio, sont séparés des logements. Un système de recyclage des eaux de pluie réutilise l'eau sur le site. Les logements sont prêts à habiter, les titres de propriété sont disponibles et le projet est éligible à la citoyenneté turque.",
+      "highlights": [
+        "Prêt à habiter, titres de propriété disponibles",
+        "Éligible à la citoyenneté turque",
+        "Par Dağ Holding, plus de 30 000 logements livrés",
+        "Six immeubles jusqu'à 21 étages autour d'un jardin central",
+        "Logements du 1+1 au 4+1, beaucoup avec suite parentale",
+        "Vue vers le lac de Küçükçekmece depuis de nombreux logements",
+        "Piscine intérieure, salles de fitness et de pilates, sauna, salle de vapeur et hammam",
+        "Terrasses communes sur les toits, salles de loisirs et ateliers",
+        "Une place de stationnement par logement, avec recharge pour voitures électriques",
+        "Commerces et marché bio sur l'avenue principale",
+        "Proche de la TEM, de l'autoroute du Nord de Marmara et de l'aéroport d'Istanbul"
+      ],
+      "nearby": [
+        {
+          "place": "Lac de Küçükçekmece"
+        },
+        {
+          "place": "Autoroute TEM"
+        },
+        {
+          "place": "Autoroute du Nord de Marmara"
+        },
+        {
+          "place": "Aéroport d'Istanbul"
+        },
+        {
+          "place": "Kanal Istanbul"
+        },
+        {
+          "place": "Marché de gros alimentaire d'Istanbul"
+        }
+      ]
+    },
+    "gokturk-kemer-evleri": {
+      "name": "Göktürk Kemer Evleri",
+      "tagline": "Des logements de faible hauteur et des villas près de la forêt de Belgrade à Göktürk, avec la garantie d'Emlak Konut.",
+      "shortDescription": "Göktürk Kemer Evleri est un projet résidentiel de faible hauteur en construction à Göktürk, dans le district d'Eyüpsultan, porté par Emlak Konut GYO avec Ziraat Bankası et Ziraat GYO : 414 logements du 1+1 au 5+1 et 81 villas avec piscine privée sur environ 329 321 m², près de la forêt de Belgrade et du golf de Kemer Country, à 15 minutes de l'aéroport d'Istanbul. Éligible à la citoyenneté turque.",
+      "longDescription": "Göktürk Kemer Evleri s'élève à Göktürk, dans le district d'Eyüpsultan, sur la lisière verte du nord de la rive européenne d'Istanbul. Il est développé par Emlak Konut GYO, la société d'investissement immobilier soutenue par l'État, avec Ziraat Bankası et Ziraat GYO, et vendu avec la garantie d'Emlak Konut. Le projet couvre environ 329 321 m² et suit une architecture horizontale de faible hauteur : des immeubles de quelques étages seulement autour de jardins paysagers et d'un étang, pour que la nature reste au cœur du quotidien. Il réunit 414 logements, du 1+1 d'environ 71 m² aux duplex 5+1 d'environ 400 m², dont beaucoup en rez-de-jardin avec un jardin privatif ou avec de larges terrasses, et 81 villas de 5+1 et 6+1 sur sous-sol, rez-de-chaussée et premier étage, chacune avec une piscine privée et un jardin d'environ 360 à 700 m². Les résidents disposent de piscines, de salles de sport, d'un hammam, d'un sauna, d'un café et d'un restaurant, d'aires de jeux pour enfants, de chemins de promenade et d'un parking couvert, et des écoles se trouvent juste à côté du projet. Les bâtiments utilisent l'énergie solaire pour l'éclairage, récupèrent l'eau de pluie, recyclent les eaux grises et trient leurs déchets. Le projet borde la forêt de Belgrade, la forêt de Fatih, le parc naturel du barrage d'Ayvat et le golf de Kemer Country, avec un accès à l'autoroute du Nord de Marmara et l'aéroport d'Istanbul à environ 15 minutes. Le projet est en construction, les ventes sont en cours et il est éligible à la citoyenneté turque.",
+      "highlights": [
+        "En construction, avec la garantie d'Emlak Konut",
+        "Éligible à la citoyenneté turque",
+        "Plans de paiement échelonné sans intérêts d'Emlak Konut ; contactez-nous pour les détails",
+        "Par Emlak Konut GYO avec Ziraat Bankası et Ziraat GYO",
+        "414 logements et 81 villas sur environ 329 321 m²",
+        "Architecture horizontale de faible hauteur autour de jardins et d'un étang",
+        "Logements du 1+1 au 5+1, dont des duplex et des rez-de-jardin",
+        "Villas 5+1 et 6+1 sur trois niveaux avec piscine et jardin privés",
+        "À côté de la forêt de Belgrade et du golf de Kemer Country",
+        "À environ 15 minutes de l'aéroport d'Istanbul, avec accès à l'autoroute du Nord de Marmara",
+        "Piscine, salle de sport, hammam, sauna, café et restaurant",
+        "Écoles juste à côté du projet",
+        "Éclairage solaire, récupération de l'eau de pluie et recyclage des eaux grises"
+      ],
+      "nearby": [
+        {
+          "place": "Forêt de Belgrade"
+        },
+        {
+          "place": "Forêt de Fatih"
+        },
+        {
+          "place": "Parc naturel du barrage d'Ayvat"
+        },
+        {
+          "place": "Golf de Kemer Country"
+        },
+        {
+          "place": "Autoroute du Nord de Marmara"
+        },
+        {
+          "place": "Aéroport d'Istanbul",
+          "time": "15 min"
+        }
+      ]
+    },
     "lotus-sisli": {
       "name": "Lotus Şişli",
       "tagline": "Un projet mixte novateur au cœur d'Istanbul.",
@@ -1899,6 +2080,25 @@
     }
   },
   "blogData": {
+    "sisli-district-guide": {
+      "category": "À propos d'Istanbul",
+      "title": "Şişli Istanbul : guide du quartier pour acheteurs",
+      "excerpt": "Şişli Istanbul : où se trouve le quartier, ce qui l'entoure et quels appartements et home offices HADARA y propose.",
+      "body": [
+        "Şişli est le quartier que beaucoup d'acheteurs imaginent quand ils pensent aux affaires et à la vie urbaine d'Istanbul. C'est un quartier central de la rive européenne, pensé pour ceux qui veulent des bureaux, des hôpitaux, des commerces et des transports en commun à quelques pas de chez eux. Ce guide explique où se trouve Şişli, ce qui l'entoure et quel projet de notre portefeuille vous y trouverez, en s'appuyant uniquement sur les distances et les détails publiés sur notre site.",
+        "## Où se trouve Şişli",
+        "Le Bosphore divise Istanbul en une rive européenne et une rive asiatique, et Şişli se situe dans la partie centrale de la rive européenne. Contrairement aux quartiers côtiers de l'ouest de la ville, c'est un secteur urbain dense où la vie quotidienne s'organise autour du travail, des services et des liaisons rapides plutôt qu'autour de la plage. Notre projet sur place, Lotus Şişli, se dresse sur le boulevard Piyalepaşa, au cœur du quartier d'affaires, à quelques pas du métro, du Metrobüs et de l'autoroute E-5.",
+        "## Hôpitaux, bureaux et commerces à proximité",
+        "Les distances ci-dessous sont celles indiquées sur notre site depuis Lotus Şişli. L'hôpital Memorial Şişli est à 100 m et l'hôpital universitaire d'Okmeydanı à 280 m. Le centre d'affaires Perpa est à 500 m, l'arrêt de Metrobüs Darülaceze–Perpa à 540 m et le palais de justice d'Istanbul à 880 m. Le métro Çağlayan est à 1 km et le centre commercial Cevahir à 1,5 km. Plus loin, Nişantaşı est à 2 km, Taksim à 2,9 km et Zorlu Center à 4,1 km.",
+        "Pour un acheteur, ce mélange compte. La santé, la justice, les bureaux et les grands centres commerciaux sont tous proches, et le métro comme le Metrobüs relient le secteur au reste de la ville. Şişli devient ainsi une adresse pratique pour qui travaille à Istanbul, y dirige une activité ou souhaite simplement tout avoir à portée de main. Gardez à l'esprit que ces chiffres sont des distances indiquées depuis une seule adresse ; demandez toujours le temps de trajet exact depuis le bien qui vous intéresse.",
+        "## Logements à Şişli",
+        "Lotus Şişli est un projet mixte conçu par l'architecte Hakan Saçık pour le promoteur Lotus Yapı Proje. Il représente 35 342 m² de surface construite répartis sur deux blocs de 18 étages et réunit 320 home offices, des appartements, des penthouses et des commerces sur rue. Le projet est en construction, les unités sont actuellement en vente et, selon le promoteur, la livraison est prévue en décembre 2026.",
+        "Les home offices peuvent servir de bureau, de logement ou des deux. Notre site indique des plans 1+1 et 2+1, proposés en appartements ou en bureaux fermés et en open space. Le 1+1 mesure 57,56 m² bruts et 43,41 m² nets, et le 2+1 mesure 83,75 m² bruts et 63,16 m² nets. Les résidents partagent un service de conciergerie, un lounge, une piscine intérieure, une salle de sport, un studio de Pilates Reformer et un spa avec hammam, sauna et salles de massage, ainsi que des salles de réunion, un café, une salle de cinéma, un parking et une sécurité privée. Le concept de « flex space » permet aussi d'ajouter de l'espace à son logement uniquement en cas de besoin.",
+        "## Comment choisir",
+        "Lotus Şişli étant encore en construction, il convient à l'acheteur qui accepte d'attendre la livraison. N'oubliez pas qu'une date de livraison est un plan, pas une garantie. Demandez-vous si vous voulez y habiter, y travailler ou les deux, et comparez les surfaces brute et nette sur le plan plutôt que la seule surface annoncée. Si vous préférez un logement où emménager plus tôt, notre portefeuille comprend aussi des projets achevés dans d'autres quartiers, que nous pouvons comparer avec vous. Avant de décider, renseignez-vous sur la disponibilité actuelle, le prix et les charges mensuelles de l'immeuble.",
+        "HADARA, votre partenaire immobilier à Istanbul, peut vous aider à comparer ces options. Contactez-nous ou réservez une visite vidéo privée pour établir votre présélection, puis venez à Istanbul la voir en personne, car l'achat lui-même se conclut lors d'une visite."
+      ]
+    },
     "iskan-occupancy-permit": {
       "category": "Achat immobilier",
       "title": "Qu'est-ce que l'İskan ? Le permis d'habiter expliqué",
@@ -2649,11 +2849,11 @@
     },
     "home": {
       "title": "HADARA Immobilier | Votre partenaire immobilier à Istanbul, Turquie",
-      "description": "Partenaire immobilier à Istanbul depuis 2014 : logements à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir, aide à la citoyenneté."
+      "description": "Partenaire immobilier à Istanbul depuis 2014 : biens à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan."
     },
     "projects": {
       "title": "Nos projets à Istanbul – Appartements et villas",
-      "description": "Projets résidentiels, mixtes et villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu et Başakşehir : lancements et biens livrés."
+      "description": "Résidences, projets mixtes et villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan."
     },
     "about": {
       "title": "À propos de HADARA – Développement et commercialisation depuis 2014",
@@ -3771,6 +3971,18 @@
     }
   },
   "adminCustomers": {
+    "edit": {
+      "open": "Modifier les coordonnées",
+      "title": "Modifier les coordonnées du client",
+      "hint": "La modification est enregistrée sur tous les dossiers de ce client (messages, demandes, visites) et sur sa fiche dans le pipeline.",
+      "hintMany": "Ce client a plusieurs numéros ou e-mails : seuls ceux affichés ici changent, les autres restent tels quels.",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "saved": "Coordonnées du client enregistrées ✓",
+      "error": "Impossible d'enregistrer, veuillez réessayer.",
+      "unavailable": "La modification fonctionne après l'exécution de la mise à jour 0033.",
+      "emailNeeded": "Ce client a une visite réservée : son e-mail ne peut pas être supprimé, seulement corrigé."
+    },
     "heroTitle": "Clients",
     "heroSubtitle": "Chaque client avec son historique complet : messages, demandes, visites et notes de l'équipe. Même e-mail ou même numéro de téléphone = même client.",
     "searchPlaceholder": "Rechercher par nom, téléphone, e-mail ou numéro de demande",
@@ -3849,18 +4061,18 @@
       },
       "source": "D'où vient-il ?",
       "sources": {
-        "gulfPlan": "Pub Golfe et Koweït : plan 30/30",
-        "gulfCitizenship": "Pub Golfe et Koweït : citoyenneté",
-        "gulfVilla": "Pub Golfe et Koweït : villa",
-        "gulf": "Ancienne publicité Golfe (jusqu'au 22/10)",
-        "villa": "Ancienne publicité villa (formulaire Facebook)",
+        "gulfPlan": "Golfe/Koweït 23/10 : plan 30/30",
+        "gulfCitizenship": "Golfe/Koweït 23/10 : citoyenneté",
+        "gulfVilla": "Golfe/Koweït 23/10 : villa",
+        "gulf": "Ex-pub Golfe (10/10 – 22/10)",
+        "villa": "Ex-pub villa (14/10 – 22/10)",
         "otherAd": "Autre publicité Facebook ou Instagram",
         "social": "Nos publications (sans publicité)",
         "website": "Le site ou une recherche Google",
         "referral": "Recommandé par quelqu'un",
         "none": "Autre / inconnu"
       },
-      "value": "Budget / valeur de la vente",
+      "value": "Valeur de la vente",
       "note": "Résumé de l'échange",
       "notePlaceholder": "ex. cherche un 3+1 avec vue sur la mer, pour la citoyenneté…",
       "submit": "Ajouter le client",
@@ -3876,6 +4088,7 @@
     "stages": {
       "new": "Nouveau",
       "contacted": "Contacté",
+      "no_reply": "Pas de réponse",
       "tour": "Visite vidéo",
       "visit": "Visite à Istanbul",
       "negotiation": "Négociation",
@@ -3888,6 +4101,9 @@
     "projectNone": "Non défini",
     "value": "Montant de l’affaire",
     "currency": "Devise",
+    "budget": "Budget approximatif",
+    "budgetNone": "Non défini",
+    "needs0032": "Le budget et l’étape « Pas de réponse » fonctionnent après la mise à jour 0032 de la base de données.",
     "lostReason": "Pourquoi perdu ?",
     "lostPlaceholder": "p. ex. Acheté ailleurs, budget",
     "followUp": "Prochaine relance",

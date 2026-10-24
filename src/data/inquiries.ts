@@ -90,3 +90,48 @@ export async function addManualCustomer(c: ManualCustomer): Promise<{ reference:
   const result = data as { reference?: string; error?: "forbidden" | "invalid" };
   return result.reference ? { reference: result.reference } : { error: result.error ?? "failed" };
 }
+
+export interface CustomerEdit {
+  inquiryIds: string[];
+  bookingIds: string[];
+  /** The customer's pipeline row, so it keeps matching them (or null). */
+  leadId: string | null;
+  /** The main phone and email shown in the form; the records that have them get the new ones. */
+  oldPhone: string;
+  oldEmail: string;
+  name: string;
+  phone: string;
+  email: string;
+  /** The latest hand-added inquiry, which also takes the country, channel and source (or null). */
+  manualId: string | null;
+  country: string;
+  channel: ManualChannel | "";
+  source: string;
+}
+
+/**
+ * Corrects a customer's details on all their records (admin_update_customer(), migration 0033).
+ * "unavailable" until 0033 has run.
+ */
+export async function updateCustomer(c: CustomerEdit): Promise<{ ok: true } | { error: "forbidden" | "invalid" | "unavailable" | "failed" }> {
+  const { data, error } = await supabase.rpc("admin_update_customer", {
+    p_inquiry_ids: c.inquiryIds,
+    p_booking_ids: c.bookingIds,
+    p_lead_id: c.leadId,
+    p_old_phone: c.oldPhone,
+    p_old_email: c.oldEmail,
+    p_name: c.name,
+    p_phone: c.phone,
+    p_email: c.email,
+    p_manual_id: c.manualId,
+    p_country: c.country,
+    p_channel: c.channel,
+    p_source: c.source
+  });
+  if (error) {
+    console.error(error);
+    return { error: error.code === "PGRST202" || error.code === "42883" ? "unavailable" : "failed" };
+  }
+  const result = data as { ok?: boolean; error?: "forbidden" | "invalid" };
+  return result.ok ? { ok: true } : { error: result.error ?? "failed" };
+}

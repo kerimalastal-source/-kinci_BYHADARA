@@ -5,8 +5,8 @@ import { countries } from "../../data/countries";
 import { projects as allProjects } from "../../data/projects";
 import { renderPhoneInput, getPhoneValue, isPhoneValid, setPhoneInvalid } from "../../components/phoneInput";
 import { MANUAL_CHANNELS, addManualCustomer, type ManualChannel } from "../../data/inquiries";
-import { CURRENCIES, STAGES, fromIstanbulInput, leadFor, personKeys, saveCrmLead, type CrmLead, type Currency, type Stage } from "../../data/crm";
-import { projectName, stageLabel } from "./crmForm";
+import { BUDGETS, CURRENCIES, STAGES, fromIstanbulInput, leadFor, personKeys, saveCrmLead, type Budget, type CrmLead, type Currency, type Stage } from "../../data/crm";
+import { budgetSelect, projectName, stageLabel } from "./crmForm";
 
 /**
  * "Add a customer" on the pipeline page: a customer who reached the team on WhatsApp, by
@@ -17,7 +17,7 @@ import { projectName, stageLabel } from "./crmForm";
  */
 
 /** Where the customer came from, saved in the same "utm_source=… · utm_campaign=…" form as the site's leads. */
-const SOURCES: Record<string, string> = {
+export const SOURCES: Record<string, string> = {
   // The Gulf + Kuwait campaign from 2026-10-23, one campaign name per ad so /admin/ads compares them.
   gulfPlan: "utm_source=facebook · utm_campaign=gulf-kw-plan",
   gulfCitizenship: "utm_source=facebook · utm_campaign=gulf-kw-citizenship",
@@ -34,7 +34,7 @@ const SOURCES: Record<string, string> = {
 const PHONE_ID = "add-customer-phone";
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-function countryOptions(): string {
+export function countryOptions(selected = ""): string {
   let names: Intl.DisplayNames | null = null;
   try {
     names = new Intl.DisplayNames([getLocale()], { type: "region" });
@@ -44,7 +44,7 @@ function countryOptions(): string {
   return countries
     .map((c) => ({ code: c.iso2, name: names?.of(c.iso2) ?? c.name }))
     .sort((a, b) => a.name.localeCompare(b.name, getLocale()))
-    .map((c) => `<option value="${c.code}">${escapeHtml(c.name)}</option>`)
+    .map((c) => `<option value="${c.code}"${c.code === selected ? " selected" : ""}>${escapeHtml(c.name)}</option>`)
     .join("");
 }
 
@@ -79,6 +79,7 @@ export function addCustomerHtml(): string {
             .map((s) => `<option value="${s}"${s === "contacted" ? " selected" : ""}>${stageLabel(s)}</option>`)
             .join("")}</select>
         </label>
+        <label class="inquiry-card__field"><span>${t("adminCrm.budget")}</span>${budgetSelect(null)}</label>
         <div class="inquiry-card__field"><span>${A("value")}</span>
           <span class="crm-form__money">
             <input name="deal_value" type="text" inputmode="decimal" dir="ltr" autocomplete="off" aria-label="${A("value")}" />
@@ -103,6 +104,45 @@ export function addCustomerHtml(): string {
   </div>`;
 }
 
+/**
+ * The country follows the phone's dialling code: picking a code (or typing or pasting a number
+ * that starts with + or 00) selects that country, until the employee picks a country by hand.
+ */
+export function linkCountryToPhone(form: HTMLFormElement, phoneId = PHONE_ID): void {
+  const dial = form.querySelector<HTMLSelectElement>(`#${phoneId}-country`);
+  const number = form.querySelector<HTMLInputElement>(`#${phoneId}-number`);
+  const country = form.querySelector<HTMLSelectElement>('select[name="country"]');
+  if (!dial || !number || !country) return;
+  // A country already filled in (editing a customer) counts as picked by hand.
+  let picked = country.value !== "";
+  // The dial menu lists the countries in the same order, so its selected index names the
+  // country even for shared codes (+1, +7).
+  const follow = () => {
+    if (!picked) country.value = countries[dial.selectedIndex]?.iso2 ?? "";
+  };
+  country.addEventListener("change", () => (picked = country.value !== ""));
+  dial.addEventListener("change", follow);
+  number.addEventListener("input", () => {
+    const raw = toWesternDigits(number.value).trim();
+    const intl = raw.match(/^(?:\+|00)\s*(\d[\d\s-]*)$/);
+    if (intl) {
+      const digits = intl[1].replace(/\D/g, "");
+      // The longest dialling code the number starts with (+974 before +97), first country for shared codes.
+      const match = countries
+        .map((c, i) => ({ dial: c.dial.replace(/\D/g, ""), i }))
+        .filter((c) => c.dial && digits.startsWith(c.dial))
+        .sort((a, b) => b.dial.length - a.dial.length)[0];
+      if (match && digits.length > match.dial.length) {
+        dial.selectedIndex = match.i;
+        dial.dispatchEvent(new Event("change", { bubbles: true }));
+        number.value = digits.slice(match.dial.length);
+      }
+    }
+    if (number.value.trim()) follow();
+  });
+  form.addEventListener("reset", () => (picked = false));
+}
+
 /** Wires the button and form; `onAdded` reloads the board. */
 export function initAddCustomer(root: HTMLElement, getLeads: () => CrmLead[], onAdded: () => Promise<void>): void {
   const open = root.querySelector<HTMLButtonElement>("[data-add-customer-open]");
@@ -119,6 +159,7 @@ export function initAddCustomer(root: HTMLElement, getLeads: () => CrmLead[], on
     if (show) form.querySelector<HTMLInputElement>('input[name="name"]')?.focus();
   };
 
+  linkCountryToPhone(form);
   open.addEventListener("click", () => toggle(form.hidden));
   form.querySelector("[data-add-customer-cancel]")?.addEventListener("click", () => {
     toggle(false);
@@ -163,23 +204,25 @@ export function initAddCustomer(root: HTMLElement, getLeads: () => CrmLead[], on
     // The pipeline row: stage, deal and the next follow-up (merged into an existing row for the same phone/email).
     const keys = personKeys(email ? [email] : [], [phone]);
     const stage = (STAGES as readonly string[]).includes(text("stage")) ? (text("stage") as Stage) : "contacted";
-    const saved = await saveCrmLead(
-      leadFor(getLeads(), keys),
-      { keys, name, email: email || null, phone },
-      {
-        stage,
-        project: project || null,
-        deal_value: dealValue,
-        currency: (CURRENCIES as readonly string[]).includes(text("currency")) ? (text("currency") as Currency) : "USD",
-        follow_up_at: fromIstanbulInput(text("follow_up_at")),
-        follow_up_note: text("follow_up_note") || null
-      }
-    );
+    const person = { keys, name, email: email || null, phone };
+    const changes = {
+      stage,
+      project: project || null,
+      deal_value: dealValue,
+      currency: (CURRENCIES as readonly string[]).includes(text("currency")) ? (text("currency") as Currency) : "USD",
+      budget: (BUDGETS as readonly string[]).includes(text("budget")) ? (text("budget") as Budget) : null,
+      follow_up_at: fromIstanbulInput(text("follow_up_at")),
+      follow_up_note: text("follow_up_note") || null
+    };
+    let saved = await saveCrmLead(leadFor(getLeads(), keys), person, changes);
+    // Before migration 0032: keep the customer, without the budget and with "contacted" for "no reply".
+    const without0032 = saved === "needs0032";
+    if (without0032) saved = await saveCrmLead(leadFor(getLeads(), keys), person, { ...changes, budget: null, stage: stage === "no_reply" ? "contacted" : stage });
     button.disabled = false;
-    if (!saved) return say(t("adminCrm.saveError"));
+    if (!saved || saved === "needs0032") return say(t("adminCrm.saveError"));
 
     form.reset();
     await onAdded();
-    say(t("adminCrm.add.added", { name, reference: added.reference }), true);
+    say(`${t("adminCrm.add.added", { name, reference: added.reference })}${without0032 ? ` ${t("adminCrm.needs0032")}` : ""}`, true);
   });
 }
