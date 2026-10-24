@@ -82,6 +82,7 @@
       "apartments": "Apartments",
       "blocksFloors": "Blocks × Floors",
       "constructionArea": "Construction Area",
+      "projectArea": "Project Area",
       "greenAndParkArea": "Green & Park Area",
       "offices": "Offices",
       "homeOffices": "Home Offices",
@@ -119,8 +120,8 @@
     "statsTitle": "HADARA in Numbers",
     "stats": [
       { "value": "12+", "label": "Years of Excellence", "icon": "years" },
-      { "value": "19", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "6,600+", "label": "Residential Units", "icon": "apartments" },
+      { "value": "20", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "7,400+", "label": "Residential Units", "icon": "apartments" },
       { "value": "420+", "label": "Office Units", "icon": "offices" },
       { "value": "300+", "label": "Commercial Units", "icon": "shops" },
       { "value": "9", "label": "Prime Istanbul Districts", "icon": "districts" }
@@ -214,8 +215,8 @@
     "statsTitle": "Our Track Record",
     "stats": [
       { "value": "12+", "label": "Years in Business", "icon": "years" },
-      { "value": "19", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "7,300+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
+      { "value": "20", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "8,100+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
       { "value": "640,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
     ]
   },
@@ -1707,6 +1708,62 @@
         {
           "place": "Istanbul Airport",
           "time": "15 min"
+        }
+      ]
+    },
+    "alya-city-veliefendi": {
+      "name": "Alya City Veliefendi",
+      "tagline": "A complete residential community in central Zeytinburnu, close to the metro, Marmaray and the coast, by BOSS4 İnşaat.",
+      "shortDescription": "Alya City Veliefendi is a residential community by BOSS4 İnşaat in Veliefendi, Zeytinburnu, on a 128,259 m² project site: 778 apartments from 1+1 to 3+1 in 12 blocks, with an indoor pool, a fitness centre, a sauna and a shopping street. Keys are coming soon, and the project is eligible for Turkish citizenship.",
+      "longDescription": "Alya City rises in the Veliefendi neighbourhood of Zeytinburnu, on Istanbul's European side, in a central location close to the E-5 motorway, the Kennedy Avenue coastal road, the Eurasia Tunnel and the TEM motorway. It is built by BOSS4 İnşaat on a project area of 128,259 m², with 778 apartments in 12 blocks set around inner gardens and walking paths: 85 1+1 apartments, 282 2+1 apartments with an open kitchen, 285 2+1 apartments with a closed kitchen and 126 3+1 apartments with a closed kitchen. Many 2+1 and 3+1 plans have a master bedroom with its own bathroom, and some 3+1 plans add a dressing room. Residents have an indoor swimming pool, a fitness centre, a sauna and steam room, a children's playroom, a PlayStation room, a meeting room, an events hall, open-air sports grounds and covered parking, and cafés and shops line Alya Meydan, the pedestrian street of the project. The Metrobus, the T1 tram, the M1A metro and Marmaray are all within easy reach, as are the Yenikapı ferry terminal and Bakırköy high-speed train station; Marmara Forum is 1.5 km away, Olivium 2.3 km, Merter 2.6 km and the Zeytinburnu seafront 2.3 km. Prices start from $165,000 for a 1+1 and from $238,000 for a 2+1, with 50% down and the balance over 12 to 24 months; the cash price differs from the instalment price. Keys are coming soon, and the project is eligible for Turkish citizenship.",
+      "highlights": [
+        "Keys coming soon",
+        "Eligible for Turkish citizenship",
+        "778 apartments from 1+1 to 3+1 in 12 blocks",
+        "2+1 apartments with an open or closed kitchen",
+        "Indoor pool, fitness centre, sauna and steam room",
+        "Children's playroom, PlayStation room, meeting room and events hall",
+        "Open-air sports grounds, walking paths and inner gardens",
+        "Alya Meydan, a pedestrian street of cafés and shops in the project",
+        "Close to the Metrobus, the T1 tram, the M1A metro and Marmaray",
+        "Central location near the E-5, the coastal road and the Eurasia Tunnel"
+      ],
+      "nearby": [
+        {
+          "place": "Marmara Forum shopping centre",
+          "time": "1.5 km"
+        },
+        {
+          "place": "Zeytinburnu Marmaray station",
+          "time": "1.7 km"
+        },
+        {
+          "place": "E-5 (D-100) motorway",
+          "time": "1.9 km"
+        },
+        {
+          "place": "Kennedy Avenue coastal road",
+          "time": "2 km"
+        },
+        {
+          "place": "Fişekhane",
+          "time": "2.1 km"
+        },
+        {
+          "place": "Olivium Outlet Center",
+          "time": "2.3 km"
+        },
+        {
+          "place": "Zeytinburnu seafront",
+          "time": "2.3 km"
+        },
+        {
+          "place": "Merter shopping centre",
+          "time": "2.6 km"
+        },
+        {
+          "place": "Bakırköy ferry pier",
+          "time": "4.9 km"
         }
       ]
     },

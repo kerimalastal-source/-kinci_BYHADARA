@@ -1,7 +1,7 @@
 import { t, tRaw, link, getProjectContent, placeLine, onLocaleChange, locales, intlTag } from "../i18n";
 import { lookup } from "../i18n/dictionaries";
 import { ensureAllLocales } from "../i18n/load";
-import { getProjectBySlug, getSortedProjects, hasVillas, type Project, type Residence } from "../data/projects";
+import { getProjectBySlug, getSortedProjects, hasVillas, planMonths, type Project, type Residence } from "../data/projects";
 import { projectStatusLabel } from "./projectCard";
 import { WHATSAPP_NUMBER, WHATSAPP_ICON } from "./floatingButtons";
 import { HEART_ICON, isFavorite } from "./favorites";
@@ -524,7 +524,7 @@ function renderInfo(slug: string, topic: InfoTopic): string {
       if (p.paymentPlan && !p.soldOut) {
         const plan = t("projectDetail.paymentPlanValue", {
           down: `<bdi dir="ltr">${p.paymentPlan.downPercent}%</bdi>`,
-          months: `<bdi dir="ltr">${p.paymentPlan.months}</bdi>`
+          months: `<bdi dir="ltr">${planMonths(p.paymentPlan)}</bdi>`
         });
         body += `<p>${t("projectDetail.paymentPlanLabel")}: ${plan}</p>`;
       }

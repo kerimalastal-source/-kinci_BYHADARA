@@ -1,5 +1,5 @@
 import { t, getProjectContent, link, placeLine, intlTag } from "../i18n";
-import { getProjectBySlug, getSortedProjects, type Project, type Residence } from "../data/projects";
+import { getProjectBySlug, getSortedProjects, planMonths, type Project, type Residence } from "../data/projects";
 import { renderProjectCard, projectStatusLabel } from "../components/projectCard";
 import { amenityIcon } from "../components/amenityIcons";
 import { statIcon } from "../components/statIcons";
@@ -496,7 +496,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   const plan = project.paymentPlan
     ? t("projectDetail.paymentPlanValue", {
         down: `<bdi dir="ltr">${project.paymentPlan.downPercent}%</bdi>`,
-        months: `<bdi dir="ltr">${project.paymentPlan.months}</bdi>`
+        months: `<bdi dir="ltr">${planMonths(project.paymentPlan)}</bdi>`
       })
     : "";
   const inquiryHref = `${link("/contact")}?project=${project.slug}`;

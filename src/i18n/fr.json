@@ -82,6 +82,7 @@
       "apartments": "Appartements",
       "blocksFloors": "Bâtiments × étages",
       "constructionArea": "Surface construite",
+      "projectArea": "Surface du projet",
       "greenAndParkArea": "Espaces verts et parc",
       "offices": "Bureaux",
       "homeOffices": "Home offices",
@@ -119,8 +120,8 @@
     "statsTitle": "HADARA en chiffres",
     "stats": [
       { "value": "12+", "label": "années d'excellence", "icon": "years" },
-      { "value": "19", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "6 600+", "label": "unités résidentielles", "icon": "apartments" },
+      { "value": "20", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "7 400+", "label": "unités résidentielles", "icon": "apartments" },
       { "value": "420+", "label": "bureaux", "icon": "offices" },
       { "value": "300+", "label": "locaux commerciaux", "icon": "shops" },
       { "value": "9", "label": "quartiers phares d'Istanbul", "icon": "districts" }
@@ -214,8 +215,8 @@
     "statsTitle": "Notre bilan",
     "stats": [
       { "value": "12+", "label": "années d'activité", "icon": "years" },
-      { "value": "19", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "7 300+", "label": "logements, bureaux et commerces", "icon": "apartments" },
+      { "value": "20", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "8 100+", "label": "logements, bureaux et commerces", "icon": "apartments" },
       { "value": "640 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
     ]
   },
@@ -1709,6 +1710,62 @@
         {
           "place": "Aéroport d'Istanbul",
           "time": "15 min"
+        }
+      ]
+    },
+    "alya-city-veliefendi": {
+      "name": "Alya City Veliefendi",
+      "tagline": "Une résidence complète au cœur de Zeytinburnu, près du métro, du Marmaray et du littoral, par BOSS4 İnşaat.",
+      "shortDescription": "Alya City Veliefendi est une résidence de BOSS4 İnşaat à Veliefendi, Zeytinburnu, sur un projet de 128 259 m² : 778 appartements du 1+1 au 3+1 répartis en 12 immeubles, avec piscine intérieure, salle de sport, sauna et rue commerçante. La remise des clés approche, et le projet est éligible à la citoyenneté turque.",
+      "longDescription": "Alya City s'élève dans le quartier de Veliefendi, à Zeytinburnu, sur la rive européenne d'Istanbul, à un emplacement central proche de l'autoroute E-5, de la route côtière Kennedy Caddesi, du tunnel Eurasia et de l'autoroute TEM. Construit par BOSS4 İnşaat sur une surface de projet de 128 259 m², il compte 778 appartements répartis en 12 immeubles autour de jardins intérieurs et d'allées piétonnes : 85 appartements 1+1, 282 appartements 2+1 à cuisine ouverte, 285 appartements 2+1 à cuisine fermée et 126 appartements 3+1 à cuisine fermée. De nombreux plans 2+1 et 3+1 offrent une chambre parentale avec salle de bains privée, et certains 3+1 un dressing. Les résidents disposent d'une piscine intérieure, d'une salle de sport, d'un sauna et d'un hammam à vapeur, d'une salle de jeux pour enfants, d'une salle PlayStation, d'une salle de réunion, d'une salle de réception, de terrains de sport en plein air et d'un parking couvert, tandis que cafés et boutiques bordent Alya Meydan, la rue piétonne du projet. Le Metrobus, le tramway T1, le métro M1A et le Marmaray sont facilement accessibles, tout comme le terminal de ferries de Yenikapı et la gare à grande vitesse de Bakırköy ; Marmara Forum est à 1,5 km, Olivium à 2,3 km, Merter à 2,6 km et le front de mer de Zeytinburnu à 2,3 km. Les prix commencent à 165 000 $ pour un 1+1 et à 238 000 $ pour un 2+1, avec 50 % d'acompte et le solde sur 12 à 24 mois ; le prix au comptant diffère du prix à crédit. La remise des clés approche, et le projet est éligible à la citoyenneté turque.",
+      "highlights": [
+        "Remise des clés prochainement",
+        "Éligible à la citoyenneté turque",
+        "778 appartements du 1+1 au 3+1 dans 12 immeubles",
+        "Appartements 2+1 à cuisine ouverte ou fermée",
+        "Piscine intérieure, salle de sport, sauna et hammam à vapeur",
+        "Salle de jeux pour enfants, salle PlayStation, salle de réunion et salle de réception",
+        "Terrains de sport en plein air, allées piétonnes et jardins intérieurs",
+        "Alya Meydan, une rue piétonne de cafés et de boutiques dans le projet",
+        "Proche du Metrobus, du tramway T1, du métro M1A et du Marmaray",
+        "Emplacement central près de l'E-5, de la route côtière et du tunnel Eurasia"
+      ],
+      "nearby": [
+        {
+          "place": "Centre commercial Marmara Forum",
+          "time": "1.5 km"
+        },
+        {
+          "place": "Gare Marmaray de Zeytinburnu",
+          "time": "1.7 km"
+        },
+        {
+          "place": "Autoroute E-5 (D-100)",
+          "time": "1.9 km"
+        },
+        {
+          "place": "Route côtière Kennedy Caddesi",
+          "time": "2 km"
+        },
+        {
+          "place": "Fişekhane",
+          "time": "2.1 km"
+        },
+        {
+          "place": "Olivium Outlet Center",
+          "time": "2.3 km"
+        },
+        {
+          "place": "Front de mer de Zeytinburnu",
+          "time": "2.3 km"
+        },
+        {
+          "place": "Centre commercial de Merter",
+          "time": "2.6 km"
+        },
+        {
+          "place": "Embarcadère de Bakırköy",
+          "time": "4.9 km"
         }
       ]
     },
