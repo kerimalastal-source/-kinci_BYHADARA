@@ -846,5 +846,37 @@
     "headlineAr": "الطابق الأول: 4 غرف نوم و3 شرفات",
     "headlineEn": "First floor: 4 bedrooms and 3 balconies",
     "photo": "/images/projects/marmara-haven-villa/bedroom-sea.jpg"
+  },
+  {
+    "date": "2026-10-24",
+    "id": "lotus-manzara-guzelce-life",
+    "topic": "لوتس مانزارا غوزلجه · الحياة في المشروع",
+    "headlineAr": "جناح نوم رئيسي بغرفة ملابس خاصة",
+    "headlineEn": "A master suite with its own dressing room",
+    "photo": "/images/projects/lotus-manzara-guzelce/master-bedroom.jpg"
+  },
+  {
+    "date": "2026-10-24",
+    "id": "blog-real-estate-market-trends",
+    "topic": "مقال: اتجاهات العقار في إسطنبول",
+    "headlineAr": "4 أشياء يبحث عنها المشترون في إسطنبول اليوم",
+    "headlineEn": "4 things buyers look for in Istanbul today",
+    "photo": "/images/blog/real-estate-market-trends.jpg"
+  },
+  {
+    "date": "2026-10-24",
+    "id": "pick-entrance-or-parking",
+    "topic": "لو خُيّرت: مدخل فسيح أم موقف خاص؟ (شرائح)",
+    "headlineAr": "مدخل فسيح بدرج داخلي أم موقف خاص لسيارتك؟",
+    "headlineEn": "A spacious entrance with a staircase, or private parking?",
+    "photo": "/images/projects/lotus-manzara-guzelce/entrance-staircase.jpg"
+  },
+  {
+    "date": "2026-10-24",
+    "id": "lotus-manzara-guzelce-life-story",
+    "topic": "ستوري: الحياة في لوتس مانزارا غوزلجه",
+    "headlineAr": "على بُعد دقائق من مارينا غوزلجه والساحل",
+    "headlineEn": "Minutes from Güzelce Marina and the coast",
+    "photo": "/images/projects/lotus-manzara-guzelce/street-view.jpg"
   }
 ]
