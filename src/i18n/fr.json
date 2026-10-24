@@ -120,8 +120,8 @@
     "statsTitle": "HADARA en chiffres",
     "stats": [
       { "value": "12+", "label": "années d'excellence", "icon": "years" },
-      { "value": "20", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "7 400+", "label": "unités résidentielles", "icon": "apartments" },
+      { "value": "21", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "7 900+", "label": "unités résidentielles", "icon": "apartments" },
       { "value": "420+", "label": "bureaux", "icon": "offices" },
       { "value": "300+", "label": "locaux commerciaux", "icon": "shops" },
       { "value": "9", "label": "quartiers phares d'Istanbul", "icon": "districts" }
@@ -215,9 +215,9 @@
     "statsTitle": "Notre bilan",
     "stats": [
       { "value": "12+", "label": "années d'activité", "icon": "years" },
-      { "value": "20", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "8 100+", "label": "logements, bureaux et commerces", "icon": "apartments" },
-      { "value": "640 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
+      { "value": "21", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "8 600+", "label": "logements, bureaux et commerces", "icon": "apartments" },
+      { "value": "660 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
     ]
   },
   "projects": {
@@ -1766,6 +1766,70 @@
         {
           "place": "Embarcadère de Bakırköy",
           "time": "4.9 km"
+        }
+      ]
+    },
+    "alya-konutlari-merkezefendi": {
+      "name": "Alya Konutları Merkezefendi",
+      "tagline": "Des logements modernes, titres de propriété disponibles, au cœur de Zeytinburnu, à deux pas du Metrobus et du tramway, par BOSS4 İnşaat.",
+      "shortDescription": "Alya Konutları Merkezefendi est un projet résidentiel de BOSS4 İnşaat à Merkezefendi, Zeytinburnu, sur environ 18 000 m² de terrain : 467 logements du 1+1 au 7+1, dont des duplex, et 15 commerces dans 9 immeubles de 5 à 7 étages, avec piscines intérieures, salle de sport, hammam et sauna. Livraison en 2026, titres de propriété disponibles, éligible à la citoyenneté turque et au permis de séjour immobilier.",
+      "longDescription": "Alya Konutları s'élève dans le quartier de Merkezefendi, à Zeytinburnu, au cœur de la rive européenne d'Istanbul. Construit par BOSS4 İnşaat sur environ 18 000 m² de terrain, il compte 9 immeubles résidentiels modernes de 5 à 7 étages, avec 467 logements et 15 commerces. Les logements vont du 1+1 au 7+1, dont des duplex, avec des finitions intérieures et extérieures et des matériaux de grande qualité. Les résidents disposent de piscines intérieures, d'une salle de sport entièrement équipée, d'un hammam, d'un sauna et d'un bain de vapeur, de bassins d'agrément et d'aires de jeux pour enfants, de vastes espaces verts avec coins de détente en famille et allées piétonnes, d'un gardiennage et d'une vidéosurveillance 24 h/24, d'ascenseurs et d'un parking sur deux niveaux, dans des immeubles parasismiques dotés d'une isolation moderne. L'arrêt de tramway Cevizlibağ est à 600 m et le Metrobus à 650 m, l'hôpital de l'université Koç à 1,9 km, l'autoroute E-5 à 3 km, la gare Marmaray de Kazlıçeşme à 3,1 km, l'université technique Yıldız à 3,5 km, le centre commercial Axis à 3,6 km, l'hôpital Cerrahpaşa à 3,9 km, Fişekhane à 4,8 km, la gare routière d'Esenler à 5,3 km et la marina d'Ataköy à 6,2 km. La livraison est prévue en 2026, les titres de propriété sont disponibles et un plan de paiement est proposé avec 50 % d'acompte et le solde sur 24 mois. Le projet est éligible à la citoyenneté turque et au permis de séjour immobilier.",
+      "highlights": [
+        "Livraison en 2026, titres de propriété disponibles",
+        "Éligible à la citoyenneté turque et au permis de séjour immobilier",
+        "467 logements du 1+1 au 7+1, dont des duplex, et 15 commerces",
+        "9 immeubles modernes de 5 à 7 étages sur environ 18 000 m² de terrain",
+        "Piscines intérieures, salle de sport, hammam, sauna et bain de vapeur",
+        "Espaces verts avec coins de détente en famille, allées piétonnes et bassins",
+        "Aires de jeux pour enfants",
+        "Gardiennage et vidéosurveillance 24 h/24, parking sur deux niveaux",
+        "Immeubles parasismiques à isolation moderne",
+        "Tramway à 600 m et Metrobus à 650 m"
+      ],
+      "nearby": [
+        {
+          "place": "Arrêt de tramway Cevizlibağ",
+          "time": "600 m"
+        },
+        {
+          "place": "Arrêt de Metrobus Cevizlibağ",
+          "time": "650 m"
+        },
+        {
+          "place": "Hôpital de l'université Koç",
+          "time": "1.9 km"
+        },
+        {
+          "place": "Autoroute E-5 (D-100)",
+          "time": "3 km"
+        },
+        {
+          "place": "Gare Marmaray de Kazlıçeşme",
+          "time": "3.1 km"
+        },
+        {
+          "place": "Université technique Yıldız",
+          "time": "3.5 km"
+        },
+        {
+          "place": "Centre commercial Axis",
+          "time": "3.6 km"
+        },
+        {
+          "place": "Hôpital Cerrahpaşa",
+          "time": "3.9 km"
+        },
+        {
+          "place": "Fişekhane",
+          "time": "4.8 km"
+        },
+        {
+          "place": "Gare routière d'Esenler",
+          "time": "5.3 km"
+        },
+        {
+          "place": "Marina d'Ataköy",
+          "time": "6.2 km"
         }
       ]
     },

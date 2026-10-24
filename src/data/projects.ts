@@ -837,6 +837,57 @@ export const projects: Project[] = [
     ]
   },
   {
+    slug: "alya-konutlari-merkezefendi",
+    district: "Zeytinburnu",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-10-25: delivery 2026, title deeds ready, eligible for citizenship and residence; 50% down and the
+    // balance over 24 months; no price given. 9 blocks of 5 to 7 floors, 467 homes and 15 shops on about 18,000 m²
+    // (17,928.53 m² on the title deed), 1+1 to 7+1 and duplexes.
+    paymentPlan: { downPercent: 50, months: 24 },
+    lifestyle: ["city"],
+    unitsAvailable: true,
+    priority: 1.99,
+    developer: "BOSS4 İnşaat",
+    address: "Merkezefendi Mah., Sabri Ülker Sk. No: 38, Zeytinburnu, İstanbul",
+    price: "on-request",
+    // Drone photos of the built blocks, renders and the sample apartment from the project folder; the developer's
+    // presentation (Cevizlibağ tram 600 m, Koç University Hospital 1.9 km). The plans have no published price list.
+    coverImage: img("alya-konutlari-merkezefendi", "aerial-blocks", 1680, 945, "Alya Konutları Merkezefendi completed blocks in Zeytinburnu, drone view"),
+    gallery: [
+      img("alya-konutlari-merkezefendi", "aerial-courtyards", 1680, 945, "Alya Konutları Merkezefendi blocks and courtyards from above"),
+      img("alya-konutlari-merkezefendi", "aerial-wide", 1680, 945, "Alya Konutları Merkezefendi among the green neighbourhood of Merkezefendi, drone view"),
+      img("alya-konutlari-merkezefendi", "aerial-gardens", 1080, 608, "Alya Konutları Merkezefendi landscaped gardens and play areas between the blocks"),
+      img("alya-konutlari-merkezefendi", "pool-render", 1080, 608, "Alya Konutları Merkezefendi garden pool and pergolas between the blocks"),
+      img("alya-konutlari-merkezefendi", "cafe-render", 1080, 608, "Alya Konutları Merkezefendi café pavilion and plaza"),
+      img("alya-konutlari-merkezefendi", "living-room", 1680, 1120, "Alya Konutları Merkezefendi sample apartment living room"),
+      img("alya-konutlari-merkezefendi", "bedroom", 1680, 1120, "Alya Konutları Merkezefendi sample apartment master bedroom"),
+      img("alya-konutlari-merkezefendi", "kitchen", 1680, 1120, "Alya Konutları Merkezefendi sample apartment kitchen")
+    ],
+    stats: [
+      { value: "467", labelKey: "apartments" },
+      { value: "15", labelKey: "shops" },
+      { value: "2026", labelKey: "delivery" },
+      { value: "18,000 m²", labelKey: "landArea" },
+      { value: "1+1 – 7+1", labelKey: "layout" }
+    ],
+    amenities: [
+      "indoorPool",
+      "fitness",
+      "hamam",
+      "sauna",
+      "playground",
+      "landscaping",
+      "joggingTrack",
+      "security",
+      "cctv",
+      "indoorParking",
+      "elevator",
+      "insulation",
+      "seismicDesign"
+    ]
+  },
+  {
     slug: "lotus-sisli",
     district: "Şişli",
     city: "Istanbul",
