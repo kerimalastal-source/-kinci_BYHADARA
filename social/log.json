@@ -878,5 +878,37 @@
     "headlineAr": "على بُعد دقائق من مارينا غوزلجه والساحل",
     "headlineEn": "Minutes from Güzelce Marina and the coast",
     "photo": "/images/projects/lotus-manzara-guzelce/street-view.jpg"
+  },
+  {
+    "date": "2026-10-25",
+    "id": "lotus-manzara-beylikduzu-types",
+    "topic": "لوتس مانزارا بيليكدوزو · نوعا الفلل",
+    "headlineAr": "مستقلة أم توأم؟ الفرق بين نوعَي الفلل",
+    "headlineEn": "Detached or semi-detached? The two villa types",
+    "photo": "/images/projects/lotus-manzara-beylikduzu/villa-type-b.jpg"
+  },
+  {
+    "date": "2026-10-25",
+    "id": "contact-visit-office",
+    "topic": "زورونا في إسطنبول أو عبر الفيديو",
+    "headlineAr": "قابلنا في مكتبنا ببيليكدوزو أو عبر مكالمة فيديو",
+    "headlineEn": "Meet us at our Beylikdüzü office or on a video call",
+    "photo": "/images/projects/marmara-haven-villa/entrance.jpg"
+  },
+  {
+    "date": "2026-10-25",
+    "id": "pick-home-size",
+    "topic": "سؤال الليلة: أيّ مساحة تناسب عائلتك؟ (شرائح)",
+    "headlineAr": "أيّ مساحة تناسب عائلتك؟",
+    "headlineEn": "Which size suits your family?",
+    "photo": "/images/projects/lotus-manzara-beylikduzu/living-room.jpg"
+  },
+  {
+    "date": "2026-10-25",
+    "id": "lotus-manzara-beylikduzu-types-story",
+    "topic": "ستوري: لوتس مانزارا بيليكدوزو من الأعلى",
+    "headlineAr": "16 فيلا فقط على أرض مساحتها 5,500 م²",
+    "headlineEn": "Only 16 villas on a 5,500 m² plot",
+    "photo": "/images/projects/lotus-manzara-beylikduzu/aerial-villas.jpg"
   }
 ]
