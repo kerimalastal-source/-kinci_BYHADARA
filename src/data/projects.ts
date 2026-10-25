@@ -892,8 +892,10 @@ export const projects: Project[] = [
     district: "Beşiktaş",
     city: "Istanbul",
     status: "ongoing",
-    // Owner, 2026-10-25: price on request, eligible for citizenship, no payment plan; delivery as in the Drive
-    // files (the developer's September 2026 offer: January 2027). No home count is published, so none is shown.
+    // Owner, 2026-10-25: price on request, eligible for citizenship; delivery as in the Drive files (the
+    // developer's September 2026 offer: January 2027); 295 homes approved by the owner (not in the developer files).
+    // Owner, 2026-10-25: same plan as Referans Pendik for all Referans projects (40% down, 24 to 36 months).
+    paymentPlan: { downPercent: 40, months: 24, monthsTo: 36 },
     lifestyle: ["city"],
     unitsAvailable: true,
     priority: 1.991,
@@ -992,6 +994,8 @@ export const projects: Project[] = [
     status: "delivered",
     // Owner, 2026-10-25: price on request, eligible for citizenship. Completed (developer's 2024 stock-exchange
     // filing and the delivered-flat photos).
+    // Owner, 2026-10-25: same plan as Referans Pendik for all Referans projects (40% down, 24 to 36 months).
+    paymentPlan: { downPercent: 40, months: 24, monthsTo: 36 },
     lifestyle: ["city", "nature"],
     unitsAvailable: true,
     priority: 1.993,
