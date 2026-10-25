@@ -794,6 +794,17 @@
   color: inherit;
 }
 
+.site-footer__bottom .site-footer__operator {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: rgba(247, 244, 236, 0.5);
+}
+
+.site-footer__company {
+  white-space: nowrap;
+}
+
 .site-footer__legal {
   color: inherit;
   text-decoration: underline;
