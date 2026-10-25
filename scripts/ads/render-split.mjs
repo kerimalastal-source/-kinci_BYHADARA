@@ -57,6 +57,19 @@ const ADS = [
     ],
     cta: ["Message us on WhatsApp", "راسلنا عبر واتساب"],
   },
+  {
+    id: "plan40",
+    // Owner 2026-10-25: website-traffic ad for the Referans plan (40% down, balance over 24 to 36 months),
+    // so the headline says "up to 36 months" and the label says selected projects, not all of them.
+    ar: "شقتك في إسطنبول<br>ادفع 40% والباقي حتى 36 شهراً",
+    en: "Istanbul homes: 40% down, the rest up to 36 months",
+    label: "SELECTED PROJECTS · ISTANBUL",
+    photos: [
+      { src: img("referans-pendik/blocks-sea-view.jpg"), pos: "center center" },
+      { src: img("referans-besiktas/aerial-courtyard.jpg"), pos: "center center" },
+    ],
+    cta: ["Explore the Projects", "تصفّح المشاريع"],
+  },
 ];
 
 const css = (w, h, story) => `
