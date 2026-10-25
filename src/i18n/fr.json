@@ -83,6 +83,7 @@
       "blocksFloors": "Bâtiments × étages",
       "constructionArea": "Surface construite",
       "projectArea": "Surface du projet",
+      "communityArea": "Espaces communs",
       "greenAndParkArea": "Espaces verts et parc",
       "offices": "Bureaux",
       "homeOffices": "Home offices",
@@ -120,18 +121,18 @@
     "statsTitle": "HADARA en chiffres",
     "stats": [
       { "value": "12+", "label": "années d'excellence", "icon": "years" },
-      { "value": "21", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "7 900+", "label": "unités résidentielles", "icon": "apartments" },
+      { "value": "24", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "9 300+", "label": "unités résidentielles", "icon": "apartments" },
       { "value": "420+", "label": "bureaux", "icon": "offices" },
       { "value": "300+", "label": "locaux commerciaux", "icon": "shops" },
-      { "value": "9", "label": "quartiers phares d'Istanbul", "icon": "districts" }
+      { "value": "11", "label": "quartiers phares d'Istanbul", "icon": "districts" }
     ],
     "partnersEyebrow": "Réseau de confiance",
     "partnersTitle": "Nos partenaires",
     "partnersSubtitle": "HADARA collabore avec des promoteurs et groupes d'investissement régionaux de premier plan pour livrer des projets sur lesquels nos clients peuvent compter.",
     "aboutEyebrow": "Qui sommes-nous",
     "aboutTitle": "Partenaire de développement et de commercialisation immobilière à Istanbul",
-    "aboutText1": "Depuis 2014, HADARA Immobilier est un partenaire de développement et de commercialisation immobilière à Istanbul. Nous avons développé Marmara Haven Villa, une résidence privée à Büyükçekmece, et nous commercialisons des projets résidentiels et mixtes de promoteurs reconnus à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan — parmi les axes de croissance les plus dynamiques de la ville.",
+    "aboutText1": "Depuis 2014, HADARA Immobilier est un partenaire de développement et de commercialisation immobilière à Istanbul. Nous avons développé Marmara Haven Villa, une résidence privée à Büyükçekmece, et nous commercialisons des projets résidentiels et mixtes de promoteurs reconnus à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş et Pendik — parmi les axes de croissance les plus dynamiques de la ville.",
     "aboutText2": "Des villas privées de luxe aux grands ensembles résidentiels, nous choisissons les projets que nous proposons pour leur architecture soignée, la qualité de leur construction et une réelle compréhension des attentes de nos clients.",
     "aboutCta": "En savoir plus sur HADARA",
     "spotlightEyebrow": "Nouveau lancement",
@@ -141,7 +142,7 @@
     "spotlightWhatsappMessage": "Bonjour, je souhaiterais obtenir plus d'informations sur le projet {name}.",
     "projectsEyebrow": "Notre portefeuille",
     "projectsTitle": "Projets phares",
-    "projectsSubtitle": "Un aperçu des développements qui façonnent les quartiers de Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan à Istanbul.",
+    "projectsSubtitle": "Un aperçu des développements qui façonnent les quartiers de Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş et Pendik à Istanbul.",
     "servicesEyebrow": "Notre expertise",
     "servicesTitle": "Une expertise immobilière complète",
     "services": [
@@ -192,7 +193,7 @@
     "storyEyebrow": "Notre histoire",
     "storyTitle": "D'une vision unique à un portefeuille en pleine croissance",
     "storyText1": "Fondée en 2014 et basée à Beylikdüzü, Istanbul, HADARA Immobilier est née d'une idée simple : une sélection rigoureuse des projets et des conseils honnêtes créent une valeur durable pour ceux qui vivent dans les biens que nous proposons, comme pour ceux qui y investissent.",
-    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut, Mesa et Dağ Holding pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan, parmi les axes de croissance les plus recherchés du côté européen d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
+    "storyText2": "Au fil de la dernière décennie, nous avons travaillé avec des promoteurs reconnus comme Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut, Mesa, Dağ Holding et Kiler GYO pour commercialiser des résidences, des sites à usage mixte et des villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş et Pendik, parmi les axes de croissance les plus recherchés des deux rives d'Istanbul, et nous avons développé notre propre villa privée, Marmara Haven, à Büyükçekmece. Aujourd'hui, nous proposons aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie, pour que nos clients façonnent leur projet avec nous dès la première idée.",
     "missionTitle": "Notre mission",
     "missionText": "Relier résidents et investisseurs à des projets résidentiels et mixtes soigneusement sélectionnés, qui allient qualité architecturale, confort quotidien et valeur durable, et les accompagner clairement à chaque étape.",
     "visionTitle": "Notre vision",
@@ -215,15 +216,15 @@
     "statsTitle": "Notre bilan",
     "stats": [
       { "value": "12+", "label": "années d'activité", "icon": "years" },
-      { "value": "21", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "8 600+", "label": "logements, bureaux et commerces", "icon": "apartments" },
-      { "value": "660 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
+      { "value": "24", "label": "projets emblématiques", "icon": "projects" },
+      { "value": "10 000+", "label": "logements, bureaux et commerces", "icon": "apartments" },
+      { "value": "680 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
     ]
   },
   "projects": {
     "heroEyebrow": "Notre portefeuille",
     "heroTitle": "Des projets qui façonnent Istanbul",
-    "heroSubtitle": "Des villas privées aux grands ensembles résidentiels, découvrez les projets développés et commercialisés par HADARA à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan.",
+    "heroSubtitle": "Des villas privées aux grands ensembles résidentiels, découvrez les projets développés et commercialisés par HADARA à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş et Pendik.",
     "atlas": {
       "title": "Nos projets sur la carte d'Istanbul",
       "projects": {
@@ -271,6 +272,8 @@
     "buyukcekmece": "Büyükçekmece",
     "kucukcekmece": "Küçükçekmece",
     "eyupsultan": "Eyüpsultan",
+    "besiktas": "Beşiktaş",
+    "pendik": "Pendik",
     "avcilar": "Avcılar",
     "ispartakule": "Ispartakule",
     "sisli": "Şişli",
@@ -645,7 +648,7 @@
         "items": [
           {
             "q": "Qui est HADARA Immobilier ?",
-            "a": "HADARA Immobilier est un partenaire de développement et de commercialisation immobilière fondé en 2014, basé à Beylikdüzü, Istanbul. Nous avons développé Marmara Haven Villa, une résidence privée à Büyükçekmece, et nous commercialisons des projets résidentiels, mixtes et des villas de promoteurs reconnus à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan."
+            "a": "HADARA Immobilier est un partenaire de développement et de commercialisation immobilière fondé en 2014, basé à Beylikdüzü, Istanbul. Nous avons développé Marmara Haven Villa, une résidence privée à Büyükçekmece, et nous commercialisons des projets résidentiels, mixtes et des villas de promoteurs reconnus à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş et Pendik."
           },
           {
             "q": "Quels types de projets HADARA propose-t-elle ?",
@@ -653,7 +656,7 @@
           },
           {
             "q": "Où sont situés les projets de HADARA ?",
-            "a": "Tous les projets que nous proposons actuellement sont situés du côté européen d'Istanbul, dans les quartiers en forte croissance de Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan."
+            "a": "Les projets que nous proposons actuellement se trouvent dans des quartiers en forte croissance des deux rives d'Istanbul : Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan et Beşiktaş sur la rive européenne, et Pendik sur la rive asiatique."
           },
           {
             "q": "Comment puis-je contacter l'équipe de HADARA ?",
@@ -1833,6 +1836,195 @@
         }
       ]
     },
+    "referans-besiktas": {
+      "name": "Referans Beşiktaş",
+      "tagline": "Des résidences basses autour d'un jardin privé à Abbasağa, entre Nişantaşı et le Bosphore, par Kiler GYO.",
+      "shortDescription": "Referans Beşiktaş est un projet résidentiel en construction à Abbasağa, Beşiktaş, développé par Kiler GYO selon le modèle de partage des revenus de TOKİ : 10 immeubles bas autour d'un jardin central paysager, des logements du 1+1 au penthouse duplex 5.5+2, une piscine intérieure, une salle de sport, un hammam et un sauna dans 900 m² d'espaces communs. Éligible à la citoyenneté turque.",
+      "longDescription": "Referans Beşiktaş s'élève à Abbasağa, l'un des quartiers les plus centraux de Beşiktaş, à quelques minutes de Nişantaşı, des rives du Bosphore, du parc de Yıldız et du centre de Beşiktaş. Il est développé par Kiler GYO, la société d'investissement immobilier cotée en bourse à l'origine d'İstanbul Sapphire, selon le modèle de partage des revenus de TOKİ, l'administration publique du logement. Le projet réunit 10 immeubles bas, conçus par İki Design Group avec des intérieurs signés Metex Design, disposés autour d'un jardin central aménagé par Spiga, avec des espaces verts entre tous les immeubles, un bassin d'ornement en cascade et un bassin biologique, des pergolas, des salons de jardin privatifs, une terrasse panoramique et une aire de jeux pour enfants. Les logements vont du 1+1 au 4+1, dont des duplex avec terrasse privative et un penthouse duplex 5.5+2 doté d'un toit-terrasse de 129,7 m², et chaque logement dispose de sa propre cave. Les résidents partagent 900 m² d'équipements avec une piscine intérieure, une salle de sport entièrement équipée et un studio, un sauna, un hammam, un bain de vapeur et des salles de massage, sous vidéosurveillance et avec une équipe de sécurité 24 h/24. Le parc d'Abbasağa est à 600 m, le pavillon d'Ihlamur à 700 m, l'hôpital Acıbadem Fulya à 1,4 km, l'Hôpital américain à 1,6 km, City's Nişantaşı à 1,3 km et Zorlu Center à 2,7 km. Le projet est en construction et la commercialisation est en cours. Le projet est éligible à la citoyenneté turque.",
+      "highlights": [
+        "À Abbasağa, Beşiktaş, entre Nişantaşı et le Bosphore",
+        "Par Kiler GYO, le promoteur d'İstanbul Sapphire, selon le modèle de partage des revenus de TOKİ",
+        "Éligible à la citoyenneté turque",
+        "10 immeubles bas autour d'un jardin central paysager",
+        "Logements du 1+1 au 4+1, duplex avec terrasse et penthouse 5.5+2",
+        "900 m² d'espaces communs : piscine intérieure, salle de sport, sauna, bain de vapeur et hammam",
+        "Bassins d'ornement, pergolas, salons de jardin privatifs et terrasse panoramique",
+        "Une cave pour chaque logement",
+        "Vidéosurveillance et équipe de sécurité 24 h/24"
+      ],
+      "nearby": [
+        {
+          "place": "Parc d'Abbasağa",
+          "time": "600 m"
+        },
+        {
+          "place": "Pavillon d'Ihlamur",
+          "time": "700 m"
+        },
+        {
+          "place": "City's Nişantaşı",
+          "time": "1.3 km"
+        },
+        {
+          "place": "Hôpital Acıbadem Fulya",
+          "time": "1.4 km"
+        },
+        {
+          "place": "Campus İTÜ de Maçka",
+          "time": "1.4 km"
+        },
+        {
+          "place": "Université technique Yıldız",
+          "time": "1.5 km"
+        },
+        {
+          "place": "Hôpital américain",
+          "time": "1.6 km"
+        },
+        {
+          "place": "Parc de Maçka",
+          "time": "2 km"
+        },
+        {
+          "place": "Parc de Yıldız",
+          "time": "2.3 km"
+        },
+        {
+          "place": "Zorlu Center",
+          "time": "2.7 km"
+        },
+        {
+          "place": "Akmerkez",
+          "time": "4.2 km"
+        },
+        {
+          "place": "Kanyon",
+          "time": "5.3 km"
+        }
+      ]
+    },
+    "referans-pendik": {
+      "name": "Referans Pendik",
+      "tagline": "Un quartier vert de faible hauteur avec vue sur la mer et les îles des Princes à Pendik, par Kiler GYO avec İLBANK.",
+      "shortDescription": "Referans Pendik est un projet résidentiel en construction à Pendik, sur la rive asiatique d'Istanbul, développé par Kiler GYO en partenariat avec İLBANK : 686 logements du 2+1 au 4+1, dont des rez-de-jardin et des duplex, dans des immeubles bas sur un site de 78 620 m² avec 35 000 m² d'espaces paysagers, une piscine intérieure, une salle de sport, un hammam et un sauna, à 50 m du métro M4. Éligible à la citoyenneté turque.",
+      "longDescription": "Referans Pendik prend forme à Pendik, sur la rive asiatique d'Istanbul, sur une colline tournée vers la mer de Marmara, la marina de Pendik et les îles des Princes, avec le bois de Gözdağı derrière lui et un parc public à côté. Il est développé par Kiler GYO, la société d'investissement immobilier cotée en bourse à l'origine d'İstanbul Sapphire, en partenariat avec İLBANK. Le projet s'étend sur 78 620 m² et a été conçu comme un quartier de faible hauteur : 686 logements du 2+1 au 4+1, dont des 3.5+1 avec chambre de service, des rez-de-jardin avec jardin privatif et des duplex, au milieu de 35 000 m² d'espaces paysagers avec un étang enjambé de passerelles, des bassins d'ornement, des fontaines et des cascades, des jardins de fleurs et un verger, des pergolas, une pelouse pour les événements, des pistes cyclables et des allées de promenade, des espaces sportifs en plein air et une aire de jeux dans chaque partie du projet. Les résidents disposent d'une piscine intérieure dans un pavillon vitré, d'une salle de sport entièrement équipée, d'un sauna et d'un hammam, ainsi que d'un parking couvert avec une place par logement, et une rue commerçante avec boutiques, cafés et restaurants longe l'entrée. Le métro M4 Kadıköy–Sabiha Gökçen, les bus et l'autoroute E-5 sont à 50 m, la gare Marmaray de Pendik à 2 km, l'aéroport Sabiha Gökçen et l'autoroute TEM à 10 km, et plusieurs hôpitaux, dont VM Medical Park, l'hôpital universitaire Medipol et l'hôpital Şifa, à environ 2 km. Le projet est en construction et la commercialisation est en cours. Le projet est éligible à la citoyenneté turque.",
+      "highlights": [
+        "Vue sur la mer de Marmara, la marina de Pendik et les îles des Princes",
+        "Par Kiler GYO, le promoteur d'İstanbul Sapphire, en partenariat avec İLBANK",
+        "Éligible à la citoyenneté turque",
+        "686 logements du 2+1 au 4+1, dont des rez-de-jardin et des duplex",
+        "Immeubles bas au milieu de 35 000 m² d'espaces paysagers, avec un étang et des allées",
+        "Piscine intérieure, salle de sport, sauna et hammam",
+        "Aires de jeux, espaces sportifs et pistes cyclables",
+        "Parking couvert avec une place par logement",
+        "Métro M4 et autoroute E-5 à 50 m, aéroport Sabiha Gökçen à 10 km"
+      ],
+      "nearby": [
+        {
+          "place": "Métro M4 Kadıköy–Sabiha Gökçen",
+          "time": "50 m"
+        },
+        {
+          "place": "Autoroute E-5 (D-100)",
+          "time": "50 m"
+        },
+        {
+          "place": "Hôpital régional de Pendik",
+          "time": "1 km"
+        },
+        {
+          "place": "Gare Marmaray de Pendik",
+          "time": "2 km"
+        },
+        {
+          "place": "VM Medical Park Pendik",
+          "time": "2 km"
+        },
+        {
+          "place": "Hôpital universitaire Medipol",
+          "time": "2 km"
+        },
+        {
+          "place": "Hôpital universitaire de Marmara",
+          "time": "2.5 km"
+        },
+        {
+          "place": "Ferry rapide pour Yalova",
+          "time": "3.5 km"
+        },
+        {
+          "place": "Aéroport Sabiha Gökçen",
+          "time": "10 km"
+        },
+        {
+          "place": "Autoroute TEM",
+          "time": "10 km"
+        }
+      ]
+    },
+    "referans-beylikduzu": {
+      "name": "Referans Beylikdüzü",
+      "tagline": "Une résidence achevée au milieu des jardins, avec piscines, jardins à thème et logements jusqu'au duplex 5+1 à Beylikdüzü, par Kiler GYO.",
+      "shortDescription": "Referans Beylikdüzü est un projet résidentiel achevé à Beylikdüzü, réalisé par Kiler GYO : 709 logements du 2+1 au 5+1, dont des duplex avec jardin et des penthouses, et 18 commerces dans 8 immeubles sur 31 000 m² de terrain, aménagés à 70 % en espaces verts, avec piscines extérieure et intérieure, hammam, sauna et salle de sport. Éligible à la citoyenneté turque.",
+      "longDescription": "Referans Beylikdüzü est une résidence achevée à Beylikdüzü, sur la rive européenne d'Istanbul, construite par Kiler GYO, la société d'investissement immobilier cotée en bourse à l'origine d'İstanbul Sapphire, avec Biskon Yapı. Elle occupe un terrain de 31 000 m², dont 70 % sont consacrés aux jardins : un jardin de lavande et d'oliviers, un jardin zen japonais, un verger, un jardin avec piscine, des bassins miroirs et un étang, une place et des allées de promenade et des pistes cyclables. Ses 8 immeubles comptent 709 logements du 2+1 au 5+1, dont des duplex en rez-de-jardin, des logements avec jardin en terrasse et des penthouses en duplex, et 18 commerces bordent la façade sur l'avenue Kocatepe. Les résidents disposent d'une piscine extérieure et d'une piscine intérieure, d'un hammam, d'un sauna, d'une salle de sport, d'un terrain de basket, d'un terrain de sport et d'aires de jeux pour enfants, d'un café, d'un salon et d'un bâtiment d'activités, ainsi que d'une crèche, d'un parking couvert et d'une sécurité 24 h/24. L'échangeur de Haramidere est à 2 km, le centre commercial Torium, West Istanbul Marina, l'hôpital Medilife Beylikdüzü et le centre médical Acıbadem de Beylikdüzü à 4 km, MarmaraPark à 5 km et le parc Yaşam Vadisi de Beylikdüzü à 6 km, et le Metrobus, l'E-5 et la TEM sont à environ 5 minutes en voiture. Le projet est achevé et prêt à habiter, et des logements sont encore disponibles. Le projet est éligible à la citoyenneté turque.",
+      "highlights": [
+        "Achevé et prêt à habiter, avec des logements disponibles",
+        "Par Kiler GYO, le promoteur d'İstanbul Sapphire",
+        "Éligible à la citoyenneté turque",
+        "709 logements du 2+1 au 5+1, dont des duplex avec jardin et des penthouses, et 18 commerces",
+        "8 immeubles sur 31 000 m² de terrain, aménagés à 70 % en espaces verts",
+        "Jardin de lavande et d'oliviers, jardin zen japonais et verger",
+        "Piscines extérieure et intérieure, hammam, sauna et salle de sport",
+        "Terrain de basket, terrain de sport, aires de jeux et crèche",
+        "Parking couvert et sécurité 24 h/24"
+      ],
+      "nearby": [
+        {
+          "place": "Échangeur de Haramidere",
+          "time": "2 km"
+        },
+        {
+          "place": "Centre commercial Torium",
+          "time": "4 km"
+        },
+        {
+          "place": "West Istanbul Marina",
+          "time": "4 km"
+        },
+        {
+          "place": "Hôpital Medilife Beylikdüzü",
+          "time": "4 km"
+        },
+        {
+          "place": "Centre médical Acıbadem Beylikdüzü",
+          "time": "4 km"
+        },
+        {
+          "place": "Campus de l'université Beykent à Beylikdüzü",
+          "time": "5 km"
+        },
+        {
+          "place": "Campus d'Avcılar de l'université d'Istanbul",
+          "time": "5 km"
+        },
+        {
+          "place": "MarmaraPark",
+          "time": "5 km"
+        },
+        {
+          "place": "Yaşam Vadisi de Beylikdüzü",
+          "time": "6 km"
+        },
+        {
+          "place": "Hôpital universitaire Beykent",
+          "time": "7 km"
+        },
+        {
+          "place": "Centre des congrès et expositions TÜYAP",
+          "time": "8 km"
+        }
+      ]
+    },
     "lotus-sisli": {
       "name": "Lotus Şişli",
       "tagline": "Un projet mixte novateur au cœur d'Istanbul.",
@@ -2970,11 +3162,11 @@
     },
     "home": {
       "title": "HADARA Immobilier | Votre partenaire immobilier à Istanbul, Turquie",
-      "description": "Partenaire immobilier à Istanbul depuis 2014 : biens à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan."
+      "description": "Partenaire immobilier à Istanbul depuis 2014 : biens dans 11 quartiers, de Beylikdüzü et Şişli à Beşiktaş et Pendik."
     },
     "projects": {
       "title": "Nos projets à Istanbul – Appartements et villas",
-      "description": "Résidences, projets mixtes et villas à Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece et Eyüpsultan."
+      "description": "Résidences, projets mixtes et villas dans 11 quartiers d'Istanbul, de Beylikdüzü, Şişli et Beşiktaş à Pendik, sur la rive asiatique."
     },
     "about": {
       "title": "À propos de HADARA – Développement et commercialisation depuis 2014",
