@@ -122,7 +122,7 @@
     "stats": [
       { "value": "+12", "label": "عاماً من التميز", "icon": "years" },
       { "value": "24", "label": "مشروعاً بارزاً", "icon": "projects" },
-      { "value": "+9,300", "label": "وحدة سكنية", "icon": "apartments" },
+      { "value": "+9,500", "label": "وحدة سكنية", "icon": "apartments" },
       { "value": "+420", "label": "وحدة مكتبية", "icon": "offices" },
       { "value": "+300", "label": "وحدة تجارية", "icon": "shops" },
       { "value": "11", "label": "مناطق رئيسية في إسطنبول", "icon": "districts" }
@@ -217,7 +217,7 @@
     "stats": [
       { "value": "+12", "label": "عاماً في السوق", "icon": "years" },
       { "value": "24", "label": "مشروعاً بارزاً", "icon": "projects" },
-      { "value": "+10,000", "label": "وحدة سكنية ومكتبية وتجارية", "icon": "apartments" },
+      { "value": "+10,300", "label": "وحدة سكنية ومكتبية وتجارية", "icon": "apartments" },
       { "value": "+680,000 م²", "label": "إجمالي مساحة أراضي المشاريع", "icon": "landArea" }
     ]
   },

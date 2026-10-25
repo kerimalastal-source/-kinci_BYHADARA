@@ -122,7 +122,7 @@
     "stats": [
       { "value": "12+", "label": "années d'excellence", "icon": "years" },
       { "value": "24", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "9 300+", "label": "unités résidentielles", "icon": "apartments" },
+      { "value": "9 500+", "label": "unités résidentielles", "icon": "apartments" },
       { "value": "420+", "label": "bureaux", "icon": "offices" },
       { "value": "300+", "label": "locaux commerciaux", "icon": "shops" },
       { "value": "11", "label": "quartiers phares d'Istanbul", "icon": "districts" }
@@ -217,7 +217,7 @@
     "stats": [
       { "value": "12+", "label": "années d'activité", "icon": "years" },
       { "value": "24", "label": "projets emblématiques", "icon": "projects" },
-      { "value": "10 000+", "label": "logements, bureaux et commerces", "icon": "apartments" },
+      { "value": "10 300+", "label": "logements, bureaux et commerces", "icon": "apartments" },
       { "value": "680 000+ m²", "label": "de terrains au total dans les projets", "icon": "landArea" }
     ]
   },

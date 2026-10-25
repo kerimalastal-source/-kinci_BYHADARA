@@ -918,6 +918,7 @@ export const projects: Project[] = [
       img("referans-besiktas", "site-plan", 1112, 884, "Referans Beşiktaş site plan with blocks A to J and the central garden")
     ],
     stats: [
+      { value: "295", labelKey: "apartments" },
       { value: "10", labelKey: "blocks" },
       { value: "2027", labelKey: "delivery" },
       { value: "900 m²", labelKey: "communityArea" },

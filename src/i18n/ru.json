@@ -122,7 +122,7 @@
     "stats": [
       { "value": "12+", "label": "лет безупречной работы", "icon": "years" },
       { "value": "24", "label": "знаковых проектов", "icon": "projects" },
-      { "value": "9 300+", "label": "жилых единиц", "icon": "apartments" },
+      { "value": "9 500+", "label": "жилых единиц", "icon": "apartments" },
       { "value": "420+", "label": "офисов", "icon": "offices" },
       { "value": "300+", "label": "коммерческих помещений", "icon": "shops" },
       { "value": "11", "label": "ключевых районов Стамбула", "icon": "districts" }
@@ -217,7 +217,7 @@
     "stats": [
       { "value": "12+", "label": "лет на рынке", "icon": "years" },
       { "value": "24", "label": "знаковых проектов", "icon": "projects" },
-      { "value": "10 000+", "label": "жилых, офисных и коммерческих единиц", "icon": "apartments" },
+      { "value": "10 300+", "label": "жилых, офисных и коммерческих единиц", "icon": "apartments" },
       { "value": "680 000+ м²", "label": "общая площадь земли проектов", "icon": "landArea" }
     ]
   },
