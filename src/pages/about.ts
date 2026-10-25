@@ -68,7 +68,7 @@ export function renderAbout(el: HTMLElement): void {
             .map(
               (item) => `
             <li class="timeline__item">
-              <span class="timeline__year">${item.year}</span>
+              <span class="timeline__year"><bdi dir="ltr">${item.year}</bdi></span>
               <p class="timeline__text">${item.text}</p>
             </li>`
             )
