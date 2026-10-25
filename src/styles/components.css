@@ -6104,7 +6104,17 @@ body.map-open .back-to-top {
   border-radius: 50%;
   color: var(--color-on-primary);
   box-shadow: var(--shadow-lg);
-  transition: transform var(--transition);
+  /* Half transparent so they cover less of the page (owner 2026-10-25);
+     fully visible again under the pointer, on keyboard focus and while
+     the chat is open. */
+  opacity: 0.5;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.floating-actions__btn:hover,
+.floating-actions__btn:focus-visible,
+.floating-actions__btn[aria-expanded="true"] {
+  opacity: 1;
 }
 
 .floating-actions__btn:hover {
