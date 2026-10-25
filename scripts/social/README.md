@@ -19,6 +19,10 @@ the branch build in time.
 
 ## Steps for the daily session
 
+> **ONE POST A DAY (owner's decision 2026-10-25, overrides everything below and the routine's
+> message):** make only the single 09:00 post that `topics.mjs` prints; no 14:00 post, no 21:00
+> carousel and no Story. `day.json` holds exactly one post with `"at": "09:00"`.
+
 > **Updated 2026-09-29 (owner's request):** where the routine's message still says "both
 > posts", "two topics" or "at 10:00", this README wins: make **every** post topics.mjs gives
 > for today (3 during the intensive week), each with its `at` time, **plus the day's Story**
