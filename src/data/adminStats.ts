@@ -244,3 +244,27 @@ export async function fetchStatsDetails(days: number): Promise<StatsDetails | nu
   const stats = data as (StatsDetails & { error?: string }) | null;
   return stats && !stats.error ? stats : null;
 }
+
+/** One day in admin_organic_daily() (supabase/migrations/0034): real visits without paid ads by source. */
+export interface OrganicDay {
+  day: string;
+  search: number;
+  direct: number;
+  posts: number;
+  social: number;
+  referral: number;
+  contacted: number;
+  paid: number;
+}
+
+/** Real visitors without paid ads per day, or null when 0034 hasn't run. */
+export async function fetchOrganicDaily(days: number): Promise<OrganicDay[] | null> {
+  const { data, error } = await supabase.rpc("admin_organic_daily", { p_days: days });
+  if (error) {
+    // Before migration 0034 the function doesn't exist; the section says so.
+    if (error.code !== "PGRST202") console.error(error);
+    return null;
+  }
+  const r = data as { daily?: OrganicDay[]; error?: string } | null;
+  return r && !r.error && r.daily ? r.daily : null;
+}

@@ -2,8 +2,8 @@ import { t, link, getLocale, getProjectContent, intlTag, listSep } from "../../i
 import { escapeHtml } from "../../utils/html";
 import { getProjectBySlug } from "../../data/projects";
 import { inquiryKindKey } from "../../data/inquiries";
-import type { DetailsRequest, FunnelCounts, StatsDetails } from "../../data/adminStats";
-import { visitorsChart, type ChartDay } from "./visitorsChart";
+import type { DetailsRequest, FunnelCounts, OrganicDay, StatsDetails } from "../../data/adminStats";
+import { ORGANIC_SOURCES, organicChart, visitorsChart, type ChartDay, type OrganicChartDay } from "./visitorsChart";
 import type { VisitMode } from "./statsTop";
 
 /**
@@ -92,6 +92,58 @@ export function chartPanel(d: StatsDetails, mode: VisitMode, fmt: DayFormat): st
     <button type="button" class="btn btn--outline btn--small stats-table-toggle" data-table-toggle aria-expanded="false">${t(`${D}.chart.tableShow`)}</button>
     <div class="stats-chart-table" hidden>${table}</div>
     ${notes.map((n) => `<p class="admin-panel__hint vchart-note">${n}</p>`).join("")}`
+  );
+}
+
+/* ---------- Real visitors without paid ads (owner's request 2026-10-24, migration 0034) ---------- */
+
+const O = "adminStats.organic";
+
+export function organicPanel(daily: OrganicDay[] | null, fmt: DayFormat): string {
+  if (!daily) return panel(t(`${O}.title`), `<p class="admin-stats__empty">${t(`${O}.unavailable`)}</p>`);
+  const days: OrganicChartDay[] = daily.map((x) => ({
+    day: x.day,
+    counts: { search: x.search, direct: x.direct, posts: x.posts, social: x.social, referral: x.referral },
+    contacted: x.contacted,
+    paid: x.paid
+  }));
+  const one = (d: OrganicChartDay) => ORGANIC_SOURCES.reduce((s, k) => s + d.counts[k], 0);
+  const total = days.reduce((s, d) => s + one(d), 0);
+  const paid = days.reduce((s, d) => s + d.paid, 0);
+  const contacted = days.reduce((s, d) => s + d.contacted, 0);
+  const avg = (v: number) => new Intl.NumberFormat(tag(), { maximumFractionDigits: 1 }).format(v);
+  const figure = (label: string, value: string) =>
+    `<div class="vchart-figure"><p class="vchart-figure__label">${label}</p><p class="vchart-figure__value"><span dir="ltr">${value}</span></p></div>`;
+  const used = ORGANIC_SOURCES.filter((k) => days.some((d) => d.counts[k]));
+  const chart = organicChart(days, {
+    date: fmt.date,
+    axis: fmt.axis,
+    minor: fmt.minor,
+    num,
+    avg,
+    source: (k) => t(`${O}.sources.${k}`),
+    total: t(`${O}.tipTotal`),
+    average: t(`${O}.tipAverage`),
+    contacted: t("adminStats.real.tipContacted"),
+    paid: t(`${O}.tipPaid`),
+    label: t(`${O}.title`)
+  });
+  return panel(
+    t(`${O}.title`),
+    `<p class="admin-panel__hint">${t(`${O}.hint`)}</p>
+    <div class="vchart-figures">
+      ${figure(t(`${O}.total`), num(total))}
+      ${figure(t("adminStats.real.average"), avg(days.length ? total / days.length : 0))}
+      ${figure(t(`${O}.share`), percent(total, total + paid))}
+      ${figure(t("adminStats.real.contacted"), num(contacted))}
+    </div>
+    <ul class="vchart-legend">
+      ${used.map((k) => `<li><i class="ochart-legend ochart__part--${k}"></i>${t(`${O}.sources.${k}`)}</li>`).join("")}
+      <li><i class="ochart-legend__avg"></i>${t(`${O}.legendAverage`)}</li>
+      <li><i class="vchart-legend__mark"></i>${t(`${O}.legendContacted`)}</li>
+    </ul>
+    ${total ? chart : `<p class="admin-stats__empty">${t(`${O}.empty`)}</p>`}
+    <p class="admin-panel__hint vchart-note">${t(`${O}.note`)}</p>`
   );
 }
 

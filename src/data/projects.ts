@@ -146,8 +146,9 @@ export interface Project {
   price?: string;
   /** `price` is a starting price: shown as "From $380,000". */
   priceFrom?: boolean;
-  /** Instalment plan confirmed by the owner (2026-10-14): down payment % and the months the balance is spread over. */
-  paymentPlan?: { downPercent: number; months: number };
+  /** Instalment plan confirmed by the owner (2026-10-14): down payment % and the months the balance is spread over
+   * (`monthsTo` when it depends on the unit, e.g. 12 to 24 months). */
+  paymentPlan?: PaymentPlan;
   /** Setting, taken from the project's own description: by the sea (or sea views), green and calm, or city. Used by "Find My Project". */
   lifestyle?: Lifestyle[];
   /** Ad landing page: adds an "I'm interested" button to the hero. */
@@ -168,6 +169,15 @@ export interface Project {
   /** "Verified Project Card": facts confirmed by the team (never filled in from marketing copy). */
   verified?: ProjectVerified;
 }
+
+export interface PaymentPlan {
+  downPercent: number;
+  months: number;
+  monthsTo?: number;
+}
+
+/** The months of a payment plan as shown: "30", or "12 – 24". */
+export const planMonths = (plan: PaymentPlan): string => (plan.monthsTo ? `${plan.months} – ${plan.monthsTo}` : String(plan.months));
 
 /** Shared services of every residential community (all projects except the single villa), per the owner. */
 const COMMUNITY: AmenityKey[] = [
@@ -771,6 +781,110 @@ export const projects: Project[] = [
       "privatePool",
       "privateGarden",
       "indoorParking"
+    ]
+  },
+  {
+    slug: "alya-city-veliefendi",
+    district: "Zeytinburnu",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-10-25: keys soon (no date), eligible for citizenship; cheapest 1+1 from $165,000 and 2+1 from
+    // $238,000, 3+1 on request; 50% down and the balance over 12 to 24 months, cash and instalment prices differ.
+    paymentPlan: { downPercent: 50, months: 12, monthsTo: 24 },
+    lifestyle: ["city"],
+    unitsAvailable: true,
+    priority: 1.98,
+    developer: "BOSS4 İnşaat",
+    address: "Veliefendi, Ahmet Yesevi Cad. No: 2, Zeytinburnu, İstanbul",
+    price: "$165,000",
+    priceFrom: true,
+    // Facts from the developer's presentation (128,259 m² project, 778 homes: 85 1+1, 282 2+1 open kitchen, 285 2+1
+    // closed kitchen, 126 3+1), its site plan (12 blocks A, B1, B2, C, D1, D2, E1, E2, F1, F2, G1, G2) and the
+    // distances on its location images; renders from the project folder (the shop street is called Alya Meydan).
+    coverImage: img("alya-city-veliefendi", "towers", 1600, 759, "Alya City Veliefendi residential blocks and entrance in Zeytinburnu"),
+    gallery: [
+      img("alya-city-veliefendi", "gateway", 1600, 748, "Alya City Veliefendi entrance arch to the Alya Meydan shop street"),
+      img("alya-city-veliefendi", "plaza", 1600, 759, "Alya City Veliefendi plaza with a fountain, cafés and shops"),
+      img("alya-city-veliefendi", "street-shops", 1600, 752, "Alya City Veliefendi blocks with a market and cafés on the street"),
+      img("alya-city-veliefendi", "gateway-street", 1600, 816, "Alya City Veliefendi pedestrian street lined with shops and trees"),
+      img("alya-city-veliefendi", "site-plan", 1680, 1194, "Alya City Veliefendi site plan with its 12 blocks and gardens")
+    ],
+    stats: [
+      { value: "778", labelKey: "apartments" },
+      { value: "12", labelKey: "blocks" },
+      { value: "128,259 m²", labelKey: "projectArea" },
+      { value: "1+1 – 3+1", labelKey: "layout" }
+    ],
+    // From the floor plans: "satış brüt" as gross and the net area without the balcony. 2+1: 11 open-kitchen plans
+    // (85.09 – 114.34 m²) and 10 closed-kitchen plans (118.28 – 143.12 m²).
+    residences: [
+      { kind: "apartment", layout: "1+1", gross: "59.49 – 76.52 m²", net: "35.31 – 45.72 m²", planTypes: 3, price: "$165,000", priceFrom: true },
+      { kind: "apartment", layout: "2+1", gross: "85.09 – 143.12 m²", net: "51.26 – 87.33 m²", planTypes: 21, price: "$238,000", priceFrom: true },
+      { kind: "apartment", layout: "3+1", gross: "152.20 – 180.74 m²", net: "96.51 – 113.27 m²", planTypes: 5 }
+    ],
+    amenities: [
+      "indoorPool",
+      "fitness",
+      "sauna",
+      "gameRoom",
+      "meetingRooms",
+      "playground",
+      "sportsCourt",
+      "joggingTrack",
+      "landscaping",
+      "indoorParking",
+      "retail"
+    ]
+  },
+  {
+    slug: "alya-konutlari-merkezefendi",
+    district: "Zeytinburnu",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-10-25: delivery 2026, title deeds ready, eligible for citizenship and residence; 50% down and the
+    // balance over 24 months; no price given. 9 blocks of 5 to 7 floors, 467 homes and 15 shops on about 18,000 m²
+    // (17,928.53 m² on the title deed), 1+1 to 7+1 and duplexes.
+    paymentPlan: { downPercent: 50, months: 24 },
+    lifestyle: ["city"],
+    unitsAvailable: true,
+    priority: 1.99,
+    developer: "BOSS4 İnşaat",
+    address: "Merkezefendi Mah., Sabri Ülker Sk. No: 38, Zeytinburnu, İstanbul",
+    price: "on-request",
+    // Drone photos of the built blocks, renders and the sample apartment from the project folder; the developer's
+    // presentation (Cevizlibağ tram 600 m, Koç University Hospital 1.9 km). The plans have no published price list.
+    coverImage: img("alya-konutlari-merkezefendi", "aerial-blocks", 1680, 945, "Alya Konutları Merkezefendi completed blocks in Zeytinburnu, drone view"),
+    gallery: [
+      img("alya-konutlari-merkezefendi", "aerial-courtyards", 1680, 945, "Alya Konutları Merkezefendi blocks and courtyards from above"),
+      img("alya-konutlari-merkezefendi", "aerial-wide", 1680, 945, "Alya Konutları Merkezefendi among the green neighbourhood of Merkezefendi, drone view"),
+      img("alya-konutlari-merkezefendi", "aerial-gardens", 1080, 608, "Alya Konutları Merkezefendi landscaped gardens and play areas between the blocks"),
+      img("alya-konutlari-merkezefendi", "pool-render", 1080, 608, "Alya Konutları Merkezefendi garden pool and pergolas between the blocks"),
+      img("alya-konutlari-merkezefendi", "cafe-render", 1080, 608, "Alya Konutları Merkezefendi café pavilion and plaza"),
+      img("alya-konutlari-merkezefendi", "living-room", 1680, 1120, "Alya Konutları Merkezefendi sample apartment living room"),
+      img("alya-konutlari-merkezefendi", "bedroom", 1680, 1120, "Alya Konutları Merkezefendi sample apartment master bedroom"),
+      img("alya-konutlari-merkezefendi", "kitchen", 1680, 1120, "Alya Konutları Merkezefendi sample apartment kitchen")
+    ],
+    stats: [
+      { value: "467", labelKey: "apartments" },
+      { value: "15", labelKey: "shops" },
+      { value: "2026", labelKey: "delivery" },
+      { value: "18,000 m²", labelKey: "landArea" },
+      { value: "1+1 – 7+1", labelKey: "layout" }
+    ],
+    amenities: [
+      "indoorPool",
+      "fitness",
+      "hamam",
+      "sauna",
+      "playground",
+      "landscaping",
+      "joggingTrack",
+      "security",
+      "cctv",
+      "indoorParking",
+      "elevator",
+      "insulation",
+      "seismicDesign"
     ]
   },
   {

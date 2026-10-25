@@ -7,12 +7,14 @@ import {
   fetchConsentStats,
   fetchRealVisitorStats,
   fetchStatsDetails,
+  fetchOrganicDaily,
   fetchStatsOverview,
   fetchVisitStats,
   fetchWaitingInquiries,
   type BehaviorStats,
   type ConsentStats,
   type RealVisitorStats,
+  type OrganicDay,
   type StatsDetails,
   type StatsOverview,
   type VisitStats,
@@ -20,7 +22,7 @@ import {
 } from "../../data/adminStats";
 import { adminHero, adminNav } from "./nav";
 import { initVisitorsChart, visitorsChart } from "./visitorsChart";
-import { audiencePanel, chartPanel, funnelPanel, initDetails, projectsPanel, recentPanel, type DayFormat } from "./statsDetails";
+import { audiencePanel, chartPanel, funnelPanel, initDetails, organicPanel, projectsPanel, recentPanel, type DayFormat } from "./statsDetails";
 import { downloadCsv, excludedLine, initSourcesPanel, initWaitingPanel, shortDate, sourcesPanel, statsCards, waitingPanel, type VisitMode } from "./statsTop";
 
 /**
@@ -327,6 +329,7 @@ interface Loaded {
   waiting: WaitingInquiry[] | null;
   waitingTotal: number;
   details: StatsDetails | null;
+  organic: OrganicDay[] | null;
 }
 
 /** The date helpers the phase 2 sections share with the older chart. */
@@ -349,6 +352,7 @@ function renderStats(d: Loaded): string {
     ${statsCards(d.overview, mode)}
     ${waitingPanel(d.waiting, d.waitingTotal, !d.overview)}
     ${d.details ? chartPanel(d.details, mode, DAY_FORMAT) : visitorsPanel(d.real)}
+    ${organicPanel(d.organic, DAY_FORMAT)}
     ${d.details ? funnelPanel(d.details, mode, DAY_FORMAT) : `<p class="admin-stats__empty stats-unavailable">${t("adminStats.details.unavailable")}</p>`}
     ${sourcesPanel(d.overview, mode, sourceLabel, sourceDetails(d.stats))}
     ${d.details ? `${audiencePanel(d.details, mode)}${projectsPanel(d.details, mode)}${recentPanel(d.details, sourceLabel)}` : ""}
@@ -412,18 +416,19 @@ export function renderAdminStats(main: HTMLElement): void {
 
   const load = async () => {
     drawButtons();
-    const [stats, consent, behavior, real, overview, details] = await Promise.all([
+    const [stats, consent, behavior, real, overview, details, organic] = await Promise.all([
       fetchVisitStats(period),
       fetchConsentStats(period),
       fetchBehaviorStats(period),
       fetchRealVisitorStats(period),
       fetchStatsOverview(period),
-      fetchStatsDetails(period)
+      fetchStatsDetails(period),
+      fetchOrganicDaily(period)
     ]);
     // Before 0024 the waiting list comes straight from the inquiries table.
     const waiting = overview ? overview.waiting : await fetchWaitingInquiries();
     if (main.dataset.requestId !== requestId) return;
-    loaded = { stats, consent, behavior, real, overview, waiting, waitingTotal: overview ? overview.waiting_total : (waiting?.length ?? 0), details };
+    loaded = { stats, consent, behavior, real, overview, waiting, waitingTotal: overview ? overview.waiting_total : (waiting?.length ?? 0), details, organic };
     draw();
   };
 

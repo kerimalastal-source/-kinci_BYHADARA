@@ -98,6 +98,20 @@ export const PROJECT_NAMES: Record<string, Record<"en" | "ar" | "fa" | "fr" | "r
     "fr": "Göktürk Kemer Evleri",
     "ru": "Göktürk Kemer Evleri"
   },
+  "alya-city-veliefendi": {
+    "en": "Alya City Veliefendi",
+    "ar": "علياء سيتي ولي أفندي",
+    "fa": "آلیا سیتی ولی‌افندی",
+    "fr": "Alya City Veliefendi",
+    "ru": "Alya City Veliefendi"
+  },
+  "alya-konutlari-merkezefendi": {
+    "en": "Alya Konutları Merkezefendi",
+    "ar": "علياء كونوتلاري مركز أفندي",
+    "fa": "آلیا کونوتلاری مرکزافندی",
+    "fr": "Alya Konutları Merkezefendi",
+    "ru": "Alya Konutları Merkezefendi"
+  },
   "lotus-sisli": {
     "en": "Lotus Şişli",
     "ar": "لوتس شيشلي",
