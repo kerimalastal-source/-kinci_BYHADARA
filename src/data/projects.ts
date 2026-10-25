@@ -943,6 +943,8 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "ongoing",
     // Owner, 2026-10-25: price on request, eligible for citizenship. The developer gives no delivery date.
+    // Payment plan from a sales-office story the owner sent (2026-10-25): 40% down, balance over 24 to 36 months.
+    paymentPlan: { downPercent: 40, months: 24, monthsTo: 36 },
     lifestyle: ["sea", "nature"],
     unitsAvailable: true,
     priority: 1.992,
