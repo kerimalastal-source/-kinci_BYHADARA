@@ -892,8 +892,8 @@ export const projects: Project[] = [
     district: "Beşiktaş",
     city: "Istanbul",
     status: "ongoing",
-    // Owner, 2026-10-25: price on request, eligible for citizenship. No delivery date or home count is published
-    // by the developer (a September 2026 offer says January 2027, listing sites say otherwise), so neither is shown.
+    // Owner, 2026-10-25: price on request, eligible for citizenship, no payment plan; delivery as in the Drive
+    // files (the developer's September 2026 offer: January 2027). No home count is published, so none is shown.
     lifestyle: ["city"],
     unitsAvailable: true,
     priority: 1.991,
@@ -919,6 +919,7 @@ export const projects: Project[] = [
     ],
     stats: [
       { value: "10", labelKey: "blocks" },
+      { value: "2027", labelKey: "delivery" },
       { value: "900 m²", labelKey: "communityArea" },
       { value: "1+1 – 5.5+2", labelKey: "layout" }
     ],
