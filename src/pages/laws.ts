@@ -51,7 +51,7 @@ export function sourceLinks(sources: LawSource[]): string {
               ${sources
                 .map(
                   (s) =>
-                    `<a class="law-source" href="${s.url}" target="_blank" rel="noopener noreferrer"><span>${iso(t(`laws.sources.${s.key}`))}</span>${EXTERNAL}</a>`
+                    `<a class="law-source" href="${s.url}" target="_blank" rel="noopener noreferrer"><span>${iso(t(`laws.sources.${s.key}`))}${s.date ? ` · <bdi>${formatDate(s.date)}</bdi>` : ""}</span>${EXTERNAL}</a>`
                 )
                 .join("")}
             </p>`;

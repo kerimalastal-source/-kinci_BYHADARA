@@ -20,6 +20,8 @@ export type LawSourceKey = "resmiGazete" | "mevzuat" | "tkgm" | "gib" | "goc" | 
 export interface LawSource {
   key: LawSourceKey;
   url: string;
+  /** Issue date (YYYY-MM-DD), shown next to the publisher when one item cites two issues of the same source. */
+  date?: string;
 }
 
 interface LawItem {
@@ -154,17 +156,18 @@ export const lawUpdates: LawUpdate[] = [
   {
     id: "secure-payment-system",
     topic: "ownership",
-    decided: "2026-04-29",
+    decided: "2026-10-01",
     effective: "2026-12-01",
-    reference: "Taşınmaz Ticareti Hakkında Yönetmelikte Değişiklik · Resmî Gazete 33238",
+    reference: "Taşınmaz Ticareti Hakkında Yönetmelikte Değişiklik · Resmî Gazete 33238 (29/4/2026) ve 33387 (1/10/2026)",
     sources: [
-      { key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2026/04/20260429-4.htm" },
+      { key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2026/10/20261001-1-1.htm", date: "2026-10-01" },
+      { key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2026/04/20260429-4.htm", date: "2026-04-29" },
       {
         key: "ticaret",
         url: "https://ticaret.gov.tr/haberler/tasinmaz-satislarinda-guvenli-odeme-sistemi-ile-ilgili-yonetmelik-degisikligi-hakkinda-basin-aciklamasi"
       }
     ],
-    checked: "2026-10-01",
+    checked: "2026-10-26",
     approved: true
   },
   {

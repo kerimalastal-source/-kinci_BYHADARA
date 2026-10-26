@@ -2379,8 +2379,8 @@
       },
       "secure-payment-system": {
         "title": "Système de paiement sécurisé obligatoire dans les ventes immobilières dès décembre 2026",
-        "summary": "Le ministère du Commerce a modifié le règlement sur le commerce immobilier et fixé au 1er décembre 2026 le début de l'utilisation obligatoire du système de paiement sécurisé dans les ventes immobilières.",
-        "after": "À partir du 1er décembre 2026, le système de paiement sécurisé devient obligatoire dans les ventes immobilières. Il relie les systèmes du registre foncier aux banques afin que le paiement et le transfert de propriété se fassent ensemble.",
+        "summary": "Le 29 avril 2026, le ministère du Commerce a modifié le règlement sur le commerce immobilier et introduit le système de paiement sécurisé dans les ventes immobilières, sans le rendre obligatoire avant le 1er juillet 2026. Une modification du 1er octobre 2026 a reporté cette date au 1er décembre 2026 et confié à un protocole entre les ministères et l'opérateur du système les ventes exclues, la phase pilote et les frais d'utilisation.",
+        "after": "À partir du 1er décembre 2026, le système de paiement sécurisé devient obligatoire dans les ventes immobilières, sauf pour les ventes exclues par le protocole. Il relie les systèmes du registre foncier aux banques afin que le paiement et le transfert de propriété se fassent ensemble.",
         "affects": "Les acheteurs et les vendeurs de biens en Turquie.",
         "help": "Nous vous expliquerons les étapes du paiement et du transfert de propriété selon le nouveau système lors de votre achat."
       },

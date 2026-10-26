@@ -2377,8 +2377,8 @@
       },
       "secure-payment-system": {
         "title": "Secure payment system mandatory in property sales from December 2026",
-        "summary": "The Ministry of Trade amended the Real Estate Trade Regulation and set 1 December 2026 as the start of mandatory use of the secure payment system in property sales.",
-        "after": "From 1 December 2026, the secure payment system becomes mandatory in property sales. It connects the Land Registry's systems with banks so that the payment and the title transfer are completed together.",
+        "summary": "On 29 April 2026 the Ministry of Trade amended the Real Estate Trade Regulation and introduced the secure payment system in property sales, not to be mandatory before 1 July 2026. An amendment of 1 October 2026 moved that date to 1 December 2026 and left the sales excluded from the system, the pilot phase and the usage fee to a protocol between the ministries and the system's operator.",
+        "after": "From 1 December 2026, the secure payment system becomes mandatory in property sales, except for the sales the protocol excludes. It connects the Land Registry's systems with banks so that the payment and the title transfer are completed together.",
         "affects": "Buyers and sellers of property in Turkey.",
         "help": "We will walk you through the payment and title transfer steps under the new system when you buy."
       },
