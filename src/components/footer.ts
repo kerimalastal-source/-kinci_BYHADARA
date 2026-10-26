@@ -14,9 +14,13 @@ const SITE_PHONE = "+90 531 930 92 14";
 const SITE_PHONE_HREF = "+905319309214";
 const SITE_EMAIL = "info@byhadara.com";
 
-// The parent group's LinkedIn page. Not the company's own profile, so it stays out of SOCIAL_LINKS.
+// The parent group's LinkedIn page, next to "Part of BYHADARA Group" on the copyright line.
+// Not the company's own profile, so it stays out of SOCIAL_LINKS.
 const GROUP_NAME = "BYHADARA Group";
 export const GROUP_LINKEDIN = "https://www.linkedin.com/company/146747112/";
+
+// The registered company behind the site. Kept in English in every language (owner's request, as on the hospitality site).
+const LEGAL_NAME = "HADARA INVESTMENT İNŞAAT SANAYİ VE TİCARET A.Ş.";
 
 export function renderFooter(el: HTMLElement): void {
   el.className = "site-footer";
@@ -28,10 +32,6 @@ export function renderFooter(el: HTMLElement): void {
         <div class="social-links" aria-label="${t("footer.followUs")}">
           ${SOCIAL_LINKS.map((s) => `<a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.label}">${SOCIAL_ICONS[s.network]}</a>`).join("")}
         </div>
-        <p class="site-footer__group">
-          <span>${t("footer.groupCompany").replace("{group}", `<bdi dir="ltr" translate="no">${GROUP_NAME}</bdi>`)}</span>
-          <a href="${GROUP_LINKEDIN}" target="_blank" rel="noopener" aria-label="${t("footer.groupLinkedin")}" title="${t("footer.groupLinkedin")}">${SOCIAL_ICONS.linkedin}</a>
-        </p>
       </div>
 
       <div class="site-footer__col">
@@ -61,7 +61,9 @@ export function renderFooter(el: HTMLElement): void {
       </div>
     </div>
     <div class="site-footer__bottom container">
-      <p><span dir="ltr" translate="no">&copy; ${new Date().getFullYear()} ${BRAND_FULL}.</span> ${t("footer.rights")} <span class="site-footer__sep" aria-hidden="true">·</span> <a class="site-footer__legal" href="${link("/privacy")}">${t("footer.privacy")}</a>${cookieSettingsLink("site-footer__legal site-footer__legal--button")}</p>
+      <p class="site-footer__copyright" lang="en" dir="ltr" translate="no"><span>&copy; ${new Date().getFullYear()} ${BRAND_FULL}</span> <span class="site-footer__sep" aria-hidden="true">·</span> <span class="site-footer__company">Part of ${GROUP_NAME}</span><a class="site-footer__linkedin" href="${GROUP_LINKEDIN}" target="_blank" rel="noopener" aria-label="${t("footer.groupLinkedin")}" title="${t("footer.groupLinkedin")}">${SOCIAL_ICONS.linkedin}</a></p>
+      <p>${t("footer.rights")} <span class="site-footer__sep" aria-hidden="true">·</span> <a class="site-footer__legal" href="${link("/privacy")}">${t("footer.privacy")}</a>${cookieSettingsLink("site-footer__legal site-footer__legal--button")}</p>
+      <p class="site-footer__operator" lang="en" dir="ltr" translate="no">Operated by <span class="site-footer__company">${LEGAL_NAME}</span></p>
     </div>
   `;
 }

@@ -18,8 +18,8 @@ interface View {
   w: number;
   h: number;
 }
-/** Phones get a closer slice around the projects; wider screens see more of the city (`wideView`). */
-const VIEW_PHONE: View = { x: 256, y: 196, w: 316, h: 276 };
+/** Phones get a closer slice around the projects (from Büyükçekmece to Pendik); wider screens see more of the city (`wideView`). */
+const VIEW_PHONE: View = { x: 270, y: 190, w: 440, h: 330 };
 const PHONE_QUERY = "(max-width: 640px)";
 /** Below this canvas width the project list opens under the map instead of beside the pin. */
 const PANEL_BELOW = 600;
@@ -145,18 +145,19 @@ function drawAtlas(canvas: HTMLElement, map: MapData, view: View, groups: Group[
         { left: p.x + 8, right: p.x + 8 + w, top: p.y + 20, bottom: p.y + 44 },
         { left: p.x - 8 - w, right: p.x - 8, top: p.y + 20, bottom: p.y + 44 }
       ];
-      // Nothing free: keep the name above its pin, slid back inside the map's edges.
+      // Slid back inside the map's edges if needed; with no free spot at all (a crowded phone map) the
+      // name is left out rather than covering another pin, and the district buttons under the map name it.
       const shift = (b: Box) => {
         const dx = Math.max(4 - b.left, Math.min(0, frame.width - 4 - b.right));
         return { ...b, left: b.left + dx, right: b.right + dx };
       };
-      const box = options.find(fits) ?? options.map(shift).find(fits) ?? shift(options[0]);
-      taken.push(box);
+      const box = options.find(fits) ?? options.map(shift).find(fits);
+      if (box) taken.push(box);
       const label = `${name}: ${projects.length}`;
       return `
       <button type="button" class="atlas-pin${district === active ? " is-active" : ""}" style="${pct(x, y)}" data-atlas-district="${district}" aria-expanded="${district === active}" aria-label="${label}">
         <span class="atlas-pin__dot" dir="ltr">${projects.length}</span>
-        <span class="atlas-pin__label" style="left:${(box.left - p.x).toFixed(1)}px;top:${(box.top - p.y).toFixed(1)}px" aria-hidden="true">${name}</span>
+        ${box ? `<span class="atlas-pin__label" style="left:${(box.left - p.x).toFixed(1)}px;top:${(box.top - p.y).toFixed(1)}px" aria-hidden="true">${name}</span>` : ""}
       </button>`;
     })
     .join("");

@@ -713,46 +713,6 @@
   color: var(--color-primary-dark);
 }
 
-/* "A BYHADARA Group company" + the group's LinkedIn page, under the social icons. */
-.site-footer__group {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.25rem 0.6rem;
-  margin-top: var(--space-sm);
-  font-size: 0.9rem;
-  color: rgba(247, 244, 236, 0.75);
-}
-
-.site-footer__group a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(247, 244, 236, 0.25);
-  color: var(--color-on-primary);
-  transition: background var(--transition), border-color var(--transition);
-}
-
-.site-footer__group a:hover {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-primary-dark);
-}
-
-.site-footer__group a svg {
-  width: 16px;
-  height: 16px;
-}
-
-[dir="rtl"] .site-footer__group {
-  max-width: 360px;
-  margin-left: 0;
-  margin-right: auto;
-}
-
 .site-footer__col h3 {
   color: var(--color-accent-light);
   font-family: var(--font-body);
@@ -792,6 +752,65 @@
 .site-footer__bottom p {
   margin: 0;
   color: inherit;
+}
+
+/* The group's LinkedIn page, right after "Part of BYHADARA Group". */
+.site-footer__linkedin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-inline: 0.4rem 0.15rem;
+  border-radius: 50%;
+  border: 1px solid rgba(247, 244, 236, 0.25);
+  color: var(--color-on-primary);
+  vertical-align: middle;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.site-footer__linkedin:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-primary-dark);
+}
+
+.site-footer__linkedin svg {
+  width: 14px;
+  height: 14px;
+}
+
+.site-footer__bottom .site-footer__copyright {
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  color: rgba(247, 244, 236, 0.78);
+}
+
+/* Phones: the dot hides (≤640px) and "Part of BYHADARA Group" takes its own line;
+   the company name gets a smaller size so it keeps clear of the screen edges. */
+@media (max-width: 640px) {
+  .site-footer__copyright .site-footer__sep {
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-footer__bottom p.site-footer__operator {
+    font-size: 0.7rem;
+  }
+}
+
+.site-footer__bottom .site-footer__operator {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: rgba(247, 244, 236, 0.5);
+}
+
+.site-footer__company {
+  white-space: nowrap;
 }
 
 .site-footer__legal {

@@ -15,6 +15,8 @@ const PATHS: Record<string, string> = {
     '<path d="M4 21.5V4.5L7 2.5v19M7 4.5h13.5M7 8l13.5-3.5"/><path d="M18.5 4.5v6.5"/><rect x="16.5" y="11" width="4" height="3" rx=".5"/><path d="M2 21.5h9"/>',
   greenAndParkArea:
     '<path d="M12 21.5v-8"/><path d="M12 13.5c-3.8 0-6.3-2.4-6.3-5.5S8.2 2.5 12 2.5s6.3 2.4 6.3 5.5-2.5 5.5-6.3 5.5z"/><path d="M6 21.5h12M9.5 10l2.5 2.5 2.5-3"/>',
+  communityArea:
+    '<circle cx="8" cy="6.5" r="2.5"/><circle cx="16" cy="6.5" r="2.5"/><circle cx="12" cy="13" r="2"/><path d="M3.5 21v-5.5A3.5 3.5 0 0 1 7 12h2M20.5 21v-5.5A3.5 3.5 0 0 0 17 12h-2M8.5 21v-2.5a3.5 3.5 0 0 1 7 0V21"/>',
   projectArea: '<path d="M3 3h18v18H3z"/><path d="M8 3v3M13 3v5M18 3v3M3 8h3M3 13h5M3 18h3"/>',
   grossArea: '<path d="M3 3h18v18H3z"/><path d="M8 3v3M13 3v5M18 3v3M3 8h3M3 13h5M3 18h3"/>',
   layout: '<rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 12h8.5V3M11.5 16v5M11.5 12h9.5M16 12v-3"/>',

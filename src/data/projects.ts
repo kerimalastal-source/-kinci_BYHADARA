@@ -888,6 +888,176 @@ export const projects: Project[] = [
     ]
   },
   {
+    slug: "referans-besiktas",
+    district: "Beşiktaş",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-10-25: price on request, eligible for citizenship; delivery as in the Drive files (the
+    // developer's September 2026 offer: January 2027); 295 homes approved by the owner (not in the developer files).
+    // Owner, 2026-10-25: same plan as Referans Pendik for all Referans projects (40% down, 24 to 36 months).
+    paymentPlan: { downPercent: 40, months: 24, monthsTo: 36 },
+    lifestyle: ["city"],
+    unitsAvailable: true,
+    priority: 1.991,
+    // A TOKİ revenue-sharing project: buyers' payments go to TOKİ collateral accounts (developer's catalogue).
+    developer: "Kiler GYO · TOKİ",
+    address: "Abbasağa, Beşiktaş, İstanbul",
+    price: "on-request",
+    // Renders from referansbesiktas.com and its e-catalogue (kilergyo.com): 10 low-rise blocks A–J around a central
+    // garden, 900 m² of shared facilities. Architect İki Design Group, interiors Metex Design, landscape Spiga.
+    coverImage: img("referans-besiktas", "aerial-sea-view", 1680, 1050, "Referans Beşiktaş blocks around a landscaped courtyard in Abbasağa with the Bosphorus beyond"),
+    gallery: [
+      img("referans-besiktas", "aerial-courtyard", 1680, 933, "Referans Beşiktaş central garden courtyard framed by the residential blocks"),
+      img("referans-besiktas", "central-garden", 1680, 988, "Referans Beşiktaş central garden with water features and walking paths"),
+      img("referans-besiktas", "ornamental-pool", 1680, 1050, "Referans Beşiktaş ornamental pool with fountains and blossoming trees"),
+      img("referans-besiktas", "landscaped-courtyard", 1680, 933, "Referans Beşiktaş landscaped courtyard with seating areas and greenery"),
+      img("referans-besiktas", "main-entrance", 1680, 1050, "Referans Beşiktaş illuminated main entrance at dusk"),
+      img("referans-besiktas", "rooftop-terraces-dusk", 1680, 933, "Referans Beşiktaş rooftop terraces of the upper-floor homes at dusk"),
+      img("referans-besiktas", "night-aerial-garden", 1680, 1400, "Referans Beşiktaş lit garden paths and ornamental pool at night"),
+      img("referans-besiktas", "indoor-pool", 800, 756, "Referans Beşiktaş residents' indoor swimming pool"),
+      img("referans-besiktas", "living-room", 1290, 825, "Referans Beşiktaş sample living and dining room"),
+      img("referans-besiktas", "master-bedroom", 1145, 825, "Referans Beşiktaş sample master bedroom with balcony doors"),
+      img("referans-besiktas", "site-plan", 1112, 884, "Referans Beşiktaş site plan with blocks A to J and the central garden")
+    ],
+    stats: [
+      { value: "295", labelKey: "apartments" },
+      { value: "10", labelKey: "blocks" },
+      { value: "2027", labelKey: "delivery" },
+      { value: "900 m²", labelKey: "communityArea" },
+      { value: "1+1 – 5.5+2", labelKey: "layout" }
+    ],
+    // From the developer's plan sheets and catalogue: the unit's own gross area ("bağımsız bölüm brüt") and the net
+    // area including the balcony. Duplexes have private terraces; the 5.5+2 penthouse has a 129.7 m² roof terrace.
+    residences: [
+      { kind: "apartment", layout: "1+1", gross: "49.90 – 56.80 m²", net: "42.40 – 47.80 m²", planTypes: 4 },
+      { kind: "apartment", layout: "2+1", gross: "105.30 – 109.20 m²", net: "91.60 – 95.20 m²", planTypes: 2 },
+      { kind: "apartment", layout: "2+1", gross: "97.80 – 108.80 m²", net: "82.20 – 90.30 m²", floors: 2, planTypes: 4 },
+      { kind: "apartment", layout: "3+1", gross: "160.80 m²", net: "141.90 m²" },
+      { kind: "apartment", layout: "3+1", gross: "166.10 m²", net: "142.70 m²", floors: 2 },
+      { kind: "apartment", layout: "4+1", gross: "181.80 m²", net: "159.40 m²" },
+      { kind: "apartment", layout: "5.5+2", gross: "282.20 m²", net: "224.30 m²", floors: 2 }
+    ],
+    amenities: ["indoorPool", "fitness", "sauna", "hamam", "landscaping", "playground", "security", "cctv"]
+  },
+  {
+    slug: "referans-pendik",
+    district: "Pendik",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-10-25: price on request, eligible for citizenship. The developer gives no delivery date.
+    // Payment plan from a sales-office story the owner sent (2026-10-25): 40% down, balance over 24 to 36 months.
+    paymentPlan: { downPercent: 40, months: 24, monthsTo: 36 },
+    lifestyle: ["sea", "nature"],
+    unitsAvailable: true,
+    priority: 1.992,
+    // Kiler GYO in partnership with İLBANK (developer's short notes; both logos on the site and catalogue).
+    developer: "Kiler GYO · İLBANK",
+    address: "Dolayoba, Pendik, İstanbul",
+    price: "on-request",
+    // Facts from the developer's short notes and catalogue (686 homes, 78,620 m² project area, 35,000 m² of
+    // landscaping) and renders from referanspendik.net.tr. The lake on the site plan belongs to the neighbouring park.
+    coverImage: img("referans-pendik", "blocks-sea-view", 1680, 1186, "Referans Pendik low-rise blocks among gardens with a view of the Sea of Marmara and the Princes' Islands"),
+    gallery: [
+      img("referans-pendik", "night-overview", 1680, 1179, "Referans Pendik residential blocks and commercial street on the hillside in the evening"),
+      img("referans-pendik", "street-to-the-sea", 1680, 1274, "Referans Pendik tree-lined street leading down towards the sea"),
+      img("referans-pendik", "sunset-courtyard", 1680, 822, "Referans Pendik courtyard between the blocks at sunset with the sea on the horizon"),
+      img("referans-pendik", "terrace-sea-view", 1680, 1030, "Referans Pendik private terrace overlooking Pendik marina and the sea"),
+      img("referans-pendik", "kids-park-landscape", 1680, 1177, "Referans Pendik landscaped children's park and walking paths"),
+      img("referans-pendik", "pergola-garden-evening", 1680, 1271, "Referans Pendik pergola garden and walking paths in the evening"),
+      img("referans-pendik", "indoor-pool-pavilion", 1680, 1120, "Referans Pendik glass indoor-pool pavilion in the gardens"),
+      img("referans-pendik", "indoor-pool", 1625, 1142, "Referans Pendik residents' indoor swimming pool"),
+      img("referans-pendik", "living-room", 1680, 1175, "Referans Pendik sample living room"),
+      img("referans-pendik", "master-bedroom", 1626, 1142, "Referans Pendik sample master bedroom with a walk-in wardrobe"),
+      img("referans-pendik", "commercial-street", 1680, 671, "Referans Pendik commercial street with cafés and shops")
+    ],
+    stats: [
+      { value: "686", labelKey: "apartments" },
+      { value: "78,620 m²", labelKey: "projectArea" },
+      { value: "35,000 m²", labelKey: "greenAndParkArea" },
+      { value: "2+1 – 4+1", labelKey: "layout" }
+    ],
+    // From the developer's catalogue and plan sheets: the unit's own gross area (without the share of common areas
+    // and allocated gardens or terraces) and the net area. Garden-floor homes have gardens of 50 to 138 m².
+    residences: [
+      { kind: "apartment", layout: "2+1", gross: "90.04 – 96.73 m²", net: "77.78 m²", planTypes: 2 },
+      { kind: "apartment", layout: "3+1", gross: "121.25 – 129.51 m²", net: "105.00 – 105.47 m²", planTypes: 3 },
+      { kind: "apartment", layout: "3.5+1", gross: "139.42 m²", net: "123.36 m²" },
+      { kind: "apartment", layout: "4+1", gross: "157.27 – 169.74 m²", net: "139.29 – 139.38 m²", planTypes: 2 },
+      { kind: "apartment", layout: "3+1", gross: "158.37 – 221.66 m²", net: "138.32 – 163.15 m²", floors: 2, planTypes: 2 }
+    ],
+    amenities: ["indoorPool", "fitness", "sauna", "hamam", "landscaping", "playground", "sportsCourt", "joggingTrack", "indoorParking", "retail", "seaView"]
+  },
+  {
+    slug: "referans-beylikduzu",
+    district: "Beylikdüzü",
+    city: "Istanbul",
+    status: "delivered",
+    // Owner, 2026-10-25: price on request, eligible for citizenship. Completed (developer's 2024 stock-exchange
+    // filing and the delivered-flat photos).
+    // Owner, 2026-10-25: same plan as Referans Pendik for all Referans projects (40% down, 24 to 36 months).
+    paymentPlan: { downPercent: 40, months: 24, monthsTo: 36 },
+    lifestyle: ["city", "nature"],
+    unitsAvailable: true,
+    priority: 1.993,
+    developer: "Kiler GYO",
+    address: "Kavaklı, Kocatepe Cad., Beylikdüzü, İstanbul",
+    price: "on-request",
+    // Facts from the developer's short notes, catalogue and plan sheets (709 homes, 18 shops on Kocatepe Caddesi,
+    // 8 blocks A1, A2, B1, B2, C1, C2, C3, D on 31,000 m², 70% landscaped) and referansbeylikduzu.com.
+    coverImage: img("referans-beylikduzu", "courtyard-pools-aerial", 1600, 1003, "Referans Beylikdüzü completed central courtyard with pools, gardens and residential towers"),
+    gallery: [
+      img("referans-beylikduzu", "towers-central-garden", 1680, 933, "Referans Beylikdüzü towers around a landscaped central garden with fountains"),
+      img("referans-beylikduzu", "terrace-garden-view", 1680, 1050, "Referans Beylikdüzü terrace overlooking the central garden and pools"),
+      img("referans-beylikduzu", "garden-duplex-pool", 1406, 765, "Referans Beylikdüzü garden duplexes beside a decorative pool"),
+      img("referans-beylikduzu", "outdoor-pool-lounge", 1305, 603, "Referans Beylikdüzü outdoor pool and lounge building at dusk"),
+      img("referans-beylikduzu", "playground-real", 1680, 1119, "Referans Beylikdüzü children's playground among trees in the completed complex"),
+      img("referans-beylikduzu", "street-shops", 1375, 642, "Referans Beylikdüzü street-front shops at the base of the blocks"),
+      img("referans-beylikduzu", "living-room-render", 1680, 700, "Referans Beylikdüzü sample living and dining room"),
+      img("referans-beylikduzu", "living-dining-render", 1406, 765, "Referans Beylikdüzü open living room with dining area"),
+      img("referans-beylikduzu", "kitchen-real", 1680, 1120, "Referans Beylikdüzü kitchen in a delivered apartment"),
+      img("referans-beylikduzu", "living-room-real", 1680, 1120, "Referans Beylikdüzü living room in a delivered garden-floor apartment"),
+      img("referans-beylikduzu", "entrance-gate", 1680, 577, "Referans Beylikdüzü main entrance gate")
+    ],
+    stats: [
+      { value: "709", labelKey: "apartments" },
+      { value: "18", labelKey: "shops" },
+      { value: "8", labelKey: "blocks" },
+      { value: "31,000 m²", labelKey: "landArea" },
+      { value: "2+1 – 5+1", labelKey: "layout" }
+    ],
+    // From the developer's plan sheets ("genel brüt", without allocated gardens and terraces, as gross; net without
+    // balconies) and catalogue (3+1, 3.5+1 and the garden duplexes). Duplexes are garden, terrace or penthouse homes.
+    residences: [
+      { kind: "apartment", layout: "2+1", gross: "94.70 – 164.45 m²", net: "61.15 – 94.15 m²", planTypes: 7 },
+      { kind: "apartment", layout: "2+1", gross: "124.29 – 163.91 m²", net: "84.59 – 99.67 m²", floors: 2, planTypes: 8 },
+      { kind: "apartment", layout: "3+1", gross: "182 m²", net: "120.70 m²" },
+      { kind: "apartment", layout: "3+1", gross: "219 m²", net: "122.80 m²", floors: 2 },
+      { kind: "apartment", layout: "3.5+1", gross: "191 m²", net: "121.90 m²" },
+      { kind: "apartment", layout: "4+1", gross: "199.43 – 214.74 m²", net: "134.20 – 137.76 m²", planTypes: 7 },
+      { kind: "apartment", layout: "4+1", gross: "227.25 – 243.85 m²", net: "141.82 – 156.51 m²", floors: 2, planTypes: 2 },
+      { kind: "apartment", layout: "4.5+1", gross: "227.33 – 238 m²", net: "146.65 – 147.90 m²", planTypes: 2 },
+      { kind: "apartment", layout: "4.5+1", gross: "262.64 – 304 m²", net: "163.30 – 167.90 m²", floors: 2, planTypes: 3 },
+      { kind: "apartment", layout: "5+1", gross: "266.49 m²", net: "166.30 – 168.54 m²" },
+      { kind: "apartment", layout: "5+1", gross: "290.71 m²", net: "184.73 m²", floors: 2 }
+    ],
+    amenities: [
+      "outdoorPool",
+      "indoorPool",
+      "hamam",
+      "sauna",
+      "fitness",
+      "sportsCourt",
+      "joggingTrack",
+      "playground",
+      "cafe",
+      "lounge",
+      "landscaping",
+      "indoorParking",
+      "security",
+      "retail"
+    ]
+  },
+  {
     slug: "lotus-sisli",
     district: "Şişli",
     city: "Istanbul",

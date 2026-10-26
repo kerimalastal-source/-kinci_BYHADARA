@@ -1,4 +1,4 @@
-// Prints today's topics (2, or 3 in the intensive week) and the day's Story from the monthly content plan (plan.json).
+// Prints today's single morning topic (owner 2026-10-25: one post a day, no Story) from the monthly content plan (plan.json).
 //
 //   node scripts/social/topics.mjs [YYYY-MM-DD]   (default: today in Istanbul)
 //
@@ -18,11 +18,12 @@ if (!day) {
   console.log(JSON.stringify({ date, plan: plan.name, finished, notStarted: date < plan.start }, null, 2));
   process.exit(0);
 }
+// Owner's decision 2026-10-25: one post a day only, the morning post; no 14:00 or 21:00 post and no Story.
+const morning = day.posts.find((p) => !p.at || p.at === "09:00") || day.posts[0];
 console.log(JSON.stringify({
   date,
   plan: plan.name,
   week: day.week,
-  topics: day.posts.map((p) => ({ ...p, photo: p.photos[0] })),
-  // Every day also one Story, going out with the morning post (owner's request 2026-09-29).
-  story: { basedOn: day.posts[0].id, id: `${day.posts[0].id}-story`, ...(day.posts[0].at ? { at: day.posts[0].at } : {}) },
+  note: "One post a day only (owner 2026-10-25): make this single 09:00 post, no Story.",
+  topics: [{ ...morning, photo: morning.photos[0] }],
 }, null, 2));

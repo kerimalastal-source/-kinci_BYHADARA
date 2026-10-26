@@ -112,6 +112,27 @@ export const PROJECT_NAMES: Record<string, Record<"en" | "ar" | "fa" | "fr" | "r
     "fr": "Alya Konutları Merkezefendi",
     "ru": "Alya Konutları Merkezefendi"
   },
+  "referans-besiktas": {
+    "en": "Referans Beşiktaş",
+    "ar": "ريفيرانس بشكتاش",
+    "fa": "رفرانس بشیکتاش",
+    "fr": "Referans Beşiktaş",
+    "ru": "Referans Beşiktaş"
+  },
+  "referans-pendik": {
+    "en": "Referans Pendik",
+    "ar": "ريفيرانس بندك",
+    "fa": "رفرانس پندیک",
+    "fr": "Referans Pendik",
+    "ru": "Referans Pendik"
+  },
+  "referans-beylikduzu": {
+    "en": "Referans Beylikdüzü",
+    "ar": "ريفيرانس بيليكدوزو",
+    "fa": "رفرانس بیلیک‌دوزو",
+    "fr": "Referans Beylikdüzü",
+    "ru": "Referans Beylikdüzü"
+  },
   "lotus-sisli": {
     "en": "Lotus Şişli",
     "ar": "لوتس شيشلي",
