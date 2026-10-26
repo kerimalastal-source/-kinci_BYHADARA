@@ -18,6 +18,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "kat-irtifaki-vs-kat-mulkiyeti",
+    priority: -11,
+    published: "2026-10-26",
+    relatedProjects: ["casablu-vadi", "marmara-haven-villa", "lotus-yali"],
+    coverImage: { src: "/images/blog/kat-irtifaki-vs-kat-mulkiyeti.jpg", width: 1282, height: 855 }
+  },
+  {
     slug: "sisli-district-guide",
     priority: -10,
     published: "2026-10-23",
