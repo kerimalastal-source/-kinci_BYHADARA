@@ -910,5 +910,13 @@
     "headlineAr": "16 فيلا فقط على أرض مساحتها 5,500 م²",
     "headlineEn": "Only 16 villas on a 5,500 m² plot",
     "photo": "/images/projects/lotus-manzara-beylikduzu/aerial-villas.jpg"
+  },
+  {
+    "date": "2026-10-26",
+    "id": "marmara-haven-villa-sea",
+    "topic": "فيلا مرمرة هيفن · إطلالة البحر",
+    "headlineAr": "تراس سطح بمساحة 24.49 م² فوق بحر مرمرة",
+    "headlineEn": "A 24.49 m² roof terrace above the Sea of Marmara",
+    "photo": "/images/projects/marmara-haven-villa/sea-view.jpg"
   }
 ]
