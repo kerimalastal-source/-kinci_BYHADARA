@@ -1,4 +1,5 @@
-// Prints today's single morning topic (owner 2026-10-25: one post a day, no Story) from the monthly content plan (plan.json).
+// Prints today's single morning topic (owner 2026-10-25: one post a day, no Story; owner 2026-10-28:
+// that post is a Reel every day) from the monthly content plan (plan.json).
 //
 //   node scripts/social/topics.mjs [YYYY-MM-DD]   (default: today in Istanbul)
 //
@@ -24,6 +25,8 @@ console.log(JSON.stringify({
   date,
   plan: plan.name,
   week: day.week,
-  note: "One post a day only (owner 2026-10-25): make this single 09:00 post, no Story.",
+  note: plan.reels
+    ? "One Reel a day (owner 2026-10-28): make this single 09:00 post with \"reel\": true (design A or \"list\" as the topic says), no Story."
+    : "One post a day only (owner 2026-10-25): make this single 09:00 post, no Story.",
   topics: [{ ...morning, photo: morning.photos[0] }],
 }, null, 2));

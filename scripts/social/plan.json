@@ -1,1328 +1,753 @@
 {
- "name": "خطة المحتوى — أكتوبر 2026",
- "start": "2026-09-29",
- "end": "2026-10-28",
+ "name": "خطة المحتوى — نوفمبر 2026 (ريلز كل صباح)",
+ "start": "2026-10-29",
+ "end": "2026-11-30",
+ "reels": true,
  "days": [
   {
-   "date": "2026-09-29",
-   "week": "التعريف والمشاريع الجديدة",
-   "weekEn": "Introduction & new launches",
+   "date": "2026-10-29",
+   "week": "مشاريع جديدة وخطوات الشراء",
+   "weekEn": "New projects & buying steps",
    "posts": [
     {
-     "id": "beylikduzu-living-overview",
+     "id": "vadi-panorama-intro",
      "kind": "project",
-     "slug": "beylikduzu-living",
-     "angle": "overview",
-     "path": "/projects/beylikduzu-living",
+     "slug": "vadi-panorama",
+     "path": "/projects/vadi-panorama",
+     "design": "A",
      "photos": [
-      "/images/projects/beylikduzu-living/aerial-view.jpg",
-      "/images/projects/beylikduzu-living/courtyard-gardens.jpg"
+      "/images/projects/vadi-panorama/valley-panorama.jpg",
+      "/images/projects/vadi-panorama/towers-dusk.jpg",
+      "/images/projects/vadi-panorama/aerial-site.jpg",
+      "/images/projects/vadi-panorama/central-garden.jpg"
      ],
-     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats.",
-     "label": "لوتس ياشام · نظرة عامة"
-    },
-    {
-     "id": "blog-buying-property-and-tapu",
-     "kind": "article",
-     "slug": "buying-property-and-tapu",
-     "path": "/blog/buying-property-and-tapu",
-     "photos": [
-      "/images/blog/buying-property-and-tapu.jpg"
-     ],
-     "brief": "3-4 practical points from the article blogData.buying-property-and-tapu, then invite to read it.",
-     "label": "مقال: كيف تشتري عقاراً في تركيا وتوثقه في الطابو"
+     "brief": "First post about Vadi Panorama: the Emlak Konut guarantee (a public-listed company whose main shareholder is TOKİ, see blogData.emlak-konut-vs-toki), 268 homes + 26 shops, 2+1 to 5+1 and 12 villas, Başakşehir between two big parks, the 40/48 payment plan (paymentPlan). No citizenship claim for this project (owner's decision). Facts from src/data/projects.ts and projectsData.vadi-panorama (ar.json/en.json). No prices (owner's rule).",
+     "label": "وادي بانوراما · بضمان إملاك كونوت",
+     "at": "09:00",
+     "reel": true
     }
    ]
   },
   {
-   "date": "2026-09-30",
-   "week": "التعريف والمشاريع الجديدة",
-   "weekEn": "Introduction & new launches",
+   "date": "2026-10-30",
+   "week": "مشاريع جديدة وخطوات الشراء",
+   "weekEn": "New projects & buying steps",
    "posts": [
     {
-     "id": "diamond-marin-life",
-     "kind": "project",
-     "slug": "diamond-marin",
-     "angle": "life",
-     "path": "/projects/diamond-marin",
+     "id": "guide-before-buying",
+     "kind": "guide",
+     "path": "/buyers-guide",
+     "design": "list",
      "photos": [
-      "/images/projects/diamond-marin/living-room.jpg",
-      "/images/projects/diamond-marin/master-bedroom.jpg"
+      "/images/projects/beylikduzu-living/aerial-main.jpg",
+      "/images/projects/beylikduzu-living/central-garden.jpg"
      ],
-     "brief": "Life in Diamond Marin: pool, gym, gardens, smart home, interiors; boutique building for 58 families.",
-     "label": "دايموند مارين · الحياة في المشروع",
-     "at": "09:00"
-    },
-    {
-     "id": "blog-about-istanbul",
-     "kind": "article",
-     "slug": "about-istanbul",
-     "path": "/blog/about-istanbul",
-     "photos": [
-      "/images/blog/about-istanbul.jpg"
-     ],
-     "brief": "3-4 practical points from the article blogData.about-istanbul, then invite to read it.",
-     "label": "مقال: إسطنبول: المدينة التي تلتقي فيها القارات",
-     "at": "14:00"
-    },
-    {
-     "id": "pick-sea-nature-city",
-     "kind": "page",
-     "angle": "question",
-     "path": "/projects",
-     "photos": [
-      "/images/projects/lotus-yali/sunset-aerial.jpg",
-      "/images/projects/lotus-sisli/twin-towers.jpg"
-     ],
-     "brief": "Evening, light and friendly: ask followers which life they prefer - sea view, nature, or the heart of the city - and name one available project for each, using only the 'lifestyle' tags in src/data/projects.ts (never soldOut). The 4 stat tiles: how many of our projects have each tag (sea / nature / city) and the number of projects on the site. Badge «سؤال لكم · Your pick». Invite them to answer in the comments.",
-     "label": "سؤال المساء: بحر، طبيعة، أم قلب المدينة؟",
-     "at": "21:00"
+     "brief": "The 'before you buy' stage of the buyer's guide (guide.* in ar.json/en.json, stage 1): 3 of its steps as the 3 list items, the tip = where to read all 18 steps on the site. No prices (owner's rule).",
+     "label": "دليل المشتري · قبل الشراء",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-01",
-   "week": "التعريف والمشاريع الجديدة",
-   "weekEn": "Introduction & new launches",
+   "date": "2026-10-31",
+   "week": "مشاريع جديدة وخطوات الشراء",
+   "weekEn": "New projects & buying steps",
    "posts": [
     {
-     "id": "lotus-sisli-overview",
+     "id": "mesa-yenikent-intro",
      "kind": "project",
-     "slug": "lotus-sisli",
-     "angle": "overview",
-     "path": "/projects/lotus-sisli",
+     "slug": "mesa-yenikent",
+     "path": "/projects/mesa-yenikent",
+     "design": "A",
      "photos": [
-      "/images/projects/lotus-sisli/twin-towers.jpg",
-      "/images/projects/lotus-sisli/tower-night.jpg"
+      "/images/projects/mesa-yenikent/cover-park.jpg",
+      "/images/projects/mesa-yenikent/central-park.jpg",
+      "/images/projects/mesa-yenikent/water-walkway.jpg",
+      "/images/projects/mesa-yenikent/buildings-gardens.jpg"
      ],
-     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats.",
-     "label": "لوتس شيشلي · نظرة عامة",
-     "at": "09:00"
-    },
-    {
-     "id": "faq-why-istanbul",
-     "kind": "page",
-     "path": "/faq",
-     "photos": [
-      "/images/projects/lotus-sisli/aerial-city.jpg"
-     ],
-     "brief": "Answer the FAQ question faq.categories[1].items[0] (question + clear short answer from the site's answer).",
-     "label": "سؤال: لماذا إسطنبول؟",
-     "at": "14:00"
-    },
-    {
-     "id": "area-beylikduzu",
-     "kind": "page",
-     "angle": "area",
-     "path": "/projects",
-     "photos": [
-      "/images/projects/diamond-marin/aerial-sea-view.jpg",
-      "/images/projects/beylikduzu-living/aerial-view.jpg"
-     ],
-     "brief": "Evening, light: Beylikdüzü as a place to live. Only facts from the site: which of our available projects are in Beylikdüzü (projects.ts district) and what is nearby from their projectsData.<slug>.nearby texts (ar/en). Badge «من إسطنبول · Istanbul life». No claims about prices, rents or growth.",
-     "label": "من إسطنبول: بيليكدوزو",
-     "at": "21:00"
+     "brief": "First post about Mesa Yenikent: a whole new town, not a complex (2,000,000 m² residential area, 1,000,000 m² parks), low horizontal buildings, garden-floor homes; developer Mesa Mesken since 1969; first phase delivery planned June 2028 per the developer. Eligible for citizenship (citizenship note). Facts from src/data/projects.ts and projectsData.mesa-yenikent (ar.json/en.json). No prices (owner's rule).",
+     "label": "ميسا ينيكنت · مدينة متكاملة",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-02",
-   "week": "التعريف والمشاريع الجديدة",
-   "weekEn": "Introduction & new launches",
+   "date": "2026-11-01",
+   "week": "مشاريع جديدة وخطوات الشراء",
+   "weekEn": "New projects & buying steps",
    "posts": [
     {
-     "id": "beylikduzu-living-life",
-     "kind": "project",
-     "slug": "beylikduzu-living",
-     "angle": "life",
-     "path": "/projects/beylikduzu-living",
+     "id": "iskan-explained",
+     "kind": "guide",
+     "path": "/blog/iskan-occupancy-permit",
+     "design": "list",
      "photos": [
-      "/images/projects/beylikduzu-living/courtyard-gardens.jpg",
-      "/images/projects/beylikduzu-living/garden-terrace.jpg",
-      "/images/projects/beylikduzu-living/living-room.jpg"
+      "/images/blog/iskan-occupancy-permit.jpg",
+      "/images/projects/lotus-koru-2/residential-blocks.jpg"
      ],
-     "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. Use the residences (2+1/3+1/4+1 sizes) too.",
-     "label": "لوتس ياشام · الحياة في المشروع",
-     "at": "09:00"
-    },
-    {
-     "id": "find-my-project",
-     "kind": "page",
-     "path": "/",
-     "photos": [
-      "/images/projects/lotus-yali/aerial-sea-view.jpg"
-     ],
-     "brief": "'Find my project' quiz on the home page (match.* texts): 4 quick questions (goal, home size, atmosphere, move-in) then matching projects. Invite to try it.",
-     "label": "اعثر على مشروعك",
-     "at": "14:00"
-    },
-    {
-     "id": "marmara-haven-villa-life",
-     "kind": "project",
-     "slug": "marmara-haven-villa",
-     "angle": "life",
-     "path": "/projects/marmara-haven-villa",
-     "photos": [
-      "/images/projects/marmara-haven-villa/private-pool.jpg",
-      "/images/projects/marmara-haven-villa/living-room.jpg",
-      "/images/projects/marmara-haven-villa/terrace.jpg"
-     ],
-     "brief": "Evening: everyday life in Marmara Haven Villa - the comfort features (elevator, smart home, underfloor heating, fireplace, the well, private spaces) from projects.ts and projectsData.marmara-haven-villa. Not the sizes/floors angle (later posts cover the overview, floors, sea view and verified card). Price 'on request' only. Badge «فلل · Villas».",
-     "label": "فيلا مرمرة هيفن · الحياة في الفيلا",
-     "at": "21:00"
+     "brief": "The occupancy permit explained from blogData.iskan-occupancy-permit: what it is, when it is issued, why a buyer asks for it — 3 short points. No prices (owner's rule).",
+     "label": "ما هو الإسكان (İskan)؟",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-03",
-   "week": "التعريف والمشاريع الجديدة",
-   "weekEn": "Introduction & new launches",
+   "date": "2026-11-02",
+   "week": "مشاريع جديدة وخطوات الشراء",
+   "weekEn": "New projects & buying steps",
    "posts": [
     {
-     "id": "diamond-marin-location",
+     "id": "referans-besiktas-intro",
      "kind": "project",
-     "slug": "diamond-marin",
-     "angle": "location",
-     "path": "/projects/diamond-marin",
+     "slug": "referans-besiktas",
+     "path": "/projects/referans-besiktas",
+     "design": "A",
      "photos": [
-      "/images/projects/diamond-marin/street-view.jpg",
-      "/images/projects/diamond-marin/facade.jpg"
+      "/images/projects/referans-besiktas/aerial-courtyard.jpg",
+      "/images/projects/referans-besiktas/central-garden.jpg",
+      "/images/projects/referans-besiktas/night-aerial-garden.jpg",
+      "/images/projects/referans-besiktas/rooftop-terraces-dusk.jpg"
      ],
-     "brief": "Location: the nearby places and travel times (projectsData.<slug>.nearby) and the district.",
-     "label": "دايموند مارين · الموقع وما حوله",
-     "at": "09:00"
-    },
-    {
-     "id": "faq-foreigners-buy",
-     "kind": "page",
-     "path": "/faq",
-     "photos": [
-      "/images/projects/diamond-marin/facade.jpg"
-     ],
-     "brief": "Answer the FAQ question faq.categories[1].items[1] (question + clear short answer from the site's answer).",
-     "label": "سؤال: هل يمكن للأجانب الشراء؟",
-     "at": "14:00"
-    },
-    {
-     "id": "area-buyukcekmece",
-     "kind": "page",
-     "angle": "area",
-     "path": "/projects",
-     "photos": [
-      "/images/projects/lotus-yali/view-from-sea.jpg",
-      "/images/projects/lotus-manzara-guzelce/aerial-villas.jpg"
-     ],
-     "brief": "Evening, light: Büyükçekmece as a place to live (sea and lake). Only facts from the site: our available projects in Büyükçekmece (projects.ts district) and their projectsData.<slug>.nearby texts. Badge «من إسطنبول · Istanbul life».",
-     "label": "من إسطنبول: بيوكجكمجة",
-     "at": "21:00"
+     "brief": "First post about Referans Beşiktaş: 10 low-rise buildings around a central garden in Abbasağa, Beşiktaş, 900 m² of shared facilities, 1+1 to 4+1 + duplex and penthouse, delivery January 2027, 40% then 24–36 months (paymentPlan). Eligible for citizenship (citizenship note). Facts from src/data/projects.ts and projectsData.referans-besiktas (ar.json/en.json). No prices (owner's rule).",
+     "label": "ريفيرانس بشكتاش · حديقة مركزية",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-04",
-   "week": "التعريف والمشاريع الجديدة",
-   "weekEn": "Introduction & new launches",
+   "date": "2026-11-03",
+   "week": "مشاريع جديدة وخطوات الشراء",
+   "weekEn": "New projects & buying steps",
    "posts": [
     {
-     "id": "lotus-sisli-offices",
-     "kind": "project",
-     "slug": "lotus-sisli",
-     "angle": "offices",
-     "path": "/projects/lotus-sisli",
+     "id": "kat-irtifaki-vs-mulkiyeti",
+     "kind": "guide",
+     "path": "/blog/kat-irtifaki-vs-kat-mulkiyeti",
+     "design": "list",
      "photos": [
-      "/images/projects/lotus-sisli/office-interior.jpg",
-      "/images/projects/lotus-sisli/tower-day.jpg"
+      "/images/blog/kat-irtifaki-vs-kat-mulkiyeti.jpg",
+      "/images/projects/tual-comfort/towers-park.jpg"
      ],
-     "brief": "Şişli home offices and office units (residences with kind office, saleable areas) for investors and professionals; location in Şişli.",
-     "label": "لوتس شيشلي · المكاتب والـ Home Office",
-     "at": "09:00"
-    },
-    {
-     "id": "faq-payment-options",
-     "kind": "page",
-     "path": "/faq",
-     "photos": [
-      "/images/projects/beylikduzu-living/living-room-2.jpg"
-     ],
-     "brief": "Answer the FAQ question faq.categories[1].items[2] (question + clear short answer from the site's answer).",
-     "label": "سؤال: خيارات الدفع",
-     "at": "14:00"
-    },
-    {
-     "id": "evening-first-question",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «سؤال الليلة · Tonight's question». «ما أول ما تسأل عنه عند شراء بيت في إسطنبول؟» with 4 options: الموقع/Location, المساحة/Size, الإطلالة/View, المرافق/Amenities.",
-     "label": "سؤال الليلة: أول ما تسأل عنه",
-     "at": "21:00"
+     "brief": "The two title deed types from blogData.kat-irtifaki-vs-kat-mulkiyeti: what each means and when one becomes the other, in 3 points. No prices (owner's rule).",
+     "label": "Kat İrtifakı أم Kat Mülkiyeti؟",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-05",
-   "week": "التعريف والمشاريع الجديدة",
-   "weekEn": "Introduction & new launches",
+   "date": "2026-11-04",
+   "week": "مشاريع جديدة وخطوات الشراء",
+   "weekEn": "New projects & buying steps",
    "posts": [
     {
-     "id": "beylikduzu-living-homes",
+     "id": "hayat-flora-intro",
      "kind": "project",
-     "slug": "beylikduzu-living",
-     "angle": "homes",
-     "path": "/projects/beylikduzu-living",
+     "slug": "hayat-flora",
+     "path": "/projects/hayat-flora",
+     "design": "A",
      "photos": [
-      "/images/projects/beylikduzu-living/living-room.jpg",
-      "/images/projects/beylikduzu-living/kitchen.jpg",
-      "/images/projects/beylikduzu-living/entrance-hall.jpg"
+      "/images/projects/hayat-flora/aerial-sea.jpg",
+      "/images/projects/hayat-flora/gardens-aerial.jpg",
+      "/images/projects/hayat-flora/pool-evening.jpg",
+      "/images/projects/hayat-flora/garden-homes.jpg"
      ],
-     "brief": "The homes: 2+1, 3+1 and 4+1 with gross sizes (residences), interiors, flexible installment plans, delivery late 2028.",
-     "label": "لوتس ياشام · الشقق والمساحات",
-     "at": "09:00"
-    },
+     "brief": "First post about Hayat Flora: Özak GYO with the Emlak Konut guarantee, 1,382 homes in 21 blocks, up to 70% green areas, Marmaray Halkalı and M11 500 m away, planned delivery February 2029 per the developer, 30/30 payment plan. Eligible for citizenship (citizenship note). Facts from src/data/projects.ts and projectsData.hayat-flora (ar.json/en.json). No prices (owner's rule).",
+     "label": "حياة فلورا · هالكالي",
+     "at": "09:00",
+     "reel": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-05",
+   "week": "الطابو والتكاليف",
+   "weekEn": "Title deed & costs",
+   "posts": [
     {
-     "id": "video-tour",
-     "kind": "page",
+     "id": "contact-video-any-project",
+     "kind": "contact",
      "path": "/video-tour",
+     "design": "list",
      "photos": [
-      "/images/projects/diamond-marin/master-bedroom.jpg"
+      "/hero-istanbul.jpg",
+      "/images/projects/diamond-marin/living-dining.jpg"
      ],
-     "brief": "Private video tour (videoTour.*): who it is for (buyers abroad), what you see, free, WhatsApp/FaceTime/Zoom/Meet, Arabic/English/Turkish. Different wording than the first video-tour post.",
-     "label": "الجولة عبر الفيديو",
-     "at": "14:00"
-    },
-    {
-     "id": "pick-complex-or-villa",
-     "kind": "evening",
-     "design": "choice",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «لو خُيّرت · Your pick». Design «choice»: A = an apartment in a complex with shared gardens (photo /images/projects/lotus-sisli/tower-garden.jpg), B = a standalone villa (photo /images/projects/lotus-manzara-beylikduzu/aerial-villas.jpg). The caption may say our available projects offer both, no prices.",
-     "label": "لو خُيّرت: شقة في مجمّع أم فيلا؟",
-     "at": "21:00"
+     "brief": "Real channels only (README 'Contact posts'): WhatsApp https://wa.me/905319309214, phone +90 531 930 92 14, info@byhadara.com, the contact form, the live chat on the website, Instagram @hadararealestate, the Facebook page, the office in Adnan Kahveci Mah., Beylikdüzü. A private video tour of ANY project from abroad (videoTour.* — how it works in 3 steps, apps, languages Arabic/English/Turkish, the office hours line). Not the villa only (that angle was 2026-10-23).",
+     "label": "جولة فيديو لأي مشروع",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-06",
-   "week": "جاهز للسكن",
-   "weekEn": "Ready to move in",
+   "date": "2026-11-06",
+   "week": "الطابو والتكاليف",
+   "weekEn": "Title deed & costs",
    "posts": [
     {
-     "id": "lotus-yali-overview",
+     "id": "gokturk-kemer-intro",
      "kind": "project",
-     "slug": "lotus-yali",
-     "angle": "overview",
-     "path": "/projects/lotus-yali",
+     "slug": "gokturk-kemer-evleri",
+     "path": "/projects/gokturk-kemer-evleri",
+     "design": "A",
      "photos": [
-      "/images/projects/lotus-yali/sunset-aerial.jpg",
-      "/images/projects/lotus-yali/aerial-sea-view.jpg"
+      "/images/projects/gokturk-kemer-evleri/pond-blocks.jpg",
+      "/images/projects/gokturk-kemer-evleri/villa-terrace-pool.jpg",
+      "/images/projects/gokturk-kemer-evleri/entrance-avenue.jpg",
+      "/images/projects/gokturk-kemer-evleri/villa-pool.jpg"
      ],
-     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats.",
-     "label": "لوتس يالي · نظرة عامة",
-     "at": "09:00"
-    },
-    {
-     "id": "blog-real-estate-in-turkey",
-     "kind": "article",
-     "slug": "real-estate-in-turkey",
-     "path": "/blog/real-estate-in-turkey",
-     "photos": [
-      "/images/blog/real-estate-in-turkey.jpg"
-     ],
-     "brief": "3-4 practical points from the article blogData.real-estate-in-turkey, then invite to read it.",
-     "label": "مقال: فهم سوق العقارات التركي",
-     "at": "14:00"
-    },
-    {
-     "id": "tf-two-plus-one",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/blog/gross-vs-net-area",
-     "photos": [],
-     "brief": "Badge «صح أم خطأ؟ · True or false?». The image shows only the statement (no answer). The caption invites answers in the comments, then gives the answer at the end after a short line «الإجابة ⬇️ / Answer ⬇️», from the site source named here: statement «في الإعلانات العقارية التركية، تعني 2+1 غرفتي نوم وغرفة معيشة واحدة» / «In Turkish property listings, 2+1 means two bedrooms and one living room»; answer: true, from blogData.gross-vs-net-area (point to /blog/gross-vs-net-area).",
-     "label": "صح أم خطأ: معنى 2+1",
-     "at": "21:00"
+     "brief": "First post about Göktürk Kemer Evleri: Emlak Konut with Ziraat GYO, 414 apartments + 81 villas with private pools, next to Belgrad Forest, 15 minutes to Istanbul Airport, interest-free instalments from Emlak Konut (highlight wording, no numbers). Eligible for citizenship (citizenship note). Facts from src/data/projects.ts and projectsData.gokturk-kemer-evleri (ar.json/en.json). No prices (owner's rule).",
+     "label": "غوكتورك كمر إيفلري · شقق وفلل",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-07",
-   "week": "جاهز للسكن",
-   "weekEn": "Ready to move in",
+   "date": "2026-11-07",
+   "week": "الطابو والتكاليف",
+   "weekEn": "Title deed & costs",
    "posts": [
     {
-     "id": "cadde-ispartakule-overview",
-     "kind": "project",
-     "slug": "cadde-ispartakule",
-     "angle": "overview",
-     "path": "/projects/cadde-ispartakule",
+     "id": "law-title-deed-fee",
+     "kind": "law",
+     "law": "title-deed-fee",
+     "path": "/property-laws",
+     "design": "list",
      "photos": [
-      "/images/projects/cadde-ispartakule/tower-avenue.jpg",
-      "/images/projects/cadde-ispartakule/tower-park.jpg"
+      "/images/blog/taxes-and-tapu-fees.jpg",
+      "/images/projects/lotus-yali/sunset-aerial.jpg"
      ],
-     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats. 78 apartments and 12 shops.",
-     "label": "جادّة إسبارتاكولي · نظرة عامة",
-     "at": "09:00"
-    },
-    {
-     "id": "blog-taxes-and-tapu-fees",
-     "kind": "article",
-     "slug": "taxes-and-tapu-fees",
-     "path": "/blog/taxes-and-tapu-fees",
-     "photos": [
-      "/images/blog/taxes-and-tapu-fees.jpg"
-     ],
-     "brief": "3-4 practical points from the article blogData.taxes-and-tapu-fees, then invite to read it.",
-     "label": "مقال: فهم ضريبة العقار ورسوم الطابو في تركيا",
-     "at": "14:00"
-    },
-    {
-     "id": "finish-ideal-home",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «أكمل الجملة · Finish the sentence». The image shows the unfinished sentence ending with «…»; the caption asks followers to finish it in the comments. «البيت المثالي بالنسبة إليّ هو…» / «My ideal home is…».",
-     "label": "أكمل الجملة: البيت المثالي",
-     "at": "21:00"
+     "brief": "The title deed fee rule (binde 20 for each side = 4% in total) and that it is calculated on the declared price; link it to the 'declared price' rule only if the approved items say so. Facts only from the approved item in src/data/laws.ts and lawsData.rules|updates.<id> in ar.json/en.json (dates, before/after, who is affected); the image says what changed and when it applies. Closing line: «معلومات عامة وليست استشارة قانونية · General information, not legal advice». path /property-laws.",
+     "label": "رسوم الطابو: من يدفع وكم؟",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-08",
-   "week": "جاهز للسكن",
-   "weekEn": "Ready to move in",
+   "date": "2026-11-08",
+   "week": "الطابو والتكاليف",
+   "weekEn": "Title deed & costs",
    "posts": [
     {
-     "id": "lotus-koru-2-overview",
+     "id": "referans-pendik-intro",
      "kind": "project",
-     "slug": "lotus-koru-2",
-     "angle": "overview",
-     "path": "/projects/lotus-koru-2",
+     "slug": "referans-pendik",
+     "path": "/projects/referans-pendik",
+     "design": "A",
      "photos": [
-      "/images/projects/lotus-koru-2/residential-blocks.jpg",
-      "/images/projects/lotus-koru-2/landscaped-grounds.jpg"
+      "/images/projects/referans-pendik/blocks-sea-view.jpg",
+      "/images/projects/referans-pendik/sunset-courtyard.jpg",
+      "/images/projects/referans-pendik/terrace-sea-view.jpg",
+      "/images/projects/referans-pendik/street-to-the-sea.jpg"
      ],
-     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats.",
-     "label": "لوتس كورو 2 · نظرة عامة",
-     "at": "09:00"
-    },
+     "brief": "First post about Referans Pendik, our first project on the Asian side: 686 homes, 35,000 m² of gardens, sea and Princes' Islands view, M4 metro 50 m, Sabiha Gökçen 10 km, 40% then 24–36 months. Eligible for citizenship (citizenship note). No shop counts (owner's decision). Facts from src/data/projects.ts and projectsData.referans-pendik (ar.json/en.json). No prices (owner's rule).",
+     "label": "ريفيرانس بندك · الجانب الآسيوي",
+     "at": "09:00",
+     "reel": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-09",
+   "week": "الطابو والتكاليف",
+   "weekEn": "Title deed & costs",
+   "posts": [
     {
-     "id": "blog-real-estate-valuation",
-     "kind": "article",
-     "slug": "real-estate-valuation",
+     "id": "valuation-report",
+     "kind": "guide",
      "path": "/blog/real-estate-valuation",
+     "design": "list",
      "photos": [
-      "/images/blog/real-estate-valuation.jpg"
+      "/images/blog/real-estate-valuation.jpg",
+      "/images/projects/sea-pearl-atakoy/aerial-coast.jpg"
      ],
-     "brief": "3-4 practical points from the article blogData.real-estate-valuation, then invite to read it.",
-     "label": "مقال: لماذا يهم التقييم العقاري عند شراء عقار",
-     "at": "14:00"
-    },
-    {
-     "id": "evening-where-from",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «سؤال الليلة · Tonight's question». «من أي مدينة تتابعوننا الليلة؟» / «Which city are you following us from tonight?» No options; invite followers to write their city in the comments.",
-     "label": "سؤال الليلة: من أين تتابعوننا؟",
-     "at": "21:00"
+     "brief": "The valuation report (blogData.real-estate-valuation + the approved law item valuation-report): who prepares it, when it is required (title deed, citizenship), what it protects — 3 points. No prices (owner's rule).",
+     "label": "تقرير التقييم العقاري: لماذا يلزمك؟",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-09",
-   "week": "جاهز للسكن",
-   "weekEn": "Ready to move in",
+   "date": "2026-11-10",
+   "week": "الطابو والتكاليف",
+   "weekEn": "Title deed & costs",
    "posts": [
     {
-     "id": "lotus-yali-life",
+     "id": "tual-comfort-intro",
      "kind": "project",
-     "slug": "lotus-yali",
-     "angle": "life",
-     "path": "/projects/lotus-yali",
+     "slug": "tual-comfort",
+     "path": "/projects/tual-comfort",
+     "design": "A",
+     "photos": [
+      "/images/projects/tual-comfort/towers-entrance.jpg",
+      "/images/projects/tual-comfort/towers-park.jpg",
+      "/images/projects/tual-comfort/central-garden.jpg",
+      "/images/projects/tual-comfort/living-room.jpg"
+     ],
+     "brief": "First post about Tual Comfort: ready to move in with the title deed ready, Ispartakule, view over Küçükçekmece lake, 480 apartments in 21 floors, indoor pool, spa and hamam, a parking space per flat. Eligible for citizenship (citizenship note). Say nothing about residence permits (Avcılar is closed to new residence permits). Facts from src/data/projects.ts and projectsData.tual-comfort (ar.json/en.json). No prices (owner's rule).",
+     "label": "توال كومفورت · جاهز بطابو",
+     "at": "09:00",
+     "reel": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-11",
+   "week": "الطابو والتكاليف",
+   "weekEn": "Title deed & costs",
+   "posts": [
+    {
+     "id": "emlak-konut-or-toki",
+     "kind": "guide",
+     "path": "/blog/emlak-konut-vs-toki",
+     "design": "list",
+     "photos": [
+      "/images/blog/emlak-konut-vs-toki.jpg",
+      "/images/projects/vadi-panorama/low-rise-block.jpg"
+     ],
+     "brief": "The difference from blogData.emlak-konut-vs-toki: TOKİ = the state housing administration (social housing for Turkish citizens), Emlak Konut = a listed company whose projects foreigners can buy — 3 points. No prices (owner's rule).",
+     "label": "إملاك كونوت أم توكي؟",
+     "at": "09:00",
+     "reel": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-12",
+   "week": "القوانين والإقامة",
+   "weekEn": "Laws & residence",
+   "posts": [
+    {
+     "id": "contact-property-request",
+     "kind": "contact",
+     "path": "/property-request",
+     "design": "list",
      "photos": [
       "/images/projects/lotus-yali/view-from-sea.jpg",
-      "/images/projects/lotus-yali/aerial-sea-view.jpg"
+      "/images/projects/lotus-yali/sunset-aerial.jpg"
      ],
-     "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. Separate indoor pools, 3+1 and 5+2 duplex.",
-     "label": "لوتس يالي · الحياة في المشروع",
-     "at": "09:00"
-    },
-    {
-     "id": "property-request",
-     "kind": "page",
-     "path": "/property-request",
-     "photos": [
-      "/images/projects/lotus-istanbul/iconic-urban-development.jpg"
-     ],
-     "brief": "Custom property request (propertyRequest.*): tell us type, city/district, new or any, budget, floor; we search for you, even outside our projects.",
-     "label": "اطلب عقارك المخصص",
-     "at": "14:00"
-    },
-    {
-     "id": "pick-ready-or-offplan",
-     "kind": "evening",
-     "design": "choice",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «لو خُيّرت · Your pick». Design «choice»: A = ready to move in (photo /images/projects/cadde-ispartakule/garden-pond.jpg), B = a new project before delivery (photo /images/projects/diamond-marin/facade-side.jpg). Caption: one honest line on each (ready = move in now; new launch = choose your unit early, installments where the project offers them), no prices.",
-     "label": "لو خُيّرت: جاهز أم على الخارطة؟",
-     "at": "21:00"
+     "brief": "Real channels only (README 'Contact posts'): WhatsApp https://wa.me/905319309214, phone +90 531 930 92 14, info@byhadara.com, the contact form, the live chat on the website, Instagram @hadararealestate, the Facebook page, the office in Adnan Kahveci Mah., Beylikdüzü. The custom property request: tell us type, area, budget range, floor and we search for you (propertyRequest.* steps). Mention WhatsApp as the quick alternative.",
+     "label": "لم تجد ما تبحث عنه؟ اطلب عقارك",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-10",
-   "week": "جاهز للسكن",
-   "weekEn": "Ready to move in",
+   "date": "2026-11-13",
+   "week": "القوانين والإقامة",
+   "weekEn": "Laws & residence",
    "posts": [
     {
-     "id": "cadde-ispartakule-life",
+     "id": "alya-city-intro",
      "kind": "project",
-     "slug": "cadde-ispartakule",
-     "angle": "life",
-     "path": "/projects/cadde-ispartakule",
+     "slug": "alya-city-veliefendi",
+     "path": "/projects/alya-city-veliefendi",
+     "design": "A",
      "photos": [
-      "/images/projects/cadde-ispartakule/hamam.jpg",
-      "/images/projects/cadde-ispartakule/fitness.jpg",
-      "/images/projects/cadde-ispartakule/garden-pond.jpg"
+      "/images/projects/alya-city-veliefendi/plaza.jpg",
+      "/images/projects/alya-city-veliefendi/street-shops.jpg",
+      "/images/projects/alya-city-veliefendi/gateway.jpg",
+      "/images/projects/alya-city-veliefendi/towers.jpg"
      ],
-     "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. Wellness (hamam, sauna, fitness), smart home, garden.",
-     "label": "جادّة إسبارتاكولي · الحياة في المشروع",
-     "at": "09:00"
-    },
-    {
-     "id": "faq-rental-investment",
-     "kind": "page",
-     "path": "/faq",
-     "photos": [
-      "/images/projects/cadde-ispartakule/terrace-view.jpg"
-     ],
-     "brief": "Answer the FAQ question faq.categories[1].items[4] (question + clear short answer from the site's answer).",
-     "label": "سؤال: الاستثمار الإيجاري",
-     "at": "14:00"
-    },
-    {
-     "id": "evening-neighbourhood",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «سؤال الليلة · Tonight's question». «ما أهم ما تحتاجه قرب بيتك؟» with 4 options: مدرسة/School, مستشفى/Hospital, مركز تسوق/Mall, مواصلات/Transport.",
-     "label": "سؤال الليلة: ماذا تحتاج قرب بيتك؟",
-     "at": "21:00"
+     "brief": "First post about Alya City Veliefendi: 778 apartments in 12 blocks around a pedestrian shopping street (Alya Meydan renders), Zeytinburnu, delivery soon, 50% then 12–24 months (paymentPlan). Eligible for citizenship (citizenship note). Facts from src/data/projects.ts and projectsData.alya-city-veliefendi (ar.json/en.json). No prices (owner's rule).",
+     "label": "علياء سيتي ولي أفندي · زيتون بورنو",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-11",
-   "week": "جاهز للسكن",
-   "weekEn": "Ready to move in",
+   "date": "2026-11-14",
+   "week": "القوانين والإقامة",
+   "weekEn": "Laws & residence",
    "posts": [
     {
-     "id": "lotus-koru-2-life",
-     "kind": "project",
-     "slug": "lotus-koru-2",
-     "angle": "life",
-     "path": "/projects/lotus-koru-2",
+     "id": "law-property-tax",
+     "kind": "law",
+     "law": "property-tax",
+     "path": "/property-laws",
+     "design": "list",
      "photos": [
       "/images/projects/lotus-koru-2/landscaped-grounds.jpg",
-      "/images/projects/lotus-koru-2/urban-living-concept.jpg"
-     ],
-     "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits.",
-     "label": "لوتس كورو 2 · الحياة في المشروع",
-     "at": "09:00"
-    },
-    {
-     "id": "contact-channels",
-     "kind": "page",
-     "path": "/contact",
-     "photos": [
-      "/images/projects/lotus-sisli/aerial-city.jpg",
-      "/hero-istanbul.jpg"
-     ],
-     "brief": "HOW TO CONTACT HADARA (owner's request 2026-10-08, a regular contact post): every real channel from the site, clearly: WhatsApp (wa.me/905319309214), phone +90 531 930 92 14, email info@byhadara.com, the contact form on /contact (choose several projects; a reference number HQ-… and a confirmation email), the live chat on the website («تحدّث مع فريقنا هنا»), Instagram @hadararealestate and the Facebook page, the office in Beylikdüzü (Adnan Kahveci Mah.). Office hours from videoTour.officeHours (9:00–18:00 Istanbul). Design A (design \"list\" fits: 3 channels) with a tip. Caption: each channel on its own bullet with its link.",
-     "label": "كيف تتواصل مع حضارة: كل القنوات",
-     "at": "14:00"
-    },
-    {
-     "id": "tf-european-side",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «صح أم خطأ؟ · True or false?». The image shows only the statement (no answer). The caption invites answers in the comments, then gives the answer at the end after a short line «الإجابة ⬇️ / Answer ⬇️», from the site source named here: statement «تقع مشاريع حضارة الحالية كلها في الجانب الأوروبي من إسطنبول» / «All of HADARA's current projects are on Istanbul's European side»; answer: true (Beylikdüzü, Büyükçekmece, Avcılar and Şişli), from faq.categories[0].items[2].",
-     "label": "صح أم خطأ: مشاريعنا في الجانب الأوروبي",
-     "at": "21:00"
-    }
-   ],
-   "intensive": true
-  },
-  {
-   "date": "2026-10-12",
-   "week": "جاهز للسكن",
-   "weekEn": "Ready to move in",
-   "posts": [
-    {
-     "id": "lotus-yali-location",
-     "kind": "project",
-     "slug": "lotus-yali",
-     "angle": "location",
-     "path": "/projects/lotus-yali",
-     "photos": [
-      "/images/projects/lotus-yali/aerial-sea-view.jpg",
-      "/images/projects/lotus-yali/sunset-aerial.jpg"
-     ],
-     "brief": "Location: the nearby places and travel times (projectsData.<slug>.nearby) and the district.",
-     "label": "لوتس يالي · الموقع وما حوله",
-     "at": "09:00"
-    },
-    {
-     "id": "why-hadara",
-     "kind": "page",
-     "path": "/about",
-     "photos": [
-      "/hero-istanbul.jpg"
-     ],
-     "brief": "Why HADARA (home.why + home.stats): your real estate partner in Istanbul, 12+ years, 11 projects, full guidance. General wording, never 'we build/develop'.",
-     "label": "لماذا حضارة",
-     "at": "14:00"
-    },
-    {
-     "id": "finish-first-thing-home",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «أكمل الجملة · Finish the sentence». The image shows the unfinished sentence ending with «…»; the caption asks followers to finish it in the comments. «أول ما سأفعله في بيتي الجديد في إسطنبول هو…» / «The first thing I'll do in my new Istanbul home is…».",
-     "label": "أكمل الجملة: أول ما سأفعله",
-     "at": "21:00"
-    }
-   ],
-   "intensive": true
-  },
-  {
-   "date": "2026-10-13",
-   "week": "الجنسية والاستثمار",
-   "weekEn": "Citizenship & investment",
-   "posts": [
-    {
-     "id": "beylikduzu-living-citizenship",
-     "kind": "project",
-     "slug": "beylikduzu-living",
-     "angle": "citizenship",
-     "path": "/projects/beylikduzu-living",
-     "photos": [
-      "/images/projects/beylikduzu-living/street-facade.jpg",
-      "/images/projects/beylikduzu-living/aerial-view.jpg"
-     ],
-     "brief": "Lotus Yaşam for buyers thinking about citizenship: a new launch with flexible installments, delivery late 2028 (from the data). IMPORTANT: not every unit qualifies; never say the project or all its units are eligible. Say only that units that meet the legal minimum value can qualify and that the HADARA team confirms which units do. No prices and no price ranges. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "لوتس ياشام · لمن يفكر في الجنسية",
-     "at": "09:00"
-    },
-    {
-     "id": "citizenship-requirements",
-     "kind": "page",
-     "path": "/citizenship",
-     "photos": [
-      "/images/blog/citizenship-investment-laws.jpg"
-     ],
-     "brief": "Citizenship programme requirements (citizenship.requirements): minimum, valuation report, foreign currency payment, 3-year hold, conformity, off-plan. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "شروط الجنسية",
-     "at": "14:00"
-    },
-    {
-     "id": "tf-rent-increase",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/property-laws",
-     "photos": [],
-     "brief": "Badge «صح أم خطأ؟ · True or false?». The image shows only the statement (no answer). The caption invites answers in the comments, then gives the answer at the end after a short line «الإجابة ⬇️ / Answer ⬇️», from the site source named here: statement «عند تجديد عقد الإيجار السكني في تركيا، يستطيع المالك رفع الإيجار بأي نسبة يريدها» / «When a home rental contract in Turkey is renewed, the landlord can raise the rent by any amount»; answer: FALSE: the yearly increase may not exceed the average change of the consumer price index (TÜFE) over the previous 12 months, Article 344 of the Turkish Code of Obligations No. 6098, from lawsData.rules.rent-increase. Add the note «الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change» and point to the Property Laws page (path /property-laws).",
-     "label": "صح أم خطأ: زيادة الإيجار",
-     "at": "21:00"
-    }
-   ],
-   "intensive": true
-  },
-  {
-   "date": "2026-10-14",
-   "week": "الجنسية والاستثمار",
-   "weekEn": "Citizenship & investment",
-   "posts": [
-    {
-     "id": "diamond-marin-limited",
-     "kind": "project",
-     "slug": "diamond-marin",
-     "angle": "limited",
-     "path": "/projects/diamond-marin",
-     "photos": [
-      "/images/projects/diamond-marin/aerial-sea-view.jpg",
-      "/images/projects/diamond-marin/street-view.jpg"
-     ],
-     "brief": "Diamond Marin: only 58 residences in two low-rise buildings (limited units), 3+1, delivery late 2027, 5 min to West Istanbul Marina. Different headline and photo crop than earlier Diamond Marin posts.",
-     "label": "دايموند مارين · وحدات محدودة",
-     "at": "09:00"
-    },
-    {
-     "id": "citizenship-steps",
-     "kind": "page",
-     "path": "/citizenship",
-     "photos": [
-      "/images/blog/citizenship-by-real-estate.jpg"
-     ],
-     "brief": "The citizenship process step by step (citizenship.steps), as a numbered list. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "خطوات الجنسية",
-     "at": "14:00"
-    },
-    {
-     "id": "evening-visited-istanbul",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «سؤال الليلة · Tonight's question». «هل زرتم إسطنبول من قبل؟» with 3 options: مرة واحدة/Once, أكثر من مرة/Many times, ليس بعد/Not yet.",
-     "label": "سؤال الليلة: هل زرتم إسطنبول؟",
-     "at": "21:00"
-    }
-   ],
-   "intensive": true
-  },
-  {
-   "date": "2026-10-15",
-   "week": "الجنسية والاستثمار",
-   "weekEn": "Citizenship & investment",
-   "posts": [
-    {
-     "id": "lotus-sisli-life",
-     "kind": "project",
-     "slug": "lotus-sisli",
-     "angle": "life",
-     "path": "/projects/lotus-sisli",
-     "photos": [
-      "/images/projects/lotus-sisli/apartment-living.jpg",
-      "/images/projects/lotus-sisli/penthouse-terrace.jpg"
-     ],
-     "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. 1+1/2+1 apartments, penthouses, facilities from the data.",
-     "label": "لوتس شيشلي · الحياة في المشروع",
-     "at": "09:00"
-    },
-    {
-     "id": "citizenship-benefits",
-     "kind": "page",
-     "path": "/citizenship",
-     "photos": [
-      "/images/projects/lotus-sisli/tower-night.jpg"
-     ],
-     "brief": "Benefits of Turkish citizenship (citizenship.benefits). Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "مزايا الجنسية",
-     "at": "14:00"
-    },
-    {
-     "id": "carousel-aidat",
-     "kind": "evening",
-     "design": "carousel",
-     "path": "/blog/monthly-fees-aidat",
-     "photos": [
-      "/images/blog/monthly-fees-aidat.jpg",
-      "/images/projects/cadde-ispartakule/garden-pond.jpg"
-     ],
-     "brief": "Carousel (owner's request 2026-10-14) from the article blogData.monthly-fees-aidat ONLY (every fact is from the Condominium Law text on mevzuat.gov.tr; add nothing else). Cover: «الأيدات في تركيا: مقابل ماذا تدفع شهرياً؟» / «Aidat in Turkey: what do you pay for each month?», badge «معلومة عقارية · Property tip». Content slides (1-2 items each): 1) what aidat is: a regular contribution of every owner to run the shared parts, not a tax, collected by the building management; 2) what it pays for: staff (doorman, heating, gardener, security) and the building as a whole (insurance, maintenance and repair of common areas, manager's fee, lifts, cleaning, lighting and water of common areas; in complexes also pools, gym, gardens, car park, cameras, generator), so fees differ between projects; 3) how it is calculated: a yearly operating budget approved by the owners' general meeting and paid in instalments (usually monthly); unless agreed otherwise, staff costs are shared equally and the rest by each unit's land share (arsa payı) on the title deed; 4) what changed in 2026 (Law No. 7579): the manager's new provisional budget may not rise more than the official annual revaluation rate and must go to the general meeting within three months; 5) before you buy: ask the current fee and what it covers, the approved budget and management plan, and written confirmation of no unpaid fees. Last slide: ask «هل تسأل عن قيمة الأيدات قبل أن تختار شقتك؟» / «Do you ask about the aidat before choosing a flat?», cta to read the full article, note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'. NO amounts in lira, no prices, no percentages except the law's own words if needed.",
-     "label": "شرائح: الأيدات — مقابل ماذا تدفع شهرياً؟",
-     "at": "21:00"
-    }
-   ],
-   "intensive": true
-  },
-  {
-   "date": "2026-10-16",
-   "week": "الجنسية والاستثمار",
-   "weekEn": "Citizenship & investment",
-   "posts": [
-    {
-     "id": "cadde-ispartakule-shops",
-     "kind": "project",
-     "slug": "cadde-ispartakule",
-     "angle": "shops",
-     "path": "/projects/cadde-ispartakule",
-     "photos": [
-      "/images/projects/cadde-ispartakule/retail-avenue.jpg",
-      "/images/projects/cadde-ispartakule/tower-avenue.jpg"
-     ],
-     "brief": "The 12 shops and the avenue setting of Cadde Ispartakule, for investors (only facts from the data).",
-     "label": "جادّة إسبارتاكولي · المحلات التجارية",
-     "at": "09:00"
-    },
-    {
-     "id": "blog-citizenship-investment-laws",
-     "kind": "article",
-     "slug": "citizenship-investment-laws",
-     "path": "/blog/citizenship-investment-laws",
-     "photos": [
-      "/images/blog/citizenship-investment-laws.jpg"
-     ],
-     "brief": "3-4 practical points from the article blogData.citizenship-investment-laws, then invite to read it.",
-     "label": "مقال: قوانين الجنسية التركية عبر الاستثمار، بالتفصيل",
-     "at": "14:00"
-    },
-    {
-     "id": "evening-what-decides",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «سؤال الليلة · Tonight's question». «ما الذي يساعدك أكثر على اتخاذ قرار الشراء؟» with 4 options: زيارة المشروع/Site visit, جولة عبر الفيديو/Video tour, رأي العائلة/Family's opinion, خطة الدفع/Payment plan. No prices.",
-     "label": "سؤال الليلة: ما الذي يحسم قرارك؟",
-     "at": "21:00"
-    }
-   ],
-   "intensive": true
-  },
-  {
-   "date": "2026-10-17",
-   "week": "الجنسية والاستثمار",
-   "weekEn": "Citizenship & investment",
-   "posts": [
-    {
-     "id": "lotus-koru-2-homes",
-     "kind": "project",
-     "slug": "lotus-koru-2",
-     "angle": "homes",
-     "path": "/projects/lotus-koru-2",
-     "photos": [
-      "/images/projects/lotus-koru-2/urban-living-concept.jpg",
       "/images/projects/lotus-koru-2/central-location.jpg"
      ],
-     "brief": "Lotus Koru 2: completed homes with available units; highlights and stats.",
-     "label": "لوتس كورو 2 · الشقق والمساحات",
-     "at": "09:00"
-    },
-    {
-     "id": "citizenship-costs",
-     "kind": "page",
-     "path": "/citizenship",
-     "photos": [
-      "/images/blog/taxes-and-tapu-fees.jpg"
-     ],
-     "brief": "Documents and costs for citizenship (citizenship.documents + citizenship.costs, e.g. title deed fee). Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "وثائق وتكاليف الجنسية",
-     "at": "14:00"
-    },
-    {
-     "id": "pick-kitchen-or-living",
-     "kind": "evening",
-     "design": "choice",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «لو خُيّرت · Your pick». Design «choice»: A = a big kitchen (photo /images/projects/marmara-haven-villa/kitchen.jpg), B = a big living room (photo /images/projects/lotus-manzara-beylikduzu/living-room.jpg).",
-     "label": "لو خُيّرت: مطبخ واسع أم صالة واسعة؟",
-     "at": "21:00"
+     "brief": "The yearly property tax (approved items property-tax and property-tax-cap-2026): who pays, when it is paid, and the 2026 cap on the increase exactly as the item states it. Facts only from the approved item in src/data/laws.ts and lawsData.rules|updates.<id> in ar.json/en.json (dates, before/after, who is affected); the image says what changed and when it applies. Closing line: «معلومات عامة وليست استشارة قانونية · General information, not legal advice». path /property-laws.",
+     "label": "ضريبة العقار السنوية (Emlak Vergisi)",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-18",
-   "week": "الجنسية والاستثمار",
-   "weekEn": "Citizenship & investment",
+   "date": "2026-11-15",
+   "week": "القوانين والإقامة",
+   "weekEn": "Laws & residence",
    "posts": [
     {
-     "id": "lotus-yali-homes",
+     "id": "casablu-vadi-sea",
      "kind": "project",
-     "slug": "lotus-yali",
-     "angle": "homes",
-     "path": "/projects/lotus-yali",
+     "slug": "casablu-vadi",
+     "path": "/projects/casablu-vadi",
+     "design": "A",
      "photos": [
-      "/images/projects/lotus-yali/aerial-sea-view.jpg",
-      "/images/projects/lotus-yali/view-from-sea.jpg"
+      "/images/projects/casablu-vadi/aerial-valley-sea.jpg",
+      "/images/projects/casablu-vadi/living-sea-sunset.jpg",
+      "/images/projects/casablu-vadi/indoor-pool.jpg",
+      "/images/projects/casablu-vadi/bedroom-sea.jpg"
      ],
-     "brief": "Lotus Yalı homes: 48 apartments, 3+1 and 5+2 duplex in 8 blocks on 8,600 m²; completed with available units.",
-     "label": "لوتس يالي · الشقق والمساحات",
-     "at": "09:00"
-    },
+     "brief": "CasaBlu Vadi (Mutlu İnşaat since 1974): 71 homes 2+1 to 6+1 in 7 blocks next to Yaşam Vadisi, 300 m to the sea, indoor pool, hamam and fitness, delivery November 2027, 30/30. Eligible for citizenship (citizenship note). Facts from src/data/projects.ts and projectsData.casablu-vadi (ar.json/en.json). No prices (owner's rule).",
+     "label": "كازا بلو وادي · بين الوادي والبحر",
+     "at": "09:00",
+     "reel": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "week": "القوانين والإقامة",
+   "weekEn": "Laws & residence",
+   "posts": [
     {
-     "id": "residence-permit",
-     "kind": "page",
-     "path": "/citizenship",
+     "id": "off-plan-or-ready",
+     "kind": "guide",
+     "path": "/blog/off-plan-or-ready",
+     "design": "list",
      "photos": [
-      "/images/blog/life-in-turkey.jpg"
+      "/images/blog/off-plan-or-ready.jpg",
+      "/images/projects/diamond-marin/aerial-sea-view.jpg"
      ],
-     "brief": "Real-estate residence permit (citizenship.residence*): minimum values in Istanbul vs other cities. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "الإقامة العقارية",
-     "at": "14:00"
-    },
+     "brief": "The comparison from blogData.off-plan-or-ready: what each option gives a buyer (time, payment plan, seeing the home) — 3 points. No prices (owner's rule).",
+     "label": "على الخارطة أم جاهز؟",
+     "at": "09:00",
+     "reel": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "week": "القوانين والإقامة",
+   "weekEn": "Laws & residence",
+   "posts": [
     {
-     "id": "tf-currency-bank",
-     "kind": "evening",
-     "design": "tweet",
+     "id": "referans-beylikduzu-intro",
+     "kind": "project",
+     "slug": "referans-beylikduzu",
+     "path": "/projects/referans-beylikduzu",
+     "design": "A",
+     "photos": [
+      "/images/projects/referans-beylikduzu/towers-central-garden.jpg",
+      "/images/projects/referans-beylikduzu/courtyard-pools-aerial.jpg",
+      "/images/projects/referans-beylikduzu/playground-real.jpg",
+      "/images/projects/referans-beylikduzu/living-room-real.jpg"
+     ],
+     "brief": "First post about Referans Beylikdüzü: completed, 709 homes in 8 blocks on 31,000 m² with 70% gardens (lavender, olive, a Japanese zen garden), outdoor and indoor pools, kindergarten, 24-hour security, 40% then 24–36 months. Eligible for citizenship (citizenship note). Prefer the real photos. Facts from src/data/projects.ts and projectsData.referans-beylikduzu (ar.json/en.json). No prices (owner's rule).",
+     "label": "ريفيرانس بيليكدوزو · جاهز للسكن",
+     "at": "09:00",
+     "reel": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "week": "القوانين والإقامة",
+   "weekEn": "Laws & residence",
+   "posts": [
+    {
+     "id": "law-residence-closed-areas",
+     "kind": "law",
+     "law": "residence-closed-areas",
      "path": "/property-laws",
-     "photos": [],
-     "brief": "Badge «صح أم خطأ؟ · True or false?». The image shows only the statement (no answer). The caption invites answers in the comments, then gives the answer at the end after a short line «الإجابة ⬇️ / Answer ⬇️», from the site source named here: statement «عندما يشتري الأجنبي عقاراً في تركيا، يُحوَّل ثمنه من العملة الأجنبية إلى الليرة التركية عبر بنك في تركيا» / «When a foreigner buys property in Turkey, the price is converted from foreign currency into Turkish lira through a bank in Turkey»; answer: true, and the bank's currency purchase document (Döviz Alım Belgesi) goes to the land registry, from lawsData.rules.currency-certificate. Add the note «الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change» and point to the Property Laws page (path /property-laws).",
-     "label": "صح أم خطأ: تحويل الثمن عبر بنك",
-     "at": "21:00"
+     "design": "list",
+     "photos": [
+      "/images/blog/life-in-turkey.jpg",
+      "/images/projects/referans-pendik/kids-park-landscape.jpg"
+     ],
+     "brief": "Property residence permit: the approved items residence-property (the value threshold exactly as the item says) and residence-closed-areas (some neighbourhoods are closed to new permits) — so a buyer checks the address first. Facts only from the approved item in src/data/laws.ts and lawsData.rules|updates.<id> in ar.json/en.json (dates, before/after, who is affected); the image says what changed and when it applies. Closing line: «معلومات عامة وليست استشارة قانونية · General information, not legal advice». path /property-laws.",
+     "label": "الإقامة العقارية: أين تُغلق الأحياء؟",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-19",
-   "week": "الجنسية والاستثمار",
-   "weekEn": "Citizenship & investment",
+   "date": "2026-11-19",
+   "week": "المناطق والقرار",
+   "weekEn": "Areas & decisions",
    "posts": [
     {
-     "id": "marmara-haven-villa-verified",
-     "kind": "project",
-     "slug": "marmara-haven-villa",
-     "angle": "verified",
-     "path": "/projects/marmara-haven-villa",
+     "id": "contact-ask-a-step",
+     "kind": "contact",
+     "path": "/buyers-guide",
+     "design": "list",
      "photos": [
-      "/images/projects/marmara-haven-villa/exterior-facade.jpg",
+      "/images/projects/marmara-haven-villa/hall.jpg",
       "/images/projects/marmara-haven-villa/side-view.jpg"
      ],
-     "brief": "Marmara Haven Villa's verified project card (projectsData.marmara-haven-villa.verified + projectDetail.verified.labels): items confirmed by the HADARA team, last update date; documents available on request.",
-     "label": "فيلا مرمرة هيفن · البطاقة الموثّقة",
-     "at": "09:00"
-    },
-    {
-     "id": "contact-after-message",
-     "kind": "page",
-     "path": "/contact",
-     "photos": [
-      "/images/projects/diamond-marin/facade-side.jpg",
-      "/images/projects/lotus-koru-2/landscaped-grounds.jpg"
-     ],
-     "brief": "CONTACT POST, new angle (owner's request 2026-10-08): what happens after you write to us, from the site only: the contact form (name, email, phone required; pick projects and topics such as citizenship or residence), the reference number HQ-… and the confirmation email in your language; the custom property request form (/property-request) when you want something outside our projects; booking a video tour (/video-tour) is confirmed instantly by email with a calendar file. Design \"list\" (3 ways) + tip. Different headline from earlier contact posts.",
-     "label": "ماذا يحدث بعد أن تراسلنا؟",
-     "at": "14:00"
-    },
-    {
-     "id": "evening-villa-priority",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «سؤال الليلة · Tonight's question». «ما الأهم لك في الفيلا؟» with 4 options: الحديقة/Garden, المسبح/Pool, الإطلالة/View, المساحة/Space.",
-     "label": "سؤال الليلة: ما الأهم في الفيلا؟",
-     "at": "21:00"
+     "brief": "Real channels only (README 'Contact posts'): WhatsApp https://wa.me/905319309214, phone +90 531 930 92 14, info@byhadara.com, the contact form, the live chat on the website, Instagram @hadararealestate, the Facebook page, the office in Adnan Kahveci Mah., Beylikdüzü. The 'ask our team' box at the end of the buyer's guide (/buyers-guide#ask): ask about any step or document and the team answers by call or message; plus WhatsApp and the live chat.",
+     "label": "سؤال عن خطوة؟ اسأل فريقنا",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-20",
-   "week": "الفلل وأسلوب الحياة",
-   "weekEn": "Villas & lifestyle",
+   "date": "2026-11-20",
+   "week": "المناطق والقرار",
+   "weekEn": "Areas & decisions",
    "posts": [
     {
-     "id": "marmara-haven-villa-overview",
+     "id": "alya-merkezefendi-intro",
      "kind": "project",
-     "slug": "marmara-haven-villa",
-     "angle": "overview",
-     "path": "/projects/marmara-haven-villa",
+     "slug": "alya-konutlari-merkezefendi",
+     "path": "/projects/alya-konutlari-merkezefendi",
+     "design": "A",
      "photos": [
-      "/images/projects/marmara-haven-villa/private-pool.jpg",
-      "/images/projects/marmara-haven-villa/sea-view.jpg"
+      "/images/projects/alya-konutlari-merkezefendi/aerial-blocks.jpg",
+      "/images/projects/alya-konutlari-merkezefendi/aerial-gardens.jpg",
+      "/images/projects/alya-konutlari-merkezefendi/pool-render.jpg",
+      "/images/projects/alya-konutlari-merkezefendi/living-room.jpg"
      ],
-     "brief": "Marmara Haven Villa again, new angle: ready to move in, private pool, sea view, 5 bedrooms, price as in projects.ts (from $1,550,000; VAT included, 4% title deed fee not included). Different headline than the first villa post.",
-     "label": "فيلا مرمرة هيفن · نظرة عامة",
-     "at": "09:00"
-    },
-    {
-     "id": "blog-life-in-turkey",
-     "kind": "article",
-     "slug": "life-in-turkey",
-     "path": "/blog/life-in-turkey",
-     "photos": [
-      "/images/blog/life-in-turkey.jpg"
-     ],
-     "brief": "3-4 practical points from the article blogData.life-in-turkey, then invite to read it.",
-     "label": "مقال: كيف تبدو الحياة في تركيا",
-     "at": "14:00"
-    },
-    {
-     "id": "finish-home-name",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «أكمل الجملة · Finish the sentence». The image shows the unfinished sentence ending with «…»; the caption asks followers to finish it in the comments. «لو كان لبيتي في إسطنبول اسم، لسمّيته…» / «If my Istanbul home had a name, I'd call it…».",
-     "label": "أكمل الجملة: لو كان لبيتي اسم",
-     "at": "21:00"
+     "brief": "First post about Alya Konutları Merkezefendi: 467 homes + 15 shops in 9 buildings of 5–7 floors on ~18,000 m², indoor pools, hamam and sauna, Cevizlibağ metrobus 650 m, delivery 2026 with the title deed ready, 50% then 24 months. Eligible for citizenship and the property residence permit (citizenship note). Prefer the real drone photos. Facts from src/data/projects.ts and projectsData.alya-konutlari-merkezefendi (ar.json/en.json). No prices (owner's rule).",
+     "label": "علياء كونوتلاري · مركز أفندي",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-21",
-   "week": "الفلل وأسلوب الحياة",
-   "weekEn": "Villas & lifestyle",
+   "date": "2026-11-21",
+   "week": "المناطق والقرار",
+   "weekEn": "Areas & decisions",
    "posts": [
     {
-     "id": "lotus-manzara-guzelce-overview",
-     "kind": "project",
-     "slug": "lotus-manzara-guzelce",
-     "angle": "overview",
-     "path": "/projects/lotus-manzara-guzelce",
+     "id": "law-declared-price",
+     "kind": "law",
+     "law": "title-deed-declared-price",
+     "path": "/property-laws",
+     "design": "list",
      "photos": [
-      "/images/projects/lotus-manzara-guzelce/villa-exterior.jpg",
+      "/images/blog/buying-property-and-tapu.jpg",
       "/images/projects/lotus-manzara-guzelce/villa-row.jpg"
      ],
-     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats. 32 villas 6+2.",
-     "label": "لوتس مانزارا غوزلجه · نظرة عامة",
-     "at": "09:00"
-    },
-    {
-     "id": "blog-about-turkey",
-     "kind": "article",
-     "slug": "about-turkey",
-     "path": "/blog/about-turkey",
-     "photos": [
-      "/images/blog/about-turkey.jpg"
-     ],
-     "brief": "3-4 practical points from the article blogData.about-turkey, then invite to read it.",
-     "label": "مقال: التعرف على تركيا: بلد بين قارتين",
-     "at": "14:00"
-    },
-    {
-     "id": "evening-who-decides",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «سؤال الليلة · Tonight's question». «مع من تختار بيتك عادةً؟» with 4 options: العائلة/Family, الأصدقاء/Friends, وحدي/On my own, مستشار عقاري/An advisor.",
-     "label": "سؤال الليلة: مع من تختار بيتك؟",
-     "at": "21:00"
+     "brief": "The approved item title-deed-declared-price: what happens when a lower price than the real one is declared at the title deed office, exactly as the item states it. Facts only from the approved item in src/data/laws.ts and lawsData.rules|updates.<id> in ar.json/en.json (dates, before/after, who is affected); the image says what changed and when it applies. Closing line: «معلومات عامة وليست استشارة قانونية · General information, not legal advice». path /property-laws.",
+     "label": "سعر البيع في الطابو: لماذا يجب أن يكون حقيقياً؟",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-22",
-   "week": "الفلل وأسلوب الحياة",
-   "weekEn": "Villas & lifestyle",
+   "date": "2026-11-22",
+   "week": "المناطق والقرار",
+   "weekEn": "Areas & decisions",
    "posts": [
     {
-     "id": "lotus-manzara-beylikduzu-overview",
+     "id": "lotus-yasam-gardens",
      "kind": "project",
-     "slug": "lotus-manzara-beylikduzu",
-     "angle": "overview",
-     "path": "/projects/lotus-manzara-beylikduzu",
+     "slug": "beylikduzu-living",
+     "path": "/projects/beylikduzu-living",
+     "design": "A",
      "photos": [
-      "/images/projects/lotus-manzara-beylikduzu/aerial-sea-view.jpg",
-      "/images/projects/lotus-manzara-beylikduzu/villas-entrance.jpg"
+      "/images/projects/beylikduzu-living/aerial-main.jpg",
+      "/images/projects/beylikduzu-living/central-garden.jpg",
+      "/images/projects/beylikduzu-living/garden-pergola.jpg",
+      "/images/projects/beylikduzu-living/night-view.jpg"
      ],
-     "brief": "Overview: what it is, where, status/delivery, unit types and sizes, 3-4 key facts from highlights/stats. 16 villas 5+2: 8 detached type A and 8 semi-detached type B.",
-     "label": "لوتس مانزارا بيليكدوزو · نظرة عامة",
-     "at": "09:00"
-    },
-    {
-     "id": "design-service",
-     "kind": "page",
-     "path": "/engineering-architecture",
-     "photos": [
-      "/images/consultancy/hero-1680.webp"
-     ],
-     "brief": "Architectural & engineering design as one of HADARA's services (consultancy.*). Images are illustrative concepts: never present them as built HADARA projects, never name another company, no invented experience numbers.",
-     "label": "التصميم المعماري والهندسي",
-     "at": "14:00"
-    },
-    {
-     "id": "tf-gross-bigger",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/blog/gross-vs-net-area",
-     "photos": [],
-     "brief": "Badge «صح أم خطأ؟ · True or false?». The image shows only the statement (no answer). The caption invites answers in the comments, then gives the answer at the end after a short line «الإجابة ⬇️ / Answer ⬇️», from the site source named here: statement «المساحة الإجمالية (brüt) للشقة أكبر دائماً من مساحتها الصافية (net)» / «A flat's gross area (brüt) is always larger than its net area»; answer: true, because the gross includes the walls and usually a share of the common areas, from blogData.gross-vs-net-area. Different wording from the 2026-10-06 true/false post.",
-     "label": "صح أم خطأ: الإجمالية أكبر من الصافية",
-     "at": "21:00"
+     "brief": "Lotus Yaşam with the developer's new photos: 308 apartments and 82 street shops in 18 blocks, the private schools area next to Yaşam Vadisi, delivery June 2028 per the developer, 30/30 payment plan. Citizenship wording: «بعقار أو أكثر بقيمة إجمالية 400 ألف دولار فأكثر». Use only photos not yet published (the new ones). Facts from src/data/projects.ts and projectsData.beylikduzu-living (ar.json/en.json). No prices (owner's rule).",
+     "label": "لوتس ياشام · 308 شقة و82 محلاً",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-23",
-   "week": "الفلل وأسلوب الحياة",
-   "weekEn": "Villas & lifestyle",
+   "date": "2026-11-23",
+   "week": "المناطق والقرار",
+   "weekEn": "Areas & decisions",
    "posts": [
     {
-     "id": "marmara-haven-villa-floors",
-     "kind": "project",
-     "slug": "marmara-haven-villa",
-     "angle": "floors",
-     "path": "/projects/marmara-haven-villa",
+     "id": "sisli-guide",
+     "kind": "guide",
+     "path": "/blog/sisli-district-guide",
+     "design": "list",
      "photos": [
-      "/images/projects/marmara-haven-villa/terrace.jpg",
-      "/images/projects/marmara-haven-villa/rooftop.jpg"
+      "/images/blog/sisli-district-guide.jpg",
+      "/images/projects/lotus-sisli/aerial-towers.jpg"
      ],
-     "brief": "Marmara Haven Villa floor by floor (floorPlan + projectsData.marmara-haven-villa.floorPlan): 4 levels with gross/net areas and features; rooftop sea view.",
-     "label": "فيلا مرمرة هيفن · الطوابق الأربعة",
-     "at": "09:00"
-    },
-    {
-     "id": "video-tour-villa",
-     "kind": "page",
-     "path": "/video-tour",
-     "photos": [
-      "/images/projects/marmara-haven-villa/living-room.jpg"
-     ],
-     "brief": "Book a private video tour of Marmara Haven Villa or any project (videoTour.*). Different wording than earlier video-tour posts.",
-     "label": "جولة فيديو للفلل",
-     "at": "14:00"
-    },
-    {
-     "id": "evening-buying-abroad",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «سؤال الليلة · Tonight's question». «ما أكثر ما يقلقك عند شراء بيت في إسطنبول وأنت خارج تركيا؟» with 4 options: الأوراق/Paperwork, المسافة/Distance, اختيار المنطقة/The area, اللغة/Language. The caption says our team guides buyers at every step (faq.categories[1].items[1]). Do not mention the video tour (the 14:00 post of the same day is about it).",
-     "label": "سؤال الليلة: ما الذي يقلقك عند الشراء من الخارج؟",
-     "at": "21:00"
+     "brief": "Şişli district guide from blogData.sisli-district-guide: 3 facts a buyer should know (location, transport, what is around). No prices (owner's rule).",
+     "label": "شيشلي: دليل المنطقة",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-24",
-   "week": "الفلل وأسلوب الحياة",
-   "weekEn": "Villas & lifestyle",
+   "date": "2026-11-24",
+   "week": "المناطق والقرار",
+   "weekEn": "Areas & decisions",
    "posts": [
     {
-     "id": "lotus-manzara-guzelce-life",
+     "id": "buyukyali-fendi",
      "kind": "project",
-     "slug": "lotus-manzara-guzelce",
-     "angle": "life",
-     "path": "/projects/lotus-manzara-guzelce",
+     "slug": "buyukyali",
+     "path": "/projects/buyukyali",
+     "design": "A",
      "photos": [
-      "/images/projects/lotus-manzara-guzelce/living-room.jpg",
-      "/images/projects/lotus-manzara-guzelce/villa-row.jpg"
+      "/images/projects/buyukyali/fendi-pool.jpg",
+      "/images/projects/buyukyali/fendi-living.jpg",
+      "/images/projects/buyukyali/fisekhane-square.jpg",
+      "/images/projects/buyukyali/promenade.jpg"
      ],
-     "brief": "Life in the project: amenities (community + project amenities), interiors, who it suits. Villa interiors, private parking (no pools in these villas).",
-     "label": "لوتس مانزارا غوزلجه · الحياة في المشروع",
-     "at": "09:00"
-    },
-    {
-     "id": "blog-real-estate-market-trends",
-     "kind": "article",
-     "slug": "real-estate-market-trends",
-     "path": "/blog/real-estate-market-trends",
-     "photos": [
-      "/images/blog/real-estate-market-trends.jpg"
-     ],
-     "brief": "3-4 practical points from the article blogData.real-estate-market-trends, then invite to read it.",
-     "label": "مقال: اتجاهات عقارية تستحق المتابعة في إسطنبول",
-     "at": "14:00"
-    },
-    {
-     "id": "pick-entrance-or-parking",
-     "kind": "evening",
-     "design": "choice",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «لو خُيّرت · Your pick». Design «choice»: A = a spacious entrance with an inner staircase (photo /images/projects/lotus-manzara-guzelce/entrance-staircase.jpg), B = a private parking space (photo /images/projects/lotus-manzara-guzelce/private-parking.jpg). Villa week.",
-     "label": "لو خُيّرت: مدخل فسيح أم موقف خاص؟",
-     "at": "21:00"
+     "brief": "Büyükyalı, a new angle (2026-10-18 was the intro and the loft): FENDI Casa homes (first FENDI Casa project in Istanbul after Miami and Dubai), Büyükyalı Club (pools, hamam, sauna), the Fişekhane culture centre, the private bridge to the seafront. No unit sizes (owner's decision). Eligible for citizenship (citizenship note). Facts from src/data/projects.ts and projectsData.buyukyali (ar.json/en.json). No prices (owner's rule).",
+     "label": "بيوك يالي · FENDI Casa والنادي",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-25",
-   "week": "الفلل وأسلوب الحياة",
-   "weekEn": "Villas & lifestyle",
+   "date": "2026-11-25",
+   "week": "المناطق والقرار",
+   "weekEn": "Areas & decisions",
    "posts": [
     {
-     "id": "lotus-manzara-beylikduzu-types",
-     "kind": "project",
-     "slug": "lotus-manzara-beylikduzu",
-     "angle": "types",
-     "path": "/projects/lotus-manzara-beylikduzu",
+     "id": "law-secure-payment",
+     "kind": "law",
+     "law": "secure-payment-system",
+     "path": "/property-laws",
+     "design": "list",
      "photos": [
-      "/images/projects/lotus-manzara-beylikduzu/villa-type-a.jpg",
-      "/images/projects/lotus-manzara-beylikduzu/villa-type-b.jpg",
-      "/images/projects/lotus-manzara-beylikduzu/living-room.jpg"
+      "/images/blog/buying-property-and-tapu.jpg",
+      "/images/projects/hayat-flora/entrance-gate.jpg"
      ],
-     "brief": "The two villa types A (detached) and B (semi-detached), 5+2, interiors, private parking (no pools).",
-     "label": "لوتس مانزارا بيليكدوزو · نوعا الفلل",
-     "at": "09:00"
-    },
-    {
-     "id": "contact-visit-office",
-     "kind": "page",
-     "path": "/contact",
-     "photos": [
-      "/images/projects/lotus-manzara-guzelce/aerial-villas.jpg",
-      "/images/projects/marmara-haven-villa/terrace.jpg"
-     ],
-     "brief": "CONTACT POST, new angle (owner's request 2026-10-08): meet us in person or by video: the office in Adnan Kahveci Mah., Beylikdüzü, Istanbul (office hours from videoTour.officeHours), or a private video tour from home (free, 30–45 min, WhatsApp/FaceTime/Zoom/Google Meet, Arabic/English/Turkish), and when you are ready to buy we arrange your visit to Istanbul (videoTour.visitText). Stats/tiles with real facts; WhatsApp and the form in the caption. Different headline from earlier contact posts.",
-     "label": "زورونا في إسطنبول أو عبر الفيديو",
-     "at": "14:00"
-    },
-    {
-     "id": "pick-home-size",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «سؤال الليلة · Tonight's question». «أيّ مساحة تناسب عائلتك؟» with 4 options: 1+1, 2+1, 3+1, فيلا/Villa. The caption shows our available projects offer each layout (residences in projects.ts; villas from the villa projects) and points to «Find my project» on the site.",
-     "label": "سؤال الليلة: أيّ مساحة تناسب عائلتك؟",
-     "at": "21:00"
+     "brief": "The approved item secure-payment-system: what it is and the dates exactly as the item states them (the 1 Oct 2026 amendment moved the start to 1 Dec 2026; exclusions, pilot and fee follow a protocol). Timely: it starts next week. Facts only from the approved item in src/data/laws.ts and lawsData.rules|updates.<id> in ar.json/en.json (dates, before/after, who is affected); the image says what changed and when it applies. Closing line: «معلومات عامة وليست استشارة قانونية · General information, not legal advice». path /property-laws.",
+     "label": "نظام الدفع الآمن عند شراء العقار",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-26",
-   "week": "الفلل وأسلوب الحياة",
-   "weekEn": "Villas & lifestyle",
-   "posts": [
-    {
-     "id": "marmara-haven-villa-sea",
-     "kind": "project",
-     "slug": "marmara-haven-villa",
-     "angle": "sea",
-     "path": "/projects/marmara-haven-villa",
-     "photos": [
-      "/images/projects/marmara-haven-villa/sea-view.jpg",
-      "/images/projects/marmara-haven-villa/rooftop.jpg"
-     ],
-     "brief": "Marmara Haven Villa's sea view and location (nearby): swimming coast 5 min, E-5 3 min; rooftop living.",
-     "label": "فيلا مرمرة هيفن · إطلالة البحر",
-     "at": "09:00"
-    },
-    {
-     "id": "blog-citizenship-by-real-estate",
-     "kind": "article",
-     "slug": "citizenship-by-real-estate",
-     "path": "/blog/citizenship-by-real-estate",
-     "photos": [
-      "/images/blog/citizenship-by-real-estate.jpg"
-     ],
-     "brief": "3-4 points from blogData.citizenship-by-real-estate, then invite to read it. Add the note 'الشروط وفق القانون الحالي وقابلة للتغيير · Conditions per current law, subject to change'.",
-     "label": "مقال: كيف يقود الاستثمار العقاري إلى الجنسية التركية",
-     "at": "14:00"
-    },
-    {
-     "id": "evening-complex-facility",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «سؤال الليلة · Tonight's question». «ما أهم ميزة في المجمّع السكني بالنسبة إليك؟» with 4 options: المسبح/Pool, النادي الرياضي/Gym, الحدائق/Gardens, الأمن/Security.",
-     "label": "سؤال الليلة: أهم ميزة في المجمّع",
-     "at": "21:00"
-    }
-   ],
-   "intensive": true
-  },
-  {
-   "date": "2026-10-27",
+   "date": "2026-11-26",
    "week": "الختام",
    "weekEn": "Wrap-up",
    "posts": [
     {
-     "id": "diamond-marin-interiors",
-     "kind": "project",
-     "slug": "diamond-marin",
-     "angle": "interiors",
-     "path": "/projects/diamond-marin",
+     "id": "contact-whatsapp-hours",
+     "kind": "contact",
+     "path": "/contact",
+     "design": "list",
      "photos": [
-      "/images/projects/diamond-marin/kids-bedroom.jpg",
-      "/images/projects/diamond-marin/dressing-room.jpg",
-      "/images/projects/diamond-marin/kitchen.jpg"
+      "/images/projects/sea-pearl-atakoy/terrace-sea.jpg",
+      "/images/projects/sea-pearl-atakoy/balcony-view.jpg"
      ],
-     "brief": "Inside the homes of Diamond Marin: layouts and sizes from residences, bedrooms, dressing room, kitchen (interior photos). A new angle: not its life, location or limited-units posts; fresh headline. No prices.",
-     "label": "دايموند مارين · من الداخل",
-     "at": "09:00"
-    },
-    {
-     "id": "hadara-in-numbers",
-     "kind": "page",
-     "path": "/about",
-     "photos": [
-      "/hero-istanbul.jpg"
-     ],
-     "brief": "HADARA in numbers (home.stats): 12+ years, 11 projects, 640+ residences, 420+ offices, 60+ shops, 4 districts; your real estate partner in Istanbul.",
-     "label": "حضارة بالأرقام",
-     "at": "14:00"
-    },
-    {
-     "id": "evening-best-season",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «سؤال الليلة · Tonight's question». «في أي فصل تفضّلون زيارة إسطنبول؟» with 4 options: الربيع/Spring, الصيف/Summer, الخريف/Autumn, الشتاء/Winter.",
-     "label": "سؤال الليلة: أي فصل لزيارة إسطنبول؟",
-     "at": "21:00"
+     "brief": "Real channels only (README 'Contact posts'): WhatsApp https://wa.me/905319309214, phone +90 531 930 92 14, info@byhadara.com, the contact form, the live chat on the website, Instagram @hadararealestate, the Facebook page, the office in Adnan Kahveci Mah., Beylikdüzü. The fastest ways to reach the team: WhatsApp and the live chat on the website (office hours line from videoTour.officeHours), plus the contact form for a written answer with a request number.",
+     "label": "تحدّث معنا الآن: واتساب والدردشة المباشرة",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
   },
   {
-   "date": "2026-10-28",
+   "date": "2026-11-27",
    "week": "الختام",
    "weekEn": "Wrap-up",
    "posts": [
     {
-     "id": "lotus-koru-2-location",
+     "id": "sea-pearl-gardens",
      "kind": "project",
-     "slug": "lotus-koru-2",
-     "angle": "location",
-     "path": "/projects/lotus-koru-2",
+     "slug": "sea-pearl-atakoy",
+     "path": "/projects/sea-pearl-atakoy",
+     "design": "A",
      "photos": [
-      "/images/projects/lotus-koru-2/central-location.jpg"
+      "/images/projects/sea-pearl-atakoy/palace-gardens.jpg",
+      "/images/projects/sea-pearl-atakoy/night-aerial.jpg",
+      "/images/projects/sea-pearl-atakoy/from-the-sea.jpg",
+      "/images/projects/sea-pearl-atakoy/open-kitchen.jpg"
      ],
-     "brief": "Location of Lotus Koru 2: the nearby places and travel times (projectsData.lotus-koru-2.nearby) and the district. No prices.",
-     "label": "لوتس كورو 2 · الموقع وما حوله",
-     "at": "09:00"
-    },
-    {
-     "id": "faq-contact",
-     "kind": "page",
-     "path": "/faq",
-     "photos": [
-      "/images/projects/lotus-yali/sunset-aerial.jpg"
-     ],
-     "brief": "Answer the FAQ question faq.categories[0].items[3] (question + clear short answer from the site's answer). Include the contact channels: WhatsApp, live chat on the website, contact form, video tour booking.",
-     "label": "كيف تتواصل معنا",
-     "at": "14:00"
-    },
-    {
-     "id": "evening-next-topics",
-     "kind": "evening",
-     "design": "tweet",
-     "path": "/projects",
-     "photos": [],
-     "brief": "Badge «سؤال الليلة · Tonight's question». «عن أي موضوع تحبون أن نكتب لكم الشهر القادم؟» / «What would you like us to post about next month?» No options; answers in the comments.",
-     "label": "سؤال الليلة: عمّ نكتب لكم؟",
-     "at": "21:00"
+     "brief": "Sea Pearl Ataköy, a new angle (2026-10-14 was the seafront intro): ~33,000 m² of gardens in the Ottoman style with plants from Japan and an artificial lake, a gym in each of the 4 buildings, the yacht berths. JW Marriott = discounted offers and yearly fees for some services ONLY (never 'free'). Eligible for citizenship per the developer (citizenship note). Facts from src/data/projects.ts and projectsData.sea-pearl-atakoy (ar.json/en.json). No prices (owner's rule).",
+     "label": "سي بيرل أتاكوي · الحدائق والبحيرة",
+     "at": "09:00",
+     "reel": true
     }
-   ],
-   "intensive": true
+   ]
+  },
+  {
+   "date": "2026-11-28",
+   "week": "الختام",
+   "weekEn": "Wrap-up",
+   "posts": [
+    {
+     "id": "buyukcekmece-guide",
+     "kind": "guide",
+     "path": "/blog/buyukcekmece-district-guide",
+     "design": "list",
+     "photos": [
+      "/images/blog/buyukcekmece-district-guide.jpg",
+      "/images/projects/lotus-manzara-guzelce/street-view.jpg"
+     ],
+     "brief": "Büyükçekmece district guide from blogData.buyukcekmece-district-guide: 3 facts a buyer should know. No prices (owner's rule).",
+     "label": "بيوكجكمجة: دليل المنطقة",
+     "at": "09:00",
+     "reel": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-29",
+   "week": "الختام",
+   "weekEn": "Wrap-up",
+   "posts": [
+    {
+     "id": "lotus-sisli-delivery",
+     "kind": "project",
+     "slug": "lotus-sisli",
+     "path": "/projects/lotus-sisli",
+     "design": "A",
+     "photos": [
+      "/images/projects/lotus-sisli/penthouse-terrace.jpg",
+      "/images/projects/lotus-sisli/rooftop-night.jpg",
+      "/images/projects/lotus-sisli/aerial-towers.jpg"
+     ],
+     "brief": "Lotus Şişli, a new angle: delivery December 2026 (stat delivery), 2 towers of 18 floors, 320 home offices + apartments + penthouses + 3 street shops, Piyalepaşa Blv., indoor pool; 30/30 payment plan. Use photos not published yet (penthouse-terrace, rooftop-night, meeting-room). Facts from src/data/projects.ts and projectsData.lotus-sisli (ar.json/en.json). No prices (owner's rule).",
+     "label": "لوتس شيشلي · التسليم ديسمبر 2026",
+     "at": "09:00",
+     "reel": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-30",
+   "week": "الختام",
+   "weekEn": "Wrap-up",
+   "posts": [
+    {
+     "id": "villa-rooftop-sea",
+     "kind": "project",
+     "slug": "marmara-haven-villa",
+     "path": "/projects/marmara-haven-villa",
+     "design": "A",
+     "photos": [
+      "/images/projects/marmara-haven-villa/balcony-pool.jpg",
+      "/images/projects/marmara-haven-villa/pool-deck.jpg",
+      "/images/projects/marmara-haven-villa/roof-terrace.jpg",
+      "/images/projects/marmara-haven-villa/kitchen-island.jpg"
+     ],
+     "brief": "Marmara Haven Villa, a new angle (earlier: verified card, overview, floors, sea terrace): one walk from the private pool to the roof terrace, 5 bedrooms and 7 bathrooms, lift, smart home, 637 m² plot. Prefer unpublished photos (balcony-pool, pool-deck, roof-terrace, kitchen-island). Facts from src/data/projects.ts and projectsData.marmara-haven-villa (ar.json/en.json). No prices (owner's rule).",
+     "label": "فيلا مرمرة هيفن · من السطح إلى المسبح",
+     "at": "09:00",
+     "reel": true
+    }
+   ]
   }
- ],
- "intensive": {
-  "from": "2026-09-30",
-  "to": "2026-10-28",
-  "times": [
-   "09:00",
-   "14:00",
-   "21:00"
-  ],
-  "note": "Owner's request 2026-09-29, kept by the owner 2026-10-03: 3 posts a day, each at its own time, one feed post per time: 09:00 a project (design A), 14:00 useful real-estate information (design A), 21:00 an interactive 'tweet' (design «tweet»; design «choice» for «لو خُيّرت» photo questions 1-2 times a week). Plus the daily Story with the morning post."
- }
+ ]
 }

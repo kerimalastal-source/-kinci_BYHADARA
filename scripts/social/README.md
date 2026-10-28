@@ -23,6 +23,18 @@ the branch build in time.
 > message):** make only the single 09:00 post that `topics.mjs` prints; no 14:00 post, no 21:00
 > carousel and no Story. `day.json` holds exactly one post with `"at": "09:00"`.
 
+> **A REEL EVERY MORNING (owner's decision 2026-10-28, from 2026-10-29; overrides "only when the
+> owner asks" below):** «بدي اياك تنشر كل يوم ريلز الصبح، والمحتوى تنوع بين المشاريع والمحتوى
+> التوعوي عن العقار وآلية الشراء والقوانين». The single 09:00 post is a **Reel**: add `"reel": true`
+> to it in posts.json (render.mjs draws the 1080×1920 design and the 8-second video `post-<n>.mp4`;
+> it needs ffmpeg: `pip install imageio-ffmpeg` and `FFMPEG=$(python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())")`).
+> Use the topic's `design`: `A` for projects, `"list"` for guides, laws and contact posts. The plan
+> (plan.json, 2026-10-29 → 2026-11-30) alternates a project day and an awareness day (buying steps,
+> real-estate concepts, laws, about one contact post a week). **Laws**: only approved items of
+> `src/data/laws.ts` with their `lawsData` text, nothing beyond what the item states, and the line
+> «معلومات عامة وليست استشارة قانونية · General information, not legal advice». Read the cover
+> frame (`post-<n>.jpg`) once; the reel must be `ok` like any post. No Story.
+
 > **Updated 2026-09-29 (owner's request):** where the routine's message still says "both
 > posts", "two topics" or "at 10:00", this README wins: make **every** post topics.mjs gives
 > for today (3 during the intensive week), each with its `at` time, **plus the day's Story**
@@ -191,7 +203,8 @@ www.hadararealestate.com + WhatsApp +90 531 930 92 14. 1080×1350 JPEG (stories 
   New launch», under construction «قيد الإنشاء · Under construction», ready «جاهز للسكن ·
   Ready to move in», villas «فلل · Villas», citizenship «الجنسية التركية · Citizenship»,
   guides «دليل المشتري · Buyer's guide» (articles), service «خدماتنا · Our services»,
-  an area of Istanbul «من إسطنبول · Istanbul life». (The 21:00 evening posts use their own
+  an area of Istanbul «من إسطنبول · Istanbul life», property laws «قوانين العقار · Property laws»
+  (from 2026-10-29), contact «تواصل معنا · Contact us». (The 21:00 evening posts use their own
   badges, see "Evening designs".)
 - Photos: sharp exterior/aerial/interior shots from `public/images/`; never a site plan,
   a bathroom or a blurry crop as the main photo.
@@ -255,7 +268,7 @@ carousel). Every post, every design:
   "id": "lotus-yali",                     // used in utm_campaign=post-<id>
   "at": "09:00",                          // from topics.mjs when the plan has it (Istanbul time)
   // "story": true  -> the day's Story: 9:16 picture, no "caption" (see step 1)
-  // "reel": true   -> a Reel: 9:16 design + an 8-second video (only when the owner asks)
+  // "reel": true   -> a Reel: 9:16 design + an 8-second video (every morning post from 2026-10-29)
   // evening post: "image": { "design": "tweet", "badge", "headlineAr", "headlineEn", "fact", "facts", "ask",
   //   "options": [ { "icon": "🌊", "ar": "إطلالة بحرية", "en": "Sea view" } ] }   (no photo, no stats)
   // or "image": { "design": "choice", "badge", "headlineAr", "headlineEn", "photo": <a.photo>,
