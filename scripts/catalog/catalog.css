@@ -1,0 +1,218 @@
+/* HADARA Real Estate catalogue: A4 landscape pages in the site's palette
+   (dark green, gold, ivory) and fonts (Inter + IBM Plex Sans Arabic). */
+@page { size: 297mm 210mm; margin: 0; }
+:root {
+  --green: #0f2b21;
+  --green-deep: #0a1f17;
+  --gold: #c9a24b;
+  --gold-soft: #e6d3a3;
+  --ivory: #f7f5f0;
+  --paper: #fbfaf6;
+  --ink: #18231e;
+  --ink-soft: #5b6660;
+  --line: #e4dfd3;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: Inter, "IBM Plex Sans Arabic", Arial, sans-serif;
+  color: var(--ink);
+  background: #fff;
+}
+[dir="rtl"] body, body:lang(ar) { font-family: "IBM Plex Sans Arabic", Inter, Tahoma, sans-serif; }
+bdi { unicode-bidi: isolate; }
+
+.page {
+  width: 297mm;
+  height: 210mm;
+  position: relative;
+  overflow: hidden;
+  break-after: page;
+  background: var(--paper);
+}
+.page:last-child { break-after: auto; }
+
+/* Brand block: logo + HADARA / REAL ESTATE, always left to right. */
+.brand { display: flex; align-items: center; gap: 3mm; direction: ltr; }
+.brand img { height: 11mm; width: auto; }
+.brand span { display: flex; flex-direction: column; line-height: 1; font-family: Inter, sans-serif; }
+.brand b { font-weight: 700; font-size: 13pt; letter-spacing: 0.04em; }
+.brand i { font-style: normal; font-weight: 600; font-size: 5.6pt; letter-spacing: 0.32em; margin-top: 1.6mm; }
+.brand--dark b { color: var(--green); }
+.brand--dark i { color: var(--gold); }
+.brand--light b { color: var(--ivory); }
+.brand--light i { color: var(--gold-soft); }
+
+.head { display: flex; justify-content: space-between; align-items: center; }
+.pno { font-family: Inter, sans-serif; font-weight: 300; font-size: 10pt; letter-spacing: 0.12em; color: var(--gold); }
+.pno--light { position: absolute; bottom: 12mm; inset-inline-end: 16mm; color: var(--gold-soft); }
+
+.eyebrow {
+  font-size: 8.5pt;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+:lang(ar) .eyebrow { letter-spacing: 0; font-size: 10pt; }
+.rule { width: 22mm; height: 0.6mm; background: var(--gold); }
+
+/* Full-bleed photo pages (cover, dividers, back). */
+.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.shade {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(10, 31, 23, 0.92) 0%, rgba(10, 31, 23, 0.72) 42%, rgba(10, 31, 23, 0.15) 75%, rgba(10, 31, 23, 0.05) 100%);
+}
+[dir="rtl"] .shade { background: linear-gradient(270deg, rgba(10, 31, 23, 0.92) 0%, rgba(10, 31, 23, 0.72) 42%, rgba(10, 31, 23, 0.15) 75%, rgba(10, 31, 23, 0.05) 100%); }
+.cover .shade::after { content: ""; position: absolute; inset: auto 0 0 0; height: 45mm; background: linear-gradient(0deg, rgba(10, 31, 23, 0.85), transparent); }
+.shade--full { background: rgba(10, 31, 23, 0.86) !important; }
+
+.cover { color: var(--ivory); }
+.cover__top { position: absolute; top: 16mm; inset-inline: 18mm; display: flex; justify-content: space-between; align-items: center; }
+.cover .brand img { height: 16mm; }
+.cover .brand b { font-size: 18pt; }
+.cover .brand i { font-size: 7pt; }
+.edition { font-family: Inter, sans-serif; font-size: 9pt; letter-spacing: 0.2em; color: var(--gold-soft); text-transform: uppercase; }
+:lang(ar) .edition { letter-spacing: 0; font-size: 10.5pt; }
+.cover__body { position: absolute; top: 62mm; inset-inline-start: 18mm; width: 150mm; display: grid; gap: 6mm; }
+.cover h1 { font-size: 40pt; font-weight: 300; line-height: 1.15; color: #fff; }
+:lang(ar) .cover h1 { font-weight: 500; font-size: 38pt; line-height: 1.35; }
+.cover__partner { font-size: 13pt; font-weight: 300; color: var(--gold-soft); }
+:lang(ar) .cover__partner { font-weight: 400; }
+.cover__foot {
+  position: absolute; bottom: 14mm; inset-inline: 18mm;
+  display: flex; gap: 10mm; font-family: Inter, sans-serif; font-size: 9pt; letter-spacing: 0.12em; color: var(--ivory);
+  border-top: 0.3mm solid rgba(201, 162, 75, 0.6); padding-top: 4mm;
+}
+
+/* About. */
+.about, .citizen { display: grid; grid-template-columns: 112mm 1fr; }
+.about__photo img, .citizen__photo img { width: 100%; height: 210mm; object-fit: cover; display: block; }
+.about__text, .citizen__text { padding: 13mm 16mm 12mm; display: flex; flex-direction: column; gap: 4.2mm; }
+.about h2, .citizen h2 { font-size: 22pt; font-weight: 500; color: var(--green); line-height: 1.25; margin-top: 1mm; }
+.lead { font-size: 10.5pt; line-height: 1.75; color: var(--ink); }
+.body { font-size: 9.5pt; line-height: 1.75; color: var(--ink-soft); }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; margin-top: auto; }
+.tiles--4 { grid-template-columns: repeat(2, 1fr); margin-top: 2mm; }
+.tile { background: var(--green); color: var(--ivory); padding: 4.5mm 5mm; border-inline-start: 0.8mm solid var(--gold); }
+.tile b { display: block; font-family: Inter, sans-serif; font-weight: 600; font-size: 17pt; color: var(--gold); }
+.tile span { display: block; font-size: 8.5pt; margin-top: 1mm; color: #e9e4d8; line-height: 1.4; }
+.small { font-size: 8pt; color: var(--ink-soft); margin-top: auto; }
+
+/* Index. */
+.index { padding: 13mm 16mm 10mm; display: flex; flex-direction: column; gap: 2.4mm; }
+.index h2 { font-size: 15pt; font-weight: 400; color: var(--green); }
+.index h3 { font-size: 9pt; font-weight: 600; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 2mm; border-bottom: 0.3mm solid var(--line); padding-bottom: 1.2mm; }
+:lang(ar) .index h3 { letter-spacing: 0; font-size: 10pt; }
+.igrid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 2.6mm; }
+.icard { position: relative; background: #fff; border: 0.25mm solid var(--line); }
+.icard img { width: 100%; height: 17mm; object-fit: cover; display: block; }
+.icard div { padding: 1.4mm 1.8mm 1.8mm; display: grid; gap: 0.4mm; }
+.icard b { font-size: 7pt; font-weight: 600; color: var(--green); line-height: 1.3; }
+.icard span { font-size: 6.2pt; color: var(--ink-soft); }
+.icard em {
+  position: absolute; top: 1.2mm; inset-inline-end: 1.2mm;
+  font-style: normal; font-family: Inter, sans-serif; font-size: 6.5pt; font-weight: 600;
+  background: var(--green); color: var(--gold); padding: 0.4mm 1.2mm;
+}
+
+/* Section dividers. */
+.divider { color: var(--ivory); }
+.divider__body { position: absolute; top: 45mm; inset-inline-start: 18mm; width: 185mm; display: grid; gap: 5mm; }
+.divider .big { font-family: Inter, sans-serif; font-weight: 200; font-size: 64pt; color: var(--gold); line-height: 1; }
+.divider h2 { font-size: 30pt; font-weight: 400; color: #fff; line-height: 1.3; }
+.divider p { font-size: 11.5pt; font-weight: 300; line-height: 1.7; color: #ece6d6; }
+:lang(ar) .divider p { font-weight: 400; }
+.divider .count { font-size: 10pt; color: var(--gold-soft); letter-spacing: 0.1em; }
+
+/* Project pages: photo column + text column. */
+.project { display: grid; grid-template-columns: 163mm 1fr; }
+.pphoto { display: grid; grid-template-rows: minmax(0, 1fr) 50mm; gap: 1.6mm; height: 210mm; background: var(--paper); }
+.pphoto img { width: 100%; height: 100%; min-height: 0; object-fit: cover; display: block; }
+.thumbs { min-height: 0; }
+.thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm; }
+.ptext { padding: 11mm 13mm 10mm; display: flex; flex-direction: column; min-width: 0; }
+.ptext .brand img { height: 9mm; }
+.ptext .brand b { font-size: 11pt; }
+.tags { display: flex; flex-wrap: wrap; gap: 1.6mm; margin-top: 7mm; }
+.tags span { font-size: 7.4pt; font-weight: 600; color: var(--green); border: 0.3mm solid var(--gold); padding: 0.8mm 2.4mm; letter-spacing: 0.06em; text-transform: uppercase; }
+:lang(ar) .tags span { letter-spacing: 0; font-size: 8.4pt; }
+.tags .sig { background: var(--gold); color: var(--green-deep); }
+.ptext h2 { font-size: 24pt; font-weight: 600; color: var(--green); line-height: 1.2; margin-top: 3.5mm; }
+:lang(en) .ptext h2 { font-weight: 500; }
+.latin { font-family: Inter, sans-serif; font-size: 8.5pt; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-top: 1mm; text-align: start; }
+[dir="rtl"] .latin { text-align: right; }
+.place { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2mm 1.5mm; font-size: 9pt; color: var(--ink-soft); margin-top: 2.6mm; }
+.place svg { color: var(--gold); }
+.place .dev { flex-basis: 100%; font-size: 8pt; }
+.tagline { font-size: 10.5pt; line-height: 1.6; color: var(--ink); margin-top: 3.5mm; font-weight: 400; }
+.pstats { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; margin-top: 4.5mm; }
+.pstats div { background: var(--ivory); border-inline-start: 0.7mm solid var(--gold); padding: 2.2mm 3mm; min-width: 0; }
+.pstats b { display: block; font-family: Inter, sans-serif; font-weight: 600; font-size: 12.5pt; color: var(--green); white-space: nowrap; }
+.pstats span { display: block; font-size: 7.6pt; color: var(--ink-soft); margin-top: 0.4mm; }
+.hl { list-style: none; display: grid; gap: 1.5mm; margin-top: 4mm; }
+.hl li {
+  position: relative; padding-inline-start: 4mm; font-size: 8.4pt; line-height: 1.5; color: var(--ink);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.hl li::before { content: ""; position: absolute; inset-inline-start: 0; top: 1.9mm; width: 1.6mm; height: 1.6mm; background: var(--gold); transform: rotate(45deg); }
+.pfoot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 4mm; border-top: 0.3mm solid var(--line); padding-top: 3mm; }
+.pinfo { display: grid; gap: 1.6mm; min-width: 0; }
+.pinfo p { font-size: 8.6pt; color: var(--ink); line-height: 1.5; }
+.pinfo span { display: block; font-size: 7pt; font-weight: 600; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+:lang(ar) .pinfo span { letter-spacing: 0; font-size: 7.8pt; }
+.pinfo .plan { color: var(--green); font-weight: 600; }
+.qr { display: grid; justify-items: center; gap: 1.2mm; width: 26mm; flex-shrink: 0; }
+.qr span { font-size: 6.2pt; color: var(--ink-soft); text-align: center; line-height: 1.35; }
+.qr svg { background: #fff; padding: 1.2mm; box-sizing: content-box; }
+
+/* Services. */
+.services { padding: 13mm 16mm 11mm; display: flex; flex-direction: column; gap: 3mm; }
+.services h2 { font-size: 20pt; font-weight: 500; color: var(--green); }
+.sgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; margin-top: 2mm; }
+.sgrid div { background: #fff; border: 0.25mm solid var(--line); padding: 4.5mm 5mm; display: grid; gap: 1.6mm; align-content: start; }
+.sgrid em { font-style: normal; font-family: Inter, sans-serif; font-weight: 300; font-size: 16pt; color: var(--gold); }
+.sgrid b { font-size: 10.5pt; color: var(--green); }
+.sgrid p, .wgrid p { font-size: 8.4pt; line-height: 1.6; color: var(--ink-soft); }
+.services h3 { font-size: 12pt; font-weight: 600; color: var(--green); margin-top: 3mm; }
+.wgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; }
+.wgrid div { background: var(--green); padding: 4mm 4.5mm; display: grid; gap: 1.4mm; align-content: start; border-top: 0.8mm solid var(--gold); }
+.wgrid b { font-size: 9.5pt; color: var(--gold); }
+.wgrid p { color: #e3ddcf; }
+
+/* Back cover. */
+.back { color: var(--ivory); }
+.back__body { position: absolute; inset: 16mm 20mm 14mm; display: flex; flex-direction: column; gap: 5mm; }
+.back .brand img { height: 15mm; }
+.back .brand b { font-size: 17pt; }
+.back h2 { font-size: 26pt; font-weight: 400; color: #fff; margin-top: 4mm; }
+.back .sub { font-size: 10.5pt; line-height: 1.7; color: #e6e0d2; max-width: 170mm; }
+.back dl { display: grid; grid-template-columns: repeat(3, auto); gap: 4mm 12mm; justify-content: start; margin-top: 2mm; }
+.back dt { font-size: 7.6pt; font-weight: 600; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; }
+:lang(ar) .back dt { letter-spacing: 0; font-size: 8.6pt; }
+.back dd { font-size: 10pt; margin-top: 1mm; color: #fff; }
+.qrs { display: flex; gap: 8mm; margin-top: auto; }
+.qr--light span { color: var(--gold-soft); }
+.qr--light svg { border-radius: 1mm; }
+.note { font-size: 7.4pt; color: #b9b3a5; max-width: 200mm; line-height: 1.5; }
+
+/* About: mission and vision. */
+.mv { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 1mm; }
+.mv div { border-top: 0.6mm solid var(--gold); padding-top: 2.6mm; }
+.mv b { display: block; font-size: 10pt; color: var(--green); margin-bottom: 1.2mm; }
+.mv p { font-size: 8.8pt; line-height: 1.7; color: var(--ink-soft); }
+
+/* Project pages: areas per home type (or the villa's floors). */
+.units { margin-top: 4mm; }
+.units__t { font-size: 7.4pt; font-weight: 600; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.6mm; }
+:lang(ar) .units__t { letter-spacing: 0; font-size: 8.2pt; }
+.units__g { display: grid; grid-template-columns: 1fr 1fr; gap: 0 5mm; }
+.units__g div { display: flex; justify-content: space-between; gap: 2mm; padding: 1.3mm 0; border-bottom: 0.25mm solid var(--line); font-size: 8.4pt; }
+.units__g b { font-weight: 600; color: var(--green); white-space: nowrap; }
+.units__g span { color: var(--ink-soft); white-space: nowrap; font-family: Inter, sans-serif; font-size: 8pt; }
+
+/* Citizenship steps. */
+.steps__t { font-size: 10pt; font-weight: 600; color: var(--green); margin-top: 3mm; }
+.steps { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 6mm; }
+.steps li { display: flex; align-items: baseline; gap: 2.4mm; font-size: 8.8pt; color: var(--ink); padding-bottom: 1.4mm; border-bottom: 0.25mm solid var(--line); }
+.steps em { font-style: normal; font-family: Inter, sans-serif; font-weight: 600; font-size: 8pt; color: var(--gold); }

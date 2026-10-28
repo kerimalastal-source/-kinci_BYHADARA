@@ -9,5 +9,6 @@ scripts/social/site/
 scripts/blog/out/
 scripts/blog/site/
 scripts/laws/out/
+scripts/catalog/out/
 scripts/laws/site/
 .prerender/
