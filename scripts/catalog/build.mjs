@@ -10,30 +10,7 @@
 // Output: scripts/catalog/out/HADARA-Real-Estate-Catalogue-<lang>.pdf (git-ignored).
 import fs from "node:fs";
 import path from "node:path";
-import { execFileSync } from "node:child_process";
-import { fileURLToPath, pathToFileURL } from "node:url";
-import { transformSync } from "esbuild";
-
-const here = path.dirname(fileURLToPath(import.meta.url));
-const root = path.resolve(here, "../..");
-const out = path.join(here, "out");
-const imgDir = path.join(out, "img");
-fs.mkdirSync(imgDir, { recursive: true });
-
-const SITE = "https://www.hadararealestate.com";
-const YEAR = "2026";
-const PHONE = "+90 531 930 92 14";
-const EMAIL = "info@byhadara.com";
-const WHATSAPP = "https://wa.me/905319309214";
-
-async function loadProjects() {
-  const { code } = transformSync(fs.readFileSync(path.join(root, "src/data/projects.ts"), "utf8"), { loader: "ts", format: "esm" });
-  const tmp = path.join(out, "projects.tmp.mjs");
-  fs.writeFileSync(tmp, code);
-  const mod = await import(pathToFileURL(tmp).href + `?t=${Date.now()}`);
-  fs.rmSync(tmp);
-  return mod;
-}
+import { out, SITE, YEAR, PHONE, EMAIL, WHATSAPP, loadTs, loadDict, lookup, esc, ltr, placeKey, num, photo, qrSvg, brand, pageHtml, renderPdfs } from "./lib.mjs";
 
 // Words the site has no dictionary key for (catalogue-only labels).
 const STR = {
@@ -101,35 +78,9 @@ const STR = {
   }
 };
 
-const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-const ltr = (s) => `<bdi dir="ltr">${esc(s)}</bdi>`;
-const placeKey = (name) => name.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/ı/g, "i").toLowerCase();
-
-const photos = new Map(); // web path -> { file, width }
-function photo(webPath, width) {
-  const base = webPath.replace(/^\//, "").replace(/\.[a-z]+$/i, "").replace(/[\/]/g, "_");
-  const key = `${webPath}@${width}`;
-  if (!photos.has(key)) photos.set(key, { src: path.join(root, "public", webPath), out: path.join(imgDir, `${base}-${width}.jpg`), width });
-  return pathToFileURL(photos.get(key).out).href;
-}
-
-function qrSvg(url, size) {
-  const py = process.env.PYTHON || "python3";
-  const svg = execFileSync(py, ["-c", "import segno,sys;print(segno.make(sys.argv[1],error='m').svg_inline(scale=1,border=0,dark='#0f2b21',light=None))", url], { encoding: "utf8" });
-  return svg.replace(/<svg width="(\d+)" height="(\d+)"/, (_, w, h) => `<svg viewBox="0 0 ${w} ${h}" width="${size}" height="${size}" shape-rendering="crispEdges"`);
-}
-
-const LOGO_LIGHT = pathToFileURL(path.join(root, "public/logo-light.png")).href;
-const LOGO_DARK = pathToFileURL(path.join(root, "public/logo-dark.png")).href;
-const brand = (variant) => `
-  <div class="brand brand--${variant}" lang="en" dir="ltr" translate="no">
-    <img src="${variant === "light" ? LOGO_LIGHT : LOGO_DARK}" alt="">
-    <span><b>HADARA</b><i>REAL ESTATE</i></span>
-  </div>`;
-
 function build(lang, mod, dict) {
   const s = STR[lang];
-  const t = (key) => key.split(".").reduce((o, k) => (o == null ? o : o[k]), dict);
+  const t = lookup(dict);
   const rtl = lang === "ar";
   const place = (d) => t(`places.${placeKey(d)}`) || d;
   const statusLabel = (p) => ({ "new-launch": t("common.statusNewLaunch"), ongoing: t("common.statusOngoing"), delivered: t("common.statusDelivered") })[p.status];
@@ -147,7 +98,6 @@ function build(lang, mod, dict) {
   n++;
   for (const p of groupB) pageOf.set(p.slug, ++n);
   const total = n + 3;
-  const num = (i) => String(i).padStart(2, "0");
 
   const projectUrl = (slug) => `${SITE}${lang === "en" ? "" : "/" + lang}/projects/${slug}?utm_source=catalog&utm_medium=print&utm_campaign=catalog-${YEAR}`;
 
@@ -350,42 +300,18 @@ function build(lang, mod, dict) {
     back
   ].join("\n");
 
-  return `<!doctype html>
-<html lang="${lang}" dir="${rtl ? "rtl" : "ltr"}"><head><meta charset="utf-8">
-<title>HADARA Real Estate — ${esc(s.subtitle)}</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
-<style>${fs.readFileSync(path.join(here, "catalog.css"), "utf8")}</style>
-</head><body>${body}</body></html>`;
+  return pageHtml(lang, `HADARA Real Estate — ${s.subtitle}`, body, ["catalog.css"]);
 }
 
 const langs = process.argv.slice(2).length ? process.argv.slice(2) : ["ar", "en"];
-const mod = await loadProjects();
-const en = JSON.parse(fs.readFileSync(path.join(root, "src/i18n/en.json"), "utf8"));
-const htmlFiles = [];
+const mod = await loadTs("src/data/projects.ts");
+const en = loadDict("en");
+const pairs = [];
 for (const lang of langs) {
-  const dict = JSON.parse(fs.readFileSync(path.join(root, `src/i18n/${lang}.json`), "utf8"));
+  const dict = loadDict(lang);
   dict.__en = en;
   const file = path.join(out, `catalogue-${lang}.html`);
   fs.writeFileSync(file, build(lang, mod, dict));
-  htmlFiles.push([lang, file]);
+  pairs.push([file, path.join(out, `HADARA-Real-Estate-Catalogue-${lang}.pdf`)]);
 }
-
-// Resize every photo once (JPEG keeps the PDF small; WebP would be stored losslessly).
-const jobs = [...photos.values()].filter((p) => !fs.existsSync(p.out));
-if (jobs.length) {
-  fs.writeFileSync(path.join(out, "photos.json"), JSON.stringify(jobs));
-  execFileSync(process.env.PYTHON || "python3", [path.join(here, "photos.py"), path.join(out, "photos.json")], { stdio: "inherit" });
-}
-
-const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || "/opt/node22/lib/node_modules/playwright/index.mjs").catch(() => import("playwright"));
-const browser = await chromium.launch();
-for (const [lang, file] of htmlFiles) {
-  const page = await browser.newPage();
-  await page.goto(pathToFileURL(file).href, { waitUntil: "networkidle" });
-  await page.evaluate(() => document.fonts.ready);
-  const pdf = path.join(out, `HADARA-Real-Estate-Catalogue-${lang}.pdf`);
-  await page.pdf({ path: pdf, width: "297mm", height: "210mm", printBackground: true, preferCSSPageSize: true });
-  console.log(`${lang}: ${pdf} (${(fs.statSync(pdf).size / 1e6).toFixed(1)} MB)`);
-  await page.close();
-}
-await browser.close();
+await renderPdfs(pairs);
