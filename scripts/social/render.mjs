@@ -553,7 +553,7 @@ for (const [i, p] of posts.entries()) {
     execFileSync(process.env.FFMPEG || "ffmpeg", [
       "-y", "-loglevel", "error", "-framerate", String(FPS), "-i", path.join(frames, "f%04d.jpg"),
       "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-shortest",
-      "-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p", "-r", String(FPS), "-b:v", "8M",
+      "-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p", "-r", String(FPS), "-crf", "21", "-maxrate", "6M", "-bufsize", "12M",
       "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", path.join(outDir, video)
     ]);
     fs.rmSync(frames, { recursive: true, force: true });
