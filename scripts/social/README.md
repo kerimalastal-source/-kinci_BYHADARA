@@ -34,6 +34,15 @@ the branch build in time.
 > `src/data/laws.ts` with their `lawsData` text, nothing beyond what the item states, and the line
 > «معلومات عامة وليست استشارة قانونية · General information, not legal advice». Read the cover
 > frame (`post-<n>.jpg`) once; the reel must be `ok` like any post. No Story.
+>
+> **Motion graphics (owner 2026-10-28: «الريلز ما فيه ولا أي حركة… بدنا فيه حركات موشن جرافيك»)**:
+> render.mjs makes a 12-second reel: the photo drifts and cross-fades into **2–3 more photos** of
+> the same project or subject — put them in `image.reelPhotos` (array of paths, sharp exteriors,
+> gardens, pools or interiors; never a plan, a bathroom or a photo already in `image.photo`); the
+> logo and badge slide in, the Arabic headline appears word by word, the English line and the gold
+> rule follow, the fact tiles pop in and their numbers count up (or the list items slide in one by
+> one), then the gold strip, the note and the footer; a light sweeps over the headline and the
+> WhatsApp icon pulses at the end. The last frames equal `post-<n>.jpg`. Always add `reelPhotos`.
 
 > **Updated 2026-09-29 (owner's request):** where the routine's message still says "both
 > posts", "two topics" or "at 10:00", this README wins: make **every** post topics.mjs gives

@@ -131,6 +131,7 @@ body.lst .ph{height:560px}
    story) and the bottom 330px stay clear of Instagram's and Facebook's buttons and caption. */
 body.reel{height:1920px}
 .reel .ph{height:1240px;transform-origin:50% 45%}
+.reel.lst .ph{height:1000px}
 .reel .ph:after{background:linear-gradient(180deg,rgba(15,43,33,.75) 0%,rgba(15,43,33,0) 18%,rgba(15,43,33,0) 40%,rgba(15,43,33,.85) 72%,#0f2b21 100%)}
 .reel .top{top:120px}
 .reel .panel{bottom:410px}
@@ -264,12 +265,75 @@ ${FRAME}${topBar(im)}${im.design === "tweet" ? tweetHtml(im) : choiceHtml(im)}${
     : factTiles(im.stats);
   return `<html><head><meta charset="utf-8"><style>${fonts}${css}</style></head><body${cls ? ` class="${cls}"` : ""}>${FRAME}
 <div class="ph" style="background-image:url('${fileUrl(photo)}');background-position:${im.position || "center"};background-size:${im.size || "cover"}"></div>
+${p.reel ? (im.reelPhotos || []).slice(0, 3).map((x) => {
+  const o = typeof x === "string" ? { photo: x } : x;
+  return `<div class="ph" data-extra style="opacity:0;background-image:url('${fileUrl(publicPath(o.photo))}');background-position:${o.position || "center"};background-size:cover"></div>`;
+}).join("") : ""}
 ${topBar(im)}
 <div class="panel">${im.place || im.placeAr ? `<div class="eyebrow"><span>${esc(im.place || "")}</span><span class="a" dir="rtl">${esc(im.placeAr || "")}</span></div>` : ""}
 <div class="ar" style="font-size:${im.arSize || 74}px">${esc(im.headlineAr)}</div><div class="en" style="font-size:${im.enSize || Math.round((im.arSize || 74) * 0.6)}px">${esc(im.headlineEn)}</div><div class="rule"></div>
 ${body}${tipBox(im.tip)}
 ${im.note ? `<div class="note"><span dir="rtl">${esc(im.note.ar)}</span> · ${esc(im.note.en)}</div>` : ""}</div>
 ${footer()}</body></html>`;
+}
+
+// ---------- reel motion graphics (owner 2026-10-28) ----------
+// Runs inside the page: prepares the elements once, then window.__reelFrame(t) sets every
+// element's state for time t (seconds), so each frame is deterministic.
+function REEL_MOTION(SECONDS) {
+  const ease = (x) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+  const back = (x) => { x = Math.min(1, Math.max(0, x)); const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+  const at = (t, a, b) => (t <= a ? 0 : t >= b ? 1 : (t - a) / (b - a));
+  const $ = (q) => document.querySelector(q), $$ = (q) => [...document.querySelectorAll(q)];
+  // The Arabic headline word by word (inline-block keeps the same wrapping).
+  const ar = $(".panel .ar");
+  if (ar) ar.innerHTML = ar.textContent.split(/(\s+)/).map((w) => (/^\s+$/.test(w) ? w : `<span class="w" style="display:inline-block">${w}</span>`)).join("");
+  // A light sweep over the headline.
+  if (ar) { ar.style.position = "relative"; ar.insertAdjacentHTML("beforeend", '<i class="sweep" style="position:absolute;top:0;bottom:0;width:180px;pointer-events:none;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,236,190,.35),rgba(255,255,255,0));mix-blend-mode:screen;opacity:0"></i>'); }
+  // Numbers that can count up (one number, not a year or a range).
+  const counters = $$(".fa .v").map((el) => {
+    const txt = el.textContent, m = txt.match(/^([^\d]*)(\d[\d,]*(?:\.\d+)?)([^\d]*)$/);
+    if (!m || /^(19|20)\d\d$/.test(m[2])) return null;
+    const dec = (m[2].split(".")[1] || "").length, comma = m[2].includes(",");
+    return { el, pre: m[1], suf: m[3], val: parseFloat(m[2].replace(/,/g, "")), dec, comma };
+  }).filter(Boolean);
+  const fmt = (c, v) => c.pre + (c.comma ? v.toLocaleString("en-US", { minimumFractionDigits: c.dec, maximumFractionDigits: c.dec }) : v.toFixed(c.dec)) + c.suf;
+  const layers = $$(".ph");
+  const seg = SECONDS / layers.length, fade = 0.7;
+  const set = (el, o, tr) => { if (!el) return; el.style.opacity = o; if (tr !== undefined) el.style.transform = tr; };
+  window.__reelFrame = (t) => {
+    // Photos: each drifts (zoom in, or a slow pan) and cross-fades into the next.
+    layers.forEach((el, k) => {
+      const a = k * seg, b = a + seg, x = Math.min(1, Math.max(0, (t - a + fade) / (seg + fade)));
+      const op = k === 0 ? (layers.length > 1 && t > b ? 1 - at(t, b, b + fade) : 1) : at(t, a, a + fade) * (k === layers.length - 1 || t < b ? 1 : 1 - at(t, b, b + fade));
+      const z = k % 2 === 0 ? 1.02 + 0.10 * x : 1.12 - 0.08 * x, dx = k % 2 === 0 ? 0 : -20 + 40 * x;
+      set(el, op, `scale(${z}) translateX(${dx}px)`);
+    });
+    set($(".frame"), ease(at(t, 0, 0.6)));
+    set($(".brand"), ease(at(t, 0.1, 0.7)), `translateY(${-30 * (1 - ease(at(t, 0.1, 0.7)))}px)`);
+    set($(".badge"), ease(at(t, 0.3, 0.9)), `translateX(${60 * (1 - ease(at(t, 0.3, 0.9)))}px)`);
+    set($(".eyebrow"), ease(at(t, 0.6, 1.1)), `translateY(${24 * (1 - ease(at(t, 0.6, 1.1)))}px)`);
+    const words = $$(".panel .ar .w");
+    words.forEach((w, k) => { const s0 = 0.9 + k * 0.12, e = ease(at(t, s0, s0 + 0.5)); set(w, e, `translateY(${36 * (1 - e)}px)`); });
+    const enStart = 0.9 + words.length * 0.12 + 0.2;
+    set($(".panel .en"), ease(at(t, enStart, enStart + 0.6)), `translateX(${-50 * (1 - ease(at(t, enStart, enStart + 0.6)))}px)`);
+    const rule = $(".rule"); if (rule) rule.style.width = `${140 * ease(at(t, enStart + 0.3, enStart + 0.9))}px`;
+    let next = enStart + 0.8;
+    $$(".fa").forEach((el, k) => { const s0 = next + k * 0.3, e = back(at(t, s0, s0 + 0.55)); set(el, Math.min(1, at(t, s0, s0 + 0.3)), `scale(${0.8 + 0.2 * e})`); });
+    counters.forEach((c) => { const k = $$(".fa").indexOf(c.el.closest(".fa")); const s0 = next + k * 0.3; c.el.textContent = fmt(c, c.val * ease(at(t, s0, s0 + 1.3))); });
+    $$(".it").forEach((el, k) => { const s0 = next + k * 0.45, e = ease(at(t, s0, s0 + 0.6)); set(el, e, `translateX(${70 * (1 - e)}px)`);
+      const n = el.querySelector(".n"); if (n) n.style.transform = `scale(${0.4 + 0.6 * back(at(t, s0 + 0.1, s0 + 0.6))})`; });
+    const blocks = Math.max($$(".fa").length * 0.3, $$(".it").length * 0.45);
+    const tipStart = next + blocks + 0.3, tip = $(".tip");
+    if (tip) { const e = ease(at(t, tipStart, tipStart + 0.6)); set(tip, e, `translateX(${80 * (1 - e)}px)`); tip.style.borderRightWidth = `${6 * e}px`; }
+    set($(".note"), ease(at(t, tipStart + 0.4, tipStart + 0.9)));
+    set($(".foot"), ease(at(t, tipStart + 0.5, tipStart + 1.0)), `translateY(${20 * (1 - ease(at(t, tipStart + 0.5, tipStart + 1.0)))}px)`);
+    // The light sweeps over the headline twice; the WhatsApp icon pulses near the end.
+    const sw = $(".sweep");
+    if (sw) { const w = ar.clientWidth, p1 = at(t, 4.6, 5.6), p2 = at(t, 9.0, 10.0); const pp = p2 > 0 ? p2 : p1;
+      sw.style.opacity = pp > 0 && pp < 1 ? 1 : 0; sw.style.right = `${-180 + (w + 360) * pp}px`; }
+    const ic = $(".foot svg"); if (ic) { const q = at(t, 8, SECONDS); ic.style.transform = `scale(${1 + 0.18 * Math.max(0, Math.sin(q * Math.PI * 6))})`; }
+  };
 }
 
 // ---------- never repeat (owner's rule 2026-10-03: "the content must never repeat") ----------
@@ -454,7 +518,8 @@ for (const [i, p] of posts.entries()) {
     const arLines = Math.round(ar.getBoundingClientRect().height / (parseFloat(getComputedStyle(ar).fontSize) * 1.28));
     return { over, clash: panel.top < top + 30, arLines, maxLines: 2, fonts: ["Inter", "Plex"].every((fam) => [...document.fonts].some((f) => f.family.replace(/"/g, "") === fam && f.status === "loaded")) ? 4 : 0 };
   });
-  const photos = design === "tweet" ? [] : design === "choice" ? [p.image.a?.photo, p.image.b?.photo] : [p.image.photo];
+  const photos = design === "tweet" ? [] : design === "choice" ? [p.image.a?.photo, p.image.b?.photo]
+    : [p.image.photo, ...(p.reel ? (p.image.reelPhotos || []).map((x) => (typeof x === "string" ? x : x?.photo)) : [])];
   const issues = [];
   for (const ph of photos) {
     const photoFile = ph ? path.resolve(root, publicPath(ph)) : "";
@@ -470,14 +535,17 @@ for (const [i, p] of posts.entries()) {
   await page.screenshot({ path: path.join(outDir, `post-${n}.jpg`), type: "jpeg", quality: 90 });
   let video = null;
   if (p.reel) {
-    // The Reel: 8 seconds at 30 fps, the photo slowly zooming in (1.00 -> 1.08) under the
-    // fixed text, with a silent audio track (Instagram expects one), H.264 + AAC, 9:16.
+    // The Reel (owner 2026-10-28: «بدنا فيه حركات موشن جرافيك»): 12 seconds at 30 fps of motion
+    // graphics over the same approved design. The photo (and up to 3 more from
+    // image.reelPhotos) drifts and cross-fades; the logo, badge, headline (word by word),
+    // English line, gold rule, fact tiles (numbers count up) or list items, the gold strip and
+    // the footer animate in; a light sweeps over the headline. The last frames show the full
+    // design (= post-<n>.jpg). Silent audio track (Instagram expects one), H.264 + AAC, 9:16.
     const frames = fs.mkdtempSync(path.join(outDir, ".frames-"));
-    const FPS = 30, SECONDS = 8, total = FPS * SECONDS;
+    const FPS = 30, SECONDS = 12, total = FPS * SECONDS;
+    await page.evaluate(REEL_MOTION, SECONDS);
     for (let f = 0; f < total; f++) {
-      const t = f / (total - 1);
-      const scale = 1 + 0.08 * (t * t * (3 - 2 * t));
-      await page.evaluate((s) => { document.querySelector(".ph").style.transform = `scale(${s})`; }, scale);
+      await page.evaluate((t) => window.__reelFrame(t), f / FPS);
       await page.screenshot({ path: path.join(frames, `f${String(f).padStart(4, "0")}.jpg`), type: "jpeg", quality: 92 });
     }
     video = `post-${n}.mp4`;
@@ -485,7 +553,7 @@ for (const [i, p] of posts.entries()) {
     execFileSync(process.env.FFMPEG || "ffmpeg", [
       "-y", "-loglevel", "error", "-framerate", String(FPS), "-i", path.join(frames, "f%04d.jpg"),
       "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-shortest",
-      "-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p", "-r", String(FPS), "-b:v", "6M",
+      "-c:v", "libx264", "-profile:v", "high", "-pix_fmt", "yuv420p", "-r", String(FPS), "-b:v", "8M",
       "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", path.join(outDir, video)
     ]);
     fs.rmSync(frames, { recursive: true, force: true });
