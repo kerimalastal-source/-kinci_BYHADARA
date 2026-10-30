@@ -18,6 +18,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "bakirkoy-atakoy-district-guide",
+    priority: -12,
+    published: "2026-10-30",
+    relatedProjects: ["sea-pearl-atakoy", "diamond-marin", "buyukyali"],
+    coverImage: { src: "/images/blog/bakirkoy-atakoy-district-guide.jpg", width: 1536, height: 1024 }
+  },
+  {
     slug: "kat-irtifaki-vs-kat-mulkiyeti",
     priority: -11,
     published: "2026-10-26",
