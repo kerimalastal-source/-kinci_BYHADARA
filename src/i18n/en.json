@@ -3362,7 +3362,15 @@
     "waHello": "Hello, I'd like to talk to your team.",
     "waQuestion": "Hello, I have a question: {q}",
     "waDesign": "Hello, I'd like to discuss an architectural / engineering design project.",
-    "designText": "HADARA also offers architectural design, interior design and engineering consultancy — for villas, residential, commercial and hospitality projects, in Türkiye and abroad. Our services:"
+    "designText": "HADARA also offers architectural design, interior design and engineering consultancy — for villas, residential, commercial and hospitality projects, in Türkiye and abroad. Our services:",
+    "book": {
+      "start": "I'd like to book a video tour",
+      "intro": "Let's book your private video tour right here: choose the project, then a day and time that suit you. It's free and with no obligation.",
+      "change": "Change",
+      "closed": "This booking has ended. You can start a new one from the menu.",
+      "paused": "You have a video tour booking in progress.",
+      "resume": "Continue my booking"
+    }
   },
   "match": {
     "eyebrow": "Your Property Advisor",

@@ -3364,7 +3364,15 @@
     "waHello": "Bonjour, je souhaiterais parler à votre équipe.",
     "waQuestion": "Bonjour, j'ai une question : {q}",
     "waDesign": "Bonjour, je souhaite échanger au sujet d'un projet de conception architecturale / d'ingénierie.",
-    "designText": "HADARA propose aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie — pour villas, résidences, commerces et hôtels, en Turquie et à l'étranger. Nos services :"
+    "designText": "HADARA propose aussi la conception architecturale, l'architecture d'intérieur et le conseil en ingénierie — pour villas, résidences, commerces et hôtels, en Turquie et à l'étranger. Nos services :",
+    "book": {
+      "start": "Je souhaite réserver une visite vidéo",
+      "intro": "Réservons votre visite vidéo privée ici même : choisissez le projet, puis le jour et l'heure qui vous conviennent. Gratuit et sans engagement.",
+      "change": "Modifier",
+      "closed": "Cette réservation est terminée. Vous pouvez en commencer une nouvelle depuis le menu.",
+      "paused": "Vous avez une réservation de visite vidéo en cours.",
+      "resume": "Reprendre ma réservation"
+    }
   },
   "match": {
     "eyebrow": "Votre conseiller immobilier",
