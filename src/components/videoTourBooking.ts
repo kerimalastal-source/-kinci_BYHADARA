@@ -17,17 +17,17 @@ import { supabase } from "../lib/supabase";
  * email + Telegram alert. Booking through WhatsApp stays available as an alternative.
  */
 
-const APPS = ["whatsapp", "facetime", "zoom", "meet"] as const;
-const LANGUAGES = ["ar", "en", "tr"] as const;
+export const APPS = ["whatsapp", "facetime", "zoom", "meet"] as const;
+export const LANGUAGES = ["ar", "en", "tr"] as const;
 const FOCUS = ["apartment", "model", "prices", "citizenship"] as const;
 const CONTACTS = ["email", "phone", "whatsapp", "telegram", "viber"] as const;
-type App = (typeof APPS)[number];
+export type App = (typeof APPS)[number];
 type Contact = (typeof CONTACTS)[number];
-type Language = (typeof LANGUAGES)[number];
+export type Language = (typeof LANGUAGES)[number];
 
 /** Türkiye keeps UTC+3 all year. */
 const ISTANBUL_OFFSET_MIN = 180;
-const ISTANBUL_TZ = "Europe/Istanbul";
+export const ISTANBUL_TZ = "Europe/Istanbul";
 /**
  * Tours start every half hour from 9:00 to 18:30 (the team works 9:00–19:00, every day).
  * Times are hours as numbers: 9.5 is 9:30.
@@ -44,7 +44,7 @@ const TOUR_MINUTES = 45;
 const PHONE_ID = "tour-phone";
 const STORE_KEY = "hadara-tour";
 
-interface TourState {
+export interface TourState {
   step: 0 | 1 | 2 | 3;
   projects: string[];
   focus: string[];
@@ -69,15 +69,16 @@ interface TourState {
 const svg = (body: string, size = 22) =>
   `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
 
-const CHECK = svg('<path d="m5 12 5 5 9-10"/>', 14);
+export const CHECK = svg('<path d="m5 12 5 5 9-10"/>', 14);
 const VIDEO = svg('<rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.5 6-3.5v10l-6-3.5"/>');
-const APP_ICONS: Record<App, string> = {
-  whatsapp: WHATSAPP_ICON,
+/** A function, not a constant: floatingButtons → chat → chatTourBooking → here is a cycle at load time. */
+export const appIcon = (app: App): string => (app === "whatsapp" ? WHATSAPP_ICON : APP_ICONS[app]);
+const APP_ICONS: Record<Exclude<App, "whatsapp">, string> = {
   facetime: VIDEO,
   zoom: svg('<rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m10 8.5 4 2-4 2z"/>'),
   meet: svg('<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9.5" r="2.4"/><path d="M3 19c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.3c.6-.2 1.3-.3 2-.3 2.5 0 4.5 2 4.5 4.5"/>')
 };
-const CALENDAR = svg('<rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/><path d="M12 13v3.5M10.25 14.75h3.5"/>', 18);
+export const CALENDAR = svg('<rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/><path d="M12 13v3.5M10.25 14.75h3.5"/>', 18);
 const PARTY = svg('<path d="m5 12 5 5 9-10"/>', 34);
 
 /* ---------- State ---------- */
@@ -139,7 +140,7 @@ const localeTag = () => intlTag();
 const earliestAllowed = () => Date.now() + LEAD_MINUTES * 60_000;
 
 /** UTC instant of an Istanbul day + time (9.5 = 9:30). */
-function slotUtc(date: string, hour: number): number {
+export function slotUtc(date: string, hour: number): number {
   const [y, m, d] = date.split("-").map(Number);
   return Date.UTC(y, m - 1, d, 0, Math.round(hour * 60)) - ISTANBUL_OFFSET_MIN * 60_000;
 }
@@ -149,7 +150,7 @@ function istanbulDay(ms: number): string {
   return `${x.getUTCFullYear()}-${pad(x.getUTCMonth() + 1)}-${pad(x.getUTCDate())}`;
 }
 
-interface Day {
+export interface Day {
   date: string;
   hours: number[];
 }
@@ -166,9 +167,9 @@ function isLunch(hour: number): boolean {
   return LUNCH_HOURS.includes(hour);
 }
 /** Booked by someone else, or the lunch break: both show as "Booked". */
-const isBlocked = (date: string, hour: number) => isLunch(hour) || isTaken(date, hour);
+export const isBlocked = (date: string, hour: number) => isLunch(hour) || isTaken(date, hour);
 
-async function loadTaken(): Promise<boolean> {
+export async function loadTaken(): Promise<boolean> {
   try {
     const { data, error } = await supabase.rpc("tour_taken_slots");
     if (error || !Array.isArray(data)) return false;
@@ -180,7 +181,7 @@ async function loadTaken(): Promise<boolean> {
 }
 
 /** First free slot in the calendar, if any. */
-function firstFree(days: Day[]): { date: string; hour: number } | null {
+export function firstFree(days: Day[]): { date: string; hour: number } | null {
   for (const d of days) {
     const hour = d.hours.find((h) => !isBlocked(d.date, h));
     if (hour !== undefined) return { date: d.date, hour };
@@ -189,7 +190,7 @@ function firstFree(days: Day[]): { date: string; hour: number } | null {
 }
 
 /** The next two weeks of Istanbul days that still have bookable hours. */
-function availableDays(): Day[] {
+export function availableDays(): Day[] {
   const min = earliestAllowed();
   const today = Date.parse(`${istanbulDay(Date.now())}T00:00:00Z`);
   const days: Day[] = [];
@@ -219,17 +220,17 @@ function gmtLabel(offset: number): string {
 }
 
 /** "Dubai · GMT+4" */
-function zoneLabel(): string {
+export function zoneLabel(): string {
   const city = visitorZone?.split("/").pop()?.replace(/_/g, " ");
   const gmt = gmtLabel(visitorOffset(Date.now()));
   return city && !/^(UTC|GMT|Etc)/i.test(city) ? `${city} · ${gmt}` : gmt;
 }
 
-function formatTime(ms: number, timeZone?: string): string {
+export function formatTime(ms: number, timeZone?: string): string {
   return new Intl.DateTimeFormat(localeTag(), { hour: "numeric", minute: "2-digit", ...(timeZone ? { timeZone } : {}) }).format(ms);
 }
 
-function formatDay(date: string, style: "chip" | "long", tag = localeTag()): string {
+export function formatDay(date: string, style: "chip" | "long", tag = localeTag()): string {
   const [y, m, d] = date.split("-").map(Number);
   const noon = Date.UTC(y, m - 1, d, 12);
   const options: Intl.DateTimeFormatOptions =
@@ -239,12 +240,12 @@ function formatDay(date: string, style: "chip" | "long", tag = localeTag()): str
   return new Intl.DateTimeFormat(tag, options).format(noon);
 }
 
-function weekday(date: string): string {
+export function weekday(date: string): string {
   const [y, m, d] = date.split("-").map(Number);
   return new Intl.DateTimeFormat(localeTag(), { weekday: "short", timeZone: "UTC" }).format(Date.UTC(y, m - 1, d, 12));
 }
 
-function relativeDay(date: string): string | null {
+export function relativeDay(date: string): string | null {
   const today = istanbulDay(Date.now());
   if (date === today) return t("videoTour.wizard.today");
   if (date === istanbulDay(Date.now() + 86_400_000)) return t("videoTour.wizard.tomorrow");
@@ -252,17 +253,17 @@ function relativeDay(date: string): string | null {
 }
 
 /** The visitor's local time for a slot, with "+1"/"−1" when it falls on another calendar day. Null when they share Istanbul's offset. */
-function localTime(ms: number): string | null {
+export function localTime(ms: number): string | null {
   if (visitorOffset(ms) === ISTANBUL_OFFSET_MIN) return null;
   const localDay = new Date(ms + visitorOffset(ms) * 60_000).toISOString().slice(0, 10);
   const shift = Math.round((Date.parse(localDay) - Date.parse(istanbulDay(ms))) / 86_400_000);
   return `${formatTime(ms)}${shift ? ` (${shift > 0 ? "+" : "−"}${Math.abs(shift)})` : ""}`;
 }
 
-const periodOf = (hour: number) => (hour < 12 ? "morning" : hour < 16 ? "afternoon" : "evening");
+export const periodOf = (hour: number) => (hour < 12 ? "morning" : hour < 16 ? "afternoon" : "evening");
 
 /** "Today, 4:00 PM" / "Tue, 7 Oct, 10:00 AM" */
-function slotLabel(date: string, hour: number): string {
+export function slotLabel(date: string, hour: number): string {
   const day = relativeDay(date) ?? `${weekday(date)} ${formatDay(date, "chip")}`;
   return `${day}${listSep()}${formatTime(slotUtc(date, hour), ISTANBUL_TZ)}`;
 }
@@ -421,7 +422,7 @@ function renderDetailsStep(state: TourState): string {
             ${APPS.map(
               (app) => `
             <button type="button" class="tour-app tour-app--${app}" data-tour-app="${app}" aria-pressed="${state.app === app}">
-              <span class="tour-app__icon">${APP_ICONS[app]}</span>
+              <span class="tour-app__icon">${appIcon(app)}</span>
               <span class="tour-app__name">${t(`videoTour.wizard.apps.${app}`)}</span>
               <span class="tour-app__hint">${t(`videoTour.wizard.appHints.${app}`)}</span>
             </button>`
@@ -524,7 +525,7 @@ function eventText(state: TourState) {
   };
 }
 
-function googleCalendarUrl(state: TourState): string {
+export function googleCalendarUrl(state: TourState): string {
   const e = eventText(state);
   const params = new URLSearchParams({ action: "TEMPLATE", text: e.title, dates: `${icsStamp(e.start)}/${icsStamp(e.end)}`, details: e.details });
   return `https://calendar.google.com/calendar/render?${params}`;
@@ -602,7 +603,7 @@ function escapeText(value: string): string {
 /* ---------- Sending the booking ---------- */
 
 const BOOK_ENDPOINT = "/api/book";
-const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+export const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 const englishNames = (slugs: string[]) =>
   slugs.map((slug) => String((lookup("en", `projectsData.${slug}`) as { name: string }).name)).join(", ");
@@ -628,6 +629,33 @@ function bookingPayload(state: TourState, openedAt: number, honeypot: string) {
     elapsedMs: Date.now() - openedAt,
     website: honeypot
   };
+}
+
+/**
+ * Sends a booking to api/book.ts (the wizard and the chat assistant both use it). A saved booking
+ * is tracked as a lead and its slot marked as taken; so is a slot someone else took a moment ago (409).
+ */
+export async function sendBooking(state: TourState, openedAt: number, honeypot: string): Promise<{ status: number; reference?: string }> {
+  let status = 0;
+  let result: { reference?: string } = {};
+  try {
+    const res = await fetch(BOOK_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(bookingPayload(state, openedAt, honeypot))
+    });
+    status = res.status;
+    result = (await res.json().catch(() => ({}))) as typeof result;
+  } catch {
+    status = 0;
+  }
+  if (status === 200 && result.reference) {
+    trackSchedule(englishNames(state.projects), { email: state.email, phone: state.phone, name: state.name });
+    taken.add(slotUtc(state.date!, state.hour!));
+    return { status, reference: result.reference };
+  }
+  if (status === 409) taken.add(slotUtc(state.date!, state.hour!));
+  return { status };
 }
 
 function renderBody(state: TourState): string {
@@ -862,29 +890,12 @@ export function initVideoTourBooking(root: HTMLElement): void {
     if (!validate()) return;
 
     setSending(true);
-    let status = 0;
-    let result: { reference?: string; error?: string } = {};
-    try {
-      const res = await fetch(BOOK_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bookingPayload(state, openedAt, body!.querySelector<HTMLInputElement>("[data-tour-hp]")?.value ?? ""))
-      });
-      status = res.status;
-      result = (await res.json().catch(() => ({}))) as typeof result;
-    } catch {
-      status = 0;
-    }
+    const { status, reference } = await sendBooking(state, openedAt, body!.querySelector<HTMLInputElement>("[data-tour-hp]")?.value ?? "");
     setSending(false);
 
-    if (status === 200 && result.reference) {
-      trackSchedule(englishNames(state.projects), { email: state.email, phone: state.phone, name: state.name });
-      taken.add(slotUtc(state.date!, state.hour!));
-      return update({ ...state, reference: result.reference, step: 3 });
-    }
+    if (reference) return update({ ...state, reference, step: 3 });
     if (status === 409) {
       // Someone else took the hour a moment ago: back to the calendar with fresh availability.
-      taken.add(slotUtc(state.date!, state.hour!));
       notice = t("videoTour.wizard.slotTakenNotice");
       update({ ...state, hour: undefined, step: 1 });
       void refreshTaken();

@@ -9,7 +9,21 @@ import { escapeHtml, isolateNumbers } from "../utils/html";
 import { toWesternDigits } from "../utils/numbers";
 import { placeKey } from "../utils/place";
 import { consultancyPath, parseRoute, splitLocale } from "../seo/routes";
-import { videoTourHref, VIDEO_TOUR_ICON } from "./videoTourInvite";
+import { VIDEO_TOUR_ICON } from "./videoTourInvite";
+import type { TourState } from "./videoTourBooking";
+import {
+  activeBookingId,
+  afterBookingRender,
+  bookingClick,
+  cancelBooking,
+  onBookingChange,
+  renderBooking,
+  renderBookingDone,
+  resumeBooking,
+  startBooking,
+  submitBooking,
+  syncBookingFields
+} from "./chatTourBooking";
 import { photoAttrs } from "../utils/responsiveImage";
 import { priceHtml } from "../utils/price";
 import {
@@ -46,7 +60,9 @@ type Entry =
   | { from: "bot"; kind: "info"; slug: string; topic: InfoTopic }
   | { from: "bot"; kind: "fallback"; query: string }
   | { from: "bot"; kind: "projects"; filter: Filter; intro?: "price" | "matched" | "district"; slugs?: string[] }
-  | { from: "bot"; kind: "project"; slug: string };
+  | { from: "bot"; kind: "project"; slug: string }
+  /** Booking a video tour right in the chat (chatTourBooking.ts); `done` keeps the confirmation. */
+  | { from: "bot"; kind: "book"; id: number; slugs?: string[]; resume?: boolean; done?: TourState };
 
 const STORE_KEY = "hadara-chat";
 /** "live" while the visitor is talking with the team (liveChat.ts), else the assistant. */
@@ -245,7 +261,7 @@ function reply(text: string): Entry {
   if (named.length > 1) return { from: "bot", kind: "projects", filter: "all", intro: "matched", slugs: named };
   if (has(q, "citizenship")) return { from: "bot", kind: "citizenship" };
   if (has(q, "design")) return { from: "bot", kind: "design" };
-  if (has(q, "tour")) return { from: "bot", kind: "tour" };
+  if (has(q, "tour")) return { from: "bot", kind: "book", id: Date.now(), slugs: context ? [context] : [] };
   if (has(q, "villas")) return { from: "bot", kind: "projects", filter: "villas" };
   const inDistrict = matchDistrict(text);
   if (inDistrict.length === 1) return { from: "bot", kind: "project", slug: inDistrict[0] };
@@ -373,7 +389,7 @@ function renderProject(slug: string): string {
     <div class="chat-actions">
       ${primary}
       <a class="chat-action" href="${link(`/projects/${slug}`)}">${t("chat.actions.details")}</a>
-      ${p.soldOut ? "" : `<a class="chat-action chat-action--tour" href="${videoTourHref([slug])}">${VIDEO_TOUR_ICON}${t("videoTour.chat.bookProject")}</a>`}
+      ${p.soldOut ? "" : `<button type="button" class="chat-action chat-action--tour" data-chat-book="${slug}">${VIDEO_TOUR_ICON}${t("videoTour.chat.bookProject")}</button>`}
       ${save}
       <button type="button" class="chat-action chat-action--ghost" data-chat-filter="all">${t("chat.actions.more")}</button>
     </div>`;
@@ -535,7 +551,7 @@ function renderInfo(slug: string, topic: InfoTopic): string {
     }
     case "tour": {
       body = `<p>${t("videoTour.chat.text")}</p>`;
-      actions = p.soldOut ? ask : `<a class="chat-action chat-action--tour" href="${videoTourHref([slug])}">${VIDEO_TOUR_ICON}${t("videoTour.chat.bookProject")}</a>`;
+      actions = p.soldOut ? ask : `<button type="button" class="chat-action chat-action--tour" data-chat-book="${slug}">${VIDEO_TOUR_ICON}${t("videoTour.chat.bookProject")}</button>`;
       break;
     }
   }
@@ -572,7 +588,7 @@ function renderTour(): string {
   return `
     <p>${t("videoTour.chat.text")}</p>
     <div class="chat-actions">
-      <a class="chat-action chat-action--tour" href="${videoTourHref()}">${VIDEO_TOUR_ICON}${t("videoTour.chat.book")}</a>
+      <button type="button" class="chat-action chat-action--tour" data-chat-book="">${VIDEO_TOUR_ICON}${t("videoTour.chat.book")}</button>
       <a class="chat-action" href="${link("/video-tour")}">${t("videoTour.home.more")}</a>
     </div>`;
 }
@@ -597,8 +613,12 @@ function renderFallback(query: string): string {
     </div>`;
 }
 
-function renderBot(entry: Extract<Entry, { from: "bot" }>): string {
+function renderBot(entry: Extract<Entry, { from: "bot" }>, isLast: boolean): string {
   switch (entry.kind) {
+    case "book":
+      return entry.done
+        ? renderBookingDone(entry.done)
+        : `${renderBooking(entry.id, isLast)}<p class="cb-more"><a href="${link("/video-tour")}">${t("videoTour.home.more")}</a></p>`;
     case "projects":
       return renderProjects(entry);
     case "project":
@@ -651,13 +671,15 @@ function renderProjectMenu(slug: string, answered?: InfoTopic): string {
     .join("")}<button type="button" class="chat-quick__btn" data-chat-menu="menu">${t("chat.otherTopics")}</button></div>`;
 }
 
-function renderEntry(entry: Entry): string {
+function renderEntry(entry: Entry, index: number): string {
   if (entry.from === "user") {
     const text =
       "key" in entry ? t(entry.key, entry.slug ? { name: getProjectContent(entry.slug).name } : undefined) : escapeHtml(entry.text);
     return `<div class="chat-msg chat-msg--user"><div class="chat-bubble">${text}</div></div>`;
   }
-  return `<div class="chat-msg chat-msg--bot"><div class="chat-bubble">${renderBot(entry)}</div></div>`;
+  const isLast = !typing && index === entries.length - 1;
+  const wide = entry.kind === "book" && !entry.done && isLast ? " chat-bubble--book" : "";
+  return `<div class="chat-msg chat-msg--bot"><div class="chat-bubble${wide}">${renderBot(entry, isLast)}</div></div>`;
 }
 
 /* ---------- Live chat with the team ---------- */
@@ -726,7 +748,8 @@ function renderLog(): void {
   const last = entries[entries.length - 1];
   // The main menu follows every answer except project lists, which carry their own choices.
   let menu = "";
-  if (!typing && last?.from === "bot" && last.kind !== "projects") {
+  // An open booking carries its own steps too.
+  if (!typing && last?.from === "bot" && last.kind !== "projects" && !(last.kind === "book" && !last.done)) {
     menu =
       last.kind === "here" || last.kind === "project"
         ? renderProjectMenu(last.slug)
@@ -735,9 +758,24 @@ function renderLog(): void {
           : renderMenu();
   }
   log.innerHTML =
-    entries.map(renderEntry).join("") +
+    entries.map((e, i) => renderEntry(e, i)).join("") +
     (typing ? `<div class="chat-msg chat-msg--bot"><div class="chat-bubble chat-typing" aria-label="${t("chat.typing")}"><span></span><span></span><span></span></div></div>` : "") +
     menu;
+  afterBookingRender(log);
+}
+
+/** Brings the open booking step to the top of the conversation. */
+function scrollToBooking(): void {
+  const log = panel?.querySelector<HTMLElement>(".chat__log");
+  const box = log?.querySelector<HTMLElement>("[data-cb]");
+  if (log && box) log.scrollTo({ top: Math.max(0, box.closest<HTMLElement>(".chat-msg")!.offsetTop - 8), behavior: reducedMotion() ? "auto" : "smooth" });
+}
+
+function repaintBooking(scroll = false): void {
+  if (!panel || mode !== "bot") return;
+  syncBookingFields(panel);
+  renderLog();
+  if (scroll) scrollToBooking();
 }
 
 /** Scrolls so the start of the newest answer is visible (long answers are read top-down). */
@@ -790,6 +828,10 @@ function push(user: Entry, answer: Entry): void {
   window.setTimeout(
     () => {
       typing = false;
+      if (answer.from === "bot" && answer.kind === "book" && !answer.done) {
+        if (answer.resume) resumeBooking(answer.id);
+        else startBooking(answer.id, answer.slugs ?? []);
+      }
       entries.push(answer);
       save();
       renderLog();
@@ -887,6 +929,21 @@ async function liveSend(text: string, retryOf?: number): Promise<void> {
 function wirePanel(el: HTMLElement): void {
   el.addEventListener("submit", (e) => {
     e.preventDefault();
+    const bookForm = (e.target as Element).closest<HTMLFormElement>("[data-cb-form]");
+    if (bookForm) {
+      const id = activeBookingId();
+      void submitBooking(bookForm).then((done) => {
+        const entry = entries.find((x): x is Extract<Entry, { kind: "book" }> => x.from === "bot" && x.kind === "book" && x.id === id);
+        if (!done || !entry) return;
+        entry.done = done;
+        save();
+        renderLog();
+        scrollToBooking();
+        const msgs = panel?.querySelectorAll<HTMLElement>(".chat-msg--bot");
+        msgs?.[msgs.length - 1]?.scrollIntoView({ block: "nearest" });
+      });
+      return;
+    }
     const details = (e.target as Element).closest<HTMLFormElement>("[data-live-details]");
     if (details) {
       const data = new FormData(details);
@@ -930,6 +987,7 @@ function wirePanel(el: HTMLElement): void {
     }
     if (target.closest("[data-live-skip]")) return skipLiveDetails();
     if (target.closest("[data-chat-restart]")) {
+      cancelBooking();
       const here = pageProject();
       entries = [here ? { from: "bot", kind: "here", slug: here } : { from: "bot", kind: "greeting" }];
       save();
@@ -937,6 +995,16 @@ function wirePanel(el: HTMLElement): void {
       return;
     }
     if (typing) return;
+    if (bookingClick(target, el)) return;
+    const book = target.closest<HTMLElement>("[data-chat-book]");
+    if (book) {
+      const slugs = (book.dataset.chatBook ?? "").split(",").filter(Boolean);
+      const here = pageProject();
+      return push({ from: "user", key: "chat.book.start" }, { from: "bot", kind: "book", id: Date.now(), slugs: slugs.length ? slugs : here ? [here] : [] });
+    }
+    if (target.closest("[data-chat-book-resume]")) {
+      return push({ from: "user", key: "chat.book.resume" }, { from: "bot", kind: "book", id: Date.now(), resume: true });
+    }
     const topicBtn = target.closest<HTMLElement>("[data-chat-topic]");
     if (topicBtn) {
       const topic = topicBtn.dataset.chatTopic as InfoTopic;
@@ -959,7 +1027,9 @@ function wirePanel(el: HTMLElement): void {
           ? { from: "bot", kind: "projects", filter: "all" }
           : menu === "price"
             ? { from: "bot", kind: "projects", filter: "all", intro: "price" }
-            : { from: "bot", kind: menu as Topic };
+            : menu === "tour"
+              ? { from: "bot", kind: "book", id: Date.now(), slugs: pageProject() ? [pageProject()!] : [] }
+              : { from: "bot", kind: menu as Topic };
       return push({ from: "user", key: menuKey(menu) }, answer);
     }
     const filter = target.closest<HTMLElement>("[data-chat-filter]")?.dataset.chatFilter as Filter | undefined;
@@ -978,6 +1048,9 @@ export function chatBubble(): string {
 }
 
 export function initChat(): void {
+  onBookingChange((scroll) => {
+    if (open) repaintBooking(scroll);
+  });
   // A reply from the team: repaint the open conversation, or light the bubble's dot.
   onLiveChange(() => {
     if (panel && open && mode === "live") {

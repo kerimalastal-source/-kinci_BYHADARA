@@ -61,6 +61,42 @@
    "category": "About Istanbul"
   },
   {
+   "slug": "basaksehir-district-guide",
+   "brief": "Başakşehir district guide for foreign buyers: a large planned district on the European side with parks and nature (Kayaşehir Millet Bahçesi, Şamlar Tabiat Parkı), low-rise compounds and a new city feel; what living there is like; nearby places ONLY from projectsData.vadi-panorama.nearby and projectsData.mesa-yenikent.nearby (keep their km/time exactly as written). Vadi Panorama (Emlak Konut guarantee) and Mesa Yenikent as examples, facts only from projects.ts and projectsData. If residence permits come up, use only lawsData.rules.residence-closed-areas wording (check the address before buying) — never say the district is open or closed.",
+   "photo": "/images/projects/mesa-yenikent/cover-park.jpg",
+   "category": "About Istanbul"
+  },
+  {
+   "slug": "besiktas-district-guide",
+   "brief": "Beşiktaş district guide for foreign buyers: a central, established district on the European side near the Bosphorus, what living there is like and why homes in central districts are rare; Referans Beşiktaş (Abbasağa, low-rise blocks around a central garden) as the example, facts only from projects.ts and projectsData.referans-besiktas (nearby, highlights). No prices. If residence permits come up, use only lawsData.rules.residence-closed-areas wording (check the address before buying) — never say the district is open or closed.",
+   "photo": "/images/projects/referans-besiktas/aerial-courtyard.jpg",
+   "category": "About Istanbul"
+  },
+  {
+   "slug": "pendik-district-guide",
+   "brief": "Pendik district guide for foreign buyers: our first project on the Asian side of Istanbul, sea and Princes' Islands views, near Sabiha Gökçen airport and the M4 metro; what living there is like; nearby places ONLY from projectsData.referans-pendik.nearby; Referans Pendik as the example, facts only from projects.ts and projectsData. Do not mention villas or shop counts (owner's decision). If residence permits come up, use only lawsData.rules.residence-closed-areas wording (check the address before buying) — never say the district is open or closed.",
+   "photo": "/images/projects/referans-pendik/blocks-sea-view.jpg",
+   "category": "About Istanbul"
+  },
+  {
+   "slug": "gokturk-district-guide",
+   "brief": "Göktürk (Eyüpsultan) district guide for foreign buyers: a green, villa-and-compound area next to the Belgrade Forest and close to Istanbul Airport and the Northern Marmara Motorway; what living there is like; nearby places ONLY from projectsData.gokturk-kemer-evleri.nearby; Göktürk Kemer Evleri (Emlak Konut with Ziraat) as the example, facts only from projects.ts and projectsData. No prices, no payment-plan figures. If residence permits come up, use only lawsData.rules.residence-closed-areas wording (check the address before buying) — never say the district is open or closed.",
+   "photo": "/images/projects/gokturk-kemer-evleri/pond-blocks.jpg",
+   "category": "About Istanbul"
+  },
+  {
+   "slug": "halkali-district-guide",
+   "brief": "Halkalı (Küçükçekmece) district guide for foreign buyers: a transport hub on the European side (Marmaray and M11 at Halkalı), parks and green space, what living there is like; nearby places and distances ONLY from projectsData.hayat-flora.nearby; Hayat Flora (Özak GYO with the Emlak Konut guarantee) as the example, facts only from projects.ts and projectsData. If residence permits come up, use only lawsData.rules.residence-closed-areas wording (check the address before buying) — never say the district is open or closed.",
+   "photo": "/images/projects/hayat-flora/aerial-sea.jpg",
+   "category": "About Istanbul"
+  },
+  {
+   "slug": "zeytinburnu-district-guide",
+   "brief": "Zeytinburnu district guide (Kazlıçeşme coast): where the historic city walls meet the Marmara Sea, transport links, what it is like to live there; nearby places ONLY from projectsData.buyukyali.nearby and its descriptions; Büyükyalı as the example (no unit sizes or prices — none are published). Residence permits: only lawsData.rules.residence-closed-areas wording.",
+   "photo": "/images/projects/buyukyali/sea-skyline.jpg",
+   "category": "About Istanbul"
+  },
+  {
    "slug": "payment-plans-explained",
    "brief": "Paying for property in Turkey: cash vs installment plans offered by developers on new projects, deposits and schedules in general terms, currency — no rates or percentages; faq.categories[1].items[2].",
    "photo": "/images/projects/beylikduzu-living/living-room.jpg",
@@ -71,12 +107,6 @@
    "brief": "DASK, Turkey's compulsory earthquake insurance for homes: what it is, who needs it, how it relates to the title deed and to buying a home, what it does not cover compared with a private home insurance. Put 'DASK' first in every language's title. Different angle from the planned earthquake-regulation-2018 topic (that one is about building design). General, well-established explanation only: no fees, amounts, percentages, rates or deadlines that are not on the site; add 'the conditions are per current law and may change'.",
    "photo": "/images/projects/diamond-marin/facade.jpg",
    "category": "Buying Property"
-  },
-  {
-   "slug": "zeytinburnu-district-guide",
-   "brief": "Zeytinburnu district guide (Kazlıçeşme coast): where the historic city walls meet the Marmara Sea, transport links, what it is like to live there; nearby places ONLY from projectsData.buyukyali.nearby and its descriptions; Büyükyalı as the example (no unit sizes or prices — none are published). Residence permits: only lawsData.rules.residence-closed-areas wording.",
-   "photo": "/images/projects/buyukyali/sea-skyline.jpg",
-   "category": "About Istanbul"
   },
   {
    "slug": "emlak-vergisi-property-tax",
@@ -131,6 +161,54 @@
    "brief": "Renting out your Istanbul property: tenant types, furnished vs unfurnished, working with a manager, what makes a unit easy to rent (location, amenities) — no yield percentages.",
    "photo": "/images/projects/cadde-ispartakule/terrace-view.jpg",
    "category": "Real Estate"
+  },
+  {
+   "slug": "tax-number-foreigners-turkey",
+   "brief": "Vergi Numarası (Turkish tax number) for foreigners buying property: what it is, why it is the first step before paying, together with a local bank account; use only citizenship.steps[2] and guide.stages[1].steps[1] and the buyer's guide wording; no fees, no office addresses, no document lists that are not on the site; say HADARA's team helps with it.",
+   "photo": "/images/projects/lotus-sisli/apartment-living.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "satis-vaadi-promise-to-sell",
+   "brief": "Satış Vaadi Sözleşmesi (notarised promise-to-sell agreement) for homes under construction: what it is, why it is signed at a notary, how it differs from receiving the title deed at handover, and that it is also accepted for citizenship with the same three-year commitment; use only citizenship.requirements[5], citizenship.steps[4], citizenship.documents[4], guide.stages[1].steps[0] and the off-plan-or-ready and kat-irtifaki articles; no fees or legal article numbers; note that conditions follow current law and may change.",
+   "photo": "/images/projects/casablu-vadi/project-aerial.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "arsa-payi-land-share",
+   "brief": "Arsa Payı (land share) in Turkish apartment buildings: what it means on the title deed, how it relates to shared areas and to how some building costs are split; use the monthly-fees-aidat article (blogData) for the cost-sharing part and the kat-irtifaki-vs-kat-mulkiyeti article for the title deed part; no numbers, ratios or formulas.",
+   "photo": "/images/projects/referans-beylikduzu/courtyard-pools-aerial.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "title-deed-check-before-buying",
+   "brief": "How to check a title deed (tapu) before buying in Turkey: why you confirm the owner, the property type (kat irtifakı/kat mülkiyeti), any mortgage or other annotation, and the iskan; use the buying-property-and-tapu, kat-irtifaki-vs-kat-mulkiyeti and iskan-occupancy-permit articles and projectsData.marmara-haven-villa.verified as an example of a verified card; no fees, no step-by-step government system instructions that are not on the site; recommend checking with the Land Registry or a lawyer.",
+   "photo": "/images/projects/marmara-haven-villa/drone-front.jpg",
+   "category": "Buying Property"
+  },
+  {
+   "slug": "inheritance-property-turkey",
+   "brief": "Inheritance of property in Turkey for foreign owners (miras/veraset): a general explanation only — that a title deed passes to heirs through a legal process, why families should keep documents in order and plan ahead, and that the rules depend on current law and each family's case; NO percentages, shares, taxes, fees, deadlines or article numbers; strongly advise confirming with a lawyer or notary. Keep it short and careful.",
+   "photo": "/images/projects/lotus-manzara-guzelce/completed-villas.jpg",
+   "category": "Life in Turkey"
+  },
+  {
+   "slug": "european-or-asian-side-istanbul",
+   "brief": "European side or Asian side of Istanbul for home buyers: how the two sides differ in general (the Bosphorus between them, the bridges, Marmaray and the Eurasia Tunnel connecting them), and what each offers; HADARA's projects are on both sides now (Pendik on the Asian side, the rest on the European side — districts from projects.ts); nearby facts only from projectsData; no price comparisons.",
+   "photo": "/hero-istanbul.jpg",
+   "category": "About Istanbul"
+  },
+  {
+   "slug": "urban-transformation-kentsel-donusum",
+   "brief": "Kentsel Dönüşüm (urban transformation) explained for buyers: in general terms, why many older buildings in Istanbul are being renewed under the earthquake-safety programme, what it can mean for someone buying a flat in an older building, and why new projects built to the 2018 earthquake code avoid that question (link the idea to projects' seismic notes in projectsData); no figures, no programme rules or procedures that are not on the site; conditions follow current law.",
+   "photo": "/images/projects/referans-besiktas/main-entrance.jpg",
+   "category": "Real Estate"
+  },
+  {
+   "slug": "utility-subscriptions-after-buying",
+   "brief": "Abonelik: opening electricity, water, gas and internet subscriptions after you receive your keys in Turkey; use guide.stages[2] (after the keys) and the monthly-fees-aidat article; what to prepare in general (title deed, tax number, ID), that the building management or our team can guide you; no fees, deposits or provider names.",
+   "photo": "/images/projects/beylikduzu-living/living-room-new.jpg",
+   "category": "Life in Turkey"
   }
  ]
 }

@@ -2392,6 +2392,25 @@
     }
   },
   "blogData": {
+    "bakirkoy-atakoy-district-guide": {
+      "category": "About Istanbul",
+      "title": "Bakırköy Ataköy Istanbul: District Guide for Buyers",
+      "excerpt": "Bakırköy Ataköy explained: where the seafront district lies, what is nearby and which project HADARA offers there.",
+      "body": [
+        "Bakırköy and Ataköy are among the names buyers meet most often when they look for a home on the Marmara coast of Istanbul. This is a seafront district on the European side, with a marina, large shopping centres and hospitals close to one another. This guide explains where Bakırköy and Ataköy lie, what surrounds them and which project in our portfolio you can find there, using only the distances and details published on our site.",
+        "## Where Bakırköy and Ataköy lie",
+        "Bakırköy is a district on the European side of Istanbul, and Ataköy is one of its best-known residential areas, stretching along the shore of the Marmara Sea. Our site describes Ataköy as one of Istanbul's most refined and sought-after residential districts, popular with Turkish residents and the city's elite. Unlike the dense business districts of the centre, it combines everyday city services with a coastline, which is what many buyers are looking for. For many buyers this means a sea view and a calm residential setting without giving up the services of a large city, so the district is a natural place to start a search for a seafront home.",
+        "## Daily life: distances from Sea Pearl Ataköy",
+        "The distances below are the ones listed on our site from Sea Pearl Ataköy. A Plus Mall is 1 minute away, Galleria Mall 3 minutes and the shopping centre in Florya 10 minutes. Medicana Hospital stands next to the project and Acıbadem Hospital is 6 minutes away. The Eurasia Tunnel is 5 minutes away, the Marmaray and M9 metro stations are a 10-minute walk, and Ataköy Marina is 1 km away.",
+        "For a buyer, this mix matters. Healthcare, shopping, a marina and rail connections are all close, so daily errands do not require a long drive, and the Marmaray and metro stations link the area to the rest of the city. Keep in mind that these figures are the times listed from one address; always ask for the exact travel time from the property you are considering.",
+        "## Homes in Bakırköy: Sea Pearl Ataköy",
+        "Sea Pearl Ataköy is the project we offer in Bakırköy. It is a seafront community of 631 apartments in four 20-storey blocks, each with two entrances and its own residents' gym, built by the developer Kuzu İnşaat. The site covers about 55,000 m², and around 60 percent of it is given over to green space, with gardens inspired by Ottoman landscaping and an artificial lake. A 1.2 km seafront is reserved for residents, who can also use yacht mooring and sea transport towards Ataköy Marina. Because the project is complete, you can see the finished buildings, gardens and seafront during your visit rather than judging them from plans alone.",
+        "The apartments range from 1+1 to 4.5+1, with gross areas from 88 m² to 398 m², and around 200 of them with direct sea views are currently available. Residents also benefit from special offers and reduced annual fees for some services of the JW Marriott hotel. According to our site, the project follows Türkiye's seismic code and is complete and ready to move in. Its price is available on request.",
+        "## If you plan to apply for a residence permit",
+        "If a residence permit is part of your plan, check the address before you buy. The Presidency of Migration Management closes some neighbourhoods and districts to new residence permit applications by foreigners, based on population density, and updates these lists from time to time. The conditions are per current law and may change, so confirm the position for the exact address in advance.",
+        "HADARA, your real estate partner in Istanbul, can help you compare these options. Contact us or book a private video tour to shortlist your favourites, then visit Istanbul to see them in person, because the purchase itself is completed on a visit."
+      ]
+    },
     "kat-irtifaki-vs-kat-mulkiyeti": {
       "category": "Buying Property",
       "title": "Kat İrtifakı vs Kat Mülkiyeti: Two Types of Turkish Tapu",
@@ -3343,7 +3362,15 @@
     "waHello": "Hello, I'd like to talk to your team.",
     "waQuestion": "Hello, I have a question: {q}",
     "waDesign": "Hello, I'd like to discuss an architectural / engineering design project.",
-    "designText": "HADARA also offers architectural design, interior design and engineering consultancy — for villas, residential, commercial and hospitality projects, in Türkiye and abroad. Our services:"
+    "designText": "HADARA also offers architectural design, interior design and engineering consultancy — for villas, residential, commercial and hospitality projects, in Türkiye and abroad. Our services:",
+    "book": {
+      "start": "I'd like to book a video tour",
+      "intro": "Let's book your private video tour right here: choose the project, then a day and time that suit you. It's free and with no obligation.",
+      "change": "Change",
+      "closed": "This booking has ended. You can start a new one from the menu.",
+      "paused": "You have a video tour booking in progress.",
+      "resume": "Continue my booking"
+    }
   },
   "match": {
     "eyebrow": "Your Property Advisor",

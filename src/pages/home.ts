@@ -9,6 +9,7 @@ import { statIcon } from "../components/statIcons";
 import { consultancyPath } from "../seo/routes";
 import { renderProjectMatch, initProjectMatch } from "../components/projectMatch";
 import { renderVideoTourInvite } from "../components/videoTourInvite";
+import { renderHeroCrane, initHeroCrane } from "../components/heroCrane";
 import { photoAttrs, photoSrcset, heroBackground } from "../utils/responsiveImage";
 
 const HERO_IMAGE = { src: "/hero-istanbul.jpg", width: 2200 };
@@ -49,14 +50,17 @@ export function renderHome(el: HTMLElement): void {
 
   el.innerHTML = `
     <section class="hero" style="${heroBackground(HERO_IMAGE, "linear-gradient(180deg, rgba(15,20,18,.55), rgba(15,20,18,.82))")}">
-      <div class="container hero__inner">
-        <p class="eyebrow eyebrow--on-dark">${t("home.heroEyebrow")}</p>
-        <h1 class="hero__title">${t("home.heroTitle")}</h1>
-        <p class="hero__subtitle">${t("home.heroSubtitle")}</p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="${link("/projects")}">${t("home.heroCtaPrimary")}</a>
-          <a class="btn btn--ghost" href="${link("/contact")}">${t("home.heroCtaSecondary")}</a>
+      <div class="container hero__layout">
+        <div class="hero__inner">
+          <p class="eyebrow eyebrow--on-dark">${t("home.heroEyebrow")}</p>
+          <h1 class="hero__title">${t("home.heroTitle")}</h1>
+          <p class="hero__subtitle">${t("home.heroSubtitle")}</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="${link("/projects")}">${t("home.heroCtaPrimary")}</a>
+            <a class="btn btn--ghost" href="${link("/contact")}">${t("home.heroCtaSecondary")}</a>
+          </div>
         </div>
+        ${renderHeroCrane()}
       </div>
     </section>
 
@@ -180,6 +184,7 @@ export function renderHome(el: HTMLElement): void {
     </section>
   `;
 
+  initHeroCrane(el);
   initStatCounters(el);
   initProjectMatch(el);
   initSpotlightGallery(el);

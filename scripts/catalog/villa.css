@@ -1,0 +1,105 @@
+/* Marmara Haven Villa brochure: layouts on top of catalog.css (same palette, fonts and brand). */
+
+.latin--light { color: var(--gold-soft); }
+
+/* Cover: a green panel beside the dusk photo. */
+.vcover { display: grid; grid-template-columns: 118mm 1fr; background: var(--green-deep); }
+.vcover__panel { padding: 16mm 16mm 13mm; display: flex; flex-direction: column; color: var(--ivory); position: relative; z-index: 1; }
+.vcover__panel .brand img { height: 14mm; }
+.vcover__panel .brand b { font-size: 16pt; }
+.vcover__body { margin-top: auto; margin-bottom: auto; display: grid; gap: 4.5mm; }
+.vcover h1 { font-size: 34pt; font-weight: 300; color: #fff; line-height: 1.2; }
+:lang(ar) .vcover h1 { font-weight: 500; font-size: 33pt; line-height: 1.35; }
+.vcover__tag { font-size: 12.5pt; font-weight: 300; line-height: 1.6; color: #ebe4d3; }
+:lang(ar) .vcover__tag { font-weight: 400; }
+.vcover__foot { font-size: 8.5pt; color: var(--gold-soft); letter-spacing: 0.06em; border-top: 0.3mm solid rgba(201, 162, 75, 0.5); padding-top: 4mm; }
+.vcover__photo { position: relative; }
+.vcover__photo img { width: 100%; height: 210mm; object-fit: cover; object-position: center 60%; display: block; }
+.vcover__photo::before { content: ""; position: absolute; inset: 0; border: 0.4mm solid rgba(201, 162, 75, 0.55); margin: 7mm; z-index: 1; }
+
+/* Full-bleed pages with text at the bottom. */
+.vfull { color: var(--ivory); }
+.vfull__shade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10, 31, 23, 0.94) 0%, rgba(10, 31, 23, 0.7) 32%, rgba(10, 31, 23, 0) 62%); }
+.vfull__body { position: absolute; inset-inline: 18mm; bottom: 16mm; display: grid; gap: 4.5mm; }
+.vfull__lead { font-size: 13pt; font-weight: 300; line-height: 1.65; color: #fff; max-width: 205mm; }
+:lang(ar) .vfull__lead { font-weight: 400; font-size: 12.5pt; }
+.vstrip { display: grid; grid-template-columns: repeat(6, 1fr); border-top: 0.3mm solid rgba(201, 162, 75, 0.6); padding-top: 4mm; margin-top: 1mm; }
+.vstrip div { display: grid; gap: 1mm; padding-inline-end: 3mm; }
+.vstrip div + div { border-inline-start: 0.3mm solid rgba(255, 255, 255, 0.18); padding-inline-start: 4mm; }
+.vstrip b { font-family: Inter, sans-serif; font-weight: 300; font-size: 19pt; color: var(--gold); white-space: nowrap; }
+.vstrip span { font-size: 8.5pt; color: #ece6d6; }
+.vfull--roof .vfull__body { max-width: 150mm; }
+.vfull--roof h2 { font-size: 28pt; font-weight: 400; color: #fff; }
+
+/* Text beside a tall photo. */
+.vsplit { display: grid; grid-template-columns: 1fr 112mm; }
+.vsplit--rev { grid-template-columns: 112mm 1fr; }
+.vsplit__photo img { width: 100%; height: 210mm; object-fit: cover; display: block; }
+.vsplit__text { padding: 13mm 16mm 12mm; display: flex; flex-direction: column; gap: 4mm; min-width: 0; }
+.vsplit h2, .vlevel h2, .vgal h2, .vver h2, .vview h2 { font-size: 20pt; font-weight: 500; color: var(--green); line-height: 1.3; }
+.vlong { font-size: 9.6pt; line-height: 1.85; color: var(--ink); column-count: 2; column-gap: 8mm; column-rule: 0.25mm solid var(--line); margin-top: 1mm; }
+
+/* Levels: photos on one side, the level's areas and features on the other. */
+.vlevel { display: grid; grid-template-columns: 172mm 1fr; }
+.vlevel__photos { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm; height: 210mm; }
+.vlevel--one .vlevel__photos { grid-template-columns: 1fr; }
+.vlevel__photos img { width: 100%; height: 100%; min-height: 0; object-fit: cover; display: block; }
+.vlevel__text { padding: 13mm 14mm 12mm; display: flex; flex-direction: column; gap: 4mm; position: relative; overflow: hidden; }
+.vlevel__no { position: absolute; bottom: -14mm; inset-inline-end: -4mm; font-family: Inter, sans-serif; font-weight: 200; font-size: 120pt; color: rgba(201, 162, 75, 0.16); line-height: 1; }
+.vlevel .eyebrow { margin-top: 10mm; }
+.vareas { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4mm; }
+.vareas div { background: var(--green); padding: 4mm 4.5mm; border-inline-start: 0.8mm solid var(--gold); }
+.vareas b { display: block; font-family: Inter, sans-serif; font-weight: 500; font-size: 15pt; color: var(--gold); white-space: nowrap; }
+.vareas span { display: block; font-size: 8pt; color: #e6e0d2; margin-top: 1mm; }
+.vlist { list-style: none; display: grid; gap: 2.2mm; margin-top: 2mm; position: relative; }
+.vlist li { position: relative; padding-inline-start: 5mm; font-size: 10pt; line-height: 1.55; color: var(--ink); }
+.vlist li::before { content: ""; position: absolute; inset-inline-start: 0; top: 2.1mm; width: 1.8mm; height: 1.8mm; background: var(--gold); transform: rotate(45deg); }
+.vlist--light li { color: #fff; font-size: 11pt; }
+
+/* Galleries. */
+.vgal { padding: 12mm 14mm 11mm; display: flex; flex-direction: column; gap: 3.5mm; }
+.vgal__title { display: grid; gap: 1.5mm; }
+.vgal__title h2 { font-size: 15pt; font-weight: 400; }
+.vgal__grid { flex: 1; min-height: 0; display: grid; gap: 2mm; }
+.vgal__grid img { width: 100%; height: 100%; min-height: 0; object-fit: cover; display: block; }
+.vgal--six .vgal__grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; }
+.vgal--five .vgal__grid { grid-template-columns: 1.7fr 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.vgal--five .vgal__grid img:first-child { grid-row: span 2; }
+
+/* Features with the site's amenity icons. */
+.vfeat { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4mm 6mm; margin-top: 2mm; }
+.vfeat div { display: flex; align-items: center; gap: 3.5mm; padding: 2.4mm 0; border-bottom: 0.25mm solid var(--line); }
+.vfeat .ico { flex-shrink: 0; width: 9.5mm; height: 9.5mm; border-radius: 50%; background: var(--green); color: var(--gold); display: grid; place-items: center; }
+.vfeat .ico svg { width: 5.4mm; height: 5.4mm; }
+.vfeat b { font-size: 9.6pt; font-weight: 500; color: var(--ink); }
+
+/* Verified card. */
+.vver { padding: 13mm 16mm 11mm; display: flex; flex-direction: column; gap: 4mm; }
+.vver__top { display: flex; justify-content: space-between; align-items: flex-end; gap: 10mm; }
+.vver__top > div { display: grid; gap: 2mm; }
+.vver__date { font-size: 8.5pt; color: var(--green); border: 0.3mm solid var(--gold); padding: 1.4mm 3mm; white-space: nowrap; }
+.vver__grid { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 3mm; margin-top: 2mm; }
+.vver__grid div { background: #fff; border: 0.25mm solid var(--line); border-top: 0.8mm solid var(--gold); padding: 5mm 5.5mm; display: grid; gap: 2mm; align-content: center; }
+.vver__grid span { font-size: 7.8pt; font-weight: 600; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; }
+:lang(ar) .vver__grid span { letter-spacing: 0; font-size: 8.6pt; }
+.vver__grid b { font-size: 11pt; font-weight: 500; color: var(--green); line-height: 1.5; }
+
+/* Location. */
+.vnear { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 2mm; }
+.vnear div { display: grid; gap: 1mm; padding: 3.4mm 4mm; background: var(--ivory); border-inline-start: 0.8mm solid var(--gold); }
+.vnear b { font-family: Inter, sans-serif; font-weight: 500; font-size: 14pt; color: var(--green); }
+:lang(ar) .vnear b { font-family: "IBM Plex Sans Arabic", Inter, sans-serif; font-weight: 600; }
+.vnear span { font-size: 9pt; color: var(--ink-soft); }
+
+/* Viewing and price. */
+.vview { display: grid; grid-template-columns: 112mm 1fr; }
+.vview__photo img { width: 100%; height: 210mm; object-fit: cover; display: block; }
+.vview__text { padding: 13mm 16mm 12mm; display: flex; flex-direction: column; gap: 4mm; }
+.vprice { background: var(--green); color: var(--ivory); padding: 5mm 6mm; border-inline-start: 1mm solid var(--gold); display: grid; gap: 1.4mm; margin-top: 2mm; }
+.vprice span { font-size: 8pt; font-weight: 600; color: var(--gold-soft); letter-spacing: 0.12em; text-transform: uppercase; }
+:lang(ar) .vprice span { letter-spacing: 0; font-size: 9pt; }
+.vprice b { font-family: Inter, sans-serif; font-weight: 400; font-size: 22pt; color: var(--gold); }
+.vprice p { font-size: 8.2pt; color: #e3ddcf; line-height: 1.5; }
+.qrs--dark { margin-top: auto; }
+.qrs--dark .qr { width: 32mm; }
+.qrs--dark .qr svg { border: 0.3mm solid var(--line); }

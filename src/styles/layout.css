@@ -939,6 +939,117 @@
   margin-top: var(--space-md);
 }
 
+/* Home hero: the text beside the animated crane (components/heroCrane.ts). */
+.hero__layout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: end;
+}
+
+.hero-crane {
+  width: 100%;
+  max-width: 440px;
+  justify-self: end;
+}
+
+.hero-crane svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+[dir="rtl"] .hero-crane svg {
+  transform: scaleX(-1);
+}
+
+.hero-crane__steel,
+.hero-crane__ground,
+.hero-crane__cable,
+.hero-crane__sling,
+.hero-crane__tie {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.hero-crane__lace {
+  stroke-width: 1;
+  opacity: 0.85;
+}
+
+.hero-crane__tie,
+.hero-crane__sling {
+  stroke-width: 1;
+}
+
+.hero-crane__ground {
+  stroke: rgba(247, 244, 236, 0.35);
+}
+
+.hero-crane__scaffold {
+  stroke: rgba(247, 244, 236, 0.4);
+  stroke-width: 0.9;
+  stroke-dasharray: 3 3;
+}
+
+.hero-crane__cable {
+  stroke: rgba(247, 244, 236, 0.75);
+  stroke-width: 1.1;
+}
+
+.hero-crane__weight,
+.hero-crane__cab,
+.hero-crane__trolley,
+.hero-crane__hook {
+  fill: var(--color-accent);
+  stroke: none;
+}
+
+.hero-crane__glass {
+  fill: rgba(15, 43, 33, 0.85);
+  stroke: none;
+}
+
+.hero-crane__stone {
+  fill: #e7dcc4;
+  stroke: rgba(15, 43, 33, 0.35);
+  stroke-width: 0.6;
+}
+
+.hero-crane__window {
+  fill: rgba(15, 43, 33, 0.7);
+  transition: fill 0.6s ease;
+}
+
+.hero-crane .is-lit .hero-crane__window {
+  fill: #f1c86a;
+}
+
+.hero-crane .is-hidden {
+  visibility: hidden;
+}
+
+.hero-crane__beacon {
+  fill: #e5533d;
+  animation: crane-beacon 1.6s ease-in-out infinite;
+}
+
+@keyframes crane-beacon {
+  0%, 60%, 100% { opacity: 0.25; }
+  70%, 85% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-crane__beacon {
+    animation: none;
+  }
+}
+
 .page-hero {
   padding: 7rem 0 4.5rem;
   background: linear-gradient(180deg, rgba(15, 43, 33, 0.55), rgba(15, 43, 33, 0.88)),
@@ -1042,6 +1153,16 @@
     padding: 6rem 0 4.5rem;
   }
 
+  .hero__layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-md);
+  }
+
+  .hero-crane {
+    max-width: 360px;
+    justify-self: start;
+  }
+
   .page-hero {
     padding: 5rem 0 3.5rem;
   }
@@ -1061,6 +1182,13 @@
   .page-hero__subtitle,
   .project-hero__tagline {
     font-size: 1rem;
+  }
+
+  /* Physically left on phones: the floating buttons sit on the right. */
+  .hero-crane {
+    max-width: 260px;
+    justify-self: left;
+    margin-bottom: -0.75rem;
   }
 
   /* Hero buttons stack at full, equal width. */
