@@ -71,6 +71,11 @@ export interface PublishDeps {
   telegramText: (html: string) => Promise<boolean>;
   /** Milliseconds between Instagram status checks (tests pass 0). */
   pollMs?: number;
+  /**
+   * Epoch ms until which a Reel may keep waiting for Instagram's video processing in this run
+   * (the function's own time limit minus room to publish and report). Without it: ~30 s.
+   */
+  deadline?: number;
   now?: () => Date;
 }
 
@@ -291,11 +296,16 @@ async function publishInstagramReel(
     await deps.store.put(containerPath, JSON.stringify({ id }), "application/json").catch(() => undefined);
   }
   let finished = false;
-  // At most ~30 s here: the function has 60 s for the whole day; the next run carries on.
-  for (let attempt = 0; attempt < 10 && !finished; attempt++) {
+  // Instagram needs time to process the video. Wait as long as this run allows (deps.deadline,
+  // set from the function's 60 s limit); on 2026-10-30 and 11-01 a fixed ~30 s wait wasn't
+  // enough and the 09:00 Reel only went out with the 14:00 run. Whatever is left, the next run
+  // (10:00, then 14:00) publishes the same container.
+  const until = deps.deadline ?? Date.now() + 30_000;
+  for (let attempt = 0; attempt < 60 && !finished; attempt++) {
     const status = await graph(deps, id, { fields: "status_code" }, "GET", meta.token);
     if (status.status_code === "FINISHED") finished = true;
     else if (status.status_code === "ERROR" || status.status_code === "EXPIRED") throw new Error(`media: ${status.status_code}`);
+    else if (Date.now() + (deps.pollMs ?? 3000) >= until) break;
     else await new Promise((resolve) => setTimeout(resolve, deps.pollMs ?? 3000));
   }
   if (!finished) throw new Error("Instagram is still processing the video — the next run publishes it");
@@ -551,28 +561,34 @@ export async function publishDay(deps: PublishDeps, date: string, time?: string)
       const reel = videoUrl;
       const reelBytes = videoBytes;
       const album = slideUrls;
-      const fb = await once(deps, date, name, "facebook", () =>
-        post.story
-          ? publishFacebookStory(deps, meta, imageUrl)
-          : album
-            ? publishFacebookCarousel(deps, meta, album, post.fb)
-            : reelBytes
-            ? publishFacebookReel(deps, meta, reelBytes, post.fb)
-            : publishFacebook(deps, meta, imageUrl, post.fb)
-      );
+      // Facebook and Instagram side by side: Instagram starts processing a Reel's video while
+      // Facebook uploads its copy, instead of after it.
+      const sentPath = markers(date, name, "instagram.container");
+      const [fb, ig] = await Promise.all([
+        once(deps, date, name, "facebook", () =>
+          post.story
+            ? publishFacebookStory(deps, meta, imageUrl)
+            : album
+              ? publishFacebookCarousel(deps, meta, album, post.fb)
+              : reelBytes
+              ? publishFacebookReel(deps, meta, reelBytes, post.fb)
+              : publishFacebook(deps, meta, imageUrl, post.fb)
+        ),
+        meta.igUserId && !igProblem
+          ? once(deps, date, name, "instagram", () =>
+              post.story
+                ? publishInstagramStory(deps, meta, imageUrl, sentPath)
+                : album
+                  ? publishInstagramCarousel(deps, meta, album, post.ig, sentPath)
+                  : reel
+                  ? publishInstagramReel(deps, meta, reel, imageUrl, post.ig, sentPath)
+                  : publishInstagram(deps, meta, imageUrl, post.ig, sentPath)
+            )
+          : Promise.resolve(null)
+      ]);
       result.facebook = fb.state;
       if (fb.error) result.errors.push(`فيسبوك: ${fb.error}`);
-      if (meta.igUserId && !igProblem) {
-        const sentPath = markers(date, name, "instagram.container");
-        const ig = await once(deps, date, name, "instagram", () =>
-          post.story
-            ? publishInstagramStory(deps, meta, imageUrl, sentPath)
-            : album
-              ? publishInstagramCarousel(deps, meta, album, post.ig, sentPath)
-              : reel
-              ? publishInstagramReel(deps, meta, reel, imageUrl, post.ig, sentPath)
-              : publishInstagram(deps, meta, imageUrl, post.ig, sentPath)
-        );
+      if (ig) {
         result.instagram = ig.state;
         if (ig.error) result.errors.push(`إنستغرام: ${ig.error}`);
       }

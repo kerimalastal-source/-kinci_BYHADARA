@@ -1,6 +1,6 @@
 // Publishes today's social posts with the live services: Vercel Blob (public image copies and
 // the "already published" markers), Meta's Graph API and Telegram. Used by /api/social-publish
-// (the cron runs at 09:00, 14:00 and 21:00 Istanbul, and the admin button). Running it twice is safe: publishDay skips whatever
+// (the cron runs at 09:00, 10:00, 14:00 and 21:00 Istanbul, and the admin button). Running it twice is safe: publishDay skips whatever
 // already went out.
 import { BlobNotFoundError, del, head, put } from "@vercel/blob";
 import { istanbulDate, istanbulTime, metaConfig, publishDay, socialSourceUrl, type DayResult, type SocialStore } from "./social.js";
@@ -62,7 +62,9 @@ export function publishTodaysPosts(now = new Date(), date?: string): Promise<Day
       meta: metaConfig(),
       fetch,
       telegramPhoto: sendTelegramPhoto,
-      telegramText: async (html) => (await sendTelegram(html)) !== null
+      telegramText: async (html) => (await sendTelegram(html)) !== null,
+      // The function may run 60 s (vercel.json): leave ~15 s to publish, record and report.
+      deadline: now.getTime() + 45_000
     },
     date ?? today,
     date && date < today ? "23:59" : istanbulTime(now)
