@@ -958,5 +958,13 @@
     "headlineAr": "مدينة سكنية متكاملة على ⁦2,000,000 m²⁩",
     "headlineEn": "A complete new town on 2,000,000 m²",
     "photo": "/images/projects/mesa-yenikent/cover-park.jpg"
+  },
+  {
+    "date": "2026-11-01",
+    "id": "iskan-explained",
+    "topic": "ما هو الإسكان (İskan)؟",
+    "headlineAr": "رخصة الإسكان: ⁦3⁩ أمور يعرفها المشتري",
+    "headlineEn": "The İskan: 3 things every buyer should know",
+    "photo": "/images/blog/iskan-occupancy-permit.jpg"
   }
 ]
