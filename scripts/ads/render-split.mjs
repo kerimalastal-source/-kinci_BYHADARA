@@ -115,6 +115,8 @@ const ADS = [
     label: "MARMARA HAVEN VILLA",
     price: { ar: "بسعر يبدأ من 1.55 مليون دولار" },
     badge: { num: "576", unit: "m²", ar: "المساحة الإجمالية" },
+    // Owner 2026-11-02: the land area under the total area.
+    badge2: { num: "637", unit: "m²", ar: "مساحة الأرض" },
     photos: [
       { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
       { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
@@ -174,6 +176,8 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .seal .sa{font-family:Plex;font-weight:700;font-size:${story ? 26 : 23}px;color:#a8853a;line-height:1.2}
 .seal b{font-weight:700;font-size:${story ? 96 : 84}px;line-height:1;letter-spacing:-2px;margin:${story ? 8 : 6}px 0}
 .seal b i{font-style:normal;font-weight:600;font-size:.4em;margin-left:5px;vertical-align:1.05em;letter-spacing:0}
+.seal .sd{width:70%;height:2px;background:rgba(201,162,75,.45);margin:${story ? 14 : 10}px 0}
+.seal b.b2{font-size:${story ? 70 : 60}px;margin-bottom:0}
 .seal .se{font-weight:600;font-size:${story ? 16 : 14}px;letter-spacing:4px;color:#a8853a}
 .price{align-self:center;margin-top:${story ? 30 : 20}px;display:flex;align-items:center;gap:${story ? 20 : 18}px;padding:${story ? "12px 34px" : "10px 30px"};border:2px solid #c9a24b;border-radius:99px;background:#fbf3df;white-space:nowrap}
 .price .pa{font-family:Plex;font-weight:700;font-size:${story ? 34 : 30}px;line-height:1.3;direction:rtl}
@@ -206,7 +210,7 @@ body.lang-ar .en{font-family:Plex,sans-serif;direction:rtl;letter-spacing:0}
 const FLAG = '<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#e30a17"/><circle cx="425" cy="400" r="200" fill="#fff"/><circle cx="475" cy="400" r="160" fill="#e30a17"/><path fill="#fff" d="M583.334 400l180.901 58.779-111.804-153.885v190.212l111.804-153.885z"/></svg>';
 const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body class="${a.lang ? "lang-" + a.lang : ""}">
 <div class="head"><div class="brand"><img src="file://${REPO}/public/logo-dark.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="rule"></div></div>
-${a.badge ? `<div class="hero"><div class="seal"><span class="sa">${a.badge.ar}</span><b dir="ltr">${a.badge.num}<i>${a.badge.unit}</i></b>${a.badge.en ? `<span class="se">${a.badge.en}</span>` : ""}</div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : `<div class="ar">${a.ar}</div><div class="en">${a.en}</div>`}
+${a.badge ? `<div class="hero"><div class="seal"><span class="sa">${a.badge.ar}</span><b dir="ltr">${a.badge.num}<i>${a.badge.unit}</i></b>${a.badge.en ? `<span class="se">${a.badge.en}</span>` : ""}${a.badge2 ? `<span class="sd"></span><span class="sa">${a.badge2.ar}</span><b class="b2" dir="ltr">${a.badge2.num}<i>${a.badge2.unit}</i></b>` : ""}</div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : `<div class="ar">${a.ar}</div><div class="en">${a.en}</div>`}
 ${a.price ? `<div class="price${a.price.big ? " big" : ""}${a.price.stack ? " stack" : ""}"><span class="pa">${a.price.ar}</span>${a.price.en ? `<span class="pb"></span><span class="pe">${a.price.en}</span>` : ""}</div>` : ""}
 ${a.label ? `<div class="label">${a.flag ? `<span class="lab">${FLAG}<span>${a.label}</span></span>` : a.label}</div>` : ""}
 <div class="photos"${a.photos.length === 1 ? ' style="grid-template-columns:1fr"' : ""}>${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
