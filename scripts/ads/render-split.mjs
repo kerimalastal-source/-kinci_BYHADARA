@@ -177,7 +177,7 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .seal b{font-weight:700;font-size:${story ? 96 : 84}px;line-height:1;letter-spacing:-2px;margin:${story ? 8 : 6}px 0}
 .seal b i{font-style:normal;font-weight:600;font-size:.4em;margin-left:5px;vertical-align:1.05em;letter-spacing:0}
 .seal .sd{width:70%;height:2px;background:rgba(201,162,75,.45);margin:${story ? 14 : 10}px 0}
-.seal b.b2{font-size:${story ? 70 : 60}px;margin-bottom:0}
+.seal b.b2{margin-bottom:0}
 .seal .se{font-weight:600;font-size:${story ? 16 : 14}px;letter-spacing:4px;color:#a8853a}
 .price{align-self:center;margin-top:${story ? 30 : 20}px;display:flex;align-items:center;gap:${story ? 20 : 18}px;padding:${story ? "12px 34px" : "10px 30px"};border:2px solid #c9a24b;border-radius:99px;background:#fbf3df;white-space:nowrap}
 .price .pa{font-family:Plex;font-weight:700;font-size:${story ? 34 : 30}px;line-height:1.3;direction:rtl}
