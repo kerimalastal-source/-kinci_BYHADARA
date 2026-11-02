@@ -104,6 +104,21 @@ const ADS = [
     ],
     cta: ["Message us on WhatsApp", "راسلنا عبر واتساب"],
   },
+  // Owner 2026-11-02: a villa + citizenship test for Arab towns in Israel, Arabic-only text and design.
+  {
+    id: "citizenship-ar",
+    dir: "israel-2026-11",
+    lang: "ar",
+    ar: "الجنسية التركية<br>عبر الاستثمار العقاري",
+    en: "بعقار واحد أو أكثر في إسطنبول",
+    label: "ONE OR MORE PROPERTIES · ISTANBUL",
+    price: { ar: "بقيمة إجمالية 400 ألف دولار فأكثر" },
+    photos: [
+      { src: img("sea-pearl-atakoy/from-the-sea.jpg"), pos: "22% center" },
+      { src: img("sea-pearl-atakoy/sea-terrace.jpg"), pos: "center center" },
+    ],
+    cta: ["", "راسلنا عبر واتساب"],
+  },
   {
     id: "plan40",
     // Owner 2026-10-25: website-traffic ad for the Referans plan (40% down, balance over 24 to 36 months),
