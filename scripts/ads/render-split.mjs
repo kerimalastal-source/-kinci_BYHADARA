@@ -31,21 +31,37 @@ const ADS = [
     ],
     cta: ["Book a Private Viewing", "احجز معاينة خاصة"],
   },
-  // Istanbul villa campaign (owner 2026-11-02: "the same Gulf ad design, aimed at Istanbul", plus a Russian
-  // version). Same layout and photos as "villa"; the Russian one is Russian only (no Arabic or English).
+  // Istanbul villa campaign (owner 2026-11-02: "the same Gulf ad design, aimed at Istanbul", then "one
+  // design per language": Arabic only, English only, Russian only). Same layout and photos as "villa".
   {
-    id: "villa-ist",
+    id: "villa-ar",
     dir: "istanbul-2026-11",
+    lang: "ar",
     ar: "فيلا بإطلالة بحرية كاملة<br>في إسطنبول",
-    en: "Full Sea View Villa in Istanbul",
+    en: "5 غرف نوم · 7 حمّامات · مسبح خاص",
     label: "MARMARA HAVEN VILLA",
-    price: { ar: "بسعر يبدأ من 1.55 مليون دولار", en: "FROM US$1.55M" },
-    badge: { num: "576", unit: "m²", ar: "المساحة الإجمالية", en: "TOTAL AREA" },
+    price: { ar: "بسعر يبدأ من 1.55 مليون دولار" },
+    badge: { num: "576", unit: "m²", ar: "المساحة الإجمالية" },
     photos: [
       { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
       { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
     ],
-    cta: ["Book a Private Viewing", "احجز معاينة خاصة"],
+    cta: ["", "احجز معاينة خاصة"],
+  },
+  {
+    id: "villa-en",
+    dir: "istanbul-2026-11",
+    lang: "en",
+    ar: "Full Sea View Villa<br>in Istanbul",
+    en: "5 Bedrooms · 7 Bathrooms · Private Pool",
+    label: "MARMARA HAVEN VILLA",
+    price: { ar: "From US$1.55 million" },
+    badge: { num: "576", unit: "m²", ar: "Total area" },
+    photos: [
+      { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
+      { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
+    ],
+    cta: ["", "Book a Private Viewing"],
   },
   {
     id: "villa-ru",
@@ -147,15 +163,16 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .foot .c{margin-left:auto;display:flex;align-items:center;gap:14px;font-weight:600;font-size:27px}
 .foot .c .a{font-family:Plex;font-weight:700;font-size:29px;color:#0f2b21}
 .foot .c .bar{color:#c9a24b}
-body.ru .ar,body.ru .pa,body.ru .sa,body.ru .foot .c .a{font-family:Inter,sans-serif;direction:ltr}
-body.ru .ar{letter-spacing:-1px;line-height:1.15}
-body.ru .sa{font-weight:600;font-size:${story ? 22 : 19}px;letter-spacing:2px;text-transform:uppercase}
-body.ru .price .pa{font-weight:700;letter-spacing:.3px}
+body.lang-ru .ar,body.lang-ru .pa,body.lang-ru .sa,body.lang-ru .foot .c .a,body.lang-en .ar,body.lang-en .pa,body.lang-en .sa,body.lang-en .foot .c .a{font-family:Inter,sans-serif;direction:ltr}
+body.lang-ru .ar,body.lang-en .ar{letter-spacing:-1px;line-height:1.15}
+body.lang-ru .sa,body.lang-en .sa{font-weight:600;font-size:${story ? 22 : 19}px;letter-spacing:2px;text-transform:uppercase}
+body.lang-ru .price .pa,body.lang-en .price .pa{font-weight:700;letter-spacing:.3px}
+body.lang-ar .en{font-family:Plex,sans-serif;direction:rtl;letter-spacing:0}
 `;
 
 // Turkish flag (official proportions).
 const FLAG = '<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#e30a17"/><circle cx="425" cy="400" r="200" fill="#fff"/><circle cx="475" cy="400" r="160" fill="#e30a17"/><path fill="#fff" d="M583.334 400l180.901 58.779-111.804-153.885v190.212l111.804-153.885z"/></svg>';
-const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body class="${a.lang || ""}">
+const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body class="${a.lang ? "lang-" + a.lang : ""}">
 <div class="head"><div class="brand"><img src="file://${REPO}/public/logo-dark.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="rule"></div></div>
 ${a.badge ? `<div class="hero"><div class="seal"><span class="sa">${a.badge.ar}</span><b dir="ltr">${a.badge.num}<i>${a.badge.unit}</i></b>${a.badge.en ? `<span class="se">${a.badge.en}</span>` : ""}</div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : `<div class="ar">${a.ar}</div><div class="en">${a.en}</div>`}
 ${a.price ? `<div class="price${a.price.big ? " big" : ""}${a.price.stack ? " stack" : ""}"><span class="pa">${a.price.ar}</span>${a.price.en ? `<span class="pb"></span><span class="pe">${a.price.en}</span>` : ""}</div>` : ""}
