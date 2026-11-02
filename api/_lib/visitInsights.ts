@@ -148,6 +148,23 @@ const LOOK_ACTIONS = new Set(["video_play", "map_open", "favorite", "chat_open",
 const actionsOf = (f: VisitFacts) => f.actions ?? [];
 const engagementOf = (f: VisitFacts) => f.engagement ?? [];
 
+/** The United States or China, or a browser on the China time zone (migration 0035). */
+export function isStrictGeo(f: { country?: string | null; tz?: string | null }): boolean {
+  return ["US", "CN"].includes((f.country || "").toUpperCase()) || f.tz === "Asia/Shanghai";
+}
+
+/**
+ * Why a new visit's Telegram alert waits for proof of a person (owner's request
+ * 2026-11-02, "no alerts for automated visits"), or null to send it at once. A 2000x2000
+ * screen is Meta's check and is never released; a US or China visit is released by
+ * refreshAlert() once classifyVisit() no longer reads it as automated (steady use, or a
+ * contact). From 20/10 to 2/11, 54 of the 58 alerts that turned out automated were these.
+ */
+export function alertHold(f: { country?: string | null; tz?: string | null; screen?: string | null }): string | null {
+  if (f.screen === "2000x2000") return "2000x2000 screen";
+  return isStrictGeo(f) ? "US or China" : null;
+}
+
 /** Weighs the signals: automation, a server-like setup or robotic timing, against presses, input, reading and scrolling. */
 export function classifyVisit(f: VisitFacts): VerdictResult {
   const bot: [number, string][] = [];
@@ -194,7 +211,7 @@ export function classifyVisit(f: VisitFacts): VerdictResult {
   const hardBot = !!f.webdriver || f.automated === "data-center town" || f.screen === "2000x2000";
   // The United States and China, or a browser on the China time zone: almost every such visit
   // was a crawler, so it needs steady human use to count (migration 0035, owner 2026-11-03).
-  const strictGeo = ["US", "CN"].includes((f.country || "").toUpperCase()) || f.tz === "Asia/Shanghai";
+  const strictGeo = isStrictGeo(f);
   const steady = interactions >= 4 || (interactions >= 2 && active >= 20) || gaps.some((g) => g >= 5 && g <= 1800);
   let verdict: Verdict;
   if (hardBot) verdict = "bot";

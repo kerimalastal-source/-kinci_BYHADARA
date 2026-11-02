@@ -7,7 +7,7 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { randomUUID } from "node:crypto";
 import { PGlite } from "@electric-sql/pglite";
-import { classifyVisit, parseUserAgent, timeZoneMismatch, visitIntent } from "../.test-build/_lib/visitInsights.js";
+import { alertHold, classifyVisit, parseUserAgent, timeZoneMismatch, visitIntent } from "../.test-build/_lib/visitInsights.js";
 import { readVisits, visitReportMessage } from "../.test-build/_lib/visitReport.js";
 import { recordVisit } from "../.test-build/_lib/visitRecord.js";
 import { POST } from "../.test-build/track.js";
@@ -225,4 +225,59 @@ test("classifyVisit: the US and China need steady human use (0035)", () => {
   assert.equal(classifyVisit({ pages: one, country: "US", tz: "Europe/Moscow", referrer: "facebook.com", engagement: [{ path: "/", active: 42, scroll: 14, interactions: 2 }] }).verdict === "bot", false);
   assert.equal(classifyVisit({ pages: one, country: "US", actions: [{ action: "whatsapp", target: null }] }).verdict, "real");
   assert.equal(classifyVisit({ pages: one, country: "TR", tz: "Europe/Istanbul" }).verdict, "pending");
+});
+
+const engagement = (v, over = {}) =>
+  POST(
+    new Request(`${ORIGIN}/api/track`, {
+      method: "POST",
+      headers: { "content-type": "application/json", "user-agent": "Mozilla/5.0 (iPhone)" },
+      body: JSON.stringify({ type: "engagement", sessionId: v.sessionId, viewId: "view-0001", path: v.path, active: 0, scroll: 0, interactions: 0, view: v, ...over })
+    })
+  );
+
+test("alertHold: the US, China and Meta's 2000x2000 check wait, everyone else is sent at once", () => {
+  assert.equal(alertHold({ country: "US", tz: "America/Chicago", screen: "390x844" }), "US or China");
+  assert.equal(alertHold({ country: "CN" }), "US or China");
+  assert.equal(alertHold({ country: "SG", tz: "Asia/Shanghai" }), "US or China");
+  assert.equal(alertHold({ country: "IE", screen: "2000x2000" }), "2000x2000 screen");
+  assert.equal(alertHold({ country: "SA", tz: "Asia/Riyadh", screen: "390x844" }), null);
+});
+
+test("a US visit gets no alert while it looks automated, and its alert goes out once it shows a person", async () => {
+  const db = await database();
+  const telegram = fakeServices(db);
+  const v = view({ tz: "America/Chicago" });
+  const us = { country: "US", city: "Chicago" };
+  await recordVisit(v, us, ORIGIN, quiet);
+  assert.equal(telegram.length, 0);
+  // No use yet: still nothing, and a later page (even the contact page) adds no edit or 🔥.
+  assert.equal((await engagement(v, { active: 3 })).status, 204);
+  await new Promise((resolve) => setTimeout(resolve, 150));
+  await recordVisit({ ...v, path: "/ar/contact", referrer: v.path }, us, ORIGIN, quiet);
+  assert.equal(telegram.length, 0);
+  // Steady touches and reading: the alert is sent now, once, with the verdict.
+  const contact = { ...v, path: "/ar/contact", viewId: "view-0002" };
+  assert.equal((await engagement(contact, { viewId: "view-0002", active: 40, scroll: 70, interactions: 9 })).status, 204);
+  await until(() => telegram.length > 0);
+  assert.deepEqual(telegram.map((m) => m.method), ["sendMessage"]);
+  assert.match(telegram[0].text, /🟢|🟡/);
+  assert.deepEqual(await q(db, "select message_id::int as m from visitor_alerts where session_id = $1", [v.sessionId]), [{ m: telegram[0].message_id ?? 100 }]);
+  // From now on it is a normal alert: the next report edits it.
+  telegram.length = 0;
+  await engagement(contact, { viewId: "view-0002", active: 60, scroll: 90, interactions: 12 });
+  await until(() => telegram.length > 0);
+  assert.equal(telegram[0].method, "editMessageText");
+  await db.close();
+});
+
+test("Meta's 2000x2000 check never gets an alert, whatever it does", async () => {
+  const db = await database();
+  const telegram = fakeServices(db);
+  const v = view({ screen: "2000x2000", device: "desktop", tz: "Europe/Dublin" });
+  await recordVisit(v, { country: "IE", city: "Dublin" }, ORIGIN, quiet);
+  await engagement(v, { active: 40, scroll: 90, interactions: 9 });
+  await new Promise((resolve) => setTimeout(resolve, 150));
+  assert.equal(telegram.length, 0);
+  await db.close();
 });
