@@ -192,9 +192,17 @@ export function classifyVisit(f: VisitFacts): VerdictResult {
   // ad checks) make a visit automated whatever it pressed or read, as visit_verdicts() does
   // (migrations 0030, 0031).
   const hardBot = !!f.webdriver || f.automated === "data-center town" || f.screen === "2000x2000";
+  // The United States and China, or a browser on the China time zone: almost every such visit
+  // was a crawler, so it needs steady human use to count (migration 0035, owner 2026-11-03).
+  const strictGeo = ["US", "CN"].includes((f.country || "").toUpperCase()) || f.tz === "Asia/Shanghai";
+  const steady = interactions >= 4 || (interactions >= 2 && active >= 20) || gaps.some((g) => g >= 5 && g <= 1800);
   let verdict: Verdict;
   if (hardBot) verdict = "bot";
   else if (contacted) verdict = "real";
+  else if (strictGeo && !steady) {
+    verdict = "bot";
+    bot.push([3, "زيارة من أمريكا أو الصين بلا استخدام بشري واضح"]);
+  }
   else if (b >= 3 && h < 3) verdict = "bot";
   else if (h >= 2.5 && b <= 1.5) verdict = "real";
   else if (!reported && !actions.length && b < 1.5 && pages.length === 1) verdict = "pending";

@@ -216,3 +216,13 @@ test("a browser that reports automation (navigator.webdriver) gets no alert, the
   assert.deepEqual(await q(db, "select os, webdriver from visitor_profiles where session_id = $1", [v.sessionId]), [{ os: "Linux", webdriver: true }]);
   await db.close();
 });
+
+test("classifyVisit: the US and China need steady human use (0035)", () => {
+  const one = [{ path: "/", at: 0 }];
+  assert.equal(classifyVisit({ pages: one, country: "US", tz: "America/Los_Angeles" }).verdict, "bot");
+  assert.equal(classifyVisit({ pages: one, country: "CN", tz: "Asia/Shanghai", engagement: [{ path: "/", active: 0, scroll: 20, interactions: 1 }], actions: [{ action: "form_start", target: null }] }).verdict, "bot");
+  assert.equal(classifyVisit({ pages: one, country: "SG", tz: "Asia/Shanghai" }).verdict, "bot");
+  assert.equal(classifyVisit({ pages: one, country: "US", tz: "Europe/Moscow", referrer: "facebook.com", engagement: [{ path: "/", active: 42, scroll: 14, interactions: 2 }] }).verdict === "bot", false);
+  assert.equal(classifyVisit({ pages: one, country: "US", actions: [{ action: "whatsapp", target: null }] }).verdict, "real");
+  assert.equal(classifyVisit({ pages: one, country: "TR", tz: "Europe/Istanbul" }).verdict, "pending");
+});
