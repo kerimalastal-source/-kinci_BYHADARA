@@ -173,7 +173,7 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .hero{display:flex;align-items:center;gap:${story ? 22 : 18}px;padding:0 0 0 56px;margin-top:${story ? 34 : 22}px}
 .hero .ht{flex:1;min-width:0}.hero .ar{margin-top:0;padding:0 44px 0 0}.hero .en{padding:0 44px 0 0}
 .seal{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:${story ? "6px 34px 6px 0" : "4px 30px 4px 0"};border-right:3px solid #c9a24b;color:#0f2b21}
-.seal .sa{font-family:Plex;font-weight:700;font-size:${story ? 26 : 23}px;color:#a8853a;line-height:1.2}
+.seal .sa{font-family:Plex;font-weight:700;font-size:${story ? 36 : 31}px;color:#94742c;line-height:1.2}
 .seal b{font-weight:700;font-size:${story ? 96 : 84}px;line-height:1;letter-spacing:-2px;margin:${story ? 8 : 6}px 0}
 .seal b i{font-style:normal;font-weight:600;font-size:.4em;margin-left:5px;vertical-align:1.05em;letter-spacing:0}
 .seal .sd{width:70%;height:2px;background:rgba(201,162,75,.45);margin:${story ? 14 : 10}px 0}
