@@ -105,6 +105,22 @@ const ADS = [
     cta: ["Message us on WhatsApp", "راسلنا عبر واتساب"],
   },
   // Owner 2026-11-02: a villa + citizenship test for Arab towns in Israel, Arabic-only text and design.
+  // Owner 2026-11-02: the villa headline must say plainly that it suits Turkish citizenship, word for word.
+  {
+    id: "villa-ar-cit",
+    dir: "israel-2026-11",
+    lang: "ar",
+    ar: "فيلا بإطلالة بحرية كاملة في إسطنبول<br>مناسبة للجنسية التركية",
+    en: "5 غرف نوم · صالونان · 7 حمّامات · مسبح خاص",
+    label: "MARMARA HAVEN VILLA",
+    price: { ar: "بسعر يبدأ من 1.55 مليون دولار" },
+    badge: { num: "576", unit: "m²", ar: "المساحة الإجمالية" },
+    photos: [
+      { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
+      { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
+    ],
+    cta: ["", "احجز معاينة خاصة"],
+  },
   {
     id: "citizenship-ar",
     dir: "israel-2026-11",
