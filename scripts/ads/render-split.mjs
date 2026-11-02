@@ -132,7 +132,7 @@ const ADS = [
     photos: [
       // Owner 2026-11-02: real photos of finished housing (the Sea Pearl boat render looked unreal).
       { src: img("referans-beylikduzu/playground-real.jpg"), pos: "center center" },
-      { src: img("alya-konutlari-merkezefendi/aerial-blocks.jpg"), pos: "center center" },
+      { src: img("lotus-yali/aerial-sea-view.jpg"), pos: "30% center" },
     ],
     cta: ["", "راسلنا عبر واتساب"],
   },
