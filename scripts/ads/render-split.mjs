@@ -130,9 +130,9 @@ const ADS = [
     label: "ONE OR MORE PROPERTIES · ISTANBUL",
     price: { ar: "بقيمة إجمالية 400 ألف دولار فأكثر" },
     photos: [
-      // Owner 2026-11-02: real photos of finished housing (the Sea Pearl boat render looked unreal).
-      { src: img("referans-beylikduzu/playground-real.jpg"), pos: "center center" },
-      { src: img("lotus-yali/view-from-sea.jpg"), pos: "38% 78%", size: "auto 165%" },
+      // Owner 2026-11-02: one photo from Mesa Yenikent and one from Vadi Panorama.
+      { src: img("mesa-yenikent/cover-park.jpg"), pos: "45% center" },
+      { src: img("vadi-panorama/central-garden.jpg"), pos: "60% center" },
     ],
     cta: ["", "راسلنا عبر واتساب"],
   },
