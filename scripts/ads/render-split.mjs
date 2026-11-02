@@ -130,8 +130,9 @@ const ADS = [
     label: "ONE OR MORE PROPERTIES · ISTANBUL",
     price: { ar: "بقيمة إجمالية 400 ألف دولار فأكثر" },
     photos: [
-      { src: img("sea-pearl-atakoy/from-the-sea.jpg"), pos: "22% center" },
-      { src: img("sea-pearl-atakoy/sea-terrace.jpg"), pos: "center center" },
+      // Owner 2026-11-02: real photos of finished housing (the Sea Pearl boat render looked unreal).
+      { src: img("referans-beylikduzu/playground-real.jpg"), pos: "center center" },
+      { src: img("alya-konutlari-merkezefendi/aerial-blocks.jpg"), pos: "center center" },
     ],
     cta: ["", "راسلنا عبر واتساب"],
   },
