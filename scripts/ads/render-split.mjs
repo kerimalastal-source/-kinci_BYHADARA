@@ -37,11 +37,12 @@ const ADS = [
     id: "villa-ar",
     dir: "istanbul-2026-11",
     lang: "ar",
-    ar: "فيلا بإطلالة بحرية كاملة<br>في إسطنبول",
+    ar: "فيلا بإطلالة بحرية كاملة في إسطنبول<br>مناسبة للجنسية التركية",
     en: "5 غرف نوم · صالونان · 7 حمّامات · مسبح خاص",
     label: "MARMARA HAVEN VILLA",
     price: { ar: "بسعر يبدأ من 1.55 مليون دولار" },
     badge: { num: "576", unit: "m²", ar: "المساحة الإجمالية" },
+    badge2: { num: "637", unit: "m²", ar: "مساحة الأرض" },
     photos: [
       { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
       { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
@@ -52,11 +53,12 @@ const ADS = [
     id: "villa-en",
     dir: "istanbul-2026-11",
     lang: "en",
-    ar: "Full Sea View Villa<br>in Istanbul",
+    ar: "Full Sea View Villa in Istanbul<br>Eligible for Turkish Citizenship",
     en: "5 Bedrooms · 2 Living Rooms · 7 Bathrooms · Private Pool",
     label: "MARMARA HAVEN VILLA",
     price: { ar: "From US$1.55 million" },
     badge: { num: "576", unit: "m²", ar: "Total area" },
+    badge2: { num: "637", unit: "m²", ar: "Land area" },
     photos: [
       { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
       { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
@@ -67,11 +69,12 @@ const ADS = [
     id: "villa-ru",
     dir: "istanbul-2026-11",
     lang: "ru",
-    ar: "Вилла с панорамным видом<br>на море в Стамбуле",
-    en: "5 спален · 2 гостиные · 7 санузлов · частный бассейн",
+    ar: "Вилла с панорамным видом на море<br>в Стамбуле, подходит<br>для гражданства Турции",
+    en: "5 спален · 2 гостиные · 7 санузлов · частный&nbsp;бассейн",
     label: "MARMARA HAVEN VILLA",
     price: { ar: "Цена от 1,55 млн долларов США" },
     badge: { num: "576", unit: "m²", ar: "Общая площадь" },
+    badge2: { num: "637", unit: "m²", ar: "Площадь участка" },
     photos: [
       { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
       { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
@@ -201,7 +204,8 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .foot .c .bar{color:#c9a24b}
 body.lang-ru .ar,body.lang-ru .pa,body.lang-ru .sa,body.lang-ru .foot .c .a,body.lang-en .ar,body.lang-en .pa,body.lang-en .sa,body.lang-en .foot .c .a{font-family:Inter,sans-serif;direction:ltr}
 body.lang-ru .ar,body.lang-en .ar{letter-spacing:-1px;line-height:1.15}
-body.lang-ru .sa,body.lang-en .sa{font-weight:600;font-size:${story ? 22 : 19}px;letter-spacing:2px;text-transform:uppercase}
+body.lang-ru .sa,body.lang-en .sa{font-weight:700;font-size:${story ? 28 : 24}px;letter-spacing:2px;text-transform:uppercase}
+body.lang-ru .sa{letter-spacing:.5px}
 body.lang-ru .price .pa,body.lang-en .price .pa{font-weight:700;letter-spacing:.3px}
 body.lang-ar .en{font-family:Plex,sans-serif;direction:rtl;letter-spacing:0}
 `;
