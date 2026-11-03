@@ -17,7 +17,7 @@ async function database() {
     await db.exec(readFileSync(new URL(file, MIGRATIONS), "utf8"));
   }
   // Re-runnable.
-  for (const file of ["0021_automated_visits.sql", "0022_clean_visit_stats.sql", "0023_clean_behavior_consent.sql", "0030_datacenter_contacts.sql", "0031_server_screen.sql"]) {
+  for (const file of ["0021_automated_visits.sql", "0022_clean_visit_stats.sql", "0023_clean_behavior_consent.sql", "0030_datacenter_contacts.sql", "0031_server_screen.sql", "0035_strict_us_cn.sql"]) {
     await db.exec(readFileSync(new URL(file, MIGRATIONS), "utf8"));
   }
   return db;
@@ -116,4 +116,39 @@ test("the migrations are ASCII only (the Supabase SQL editor cuts other characte
   for (const file of ["0020_real_visitors.sql", "0021_automated_visits.sql", "0022_clean_visit_stats.sql", "0023_clean_behavior_consent.sql"]) {
     assert.ok(/^[\x00-\x7f]*$/.test(readFileSync(new URL(file, MIGRATIONS), "utf8")), file);
   }
+});
+
+test("visits from the US and China need steady human use to count (0035)", async () => {
+  const db = await database();
+  const at = new Date(Date.now() - 3600 * 1000).toISOString();
+  const plus = (s) => new Date(Date.parse(at) + s * 1000).toISOString();
+  const eng = (n, inter, active) =>
+    db.query(`insert into public.visitor_engagement (session_id, view_id, path, active_seconds, scroll_pct, interactions) values ($1, $2, '/', $3, 20, $4)`, [id(n), `v${n}`, active, inter]);
+  // A crawler in Santa Clara: one page, nothing reported.
+  await visit(db, 21, "/about", plus(0), { city: "Santa Clara", country: "US" });
+  // Meta's ad check from Fort Worth: touched a form once, nothing else.
+  await visit(db, 22, "/property-request", plus(100), { city: "Fort Worth", country: "US", referrer: "m.facebook.com" });
+  await eng(22, 1, 0);
+  await db.query("insert into public.visitor_actions (session_id, action, target) values ($1, 'form_start', 'property-request')", [id(22)]);
+  // A person in Dallas who read and touched the page.
+  await visit(db, 23, "/ru/projects/x", plus(200), { city: "Dallas", country: "US", referrer: "facebook.com" });
+  await eng(23, 2, 42);
+  // A person in Beijing who pressed WhatsApp.
+  await visit(db, 24, "/", plus(300), { city: "Beijing", country: "CN" });
+  await db.query("insert into public.visitor_actions (session_id, action, target) values ($1, 'whatsapp', 'contact')", [id(24)]);
+  // Singapore on the China time zone, nothing reported.
+  await visit(db, 25, "/faq", plus(400), { city: "Singapore", country: "SG" });
+  await db.query("insert into public.visitor_profiles (session_id, tz) values ($1, 'Asia/Shanghai')", [id(25)]);
+  // Istanbul, one silent page: still not judged automated.
+  await visit(db, 26, "/", plus(500));
+
+  const rows = (await db.query("select session_id, contacted, automated from public.visit_verdicts(now() - interval '1 day')")).rows;
+  const of = (n) => rows.find((r) => r.session_id === id(n));
+  assert.equal(of(21).automated, true);
+  assert.equal(of(22).automated, true);
+  assert.equal(of(23).automated, false);
+  assert.equal(of(24).automated, false);
+  assert.equal(of(24).contacted, true);
+  assert.equal(of(25).automated, true);
+  assert.equal(of(26).automated, false);
 });

@@ -6,8 +6,10 @@ import { SOCIAL_LINKS } from "../data/social";
 const SITE_PHONE = "+90 531 930 92 14";
 const SITE_PHONE_HREF = "+905319309214";
 const SITE_EMAIL = "info@byhadara.com";
+// The office in Gökevler Mahallesi: the pin is the middle of the neighbourhood (OpenStreetMap
+// boundary), since the street's exact coordinates were not available.
 const MAP_EMBED_SRC =
-  "https://www.openstreetmap.org/export/embed.html?bbox=28.6033%2C40.9633%2C28.6633%2C41.0033&layer=mapnik&marker=40.9833%2C28.6333";
+  "https://www.openstreetmap.org/export/embed.html?bbox=28.6168%2C41.0156%2C28.6468%2C41.0356&layer=mapnik&marker=41.0256%2C28.6318";
 
 export function renderContact(el: HTMLElement): void {
   const params = new URLSearchParams(window.location.search);

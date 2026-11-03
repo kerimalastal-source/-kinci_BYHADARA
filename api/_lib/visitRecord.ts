@@ -1,9 +1,10 @@
 // Saves one page view and tells the team on Telegram (called by api/track.ts inside
 // waitUntil, after the 204 went out). A new session sends the "new visitor" alert, later
 // pages edit it, and the first opening of a request page sends a 🔥 reply. Visits that
-// look automated (api/_lib/visitBots.ts) are saved but get no Telegram message at all.
-import { editTelegram, escapeHtml, sendTelegram } from "./telegram.js";
-import { alertInsightLines, insightFacts, type Insight, type VisitFacts } from "./visitInsights.js";
+// look automated (api/_lib/visitBots.ts) are saved but get no Telegram message at all, and
+// visits that start like a crawler (alertHold()) wait silently until they show a person.
+import { botApi, editTelegram, escapeHtml, sendTelegram, teamChatId } from "./telegram.js";
+import { alertHold, alertInsightLines, classifyVisit, insightFacts, type Insight, type VisitFacts } from "./visitInsights.js";
 import { rpc, RpcError } from "./supabase.js";
 import { botReason, burstFor, isDataCenterTown, SETTLE_MS } from "./visitBots.js";
 import {
@@ -123,6 +124,15 @@ export async function recordVisit(view: PageView, geo: Geo, origin: string, opti
     return;
   }
 
+  // A visit that starts like a crawler (the US or China, or Meta's 2000x2000 check) gets no
+  // alert, no edit and no 🔥 while it looks automated: refreshAlert() sends its alert once
+  // the visitor's use shows a person (owner's request 2026-11-02).
+  const hold = alertHold({ country: landing.country, tz: view.tz, screen: view.screen });
+  if (hold && !messageId) {
+    console.info(`track: alert held: ${hold} (${landing.city ?? "?"}, ${landing.country ?? "?"})`);
+    return;
+  }
+
   if (state.is_new) {
     // A first page has no engagement yet: the verdict reads "⏳" until the page reports.
     const facts: VisitFacts = {
@@ -171,12 +181,18 @@ async function visitInsight(sessionId: string): Promise<Insight | null> {
 export async function refreshAlert(view: PageView, insight: Insight, origin: string): Promise<void> {
   const messageId = insight.message_id ? Number(insight.message_id) : null;
   const landing = insight.landing;
-  if (!messageId || !landing || (landing.referrer ?? "").startsWith("/") || isDataCenterTown(landing)) return;
+  if (!landing || (landing.referrer ?? "").startsWith("/") || isDataCenterTown(landing)) return;
+  const facts = insightFacts(insight);
+  // A held visit (alertHold()) has no alert yet: it gets one once it no longer reads as
+  // automated, unless it was part of a same-page burst. Any other visit without an alert
+  // stays without one.
+  if (!messageId && (!alertHold(facts) || classifyVisit(facts).verdict === "bot")) return;
+  if (!messageId && (await burstFor(view.sessionId, landing.path)).burst > 0) return;
   const pages = insight.pages?.length ?? 1;
   // A report for a page the visitor has already left: the next page's own edit (which
   // re-reads the visit) shows the newer state, so this one mustn't overwrite it.
   if (pages > 1 && insight.pages[pages - 1]?.path !== view.path) return;
-  const extra = alertInsightLines(insightFacts(insight), escapeHtml);
+  const extra = alertInsightLines(facts, escapeHtml);
   let text: string;
   if (pages > 1) {
     const state: VisitState = {
@@ -192,5 +208,19 @@ export async function refreshAlert(view: PageView, insight: Insight, origin: str
     const first: PageView = { ...view, path: landing.path, locale: view.locale, referrer: landing.referrer ?? "" };
     text = newVisitorMessage(first, { country: landing.country, city: landing.city }, origin, extra);
   }
-  if (await editTelegram(messageId, text)) console.info("track: alert updated after engagement");
+  if (messageId) {
+    if (await editTelegram(messageId, text)) console.info("track: alert updated after engagement");
+    return;
+  }
+  const sent = await sendTelegram(text);
+  if (!sent) return;
+  await rpc("save_visitor_alert", { p_session_id: view.sessionId, p_message_id: sent });
+  // Two reports of one visit released at the same moment: the first saved alert stays and
+  // the other message is removed.
+  const kept = (await visitInsight(view.sessionId))?.message_id;
+  if (kept && Number(kept) !== sent) {
+    await botApi("deleteMessage", { chat_id: teamChatId(), message_id: sent });
+    return;
+  }
+  console.info("track: held alert sent after engagement");
 }

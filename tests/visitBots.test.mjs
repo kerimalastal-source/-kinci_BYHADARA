@@ -162,9 +162,12 @@ test("sessions opening the same page together get nothing, the first one include
   await db.close();
 });
 
-test("a lone visitor from a real city with a data center (Fort Worth) is not hidden", async () => {
+test("a lone visitor from a real city with a data center is not hidden (Frankfurt), a US one waits (Fort Worth)", async () => {
   const db = await database();
   const telegram = fakeServices(db);
+  await recordVisit(view(), { country: "DE", city: "Frankfurt am Main" }, ORIGIN, quiet);
+  assert.deepEqual(telegram.map((m) => m.method), ["sendMessage"]);
+  // The United States: held until the visitor shows a person (alertHold(), 2026-11-02).
   await recordVisit(view(), { country: "US", city: "Fort Worth" }, ORIGIN, quiet);
   assert.deepEqual(telegram.map((m) => m.method), ["sendMessage"]);
   await db.close();

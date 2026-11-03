@@ -872,7 +872,7 @@
     "successText": "Votre message a été préparé. Votre client e-mail va s'ouvrir pour l'envoyer à notre équipe, qui reviendra vers vous rapidement.",
     "infoTitle": "Informations de contact",
     "addressTitle": "Bureau",
-    "address": "Adnan Kahveci Mah., Beylikdüzü, Istanbul 34000, Turquie",
+    "address": "Gökevler Mah., 529. Sokak No : 4, 2e étage, Beylikdüzü, Istanbul, Turquie",
     "phoneTitle": "Téléphone",
     "emailTitle": "E-mail",
     "hoursTitle": "Horaires d'ouverture",
@@ -2394,6 +2394,24 @@
     }
   },
   "blogData": {
+    "basaksehir-district-guide": {
+      "category": "À propos d'Istanbul",
+      "title": "Başakşehir Istanbul : guide du quartier pour étrangers",
+      "excerpt": "Başakşehir Istanbul expliqué : situation du quartier, parcs et deux projets, Vadi Panorama et Mesa Yenikent.",
+      "body": [
+        "Başakşehir est un nom qui revient souvent lorsque les acheteurs étrangers examinent la rive européenne d'Istanbul, généralement associé à des mots comme parcs, nouveaux quartiers et vie planifiée. Ce guide explique quel type de quartier c'est, à quoi peut ressembler la vie quotidienne autour de ses espaces verts et quels deux projets de notre portefeuille s'y trouvent, en s'appuyant uniquement sur les informations et les distances publiées sur notre site.",
+        "## Où se trouve Başakşehir",
+        "Başakşehir est un quartier planifié du nord de la rive européenne d'Istanbul. Au lieu de grandir rue après rue au fil des ans, un quartier planifié est conçu comme un tout, avec des zones d'habitation, des routes, des bâtiments publics et des espaces ouverts pensés pour fonctionner ensemble. Pour un acheteur, cela signifie généralement des ensembles résidentiels organisés et des services comme une place centrale et un grand hôpital situés dans le quartier. Le Bosphore divise Istanbul en une rive européenne et une rive asiatique, et Başakşehir appartient à la première, avec des liaisons vers l'autoroute TEM, l'autoroute du Nord de Marmara et la route de l'aéroport d'Istanbul.",
+        "## Parcs et nature",
+        "La verdure est la première chose que notre site mentionne à propos de cette partie de Başakşehir. Le secteur de Kayaşehir se situe entre le Jardin de la Nation de Kayaşehir et le Parc naturel de Şamlar, avec les forêts du nord d'Istanbul d'un côté et la ville de l'autre. Un Jardin de la Nation est un grand parc public et Şamlar est un parc naturel : les habitants disposent donc de lieux pour marcher, faire du sport et passer un week-end sans quitter le quartier. La station de métro Kayaşehir Merkez (M3), la Place centrale de Başakşehir et l'Hôpital Çam et Sakura de Başakşehir figurent aussi parmi les lieux proches.",
+        "## Les logements à Başakşehir",
+        "Vadi Panorama est en construction dans une vallée verte de Başakşehir, avec la garantie d'Emlak Konut, une société d'investissement immobilier cotée dont le principal actionnaire est TOKİ, l'administration turque du logement public, en partenariat avec Binbay et Enam. Il compte 268 logements et 26 commerces : des appartements du 2+1 au 5+1, beaucoup avec jardin privatif ou larges terrasses, et 12 villas individuelles 5+1 sur trois niveaux, chacune avec son jardin. Chaque logement dispose d'un système de maison intelligente, d'un chauffage au sol et d'un hammam privé. Le projet est en construction, la livraison est prévue en décembre 2028 et le plan de paiement est de 40 % à l'apport, le solde étant réparti sur 48 mois. Le prix est communiqué sur demande.",
+        "Mesa Yenikent, du promoteur Mesa Mesken, est conçu comme une ville entière plutôt que comme un seul ensemble : environ 4 000 logements en cinq phases sur une zone d'habitation de 2 000 000 m², dont 1 000 000 m² d'espaces paysagers. Les immeubles sont de faible hauteur, avec des logements en rez-de-jardin, des toits-terrasses et de larges balcons. Les logements vont du 2+1 au 6.5+1, dont des logements sur deux niveaux, et la ville comprend une piscine intérieure, une salle de sport, un sauna et des bains de vapeur, des terrains de sport, des chemins de promenade et des pistes cyclables, des écoles, des commerces, des restaurants et des cafés. Selon le promoteur, la livraison de la première phase de 843 logements est prévue en juin 2028. Le projet est en construction et le prix est communiqué sur demande.",
+        "Pour Mesa Yenikent, notre site indique ces distances : station de métro Kayaşehir et Hôpital Çam et Sakura de Başakşehir 6 km, Stade olympique Atatürk et Tema World 8 km, Étang de Bahçeşehir 9,4 km, Mall of Istanbul 10 km, Florentia Village 25 km et aéroport d'Istanbul 32 km. Vadi Panorama a son propre environnement : demandez donc toujours les chiffres exacts de l'adresse qui vous intéresse.",
+        "Deux points juridiques méritent d'être connus. Mesa Yenikent est indiqué comme éligible à la citoyenneté turque ; les conditions dépendent de la loi en vigueur et peuvent changer, vérifiez-les donc avant de décider. Si votre objectif est un titre de séjour, rappelez-vous que la Direction générale de la gestion de la migration ferme certains quartiers et districts aux nouvelles demandes de titre de séjour des étrangers et met ces listes à jour de temps à autre : vérifiez l'adresse avant d'acheter.",
+        "Le choix entre les deux dépend de votre projet : Vadi Panorama offre la garantie d'Emlak Konut et un plan de paiement publié, tandis que Mesa Yenikent propose une ville plus vaste avec de nombreux équipements sur place. Rappelez-vous qu'une date de livraison est un plan et non une garantie, et renseignez-vous sur le plan, les surfaces brute et nette et les charges mensuelles de la résidence. HADARA, votre partenaire immobilier à Istanbul, peut vous aider à les comparer. Contactez-nous ou réservez une visite vidéo privée pour explorer les options, puis venez à Istanbul voir votre présélection en personne."
+      ]
+    },
     "bakirkoy-atakoy-district-guide": {
       "category": "À propos d'Istanbul",
       "title": "Ataköy Istanbul : guide du quartier de Bakırköy",

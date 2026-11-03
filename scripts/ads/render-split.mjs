@@ -31,6 +31,56 @@ const ADS = [
     ],
     cta: ["Book a Private Viewing", "احجز معاينة خاصة"],
   },
+  // Istanbul villa campaign (owner 2026-11-02: "the same Gulf ad design, aimed at Istanbul", then "one
+  // design per language": Arabic only, English only, Russian only). Same layout and photos as "villa".
+  {
+    id: "villa-ar",
+    dir: "istanbul-2026-11",
+    lang: "ar",
+    ar: "فيلا بإطلالة بحرية كاملة في إسطنبول<br>مناسبة للجنسية التركية",
+    en: "5 غرف نوم · صالونان · 7 حمّامات · مسبح خاص",
+    label: "MARMARA HAVEN VILLA",
+    price: { ar: "بسعر يبدأ من 1.55 مليون دولار" },
+    badge: { num: "576", unit: "m²", ar: "المساحة الإجمالية" },
+    badge2: { num: "637", unit: "m²", ar: "مساحة الأرض" },
+    photos: [
+      { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
+      { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
+    ],
+    cta: ["", "احجز معاينة خاصة"],
+  },
+  {
+    id: "villa-en",
+    dir: "istanbul-2026-11",
+    lang: "en",
+    ar: "Full Sea View Villa in Istanbul<br>Eligible for Turkish Citizenship",
+    en: "5 Bedrooms · 2 Living Rooms · 7 Bathrooms · Private Pool",
+    label: "MARMARA HAVEN VILLA",
+    price: { ar: "From US$1.55 million" },
+    badge: { num: "576", unit: "m²", ar: "Total area" },
+    badge2: { num: "637", unit: "m²", ar: "Land area" },
+    photos: [
+      { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
+      { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
+    ],
+    cta: ["", "Book a Private Viewing"],
+  },
+  {
+    id: "villa-ru",
+    dir: "istanbul-2026-11",
+    lang: "ru",
+    ar: "Вилла с панорамным видом на море<br>в Стамбуле, подходит<br>для гражданства Турции",
+    en: "5 спален · 2 гостиные · 7 санузлов · частный&nbsp;бассейн",
+    label: "MARMARA HAVEN VILLA",
+    price: { ar: "Цена от 1,55 млн долларов США" },
+    badge: { num: "576", unit: "m²", ar: "Общая площадь" },
+    badge2: { num: "637", unit: "m²", ar: "Площадь участка" },
+    photos: [
+      { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
+      { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
+    ],
+    cta: ["", "Записаться на просмотр"],
+  },
   {
     id: "plan",
     // Owner 2026-10-22: a 30/30 plan exists nowhere else, so the ad must say where (Istanbul + the flag).
@@ -56,6 +106,40 @@ const ADS = [
       { src: img("sea-pearl-atakoy/sea-terrace.jpg"), pos: "center center" },
     ],
     cta: ["Message us on WhatsApp", "راسلنا عبر واتساب"],
+  },
+  // Owner 2026-11-02: a villa + citizenship test for Arab towns in Israel, Arabic-only text and design.
+  // Owner 2026-11-02: the villa headline must say plainly that it suits Turkish citizenship, word for word.
+  {
+    id: "villa-ar-cit",
+    dir: "israel-2026-11",
+    lang: "ar",
+    ar: "فيلا بإطلالة بحرية كاملة في إسطنبول<br>مناسبة للجنسية التركية",
+    en: "5 غرف نوم · صالونان · 7 حمّامات · مسبح خاص",
+    label: "MARMARA HAVEN VILLA",
+    price: { ar: "بسعر يبدأ من 1.55 مليون دولار" },
+    badge: { num: "576", unit: "m²", ar: "المساحة الإجمالية" },
+    // Owner 2026-11-02: the land area under the total area.
+    badge2: { num: "637", unit: "m²", ar: "مساحة الأرض" },
+    photos: [
+      { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
+      { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" },
+    ],
+    cta: ["", "احجز معاينة خاصة"],
+  },
+  {
+    id: "citizenship-ar",
+    dir: "israel-2026-11",
+    lang: "ar",
+    ar: "الجنسية التركية<br>عبر الاستثمار العقاري",
+    en: "بعقار واحد أو أكثر في إسطنبول",
+    label: "ONE OR MORE PROPERTIES · ISTANBUL",
+    price: { ar: "بقيمة إجمالية 400 ألف دولار فأكثر" },
+    photos: [
+      // Owner 2026-11-02: one photo from Mesa Yenikent and one from Vadi Panorama.
+      { src: img("mesa-yenikent/cover-park.jpg"), pos: "45% center" },
+      { src: img("vadi-panorama/central-garden.jpg"), pos: "60% center" },
+    ],
+    cta: ["", "راسلنا عبر واتساب"],
   },
   {
     id: "plan40",
@@ -92,9 +176,11 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .hero{display:flex;align-items:center;gap:${story ? 22 : 18}px;padding:0 0 0 56px;margin-top:${story ? 34 : 22}px}
 .hero .ht{flex:1;min-width:0}.hero .ar{margin-top:0;padding:0 44px 0 0}.hero .en{padding:0 44px 0 0}
 .seal{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:${story ? "6px 34px 6px 0" : "4px 30px 4px 0"};border-right:3px solid #c9a24b;color:#0f2b21}
-.seal .sa{font-family:Plex;font-weight:700;font-size:${story ? 26 : 23}px;color:#a8853a;line-height:1.2}
+.seal .sa{font-family:Plex;font-weight:700;font-size:${story ? 36 : 31}px;color:#94742c;line-height:1.2}
 .seal b{font-weight:700;font-size:${story ? 96 : 84}px;line-height:1;letter-spacing:-2px;margin:${story ? 8 : 6}px 0}
 .seal b i{font-style:normal;font-weight:600;font-size:.4em;margin-left:5px;vertical-align:1.05em;letter-spacing:0}
+.seal .sd{width:70%;height:2px;background:rgba(201,162,75,.45);margin:${story ? 14 : 10}px 0}
+.seal b.b2{margin-bottom:0}
 .seal .se{font-weight:600;font-size:${story ? 16 : 14}px;letter-spacing:4px;color:#a8853a}
 .price{align-self:center;margin-top:${story ? 30 : 20}px;display:flex;align-items:center;gap:${story ? 20 : 18}px;padding:${story ? "12px 34px" : "10px 30px"};border:2px solid #c9a24b;border-radius:99px;background:#fbf3df;white-space:nowrap}
 .price .pa{font-family:Plex;font-weight:700;font-size:${story ? 34 : 30}px;line-height:1.3;direction:rtl}
@@ -116,17 +202,23 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .foot .c{margin-left:auto;display:flex;align-items:center;gap:14px;font-weight:600;font-size:27px}
 .foot .c .a{font-family:Plex;font-weight:700;font-size:29px;color:#0f2b21}
 .foot .c .bar{color:#c9a24b}
+body.lang-ru .ar,body.lang-ru .pa,body.lang-ru .sa,body.lang-ru .foot .c .a,body.lang-en .ar,body.lang-en .pa,body.lang-en .sa,body.lang-en .foot .c .a{font-family:Inter,sans-serif;direction:ltr}
+body.lang-ru .ar,body.lang-en .ar{letter-spacing:-1px;line-height:1.15}
+body.lang-ru .sa,body.lang-en .sa{font-weight:700;font-size:${story ? 28 : 24}px;letter-spacing:2px;text-transform:uppercase}
+body.lang-ru .sa{letter-spacing:.5px}
+body.lang-ru .price .pa,body.lang-en .price .pa{font-weight:700;letter-spacing:.3px}
+body.lang-ar .en{font-family:Plex,sans-serif;direction:rtl;letter-spacing:0}
 `;
 
 // Turkish flag (official proportions).
 const FLAG = '<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#e30a17"/><circle cx="425" cy="400" r="200" fill="#fff"/><circle cx="475" cy="400" r="160" fill="#e30a17"/><path fill="#fff" d="M583.334 400l180.901 58.779-111.804-153.885v190.212l111.804-153.885z"/></svg>';
-const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body>
+const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body class="${a.lang ? "lang-" + a.lang : ""}">
 <div class="head"><div class="brand"><img src="file://${REPO}/public/logo-dark.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="rule"></div></div>
-${a.badge ? `<div class="hero"><div class="seal"><span class="sa">${a.badge.ar}</span><b dir="ltr">${a.badge.num}<i>${a.badge.unit}</i></b><span class="se">${a.badge.en}</span></div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : `<div class="ar">${a.ar}</div><div class="en">${a.en}</div>`}
+${a.badge ? `<div class="hero"><div class="seal"><span class="sa">${a.badge.ar}</span><b dir="ltr">${a.badge.num}<i>${a.badge.unit}</i></b>${a.badge.en ? `<span class="se">${a.badge.en}</span>` : ""}${a.badge2 ? `<span class="sd"></span><span class="sa">${a.badge2.ar}</span><b class="b2" dir="ltr">${a.badge2.num}<i>${a.badge2.unit}</i></b>` : ""}</div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : `<div class="ar">${a.ar}</div><div class="en">${a.en}</div>`}
 ${a.price ? `<div class="price${a.price.big ? " big" : ""}${a.price.stack ? " stack" : ""}"><span class="pa">${a.price.ar}</span>${a.price.en ? `<span class="pb"></span><span class="pe">${a.price.en}</span>` : ""}</div>` : ""}
 ${a.label ? `<div class="label">${a.flag ? `<span class="lab">${FLAG}<span>${a.label}</span></span>` : a.label}</div>` : ""}
 <div class="photos"${a.photos.length === 1 ? ' style="grid-template-columns:1fr"' : ""}>${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
-<div class="foot"><span class="w">hadararealestate.com</span><span class="sep"></span><span class="c"><span class="a">${a.cta[1]}</span><span class="bar">|</span><span>${a.cta[0]}</span></span></div>
+<div class="foot"><span class="w">hadararealestate.com</span><span class="sep"></span><span class="c"><span class="a">${a.cta[1]}</span>${a.cta[0] ? `<span class="bar">|</span><span>${a.cta[0]}</span>` : ""}</span></div>
 </body></html>`;
 
 // High resolution (owner 2026-10-22: "highest quality"): render at 2x (2160 wide) and feed each photo
@@ -153,7 +245,9 @@ const only = process.argv.slice(2);
 for (const a of ADS.filter((x) => !only.length || only.includes(x.id))) {
   for (const [w, h, story, suffix] of [[1080, 1350, false, "feed"], [1080, 1920, true, "story"]]) {
     const p = await b.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: SCALE });
-    const f = path.join(OUT, `${a.id}-${suffix}.html`);
+    const dir = a.dir ? path.join(HERE, a.dir) : OUT;
+    fs.mkdirSync(dir, { recursive: true });
+    const f = path.join(dir, `${a.id}-${suffix}.html`);
     fs.writeFileSync(f, html(a, w, h, story));
     await p.goto("file://" + f);
     await p.waitForTimeout(400);
@@ -181,7 +275,7 @@ for (const a of ADS.filter((x) => !only.length || only.includes(x.id))) {
     await p.goto("file://" + f);
     await p.waitForTimeout(500);
     await p.evaluate((z) => [".ar", ".en"].forEach((q, i) => { if (z[i]) document.querySelector(q).style.fontSize = z[i]; }), sizes);
-    await p.screenshot({ path: path.join(OUT, `${a.id}-${suffix}.jpg`), type: "jpeg", quality: 95 });
+    await p.screenshot({ path: path.join(dir, `${a.id}-${suffix}.jpg`), type: "jpeg", quality: 95 });
     fs.unlinkSync(f);
     await p.close();
   }

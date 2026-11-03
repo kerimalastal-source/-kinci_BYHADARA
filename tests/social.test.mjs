@@ -99,7 +99,7 @@ function fakeFetch(opts = {}) {
         if (published.has(path)) return json({ status_code: "PUBLISHED" });
         // IN_PROGRESS once, then FINISHED.
         const checks = calls.filter((c) => c.url.includes(`/${path}?`)).length;
-        return json({ status_code: checks > 1 ? "FINISHED" : "IN_PROGRESS" });
+        return json({ status_code: checks > (opts.slowChecks ?? 1) ? "FINISHED" : "IN_PROGRESS" });
       }
       if (path === "IGUSER/media_publish") {
         const post = () => feed.unshift({ id: `ig_${body.creation_id}_${feed.length}`, caption: captions.get(body.creation_id) ?? "" });
@@ -255,6 +255,42 @@ test("a Reel: the video goes to Facebook Reels and Instagram Reels, with the ima
   assert.equal(media.body.share_to_feed, "true");
   assert.ok(store.files.has(`social-state/${DATE}/post-4/instagram.done`));
   assert.match(photos[0].caption, /ريلز/);
+});
+
+test("a Reel: Instagram starts on the video while Facebook uploads (side by side)", async () => {
+  const posts = { "post-1": { id: "reel", topic: "ريلز", image: "post-1.jpg", video: "post-1.mp4", fb: "FB reel", ig: "IG reel #HADARA" } };
+  const { deps, calls } = setup({ posts, day: ["post-1.json"] });
+  await publishDay(deps, DATE);
+  const igContainer = calls.findIndex((c) => c.url.includes("/IGUSER/media") && c.body.media_type === "REELS");
+  const fbFinish = calls.findIndex((c) => c.url.includes("/PAGE/video_reels") && c.body.upload_phase === "finish");
+  assert.ok(igContainer >= 0 && fbFinish >= 0);
+  assert.ok(igContainer < fbFinish, "the Instagram container is made before Facebook's upload finishes");
+});
+
+test("a Reel Instagram processes slowly: the run keeps waiting until its deadline, then publishes", async () => {
+  const posts = { "post-1": { id: "reel", topic: "ريلز", image: "post-1.jpg", video: "post-1.mp4", fb: "FB reel", ig: "IG reel #HADARA" } };
+  // 25 checks still IN_PROGRESS: more than the old fixed 10, inside the run's deadline.
+  const { deps, store } = setup({ posts, day: ["post-1.json"], slowChecks: 25 });
+  deps.deadline = Date.now() + 60_000;
+  const day = await publishDay(deps, DATE);
+  assert.deepEqual(day.results.map((r) => r.instagram), ["published"]);
+  assert.ok(store.files.has(`social-state/${DATE}/post-1/instagram.done`));
+});
+
+test("a Reel still processing at the deadline: the next run publishes the same container", async () => {
+  const posts = { "post-1": { id: "reel", topic: "ريلز", image: "post-1.jpg", video: "post-1.mp4", fb: "FB reel", ig: "IG reel #HADARA" } };
+  const store = memoryStore();
+  const first = setup({ posts, day: ["post-1.json"], slowChecks: 1000, store });
+  first.deps.deadline = Date.now() - 1;
+  const day1 = await publishDay(first.deps, DATE);
+  assert.deepEqual(day1.results.map((r) => [r.facebook, r.instagram]), [["published", "failed"]]);
+  assert.match(day1.results[0].errors.join(" "), /still processing/);
+  // Next run (10:00): Instagram has finished; no new container, the kept one is published.
+  const second = setup({ posts, day: ["post-1.json"], store });
+  const day2 = await publishDay(second.deps, DATE, "10:05");
+  assert.deepEqual(day2.results.map((r) => [r.facebook, r.instagram]), [["already", "published"]]);
+  assert.equal(graphCalls(second.calls, "IGUSER/media").filter((c) => c.body.media_type === "REELS").length, 0);
+  assert.equal(graphCalls(second.calls, "PAGE/video_reels").length, 0);
 });
 
 test("a Reel whose video is missing is reported, nothing published", async () => {

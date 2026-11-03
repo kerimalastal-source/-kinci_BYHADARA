@@ -1,7 +1,8 @@
 // /api/social-publish — publishes today's social posts (api/_lib/social.ts,
 // scripts/social/README.md) on the Facebook Page and Instagram, and sends them to Telegram.
-//   GET  — Vercel Cron at 06:00, 11:00 and 18:00 UTC = 09:00, 14:00 and 21:00 Istanbul
-//          (vercel.json; each run publishes the posts whose `at` time has come), with
+//   GET  — Vercel Cron at 06:00, 07:00, 11:00 and 18:00 UTC = 09:00, 10:00, 14:00 and 21:00
+//          Istanbul (vercel.json; each run publishes the posts whose `at` time has come and
+//          finishes anything an earlier run left, e.g. a Reel Instagram was still processing), with
 //          "Authorization: Bearer <CRON_SECRET>"; refuses everything without it.
 //   POST — the "Publish today's posts now" button on the admin home (signed-in admin's own
 //          Supabase token in Authorization, checked with is_admin()).
