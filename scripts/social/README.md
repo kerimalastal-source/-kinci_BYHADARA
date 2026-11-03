@@ -124,7 +124,7 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
   https://wa.me/905319309214, phone +90 531 930 92 14, email info@byhadara.com, the contact
   form (/contact), the custom property request (/property-request), the video tour booking
   (/video-tour), the live chat on the website, Instagram @hadararealestate and the Facebook
-  page, and the office in Adnan Kahveci Mah., Beylikdüzü. When you write the next month's
+  page, and the office in Gökevler Mah., 529. Sokak No: 4, Kat: 2, Beylikdüzü. When you write the next month's
   plan, keep about one contact post a week.
 
 ## Evening carousel (approved by the owner 2026-10-08 — locked; every evening from 2026-10-09)

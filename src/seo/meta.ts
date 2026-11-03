@@ -20,10 +20,9 @@ const CONTACT = {
   email: "info@byhadara.com",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Adnan Kahveci Mah.",
+    streetAddress: "Gökevler Mah., 529. Sokak No: 4, Kat: 2",
     addressLocality: "Beylikdüzü",
     addressRegion: "Istanbul",
-    postalCode: "34000",
     addressCountry: "TR"
   }
 };
