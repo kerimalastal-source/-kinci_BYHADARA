@@ -998,5 +998,13 @@
     "headlineAr": "جولة فيديو خاصة في أي مشروع من بلدك",
     "headlineEn": "A private video tour of any project, from home",
     "photo": "/images/projects/diamond-marin/living-dining.jpg"
+  },
+  {
+    "date": "2026-11-06",
+    "id": "gokturk-kemer-intro",
+    "topic": "غوكتورك كمر إيفلري · شقق وفلل",
+    "headlineAr": "شقق وفلل بمسابح خاصة بجوار غابة بلغراد",
+    "headlineEn": "Homes and pool villas beside Belgrad Forest",
+    "photo": "/images/projects/gokturk-kemer-evleri/pond-blocks.jpg"
   }
 ]
