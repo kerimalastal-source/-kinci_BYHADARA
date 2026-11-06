@@ -176,6 +176,28 @@ const ADS = [
     ],
     cta: ["", "راسلنا عبر واتساب"],
   },
+  // Owner 2026-11-06: an Istanbul projects ad "pay 30% and the rest over 48 months", one design in Arabic and
+  // one in English (iPhone, 35-60, phone language Arabic, Hebrew or English).
+  {
+    id: "plan48-ar",
+    dir: "plan48-2026-11",
+    lang: "ar",
+    ar: "ادفع 30% والباقي<br>على 48 شهراً",
+    en: "شقتك في إسطنبول، في مشاريع مختارة",
+    label: "SELECTED PROJECTS · ISTANBUL",
+    photos: [{ src: img("beylikduzu-living/central-garden.jpg"), pos: "42% center" }],
+    cta: ["", "راسلنا عبر واتساب"],
+  },
+  {
+    id: "plan48-en",
+    dir: "plan48-2026-11",
+    lang: "en",
+    ar: "Pay 30% Now,<br>the Rest over 48 Months",
+    en: "Your home in Istanbul, in selected projects",
+    label: "SELECTED PROJECTS · ISTANBUL",
+    photos: [{ src: img("beylikduzu-living/central-garden.jpg"), pos: "42% center" }],
+    cta: ["", "Message us on WhatsApp"],
+  },
   {
     id: "plan40",
     // Owner 2026-10-25: website-traffic ad for the Referans plan (40% down, balance over 24 to 36 months),
