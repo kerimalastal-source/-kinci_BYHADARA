@@ -81,6 +81,41 @@ const ADS = [
     ],
     cta: ["", "Записаться на просмотр"],
   },
+  // Gulf villa campaign after 2026-11-06 (owner: one Arabic ad set and one English ad set, each with its own
+  // design, and the two living rooms in the image and the text). Same approved layout as the Istanbul ads;
+  // the second photo is the living room that opens onto the sea instead of the roof terrace.
+  {
+    id: "villa-ar",
+    dir: "gulf-2026-11",
+    lang: "ar",
+    ar: "فيلا بإطلالة بحرية كاملة في إسطنبول<br>مناسبة للجنسية التركية",
+    en: "5 غرف نوم · صالونان · 7 حمّامات · مسبح خاص",
+    label: "MARMARA HAVEN VILLA",
+    price: { ar: "بسعر يبدأ من 1.55 مليون دولار" },
+    badge: { num: "576", unit: "m²", ar: "المساحة الإجمالية" },
+    badge2: { num: "637", unit: "m²", ar: "مساحة الأرض" },
+    photos: [
+      { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
+      { src: img("marmara-haven-villa/living-sea.jpg"), pos: "12% 80%", size: "auto 122%" },
+    ],
+    cta: ["", "احجز معاينة خاصة"],
+  },
+  {
+    id: "villa-en",
+    dir: "gulf-2026-11",
+    lang: "en",
+    ar: "Full Sea View Villa in Istanbul<br>Eligible for Turkish Citizenship",
+    en: "5 Bedrooms · 2 Living Rooms · 7 Bathrooms · Private Pool",
+    label: "MARMARA HAVEN VILLA",
+    price: { ar: "From US$1.55 million" },
+    badge: { num: "576", unit: "m²", ar: "Total area" },
+    badge2: { num: "637", unit: "m²", ar: "Land area" },
+    photos: [
+      { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
+      { src: img("marmara-haven-villa/living-sea.jpg"), pos: "12% 80%", size: "auto 122%" },
+    ],
+    cta: ["", "Book a Private Viewing"],
+  },
   {
     id: "plan",
     // Owner 2026-10-22: a 30/30 plan exists nowhere else, so the ad must say where (Istanbul + the flag).
@@ -242,7 +277,7 @@ function crop(src, pos, size, box) {
 
 const b = await chromium.launch();
 const only = process.argv.slice(2);
-for (const a of ADS.filter((x) => !only.length || only.includes(x.id))) {
+for (const a of ADS.filter((x) => !only.length || only.includes(x.id) || only.includes(`${x.dir}/${x.id}`))) {
   for (const [w, h, story, suffix] of [[1080, 1350, false, "feed"], [1080, 1920, true, "story"]]) {
     const p = await b.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: SCALE });
     const dir = a.dir ? path.join(HERE, a.dir) : OUT;
