@@ -18,6 +18,12 @@ import { budgetSelect, projectName, stageLabel } from "./crmForm";
 
 /** Where the customer came from, saved in the same "utm_source=… · utm_campaign=…" form as the site's leads. */
 export const SOURCES: Record<string, string> = {
+  // The Istanbul villa campaign (one ad set per language) and the Arab towns campaign, from 2026-11-03.
+  istVillaAr: "utm_source=facebook · utm_campaign=ist-villa-ar",
+  istVillaEn: "utm_source=facebook · utm_campaign=ist-villa-en",
+  istVillaRu: "utm_source=facebook · utm_campaign=ist-villa-ru",
+  townsVilla: "utm_source=facebook · utm_campaign=towns-villa",
+  townsCitizenship: "utm_source=facebook · utm_campaign=towns-citizenship",
   // The Gulf + Kuwait campaign from 2026-10-23, one campaign name per ad so /admin/ads compares them.
   gulfPlan: "utm_source=facebook · utm_campaign=gulf-kw-plan",
   gulfCitizenship: "utm_source=facebook · utm_campaign=gulf-kw-citizenship",
