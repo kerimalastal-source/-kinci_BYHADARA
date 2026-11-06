@@ -18,6 +18,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "besiktas-district-guide",
+    priority: -14,
+    published: "2026-11-06",
+    relatedProjects: ["referans-besiktas", "lotus-sisli", "sea-pearl-atakoy"],
+    coverImage: { src: "/images/blog/besiktas-district-guide.jpg", width: 1400, height: 933 }
+  },
+  {
     slug: "basaksehir-district-guide",
     priority: -13,
     published: "2026-11-02",
