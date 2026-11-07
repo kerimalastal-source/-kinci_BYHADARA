@@ -668,6 +668,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
       </div>
     </section>
 
+    ${renderProjectQuickForm(content.name)}
+
     ${
       others.length
         ? `
@@ -681,8 +683,6 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
     </section>`
         : ""
     }
-
-    ${renderProjectQuickForm(content.name)}
   `;
 
   initStatCounters(el);
