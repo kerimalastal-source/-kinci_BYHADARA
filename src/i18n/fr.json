@@ -282,6 +282,15 @@
     "esenyurt": "Esenyurt"
   },
   "projectDetail": {
+    "quickForm": {
+      "eyebrow": "Ce projet vous intéresse ?",
+      "title": "Contactez-nous au sujet de {name}",
+      "text": "Laissez votre nom, votre e-mail et votre numéro de téléphone, et notre équipe vous contactera au sujet de ce projet.",
+      "submit": "Envoyer ma demande",
+      "sentTitle": "Merci, nous avons bien reçu votre demande.",
+      "sentText": "Nous vous contacterons très prochainement au sujet de {name}, et nous vous avons envoyé un e-mail de confirmation.",
+      "privacy": "Découvrez comment nous traitons vos données dans notre <a href=\"{href}\">politique de confidentialité</a>."
+    },
     "verified": {
       "title": "Fiche projet vérifiée",
       "subtitle": "Informations juridiques et techniques confirmées par l'équipe HADARA.",
@@ -3818,7 +3827,7 @@
       {
         "title": "Comment vos messages nous parviennent",
         "paragraphs": [
-          "Les messages et demandes que vous envoyez via les formulaires du Site (contact, recherche de bien sur mesure, consultation en conception et questions du guide de l'acheteur) sont enregistrés directement dans notre système. Notre équipe en reçoit une notification interne par Telegram et par e-mail, et vous recevez un e-mail de confirmation avec votre numéro de demande. Seule notre équipe les traite, en y notant leur état de suivi et des remarques internes afin de vous servir. Si notre système est inaccessible pour une raison technique, votre messagerie s'ouvre à la place avec un message prêt, et les informations ne nous parviennent alors que lorsque vous envoyez vous-même ce message. Les réservations de visites vidéo privées sont elles aussi enregistrées dans notre système (voir la section 5). Les messages envoyés via WhatsApp sont soumis à la politique de confidentialité de WhatsApp.", "Lorsque vous utilisez « Discuter avec l'équipe » dans la fenêtre de l'assistant, vos messages et les réponses de notre équipe sont enregistrés dans notre système, avec le nom et le moyen de contact que vous choisissez d'ajouter, la page depuis laquelle vous avez écrit, la langue du site, votre pays et votre ville approximatifs (jamais votre adresse IP) et la source publicitaire, le cas échéant. Vos messages parviennent à notre équipe sur Telegram afin qu'elle puisse vous répondre, et un code secret de la conversation est conservé uniquement dans votre navigateur (stockage local) pour que vous retrouviez les réponses à votre retour."
+          "Les messages et demandes que vous envoyez via les formulaires du Site (contact, recherche de bien sur mesure, consultation en conception et questions du guide de l'acheteur, ainsi que le formulaire d'intérêt des pages de projet) sont enregistrés directement dans notre système. Notre équipe en reçoit une notification interne par Telegram et par e-mail, et vous recevez un e-mail de confirmation avec votre numéro de demande. Seule notre équipe les traite, en y notant leur état de suivi et des remarques internes afin de vous servir. Si notre système est inaccessible pour une raison technique, votre messagerie s'ouvre à la place avec un message prêt, et les informations ne nous parviennent alors que lorsque vous envoyez vous-même ce message. Les réservations de visites vidéo privées sont elles aussi enregistrées dans notre système (voir la section 5). Les messages envoyés via WhatsApp sont soumis à la politique de confidentialité de WhatsApp.", "Lorsque vous utilisez « Discuter avec l'équipe » dans la fenêtre de l'assistant, vos messages et les réponses de notre équipe sont enregistrés dans notre système, avec le nom et le moyen de contact que vous choisissez d'ajouter, la page depuis laquelle vous avez écrit, la langue du site, votre pays et votre ville approximatifs (jamais votre adresse IP) et la source publicitaire, le cas échéant. Vos messages parviennent à notre équipe sur Telegram afin qu'elle puisse vous répondre, et un code secret de la conversation est conservé uniquement dans votre navigateur (stockage local) pour que vous retrouviez les réponses à votre retour."
         ],
         "items": []
       },
@@ -3979,6 +3988,7 @@
     "kinds": {
       "manual": "Ajouté manuellement",
       "guide": "Question du guide de l'acheteur",
+      "project": "Formulaire d'une page projet",
       "contact": "Formulaire de contact",
       "property_request": "Recherche de bien sur mesure",
       "consultation": "Consultation en conception"

@@ -10,6 +10,7 @@ import { WHATSAPP_ICON, WHATSAPP_NUMBER } from "../components/floatingButtons";
 import { favoriteButton } from "../components/favorites";
 import { renderProjectMap, initProjectMap } from "../components/projectMap";
 import { renderVideoTourInvite, videoTourHref, VIDEO_TOUR_ICON } from "../components/videoTourInvite";
+import { renderProjectQuickForm, initProjectQuickForm } from "../components/projectQuickForm";
 import { renderNotFound } from "./notFound";
 import { photoAttrs, photoSrcset, heroBackground } from "../utils/responsiveImage";
 import { priceHtml } from "../utils/price";
@@ -680,6 +681,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
     </section>`
         : ""
     }
+
+    ${renderProjectQuickForm(content.name)}
   `;
 
   initStatCounters(el);
@@ -687,6 +690,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   initProjectMap(el);
   initVideo(el);
   initReadMore(el);
+  initProjectQuickForm(el, project, content.name);
 
   const floorImages = (project.floorPlan ?? []).flatMap((f) => (f.image ? [f.image] : []));
   el.querySelectorAll<HTMLButtonElement>(".floor-card__media").forEach((btn) => {
