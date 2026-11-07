@@ -4375,7 +4375,12 @@
       "tiktok": "تيك توك",
       "bing": "بحث Bing",
       "youtube": "يوتيوب",
-      "whatsapp": "واتساب"
+      "whatsapp": "واتساب",
+      "chatgpt": "ChatGPT (ذكاء اصطناعي)",
+      "perplexity": "Perplexity (ذكاء اصطناعي)",
+      "gemini": "Gemini (ذكاء اصطناعي)",
+      "copilot": "Copilot (ذكاء اصطناعي)",
+      "claude": "Claude (ذكاء اصطناعي)"
     },
     "pages": {
       "home": "الرئيسية",

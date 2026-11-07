@@ -4367,7 +4367,12 @@
       "tiktok": "TikTok",
       "bing": "Bing search",
       "youtube": "YouTube",
-      "whatsapp": "WhatsApp"
+      "whatsapp": "WhatsApp",
+      "chatgpt": "ChatGPT (AI assistant)",
+      "perplexity": "Perplexity (AI assistant)",
+      "gemini": "Gemini (AI assistant)",
+      "copilot": "Copilot (AI assistant)",
+      "claude": "Claude (AI assistant)"
     },
     "pages": {
       "home": "Home",

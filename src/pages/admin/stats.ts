@@ -62,6 +62,15 @@ const SOURCE_KEYS: Record<string, string> = {
   youtube: "youtube",
   "youtube.com": "youtube",
   whatsapp: "whatsapp",
+  // AI assistants: ChatGPT tags its links utm_source=chatgpt.com (a free visit, not an ad).
+  "chatgpt.com": "chatgpt",
+  "chat.openai.com": "chatgpt",
+  openai: "chatgpt",
+  "perplexity.ai": "perplexity",
+  perplexity: "perplexity",
+  "gemini.google.com": "gemini",
+  "copilot.microsoft.com": "copilot",
+  "claude.ai": "claude",
   // Customers added by hand on the pipeline page (migration 0019).
   social: "social",
   website: "website",

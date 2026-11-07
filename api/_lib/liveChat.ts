@@ -1,6 +1,7 @@
 // Live chat with the team (supabase/migrations/0011): the Telegram side. Visitor messages
 // are posted to the team's chat; a Telegram "reply" to any of them goes back to the visitor
 // (api/telegram-webhook.ts). Texts for the team are in Arabic, like the other alerts.
+import { aiFromCampaign } from "./aiSources.js";
 import { createHash } from "node:crypto";
 import { escapeHtml } from "./telegram.js";
 import { PROJECT_NAMES } from "./projectNames.js";
@@ -52,7 +53,9 @@ export function newChatMessage(c: ChatContext, body: string, site: string): stri
     `📍 ${escapeHtml(where(c))} · 🌐 ${escapeHtml(LANGUAGE_AR[c.locale ?? ""] ?? c.locale ?? "—")}`
   ];
   if (c.page) lines.push(`📄 ${ltr(c.page)}${project ? ` (${escapeHtml(project)})` : ""}`);
-  if (c.campaign) lines.push(`📣 الإعلان: ${ltr(c.campaign)}`);
+  const ai = aiFromCampaign(c.campaign);
+  if (ai) lines.push(`🤖 جاء من: ${ai} (ذكاء اصطناعي)`);
+  else if (c.campaign) lines.push(`📣 الإعلان: ${ltr(c.campaign)}`);
   if (c.name || c.contact) lines.push(`👤 ${escapeHtml(c.name ?? "")}${c.contact ? ` · ${ltr(c.contact)}` : ""}`);
   lines.push("", quote(body), "", `↩️ <i>ردّ على هذه الرسالة (Reply) ليصل ردّك إلى الزائر فوراً — بلغته إن أمكن.</i>`);
   lines.push(`<a href="${escapeHtml(`${site}/ar/admin/chats`)}">المحادثات في لوحة التحكم</a>`);

@@ -4456,7 +4456,12 @@
       "tiktok": "TikTok",
       "bing": "جست‌وجوی Bing",
       "youtube": "YouTube",
-      "whatsapp": "WhatsApp"
+      "whatsapp": "WhatsApp",
+      "chatgpt": "ChatGPT (هوش مصنوعی)",
+      "perplexity": "Perplexity (هوش مصنوعی)",
+      "gemini": "Gemini (هوش مصنوعی)",
+      "copilot": "Copilot (هوش مصنوعی)",
+      "claude": "Claude (هوش مصنوعی)"
     },
     "pages": {
       "home": "صفحه‌ی اصلی",
