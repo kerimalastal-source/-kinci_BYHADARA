@@ -4,6 +4,7 @@
 // how many were people, unsure or automated, and for each likely person where they came
 // from, on what device, what they looked at, how interested they seem and what they are
 // probably after. Data: visit_report() (supabase/migrations/0018).
+import { aiAssistant } from "./aiSources.js";
 import { escapeHtml } from "./telegram.js";
 import { isDataCenterTown } from "./visitBots.js";
 import {
@@ -107,6 +108,8 @@ function countryName(code: string | null): string | null {
 const place = (f: VisitFacts) => escapeHtml([f.city, countryName(f.country ?? null)].filter(Boolean).join("، ") || "مكان غير معروف");
 
 function source(f: VisitFacts): string {
+  const ai = aiAssistant(f.campaign, f.referrer);
+  if (ai) return `${ai} (ذكاء اصطناعي)`;
   if (f.campaign) return `إعلان (${escapeHtml(f.campaign.slice(0, 60))})`;
   return f.referrer ? escapeHtml(f.referrer) : "دخول مباشر";
 }

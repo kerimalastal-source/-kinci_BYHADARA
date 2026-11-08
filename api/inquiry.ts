@@ -14,6 +14,7 @@ import { sendEmail } from "./_lib/email.js";
 import { hasSupabase, rpc, RpcError } from "./_lib/supabase.js";
 import { TEAM_INBOX, type SiteLocale } from "./_lib/bookingMessages.js";
 import { teamEmail, teamTelegram, visitorEmail, type InquiryDetails, type InquiryKind } from "./_lib/inquiryMessages.js";
+import { PROJECT_NAMES } from "./_lib/projectNames.js";
 
 const KINDS: readonly InquiryKind[] = ["contact", "property_request", "consultation"];
 const INTERESTS = ["citizenship", "residence"];
@@ -103,7 +104,13 @@ function parse(body: unknown): Parsed | null {
   }
 
   // A Buyer's Guide question is a contact message with details.form = "guide" and a known stage.
-  if (details.form && (details.form !== "guide" || kind !== "contact" || !GUIDE_STAGES.includes(details.stage ?? ""))) return null;
+  // The form at the end of a project page is a contact message with details.form = "project"
+  // and exactly that one project; its Arabic name comes from the site's own list.
+  if (details.form === "project") {
+    const project = projects.length === 1 ? PROJECT_NAMES[projects[0].slug] : undefined;
+    if (kind !== "contact" || !project) return null;
+    projects[0].nameAr = project.ar;
+  } else if (details.form && (details.form !== "guide" || kind !== "contact" || !GUIDE_STAGES.includes(details.stage ?? ""))) return null;
 
   const page = text(d.page, 200);
   return {
@@ -166,6 +173,14 @@ export async function POST(request: Request): Promise<Response> {
     reference: result.reference,
     kind: inquiry.kind,
     guideStage: inquiry.details.form === "guide" ? inquiry.details.stage : undefined,
+    project:
+      inquiry.details.form === "project"
+        ? {
+            name: PROJECT_NAMES[inquiry.projects[0].slug][inquiry.locale],
+            nameAr: inquiry.projects[0].nameAr,
+            page: `${origin}${inquiry.page ?? `${prefix}/projects/${inquiry.projects[0].slug}`}`
+          }
+        : undefined,
     name: inquiry.name,
     email: inquiry.email,
     phone: inquiry.phone,

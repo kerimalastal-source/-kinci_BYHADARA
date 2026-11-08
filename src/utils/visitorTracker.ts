@@ -355,7 +355,8 @@ const FORMS: [selector: string, name: string][] = [
   ["#property-request-form", "property-request"],
   ["#consultancy-form", "consultancy"],
   [".tour-booking", "video-tour"],
-  ["#guide-question-form", "guide-question"]
+  ["#guide-question-form", "guide-question"],
+  ["#project-quick-form", "project-form"]
 ];
 
 function formStart(event: Event): void {

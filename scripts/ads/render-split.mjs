@@ -81,6 +81,41 @@ const ADS = [
     ],
     cta: ["", "Записаться на просмотр"],
   },
+  // Gulf villa campaign after 2026-11-06 (owner: one Arabic ad set and one English ad set, each with its own
+  // design, and the two living rooms in the image and the text). Same approved layout as the Istanbul ads;
+  // the second photo is the living room that opens onto the sea instead of the roof terrace.
+  {
+    id: "villa-ar",
+    dir: "gulf-2026-11",
+    lang: "ar",
+    ar: "فيلا بإطلالة بحرية كاملة في إسطنبول<br>مناسبة للجنسية التركية",
+    en: "5 غرف نوم · صالونان · 7 حمّامات · مسبح خاص",
+    label: "MARMARA HAVEN VILLA",
+    price: { ar: "بسعر يبدأ من 1.55 مليون دولار" },
+    badge: { num: "576", unit: "m²", ar: "المساحة الإجمالية" },
+    badge2: { num: "637", unit: "m²", ar: "مساحة الأرض" },
+    photos: [
+      { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
+      { src: img("marmara-haven-villa/living-sea.jpg"), pos: "12% 80%", size: "auto 122%" },
+    ],
+    cta: ["", "احجز معاينة خاصة"],
+  },
+  {
+    id: "villa-en",
+    dir: "gulf-2026-11",
+    lang: "en",
+    ar: "Full Sea View Villa in Istanbul<br>Eligible for Turkish Citizenship",
+    en: "5 Bedrooms · 2 Living Rooms · 7 Bathrooms · Private Pool",
+    label: "MARMARA HAVEN VILLA",
+    price: { ar: "From US$1.55 million" },
+    badge: { num: "576", unit: "m²", ar: "Total area" },
+    badge2: { num: "637", unit: "m²", ar: "Land area" },
+    photos: [
+      { src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" },
+      { src: img("marmara-haven-villa/living-sea.jpg"), pos: "12% 80%", size: "auto 122%" },
+    ],
+    cta: ["", "Book a Private Viewing"],
+  },
   {
     id: "plan",
     // Owner 2026-10-22: a 30/30 plan exists nowhere else, so the ad must say where (Istanbul + the flag).
@@ -141,6 +176,34 @@ const ADS = [
     ],
     cta: ["", "راسلنا عبر واتساب"],
   },
+  // Owner 2026-11-06: an Istanbul projects ad "pay 30% and the rest over 48 months", one design in Arabic and
+  // one in English (iPhone, 35-60, phone language Arabic, Hebrew or English).
+  {
+    id: "plan48-ar",
+    dir: "plan48-2026-11",
+    lang: "ar",
+    // Owner 2026-11-06: a Turkish passport on the left with "suitable for Turkish citizenship" in bold under it.
+    passport: "مناسب للجنسية<br>التركية",
+    // Owner 2026-11-06: the real passport photo he sent, not a drawing (background tinted to the ad's ivory).
+    passportImg: "plan48-2026-11/passport.jpg",
+    ar: "ادفع 30% والباقي<br>على 48 شهراً",
+    en: "شقتك في إسطنبول، في مشاريع مختارة",
+    label: "SELECTED PROJECTS · ISTANBUL",
+    photos: [{ src: img("beylikduzu-living/central-garden.jpg"), pos: "42% center" }],
+    cta: ["", "راسلنا عبر واتساب"],
+  },
+  {
+    id: "plan48-en",
+    dir: "plan48-2026-11",
+    lang: "en",
+    passport: "Eligible for<br>Turkish Citizenship",
+    passportImg: "plan48-2026-11/passport.jpg",
+    ar: "Pay 30% Now,<br>the Rest over 48 Months",
+    en: "Your home in Istanbul, in selected projects",
+    label: "SELECTED PROJECTS · ISTANBUL",
+    photos: [{ src: img("beylikduzu-living/central-garden.jpg"), pos: "42% center" }],
+    cta: ["", "Message us on WhatsApp"],
+  },
   {
     id: "plan40",
     // Owner 2026-10-25: website-traffic ad for the Referans plan (40% down, balance over 24 to 36 months),
@@ -181,6 +244,11 @@ body{width:${w}px;height:${h}px;overflow:hidden;background:#f7f5f0;color:#0f2b21
 .seal b i{font-style:normal;font-weight:600;font-size:.4em;margin-left:5px;vertical-align:1.05em;letter-spacing:0}
 .seal .sd{width:70%;height:2px;background:rgba(201,162,75,.45);margin:${story ? 14 : 10}px 0}
 .seal b.b2{margin-bottom:0}
+.pp{flex:none;display:flex;flex-direction:column;align-items:center;gap:${story ? 16 : 12}px;padding:${story ? "6px 34px 6px 0" : "4px 28px 4px 0"};border-right:3px solid #c9a24b}
+.pp img{width:${story ? 290 : 250}px;height:auto}
+.pp svg{width:${story ? 190 : 160}px;height:auto;filter:drop-shadow(0 10px 18px rgba(60,10,20,.25))}
+.pp .ppl{font-family:Plex,sans-serif;font-weight:700;font-size:${story ? 36 : 31}px;line-height:1.25;color:#7a1726;text-align:center;direction:rtl}
+body.lang-en .pp .ppl{font-family:Inter,sans-serif;direction:ltr;font-size:${story ? 30 : 26}px;letter-spacing:.2px}
 .seal .se{font-weight:600;font-size:${story ? 16 : 14}px;letter-spacing:4px;color:#a8853a}
 .price{align-self:center;margin-top:${story ? 30 : 20}px;display:flex;align-items:center;gap:${story ? 20 : 18}px;padding:${story ? "12px 34px" : "10px 30px"};border:2px solid #c9a24b;border-radius:99px;background:#fbf3df;white-space:nowrap}
 .price .pa{font-family:Plex;font-weight:700;font-size:${story ? 34 : 30}px;line-height:1.3;direction:rtl}
@@ -212,9 +280,12 @@ body.lang-ar .en{font-family:Plex,sans-serif;direction:rtl;letter-spacing:0}
 
 // Turkish flag (official proportions).
 const FLAG = '<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#e30a17"/><circle cx="425" cy="400" r="200" fill="#fff"/><circle cx="475" cy="400" r="160" fill="#e30a17"/><path fill="#fff" d="M583.334 400l180.901 58.779-111.804-153.885v190.212l111.804-153.885z"/></svg>';
+// A plain, stylised Turkish passport cover (burgundy, gold lettering, crescent and star) for citizenship ads;
+// no personal data page, just the cover as an illustration.
+const PASSPORT = '<svg viewBox="0 0 300 420" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a1c2b"/><stop offset="1" stop-color="#5c0f1b"/></linearGradient></defs><rect x="6" y="6" width="288" height="408" rx="18" fill="#000" opacity=".18"/><rect width="288" height="408" rx="18" fill="url(#pg)"/><rect x="10" width="6" height="408" fill="#000" opacity=".12"/><g fill="#d9b25a" font-family="Inter,sans-serif" font-weight="700" text-anchor="middle"><text x="144" y="62" font-size="21" letter-spacing="1.5">TÜRKİYE</text><text x="144" y="90" font-size="17" letter-spacing="1.5">CUMHURİYETİ</text><ellipse cx="144" cy="196" rx="62" ry="72" fill="none" stroke="#d9b25a" stroke-width="4"/><circle cx="132" cy="196" r="34"/><circle cx="142" cy="196" r="27" fill="#7a1726"/><path d="M178 196l-24.7 8 15.3-21v26l-15.3-21z"/><text x="144" y="318" font-size="26" letter-spacing="4">PASAPORT</text><text x="144" y="348" font-size="16" letter-spacing="4">PASSPORT</text><rect x="125" y="368" width="38" height="24" rx="4" fill="none" stroke="#d9b25a" stroke-width="3"/><circle cx="144" cy="380" r="7" fill="none" stroke="#d9b25a" stroke-width="3"/></g></svg>';
 const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body class="${a.lang ? "lang-" + a.lang : ""}">
 <div class="head"><div class="brand"><img src="file://${REPO}/public/logo-dark.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="rule"></div></div>
-${a.badge ? `<div class="hero"><div class="seal"><span class="sa">${a.badge.ar}</span><b dir="ltr">${a.badge.num}<i>${a.badge.unit}</i></b>${a.badge.en ? `<span class="se">${a.badge.en}</span>` : ""}${a.badge2 ? `<span class="sd"></span><span class="sa">${a.badge2.ar}</span><b class="b2" dir="ltr">${a.badge2.num}<i>${a.badge2.unit}</i></b>` : ""}</div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : `<div class="ar">${a.ar}</div><div class="en">${a.en}</div>`}
+${a.passport ? `<div class="hero"><div class="pp">${a.passportImg ? `<img src="file://${path.join(HERE, a.passportImg)}">` : PASSPORT}<span class="ppl">${a.passport}</span></div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : a.badge ? `<div class="hero"><div class="seal"><span class="sa">${a.badge.ar}</span><b dir="ltr">${a.badge.num}<i>${a.badge.unit}</i></b>${a.badge.en ? `<span class="se">${a.badge.en}</span>` : ""}${a.badge2 ? `<span class="sd"></span><span class="sa">${a.badge2.ar}</span><b class="b2" dir="ltr">${a.badge2.num}<i>${a.badge2.unit}</i></b>` : ""}</div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : `<div class="ar">${a.ar}</div><div class="en">${a.en}</div>`}
 ${a.price ? `<div class="price${a.price.big ? " big" : ""}${a.price.stack ? " stack" : ""}"><span class="pa">${a.price.ar}</span>${a.price.en ? `<span class="pb"></span><span class="pe">${a.price.en}</span>` : ""}</div>` : ""}
 ${a.label ? `<div class="label">${a.flag ? `<span class="lab">${FLAG}<span>${a.label}</span></span>` : a.label}</div>` : ""}
 <div class="photos"${a.photos.length === 1 ? ' style="grid-template-columns:1fr"' : ""}>${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
@@ -242,7 +313,7 @@ function crop(src, pos, size, box) {
 
 const b = await chromium.launch();
 const only = process.argv.slice(2);
-for (const a of ADS.filter((x) => !only.length || only.includes(x.id))) {
+for (const a of ADS.filter((x) => !only.length || only.includes(x.id) || only.includes(`${x.dir}/${x.id}`))) {
   for (const [w, h, story, suffix] of [[1080, 1350, false, "feed"], [1080, 1920, true, "story"]]) {
     const p = await b.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: SCALE });
     const dir = a.dir ? path.join(HERE, a.dir) : OUT;

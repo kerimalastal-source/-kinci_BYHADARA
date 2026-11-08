@@ -10,6 +10,9 @@ export interface InquiryDetails {
   kind: InquiryKind;
   /** Set for a question from the Buyer's Guide page: the stage the visitor picked. */
   guideStage?: string;
+  /** Set for the form at the end of a project page: the project's name (visitor's language
+   *  and Arabic) and the page the visitor filled it in on. */
+  project?: { name: string; nameAr: string; page: string };
   name: string;
   email: string;
   phone: string;
@@ -39,8 +42,10 @@ const GUIDE_STAGE_AR: Record<string, string> = {
   other: "موضوع آخر"
 };
 
-/** The request's name for the team: a Buyer's Guide question, or the form it came from. */
-const kindAr = (d: InquiryDetails) => (d.guideStage ? GUIDE_AR : KIND_AR[d.kind]);
+/** The request's name for the team: a project page, a Buyer's Guide question, or the form it came from. */
+const kindAr = (d: InquiryDetails) => (d.project ? `طلب من صفحة مشروع ${d.project.nameAr}` : d.guideStage ? GUIDE_AR : KIND_AR[d.kind]);
+
+const PROJECT_PAGE_AR = "صفحة المشروع التي أُرسل منها";
 
 /** Telegram allows 4096 characters; the full message is always in the inbox. */
 const TELEGRAM_MESSAGE_MAX = 1200;
@@ -55,6 +60,7 @@ function teamRows(d: InquiryDetails): [string, string][] {
     ["الإيميل", d.email],
     ...(d.guideStage ? ([["المرحلة", GUIDE_STAGE_AR[d.guideStage] ?? d.guideStage]] as [string, string][]) : []),
     ...(d.projects.length ? ([["المشاريع", d.projects.map((p) => p.nameAr).join("، ")]] as [string, string][]) : []),
+    ...(d.project ? ([[PROJECT_PAGE_AR, d.project.page]] as [string, string][]) : []),
     ...(d.interestsAr.length ? ([["الاهتمامات", d.interestsAr.join("، ")]] as [string, string][]) : []),
     ...d.summaryAr,
     ...(d.subject ? ([["الموضوع", d.subject]] as [string, string][]) : []),
@@ -68,6 +74,8 @@ export function teamTelegram(d: InquiryDetails): string {
   for (const [label, value] of teamRows(d)) {
     if (label === "المشاريع") {
       lines.push(`${label}: ${d.projects.map((p) => `<a href="${escapeHtml(p.url)}">${escapeHtml(p.nameAr)}</a>`).join("، ")}`);
+    } else if (label === PROJECT_PAGE_AR) {
+      lines.push(`${label}: <a href="${escapeHtml(value)}">${escapeHtml(value)}</a>`);
     } else {
       lines.push(`${label}: ${escapeHtml(value)}`);
     }
@@ -86,6 +94,7 @@ export function teamEmail(d: InquiryDetails): { subject: string; html: string; t
     if (label === "الإيميل") return [label, `<a href="mailto:${escapeHtml(value)}" dir="ltr" style="color:#0f2b21">${escapeHtml(value)}</a>`];
     if (label === "رقم الطلب") return [label, ltrSpan(escapeHtml(value))];
     if (label === "المشاريع") return [label, d.projects.map((p) => `<a href="${escapeHtml(p.url)}" style="color:#0f2b21">${escapeHtml(p.nameAr)}</a>`).join("، ")];
+    if (label === PROJECT_PAGE_AR) return [label, `<a href="${escapeHtml(value)}" dir="ltr" style="color:#0f2b21;word-break:break-all">${escapeHtml(value)}</a>`];
     return [label, escapeHtml(value)];
   });
   const message = d.message
@@ -107,7 +116,8 @@ export function teamEmail(d: InquiryDetails): { subject: string; html: string; t
   const text = [kindAr(d), "", ...teamRows(d).map(([l, v]) => `${l}: ${v}`), "", d.message, "", `صندوق الاستفسارات: ${inboxUrl(d.origin)}`]
     .filter((line, i, all) => line || all[i - 1])
     .join("\n");
-  return { subject: `${kindAr(d)}: ${d.name} (${d.reference})`, html, text };
+  const subject = d.project ? `طلب جديد لمشروع ${d.project.nameAr}: ${d.name} (${d.reference})` : `${kindAr(d)}: ${d.name} (${d.reference})`;
+  return { subject, html, text };
 }
 
 interface VisitorText {
@@ -208,8 +218,44 @@ const VISITOR_GUIDE: Record<SiteLocale, Pick<VisitorText, "subject" | "intro" | 
   }
 };
 
+/** The form at the end of a project page: "we received your request about {project}; we will contact you". */
+const VISITOR_PROJECT: Record<SiteLocale, Pick<VisitorText, "subject" | "intro" | "next">> = {
+  en: {
+    subject: "We received your request about {project} — HADARA Real Estate ({ref})",
+    intro: "Thank you for your interest in {project}. We have received your request.",
+    next: "One of our advisors will contact you shortly."
+  },
+  ar: {
+    subject: "تم استلام طلبك بخصوص {project} — حضارة العقارية ({ref})",
+    intro: "شكراً لاهتمامك بمشروع {project}. تم استلام طلبك.",
+    next: "سيتواصل معك أحد مستشارينا قريباً."
+  },
+  fa: {
+    subject: "درخواست شما درباره {project} دریافت شد — املاک حضارا ({ref})",
+    intro: "از علاقه شما به پروژه {project} سپاسگزاریم. درخواست شما دریافت شد.",
+    next: "یکی از مشاوران ما به‌زودی با شما تماس خواهد گرفت."
+  },
+  fr: {
+    subject: "Nous avons bien reçu votre demande concernant {project} — HADARA Real Estate ({ref})",
+    intro: "Merci de l'intérêt que vous portez à {project}. Nous avons bien reçu votre demande.",
+    next: "L'un de nos conseillers vous contactera très prochainement."
+  },
+  ru: {
+    subject: "Мы получили вашу заявку по проекту {project} — HADARA Real Estate ({ref})",
+    intro: "Спасибо за интерес к проекту {project}. Ваша заявка получена.",
+    next: "Наш консультант свяжется с вами в ближайшее время."
+  }
+};
+
 export function visitorEmail(d: InquiryDetails): { subject: string; html: string; text: string } {
-  const t = d.guideStage ? { ...VISITOR[d.locale], ...VISITOR_GUIDE[d.locale] } : VISITOR[d.locale];
+  const base = d.guideStage ? { ...VISITOR[d.locale], ...VISITOR_GUIDE[d.locale] } : VISITOR[d.locale];
+  const t = d.project
+    ? (() => {
+        const p = VISITOR_PROJECT[d.locale];
+        const project = d.project.name;
+        return { ...base, subject: p.subject.replace("{project}", project), intro: p.intro.replace("{project}", project), next: p.next };
+      })()
+    : base;
   const rtl = d.locale === "ar" || d.locale === "fa";
   const site = d.locale === "en" ? d.origin : `${d.origin}/${d.locale}`;
   const message = d.message

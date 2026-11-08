@@ -1,5 +1,6 @@
 // Telegram texts of the anonymous visitor alerts (api/track.ts), in Arabic, parse_mode
 // HTML: every value that comes from the request is escaped.
+import { aiAssistant } from "./aiSources.js";
 import { escapeHtml } from "./telegram.js";
 
 export const LOCALES = ["en", "ar", "fa", "fr", "ru"] as const;
@@ -199,7 +200,9 @@ function visitorLines(landing: Landing, title: string, origin: string, pageLabel
 export function newVisitorMessage(view: PageView, geo: Geo, origin: string, extra: string[] = []): string {
   const landing: Landing = { path: view.path, locale: view.locale, referrer: view.referrer, country: geo.country, city: geo.city };
   const lines = visitorLines(landing, view.title, origin, "الصفحة");
-  if (view.campaign) lines.push(`📣 الإعلان: ${escapeHtml(view.campaign)}`);
+  const ai = aiAssistant(view.campaign, view.referrer);
+  if (ai) lines.push(`🤖 جاء من: ${ai} (مساعد ذكاء اصطناعي، ليس إعلاناً)`);
+  else if (view.campaign) lines.push(`📣 الإعلان: ${escapeHtml(view.campaign)}`);
   return [...lines, ...extra].join("\n");
 }
 
