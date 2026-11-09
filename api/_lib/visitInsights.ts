@@ -154,6 +154,20 @@ export function isStrictGeo(f: { country?: string | null; tz?: string | null }):
 }
 
 /**
+ * A desktop window 1200-1400 wide and 1050+ tall (and at least 0.78 as tall as wide): the
+ * crawler from Hong Kong, Singapore and Mexico City (owner 2026-11-09, migration 0036). Since
+ * September 312 visits had such a screen and none touched a page or contacted us; real laptops
+ * and monitors are wider than they are tall, and an iPad in landscape is under 1050 tall.
+ */
+export function isTallDesktop(screen?: string | null): boolean {
+  const m = /^(\d{3,4})x(\d{3,4})$/.exec(screen || "");
+  if (!m) return false;
+  const w = Number(m[1]);
+  const h = Number(m[2]);
+  return w >= 1200 && w <= 1400 && h >= 1050 && h >= 0.78 * w;
+}
+
+/**
  * Why a new visit's Telegram alert waits for proof of a person (owner's request
  * 2026-11-02, "no alerts for automated visits"), or null to send it at once. A 2000x2000
  * screen is Meta's check and is never released; a US or China visit is released by
@@ -162,7 +176,8 @@ export function isStrictGeo(f: { country?: string | null; tz?: string | null }):
  */
 export function alertHold(f: { country?: string | null; tz?: string | null; screen?: string | null }): string | null {
   if (f.screen === "2000x2000") return "2000x2000 screen";
-  return isStrictGeo(f) ? "US or China" : null;
+  if (isStrictGeo(f)) return "US or China";
+  return isTallDesktop(f.screen) ? "tall desktop screen" : null;
 }
 
 /** Weighs the signals: automation, a server-like setup or robotic timing, against presses, input, reading and scrolling. */
@@ -219,6 +234,12 @@ export function classifyVisit(f: VisitFacts): VerdictResult {
   else if (strictGeo && !steady) {
     verdict = "bot";
     bot.push([3, "زيارة من أمريكا أو الصين بلا استخدام بشري واضح"]);
+  }
+  // A tall desktop window: the crawler from Hong Kong, Singapore and Mexico City, read the
+  // same way (migration 0036, owner 2026-11-09).
+  else if (isTallDesktop(f.screen) && !steady) {
+    verdict = "bot";
+    bot.push([3, "شاشة كمبيوتر بمقاس آلي بلا استخدام بشري واضح"]);
   }
   else if (b >= 3 && h < 3) verdict = "bot";
   else if (h >= 2.5 && b <= 1.5) verdict = "real";

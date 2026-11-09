@@ -7,7 +7,7 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { randomUUID } from "node:crypto";
 import { PGlite } from "@electric-sql/pglite";
-import { alertHold, classifyVisit, parseUserAgent, timeZoneMismatch, visitIntent } from "../.test-build/_lib/visitInsights.js";
+import { alertHold, classifyVisit, isTallDesktop, parseUserAgent, timeZoneMismatch, visitIntent } from "../.test-build/_lib/visitInsights.js";
 import { readVisits, visitReportMessage } from "../.test-build/_lib/visitReport.js";
 import { recordVisit } from "../.test-build/_lib/visitRecord.js";
 import { POST } from "../.test-build/track.js";
@@ -280,4 +280,17 @@ test("Meta's 2000x2000 check never gets an alert, whatever it does", async () =>
   await new Promise((resolve) => setTimeout(resolve, 150));
   assert.equal(telegram.length, 0);
   await db.close();
+});
+
+test("isTallDesktop and classifyVisit: the tall desktop crawler needs steady human use (0036)", () => {
+  for (const sc of ["1292x1188", "1292x1126", "1372x1286", "1219x1056"]) assert.equal(isTallDesktop(sc), true, sc);
+  for (const sc of ["1440x900", "1920x1080", "1366x1024", "1376x1032", "1024x1366", "390x844", "2000x2000", "", null]) assert.equal(isTallDesktop(sc), false, String(sc));
+  const one = [{ path: "/", at: 0 }];
+  assert.equal(classifyVisit({ pages: one, country: "HK", tz: "Asia/Hong_Kong", screen: "1292x1188" }).verdict, "bot");
+  assert.equal(classifyVisit({ pages: one, country: "SG", screen: "1336x1176", engagement: [{ path: "/", active: 0, scroll: 0, interactions: 0 }] }).verdict, "bot");
+  assert.equal(classifyVisit({ pages: one, country: "MX", screen: "1301x1223", actions: [{ action: "whatsapp", target: null }] }).verdict, "real");
+  assert.equal(classifyVisit({ pages: one, country: "TR", screen: "1300x1200", engagement: [{ path: "/", active: 40, scroll: 60, interactions: 5 }] }).verdict === "bot", false);
+  assert.equal(classifyVisit({ pages: one, country: "TR", tz: "Europe/Istanbul", screen: "1440x900" }).verdict, "pending");
+  assert.equal(alertHold({ country: "HK", tz: "Asia/Hong_Kong", screen: "1292x1188" }), "tall desktop screen");
+  assert.equal(alertHold({ country: "TR", tz: "Europe/Istanbul", screen: "1440x900" }), null);
 });
