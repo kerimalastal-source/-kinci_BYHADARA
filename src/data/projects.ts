@@ -1078,6 +1078,72 @@ export const projects: Project[] = [
     ]
   },
   {
+    slug: "dragos",
+    district: "Maltepe",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-11-10: add Özak Dragos from the Drive folder «DRAGOS»; under construction (no delivery date in the
+    // files), eligible for citizenship. Prices, areas and the payment plan from «OZAK DRAGOS OCT2026» (price list:
+    // 10% VAT included, may be updated).
+    paymentPlan: { downPercent: 50, months: 24 },
+    lifestyle: ["sea", "city"],
+    unitsAvailable: true,
+    priority: 1.994,
+    developer: "Özak GYO",
+    address: "Özak Dragos, Maltepe, İstanbul",
+    price: "$360,000 – $849,000",
+    // Facts from the developer's digital catalogue (TR/EN/AR): about 16,000 m² on two facing plots, 5 blocks,
+    // 458 apartments 1+1 to 3+1, two outdoor pools, a social facility per plot (pool, fitness, café, lounge, sauna,
+    // play areas), M4 metro within walking distance, opposite Maltepe Piazza and Maltepe Park, Maltepe coast 5 minutes.
+    // Images: the developer's full-size renders (Drive «OUTSİDE» / «İNSİDE»), resized to 1920 px.
+    coverImage: img("dragos", "aerial-islands-dusk", 1920, 1438, "Özak Dragos blocks in Maltepe at dusk with the Princes' Islands and the Sea of Marmara behind"),
+    gallery: [
+      img("dragos", "aerial-islands", 1920, 1440, "Özak Dragos in central Maltepe with a view of the Princes' Islands"),
+      img("dragos", "blocks-street", 1920, 1200, "Özak Dragos residential blocks along the avenue"),
+      img("dragos", "balcony-islands", 1920, 1080, "Özak Dragos balcony looking out over the Princes' Islands"),
+      img("dragos", "balcony-sunset", 1920, 1080, "Özak Dragos balcony at sunset with a view of the sea and the islands"),
+      img("dragos", "pool", 1920, 1198, "Özak Dragos outdoor swimming pool with sun loungers"),
+      img("dragos", "gardens-walk", 1920, 1196, "Özak Dragos landscaped gardens and walking path between the blocks"),
+      img("dragos", "garden-path", 1920, 1536, "Özak Dragos garden path leading to a block entrance"),
+      img("dragos", "central-lawn", 1920, 1599, "Özak Dragos central lawn and gardens"),
+      img("dragos", "garden-terrace", 1920, 1467, "Özak Dragos garden terrace with seating"),
+      img("dragos", "playground", 1920, 1196, "Özak Dragos children's playground and pool between the blocks"),
+      img("dragos", "gardens-evening", 1920, 1196, "Özak Dragos gardens in the evening"),
+      img("dragos", "entrance-sign", 1920, 1216, "Özak Dragos main entrance"),
+      img("dragos", "living-room-sea", 1920, 806, "Özak Dragos living and dining room with a sea view"),
+      img("dragos", "living-room", 1920, 961, "Özak Dragos living room with a dining area"),
+      img("dragos", "kitchen", 1920, 1920, "Özak Dragos kitchen with a balcony and a sea view"),
+      img("dragos", "master-bedroom", 1920, 1920, "Özak Dragos master bedroom with a walk-in wardrobe"),
+      img("dragos", "kids-room", 1920, 1372, "Özak Dragos children's bedroom with a view of the islands"),
+      img("dragos", "residents-lounge", 1920, 1232, "Özak Dragos residents' lounge"),
+      img("dragos", "cafe", 1920, 1279, "Özak Dragos social facility café"),
+      img("dragos", "fitness", 1920, 1152, "Özak Dragos fitness centre")
+    ],
+    stats: [
+      { value: "458", labelKey: "apartments" },
+      { value: "5", labelKey: "blocks" },
+      { value: "16,000 m²", labelKey: "landArea" },
+      { value: "1+1 – 3+1", labelKey: "layout" }
+    ],
+    // Price list «PRICE & SQM RANGES 2026» (October 2026).
+    residences: [
+      { kind: "apartment", layout: "1+1", gross: "68.19 – 86.40 m²", price: "$360,000 – $399,000" },
+      { kind: "apartment", layout: "2+1", gross: "98 – 213.64 m²", price: "$480,000 – $677,000" },
+      { kind: "apartment", layout: "3+1", gross: "153 – 218.92 m²", price: "$670,000 – $849,000" }
+    ],
+    amenities: [
+      "seaView",
+      "outdoorPool",
+      "fitness",
+      "sauna",
+      "cafe",
+      "lounge",
+      "playground",
+      "sportsCourt",
+      "landscaping"
+    ]
+  },
+  {
     slug: "lotus-sisli",
     district: "Şişli",
     city: "Istanbul",
