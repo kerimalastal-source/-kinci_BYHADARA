@@ -133,6 +133,8 @@ body.reel{height:1920px}
 .reel .ph{height:1240px;transform-origin:50% 45%}
 .reel.lst .ph{height:1000px}
 .reel .ph:after{background:linear-gradient(180deg,rgba(15,43,33,.75) 0%,rgba(15,43,33,0) 18%,rgba(15,43,33,0) 40%,rgba(15,43,33,.85) 72%,#0f2b21 100%)}
+.pf .ph{height:1060px}.pf .ph:after{background:linear-gradient(180deg,rgba(15,43,33,.7) 0%,rgba(15,43,33,0) 18%,rgba(15,43,33,0) 62%,rgba(15,43,33,.85) 86%,#0f2b21 100%)}
+.reel.pf .ph{height:1620px}.reel.pf .ph:after{background:linear-gradient(180deg,rgba(15,43,33,.75) 0%,rgba(15,43,33,0) 14%,rgba(15,43,33,0) 58%,rgba(15,43,33,.88) 84%,#0f2b21 100%)}
 .reel .top{top:120px}
 .reel .panel{bottom:410px}
 .reel .foot{bottom:330px}
@@ -259,7 +261,10 @@ ${FRAME}${topBar(im)}${im.design === "tweet" ? tweetHtml(im) : choiceHtml(im)}${
   // list for guides, design "list"), a gold "info" strip, thin gold frame.
   const im = p.image;
   const photo = publicPath(im.photo);
-  const cls = [p.story || p.reel ? "reel" : "", p.story ? "story" : "", im.design === "list" ? "lst" : ""].filter(Boolean).join(" ");
+  const cls = [p.story || p.reel ? "reel" : "", p.story ? "story" : "", im.design === "list" ? "lst" : "",
+    // Photo first (owner 2026-11-10: «خفّف النصوص وركّز على الصورة»): no fact tiles and no
+    // info strip -> the photo fills most of the post and the shade starts lower.
+    im.design !== "list" && !im.stats?.length && !im.tip ? "pf" : ""].filter(Boolean).join(" ");
   const body = im.design === "list"
     ? `<div class="list">${(im.items || []).map((it, k) => `<div class="it"><div class="n">${k + 1}</div><div><div class="a">${esc(it.ar)}</div><div class="e">${esc(it.en)}</div></div></div>`).join("")}</div>`
     : factTiles(im.stats);

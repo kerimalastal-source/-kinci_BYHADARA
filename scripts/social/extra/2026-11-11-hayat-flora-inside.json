@@ -1,31 +1,53 @@
-{ "posts": [ {
-  "id": "hayat-flora-inside",
-  "at": "14:00",
-  "reel": true,
-  "topic": "حياة فلورا من الداخل",
-  "image": {
+{
+ "posts": [
+  {
+   "id": "hayat-flora-inside",
+   "at": "14:00",
+   "reel": true,
+   "topic": "حياة فلورا من الداخل",
+   "image": {
     "photo": "/images/projects/hayat-flora/living-room-2.jpg",
-    "reelPhotos": ["/images/projects/hayat-flora/kitchen.jpg", "/images/projects/hayat-flora/bedroom.jpg", "/images/projects/hayat-flora/kids-room.jpg"],
-    "badge": { "ar": "من الداخل", "en": "Inside the homes" },
-    "place": "Hayat Flora · Halkalı, Küçükçekmece", "placeAr": "حياة فلورا · هالكالي، كوتشوك تشكمجه",
-    "headlineAr": "حياة فلورا من الداخل: مساكن للعائلة قرب مرمراي",
-    "headlineEn": "Hayat Flora inside: family homes by Marmaray",
-    "stats": [
-      { "value": "10 min", "ar": "إلى فلوريا بالمرمراي", "en": "To Florya by Marmaray" },
-      { "value": "19 min", "ar": "إلى أتاكوي بالمرمراي", "en": "To Ataköy by Marmaray" },
-      { "value": "4.5 km", "ar": "مرمرة أرموني بارك", "en": "Marmara Armoni Park mall" }
+    "reelPhotos": [
+     "/images/projects/hayat-flora/kitchen.jpg",
+     "/images/projects/hayat-flora/bedroom.jpg",
+     "/images/projects/hayat-flora/kids-room.jpg"
     ],
-    "tip": { "ar": "مساكن من 1+1 إلى 4+1، منها دوبلكس بحديقة أو تراس", "en": "Homes from 1+1 to 4+1, including duplexes with a garden or terrace", "labelAr": "معلومة" }
-  },
-  "caption": {
-    "ar": { "title": "حياة فلورا من الداخل: صالونات مضيئة ومطابخ واسعة وغرف للأطفال 🏡",
-            "intro": "مساكن من 1+1 إلى 4+1 في هالكالي، ولسكانها مسابح خارجية ومركز للياقة البدنية وساونا، ومحطة مرمراي على بُعد نحو 500 م توصلك إلى فلوريا في 10 دقائق وإلى أتاكوي في 19 دقيقة.",
-            "closing": ["المشروع من أوزاك بضمان إملاك كونوت، والتسليم مخطط في فبراير 2029 بحسب المطوّر."],
-            "cta": "شاهد صور المشروع", "path": "/projects/hayat-flora" },
-    "en": { "title": "Hayat Flora inside: bright living rooms, roomy kitchens and kids' rooms 🏡",
-            "intro": "1+1 to 4+1 homes in Halkalı, with outdoor pools, a fitness centre and a sauna for residents, and Marmaray about 500 m away: Florya in 10 minutes, Ataköy in 19.",
-            "closing": ["By Özak GYO with the Emlak Konut guarantee; handover planned for February 2029 per the developer."],
-            "cta": "See the project photos", "path": "/projects/hayat-flora" },
-    "hashtags": ["#HayatFlora", "#Halkali", "#EmlakKonut", "#Istanbul", "#HadaraRealEstate"]
+    "badge": {
+     "ar": "من الداخل",
+     "en": "Inside the homes"
+    },
+    "place": "Hayat Flora · Halkalı, Küçükçekmece",
+    "placeAr": "حياة فلورا · هالكالي، كوتشوك تشكمجه",
+    "headlineAr": "حياة فلورا من الداخل",
+    "headlineEn": "Hayat Flora, inside"
+   },
+   "caption": {
+    "ar": {
+     "title": "حياة فلورا من الداخل 🏡",
+     "intro": "صالونات مضيئة ومطابخ واسعة وغرف للأطفال، في مساكن من 1+1 إلى 4+1 على بُعد نحو 500 م من مرمراي هالكالي.",
+     "closing": [
+      "من أوزاك بضمان إملاك كونوت."
+     ],
+     "cta": "شاهد صور المشروع",
+     "path": "/projects/hayat-flora"
+    },
+    "en": {
+     "title": "Hayat Flora, inside 🏡",
+     "intro": "Bright living rooms, roomy kitchens and kids' rooms, in 1+1 to 4+1 homes about 500 m from Marmaray Halkalı.",
+     "closing": [
+      "By Özak GYO with the Emlak Konut guarantee."
+     ],
+     "cta": "See the project photos",
+     "path": "/projects/hayat-flora"
+    },
+    "hashtags": [
+     "#HayatFlora",
+     "#Halkali",
+     "#EmlakKonut",
+     "#Istanbul",
+     "#HadaraRealEstate"
+    ]
+   }
   }
-} ] }
+ ]
+}
