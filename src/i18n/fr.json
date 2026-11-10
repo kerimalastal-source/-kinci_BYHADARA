@@ -370,6 +370,11 @@
     "priceFrom": "À partir de {price}",
     "priceNote": "Prix TVA incluse, variables selon le mode de paiement. Les frais d'enregistrement du titre de propriété (4 %) ne sont pas inclus.",
     "residencePriceNote": "Prix TVA incluse, variables selon l'étage, la vue et le mode de paiement. Les frais d'enregistrement du titre de propriété (4 %) ne sont pas inclus.",
+    "priceNoteExVat": "Prix de départ selon la grille du promoteur, hors TVA, frais de contrat et frais d'enregistrement du titre de propriété ; ils peuvent évoluer.",
+    "residencePriceNoteExVat": "Prix de départ selon la grille du promoteur ; le prix de chaque logement dépend de sa surface, de l'étage et de la vue. Hors TVA, frais de contrat et frais d'enregistrement du titre de propriété ; les prix peuvent évoluer.",
+    "residencesMoreOptions": "Chaque carte présente un plan type pour cette typologie. D'autres options et plans de différentes surfaces sont disponibles ; contactez-nous pour les découvrir.",
+    "residencePlanCaption": "Plan type",
+    "residencePlanOpen": "Agrandir le plan",
     "addressLabel": "Adresse",
     "grossAreaLabel": "Surface brute",
     "netAreaLabel": "Surface nette",
@@ -3467,7 +3472,8 @@
       "verifiedOn": "Dernière vérification : {date}",
       "priceOnRequest": "Le prix de {name} est communiqué sur demande. Notre équipe vous enverra les détails sur WhatsApp.",
       "priceText": "Les prix de {name} dépendent du logement, de l'étage et du plan de paiement : notre équipe vous envoie l'offre du jour sur WhatsApp.",
-      "priceKnown": "{name} : {price}. Prix TVA incluse, variables selon le logement et le mode de paiement ; les frais de titre de propriété (4 %) ne sont pas inclus. Notre équipe vous envoie les options du jour sur WhatsApp."
+      "priceKnown": "{name} : {price}. Prix TVA incluse, variables selon le logement et le mode de paiement ; les frais de titre de propriété (4 %) ne sont pas inclus. Notre équipe vous envoie les options du jour sur WhatsApp.",
+      "priceKnownExVat": "{name} : {price}. Prix de départ selon la grille du promoteur, hors TVA, frais de contrat et frais de titre de propriété ; ils peuvent évoluer. Notre équipe vous envoie les options du jour sur WhatsApp."
     },
     "bubble": "Discutez avec nous",
     "title": "Assistant HADARA",

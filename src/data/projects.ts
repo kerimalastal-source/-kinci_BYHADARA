@@ -87,6 +87,8 @@ export interface Residence {
   price?: string;
   /** `price` is a starting price: shown as "From $380,000". */
   priceFrom?: boolean;
+  /** One sample floor plan for this type, shown at the top of the card (opens in the lightbox). */
+  plan?: ProjectImage;
 }
 
 /** Gross/net area of one level; its name and features live in projectsData.<slug>.floorPlan (same order). */
@@ -149,6 +151,10 @@ export interface Project {
   price?: string;
   /** `price` is a starting price: shown as "From $380,000". */
   priceFrom?: boolean;
+  /** The developer's prices exclude VAT and contract costs (the price notes say so instead of "VAT included"). */
+  priceExcludesVat?: boolean;
+  /** Each residence card shows one sample plan; a note under the cards says other plans and options exist. */
+  residencesMoreOptions?: boolean;
   /** Instalment plan confirmed by the owner (2026-10-14): down payment % and the months the balance is spread over
    * (`monthsTo` when it depends on the unit, e.g. 12 to 24 months). */
   paymentPlan?: PaymentPlan;
@@ -964,7 +970,7 @@ export const projects: Project[] = [
     district: "Pendik",
     city: "Istanbul",
     status: "ongoing",
-    // Owner, 2026-10-25: price on request, eligible for citizenship. The developer gives no delivery date.
+    // Owner, 2026-10-25: eligible for citizenship. Delivery August 2027 (owner, 2026-11-10).
     // Payment plan from a sales-office story the owner sent (2026-10-25): 40% down, balance over 24 to 36 months.
     paymentPlan: { downPercent: 40, months: 24, monthsTo: 36 },
     lifestyle: ["sea", "nature"],
@@ -973,7 +979,12 @@ export const projects: Project[] = [
     // Kiler GYO in partnership with İLBANK (developer's short notes; both logos on the site and catalogue).
     developer: "Kiler GYO · İLBANK",
     address: "Dolayoba, Pendik, İstanbul",
-    price: "on-request",
+    // Developer's price list "Kas.26" (November 2026, Drive folder REFERANS PENDİK): starting prices per type,
+    // excluding VAT, contract and other costs; Kiler GYO may change prices and campaigns.
+    price: "$325,000",
+    priceFrom: true,
+    priceExcludesVat: true,
+    residencesMoreOptions: true,
     // Facts from the developer's short notes and catalogue (686 homes, 78,620 m² project area, 35,000 m² of
     // landscaping) and renders from referanspendik.net.tr. The lake on the site plan belongs to the neighbouring park.
     coverImage: img("referans-pendik", "blocks-sea-view", 1680, 1186, "Referans Pendik low-rise blocks among gardens with a view of the Sea of Marmara and the Princes' Islands"),
@@ -997,14 +1008,14 @@ export const projects: Project[] = [
       { value: "35,000 m²", labelKey: "greenAndParkArea" },
       { value: "2+1 – 4+1", labelKey: "layout" }
     ],
-    // From the developer's catalogue and plan sheets: the unit's own gross area (without the share of common areas
-    // and allocated gardens or terraces) and the net area. Garden-floor homes have gardens of 50 to 138 m².
+    // Owner, 2026-11-10: one sample plan per type and a note that other options exist. Areas per type are the
+    // min-max "m²" of the November 2026 price list (the plan sheets' "daire kat brüt alanı", e.g. 4+1 A = 191.08 m²);
+    // 2.5+1 is not on the price list, so its card shows its own plan sheet (F-2.5+1 Tip 1, garden 174.13 m²).
     residences: [
-      { kind: "apartment", layout: "2+1", gross: "90.04 – 96.73 m²", net: "77.78 m²", planTypes: 2 },
-      { kind: "apartment", layout: "3+1", gross: "121.25 – 129.51 m²", net: "105.00 – 105.47 m²", planTypes: 3 },
-      { kind: "apartment", layout: "3.5+1", gross: "139.42 m²", net: "123.36 m²" },
-      { kind: "apartment", layout: "4+1", gross: "157.27 – 169.74 m²", net: "139.29 – 139.38 m²", planTypes: 2 },
-      { kind: "apartment", layout: "3+1", gross: "158.37 – 221.66 m²", net: "138.32 – 163.15 m²", floors: 2, planTypes: 2 }
+      { kind: "apartment", layout: "2+1", gross: "82 – 183 m²", price: "$325,000", priceFrom: true, plan: img("referans-pendik", "plan-2-1", 1299, 1482, "Referans Pendik sample 2+1 floor plan (type 2+1 A) with a private garden and terrace") },
+      { kind: "apartment", layout: "2.5+1", gross: "127.12 m²", garden: "174.13 m²", plan: img("referans-pendik", "plan-2-5-1", 1600, 1103, "Referans Pendik sample 2.5+1 garden-floor plan with a terrace and private garden") },
+      { kind: "apartment", layout: "3+1", gross: "131 – 223 m²", price: "$498,000", priceFrom: true, plan: img("referans-pendik", "plan-3-1", 1600, 1060, "Referans Pendik sample 3+1 floor plan (type 3+1 A) with a terrace and private garden") },
+      { kind: "apartment", layout: "4+1", gross: "179 – 191 m²", price: "$714,000", priceFrom: true, plan: img("referans-pendik", "plan-4-1", 1600, 1232, "Referans Pendik sample 4+1 floor plan (type 4+1 A) with a balcony") }
     ],
     amenities: ["indoorPool", "fitness", "sauna", "hamam", "landscaping", "playground", "sportsCourt", "joggingTrack", "indoorParking", "retail", "seaView"]
   },

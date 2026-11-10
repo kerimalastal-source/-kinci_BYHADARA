@@ -48,7 +48,7 @@ function renderResidences(project: Project): string {
   return `
     <section class="detail-block">
       <h2>${t("projectDetail.residencesTitle")}</h2>
-      <div class="residence-grid${project.residences.length === 1 ? " residence-grid--single" : ""}">
+      <div class="residence-grid${project.residences.length === 1 ? " residence-grid--single" : ""}${project.residences.some((r) => r.plan) ? " residence-grid--plans" : ""}">
         ${project.residences
           .map((r, i) => {
             const meta: [string, string][] = [];
@@ -58,7 +58,15 @@ function renderResidences(project: Project): string {
             if (r.floors) meta.push([t("projectDetail.floorsLabel"), String(r.floors)]);
             if (r.planTypes) meta.push([t("projectDetail.planTypesLabel"), String(r.planTypes)]);
             return `
-          <article class="residence-card" ${reveal(i, 3)}>
+          <article class="residence-card${r.plan ? " residence-card--plan" : ""}" ${reveal(i, 3)}>
+            ${
+              r.plan
+                ? `<button type="button" class="residence-card__plan" data-plan-index="${i}" aria-label="${t("projectDetail.residencePlanOpen")}">
+              <img ${photoAttrs(r.plan, "(max-width: 640px) 90vw, 340px")} alt="${r.plan.alt}" width="${r.plan.width}" height="${r.plan.height}" loading="lazy" decoding="async" />
+              <span class="residence-card__plan-tag">${t("projectDetail.residencePlanCaption")}</span>
+            </button>`
+                : ""
+            }
             ${r.label ? `<p class="residence-card__eyebrow"><span lang="en" dir="ltr" translate="no">${r.label}</span></p>` : ""}
             ${r.variant ? `<p class="residence-card__eyebrow">${t("projectDetail.residenceVariant", { variant: r.variant })}</p>` : ""}
             <h3 class="residence-card__title">${residenceTitle(r)}</h3>
@@ -89,7 +97,12 @@ function renderResidences(project: Project): string {
           })
           .join("")}
       </div>
-      ${project.residences.some((r) => r.price) ? `<p class="price-note">${t("projectDetail.residencePriceNote")}</p>` : ""}
+      ${project.residencesMoreOptions ? `<p class="residence-more">${t("projectDetail.residencesMoreOptions")}</p>` : ""}
+      ${
+        project.residences.some((r) => r.price)
+          ? `<p class="price-note">${t(project.priceExcludesVat ? "projectDetail.residencePriceNoteExVat" : "projectDetail.residencePriceNote")}</p>`
+          : ""
+      }
     </section>`;
 }
 
@@ -642,7 +655,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
                 price
                   ? `<div>
                 <dt>${t("projectDetail.priceLabel")}</dt>
-                <dd>${price}${project.price === "on-request" ? "" : `<small class="price-note">${t("projectDetail.priceNote")}</small>`}</dd>
+                <dd>${price}${project.price === "on-request" ? "" : `<small class="price-note">${t(project.priceExcludesVat ? "projectDetail.priceNoteExVat" : "projectDetail.priceNote")}</small>`}</dd>
               </div>`
                   : ""
               }
@@ -699,6 +712,14 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
     btn.addEventListener("click", () => {
       const image = project.floorPlan![Number(btn.dataset.floorIndex)].image!;
       openLightbox(floorImages.map((g) => ({ src: g.src, alt: g.alt, srcset: photoSrcset(g) })), floorImages.indexOf(image));
+    });
+  });
+
+  const plans = (project.residences ?? []).flatMap((r) => (r.plan ? [r.plan] : []));
+  el.querySelectorAll<HTMLButtonElement>(".residence-card__plan").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const plan = project.residences![Number(btn.dataset.planIndex)].plan!;
+      openLightbox(plans.map((g) => ({ src: g.src, alt: g.alt, srcset: photoSrcset(g) })), plans.indexOf(plan));
     });
   });
 

@@ -368,6 +368,11 @@
     "priceFrom": "From {price}",
     "priceNote": "Prices include VAT and vary by payment method. The 4% title deed registration fee is not included.",
     "residencePriceNote": "Prices include VAT and vary with the floor, view and payment method. The 4% title deed registration fee is not included.",
+    "priceNoteExVat": "Starting prices from the developer's price list. VAT, contract costs and the title deed registration fee are not included; prices may change.",
+    "residencePriceNoteExVat": "Starting prices from the developer's price list; each home's price depends on its size, floor and view. VAT, contract costs and the title deed registration fee are not included, and prices may change.",
+    "residencesMoreOptions": "Each card shows one sample plan for that type. Other options and plans in different sizes are available; contact us to see them.",
+    "residencePlanCaption": "Sample plan",
+    "residencePlanOpen": "Enlarge the plan",
     "addressLabel": "Address",
     "grossAreaLabel": "Gross area",
     "netAreaLabel": "Net area",
@@ -3465,7 +3470,8 @@
       "verifiedOn": "Last checked: {date}",
       "priceOnRequest": "The price of {name} is available on request. Our team will send you the details on WhatsApp.",
       "priceText": "Prices for {name} depend on the unit, floor and payment plan, so our team sends today's offer on WhatsApp.",
-      "priceKnown": "{name}: {price}. Prices include VAT and vary by unit and payment method; the 4% title deed fee is not included. Our team can send you today's options on WhatsApp."
+      "priceKnown": "{name}: {price}. Prices include VAT and vary by unit and payment method; the 4% title deed fee is not included. Our team can send you today's options on WhatsApp.",
+      "priceKnownExVat": "{name}: {price}. Starting prices from the developer's price list; VAT, contract costs and the title deed fee are not included, and prices may change. Our team can send you today's options on WhatsApp."
     },
     "bubble": "Chat with us",
     "title": "HADARA Assistant",
