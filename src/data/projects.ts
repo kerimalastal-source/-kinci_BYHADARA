@@ -1082,8 +1082,8 @@ export const projects: Project[] = [
     district: "Maltepe",
     city: "Istanbul",
     status: "ongoing",
-    // Owner, 2026-11-10: add Özak Dragos from the Drive folder «DRAGOS»; under construction (no delivery date in the
-    // files), eligible for citizenship. Prices, areas and the payment plan from «OZAK DRAGOS OCT2026» (price list:
+    // Owner, 2026-11-10: add Özak Dragos from the Drive folder «DRAGOS»; under construction, delivery March 2027 (owner,
+    // same day), eligible for citizenship. Prices, areas and the payment plan from «OZAK DRAGOS OCT2026» (price list:
     // 10% VAT included, may be updated).
     paymentPlan: { downPercent: 50, months: 24 },
     lifestyle: ["sea", "city"],
@@ -1121,6 +1121,7 @@ export const projects: Project[] = [
     ],
     stats: [
       { value: "458", labelKey: "apartments" },
+      { value: "2027", labelKey: "delivery" },
       { value: "5", labelKey: "blocks" },
       { value: "16,000 m²", labelKey: "landArea" },
       { value: "1+1 – 3+1", labelKey: "layout" }
