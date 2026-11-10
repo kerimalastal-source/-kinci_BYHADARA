@@ -168,6 +168,8 @@ export interface Project {
   gallery: ProjectImage[];
   /** Villa photos (exterior first) for the "Villas" filter on the projects page; only for projects that sell villas. */
   villaPhotos?: ProjectImage[];
+  /** Real photos of the construction site, shown in their own dated section after the gallery (never mixed with renders). */
+  siteProgress?: { date: string; photos: ProjectImage[] };
   stats: ProjectStat[];
   residences?: Residence[];
   /** Level-by-level breakdown, shown as a "Floor by Floor" section. */
@@ -1001,6 +1003,17 @@ export const projects: Project[] = [
       img("referans-pendik", "master-bedroom", 1626, 1142, "Referans Pendik sample master bedroom with a walk-in wardrobe"),
       img("referans-pendik", "commercial-street", 1680, 671, "Referans Pendik commercial street with cafés and shops")
     ],
+    siteProgress: {
+      date: "2026-03",
+      photos: [
+        img("referans-pendik", "site-2026-03-blocks-sea", 1920, 1079, "Referans Pendik completed residential blocks on site with Pendik and the sea behind, March 2026"),
+        img("referans-pendik", "site-2026-03-facades", 1920, 1079, "Referans Pendik blocks with finished façades on the construction site, March 2026"),
+        img("referans-pendik", "site-2026-03-hillside-blocks", 1920, 1079, "Referans Pendik blocks under construction on the hillside, March 2026"),
+        img("referans-pendik", "site-2026-03-blocks-aerial", 1920, 1079, "Aerial view of the Referans Pendik blocks and site works, March 2026"),
+        img("referans-pendik", "site-2026-03-frame-sea", 1920, 1079, "Referans Pendik concrete frame under construction with a sea view, March 2026"),
+        img("referans-pendik", "site-2026-03-foundations", 1920, 1079, "Referans Pendik foundation works for the next blocks, March 2026")
+      ]
+    },
     stats: [
       { value: "686", labelKey: "apartments" },
       { value: "2027", labelKey: "delivery" },

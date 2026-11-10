@@ -371,6 +371,8 @@
     "priceNoteExVat": "Starting prices from the developer's price list. VAT, contract costs and the title deed registration fee are not included; prices may change.",
     "residencePriceNoteExVat": "Starting prices from the developer's price list; each home's price depends on its size, floor and view. VAT, contract costs and the title deed registration fee are not included, and prices may change.",
     "residencesMoreOptions": "Each card shows one sample plan for that type. Other options and plans in different sizes are available; contact us to see them.",
+    "siteProgressTitle": "Real photos from the construction site",
+    "siteProgressIntro": "Real aerial photos of the construction works, showing the progress reached in {date}.",
     "residencePlanCaption": "Sample plan",
     "residencePlanOpen": "Enlarge the plan",
     "addressLabel": "Address",
