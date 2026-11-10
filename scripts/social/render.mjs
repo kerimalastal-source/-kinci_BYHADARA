@@ -115,7 +115,7 @@ const css = `*{margin:0;box-sizing:border-box} body{font-family:Inter,sans-serif
 .rule{height:3px;width:140px;background:#c9a24b;margin:22px 0 22px auto}
 .facts{display:grid;gap:16px;direction:rtl}
 .fa{border-top:3px solid #c9a24b;background:rgba(255,255,255,.05);padding:20px 10px 18px;text-align:center}
-.fa .v{direction:ltr;font-size:58px;font-weight:700;color:#c9a24b;line-height:1;white-space:nowrap}.fa .v.t{font-family:Plex;font-size:46px;direction:rtl}
+.fa .v{direction:ltr;font-size:58px;font-weight:700;color:#c9a24b;line-height:1;white-space:nowrap}.fa .v.t{font-family:Plex;font-size:46px;direction:rtl}.fa .v.t.l{direction:ltr}
 .fa .a{font-family:Plex;font-weight:700;font-size:29px;margin-top:12px;color:#fff}.fa .e{font-size:22px;color:#efe6cf;margin-top:4px;font-weight:600;direction:ltr}
 .tip{margin-top:22px;display:flex;gap:18px;align-items:flex-start;background:rgba(201,162,75,.12);border-right:6px solid #c9a24b;padding:16px 22px;direction:rtl}
 .tip .k{font-family:Plex;font-weight:700;color:#c9a24b;font-size:26px;white-space:nowrap}
@@ -197,7 +197,7 @@ const askPill = (a) => `<div class="ask"><span dir="rtl">${esc((a || ASK).ar)}</
 const FRAME = `<div class="frame"></div>`;
 const textual = (v) => !/^[\d$€+.,\s–\-m²KkMm·:/×%\u2066\u2069]+$/.test(v);
 const factTiles = (stats) => stats?.length ? `<div class="facts" style="grid-template-columns:repeat(${stats.length},1fr)">${stats.map((s) =>
-  `<div class="fa"><div class="v${textual(s.value) ? " t" : ""}">${esc(s.value)}</div><div class="a">${esc(s.ar)}</div><div class="e">${esc(s.en)}</div></div>`).join("")}</div>` : "";
+  `<div class="fa"><div class="v${textual(s.value) ? " t" : ""}${textual(s.value) && !/[\u0600-\u06FF]/.test(s.value) ? " l" : ""}">${esc(s.value)}</div><div class="a">${esc(s.ar)}</div><div class="e">${esc(s.en)}</div></div>`).join("")}</div>` : "";
 const tipBox = (tip) => tip ? `<div class="tip"><div class="k">${esc(tip.labelAr || "معلومة")}</div><div><div class="t">${esc(tip.ar)}</div><div class="te">${esc(tip.en)}</div></div></div>` : "";
 
 function tweetHtml(im) {
