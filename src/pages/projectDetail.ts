@@ -38,6 +38,7 @@ function galleryTail(total: number): string {
 
 function residenceTitle(r: Residence): string {
   if (r.kind === "office") return t(r.layout === "open" ? "projectDetail.officeOpen" : "projectDetail.officeClosed");
+  if (r.kind === "loft") return t("projectDetail.residenceLoft");
   const layout = `<span dir="ltr">${r.layout}</span>`;
   return t(r.kind === "villa" ? "projectDetail.residenceVilla" : "projectDetail.residenceApartment", { layout });
 }
@@ -58,6 +59,7 @@ function renderResidences(project: Project): string {
             if (r.planTypes) meta.push([t("projectDetail.planTypesLabel"), String(r.planTypes)]);
             return `
           <article class="residence-card" ${reveal(i, 3)}>
+            ${r.label ? `<p class="residence-card__eyebrow"><span lang="en" dir="ltr" translate="no">${r.label}</span></p>` : ""}
             ${r.variant ? `<p class="residence-card__eyebrow">${t("projectDetail.residenceVariant", { variant: r.variant })}</p>` : ""}
             <h3 class="residence-card__title">${residenceTitle(r)}</h3>
             ${

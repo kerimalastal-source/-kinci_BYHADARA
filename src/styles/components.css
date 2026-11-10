@@ -12176,7 +12176,8 @@ body.map-open .cookie-consent {
 
 .residence-card__price strong {
   color: var(--color-accent-dark);
-  font-size: 1.05rem;
+  /* Shrinks with the card so a long range ("$2,192,000 – $3,833,000") stays inside it on one line. */
+  font-size: min(1.05rem, 7.2cqi);
   white-space: nowrap;
 }
 
