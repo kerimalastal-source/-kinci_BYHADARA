@@ -685,18 +685,23 @@ export const projects: Project[] = [
     // ground + 13 floors on about 92,440 m², 2,318 parking spaces, revenue-sharing model) and its catalogue;
     // images from the developer's site and landing page.
     coverImage: img("hayat-flora", "aerial-sea", 1680, 1047, "Hayat Flora aerial view in Halkalı, Küçükçekmece, with the Sea of Marmara and Lake Küçükçekmece behind"),
+    // Gallery renders: 1920 px versions of the developer's originals (Drive folder «Hayat Flora», owner 2026-11-10),
+    // plus street-avenue and entrance-gate from the developer's site. The aerials over 6 MB do not download from Drive.
     gallery: [
-      img("hayat-flora", "aerial-night", 1680, 1066, "Hayat Flora blocks at night above Lake Küçükçekmece and the sea"),
-      img("hayat-flora", "entrance-gate", 1680, 1047, "Hayat Flora main entrance and security gate"),
-      img("hayat-flora", "pool", 1680, 1260, "Hayat Flora outdoor swimming pool with sun loungers"),
-      img("hayat-flora", "pool-evening", 1680, 1047, "Hayat Flora poolside terrace in the evening"),
-      img("hayat-flora", "gardens-aerial", 1680, 1120, "Hayat Flora landscaped gardens, pool and play areas seen from above"),
-      img("hayat-flora", "playground", 1680, 1047, "Hayat Flora children's playground between the blocks"),
+      img("hayat-flora", "aerial-night", 1920, 1218, "Hayat Flora blocks at night above Lake Küçükçekmece and the sea"),
+      img("hayat-flora", "pool", 1920, 1440, "Hayat Flora outdoor swimming pool with sun loungers"),
+      img("hayat-flora", "pool-evening", 1920, 1440, "Hayat Flora social facility café and pool terrace in the evening"),
+      img("hayat-flora", "gardens-aerial", 1920, 1280, "Hayat Flora landscaped gardens, pool and play areas seen from above"),
+      img("hayat-flora", "garden-homes", 1920, 1280, "Hayat Flora ground-floor home with a private garden"),
+      img("hayat-flora", "playground", 1920, 1280, "Hayat Flora children's playground between the blocks"),
       img("hayat-flora", "street-avenue", 1550, 750, "Hayat Flora blocks with shops on the avenue"),
-      img("hayat-flora", "garden-homes", 1550, 750, "Hayat Flora ground-floor homes with private gardens"),
-      img("hayat-flora", "rooftop-terrace", 1680, 945, "Hayat Flora terrace home looking towards the sea"),
-      img("hayat-flora", "living-room", 1680, 909, "Hayat Flora living and dining room with lake and sea views"),
-      img("hayat-flora", "bedroom", 1550, 750, "Hayat Flora bedroom with a view of the lake")
+      img("hayat-flora", "entrance-gate", 1680, 1047, "Hayat Flora main entrance and security gate"),
+      img("hayat-flora", "rooftop-terrace", 1920, 1080, "Hayat Flora rooftop duplex terrace looking towards the sea"),
+      img("hayat-flora", "living-room", 1920, 1039, "Hayat Flora living and dining room with lake and sea views"),
+      img("hayat-flora", "living-room-2", 1920, 1225, "Hayat Flora living room"),
+      img("hayat-flora", "kitchen", 1920, 1409, "Hayat Flora kitchen with a dining corner and a view of the lake"),
+      img("hayat-flora", "bedroom", 1920, 1364, "Hayat Flora master bedroom with a walk-in wardrobe"),
+      img("hayat-flora", "kids-room", 1920, 1409, "Hayat Flora children's bedroom")
     ],
     stats: [
       { value: "1,382", labelKey: "apartments" },
@@ -714,6 +719,7 @@ export const projects: Project[] = [
     amenities: [
       "outdoorPool",
       "fitness",
+      "sauna",
       "lounge",
       "playground",
       "sportsCourt",
