@@ -535,6 +535,8 @@ for (const [i, p] of posts.entries()) {
   if (design === "A" && check.over.some((t) => t === p.image.headlineEn)) issues.push("English headline too long for one line (shorten it)");
   if (check.arLines > (check.maxLines || 1)) issues.push(`Arabic text wraps to ${check.arLines} lines (max ${check.maxLines || 1}: shorten it or lower arSize)`);
   issues.push(...(repeatProblems.get(p.id) || []));
+  // Photo first (owner 2026-11-10, README): design A carries no fact tiles and no info strip.
+  if (design === "A" && p.image?.design !== "list" && (p.image?.stats?.length || p.image?.tip)) issues.push("photo first (owner 2026-11-10): drop image.stats and image.tip; put the project and the place in the headline, details in the caption");
   if (design !== "A" && (p.story || p.reel)) issues.push(`design "${design}" is for feed posts only (no story/reel)`);
   if (check.fonts < 4) issues.push("fonts did not load");
   await page.screenshot({ path: path.join(outDir, `post-${n}.jpg`), type: "jpeg", quality: 90 });
