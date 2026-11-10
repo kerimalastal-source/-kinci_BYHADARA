@@ -331,11 +331,24 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-lg) var(--space-md);
   }
+
+  /* A logo left alone on the last row sits in the middle instead of the first column. */
+  .partner-logo:last-child:nth-child(3n + 1) {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 640px) {
   .partners-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .partner-logo:last-child:nth-child(3n + 1) {
+    grid-column: auto;
+  }
+
+  .partner-logo:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 
   .partner-logo {
