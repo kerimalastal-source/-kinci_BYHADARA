@@ -293,7 +293,7 @@ function REEL_MOTION(SECONDS) {
   // Numbers that can count up (one number, not a year or a range).
   const counters = $$(".fa .v").map((el) => {
     const txt = el.textContent, m = txt.match(/^([^\d]*)(\d[\d,]*(?:\.\d+)?)([^\d]*)$/);
-    if (!m || /^(19|20)\d\d$/.test(m[2])) return null;
+    if (!m || /^(1[5-9]|20)\d\d$/.test(m[2])) return null;
     const dec = (m[2].split(".")[1] || "").length, comma = m[2].includes(",");
     return { el, pre: m[1], suf: m[3], val: parseFloat(m[2].replace(/,/g, "")), dec, comma };
   }).filter(Boolean);
