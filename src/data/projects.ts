@@ -67,7 +67,10 @@ export type AmenityKey =
 
 /** One residence type, shown as a card in the project's "Residences" section. */
 export interface Residence {
-  kind: "apartment" | "villa" | "office";
+  /** "loft": the developer's own loft/villa type (e.g. Büyükyalı's Fişekhane lofts); not counted as a villa. */
+  kind: "apartment" | "villa" | "office" | "loft";
+  /** Concept or collection name shown as written above the title, e.g. "FENDI Casa". */
+  label?: string;
   /** Room layout as sold in Türkiye, e.g. "3+1"; for offices "closed" or "open". */
   layout: string;
   /** Plan variant letter from the catalog, e.g. "A". */
@@ -373,8 +376,10 @@ export const projects: Project[] = [
     // Right after Sea Pearl Ataköy (owner, 2026-10-13: another project to market).
     priority: 1.6,
     developer: "Özak GYO · Ziylan · Yenigün",
-    // No price list from the developer yet.
-    price: "on-request",
+    // Owner, 2026-11-10: the developer's "Price & sqm ranges 2026" list (Drive folder "Büyükyalı"), USD, VAT
+    // included; payment plan 50% down and 12 monthly instalments. The list says prices may change.
+    price: "$1,079,000 – $3,859,000",
+    paymentPlan: { downPercent: 50, months: 12 },
     address: "Kazlıçeşme, Kennedy Cad. No:52, Zeytinburnu / İstanbul",
     // Facts from the developer's catalog and project page (ozakgyo.com/tr/proje/buyukyali, 2026-10-13); photos from both.
     coverImage: img("buyukyali", "sea-skyline", 1573, 790, "Büyükyalı towers on the Kazlıçeşme coast seen across the water"),
@@ -400,6 +405,15 @@ export const projects: Project[] = [
       { value: "111,000 m²", labelKey: "landArea" },
       { value: "59", labelKey: "shops" },
       { value: "1+1 – 5+1", labelKey: "layout" }
+    ],
+    // Area and price ranges per type from the developer's 2026 list (owner, 2026-11-10).
+    residences: [
+      { kind: "apartment", layout: "2+1", gross: "134 – 223 m²", price: "$1,079,000 – $1,660,000" },
+      { kind: "apartment", layout: "3+1", gross: "175 – 344 m²", price: "$1,491,000 – $2,549,000" },
+      { kind: "apartment", layout: "4+1", gross: "227.54 – 364.10 m²", price: "$2,192,000 – $3,833,000" },
+      { kind: "apartment", label: "FENDI Casa", layout: "2+1", gross: "142 – 312.16 m²", price: "$1,587,000 – $1,740,000" },
+      { kind: "apartment", label: "FENDI Casa", layout: "4+1", gross: "326.32 – 517.87 m²", price: "$3,126,000 – $3,859,000" },
+      { kind: "loft", layout: "Loft", gross: "376 – 426 m²", price: "$2,433,000 – $3,603,000" }
     ],
     // Developer's site: a residents-only bridge to the shore, Büyükyalı Club (pools, hamam, sauna, tennis), 7/24 concierge, Fişekhane culture centre.
     amenities: [

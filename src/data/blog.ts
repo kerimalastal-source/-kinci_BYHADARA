@@ -18,6 +18,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "fisekhane-buyukyali",
+    priority: -16,
+    published: "2026-11-10",
+    relatedProjects: ["buyukyali", "sea-pearl-atakoy", "alya-konutlari-merkezefendi"],
+    coverImage: { src: "/images/blog/fisekhane-buyukyali.jpg", width: 1080, height: 720 }
+  },
+  {
     slug: "pendik-district-guide",
     priority: -15,
     published: "2026-11-09",

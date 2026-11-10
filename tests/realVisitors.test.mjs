@@ -17,7 +17,7 @@ async function database() {
     await db.exec(readFileSync(new URL(file, MIGRATIONS), "utf8"));
   }
   // Re-runnable.
-  for (const file of ["0021_automated_visits.sql", "0022_clean_visit_stats.sql", "0023_clean_behavior_consent.sql", "0030_datacenter_contacts.sql", "0031_server_screen.sql", "0035_strict_us_cn.sql"]) {
+  for (const file of ["0021_automated_visits.sql", "0022_clean_visit_stats.sql", "0023_clean_behavior_consent.sql", "0030_datacenter_contacts.sql", "0031_server_screen.sql", "0035_strict_us_cn.sql", "0036_tall_desktop.sql"]) {
     await db.exec(readFileSync(new URL(file, MIGRATIONS), "utf8"));
   }
   return db;
@@ -151,4 +151,45 @@ test("visits from the US and China need steady human use to count (0035)", async
   assert.equal(of(24).contacted, true);
   assert.equal(of(25).automated, true);
   assert.equal(of(26).automated, false);
+});
+
+test("a tall desktop window needs steady human use to count (0036)", async () => {
+  const db = await database();
+  const at = new Date(Date.now() - 3600 * 1000).toISOString();
+  const plus = (s) => new Date(Date.parse(at) + s * 1000).toISOString();
+  const screen = (n, sc, os = "macOS") => db.query("insert into public.visitor_profiles (session_id, screen, os) values ($1, $2, $3)", [id(n), sc, os]);
+  // The crawler: Hong Kong, Singapore, Mexico City, one page, nothing reported.
+  await visit(db, 31, "/contact", plus(0), { city: "Hong Kong", country: "HK" });
+  await screen(31, "1292x1188");
+  await visit(db, 32, "/blog/x", plus(100), { city: "Singapore", country: "SG" });
+  await screen(32, "1372x1286", "Windows");
+  await visit(db, 33, "/projects/y", plus(200), { city: "Mexico City", country: "MX" });
+  await screen(33, "1301x1223");
+  // The same screen pressing WhatsApp still counts.
+  await visit(db, 34, "/", plus(300), { city: "Hong Kong", country: "HK" });
+  await screen(34, "1347x1180", "Windows");
+  await db.query("insert into public.visitor_actions (session_id, action, target) values ($1, 'whatsapp', 'contact')", [id(34)]);
+  // Ordinary screens in Istanbul: a laptop, an iPad in landscape, a phone.
+  await visit(db, 35, "/", plus(400));
+  await screen(35, "1440x900");
+  await visit(db, 36, "/", plus(500));
+  await screen(36, "1366x1024");
+  await visit(db, 37, "/", plus(600));
+  await screen(37, "390x844", "iOS");
+  // A text-like screen value does not break the query.
+  await visit(db, 38, "/", plus(700));
+  await screen(38, "unknown");
+
+  const rows = (await db.query("select session_id, contacted, automated from public.visit_verdicts(now() - interval '1 day')")).rows;
+  const of = (n) => rows.find((r) => r.session_id === id(n));
+  assert.equal(of(31).automated, true);
+  assert.equal(of(32).automated, true);
+  assert.equal(of(33).automated, true);
+  assert.equal(of(34).automated, false);
+  assert.equal(of(34).contacted, true);
+  for (const n of [35, 36, 37, 38]) assert.equal(of(n).automated, false, `visit ${n}`);
+});
+
+test("0036 is ASCII only", () => {
+  assert.ok(/^[\x00-\x7f]*$/.test(readFileSync(new URL("0036_tall_desktop.sql", MIGRATIONS), "utf8")));
 });

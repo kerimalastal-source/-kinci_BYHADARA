@@ -397,7 +397,9 @@ function renderProject(slug: string): string {
 
 function residenceTitle(r: Residence): string {
   if (r.kind === "office") return t(r.layout === "open" ? "projectDetail.officeOpen" : "projectDetail.officeClosed");
-  return t(r.kind === "villa" ? "projectDetail.residenceVilla" : "projectDetail.residenceApartment", { layout: `<bdi dir="ltr">${r.layout}</bdi>` });
+  if (r.kind === "loft") return t("projectDetail.residenceLoft");
+  const title = t(r.kind === "villa" ? "projectDetail.residenceVilla" : "projectDetail.residenceApartment", { layout: `<bdi dir="ltr">${r.layout}</bdi>` });
+  return r.label ? `${title} · <bdi dir="ltr">${r.label}</bdi>` : title;
 }
 
 /** Keeps a Latin term in brackets, e.g. "(Müstakil Tapu)", in reading order inside Arabic text. */
