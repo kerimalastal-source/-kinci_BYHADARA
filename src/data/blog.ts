@@ -18,6 +18,27 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "arsa-payi-land-share",
+    priority: -19,
+    published: "2026-11-11",
+    relatedProjects: ["referans-beylikduzu", "beylikduzu-living", "casablu-vadi"],
+    coverImage: { src: "/images/blog/arsa-payi-land-share.jpg", width: 1504, height: 1003 }
+  },
+  {
+    slug: "satis-vaadi-promise-to-sell",
+    priority: -18,
+    published: "2026-11-11",
+    relatedProjects: ["casablu-vadi", "hayat-flora", "referans-pendik"],
+    coverImage: { src: "/images/blog/satis-vaadi-promise-to-sell.jpg", width: 1282, height: 855 }
+  },
+  {
+    slug: "title-deed-check-before-buying",
+    priority: -17,
+    published: "2026-11-11",
+    relatedProjects: ["marmara-haven-villa", "tual-comfort", "lotus-yali"],
+    coverImage: { src: "/images/blog/title-deed-check-before-buying.jpg", width: 1536, height: 1024 }
+  },
+  {
     slug: "fisekhane-buyukyali",
     priority: -16,
     published: "2026-11-10",
