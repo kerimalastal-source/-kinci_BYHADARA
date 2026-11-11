@@ -452,7 +452,7 @@ export const projects: Project[] = [
     developer: "Mutlu İnşaat",
     price: "on-request",
     // Facts, areas and images from the developer's catalog ("CasaBlu Vadi Katolog", Drive).
-    coverImage: img("casablu-vadi", "project-aerial", 2000, 855, "CasaBlu Vadi blocks beside Beylikdüzü Yaşam Vadisi and the Marmara Sea, aerial view"),
+    coverImage: img("casablu-vadi", "blocks-aerial", 2000, 1092, "CasaBlu Vadi low-rise residential blocks around a landscaped central garden, aerial view"),
     gallery: [
       img("casablu-vadi", "aerial-valley-sea", 2000, 1415, "CasaBlu Vadi between Yaşam Vadisi and the Marmara Sea, with Ambarlı in the distance"),
       img("casablu-vadi", "living-sea-sunset", 2000, 1100, "CasaBlu Vadi living room opening onto a sea-view terrace at sunset"),
