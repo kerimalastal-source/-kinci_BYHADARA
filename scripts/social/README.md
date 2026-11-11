@@ -23,6 +23,17 @@ the branch build in time.
 > message):** make only the single 09:00 post that `topics.mjs` prints; no 14:00 post, no 21:00
 > carousel and no Story. `day.json` holds exactly one post with `"at": "09:00"`.
 
+> **PHOTO FIRST, LITTLE TEXT (owner's decision 2026-11-10, from 2026-11-11; overrides the
+> "3 fact tiles" and "tip" rules below):** «خفّف من النصوص المكتوبة وركّز على الصورة لأنها هي التي
+> تشدّ انتباه المتابعين» ← «اعتمده». On design `A` posts give **no `stats` and no `tip`**: render.mjs
+> then draws the photo over most of the post (class `pf`) with only the eyebrow and the headline.
+> The headline must still say **what and where** (owner: «العنوان صار عام، الناس ما بتعرف شو حياة
+> فلورا»): project name + kind of homes + Istanbul or the district, and one key fact when it fits,
+> e.g. «حياة فلورا: شقق عائلية في إسطنبول بضمان إملاك كونوت» / «Hayat Flora: family homes in
+> Istanbul». Never just «X من الداخل». Numbers and details go in the short caption. `list` posts
+> (buying steps, laws, contact) keep their 3 short items but drop the `tip` strip unless the legal
+> line needs it. render.mjs refuses `stats`/`tip` on design `A` (except carousels).
+
 > **A REEL EVERY MORNING (owner's decision 2026-10-28, from 2026-10-29; overrides "only when the
 > owner asks" below):** «بدي اياك تنشر كل يوم ريلز الصبح، والمحتوى تنوع بين المشاريع والمحتوى
 > التوعوي عن العقار وآلية الشراء والقوانين». The single 09:00 post is a **Reel**: add `"reel": true`
@@ -294,8 +305,8 @@ carousel). Every post, every design:
     "badge": { "ar": "جاهز للسكن", "en": "Ready to move in" },   // optional
     "place": "Lotus Yalı · Büyükçekmece",  "placeAr": "لوتس يالي · بيوكجكمجة",   // eyebrow (optional)
     "headlineAr": "…", "headlineEn": "…", "arSize": 68,  // optional; enSize optional (default arSize × 0.6)
-    "stats": [ { "value": "48", "ar": "شقة", "en": "Apartments" } ],   // 3 (4 allowed)
-    "tip": { "ar": "…", "en": "…", "labelAr": "معلومة" },  // gold info strip (recommended)
+    // design A: NO "stats" and NO "tip" since 2026-11-10 (photo first; see the top of this file)
+    "tip": { "ar": "…", "en": "…", "labelAr": "معلومة" },  // list posts only, when the legal line needs it
     "note": { "ar": "…", "en": "…" }     // optional small line under everything
     // guides: "design": "list", "items": [ { "ar": "…", "en": "…" } x3 ] instead of "stats"
   },

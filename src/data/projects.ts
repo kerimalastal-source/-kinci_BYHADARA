@@ -87,6 +87,8 @@ export interface Residence {
   price?: string;
   /** `price` is a starting price: shown as "From $380,000". */
   priceFrom?: boolean;
+  /** One sample floor plan for this type, shown at the top of the card (opens in the lightbox). */
+  plan?: ProjectImage;
 }
 
 /** Gross/net area of one level; its name and features live in projectsData.<slug>.floorPlan (same order). */
@@ -149,6 +151,10 @@ export interface Project {
   price?: string;
   /** `price` is a starting price: shown as "From $380,000". */
   priceFrom?: boolean;
+  /** The developer's prices exclude VAT and contract costs (the price notes say so instead of "VAT included"). */
+  priceExcludesVat?: boolean;
+  /** Each residence card shows one sample plan; a note under the cards says other plans and options exist. */
+  residencesMoreOptions?: boolean;
   /** Instalment plan confirmed by the owner (2026-10-14): down payment % and the months the balance is spread over
    * (`monthsTo` when it depends on the unit, e.g. 12 to 24 months). */
   paymentPlan?: PaymentPlan;
@@ -162,6 +168,8 @@ export interface Project {
   gallery: ProjectImage[];
   /** Villa photos (exterior first) for the "Villas" filter on the projects page; only for projects that sell villas. */
   villaPhotos?: ProjectImage[];
+  /** Real photos of the construction site, shown in their own dated section after the gallery (never mixed with renders). */
+  siteProgress?: { date: string; photos: ProjectImage[] };
   stats: ProjectStat[];
   residences?: Residence[];
   /** Level-by-level breakdown, shown as a "Floor by Floor" section. */
@@ -685,18 +693,23 @@ export const projects: Project[] = [
     // ground + 13 floors on about 92,440 m², 2,318 parking spaces, revenue-sharing model) and its catalogue;
     // images from the developer's site and landing page.
     coverImage: img("hayat-flora", "aerial-sea", 1680, 1047, "Hayat Flora aerial view in Halkalı, Küçükçekmece, with the Sea of Marmara and Lake Küçükçekmece behind"),
+    // Gallery renders: 1920 px versions of the developer's originals (Drive folder «Hayat Flora», owner 2026-11-10),
+    // plus street-avenue and entrance-gate from the developer's site. The aerials over 6 MB do not download from Drive.
     gallery: [
-      img("hayat-flora", "aerial-night", 1680, 1066, "Hayat Flora blocks at night above Lake Küçükçekmece and the sea"),
-      img("hayat-flora", "entrance-gate", 1680, 1047, "Hayat Flora main entrance and security gate"),
-      img("hayat-flora", "pool", 1680, 1260, "Hayat Flora outdoor swimming pool with sun loungers"),
-      img("hayat-flora", "pool-evening", 1680, 1047, "Hayat Flora poolside terrace in the evening"),
-      img("hayat-flora", "gardens-aerial", 1680, 1120, "Hayat Flora landscaped gardens, pool and play areas seen from above"),
-      img("hayat-flora", "playground", 1680, 1047, "Hayat Flora children's playground between the blocks"),
+      img("hayat-flora", "aerial-night", 1920, 1218, "Hayat Flora blocks at night above Lake Küçükçekmece and the sea"),
+      img("hayat-flora", "pool", 1920, 1440, "Hayat Flora outdoor swimming pool with sun loungers"),
+      img("hayat-flora", "pool-evening", 1920, 1440, "Hayat Flora social facility café and pool terrace in the evening"),
+      img("hayat-flora", "gardens-aerial", 1920, 1280, "Hayat Flora landscaped gardens, pool and play areas seen from above"),
+      img("hayat-flora", "garden-homes", 1920, 1280, "Hayat Flora ground-floor home with a private garden"),
+      img("hayat-flora", "playground", 1920, 1280, "Hayat Flora children's playground between the blocks"),
       img("hayat-flora", "street-avenue", 1550, 750, "Hayat Flora blocks with shops on the avenue"),
-      img("hayat-flora", "garden-homes", 1550, 750, "Hayat Flora ground-floor homes with private gardens"),
-      img("hayat-flora", "rooftop-terrace", 1680, 945, "Hayat Flora terrace home looking towards the sea"),
-      img("hayat-flora", "living-room", 1680, 909, "Hayat Flora living and dining room with lake and sea views"),
-      img("hayat-flora", "bedroom", 1550, 750, "Hayat Flora bedroom with a view of the lake")
+      img("hayat-flora", "entrance-gate", 1680, 1047, "Hayat Flora main entrance and security gate"),
+      img("hayat-flora", "rooftop-terrace", 1920, 1080, "Hayat Flora rooftop duplex terrace looking towards the sea"),
+      img("hayat-flora", "living-room", 1920, 1039, "Hayat Flora living and dining room with lake and sea views"),
+      img("hayat-flora", "living-room-2", 1920, 1225, "Hayat Flora living room"),
+      img("hayat-flora", "kitchen", 1920, 1409, "Hayat Flora kitchen with a dining corner and a view of the lake"),
+      img("hayat-flora", "bedroom", 1920, 1364, "Hayat Flora master bedroom with a walk-in wardrobe"),
+      img("hayat-flora", "kids-room", 1920, 1409, "Hayat Flora children's bedroom")
     ],
     stats: [
       { value: "1,382", labelKey: "apartments" },
@@ -714,6 +727,7 @@ export const projects: Project[] = [
     amenities: [
       "outdoorPool",
       "fitness",
+      "sauna",
       "lounge",
       "playground",
       "sportsCourt",
@@ -958,7 +972,7 @@ export const projects: Project[] = [
     district: "Pendik",
     city: "Istanbul",
     status: "ongoing",
-    // Owner, 2026-10-25: price on request, eligible for citizenship. The developer gives no delivery date.
+    // Owner, 2026-10-25: eligible for citizenship. Delivery August 2027 (owner, 2026-11-10).
     // Payment plan from a sales-office story the owner sent (2026-10-25): 40% down, balance over 24 to 36 months.
     paymentPlan: { downPercent: 40, months: 24, monthsTo: 36 },
     lifestyle: ["sea", "nature"],
@@ -967,7 +981,12 @@ export const projects: Project[] = [
     // Kiler GYO in partnership with İLBANK (developer's short notes; both logos on the site and catalogue).
     developer: "Kiler GYO · İLBANK",
     address: "Dolayoba, Pendik, İstanbul",
-    price: "on-request",
+    // Developer's price list "Kas.26" (November 2026, Drive folder REFERANS PENDİK): starting prices per type,
+    // excluding VAT, contract and other costs; Kiler GYO may change prices and campaigns.
+    price: "$325,000",
+    priceFrom: true,
+    priceExcludesVat: true,
+    residencesMoreOptions: true,
     // Facts from the developer's short notes and catalogue (686 homes, 78,620 m² project area, 35,000 m² of
     // landscaping) and renders from referanspendik.net.tr. The lake on the site plan belongs to the neighbouring park.
     coverImage: img("referans-pendik", "blocks-sea-view", 1680, 1186, "Referans Pendik low-rise blocks among gardens with a view of the Sea of Marmara and the Princes' Islands"),
@@ -984,20 +1003,32 @@ export const projects: Project[] = [
       img("referans-pendik", "master-bedroom", 1626, 1142, "Referans Pendik sample master bedroom with a walk-in wardrobe"),
       img("referans-pendik", "commercial-street", 1680, 671, "Referans Pendik commercial street with cafés and shops")
     ],
+    siteProgress: {
+      date: "2026-03",
+      photos: [
+        img("referans-pendik", "site-2026-03-blocks-sea", 1920, 1079, "Referans Pendik completed residential blocks on site with Pendik and the sea behind, March 2026"),
+        img("referans-pendik", "site-2026-03-facades", 1920, 1079, "Referans Pendik blocks with finished façades on the construction site, March 2026"),
+        img("referans-pendik", "site-2026-03-hillside-blocks", 1920, 1079, "Referans Pendik blocks under construction on the hillside, March 2026"),
+        img("referans-pendik", "site-2026-03-blocks-aerial", 1920, 1079, "Aerial view of the Referans Pendik blocks and site works, March 2026"),
+        img("referans-pendik", "site-2026-03-frame-sea", 1920, 1079, "Referans Pendik concrete frame under construction with a sea view, March 2026"),
+        img("referans-pendik", "site-2026-03-foundations", 1920, 1079, "Referans Pendik foundation works for the next blocks, March 2026")
+      ]
+    },
     stats: [
       { value: "686", labelKey: "apartments" },
+      { value: "2027", labelKey: "delivery" },
       { value: "78,620 m²", labelKey: "projectArea" },
       { value: "35,000 m²", labelKey: "greenAndParkArea" },
       { value: "2+1 – 4+1", labelKey: "layout" }
     ],
-    // From the developer's catalogue and plan sheets: the unit's own gross area (without the share of common areas
-    // and allocated gardens or terraces) and the net area. Garden-floor homes have gardens of 50 to 138 m².
+    // Owner, 2026-11-10: one sample plan per type and a note that other options exist. Areas per type are the
+    // min-max "m²" of the November 2026 price list (the plan sheets' "daire kat brüt alanı", e.g. 4+1 A = 191.08 m²);
+    // 2.5+1 is not on the price list, so its card shows its own plan sheet (F-2.5+1 Tip 1, garden 174.13 m²).
     residences: [
-      { kind: "apartment", layout: "2+1", gross: "90.04 – 96.73 m²", net: "77.78 m²", planTypes: 2 },
-      { kind: "apartment", layout: "3+1", gross: "121.25 – 129.51 m²", net: "105.00 – 105.47 m²", planTypes: 3 },
-      { kind: "apartment", layout: "3.5+1", gross: "139.42 m²", net: "123.36 m²" },
-      { kind: "apartment", layout: "4+1", gross: "157.27 – 169.74 m²", net: "139.29 – 139.38 m²", planTypes: 2 },
-      { kind: "apartment", layout: "3+1", gross: "158.37 – 221.66 m²", net: "138.32 – 163.15 m²", floors: 2, planTypes: 2 }
+      { kind: "apartment", layout: "2+1", gross: "82 – 183 m²", price: "$325,000", priceFrom: true, plan: img("referans-pendik", "plan-2-1", 1299, 1482, "Referans Pendik sample 2+1 floor plan (type 2+1 A) with a private garden and terrace") },
+      { kind: "apartment", layout: "2.5+1", gross: "127.12 m²", garden: "174.13 m²", plan: img("referans-pendik", "plan-2-5-1", 1600, 1103, "Referans Pendik sample 2.5+1 garden-floor plan with a terrace and private garden") },
+      { kind: "apartment", layout: "3+1", gross: "131 – 223 m²", price: "$498,000", priceFrom: true, plan: img("referans-pendik", "plan-3-1", 1600, 1060, "Referans Pendik sample 3+1 floor plan (type 3+1 A) with a terrace and private garden") },
+      { kind: "apartment", layout: "4+1", gross: "179 – 191 m²", price: "$714,000", priceFrom: true, plan: img("referans-pendik", "plan-4-1", 1600, 1232, "Referans Pendik sample 4+1 floor plan (type 4+1 A) with a balcony") }
     ],
     amenities: ["indoorPool", "fitness", "sauna", "hamam", "landscaping", "playground", "sportsCourt", "joggingTrack", "indoorParking", "retail", "seaView"]
   },
@@ -1069,6 +1100,73 @@ export const projects: Project[] = [
       "indoorParking",
       "security",
       "retail"
+    ]
+  },
+  {
+    slug: "dragos",
+    district: "Maltepe",
+    city: "Istanbul",
+    status: "ongoing",
+    // Owner, 2026-11-10: add Özak Dragos from the Drive folder «DRAGOS»; under construction, delivery March 2027 (owner,
+    // same day), eligible for citizenship. Prices, areas and the payment plan from «OZAK DRAGOS OCT2026» (price list:
+    // 10% VAT included, may be updated).
+    paymentPlan: { downPercent: 50, months: 24 },
+    lifestyle: ["sea", "city"],
+    unitsAvailable: true,
+    priority: 1.994,
+    developer: "Özak GYO",
+    address: "Özak Dragos, Maltepe, İstanbul",
+    price: "$360,000 – $849,000",
+    // Facts from the developer's digital catalogue (TR/EN/AR): about 16,000 m² on two facing plots, 5 blocks,
+    // 458 apartments 1+1 to 3+1, two outdoor pools, a social facility per plot (pool, fitness, café, lounge, sauna,
+    // play areas), M4 metro within walking distance, opposite Maltepe Piazza and Maltepe Park, Maltepe coast 5 minutes.
+    // Images: the developer's full-size renders (Drive «OUTSİDE» / «İNSİDE»), resized to 1920 px.
+    coverImage: img("dragos", "aerial-islands-dusk", 1920, 1438, "Özak Dragos blocks in Maltepe at dusk with the Princes' Islands and the Sea of Marmara behind"),
+    gallery: [
+      img("dragos", "aerial-islands", 1920, 1440, "Özak Dragos in central Maltepe with a view of the Princes' Islands"),
+      img("dragos", "blocks-street", 1920, 1200, "Özak Dragos residential blocks along the avenue"),
+      img("dragos", "balcony-islands", 1920, 1080, "Özak Dragos balcony looking out over the Princes' Islands"),
+      img("dragos", "balcony-sunset", 1920, 1080, "Özak Dragos balcony at sunset with a view of the sea and the islands"),
+      img("dragos", "pool", 1920, 1198, "Özak Dragos outdoor swimming pool with sun loungers"),
+      img("dragos", "gardens-walk", 1920, 1196, "Özak Dragos landscaped gardens and walking path between the blocks"),
+      img("dragos", "garden-path", 1920, 1536, "Özak Dragos garden path leading to a block entrance"),
+      img("dragos", "central-lawn", 1920, 1599, "Özak Dragos central lawn and gardens"),
+      img("dragos", "garden-terrace", 1920, 1467, "Özak Dragos garden terrace with seating"),
+      img("dragos", "playground", 1920, 1196, "Özak Dragos children's playground and pool between the blocks"),
+      img("dragos", "gardens-evening", 1920, 1196, "Özak Dragos gardens in the evening"),
+      img("dragos", "entrance-sign", 1920, 1216, "Özak Dragos main entrance"),
+      img("dragos", "living-room-sea", 1920, 806, "Özak Dragos living and dining room with a sea view"),
+      img("dragos", "living-room", 1920, 961, "Özak Dragos living room with a dining area"),
+      img("dragos", "kitchen", 1920, 1920, "Özak Dragos kitchen with a balcony and a sea view"),
+      img("dragos", "master-bedroom", 1920, 1920, "Özak Dragos master bedroom with a walk-in wardrobe"),
+      img("dragos", "kids-room", 1920, 1372, "Özak Dragos children's bedroom with a view of the islands"),
+      img("dragos", "residents-lounge", 1920, 1232, "Özak Dragos residents' lounge"),
+      img("dragos", "cafe", 1920, 1279, "Özak Dragos social facility café"),
+      img("dragos", "fitness", 1920, 1152, "Özak Dragos fitness centre")
+    ],
+    stats: [
+      { value: "458", labelKey: "apartments" },
+      { value: "2027", labelKey: "delivery" },
+      { value: "5", labelKey: "blocks" },
+      { value: "16,000 m²", labelKey: "landArea" },
+      { value: "1+1 – 3+1", labelKey: "layout" }
+    ],
+    // Price list «PRICE & SQM RANGES 2026» (October 2026).
+    residences: [
+      { kind: "apartment", layout: "1+1", gross: "68.19 – 86.40 m²", price: "$360,000 – $399,000" },
+      { kind: "apartment", layout: "2+1", gross: "98 – 213.64 m²", price: "$480,000 – $677,000" },
+      { kind: "apartment", layout: "3+1", gross: "153 – 218.92 m²", price: "$670,000 – $849,000" }
+    ],
+    amenities: [
+      "seaView",
+      "outdoorPool",
+      "fitness",
+      "sauna",
+      "cafe",
+      "lounge",
+      "playground",
+      "sportsCourt",
+      "landscaping"
     ]
   },
   {

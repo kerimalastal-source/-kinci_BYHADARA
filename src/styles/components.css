@@ -331,11 +331,24 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-lg) var(--space-md);
   }
+
+  /* A logo left alone on the last row sits in the middle instead of the first column. */
+  .partner-logo:last-child:nth-child(3n + 1) {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 640px) {
   .partners-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .partner-logo:last-child:nth-child(3n + 1) {
+    grid-column: auto;
+  }
+
+  .partner-logo:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 
   .partner-logo {
@@ -15347,4 +15360,70 @@ body.map-open .cookie-consent {
   border-radius: 50%;
   background: #2e9e5b;
   color: #fff;
+}
+
+/* Residence card with a sample floor plan on top (e.g. Referans Pendik): the plan sits on white,
+   shown whole (contain) and opens in the lightbox. */
+.residence-card--plan {
+  overflow: hidden;
+}
+
+.residence-card__plan {
+  position: relative;
+  display: block;
+  width: calc(100% + 2 * var(--space-md));
+  margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md);
+  padding: 0.6rem;
+  aspect-ratio: 4 / 3;
+  background: #fff;
+  border: 0;
+  border-bottom: 1px solid var(--color-border);
+  cursor: zoom-in;
+}
+
+.residence-card__plan img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.residence-card__plan-tag {
+  position: absolute;
+  inset-block-start: 0.5rem;
+  inset-inline-start: 0.5rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.residence-card__plan:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -4px;
+}
+
+.detail-block > .residence-more {
+  margin: 1.1rem 0 0;
+  padding: 0.75rem 1rem;
+  border-inline-start: 3px solid var(--color-accent);
+  background: var(--color-surface-alt, var(--color-surface));
+  border-radius: var(--radius-sm, 6px);
+  color: var(--color-ink);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Cards with floor plans: two wide columns so the plans stay readable. */
+.residence-grid--plans {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+
+/* Real construction-site photos (dated), below the gallery. */
+.site-progress__intro {
+  margin: -0.4rem 0 1rem;
+  color: var(--color-ink-soft);
 }

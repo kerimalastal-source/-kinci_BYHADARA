@@ -1,0 +1,53 @@
+{
+ "posts": [
+  {
+   "id": "hayat-flora-inside",
+   "at": "14:00",
+   "reel": true,
+   "topic": "حياة فلورا من الداخل",
+   "image": {
+    "photo": "/images/projects/hayat-flora/living-room-2.jpg",
+    "reelPhotos": [
+     "/images/projects/hayat-flora/kitchen.jpg",
+     "/images/projects/hayat-flora/bedroom.jpg",
+     "/images/projects/hayat-flora/kids-room.jpg"
+    ],
+    "badge": {
+     "ar": "من الداخل",
+     "en": "Inside the homes"
+    },
+    "place": "Hayat Flora · Halkalı, Küçükçekmece",
+    "placeAr": "حياة فلورا · هالكالي، كوتشوك تشكمجه",
+    "headlineAr": "حياة فلورا: شقق عائلية في إسطنبول بضمان إملاك كونوت",
+    "headlineEn": "Hayat Flora: family homes in Istanbul"
+   },
+   "caption": {
+    "ar": {
+     "title": "حياة فلورا: شقق عائلية في إسطنبول بضمان إملاك كونوت 🏡",
+     "intro": "صالونات مضيئة ومطابخ واسعة وغرف للأطفال، في مساكن من 1+1 إلى 4+1 على بُعد نحو 500 م من مرمراي هالكالي.",
+     "closing": [
+      "المشروع من تطوير أوزاك."
+     ],
+     "cta": "شاهد صور المشروع",
+     "path": "/projects/hayat-flora"
+    },
+    "en": {
+     "title": "Hayat Flora: family homes in Istanbul, with the Emlak Konut guarantee 🏡",
+     "intro": "Bright living rooms, roomy kitchens and kids' rooms, in 1+1 to 4+1 homes about 500 m from Marmaray Halkalı.",
+     "closing": [
+      "Developed by Özak GYO."
+     ],
+     "cta": "See the project photos",
+     "path": "/projects/hayat-flora"
+    },
+    "hashtags": [
+     "#HayatFlora",
+     "#Halkali",
+     "#EmlakKonut",
+     "#Istanbul",
+     "#HadaraRealEstate"
+    ]
+   }
+  }
+ ]
+}

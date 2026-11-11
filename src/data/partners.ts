@@ -12,6 +12,7 @@ export const partners: Partner[] = [
   { name: "DAG Holding", logo: "/partners/dag-holding.png", width: 304, height: 124 },
   { name: "WUJHA Development", logo: "/partners/wujha.png", width: 226, height: 94 },
   { name: "Lotus", logo: "/partners/lotus.png", width: 1417, height: 401 },
+  { name: "Özak GYO", logo: "/partners/ozak-gyo.png", width: 1400, height: 315 },
   { name: "Studio Vertebra", logo: "/partners/studio-vertebra.png", width: 756, height: 157 }
 ];
 

@@ -36,6 +36,28 @@ function galleryTail(total: number): string {
   return total > 3 && (total - 3) % 3 === 1 ? " gallery-grid__item--panorama" : "";
 }
 
+/** Dated section of real construction-site photos, kept apart from the renders in the gallery. */
+function renderSiteProgress(project: Project): string {
+  const sp = project.siteProgress;
+  if (!sp?.photos.length) return "";
+  const date = new Intl.DateTimeFormat(intlTag(), { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${sp.date}-01T12:00:00Z`));
+  return `
+          <section class="detail-block site-progress">
+            <h2>${t("projectDetail.siteProgressTitle")}</h2>
+            <p class="site-progress__intro">${t("projectDetail.siteProgressIntro", { date })}</p>
+            <div class="gallery-grid" id="project-site-progress">
+              ${sp.photos
+                .map(
+                  (img, i) => `
+                <button type="button" class="gallery-grid__item${i === 0 ? " gallery-grid__item--wide" : ""}${i === sp.photos.length - 1 ? galleryTail(sp.photos.length) : ""}" data-index="${i}">
+                  <img ${photoAttrs(img, i === 0 ? "(max-width: 720px) 100vw, 800px" : "(max-width: 720px) 50vw, 280px")} alt="${img.alt}" width="${img.width}" height="${img.height}" loading="lazy" />
+                </button>`
+                )
+                .join("")}
+            </div>
+          </section>`;
+}
+
 function residenceTitle(r: Residence): string {
   if (r.kind === "office") return t(r.layout === "open" ? "projectDetail.officeOpen" : "projectDetail.officeClosed");
   if (r.kind === "loft") return t("projectDetail.residenceLoft");
@@ -48,7 +70,7 @@ function renderResidences(project: Project): string {
   return `
     <section class="detail-block">
       <h2>${t("projectDetail.residencesTitle")}</h2>
-      <div class="residence-grid${project.residences.length === 1 ? " residence-grid--single" : ""}">
+      <div class="residence-grid${project.residences.length === 1 ? " residence-grid--single" : ""}${project.residences.some((r) => r.plan) ? " residence-grid--plans" : ""}">
         ${project.residences
           .map((r, i) => {
             const meta: [string, string][] = [];
@@ -58,7 +80,15 @@ function renderResidences(project: Project): string {
             if (r.floors) meta.push([t("projectDetail.floorsLabel"), String(r.floors)]);
             if (r.planTypes) meta.push([t("projectDetail.planTypesLabel"), String(r.planTypes)]);
             return `
-          <article class="residence-card" ${reveal(i, 3)}>
+          <article class="residence-card${r.plan ? " residence-card--plan" : ""}" ${reveal(i, 3)}>
+            ${
+              r.plan
+                ? `<button type="button" class="residence-card__plan" data-plan-index="${i}" aria-label="${t("projectDetail.residencePlanOpen")}">
+              <img ${photoAttrs(r.plan, "(max-width: 640px) 90vw, 340px")} alt="${r.plan.alt}" width="${r.plan.width}" height="${r.plan.height}" loading="lazy" decoding="async" />
+              <span class="residence-card__plan-tag">${t("projectDetail.residencePlanCaption")}</span>
+            </button>`
+                : ""
+            }
             ${r.label ? `<p class="residence-card__eyebrow"><span lang="en" dir="ltr" translate="no">${r.label}</span></p>` : ""}
             ${r.variant ? `<p class="residence-card__eyebrow">${t("projectDetail.residenceVariant", { variant: r.variant })}</p>` : ""}
             <h3 class="residence-card__title">${residenceTitle(r)}</h3>
@@ -89,7 +119,12 @@ function renderResidences(project: Project): string {
           })
           .join("")}
       </div>
-      ${project.residences.some((r) => r.price) ? `<p class="price-note">${t("projectDetail.residencePriceNote")}</p>` : ""}
+      ${project.residencesMoreOptions ? `<p class="residence-more">${t("projectDetail.residencesMoreOptions")}</p>` : ""}
+      ${
+        project.residences.some((r) => r.price)
+          ? `<p class="price-note">${t(project.priceExcludesVat ? "projectDetail.residencePriceNoteExVat" : "projectDetail.residencePriceNote")}</p>`
+          : ""
+      }
     </section>`;
 }
 
@@ -607,6 +642,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
             </div>
           </section>
 
+          ${renderSiteProgress(project)}
+
           ${project.soldOut ? "" : `<section class="detail-block">${renderVideoTourInvite({ slugs: [project.slug], name: content.name })}</section>`}
         </div>
 
@@ -642,7 +679,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
                 price
                   ? `<div>
                 <dt>${t("projectDetail.priceLabel")}</dt>
-                <dd>${price}${project.price === "on-request" ? "" : `<small class="price-note">${t("projectDetail.priceNote")}</small>`}</dd>
+                <dd>${price}${project.price === "on-request" ? "" : `<small class="price-note">${t(project.priceExcludesVat ? "projectDetail.priceNoteExVat" : "projectDetail.priceNote")}</small>`}</dd>
               </div>`
                   : ""
               }
@@ -699,6 +736,21 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
     btn.addEventListener("click", () => {
       const image = project.floorPlan![Number(btn.dataset.floorIndex)].image!;
       openLightbox(floorImages.map((g) => ({ src: g.src, alt: g.alt, srcset: photoSrcset(g) })), floorImages.indexOf(image));
+    });
+  });
+
+  const plans = (project.residences ?? []).flatMap((r) => (r.plan ? [r.plan] : []));
+  el.querySelectorAll<HTMLButtonElement>(".residence-card__plan").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const plan = project.residences![Number(btn.dataset.planIndex)].plan!;
+      openLightbox(plans.map((g) => ({ src: g.src, alt: g.alt, srcset: photoSrcset(g) })), plans.indexOf(plan));
+    });
+  });
+
+  const progress = project.siteProgress?.photos ?? [];
+  el.querySelectorAll<HTMLButtonElement>("#project-site-progress .gallery-grid__item").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      openLightbox(progress.map((g) => ({ src: g.src, alt: g.alt, srcset: photoSrcset(g) })), Number(btn.dataset.index));
     });
   });
 

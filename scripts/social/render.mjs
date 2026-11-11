@@ -115,7 +115,7 @@ const css = `*{margin:0;box-sizing:border-box} body{font-family:Inter,sans-serif
 .rule{height:3px;width:140px;background:#c9a24b;margin:22px 0 22px auto}
 .facts{display:grid;gap:16px;direction:rtl}
 .fa{border-top:3px solid #c9a24b;background:rgba(255,255,255,.05);padding:20px 10px 18px;text-align:center}
-.fa .v{direction:ltr;font-size:58px;font-weight:700;color:#c9a24b;line-height:1;white-space:nowrap}.fa .v.t{font-family:Plex;font-size:46px;direction:rtl}
+.fa .v{direction:ltr;font-size:58px;font-weight:700;color:#c9a24b;line-height:1;white-space:nowrap}.fa .v.t{font-family:Plex;font-size:46px;direction:rtl}.fa .v.t.l{direction:ltr}
 .fa .a{font-family:Plex;font-weight:700;font-size:29px;margin-top:12px;color:#fff}.fa .e{font-size:22px;color:#efe6cf;margin-top:4px;font-weight:600;direction:ltr}
 .tip{margin-top:22px;display:flex;gap:18px;align-items:flex-start;background:rgba(201,162,75,.12);border-right:6px solid #c9a24b;padding:16px 22px;direction:rtl}
 .tip .k{font-family:Plex;font-weight:700;color:#c9a24b;font-size:26px;white-space:nowrap}
@@ -133,6 +133,8 @@ body.reel{height:1920px}
 .reel .ph{height:1240px;transform-origin:50% 45%}
 .reel.lst .ph{height:1000px}
 .reel .ph:after{background:linear-gradient(180deg,rgba(15,43,33,.75) 0%,rgba(15,43,33,0) 18%,rgba(15,43,33,0) 40%,rgba(15,43,33,.85) 72%,#0f2b21 100%)}
+.pf .ph{height:1060px}.pf .ph:after{background:linear-gradient(180deg,rgba(15,43,33,.7) 0%,rgba(15,43,33,0) 18%,rgba(15,43,33,0) 62%,rgba(15,43,33,.85) 86%,#0f2b21 100%)}
+.reel.pf .ph{height:1620px}.reel.pf .ph:after{background:linear-gradient(180deg,rgba(15,43,33,.75) 0%,rgba(15,43,33,0) 14%,rgba(15,43,33,0) 58%,rgba(15,43,33,.88) 84%,#0f2b21 100%)}
 .reel .top{top:120px}
 .reel .panel{bottom:410px}
 .reel .foot{bottom:330px}
@@ -197,7 +199,7 @@ const askPill = (a) => `<div class="ask"><span dir="rtl">${esc((a || ASK).ar)}</
 const FRAME = `<div class="frame"></div>`;
 const textual = (v) => !/^[\d$€+.,\s–\-m²KkMm·:/×%\u2066\u2069]+$/.test(v);
 const factTiles = (stats) => stats?.length ? `<div class="facts" style="grid-template-columns:repeat(${stats.length},1fr)">${stats.map((s) =>
-  `<div class="fa"><div class="v${textual(s.value) ? " t" : ""}">${esc(s.value)}</div><div class="a">${esc(s.ar)}</div><div class="e">${esc(s.en)}</div></div>`).join("")}</div>` : "";
+  `<div class="fa"><div class="v${textual(s.value) ? " t" : ""}${textual(s.value) && !/[\u0600-\u06FF]/.test(s.value) ? " l" : ""}">${esc(s.value)}</div><div class="a">${esc(s.ar)}</div><div class="e">${esc(s.en)}</div></div>`).join("")}</div>` : "";
 const tipBox = (tip) => tip ? `<div class="tip"><div class="k">${esc(tip.labelAr || "معلومة")}</div><div><div class="t">${esc(tip.ar)}</div><div class="te">${esc(tip.en)}</div></div></div>` : "";
 
 function tweetHtml(im) {
@@ -259,7 +261,10 @@ ${FRAME}${topBar(im)}${im.design === "tweet" ? tweetHtml(im) : choiceHtml(im)}${
   // list for guides, design "list"), a gold "info" strip, thin gold frame.
   const im = p.image;
   const photo = publicPath(im.photo);
-  const cls = [p.story || p.reel ? "reel" : "", p.story ? "story" : "", im.design === "list" ? "lst" : ""].filter(Boolean).join(" ");
+  const cls = [p.story || p.reel ? "reel" : "", p.story ? "story" : "", im.design === "list" ? "lst" : "",
+    // Photo first (owner 2026-11-10: «خفّف النصوص وركّز على الصورة»): no fact tiles and no
+    // info strip -> the photo fills most of the post and the shade starts lower.
+    im.design !== "list" && !im.stats?.length && !im.tip ? "pf" : ""].filter(Boolean).join(" ");
   const body = im.design === "list"
     ? `<div class="list">${(im.items || []).map((it, k) => `<div class="it"><div class="n">${k + 1}</div><div><div class="a">${esc(it.ar)}</div><div class="e">${esc(it.en)}</div></div></div>`).join("")}</div>`
     : factTiles(im.stats);
@@ -293,7 +298,7 @@ function REEL_MOTION(SECONDS) {
   // Numbers that can count up (one number, not a year or a range).
   const counters = $$(".fa .v").map((el) => {
     const txt = el.textContent, m = txt.match(/^([^\d]*)(\d[\d,]*(?:\.\d+)?)([^\d]*)$/);
-    if (!m || /^(19|20)\d\d$/.test(m[2])) return null;
+    if (!m || /^(1[5-9]|20)\d\d$/.test(m[2])) return null;
     const dec = (m[2].split(".")[1] || "").length, comma = m[2].includes(",");
     return { el, pre: m[1], suf: m[3], val: parseFloat(m[2].replace(/,/g, "")), dec, comma };
   }).filter(Boolean);
@@ -530,6 +535,8 @@ for (const [i, p] of posts.entries()) {
   if (design === "A" && check.over.some((t) => t === p.image.headlineEn)) issues.push("English headline too long for one line (shorten it)");
   if (check.arLines > (check.maxLines || 1)) issues.push(`Arabic text wraps to ${check.arLines} lines (max ${check.maxLines || 1}: shorten it or lower arSize)`);
   issues.push(...(repeatProblems.get(p.id) || []));
+  // Photo first (owner 2026-11-10, README): design A carries no fact tiles and no info strip.
+  if (design === "A" && p.image?.design !== "list" && (p.image?.stats?.length || p.image?.tip)) issues.push("photo first (owner 2026-11-10): drop image.stats and image.tip; put the project and the place in the headline, details in the caption");
   if (design !== "A" && (p.story || p.reel)) issues.push(`design "${design}" is for feed posts only (no story/reel)`);
   if (check.fonts < 4) issues.push("fonts did not load");
   await page.screenshot({ path: path.join(outDir, `post-${n}.jpg`), type: "jpeg", quality: 90 });

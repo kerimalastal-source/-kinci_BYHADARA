@@ -120,18 +120,18 @@
     "statsTitle": "HADARA in Numbers",
     "stats": [
       { "value": "12+", "label": "Years of Excellence", "icon": "years" },
-      { "value": "24", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "9,500+", "label": "Residential Units", "icon": "apartments" },
+      { "value": "25", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "10,000+", "label": "Residential Units", "icon": "apartments" },
       { "value": "420+", "label": "Office Units", "icon": "offices" },
       { "value": "300+", "label": "Commercial Units", "icon": "shops" },
-      { "value": "11", "label": "Prime Istanbul Districts", "icon": "districts" }
+      { "value": "12", "label": "Prime Istanbul Districts", "icon": "districts" }
     ],
     "partnersEyebrow": "Trusted Network",
     "partnersTitle": "Our Success Partners",
     "partnersSubtitle": "HADARA works alongside leading regional developers and holding groups to deliver projects our clients can rely on.",
     "aboutEyebrow": "Who We Are",
     "aboutTitle": "Real Estate Development & Marketing Partner in Istanbul",
-    "aboutText1": "Since 2014, HADARA Real Estate has worked as a real estate development and marketing partner in Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects by leading developers in Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş and Pendik — among the city's most dynamic growth corridors.",
+    "aboutText1": "Since 2014, HADARA Real Estate has worked as a real estate development and marketing partner in Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects by leading developers in Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş, Pendik and Maltepe — among the city's most dynamic growth corridors.",
     "aboutText2": "From private luxury villas to large-scale residential communities, we choose the projects we offer for thoughtful architecture, quality construction and a genuine understanding of how people want to live.",
     "aboutCta": "More About HADARA",
     "spotlightEyebrow": "New Launch",
@@ -141,7 +141,7 @@
     "spotlightWhatsappMessage": "Hello, I would like more information about the {name} project.",
     "projectsEyebrow": "Our Portfolio",
     "projectsTitle": "Featured Projects",
-    "projectsSubtitle": "A closer look at the developments shaping Istanbul's Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş and Pendik districts.",
+    "projectsSubtitle": "A closer look at the developments shaping Istanbul's Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş, Pendik and Maltepe districts.",
     "servicesEyebrow": "What We Do",
     "servicesTitle": "End-to-End Real Estate Expertise",
     "services": [
@@ -192,7 +192,7 @@
     "storyEyebrow": "Our Story",
     "storyTitle": "From a Single Vision to a Growing Portfolio",
     "storyText1": "Founded in 2014 and headquartered in Beylikdüzü, Istanbul, HADARA Real Estate was built on a simple idea: that careful project selection and honest advice create lasting value for the people who live in — and invest in — the homes we offer.",
-    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut, Mesa, Dağ Holding and Kiler GYO to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş and Pendik, among the most sought-after growth corridors on both sides of Istanbul, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
+    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut, Mesa, Dağ Holding and Kiler GYO to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş, Pendik and Maltepe, among the most sought-after growth corridors on both sides of Istanbul, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
     "missionTitle": "Our Mission",
     "missionText": "To connect residents and investors with carefully selected residential and mixed-use projects that combine architectural quality, everyday comfort and dependable long-term value, and to guide them clearly at every step.",
     "visionTitle": "Our Vision",
@@ -216,15 +216,15 @@
     "statsTitle": "Our Track Record",
     "stats": [
       { "value": "12+", "label": "Years in Business", "icon": "years" },
-      { "value": "24", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "10,300+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
-      { "value": "680,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
+      { "value": "25", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "10,700+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
+      { "value": "690,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
     ]
   },
   "projects": {
     "heroEyebrow": "Our Portfolio",
     "heroTitle": "Projects Shaping Istanbul",
-    "heroSubtitle": "From private villas to large residential communities, explore the projects HADARA developed and markets across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş and Pendik.",
+    "heroSubtitle": "From private villas to large residential communities, explore the projects HADARA developed and markets across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş, Pendik and Maltepe.",
     "atlas": {
       "title": "Our projects on the map of Istanbul",
       "projects": {
@@ -277,7 +277,8 @@
     "sisli": "Şişli",
     "zeytinburnu": "Zeytinburnu",
     "basaksehir": "Başakşehir",
-    "esenyurt": "Esenyurt"
+    "esenyurt": "Esenyurt",
+    "maltepe": "Maltepe"
   },
   "projectDetail": {
     "quickForm": {
@@ -367,6 +368,13 @@
     "priceFrom": "From {price}",
     "priceNote": "Prices include VAT and vary by payment method. The 4% title deed registration fee is not included.",
     "residencePriceNote": "Prices include VAT and vary with the floor, view and payment method. The 4% title deed registration fee is not included.",
+    "priceNoteExVat": "Starting prices from the developer's price list. VAT, contract costs and the title deed registration fee are not included; prices may change.",
+    "residencePriceNoteExVat": "Starting prices from the developer's price list; each home's price depends on its size, floor and view. VAT, contract costs and the title deed registration fee are not included, and prices may change.",
+    "residencesMoreOptions": "Each card shows one sample plan for that type. Other options and plans in different sizes are available; contact us to see them.",
+    "siteProgressTitle": "Real photos from the construction site",
+    "siteProgressIntro": "Real aerial photos of the construction works, showing the progress reached in {date}.",
+    "residencePlanCaption": "Sample plan",
+    "residencePlanOpen": "Enlarge the plan",
     "addressLabel": "Address",
     "grossAreaLabel": "Gross area",
     "netAreaLabel": "Net area",
@@ -656,7 +664,7 @@
         "items": [
           {
             "q": "Who is HADARA Real Estate?",
-            "a": "HADARA Real Estate is a real estate development and marketing partner founded in 2014 and headquartered in Beylikdüzü, Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects and villas by leading developers across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş and Pendik."
+            "a": "HADARA Real Estate is a real estate development and marketing partner founded in 2014 and headquartered in Beylikdüzü, Istanbul. We developed Marmara Haven Villa, a private residence in Büyükçekmece, and we market residential and mixed-use projects and villas by leading developers across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş, Pendik and Maltepe."
           },
           {
             "q": "What types of projects does HADARA offer?",
@@ -664,7 +672,7 @@
           },
           {
             "q": "Where are HADARA's projects located?",
-            "a": "The projects we currently offer are in fast-growing districts on both sides of Istanbul: Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan and Beşiktaş on the European side, and Pendik on the Asian side."
+            "a": "The projects we currently offer are in fast-growing districts on both sides of Istanbul: Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan and Beşiktaş on the European side, and Pendik and Maltepe on the Asian side."
           },
           {
             "q": "How can I get in touch with HADARA's team?",
@@ -1587,7 +1595,7 @@
       "name": "Hayat Flora",
       "tagline": "A new neighbourhood with sea and lake views in Halkalı, by Özak GYO with the Emlak Konut guarantee.",
       "shortDescription": "Hayat Flora is a new residential neighbourhood under construction in Halkalı, Küçükçekmece, built by Özak GYO with the Emlak Konut guarantee: 1,382 homes from 1+1 to 4+1 and 46 street shops in 21 blocks, with views over the Sea of Marmara and Lake Küçükçekmece, wide landscaped gardens, and Marmaray Halkalı station 500 m away. Eligible for Turkish citizenship.",
-      "longDescription": "Hayat Flora is rising in Halkalı, in the Küçükçekmece district on Istanbul's European side, between the Sea of Marmara and Lake Küçükçekmece. It is built by Özak GYO, the developer of Büyükyalı, under the guarantee of Emlak Konut GYO, the state-backed real estate investment company, on its revenue-sharing model. The project covers about 92,440 m² and is laid out as a new neighbourhood in three sections, each with its own landscaped park, with up to 70% of the site given to gardens, walking paths, children's play areas, sports areas and places to sit and rest. Its 21 blocks of ground plus 13 floors hold 1,382 homes, from 1+1 to 4+1, including garden-floor homes and duplexes with a garden or terrace, many of them looking out over the sea and the lake, and 46 shops line the three avenues of the project. Residents have outdoor swimming pools, a fitness centre, a residents' lounge, a secured entrance and parking for 2,318 cars. Marmaray Halkalı station and the M11 metro line to Istanbul Airport are about 500 m away, Florya is 10 minutes and Ataköy 19 minutes by Marmaray, and the E-5 and TEM motorways are 10 minutes by car. The blocks are designed to Türkiye's 2018 earthquake code, with structural calculations checked by Istanbul Technical University and Emlak Konut, raft foundations and 1,710 foundation piles. Sales are offered in two phases, and the developer plans to hand over the keys in February 2029. The project is eligible for Turkish citizenship.",
+      "longDescription": "Hayat Flora is rising in Halkalı, in the Küçükçekmece district on Istanbul's European side, between the Sea of Marmara and Lake Küçükçekmece. It is built by Özak GYO, the developer of Büyükyalı, under the guarantee of Emlak Konut GYO, the state-backed real estate investment company, on its revenue-sharing model. The project covers about 92,440 m² and is laid out as a new neighbourhood in three sections, each with its own landscaped park, with up to 70% of the site given to gardens, walking paths, children's play areas, sports areas and places to sit and rest. Its 21 blocks of ground plus 13 floors hold 1,382 homes, from 1+1 to 4+1, including garden-floor homes and duplexes with a garden or terrace, many of them looking out over the sea and the lake, and 46 shops line the three avenues of the project. Residents have outdoor swimming pools, a fitness centre, a sauna, a residents' lounge, a secured entrance and parking for 2,318 cars. Marmaray Halkalı station and the M11 metro line to Istanbul Airport are about 500 m away, Florya is 10 minutes and Ataköy 19 minutes by Marmaray, and the E-5 and TEM motorways are 10 minutes by car. The blocks are designed to Türkiye's 2018 earthquake code, with structural calculations checked by Istanbul Technical University and Emlak Konut, raft foundations and 1,710 foundation piles. Sales are offered in two phases, and the developer plans to hand over the keys in February 2029. The project is eligible for Turkish citizenship.",
       "highlights": [
         "Under construction, with handover planned for February 2029 according to the developer",
         "Eligible for Turkish citizenship",
@@ -1625,6 +1633,22 @@
         {
           "place": "Florya Atatürk Forest",
           "time": "7.6 km"
+        },
+        {
+          "place": "Marmara Armoni Park mall",
+          "time": "4.5 km"
+        },
+        {
+          "place": "Arena Park mall",
+          "time": "5.8 km"
+        },
+        {
+          "place": "212 Outlet",
+          "time": "7.4 km"
+        },
+        {
+          "place": "Mall of Istanbul",
+          "time": "12 km"
         },
         {
           "place": "E-5 and TEM motorways",
@@ -1917,11 +1941,12 @@
       "name": "Referans Pendik",
       "tagline": "A green low-rise neighbourhood with views of the sea and the Princes' Islands in Pendik, by Kiler GYO with İLBANK.",
       "shortDescription": "Referans Pendik is a residential project under construction in Pendik, on Istanbul's Asian side, by Kiler GYO in partnership with İLBANK: 686 homes from 2+1 to 4+1, including garden-floor homes and duplexes, in low-rise blocks on a 78,620 m² site with 35,000 m² of landscaping, an indoor pool, a fitness centre, a Turkish bath and sauna, 50 m from the M4 metro. Eligible for Turkish citizenship.",
-      "longDescription": "Referans Pendik is taking shape in Pendik, on Istanbul's Asian side, on a hillside looking out over the Sea of Marmara, Pendik marina and the Princes' Islands, with Gözdağı Grove behind it and a public park next door. It is developed by Kiler GYO, the listed real estate investment company behind İstanbul Sapphire, in partnership with İLBANK. The project covers 78,620 m² and is planned as a low-rise neighbourhood: 686 homes from 2+1 to 4+1, including 3.5+1 homes with a maid's room, garden-floor homes with private gardens and duplexes, set in 35,000 m² of landscaping with a pond with bridges, ornamental pools, fountains and cascades, flower and fruit gardens, pergolas, a grassy event lawn, cycling and walking tracks, open-air sports areas and a playground in every part of the project. Residents have an indoor swimming pool in a glass pavilion, a fully equipped fitness centre, a sauna and a Turkish bath, and a closed car park with a space for every home, and a commercial street with shops, cafés and restaurants runs along the entrance. The M4 Kadıköy–Sabiha Gökçen metro, buses and the E-5 motorway are 50 m away, Pendik Marmaray station 2 km, Sabiha Gökçen Airport and the TEM motorway 10 km, and several hospitals, among them VM Medical Park, Medipol University Hospital and Şifa Hospital, about 2 km. The project is under construction and sales are under way. The project is eligible for Turkish citizenship.",
+      "longDescription": "Referans Pendik is taking shape in Pendik, on Istanbul's Asian side, on a hillside looking out over the Sea of Marmara, Pendik marina and the Princes' Islands, with Gözdağı Grove behind it and a public park next door. It is developed by Kiler GYO, the listed real estate investment company behind İstanbul Sapphire, in partnership with İLBANK. The project covers 78,620 m² and is planned as a low-rise neighbourhood: 686 homes from 2+1 to 4+1, including 3.5+1 homes with a maid's room, garden-floor homes with private gardens and duplexes, set in 35,000 m² of landscaping with a pond with bridges, ornamental pools, fountains and cascades, flower and fruit gardens, pergolas, a grassy event lawn, cycling and walking tracks, open-air sports areas and a playground in every part of the project. Residents have an indoor swimming pool in a glass pavilion, a fully equipped fitness centre, a sauna and a Turkish bath, and a closed car park with a space for every home, and a commercial street with shops, cafés and restaurants runs along the entrance. The M4 Kadıköy–Sabiha Gökçen metro, buses and the E-5 motorway are 50 m away, Pendik Marmaray station 2 km, Sabiha Gökçen Airport and the TEM motorway 10 km, and several hospitals, among them VM Medical Park, Medipol University Hospital and Şifa Hospital, about 2 km. The project is under construction, with delivery planned for August 2027, and sales are under way. The project is eligible for Turkish citizenship.",
       "highlights": [
         "Views of the Sea of Marmara, Pendik marina and the Princes' Islands",
         "By Kiler GYO, the developer of İstanbul Sapphire, in partnership with İLBANK",
         "Eligible for Turkish citizenship",
+        "Delivery planned for August 2027",
         "686 homes from 2+1 to 4+1, including garden-floor homes and duplexes",
         "Low-rise blocks with 35,000 m² of landscaping, a pond and walking paths",
         "Indoor pool, fitness centre, sauna and Turkish bath",
@@ -2032,6 +2057,67 @@
         {
           "place": "TÜYAP Fair and Congress Centre",
           "time": "8 km"
+        }
+      ]
+    },
+    "dragos": {
+      "name": "Özak Dragos",
+      "tagline": "Apartments facing the Princes' Islands in central Maltepe, by Özak GYO, steps from the M4 metro.",
+      "shortDescription": "Özak Dragos is a residential project under construction in the centre of Maltepe, on Istanbul's Asian side, built by Özak GYO: 458 apartments from 1+1 to 3+1 in 5 blocks on about 16,000 m², with views of the Princes' Islands and the Sea of Marmara, two outdoor pools and social facilities, the M4 metro within walking distance and Maltepe's shopping malls across the road. Eligible for Turkish citizenship.",
+      "longDescription": "Özak Dragos is rising in the centre of Maltepe on Istanbul's Asian side, in a location that looks out over the Princes' Islands and the Sea of Marmara. It is built by Özak GYO, the developer of Büyükyalı and Hayat Flora. The project covers about 16,000 m² on two facing plots and holds 458 apartments, from 1+1 to 3+1, in 5 blocks. Each plot has its own social facility with an outdoor swimming pool, a fitness centre, a café, a lounge, a sauna and children's play areas, and landscaped gardens and sports areas run between the blocks. The project sits beside the E-5 highway, within walking distance of the M4 Kadıköy – Sabiha Gökçen metro line and across the road from the Maltepe Piazza and Maltepe Park shopping malls, close to Marmaray and the coastal road, and the planned Kadıköy – Maltepe tram line will pass right in front of it. It neighbours Cengiz Aytmatov Park and Cumhuriyet Park, and the green Maltepe coastline is only 5 minutes away. Apartments range from 68 m² for a 1+1 to about 219 m² for a 3+1, and the developer offers a payment plan of 50% down with the balance over 24 months. Delivery is planned for March 2027, and the project is eligible for Turkish citizenship.",
+      "highlights": [
+        "Under construction, with delivery in March 2027",
+        "Eligible for Turkish citizenship",
+        "By Özak GYO, the developer of Büyükyalı and Hayat Flora",
+        "458 apartments from 1+1 to 3+1 in 5 blocks on about 16,000 m²",
+        "Views of the Princes' Islands and the Sea of Marmara",
+        "Two social facilities, each with an outdoor pool, fitness centre, café, lounge, sauna and play areas",
+        "M4 Kadıköy – Sabiha Gökçen metro within walking distance",
+        "Across the road from the Maltepe Piazza and Maltepe Park shopping malls",
+        "Maltepe coastline 5 minutes away",
+        "Payment plan: 50% down and the balance over 24 months"
+      ],
+      "nearby": [
+        {
+          "place": "M4 Kadıköy – Sabiha Gökçen metro",
+          "time": "Walking distance"
+        },
+        {
+          "place": "Maltepe Piazza shopping mall",
+          "time": "Across the road"
+        },
+        {
+          "place": "Maltepe Park shopping mall",
+          "time": "Across the road"
+        },
+        {
+          "place": "Cengiz Aytmatov Park and Cumhuriyet Park",
+          "time": "Next door"
+        },
+        {
+          "place": "Maltepe coastline",
+          "time": "5 min"
+        },
+        {
+          "place": "Marmara University Dragos campus"
+        },
+        {
+          "place": "Yeditepe University"
+        },
+        {
+          "place": "Bezmialem Dragos Hospital"
+        },
+        {
+          "place": "Maltepe Medical Park Hospital"
+        },
+        {
+          "place": "Kartal Dr. Lütfi Kırdar City Hospital"
+        },
+        {
+          "place": "Bostancı pier (İDO)"
+        },
+        {
+          "place": "Sabiha Gökçen Airport"
         }
       ]
     },
@@ -3285,11 +3371,11 @@
     },
     "home": {
       "title": "HADARA Real Estate | Your Real Estate Partner in Istanbul, Turkey",
-      "description": "Istanbul property partner since 2014: homes in 11 districts, from Beylikdüzü and Şişli to Beşiktaş and Pendik, with citizenship guidance."
+      "description": "Istanbul property partner since 2014: homes in 12 districts, from Beylikdüzü and Şişli to Beşiktaş, Pendik and Maltepe, with citizenship guidance."
     },
     "projects": {
       "title": "Our Projects in Istanbul – Apartments & Villas",
-      "description": "Apartments, villas and mixed-use projects in 11 Istanbul districts, from Beylikdüzü, Şişli and Beşiktaş to Pendik on the Asian side."
+      "description": "Apartments, villas and mixed-use projects in 12 Istanbul districts, from Beylikdüzü, Şişli and Beşiktaş to Pendik and Maltepe on the Asian side."
     },
     "about": {
       "title": "About HADARA – Development & Marketing Partner Since 2014",
@@ -3386,7 +3472,8 @@
       "verifiedOn": "Last checked: {date}",
       "priceOnRequest": "The price of {name} is available on request. Our team will send you the details on WhatsApp.",
       "priceText": "Prices for {name} depend on the unit, floor and payment plan, so our team sends today's offer on WhatsApp.",
-      "priceKnown": "{name}: {price}. Prices include VAT and vary by unit and payment method; the 4% title deed fee is not included. Our team can send you today's options on WhatsApp."
+      "priceKnown": "{name}: {price}. Prices include VAT and vary by unit and payment method; the 4% title deed fee is not included. Our team can send you today's options on WhatsApp.",
+      "priceKnownExVat": "{name}: {price}. Starting prices from the developer's price list; VAT, contract costs and the title deed fee are not included, and prices may change. Our team can send you today's options on WhatsApp."
     },
     "bubble": "Chat with us",
     "title": "HADARA Assistant",

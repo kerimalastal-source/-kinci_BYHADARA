@@ -133,6 +133,13 @@ export const PROJECT_NAMES: Record<string, Record<"en" | "ar" | "fa" | "fr" | "r
     "fr": "Referans Beylikdüzü",
     "ru": "Referans Beylikdüzü"
   },
+  "dragos": {
+    "en": "Özak Dragos",
+    "ar": "أوزاك دراغوس",
+    "fa": "اوزاک دراگوس",
+    "fr": "Özak Dragos",
+    "ru": "Özak Dragos"
+  },
   "lotus-sisli": {
     "en": "Lotus Şişli",
     "ar": "لوتس شيشلي",

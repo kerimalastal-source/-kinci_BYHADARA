@@ -536,7 +536,7 @@ function renderInfo(slug: string, topic: InfoTopic): string {
         p.price === "on-request"
           ? t("chat.info.priceOnRequest", { name })
           : p.price
-            ? t("chat.info.priceKnown", { name, price: priceHtml(p.price, p.priceFrom) })
+            ? t(p.priceExcludesVat ? "chat.info.priceKnownExVat" : "chat.info.priceKnown", { name, price: priceHtml(p.price, p.priceFrom) })
             : t("chat.info.priceText", { name })
       }</p>`;
       if (p.paymentPlan && !p.soldOut) {
