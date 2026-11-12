@@ -55,6 +55,10 @@
   ],
   "rewrites": [
     {
+      "source": "/api/whatsapp",
+      "destination": "/api/meta-event"
+    },
+    {
       "source": "/(login|register|account|admin)(/.*)?",
       "destination": "/"
     },

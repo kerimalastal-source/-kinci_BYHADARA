@@ -50,6 +50,7 @@ export async function updateInquiry(id: string, changes: { status?: InquiryStatu
 export function inquiryKindKey(inquiry: { kind: string; details?: Record<string, string> | null }): string {
   const form = inquiry.details?.form;
   if (form === "meta_lead") return "metaLead";
+  if (form === "whatsapp") return "whatsapp";
   return form === "guide" || form === "project" ? form : inquiry.kind;
 }
 

@@ -4150,7 +4150,7 @@
           "Nous ne partageons des données personnelles que lorsque c'est nécessaire, et uniquement les données nécessaires :"
         ],
         "items": [
-          "Les prestataires qui font fonctionner le Site pour nous : Vercel (hébergement, et localisation approximative des visites), Supabase (base de données et connexion du portail de revente, messages des formulaires du Site et des formulaires de nos publicités Facebook et Instagram, réservations de visites, et statistiques de visite anonymes), Google (polices, mesure d'audience et publicité) et Meta (WhatsApp, mesure et diffusion publicitaires, et les informations que vous nous envoyez via un formulaire ou un message WhatsApp dans l’une de nos publicités Facebook ou Instagram). La carte de notre page de contact est fournie par OpenStreetMap.",
+          "Les prestataires qui font fonctionner le Site pour nous : Vercel (hébergement, et localisation approximative des visites), Supabase (base de données et connexion du portail de revente, messages des formulaires du Site et des formulaires de nos publicités Facebook et Instagram, messages WhatsApp que vous envoyez à notre numéro professionnel, réservations de visites, et statistiques de visite anonymes), Google (polices, mesure d'audience et publicité) et Meta (WhatsApp, mesure et diffusion publicitaires, et les informations que vous nous envoyez via un formulaire ou un message WhatsApp dans l’une de nos publicités Facebook ou Instagram). La carte de notre page de contact est fournie par OpenStreetMap.",
           "Telegram et l'e-mail, qui transmettent à notre équipe des notifications internes : nouvelles visites (avec des informations anonymes uniquement), nouveaux messages et demandes (y compris les demandes envoyées via un formulaire intégré à l'une de nos publicités Facebook ou Instagram), et réservations de visites. Les e-mails de confirmation qui vous sont adressés sont envoyés via le service d'e-mail Resend.",
           "Les promoteurs des projets, lorsque c'est nécessaire pour traiter votre demande, par exemple pour réserver un logement ou finaliser un achat.",
           "Dans le portail de revente : les messages des acheteurs sont transmis au propriétaire de l'annonce, et les annonces approuvées sont publiées sur le Site.",
@@ -4245,6 +4245,7 @@
     "noResults": "Aucun résultat pour cette recherche.",
     "searchPlaceholder": "Rechercher par nom, téléphone, e-mail ou numéro de demande",
     "kinds": {
+      "whatsapp": "Message WhatsApp",
       "metaLead": "Formulaire publicitaire (Meta)",
       "manual": "Ajouté manuellement",
       "guide": "Question du guide de l'acheteur",
