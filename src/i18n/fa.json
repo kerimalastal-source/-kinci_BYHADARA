@@ -2420,7 +2420,11 @@
     "relatedProjectsEyebrow": "از پروژه‌های ما",
     "relatedProjectsTitle": "پروژه‌هایی که ممکن است برایتان جالب باشد",
     "relatedProjectsSubtitle": "چند پروژه از پروژه‌های ما که با موضوع این مقاله مرتبط‌اند؛ تیم ما با کمال میل به پرسش‌های شما درباره آن‌ها پاسخ می‌دهد.",
-    "relatedProjectsCta": "درباره این پروژه‌ها بپرسید"
+    "relatedProjectsCta": "درباره این پروژه‌ها بپرسید",
+    "relatedDistrictTitle": "پروژه‌های ما در {district}",
+    "relatedDistrictNearbyTitle": "پروژه‌های ما در {district} و اطراف آن",
+    "relatedDistrictSubtitle": "پروژه‌های ما که در {district} برای فروش موجودند؛ تیم ما با کمال میل جزئیات را برایتان می‌فرستد و بازدید حضوری یا تور ویدیویی ترتیب می‌دهد.",
+    "relatedDistrictNearbySubtitle": "پروژه‌های ما که در {district} و مناطق نزدیک آن برای فروش موجودند؛ تیم ما با کمال میل جزئیات را برایتان می‌فرستد و بازدید حضوری یا تور ویدیویی ترتیب می‌دهد."
   },
   "laws": {
     "heroEyebrow": "قوانین املاک",

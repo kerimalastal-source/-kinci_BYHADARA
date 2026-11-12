@@ -54,6 +54,11 @@ Work from the repository root (clone kerimalastal-source/-kinci_BYHADARA if need
    - `projects`: 3 project slugs from `src/data/projects.ts` that fit the topic (not
      `soldOut`), shown as "Projects you may like" under the article — e.g. villas for a
      villa topic, projects in the district of a district guide, ready homes vs. new launches.
+   - `district` (district guides only, owner's rule 2026-11-12): the district name exactly
+     as in `src/data/projects.ts` (e.g. `"Başakşehir"`). The box under the article then
+     shows **all** our available projects in that district ("Our Projects in Başakşehir");
+     when there are fewer than 3, `projects` fills it up with projects in nearby districts
+     ("… and Around"), so list the nearest ones there.
 6. `python3 scripts/blog/add-article.py scripts/blog/out/<slug>.json --draft` must print
    `draft ok` (fix and re-run otherwise). Look at `scripts/blog/out/<slug>.jpg` once.
 7. `node scripts/blog/build-review.mjs <drafts.json from step 2> --add scripts/blog/out/<slug>.json`

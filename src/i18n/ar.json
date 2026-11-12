@@ -2346,7 +2346,11 @@
     "relatedProjectsEyebrow": "من مشاريعنا",
     "relatedProjectsTitle": "مشاريع قد تهمك",
     "relatedProjectsSubtitle": "مشاريع مختارة تتصل بموضوع هذا المقال، ويسعد فريقنا بالإجابة عن أسئلتك حولها.",
-    "relatedProjectsCta": "استفسر عن هذه المشاريع"
+    "relatedProjectsCta": "استفسر عن هذه المشاريع",
+    "relatedDistrictTitle": "مشاريعنا في {district}",
+    "relatedDistrictNearbyTitle": "مشاريعنا في {district} وما حولها",
+    "relatedDistrictSubtitle": "مشاريعنا المتاحة للبيع في {district}، ويسعد فريقنا بإرسال التفاصيل إليك وترتيب زيارة أو جولة عبر الفيديو.",
+    "relatedDistrictNearbySubtitle": "مشاريعنا المتاحة للبيع في {district} والمناطق القريبة منها، ويسعد فريقنا بإرسال التفاصيل إليك وترتيب زيارة أو جولة عبر الفيديو."
   },
   "laws": {
     "heroEyebrow": "قوانين العقار",

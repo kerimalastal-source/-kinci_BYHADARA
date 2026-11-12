@@ -1,4 +1,4 @@
-import { t, tRaw, link } from "../i18n";
+import { t, tRaw, link, placeName } from "../i18n";
 import { getBlogPostBySlug, getSortedBlogPosts, type BlogPost } from "../data/blog";
 import { getProjectBySlug, getSortedProjects, type Project } from "../data/projects";
 import { renderProjectCard } from "../components/projectCard";
@@ -18,20 +18,42 @@ function articleBlock(text: string): string {
 }
 
 // The article's chosen projects (sold-out ones skipped), topped up with the first available projects.
-function relatedProjects(post: BlogPost): Project[] {
-  const picked = (post.relatedProjects ?? [])
+// A district guide shows every available project in its district instead, topped up to 3 with its
+// chosen projects around it.
+function relatedProjects(post: BlogPost): { projects: Project[]; inDistrict: number } {
+  const chosen = (post.relatedProjects ?? [])
     .map((slug) => getProjectBySlug(slug))
     .filter((p): p is Project => !!p && !p.soldOut);
+  if (post.district) {
+    const here = getSortedProjects().filter((p) => !p.soldOut && p.district === post.district);
+    if (here.length) {
+      const picked = [...here];
+      for (const p of chosen) {
+        if (picked.length >= 3) break;
+        if (!picked.includes(p)) picked.push(p);
+      }
+      return { projects: picked, inDistrict: here.length };
+    }
+  }
+  const picked = [...chosen];
   for (const p of getSortedProjects()) {
     if (picked.length >= 3) break;
     if (!p.soldOut && !picked.includes(p)) picked.push(p);
   }
-  return picked.slice(0, 3);
+  return { projects: picked.slice(0, 3), inDistrict: 0 };
 }
 
 function renderRelatedProjects(post: BlogPost): string {
-  const projects = relatedProjects(post);
+  const { projects, inDistrict } = relatedProjects(post);
   if (!projects.length) return "";
+  const district = post.district && inDistrict ? placeName(post.district) : "";
+  const nearby = inDistrict < projects.length;
+  const title = !district
+    ? t("blog.relatedProjectsTitle")
+    : t(nearby ? "blog.relatedDistrictNearbyTitle" : "blog.relatedDistrictTitle").replace("{district}", district);
+  const subtitle = district
+    ? t(nearby ? "blog.relatedDistrictNearbySubtitle" : "blog.relatedDistrictSubtitle").replace("{district}", district)
+    : t("blog.relatedProjectsSubtitle");
   const inquiry = link(`/contact?project=${projects.map((p) => p.slug).join(",")}`);
   return `
     <section class="section other-projects blog-related">
@@ -39,8 +61,8 @@ function renderRelatedProjects(post: BlogPost): string {
         <div class="section-head">
           <div>
             <p class="eyebrow">${t("blog.relatedProjectsEyebrow")}</p>
-            <h2 class="section-title">${t("blog.relatedProjectsTitle")}</h2>
-            <p class="section-subtitle">${t("blog.relatedProjectsSubtitle")}</p>
+            <h2 class="section-title">${title}</h2>
+            <p class="section-subtitle">${subtitle}</p>
           </div>
           <a class="btn btn--primary" href="${inquiry}">${t("blog.relatedProjectsCta")}</a>
         </div>

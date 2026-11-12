@@ -28,6 +28,10 @@ scripts/blog/out/<slug>.jpg for the review page.
 "projects" (optional, up to 3 project slugs from src/data/projects.ts that are not sold out) fills the
 "Projects you may like" box under the article (`relatedProjects` in src/data/blog.ts); with --replace
 it replaces the article's current list only when given.
+
+"district" (optional, district guides only): the Turkish district name exactly as in
+src/data/projects.ts (e.g. "Başakşehir"). The box under the article then shows all our available
+projects in that district, topped up to 3 with "projects".
 """
 import json
 import re
@@ -108,6 +112,13 @@ def main() -> None:
     projects_line = (
         "    relatedProjects: [" + ", ".join(f'"{p}"' for p in projects) + "],\n" if projects else ""
     )
+    district = art.get("district")
+    if district is not None:
+        known = set(re.findall(r'\n    district: "([^"]+)"', (ROOT / "src/data/projects.ts").read_text(encoding="utf-8")))
+        if not isinstance(district, str) or district not in known:
+            fail(f'"district" must be a project district from src/data/projects.ts: {sorted(known)}')
+        projects_line += f'    district: "{district}",\n'
+
 
     words = len(" ".join(art["en"]["body"]).split())
     if replace:
@@ -137,8 +148,11 @@ def main() -> None:
             new_entry = re.sub(r'updated: "[0-9-]+",', f'updated: "{today}",', entry)
         else:
             new_entry = re.sub(r'(published: "[0-9-]+",\n)', rf'\1    updated: "{today}",\n', entry)
-        if projects:
-            new_entry = re.sub(r"    relatedProjects: \[[^\]]*\],\n", "", new_entry)
+        if projects or district:
+            if projects:
+                new_entry = re.sub(r"    relatedProjects: \[[^\]]*\],\n", "", new_entry)
+            if district:
+                new_entry = re.sub(r'    district: "[^"]*",\n', "", new_entry)
             new_entry = new_entry.rstrip(" ") + projects_line + "    "
         blog_ts.write_text(ts[:entry_at] + new_entry + ts[entry_end:], encoding="utf-8")
         print(f"replaced {slug}: {words} English words, updated {today}")

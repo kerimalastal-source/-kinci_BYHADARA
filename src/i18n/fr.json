@@ -2340,7 +2340,11 @@
     "relatedProjectsEyebrow": "Nos projets",
     "relatedProjectsTitle": "Des projets qui pourraient vous intéresser",
     "relatedProjectsSubtitle": "Une sélection de nos projets en lien avec cet article. Notre équipe répond volontiers à vos questions.",
-    "relatedProjectsCta": "Se renseigner sur ces projets"
+    "relatedProjectsCta": "Se renseigner sur ces projets",
+    "relatedDistrictTitle": "Nos projets à {district}",
+    "relatedDistrictNearbyTitle": "Nos projets à {district} et aux alentours",
+    "relatedDistrictSubtitle": "Nos projets disponibles à la vente à {district}. Notre équipe vous envoie volontiers les détails et organise une visite ou une visite vidéo.",
+    "relatedDistrictNearbySubtitle": "Nos projets disponibles à la vente à {district} et dans les quartiers voisins. Notre équipe vous envoie volontiers les détails et organise une visite ou une visite vidéo."
   },
   "laws": {
     "heroEyebrow": "Lois immobilières",

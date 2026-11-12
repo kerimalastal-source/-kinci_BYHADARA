@@ -2342,7 +2342,11 @@
     "relatedProjectsEyebrow": "Наши проекты",
     "relatedProjectsTitle": "Проекты, которые могут вас заинтересовать",
     "relatedProjectsSubtitle": "Несколько наших проектов, связанных с темой статьи. Наша команда с радостью ответит на ваши вопросы о них.",
-    "relatedProjectsCta": "Узнать об этих проектах"
+    "relatedProjectsCta": "Узнать об этих проектах",
+    "relatedDistrictTitle": "Наши проекты в районе {district}",
+    "relatedDistrictNearbyTitle": "Наши проекты в районе {district} и рядом",
+    "relatedDistrictSubtitle": "Наши проекты, доступные для покупки в районе {district}. Наша команда с радостью пришлёт подробности и организует просмотр или видеотур.",
+    "relatedDistrictNearbySubtitle": "Наши проекты, доступные для покупки в районе {district} и в соседних районах. Наша команда с радостью пришлёт подробности и организует просмотр или видеотур."
   },
   "laws": {
     "heroEyebrow": "Законы о недвижимости",
