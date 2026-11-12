@@ -97,6 +97,12 @@
    "category": "About Istanbul"
   },
   {
+   "slug": "maltepe-district-guide",
+   "brief": "Maltepe district guide for foreign buyers: Asian side by the Sea of Marmara facing the Princes' Islands, the M4 metro, malls and parks; nearby places ONLY from projectsData.dragos.nearby; Özak Dragos as the example. Residence permits: only lawsData.rules.residence-closed-areas wording.",
+   "photo": "/images/projects/dragos/aerial-islands.jpg",
+   "category": "About Istanbul"
+  },
+  {
    "slug": "payment-plans-explained",
    "brief": "Paying for property in Turkey: cash vs installment plans offered by developers on new projects, deposits and schedules in general terms, currency — no rates or percentages; faq.categories[1].items[2].",
    "photo": "/images/projects/beylikduzu-living/living-room.jpg",

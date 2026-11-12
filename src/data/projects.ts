@@ -445,18 +445,24 @@ export const projects: Project[] = [
     city: "Istanbul",
     status: "ongoing",
     // Owner, 2026-10-18: under construction, delivery November 2027, 30/30 instalments, eligible for citizenship.
-    paymentPlan: { downPercent: 30, months: 30 },
+    paymentPlan: { downPercent: 40, months: 18 },
     lifestyle: ["sea", "nature"],
     unitsAvailable: true,
     priority: 1.7,
     developer: "Mutlu İnşaat",
     price: "on-request",
     // Facts, areas and images from the developer's catalog ("CasaBlu Vadi Katolog", Drive).
-    coverImage: img("casablu-vadi", "project-aerial", 2000, 855, "CasaBlu Vadi blocks beside Beylikdüzü Yaşam Vadisi and the Marmara Sea, aerial view"),
+    coverImage: img("casablu-vadi", "blocks-aerial", 2000, 1092, "CasaBlu Vadi low-rise residential blocks around a landscaped central garden, aerial view"),
     gallery: [
+      img("casablu-vadi", "courtyard-night", 2000, 1415, "CasaBlu Vadi blocks and landscaped courtyard lit at night"),
+      img("casablu-vadi", "facade-dusk", 1174, 687, "CasaBlu Vadi residential block and garden pavilion at dusk"),
+      img("casablu-vadi", "a1-entrance", 1778, 1015, "Entrance of CasaBlu Vadi block A1 with its garden path"),
       img("casablu-vadi", "aerial-valley-sea", 2000, 1415, "CasaBlu Vadi between Yaşam Vadisi and the Marmara Sea, with Ambarlı in the distance"),
+      img("casablu-vadi", "aerial-sea", 1180, 1298, "Aerial view of CasaBlu Vadi with the Marmara Sea beyond"),
+      img("casablu-vadi", "terrace-sunset", 1778, 977, "CasaBlu Vadi terrace with a sea view at sunset"),
       img("casablu-vadi", "living-sea-sunset", 2000, 1100, "CasaBlu Vadi living room opening onto a sea-view terrace at sunset"),
       img("casablu-vadi", "living-terrace", 2000, 1146, "CasaBlu Vadi living room and terrace above the sea"),
+      img("casablu-vadi", "living-night", 1728, 1901, "CasaBlu Vadi living room and sea-view terrace in the evening"),
       img("casablu-vadi", "bedroom-sea", 1179, 657, "CasaBlu Vadi bedroom with sea view and walk-in wardrobe"),
       img("casablu-vadi", "kitchen-dining", 1179, 657, "CasaBlu Vadi kitchen and dining area with sea view"),
       img("casablu-vadi", "indoor-pool", 727, 668, "CasaBlu Vadi indoor swimming pool"),
@@ -470,12 +476,13 @@ export const projects: Project[] = [
       { value: "17,263 m²", labelKey: "constructionArea" },
       { value: "2+1 – 6+1", labelKey: "layout" }
     ],
-    // Catalog plan pages: "satışa esas brüt" as gross, and net area. The 5+1 type and one 4+1 type are on catalog
-    // pages not read yet; one 6+1 type's saleable area is cut off in the catalog itself (hence "+").
+    // Catalog plan pages: "satışa esas brüt" as gross, and net area. The 5+1 (Tip 6) and one 6+1 type have their
+    // saleable area cut off in the catalog itself (5+1: net only; 6+1: "+").
     residences: [
       { kind: "apartment", layout: "2+1", gross: "102.51 – 192.56 m²", net: "56.80 – 98.25 m²", planTypes: 7 },
       { kind: "apartment", layout: "3+1", gross: "155.94 – 250.92 m²", net: "100.00 – 148.15 m²", planTypes: 13 },
-      { kind: "apartment", layout: "4+1", gross: "194.15 – 382.87 m²", net: "126.25 – 223.15 m²" },
+      { kind: "apartment", layout: "4+1", gross: "194.15 – 382.87 m²", net: "126.25 – 223.15 m²", planTypes: 9 },
+      { kind: "apartment", layout: "5+1", net: "220.40 m²", garden: "21.50 m²", floors: 2 },
       { kind: "apartment", layout: "6+1", gross: "363.80 m²+", net: "215.40 – 240.85 m²", planTypes: 2 }
     ],
     amenities: [
