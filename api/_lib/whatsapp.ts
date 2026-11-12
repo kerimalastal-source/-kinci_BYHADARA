@@ -14,6 +14,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { escapeHtml } from "./telegram.js";
 import { ISTANBUL } from "./bookingMessages.js";
 import { adCampaign } from "./whatsappAds.js";
+import { STAGE_AR } from "./followups.js";
 
 /** One message as the server keeps it. */
 export interface WaMessage {
@@ -120,6 +121,13 @@ export interface SaveResult {
   reference?: string;
   /** A new customer was opened by this message. */
   created?: boolean;
+  /** First WhatsApp message today from a customer already in our records (migration 0040). */
+  returning?: boolean;
+  /** Their previous WhatsApp message (ISO), or null. */
+  last_at?: string | null;
+  /** The name in our records and the pipeline stage (migration 0040). */
+  name?: string;
+  stage?: string | null;
   duplicate?: boolean;
   error?: string;
 }
@@ -153,7 +161,44 @@ export function newCustomerAlert(m: WaMessage, reference: string): string {
   return lines.join("\n");
 }
 
-/** Saves each message (oldest first) and announces new customers. Returns how many were saved. */
+const istanbulDay = (ms: number) => new Intl.DateTimeFormat("en-CA", { timeZone: ISTANBUL }).format(ms);
+
+/** "أمس", "قبل يومين", "قبل 5 أيام", "قبل 12 يوماً" between two moments, in Istanbul days. */
+export function daysAgo(fromMs: number, toMs: number): string {
+  const days = Math.round((Date.parse(istanbulDay(toMs)) - Date.parse(istanbulDay(fromMs))) / 86_400_000);
+  if (days <= 0) return "اليوم";
+  if (days === 1) return "أمس";
+  if (days === 2) return "قبل يومين";
+  if (days <= 10) return `قبل ${days} أيام`;
+  return `قبل ${days} يوماً`;
+}
+
+/** The Telegram alert when a customer already in our records writes again (all values escaped). */
+export function returningAlert(m: WaMessage, r: SaveResult): string {
+  const stage = r.stage ? STAGE_AR[r.stage] ?? r.stage : "";
+  const lines = [
+    `<b>💬 حضارة للعقار — زبون رجع كتب على واتساب</b>`,
+    "",
+    `👤 <b>${escapeHtml(r.name || m.name || "—")}</b>${stage ? ` · ${escapeHtml(stage)}` : ""}`,
+    `📞 ‎+${escapeHtml(m.waId)} · <a href="https://wa.me/${m.waId}">واتساب</a>`
+  ];
+  const last = r.last_at ? Date.parse(r.last_at) : NaN;
+  lines.push(
+    Number.isFinite(last)
+      ? `🕓 آخر رسالة واتساب منه: ‎${clock(last)} (${daysAgo(last, m.at)})`
+      : `🕓 أول رسالة واتساب منه (مسجّل عندنا من قبل)`
+  );
+  if (m.ad) lines.push(`📣 من إعلان: ${escapeHtml(m.ad.headline || m.ad.id)}`);
+  lines.push("", `✉️ ${escapeHtml(m.text.length > 500 ? `${m.text.slice(0, 500)}…` : m.text)}`, "");
+  lines.push(`🕒 ‎${clock(m.at)} (توقيت إسطنبول)`);
+  if (r.reference) {
+    lines.push(`🗂️ سجل الزبون: <a href="https://www.hadararealestate.com/ar/admin/customers?q=${encodeURIComponent(r.reference)}">${escapeHtml(r.reference)}</a>`);
+  }
+  return lines.join("\n");
+}
+
+/** Saves each message (oldest first) and announces new customers, and customers who write
+ *  again (once a day each). Returns how many were saved. */
 export async function handleMessages(messages: WaMessage[], deps: WaDeps): Promise<number> {
   let saved = 0;
   for (const m of [...messages].sort((a, b) => a.at - b.at)) {
@@ -181,6 +226,7 @@ export async function handleMessages(messages: WaMessage[], deps: WaDeps): Promi
     if (result.duplicate) continue;
     saved++;
     if (result.created && result.reference) await deps.telegram(newCustomerAlert(m, result.reference));
+    else if (result.returning) await deps.telegram(returningAlert(m, result));
   }
   return saved;
 }

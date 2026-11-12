@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { createHmac } from "node:crypto";
 import { readdirSync, readFileSync } from "node:fs";
 import { PGlite } from "@electric-sql/pglite";
-import { handleMessages, messageSource, newCustomerAlert, parseWebhook, validSignature } from "../.test-build/_lib/whatsapp.js";
+import { daysAgo, handleMessages, messageSource, newCustomerAlert, parseWebhook, returningAlert, validSignature } from "../.test-build/_lib/whatsapp.js";
 
 const MIGRATIONS = new URL("../supabase/migrations/", import.meta.url);
 
@@ -52,6 +52,34 @@ test("the ad source names the campaign, or ctwa-<id> for an unknown ad", () => {
   assert.equal(messageSource(null), "utm_source=whatsapp");
 });
 
+test("handleMessages announces a customer who writes again, and the alert text", async () => {
+  const alerts = [];
+  const msgs = parseWebhook(webhook([textMessage("wamid.9", 1762934400, "<back>")]));
+  await handleMessages(msgs, {
+    secret: "S",
+    save: async () => ({ reference: "HQ-111111", created: false, returning: true, last_at: "2025-11-05T09:00:00Z", name: "Ali <x>", stage: "contacted" }),
+    telegram: async (html) => {
+      alerts.push(html);
+      return true;
+    }
+  });
+  assert.equal(alerts.length, 1);
+  assert.match(alerts[0], /زبون رجع كتب على واتساب/);
+  assert.match(alerts[0], /Ali &lt;x&gt;<\/b> · تم التواصل/);
+  assert.match(alerts[0], /قبل 7 أيام/);
+  assert.match(alerts[0], /&lt;back&gt;/);
+  assert.match(alerts[0], /HQ-111111/);
+  assert.match(returningAlert(msgs[0], { reference: "HQ-1", returning: true, last_at: null }), /أول رسالة واتساب منه/);
+  // Not returning (same day, or before 0040 ran): no alert.
+  const none = [];
+  await handleMessages(msgs, { secret: "S", save: async () => ({ reference: "HQ-1", created: false }), telegram: async (h) => none.push(h) > 0 });
+  assert.equal(none.length, 0);
+  const day = (iso) => Date.parse(iso);
+  assert.equal(daysAgo(day("2026-11-11T20:00:00Z"), day("2026-11-12T08:00:00Z")), "أمس");
+  assert.equal(daysAgo(day("2026-11-10T08:00:00Z"), day("2026-11-12T08:00:00Z")), "قبل يومين");
+  assert.equal(daysAgo(day("2026-10-20T08:00:00Z"), day("2026-11-12T08:00:00Z")), "قبل 23 يوماً");
+});
+
 test("handleMessages saves oldest first and alerts only a new customer", async () => {
   const saved = [];
   const alerts = [];
@@ -88,7 +116,7 @@ async function database() {
     create table public.listings (id int);
     create function public.is_admin() returns boolean language sql as
       $$ select coalesce(current_setting('test.admin', true), 'true') = 'true' $$;`);
-  for (const file of readdirSync(MIGRATIONS).filter((f) => f.endsWith(".sql") && f.slice(0, 4) >= "0002" && f.slice(0, 4) <= "0039").sort()) {
+  for (const file of readdirSync(MIGRATIONS).filter((f) => f.endsWith(".sql") && f.slice(0, 4) >= "0002" && f.slice(0, 4) <= "0040").sort()) {
     await db.exec(readFileSync(new URL(file, MIGRATIONS), "utf8"));
   }
   const secret = (await db.query("select value from public.internal_secrets where name = 'cron'")).rows[0].value;
@@ -102,8 +130,39 @@ const save = async (db, secret, o = {}) => {
   ).rows[0].r;
 };
 
-test("migration 0039 is plain ASCII", () => {
-  assert.ok(/^[\x00-\x7F]*$/.test(readFileSync(new URL("0039_whatsapp_messages.sql", MIGRATIONS), "utf8")));
+test("migrations 0039 and 0040 are plain ASCII", () => {
+  for (const f of ["0039_whatsapp_messages.sql", "0040_whatsapp_returning.sql"]) {
+    assert.ok(/^[\x00-\x7F]*$/.test(readFileSync(new URL(f, MIGRATIONS), "utf8")), f);
+  }
+});
+
+test("a customer in the records who writes again is announced once a day", async () => {
+  const { db, secret } = await database();
+  const added = (await db.query("select public.admin_add_customer('Ali', '+965 9988 7766', '', 'KW', 'whatsapp', '', '{}', '') as r")).rows[0].r;
+  // First WhatsApp message from a customer added by hand: announced, no earlier message.
+  const r1 = await save(db, secret, { id: "wamid.R1", at: "2026-11-10T08:00:00Z" });
+  assert.equal(r1.created, false);
+  assert.equal(r1.returning, true);
+  assert.equal(r1.last_at, null);
+  assert.equal(r1.name, "Ali");
+  assert.equal(r1.reference, added.reference);
+  assert.ok(r1.stage);
+  // Same Istanbul day: not again.
+  const r2 = await save(db, secret, { id: "wamid.R2", at: "2026-11-10T18:00:00Z" });
+  assert.equal(r2.returning, false);
+  // 23:30 UTC on the 10th is already the 11th in Istanbul: announced, with the last message.
+  const r3 = await save(db, secret, { id: "wamid.R3", at: "2026-11-10T23:30:00Z" });
+  assert.equal(r3.returning, true);
+  assert.equal(new Date(r3.last_at).toISOString(), "2026-11-10T18:00:00.000Z");
+  await db.close();
+});
+
+test("a brand-new customer is never 'returning'", async () => {
+  const { db, secret } = await database();
+  const r = await save(db, secret);
+  assert.equal(r.created, true);
+  assert.equal(r.returning, false);
+  await db.close();
 });
 
 test("a first message opens a customer; later messages only add to the activity log", async () => {
