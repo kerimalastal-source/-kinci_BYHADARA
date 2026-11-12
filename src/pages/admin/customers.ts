@@ -12,6 +12,8 @@ import { crmFormHtml, followUpTag, readCrmForm, stageTag, syncCrmForm } from "./
 import { SOURCES, countryOptions, linkCountryToPhone } from "./addCustomer";
 import { getPhoneValue, isPhoneValid, renderPhoneInput, setPhoneInvalid, setPhoneValue } from "../../components/phoneInput";
 import { toWesternDigits } from "../../utils/numbers";
+import { activitiesOf, addActivity, deleteActivity, fetchActivities, type CrmActivity } from "../../data/crmActivities";
+import { activityLogHtml, readActivityForm } from "./activityLog";
 
 /**
  * Customers (/admin/customers): every inquiry and video tour booking grouped by person —
@@ -188,8 +190,11 @@ function editFormHtml(c: Customer): string {
   </form>`;
 }
 
-/** `lead` is the customer's pipeline row (null: none yet; undefined: pipeline not set up — 0010). */
-function renderCustomer(c: Customer, open: boolean, lead: CrmLead | null | undefined): string {
+/**
+ * `lead` is the customer's pipeline row (null: none yet; undefined: pipeline not set up — 0010);
+ * `activities` every customer's activity log (null: migration 0037 not run yet).
+ */
+function renderCustomer(c: Customer, open: boolean, lead: CrmLead | null | undefined, activities: CrmActivity[] | null): string {
   const inquiries = c.entries.filter((e) => e.type === "inquiry").length;
   const tours = c.entries.filter((e) => e.type === "tour").length;
   const latestInquiry = c.entries.find((e): e is Extract<Entry, { type: "inquiry" }> => e.type === "inquiry")?.item;
@@ -236,6 +241,7 @@ function renderCustomer(c: Customer, open: boolean, lead: CrmLead | null | undef
       </div>
       ${editFormHtml(c)}
       ${lead !== undefined ? crmFormHtml(c.id, lead, projects) : `<p class="admin-panel__hint">${t("adminCrm.unavailable")}</p>`}
+      ${lead !== undefined ? activityLogHtml(c.id, activities && activitiesOf(activities, lead?.id)) : ""}
       <h3 class="customer-card__history">${t("adminCustomers.history")}</h3>
       <ol class="customer-entries">${c.entries.map(entryHtml).join("")}</ol>
       <div class="booking-card__actions">${replies}</div>
@@ -268,7 +274,22 @@ export function renderAdminCustomers(main: HTMLElement): void {
   let customers: Customer[] = [];
   /** Pipeline rows; null until migration 0010 has run. */
   let leads: CrmLead[] | null = null;
+  /** Every activity, newest first; null until migration 0037 has run. */
+  let activities: CrmActivity[] | null = null;
   const leadOf = (c: Customer) => (leads ? leadFor(leads, c.keys) : undefined);
+  /** Repaints one customer's card (kept open) and shows `message` in the notice `selector`. */
+  const repaint = (customer: Customer, card: Element, selector: string, message: string, ok = true) => {
+    card.outerHTML = renderCustomer(customer, true, leadOf(customer), activities);
+    const fresh = [...listEl.querySelectorAll<HTMLElement>(".customer-card")].find((el) =>
+      el.querySelector(`[data-crm-form="${CSS.escape(customer.id)}"]`)
+    );
+    const notice = fresh?.querySelector<HTMLElement>(selector);
+    if (notice) {
+      notice.textContent = message;
+      notice.classList.toggle("booking-card__error--ok", ok);
+    }
+    return fresh;
+  };
 
   /** `openEntry`: keep the customer holding this record open (after editing their details). */
   const paint = (openEntry?: string) => {
@@ -276,16 +297,22 @@ export function renderAdminCustomers(main: HTMLElement): void {
     countEl.textContent = t("adminCustomers.count", { count: found.length });
     // One match (e.g. from a card's "Customer history" link) opens straight away.
     listEl.innerHTML = found.length
-      ? found.map((c) => renderCustomer(c, found.length === 1 || (!!openEntry && c.entries.some((e) => e.item.id === openEntry)), leadOf(c))).join("")
+      ? found.map((c) => renderCustomer(c, found.length === 1 || (!!openEntry && c.entries.some((e) => e.item.id === openEntry)), leadOf(c), activities)).join("")
       : `<p class="admin-bookings__empty">${t(query.trim() ? "adminInquiries.noResults" : "adminCustomers.empty")}</p>`;
   };
 
   const load = (openEntry?: string) =>
-    Promise.all([fetchInquiries().catch(() => [] as Inquiry[]), fetchTourBookings().catch(() => [] as TourBooking[]), fetchCrmLeads()]).then(
-      ([inquiries, bookings, crm]) => {
+    Promise.all([
+      fetchInquiries().catch(() => [] as Inquiry[]),
+      fetchTourBookings().catch(() => [] as TourBooking[]),
+      fetchCrmLeads(),
+      fetchActivities().catch(() => null)
+    ]).then(
+      ([inquiries, bookings, crm, acts]) => {
         if (main.dataset.requestId !== requestId) return;
         customers = groupCustomers(inquiries, bookings);
         leads = crm;
+        activities = acts;
         paint(openEntry);
       }
     );
@@ -410,15 +437,57 @@ export function renderAdminCustomers(main: HTMLElement): void {
       return;
     }
     leads = [saved, ...leads.filter((l) => l.id !== saved.id)];
-    // Repaint this card (tags in its summary) and keep it open.
-    const card = form.closest<HTMLDetailsElement>(".customer-card")!;
-    card.outerHTML = renderCustomer(customer, true, saved);
-    const fresh = listEl.querySelector<HTMLFormElement>(`[data-crm-form="${CSS.escape(customer.id)}"]`);
-    const freshNotice = fresh?.querySelector<HTMLElement>("[data-crm-notice]");
-    if (freshNotice) {
-      freshNotice.textContent = t("adminCrm.saved");
-      freshNotice.classList.add("booking-card__error--ok");
+    // A stage change is logged by the database: reload the log, then repaint this card (kept open).
+    if (activities) activities = (await fetchActivities().catch(() => null)) ?? activities;
+    repaint(customer, form.closest(".customer-card")!, "[data-crm-notice]", t("adminCrm.saved"));
+  });
+
+  // Activity log: add an entry (creating the customer's pipeline row first if they have none).
+  listEl.addEventListener("submit", async (e) => {
+    const form = (e.target as Element).closest<HTMLFormElement>("[data-activity-form]");
+    if (!form || !leads || !activities) return;
+    e.preventDefault();
+    const customer = customers.find((c) => c.id === form.dataset.activityForm);
+    const notice = form.querySelector<HTMLElement>("[data-activity-notice]")!;
+    const say = (key: string) => {
+      notice.textContent = t(key);
+      notice.classList.remove("booking-card__error--ok");
+    };
+    if (!customer) return;
+    const read = readActivityForm(form);
+    if ("error" in read) return say(read.error);
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    button.disabled = true;
+    let lead = leadFor(leads, customer.keys);
+    if (!lead) {
+      const created = await saveCrmLead(null, { keys: customer.keys, name: customer.name, email: customer.emails[0] ?? null, phone: customer.phones[0] ?? null }, {});
+      if (created && created !== "needs0032") {
+        lead = created;
+        leads = [created, ...leads];
+      }
     }
+    const added = lead ? await addActivity({ lead_id: lead.id, ...read }) : null;
+    button.disabled = false;
+    if (!added || added === "needs0037") return say(added ? "adminCrm.activity.needs0037" : "adminCrm.activity.error");
+    activities = (await fetchActivities().catch(() => null)) ?? [added, ...activities];
+    repaint(customer, form.closest(".customer-card")!, "[data-activity-notice]", t("adminCrm.activity.added"));
+  });
+
+  listEl.addEventListener("click", async (e) => {
+    const button = (e.target as Element).closest<HTMLButtonElement>("[data-activity-delete]");
+    const id = button?.closest<HTMLElement>("[data-activity]")?.dataset.activity;
+    const card = button?.closest(".customer-card");
+    const customer = customers.find((c) => card?.querySelector(`[data-activity-form="${CSS.escape(c.id)}"]`));
+    if (!button || !id || !card || !customer || !activities) return;
+    if (!window.confirm(t("adminCrm.activity.deleteConfirm"))) return;
+    button.disabled = true;
+    if (!(await deleteActivity(id))) {
+      button.disabled = false;
+      window.alert(t("adminCrm.activity.error"));
+      return;
+    }
+    activities = activities.filter((a) => a.id !== id);
+    repaint(customer, card, "[data-activity-notice]", t("adminCrm.activity.deleted"));
   });
 
   searchEl.addEventListener("input", () => {

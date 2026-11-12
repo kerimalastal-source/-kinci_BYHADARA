@@ -5602,6 +5602,223 @@ body.map-open .back-to-top {
   font-size: 0.88rem;
 }
 
+/* Activity log on a customer's record (/admin/customers) */
+.activity-log {
+  display: grid;
+  gap: 0.75rem;
+  margin-block: 1rem;
+}
+
+.activity-log .customer-card__history {
+  margin: 0;
+}
+
+.activity-form {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 12px);
+  background: var(--color-surface-alt);
+}
+
+.activity-kinds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.activity-kind {
+  position: relative;
+  cursor: pointer;
+}
+
+.activity-kind input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.activity-kind span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-height: 38px;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.activity-kind input:checked + span {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.activity-kind input:focus-visible + span {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.activity-form textarea {
+  min-height: 3.5rem;
+  resize: vertical;
+}
+
+.activity-form__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.activity-form__row .inquiry-card__field {
+  flex: 0 1 15rem;
+  min-width: 0;
+}
+
+.activity-form__row .btn {
+  min-height: 44px;
+}
+
+.activity-form .booking-card__error {
+  margin: 0;
+}
+
+.activity-form .booking-card__error:empty {
+  display: none;
+}
+
+.activity-log__empty {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.activity-list {
+  position: relative;
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The timeline's line, behind the icons. */
+.activity-list::before {
+  content: "";
+  position: absolute;
+  inset-block: 0.75rem;
+  inset-inline-start: 15px;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.activity-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.activity-item__icon {
+  flex: 0 0 32px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface);
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.activity-item__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.activity-item--stage .activity-item__main {
+  border-style: dashed;
+  background: transparent;
+}
+
+.activity-item p {
+  margin: 0;
+}
+
+.activity-item__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.activity-item__what {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.6rem;
+}
+
+.activity-item--stage .activity-item__head strong {
+  color: var(--color-ink-soft);
+  font-weight: 600;
+}
+
+.activity-item__date {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.activity-item__delete {
+  flex: 0 0 28px;
+  margin-block: -0.2rem;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.activity-item__delete:hover,
+.activity-item__delete:focus-visible {
+  background: #fbe9e7;
+  color: #a2321f;
+}
+
+.activity-item__body {
+  margin-top: 0.3rem !important;
+  color: var(--color-ink);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.pipeline-card__activity {
+  color: var(--color-ink-soft);
+}
+
+.pipeline-card__when {
+  white-space: nowrap;
+}
+
 /* Ready WhatsApp replies (admin cards) */
 .wa-replies {
   position: relative;

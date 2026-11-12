@@ -8,6 +8,8 @@ import { adminHero, adminNav } from "./nav";
 import { groupCustomers, type Customer } from "./customers";
 import { followUpTag, money, projectName, stageLabel } from "./crmForm";
 import { addCustomerHtml, initAddCustomer } from "./addCustomer";
+import { activitiesOf, fetchActivities, type CrmActivity } from "../../data/crmActivities";
+import { lastActivityLine } from "./activityLog";
 
 /**
  * Sales pipeline (/admin/pipeline): every customer (from the inquiries and tour bookings,
@@ -36,17 +38,23 @@ function totals(leads: CrmLead[]): string {
   return sums.size ? [...sums].map(([c, v]) => money(v, c)).join(" · ") : "—";
 }
 
+/** Every customer's activity log (migration 0037; empty before it runs). */
+let activities: CrmActivity[] = [];
+
 function cardHtml(card: Card): string {
   const { customer: c, lead } = card;
   const project = lead?.project ?? c.entries.flatMap((e) => e.item.projects ?? [])[0];
   const record = c.phones[0] ?? c.emails[0] ?? c.name;
+  // The team's latest logged activity replaces the "last contact" date when there is one.
+  const activity = lastActivityLine(activitiesOf(activities, lead?.id));
   return `<li class="pipeline-card" data-pipeline-card="${escapeHtml(c.id)}">
     <p class="pipeline-card__name"><strong dir="auto">${escapeHtml(c.name)}</strong></p>
     ${project ? `<p class="pipeline-card__meta">${escapeHtml(projectName(project))}</p>` : ""}
     ${lead?.deal_value ? `<p class="pipeline-card__value" dir="ltr">${escapeHtml(money(Number(lead.deal_value), lead.currency))}</p>` : ""}
     ${lead?.budget ? `<p class="pipeline-card__meta">${t("adminCrm.budget")}: <span dir="ltr">${escapeHtml(budgetLabel(lead.budget))}</span></p>` : ""}
     ${card.stage === "lost" && lead?.lost_reason ? `<p class="pipeline-card__meta" dir="auto">${escapeHtml(lead.lost_reason)}</p>` : ""}
-    <p class="pipeline-card__tags">${followUpTag(lead)}<span class="pipeline-card__date">${t("adminCrm.lastActivity", { date: shortDate(c.last) })}</span></p>
+    ${activity}
+    <p class="pipeline-card__tags">${followUpTag(lead)}${activity ? "" : `<span class="pipeline-card__date">${t("adminCrm.lastActivity", { date: shortDate(c.last) })}</span>`}</p>
     <div class="pipeline-card__actions">
       <label class="visually-hidden" for="stage-${escapeHtml(c.id)}">${t("adminCrm.moveTo")}</label>
       <select id="stage-${escapeHtml(c.id)}" data-pipeline-stage>${STAGES.map(
@@ -112,8 +120,14 @@ export function renderAdminPipeline(main: HTMLElement): void {
   };
 
   const load = () =>
-    Promise.all([fetchInquiries().catch(() => [] as Inquiry[]), fetchTourBookings().catch(() => [] as TourBooking[]), fetchCrmLeads()]).then(
-      ([inquiries, bookings, crm]) => {
+    Promise.all([
+      fetchInquiries().catch(() => [] as Inquiry[]),
+      fetchTourBookings().catch(() => [] as TourBooking[]),
+      fetchCrmLeads(),
+      fetchActivities().catch(() => null)
+    ]).then(
+      ([inquiries, bookings, crm, acts]) => {
+        activities = acts ?? [];
         if (main.dataset.requestId !== requestId) return;
         if (!crm) {
           kpis.innerHTML = "";

@@ -7,6 +7,7 @@ import { renderPhoneInput, getPhoneValue, isPhoneValid, setPhoneInvalid } from "
 import { MANUAL_CHANNELS, addManualCustomer, type ManualChannel } from "../../data/inquiries";
 import { BUDGETS, CURRENCIES, STAGES, fromIstanbulInput, leadFor, personKeys, saveCrmLead, type Budget, type CrmLead, type Currency, type Stage } from "../../data/crm";
 import { budgetSelect, projectName, stageLabel } from "./crmForm";
+import { addActivity } from "../../data/crmActivities";
 
 /**
  * "Add a customer" on the pipeline page: a customer who reached the team on WhatsApp, by
@@ -230,6 +231,11 @@ export function initAddCustomer(root: HTMLElement, getLeads: () => CrmLead[], on
     if (without0032) saved = await saveCrmLead(leadFor(getLeads(), keys), person, { ...changes, budget: null, stage: stage === "no_reply" ? "contacted" : stage });
     button.disabled = false;
     if (!saved || saved === "needs0032") return say(t("adminCrm.saveError"));
+
+    // The conversation summary starts the customer's activity log (skipped quietly before migration 0037).
+    const channel = text("channel");
+    const kind = channel === "whatsapp" || channel === "call" ? channel : channel === "office" ? "meeting" : "note";
+    if (text("note") || kind !== "note") await addActivity({ lead_id: saved.id, kind, body: text("note") }).catch(() => null);
 
     form.reset();
     await onAdded();
