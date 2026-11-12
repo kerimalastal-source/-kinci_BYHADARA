@@ -139,9 +139,9 @@ const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 /** Unique ids for the phone fields of the edit forms (customer ids hold "@" and "."). */
 let editCount = 0;
 
-/** The customer's latest hand-added inquiry (the one that holds country, channel and source). */
+/** The customer's latest hand-added inquiry (the one that holds country, channel and source); not a Meta form lead. */
 const manualOf = (c: Customer) =>
-  c.entries.find((e): e is Extract<Entry, { type: "inquiry" }> => e.type === "inquiry" && e.item.kind === "manual")?.item;
+  c.entries.find((e): e is Extract<Entry, { type: "inquiry" }> => e.type === "inquiry" && e.item.kind === "manual" && e.item.details?.form !== "meta_lead")?.item;
 
 function countryName(code: string): string {
   try {

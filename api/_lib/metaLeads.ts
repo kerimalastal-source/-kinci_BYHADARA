@@ -4,7 +4,8 @@
 // visitors, and the morning job checks once more. Each lead is announced once: a marker file
 // in Vercel Blob is claimed first (put without overwrite), so two checks at the same moment
 // can't both send it, and a lead whose Telegram message failed is released for the next check.
-// The lead itself (name, phone, answers) is only passed on to Telegram, never stored here.
+// Since 2026-11-12 each new lead is also saved as a customer (inquiry HF-XXXXXX + a pipeline row)
+// through save_meta_lead() (migration 0038), so it shows on /admin/customers and /admin/pipeline.
 // Needs META_LEADS_TOKEN (a system-user token with leads_retrieval); without it nothing runs.
 import { escapeHtml } from "./telegram.js";
 import { ISTANBUL } from "./bookingMessages.js";
@@ -31,7 +32,27 @@ export interface LeadDeps {
   forms: string[];
   store: LeadStore;
   telegram: (html: string) => Promise<boolean>;
+  /** Saves the lead as a customer; returns its reference, or null when it could not (logged). */
+  save?: (lead: SavedLead) => Promise<string | null>;
   now: () => number;
+}
+
+/** What is saved for one lead (migration 0038, save_meta_lead()). */
+export interface SavedLead {
+  id: string;
+  name: string;
+  phone: string;
+  email: string;
+  form: string;
+  ad: string;
+  platform: string;
+  /** The form's other answers, one "question: answer" line each. */
+  message: string;
+  /** Project slug the form is about (the villa forms), or "". */
+  project: string;
+  /** The ad source, as the customers page and the ad report read it. */
+  source: string;
+  created: string | null;
 }
 
 interface Question {
@@ -92,8 +113,38 @@ export function leadTime(value: string | undefined): number | null {
 
 const STANDARD: Record<string, string> = { full_name: "👤", phone_number: "📞", email: "✉️" };
 
-/** The Telegram message for one lead (all values escaped). */
-export function leadMessage(lead: Lead, form: Form, pageId: string): string {
+/** The villa forms are about Marmara Haven; their leads count for the villa lead-form campaign. */
+const VILLA_FORM = /marmara|villa/i;
+
+/** The lead's fields and answers in the shape save_meta_lead() takes. */
+export function savedLead(lead: Lead, form: Form): SavedLead {
+  const fields = new Map((lead.field_data ?? []).map((f) => [f.name, (f.values ?? []).join(", ")]));
+  const answers: string[] = [];
+  for (const [key, value] of fields) {
+    if (key in STANDARD || !value) continue;
+    const question = form.questions.find((q) => q.key === key);
+    const answer = question?.options.find((o) => o.key === value)?.value ?? value;
+    answers.push(`${question?.label ?? key.replace(/_/g, " ")}: ${answer}`);
+  }
+  const villa = VILLA_FORM.test(form.name);
+  const time = leadTime(lead.created_time);
+  return {
+    id: lead.id,
+    name: (fields.get("full_name") ?? "").slice(0, 200),
+    phone: (fields.get("phone_number") ?? "").slice(0, 40),
+    email: (fields.get("email") ?? "").slice(0, 254),
+    form: form.name.slice(0, 200),
+    ad: (lead.ad_name ?? "").slice(0, 300),
+    platform: lead.platform === "ig" ? "instagram" : lead.platform === "fb" ? "facebook" : "",
+    message: [`نموذج الإعلان: ${form.name}`, ...answers].join("\n").slice(0, 5000),
+    project: villa ? "marmara-haven-villa" : "",
+    source: `utm_source=facebook · utm_campaign=${villa ? "villa-leads" : "lead-form"}`,
+    created: time === null ? null : new Date(time).toISOString()
+  };
+}
+
+/** The Telegram message for one lead (all values escaped); `reference` = its saved customer record. */
+export function leadMessage(lead: Lead, form: Form, pageId: string, reference?: string | null): string {
   const fields = new Map((lead.field_data ?? []).map((f) => [f.name, (f.values ?? []).join(", ")]));
   const name = fields.get("full_name") || "—";
   const phone = fields.get("phone_number") ?? "";
@@ -120,6 +171,9 @@ export function leadMessage(lead: Lead, form: Form, pageId: string): string {
     lines.push(`🕒 ‎${clock} (توقيت إسطنبول)`);
   }
   lines.push(`⚡ اتصلوا به في أسرع وقت، ويفضّل خلال ساعة.`);
+  if (reference) {
+    lines.push(`🗂️ حُفظ في سجل الزبائن: <a href="https://www.hadararealestate.com/ar/admin/customers?q=${encodeURIComponent(reference)}">${escapeHtml(reference)}</a>`);
+  }
   lines.push(`<a href="https://business.facebook.com/latest/leads_center?asset_id=${encodeURIComponent(pageId)}">كل الطلبات في Meta</a>`);
   return lines.join("\n");
 }
@@ -184,7 +238,9 @@ export async function inspectLeads(deps: LeadDeps): Promise<LeadReport> {
           result.already++;
           continue;
         }
-        if (await deps.telegram(leadMessage(lead, form, deps.pageId))) result.sent++;
+        // Saved first (the same lead id is saved once, so a retried check is harmless), then announced.
+        const reference = deps.save ? await deps.save(savedLead(lead, form)).catch(() => null) : null;
+        if (await deps.telegram(leadMessage(lead, form, deps.pageId, reference))) result.sent++;
         else {
           result.failed++;
           await deps.store.remove(marker).catch(() => undefined);
