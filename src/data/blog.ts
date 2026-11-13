@@ -22,6 +22,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "payment-plans-explained",
+    priority: -24,
+    published: "2026-11-13",
+    relatedProjects: ["beylikduzu-living", "vadi-panorama", "dragos"],
+    coverImage: { src: "/images/blog/payment-plans-explained.jpg", width: 1005, height: 670 }
+  },
+  {
     slug: "maltepe-district-guide",
     priority: -23,
     published: "2026-11-11",
