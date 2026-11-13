@@ -4349,6 +4349,29 @@
       "session": "Votre session a expiré. Veuillez vous reconnecter.",
       "http": "Le serveur a répondu par une erreur ({status})."
     },
+    "whatsapp": {
+      "title": "Connecter un numéro WhatsApp",
+      "hint": "Connecte le numéro WhatsApp de l'entreprise au tableau de bord tout en le gardant actif sur l'application WhatsApp Business du téléphone. Le bouton ouvre la fenêtre de Meta : connectez-vous, choisissez l'entreprise, saisissez le numéro, puis scannez le code QR depuis l'application. Les messages des clients sont ensuite enregistrés dans les fiches clients et signalés sur Telegram.",
+      "config": "Identifiant de configuration (Configuration ID)",
+      "button": "Connecter le numéro WhatsApp",
+      "working": "Connexion en cours… terminez les étapes dans la fenêtre de Meta.",
+      "done": "Le numéro est connecté ✓",
+      "next": "Les détails ont été envoyés sur Telegram. Si WHATSAPP_PHONE_NUMBER_ID est défini dans Vercel, mettez-y le phone_number_id ci-dessus (ou supprimez-le) puis redéployez.",
+      "errors": {
+        "config": "Saisissez d'abord l'identifiant de configuration de Facebook Login for Business.",
+        "sdk": "L'outil de Facebook n'est pas encore chargé. Patientez deux secondes et appuyez de nouveau.",
+        "cancelled": "La fenêtre de Meta a été fermée avant la fin de la connexion.",
+        "meta": "La fenêtre de Meta a affiché une erreur :",
+        "session": "Votre session a expiré. Veuillez vous reconnecter.",
+        "forbidden": "Ce bouton est réservé aux administrateurs.",
+        "token": "Impossible de finaliser la connexion avec Meta (code de connexion) :",
+        "numbers": "Impossible de lire les numéros du compte chez Meta :",
+        "subscribe": "Connecté, mais l'application n'a pas pu s'abonner aux messages :",
+        "input": "Les informations de connexion de la fenêtre de Meta étaient incomplètes.",
+        "missing": "Non activé : WHATSAPP_APP_SECRET manque dans Vercel.",
+        "error": "Impossible de joindre le serveur. Veuillez réessayer."
+      }
+    },
     "followUpsToday": "Relances à faire",
     "noFollowUps": "Aucune relance aujourd’hui.",
     "allPipeline": "Pipeline de ventes →",

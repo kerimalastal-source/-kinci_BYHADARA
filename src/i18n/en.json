@@ -4347,6 +4347,29 @@
       "session": "Your session has ended. Please sign in again.",
       "http": "The server answered with an error ({status})."
     },
+    "whatsapp": {
+      "title": "Connect a WhatsApp number",
+      "hint": "Connects the company's WhatsApp number to the dashboard while it keeps working on the WhatsApp Business app on the phone. The button opens Meta's window: sign in, choose the business, enter the number, then scan the QR code from the app. Customer messages are then saved in the customer records and announced on Telegram.",
+      "config": "Configuration ID",
+      "button": "Connect WhatsApp number",
+      "working": "Connecting… finish the steps in Meta's window.",
+      "done": "The number is connected ✓",
+      "next": "The details were sent to Telegram. If WHATSAPP_PHONE_NUMBER_ID is set in Vercel, put the phone_number_id above in it (or remove it) and redeploy.",
+      "errors": {
+        "config": "Enter the Configuration ID from the Facebook Login for Business settings first.",
+        "sdk": "Facebook's tool has not finished loading. Wait two seconds and press the button again.",
+        "cancelled": "Meta's window was closed before the connection finished.",
+        "meta": "Meta's window showed an error:",
+        "session": "Your session has expired. Please sign in again.",
+        "forbidden": "This button is for admins only.",
+        "token": "Could not finish the connection with Meta (login code):",
+        "numbers": "Could not read the account's numbers from Meta:",
+        "subscribe": "Connected, but the app could not subscribe to messages:",
+        "input": "The connection details from Meta's window were incomplete.",
+        "missing": "Not enabled: WHATSAPP_APP_SECRET is missing in Vercel.",
+        "error": "Could not reach the server. Please try again."
+      }
+    },
     "followUpsToday": "Sales follow-ups due",
     "noFollowUps": "No follow-ups due today.",
     "allPipeline": "Sales pipeline →",

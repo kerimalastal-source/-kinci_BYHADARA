@@ -9,7 +9,7 @@
 // calls without a valid signature are refused. Settings (Vercel, Production):
 //   WHATSAPP_APP_SECRET      the Meta app's App Secret (required to accept messages)
 //   WHATSAPP_VERIFY_TOKEN    any long random text, the same one typed in Meta's webhook settings
-//   WHATSAPP_PHONE_NUMBER_ID optional: only messages to this business number are saved
+//   WHATSAPP_PHONE_NUMBER_ID optional: only messages to this business number (or these, comma-separated) are saved
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { escapeHtml } from "./telegram.js";
 import { ISTANBUL } from "./bookingMessages.js";
@@ -71,6 +71,7 @@ function messageText(m: RawMessage): string {
 /** The customer messages in one webhook call (statuses, echoes and other numbers are left out). */
 export function parseWebhook(body: unknown, phoneNumberId?: string): WaMessage[] {
   const out: WaMessage[] = [];
+  const allowed = (phoneNumberId ?? "").split(",").map((id) => id.trim()).filter(Boolean);
   const entries = (body as { object?: string; entry?: unknown[] } | null)?.entry;
   if ((body as { object?: string } | null)?.object !== "whatsapp_business_account" || !Array.isArray(entries)) return out;
   for (const entry of entries) {
@@ -83,7 +84,7 @@ export function parseWebhook(body: unknown, phoneNumberId?: string): WaMessage[]
         contacts?: { wa_id?: string; profile?: { name?: string } }[];
         messages?: RawMessage[];
       };
-      if (phoneNumberId && value.metadata?.phone_number_id !== phoneNumberId) continue;
+      if (allowed.length && !allowed.includes(value.metadata?.phone_number_id ?? "")) continue;
       const names = new Map((value.contacts ?? []).map((c) => [c.wa_id ?? "", c.profile?.name ?? ""]));
       for (const m of value.messages ?? []) {
         if (!m.id || !m.from || !/^\d{6,20}$/.test(m.from)) continue;

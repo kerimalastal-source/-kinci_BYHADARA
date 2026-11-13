@@ -4848,6 +4848,32 @@ body.map-open .back-to-top {
   color: var(--color-danger);
 }
 
+/* Admin home: connect a WhatsApp number (Embedded Signup). */
+.admin-wa__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.admin-wa__label {
+  flex: 1 1 100%;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.admin-wa__input {
+  flex: 1 1 14rem;
+  min-width: 0;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 1rem;
+  text-align: left;
+}
+
 .admin-panel__more {
   align-self: flex-start;
   margin-top: auto;
