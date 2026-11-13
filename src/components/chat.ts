@@ -601,7 +601,7 @@ function renderContact(): string {
     <div class="chat-actions">
       <button type="button" class="chat-action chat-action--live" data-chat-live>${CHAT_ICON}${t("live.start")}</button>
       <a class="chat-action chat-action--wa" href="${whatsappHref(t("chat.waHello"))}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("floatingActions.whatsapp")}</a>
-      <a class="chat-action" href="tel:+${WHATSAPP_NUMBER}"><span dir="ltr">+90 531 930 92 14</span></a>
+      <a class="chat-action" href="tel:+${WHATSAPP_NUMBER}"><span dir="ltr">+90 532 139 25 23</span></a>
       <a class="chat-action" href="${link("/contact")}">${t("chat.actions.form")}</a>
     </div>`;
 }

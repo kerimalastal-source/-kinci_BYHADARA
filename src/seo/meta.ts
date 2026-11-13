@@ -16,7 +16,7 @@ export const DEFAULT_SITE_URL = "https://www.hadararealestate.com";
 const OG_LOCALES: Record<Locale, string> = { en: "en_US", ar: "ar_AR", fa: "fa_IR", fr: "fr_FR", ru: "ru_RU" };
 
 const CONTACT = {
-  telephone: "+90 531 930 92 14",
+  telephone: "+90 532 139 25 23",
   email: "info@byhadara.com",
   address: {
     "@type": "PostalAddress",

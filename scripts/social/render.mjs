@@ -13,8 +13,8 @@ const require_ = createRequire(import.meta.url);
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "../..");
 const SITE = "https://www.hadararealestate.com";
-const WHATSAPP = "https://wa.me/905319309214";
-const PHONE = "+90 531 930 92 14";
+const WHATSAPP = "https://wa.me/905321392523";
+const PHONE = "+90 532 139 25 23";
 const LRM = "‎";
 
 const specPath = path.resolve(process.argv[2] || "");

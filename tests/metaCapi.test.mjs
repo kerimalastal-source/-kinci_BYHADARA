@@ -12,7 +12,7 @@ const good = {
   fbp: "fb.1.1728400000000.123456789",
   fbc: "fb.1.1728400000000.IwAR0abc_DEF-1",
   params: { content_category: "contact", content_name: "Marmara Haven Villa", evil: "<x>" },
-  user: { email: " Ahmad@Example.COM ", phone: "+90 531 930 92 14", name: "Ahmad Al Hasan" }
+  user: { email: " Ahmad@Example.COM ", phone: "+90 532 139 25 23", name: "Ahmad Al Hasan" }
 };
 
 test("only our site's events with a valid ID are accepted", () => {
@@ -29,11 +29,11 @@ test("only our site's events with a valid ID are accepted", () => {
 test("contact details are normalised and hashed, never sent in clear", () => {
   const h = hashedUser(parseMetaEvent(good).user);
   assert.deepEqual(h.em, [sha("ahmad@example.com")]);
-  assert.deepEqual(h.ph, [sha("905319309214")]);
+  assert.deepEqual(h.ph, [sha("905321392523")]);
   assert.deepEqual(h.fn, [sha("ahmad")]);
   assert.deepEqual(h.ln, [sha("hasan")]);
   const body = JSON.stringify(capiPayload(parseMetaEvent(good), { ip: "1.2.3.4", userAgent: "UA" }));
-  assert.ok(!/ahmad|example\.com|5319309214/i.test(body));
+  assert.ok(!/ahmad|example\.com|5321392523/i.test(body));
   assert.deepEqual(hashedUser({ email: "", phone: "", name: "" }), {});
 });
 

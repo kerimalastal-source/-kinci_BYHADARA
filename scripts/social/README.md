@@ -132,7 +132,7 @@ Work from the repository root. Use Istanbul's date (`TZ=Europe/Istanbul date +%F
 - **Contact posts in the schedule**: the plan has regular «how to contact HADARA» posts
   (2026-10-11 all channels, 2026-10-19 what happens after you write, 2026-10-25 visit us or
   by video, 2026-10-28 FAQ). Each one lists the real channels with their links: WhatsApp
-  https://wa.me/905319309214, phone +90 531 930 92 14, email info@byhadara.com, the contact
+  https://wa.me/905321392523, phone +90 532 139 25 23, email info@byhadara.com, the contact
   form (/contact), the custom property request (/property-request), the video tour booking
   (/video-tour), the live chat on the website, Instagram @hadararealestate and the Facebook
   page, and the office in Gökevler Mah., 529. Sokak No: 4, Kat: 2, Beylikdüzü. When you write the next month's
@@ -199,7 +199,7 @@ a **big Arabic headline** (`arSize` 68 by default, up to 2 lines; render.mjs shr
 then **3 large fact tiles** (gold number 58px, Arabic label, English label; 4 still work but
 3 read better), and the gold **"معلومة" strip** (`tip`: one more useful fact, Arabic +
 English; `tip.labelAr` can change the word, e.g. «للجنسية» or «نصيحة»). Footer:
-www.hadararealestate.com + WhatsApp +90 531 930 92 14. 1080×1350 JPEG (stories 1080×1920).
+www.hadararealestate.com + WhatsApp +90 532 139 25 23. 1080×1350 JPEG (stories 1080×1920).
 
 - **Guides / articles / FAQ / citizenship** may use `design: "list"`: a shorter photo band
   and a numbered list of 3 `items` (`{ar, en}`, one line each in Arabic) instead of the
