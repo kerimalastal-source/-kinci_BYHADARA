@@ -1,4 +1,5 @@
-import { t, getProjectContent, link, placeLine, intlTag } from "../i18n";
+import { t, tRaw, getProjectContent, link, placeLine, intlTag } from "../i18n";
+import { blogPosts } from "../data/blog";
 import { getProjectBySlug, getSortedProjects, planMonths, type Project, type Residence } from "../data/projects";
 import { renderProjectCard, projectStatusLabel } from "../components/projectCard";
 import { amenityIcon } from "../components/amenityIcons";
@@ -511,7 +512,28 @@ function renderLocation(project: Project, name: string, nearby: ReturnType<typeo
       </ul>`
           : ""
       }
+      ${renderDistrictGuide(project)}
     </section>`;
+}
+
+/** Link to our blog guide for the project's district, so readers and search engines move between the two. */
+function renderDistrictGuide(project: Project): string {
+  const post = blogPosts.find((p) => p.district === project.district);
+  if (!post) return "";
+  const { title, excerpt } = tRaw<{ title: string; excerpt: string }>(`blogData.${post.slug}`);
+  const href = link(`/blog/${post.slug}`);
+  return `
+      <a class="district-guide" href="${href}" data-reveal>
+        <img ${photoAttrs(post.coverImage, "(max-width: 640px) 112px, 160px")} alt="" width="${post.coverImage.width}" height="${post.coverImage.height}" loading="lazy" />
+        <span class="district-guide__body">
+          <span class="district-guide__label">${t("projectDetail.districtGuideLabel")}</span>
+          <span class="district-guide__title">${title}</span>
+          <span class="district-guide__excerpt">${excerpt}</span>
+          <span class="district-guide__cta">${t("projectDetail.districtGuideCta")}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </span>
+      </a>`;
 }
 
 export function renderProjectDetail(el: HTMLElement, slug: string): void {

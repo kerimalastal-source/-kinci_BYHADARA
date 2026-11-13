@@ -327,6 +327,8 @@
     "residencesTitle": "Residences",
     "amenitiesTitle": "Amenities & Services",
     "locationTitle": "Location & Connectivity",
+    "districtGuideLabel": "District guide",
+    "districtGuideCta": "Read the guide",
     "mapAlt": "Map of Istanbul showing {name} in {place}",
     "mapCaption": "{place}",
     "openInMaps": "Open in Google Maps",

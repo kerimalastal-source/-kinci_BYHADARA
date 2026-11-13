@@ -331,6 +331,8 @@
     "residencesTitle": "Планировки",
     "amenitiesTitle": "Инфраструктура и сервис",
     "locationTitle": "Расположение и транспорт",
+    "districtGuideLabel": "Гид по району",
+    "districtGuideCta": "Читать гид",
     "mapAlt": "Карта Стамбула: {name}, {place}",
     "mapCaption": "{place}",
     "openInMaps": "Открыть в Google Картах",

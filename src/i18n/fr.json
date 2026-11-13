@@ -329,6 +329,8 @@
     "residencesTitle": "Résidences",
     "amenitiesTitle": "Équipements & services",
     "locationTitle": "Emplacement & accès",
+    "districtGuideLabel": "Guide du quartier",
+    "districtGuideCta": "Lire le guide",
     "mapAlt": "Carte d'Istanbul situant {name} à {place}",
     "mapCaption": "{place}",
     "openInMaps": "Ouvrir dans Google Maps",

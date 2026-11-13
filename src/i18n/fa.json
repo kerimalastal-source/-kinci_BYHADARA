@@ -409,6 +409,8 @@
     "residencesTitle": "واحدهای مسکونی",
     "amenitiesTitle": "امکانات و خدمات",
     "locationTitle": "موقعیت و دسترسی‌ها",
+    "districtGuideLabel": "راهنمای منطقه",
+    "districtGuideCta": "خواندن راهنما",
     "mapAlt": "نقشه استانبول که موقعیت {name} را در {place} نشان می‌دهد",
     "mapCaption": "{place}",
     "openInMaps": "باز کردن در Google Maps",

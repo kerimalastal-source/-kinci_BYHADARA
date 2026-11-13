@@ -335,6 +335,8 @@
     "residencesTitle": "الوحدات السكنية",
     "amenitiesTitle": "المرافق والخدمات",
     "locationTitle": "الموقع وسهولة الوصول",
+    "districtGuideLabel": "دليل المنطقة",
+    "districtGuideCta": "اقرأ الدليل",
     "mapAlt": "خريطة إسطنبول تُظهر موقع {name} في {place}",
     "mapCaption": "{place}",
     "openInMaps": "افتح في خرائط Google",

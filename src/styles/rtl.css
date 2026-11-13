@@ -4,6 +4,7 @@
    icons that CSS logical properties can't fix on their own. */
 
 [dir="rtl"] .back-link svg,
+[dir="rtl"] .district-guide__cta svg,
 [dir="rtl"] .lightbox__nav--prev svg,
 [dir="rtl"] .lightbox__nav--next svg {
   transform: scaleX(-1);
