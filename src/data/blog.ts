@@ -9,6 +9,10 @@ export interface BlogPost {
   /** Project slugs shown in the "Projects you may like" box at the end of the article (sold-out ones are
    *  skipped; without it the first available projects by priority are shown). */
   relatedProjects?: string[];
+  /** District guides: the Turkish district name as in projects.ts (e.g. "Başakşehir"). The box at the end
+   *  of the article then shows all our available projects in that district; when there are fewer than 3,
+   *  it adds the `relatedProjects` around it. */
+  district?: string;
   coverImage: {
     src: string;
     width: number;
@@ -21,7 +25,8 @@ export const blogPosts: BlogPost[] = [
     slug: "maltepe-district-guide",
     priority: -23,
     published: "2026-11-11",
-    relatedProjects: ["dragos", "referans-pendik", "hayat-flora"],
+    relatedProjects: ["dragos", "referans-pendik", "referans-besiktas"],
+    district: "Maltepe",
     coverImage: { src: "/images/blog/maltepe-district-guide.jpg", width: 1536, height: 1024 }
   },
   {
@@ -29,13 +34,15 @@ export const blogPosts: BlogPost[] = [
     priority: -22,
     published: "2026-11-11",
     relatedProjects: ["buyukyali", "alya-city-veliefendi", "alya-konutlari-merkezefendi"],
+    district: "Zeytinburnu",
     coverImage: { src: "/images/blog/zeytinburnu-district-guide.jpg", width: 1185, height: 790 }
   },
   {
     slug: "halkali-district-guide",
     priority: -21,
     published: "2026-11-11",
-    relatedProjects: ["hayat-flora", "sea-pearl-atakoy", "vadi-panorama"],
+    relatedProjects: ["hayat-flora", "vadi-panorama", "sea-pearl-atakoy"],
+    district: "Küçükçekmece",
     coverImage: { src: "/images/blog/halkali-district-guide.jpg", width: 1536, height: 1024 }
   },
   {
@@ -43,6 +50,7 @@ export const blogPosts: BlogPost[] = [
     priority: -20,
     published: "2026-11-11",
     relatedProjects: ["gokturk-kemer-evleri", "vadi-panorama", "hayat-flora"],
+    district: "Eyüpsultan",
     coverImage: { src: "/images/blog/gokturk-district-guide.jpg", width: 1185, height: 790 }
   },
   {
@@ -78,7 +86,8 @@ export const blogPosts: BlogPost[] = [
     priority: -15,
     published: "2026-11-09",
     updated: "2026-11-12",
-    relatedProjects: ["referans-pendik", "referans-besiktas", "referans-beylikduzu"],
+    relatedProjects: ["referans-pendik", "dragos", "referans-besiktas"],
+    district: "Pendik",
     coverImage: { src: "/images/blog/pendik-district-guide.jpg", width: 1536, height: 1024 }
   },
   {
@@ -86,20 +95,23 @@ export const blogPosts: BlogPost[] = [
     priority: -14,
     published: "2026-11-06",
     relatedProjects: ["referans-besiktas", "lotus-sisli", "sea-pearl-atakoy"],
+    district: "Beşiktaş",
     coverImage: { src: "/images/blog/besiktas-district-guide.jpg", width: 1400, height: 933 }
   },
   {
     slug: "basaksehir-district-guide",
     priority: -13,
     published: "2026-11-02",
-    relatedProjects: ["vadi-panorama", "mesa-yenikent"],
+    relatedProjects: ["vadi-panorama", "mesa-yenikent", "hayat-flora"],
+    district: "Başakşehir",
     coverImage: { src: "/images/blog/basaksehir-district-guide.jpg", width: 1425, height: 950 }
   },
   {
     slug: "bakirkoy-atakoy-district-guide",
     priority: -12,
     published: "2026-10-30",
-    relatedProjects: ["sea-pearl-atakoy", "diamond-marin", "buyukyali"],
+    relatedProjects: ["sea-pearl-atakoy", "buyukyali", "alya-konutlari-merkezefendi"],
+    district: "Bakırköy",
     coverImage: { src: "/images/blog/bakirkoy-atakoy-district-guide.jpg", width: 1536, height: 1024 }
   },
   {
@@ -113,7 +125,8 @@ export const blogPosts: BlogPost[] = [
     slug: "sisli-district-guide",
     priority: -10,
     published: "2026-10-23",
-    relatedProjects: ["lotus-sisli", "beylikduzu-living", "cadde-ispartakule"],
+    relatedProjects: ["lotus-sisli", "referans-besiktas", "buyukyali"],
+    district: "Şişli",
     coverImage: { src: "/images/blog/sisli-district-guide.jpg", width: 1265, height: 843 }
   },
   {
@@ -128,6 +141,7 @@ export const blogPosts: BlogPost[] = [
     priority: -8,
     published: "2026-10-16",
     relatedProjects: ["lotus-yali", "lotus-manzara-guzelce", "marmara-haven-villa"],
+    district: "Büyükçekmece",
     coverImage: { src: "/images/blog/buyukcekmece-district-guide.jpg", width: 1500, height: 1000 }
   },
   {
@@ -163,6 +177,7 @@ export const blogPosts: BlogPost[] = [
     priority: -3,
     published: "2026-10-09",
     relatedProjects: ["diamond-marin", "beylikduzu-living", "lotus-manzara-beylikduzu"],
+    district: "Beylikdüzü",
     coverImage: { src: "/images/blog/beylikduzu-district-guide.jpg", width: 1006, height: 671 }
   },
   {

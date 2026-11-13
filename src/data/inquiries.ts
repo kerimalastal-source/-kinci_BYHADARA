@@ -49,6 +49,8 @@ export async function updateInquiry(id: string, changes: { status?: InquiryStatu
 /** The key under adminInquiries.kinds.*: a Buyer's Guide question or project-page form (details.form), or the form's kind. */
 export function inquiryKindKey(inquiry: { kind: string; details?: Record<string, string> | null }): string {
   const form = inquiry.details?.form;
+  if (form === "meta_lead") return "metaLead";
+  if (form === "whatsapp") return "whatsapp";
   return form === "guide" || form === "project" ? form : inquiry.kind;
 }
 

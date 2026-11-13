@@ -2338,7 +2338,11 @@
     "relatedProjectsEyebrow": "From our projects",
     "relatedProjectsTitle": "Projects You May Like",
     "relatedProjectsSubtitle": "A few of our projects that relate to this article. Our team is happy to answer your questions about them.",
-    "relatedProjectsCta": "Ask About These Projects"
+    "relatedProjectsCta": "Ask About These Projects",
+    "relatedDistrictTitle": "Our Projects in {district}",
+    "relatedDistrictNearbyTitle": "Our Projects in and Around {district}",
+    "relatedDistrictSubtitle": "Our projects available for sale in {district}. Our team is happy to send you the details and arrange a visit or a video tour.",
+    "relatedDistrictNearbySubtitle": "Our projects available for sale in {district} and the districts around it. Our team is happy to send you the details and arrange a visit or a video tour."
   },
   "laws": {
     "heroEyebrow": "Property Laws",
@@ -4148,7 +4152,7 @@
           "We share personal data only when it is needed, and only the data that is needed:"
         ],
         "items": [
-          "Service providers who run the Website for us: Vercel (hosting, and the approximate location of visits), Supabase (resale portal database and sign-in, messages from the Website's forms, tour bookings, and anonymous visit statistics), Google (fonts, analytics and advertising) and Meta (WhatsApp, ad measurement and showing our ads, and the details you send us through a form or a WhatsApp message inside one of our Facebook or Instagram ads). The map on our contact page is provided by OpenStreetMap.",
+          "Service providers who run the Website for us: Vercel (hosting, and the approximate location of visits), Supabase (resale portal database and sign-in, messages from the Website's forms and from the forms inside our Facebook and Instagram ads, WhatsApp messages you send to our business number, tour bookings, and anonymous visit statistics), Google (fonts, analytics and advertising) and Meta (WhatsApp, ad measurement and showing our ads, and the details you send us through a form or a WhatsApp message inside one of our Facebook or Instagram ads). The map on our contact page is provided by OpenStreetMap.",
           "Telegram and email, which deliver internal notifications to our team: new visits (with anonymous details only), new messages and requests (including requests sent through a form inside one of our Facebook or Instagram ads), and tour bookings. Confirmation emails to you are sent through the email service Resend.",
           "Project developers, when it is needed to complete your request, for example to reserve a unit or complete a purchase.",
           "In the resale portal: buyers' messages are shared with the owner of the listing, and approved listings are published on the Website.",
@@ -4243,6 +4247,8 @@
     "noResults": "Nothing matches your search.",
     "searchPlaceholder": "Search by name, phone, email or request number",
     "kinds": {
+      "whatsapp": "WhatsApp message",
+      "metaLead": "Meta ad form",
       "manual": "Added by hand",
       "guide": "Buyer's Guide question",
       "project": "Project page form",
@@ -4814,6 +4820,36 @@
     "unavailable": "The sales pipeline starts working once database update 0010 has been run.",
     "overdue": "Overdue",
     "lastActivity": "Last contact {date}",
+    "activity": {
+      "title": "Activity log",
+      "kind": "What happened",
+      "kinds": {
+        "call": "Call",
+        "whatsapp": "WhatsApp",
+        "email": "Email",
+        "meeting": "Meeting / visit",
+        "tour": "Video tour",
+        "offer": "Price offer",
+        "note": "Note",
+        "stage": "Stage"
+      },
+      "body": "Details",
+      "placeholder": "e.g. Sent the villa prices; he asked for a call on Sunday",
+      "when": "When (Istanbul time)",
+      "add": "Add to log",
+      "added": "Added to the log.",
+      "deleted": "Removed from the log.",
+      "empty": "Nothing logged yet. Add the first call or message.",
+      "stageMove": "Stage: {from} → {to}",
+      "stageSet": "Stage: {to}",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this activity from the log?",
+      "bodyRequired": "Write what happened.",
+      "future": "This time is in the future. Use the follow-up date for what is planned.",
+      "error": "Could not save. Please try again.",
+      "needs0037": "The activity log works after database update 0037 is run.",
+      "last": "Last: {what} · {date}"
+    },
     "moveTo": "Move to",
     "openRecord": "Open record",
     "emptyStage": "No customers",

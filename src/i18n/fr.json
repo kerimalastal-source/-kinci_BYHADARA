@@ -2340,7 +2340,11 @@
     "relatedProjectsEyebrow": "Nos projets",
     "relatedProjectsTitle": "Des projets qui pourraient vous intéresser",
     "relatedProjectsSubtitle": "Une sélection de nos projets en lien avec cet article. Notre équipe répond volontiers à vos questions.",
-    "relatedProjectsCta": "Se renseigner sur ces projets"
+    "relatedProjectsCta": "Se renseigner sur ces projets",
+    "relatedDistrictTitle": "Nos projets à {district}",
+    "relatedDistrictNearbyTitle": "Nos projets à {district} et aux alentours",
+    "relatedDistrictSubtitle": "Nos projets disponibles à la vente à {district}. Notre équipe vous envoie volontiers les détails et organise une visite ou une visite vidéo.",
+    "relatedDistrictNearbySubtitle": "Nos projets disponibles à la vente à {district} et dans les quartiers voisins. Notre équipe vous envoie volontiers les détails et organise une visite ou une visite vidéo."
   },
   "laws": {
     "heroEyebrow": "Lois immobilières",
@@ -4150,7 +4154,7 @@
           "Nous ne partageons des données personnelles que lorsque c'est nécessaire, et uniquement les données nécessaires :"
         ],
         "items": [
-          "Les prestataires qui font fonctionner le Site pour nous : Vercel (hébergement, et localisation approximative des visites), Supabase (base de données et connexion du portail de revente, messages des formulaires du Site, réservations de visites, et statistiques de visite anonymes), Google (polices, mesure d'audience et publicité) et Meta (WhatsApp, mesure et diffusion publicitaires, et les informations que vous nous envoyez via un formulaire ou un message WhatsApp dans l’une de nos publicités Facebook ou Instagram). La carte de notre page de contact est fournie par OpenStreetMap.",
+          "Les prestataires qui font fonctionner le Site pour nous : Vercel (hébergement, et localisation approximative des visites), Supabase (base de données et connexion du portail de revente, messages des formulaires du Site et des formulaires de nos publicités Facebook et Instagram, messages WhatsApp que vous envoyez à notre numéro professionnel, réservations de visites, et statistiques de visite anonymes), Google (polices, mesure d'audience et publicité) et Meta (WhatsApp, mesure et diffusion publicitaires, et les informations que vous nous envoyez via un formulaire ou un message WhatsApp dans l’une de nos publicités Facebook ou Instagram). La carte de notre page de contact est fournie par OpenStreetMap.",
           "Telegram et l'e-mail, qui transmettent à notre équipe des notifications internes : nouvelles visites (avec des informations anonymes uniquement), nouveaux messages et demandes (y compris les demandes envoyées via un formulaire intégré à l'une de nos publicités Facebook ou Instagram), et réservations de visites. Les e-mails de confirmation qui vous sont adressés sont envoyés via le service d'e-mail Resend.",
           "Les promoteurs des projets, lorsque c'est nécessaire pour traiter votre demande, par exemple pour réserver un logement ou finaliser un achat.",
           "Dans le portail de revente : les messages des acheteurs sont transmis au propriétaire de l'annonce, et les annonces approuvées sont publiées sur le Site.",
@@ -4245,6 +4249,8 @@
     "noResults": "Aucun résultat pour cette recherche.",
     "searchPlaceholder": "Rechercher par nom, téléphone, e-mail ou numéro de demande",
     "kinds": {
+      "whatsapp": "Message WhatsApp",
+      "metaLead": "Formulaire publicitaire (Meta)",
       "manual": "Ajouté manuellement",
       "guide": "Question du guide de l'acheteur",
       "project": "Formulaire d'une page projet",
@@ -4816,6 +4822,36 @@
     "unavailable": "Le pipeline de ventes fonctionnera une fois la mise à jour 0010 de la base de données exécutée.",
     "overdue": "En retard",
     "lastActivity": "Dernier contact {date}",
+    "activity": {
+      "title": "Journal d’activité",
+      "kind": "Ce qui s’est passé",
+      "kinds": {
+        "call": "Appel",
+        "whatsapp": "WhatsApp",
+        "email": "E-mail",
+        "meeting": "Rendez-vous / visite",
+        "tour": "Visite vidéo",
+        "offer": "Offre de prix",
+        "note": "Note",
+        "stage": "Étape"
+      },
+      "body": "Détails",
+      "placeholder": "Ex. : prix de la villa envoyés ; il souhaite un appel dimanche",
+      "when": "Quand (heure d’Istanbul)",
+      "add": "Ajouter au journal",
+      "added": "Ajouté au journal.",
+      "deleted": "Supprimé du journal.",
+      "empty": "Rien n’est encore noté. Ajoutez le premier appel ou message.",
+      "stageMove": "Étape : {from} → {to}",
+      "stageSet": "Étape : {to}",
+      "delete": "Supprimer",
+      "deleteConfirm": "Supprimer cette activité du journal ?",
+      "bodyRequired": "Décrivez ce qui s’est passé.",
+      "future": "Cette heure est dans le futur. Utilisez la date de relance pour ce qui est prévu.",
+      "error": "Enregistrement impossible. Veuillez réessayer.",
+      "needs0037": "Le journal d’activité fonctionne après la mise à jour 0037 de la base de données.",
+      "last": "Dernière activité : {what} · {date}"
+    },
     "moveTo": "Déplacer vers",
     "openRecord": "Ouvrir la fiche",
     "emptyStage": "Aucun client",

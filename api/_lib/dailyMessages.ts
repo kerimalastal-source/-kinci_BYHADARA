@@ -46,7 +46,8 @@ export interface Digest {
 const KIND_AR: Record<string, string> = {
   contact: "تواصل معنا",
   property_request: "طلب عقار مخصص",
-  consultation: "استشارة التصميم الهندسي"
+  consultation: "استشارة التصميم الهندسي",
+  manual: "زبون من نموذج إعلان أو مُضاف يدوياً"
 };
 
 /** Where visitors came from, in Arabic ("instagram" → "إنستغرام"). */

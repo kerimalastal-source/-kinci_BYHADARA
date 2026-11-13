@@ -3,9 +3,10 @@
 // from the morning job (api/daily.ts). Does nothing until META_LEADS_TOKEN, a Blob store and
 // the Telegram bot are configured.
 import { BlobNotFoundError, del, head, put } from "@vercel/blob";
-import { DEFAULT_FORMS, inspectLeads, type LeadReport, type LeadStore } from "./metaLeads.js";
+import { DEFAULT_FORMS, inspectLeads, type LeadReport, type LeadStore, type SavedLead } from "./metaLeads.js";
 import { sendTelegram } from "./telegram.js";
 import { hasBlob } from "./socialRun.js";
+import { RpcError, hasSupabase, rpc } from "./supabase.js";
 
 const store: LeadStore = {
   async claim(path) {
@@ -30,6 +31,34 @@ const store: LeadStore = {
 
 let lastRun = 0;
 
+/** Saves a lead as a customer (migration 0038); null when it can't (not set up yet, or an error). */
+async function saveLead(lead: SavedLead): Promise<string | null> {
+  const secret = process.env.CRON_SECRET;
+  if (!secret || !hasSupabase()) return null;
+  try {
+    const result = (await rpc("save_meta_lead", {
+      p_secret: secret,
+      p_lead_id: lead.id,
+      p_name: lead.name,
+      p_phone: lead.phone,
+      p_email: lead.email,
+      p_form: lead.form,
+      p_ad: lead.ad,
+      p_platform: lead.platform,
+      p_message: lead.message,
+      p_project: lead.project,
+      p_source: lead.source,
+      p_created: lead.created
+    })) as { reference?: string; error?: string } | null;
+    if (result?.reference) return result.reference;
+    console.error(`meta-leads: save_meta_lead refused lead ${lead.id}: ${result?.error ?? "no answer"}`);
+  } catch (error) {
+    // 404: migration 0038 not run yet; the Telegram alert still goes out.
+    if (!(error instanceof RpcError && error.status === 404)) console.error(`meta-leads: ${error instanceof Error ? error.message : error}`);
+  }
+  return null;
+}
+
 /** The first setting the check still needs, or null when it can run. */
 export function leadsMissing(): "token" | "page" | "blob" | "telegram" | null {
   if (!process.env.META_LEADS_TOKEN) return "token";
@@ -53,6 +82,7 @@ export async function inspectMetaLeads(): Promise<LeadReport> {
     forms: forms.length ? forms : DEFAULT_FORMS,
     store,
     telegram: async (html) => (await sendTelegram(html)) !== null,
+    save: saveLead,
     now: Date.now
   });
 }

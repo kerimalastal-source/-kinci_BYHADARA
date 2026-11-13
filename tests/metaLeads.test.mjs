@@ -147,3 +147,38 @@ test("inspectLeads reports each form, and one failing form does not hide the oth
   assert.equal(sent.length, 2);
   assert.match(sent[1], /Unsupported get request/);
 });
+
+test("each new lead is saved as a customer before the alert, and the alert links to it", async () => {
+  const { deps, sent } = setup();
+  const saved = [];
+  deps.save = async (l) => {
+    saved.push(l);
+    return "HF-ABC123";
+  };
+  assert.equal(await checkLeads(deps), 1);
+  assert.equal(saved.length, 1);
+  const s = saved[0];
+  assert.equal(s.id, "L1");
+  assert.equal(s.name, "Ali <Test>");
+  assert.equal(s.phone, "+90 531 000 00 00");
+  assert.equal(s.email, "ali@example.com");
+  assert.equal(s.platform, "instagram");
+  assert.equal(s.project, "marmara-haven-villa");
+  assert.equal(s.source, "utm_source=facebook · utm_campaign=villa-leads");
+  assert.match(s.message, /Is this within your budget\?: Yes, within my budget/);
+  assert.equal(s.created, new Date(NOW - 5 * 60_000).toISOString());
+  assert.match(sent[0], /HF-ABC123/);
+  assert.match(sent[0], /admin\/customers\?q=HF-ABC123/);
+  // Announced once: the next check neither saves nor sends again.
+  assert.equal(await checkLeads(deps), 0);
+  assert.equal(saved.length, 1);
+});
+
+test("a failed save still sends the alert, without a record link", async () => {
+  const { deps, sent } = setup();
+  deps.save = async () => {
+    throw new Error("down");
+  };
+  assert.equal(await checkLeads(deps), 1);
+  assert.doesNotMatch(sent[0], /سجل الزبائن/);
+});

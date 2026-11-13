@@ -1,0 +1,54 @@
+{
+ "posts": [
+  {
+   "id": "blog-district-guides-4",
+   "at": "14:00",
+   "reel": true,
+   "topic": "مقالات: أدلة غوكتورك وهالكالي وزيتون بورنو ومالتبه",
+   "image": {
+    "photo": "/images/projects/buyukyali/sea-skyline.jpg",
+    "reelPhotos": [
+     "/images/projects/gokturk-kemer-evleri/pond-blocks.jpg",
+     "/images/projects/hayat-flora/aerial-sea.jpg",
+     "/images/projects/dragos/aerial-islands.jpg"
+    ],
+    "badge": {
+     "ar": "دليل المشتري",
+     "en": "Buyer's guide"
+    },
+    "place": "Göktürk · Halkalı · Zeytinburnu · Maltepe",
+    "placeAr": "غوكتورك · هالكالي · زيتون بورنو · مالتبه",
+    "headlineAr": "أدلة جديدة لأربع مناطق في إسطنبول",
+    "headlineEn": "New guides to four Istanbul districts"
+   },
+   "caption": {
+    "ar": {
+     "title": "أدلة جديدة لأربع مناطق في إسطنبول 🗺️",
+     "intro": "غوكتورك وهالكالي وزيتون بورنو ومالتبه: أين تقع كل منطقة، وكيف تتنقل منها، والمشاريع التي نعرضها فيها، في أربعة أدلة جديدة على مدونتنا.",
+     "closing": [
+      "متوفرة بالعربية والإنجليزية والفارسية والفرنسية والروسية."
+     ],
+     "cta": "اقرأ الأدلة",
+     "path": "/blog"
+    },
+    "en": {
+     "title": "New guides to four Istanbul districts 🗺️",
+     "intro": "Göktürk, Halkalı, Zeytinburnu and Maltepe: where each district lies, how to get around, and the projects we offer there, in four new guides on our blog.",
+     "closing": [
+      "Available in Arabic, English, Persian, French and Russian."
+     ],
+     "cta": "Read the guides",
+     "path": "/blog"
+    },
+    "hashtags": [
+     "#Gokturk",
+     "#Halkali",
+     "#Zeytinburnu",
+     "#Maltepe",
+     "#Istanbul",
+     "#HadaraRealEstate"
+    ]
+   }
+  }
+ ]
+}
