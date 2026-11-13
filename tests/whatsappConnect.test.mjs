@@ -2,7 +2,7 @@
 // webhook's number filter accepting several numbers (api/_lib/whatsapp.ts).
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { connectWhatsApp, connectedAlert, parseConnectInput } from "../.test-build/_lib/whatsappConnect.js";
+import { connectWhatsApp, connectedAlert, parseConnectInput, redirectCandidates } from "../.test-build/_lib/whatsappConnect.js";
 import { parseWebhook } from "../.test-build/_lib/whatsapp.js";
 
 const json = (body, status = 200) => new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
@@ -110,4 +110,34 @@ test("the webhook's number filter accepts a comma-separated list", () => {
   assert.equal(parseWebhook(body("OTHER"), "OLD,NEW").length, 0);
   assert.equal(parseWebhook(body("ANY"), "").length, 1);
   assert.equal(parseWebhook(body("ANY")).length, 1);
+});
+
+test("a redirect_uri mismatch retries with the page, the site root and Facebook's login page", async () => {
+  const tried = [];
+  const graph = fakeGraph([
+    [
+      "/oauth/access_token",
+      (u) => {
+        tried.push(u.searchParams.get("redirect_uri"));
+        return u.searchParams.get("redirect_uri") === "https://www.hadararealestate.com/ar/admin"
+          ? json({ access_token: "T" })
+          : json({ error: { code: 100, message: "Error validating verification code. Please make sure your redirect_uri is identical to the one you used in the OAuth dialog request" } }, 400);
+      }
+    ],
+    ["/111222333444/phone_numbers", json({ data: [{ id: "555666777888" }] })],
+    ["/111222333444/subscribed_apps", json({ success: true })]
+  ]);
+  const input = parseConnectInput({ action: "whatsapp-connect", code: "C", wabaId: "111222333444", phoneNumberId: "", page: "https://www.hadararealestate.com/ar/admin" });
+  const result = await connectWhatsApp(input, { fetch: graph.fetch, appId: "1", appSecret: "S" });
+  assert.equal(result.ok, true);
+  assert.deepEqual(tried, [null, "https://www.hadararealestate.com/ar/admin"]);
+});
+
+test("redirectCandidates never sends another site's address, and an expired code is not retried", async () => {
+  assert.deepEqual(redirectCandidates("https://evil.example/x"), [null, "https://www.hadararealestate.com/", "https://www.facebook.com/connect/login_success.html"]);
+  const tried = [];
+  const graph = fakeGraph([["/oauth/access_token", (u) => (tried.push(u.searchParams.get("redirect_uri")), json({ error: { code: 100, message: "This authorization code has expired." } }, 400))]]);
+  const r = await connectWhatsApp({ code: "C", wabaId: "111222333444", phoneNumberId: "", page: "https://www.hadararealestate.com/ar/admin" }, { fetch: graph.fetch, appId: "1", appSecret: "S" });
+  assert.equal(r.error, "token");
+  assert.equal(tried.length, 1);
 });

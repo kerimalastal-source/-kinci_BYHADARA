@@ -121,7 +121,13 @@ async function finish(code: string, info: SessionInfo | null): Promise<ConnectRe
     const res = await fetch("/api/meta-leads", {
       method: "POST",
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "whatsapp-connect", code, wabaId: info?.wabaId ?? "", phoneNumberId: info?.phoneNumberId ?? "" })
+      body: JSON.stringify({
+        action: "whatsapp-connect",
+        code,
+        wabaId: info?.wabaId ?? "",
+        phoneNumberId: info?.phoneNumberId ?? "",
+        page: location.origin + location.pathname
+      })
     });
     if (res.status === 403) return { ok: false, error: "forbidden", status: 403 };
     const body = (await res.json().catch(() => null)) as ConnectResult | null;

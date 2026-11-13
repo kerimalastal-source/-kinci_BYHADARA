@@ -18,6 +18,23 @@ export interface ConnectInput {
   code: string;
   wabaId: string;
   phoneNumberId: string;
+  /** The admin page's address (origin + path), for the redirect_uri Meta may tie the code to. */
+  page?: string;
+}
+
+const SITE = "https://www.hadararealestate.com";
+
+/**
+ * The redirect_uri values to try when trading the code. Facebook's JavaScript SDK does not
+ * say which one its popup used, and Meta answers "redirect_uri is identical…" when it differs,
+ * so: none first (the documented way), then the page itself, the site root, and Facebook's
+ * own login_success page. Only our own site's addresses are ever sent.
+ */
+export function redirectCandidates(page?: string): (string | null)[] {
+  const out: (string | null)[] = [null];
+  if (page && page.startsWith(`${SITE}/`) && page.length < 300 && !/[?#\s]/.test(page)) out.push(page);
+  out.push(`${SITE}/`, "https://www.facebook.com/connect/login_success.html");
+  return [...new Set(out)];
 }
 
 export interface ConnectedNumber {
@@ -52,10 +69,11 @@ export function parseConnectInput(body: unknown): ConnectInput | null {
   const code = typeof b.code === "string" ? b.code.trim() : "";
   const wabaId = typeof b.wabaId === "string" ? b.wabaId.trim() : "";
   const phoneNumberId = typeof b.phoneNumberId === "string" ? b.phoneNumberId.trim() : "";
+  const page = typeof b.page === "string" ? b.page.trim().slice(0, 300) : "";
   if (!code || code.length > 2000 || /\s/.test(code)) return null;
   if (wabaId && !ID.test(wabaId)) return null;
   if (phoneNumberId && !ID.test(phoneNumberId)) return null;
-  return { code, wabaId, phoneNumberId };
+  return { code, wabaId, phoneNumberId, ...(page ? { page } : {}) };
 }
 
 const escapeHtml = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
@@ -93,13 +111,22 @@ export function connectedAlert(result: ConnectResult): string {
 
 /** The whole connection: code → token, the WABA's numbers, subscribed_apps, Telegram note. */
 export async function connectWhatsApp(input: ConnectInput, deps: ConnectDeps): Promise<ConnectResult> {
-  const tokenUrl =
-    `${GRAPH}/oauth/access_token?client_id=${encodeURIComponent(deps.appId)}` +
-    `&client_secret=${encodeURIComponent(deps.appSecret)}&code=${encodeURIComponent(input.code)}`;
-  const tokenRes = await deps.fetch(tokenUrl);
-  const tokenData = (await tokenRes.json().catch(() => null)) as { access_token?: string } | null;
-  const token = tokenRes.ok ? tokenData?.access_token : undefined;
-  if (!token) return { ok: false, error: "token", detail: graphError(tokenData) };
+  let token: string | undefined;
+  let tokenError = "";
+  for (const redirect of redirectCandidates(input.page)) {
+    const tokenUrl =
+      `${GRAPH}/oauth/access_token?client_id=${encodeURIComponent(deps.appId)}` +
+      `&client_secret=${encodeURIComponent(deps.appSecret)}&code=${encodeURIComponent(input.code)}` +
+      (redirect ? `&redirect_uri=${encodeURIComponent(redirect)}` : "");
+    const tokenRes = await deps.fetch(tokenUrl);
+    const tokenData = (await tokenRes.json().catch(() => null)) as { access_token?: string } | null;
+    token = tokenRes.ok ? tokenData?.access_token : undefined;
+    if (token) break;
+    tokenError = graphError(tokenData);
+    // Only a redirect_uri mismatch is worth another try; an expired or used code is not.
+    if (!/redirect_uri/i.test(tokenError)) break;
+  }
+  if (!token) return { ok: false, error: "token", detail: tokenError };
 
   let wabaId = input.wabaId;
   if (!wabaId && input.phoneNumberId) {
