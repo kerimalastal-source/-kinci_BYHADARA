@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face{font-family:Amiri;font-weight:700;src:url(../fonts/J7acnpd8CGxBHp2VkZY4.ttf)}
+@font-face{font-family:Playfair;font-weight:600;src:url(../fonts/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKebukDQ.ttf)}
+@font-face{font-family:Playfair;font-style:italic;font-weight:500;src:url(../fonts/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_pqTbtY.ttf)}
+@font-face{font-family:Plex;font-weight:500;src:url(REPO/scripts/social/fonts/plex-500.ttf)}
+@font-face{font-family:Plex;font-weight:600;src:url(REPO/scripts/social/fonts/plex-600.ttf)}
+@font-face{font-family:Plex;font-weight:700;src:url(REPO/scripts/social/fonts/plex-700.ttf)}
+@font-face{font-family:Inter;font-weight:600;src:url(REPO/scripts/social/fonts/inter-600.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden}
+body{background:radial-gradient(ellipse 90% 60% at 50% 42%,#164633 0%,#0f2f23 55%,#0a2219 100%);color:#f7f4ec;font-family:Plex,sans-serif;position:relative}
+.frame{position:absolute;inset:52px;border:1.5px solid rgba(201,162,75,.35)}
+.frame:after{content:"";position:absolute;inset:10px;border:1px solid rgba(201,162,75,.14)}
+.gold{color:#d7b465}
+#head{position:absolute;top:205px;left:0;right:0;text-align:center}
+#logo{height:96px;display:block;margin:0 auto}
+#brand{font-family:Inter;font-weight:600;font-size:22px;letter-spacing:.32em;color:#e9dcbc;margin-top:12px;direction:ltr}
+#kicker{font-family:Plex;font-weight:700;font-size:31px;color:#d7b465;margin-top:22px}
+#qwrap{position:absolute;top:440px;left:0;right:0;height:300px;text-align:center}
+.q{position:absolute;left:0;right:0;top:0;font-family:Plex;font-weight:600;font-size:54px;color:#fff}
+.a{position:absolute;left:0;right:0;top:76px;font-family:Amiri;font-weight:700;font-size:124px;line-height:1.05;color:#d7b465}
+.a .n{font-family:Playfair;font-weight:600}
+.a .u{font-family:Playfair;font-style:italic;font-weight:500;font-size:.62em}
+.a small{display:block;font-family:Plex;font-weight:600;font-size:36px;color:#e9dcbc;margin-top:6px}
+#title{position:absolute;top:470px;left:0;right:0;text-align:center}
+#title .l1{font-family:Plex;font-weight:600;font-size:64px;color:#fff}
+#title .l2{font-family:Amiri;font-weight:700;font-size:96px;color:#d7b465;line-height:1.25}
+#main{position:absolute;top:780px;left:72px;right:72px;height:990px;display:flex;gap:30px;direction:rtl}
+#card{position:relative;width:660px;height:990px;overflow:hidden;border:2px solid rgba(201,162,75,.55);box-shadow:0 30px 60px rgba(0,0,0,.45)}
+#card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#card .cap{position:absolute;right:0;left:0;top:0;padding:26px 30px 90px;background:linear-gradient(rgba(5,20,14,.82),transparent);font-family:Plex;font-weight:700;font-size:32px;line-height:1.5;color:#fff}
+#card .cap b{color:#d7b465}
+#list{flex:1;display:flex;flex-direction:column;justify-content:flex-start;padding-top:6px}
+.it{position:relative;padding:22px 22px 16px 0;border-bottom:1px solid rgba(201,162,75,.25);height:198px}
+.it:last-child{border-bottom:0}
+.it .bar{position:absolute;right:0;top:16px;bottom:18px;width:3px;background:#c9a24b;opacity:.45}
+.it .lab{font-family:Plex;font-weight:700;font-size:31px;color:#d7b465;display:flex;align-items:baseline;gap:12px}
+.it .lab i{font-family:Playfair;font-style:italic;font-weight:500;font-size:30px;color:#c9a24b}
+.it .val{font-family:Amiri;font-weight:700;font-size:44px;color:#f1e3bd;line-height:1.15;margin-top:8px;white-space:nowrap}
+.it .val .n{font-family:Playfair;font-weight:600}
+.it .val .u{font-family:Playfair;font-style:italic;font-weight:500;font-size:.7em}
+#end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-bottom:120px}
+#end img{height:230px}
+#end .brand{font-family:Inter;font-weight:600;font-size:30px;letter-spacing:.32em;color:#e9dcbc;margin-top:18px;direction:ltr}
+#end .line{width:0;height:2px;background:#c9a24b;margin:54px auto 48px}
+#end .t1{font-family:Amiri;font-weight:700;font-size:74px;color:#d7b465;line-height:1.3}
+#end .price{display:inline-block;margin-top:26px;padding:14px 40px 18px;border:2px solid #c9a24b;font-family:Plex;font-weight:700;font-size:46px;color:#fff;background:rgba(201,162,75,.08)}
+#end .price bdi{font-family:Playfair;font-weight:600;font-size:1.25em;color:#d7b465}
+#end .t2{font-family:Plex;font-weight:600;font-size:40px;color:#f7f4ec;margin-top:18px}
+#end .ph{font-family:Inter;font-weight:600;font-size:62px;color:#fff;margin-top:52px;direction:ltr;letter-spacing:.02em}
+#end .wa{display:inline-flex;align-items:center;gap:18px;margin-top:22px;font-family:Plex;font-weight:600;font-size:34px;color:#d7b465}
+#end .web{font-family:Inter;font-weight:600;font-size:32px;color:#e9dcbc;margin-top:34px;direction:ltr;letter-spacing:.06em}
+</style>
+
+<style id="r45">
+html,body{height:1350px}
+.frame{inset:36px}
+#head{top:66px}
+#logo{height:66px}
+#brand{font-size:17px;margin-top:8px}
+#kicker{font-size:25px;margin-top:12px}
+#title{top:236px}
+#title .l1{font-size:46px}
+#title .l2{font-size:72px}
+#qwrap{top:228px}
+.q{font-size:42px}
+.a{top:56px;font-size:96px}
+.a small{font-size:28px;margin-top:2px}
+#main{top:470px;left:60px;right:60px;height:830px;gap:24px}
+#card{width:600px;height:830px}
+#card .cap{font-size:27px;padding:20px 24px 70px}
+.it{height:166px;padding:18px 18px 12px 0}
+.it .lab{font-size:27px}
+.it .lab i{font-size:26px}
+.it .val{font-size:38px;margin-top:6px}
+#end{padding-bottom:40px}
+#end img{height:160px}
+#end .brand{font-size:24px;margin-top:12px}
+#end .line{margin:34px auto 30px}
+#end .t1{font-size:60px}
+#end .price{font-size:38px;margin-top:18px;padding:10px 32px 14px}
+#end .t2{font-size:32px;margin-top:22px}
+#end .ph{font-size:52px;margin-top:30px}
+#end .web{font-size:28px;margin-top:22px}
+</style>
+</head>
+<body>
+<div class="frame"></div>
+<div id="stage">
+  <div id="head">
+    <img id="logo" src="REPO/public/logo-light.png" alt="">
+    <div id="brand">HADARA REAL ESTATE</div>
+    <div id="kicker">فيلا مرمرة هيفن · 5 أسئلة · 5 إجابات قصيرة</div>
+  </div>
+  <div id="title"><div class="l1">فيلا في إسطنبول؟</div><div class="l2">5 أسئلة، 5 إجابات قصيرة</div></div>
+  <div id="qwrap"></div>
+  <div id="main">
+    <div id="card"><div id="imgs"></div><div class="cap">فيلا مستقلة على 4 طوابق<br><b>مسبح خاص · مصعد</b></div></div>
+    <div id="list"></div>
+  </div>
+</div>
+<div id="end">
+  <img src="REPO/public/logo-light.png" alt="">
+  <div class="brand">HADARA REAL ESTATE</div>
+  <div class="line"></div>
+  <div class="t1">فيلا مرمرة هيفن</div>
+  <div class="price">بسعر يبدأ من <bdi dir="ltr">1.55</bdi> مليون دولار</div>
+  <div class="t2">للتفاصيل أو لحجز جولة، راسلنا عبر واتساب</div>
+  <div class="ph">+90 531 930 92 14</div>
+  <div class="web">hadararealestate.com</div>
+</div>
+<script>
+const P = "REPO/public/images/projects/marmara-haven-villa/";
+const QA = [
+  {q:"المساحة؟", lab:"المساحة", a:'<bdi dir="ltr"><span class="n">576</span> <span class="u">m²</span></bdi>', sub:"مساحة إجمالية على 4 طوابق", v:'<bdi dir="ltr"><span class="n">576</span> <span class="u">m²</span></bdi>', img:"drone"},
+  {q:"الأرض؟", lab:"الأرض", a:'<bdi dir="ltr"><span class="n">637</span> <span class="u">m²</span></bdi>', sub:"أرض خاصة بالفيلا", v:'<bdi dir="ltr"><span class="n">637</span> <span class="u">m²</span></bdi>', img:"aerial-top"},
+  {q:"الغرف؟", lab:"الغرف", a:'5 غرف نوم', sub:"صالونان و7 حمّامات", v:'5 غرف نوم', img:"living-sea"},
+  {q:"الإطلالة؟", lab:"الإطلالة", a:'بحرية كاملة', sub:"على بحر مرمرة", v:'بحرية كاملة', img:"terrace"},
+  {q:"الجنسية؟", lab:"الجنسية", a:'مناسبة', sub:"للحصول على الجنسية التركية", v:'مناسبة', img:"balcony-pool"},
+];
+const IMGS = ["dusk-pool", ...QA.map(x=>x.img)];
+const imgs = document.getElementById("imgs");
+IMGS.forEach((n,i)=>{const im=document.createElement("img");im.src=P+n+".jpg";im.id="im"+i;imgs.appendChild(im);});
+const list = document.getElementById("list"), qwrap = document.getElementById("qwrap");
+QA.forEach((x,i)=>{
+  list.insertAdjacentHTML("beforeend",`<div class="it" id="it${i}"><div class="bar"></div><div class="lab"><i>${i+1}</i>${x.lab}</div><div class="val">${x.v}</div></div>`);
+  qwrap.insertAdjacentHTML("beforeend",`<div class="q" id="q${i}">${x.q}</div><div class="a" id="a${i}">${x.a}<small>${x.sub}</small></div>`);
+});
+const $ = id => document.getElementById(id);
+const clamp = (x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const ease = x => { x=clamp(x); return 1-Math.pow(1-x,3); };
+const inout = x => { x=clamp(x); return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2; };
+const seg = (t,a,b)=> clamp((t-a)/(b-a));
+
+const VO = {"starts": [0.2, 4.856, 8.425, 11.977, 15.924, 19.181, 23.04], "durs": [4.436, 3.349, 3.332, 3.727, 3.037, 3.639, 5.774], "total": 29.914, "tempo": 1.2};
+const FADE=0.7;
+const QS = VO.starts.slice(1,6).map(x=>x-0.15);
+const ENDSTART = VO.starts[6]-0.55;
+const LEN = QS.map((q,i)=> (i<4? QS[i+1] : ENDSTART) - q);
+const INTRO = QS[0];
+const QSTART = INTRO;
+window.TOTAL = VO.total;
+
+window.render = function(t){
+  // header
+  const h = 1;
+  $("head").style.opacity = h; $("head").style.transform = `translateY(${(1-h)*-30}px)`;
+  // title
+  const tin = 1, tout = 1-ease(seg(t,INTRO-.45,INTRO));
+  $("title").style.opacity = Math.min(tin,tout);
+  $("title").style.transform = `translateY(${(1-tin)*40}px) scale(${1-(1-tout)*.06})`;
+  // card + list entrance
+  const c = 1;
+  $("card").style.opacity = c; $("card").style.transform = `translateY(${(1-c)*80}px)`;
+  QA.forEach((x,i)=>{
+    const li = 1;
+    const it = $("it"+i);
+    it.style.opacity = li; it.style.transform = `translateX(${(1-li)*-40}px)`;
+    const qs = QS[i], L = LEN[i];
+    // value in list
+    const v = ease(seg(t, qs+L-.85, qs+L-.35));
+    const val = it.querySelector(".val");
+    val.style.opacity = v; val.style.transform = `translateY(${(1-v)*16}px)`;
+    // active bar
+    const active = t>=qs && t<qs+L;
+    const bar = it.querySelector(".bar");
+    bar.style.opacity = active ? 1 : (t>=qs+L ? .8 : .35);
+    bar.style.width = active ? "5px" : "3px";
+    // question + big answer
+    const qin = ease(seg(t,qs,qs+.4)), qout = 1-ease(seg(t,qs+L-.45,qs+L-.05));
+    $("q"+i).style.opacity = Math.min(qin,qout);
+    $("q"+i).style.transform = `translateY(${(1-qin)*24}px)`;
+    const ain = ease(seg(t,qs+.55,qs+1.1)), aout = 1-ease(seg(t,qs+L-.9,qs+L-.4));
+    const a = $("a"+i);
+    a.style.opacity = Math.min(ain,aout);
+    a.style.transform = `translateY(${(1-ain)*50 + (1-aout)*30}px) scale(${.92+.08*ain})`;
+    a.style.clipPath = `inset(0 0 ${(1-ain)*100}% 0)`;
+  });
+  // images: crossfade + slow zoom
+  IMGS.forEach((n,k)=>{
+    const start = k===0 ? 0 : QS[k-1] + .15;
+    const next = k===IMGS.length-1 ? 1e9 : QS[k] + .15;
+    const op = k===0 ? 1 - ease(seg(t,next,next+.6)) : Math.min(ease(seg(t,start,start+.6)), 1-ease(seg(t,next,next+.6)));
+    const z = 1.03 + .10*clamp((t-start)/(k===0?INTRO+1:LEN[k-1]+1.2));
+    const im = $("im"+k);
+    im.style.opacity = k===IMGS.length-1 ? ease(seg(t,start,start+.6)) : op;
+    im.style.transform = `scale(${z})`;
+  });
+  // stage -> end
+  const f = inout(seg(t,ENDSTART,ENDSTART+FADE));
+  $("stage").style.opacity = 1-f;
+  const e = $("end");
+  e.style.opacity = f;
+  const kids = e.children;
+  const es = ENDSTART + FADE*.6;
+  [0,1,3,4,5,6,7].forEach((idx,j)=>{
+    const p = ease(seg(t, es + j*.14, es + j*.14 + .55));
+    kids[idx].style.opacity = p; kids[idx].style.transform = `translateY(${(1-p)*30}px)`;
+  });
+  $("end").querySelector(".line").style.width = (ease(seg(t,es+.2,es+1.1))*420)+"px";
+};
+render(0);
+</script>
+</body>
+</html>
