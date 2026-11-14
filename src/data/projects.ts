@@ -1221,6 +1221,18 @@ export const projects: Project[] = [
       img("bizim-evler-12", "kitchen", 1600, 897, "Bizim Evler 12 sample fitted kitchen"),
       img("bizim-evler-12", "bedroom", 1300, 889, "Bizim Evler 12 sample master bedroom")
     ],
+    // Real drone photos of the site, 20 June 2026, from the sales office's shared Drive folder (owner, 2026-11-14).
+    siteProgress: {
+      date: "2026-06",
+      photos: [
+        img("bizim-evler-12", "site-2026-06-blocks-wide", 1920, 1080, "Bizim Evler 12 blocks under construction in Ispartakule, June 2026"),
+        img("bizim-evler-12", "site-2026-06-lake", 1920, 1080, "Bizim Evler 12 construction site with the lake behind, June 2026"),
+        img("bizim-evler-12", "site-2026-06-aerial", 1920, 1080, "Aerial view of the Bizim Evler 12 construction site, June 2026"),
+        img("bizim-evler-12", "site-2026-06-district", 1920, 1080, "Bizim Evler 12 construction site and the Ispartakule district, June 2026"),
+        img("bizim-evler-12", "site-2026-06-slab", 1920, 1080, "Floor slab works at Bizim Evler 12, June 2026"),
+        img("bizim-evler-12", "site-2026-06-crane", 1920, 1080, "Tower crane and concrete frame at Bizim Evler 12, June 2026")
+      ]
+    },
     stats: [
       { value: "473", labelKey: "apartments" },
       { value: "2028", labelKey: "delivery" },
