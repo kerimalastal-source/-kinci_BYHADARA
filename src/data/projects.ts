@@ -1194,18 +1194,29 @@ export const projects: Project[] = [
     price: "on-request",
     // Facts from the owner (43,000 m² project, 32,500 m² green, 7 blocks of 12–13 floors, 473 apartments: 96 2+1,
     // 273 3+1, 104 4+1, 25 shops, mosque, shelters, 5-year warranty) and the developer's site and catalogue
-    // (bizimevler.com.tr/bizimevler12, April 2026): lake views, indoor pool with separate sessions for men and women,
-    // fitness, sauna, sports courts, EV charging, generator, 24/7 CCTV security, a parking space for every flat.
-    coverImage: img("bizim-evler-12", "gardens-blocks", 1900, 1069, "Bizim Evler 12 residential blocks around landscaped gardens and ornamental pools in Ispartakule"),
+    // (bizimevler.com.tr/bizimevler12; English catalogue, November 2026): lake views, indoor pool with separate
+    // sessions for men and women, fitness, sauna, sports courts, EV charging, generator, 24/7 CCTV security, a
+    // parking space for every flat. Photos (2026-11-14): the developer's renders and site plan from the owner's
+    // Drive folder "Bizim evleri 12", scaled to 1920 px; the three interiors are from the catalogue.
+    coverImage: img("bizim-evler-12", "gardens-blocks", 1920, 1080, "Bizim Evler 12 residential blocks around landscaped gardens and ornamental pools in Ispartakule"),
     gallery: [
-      img("bizim-evler-12", "blocks-pools", 1900, 1069, "Bizim Evler 12 blocks with ornamental pools and walking paths"),
-      img("bizim-evler-12", "gardens-aerial", 1600, 900, "Bizim Evler 12 gardens, pools and play areas seen from above"),
-      img("bizim-evler-12", "garden-walkway", 1900, 1069, "Bizim Evler 12 garden walkway between the blocks"),
-      img("bizim-evler-12", "sports-courts", 1900, 1069, "Bizim Evler 12 tennis court and football pitch"),
-      img("bizim-evler-12", "playground", 1900, 1069, "Bizim Evler 12 children's playground in the gardens"),
-      img("bizim-evler-12", "entrance-shops", 1900, 990, "Bizim Evler 12 main entrance with street shops and cafés"),
-      img("bizim-evler-12", "night-pools", 1500, 870, "Bizim Evler 12 blocks and fountains in the evening"),
-      img("bizim-evler-12", "site-plan", 1300, 891, "Bizim Evler 12 site plan with blocks A1 to A4 and B1 to B3"),
+      img("bizim-evler-12", "gardens-overview", 1920, 1080, "Bizim Evler 12 blocks around the central gardens, seen from above"),
+      img("bizim-evler-12", "blocks-gardens", 1920, 1080, "Bizim Evler 12 blocks facing the landscaped gardens"),
+      img("bizim-evler-12", "blocks-pools", 1920, 1080, "Bizim Evler 12 blocks with ornamental pools and walking paths"),
+      img("bizim-evler-12", "gardens-top", 1920, 1080, "Bizim Evler 12 gardens, ornamental pool and play areas from above"),
+      img("bizim-evler-12", "gardens-aerial", 1920, 1080, "Bizim Evler 12 winding ornamental pools and paths between the blocks"),
+      img("bizim-evler-12", "garden-walkway", 1920, 1080, "Bizim Evler 12 garden walkway between the blocks"),
+      img("bizim-evler-12", "playground", 1920, 1080, "Bizim Evler 12 children's playground in the gardens"),
+      img("bizim-evler-12", "sports-courts", 1920, 1080, "Bizim Evler 12 tennis court and football pitch"),
+      img("bizim-evler-12", "entrance-shops", 1920, 1080, "Bizim Evler 12 street shops and cafés at the entrance in the evening"),
+      img("bizim-evler-12", "night-gardens", 1920, 1080, "Bizim Evler 12 blocks and garden fountain in the evening"),
+      img("bizim-evler-12", "night-fountains", 1920, 1080, "Bizim Evler 12 ornamental pool and fountains at night"),
+      img("bizim-evler-12", "night-walkway", 1920, 1080, "Bizim Evler 12 garden walkway and pools at night"),
+      img("bizim-evler-12", "aerial-area", 1920, 1408, "Aerial view of Bizim Evler 12 and its surroundings in Ispartakule"),
+      img("bizim-evler-12", "aerial-lake", 1920, 1250, "Aerial view from Ispartakule towards the lake"),
+      img("bizim-evler-12", "aerial-night", 1920, 1250, "Aerial view of Bizim Evler 12 and Ispartakule at night"),
+      img("bizim-evler-12", "master-plan-3d", 1920, 1240, "Bizim Evler 12 seven blocks, gardens and street shops, aerial render"),
+      img("bizim-evler-12", "site-plan", 1920, 1646, "Bizim Evler 12 site plan with blocks A1 to A4 and B1 to B3, the social facility, the mosque and the shops"),
       img("bizim-evler-12", "living-room", 1900, 925, "Bizim Evler 12 sample living and dining room"),
       img("bizim-evler-12", "kitchen", 1600, 897, "Bizim Evler 12 sample fitted kitchen"),
       img("bizim-evler-12", "bedroom", 1300, 889, "Bizim Evler 12 sample master bedroom")
@@ -1217,13 +1228,14 @@ export const projects: Project[] = [
       { value: "32,500 m²", labelKey: "greenAndParkArea" },
       { value: "2+1 – 4+1", labelKey: "layout" }
     ],
-    // One sample plan per type from the catalogue (gross "brüt alan"): 2+1 A 126 m² (128 m² in the owner's sample
-    // flat), 3+1 A-B 166–168 m² and 3+1 C 177 m², 4+1 A 216 m².
+    // The four plan sheets of the catalogue (gross "brüt alan"): 2+1 A 126 m² (128 m² in the owner's sample
+    // flat), 3+1 A-B 166–168 m², 3+1 C 177 m², 4+1 A 216 m². Layouts vary by block and floor.
     residencesMoreOptions: true,
     residences: [
-      { kind: "apartment", layout: "2+1", gross: "126 – 128 m²", plan: img("bizim-evler-12", "plan-2-1", 1552, 1051, "Bizim Evler 12 sample 2+1 floor plan (type 2+1 A)") },
-      { kind: "apartment", layout: "3+1", gross: "166 – 177 m²", plan: img("bizim-evler-12", "plan-3-1", 1528, 1047, "Bizim Evler 12 sample 3+1 floor plan (type 3+1 A-B)") },
-      { kind: "apartment", layout: "4+1", gross: "216 m²", plan: img("bizim-evler-12", "plan-4-1", 1538, 1047, "Bizim Evler 12 sample 4+1 floor plan (type 4+1 A)") }
+      { kind: "apartment", layout: "2+1", label: "Type A", gross: "126 – 128 m²", plan: img("bizim-evler-12", "plan-2-1", 1552, 1051, "Bizim Evler 12 2+1 floor plan (type 2+1 A)") },
+      { kind: "apartment", layout: "3+1", label: "Type A-B", gross: "166 – 168 m²", plan: img("bizim-evler-12", "plan-3-1", 1528, 1047, "Bizim Evler 12 3+1 floor plan (type 3+1 A-B)") },
+      { kind: "apartment", layout: "3+1", label: "Type C", gross: "177 m²", plan: img("bizim-evler-12", "plan-3-1-c", 1538, 1040, "Bizim Evler 12 3+1 floor plan (type 3+1 C)") },
+      { kind: "apartment", layout: "4+1", label: "Type A", gross: "216 m²", plan: img("bizim-evler-12", "plan-4-1", 1538, 1047, "Bizim Evler 12 4+1 floor plan (type 4+1 A)") }
     ],
     amenities: [
       "indoorPool",
