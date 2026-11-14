@@ -97,6 +97,8 @@ export interface ProjectVideo {
   sources: { small: string; large: string };
   /** Phone footage (9:16). */
   vertical?: boolean;
+  /** The file has no soundtrack, so the player shows no sound button. */
+  silent?: boolean;
   poster: ProjectImage;
 }
 
@@ -1221,6 +1223,17 @@ export const projects: Project[] = [
       img("bizim-evler-12", "kitchen", 1600, 897, "Bizim Evler 12 sample fitted kitchen"),
       img("bizim-evler-12", "bedroom", 1300, 889, "Bizim Evler 12 sample master bedroom")
     ],
+    // Walk-through of the sample flat (phone footage from the sales office's shared Drive folder, 37 s). The
+    // soundtrack was removed: we could not check what it is, so the film plays silent (owner, 2026-11-14).
+    video: {
+      sources: {
+        small: "/videos/bizim-evler-12/sample-flat-540.mp4",
+        large: "/videos/bizim-evler-12/sample-flat-720.mp4"
+      },
+      vertical: true,
+      silent: true,
+      poster: img("bizim-evler-12", "sample-flat", 1080, 1920, "Bizim Evler 12 sample apartment, living and dining room")
+    },
     // Real drone photos of the site, 20 June 2026, from the sales office's shared Drive folder (owner, 2026-11-14).
     siteProgress: {
       date: "2026-06",

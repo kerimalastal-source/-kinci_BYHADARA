@@ -6868,6 +6868,10 @@ body.nav-open .back-to-top {
   transition: opacity 300ms ease, visibility 300ms;
 }
 
+.video-player--silent .video-player__controls {
+  justify-content: flex-end;
+}
+
 .video-player.is-playing:not(.is-waiting) .video-player__controls {
   opacity: 1;
   visibility: visible;
