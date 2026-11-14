@@ -10,8 +10,8 @@ export const SOCIAL_ICONS = {
   linkedin: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`
 };
 
-const SITE_PHONE = "+90 531 930 92 14";
-const SITE_PHONE_HREF = "+905319309214";
+const SITE_PHONE = "+90 532 139 25 23";
+const SITE_PHONE_HREF = "+905321392523";
 const SITE_EMAIL = "info@byhadara.com";
 
 // The parent group's LinkedIn page, next to "Part of BYHADARA Group" on the copyright line.

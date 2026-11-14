@@ -3,8 +3,8 @@ import { renderContactForm, initContactForm } from "../components/contactForm";
 import { GROUP_LINKEDIN, SOCIAL_ICONS } from "../components/footer";
 import { SOCIAL_LINKS } from "../data/social";
 
-const SITE_PHONE = "+90 531 930 92 14";
-const SITE_PHONE_HREF = "+905319309214";
+const SITE_PHONE = "+90 532 139 25 23";
+const SITE_PHONE_HREF = "+905321392523";
 const SITE_EMAIL = "info@byhadara.com";
 // The office in Gökevler Mahallesi: the pin is the middle of the neighbourhood (OpenStreetMap
 // boundary), since the street's exact coordinates were not available.

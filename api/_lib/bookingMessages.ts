@@ -31,7 +31,7 @@ export interface BookingDetails {
 
 export const ISTANBUL = "Europe/Istanbul";
 const TOUR_MINUTES = 45;
-export const TEAM_PHONE = "+90 531 930 92 14";
+export const TEAM_PHONE = "+90 532 139 25 23";
 const TEAM_EMAIL = "info@byhadara.com";
 
 export const APPS: Record<SiteLocale, Record<App, string>> = {

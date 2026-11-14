@@ -14,9 +14,9 @@ fs.mkdirSync(imgDir, { recursive: true });
 
 export const SITE = "https://www.hadararealestate.com";
 export const YEAR = "2026";
-export const PHONE = "+90 531 930 92 14";
+export const PHONE = "+90 532 139 25 23";
 export const EMAIL = "info@byhadara.com";
-export const WHATSAPP = "https://wa.me/905319309214";
+export const WHATSAPP = "https://wa.me/905321392523";
 const PYTHON = process.env.PYTHON || "python3";
 
 /** Imports a TypeScript module of the site that has no runtime imports (e.g. src/data/projects.ts). */

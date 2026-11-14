@@ -2434,6 +2434,94 @@ body.map-open .back-to-top {
   white-space: nowrap;
 }
 
+/* Link from a project's location section to our guide for its district. */
+.district-guide {
+  display: flex;
+  gap: 1.1rem;
+  align-items: center;
+  margin-top: var(--space-lg);
+  padding: 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.district-guide:hover,
+.district-guide:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow: 0 10px 24px rgba(15, 43, 33, 0.08);
+  transform: translateY(-2px);
+}
+
+.district-guide img {
+  flex: 0 0 160px;
+  width: 160px;
+  aspect-ratio: 3 / 2;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.district-guide__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.district-guide__label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-accent-dark);
+}
+
+.district-guide__title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--color-primary);
+}
+
+.district-guide__excerpt {
+  font-size: 0.92rem;
+  color: var(--color-ink-soft);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.district-guide__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+@media (max-width: 640px) {
+  .district-guide {
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 0.75rem;
+  }
+
+  .district-guide img {
+    flex-basis: 112px;
+    width: 112px;
+  }
+
+  .district-guide__excerpt {
+    display: none;
+  }
+}
+
 @media (max-width: 720px) {
   .project-stats__grid {
     grid-template-columns: repeat(2, 1fr);
@@ -4758,6 +4846,32 @@ body.map-open .back-to-top {
 
 .admin-leads__form--error span {
   color: var(--color-danger);
+}
+
+/* Admin home: connect a WhatsApp number (Embedded Signup). */
+.admin-wa__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.admin-wa__label {
+  flex: 1 1 100%;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.admin-wa__input {
+  flex: 1 1 14rem;
+  min-width: 0;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 1rem;
+  text-align: left;
 }
 
 .admin-panel__more {

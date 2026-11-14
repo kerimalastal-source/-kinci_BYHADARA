@@ -12,6 +12,7 @@ import { adminHero, adminNav } from "./nav";
 import { dailyChart, sourceLabel } from "./stats";
 import { publishSocialNow, type SocialPublishResult } from "../../data/socialPublish";
 import { checkLeadFormsNow, type LeadCheckResult } from "../../data/metaLeads";
+import { connectWhatsAppNumber, loadSdk, savedConfigId, type ConnectResult } from "../../data/whatsappConnect";
 
 /**
  * The admin home (/admin): the day at a glance — today's and tomorrow's video tours,
@@ -83,6 +84,23 @@ function list(items: string[], empty: string): string {
 
 /** One line about what the "publish now" button did. */
 /** The lead-forms check result: one line per form, then a summary (Meta's texts escaped). */
+/** What the WhatsApp connect button reports (api/_lib/whatsappConnect.ts). */
+function whatsappStatus(result: ConnectResult): string {
+  if (result.ok) {
+    const numbers = (result.numbers ?? [])
+      .map((n) => `<li class="admin-leads__form"><b><bdi dir="ltr">${escapeHtml(n.display || n.id)}</bdi></b>${n.name ? ` <bdi>${escapeHtml(n.name)}</bdi>` : ""}<span>phone_number_id: <bdi dir="ltr">${escapeHtml(n.id)}</bdi></span></li>`)
+      .join("");
+    return `<p>${t("adminHome.whatsapp.done")}</p><ul class="admin-leads__forms">${numbers}</ul><p>${t("adminHome.whatsapp.next")}</p>`;
+  }
+  const detail = result.detail || result.step ? ` <bdi dir="ltr">${escapeHtml(result.detail || result.step || "")}</bdi>` : "";
+  const key = ["config", "sdk", "cancelled", "meta", "session", "forbidden", "token", "numbers", "subscribe", "input"].includes(result.error ?? "")
+    ? result.error!
+    : result.missing
+      ? "missing"
+      : "error";
+  return `<p>${t(`adminHome.whatsapp.errors.${key}`)}${detail}</p>`;
+}
+
 function leadsStatus(result: LeadCheckResult | null): string {
   if (!result) return `<p>${t("adminHome.leads.error")}</p>`;
   if (result.missing) return `<p>${t("adminHome.leads.missing", { missing: escapeHtml(result.missing) })}</p>`;
@@ -164,6 +182,16 @@ export function renderAdminOverview(main: HTMLElement): void {
           <button type="button" class="btn btn--primary btn--small" data-leads-check>${t("adminHome.leads.button")}</button>
           <div class="admin-social__status admin-leads" data-home-leads role="status" aria-live="polite"></div>
         </section>
+        <section class="admin-panel admin-panel--wide admin-social admin-wa">
+          <h2 class="admin-panel__title">${t("adminHome.whatsapp.title")}</h2>
+          <p class="admin-panel__hint">${t("adminHome.whatsapp.hint")}</p>
+          <div class="admin-wa__row">
+            <label class="admin-wa__label" for="wa-config">${t("adminHome.whatsapp.config")}</label>
+            <input class="admin-wa__input" id="wa-config" type="text" inputmode="numeric" dir="ltr" autocomplete="off" value="${escapeHtml(savedConfigId())}" />
+            <button type="button" class="btn btn--primary btn--small" data-wa-connect>${t("adminHome.whatsapp.button")}</button>
+          </div>
+          <div class="admin-social__status admin-leads" data-home-wa role="status" aria-live="polite"></div>
+        </section>
       </div>
     </section>`;
 
@@ -185,6 +213,19 @@ export function renderAdminOverview(main: HTMLElement): void {
     const result = await checkLeadFormsNow();
     button.disabled = false;
     status.innerHTML = leadsStatus(result);
+  });
+
+  // Facebook's SDK loads with the page, so the signup popup opens straight from the click.
+  void loadSdk().catch(() => undefined);
+  main.querySelector<HTMLButtonElement>("[data-wa-connect]")!.addEventListener("click", async (event) => {
+    const button = event.currentTarget as HTMLButtonElement;
+    const status = main.querySelector<HTMLElement>("[data-home-wa]")!;
+    const config = main.querySelector<HTMLInputElement>("#wa-config")!.value;
+    button.disabled = true;
+    status.innerHTML = `<p>${t("adminHome.whatsapp.working")}</p>`;
+    const result = await connectWhatsAppNumber(config);
+    button.disabled = false;
+    status.innerHTML = whatsappStatus(result);
   });
 
   const requestId = crypto.randomUUID();

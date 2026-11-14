@@ -34,8 +34,8 @@ interface FaqItem {
 }
 
 const SITE_EMAIL = "info@byhadara.com";
-const SITE_PHONE = "+90 531 930 92 14";
-const SITE_PHONE_HREF = "+905319309214";
+const SITE_PHONE = "+90 532 139 25 23";
+const SITE_PHONE_HREF = "+905321392523";
 const FORM_ID = "consultation-form";
 
 const icon = (paths: string, size = 26) =>

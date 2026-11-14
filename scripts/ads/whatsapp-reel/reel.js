@@ -115,7 +115,7 @@ const S = [];
     g.style.transform = `translate(-50%,-50%) scale(${lerp(0.7, 1, out3(p)) + 0.04 * Math.sin(p * Math.PI * 2)})`;
   });
   const N = layer(); N.innerHTML = `<div class="c num"><small>${WA}<span>WhatsApp</span></small><div class="d"></div></div>`;
-  const d = N.querySelector(".d"), digits = "+90 531 930 92 14";
+  const d = N.querySelector(".d"), digits = "+90 532 139 25 23";
   S.push((t) => {
     N.style.opacity = vis(t, 8.1, 9.7, 0.2, 0.3);
     const n = Math.round(lerp(0, digits.length, prog(t, 8.25, 9.15)));

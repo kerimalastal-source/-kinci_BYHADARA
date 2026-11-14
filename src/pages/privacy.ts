@@ -12,8 +12,8 @@ interface PolicySection {
 const LAST_UPDATED = "2026-11-12";
 
 const SITE_EMAIL = "info@byhadara.com";
-const SITE_PHONE = "+90 531 930 92 14";
-const SITE_PHONE_HREF = "+905319309214";
+const SITE_PHONE = "+90 532 139 25 23";
+const SITE_PHONE_HREF = "+905321392523";
 
 const CHECK =
   '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>';

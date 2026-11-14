@@ -40,7 +40,7 @@ import {
 
 const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru"];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const WHATSAPP = "905319309214";
+const WHATSAPP = "905321392523";
 
 type Answer = "accepted" | "declined";
 /** What the team is told: an answer, or a time the visitor picked (held, or only suggested). */
