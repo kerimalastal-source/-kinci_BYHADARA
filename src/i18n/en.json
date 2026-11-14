@@ -120,10 +120,10 @@
     "statsTitle": "HADARA in Numbers",
     "stats": [
       { "value": "12+", "label": "Years of Excellence", "icon": "years" },
-      { "value": "25", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "10,000+", "label": "Residential Units", "icon": "apartments" },
+      { "value": "26", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "10,500+", "label": "Residential Units", "icon": "apartments" },
       { "value": "420+", "label": "Office Units", "icon": "offices" },
-      { "value": "300+", "label": "Commercial Units", "icon": "shops" },
+      { "value": "350+", "label": "Commercial Units", "icon": "shops" },
       { "value": "12", "label": "Prime Istanbul Districts", "icon": "districts" }
     ],
     "partnersEyebrow": "Trusted Network",
@@ -192,7 +192,7 @@
     "storyEyebrow": "Our Story",
     "storyTitle": "From a Single Vision to a Growing Portfolio",
     "storyText1": "Founded in 2014 and headquartered in Beylikdüzü, Istanbul, HADARA Real Estate was built on a simple idea: that careful project selection and honest advice create lasting value for the people who live in — and invest in — the homes we offer.",
-    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut, Mesa, Dağ Holding and Kiler GYO to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş, Pendik and Maltepe, among the most sought-after growth corridors on both sides of Istanbul, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
+    "storyText2": "Over the past decade, we have worked with leading developers such as Lotus Yapı, Yıltaş, MH Grup, Kuzu Grup, Özak GYO, Mutlu İnşaat, Emlak Konut, Mesa, Dağ Holding, Kiler GYO and İhlas Holding to market residential communities, mixed-use landmarks and villas across Beylikdüzü, Büyükçekmece, Avcılar, Şişli, Bakırköy, Zeytinburnu, Başakşehir, Küçükçekmece, Eyüpsultan, Beşiktaş, Pendik and Maltepe, among the most sought-after growth corridors on both sides of Istanbul, and we developed our own private villa, Marmara Haven, in Büyükçekmece. Today we also offer architectural design, interior design and engineering consultancy, so clients can shape a project with us from the first idea.",
     "missionTitle": "Our Mission",
     "missionText": "To connect residents and investors with carefully selected residential and mixed-use projects that combine architectural quality, everyday comfort and dependable long-term value, and to guide them clearly at every step.",
     "visionTitle": "Our Vision",
@@ -216,8 +216,8 @@
     "statsTitle": "Our Track Record",
     "stats": [
       { "value": "12+", "label": "Years in Business", "icon": "years" },
-      { "value": "25", "label": "Landmark Projects", "icon": "projects" },
-      { "value": "10,700+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
+      { "value": "26", "label": "Landmark Projects", "icon": "projects" },
+      { "value": "11,200+", "label": "Residential, Office & Commercial Units", "icon": "apartments" },
       { "value": "690,000+ m²", "label": "Total Project Land Area", "icon": "landArea" }
     ]
   },
@@ -2120,6 +2120,50 @@
         },
         {
           "place": "Sabiha Gökçen Airport"
+        }
+      ]
+    },
+    "bizim-evler-12": {
+      "name": "Bizim Evler 12",
+      "tagline": "A new family community among gardens and lake views in Ispartakule, by İhlas Holding.",
+      "shortDescription": "Bizim Evler 12 is a new off-plan residential project by İhlas Holding in Ispartakule on Istanbul's European side: 473 apartments from 2+1 to 4+1 in 7 blocks on 43,000 m², 32,500 m² of it green space, with an indoor pool, fitness centre, sports courts, a mosque and 25 shops. Delivery is expected in December 2028, and the project is eligible for Turkish citizenship.",
+      "longDescription": "Bizim Evler 12 is the newest project in the Bizim Evler series that İhlas Holding has built in Ispartakule, on Istanbul's European side. İhlas Holding has worked in construction for 36 years and has delivered some 25,000 homes on more than 4.5 million m². The project covers 43,000 m², of which 32,500 m² are landscaped gardens with walking and seating areas, ornamental pools, fountains and gazebos, and according to the developer many windows look out over the lake. It has 473 apartments in 7 blocks of 12 and 13 floors, five per floor: 96 2+1, 273 3+1 and 104 4+1, with comfortable 3-metre ceilings, central underfloor heating throughout, modern kitchens with built-in appliances, high-quality thermal insulation and fibre internet right into the home. Residents have an indoor pool with separate sessions for men and women, a fitness centre, a sauna, walking, jogging and cycling paths, tennis, football, basketball and volleyball courts, children's play areas and a mosque on site, and 25 shops with stores, cafés and restaurants at the entrance. There is indoor and outdoor parking with a space for every apartment, electric car charging, a backup generator, 24/7 security with CCTV, safe shelters, a dedicated drinking-water filtration system by İhlas, rainwater collected to water the gardens, and a 5-year warranty on the apartment. The project is 3 minutes from the TEM motorway's Ispartakule toll gates, with a direct link to Istanbul Airport and the Yavuz Sultan Selim Bridge, and sits next to the Nakkaş–Başakşehir motorway and the Halkalı–Ispartakule high-speed rail line. It is off plan, delivery is expected in December 2028, and the title deeds are ready (kat irtifakı). Prices are on request, with a payment plan of 40% down and the balance over 24 months, and discounts for cash payment. The project is eligible for Turkish citizenship.",
+      "highlights": [
+        "By İhlas Holding, with 36 years in construction and some 25,000 homes delivered",
+        "Eligible for Turkish citizenship",
+        "Delivery expected in December 2028, title deeds ready (kat irtifakı)",
+        "40% down, the balance over 24 months, and discounts for cash payment",
+        "473 apartments from 2+1 to 4+1 in 7 blocks, with 3-metre ceilings",
+        "32,500 m² of landscaped gardens with ornamental pools and fountains, and lake views",
+        "Indoor pool with separate sessions for men and women, fitness centre and sauna",
+        "Tennis, football, basketball and volleyball courts, walking and cycling paths",
+        "A mosque on site and 25 shops with stores, cafés and restaurants",
+        "Underfloor heating, fibre internet and a dedicated drinking-water filtration system",
+        "A parking space for every apartment, EV charging, safe shelters and a 5-year warranty",
+        "3 minutes from the TEM motorway, with a direct link to Istanbul Airport"
+      ],
+      "nearby": [
+        {
+          "place": "TEM motorway, Ispartakule toll gates",
+          "time": "3 min"
+        },
+        {
+          "place": "Nakkaş–Başakşehir motorway"
+        },
+        {
+          "place": "Halkalı–Ispartakule high-speed rail line"
+        },
+        {
+          "place": "Istanbul Airport"
+        },
+        {
+          "place": "Yavuz Sultan Selim Bridge"
+        },
+        {
+          "place": "Başakşehir Çam and Sakura City Hospital"
+        },
+        {
+          "place": "Kanal Istanbul"
         }
       ]
     },

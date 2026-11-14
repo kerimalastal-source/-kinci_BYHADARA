@@ -140,6 +140,13 @@ export const PROJECT_NAMES: Record<string, Record<"en" | "ar" | "fa" | "fr" | "r
     "fr": "Özak Dragos",
     "ru": "Özak Dragos"
   },
+  "bizim-evler-12": {
+    "en": "Bizim Evler 12",
+    "ar": "بيزيم إيفلر 12",
+    "fa": "بیزیم اولر 12",
+    "fr": "Bizim Evler 12",
+    "ru": "Bizim Evler 12"
+  },
   "lotus-sisli": {
     "en": "Lotus Şişli",
     "ar": "لوتس شيشلي",

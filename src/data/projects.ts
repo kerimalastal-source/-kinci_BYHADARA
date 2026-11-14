@@ -1177,6 +1177,72 @@ export const projects: Project[] = [
     ]
   },
   {
+    slug: "bizim-evler-12",
+    // Shown as Ispartakule like Tual Comfort; the map draws its district, Avcılar (owner, 2026-11-13).
+    district: "Ispartakule",
+    mapDistrict: "Avcılar",
+    city: "Istanbul",
+    status: "new-launch",
+    // Owner, 2026-11-13: off plan, delivery expected December 2028, eligible for citizenship, title deeds ready
+    // (kat irtifakı), price on request, 40% down and the balance over 24 months (cash discounts on request).
+    paymentPlan: { downPercent: 40, months: 24 },
+    lifestyle: ["nature", "city"],
+    unitsAvailable: true,
+    priority: 1.995,
+    developer: "İhlas Holding",
+    address: "Bizim Evler 12, Tahtakale Mah., Gece Sefası Sok., Ispartakule, Avcılar, İstanbul",
+    price: "on-request",
+    // Facts from the owner (43,000 m² project, 32,500 m² green, 7 blocks of 12–13 floors, 473 apartments: 96 2+1,
+    // 273 3+1, 104 4+1, 25 shops, mosque, shelters, 5-year warranty) and the developer's site and catalogue
+    // (bizimevler.com.tr/bizimevler12, April 2026): lake views, indoor pool with separate sessions for men and women,
+    // fitness, sauna, sports courts, EV charging, generator, 24/7 CCTV security, a parking space for every flat.
+    coverImage: img("bizim-evler-12", "gardens-blocks", 1900, 1069, "Bizim Evler 12 residential blocks around landscaped gardens and ornamental pools in Ispartakule"),
+    gallery: [
+      img("bizim-evler-12", "blocks-pools", 1900, 1069, "Bizim Evler 12 blocks with ornamental pools and walking paths"),
+      img("bizim-evler-12", "gardens-aerial", 1600, 900, "Bizim Evler 12 gardens, pools and play areas seen from above"),
+      img("bizim-evler-12", "garden-walkway", 1900, 1069, "Bizim Evler 12 garden walkway between the blocks"),
+      img("bizim-evler-12", "sports-courts", 1900, 1069, "Bizim Evler 12 tennis court and football pitch"),
+      img("bizim-evler-12", "playground", 1900, 1069, "Bizim Evler 12 children's playground in the gardens"),
+      img("bizim-evler-12", "entrance-shops", 1900, 990, "Bizim Evler 12 main entrance with street shops and cafés"),
+      img("bizim-evler-12", "night-pools", 1500, 870, "Bizim Evler 12 blocks and fountains in the evening"),
+      img("bizim-evler-12", "site-plan", 1300, 891, "Bizim Evler 12 site plan with blocks A1 to A4 and B1 to B3"),
+      img("bizim-evler-12", "living-room", 1900, 925, "Bizim Evler 12 sample living and dining room"),
+      img("bizim-evler-12", "kitchen", 1600, 897, "Bizim Evler 12 sample fitted kitchen"),
+      img("bizim-evler-12", "bedroom", 1300, 889, "Bizim Evler 12 sample master bedroom")
+    ],
+    stats: [
+      { value: "473", labelKey: "apartments" },
+      { value: "2028", labelKey: "delivery" },
+      { value: "43,000 m²", labelKey: "projectArea" },
+      { value: "32,500 m²", labelKey: "greenAndParkArea" },
+      { value: "2+1 – 4+1", labelKey: "layout" }
+    ],
+    // One sample plan per type from the catalogue (gross "brüt alan"): 2+1 A 126 m² (128 m² in the owner's sample
+    // flat), 3+1 A-B 166–168 m² and 3+1 C 177 m², 4+1 A 216 m².
+    residencesMoreOptions: true,
+    residences: [
+      { kind: "apartment", layout: "2+1", gross: "126 – 128 m²", plan: img("bizim-evler-12", "plan-2-1", 1552, 1051, "Bizim Evler 12 sample 2+1 floor plan (type 2+1 A)") },
+      { kind: "apartment", layout: "3+1", gross: "166 – 177 m²", plan: img("bizim-evler-12", "plan-3-1", 1528, 1047, "Bizim Evler 12 sample 3+1 floor plan (type 3+1 A-B)") },
+      { kind: "apartment", layout: "4+1", gross: "216 m²", plan: img("bizim-evler-12", "plan-4-1", 1538, 1047, "Bizim Evler 12 sample 4+1 floor plan (type 4+1 A)") }
+    ],
+    amenities: [
+      "indoorPool",
+      "fitness",
+      "sauna",
+      "joggingTrack",
+      "sportsCourt",
+      "playground",
+      "landscaping",
+      "underfloorHeating",
+      "indoorParking",
+      "evCharging",
+      "generator",
+      "security",
+      "cctv",
+      "retail"
+    ]
+  },
+  {
     slug: "lotus-sisli",
     district: "Şişli",
     city: "Istanbul",
