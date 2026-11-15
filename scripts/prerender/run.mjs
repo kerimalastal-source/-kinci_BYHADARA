@@ -12,6 +12,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { build } from "vite";
 import { GlobalRegistrator } from "@happy-dom/global-registrator";
+import { i18nSplit } from "../i18n-split-plugin.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, "../..");
@@ -28,6 +29,8 @@ await build({
     "import.meta.env.VITE_SUPABASE_URL": JSON.stringify("http://127.0.0.1:9"),
     "import.meta.env.VITE_SUPABASE_ANON_KEY": JSON.stringify("prerender")
   },
+  // The app imports its dictionary parts from this plugin; here they are never fetched (entry.ts registers whole dictionaries).
+  plugins: [i18nSplit(root)],
   build: { ssr: resolve(here, "entry.ts"), outDir: tmp, emptyOutDir: true, minify: false }
 });
 

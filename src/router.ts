@@ -21,9 +21,8 @@ import { renderResaleDetail } from "./pages/resale/detail";
 import { renderHeader } from "./components/header";
 import { renderFooter } from "./components/footer";
 import { renderFloatingButtons } from "./components/floatingButtons";
-import { onLocaleChange, syncLocale, getPreferredLocale, link, locales, type Locale } from "./i18n";
-import { hasDictionary } from "./i18n/dictionaries";
-import { ensureLocales } from "./i18n/load";
+import { onLocaleChange, syncLocale, getPreferredLocale, link, type Locale } from "./i18n";
+import { ensureRoute, routeReady } from "./i18n/load";
 import { parseRoute, splitLocale, localizePath, type Route } from "./seo/routes";
 import { applyMeta } from "./seo/head";
 import { onAuthChange } from "./auth/session";
@@ -32,9 +31,6 @@ import { trackPageView } from "./utils/tracking";
 import { trackVisit } from "./utils/visitorTracker";
 
 export type { Route };
-
-/** Pages with a form whose message also goes to the team in English and Arabic. */
-const FORM_ROUTES = new Set<Route["name"]>(["contact", "property-request", "video-tour", "consultancy"]);
 
 let rerender: () => void = () => {};
 let renderedPath = "";
@@ -230,15 +226,9 @@ export function startRouter(root: HTMLElement): void {
   function renderAll(): void {
     closeSearch();
     const { locale, route } = currentRoute();
-    // Admin pages show customers' messages in their own languages, so they need every dictionary;
-    // the form pages also write the team's copy in English and Arabic.
-    const needed = route.name.startsWith("admin")
-      ? locales
-      : FORM_ROUTES.has(route.name)
-        ? [...new Set<Locale>([locale, "en", "ar"])]
-        : [locale];
-    if (needed.some((l) => !hasDictionary(l))) {
-      void ensureLocales(needed).then(renderAll);
+    // The dictionaries arrive in parts (i18n/load.ts); wait for the ones this page reads.
+    if (!routeReady(route, locale)) {
+      void ensureRoute(route, locale).then(renderAll);
       return;
     }
     syncLocale(locale);
