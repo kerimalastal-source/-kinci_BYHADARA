@@ -317,6 +317,13 @@
     "overviewTitle": "Обзор проекта",
     "keyFactsTitle": "Основные факты",
     "galleryTitle": "Галерея",
+    "photosTitle": "Фото проекта",
+    "photosAll": "Все фото ({count})",
+    "bar": {
+      "whatsapp": "WhatsApp",
+      "requestPrice": "Узнать цену",
+      "requestDetails": "Узнать подробности"
+    },
     "locationLabel": "Расположение",
     "timelineLabel": "Сроки",
     "statusLabel": "Статус",
@@ -4815,6 +4822,7 @@
     "label": "Уведомление о файлах cookie",
     "title": "Файлы cookie",
     "text": "Мы используем cookie Meta и Google, чтобы оценивать нашу рекламу и показывать более подходящую. Они загружаются только с вашего согласия, а сайт работает в любом случае.",
+    "shortText": "Мы используем cookie Meta и Google для рекламы и её оценки. Они загружаются только с вашего согласия.",
     "accept": "Принять",
     "decline": "Отклонить",
     "more": "Политика конфиденциальности",

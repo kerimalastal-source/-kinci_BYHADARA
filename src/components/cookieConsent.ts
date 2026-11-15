@@ -66,7 +66,7 @@ function render(el: HTMLElement): void {
   el.innerHTML = `
     <div class="cookie-consent__body">
       <p class="cookie-consent__title">${t("consent.title")}</p>
-      <p class="cookie-consent__text">${t("consent.text")} ${more}</p>
+      <p class="cookie-consent__text"><span class="cookie-consent__long">${t("consent.text")}</span><span class="cookie-consent__short">${t("consent.shortText")}</span> ${more}</p>
     </div>
     <div class="cookie-consent__actions">
       <button type="button" class="btn btn--outline" data-consent="denied">${t("consent.decline")}</button>

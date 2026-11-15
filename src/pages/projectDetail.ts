@@ -15,6 +15,7 @@ import { renderProjectQuickForm, initProjectQuickForm } from "../components/proj
 import { renderNotFound } from "./notFound";
 import { photoAttrs, photoSrcset, heroBackground } from "../utils/responsiveImage";
 import { priceHtml } from "../utils/price";
+import { reportAction } from "../utils/visitorTracker";
 
 /** Scroll-reveal attributes; the stagger restarts every row so long grids don't lag. */
 const reveal = (i: number, perRow = 4) => `data-reveal data-reveal-index="${i % perRow}"`;
@@ -499,6 +500,84 @@ function renderAmenities(project: Project): string {
     </section>`;
 }
 
+/** How many photos the strip under the key facts shows before its "All photos" tile. */
+const STRIP_PHOTOS = 8;
+
+/**
+ * A swipeable row of photos right under the key facts, so a visitor sees the project before reading
+ * about it (the full gallery stays further down). The cover is already the hero, so the row starts
+ * with the second photo; the last tile opens the whole set.
+ */
+function renderPhotoStrip(gallery: Project["gallery"]): string {
+  if (gallery.length < 4) return "";
+  const shown = gallery.slice(1, 1 + STRIP_PHOTOS);
+  // Wide screens show four tiles, so the fourth carries the label there; phones swipe to the last one.
+  const labelled = (i: number) => shown.length >= 4 && (i === 3 || i === shown.length - 1);
+  return `
+    <section class="photo-strip" aria-label="${t("projectDetail.photosTitle")}">
+      <div class="container">
+        <div class="photo-strip__track" id="project-photo-strip" style="--strip-columns: ${Math.min(4, shown.length)}">
+          ${shown
+            .map(
+              (img, i) => `
+          <button type="button" class="photo-strip__item" data-index="${i + 1}">
+            <img ${photoAttrs(img, "(max-width: 720px) 76vw, 300px")} alt="${img.alt}" width="${img.width}" height="${img.height}" ${i < 2 ? "" : 'loading="lazy" '}decoding="async" />
+            ${labelled(i) ? `<span class="photo-strip__more"><span>${t("projectDetail.photosAll", { count: `<bdi dir="ltr">${gallery.length}</bdi>` })}</span></span>` : ""}
+          </button>`
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>`;
+}
+
+let stopProjectBar: () => void = () => {};
+
+/**
+ * Phones only (CSS): once the hero has scrolled away, a bar with WhatsApp and "Request the price" stays
+ * at the bottom, and steps aside wherever the page offers the same thing itself (the contact card,
+ * the short form) and over the footer.
+ */
+function initProjectBar(el: HTMLElement, slug: string): void {
+  stopProjectBar();
+  const bar = el.querySelector<HTMLElement>("#project-bar");
+  const hero = el.querySelector<HTMLElement>(".project-hero");
+  if (!bar || !hero || !("IntersectionObserver" in window)) return;
+
+  const inView = new Set<Element>();
+  let pastHero = false;
+  const update = () => bar.classList.toggle("is-visible", pastHero && inView.size === 0);
+
+  const heroWatch = new IntersectionObserver(([entry]) => {
+    pastHero = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+    update();
+  });
+  heroWatch.observe(hero);
+
+  const ownOffers = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) inView.add(entry.target);
+      else inView.delete(entry.target);
+    }
+    update();
+  });
+  el.querySelectorAll(".cta-card, #project-quick-form").forEach((node) => ownOffers.observe(node));
+  const footer = document.querySelector("#site-footer");
+  if (footer) ownOffers.observe(footer);
+
+  bar.querySelector<HTMLButtonElement>("[data-project-bar-request]")?.addEventListener("click", () => {
+    reportAction("interested", slug);
+    const form = el.querySelector<HTMLElement>("#project-inquiry");
+    form?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  });
+
+  stopProjectBar = () => {
+    heroWatch.disconnect();
+    ownOffers.disconnect();
+    stopProjectBar = () => {};
+  };
+}
+
 function renderLocation(project: Project, name: string, nearby: ReturnType<typeof getProjectContent>["nearby"]): string {
   return `
     <section class="detail-block" id="project-location">
@@ -630,6 +709,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
       </div>
     </section>
 
+    ${renderPhotoStrip(gallery)}
+
     ${renderVideo(project, content, contactActions)}
 
     <section class="section project-detail">
@@ -739,6 +820,16 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
     ${renderProjectQuickForm(content.name)}
 
     ${
+      project.soldOut
+        ? ""
+        : `
+    <div class="project-bar" id="project-bar">
+      <a class="btn btn--whatsapp project-bar__btn" href="${whatsappHref}" target="_blank" rel="noopener">${WHATSAPP_ICON}${t("projectDetail.bar.whatsapp")}</a>
+      <button type="button" class="btn btn--primary project-bar__btn" data-project-bar-request>${t(project.price === "on-request" || !project.price ? "projectDetail.bar.requestPrice" : "projectDetail.bar.requestDetails")}</button>
+    </div>`
+    }
+
+    ${
       others.length
         ? `
     <section class="section other-projects">
@@ -759,6 +850,13 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   initVideo(el);
   initReadMore(el);
   initProjectQuickForm(el, project, content.name);
+  initProjectBar(el, project.slug);
+
+  el.querySelectorAll<HTMLButtonElement>("#project-photo-strip .photo-strip__item").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      openLightbox(gallery.map((g) => ({ src: g.src, alt: g.alt, srcset: photoSrcset(g) })), Number(btn.dataset.index));
+    });
+  });
 
   const floorImages = (project.floorPlan ?? []).flatMap((f) => (f.image ? [f.image] : []));
   el.querySelectorAll<HTMLButtonElement>(".floor-card__media").forEach((btn) => {

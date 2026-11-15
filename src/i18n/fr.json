@@ -315,6 +315,13 @@
     "overviewTitle": "Aperçu du projet",
     "keyFactsTitle": "Chiffres clés",
     "galleryTitle": "Galerie",
+    "photosTitle": "Photos du projet",
+    "photosAll": "Toutes les photos ({count})",
+    "bar": {
+      "whatsapp": "WhatsApp",
+      "requestPrice": "Demander le prix",
+      "requestDetails": "Demander les détails"
+    },
     "locationLabel": "Emplacement",
     "timelineLabel": "Calendrier",
     "statusLabel": "Statut",
@@ -4813,6 +4820,7 @@
     "label": "Avis sur les cookies",
     "title": "Cookies",
     "text": "Nous utilisons des cookies de Meta et de Google pour mesurer nos publicités et vous en montrer de plus pertinentes. Ils ne sont chargés que si vous acceptez, et le site fonctionne entièrement dans les deux cas.",
+    "shortText": "Nous utilisons des cookies Meta et Google pour la publicité et sa mesure. Ils ne sont chargés que si vous acceptez.",
     "accept": "Accepter",
     "decline": "Refuser",
     "more": "Politique de confidentialité",

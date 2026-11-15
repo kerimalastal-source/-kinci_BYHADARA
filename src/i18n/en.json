@@ -313,6 +313,13 @@
     "overviewTitle": "Project Overview",
     "keyFactsTitle": "Key Facts",
     "galleryTitle": "Gallery",
+    "photosTitle": "Project photos",
+    "photosAll": "All photos ({count})",
+    "bar": {
+      "whatsapp": "WhatsApp",
+      "requestPrice": "Request the price",
+      "requestDetails": "Request details"
+    },
     "locationLabel": "Location",
     "timelineLabel": "Timeline",
     "statusLabel": "Status",
@@ -4811,6 +4818,7 @@
     "label": "Cookie notice",
     "title": "Cookies",
     "text": "We use cookies from Meta and Google to measure our ads and show you more relevant ones. They load only if you accept, and the site works fully either way.",
+    "shortText": "We use Meta and Google cookies for ads and to measure them. They load only if you accept.",
     "accept": "Accept",
     "decline": "Decline",
     "more": "Privacy Policy",

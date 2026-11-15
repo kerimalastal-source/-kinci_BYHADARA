@@ -11638,6 +11638,11 @@ body.nav-open .back-to-top {
   line-height: 1.6;
 }
 
+/* Phones show a shorter sentence (see the 640px block below). */
+.cookie-consent__short {
+  display: none;
+}
+
 .cookie-consent__text a {
   color: var(--color-primary);
   text-decoration: underline;
@@ -11817,8 +11822,67 @@ body.map-open .cookie-consent {
     max-height: calc(100dvh - 24px);
   }
 
-  /* Raised above the card they would sit on the page's own buttons; they come back once the visitor chooses. */
+  /* A compact bar on phones: one short sentence, then "Customise" and the two equal buttons in one row,
+     so it covers little of the page and the visitor who never answers can still read and get in touch. */
+  .cookie-consent:not(.cookie-consent--settings) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.55rem 0.5rem;
+    padding: 0.7rem 0.8rem;
+    border-radius: 14px;
+  }
+
+  .cookie-consent:not(.cookie-consent--settings) .cookie-consent__body {
+    grid-column: 1 / -1;
+  }
+
+  .cookie-consent:not(.cookie-consent--settings) .cookie-consent__title,
+  .cookie-consent:not(.cookie-consent--settings) .cookie-consent__long {
+    display: none;
+  }
+
+  .cookie-consent:not(.cookie-consent--settings) .cookie-consent__short {
+    display: inline;
+  }
+
+  .cookie-consent:not(.cookie-consent--settings) .cookie-consent__text {
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .cookie-consent:not(.cookie-consent--settings) .cookie-consent__actions {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 0;
+    gap: 0.45rem;
+  }
+
+  .cookie-consent:not(.cookie-consent--settings) .cookie-consent__actions .btn {
+    flex: 0 0 auto;
+    min-width: 5.4rem;
+    min-height: 40px;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .cookie-consent:not(.cookie-consent--settings) .cookie-consent__customize {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    margin: 0;
+    padding: 0.35rem 0.2rem;
+    min-height: 40px;
+    font-size: 0.82rem;
+  }
+
+  /* WhatsApp stays in reach above the bar (nearly half of visitors never answer it);
+     the other two circles come back once the visitor chooses, so the stack stays clear of the page's own buttons. */
   body.consent-open .floating-actions {
+    bottom: calc(var(--consent-h, 0px) + 24px + env(safe-area-inset-bottom));
+  }
+
+  body.consent-open .floating-actions__btn:not(.floating-actions__btn--whatsapp) {
     display: none;
   }
 
@@ -11835,6 +11899,188 @@ body.map-open .cookie-consent {
   .cookie-consent,
   .consent-switch__track,
   .consent-switch__track::after {
+    transition: none;
+  }
+}
+
+/* ---------- Project page: photo strip under the key facts ---------- */
+.photo-strip {
+  padding-block: 1.25rem 0;
+  background: var(--color-bg);
+}
+
+.photo-strip__track {
+  display: grid;
+  grid-template-columns: repeat(var(--strip-columns, 4), minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.photo-strip__item {
+  position: relative;
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--color-surface-alt);
+  cursor: zoom-in;
+}
+
+/* Wide screens show four photos in a row; the fourth carries the "All photos" label. */
+.photo-strip__item:nth-child(n + 5) {
+  display: none;
+}
+
+.photo-strip__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms ease;
+}
+
+.photo-strip__more {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  padding: 0.5rem;
+  background: rgba(15, 43, 33, 0.62);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* The label is on the fourth tile (the last one wide screens show) and on the last tile (where phones stop swiping). */
+.photo-strip__item:nth-child(4) .photo-strip__more {
+  display: grid;
+}
+
+@media (hover: hover) {
+  .photo-strip__item:hover img {
+    transform: scale(1.04);
+  }
+}
+
+.photo-strip__item:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  /* A row to swipe: each photo most of the screen wide, the next one peeking in. */
+  .photo-strip .container {
+    padding-inline: 0;
+  }
+
+  .photo-strip__track {
+    display: flex;
+    gap: 0.6rem;
+    overflow-x: auto;
+    padding-inline: 1.25rem;
+    scroll-padding-inline: 1.25rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .photo-strip__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .photo-strip__item,
+  .photo-strip__item:nth-child(n + 5) {
+    display: block;
+    flex: 0 0 min(76vw, 340px);
+    scroll-snap-align: start;
+  }
+
+  .photo-strip__item:nth-child(4):not(:last-child) .photo-strip__more {
+    display: none;
+  }
+
+  .photo-strip__item:last-child .photo-strip__more {
+    display: grid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-strip__item img {
+    transition: none;
+  }
+}
+
+/* ---------- Project page: WhatsApp + request bar at the bottom of phones ---------- */
+.project-bar {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .project-bar {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 88;
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+    box-shadow: 0 -6px 18px rgba(15, 43, 33, 0.1);
+    transform: translateY(110%);
+    visibility: hidden;
+    transition: transform 240ms ease, visibility 0s linear 240ms;
+  }
+
+  .project-bar.is-visible {
+    transform: none;
+    visibility: visible;
+    transition: transform 240ms ease;
+  }
+
+  .project-bar__btn {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 46px;
+    justify-content: center;
+    padding: 0.55rem 0.6rem;
+    /* Shrinks on the narrowest phones so the longest label (Russian) keeps its side padding. */
+    font-size: clamp(0.8rem, 3.9vw, 0.95rem);
+    white-space: nowrap;
+  }
+
+  body.nav-open .project-bar,
+  body.map-open .project-bar,
+  body.chat-open .project-bar {
+    display: none;
+  }
+
+  /* The bar carries WhatsApp itself; the other floating circles and the page's corner controls move above it. */
+  body:has(.project-bar.is-visible) .floating-actions__btn--whatsapp {
+    display: none;
+  }
+
+  body:has(.project-bar.is-visible) .floating-actions {
+    bottom: calc(78px + env(safe-area-inset-bottom));
+  }
+
+  body:has(.project-bar.is-visible) .back-to-top {
+    bottom: calc(78px + env(safe-area-inset-bottom));
+  }
+
+  body:has(.project-bar.is-visible) .fav-toast {
+    bottom: calc(var(--consent-h, 0px) + 78px + env(safe-area-inset-bottom));
+  }
+
+  body:has(.project-bar.is-visible) .cookie-consent {
+    bottom: calc(74px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-bar,
+  .project-bar.is-visible {
     transition: none;
   }
 }
