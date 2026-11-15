@@ -12,6 +12,7 @@ import { favoriteButton } from "../components/favorites";
 import { renderProjectMap, initProjectMap } from "../components/projectMap";
 import { renderVideoTourInvite, videoTourHref, VIDEO_TOUR_ICON } from "../components/videoTourInvite";
 import { renderProjectQuickForm, initProjectQuickForm } from "../components/projectQuickForm";
+import { renderCatalogOffer, initCatalogOffer } from "../components/catalogRequest";
 import { renderNotFound } from "./notFound";
 import { photoAttrs, photoSrcset, heroBackground } from "../utils/responsiveImage";
 import { priceHtml } from "../utils/price";
@@ -561,7 +562,7 @@ function initProjectBar(el: HTMLElement, slug: string): void {
     }
     update();
   });
-  el.querySelectorAll(".cta-card, #project-quick-form").forEach((node) => ownOffers.observe(node));
+  el.querySelectorAll(".cta-card, #project-quick-form, #catalog-form").forEach((node) => ownOffers.observe(node));
   const footer = document.querySelector("#site-footer");
   if (footer) ownOffers.observe(footer);
 
@@ -731,6 +732,8 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
 
           ${project.landing ? ctaCard(" cta-card--inline") : ""}
 
+          ${renderCatalogOffer(project, content.name)}
+
           ${renderVerified(project, content.name, content.verified)}
 
           ${renderResidences(project)}
@@ -850,6 +853,7 @@ export function renderProjectDetail(el: HTMLElement, slug: string): void {
   initVideo(el);
   initReadMore(el);
   initProjectQuickForm(el, project, content.name);
+  initCatalogOffer(el, project, content.name);
   initProjectBar(el, project.slug);
 
   el.querySelectorAll<HTMLButtonElement>("#project-photo-strip .photo-strip__item").forEach((btn) => {

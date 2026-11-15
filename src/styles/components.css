@@ -12085,6 +12085,134 @@ body.map-open .cookie-consent {
   }
 }
 
+/* ---------- Project page: "send me the catalogue" (WhatsApp number -> PDF) ---------- */
+.catalog-offer__card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem 2rem;
+  align-items: start;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-accent);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Icon beside the title; the text under the title on wide screens, across the card on phones. */
+.catalog-offer__intro {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.5rem 0.9rem;
+  align-items: center;
+}
+
+.catalog-offer__icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--color-surface-alt);
+  color: var(--color-primary);
+}
+
+.catalog-offer .catalog-offer__title {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.catalog-offer__text {
+  grid-column: 2;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.catalog-offer__form {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.catalog-offer__form .form-field {
+  margin: 0;
+}
+
+.catalog-offer__submit {
+  justify-content: center;
+  min-height: 48px;
+}
+
+.catalog-offer__note {
+  margin: 0;
+  color: var(--color-ink-soft);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.catalog-offer__note a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.catalog-offer__done {
+  display: grid;
+  gap: 0.7rem;
+  align-content: start;
+}
+
+.catalog-offer__done[hidden],
+.catalog-offer__form[hidden] {
+  display: none;
+}
+
+.catalog-offer__done-title {
+  color: var(--color-primary);
+  font-size: 1.05rem;
+}
+
+.catalog-offer__done p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.catalog-offer__done-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.catalog-offer__done-actions .btn {
+  flex: 1 1 220px;
+  justify-content: center;
+  min-height: 48px;
+}
+
+@media (max-width: 720px) {
+  .catalog-offer__card {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1.1rem;
+  }
+
+  .catalog-offer .catalog-offer__title {
+    font-size: 1.1rem;
+  }
+
+  .catalog-offer__text {
+    grid-column: 1 / -1;
+  }
+
+  .catalog-offer__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+}
+
 /* ---------- Admin: sales pipeline, follow-ups, ad results ---------- */
 .inquiry-card__field input {
   width: 100%;

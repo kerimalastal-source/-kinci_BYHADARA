@@ -10,7 +10,7 @@
 // Output: scripts/catalog/out/HADARA-Real-Estate-Catalogue-<lang>.pdf (git-ignored).
 import fs from "node:fs";
 import path from "node:path";
-import { out, SITE, YEAR, PHONE, EMAIL, WHATSAPP, loadTs, loadDict, lookup, esc, ltr, placeKey, num, photo, qrSvg, brand, pageHtml, renderPdfs } from "./lib.mjs";
+import { out, SITE, YEAR, PHONE, EMAIL, WHATSAPP, loadTs, loadDict, lookup, esc, ltr, placeKey, num, photo, qrSvg, brand, pageHtml, renderPdfs, PDF_SUFFIX } from "./lib.mjs";
 
 // Words the site has no dictionary key for (catalogue-only labels).
 const STR = {
@@ -312,6 +312,6 @@ for (const lang of langs) {
   dict.__en = en;
   const file = path.join(out, `catalogue-${lang}.html`);
   fs.writeFileSync(file, build(lang, mod, dict));
-  pairs.push([file, path.join(out, `HADARA-Real-Estate-Catalogue-${lang}.pdf`)]);
+  pairs.push([file, path.join(out, `HADARA-Real-Estate-Catalogue-${lang}${PDF_SUFFIX}.pdf`)]);
 }
 await renderPdfs(pairs);

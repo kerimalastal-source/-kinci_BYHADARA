@@ -18,6 +18,14 @@ export const PHONE = "+90 532 139 25 23";
 export const EMAIL = "info@byhadara.com";
 export const WHATSAPP = "https://wa.me/905321392523";
 const PYTHON = process.env.PYTHON || "python3";
+/**
+ * CATALOG_WEB=1 builds the edition the website hands out (public/catalogs/): the same pages with
+ * smaller, more compressed photos, so the file is light enough to download on a phone.
+ * Without it the PDFs are print quality.
+ */
+export const WEB = process.env.CATALOG_WEB === "1";
+/** Appended to the PDF file name, so the two editions sit side by side in out/. */
+export const PDF_SUFFIX = WEB ? "-web" : "";
 
 /** Imports a TypeScript module of the site that has no runtime imports (e.g. src/data/projects.ts). */
 export async function loadTs(rel) {
@@ -42,7 +50,10 @@ const photos = new Map();
 export function photo(webPath, width) {
   const base = webPath.replace(/^\//, "").replace(/\.[a-z]+$/i, "").replace(/[\/]/g, "_");
   const key = `${webPath}@${width}`;
-  if (!photos.has(key)) photos.set(key, { src: path.join(root, "public", webPath), out: path.join(imgDir, `${base}-${width}.jpg`), width });
+  if (!photos.has(key)) {
+    const w = WEB ? Math.round(width * 0.6) : width;
+    photos.set(key, { src: path.join(root, "public", webPath), out: path.join(imgDir, `${base}-${w}${WEB ? "w" : ""}.jpg`), width: w, quality: WEB ? 68 : 84 });
+  }
   return pathToFileURL(photos.get(key).out).href;
 }
 
