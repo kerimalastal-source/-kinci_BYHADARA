@@ -203,7 +203,7 @@ function renderVideo(project: Project, content: ReturnType<typeof getProjectCont
           <h2 id="project-video-title">${content.videoTitle ?? content.name}</h2>
           ${content.videoText ? `<p class="project-video__text">${content.videoText}</p>` : ""}
         </div>
-        <div class="project-video__frame video-player" data-video-small="${video.sources.small}" data-video-large="${video.sources.large}">
+        <div class="project-video__frame video-player${video.silent ? " video-player--silent" : ""}" data-video-small="${video.sources.small}" data-video-large="${video.sources.large}">
           <img class="video-player__poster" ${photoAttrs(video.poster, "(max-width: 640px) calc(100vw - 32px), 420px")} alt="${video.poster.alt}" width="${video.poster.width}" height="${video.poster.height}" loading="lazy" />
           <video class="video-player__video" muted playsinline loop preload="none" disablepictureinpicture aria-label="${content.videoTitle ?? content.name}"></video>
           <button type="button" class="video-facade video-player__start" data-video-start aria-label="${t("projectDetail.videoPlay")}">
@@ -211,9 +211,13 @@ function renderVideo(project: Project, content: ReturnType<typeof getProjectCont
             <span class="video-facade__label">${t("projectDetail.videoPlay")}</span>
           </button>
           <div class="video-player__controls">
-            <button type="button" class="video-player__btn video-player__sound" data-video-sound aria-pressed="false">
+            ${
+              video.silent
+                ? ""
+                : `<button type="button" class="video-player__btn video-player__sound" data-video-sound aria-pressed="false">
               <span class="video-player__icon">${MUTED_ICON}</span><span class="video-player__sound-text">${t("projectDetail.videoSoundOn")}</span>
-            </button>
+            </button>`
+            }
             <div class="video-player__group">
               <button type="button" class="video-player__btn video-player__round" data-video-toggle aria-label="${t("projectDetail.videoPause")}">${PAUSE_ICON}</button>
               <button type="button" class="video-player__btn video-player__round" data-video-fullscreen aria-label="${t("projectDetail.videoFullscreen")}">${EXPAND_ICON}</button>
@@ -234,7 +238,9 @@ function initVideo(el: HTMLElement): void {
     const sound = player.querySelector<HTMLButtonElement>("[data-video-sound]");
     const toggle = player.querySelector<HTMLButtonElement>("[data-video-toggle]");
     const full = player.querySelector<HTMLButtonElement>("[data-video-fullscreen]");
-    if (!video || !start || !sound || !toggle || !full) return;
+    // A film with no soundtrack has no sound button.
+    const silent = player.classList.contains("video-player--silent");
+    if (!video || !start || !toggle || !full || (!sound && !silent)) return;
 
     // Data saver and reduced motion: nothing loads or moves until the visitor asks.
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
@@ -257,6 +263,7 @@ function initVideo(el: HTMLElement): void {
       video.play().then(() => showStart(false)).catch(() => showStart(true));
     };
     const syncSound = (): void => {
+      if (!sound) return;
       sound.setAttribute("aria-pressed", String(!video.muted));
       sound.querySelector(".video-player__icon")!.innerHTML = video.muted ? MUTED_ICON : SOUND_ON_ICON;
       sound.querySelector(".video-player__sound-text")!.textContent = t(video.muted ? "projectDetail.videoSoundOn" : "projectDetail.videoSoundOff");
@@ -281,11 +288,11 @@ function initVideo(el: HTMLElement): void {
     start.addEventListener("click", () => {
       pausedByVisitor = false;
       load();
-      video.muted = false;
+      video.muted = silent;
       video.currentTime = 0;
       play();
     });
-    sound.addEventListener("click", () => {
+    sound?.addEventListener("click", () => {
       const turningOn = video.muted;
       video.muted = !turningOn;
       // First time the sound comes on: start over so the visitor hears it from the beginning.
@@ -350,7 +357,7 @@ function initVideo(el: HTMLElement): void {
     video.addEventListener("webkitendfullscreen", syncFull);
 
     // Tapping the picture itself turns the sound on (what most people expect), then pauses/resumes.
-    video.addEventListener("click", () => (video.muted ? sound : toggle).click());
+    video.addEventListener("click", () => (video.muted && sound ? sound : toggle).click());
 
     showStart(!autoplay);
     if (!("IntersectionObserver" in window)) {

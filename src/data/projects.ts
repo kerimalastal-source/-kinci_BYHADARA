@@ -97,6 +97,8 @@ export interface ProjectVideo {
   sources: { small: string; large: string };
   /** Phone footage (9:16). */
   vertical?: boolean;
+  /** The file has no soundtrack, so the player shows no sound button. */
+  silent?: boolean;
   poster: ProjectImage;
 }
 
@@ -1174,6 +1176,107 @@ export const projects: Project[] = [
       "playground",
       "sportsCourt",
       "landscaping"
+    ]
+  },
+  {
+    slug: "bizim-evler-12",
+    // Shown as Ispartakule like Tual Comfort; the map draws its district, Avcılar (owner, 2026-11-13).
+    district: "Ispartakule",
+    mapDistrict: "Avcılar",
+    city: "Istanbul",
+    status: "new-launch",
+    // Owner, 2026-11-13: off plan, delivery expected December 2028, eligible for citizenship, title deeds ready
+    // (kat irtifakı), price on request, 40% down and the balance over 24 months (cash discounts on request).
+    paymentPlan: { downPercent: 40, months: 24 },
+    lifestyle: ["nature", "city"],
+    unitsAvailable: true,
+    priority: 1.995,
+    developer: "İhlas Holding",
+    address: "Bizim Evler 12, Tahtakale Mah., Gece Sefası Sok., Ispartakule, Avcılar, İstanbul",
+    price: "on-request",
+    // Facts from the owner (43,000 m² project, 32,500 m² green, 7 blocks of 12–13 floors, 473 apartments: 96 2+1,
+    // 273 3+1, 104 4+1, 25 shops, mosque, shelters, 5-year warranty) and the developer's site and catalogue
+    // (bizimevler.com.tr/bizimevler12; English catalogue, November 2026): lake views, indoor pool with separate
+    // sessions for men and women, fitness, sauna, sports courts, EV charging, generator, 24/7 CCTV security, a
+    // parking space for every flat. Photos (2026-11-14): the developer's renders and site plan from the owner's
+    // Drive folder "Bizim evleri 12", scaled to 1920 px; the three interiors are from the catalogue.
+    coverImage: img("bizim-evler-12", "gardens-blocks", 1920, 1080, "Bizim Evler 12 residential blocks around landscaped gardens and ornamental pools in Ispartakule"),
+    gallery: [
+      img("bizim-evler-12", "gardens-overview", 1920, 1080, "Bizim Evler 12 blocks around the central gardens, seen from above"),
+      img("bizim-evler-12", "blocks-gardens", 1920, 1080, "Bizim Evler 12 blocks facing the landscaped gardens"),
+      img("bizim-evler-12", "blocks-pools", 1920, 1080, "Bizim Evler 12 blocks with ornamental pools and walking paths"),
+      img("bizim-evler-12", "gardens-top", 1920, 1080, "Bizim Evler 12 gardens, ornamental pool and play areas from above"),
+      img("bizim-evler-12", "gardens-aerial", 1920, 1080, "Bizim Evler 12 winding ornamental pools and paths between the blocks"),
+      img("bizim-evler-12", "garden-walkway", 1920, 1080, "Bizim Evler 12 garden walkway between the blocks"),
+      img("bizim-evler-12", "playground", 1920, 1080, "Bizim Evler 12 children's playground in the gardens"),
+      img("bizim-evler-12", "sports-courts", 1920, 1080, "Bizim Evler 12 tennis court and football pitch"),
+      img("bizim-evler-12", "entrance-shops", 1920, 1080, "Bizim Evler 12 street shops and cafés at the entrance in the evening"),
+      img("bizim-evler-12", "night-gardens", 1920, 1080, "Bizim Evler 12 blocks and garden fountain in the evening"),
+      img("bizim-evler-12", "night-fountains", 1920, 1080, "Bizim Evler 12 ornamental pool and fountains at night"),
+      img("bizim-evler-12", "night-walkway", 1920, 1080, "Bizim Evler 12 garden walkway and pools at night"),
+      img("bizim-evler-12", "aerial-area", 1920, 1408, "Aerial view of Bizim Evler 12 and its surroundings in Ispartakule"),
+      img("bizim-evler-12", "aerial-lake", 1920, 1250, "Aerial view from Ispartakule towards the lake"),
+      img("bizim-evler-12", "aerial-night", 1920, 1250, "Aerial view of Bizim Evler 12 and Ispartakule at night"),
+      img("bizim-evler-12", "master-plan-3d", 1920, 1240, "Bizim Evler 12 seven blocks, gardens and street shops, aerial render"),
+      img("bizim-evler-12", "site-plan", 1920, 1646, "Bizim Evler 12 site plan with blocks A1 to A4 and B1 to B3, the social facility, the mosque and the shops"),
+      img("bizim-evler-12", "living-room", 1900, 925, "Bizim Evler 12 sample living and dining room"),
+      img("bizim-evler-12", "kitchen", 1600, 897, "Bizim Evler 12 sample fitted kitchen"),
+      img("bizim-evler-12", "bedroom", 1300, 889, "Bizim Evler 12 sample master bedroom")
+    ],
+    // Walk-through of the sample flat (phone footage from the sales office's shared Drive folder, 37 s). The
+    // soundtrack was removed: we could not check what it is, so the film plays silent (owner, 2026-11-14).
+    video: {
+      sources: {
+        small: "/videos/bizim-evler-12/sample-flat-540.mp4",
+        large: "/videos/bizim-evler-12/sample-flat-720.mp4"
+      },
+      vertical: true,
+      silent: true,
+      poster: img("bizim-evler-12", "sample-flat", 1080, 1920, "Bizim Evler 12 sample apartment, living and dining room")
+    },
+    // Real drone photos of the site, 20 June 2026, from the sales office's shared Drive folder (owner, 2026-11-14).
+    siteProgress: {
+      date: "2026-06",
+      photos: [
+        img("bizim-evler-12", "site-2026-06-blocks-wide", 1920, 1080, "Bizim Evler 12 blocks under construction in Ispartakule, June 2026"),
+        img("bizim-evler-12", "site-2026-06-lake", 1920, 1080, "Bizim Evler 12 construction site with the lake behind, June 2026"),
+        img("bizim-evler-12", "site-2026-06-aerial", 1920, 1080, "Aerial view of the Bizim Evler 12 construction site, June 2026"),
+        img("bizim-evler-12", "site-2026-06-district", 1920, 1080, "Bizim Evler 12 construction site and the Ispartakule district, June 2026"),
+        img("bizim-evler-12", "site-2026-06-slab", 1920, 1080, "Floor slab works at Bizim Evler 12, June 2026"),
+        img("bizim-evler-12", "site-2026-06-crane", 1920, 1080, "Tower crane and concrete frame at Bizim Evler 12, June 2026")
+      ]
+    },
+    stats: [
+      { value: "473", labelKey: "apartments" },
+      { value: "2028", labelKey: "delivery" },
+      { value: "43,000 m²", labelKey: "projectArea" },
+      { value: "32,500 m²", labelKey: "greenAndParkArea" },
+      { value: "2+1 – 4+1", labelKey: "layout" }
+    ],
+    // The four plan sheets of the catalogue (gross "brüt alan"): 2+1 A 126 m² (128 m² in the owner's sample
+    // flat), 3+1 A-B 166–168 m², 3+1 C 177 m², 4+1 A 216 m². Layouts vary by block and floor.
+    residencesMoreOptions: true,
+    residences: [
+      { kind: "apartment", layout: "2+1", label: "Type A", gross: "126 – 128 m²", plan: img("bizim-evler-12", "plan-2-1", 1552, 1051, "Bizim Evler 12 2+1 floor plan (type 2+1 A)") },
+      { kind: "apartment", layout: "3+1", label: "Type A-B", gross: "166 – 168 m²", plan: img("bizim-evler-12", "plan-3-1", 1528, 1047, "Bizim Evler 12 3+1 floor plan (type 3+1 A-B)") },
+      { kind: "apartment", layout: "3+1", label: "Type C", gross: "177 m²", plan: img("bizim-evler-12", "plan-3-1-c", 1538, 1040, "Bizim Evler 12 3+1 floor plan (type 3+1 C)") },
+      { kind: "apartment", layout: "4+1", label: "Type A", gross: "216 m²", plan: img("bizim-evler-12", "plan-4-1", 1538, 1047, "Bizim Evler 12 4+1 floor plan (type 4+1 A)") }
+    ],
+    amenities: [
+      "indoorPool",
+      "fitness",
+      "sauna",
+      "joggingTrack",
+      "sportsCourt",
+      "playground",
+      "landscaping",
+      "underfloorHeating",
+      "indoorParking",
+      "evCharging",
+      "generator",
+      "security",
+      "cctv",
+      "retail"
     ]
   },
   {
