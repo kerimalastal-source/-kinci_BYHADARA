@@ -22,6 +22,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "dask-earthquake-insurance",
+    priority: -25,
+    published: "2026-11-16",
+    relatedProjects: ["marmara-haven-villa", "hayat-flora", "diamond-marin"],
+    coverImage: { src: "/images/blog/dask-earthquake-insurance.jpg", width: 1448, height: 965 }
+  },
+  {
     slug: "payment-plans-explained",
     priority: -24,
     published: "2026-11-13",
