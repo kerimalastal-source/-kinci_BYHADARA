@@ -7,15 +7,16 @@ import { initChat } from "./components/chat";
 import { initBackToTop } from "./components/backToTop";
 import { initPhoneInputs } from "./components/phoneInput";
 import { initCookieConsent } from "./components/cookieConsent";
-import { ensureLocales } from "./i18n/load";
-import { splitLocale } from "./seo/routes";
+import { ensureRoute } from "./i18n/load";
+import { parseRoute, splitLocale } from "./seo/routes";
 
 captureCampaign();
 initTracking();
 initVisitActions();
 
-// Only the page language is downloaded before the first render (see i18n/load.ts).
-void ensureLocales([splitLocale(window.location.pathname).locale]).then(() => {
+// Only what the first page reads is downloaded before the first render (see i18n/load.ts).
+const first = splitLocale(window.location.pathname);
+void ensureRoute(parseRoute(first.path), first.locale).then(() => {
   initFavorites();
   initChat();
   const app = document.querySelector<HTMLDivElement>("#app")!;

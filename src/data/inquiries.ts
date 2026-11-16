@@ -51,6 +51,7 @@ export function inquiryKindKey(inquiry: { kind: string; details?: Record<string,
   const form = inquiry.details?.form;
   if (form === "meta_lead") return "metaLead";
   if (form === "whatsapp") return "whatsapp";
+  if (form === "catalog") return "catalog";
   return form === "guide" || form === "project" ? form : inquiry.kind;
 }
 

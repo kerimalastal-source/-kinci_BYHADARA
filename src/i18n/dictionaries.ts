@@ -23,6 +23,39 @@ export function hasDictionary(locale: Locale): boolean {
   return dictionaries[locale] !== undefined;
 }
 
+// The browser gets a dictionary in parts (i18n/load.ts): the core first, then every project's long
+// texts and each article's body only where they are shown. The build registers whole dictionaries,
+// so for it these parts are always "already there".
+
+/** Whether projectsData.<slug> carries its long texts (description, highlights, nearby places...). */
+export function hasProjectDetails(locale: Locale): boolean {
+  const data = dictionaries[locale]?.projectsData as Record<string, Record<string, unknown>> | undefined;
+  if (!data) return false;
+  const first = Object.values(data)[0];
+  return !first || "longDescription" in first;
+}
+
+export function mergeProjectDetails(locale: Locale, details: Record<string, Record<string, unknown>>): void {
+  const data = dictionaries[locale]?.projectsData as Record<string, Record<string, unknown>> | undefined;
+  if (!data) return;
+  for (const [slug, fields] of Object.entries(details)) {
+    if (data[slug]) Object.assign(data[slug], fields);
+  }
+}
+
+/** Whether blogData.<slug> carries its body; true for an unknown article (there is nothing to load). */
+export function hasBlogBody(locale: Locale, slug: string): boolean {
+  const dict = dictionaries[locale];
+  if (!dict) return false;
+  const article = dict.blogData?.[slug] as Record<string, unknown> | undefined;
+  return !article || "body" in article;
+}
+
+export function mergeBlogBody(locale: Locale, slug: string, part: Record<string, unknown>): void {
+  const article = dictionaries[locale]?.blogData?.[slug] as Record<string, unknown> | undefined;
+  if (article) Object.assign(article, { body: [] }, part);
+}
+
 /**
  * The Intl locale for dates and numbers: Latin digits everywhere, and the Gregorian
  * calendar for Persian too (Intl would otherwise use the Solar Hijri calendar, while

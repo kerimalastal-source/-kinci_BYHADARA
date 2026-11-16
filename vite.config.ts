@@ -7,6 +7,8 @@ import { localizePath, routePath, type Route } from "./src/seo/routes";
 import { projects } from "./src/data/projects";
 import { blogPosts } from "./src/data/blog";
 import { locales } from "./src/i18n/dictionaries";
+// @ts-expect-error plain .mjs, shared with scripts/prerender/run.mjs
+import { i18nSplit, i18nChunkFiles } from "./scripts/i18n-split-plugin.mjs";
 
 /**
  * After the build, writes one HTML file per indexable page and locale (e.g. dist/ar/projects/index.html)
@@ -27,16 +29,21 @@ function seoPrerender(): Plugin {
       const today = new Date().toISOString().slice(0, 10);
       const sitemapEntries: string[] = [];
 
-      // Each language's dictionary is its own chunk (src/i18n/load.ts); every page asks for its own
-      // one right away instead of after the main script has run.
-      const dictChunks = Object.fromEntries(
-        readdirSync(resolve(outDir, "assets"))
-          .map((file) => file.match(/^(en|ar|fa|fr|ru)-[\w-]+\.js$/))
-          .filter((m): m is RegExpMatchArray => Boolean(m))
-          .map((m) => [m[1], `/assets/${m[0]}`])
-      );
-      const preload = (locale: string) =>
-        dictChunks[locale] ? `<link rel="modulepreload" crossorigin href="${dictChunks[locale]}">\n    ` : "";
+      // The dictionary parts a page reads (see src/i18n/load.ts) are requested right away,
+      // instead of after the main script has run.
+      const chunks = i18nChunkFiles as Record<string, string>;
+      const preload = (locale: string, route: Route) =>
+        [
+          `core-${locale}`,
+          ...(route.name === "contact" || route.name === "property-request" || route.name === "video-tour" || route.name === "consultancy"
+            ? ["core-en", "core-ar"]
+            : []),
+          ...(route.name === "project" ? [`projects-${locale}`] : []),
+          ...(route.name === "blog-post" ? [`blog-${locale}-${route.slug}`] : [])
+        ]
+          .filter((key, i, all) => chunks[key] && all.indexOf(key) === i)
+          .map((key) => `<link rel="modulepreload" crossorigin href="${chunks[key]}">\n    `)
+          .join("");
 
       for (const route of indexableRoutes()) {
         for (const locale of locales) {
@@ -45,7 +52,7 @@ function seoPrerender(): Plugin {
             .replace(/<html[^>]*>/, `<html lang="${locale}" dir="${isRtlLocale(locale) ? "rtl" : "ltr"}">`)
             .replace(
               /<title>[\s\S]*?<\/title>/,
-              () => `${preload(locale)}<title>${escapeXml(meta.title)}</title>\n    ${renderHeadTags(meta)}`
+              () => `${preload(locale, route)}<title>${escapeXml(meta.title)}</title>\n    ${renderHeadTags(meta)}`
             );
 
           const path = localizePath(routePath(route), locale);
@@ -126,7 +133,7 @@ function escapeXml(value: string): string {
 export default defineConfig({
   // Absolute asset URLs so pages under nested paths (/ar/projects/...) load the same bundle.
   base: "/",
-  plugins: [seoPrerender()],
+  plugins: [i18nSplit(process.cwd()), seoPrerender()],
   build: {
     outDir: "dist",
     assetsDir: "assets"

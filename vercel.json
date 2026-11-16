@@ -94,6 +94,12 @@
       "maxDuration": 60
     }
   },
+  "headers": [
+    {
+      "source": "/catalogs/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+    }
+  ],
   "crons": [
     {
       "path": "/api/daily",

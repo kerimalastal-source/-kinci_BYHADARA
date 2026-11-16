@@ -1,6 +1,6 @@
-import { t, tRaw, link, getProjectContent, placeLine, onLocaleChange, locales, intlTag } from "../i18n";
+import { t, tRaw, link, getLocale, getProjectContent, placeLine, onLocaleChange, locales, intlTag } from "../i18n";
 import { lookup } from "../i18n/dictionaries";
-import { ensureAllLocales } from "../i18n/load";
+import { ensureAllLocales, ensureProjectDetails } from "../i18n/load";
 import { getProjectBySlug, getSortedProjects, hasVillas, planMonths, type Project, type Residence } from "../data/projects";
 import { projectStatusLabel } from "./projectCard";
 import { WHATSAPP_NUMBER, WHATSAPP_ICON } from "./floatingButtons";
@@ -850,11 +850,19 @@ function syncBubble(): void {
   });
 }
 
+/** Answers about a project quote its long texts (nearby places, floor plan, verified facts); redraw once they are here. */
+function loadProjectAnswers(): void {
+  void ensureProjectDetails(getLocale()).then(() => {
+    if (panel && open) renderLog();
+  });
+}
+
 function openChat(): void {
   // Project and district names are matched in all five languages; rebuild the index once they are here.
   void ensureAllLocales().then(() => {
     index = null;
   });
+  loadProjectAnswers();
   if (!panel) {
     panel = document.createElement("section");
     panel.className = "chat";
@@ -1075,6 +1083,9 @@ export function initChat(): void {
     if (e.key === "Escape" && open && !document.querySelector(".search-overlay, .lightbox")) closeChat();
   });
   onLocaleChange(() => {
-    if (panel && open) renderPanelChrome();
+    if (panel && open) {
+      renderPanelChrome();
+      loadProjectAnswers();
+    }
   });
 }

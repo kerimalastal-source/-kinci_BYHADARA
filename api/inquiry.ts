@@ -8,6 +8,8 @@
 //
 // Answers: 200 {reference} · 429 {error:"limit"} · 400 {error:"invalid"} ·
 // 503 {error:"unavailable"}.
+//
+// kind "catalog" (the catalogue request on a project page) is handled by _lib/catalogRequest.ts.
 import { waitUntil } from "@vercel/functions";
 import { sendTelegram } from "./_lib/telegram.js";
 import { sendEmail } from "./_lib/email.js";
@@ -15,6 +17,7 @@ import { hasSupabase, rpc, RpcError } from "./_lib/supabase.js";
 import { TEAM_INBOX, type SiteLocale } from "./_lib/bookingMessages.js";
 import { teamEmail, teamTelegram, visitorEmail, type InquiryDetails, type InquiryKind } from "./_lib/inquiryMessages.js";
 import { PROJECT_NAMES } from "./_lib/projectNames.js";
+import { handleCatalogRequest } from "./_lib/catalogRequest.js";
 
 const KINDS: readonly InquiryKind[] = ["contact", "property_request", "consultation"];
 const INTERESTS = ["citizenship", "residence"];
@@ -132,7 +135,10 @@ function parse(body: unknown): Parsed | null {
 }
 
 export async function POST(request: Request): Promise<Response> {
-  const inquiry = parse(await request.json().catch(() => null));
+  const body = await request.json().catch(() => null);
+  // "Send me the catalogue" (a WhatsApp number, no email) has its own, shorter path.
+  if (body && typeof body === "object" && (body as { kind?: unknown }).kind === "catalog") return handleCatalogRequest(request, body);
+  const inquiry = parse(body);
   if (!inquiry || BOT_AGENT.test(request.headers.get("user-agent") ?? "")) return json({ error: "invalid" }, 400);
   if (!hasSupabase()) {
     console.error("inquiry: Supabase URL / anon key are not set");

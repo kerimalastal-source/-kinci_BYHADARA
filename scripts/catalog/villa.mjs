@@ -9,7 +9,7 @@
 // Output: scripts/catalog/out/Marmara-Haven-Villa-<lang>.pdf (git-ignored).
 import fs from "node:fs";
 import path from "node:path";
-import { out, SITE, YEAR, PHONE, EMAIL, WHATSAPP, loadTs, loadDict, lookup, esc, ltr, placeKey, num, photo, qrSvg, brand, pageHtml, renderPdfs } from "./lib.mjs";
+import { out, SITE, YEAR, PHONE, EMAIL, WHATSAPP, loadTs, loadDict, lookup, esc, ltr, placeKey, num, photo, qrSvg, brand, pageHtml, renderPdfs, PDF_SUFFIX } from "./lib.mjs";
 
 const SLUG = "marmara-haven-villa";
 const IMG = (name) => `/images/projects/${SLUG}/${name}.jpg`;
@@ -270,6 +270,6 @@ for (const lang of langs) {
   dict.__en = en;
   const file = path.join(out, `villa-${lang}.html`);
   fs.writeFileSync(file, build(lang, project, icons, dict));
-  pairs.push([file, path.join(out, `Marmara-Haven-Villa-${lang}.pdf`)]);
+  pairs.push([file, path.join(out, `Marmara-Haven-Villa-${lang}${PDF_SUFFIX}.pdf`)]);
 }
 await renderPdfs(pairs);
