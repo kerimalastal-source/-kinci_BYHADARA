@@ -28,8 +28,13 @@ const posts = Array.isArray(spec) ? spec : spec.posts;
 
 // ---------- captions ----------
 
-const url = (lang, p, id, source) =>
-  `${SITE}${lang === "ar" ? "/ar" : ""}${p === "/" && lang === "ar" ? "" : p}?utm_source=${source}&utm_campaign=post-${id}`;
+// The query goes before any "#anchor": after it the browser treats the UTM as part of the
+// anchor, so the page does not scroll to it and the campaign is not recorded.
+const url = (lang, p, id, source) => {
+  const [path, hash] = p.split("#");
+  const base = `${SITE}${lang === "ar" ? "/ar" : ""}${path === "/" && lang === "ar" ? "" : path}`;
+  return `${base}?utm_source=${source}&utm_campaign=post-${id}${hash ? `#${hash}` : ""}`;
+};
 
 function block(c, lang, id, platform) {
   const ltr = lang === "en";
