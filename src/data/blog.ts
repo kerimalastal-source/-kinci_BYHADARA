@@ -22,6 +22,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "emlak-vergisi-property-tax",
+    priority: -26,
+    published: "2026-11-18",
+    relatedProjects: ["tual-comfort", "referans-beylikduzu", "cadde-ispartakule"],
+    coverImage: { src: "/images/blog/emlak-vergisi-property-tax.jpg", width: 849, height: 566 }
+  },
+  {
     slug: "dask-earthquake-insurance",
     priority: -25,
     published: "2026-11-16",
