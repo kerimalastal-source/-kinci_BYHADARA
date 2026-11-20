@@ -23,6 +23,8 @@ export interface LeadStore {
   /** Creates the marker; false when it already exists (the lead was announced). */
   claim(path: string): Promise<boolean>;
   remove(path: string): Promise<void>;
+  /** Whether the marker exists (used for the "rate limit for over an hour" check). */
+  exists?(path: string): Promise<boolean>;
 }
 
 export interface LeadDeps {
@@ -74,7 +76,14 @@ export interface Lead {
   platform?: string;
 }
 
-class GraphError extends Error {}
+/** Meta's "too many requests" answers: HTTP 429 or its rate-limit error codes. */
+const LIMIT_CODES = new Set([4, 17, 32, 613, 80004]);
+
+class GraphError extends Error {
+  constructor(message: string, readonly limited = false) {
+    super(message);
+  }
+}
 
 async function graph(deps: LeadDeps, path: string, params: Record<string, string>, token: string): Promise<Record<string, unknown>> {
   const query = new URLSearchParams({ ...params, access_token: token });
@@ -83,7 +92,8 @@ async function graph(deps: LeadDeps, path: string, params: Record<string, string
   if (!response.ok || data.error) {
     const error = (data.error ?? {}) as { message?: string; code?: number };
     // Meta's message (e.g. a missing permission); never the token.
-    throw new GraphError(`${error.code ?? response.status}: ${(error.message ?? "request failed").slice(0, 200)}`);
+    const limited = response.status === 429 || (typeof error.code === "number" && LIMIT_CODES.has(error.code));
+    throw new GraphError(`${error.code ?? response.status}: ${(error.message ?? "request failed").slice(0, 200)}`, limited);
   }
   return data;
 }
@@ -181,6 +191,22 @@ export function leadMessage(lead: Lead, form: Form, pageId: string, reference?: 
 /** Today's date in Istanbul, for the once-a-day warning marker. */
 const istanbulDay = (ms: number) => new Intl.DateTimeFormat("en-CA", { timeZone: ISTANBUL }).format(ms);
 
+/** The Istanbul hour ("2026-11-20-20"), for the rate-limit markers. */
+const istanbulHour = (ms: number) => `${istanbulDay(ms)}-${new Intl.DateTimeFormat("en-GB", { hour: "2-digit", hourCycle: "h23", timeZone: ISTANBUL }).format(ms)}`;
+
+/**
+ * Whether a failed check deserves the Telegram warning. Meta's rate limit (429) is usually over
+ * within minutes and loses nothing (the leads wait in Meta), so it is only reported when it was
+ * also hit in the previous hour, i.e. it has lasted more than an hour.
+ */
+async function worthWarning(deps: LeadDeps, error: GraphError): Promise<boolean> {
+  if (!error.limited) return true;
+  const now = deps.now();
+  await deps.store.claim(`meta-leads/limited-${istanbulHour(now)}`).catch(() => false);
+  if (!deps.store.exists) return false;
+  return deps.store.exists(`meta-leads/limited-${istanbulHour(now - 3_600_000)}`).catch(() => false);
+}
+
 /** What one check found for one form (the admin "check now" button shows it). */
 export interface FormReport {
   id: string;
@@ -249,12 +275,13 @@ export async function inspectLeads(deps: LeadDeps): Promise<LeadReport> {
     } catch (error) {
       result.error = (error instanceof Error ? error.message : "unknown error").slice(0, 300);
       console.error(`meta-leads: form ${id}: ${result.error}`);
-      if (error instanceof GraphError) graphError ??= error;
+      // A real error (a missing permission) wins over a rate limit for the warning.
+      if (error instanceof GraphError && (!graphError || (graphError.limited && !error.limited))) graphError = error;
     }
     report.sent += result.sent;
   }
   // Usually a token without leads_retrieval: say so on Telegram once a day.
-  if (graphError && (await deps.store.claim(`meta-leads/warning-${istanbulDay(deps.now())}`).catch(() => false))) {
+  if (graphError && (await worthWarning(deps, graphError)) && (await deps.store.claim(`meta-leads/warning-${istanbulDay(deps.now())}`).catch(() => false))) {
     await deps.telegram(`<b>⚠️ تعذّر قراءة طلبات نماذج الإعلانات من Meta</b>\n${escapeHtml(graphError.message)}\nالطلبات محفوظة في Meta Business Suite، ولن تصل إلى تيليجرام حتى يُحلّ الخطأ.`);
   }
   return report;
