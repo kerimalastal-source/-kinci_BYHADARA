@@ -207,8 +207,8 @@ body.nav-open {
 
 /* German compounds are long ("Wohnungsaufteilung"): let the browser hyphenate them
    instead of breaking a word mid-letter in narrow boxes. Only German pages.
-   Headings and short labels only, so running text keeps whole words. */
-:lang(de) :is(h1, h2, h3, h4, h5, dt, dd, th, label, button, [class*="__label"]) {
+   Small headings and short labels only, so running text and the big headlines keep whole words. */
+:lang(de) :is(h3, h4, h5, dt, dd, th, label, button, [class*="__label"]) {
   hyphens: auto;
   -webkit-hyphens: auto;
 }
