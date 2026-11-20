@@ -22,6 +22,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "investor-residence-permit-turkey",
+    priority: -28,
+    published: "2026-11-20",
+    relatedProjects: ["beylikduzu-living", "hayat-flora", "dragos"],
+    coverImage: { src: "/images/blog/investor-residence-permit-turkey.jpg", width: 1536, height: 1024 }
+  },
+  {
     slug: "residence-permit-by-property",
     priority: -27,
     published: "2026-11-20",

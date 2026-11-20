@@ -2503,6 +2503,20 @@
       }
     },
     "updates": {
+      "investor-residence-3-5-years": {
+        "title": "Residence permit of 3 or 5 years for foreign investors",
+        "summary": "A Presidential Decision published on 18 November 2026 lets foreigners who do not work in Turkey obtain a residence permit for investing at least US$150,000 (3 years) or at least US$200,000 (5 years), or the equivalent in foreign currency. The investment can be a deposit in a bank operating in Turkey, government debt securities, participation shares in a real estate investment fund or venture capital investment fund, or contributions to the private pension system, each kept for at least half of the permit period.",
+        "after": "Spouses and minor or dependent children can be included. The permit does not replace a work permit, it does not count towards Turkish citizenship by investment, and the procedures are set by the Ministry of Interior. Buying a home is not one of the listed investment types; the residence permit by property keeps its own conditions.",
+        "affects": "Foreign investors who want a long residence in Turkey without working there, and their families.",
+        "help": "We can explain how this route differs from the residence permit by property and from citizenship, so you can choose the one that fits your plan."
+      },
+      "tourism-rental-permit-30-days": {
+        "title": "Holiday-let permit: 30 days to fix missing documents",
+        "summary": "The Ministry of Culture and Tourism amended the regulation on renting homes for tourism purposes (published 28 December 2023). Article 12 now says that if the documents behind a holiday-let permit are incomplete or unsuitable, or the documented information changes, the permit holder is given thirty days to correct the shortcomings.",
+        "after": "If the shortcomings are not corrected within those thirty days, the permit is cancelled. The amendment took effect on the day of publication, 27 October 2026.",
+        "affects": "Owners who rent out an apartment to tourists for short stays, including foreign owners.",
+        "help": "We can explain which documents a holiday-let permit requires so you can plan before you buy."
+      },
       "law-7579-site-fees": {
         "title": "A cap on increases in residential complex fees (Law No. 7579)",
         "summary": "Law No. 7579 amended the Condominium Law to curb excessive management fees (aidat) in apartment buildings and residential complexes, and added new building-safety rules.",
@@ -2566,6 +2580,24 @@
     }
   },
   "blogData": {
+    "investor-residence-permit-turkey": {
+      "category": "Citizenship by Investment",
+      "title": "Investor Residence Permit in Turkey: 3 or 5 Years",
+      "excerpt": "Turkey's investor residence permit: US$150,000 for 3 years or US$200,000 for 5, the accepted investments and how it differs from property residence.",
+      "body": [
+        "On 18 November 2026, Turkey's Official Gazette (Resmî Gazete) published a Presidential Decision that opens a new route to living in Turkey: a residence permit of three or five years for foreign investors. Many buyers now ask whether it replaces the residence permit by property or citizenship by investment. This guide explains what the official text says, what it does not cover, and who each route suits.",
+        "## What the decision says",
+        "The Decision on Residence Permits to Be Issued to Foreign Investors (Decision No. 11994) was issued under Article 31 of Law No. 6458 on Foreigners and International Protection and entered into force on the day of publication. It covers foreigners who do not work in Turkey. Those who invest at least US$150,000, or the equivalent amount in foreign currency, can receive a residence permit for three years, and those who invest at least US$200,000 can receive one for five years. The investor's foreign spouse and the minor or dependent children of the investor and the spouse are also covered.",
+        "The decision lists four types of investment, each confirmed by the competent authority: a deposit in a bank operating in Turkey (confirmed by the Banking Regulation and Supervision Agency); government debt securities (the Ministry of Treasury and Finance); participation shares in a real estate investment fund or a venture capital investment fund (the Capital Markets Board, SPK); or contributions to the private pension system (the Insurance and Private Pension Regulation and Supervision Agency). In every case, the investment must be kept for at least half of the permit period.",
+        "## What it does not do",
+        "The decision is about residence only. According to the Presidency of Migration Management, a permit issued under it does not replace a work permit, and it is issued on the basis of the general conditions of Law No. 6458. The decision also states that these permits are not taken into account under Article 12 of Turkish Citizenship Law No. 5901, so they do not count towards Turkish citizenship by investment. The procedures for applications are set by the Ministry of Interior. Finally, buying a home is not among the listed investments: a real estate investment fund is a financial product, not a title deed in your name.",
+        "## Investor residence, property residence or citizenship?",
+        "The three routes answer different needs. The residence permit by property rests on owning a home: according to the official list of documents of the Presidency of Migration Management, the home must be worth at least US$200,000, or its equivalent in Turkish lira, at the time of purchase, and it must be used as your residence, not rented out. Citizenship by investment requires a property worth at least US$400,000, confirmed by an official valuation report, paid in foreign currency and kept for at least three years. The new investor residence permit starts from a financial investment of US$150,000 and does not require owning a home in Turkey.",
+        "In practice, the investor permit may suit people who want a long stay in Turkey before deciding where to live, or who prefer to keep their capital in financial assets. The residence permit by property suits families who want a home of their own to live in, and citizenship suits those who want a second passport for the whole family and can commit to the higher amount and the three-year holding period. Each route has its own file and its own conditions, so the right choice depends on your goal, your budget and how long you plan to stay. The conditions are per current law and may change, and practical details will follow from the Ministry of Interior's procedures.",
+        "For the financial side of this decision, such as deposits, funds or pension plans, banks and licensed advisers are the right reference. Our role is the property side: if your plan includes a home in Istanbul, we help you compare projects, check the address against the neighbourhoods closed to new residence permits, and review the title deed type and the building documents before you decide.",
+        "If you are weighing these routes and want to know which homes in Istanbul fit your plan, contact HADARA, your real estate partner in Istanbul. You can also book a private video tour to see the projects from wherever you are, before you visit Istanbul to complete your purchase."
+      ]
+    },
     "residence-permit-by-property": {
       "category": "Citizenship by Investment",
       "title": "Residence Permit by Property in Turkey: Who It Suits",
