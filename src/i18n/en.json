@@ -41,7 +41,8 @@
     "ar": "العربية",
     "fr": "Français",
     "ru": "Русский",
-    "fa": "فارسی"
+    "fa": "فارسی",
+    "de": "Deutsch"
   },
   "phoneInput": {
     "label": "Country code",

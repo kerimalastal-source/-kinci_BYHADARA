@@ -10,7 +10,7 @@ The JSON (written by the weekly blog session, see scripts/blog/README.md):
   "cover": { "photo": "/images/projects/lotus-sisli/apartment-living.jpg", "focus": 0.5 },
   "projects": ["beylikduzu-living", "lotus-sisli", "cadde-ispartakule"],
   "en": { "category": "...", "title": "...", "excerpt": "...", "body": ["...", "## Subheading", "..."] },
-  "ar": {...}, "fa": {...}, "fr": {...}, "ru": {...}
+  "ar": {...}, "fa": {...}, "fr": {...}, "ru": {...}, "de": {...}
 }
 
 With --draft (the weekly session) it only validates the article and writes the cropped
@@ -43,7 +43,7 @@ from pathlib import Path
 from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parents[2]
-LOCALES = ("en", "ar", "fa", "fr", "ru")
+LOCALES = ("en", "ar", "fa", "fr", "ru", "de")
 MAX_W, RATIO = 1536, 3 / 2
 
 

@@ -7,9 +7,25 @@ interface ParsedStat {
   /** Thousands separator as written ("," or a French/Russian space), "" if none. */
   separator: string;
   decimals: number;
+  /** Decimal mark as written: "." or the German ",". */
+  decimalMark: string;
 }
 
 function parseStat(raw: string): ParsedStat | null {
+  // German style "60.000" / "2,5" (dot groups, comma decimals): read it as such and write it back the same way.
+  const german = raw.match(/\d{1,3}(?:\.\d{3})+(?!\d)(?:,\d+)?/);
+  if (german) {
+    const numStr = german[0];
+    const [intPart, decPart = ""] = numStr.split(",");
+    return {
+      prefix: raw.slice(0, german.index),
+      suffix: raw.slice((german.index ?? 0) + numStr.length),
+      target: parseFloat(`${intPart.split(".").join("")}.${decPart || "0"}`),
+      separator: ".",
+      decimals: decPart.length,
+      decimalMark: ","
+    };
+  }
   // "60,000", "60 000" (plain, no-break or narrow space) or "576.63".
   const match = raw.match(/\d{1,3}(?:([, \u00a0\u202f])\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?/);
   if (!match) return null;
@@ -20,15 +36,15 @@ function parseStat(raw: string): ParsedStat | null {
   const normalized = separator ? numStr.split(separator).join("") : numStr;
   const decimals = normalized.includes(".") ? normalized.split(".")[1].length : 0;
   const target = parseFloat(normalized);
-  return { prefix, suffix, target, separator, decimals };
+  return { prefix, suffix, target, separator, decimals, decimalMark: "." };
 }
 
 function formatNumber(n: number, parsed: ParsedStat): string {
   const rounded = parsed.decimals > 0 ? n.toFixed(parsed.decimals) : String(Math.round(n));
-  if (!parsed.separator) return rounded;
+  if (!parsed.separator) return parsed.decimalMark === "." ? rounded : rounded.replace(".", parsed.decimalMark);
   const [intPart, decPart] = rounded.split(".");
   const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, parsed.separator);
-  return decPart ? `${grouped}.${decPart}` : grouped;
+  return decPart ? `${grouped}${parsed.decimalMark}${decPart}` : grouped;
 }
 
 /** "60,000+ m²": the unit after the number and its symbols is set smaller so the figure stays on one line. */

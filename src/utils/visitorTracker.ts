@@ -319,11 +319,11 @@ export type VisitAction =
   | "form_sent";
 
 /** Seller account and admin pages are never reported (same rule as page views). */
-const INTERNAL_PATH = /^\/(?:(?:ar|fa|fr|ru)\/)?(?:admin|account|login|register)(?:\/|$)/;
+const INTERNAL_PATH = /^\/(?:(?:ar|fa|fr|ru|de)\/)?(?:admin|account|login|register)(?:\/|$)/;
 
 /** The project whose page this is, or "". */
 function pageProject(): string {
-  return window.location.pathname.match(/^\/(?:(?:ar|fa|fr|ru)\/)?projects\/([a-z0-9-]+)/)?.[1] ?? "";
+  return window.location.pathname.match(/^\/(?:(?:ar|fa|fr|ru|de)\/)?projects\/([a-z0-9-]+)/)?.[1] ?? "";
 }
 
 /** Actions counted once per page (opening the map twice is still one look at the map). */

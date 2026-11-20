@@ -181,6 +181,16 @@ const VISITOR: Record<SiteLocale, VisitorText> = {
     yourMessage: "Ваше сообщение",
     contact: "По срочным вопросам звоните или пишите нам в WhatsApp:",
     site: "Перейти на сайт"
+  },
+  de: {
+    subject: "Wir haben Ihre Nachricht erhalten — HADARA Real Estate ({ref})",
+    hello: "Guten Tag {name},",
+    intro: "Vielen Dank, dass Sie HADARA Real Estate kontaktiert haben. Ihre Nachricht ist bei unserem Team angekommen.",
+    reference: "Ihre Anfragenummer: {ref}",
+    next: "Einer unserer Berater meldet sich in Kürze bei Ihnen.",
+    yourMessage: "Ihre Nachricht",
+    contact: "Für dringende Anliegen rufen Sie uns an oder schreiben Sie uns auf WhatsApp:",
+    site: "Zu unserer Website"
   }
 };
 
@@ -215,6 +225,12 @@ const VISITOR_GUIDE: Record<SiteLocale, Pick<VisitorText, "subject" | "intro" | 
     intro: "Спасибо, ваш запрос получен.",
     next: "Его рассмотрит профильная команда, и мы свяжемся с вами по телефону или пришлём нужную информацию в ближайшее время.",
     yourMessage: "Ваш вопрос"
+  },
+  de: {
+    subject: "Wir haben Ihre Anfrage erhalten — HADARA Real Estate ({ref})",
+    intro: "Vielen Dank, wir haben Ihre Anfrage erhalten.",
+    next: "Das zuständige Team prüft sie, und wir melden uns so bald wie möglich mit einem Anruf oder den gewünschten Informationen bei Ihnen.",
+    yourMessage: "Ihre Frage"
   }
 };
 
@@ -244,6 +260,11 @@ const VISITOR_PROJECT: Record<SiteLocale, Pick<VisitorText, "subject" | "intro" 
     subject: "Мы получили вашу заявку по проекту {project} — HADARA Real Estate ({ref})",
     intro: "Спасибо за интерес к проекту {project}. Ваша заявка получена.",
     next: "Наш консультант свяжется с вами в ближайшее время."
+  },
+  de: {
+    subject: "Wir haben Ihre Anfrage zu {project} erhalten — HADARA Real Estate ({ref})",
+    intro: "Vielen Dank für Ihr Interesse an {project}. Wir haben Ihre Anfrage erhalten.",
+    next: "Einer unserer Berater meldet sich in Kürze bei Ihnen."
   }
 };
 

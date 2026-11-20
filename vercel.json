@@ -63,7 +63,7 @@
       "destination": "/"
     },
     {
-      "source": "/(ar|fa|fr|ru)/(login|register|account|admin)(/.*)?",
+      "source": "/(ar|fa|fr|ru|de)/(login|register|account|admin)(/.*)?",
       "destination": "/"
     },
     {
@@ -71,7 +71,7 @@
       "destination": "/"
     },
     {
-      "source": "/(ar|fa|fr|ru)/resale/([^/]+)",
+      "source": "/(ar|fa|fr|ru|de)/resale/([^/]+)",
       "destination": "/"
     }
   ],

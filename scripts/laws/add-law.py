@@ -22,7 +22,7 @@ Draft shape (one file per item):
   "text": {
     "en": {"title", "summary", "before"?, "after", "affects", "help"}   # update
           {"title", "text"}                                             # rule
-    "ar": {...}, "fa": {...}, "fr": {...}, "ru": {...}
+    "ar": {...}, "fa": {...}, "fr": {...}, "ru": {...}, "de": {...}
   }
 }
 """
@@ -35,7 +35,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[2]
 LAWS_TS = ROOT / "src/data/laws.ts"
-LOCALES = ["en", "ar", "fa", "fr", "ru"]
+LOCALES = ["en", "ar", "fa", "fr", "ru", "de"]
 TOPICS = {"citizenship", "residence", "ownership", "taxes", "rent"}
 SOURCES = {"resmiGazete", "mevzuat", "tkgm", "gib", "goc", "ticaret", "tbmm", "nvi"}
 UPDATE_KEYS = {"title", "summary", "after", "affects", "help"}

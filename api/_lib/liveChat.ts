@@ -12,7 +12,7 @@ export function webhookSecret(): string | null {
   return secret.length >= 32 ? createHash("sha256").update(`${secret}:telegram-webhook`).digest("hex").slice(0, 48) : null;
 }
 
-const LANGUAGE_AR: Record<string, string> = { en: "الإنجليزية", ar: "العربية", fa: "الفارسية", fr: "الفرنسية", ru: "الروسية" };
+const LANGUAGE_AR: Record<string, string> = { en: "الإنجليزية", ar: "العربية", fa: "الفارسية", fr: "الفرنسية", ru: "الروسية", de: "الألمانية" };
 
 export interface ChatContext {
   reference: string;

@@ -4,7 +4,7 @@
 import { escapeHtml } from "./telegram.js";
 import type { EmailAttachment } from "./email.js";
 
-export type SiteLocale = "en" | "ar" | "fa" | "fr" | "ru";
+export type SiteLocale = "en" | "ar" | "fa" | "fr" | "ru" | "de";
 export type App = "whatsapp" | "facetime" | "zoom" | "meet";
 export type TourLanguage = "ar" | "en" | "tr";
 export type ContactMethod = "email" | "phone" | "whatsapp" | "telegram" | "viber";
@@ -39,7 +39,8 @@ export const APPS: Record<SiteLocale, Record<App, string>> = {
   ar: { whatsapp: "واتساب فيديو", facetime: "فيس تايم", zoom: "زوم", meet: "جوجل ميت" },
   fa: { whatsapp: "تماس تصویری WhatsApp", facetime: "FaceTime", zoom: "Zoom", meet: "Google Meet" },
   fr: { whatsapp: "Vidéo WhatsApp", facetime: "FaceTime", zoom: "Zoom", meet: "Google Meet" },
-  ru: { whatsapp: "Видео в WhatsApp", facetime: "FaceTime", zoom: "Zoom", meet: "Google Meet" }
+  ru: { whatsapp: "Видео в WhatsApp", facetime: "FaceTime", zoom: "Zoom", meet: "Google Meet" },
+  de: { whatsapp: "WhatsApp-Videoanruf", facetime: "FaceTime", zoom: "Zoom", meet: "Google Meet" }
 };
 
 export const TOUR_LANGUAGES: Record<SiteLocale, Record<TourLanguage, string>> = {
@@ -47,7 +48,8 @@ export const TOUR_LANGUAGES: Record<SiteLocale, Record<TourLanguage, string>> = 
   ar: { ar: "العربية", en: "الإنجليزية", tr: "التركية" },
   fa: { ar: "عربی", en: "انگلیسی", tr: "ترکی" },
   fr: { ar: "Arabe", en: "Anglais", tr: "Turc" },
-  ru: { ar: "Арабский", en: "Английский", tr: "Турецкий" }
+  ru: { ar: "Арабский", en: "Английский", tr: "Турецкий" },
+  de: { ar: "Arabisch", en: "Englisch", tr: "Türkisch" }
 };
 
 export const CONTACT_AR: Record<ContactMethod, string> = {
@@ -58,7 +60,7 @@ export const CONTACT_AR: Record<ContactMethod, string> = {
   viber: "فايبر"
 };
 
-export const SITE_LANGUAGE_AR: Record<SiteLocale, string> = { en: "الإنجليزية", ar: "العربية", fa: "الفارسية", fr: "الفرنسية", ru: "الروسية" };
+export const SITE_LANGUAGE_AR: Record<SiteLocale, string> = { en: "الإنجليزية", ar: "العربية", fa: "الفارسية", fr: "الفرنسية", ru: "الروسية", de: "الألمانية" };
 
 interface VisitorText {
   subject: string;
@@ -193,6 +195,28 @@ const VISITOR: Record<SiteLocale, VisitorText> = {
     team: "Команда HADARA Real Estate",
     event: "Частная видеоэкскурсия — {projects}",
     eventDetails: "Ваш консультант HADARA позвонит вам через {app}. Бронирование {ref}."
+  },
+  de: {
+    subject: "Ihre private Videobesichtigung ist gebucht — {ref}",
+    hello: "Guten Tag {name},",
+    intro: "Ihre private Videobesichtigung mit HADARA Real Estate ist gebucht. Hier sind die Details:",
+    reference: "Buchungsnummer",
+    projects: "Projekt",
+    date: "Datum",
+    time: "Uhrzeit",
+    istanbul: "Istanbuler Zeit",
+    yourTime: "Ihre Ortszeit",
+    app: "Videoanruf",
+    language: "Sprache der Besichtigung",
+    nextTitle: "Wie es weitergeht",
+    next: "Ihr HADARA-Berater ruft Sie zum gebuchten Termin über {app} an.",
+    linkNote: "Den Link zum Gespräch senden wir Ihnen vor der Besichtigung.",
+    change: "Möchten Sie den Termin ändern? Antworten Sie einfach auf diese E-Mail oder kontaktieren Sie uns unter {phone}.",
+    calendar: "Mit der angehängten Kalenderdatei tragen Sie die Besichtigung in Ihren Kalender ein.",
+    thanks: "Bis bald,",
+    team: "Ihr Team von HADARA Real Estate",
+    event: "Private Videobesichtigung — {projects}",
+    eventDetails: "Ihr HADARA-Berater ruft Sie über {app} an. Buchung {ref}."
   }
 };
 
@@ -339,6 +363,11 @@ const CONFIRMED: Record<SiteLocale, UpdateText> = {
     subject: "Ваша видеоэкскурсия подтверждена — {ref}",
     intro: "Хорошие новости: наша команда подтвердила вашу частную видеоэкскурсию. Подробности:",
     calendar: "Приложенный файл календаря добавит экскурсию в ваш календарь."
+  },
+  de: {
+    subject: "Ihre Videobesichtigung ist bestätigt — {ref}",
+    intro: "Gute Nachricht: Unser Team hat Ihre private Videobesichtigung bestätigt. Hier sind die Details:",
+    calendar: "Mit der angehängten Kalenderdatei tragen Sie die Besichtigung in Ihren Kalender ein."
   }
 };
 
@@ -368,6 +397,11 @@ const REMINDER: Record<SiteLocale, UpdateText> = {
     subject: "Напоминание: ваша видеоэкскурсия завтра — {ref}",
     intro: "Напоминаем: ваша частная видеоэкскурсия с HADARA Real Estate состоится завтра. Подробности:",
     calendar: "Приложенный файл календаря сохранит экскурсию в вашем календаре."
+  },
+  de: {
+    subject: "Erinnerung: Ihre Videobesichtigung ist morgen — {ref}",
+    intro: "Eine freundliche Erinnerung: Ihre private Videobesichtigung mit HADARA Real Estate findet morgen statt. Hier sind die Details:",
+    calendar: "Die angehängte Kalenderdatei hält die Besichtigung in Ihrem Kalender fest."
   }
 };
 
@@ -416,6 +450,15 @@ const RESCHEDULED: Record<SiteLocale, RescheduleText> = {
     accept: "Да, это время мне подходит",
     decline: "Мне нужно другое время",
     declineNote: "Если вам нужно другое время, наша команда свяжется с вами, чтобы его согласовать."
+  },
+  de: {
+    subject: "Neuer Termin für Ihre Videobesichtigung — {ref}",
+    intro: "Unser Team hat den Termin Ihrer privaten Videobesichtigung geändert. Hier sind die neuen Details:",
+    calendar: "Die angehängte Kalenderdatei enthält den neuen Termin.",
+    question: "Passt Ihnen dieser Termin?",
+    accept: "Ja, dieser Termin passt mir",
+    decline: "Ich brauche einen anderen Termin",
+    declineNote: "Wenn Sie einen anderen Termin brauchen, meldet sich unser Team bei Ihnen, um einen neuen zu vereinbaren."
   }
 };
 

@@ -1,7 +1,7 @@
 # كاتب المدونة (weekly blog writer)
 
-Three times a week (Monday, Wednesday and Friday; twice a week until 2026-11-13) a scheduled Claude session writes **one new blog article in the site's 5
-languages** (en, ar, fa, fr, ru) with a cover photo, and saves it as a draft **on the
+Three times a week (Monday, Wednesday and Friday; twice a week until 2026-11-13) a scheduled Claude session writes **one new blog article in the site's 6
+languages** (en, ar, fa, fr, ru, de) with a cover photo, and saves it as a draft **on the
 owner's review page** on claude.ai (`REVIEW_URL` in `scripts/blog/config.json`):
 `drafts.json` + `articles/<slug>.json` + `covers/<slug>.jpg` are published with the page.
 The weekly session **cannot push to the repository** (routines have read-only access), so
@@ -29,11 +29,13 @@ Work from the repository root (clone kerimalastal-source/-kinci_BYHADARA if need
    verified), `citizenship.*`, `videoTour.*`, `faq.*`, `blogData.*`. Read 2 existing
    articles in `blogData` to match the tone.
 5. Write `scripts/blog/out/<slug>.json` (shape in `add-article.py`):
-   - `en`, `ar`, `fa`, `fr`, `ru`, each `{category, title, excerpt, body[]}`.
+   - `en`, `ar`, `fa`, `fr`, `ru`, `de`, each `{category, title, excerpt, body[]}`
+     (German added 2026-11-20: formal "Sie", German number style "400.000 US-Dollar",
+     „…“ quotes, Turkish terms kept as in English).
    - **600–900 English words**; `body` = 7–12 entries; 2–4 of them are subheadings
      written as `"## Subheading"` (never the first entry). Every language has exactly the
      same entries in the same order (a real translation, natural in each language:
-     Arabic = formal MSA, Persian = formal Persian).
+     Arabic = formal MSA, Persian = formal Persian, German = formal German with "Sie").
    - `category`: reuse an existing category and its translations when one fits
      (see the other articles' `category` in each dictionary).
    - `title` ≤ 60 characters **in every language**, and it **starts with the term people
@@ -80,7 +82,7 @@ Write `scripts/blog/out/expand/<slug>.json` (same shape, no `cover`), check it w
 `python3 scripts/blog/add-article.py <file> --replace --draft` (copies the current cover next to
 it), and add it to the review page with `build-review.mjs <drafts.json> --add <file>` (shown as
 "توسيع مقال منشور"). After approval: `add-article.py <file> --replace` replaces `blogData.<slug>`
-in the five dictionaries; the draft leaves the page once the site's text matches it.
+in the six dictionaries; the draft leaves the page once the site's text matches it.
 
 ## Content rules (from the owner — do not break)
 
@@ -96,3 +98,10 @@ in the five dictionaries; the draft leaves the page once the site's text matches
 - No remote-purchase promises: the video tour helps choose; buying happens on a visit.
 - No HTML, no links, no emoji inside the article text.
 - Never commit, push, deploy or change the site from the weekly session.
+
+## Drafts written before German (2026-11-20)
+
+`add-article.py` now needs all six languages. A draft on the review page that has no `de`
+(written before 2026-11-20) is not rejected by hand: the publishing session translates it into
+German first (same entries in the same order, title <= 60 characters starting with the German
+search term), adds `"de"` to the JSON, and then runs `add-article.py` as usual.
