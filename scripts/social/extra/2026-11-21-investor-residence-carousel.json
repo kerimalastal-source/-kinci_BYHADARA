@@ -1,0 +1,89 @@
+{
+ "posts": [
+  {
+   "id": "investor-residence-carousel",
+   "at": "14:00",
+   "topic": "قرار إقامة المستثمرين الأجانب (3 أو 5 سنوات)",
+   "image": {
+    "design": "carousel",
+    "photo": "/hero-istanbul.jpg",
+    "position": "center 45%",
+    "badge": { "ar": "قوانين العقار", "en": "Property laws" },
+    "headlineAr": "إقامة المستثمر في تركيا: ماذا يقول القرار الجديد؟",
+    "headlineEn": "Investor residence in Turkey: what the new decision says",
+    "arSize": 80,
+    "subAr": "قرار رئاسي نُشر في الجريدة الرسمية في 18 نوفمبر 2026",
+    "subEn": "A Presidential Decision published in the Official Gazette on 18 November 2026",
+    "sectionAr": "إقامة المستثمرين الأجانب",
+    "sectionEn": "Residence for foreign investors",
+    "slides": [
+     { "items": [
+      { "titleAr": "إقامة 3 سنوات", "textAr": "مقابل استثمار لا يقل عن 150,000 دولار أو ما يعادله بالعملة الأجنبية.",
+        "titleEn": "A 3-year permit", "textEn": "For an investment of at least US$150,000 or the equivalent in foreign currency." },
+      { "titleAr": "إقامة 5 سنوات", "textAr": "مقابل استثمار لا يقل عن 200,000 دولار أو ما يعادله بالعملة الأجنبية.",
+        "titleEn": "A 5-year permit", "textEn": "For an investment of at least US$200,000 or the equivalent in foreign currency." }
+     ] },
+     { "items": [
+      { "titleAr": "لمن هذه الإقامة؟", "textAr": "للأجانب الذين لا يعملون في تركيا، ولا تحل محل تصريح العمل.",
+        "titleEn": "Who is it for?", "textEn": "Foreigners who do not work in Turkey; it does not replace a work permit." },
+      { "titleAr": "تشمل الأسرة", "textAr": "يمكن أن تشمل الزوج والأبناء القاصرين أو المعالين.",
+        "titleEn": "Family included", "textEn": "Spouses and minor or dependent children can be included." }
+     ] },
+     { "items": [
+      { "titleAr": "وديعة أو أدوات دين", "textAr": "وديعة في بنك يعمل في تركيا، أو أدوات دين حكومية.",
+        "titleEn": "Deposits or debt securities", "textEn": "A deposit in a bank operating in Turkey, or government debt securities." },
+      { "titleAr": "صناديق أو تقاعد خاص", "textAr": "حصص في صندوق استثمار عقاري أو رأس مال مخاطر، أو مساهمات التقاعد الخاص.",
+        "titleEn": "Funds or private pension", "textEn": "Real estate or venture capital fund shares, or private pension contributions." }
+     ] },
+     { "photo": "/images/projects/sea-pearl-atakoy/from-the-sea.jpg", "items": [
+      { "titleAr": "الاحتفاظ بالاستثمار", "textAr": "يُحتفظ بالاستثمار نصف مدة الإقامة على الأقل.",
+        "titleEn": "Keeping the investment", "textEn": "It is kept for at least half of the permit period." }
+     ] },
+     { "items": [
+      { "titleAr": "ليست شراء مسكن", "textAr": "شراء المسكن ليس من أنواع الاستثمار في القرار، والإقامة العقارية تبقى بشروطها.",
+        "titleEn": "Not a home purchase", "textEn": "Buying a home is not a listed type; the property residence keeps its own conditions." },
+      { "titleAr": "ولا تُحتسب للجنسية", "textAr": "لا تُحتسب ضمن الجنسية التركية عبر الاستثمار.",
+        "titleEn": "Not towards citizenship", "textEn": "It does not count towards Turkish citizenship by investment." }
+     ] }
+    ],
+    "end": {
+     "headlineAr": "أي طريق يناسب خطتك؟",
+     "headlineEn": "Which route fits your plan?",
+     "stats": [
+      { "value": "150,000$", "ar": "إقامة 3 سنوات", "en": "3-year permit" },
+      { "value": "200,000$", "ar": "إقامة 5 سنوات", "en": "5-year permit" }
+     ],
+     "ask": { "labelAr": "سؤالنا لكم", "ar": "هل تفضّل الإقامة عبر استثمار مالي أم عبر شراء عقار؟", "en": "Would you choose a financial investment or a property purchase for residence?" },
+     "cta": { "ar": "اقرأ المقال كاملاً على موقعنا", "en": "Read the full article on our website" },
+     "note": { "ar": "معلومات عامة وليست استشارة قانونية", "en": "General information, not legal advice" }
+    }
+   },
+   "caption": {
+    "ar": {
+     "title": "قرار جديد: إقامة 3 أو 5 سنوات للمستثمرين الأجانب 📜",
+     "intro": "قرار رئاسي نُشر في 18 نوفمبر 2026 يتيح إقامة 3 سنوات مقابل 150,000 دولار و5 سنوات مقابل 200,000 دولار في ودائع أو أدوات دين أو صناديق. وشراء المسكن ليس من أنواعه، والإقامة العقارية تبقى بشروطها.",
+     "closing": [
+      "معلومات عامة وليست استشارة قانونية."
+     ],
+     "cta": "اقرأ المقال كاملاً",
+     "path": "/blog/investor-residence-permit-turkey"
+    },
+    "en": {
+     "title": "New: a 3- or 5-year residence permit for foreign investors 📜",
+     "intro": "A Presidential Decision of 18 November 2026 grants 3 years for US$150,000 and 5 years for US$200,000 in deposits, debt securities or funds. Buying a home is not one of the listed types; the property residence keeps its own conditions.",
+     "closing": [
+      "General information, not legal advice."
+     ],
+     "cta": "Read the full article",
+     "path": "/blog/investor-residence-permit-turkey"
+    },
+    "hashtags": [
+     "#TurkeyResidence",
+     "#InvestorResidence",
+     "#Istanbul",
+     "#HadaraRealEstate"
+    ]
+   }
+  }
+ ]
+}
