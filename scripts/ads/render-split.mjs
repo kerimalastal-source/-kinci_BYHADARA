@@ -241,9 +241,10 @@ const ADS = [
         // Owner 2026-11-21 (review): two empty rooms read as "not ready"; keep the sea living room, add the lawn and pool.
         photos: [{ src: img("marmara-haven-villa/living-sea.jpg"), pos: "12% 80%", size: "auto 122%", story: { pos: "8% center" } }, { src: img("marmara-haven-villa/private-pool.jpg"), pos: "center 70%", story: { pos: "70% center" } }] },
       { ...base, id: `citizen-${t.lang}`, ar: t.citizen[0], en: t.citizen[1], passport: t.passport, passportImg: "plan48-2026-11/passport.jpg",
-        // Owner 2026-11-21: two photos like the old ad, the villa and the sea. The daytime drone shot showed bare
-        // earth, and the terrace shot repeated the sea ad, so: the finished villa on its lawn + the sea at sunset.
-        photos: [{ src: img("marmara-haven-villa/garden-wide.jpg"), pos: "48% 30%", size: "auto 135%", story: { pos: "55% center" } }, { src: img("marmara-haven-villa/sunset.jpg"), pos: "center 62%", story: { pos: "center center" } }] },
+        // Owner 2026-11-21: two photos like the old ad, the villa and the sea. garden-wide has a power line across
+        // the villa and the owner prefers the sea by day to the sunset: the whole villa from the front drone shot,
+        // beside the daylight sea over the pool from the balcony (cropped past the utility pole on the left).
+        photos: [{ src: img("marmara-haven-villa/drone-front.jpg"), pos: "42% center", story: { pos: "40% center" } }, { src: img("marmara-haven-villa/balcony-pool.jpg"), pos: "100% 45%", size: "auto 145%", story: { pos: "100% center" } }] },
       { ...base, id: `sea-${t.lang}`, ar: t.sea[0], en: t.sea[1], badge, badge2,
         photos: [{ src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%", story: { pos: "40% center" } }, { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%", story: { pos: "45% 85%", size: "auto 140%" } }] },
     ];
