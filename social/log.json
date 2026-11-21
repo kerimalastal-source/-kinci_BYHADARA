@@ -1150,5 +1150,13 @@
     "headlineAr": "قرار جديد: إقامة 3 أو 5 سنوات للمستثمرين الأجانب",
     "headlineEn": "New: 3- or 5-year investor residence",
     "photo": "/images/projects/sea-pearl-atakoy/night-aerial.jpg"
+  },
+  {
+    "date": "2026-11-21",
+    "id": "investor-residence-carousel",
+    "topic": "قرار إقامة المستثمرين الأجانب (3 أو 5 سنوات)",
+    "headlineAr": "إقامة المستثمر في تركيا: ماذا يقول القرار الجديد؟",
+    "headlineEn": "Investor residence in Turkey: what the new decision says",
+    "photo": "/hero-istanbul.jpg"
   }
 ]
