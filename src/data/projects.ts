@@ -1594,8 +1594,9 @@ export const projects: Project[] = [
     timeline: "2024 – 2026",
     // The one project HADARA developed itself (owner, 2026-10-10); every other project is marketed for its developer.
     developer: "HADARA Real Estate",
-    // Prices from the owner on 2026-09-30 (VAT included, 4% title deed fee not included).
-    price: "$1,550,000 – $1,650,000",
+    // Owner 2026-11-21: price cut to a single price of $1,450,000 (was $1,550,000 – $1,650,000 from 2026-09-30;
+    // VAT included, 4% title deed fee not included).
+    price: "$1,450,000",
     landing: true,
     // Confirmed by the owner on 2026-09-27 (no monthly fee answer, so no "aidat" row).
     verified: {
