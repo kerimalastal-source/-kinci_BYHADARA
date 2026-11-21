@@ -217,6 +217,34 @@ const ADS = [
     ],
     cta: ["Explore the Projects", "تصفّح المشاريع"],
   },
+  // Villa push after the price cut (owner 2026-11-21: "we must sell it as soon as possible"; "strike 1,550 and
+  // write the new price 1,450,000 so it shows we came down"). One flexible ad per language set with three
+  // different angles (lesson 11): family, citizenship, sea lifestyle. Same approved split layout.
+  ...[
+    { lang: "ar", was: "1,550,000 دولار", now: "السعر الجديد 1,450,000 دولار", cta: "احجز معاينة خاصة",
+      area: ["المساحة الإجمالية", "مساحة الأرض"],
+      family: ["فيلا عائلية بإطلالة بحرية<br>كاملة في إسطنبول", "5 غرف نوم · صالونان · 7 حمّامات · مسبح خاص"],
+      citizen: ["فيلا بإطلالة بحرية<br>كاملة في إسطنبول", "لك ولعائلتك · 5 غرف نوم · صالونان · مسبح خاص"],
+      sea: ["بيتك على البحر<br>في إسطنبول", "مسبح خاص · تراس على السطح · مصعد · منزل ذكي"],
+      passport: "مناسبة للجنسية<br>التركية" },
+    { lang: "en", was: "US$1,550,000", now: "New price US$1,450,000", cta: "Book a Private Viewing",
+      area: ["Total area", "Land area"],
+      family: ["A Family Villa with a<br>Full Sea View in Istanbul", "5 Bedrooms · 2 Living Rooms · 7 Bathrooms · Private Pool"],
+      citizen: ["A Full Sea View Villa<br>in Istanbul", "For your family · 5 Bedrooms · 2 Living Rooms · Pool"],
+      sea: ["Your Home by the Sea<br>in Istanbul", "Private pool · Roof terrace · Lift · Smart home"],
+      passport: "Eligible for<br>Turkish Citizenship" },
+  ].flatMap((t) => {
+    const base = { dir: "villa-2026-11", lang: t.lang, label: "MARMARA HAVEN VILLA", cta: ["", t.cta], price: { was: t.was, ar: t.now } };
+    const badge = { num: "576", unit: "m²", ar: t.area[0] }, badge2 = { num: "637", unit: "m²", ar: t.area[1] };
+    return [
+      { ...base, id: `family-${t.lang}`, ar: t.family[0], en: t.family[1], badge, badge2,
+        photos: [{ src: img("marmara-haven-villa/living-sea.jpg"), pos: "12% 80%", size: "auto 122%" }, { src: img("marmara-haven-villa/bedroom-sea.jpg"), pos: "center center" }] },
+      { ...base, id: `citizen-${t.lang}`, ar: t.citizen[0], en: t.citizen[1], passport: t.passport, passportImg: "plan48-2026-11/passport.jpg",
+        photos: [{ src: img("marmara-haven-villa/drone.jpg"), pos: "center 45%" }] },
+      { ...base, id: `sea-${t.lang}`, ar: t.sea[0], en: t.sea[1], badge, badge2,
+        photos: [{ src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" }, { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" }] },
+    ];
+  }),
 ];
 
 const css = (w, h, story) => `
@@ -260,6 +288,12 @@ body.lang-en .pp .ppl{font-family:Inter,sans-serif;direction:ltr;font-size:${sto
 .price.stack{flex-direction:column;gap:2px;border-radius:30px;padding:${story ? "14px 50px 16px" : "12px 46px 14px"}}
 .price.stack .pb{display:none}
 .price.stack .pe{font-size:34px;font-weight:600}
+/* Owner 2026-11-21: the old villa price struck through above the new one, so the cut is obvious. */
+.price.was{flex-direction:column;gap:0;border-radius:30px;padding:${story ? "12px 54px 14px" : "10px 50px 12px"}}
+.price.was .pw{font-weight:600;font-size:${story ? 32 : 28}px;color:#7d7a70;line-height:1.25}
+.price.was .pw s{text-decoration-color:#b3261e;text-decoration-thickness:3px}
+body.lang-ar .price.was .pw{font-family:Plex,sans-serif;direction:rtl}
+.price.was .pa{font-size:${story ? 46 : 40}px;color:#0f2b21}
 .price .pb{width:2px;height:${story ? 34 : 30}px;background:#c9a24b}
 .label::before,.label::after{content:"";flex:1;height:2px;background:#c9a24b;opacity:.75}
 .photos{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:0}
@@ -286,7 +320,7 @@ const PASSPORT = '<svg viewBox="0 0 300 420" xmlns="http://www.w3.org/2000/svg">
 const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body class="${a.lang ? "lang-" + a.lang : ""}">
 <div class="head"><div class="brand"><img src="file://${REPO}/public/logo-dark.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="rule"></div></div>
 ${a.passport ? `<div class="hero"><div class="pp">${a.passportImg ? `<img src="file://${path.join(HERE, a.passportImg)}">` : PASSPORT}<span class="ppl">${a.passport}</span></div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : a.badge ? `<div class="hero"><div class="seal"><span class="sa">${a.badge.ar}</span><b dir="ltr">${a.badge.num}<i>${a.badge.unit}</i></b>${a.badge.en ? `<span class="se">${a.badge.en}</span>` : ""}${a.badge2 ? `<span class="sd"></span><span class="sa">${a.badge2.ar}</span><b class="b2" dir="ltr">${a.badge2.num}<i>${a.badge2.unit}</i></b>` : ""}</div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : `<div class="ar">${a.ar}</div><div class="en">${a.en}</div>`}
-${a.price ? `<div class="price${a.price.big ? " big" : ""}${a.price.stack ? " stack" : ""}"><span class="pa">${a.price.ar}</span>${a.price.en ? `<span class="pb"></span><span class="pe">${a.price.en}</span>` : ""}</div>` : ""}
+${a.price ? `<div class="price${a.price.big ? " big" : ""}${a.price.stack ? " stack" : ""}${a.price.was ? " was" : ""}">${a.price.was ? `<span class="pw"><s>${a.price.was}</s></span>` : ""}<span class="pa">${a.price.ar}</span>${a.price.en ? `<span class="pb"></span><span class="pe">${a.price.en}</span>` : ""}</div>` : ""}
 ${a.label ? `<div class="label">${a.flag ? `<span class="lab">${FLAG}<span>${a.label}</span></span>` : a.label}</div>` : ""}
 <div class="photos"${a.photos.length === 1 ? ' style="grid-template-columns:1fr"' : ""}>${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
 <div class="foot"><span class="w">hadararealestate.com</span><span class="sep"></span><span class="c"><span class="a">${a.cta[1]}</span>${a.cta[0] ? `<span class="bar">|</span><span>${a.cta[0]}</span>` : ""}</span></div>
