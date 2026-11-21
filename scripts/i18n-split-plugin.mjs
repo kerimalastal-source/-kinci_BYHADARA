@@ -9,7 +9,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-export const LOCALES = ["en", "ar", "fa", "fr", "ru"];
+export const LOCALES = ["en", "ar", "fa", "fr", "ru", "de"];
 /** Fields of projectsData.<slug> that only the project page, its SEO tags and the chat's answers read. */
 export const PROJECT_DETAIL_KEYS = ["longDescription", "highlights", "nearby", "floorPlan", "verified", "videoTitle", "videoText"];
 
@@ -62,7 +62,7 @@ export function i18nSplit(root) {
         return `export const core = ${map("core")};\nexport const projects = ${map("projects")};\nexport const blog = {\n  ${blog}\n};\n`;
       }
 
-      const m = key.match(/^(core|projects|blog)-(en|ar|fa|fr|ru)(?:-(.+))?$/);
+      const m = key.match(/^(core|projects|blog)-(en|ar|fa|fr|ru|de)(?:-(.+))?$/);
       if (!m) return null;
       const parts = read(m[2]);
       if (m[1] === "core") return asModule(parts.core);

@@ -14,7 +14,7 @@ import { sendTelegram } from "./_lib/telegram.js";
 import { hasSupabase, rpc, RpcError } from "./_lib/supabase.js";
 import { newChatMessage, nextChatMessage, type ChatContext } from "./_lib/liveChat.js";
 
-const LOCALES = ["en", "ar", "fa", "fr", "ru"];
+const LOCALES = ["en", "ar", "fa", "fr", "ru", "de"];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const BOT_AGENT = /bot|crawl|spider|slurp|facebookexternalhit|embedly|preview|headless|lighthouse/i;
 const SITE = (process.env.VITE_SITE_URL || "https://www.hadararealestate.com").replace(/\/$/, "");

@@ -2,9 +2,9 @@
 // The dictionaries themselves are registered from outside: the browser loads only the languages
 // it needs (i18n/load.ts), the build registers all five (i18n/all.ts).
 
-export type Locale = "en" | "ar" | "fa" | "fr" | "ru";
+export type Locale = "en" | "ar" | "fa" | "fr" | "ru" | "de";
 
-export const locales: Locale[] = ["en", "ar", "fa", "fr", "ru"];
+export const locales: Locale[] = ["en", "ar", "fa", "fr", "ru", "de"];
 
 export const defaultLocale: Locale = "en";
 

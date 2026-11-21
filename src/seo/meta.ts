@@ -13,7 +13,7 @@ import { RESALE_LIVE } from "../data/resale";
 /** The live address: hadararealestate.com redirects here (308), so canonical/hreflang/sitemap URLs use www. */
 export const DEFAULT_SITE_URL = "https://www.hadararealestate.com";
 
-const OG_LOCALES: Record<Locale, string> = { en: "en_US", ar: "ar_AR", fa: "fa_IR", fr: "fr_FR", ru: "ru_RU" };
+const OG_LOCALES: Record<Locale, string> = { en: "en_US", ar: "ar_AR", fa: "fa_IR", fr: "fr_FR", ru: "ru_RU", de: "de_DE" };
 
 const CONTACT = {
   telephone: "+90 532 139 25 23",

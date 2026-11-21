@@ -293,7 +293,7 @@ const PAGE_NAMES: Record<string, string> = {
 
 /** Path without the language prefix, query or trailing slash: "/ar/contact/" -> "/contact". */
 export function basePath(path: string): string {
-  return path.split(/[?#]/)[0].replace(/^\/(?:ar|fa|fr|ru)(?=\/|$)/, "").replace(/\/$/, "") || "/";
+  return path.split(/[?#]/)[0].replace(/^\/(?:ar|fa|fr|ru|de)(?=\/|$)/, "").replace(/\/$/, "") || "/";
 }
 
 const projectSlug = (path: string) => basePath(path).match(/^\/projects\/([a-z0-9-]+)$/)?.[1] ?? null;

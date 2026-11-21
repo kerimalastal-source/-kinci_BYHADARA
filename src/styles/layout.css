@@ -296,7 +296,8 @@
 .lang-switch {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  /* Six languages since German (2026-11-20): a little tighter so the full bar still fits at 1180px. */
+  gap: 0.55rem;
   direction: ltr;
 }
 

@@ -452,7 +452,12 @@ export const projects: Project[] = [
     unitsAvailable: true,
     priority: 1.7,
     developer: "Mutlu İnşaat",
-    price: "on-request",
+    // Owner, 2026-11-20: the developer's offer sheets of 11/11/2026 (list prices in TL, excluding 10% VAT) for
+    // 2+1 A3/4 131.37 m², A3/5 136.81, A7/2 192.56; 3+1 A6/5 156.02, A3/9 182.27; 4+1 A2/8 216.78 and duplex
+    // A6/7 256.79, A2/10 382.87; plus the office's 10% commission, at US$1 = 50.50 TL, rounded to $1,000.
+    // Shown as ranges per type, as the owner asked, excluding VAT.
+    price: "$255,000 – $876,000",
+    priceExcludesVat: true,
     // Facts, areas and images from the developer's catalog ("CasaBlu Vadi Katolog", Drive).
     coverImage: img("casablu-vadi", "blocks-aerial", 2000, 1092, "CasaBlu Vadi low-rise residential blocks around a landscaped central garden, aerial view"),
     gallery: [
@@ -481,9 +486,9 @@ export const projects: Project[] = [
     // Catalog plan pages: "satışa esas brüt" as gross, and net area. The 5+1 (Tip 6) and one 6+1 type have their
     // saleable area cut off in the catalog itself (5+1: net only; 6+1: "+").
     residences: [
-      { kind: "apartment", layout: "2+1", gross: "102.51 – 192.56 m²", net: "56.80 – 98.25 m²", planTypes: 7 },
-      { kind: "apartment", layout: "3+1", gross: "155.94 – 250.92 m²", net: "100.00 – 148.15 m²", planTypes: 13 },
-      { kind: "apartment", layout: "4+1", gross: "194.15 – 382.87 m²", net: "126.25 – 223.15 m²", planTypes: 9 },
+      { kind: "apartment", layout: "2+1", gross: "102.51 – 192.56 m²", net: "56.80 – 98.25 m²", planTypes: 7, price: "$255,000 – $336,000" },
+      { kind: "apartment", layout: "3+1", gross: "155.94 – 250.92 m²", net: "100.00 – 148.15 m²", planTypes: 13, price: "$350,000 – $363,000" },
+      { kind: "apartment", layout: "4+1", gross: "194.15 – 382.87 m²", net: "126.25 – 223.15 m²", planTypes: 9, price: "$524,000 – $876,000" },
       { kind: "apartment", layout: "5+1", net: "220.40 m²", garden: "21.50 m²", floors: 2 },
       { kind: "apartment", layout: "6+1", gross: "363.80 m²+", net: "215.40 – 240.85 m²", planTypes: 2 }
     ],

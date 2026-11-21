@@ -22,8 +22,8 @@
   --color-on-primary: #f7f4ec;
 
   /* Typography */
-  --font-heading: "Inter", "IBM Plex Sans Arabic", -apple-system, sans-serif;
-  --font-body: "Inter", "IBM Plex Sans Arabic", -apple-system, sans-serif;
+  --font-heading: "Inter", "Thmanyah Sans", "IBM Plex Sans Arabic", -apple-system, sans-serif;
+  --font-body: "Inter", "Thmanyah Sans", "IBM Plex Sans Arabic", -apple-system, sans-serif;
 
   /* Layout */
   --container-width: 1220px;
@@ -41,4 +41,11 @@
   --space-lg: 2.5rem;
   --space-xl: 4rem;
   --space-2xl: 6rem;
+}
+
+/* Thmanyah Sans has no Persian letters (گ ی ک ژ): Persian pages keep IBM Plex Sans Arabic
+   so a word never mixes two Arabic-script fonts. */
+:root:lang(fa) {
+  --font-heading: "Inter", "IBM Plex Sans Arabic", -apple-system, sans-serif;
+  --font-body: "Inter", "IBM Plex Sans Arabic", -apple-system, sans-serif;
 }

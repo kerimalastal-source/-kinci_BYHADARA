@@ -130,6 +130,30 @@ export const lawRules: LawRule[] = [
 
 export const lawUpdates: LawUpdate[] = [
   {
+    id: "investor-residence-3-5-years",
+    topic: "residence",
+    decided: "2026-11-18",
+    effective: "2026-11-18",
+    reference: "Yabancı Yatırımcılara Düzenlenecek İkamet İzinlerine Dair Karar (Karar Sayısı: 11994) · Resmî Gazete 33434 (18/11/2026)",
+    sources: [
+      { key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2026/11/20261118-3.pdf" }
+    ],
+    checked: "2026-11-20",
+    approved: true
+  },
+  {
+    id: "tourism-rental-permit-30-days",
+    topic: "rent",
+    decided: "2026-10-27",
+    effective: "2026-10-27",
+    reference: "Konutların Turizm Amaçlı Kiralanması Faaliyetlerinin Düzenlenmesine İlişkin Yönetmelikte Değişiklik · Resmî Gazete 33413 (27/10/2026)",
+    sources: [
+      { key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2026/10/20261027-2.htm" }
+    ],
+    checked: "2026-11-20",
+    approved: true
+  },
+  {
     id: "law-7579-site-fees",
     topic: "ownership",
     decided: "2026-05-22",

@@ -43,7 +43,9 @@ function seoPrerender(): Plugin {
         ]
           .filter((key, i, all) => chunks[key] && all.indexOf(key) === i)
           .map((key) => `<link rel="modulepreload" crossorigin href="${chunks[key]}">\n    `)
-          .join("");
+          .join("") +
+        // Arabic pages: the body font (Thmanyah Sans Regular) starts loading with the page.
+        (locale === "ar" ? `<link rel="preload" href="/fonts/thmanyah/thmanyahsans-Regular.woff2" as="font" type="font/woff2" crossorigin>\n    ` : "");
 
       for (const route of indexableRoutes()) {
         for (const locale of locales) {

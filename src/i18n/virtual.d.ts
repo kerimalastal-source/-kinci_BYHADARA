@@ -1,6 +1,6 @@
 // Dictionary parts served by scripts/i18n-split-plugin.mjs.
 declare module "virtual:i18n/loaders" {
-  type Locale = "en" | "ar" | "fa" | "fr" | "ru";
+  type Locale = "en" | "ar" | "fa" | "fr" | "ru" | "de";
   type Loader = () => Promise<{ default: unknown }>;
   /** Everything except project long texts and article bodies. */
   export const core: Record<Locale, Loader>;

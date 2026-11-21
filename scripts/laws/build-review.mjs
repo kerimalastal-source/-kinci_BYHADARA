@@ -36,7 +36,7 @@ for (let i = 0; i < args.length; i++) {
 }
 
 const laws = await loadLaws();
-const dict = Object.fromEntries(["en", "ar", "fa", "fr", "ru"].map((l) => [l, JSON.parse(fs.readFileSync(path.join(root, `src/i18n/${l}.json`), "utf8"))]));
+const dict = Object.fromEntries(["en", "ar", "fa", "fr", "ru", "de"].map((l) => [l, JSON.parse(fs.readFileSync(path.join(root, `src/i18n/${l}.json`), "utf8"))]));
 const notes = JSON.parse(fs.readFileSync(path.join(here, "review-notes.json"), "utf8"));
 const knownIds = new Set([...laws.lawRules, ...laws.lawUpdates].map((i) => i.id));
 

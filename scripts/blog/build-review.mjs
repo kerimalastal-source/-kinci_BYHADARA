@@ -16,7 +16,7 @@ import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "../..");
-const LOCALES = [["ar", "العربية"], ["en", "English"], ["fa", "فارسی"], ["fr", "Français"], ["ru", "Русский"]];
+const LOCALES = [["ar", "العربية"], ["en", "English"], ["fa", "فارسی"], ["fr", "Français"], ["ru", "Русский"], ["de", "Deutsch"]];
 
 const args = process.argv.slice(2);
 const adds = [];
@@ -140,7 +140,7 @@ article p{margin:0 0 .9em}
       art.appendChild(el("div","cat",c.category)); art.appendChild(el("h2",null,c.title)); art.appendChild(el("p","ex",c.excerpt));
       c.body.forEach(function(p){ art.appendChild(p.indexOf("## ")===0 ? el("h3",null,p.slice(3)) : el("p",null,p)); });
     }
-    locales.forEach(function(L,i){
+    locales.filter(function(L){ return a.langs[L[0]]; }).forEach(function(L,i){
       var b=el("button",null,L[1]); b.type="button"; b.setAttribute("role","tab"); b.setAttribute("aria-selected",i===0?"true":"false");
       b.addEventListener("click",function(){ tabs.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-selected","false");}); b.setAttribute("aria-selected","true"); show(L[0]); });
       tabs.appendChild(b);

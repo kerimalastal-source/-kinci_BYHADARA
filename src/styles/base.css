@@ -1,3 +1,54 @@
+/* Thmanyah Sans for Arabic text (licence: Thmanyah's written approval of 2026-11-20, ticket 504537,
+   for byhadara.com, hadararealestate.com and hadarahospitality.com). The woff2 files are used exactly
+   as Thmanyah sent them: no subsetting, no conversion, no renaming. Arabic letters only (unicode-range),
+   so Latin text stays on Inter. It has no Persian letters (گ ی ک ژ), so Persian pages keep
+   IBM Plex Sans Arabic (variables.css). */
+
+@font-face {
+  font-family: "Thmanyah Sans";
+  src: url("/fonts/thmanyah/thmanyahsans-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+}
+
+@font-face {
+  font-family: "Thmanyah Sans";
+  src: url("/fonts/thmanyah/thmanyahsans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+}
+
+@font-face {
+  font-family: "Thmanyah Sans";
+  src: url("/fonts/thmanyah/thmanyahsans-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+}
+
+@font-face {
+  font-family: "Thmanyah Sans";
+  src: url("/fonts/thmanyah/thmanyahsans-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+}
+
+@font-face {
+  font-family: "Thmanyah Sans";
+  src: url("/fonts/thmanyah/thmanyahsans-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+}
+
 *,
 *::before,
 *::after {
@@ -203,4 +254,12 @@ p {
 /* The page behind the open mobile menu stays put. */
 body.nav-open {
   overflow: hidden;
+}
+
+/* German compounds are long ("Wohnungsaufteilung"): let the browser hyphenate them
+   instead of breaking a word mid-letter in narrow boxes. Only German pages.
+   Small headings and short labels only, so running text and the big headlines keep whole words. */
+:lang(de) :is(h3, h4, h5, dt, dd, th, label, button, [class*="__label"]) {
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }

@@ -22,6 +22,20 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "investor-residence-permit-turkey",
+    priority: -28,
+    published: "2026-11-20",
+    relatedProjects: ["beylikduzu-living", "hayat-flora", "dragos"],
+    coverImage: { src: "/images/blog/investor-residence-permit-turkey.jpg", width: 1536, height: 1024 }
+  },
+  {
+    slug: "residence-permit-by-property",
+    priority: -27,
+    published: "2026-11-20",
+    relatedProjects: ["alya-konutlari-merkezefendi", "beylikduzu-living", "referans-beylikduzu"],
+    coverImage: { src: "/images/blog/residence-permit-by-property.jpg", width: 1536, height: 1024 }
+  },
+  {
     slug: "emlak-vergisi-property-tax",
     priority: -26,
     published: "2026-11-18",

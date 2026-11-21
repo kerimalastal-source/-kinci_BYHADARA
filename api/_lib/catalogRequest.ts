@@ -12,7 +12,7 @@ import { hasSupabase, rpc, RpcError } from "./supabase.js";
 import { SITE_LANGUAGE_AR, type SiteLocale } from "./bookingMessages.js";
 import { PROJECT_NAMES } from "./projectNames.js";
 
-const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru"];
+const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru", "de"];
 const PHONE = /^\+?[0-9][0-9 ()-]{5,28}$/;
 const BOT_AGENT = /bot|crawl|spider|slurp|headless|lighthouse/i;
 /** Typing a phone number takes a person longer than this. */
@@ -70,7 +70,9 @@ const REPLY: Record<SiteLocale, (name: string, url: string, project: string) => 
   fr: (name, url, project) =>
     `Bonjour${name ? ` ${name}` : ""}, ici l'équipe HADARA Real Estate. Voici le catalogue que vous avez demandé sur notre site :\n${url}\n\nNous vous enverrons volontiers les prix et les plans disponibles pour ${project}. Que recherchez-vous ?`,
   ru: (name, url, project) =>
-    `Здравствуйте${name ? `, ${name}` : ""}! Это команда HADARA Real Estate. Вот каталог, который вы запросили на нашем сайте:\n${url}\n\nБудем рады прислать актуальные цены и планировки по проекту ${project}. Что вы ищете?`
+    `Здравствуйте${name ? `, ${name}` : ""}! Это команда HADARA Real Estate. Вот каталог, который вы запросили на нашем сайте:\n${url}\n\nБудем рады прислать актуальные цены и планировки по проекту ${project}. Что вы ищете?`,
+  de: (name, url, project) =>
+    `Guten Tag${name ? ` ${name}` : ""}, hier ist das Team von HADARA Real Estate. Hier ist der Katalog, den Sie auf unserer Website angefordert haben:\n${url}\n\nGerne senden wir Ihnen die aktuellen Preise und verfügbaren Grundrisse für ${project}. Wonach suchen Sie?`
 };
 
 export function catalogAlert(r: CatalogRequest, reference: string, key: string): string {

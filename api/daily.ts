@@ -30,7 +30,7 @@ import { checkMetaLeads } from "./_lib/metaLeadsRun.js";
 import { readVisits, visitReportMessage, type ReportRow } from "./_lib/visitReport.js";
 import { saveFacebookInsights, saveInstagramInsights } from "./_lib/igInsightsRun.js";
 
-const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru"];
+const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru", "de"];
 /** Links in emails and alerts point at the public site, whatever URL the cron called. */
 const SITE = (process.env.VITE_SITE_URL || "https://www.hadararealestate.com").replace(/\/$/, "");
 

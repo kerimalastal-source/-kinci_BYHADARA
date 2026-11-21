@@ -38,7 +38,7 @@ import {
   type SiteLocale
 } from "./_lib/bookingMessages.js";
 
-const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru"];
+const LOCALES: readonly SiteLocale[] = ["en", "ar", "fa", "fr", "ru", "de"];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const WHATSAPP = "905321392523";
 
@@ -269,6 +269,39 @@ const TEXT: Record<SiteLocale, PageText> = {
     errorTitle: "Что-то пошло не так",
     error: "Не удалось сохранить ваш ответ. Попробуйте чуть позже или свяжитесь с нами:",
     site: "Перейти на сайт"
+  },
+  de: {
+    pickTitle: "Wählen Sie einen passenden Termin",
+    pickIntro: "Wählen Sie einen Tag und dann eine Uhrzeit (Istanbuler Zeit). Graue Zeiten sind bereits gebucht. Der gewählte Termin wird sofort für Sie reserviert, und unser Team bestätigt ihn.",
+    booked: "Gebucht",
+    send: "Diesen Termin buchen",
+    noneFit: "Kein Termin passt mir — bitte kontaktieren Sie mich",
+    noTimes: "In den nächsten zwei Wochen sind keine Termine frei. Unser Team meldet sich bei Ihnen, um einen zu finden.",
+    proposedTitle: "Ihr neuer Termin ist gebucht",
+    proposed: "Wir haben diesen Termin für Sie reserviert. Unser Team bestätigt ihn in Kürze, und Sie erhalten eine Bestätigung per E-Mail.",
+    pending: "Sie haben diesen Termin gewählt; unser Team bestätigt ihn in Kürze. Sie können weiterhin einen anderen wählen.",
+    chooseAnother: "Anderen Termin wählen",
+    slotTaken: "Dieser Termin wurde gerade von jemand anderem gebucht. Bitte wählen Sie einen anderen.",
+    localNote: "Die kleine Uhrzeit unter jedem Termin ist Ihre Ortszeit.",
+    title: "Ihre private Videobesichtigung",
+    hello: "Guten Tag {name},",
+    intro: "Der neue Termin Ihrer Videobesichtigung {ref} ist:",
+    istanbul: "Istanbuler Zeit",
+    yourTime: "Ihre Ortszeit",
+    question: "Passt Ihnen dieser Termin?",
+    accept: "Ja, dieser Termin passt mir",
+    decline: "Ich brauche einen anderen Termin",
+    chosen: "Ihre Antwort: {answer}. Sie können sie unten ändern.",
+    acceptedTitle: "Vielen Dank — Ihre Besichtigung ist bestätigt",
+    accepted: "Wir freuen uns darauf, Ihnen alles zu zeigen. Ihr HADARA-Berater ruft Sie zu diesem Termin über {app} an.",
+    declinedTitle: "Danke für Ihre Rückmeldung",
+    declined: "Unser Team meldet sich in Kürze bei Ihnen, um einen passenden Termin zu vereinbaren.",
+    whatsapp: "Schreiben Sie uns auf WhatsApp",
+    invalidTitle: "Dieser Link ist nicht mehr gültig",
+    invalid: "Der Termin Ihrer Besichtigung hat sich vielleicht erneut geändert, oder die Besichtigung hat bereits stattgefunden. Bei Fragen kontaktieren Sie uns:",
+    errorTitle: "Etwas ist schiefgelaufen",
+    error: "Wir konnten Ihre Antwort nicht speichern. Bitte versuchen Sie es gleich noch einmal oder kontaktieren Sie uns:",
+    site: "Zu unserer Website"
   }
 };
 

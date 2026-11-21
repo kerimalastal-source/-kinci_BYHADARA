@@ -64,7 +64,7 @@ Work from the repository root (clone kerimalastal-source/-kinci_BYHADARA if need
    (the official Turkish reference: law/regulation name or number, Resmî Gazete date and
    number), `sources`, `checked` = today, `verify` (Arabic, in the owner's simple
    Levantine style: exactly what to check on the official page), and `text` in **en, ar,
-   fa, fr, ru** with the same keys (update: `title`, `summary`, optional `before`,
+   fa, fr, ru, de** (German since 2026-11-20, formal "Sie") with the same keys (update: `title`, `summary`, optional `before`,
    `after`, `affects`, `help`; rule: `title`, `text`). Match the tone of the existing
    items in `lawsData`: short, factual, formal (Arabic = MSA, Persian = formal); `help` =
    one sentence on how HADARA's team helps, without promises (no legal representation, no
@@ -88,3 +88,6 @@ The owner says "موافق على …" (or asks for an edit / deletion):
   read `drafts.json` and republish the review page with
   `node scripts/laws/build-review.mjs <drafts.json>` (approved items drop off) → live with
   the next "انشر".
+
+A draft written before 2026-11-20 has no `de`: translate it into German (same keys) before
+running `add-law.py`, which now needs all six languages.

@@ -529,17 +529,18 @@
    "weekEn": "Areas & decisions",
    "posts": [
     {
-     "id": "law-declared-price",
+     "id": "law-investor-residence",
      "kind": "law",
-     "law": "title-deed-declared-price",
-     "path": "/property-laws",
+     "law": "investor-residence-3-5-years",
+     "path": "/blog/investor-residence-permit-turkey",
      "design": "list",
      "photos": [
-      "/images/blog/buying-property-and-tapu.jpg",
-      "/images/projects/lotus-manzara-guzelce/villa-row.jpg"
+      "/images/projects/sea-pearl-atakoy/night-aerial.jpg",
+      "/images/projects/sea-pearl-atakoy/dusk-coast.jpg",
+      "/images/projects/sea-pearl-atakoy/palace-gardens.jpg"
      ],
-     "brief": "The approved item title-deed-declared-price: what happens when a lower price than the real one is declared at the title deed office, exactly as the item states it. Facts only from the approved item in src/data/laws.ts and lawsData.rules|updates.<id> in ar.json/en.json (dates, before/after, who is affected); the image says what changed and when it applies. Closing line: «معلومات عامة وليست استشارة قانونية · General information, not legal advice». path /property-laws.",
-     "label": "سعر البيع في الطابو: لماذا يجب أن يكون حقيقياً؟",
+     "brief": "The approved item investor-residence-3-5-years (Presidential Decision 11994, Resmî Gazete 18/11/2026): a 3-year residence permit for an investment of at least US$150,000 and a 5-year permit for at least US$200,000, for foreigners who do not work in Turkey. Three short items on the image: (1) the two amounts and periods; (2) the investment is a deposit in a bank in Turkey, government debt securities, real estate or venture capital fund shares, or private pension contributions, kept for at least half of the permit period; (3) spouse and minor or dependent children can be included. The caption must say clearly that buying a home is NOT one of the listed investment types, that it does not count towards citizenship, and that the residence permit by property keeps its own conditions. Facts only from the approved item in src/data/laws.ts and lawsData.updates.investor-residence-3-5-years in ar.json/en.json. Badge «قوانين العقار · Property laws». Closing line: «معلومات عامة وليست استشارة قانونية · General information, not legal advice». path = the article /blog/investor-residence-permit-turkey. Never write that HADARA arranges deposits or funds.",
+     "label": "قرار جديد: إقامة 3 أو 5 سنوات للمستثمرين الأجانب",
      "at": "09:00",
      "reel": true
     }
