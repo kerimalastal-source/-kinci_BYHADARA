@@ -225,13 +225,13 @@ const ADS = [
       area: ["المساحة الإجمالية", "مساحة الأرض"],
       family: ["فيلا عائلية بإطلالة بحرية<br>كاملة في إسطنبول", "5 غرف نوم · صالونان · 7 حمّامات · مسبح خاص"],
       citizen: ["فيلا بإطلالة بحرية<br>كاملة في إسطنبول", "لك ولعائلتك · 5 غرف نوم · صالونان · مسبح خاص"],
-      sea: ["بيتك على البحر<br>في إسطنبول", "مسبح خاص · تراس على السطح · مصعد · منزل ذكي"],
+      sea: ["فيلتك على البحر<br>في إسطنبول", "مسبح خاص · تراس على السطح · مصعد · منزل ذكي"],
       passport: "مناسبة للجنسية<br>التركية" },
     { lang: "en", was: "US$1,550,000", now: "New price US$1,450,000", cta: "Book a Private Viewing",
       area: ["Total area", "Land area"],
       family: ["A Family Villa with a<br>Full Sea View in Istanbul", "5 Bedrooms · 2 Living Rooms · 7 Bathrooms · Private Pool"],
       citizen: ["A Full Sea View Villa<br>in Istanbul", "For your family · 5 Bedrooms · 2 Living Rooms · Pool"],
-      sea: ["Your Home by the Sea<br>in Istanbul", "Private pool · Roof terrace · Lift · Smart home"],
+      sea: ["Your Villa by the Sea<br>in Istanbul", "Private pool · Roof terrace · Lift · Smart home"],
       passport: "Eligible for<br>Turkish Citizenship" },
   ].flatMap((t) => {
     const base = { dir: "villa-2026-11", lang: t.lang, label: "MARMARA HAVEN VILLA", cta: ["", t.cta], price: { was: t.was, ar: t.now } };
@@ -240,7 +240,8 @@ const ADS = [
       { ...base, id: `family-${t.lang}`, ar: t.family[0], en: t.family[1], badge, badge2,
         photos: [{ src: img("marmara-haven-villa/living-sea.jpg"), pos: "12% 80%", size: "auto 122%" }, { src: img("marmara-haven-villa/bedroom-sea.jpg"), pos: "center center" }] },
       { ...base, id: `citizen-${t.lang}`, ar: t.citizen[0], en: t.citizen[1], passport: t.passport, passportImg: "plan48-2026-11/passport.jpg",
-        photos: [{ src: img("marmara-haven-villa/drone.jpg"), pos: "center 45%" }] },
+        // Owner 2026-11-21: two photos like the old ad, the villa and the sea from the terrace beside it.
+        photos: [{ src: img("marmara-haven-villa/drone.jpg"), pos: "42% 45%" }, { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" }] },
       { ...base, id: `sea-${t.lang}`, ar: t.sea[0], en: t.sea[1], badge, badge2,
         photos: [{ src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%" }, { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%" }] },
     ];
@@ -289,11 +290,11 @@ body.lang-en .pp .ppl{font-family:Inter,sans-serif;direction:ltr;font-size:${sto
 .price.stack .pb{display:none}
 .price.stack .pe{font-size:34px;font-weight:600}
 /* Owner 2026-11-21: the old villa price struck through above the new one, so the cut is obvious. */
-.price.was{flex-direction:column;gap:0;border-radius:30px;padding:${story ? "12px 54px 14px" : "10px 50px 12px"}}
-.price.was .pw{font-weight:600;font-size:${story ? 32 : 28}px;color:#7d7a70;line-height:1.25}
+.price.was{flex-direction:column;gap:2px;border-radius:34px;padding:${story ? "14px 56px 18px" : "12px 52px 16px"}}
+.price.was .pw{font-weight:600;font-size:${story ? 42 : 38}px;color:#7d7a70;line-height:1.25}
 .price.was .pw s{text-decoration-color:#b3261e;text-decoration-thickness:3px}
 body.lang-ar .price.was .pw{font-family:Plex,sans-serif;direction:rtl}
-.price.was .pa{font-size:${story ? 46 : 40}px;color:#0f2b21}
+.price.was .pa{font-size:${story ? 62 : 56}px;color:#0f2b21;line-height:1.2}
 .price .pb{width:2px;height:${story ? 34 : 30}px;background:#c9a24b}
 .label::before,.label::after{content:"";flex:1;height:2px;background:#c9a24b;opacity:.75}
 .photos{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:0}
