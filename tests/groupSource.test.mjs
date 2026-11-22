@@ -40,3 +40,15 @@ test("the Google Business Profile link is named in the alert, not shown as an ad
   assert.match(msg, /📍 جاء من: ملف جوجل التجاري \(خرائط جوجل\)/);
   assert.doesNotMatch(msg, /📣 الإعلان/);
 });
+
+test("the Instagram bio link is named in the alert, not shown as an ad", async () => {
+  const { bioLink } = await import("../.test-build/_lib/groupSource.js");
+  const bio = "utm_source=ig · utm_medium=social · utm_content=link_in_bio · fbclid=PAZXh0bg";
+  assert.equal(bioLink(bio), "رابط البايو في إنستغرام");
+  assert.equal(bioLink("utm_source=facebook · utm_content=link_in_bio"), "رابط البايو في فيسبوك");
+  assert.equal(bioLink("utm_source=ig · utm_medium=paid · utm_content=link_in_bio"), "");
+  assert.equal(bioLink("utm_source=facebook · utm_campaign=villa"), "");
+  const msg = newVisitorMessage(view(bio), PLACE, ORIGIN);
+  assert.match(msg, /📸 جاء من: رابط البايو في إنستغرام \(ليس إعلاناً\)/);
+  assert.doesNotMatch(msg, /📣 الإعلان|fbclid/);
+});

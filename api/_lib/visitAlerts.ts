@@ -1,7 +1,7 @@
 // Telegram texts of the anonymous visitor alerts (api/track.ts), in Arabic, parse_mode
 // HTML: every value that comes from the request is escaped.
 import { aiAssistant } from "./aiSources.js";
-import { fromGoogleBusiness, fromGroupSite, groupPlacement, GOOGLE_BUSINESS_NAME, GROUP_NAME } from "./groupSource.js";
+import { bioLink, fromGoogleBusiness, fromGroupSite, groupPlacement, GOOGLE_BUSINESS_NAME, GROUP_NAME } from "./groupSource.js";
 import { escapeHtml } from "./telegram.js";
 
 export const LOCALES = ["en", "ar", "fa", "fr", "ru", "de"] as const;
@@ -207,6 +207,7 @@ export function newVisitorMessage(view: PageView, geo: Geo, origin: string, extr
     const from = groupPlacement(view.campaign);
     lines.push(`🏛️ جاء من: ${GROUP_NAME}${from ? ` · ${escapeHtml(from)}` : ""}`);
   } else if (fromGoogleBusiness(view.campaign)) lines.push(`📍 جاء من: ${GOOGLE_BUSINESS_NAME}`);
+  else if (bioLink(view.campaign)) lines.push(`📸 جاء من: ${bioLink(view.campaign)} (ليس إعلاناً)`);
   else if (view.campaign) lines.push(`📣 الإعلان: ${escapeHtml(view.campaign)}`);
   return [...lines, ...extra].join("\n");
 }

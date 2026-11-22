@@ -45,3 +45,23 @@ export function fromGoogleBusiness(campaign: string | null | undefined): boolean
   const source = param(campaign, "utm_source").toLowerCase();
   return source === "google_business" || source === "gbp";
 }
+
+// Visits from the link in our social profiles' bio. Instagram tags that link by itself with
+// "utm_source=ig · utm_medium=social · utm_content=link_in_bio" (owner saw it 2026-11-22 as
+// "📣 الإعلان"). Free, not an ad.
+
+const BIO_PLATFORMS: Record<string, string> = {
+  ig: "إنستغرام",
+  instagram: "إنستغرام",
+  fb: "فيسبوك",
+  facebook: "فيسبوك",
+  threads: "ثريدز",
+};
+
+/** "رابط البايو في إنستغرام" when the visit came from a profile bio link, else "". */
+export function bioLink(campaign: string | null | undefined): string {
+  if (!campaign || param(campaign, "utm_medium").toLowerCase() === "paid") return "";
+  if (param(campaign, "utm_content").toLowerCase() !== "link_in_bio") return "";
+  const platform = BIO_PLATFORMS[param(campaign, "utm_source").toLowerCase()];
+  return platform ? `رابط البايو في ${platform}` : "رابط البايو في حساباتنا";
+}
