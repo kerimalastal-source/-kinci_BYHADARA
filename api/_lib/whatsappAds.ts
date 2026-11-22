@@ -3,6 +3,17 @@
 // Meta sends the ad's id with the first message from an ad; an ad that is not listed here is
 // recorded as "ctwa-<ad id>". A new click-to-WhatsApp ad → add its id here.
 const AD_CAMPAIGNS: Record<string, string> = {
+  // Villa at the new price $1.45M (campaign 52513850360879, from 2026-11)
+  "52513850404679": "villa145-ar",
+  "52513850414879": "villa145-ar",
+  "52513850416079": "villa145-ar",
+  "52513850425679": "villa145-en",
+  "52513850425879": "villa145-en",
+  "52513850426079": "villa145-en",
+  "52513851046679": "villa145-iq",
+  "52513851054679": "villa145-iq",
+  "52513850416279": "villa145-warm",
+  "52513850427079": "villa145-warm",
   // Gulf villa, AR / EN split (from 2026-11-07)
   "52510281419679": "gulf-villa-en",
   "52510281442079": "gulf-villa-ar",
