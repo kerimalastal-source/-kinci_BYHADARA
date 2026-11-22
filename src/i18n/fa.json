@@ -4938,6 +4938,7 @@
       "bing": "جست‌وجوی Bing",
       "youtube": "YouTube",
       "whatsapp": "WhatsApp",
+      "byhadara": "وب‌سایت گروه مادر (BYHADARA Group)",
       "chatgpt": "ChatGPT (هوش مصنوعی)",
       "perplexity": "Perplexity (هوش مصنوعی)",
       "gemini": "Gemini (هوش مصنوعی)",
@@ -5072,6 +5073,7 @@
         "otherAd": "تبلیغ دیگری در فیسبوک یا اینستاگرام",
         "social": "پست‌های ما (بدون تبلیغ)",
         "website": "سایت یا جست‌وجو در گوگل",
+        "byhadara": "وب‌سایت گروه (BYHADARA)",
         "referral": "معرفی از طرف کسی",
         "none": "سایر / نامشخص"
       },

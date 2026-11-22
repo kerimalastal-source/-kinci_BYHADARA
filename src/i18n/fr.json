@@ -4850,6 +4850,7 @@
       "bing": "Recherche Bing",
       "youtube": "YouTube",
       "whatsapp": "WhatsApp",
+      "byhadara": "Site du groupe (BYHADARA Group)",
       "chatgpt": "ChatGPT (assistant IA)",
       "perplexity": "Perplexity (assistant IA)",
       "gemini": "Gemini (assistant IA)",
@@ -4984,6 +4985,7 @@
         "otherAd": "Autre publicité Facebook ou Instagram",
         "social": "Nos publications (sans publicité)",
         "website": "Le site ou une recherche Google",
+        "byhadara": "Site du groupe BYHADARA",
         "referral": "Recommandé par quelqu'un",
         "none": "Autre / inconnu"
       },

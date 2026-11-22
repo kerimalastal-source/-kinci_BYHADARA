@@ -4856,6 +4856,7 @@
       "bing": "بحث Bing",
       "youtube": "يوتيوب",
       "whatsapp": "واتساب",
+      "byhadara": "موقع حضارة الأم (BYHADARA Group)",
       "chatgpt": "ChatGPT (ذكاء اصطناعي)",
       "perplexity": "Perplexity (ذكاء اصطناعي)",
       "gemini": "Gemini (ذكاء اصطناعي)",
@@ -4990,6 +4991,7 @@
         "otherAd": "إعلان آخر على فيسبوك أو إنستغرام",
         "social": "منشوراتنا (دون إعلان)",
         "website": "الموقع أو البحث في جوجل",
+        "byhadara": "موقع حضارة الأم (BYHADARA)",
         "referral": "توصية من شخص",
         "none": "أخرى / غير معروف"
       },
