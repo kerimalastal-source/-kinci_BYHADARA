@@ -11,7 +11,10 @@ const { chromium } = require("playwright");
 
 const HERE = path.dirname(new URL(import.meta.url).pathname);
 const REPO = path.resolve(HERE, "../..");
-const OUT = path.join(HERE, "villa-2026-10", "short");
+// NEW_PRICE=1 (owner 2026-11-22): the same cut with the price cut on the closing card (old price struck
+// through, new price below), written to villa-2026-11/short for the villa campaign at $1.45M.
+const NEW_PRICE = process.env.NEW_PRICE === "1";
+const OUT = path.join(HERE, NEW_PRICE ? "villa-2026-11" : "villa-2026-10", "short");
 fs.mkdirSync(OUT, { recursive: true });
 const SRC = path.join(REPO, "public/videos/marmara-haven-villa/tour-720.mp4");
 const FFMPEG = process.env.FFMPEG || "ffmpeg";
@@ -54,6 +57,8 @@ html,body{width:720px;height:1280px;overflow:hidden;background:#0f2b21;color:#ff
 .price{display:inline-block;margin-top:22px;padding:12px 26px;border-radius:18px;border:2px solid #c9a24b;background:rgba(201,162,75,.16)}
 .price .a{font-family:Plex;font-weight:700;font-size:36px;color:#f3d98e;direction:rtl;display:block}
 .price .e{font-family:Inter;font-weight:700;font-size:22px;color:#efe6cf;display:block}
+.price .w{font-family:Plex;font-weight:700;font-size:26px;color:#cfc6ae;direction:rtl;display:block}
+.price .w s{text-decoration-color:#e0574b;text-decoration-thickness:3px}
 .grid{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;direction:rtl}
 .f{border:1.5px solid rgba(201,162,75,.55);border-radius:16px;padding:12px 6px;background:rgba(255,255,255,.04)}
 .f b{display:block;font-family:Inter;font-weight:700;font-size:30px;color:#f3d98e;direction:ltr}
@@ -64,7 +69,9 @@ html,body{width:720px;height:1280px;overflow:hidden;background:#0f2b21;color:#ff
 <div class="brand"><img src="${LOGO}"><div><b>HADARA</b><i>REAL ESTATE</i></div></div>
 <div class="body">
 <div class="ar">فيلا مرمرة هيفن</div><div class="en">Marmara Haven Villa · Büyükçekmece</div>
-<div class="price"><span class="a">السعر من 1.55 مليون دولار</span><span class="e">From US$1.55M</span></div>
+${NEW_PRICE
+  ? `<div class="price"><span class="w"><s>1,550,000 دولار</s></span><span class="a">السعر الجديد 1,450,000 دولار</span><span class="e">New price US$1,450,000</span></div>`
+  : `<div class="price"><span class="a">السعر من 1.55 مليون دولار</span><span class="e">From US$1.55M</span></div>`}
 <div class="grid">${FACTS.map(([v, a, e]) => `<div class="f"><b>${v}</b><i>${a}</i><s>${e}</s></div>`).join("")}</div>
 </div></body></html>`;
 

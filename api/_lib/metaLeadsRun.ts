@@ -1,5 +1,5 @@
 // Checks Meta's lead forms with the live services (Graph API, Vercel Blob markers, Telegram).
-// Called from api/track.ts (some page views, at most once a minute per server instance) and
+// Called from api/track.ts (some page views, at most once every 10 minutes per server instance) and
 // from the morning job (api/daily.ts). Does nothing until META_LEADS_TOKEN, a Blob store and
 // the Telegram bot are configured.
 import { BlobNotFoundError, del, head, put } from "@vercel/blob";
@@ -26,6 +26,15 @@ const store: LeadStore = {
   },
   async remove(path) {
     await del(path);
+  },
+  async exists(path) {
+    try {
+      await head(path);
+      return true;
+    } catch (error) {
+      if (error instanceof BlobNotFoundError) return false;
+      throw error;
+    }
   }
 };
 

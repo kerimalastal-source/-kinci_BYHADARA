@@ -107,10 +107,11 @@ export async function POST(request: Request): Promise<Response> {
       );
     }
     // New leads from Meta's lead-form ads (filled in inside Facebook/Instagram, so they never
-    // reach the site): announced on Telegram within a minute or two while the site has visitors.
+    // reach the site): announced on Telegram within about 10 minutes while the site has visitors
+    // (more often hit Meta's rate limit, 2026-11-20).
     if (Math.random() < 0.3) {
       waitUntil(
-        checkMetaLeads(60_000).catch((error: unknown) => {
+        checkMetaLeads(600_000).catch((error: unknown) => {
           console.error(`track: meta leads failed: ${error instanceof Error ? error.message : "unknown error"}`);
         })
       );

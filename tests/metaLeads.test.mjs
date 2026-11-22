@@ -182,3 +182,38 @@ test("a failed save still sends the alert, without a record link", async () => {
   assert.equal(await checkLeads(deps), 1);
   assert.doesNotMatch(sent[0], /سجل الزبائن/);
 });
+
+test("Meta's rate limit (429) warns only when it lasted over an hour", async () => {
+  const { deps, sent, files } = setup();
+  deps.store.exists = async (path) => files.has(path);
+  let clock = NOW;
+  deps.now = () => clock;
+  deps.fetch = async (url) => {
+    const path = new URL(url).pathname.replace("/v21.0/", "");
+    if (path === "PAGE") return new Response(JSON.stringify({ access_token: "PAGE_TOKEN" }));
+    return new Response(JSON.stringify({ error: { message: "An error has occurred." } }), { status: 429 });
+  };
+  await checkLeads(deps);
+  clock += 20 * 60_000; // still the same Istanbul hour
+  await checkLeads(deps);
+  assert.equal(sent.length, 0);
+  clock += 60 * 60_000; // the next hour, still limited
+  await checkLeads(deps);
+  assert.equal(sent.length, 1);
+  assert.match(sent[0], /429/);
+  // Once a day, as before.
+  clock += 10 * 60_000;
+  await checkLeads(deps);
+  assert.equal(sent.length, 1);
+});
+
+test("a short rate limit never warns when the store cannot look up markers", async () => {
+  const { deps, sent } = setup();
+  deps.fetch = async (url) => {
+    const path = new URL(url).pathname.replace("/v21.0/", "");
+    if (path === "PAGE") return new Response(JSON.stringify({ access_token: "PAGE_TOKEN" }));
+    return new Response(JSON.stringify({ error: { code: 4, message: "Application request limit reached" } }), { status: 400 });
+  };
+  await checkLeads(deps);
+  assert.equal(sent.length, 0);
+});

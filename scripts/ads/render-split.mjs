@@ -217,6 +217,38 @@ const ADS = [
     ],
     cta: ["Explore the Projects", "تصفّح المشاريع"],
   },
+  // Villa push after the price cut (owner 2026-11-21: "we must sell it as soon as possible"; "strike 1,550 and
+  // write the new price 1,450,000 so it shows we came down"). One flexible ad per language set with three
+  // different angles (lesson 11): family, citizenship, sea lifestyle. Same approved split layout.
+  ...[
+    { lang: "ar", was: "1,550,000 دولار", now: "السعر الجديد 1,450,000 دولار", cta: "احجز معاينة خاصة",
+      area: ["المساحة الإجمالية", "مساحة الأرض"],
+      family: ["فيلا عائلية بإطلالة بحرية<br>كاملة في إسطنبول", "5 غرف نوم · صالونان · 7 حمّامات · مسبح خاص"],
+      citizen: ["فيلا بإطلالة بحرية<br>كاملة في إسطنبول", "لك ولعائلتك · 5 غرف نوم · صالونان · مسبح خاص"],
+      sea: ["فيلتك على البحر<br>في إسطنبول", "مسبح خاص · تراس على السطح · مصعد · منزل ذكي"],
+      passport: "مناسبة للجنسية<br>التركية" },
+    { lang: "en", was: "US$1,550,000", now: "New price US$1,450,000", cta: "Book a Private Viewing",
+      area: ["Total area", "Land area"],
+      family: ["A Family Villa with a<br>Full Sea View in Istanbul", "5 Bedrooms · 2 Living Rooms · 7 Bathrooms · Private Pool"],
+      citizen: ["A Full Sea View Villa<br>in Istanbul", "For your family · 5 Bedrooms · 2 Living Rooms · Pool"],
+      sea: ["Your Villa by the Sea<br>in Istanbul", "Private pool · Roof terrace · Lift · Smart home"],
+      passport: "Eligible for<br>Turkish Citizenship" },
+  ].flatMap((t) => {
+    const base = { dir: "villa-2026-11", storyBleed: true, lang: t.lang, label: "MARMARA HAVEN VILLA", cta: ["", t.cta], price: { was: t.was, ar: t.now } };
+    const badge = { num: "576", unit: "m²", ar: t.area[0] }, badge2 = { num: "637", unit: "m²", ar: t.area[1] };
+    return [
+      { ...base, id: `family-${t.lang}`, ar: t.family[0], en: t.family[1], badge, badge2,
+        // Owner 2026-11-21 (review): two empty rooms read as "not ready"; keep the sea living room, add the lawn and pool.
+        photos: [{ src: img("marmara-haven-villa/living-sea.jpg"), pos: "12% 80%", size: "auto 122%", story: { pos: "8% center" } }, { src: img("marmara-haven-villa/private-pool.jpg"), pos: "center 70%", story: { pos: "70% center" } }] },
+      { ...base, id: `citizen-${t.lang}`, ar: t.citizen[0], en: t.citizen[1], passport: t.passport, passportImg: "plan48-2026-11/passport.jpg",
+        // Owner 2026-11-21: two photos like the old ad, the villa and the sea. garden-wide has a power line across
+        // the villa and the owner prefers the sea by day to the sunset: the whole villa from the front drone shot,
+        // beside the daylight sea over the pool from the balcony (cropped past the utility pole on the left).
+        photos: [{ src: img("marmara-haven-villa/drone-front.jpg"), pos: "42% center", story: { pos: "40% center" } }, { src: img("marmara-haven-villa/balcony-pool.jpg"), pos: "100% 45%", size: "auto 145%", story: { pos: "100% center" } }] },
+      { ...base, id: `sea-${t.lang}`, ar: t.sea[0], en: t.sea[1], badge, badge2,
+        photos: [{ src: img("marmara-haven-villa/dusk-pool.jpg"), pos: "34% 66%", size: "auto 128%", story: { pos: "40% center" } }, { src: img("marmara-haven-villa/terrace.jpg"), pos: "45% 64%", size: "auto 160%", story: { pos: "45% 85%", size: "auto 140%" } }] },
+    ];
+  }),
 ];
 
 const css = (w, h, story) => `
@@ -260,10 +292,20 @@ body.lang-en .pp .ppl{font-family:Inter,sans-serif;direction:ltr;font-size:${sto
 .price.stack{flex-direction:column;gap:2px;border-radius:30px;padding:${story ? "14px 50px 16px" : "12px 46px 14px"}}
 .price.stack .pb{display:none}
 .price.stack .pe{font-size:34px;font-weight:600}
+/* Owner 2026-11-21: the old villa price struck through above the new one, so the cut is obvious. */
+.price.was{flex-direction:column;gap:2px;border-radius:34px;padding:${story ? "14px 56px 18px" : "12px 52px 16px"}}
+.price.was .pw{font-weight:600;font-size:${story ? 42 : 38}px;color:#7d7a70;line-height:1.25}
+.price.was .pw s{text-decoration-color:#b3261e;text-decoration-thickness:3px}
+body.lang-ar .price.was .pw{font-family:Plex,sans-serif;direction:rtl}
+.price.was .pa{font-size:${story ? 62 : 56}px;color:#0f2b21;line-height:1.2}
 .price .pb{width:2px;height:${story ? 34 : 30}px;background:#c9a24b}
 .label::before,.label::after{content:"";flex:1;height:2px;background:#c9a24b;opacity:.75}
 .photos{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:0}
 .photos div{background-size:cover}
+/* Story/reels with storyBleed (owner 2026-11-21: "the photo is the main thing"): the photos run down to the
+   bottom edge. The Reels UI covers the bottom third, so no text sits there; the WhatsApp button is the CTA. */
+body.bleed{padding-bottom:0}
+body.bleed .foot{display:none}
 .foot{display:flex;align-items:center;gap:26px;white-space:nowrap;padding:0 56px;height:${story ? 110 : 96}px;flex:none}
 .foot .w{font-weight:500;font-size:27px;letter-spacing:1.5px}
 .foot .sep{width:2px;height:46px;background:#c9a24b}
@@ -283,12 +325,12 @@ const FLAG = '<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><re
 // A plain, stylised Turkish passport cover (burgundy, gold lettering, crescent and star) for citizenship ads;
 // no personal data page, just the cover as an illustration.
 const PASSPORT = '<svg viewBox="0 0 300 420" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a1c2b"/><stop offset="1" stop-color="#5c0f1b"/></linearGradient></defs><rect x="6" y="6" width="288" height="408" rx="18" fill="#000" opacity=".18"/><rect width="288" height="408" rx="18" fill="url(#pg)"/><rect x="10" width="6" height="408" fill="#000" opacity=".12"/><g fill="#d9b25a" font-family="Inter,sans-serif" font-weight="700" text-anchor="middle"><text x="144" y="62" font-size="21" letter-spacing="1.5">TÜRKİYE</text><text x="144" y="90" font-size="17" letter-spacing="1.5">CUMHURİYETİ</text><ellipse cx="144" cy="196" rx="62" ry="72" fill="none" stroke="#d9b25a" stroke-width="4"/><circle cx="132" cy="196" r="34"/><circle cx="142" cy="196" r="27" fill="#7a1726"/><path d="M178 196l-24.7 8 15.3-21v26l-15.3-21z"/><text x="144" y="318" font-size="26" letter-spacing="4">PASAPORT</text><text x="144" y="348" font-size="16" letter-spacing="4">PASSPORT</text><rect x="125" y="368" width="38" height="24" rx="4" fill="none" stroke="#d9b25a" stroke-width="3"/><circle cx="144" cy="380" r="7" fill="none" stroke="#d9b25a" stroke-width="3"/></g></svg>';
-const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body class="${a.lang ? "lang-" + a.lang : ""}">
+const html = (a, w, h, story, prepped) => `<!doctype html><html><head><meta charset="utf-8"><style>${css(w, h, story)}</style></head><body class="${a.lang ? "lang-" + a.lang : ""}${story && a.storyBleed ? " bleed" : ""}">
 <div class="head"><div class="brand"><img src="file://${REPO}/public/logo-dark.png"><div><b>HADARA</b><i>REAL ESTATE</i></div></div><div class="rule"></div></div>
 ${a.passport ? `<div class="hero"><div class="pp">${a.passportImg ? `<img src="file://${path.join(HERE, a.passportImg)}">` : PASSPORT}<span class="ppl">${a.passport}</span></div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : a.badge ? `<div class="hero"><div class="seal"><span class="sa">${a.badge.ar}</span><b dir="ltr">${a.badge.num}<i>${a.badge.unit}</i></b>${a.badge.en ? `<span class="se">${a.badge.en}</span>` : ""}${a.badge2 ? `<span class="sd"></span><span class="sa">${a.badge2.ar}</span><b class="b2" dir="ltr">${a.badge2.num}<i>${a.badge2.unit}</i></b>` : ""}</div><div class="ht"><div class="ar">${a.ar}</div><div class="en">${a.en}</div></div></div>` : `<div class="ar">${a.ar}</div><div class="en">${a.en}</div>`}
-${a.price ? `<div class="price${a.price.big ? " big" : ""}${a.price.stack ? " stack" : ""}"><span class="pa">${a.price.ar}</span>${a.price.en ? `<span class="pb"></span><span class="pe">${a.price.en}</span>` : ""}</div>` : ""}
+${a.price ? `<div class="price${a.price.big ? " big" : ""}${a.price.stack ? " stack" : ""}${a.price.was ? " was" : ""}">${a.price.was ? `<span class="pw"><s>${a.price.was}</s></span>` : ""}<span class="pa">${a.price.ar}</span>${a.price.en ? `<span class="pb"></span><span class="pe">${a.price.en}</span>` : ""}</div>` : ""}
 ${a.label ? `<div class="label">${a.flag ? `<span class="lab">${FLAG}<span>${a.label}</span></span>` : a.label}</div>` : ""}
-<div class="photos"${a.photos.length === 1 ? ' style="grid-template-columns:1fr"' : ""}>${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${p.pos}" data-size="${p.size || ""}"></div>`)).join("")}</div>
+<div class="photos"${a.photos.length === 1 ? ' style="grid-template-columns:1fr"' : ""}>${a.photos.map((p, i) => (prepped ? `<div style="background-image:url('file://${prepped[i]}');background-size:100% 100%"></div>` : `<div data-src="${p.src.replace("file://", "")}" data-pos="${(story && p.story?.pos) || p.pos}" data-size="${story && p.story ? p.story.size || "" : p.size || ""}"></div>`)).join("")}</div>
 <div class="foot"><span class="w">hadararealestate.com</span><span class="sep"></span><span class="c"><span class="a">${a.cta[1]}</span>${a.cta[0] ? `<span class="bar">|</span><span>${a.cta[0]}</span>` : ""}</span></div>
 </body></html>`;
 

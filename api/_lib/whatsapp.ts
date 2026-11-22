@@ -104,6 +104,47 @@ export function parseWebhook(body: unknown, phoneNumberId?: string): WaMessage[]
   return out;
 }
 
+/** One reply the team wrote in the WhatsApp Business app on the phone (coexistence echo). */
+export interface WaEcho {
+  id: string;
+  /** The customer's number, digits only. */
+  waId: string;
+  at: number;
+  text: string;
+}
+
+/**
+ * The team's replies from the phone in one webhook call (field smb_message_echoes, sent once
+ * the company number is connected with coexistence). An echo without the customer's number
+ * (Meta may give only a business-scoped user id) is left out.
+ */
+export function parseEchoes(body: unknown, phoneNumberId?: string): WaEcho[] {
+  const out: WaEcho[] = [];
+  const allowed = (phoneNumberId ?? "").split(",").map((id) => id.trim()).filter(Boolean);
+  const entries = (body as { object?: string; entry?: unknown[] } | null)?.entry;
+  if ((body as { object?: string } | null)?.object !== "whatsapp_business_account" || !Array.isArray(entries)) return out;
+  for (const entry of entries) {
+    const changes = (entry as { changes?: unknown[] }).changes;
+    if (!Array.isArray(changes)) continue;
+    for (const change of changes as { field?: string; value?: Record<string, unknown> }[]) {
+      if (change.field !== "smb_message_echoes" || !change.value) continue;
+      const value = change.value as { metadata?: { phone_number_id?: string }; message_echoes?: (RawMessage & { to?: string })[] };
+      if (allowed.length && !allowed.includes(value.metadata?.phone_number_id ?? "")) continue;
+      for (const m of value.message_echoes ?? []) {
+        if (!m.id || !m.to || !/^\d{6,20}$/.test(m.to)) continue;
+        const seconds = Number(m.timestamp);
+        out.push({
+          id: m.id.slice(0, 300),
+          waId: m.to,
+          at: Number.isFinite(seconds) && seconds > 0 ? seconds * 1000 : Date.now(),
+          text: messageText(m).slice(0, 1900)
+        });
+      }
+    }
+  }
+  return out;
+}
+
 /** Whether X-Hub-Signature-256 is Meta's signature of this exact body with our app secret. */
 export function validSignature(rawBody: string, header: string | null, appSecret: string): boolean {
   if (!header?.startsWith("sha256=") || !appSecret) return false;
@@ -228,6 +269,34 @@ export async function handleMessages(messages: WaMessage[], deps: WaDeps): Promi
     saved++;
     if (result.created && result.reference) await deps.telegram(newCustomerAlert(m, result.reference));
     else if (result.returning) await deps.telegram(returningAlert(m, result));
+  }
+  return saved;
+}
+
+export interface EchoDeps {
+  save: (args: Record<string, unknown>) => Promise<{ saved?: boolean; skipped?: boolean; duplicate?: boolean; error?: string } | null>;
+  secret: string;
+}
+
+/** Writes each team reply to the customer's activity log (save_whatsapp_echo, migration 0043);
+ *  replies to numbers that are not our customers are skipped. No alert. Returns how many were saved. */
+export async function handleEchoes(echoes: WaEcho[], deps: EchoDeps): Promise<number> {
+  let saved = 0;
+  for (const e of [...echoes].sort((a, b) => a.at - b.at)) {
+    const result = await deps
+      .save({
+        p_secret: deps.secret,
+        p_message_id: e.id,
+        p_wa_id: e.waId,
+        p_activity: `رسالة من الفريق: ${e.text}`,
+        p_at: new Date(e.at).toISOString()
+      })
+      .catch((error: unknown) => {
+        console.error(`whatsapp echo: ${error instanceof Error ? error.message : error}`);
+        return null;
+      });
+    if (result?.error) console.error(`whatsapp echo: save refused ${e.id}: ${result.error}`);
+    if (result?.saved) saved++;
   }
   return saved;
 }

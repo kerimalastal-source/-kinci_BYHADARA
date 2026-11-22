@@ -19,6 +19,12 @@ import { addActivity } from "../../data/crmActivities";
 
 /** Where the customer came from, saved in the same "utm_source=… · utm_campaign=…" form as the site's leads. */
 export const SOURCES: Record<string, string> = {
+  // The villa campaign after the price cut to $1.45M (from 2026-11, owner 2026-11-21/22): Gulf Arabic and English
+  // ad sets (37-64), an Iraq ad set (Baghdad + Erbil, 40-64) and a retarget set for people who saw the villa before.
+  villa145Ar: "utm_source=facebook · utm_campaign=villa145-ar",
+  villa145En: "utm_source=facebook · utm_campaign=villa145-en",
+  villa145Iq: "utm_source=facebook · utm_campaign=villa145-iq",
+  villa145Warm: "utm_source=facebook · utm_campaign=villa145-warm",
   // The Gulf villa campaign from 2026-11-07: English and Arabic ad sets on upscale circles, plus a broad English test.
   gulfVillaEn: "utm_source=facebook · utm_campaign=gulf-villa-en",
   gulfVillaAr: "utm_source=facebook · utm_campaign=gulf-villa-ar",

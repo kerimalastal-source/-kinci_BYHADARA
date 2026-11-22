@@ -1,0 +1,13 @@
+{
+  "note": "Iraq upscale areas for the villa 1.45M campaign (ad set 52513851038679, built 2026-11-22, draft). No neighbourhood boundaries were available (geoBoundaries IRQ has districts only; OSM is blocked), so the centres come from published coordinates (Wikipedia mirrors, bamwor, latlong.net via web search) and each circle was checked only against geoBoundaries IRQ ADM2 districts: the Baghdad circles stay on their own bank of the Tigris (Karkh / Risafa 98-100%), Erbil 100%. Not verified at neighbourhood level; ask someone who knows Baghdad and Erbil before widening them. Dream City, Empire World and Italian Village (Erbil) were left out: no reliable coordinates found.",
+  "circles": [
+    {"name": "Al-Mansour", "lat": 33.315, "lon": 44.347, "radius_km": 1.5, "district": "Al-Karkh"},
+    {"name": "Al-Yarmouk", "lat": 33.296, "lon": 44.342, "radius_km": 1.2, "district": "Al-Karkh"},
+    {"name": "Al-Harithiya", "lat": 33.307, "lon": 44.364, "radius_km": 1.0, "district": "Al-Karkh"},
+    {"name": "Al-Jadriya", "lat": 33.284, "lon": 44.390, "radius_km": 1.2, "district": "Al-Risafa"},
+    {"name": "Karrada / Arasat al-Hindiya", "lat": 33.298, "lon": 44.433, "radius_km": 1.2, "district": "Al-Risafa"},
+    {"name": "Zayouna", "lat": 33.327, "lon": 44.463, "radius_km": 1.2, "district": "Al-Risafa"},
+    {"name": "Ankawa (Erbil)", "lat": 36.229, "lon": 43.994, "radius_km": 2.0, "district": "Erbil"},
+    {"name": "English Village / west Erbil", "lat": 36.193, "lon": 43.972, "radius_km": 1.5, "district": "Erbil"}
+  ]
+}
