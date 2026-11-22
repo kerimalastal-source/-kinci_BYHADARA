@@ -65,3 +65,15 @@ export function bioLink(campaign: string | null | undefined): string {
   const platform = BIO_PLATFORMS[param(campaign, "utm_source").toLowerCase()];
   return platform ? `رابط البايو في ${platform}` : "رابط البايو في حساباتنا";
 }
+
+// Visits from the owner's personal Instagram bio. His link carries
+// "utm_source=owner · utm_medium=social · utm_campaign=personal-bio" (owner 2026-11-22).
+// Checked before bioLink(), because Instagram may add its own link_in_bio tag to it.
+
+export const OWNER_PERSONAL_NAME = "حساب المالك الشخصي على إنستغرام";
+
+/** True when the visit came from the owner's personal account link. */
+export function fromOwnerPersonal(campaign: string | null | undefined): boolean {
+  if (!campaign || param(campaign, "utm_medium").toLowerCase() === "paid") return false;
+  return param(campaign, "utm_source").toLowerCase() === "owner";
+}

@@ -55,6 +55,7 @@ const SOURCE_KEYS: Record<string, string> = {
   facebook: "facebook",
   "facebook.com": "facebook",
   ig: "instagram",
+  owner: "ownerPersonal",
   instagram: "instagram",
   "instagram.com": "instagram",
   tiktok: "tiktok",

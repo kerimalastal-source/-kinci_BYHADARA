@@ -52,3 +52,13 @@ test("the Instagram bio link is named in the alert, not shown as an ad", async (
   assert.match(msg, /📸 جاء من: رابط البايو في إنستغرام \(ليس إعلاناً\)/);
   assert.doesNotMatch(msg, /📣 الإعلان|fbclid/);
 });
+
+test("the owner's personal Instagram link is named, even with Instagram's bio tag added", async () => {
+  const { fromOwnerPersonal } = await import("../.test-build/_lib/groupSource.js");
+  const link = "utm_source=owner · utm_medium=social · utm_campaign=personal-bio";
+  assert.equal(fromOwnerPersonal(link), true);
+  assert.equal(fromOwnerPersonal("utm_source=ig · utm_content=link_in_bio"), false);
+  const msg = newVisitorMessage(view(`${link} · utm_content=link_in_bio · fbclid=x`), PLACE, ORIGIN);
+  assert.match(msg, /👤 جاء من: حساب المالك الشخصي على إنستغرام \(رابط البايو\)/);
+  assert.doesNotMatch(msg, /📸|📣/);
+});
