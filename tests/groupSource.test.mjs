@@ -30,3 +30,13 @@ test("the alert names the group site and the page that sent the visitor", () => 
   const ad = newVisitorMessage(view("utm_source=facebook · utm_campaign=villa"), PLACE, ORIGIN);
   assert.match(ad, /📣 الإعلان/);
 });
+
+test("the Google Business Profile link is named in the alert, not shown as an ad", async () => {
+  const { fromGoogleBusiness } = await import("../.test-build/_lib/groupSource.js");
+  assert.equal(fromGoogleBusiness("utm_source=google_business · utm_medium=organic · utm_campaign=gbp"), true);
+  assert.equal(fromGoogleBusiness("utm_source=google_business · utm_medium=paid"), false);
+  assert.equal(fromGoogleBusiness("utm_source=google · utm_medium=cpc"), false);
+  const msg = newVisitorMessage(view("utm_source=google_business · utm_medium=organic · utm_campaign=gbp"), PLACE, ORIGIN);
+  assert.match(msg, /📍 جاء من: ملف جوجل التجاري \(خرائط جوجل\)/);
+  assert.doesNotMatch(msg, /📣 الإعلان/);
+});

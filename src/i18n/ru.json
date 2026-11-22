@@ -4853,6 +4853,7 @@
       "youtube": "YouTube",
       "whatsapp": "WhatsApp",
       "byhadara": "Сайт группы (BYHADARA Group)",
+      "googleBusiness": "Профиль компании в Google (Карты)",
       "chatgpt": "ChatGPT (ИИ-ассистент)",
       "perplexity": "Perplexity (ИИ-ассистент)",
       "gemini": "Gemini (ИИ-ассистент)",
@@ -4988,6 +4989,7 @@
         "social": "Наши публикации (без рекламы)",
         "website": "Сайт или поиск Google",
         "byhadara": "Сайт группы BYHADARA",
+        "googleBusiness": "Профиль в Google (Карты)",
         "referral": "По рекомендации",
         "none": "Другое / неизвестно"
       },

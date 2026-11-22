@@ -45,6 +45,7 @@ export const SOURCES: Record<string, string> = {
   social: "utm_source=social",
   website: "utm_source=website",
   byhadara: "utm_source=byhadara · utm_medium=referral",
+  googleBusiness: "utm_source=google_business · utm_medium=organic · utm_campaign=gbp",
   referral: "utm_source=referral",
   none: ""
 };

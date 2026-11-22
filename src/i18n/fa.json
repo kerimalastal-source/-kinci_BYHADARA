@@ -4939,6 +4939,7 @@
       "youtube": "YouTube",
       "whatsapp": "WhatsApp",
       "byhadara": "وب‌سایت گروه مادر (BYHADARA Group)",
+      "googleBusiness": "پروفایل کسب‌وکار گوگل (نقشه)",
       "chatgpt": "ChatGPT (هوش مصنوعی)",
       "perplexity": "Perplexity (هوش مصنوعی)",
       "gemini": "Gemini (هوش مصنوعی)",
@@ -5074,6 +5075,7 @@
         "social": "پست‌های ما (بدون تبلیغ)",
         "website": "سایت یا جست‌وجو در گوگل",
         "byhadara": "وب‌سایت گروه (BYHADARA)",
+        "googleBusiness": "پروفایل گوگل (نقشه)",
         "referral": "معرفی از طرف کسی",
         "none": "سایر / نامشخص"
       },

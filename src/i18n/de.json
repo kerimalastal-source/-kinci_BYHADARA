@@ -5015,6 +5015,7 @@
       "youtube": "YouTube",
       "whatsapp": "WhatsApp",
       "byhadara": "Website der Gruppe (BYHADARA Group)",
+      "googleBusiness": "Google-Unternehmensprofil (Maps)",
       "chatgpt": "ChatGPT (KI-Assistent)",
       "perplexity": "Perplexity (KI-Assistent)",
       "gemini": "Gemini (KI-Assistent)",
@@ -5150,6 +5151,7 @@
         "social": "Unsere Beiträge (ohne Anzeige)",
         "website": "Website oder Google-Suche",
         "byhadara": "Website der BYHADARA Group",
+        "googleBusiness": "Google-Profil (Maps)",
         "referral": "Von jemandem empfohlen",
         "none": "Sonstiges / unbekannt"
       },

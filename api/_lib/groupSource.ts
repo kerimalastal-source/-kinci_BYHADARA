@@ -32,3 +32,16 @@ export function fromGroupSite(campaign: string | null | undefined, referrer: str
 export function groupPlacement(campaign: string | null | undefined): string {
   return campaign ? param(campaign, "utm_campaign").slice(0, 80) : "";
 }
+
+// Visits from the company's Google Business Profile (the listing on Google Maps and in Google
+// search). Its website link carries "utm_source=google_business · utm_medium=organic ·
+// utm_campaign=gbp" (owner 2026-11-22). Free, not an ad.
+
+export const GOOGLE_BUSINESS_NAME = "ملف جوجل التجاري (خرائط جوجل)";
+
+/** True when the visit came from the Google Business Profile link. */
+export function fromGoogleBusiness(campaign: string | null | undefined): boolean {
+  if (!campaign || param(campaign, "utm_medium").toLowerCase() === "paid") return false;
+  const source = param(campaign, "utm_source").toLowerCase();
+  return source === "google_business" || source === "gbp";
+}

@@ -74,6 +74,9 @@ const SOURCE_KEYS: Record<string, string> = {
   // The group's parent website (its links carry utm_source=byhadara; owner 2026-11-22).
   byhadara: "byhadara",
   "byhadara.com": "byhadara",
+  // The website link on the Google Business Profile (Google Maps), owner 2026-11-22.
+  google_business: "googleBusiness",
+  gbp: "googleBusiness",
   // Customers added by hand on the pipeline page (migration 0019).
   social: "social",
   website: "website",

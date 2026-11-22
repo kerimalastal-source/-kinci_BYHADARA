@@ -4849,6 +4849,7 @@
       "youtube": "YouTube",
       "whatsapp": "WhatsApp",
       "byhadara": "BYHADARA Group website (parent)",
+      "googleBusiness": "Google Business Profile (Maps)",
       "chatgpt": "ChatGPT (AI assistant)",
       "perplexity": "Perplexity (AI assistant)",
       "gemini": "Gemini (AI assistant)",
@@ -4984,6 +4985,7 @@
         "social": "Our posts (no ad)",
         "website": "The website or a Google search",
         "byhadara": "BYHADARA Group website",
+        "googleBusiness": "Google Business Profile (Maps)",
         "referral": "Recommended by someone",
         "none": "Other / not known"
       },

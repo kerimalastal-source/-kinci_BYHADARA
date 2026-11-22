@@ -4857,6 +4857,7 @@
       "youtube": "يوتيوب",
       "whatsapp": "واتساب",
       "byhadara": "موقع حضارة الأم (BYHADARA Group)",
+      "googleBusiness": "ملف جوجل التجاري (خرائط جوجل)",
       "chatgpt": "ChatGPT (ذكاء اصطناعي)",
       "perplexity": "Perplexity (ذكاء اصطناعي)",
       "gemini": "Gemini (ذكاء اصطناعي)",
@@ -4992,6 +4993,7 @@
         "social": "منشوراتنا (دون إعلان)",
         "website": "الموقع أو البحث في جوجل",
         "byhadara": "موقع حضارة الأم (BYHADARA)",
+        "googleBusiness": "ملف جوجل التجاري (الخريطة)",
         "referral": "توصية من شخص",
         "none": "أخرى / غير معروف"
       },
