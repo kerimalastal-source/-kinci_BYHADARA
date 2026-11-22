@@ -77,3 +77,15 @@ export function fromOwnerPersonal(campaign: string | null | undefined): boolean 
   if (!campaign || param(campaign, "utm_medium").toLowerCase() === "paid") return false;
   return param(campaign, "utm_source").toLowerCase() === "owner";
 }
+
+// Visits from the link in the company's own Instagram bio (@hadararealestate). Its link carries
+// "utm_source=hadara_ig · utm_medium=social · utm_campaign=company-bio" (owner 2026-11-23).
+// Checked before bioLink(), because Instagram may add its own link_in_bio tag to it.
+
+export const COMPANY_INSTAGRAM_NAME = "حساب الشركة على إنستغرام (@hadararealestate)";
+
+/** True when the visit came from the company's own Instagram bio link. */
+export function fromCompanyInstagram(campaign: string | null | undefined): boolean {
+  if (!campaign || param(campaign, "utm_medium").toLowerCase() === "paid") return false;
+  return param(campaign, "utm_source").toLowerCase() === "hadara_ig";
+}

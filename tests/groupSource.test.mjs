@@ -62,3 +62,13 @@ test("the owner's personal Instagram link is named, even with Instagram's bio ta
   assert.match(msg, /👤 جاء من: حساب المالك الشخصي على إنستغرام \(رابط البايو\)/);
   assert.doesNotMatch(msg, /📸|📣/);
 });
+
+test("the company's own Instagram bio link is named", async () => {
+  const { fromCompanyInstagram } = await import("../.test-build/_lib/groupSource.js");
+  const link = "utm_source=hadara_ig · utm_medium=social · utm_campaign=company-bio";
+  assert.equal(fromCompanyInstagram(link), true);
+  assert.equal(fromCompanyInstagram("utm_source=ig · utm_content=link_in_bio"), false);
+  const msg = newVisitorMessage(view(`${link} · utm_content=link_in_bio · fbclid=x`), PLACE, ORIGIN);
+  assert.match(msg, /📸 جاء من: حساب الشركة على إنستغرام \(@hadararealestate\) \(رابط البايو\)/);
+  assert.doesNotMatch(msg, /👤|📣|fbclid/);
+});
