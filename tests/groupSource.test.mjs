@@ -69,6 +69,6 @@ test("the company's own Instagram bio link is named", async () => {
   assert.equal(fromCompanyInstagram(link), true);
   assert.equal(fromCompanyInstagram("utm_source=ig · utm_content=link_in_bio"), false);
   const msg = newVisitorMessage(view(`${link} · utm_content=link_in_bio · fbclid=x`), PLACE, ORIGIN);
-  assert.match(msg, /📸 جاء من: حساب الشركة على إنستغرام \(@hadararealestate\) \(رابط البايو\)/);
+  assert.match(msg, /📸 جاء من: حساب الشركة على إنستغرام \(hadararealestate\) \(رابط البايو\)/);
   assert.doesNotMatch(msg, /👤|📣|fbclid/);
 });

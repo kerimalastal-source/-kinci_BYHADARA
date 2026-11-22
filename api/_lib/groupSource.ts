@@ -82,7 +82,7 @@ export function fromOwnerPersonal(campaign: string | null | undefined): boolean 
 // "utm_source=hadara_ig · utm_medium=social · utm_campaign=company-bio" (owner 2026-11-23).
 // Checked before bioLink(), because Instagram may add its own link_in_bio tag to it.
 
-export const COMPANY_INSTAGRAM_NAME = "حساب الشركة على إنستغرام (@hadararealestate)";
+export const COMPANY_INSTAGRAM_NAME = "حساب الشركة على إنستغرام (hadararealestate)";
 
 /** True when the visit came from the company's own Instagram bio link. */
 export function fromCompanyInstagram(campaign: string | null | undefined): boolean {
