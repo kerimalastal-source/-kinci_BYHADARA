@@ -6,7 +6,7 @@
 //     customers' messages (api/_lib/whatsapp.ts). Answers 200 right away; saving runs after.
 import { waitUntil } from "@vercel/functions";
 import { parseMetaEvent, sendToMeta } from "./_lib/metaCapi.js";
-import { handleMessages, parseWebhook, validSignature, type SaveResult } from "./_lib/whatsapp.js";
+import { handleEchoes, handleMessages, parseEchoes, parseWebhook, validSignature, type SaveResult } from "./_lib/whatsapp.js";
 import { hasSupabase, rpc } from "./_lib/supabase.js";
 import { sendTelegram } from "./_lib/telegram.js";
 
@@ -33,7 +33,18 @@ async function whatsapp(raw: string, signature: string | null): Promise<Response
     return new Response("ok", { status: 200 });
   }
   const messages = parseWebhook(body, process.env.WHATSAPP_PHONE_NUMBER_ID || undefined);
+  const echoes = parseEchoes(body, process.env.WHATSAPP_PHONE_NUMBER_ID || undefined);
   const secret = process.env.CRON_SECRET ?? "";
+  if (echoes.length && secret && hasSupabase()) {
+    // The team's replies from the phone (coexistence). Before 0043 the rpc is a 404 and
+    // nothing is saved; the customers' own messages below are not affected.
+    waitUntil(
+      handleEchoes(echoes, {
+        secret,
+        save: async (args) => (await rpc("save_whatsapp_echo", args).catch(() => null)) as { saved?: boolean } | null
+      }).catch((error: unknown) => console.error(`whatsapp echo: ${error instanceof Error ? error.message : error}`))
+    );
+  }
   if (messages.length && secret && hasSupabase()) {
     waitUntil(
       handleMessages(messages, {

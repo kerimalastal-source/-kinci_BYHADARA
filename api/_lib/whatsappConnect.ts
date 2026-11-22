@@ -5,8 +5,13 @@
 // message event; here we trade the code for a business token, find the number, subscribe our
 // app to the WABA (POST /{waba}/subscribed_apps, without it no message reaches the webhook)
 // and tell the team on Telegram which phone_number_id to put in WHATSAPP_PHONE_NUMBER_ID.
-// Coexistence numbers skip /register (that would take the number off the app). The token is
-// not kept anywhere.
+// Coexistence numbers skip /register (that would take the number off the app). Right after,
+// Meta requires the contacts and chat history sync to be started within 24 hours, or the number
+// is disconnected and has to be connected again: POST /{phone_number_id}/smb_app_data with
+// sync_type smb_app_state_sync, then history (each can be asked once; the owner chooses in the
+// app whether to share the history). We start both here and say on Telegram how it went. The
+// history and contact webhooks that follow are not stored (only new messages and the team's
+// replies are). The token is not kept anywhere.
 //
 // Settings (Vercel): WHATSAPP_APP_SECRET (already used to check webhook signatures), and
 // META_APP_ID only if the Meta app ever changes (default: HADARA Publisher Real Estate).
@@ -48,6 +53,8 @@ export interface ConnectResult {
   wabaId?: string;
   numbers?: ConnectedNumber[];
   subscribed?: boolean;
+  /** The coexistence sync started for each number (contacts, then history). */
+  sync?: { id: string; contacts: boolean; history: boolean; detail?: string }[];
   /** Which step failed: input, token, numbers or subscribe; with Meta's message when there is one. */
   error?: string;
   detail?: string;
@@ -105,6 +112,13 @@ export function connectedAlert(result: ConnectResult): string {
   }
   lines.push(`🏢 WABA: <code>${escapeHtml(result.wabaId ?? "")}</code>`);
   lines.push(result.subscribed ? "✅ اشتراك التطبيق بالرسائل تم (subscribed_apps)." : "⚠️ اشتراك التطبيق بالرسائل لم يتم.");
+  for (const s of result.sync ?? []) {
+    lines.push(
+      s.contacts && s.history
+        ? "✅ بدأت مزامنة جهات الاتصال والمحادثات (اترك تطبيق واتساب مفتوحاً على الموبايل بضع دقائق)."
+        : `⚠️ لم تبدأ المزامنة كاملة (جهات الاتصال: ${s.contacts ? "تمت" : "لا"}، المحادثات: ${s.history ? "تمت" : "لا"})${s.detail ? `: ${escapeHtml(s.detail)}` : ""}. يجب أن تبدأ خلال 24 ساعة من الربط وإلا يُفصل الرقم.`
+    );
+  }
   lines.push("إذا كان WHATSAPP_PHONE_NUMBER_ID مضبوطاً في Vercel، ضع فيه الرقم أعلاه (أو احذفه) ثم Redeploy.");
   return lines.join("\n");
 }
@@ -148,11 +162,22 @@ export async function connectWhatsApp(input: ConnectInput, deps: ConnectDeps): P
 
   const sub = await graph(deps, `${wabaId}/subscribed_apps`, token, { method: "POST" });
   const subscribed = sub.ok && (sub.data as { success?: boolean } | null)?.success === true;
+  // Coexistence sync, required within 24 hours of the connection (see the note at the top).
+  const sync: NonNullable<ConnectResult["sync"]> = [];
+  if (subscribed) {
+    for (const n of numbers) {
+      const contacts = await graph(deps, `${n.id}/smb_app_data`, token, { method: "POST", body: { messaging_product: "whatsapp", sync_type: "smb_app_state_sync" } });
+      const history = await graph(deps, `${n.id}/smb_app_data`, token, { method: "POST", body: { messaging_product: "whatsapp", sync_type: "history" } });
+      const detail = [contacts, history].filter((r) => !r.ok).map((r) => graphError(r.data)).filter(Boolean).join(" | ");
+      sync.push({ id: n.id, contacts: contacts.ok, history: history.ok, ...(detail ? { detail } : {}) });
+    }
+  }
   const result: ConnectResult = {
     ok: subscribed,
     wabaId,
     numbers,
     subscribed,
+    ...(sync.length ? { sync } : {}),
     ...(subscribed ? {} : { error: "subscribe", detail: graphError(sub.data) })
   };
   if (deps.telegram) await deps.telegram(connectedAlert(result)).catch(() => undefined);
