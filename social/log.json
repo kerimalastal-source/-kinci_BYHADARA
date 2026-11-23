@@ -1166,5 +1166,13 @@
     "headlineAr": "لوتس ياشام: 308 شقق عائلية في بيليكدوزو، إسطنبول",
     "headlineEn": "Lotus Yaşam: 308 homes in Beylikdüzü",
     "photo": "/images/projects/beylikduzu-living/central-garden.jpg"
+  },
+  {
+    "date": "2026-11-23",
+    "id": "sisli-guide",
+    "topic": "شيشلي: دليل المنطقة",
+    "headlineAr": "شيشلي: ثلاثة أمور يعرفها المشتري عن قلب إسطنبول",
+    "headlineEn": "Şişli: 3 things a buyer should know",
+    "photo": "/images/blog/sisli-district-guide.jpg"
   }
 ]
