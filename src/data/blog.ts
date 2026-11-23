@@ -22,6 +22,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "tax-number-foreigners-turkey",
+    priority: -29,
+    published: "2026-11-23",
+    relatedProjects: ["beylikduzu-living", "dragos", "referans-pendik"],
+    coverImage: { src: "/images/blog/tax-number-foreigners-turkey.jpg", width: 1536, height: 1024 }
+  },
+  {
     slug: "investor-residence-permit-turkey",
     priority: -28,
     published: "2026-11-20",
