@@ -17,7 +17,7 @@ async function database() {
     await db.exec(readFileSync(new URL(file, MIGRATIONS), "utf8"));
   }
   // Re-runnable.
-  for (const file of ["0021_automated_visits.sql", "0022_clean_visit_stats.sql", "0023_clean_behavior_consent.sql", "0030_datacenter_contacts.sql", "0031_server_screen.sql", "0035_strict_us_cn.sql", "0036_tall_desktop.sql"]) {
+  for (const file of ["0021_automated_visits.sql", "0022_clean_visit_stats.sql", "0023_clean_behavior_consent.sql", "0030_datacenter_contacts.sql", "0031_server_screen.sql", "0035_strict_us_cn.sql", "0036_tall_desktop.sql", "0044_server_desktop.sql"]) {
     await db.exec(readFileSync(new URL(file, MIGRATIONS), "utf8"));
   }
   return db;
@@ -192,4 +192,57 @@ test("a tall desktop window needs steady human use to count (0036)", async () =>
 
 test("0036 is ASCII only", () => {
   assert.ok(/^[\x00-\x7f]*$/.test(readFileSync(new URL("0036_tall_desktop.sql", MIGRATIONS), "utf8")));
+});
+
+test("a server-like desktop needs steady human use to count (0044)", async () => {
+  const db = await database();
+  const at = new Date(Date.now() - 3600 * 1000).toISOString();
+  const plus = (s) => new Date(Date.parse(at) + s * 1000).toISOString();
+  const profile = (n, screen, os, tz, device = "desktop") =>
+    Promise.all([
+      db.query("insert into public.visitor_profiles (session_id, screen, os, tz) values ($1, $2, $3, $4)", [id(n), screen, os, tz]),
+      db.query("insert into public.visitor_devices (session_id, device) values ($1, $2)", [id(n), device])
+    ]);
+  const looked = (n, inter, active) =>
+    db.query(`insert into public.visitor_engagement (session_id, view_id, path, active_seconds, scroll_pct, interactions) values ($1, 'v', '/', $2, 14, $3)`, [id(n), active, inter]);
+  // The crawlers of 16/11-22/11: one page, 15 seconds, nothing touched.
+  await visit(db, 41, "/", plus(0), { city: "London", country: "GB" });
+  await profile(41, "1920x1080", "Windows", "America/New_York");
+  await looked(41, 0, 15);
+  await visit(db, 42, "/", plus(60), { city: "Frankfurt am Main", country: "DE" });
+  await profile(42, "1600x1200", "Linux", "Europe/Berlin");
+  await looked(42, 1, 6);
+  await visit(db, 43, "/", plus(120), { city: "Amsterdam", country: "NL" });
+  await profile(43, "800x600", "Windows", "Europe/Moscow");
+  await looked(43, 0, 15);
+  await visit(db, 44, "/", plus(180), { city: "Amsterdam", country: "NL" });
+  await profile(44, "1366x768", "Windows", "UTC");
+  await looked(44, 0, 15);
+  // The same setup with steady use, or a contact, still counts.
+  await visit(db, 45, "/", plus(240), { city: "London", country: "GB" });
+  await profile(45, "1920x1080", "Windows", "UTC");
+  await looked(45, 4, 26);
+  await visit(db, 46, "/", plus(300), { city: "Dublin", country: "IE" });
+  await profile(46, "1920x1080", "Windows", "America/New_York");
+  await db.query("insert into public.visitor_actions (session_id, action, target) values ($1, 'whatsapp', 'contact')", [id(46)]);
+  // Real visitors: a Canadian on an American time zone, a phone on UTC, an Istanbul laptop.
+  await visit(db, 47, "/", plus(360), { city: "Toronto", country: "CA" });
+  await profile(47, "1920x1080", "Windows", "America/Toronto");
+  await looked(47, 1, 8);
+  await visit(db, 48, "/", plus(420), { city: "Doha", country: "QA" });
+  await profile(48, "390x844", "iOS", "UTC", "mobile");
+  await looked(48, 1, 8);
+  await visit(db, 49, "/", plus(480));
+  await profile(49, "1440x900", "macOS", "Europe/Istanbul");
+  await looked(49, 1, 8);
+
+  const rows = (await db.query("select session_id, contacted, automated from public.visit_verdicts(now() - interval '1 day')")).rows;
+  const of = (n) => rows.find((r) => r.session_id === id(n));
+  for (const n of [41, 42, 43, 44]) assert.equal(of(n).automated, true, `visit ${n}`);
+  for (const n of [45, 46, 47, 48, 49]) assert.equal(of(n).automated, false, `visit ${n}`);
+  assert.equal(of(46).contacted, true);
+});
+
+test("0044 is ASCII only", () => {
+  assert.ok(/^[\x00-\x7f]*$/.test(readFileSync(new URL("0044_server_desktop.sql", MIGRATIONS), "utf8")));
 });

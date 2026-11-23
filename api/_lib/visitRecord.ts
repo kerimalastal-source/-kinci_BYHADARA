@@ -124,10 +124,11 @@ export async function recordVisit(view: PageView, geo: Geo, origin: string, opti
     return;
   }
 
-  // A visit that starts like a crawler (the US or China, or Meta's 2000x2000 check) gets no
-  // alert, no edit and no 🔥 while it looks automated: refreshAlert() sends its alert once
+  // A visit that starts like a crawler (the US or China, Meta's 2000x2000 check, a tall or
+  // server-like desktop) gets no alert, no edit and no 🔥 while it looks automated:
+  // refreshAlert() sends its alert once
   // the visitor's use shows a person (owner's request 2026-11-02).
-  const hold = alertHold({ country: landing.country, tz: view.tz, screen: view.screen });
+  const hold = alertHold({ country: landing.country, tz: view.tz, screen: view.screen, device: view.device || null, os: view.os ?? null });
   if (hold && !messageId) {
     console.info(`track: alert held: ${hold} (${landing.city ?? "?"}, ${landing.country ?? "?"})`);
     return;
