@@ -167,6 +167,21 @@ export function isTallDesktop(screen?: string | null): boolean {
   return w >= 1200 && w <= 1400 && h >= 1050 && h >= 0.78 * w;
 }
 
+const AMERICAN_COUNTRIES = new Set(AMERICAS.split(" "));
+
+/**
+ * A desktop setup no buyer uses (owner 2026-11-23, migration 0044): not a phone or tablet (nor
+ * iOS or Android), with an 800x600 screen, a UTC time zone, Linux with a 1600x1200 screen, or
+ * an America/* time zone outside the Americas. In the week 16/11-22/11 about 24 of the 29 direct home-page visits that
+ * passed the filter looked like this; since 25/9, 39 such visits passed and none contacted us.
+ */
+export function isServerDesktop(f: { device?: string | null; os?: string | null; tz?: string | null; screen?: string | null; country?: string | null }): boolean {
+  if (f.device === "mobile" || f.device === "tablet" || f.os === "iOS" || f.os === "Android") return false;
+  if (f.screen === "800x600" || isUtcZone(f.tz)) return true;
+  if (f.os === "Linux" && f.screen === "1600x1200") return true;
+  return Boolean(f.tz && f.tz.startsWith("America/") && !AMERICAN_COUNTRIES.has((f.country || "").toUpperCase()));
+}
+
 /**
  * Why a new visit's Telegram alert waits for proof of a person (owner's request
  * 2026-11-02, "no alerts for automated visits"), or null to send it at once. A 2000x2000
@@ -174,10 +189,11 @@ export function isTallDesktop(screen?: string | null): boolean {
  * refreshAlert() once classifyVisit() no longer reads it as automated (steady use, or a
  * contact). From 20/10 to 2/11, 54 of the 58 alerts that turned out automated were these.
  */
-export function alertHold(f: { country?: string | null; tz?: string | null; screen?: string | null }): string | null {
+export function alertHold(f: { country?: string | null; tz?: string | null; screen?: string | null; device?: string | null; os?: string | null }): string | null {
   if (f.screen === "2000x2000") return "2000x2000 screen";
   if (isStrictGeo(f)) return "US or China";
-  return isTallDesktop(f.screen) ? "tall desktop screen" : null;
+  if (isTallDesktop(f.screen)) return "tall desktop screen";
+  return isServerDesktop(f) ? "server-like desktop" : null;
 }
 
 /** Weighs the signals: automation, a server-like setup or robotic timing, against presses, input, reading and scrolling. */
@@ -240,6 +256,12 @@ export function classifyVisit(f: VisitFacts): VerdictResult {
   else if (isTallDesktop(f.screen) && !steady) {
     verdict = "bot";
     bot.push([3, "شاشة كمبيوتر بمقاس آلي بلا استخدام بشري واضح"]);
+  }
+  // A server-like desktop: 800x600, UTC, Linux 1600x1200, or an American time zone outside
+  // the Americas (migration 0044, owner 2026-11-23).
+  else if (isServerDesktop(f) && !steady) {
+    verdict = "bot";
+    bot.push([3, "كمبيوتر بإعدادات خادم بلا استخدام بشري واضح"]);
   }
   else if (b >= 3 && h < 3) verdict = "bot";
   else if (h >= 2.5 && b <= 1.5) verdict = "real";

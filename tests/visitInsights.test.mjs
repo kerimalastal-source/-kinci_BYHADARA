@@ -7,7 +7,7 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { randomUUID } from "node:crypto";
 import { PGlite } from "@electric-sql/pglite";
-import { alertHold, classifyVisit, isTallDesktop, parseUserAgent, timeZoneMismatch, visitIntent } from "../.test-build/_lib/visitInsights.js";
+import { alertHold, classifyVisit, isServerDesktop, isTallDesktop, parseUserAgent, timeZoneMismatch, visitIntent } from "../.test-build/_lib/visitInsights.js";
 import { readVisits, visitReportMessage } from "../.test-build/_lib/visitReport.js";
 import { recordVisit } from "../.test-build/_lib/visitRecord.js";
 import { POST } from "../.test-build/track.js";
@@ -293,4 +293,24 @@ test("isTallDesktop and classifyVisit: the tall desktop crawler needs steady hum
   assert.equal(classifyVisit({ pages: one, country: "TR", tz: "Europe/Istanbul", screen: "1440x900" }).verdict, "pending");
   assert.equal(alertHold({ country: "HK", tz: "Asia/Hong_Kong", screen: "1292x1188" }), "tall desktop screen");
   assert.equal(alertHold({ country: "TR", tz: "Europe/Istanbul", screen: "1440x900" }), null);
+});
+
+test("isServerDesktop and classifyVisit: server-like desktops need steady human use (0044)", () => {
+  const desk = (o) => ({ device: "desktop", ...o });
+  assert.equal(isServerDesktop(desk({ os: "Windows", tz: "America/New_York", country: "GB", screen: "1920x1080" })), true);
+  assert.equal(isServerDesktop(desk({ os: "Linux", screen: "1600x1200", tz: "Europe/Berlin", country: "DE" })), true);
+  assert.equal(isServerDesktop(desk({ screen: "800x600", tz: "Europe/Moscow", country: "NL" })), true);
+  assert.equal(isServerDesktop(desk({ tz: "UTC", screen: "1366x768", country: "NL" })), true);
+  assert.equal(isServerDesktop({ device: "mobile", tz: "UTC", country: "QA" }), false);
+  assert.equal(isServerDesktop(desk({ tz: "America/Toronto", country: "CA" })), false);
+  assert.equal(isServerDesktop(desk({ os: "Linux", screen: "1920x1080", tz: "Europe/Berlin", country: "DE" })), false);
+  assert.equal(isServerDesktop(desk({ os: "macOS", screen: "1440x900", tz: "Europe/Istanbul", country: "TR" })), false);
+  const one = [{ path: "/", at: 0 }];
+  const idle = [{ path: "/", active: 15, scroll: 14, interactions: 0 }];
+  assert.equal(classifyVisit(desk({ pages: one, os: "Windows", tz: "America/New_York", country: "GB", screen: "1920x1080", engagement: idle })).verdict, "bot");
+  assert.equal(classifyVisit(desk({ pages: one, os: "Linux", screen: "1600x1200", tz: "Europe/Berlin", country: "DE", engagement: [{ path: "/", active: 6, scroll: 15, interactions: 1 }] })).verdict, "bot");
+  assert.equal(classifyVisit(desk({ pages: one, os: "Windows", tz: "UTC", country: "GB", screen: "1920x1080", engagement: [{ path: "/", active: 26, scroll: 40, interactions: 4 }] })).verdict === "bot", false);
+  assert.equal(classifyVisit(desk({ pages: one, os: "Windows", tz: "America/New_York", country: "IE", actions: [{ action: "whatsapp", target: null }] })).verdict, "real");
+  assert.equal(alertHold({ country: "GB", tz: "America/New_York", screen: "1920x1080", device: "desktop", os: "Windows" }), "server-like desktop");
+  assert.equal(alertHold({ country: "QA", tz: "UTC", screen: "390x844", device: "mobile", os: "iOS" }), null);
 });
