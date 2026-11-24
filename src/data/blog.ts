@@ -22,6 +22,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "yapi-denetim-building-inspection",
+    priority: -30,
+    published: "2026-11-24",
+    relatedProjects: ["diamond-marin", "lotus-sisli", "marmara-haven-villa"],
+    coverImage: { src: "/images/blog/yapi-denetim-building-inspection.jpg", width: 1327, height: 885 }
+  },
+  {
     slug: "tax-number-foreigners-turkey",
     priority: -29,
     published: "2026-11-23",
