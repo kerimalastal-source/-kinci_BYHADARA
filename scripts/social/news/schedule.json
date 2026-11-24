@@ -1,77 +1,203 @@
 {
   "note": "News-design posts, owner 2026-11-23: three a week for two weeks, every other day, as an extra 14:00 post next to the daily 09:00 Reel. Facts only from approved items on /property-laws and /citizenship.",
   "posts": [
-    { "date": "2026-11-25", "at": "14:00", "id": "news-citizenship-more-than-one", "spec": "citizenship-more-than-one.json",
+    {
+      "date": "2026-11-25",
+      "at": "14:00",
+      "id": "news-citizenship-more-than-one",
+      "spec": "citizenship-more-than-one.json",
       "topic": "تصميم الأخبار: الجنسية بأكثر من عقار",
       "caption": {
-        "ar": { "title": "الجنسية التركية بأكثر من عقار؟",
+        "ar": {
+          "title": "الجنسية التركية بأكثر من عقار؟",
           "intro": "نعم. يمكنك التقدم بطلب الجنسية التركية بشراء عقار واحد أو أكثر، على ألا تقل قيمتها الإجمالية عن 400,000 دولار أمريكي، مع تسجيل شرط عدم البيع لمدة 3 سنوات في سند الطابو.",
-          "closing": ["الشروط قابلة للتغيير، وهذه معلومات عامة وليست استشارة قانونية."],
-          "cta": "شروط الجنسية وخطواتها كاملة", "path": "/citizenship" },
-        "en": { "title": "Turkish citizenship with more than one property?",
+          "closing": [
+            "ويشمل الطلب نفسه الزوج أو الزوجة والأبناء دون 18 عاماً. أخبرنا بميزانيتك، ونقترح عليك عقارات تحقق الشرط.",
+            "الشروط قابلة للتغيير، وهذه معلومات عامة وليست استشارة قانونية."
+          ],
+          "cta": "شروط الجنسية وخطواتها كاملة",
+          "path": "/citizenship"
+        },
+        "en": {
+          "title": "Turkish citizenship with more than one property?",
           "intro": "Yes. You can apply for Turkish citizenship by buying one or more properties worth at least US$400,000 in total, with a 3-year no-sale annotation on the title deed.",
-          "closing": ["Conditions may change. This is general information, not legal advice."],
-          "cta": "Full citizenship conditions and steps", "path": "/citizenship" },
-        "hashtags": ["#الجنسية_التركية", "#TurkishCitizenship"] } },
-    { "date": "2026-11-27", "at": "14:00", "id": "news-declared-price", "spec": "declared-price.json",
+          "closing": [
+            "Your spouse and children under 18 are included in the same application. Tell us your budget and we will suggest properties that meet the condition.",
+            "Conditions may change. This is general information, not legal advice."
+          ],
+          "cta": "Full citizenship conditions and steps",
+          "path": "/citizenship"
+        },
+        "hashtags": [
+          "#الجنسية_التركية",
+          "#TurkishCitizenship"
+        ]
+      }
+    },
+    {
+      "date": "2026-11-27",
+      "at": "14:00",
+      "id": "news-declared-price",
+      "spec": "declared-price.json",
       "topic": "تصميم الأخبار: غرامة السعر الأقل في الطابو",
       "caption": {
-        "ar": { "title": "سعر أقل في الطابو؟ انتبه للغرامة",
+        "ar": {
+          "title": "سعر أقل في الطابو؟ انتبه للغرامة",
           "intro": "شدّد القانون رقم 7566 الغرامة عند تسجيل البيع في الطابو بسعر أقل من السعر الحقيقي، فصارت مساوية لكامل فرق الرسوم غير المدفوعة بعد أن كانت 25% منه.",
-          "closing": ["ننصح دائماً بتسجيل السعر الحقيقي في الطابو."],
-          "cta": "تفاصيل الخبر ومصدره الرسمي", "path": "/property-laws" },
-        "en": { "title": "A lower price at the land registry? Mind the penalty",
+          "closing": [
+            "ننصح دائماً بتسجيل السعر الحقيقي في الطابو.",
+            "اسألنا قبل التوقيع عن الرسوم المتوقعة على صفقتك."
+          ],
+          "cta": "تفاصيل الخبر ومصدره الرسمي",
+          "path": "/property-laws"
+        },
+        "en": {
+          "title": "A lower price at the land registry? Mind the penalty",
           "intro": "Law No. 7566 raised the penalty for registering a sale below the real price: it now equals the full unpaid fee difference, up from 25% of it.",
-          "closing": ["We always advise registering the real price at the land registry."],
-          "cta": "The news and its official source", "path": "/property-laws" },
-        "hashtags": ["#قوانين_العقار", "#TurkeyPropertyLaw"] } },
-    { "date": "2026-11-29", "at": "14:00", "id": "news-savings-finance", "spec": "savings-finance.json",
+          "closing": [
+            "We always advise registering the real price at the land registry.",
+            "Ask us about the expected fees on your deal before you sign."
+          ],
+          "cta": "The news and its official source",
+          "path": "/property-laws"
+        },
+        "hashtags": [
+          "#قوانين_العقار",
+          "#TurkeyPropertyLaw"
+        ]
+      }
+    },
+    {
+      "date": "2026-11-29",
+      "at": "14:00",
+      "id": "news-savings-finance",
+      "spec": "savings-finance.json",
       "topic": "تصميم الأخبار: التمويل الادخاري ممنوع للأجانب",
       "caption": {
-        "ar": { "title": "التمويل الادخاري ممنوع للأجانب",
+        "ar": {
+          "title": "التمويل الادخاري ممنوع للأجانب",
           "intro": "أعلنت المديرية العامة للطابو أن الأجانب لا يمكنهم تملّك عقار في تركيا بقروض شركات التمويل الادخاري (Tasarruf Finansman Şirketleri).",
-          "closing": ["خطّط لطريقة الدفع قبل الشراء، ونحن نساعدك في ذلك."],
-          "cta": "تفاصيل الخبر ومصدره الرسمي", "path": "/property-laws" },
-        "en": { "title": "Savings finance loans: not for foreigners",
+          "closing": [
+            "خطّط لطريقة الدفع قبل الشراء، ونحن نساعدك في ذلك.",
+            "وفي بعض المشاريع خطط تقسيط مباشرة من المطوّر، اسألنا عنها."
+          ],
+          "cta": "تفاصيل الخبر ومصدره الرسمي",
+          "path": "/property-laws"
+        },
+        "en": {
+          "title": "Savings finance loans: not for foreigners",
           "intro": "The Land Registry announced that foreigners cannot acquire property in Turkey with loans from savings finance companies (Tasarruf Finansman Şirketleri).",
-          "closing": ["Plan your payment method before you buy; we can help."],
-          "cta": "The news and its official source", "path": "/property-laws" },
-        "hashtags": ["#قوانين_العقار", "#TurkeyPropertyLaw"] } },
-    { "date": "2026-12-01", "at": "14:00", "id": "news-valuable-housing-tax", "spec": "valuable-housing-tax.json",
+          "closing": [
+            "Plan your payment method before you buy; we can help.",
+            "Some projects offer instalment plans directly from the developer. Ask us about them."
+          ],
+          "cta": "The news and its official source",
+          "path": "/property-laws"
+        },
+        "hashtags": [
+          "#قوانين_العقار",
+          "#TurkeyPropertyLaw"
+        ]
+      }
+    },
+    {
+      "date": "2026-12-01",
+      "at": "14:00",
+      "id": "news-valuable-housing-tax",
+      "spec": "valuable-housing-tax.json",
       "topic": "تصميم الأخبار: ضريبة المسكن القيّم 2026",
       "caption": {
-        "ar": { "title": "ضريبة المسكن القيّم: متى تدفعها؟",
+        "ar": {
+          "title": "ضريبة المسكن القيّم: متى تدفعها؟",
           "intro": "تُفرض ضريبة المسكن القيّم (Değerli Konut Vergisi) على المساكن التي تتجاوز قيمتها الضريبية حداً تحدده إدارة الإيرادات كل عام، وهو 17,711,000 ليرة تركية لعام 2026، بعد أن كان 15,709,000 ليرة لعام 2025.",
-          "closing": ["نخبرك إن كان العقار الذي تختاره قد يخضع لهذه الضريبة."],
-          "cta": "تفاصيل الخبر ومصدره الرسمي", "path": "/property-laws" },
-        "en": { "title": "Valuable housing tax: when do you pay it?",
+          "closing": [
+            "نخبرك إن كان العقار الذي تختاره قد يخضع لهذه الضريبة.",
+            "راسلنا على واتساب باسم المشروع الذي يهمك."
+          ],
+          "cta": "تفاصيل الخبر ومصدره الرسمي",
+          "path": "/property-laws"
+        },
+        "en": {
+          "title": "Valuable housing tax: when do you pay it?",
           "intro": "The valuable housing tax (Değerli Konut Vergisi) applies to homes whose tax value exceeds a threshold set each year by the Revenue Administration: TRY 17,711,000 for 2026, up from TRY 15,709,000 for 2025.",
-          "closing": ["We tell you whether the property you choose may be subject to it."],
-          "cta": "The news and its official source", "path": "/property-laws" },
-        "hashtags": ["#قوانين_العقار", "#TurkeyPropertyLaw"] } },
-    { "date": "2026-12-03", "at": "14:00", "id": "news-citizenship-certificate", "spec": "citizenship-certificate.json",
+          "closing": [
+            "We tell you whether the property you choose may be subject to it.",
+            "Message us on WhatsApp with the project you are interested in."
+          ],
+          "cta": "The news and its official source",
+          "path": "/property-laws"
+        },
+        "hashtags": [
+          "#قوانين_العقار",
+          "#TurkeyPropertyLaw"
+        ]
+      }
+    },
+    {
+      "date": "2026-12-03",
+      "at": "14:00",
+      "id": "news-citizenship-certificate",
+      "spec": "citizenship-certificate.json",
       "topic": "تصميم الأخبار: وثيقة مبلغ الجنسية صالحة 6 أشهر",
       "caption": {
-        "ar": { "title": "وثيقة مبلغ الجنسية صالحة 6 أشهر",
+        "ar": {
+          "title": "وثيقة مبلغ الجنسية صالحة 6 أشهر",
           "intro": "في ملف الجنسية عبر العقار، يُثبَت مبلغ الشراء بوثيقة تحديد المبلغ (Tutar Tespit Belgesi) التي تصدرها شركة GEDAŞ. والوثائق الصادرة بعد 9 ديسمبر 2024 صالحة 6 أشهر بدل 3 أشهر.",
-          "closing": ["نتابع معك صلاحية الوثيقة حتى نقل الملكية."],
-          "cta": "تفاصيل الخبر ومصدره الرسمي", "path": "/property-laws" },
-        "en": { "title": "The citizenship amount certificate: valid 6 months",
+          "closing": [
+            "نتابع معك صلاحية الوثيقة حتى نقل الملكية.",
+            "اسألنا عن خطوات ملف الجنسية بالترتيب، من اختيار العقار حتى تقديم الطلب."
+          ],
+          "cta": "تفاصيل الخبر ومصدره الرسمي",
+          "path": "/property-laws"
+        },
+        "en": {
+          "title": "The citizenship amount certificate: valid 6 months",
           "intro": "In a citizenship-by-property file, the purchase amount is confirmed by an Amount Determination Certificate (Tutar Tespit Belgesi) issued by GEDAŞ. Certificates issued after 9 December 2024 are valid for 6 months instead of 3.",
-          "closing": ["We track the certificate's validity with you until the transfer."],
-          "cta": "The news and its official source", "path": "/property-laws" },
-        "hashtags": ["#الجنسية_التركية", "#TurkishCitizenship"] } },
-    { "date": "2026-12-05", "at": "14:00", "id": "news-holiday-let", "spec": "holiday-let.json",
+          "closing": [
+            "We track the certificate's validity with you until the transfer of ownership.",
+            "Ask us about the citizenship file steps in order, from choosing the property to applying."
+          ],
+          "cta": "The news and its official source",
+          "path": "/property-laws"
+        },
+        "hashtags": [
+          "#الجنسية_التركية",
+          "#TurkishCitizenship"
+        ]
+      }
+    },
+    {
+      "date": "2026-12-05",
+      "at": "14:00",
+      "id": "news-holiday-let",
+      "spec": "holiday-let.json",
       "topic": "تصميم الأخبار: تصريح الإيجار السياحي ومهلة 30 يوماً",
       "caption": {
-        "ar": { "title": "تأجير سياحي؟ مهلة 30 يوماً",
+        "ar": {
+          "title": "تأجير سياحي؟ مهلة 30 يوماً",
           "intro": "إذا كانت وثائق تصريح الإيجار السياحي ناقصة أو غير ملائمة، أو تغيّرت معلوماتها، يُمنح صاحب التصريح 30 يوماً لاستكمالها، وإلا يُلغى التصريح. التعديل نافذ منذ 27 أكتوبر 2026.",
-          "closing": ["يهمّ كل من يؤجّر شقته للسياح لإقامات قصيرة، ومنهم المالكون الأجانب."],
-          "cta": "تفاصيل الخبر ومصدره الرسمي", "path": "/property-laws" },
-        "en": { "title": "Holiday let? 30 days to fix your documents",
+          "closing": [
+            "يهمّ كل من يؤجّر شقته للسياح لإقامات قصيرة، ومنهم المالكون الأجانب.",
+            "تفكّر في شراء شقة للتأجير؟ اسألنا عن الشروط قبل الشراء."
+          ],
+          "cta": "تفاصيل الخبر ومصدره الرسمي",
+          "path": "/property-laws"
+        },
+        "en": {
+          "title": "Holiday let? 30 days to fix your documents",
           "intro": "If the documents behind a holiday-let permit are incomplete or unsuitable, or their information changes, the holder gets 30 days to correct them, or the permit is cancelled. In force since 27 October 2026.",
-          "closing": ["It concerns anyone renting a flat to tourists for short stays, including foreign owners."],
-          "cta": "The news and its official source", "path": "/property-laws" },
-        "hashtags": ["#قوانين_العقار", "#TurkeyPropertyLaw"] } }
+          "closing": [
+            "It concerns anyone renting a flat to tourists for short stays, including foreign owners.",
+            "Thinking of buying a flat to rent out? Ask us about the rules before you buy."
+          ],
+          "cta": "The news and its official source",
+          "path": "/property-laws"
+        },
+        "hashtags": [
+          "#قوانين_العقار",
+          "#TurkeyPropertyLaw"
+        ]
+      }
+    }
   ]
 }
