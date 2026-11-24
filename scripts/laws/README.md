@@ -66,6 +66,13 @@ Work from the repository root (clone kerimalastal-source/-kinci_BYHADARA if need
    and citizenship items first. If an item fits none of the page's topics, use the closest
    one and suggest a new topic in its `verify`. At most **5 new drafts** per run
    (most important first).
+   **Each approved update gets its own page, `/property-laws/<id>`, made for Google** (owner
+   2026-11-25): so the draft's `id` is the page address. Write it as short lowercase English
+   words with hyphens that name the topic as people search for it (e.g.
+   `investor-residence-3-5-years`), and never change it after approval. The `title` starts
+   with the term people search for (the page title adds "in Turkey"), and `summary` is
+   2–4 clear sentences (Google shows its first ~155 characters). If a published blog article
+   explains the topic, name its slug in `verify` so the HADARA session can link it (`article`).
 5. "Market" check: compare what you found with the figures the site already shows
    (`citizenship.*` in `src/i18n/en.json`: 400,000 USD, 3-year hold, 200,000/100,000 USD
    residence, 4% title deed fee, and the rules in laws.ts). If an official decision
