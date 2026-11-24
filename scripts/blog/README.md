@@ -84,6 +84,28 @@ it), and add it to the review page with `build-review.mjs <drafts.json> --add <f
 "توسيع مقال منشور"). After approval: `add-article.py <file> --replace` replaces `blogData.<slug>`
 in the six dictionaries; the draft leaves the page once the site's text matches it.
 
+## Why we write (the owner's standing rule, 2026-11-25)
+
+The owner: articles are written **to help people with what they actually search for**, never
+"an article for the sake of writing". They bring free visitors from Google (no ads), and every
+article ends with our projects (the district's projects on district guides), so readers move on
+to project pages. Therefore:
+
+- **Pick topics people search for**: first the owner's Search Console export (the
+  "Performance on Search" queries he sends from time to time), then the questions buyers really
+  ask about property in Turkey: **laws, conditions, fees as published on the site, procedures,
+  official news, and districts**. Laws and official changes come first when they exist
+  (only from the site's own `src/data/laws.ts` and its official sources; no news sites).
+- **Skip a topic** that does not answer a real question, repeats or competes with a published
+  article, or has nothing a reader can act on. If the list has no good topic left, write
+  nothing and say the list needs refreshing from Search Console.
+- **Every article ends in the right projects**: a district guide carries `"district"`, any other
+  article picks 1–3 `"projects"` that truly relate to the topic.
+- **Links must work**: the slug is short, lowercase English with hyphens and never changes once
+  published; `projects` and `district` must exist in `src/data/projects.ts` (`add-article.py`
+  checks them); the publishing session opens the new page in all six languages before it
+  reports success.
+
 ## Content rules (from the owner — do not break)
 
 - **Never invent facts.** Numbers, sizes, distances, dates, prices and legal values
