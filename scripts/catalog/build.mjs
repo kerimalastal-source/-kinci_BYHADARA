@@ -1,7 +1,7 @@
 // Builds the HADARA Real Estate project catalogue as print-ready PDFs (A4 landscape),
-// one in Arabic and one in English, from the site's own data:
+// one per site language (ar, en, fa, fr, ru, de), from the site's own data:
 //
-//   node scripts/catalog/build.mjs [ar|en ...]
+//   node scripts/catalog/build.mjs [ar|en|fa|fr|ru|de ...]   (default: all six)
 //
 // Every fact comes from src/data/projects.ts and src/i18n/<lang>.json, so the catalogue
 // stays in line with the website. Sold-out projects are left out and no prices are
@@ -10,7 +10,7 @@
 // Output: scripts/catalog/out/HADARA-Real-Estate-Catalogue-<lang>.pdf (git-ignored).
 import fs from "node:fs";
 import path from "node:path";
-import { out, SITE, YEAR, PHONE, EMAIL, WHATSAPP, loadTs, loadDict, lookup, esc, ltr, placeKey, num, photo, qrSvg, brand, pageHtml, renderPdfs, PDF_SUFFIX } from "./lib.mjs";
+import { out, SITE, YEAR, PHONE, EMAIL, WHATSAPP, loadTs, loadDict, lookup, esc, ltr, placeKey, isRtl, num, photo, qrSvg, brand, pageHtml, renderPdfs, PDF_SUFFIX } from "./lib.mjs";
 
 // Words the site has no dictionary key for (catalogue-only labels).
 const STR = {
@@ -75,13 +75,137 @@ const STR = {
     note: "Information and images come from the developers and may change; some images are design renderings. Prices on request.",
     citizenshipNote: "Conditions per current law, subject to change.",
     edition: `Edition ${YEAR}`
+  },
+  fa: {
+    title: "پروژه‌های ما در استانبول",
+    subtitle: "کاتالوگ پروژه‌ها",
+    partner: "شریک توسعه و بازاریابی املاک در استانبول",
+    about: "درباره ما",
+    index: "پروژه‌ها",
+    indexSub: "گزیده‌ای از برجسته‌ترین پروژه‌های مسکونی استانبول، در هر دو سوی شهر",
+    sectionA: "پروژه‌های تازه عرضه‌شده و در حال ساخت",
+    sectionASub: "طرح‌های پرداخت منعطف در پروژه‌های منتخب، با خانه‌هایی که در سال‌های آینده تحویل می‌شوند",
+    sectionB: "آماده سکونت",
+    sectionBSub: "مجتمع‌های تکمیل‌شده و ویلاهای آماده، با واحدهایی که هم‌اکنون قابل خرید هستند",
+    projectsWord: "پروژه",
+    signature: "ساخته‌شده توسط حضارا",
+    layouts: "انواع واحدها",
+    scan: "برای جزئیات و تصاویر پروژه، کد را اسکن کنید",
+    page: "صفحه",
+    services: "خدمات ما",
+    citizenship: "شهروندی ترکیه از طریق خرید ملک",
+    contact: "تماس با ما",
+    contactSub: "تیم ما با کمال میل در انتخاب پروژه مناسب و هماهنگی بازدید در استانبول یا تور ویدیویی خصوصی به شما کمک می‌کند.",
+    phone: "تلفن و واتساپ",
+    email: "ایمیل",
+    address: "دفتر",
+    hours: "ساعات کاری",
+    web: "وب‌سایت",
+    scanWa: "واتساپ",
+    scanWeb: "همه پروژه‌ها",
+    note: "اطلاعات و تصاویر از سازندگان گرفته شده و ممکن است تغییر کند؛ برخی تصاویر طرح‌های معماری هستند. قیمت‌ها در صورت درخواست.",
+    citizenshipNote: "شرایط طبق قانون فعلی است و ممکن است تغییر کند.",
+    edition: `نسخه ${YEAR}`
+  },
+  fr: {
+    title: "Nos projets à Istanbul",
+    subtitle: "Catalogue des projets",
+    partner: "Partenaire de développement et de commercialisation immobilière à Istanbul",
+    about: "À propos",
+    index: "Les projets",
+    indexSub: "Une sélection des principaux projets résidentiels d'Istanbul, des deux côtés de la ville",
+    sectionA: "Nouveaux lancements et projets en construction",
+    sectionASub: "Des plans de paiement flexibles sur une sélection de projets, avec des logements livrés au cours des prochaines années",
+    sectionB: "Prêts à habiter",
+    sectionBSub: "Résidences achevées et villas terminées, avec des logements disponibles dès maintenant",
+    projectsWord: "projets",
+    signature: "Développé par HADARA",
+    layouts: "Types de logements",
+    scan: "Scannez pour voir les détails et les photos du projet",
+    page: "Page",
+    services: "Ce que nous vous offrons",
+    citizenship: "La citoyenneté turque par l'immobilier",
+    contact: "Contactez-nous",
+    contactSub: "Notre équipe vous aidera volontiers à choisir le bon projet et à organiser une visite à Istanbul ou une visite vidéo privée.",
+    phone: "Téléphone et WhatsApp",
+    email: "E-mail",
+    address: "Bureau",
+    hours: "Horaires",
+    web: "Site web",
+    scanWa: "WhatsApp",
+    scanWeb: "Tous les projets",
+    note: "Les informations et les images proviennent des promoteurs et peuvent changer ; certaines images sont des perspectives de conception. Prix sur demande.",
+    citizenshipNote: "Conditions selon la loi en vigueur, susceptibles de changer.",
+    edition: `Édition ${YEAR}`
+  },
+  ru: {
+    title: "Наши проекты в Стамбуле",
+    subtitle: "Каталог проектов",
+    partner: "Партнёр по девелопменту и маркетингу недвижимости в Стамбуле",
+    about: "О нас",
+    index: "Проекты",
+    indexSub: "Подборка ведущих жилых проектов Стамбула на обеих сторонах города",
+    sectionA: "Новые проекты и строящиеся объекты",
+    sectionASub: "Гибкие планы оплаты в избранных проектах и дома со сдачей в ближайшие годы",
+    sectionB: "Готовы к заселению",
+    sectionBSub: "Завершённые комплексы и готовые виллы с квартирами, доступными уже сейчас",
+    projectsWord: "проектов",
+    signature: "Девелопер — HADARA",
+    layouts: "Типы квартир",
+    scan: "Отсканируйте, чтобы увидеть детали и фото проекта",
+    page: "Стр.",
+    services: "Что мы предлагаем",
+    citizenship: "Гражданство Турции через недвижимость",
+    contact: "Свяжитесь с нами",
+    contactSub: "Наша команда с радостью поможет выбрать подходящий проект и организует просмотр в Стамбуле или частный видеотур.",
+    phone: "Телефон и WhatsApp",
+    email: "Эл. почта",
+    address: "Офис",
+    hours: "Часы работы",
+    web: "Сайт",
+    scanWa: "WhatsApp",
+    scanWeb: "Все проекты",
+    note: "Информация и изображения предоставлены застройщиками и могут меняться; часть изображений — визуализации. Цены по запросу.",
+    citizenshipNote: "Условия согласно действующему законодательству и могут измениться.",
+    edition: `Издание ${YEAR}`
+  },
+  de: {
+    title: "Unsere Projekte in Istanbul",
+    subtitle: "Projektkatalog",
+    partner: "Partner für Immobilienentwicklung und -vermarktung in Istanbul",
+    about: "Über uns",
+    index: "Die Projekte",
+    indexSub: "Eine Auswahl der führenden Wohnprojekte Istanbuls, auf beiden Seiten der Stadt",
+    sectionA: "Neue Projekte und Projekte im Bau",
+    sectionASub: "Flexible Zahlungspläne bei ausgewählten Projekten, mit Übergabe der Wohnungen in den kommenden Jahren",
+    sectionB: "Bezugsfertig",
+    sectionBSub: "Fertiggestellte Wohnanlagen und Villen, mit sofort verfügbaren Wohnungen",
+    projectsWord: "Projekte",
+    signature: "Entwickelt von HADARA",
+    layouts: "Wohnungstypen",
+    scan: "Scannen Sie für Details und Fotos des Projekts",
+    page: "Seite",
+    services: "Was wir Ihnen bieten",
+    citizenship: "Türkische Staatsbürgerschaft durch Immobilien",
+    contact: "Kontakt",
+    contactSub: "Unser Team hilft Ihnen gern, das passende Projekt zu finden, und organisiert eine Besichtigung in Istanbul oder eine private Videobesichtigung.",
+    phone: "Telefon & WhatsApp",
+    email: "E-Mail",
+    address: "Büro",
+    hours: "Öffnungszeiten",
+    web: "Website",
+    scanWa: "WhatsApp",
+    scanWeb: "Alle Projekte",
+    note: "Angaben und Bilder stammen von den Bauträgern und können sich ändern; einige Bilder sind Visualisierungen. Preise auf Anfrage.",
+    citizenshipNote: "Bedingungen nach aktueller Rechtslage, Änderungen vorbehalten.",
+    edition: `Ausgabe ${YEAR}`
   }
 };
 
 function build(lang, mod, dict) {
   const s = STR[lang];
   const t = lookup(dict);
-  const rtl = lang === "ar";
+  const rtl = isRtl(lang);
   const place = (d) => t(`places.${placeKey(d)}`) || d;
   const statusLabel = (p) => ({ "new-launch": t("common.statusNewLaunch"), ongoing: t("common.statusOngoing"), delivered: t("common.statusDelivered") })[p.status];
   const stat = (st) => t(`common.statLabels.${st.labelKey}`) || st.labelKey;
@@ -169,7 +293,7 @@ function build(lang, mod, dict) {
 
   const projectPage = (p) => {
     const c = t(`projectsData.${p.slug}`);
-    const latin = lang === "en" ? "" : dict.__en.projectsData[p.slug].name;
+    const latin = lang === "en" || dict.__en.projectsData[p.slug].name === c.name ? "" : dict.__en.projectsData[p.slug].name;
     const gallery = p.gallery.filter((g) => !/plan|bath|hamam|site-plan/i.test(g.src)).slice(0, 2);
     const stats = p.stats.filter((x) => x.labelKey !== "layout" && x.labelKey !== "villaLayout").slice(0, 4);
     const layoutStat = p.stats.find((x) => x.labelKey === "layout" || x.labelKey === "villaLayout");
@@ -303,7 +427,7 @@ function build(lang, mod, dict) {
   return pageHtml(lang, `HADARA Real Estate — ${s.subtitle}`, body, ["catalog.css"]);
 }
 
-const langs = process.argv.slice(2).length ? process.argv.slice(2) : ["ar", "en"];
+const langs = process.argv.slice(2).length ? process.argv.slice(2) : Object.keys(STR);
 const mod = await loadTs("src/data/projects.ts");
 const en = loadDict("en");
 const pairs = [];

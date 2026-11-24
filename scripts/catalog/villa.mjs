@@ -1,7 +1,7 @@
 // Builds the Marmara Haven Villa brochure (HADARA's own development) as print-ready PDFs,
-// A4 landscape, in Arabic and English:
+// A4 landscape, in each site language (ar, en, fa, fr, ru, de):
 //
-//   node scripts/catalog/villa.mjs [ar|en ...]
+//   node scripts/catalog/villa.mjs [ar|en|fa|fr|ru|de ...]   (default: all six)
 //
 // Every fact comes from the site: src/data/projects.ts (stats, floors, amenities, verified
 // card, price) and projectsData.marmara-haven-villa in src/i18n/<lang>.json. The price is the
@@ -9,7 +9,7 @@
 // Output: scripts/catalog/out/Marmara-Haven-Villa-<lang>.pdf (git-ignored).
 import fs from "node:fs";
 import path from "node:path";
-import { out, SITE, YEAR, PHONE, EMAIL, WHATSAPP, loadTs, loadDict, lookup, esc, ltr, placeKey, num, photo, qrSvg, brand, pageHtml, renderPdfs, PDF_SUFFIX } from "./lib.mjs";
+import { out, SITE, YEAR, PHONE, EMAIL, WHATSAPP, loadTs, loadDict, lookup, esc, ltr, placeKey, isRtl, intlTag, num, photo, qrSvg, brand, pageHtml, renderPdfs, PDF_SUFFIX } from "./lib.mjs";
 
 const SLUG = "marmara-haven-villa";
 const IMG = (name) => `/images/projects/${SLUG}/${name}.jpg`;
@@ -65,6 +65,106 @@ const STR = {
     address: "Office",
     hours: "Office hours",
     note: "Information and areas confirmed by the HADARA team; the price may change. Photos show the villa itself."
+  },
+  fa: {
+    signature: "ساخته‌شده توسط املاک حضارا",
+    brochure: "بروشور ویلا",
+    glance: "ویلا در یک نگاه",
+    overview: "درباره ویلا",
+    floor: "طبقه",
+    gross: "مساحت ناخالص",
+    net: "مساحت خالص",
+    inside: "فضای داخلی",
+    insideSub: "فضاهای وسیع، نور طبیعی و نازک‌کاری با مصالح باکیفیت",
+    outside: "باغ و استخر",
+    features: "امکانات ویلا",
+    location: "موقعیت و اطراف",
+    locationSub: "بویوک‌چکمجه، در بخش اروپایی استانبول، نزدیک ساحل دریای مرمره",
+    viewing: "بازدید خصوصی خود را رزرو کنید",
+    price: "قیمت",
+    scanVideo: "تور ویدیویی و صفحه ویلا را ببینید",
+    scanWa: "از طریق واتساپ با ما در تماس باشید",
+    contact: "تماس با ما",
+    phone: "تلفن و واتساپ",
+    email: "ایمیل",
+    address: "دفتر",
+    hours: "ساعات کاری",
+    note: "اطلاعات و مساحت‌ها توسط تیم حضارا تأیید شده و قیمت ممکن است تغییر کند. تصاویر از خود ویلا هستند."
+  },
+  fr: {
+    signature: "Développée par HADARA Real Estate",
+    brochure: "Brochure de la villa",
+    glance: "La villa en un coup d'œil",
+    overview: "La villa",
+    floor: "Niveau",
+    gross: "Surface brute",
+    net: "Surface nette",
+    inside: "L'intérieur de la villa",
+    insideSub: "Des espaces généreux, de la lumière naturelle et des finitions en matériaux de qualité",
+    outside: "Jardin et piscine",
+    features: "Atouts de la villa",
+    location: "Emplacement et environs",
+    locationSub: "Büyükçekmece, sur la rive européenne d'Istanbul, près du littoral de la mer de Marmara",
+    viewing: "Réservez votre visite privée",
+    price: "Prix",
+    scanVideo: "Regardez la visite vidéo et la page de la villa",
+    scanWa: "Écrivez-nous sur WhatsApp",
+    contact: "Contactez-nous",
+    phone: "Téléphone et WhatsApp",
+    email: "E-mail",
+    address: "Bureau",
+    hours: "Horaires",
+    note: "Informations et surfaces confirmées par l'équipe HADARA ; le prix peut changer. Les photos montrent la villa elle-même."
+  },
+  ru: {
+    signature: "Девелопер — HADARA Real Estate",
+    brochure: "Буклет виллы",
+    glance: "Вилла в цифрах",
+    overview: "О вилле",
+    floor: "Этаж",
+    gross: "Общая площадь",
+    net: "Полезная площадь",
+    inside: "Интерьеры виллы",
+    insideSub: "Просторные помещения, естественный свет и отделка из качественных материалов",
+    outside: "Сад и бассейн",
+    features: "Преимущества виллы",
+    location: "Расположение и окрестности",
+    locationSub: "Бююкчекмедже, европейская часть Стамбула, недалеко от побережья Мраморного моря",
+    viewing: "Запишитесь на частный просмотр",
+    price: "Цена",
+    scanVideo: "Смотрите видеотур и страницу виллы",
+    scanWa: "Напишите нам в WhatsApp",
+    contact: "Свяжитесь с нами",
+    phone: "Телефон и WhatsApp",
+    email: "Эл. почта",
+    address: "Офис",
+    hours: "Часы работы",
+    note: "Информация и площади подтверждены командой HADARA; цена может измениться. На фотографиях — сама вилла."
+  },
+  de: {
+    signature: "Entwickelt von HADARA Real Estate",
+    brochure: "Villa-Broschüre",
+    glance: "Die Villa auf einen Blick",
+    overview: "Die Villa",
+    floor: "Ebene",
+    gross: "Bruttofläche",
+    net: "Nettofläche",
+    inside: "Die Villa von innen",
+    insideSub: "Großzügige Räume, natürliches Licht und Ausstattung aus hochwertigen Materialien",
+    outside: "Garten & Pool",
+    features: "Ausstattung der Villa",
+    location: "Lage & Umgebung",
+    locationSub: "Büyükçekmece, auf der europäischen Seite Istanbuls, nahe der Küste des Marmarameers",
+    viewing: "Buchen Sie Ihre private Besichtigung",
+    price: "Preis",
+    scanVideo: "Videorundgang und Seite der Villa ansehen",
+    scanWa: "Schreiben Sie uns auf WhatsApp",
+    contact: "Kontakt",
+    phone: "Telefon & WhatsApp",
+    email: "E-Mail",
+    address: "Büro",
+    hours: "Öffnungszeiten",
+    note: "Angaben und Flächen vom HADARA-Team bestätigt; der Preis kann sich ändern. Die Fotos zeigen die Villa selbst."
   }
 };
 
@@ -74,7 +174,7 @@ const LEVEL_PHOTOS = [["basement-room"], ["living-sea", "kitchen-island"], ["bed
 function build(lang, project, icons, dict) {
   const s = STR[lang];
   const t = lookup(dict);
-  const rtl = lang === "ar";
+  const rtl = isRtl(lang);
   const c = t(`projectsData.${SLUG}`);
   const latin = dict.__en.projectsData[SLUG].name;
   const place = (d) => t(`places.${placeKey(d)}`) || d;
@@ -191,7 +291,7 @@ function build(lang, project, icons, dict) {
 
   const v = project.verified;
   const vlabels = t("projectDetail.verified.labels");
-  const updated = new Intl.DateTimeFormat(rtl ? "ar-u-nu-latn" : "en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(v.updated));
+  const updated = new Intl.DateTimeFormat(intlTag(lang), { day: "numeric", month: "long", year: "numeric" }).format(new Date(v.updated));
   const verified = `
   <section class="page vver">
     ${head()}
@@ -259,7 +359,7 @@ function build(lang, project, icons, dict) {
   return pageHtml(lang, `${latin} — HADARA Real Estate`, body, ["catalog.css", "villa.css"]);
 }
 
-const langs = process.argv.slice(2).length ? process.argv.slice(2) : ["ar", "en"];
+const langs = process.argv.slice(2).length ? process.argv.slice(2) : Object.keys(STR);
 const { projects } = await loadTs("src/data/projects.ts");
 const icons = await loadTs("src/components/amenityIcons.ts");
 const project = projects.find((p) => p.slug === SLUG);

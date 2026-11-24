@@ -161,10 +161,13 @@ test("the endpoint saves the request with the secret and answers with the catalo
   assert.equal(calls.some((c) => c.url.endsWith("/rpc/submit_inquiry")), false, "the ordinary inquiry path is not used");
 });
 
-test("the villa gets its own brochure; other languages get the English file", async () => {
-  assert.equal((await send({ ...request, project: "marmara-haven-villa", locale: "ru" })).data.url, "/catalogs/marmara-haven-villa-en.pdf");
+test("the villa gets its own brochure, and every site language gets its own file", async () => {
+  assert.equal((await send({ ...request, project: "marmara-haven-villa", locale: "ru" })).data.url, "/catalogs/marmara-haven-villa-ru.pdf");
   assert.equal(catalogKey("marmara-haven-villa", "ar"), "villa-ar");
-  assert.equal(catalogKey("dragos", "fa"), "catalogue-en");
+  for (const locale of ["en", "ar", "fa", "fr", "ru", "de"]) {
+    assert.equal(catalogKey("dragos", locale), `catalogue-${locale}`);
+    assert.ok(CATALOGS[`catalogue-${locale}`] && CATALOGS[`villa-${locale}`], locale);
+  }
 });
 
 test("every catalogue the server names is a real file in public/catalogs", () => {

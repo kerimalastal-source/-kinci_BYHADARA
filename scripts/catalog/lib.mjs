@@ -43,6 +43,10 @@ export const lookup = (dict) => (key) => key.split(".").reduce((o, k) => (o == n
 export const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 export const ltr = (s) => `<bdi dir="ltr">${esc(s)}</bdi>`;
 export const placeKey = (name) => name.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/ı/g, "i").toLowerCase();
+/** Arabic and Persian pages run right to left. */
+export const isRtl = (lang) => lang === "ar" || lang === "fa";
+/** Intl locale for dates: Gregorian calendar and Latin digits everywhere (Persian would default to the Solar Hijri calendar). */
+export const intlTag = (lang) => ({ ar: "ar-u-nu-latn", fa: "fa-u-ca-gregory-nu-latn", en: "en-GB", fr: "fr-FR", ru: "ru-RU", de: "de-DE" })[lang] || "en-GB";
 export const num = (i) => String(i).padStart(2, "0");
 
 const photos = new Map();
@@ -73,7 +77,7 @@ export const brand = (variant) => `
 export function pageHtml(lang, title, body, cssFiles) {
   const css = cssFiles.map((f) => fs.readFileSync(path.join(here, f), "utf8")).join("\n");
   return `<!doctype html>
-<html lang="${lang}" dir="${lang === "ar" || lang === "fa" ? "rtl" : "ltr"}"><head><meta charset="utf-8">
+<html lang="${lang}" dir="${isRtl(lang) ? "rtl" : "ltr"}"><head><meta charset="utf-8">
 <title>${esc(title)}</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700&display=swap">
 <style>${css}</style>
