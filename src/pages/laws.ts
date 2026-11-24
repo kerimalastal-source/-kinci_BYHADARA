@@ -1,6 +1,7 @@
 import { t, tRaw, link, intlTag } from "../i18n";
 import {
   LAW_TOPICS,
+  lawPath,
   lawRules,
   lawUpdates,
   sortedLawUpdates,
@@ -16,7 +17,7 @@ interface RuleText {
   title: string;
   text: string;
 }
-interface UpdateText {
+export interface UpdateText {
   title: string;
   summary: string;
   before?: string;
@@ -58,13 +59,31 @@ export function sourceLinks(sources: LawSource[]): string {
 }
 
 export const topicBadge = (topic: LawTopic) => `<span class="law-topic law-topic--${topic}">${t(`laws.topics.${topic}`)}</span>`;
-const draftBadge = (approved: boolean) => (approved ? "" : `<span class="law-draft">${t("laws.draft")}</span>`);
+export const draftBadge = (approved: boolean) => (approved ? "" : `<span class="law-draft">${t("laws.draft")}</span>`);
 
-function updateCard(u: LawUpdate, i: number): string {
-  const text = tRaw<UpdateText>(`lawsData.updates.${u.id}`);
+/** The update's details (summary, before/after, facts, help, sources), shared by the list and its own page. */
+export function updateDetails(u: LawUpdate, text: UpdateText): string {
   const rows: [string, string][] = [];
   if (text.before) rows.push([t("laws.before"), text.before]);
   rows.push([text.before ? t("laws.after") : t("laws.whatChanged"), text.after]);
+  return `
+            <p class="law-update__summary">${iso(text.summary)}</p>
+            <dl class="law-compare${rows.length > 1 ? " law-compare--two" : ""}">
+              ${rows.map(([label, value]) => `<div><dt>${label}</dt><dd>${iso(value)}</dd></div>`).join("")}
+            </dl>
+            <dl class="law-facts">
+              <div><dt>${t("laws.affects")}</dt><dd>${text.affects}</dd></div>
+              ${u.effective ? `<div><dt>${t("laws.effective")}</dt><dd>${formatDate(u.effective)}</dd></div>` : ""}
+              <div><dt>${t("laws.reference")}</dt><dd><bdi lang="tr" dir="ltr">${u.reference}</bdi></dd></div>
+            </dl>
+            <p class="law-help"><strong>${t("laws.howWeHelp")}</strong> ${iso(text.help)}</p>
+            ${sourceLinks(u.sources)}
+            <p class="law-checked">${t("laws.checked", { date: formatDate(u.checked) })}</p>`;
+}
+
+function updateCard(u: LawUpdate, i: number): string {
+  const text = tRaw<UpdateText>(`lawsData.updates.${u.id}`);
+  const href = link(lawPath(u.id)) + (u.approved ? "" : "?preview");
 
   return `
         <li class="law-update" data-topic="${u.topic}" data-reveal data-reveal-index="${i % 3}">
@@ -77,19 +96,9 @@ function updateCard(u: LawUpdate, i: number): string {
               ${u.stage === "proposal" ? `<span class="law-stage">${t("laws.proposal")}</span>` : ""}
               ${draftBadge(u.approved)}
             </div>
-            <h3>${iso(text.title)}</h3>
-            <p class="law-update__summary">${iso(text.summary)}</p>
-            <dl class="law-compare${rows.length > 1 ? " law-compare--two" : ""}">
-              ${rows.map(([label, value]) => `<div><dt>${label}</dt><dd>${iso(value)}</dd></div>`).join("")}
-            </dl>
-            <dl class="law-facts">
-              <div><dt>${t("laws.affects")}</dt><dd>${text.affects}</dd></div>
-              ${u.effective ? `<div><dt>${t("laws.effective")}</dt><dd>${formatDate(u.effective)}</dd></div>` : ""}
-              <div><dt>${t("laws.reference")}</dt><dd><bdi lang="tr" dir="ltr">${u.reference}</bdi></dd></div>
-            </dl>
-            <p class="law-help"><strong>${t("laws.howWeHelp")}</strong> ${iso(text.help)}</p>
-            ${sourceLinks(u.sources)}
-            <p class="law-checked">${t("laws.checked", { date: formatDate(u.checked) })}</p>
+            <h3><a class="law-update__link" href="${href}">${iso(text.title)}</a></h3>
+            ${updateDetails(u, text)}
+            <a class="law-update__more" href="${href}">${t("laws.readMore")}</a>
           </article>
         </li>`;
 }

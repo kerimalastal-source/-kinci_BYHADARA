@@ -5,7 +5,7 @@ import { getSortedProjects } from "../data/projects";
 import { getSortedBlogPosts } from "../data/blog";
 import { navigate } from "../router";
 import { consultancyPath, GUIDE_SEGMENT, LAWS_SEGMENT } from "../seo/routes";
-import { LAWS_PAGE_LIVE } from "../data/laws";
+import { LAWS_PAGE_LIVE, lawPath, lawUpdates, sortedLawUpdates, visibleLawItems } from "../data/laws";
 
 interface SearchResult {
   title: string;
@@ -69,7 +69,13 @@ function buildIndex(): SearchResult[] {
   results.push({ title: t("videoTour.nav"), snippet: t("videoTour.heroSubtitle"), route: "/video-tour" });
   results.push({ title: t("nav.blog"), snippet: t("blog.heroSubtitle"), route: "/blog" });
   results.push({ title: t("nav.faq"), snippet: t("faq.heroSubtitle"), route: "/faq" });
-  if (LAWS_PAGE_LIVE) results.push({ title: t("nav.laws"), snippet: t("laws.heroSubtitle"), route: `/${LAWS_SEGMENT}` });
+  if (LAWS_PAGE_LIVE) {
+    results.push({ title: t("nav.laws"), snippet: t("laws.heroSubtitle"), route: `/${LAWS_SEGMENT}` });
+    for (const u of sortedLawUpdates(visibleLawItems(lawUpdates, false))) {
+      const text = tRaw<{ title: string; summary: string }>(`lawsData.updates.${u.id}`);
+      results.push({ title: `${text.title} · ${t("nav.laws")}`, snippet: text.summary, route: lawPath(u.id) });
+    }
+  }
   results.push({ title: t("nav.contact"), snippet: t("contact.heroSubtitle"), route: "/contact" });
 
   return results;

@@ -7,7 +7,7 @@ import { blogPosts } from "../data/blog";
 import { placeKey } from "../utils/place";
 import { CONSULTANCY_PAGE_IMAGES } from "../data/consultancy";
 import { SOCIAL_LINKS } from "../data/social";
-import { LAWS_PAGE_LIVE } from "../data/laws";
+import { LAWS_PAGE_LIVE, lawPath, lawUpdates, sortedLawUpdates, visibleLawItems } from "../data/laws";
 import { RESALE_LIVE } from "../data/resale";
 
 /** The live address: hadararealestate.com redirects here (308), so canonical/hreflang/sitemap URLs use www. */
@@ -114,8 +114,13 @@ export function indexableRoutes(): Route[] {
     ...(RESALE_LIVE ? [{ name: "resale" } as Route] : []),
     { name: "privacy" },
     { name: "buyers-guide" },
-    ...(LAWS_PAGE_LIVE ? [{ name: "laws" } as Route] : [])
+    ...(LAWS_PAGE_LIVE ? [{ name: "laws" } as Route, ...liveLawUpdates().map((u) => ({ name: "law", id: u.id }) as Route)] : [])
   ];
+}
+
+/** Approved legal updates with an official source: each one has its own indexable page. */
+export function liveLawUpdates() {
+  return sortedLawUpdates(visibleLawItems(lawUpdates, false));
 }
 
 /** What the page sells, in the search title ("Apartments for Sale in Beylikdüzü"), read from the project's own data. */
@@ -165,7 +170,8 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
 
   const project = route.name === "project" ? projects.find((p) => p.slug === route.slug) : undefined;
   const post = route.name === "blog-post" ? blogPosts.find((p) => p.slug === route.slug) : undefined;
-  if ((route.name === "project" && !project) || (route.name === "blog-post" && !post)) {
+  const law = route.name === "law" && LAWS_PAGE_LIVE ? liveLawUpdates().find((u) => u.id === route.id) : undefined;
+  if ((route.name === "project" && !project) || (route.name === "blog-post" && !post) || (route.name === "law" && !law)) {
     pageRoute = { name: "not-found" };
   }
 
@@ -209,6 +215,29 @@ export function buildMeta(route: Route, locale: Locale, siteUrl = DEFAULT_SITE_U
       wordCount: content.body.join(" ").split(/\s+/).filter(Boolean).length,
       url: url(routePath(route)),
       mainEntityOfPage: url(routePath(route)),
+      author: { "@id": `${siteUrl}/#organization` },
+      publisher: { "@id": `${siteUrl}/#organization` }
+    });
+  } else if (law) {
+    const content = lookup(locale, `lawsData.updates.${law.id}`) as { title: string; summary: string };
+    title = tr("seo.lawTitle").replace("{title}", content.title);
+    description = clip(content.summary);
+    imageAlt = content.title;
+    ogType = "article";
+    crumbs.push({ name: tr("nav.laws"), path: "/property-laws" }, { name: content.title, path: lawPath(law.id) });
+    jsonLd.push({
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      headline: content.title.slice(0, 110),
+      description: content.summary,
+      articleSection: tr(`laws.topics.${law.topic}`),
+      image,
+      inLanguage: locale,
+      datePublished: law.decided,
+      dateModified: law.checked > law.decided ? law.checked : law.decided,
+      url: url(lawPath(law.id)),
+      mainEntityOfPage: url(lawPath(law.id)),
+      isBasedOn: law.sources.map((s) => s.url),
       author: { "@id": `${siteUrl}/#organization` },
       publisher: { "@id": `${siteUrl}/#organization` }
     });

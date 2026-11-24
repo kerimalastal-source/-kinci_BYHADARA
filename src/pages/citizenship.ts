@@ -1,7 +1,7 @@
 import { t, tRaw, link } from "../i18n";
 import { statIcon } from "../components/statIcons";
 import { initScrollReveal } from "../components/scrollReveal";
-import { LAWS_PAGE_LIVE, lawUpdates, sortedLawUpdates, visibleLawItems, type LawTopic } from "../data/laws";
+import { LAWS_PAGE_LIVE, lawPath, lawUpdates, sortedLawUpdates, visibleLawItems, type LawTopic } from "../data/laws";
 import { formatDate, iso, sourceLinks, topicBadge } from "./laws";
 
 interface TextItem {
@@ -83,7 +83,7 @@ function latestLaws(): string {
               <time datetime="${u.decided}">${formatDate(u.decided)}</time>
               ${topicBadge(u.topic)}
             </div>
-            <h3>${iso(text.title)}</h3>
+            <h3><a class="law-update__link" href="${link(lawPath(u.id))}">${iso(text.title)}</a></h3>
             <p class="cz-law__summary">${iso(text.summary)}</p>
             ${sourceLinks(u.sources)}
             <p class="law-checked">${t("laws.checked", { date: formatDate(u.checked) })}</p>

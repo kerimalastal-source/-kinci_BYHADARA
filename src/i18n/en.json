@@ -2450,6 +2450,12 @@
     "ctaButton": "Contact us",
     "ctaWhatsapp": "Ask us on WhatsApp",
     "whatsappMessage": "Hello, I have a question about property laws in Turkey.",
+    "backLabel": "All legal updates",
+    "readMore": "Open this update",
+    "otherTitle": "More legal updates",
+    "relatedArticle": "For a full explanation, read our article:",
+    "decidedOn": "Decision date: {date}",
+    "projectsSubtitle": "Selected projects in Istanbul. Our team is happy to answer your questions about them and the rules that apply.",
     "topics": {
       "citizenship": "Citizenship",
       "residence": "Residence",
@@ -3689,6 +3695,7 @@
       "title": "Buyer's Guide: Buying Property in Istanbul Step by Step",
       "description": "Buying a home in Istanbul as a foreigner: the steps before you buy, the purchase and the title deed, and life after you receive the keys, explained clearly by HADARA."
     },
+    "lawTitle": "{title} in Turkey",
     "laws": {
       "title": "Turkish Property Law Updates",
       "description": "The current rules and latest official decisions on citizenship, residence, buying property, taxes and renting in Turkey, each with a link to its government source."

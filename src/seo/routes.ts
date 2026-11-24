@@ -39,6 +39,7 @@ export type Route =
   | { name: "faq" }
   | { name: "privacy" }
   | { name: "laws" }
+  | { name: "law"; id: string }
   | { name: "buyers-guide" }
   | { name: "blog" }
   | { name: "blog-post"; slug: string }
@@ -95,6 +96,7 @@ export function parseRoute(path: string): Route {
   if (segment === "faq") return { name: "faq" };
   if (segment === "privacy" && !p1) return { name: "privacy" };
   if (segment === LAWS_SEGMENT && !p1) return { name: "laws" };
+  if (segment === LAWS_SEGMENT && !p2) return { name: "law", id: p1 };
   if (segment === GUIDE_SEGMENT && !p1) return { name: "buyers-guide" };
   if (segment === "blog" && p1) return { name: "blog-post", slug: p1 };
   if (segment === "blog") return { name: "blog" };
@@ -160,6 +162,8 @@ export function routePath(route: Route): string {
       return "/admin/chats";
     case "laws":
       return `/${LAWS_SEGMENT}`;
+    case "law":
+      return `/${LAWS_SEGMENT}/${route.id}`;
     case "buyers-guide":
       return `/${GUIDE_SEGMENT}`;
     case "consultancy":

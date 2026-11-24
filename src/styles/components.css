@@ -16136,3 +16136,70 @@ body.map-open .cookie-consent {
   margin: -0.4rem 0 1rem;
   color: var(--color-ink-soft);
 }
+
+/* One legal update on its own page (/property-laws/<id>) and the links to it. */
+.law-update__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.law-update__link:hover,
+.law-update__link:focus-visible {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.law-update__more {
+  align-self: flex-start;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.law-hero .back-link {
+  margin-bottom: var(--space-sm);
+}
+
+.law-hero .law-update__badges {
+  margin-bottom: 0.75rem;
+}
+
+.law-hero .law-topic {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.law-hero .law-stage {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.law-detail__card {
+  font-size: 1.05rem;
+}
+
+.law-detail__article {
+  margin: var(--space-md) 0 0;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(201, 162, 75, 0.12);
+}
+
+.law-detail__article a {
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.law-detail__disclaimer {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.law-detail + .law-others {
+  padding-top: 0;
+}

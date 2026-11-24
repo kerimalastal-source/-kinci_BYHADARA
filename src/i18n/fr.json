@@ -2452,6 +2452,12 @@
     "ctaButton": "Nous contacter",
     "ctaWhatsapp": "Nous écrire sur WhatsApp",
     "whatsappMessage": "Bonjour, j'ai une question sur le droit immobilier en Turquie.",
+    "backLabel": "Toutes les actualités juridiques",
+    "readMore": "Voir cette actualité",
+    "otherTitle": "Autres actualités juridiques",
+    "relatedArticle": "Pour une explication complète, lisez notre article :",
+    "decidedOn": "Date de la décision : {date}",
+    "projectsSubtitle": "Des projets sélectionnés à Istanbul. Notre équipe répond volontiers à vos questions sur ces projets et sur les règles qui s’y appliquent.",
     "topics": {
       "citizenship": "Citoyenneté",
       "residence": "Résidence",
@@ -3691,6 +3697,7 @@
       "title": "Guide de l'acheteur : acheter un bien à Istanbul étape par étape",
       "description": "Acheter à Istanbul en tant qu'étranger : avant l'achat, l'achat et le titre de propriété, puis l'après-remise des clés, expliqués clairement par HADARA."
     },
+    "lawTitle": "{title} en Turquie",
     "laws": {
       "title": "Actualité du droit immobilier en Turquie",
       "description": "Règles en vigueur et dernières décisions officielles en Turquie : citoyenneté, résidence, achat, impôts et location, avec le lien vers la source officielle."

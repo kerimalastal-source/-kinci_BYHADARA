@@ -170,9 +170,11 @@ function otherPages(count: number): string {
 
 /** What the visitor opened when it's a specific project, resale listing or article. */
 function pageSubject(path: string): string | null {
-  const match = path.match(/^\/(?:(?:ar|fa|fr|ru|de)\/)?(projects|resale|blog)\/[^/]+\/?$/);
+  const match = path.match(/^\/(?:(?:ar|fa|fr|ru|de)\/)?(projects|resale|blog|property-laws)\/[^/]+\/?$/);
   if (!match) return null;
-  return { projects: "المشروع", resale: "العقار", blog: "المقال" }[match[1] as "projects" | "resale" | "blog"];
+  return { projects: "المشروع", resale: "العقار", blog: "المقال", "property-laws": "الخبر القانوني" }[
+    match[1] as "projects" | "resale" | "blog" | "property-laws"
+  ];
 }
 
 /** The 🏠 line for a project, resale listing or article page, or null. */

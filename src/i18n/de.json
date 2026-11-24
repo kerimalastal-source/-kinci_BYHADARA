@@ -2608,6 +2608,12 @@
     "ctaButton": "Kontakt",
     "ctaWhatsapp": "Per WhatsApp fragen",
     "whatsappMessage": "Hallo, ich habe eine Frage zu den Immobiliengesetzen in der Türkei.",
+    "backLabel": "Alle Rechtsneuigkeiten",
+    "readMore": "Diese Meldung öffnen",
+    "otherTitle": "Weitere Rechtsneuigkeiten",
+    "relatedArticle": "Eine ausführliche Erklärung finden Sie in unserem Artikel:",
+    "decidedOn": "Datum der Entscheidung: {date}",
+    "projectsSubtitle": "Ausgewählte Projekte in Istanbul. Unser Team beantwortet gern Ihre Fragen zu diesen Projekten und zu den geltenden Regeln.",
     "topics": {
       "citizenship": "Staatsbürgerschaft",
       "residence": "Aufenthalt",
@@ -3847,6 +3853,7 @@
       "title": "Käuferratgeber: Immobilienkauf in Istanbul, Schritt für Schritt",
       "description": "Als Ausländer in Istanbul kaufen: die Schritte vor dem Kauf, Kauf und Tapu sowie das Leben nach der Schlüsselübergabe – verständlich erklärt von HADARA."
     },
+    "lawTitle": "{title} in der Türkei",
     "laws": {
       "title": "Immobiliengesetze in der Türkei: aktuelle Änderungen",
       "description": "Aktuelle Regeln und neueste amtliche Beschlüsse zu Staatsbürgerschaft, Aufenthalt, Immobilienkauf, Steuern und Miete in der Türkei, mit Link zur Behördenquelle."
