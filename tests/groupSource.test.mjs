@@ -72,3 +72,15 @@ test("the company's own Instagram bio link is named", async () => {
   assert.match(msg, /📸 جاء من: حساب الشركة على إنستغرام \(hadararealestate\) \(رابط البايو\)/);
   assert.doesNotMatch(msg, /👤|📣|fbclid/);
 });
+
+test("a link inside our PDF catalogues is named, not shown as an ad", async () => {
+  const { catalogLink } = await import("../.test-build/_lib/groupSource.js");
+  const link = "utm_source=catalog · utm_medium=print · utm_campaign=catalog-2026";
+  assert.equal(catalogLink(link), "كتالوج مشاريع حضارة (PDF)");
+  assert.equal(catalogLink("utm_source=catalog · utm_medium=print · utm_campaign=villa-brochure-2026"), "كتالوج فيلا مرمرة هيفن (PDF)");
+  assert.equal(catalogLink("utm_source=catalog · utm_medium=paid"), "");
+  assert.equal(catalogLink("utm_source=facebook · utm_campaign=catalog-2026"), "");
+  const msg = newVisitorMessage(view(link), PLACE, ORIGIN);
+  assert.match(msg, /📄 جاء من: رابط داخل كتالوج مشاريع حضارة \(PDF\)/);
+  assert.doesNotMatch(msg, /📣 الإعلان/);
+});
