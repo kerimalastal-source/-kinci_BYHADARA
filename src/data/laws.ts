@@ -186,7 +186,7 @@ export const lawUpdates: LawUpdate[] = [
   },
   {
     id: "secure-payment-system",
-    article: "buying-property-and-tapu",
+    article: "secure-payment-system-turkey",
     topic: "ownership",
     decided: "2026-10-01",
     effective: "2026-12-01",
