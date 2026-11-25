@@ -1,7 +1,8 @@
 # مراقب القوانين والسوق (weekly Property Laws monitor)
 
 Once a week (Thursday morning, Istanbul) a scheduled Claude session looks for **new
-Turkish legal decisions that matter to people buying, owning or renting property**, and
+Turkish legal decisions that matter to people buying, owning or renting property, and to
+foreigners living in, moving to or investing in Turkey** (owner's rule 2026-11-25), and
 saves each one as a draft **on the owner's review page** (`REVIEW_URL` in
 `scripts/laws/config.json`): `drafts.json` + `drafts/<id>.json`. The weekly session
 **cannot push to the repository** (routines are read-only), so it never commits.
@@ -52,8 +53,26 @@ Work from the repository root (clone kerimalastal-source/-kinci_BYHADARA if need
    - TKGM duyurular (yabancı işler), GİB duyurular/rehberler, Göç İdaresi duyurular
      (mahalle kapatma, ikamet), NVİ vatandaşlık, TBMM kanun teklifleri (only bills that
      clearly affect housing; mark them `stage: "proposal"`).
-   Keep only what affects a person who buys, owns, sells or rents a home in Turkey,
-   especially foreigners. At most **5 new drafts** per run (most important first).
+   - **Foreigners in Turkey (owner's rule 2026-11-25)**: also look for decisions that
+     concern foreigners even when they are not about property: residence permits of every
+     kind (ikamet izni, kısa dönem, uzun dönem, yatırımcı ikameti), visas and entry,
+     citizenship, investment (yatırım, döviz mevduatı, devlet tahvili, GYF/GSYF), work
+     permits (çalışma izni, Turkuaz Kart), tourism (turizm, kısa süreli kiralama), health
+     insurance for foreigners, customs and car import for foreigners. Example: the investor
+     residence of 18/11/2026 (decision 11994: US$150,000 for 3 years, US$200,000 for 5 years).
+   Keep what affects a person who buys, owns, sells or rents a home in Turkey, **and what
+   affects foreigners living in, moving to or investing in Turkey** (they may buy property
+   later, and these items bring visitors from search and social media). Property, residence
+   and citizenship items first. If an item fits none of the page's topics, use the closest
+   one and suggest a new topic in its `verify`. At most **5 new drafts** per run
+   (most important first).
+   **Each approved update gets its own page, `/property-laws/<id>`, made for Google** (owner
+   2026-11-25): so the draft's `id` is the page address. Write it as short lowercase English
+   words with hyphens that name the topic as people search for it (e.g.
+   `investor-residence-3-5-years`), and never change it after approval. The `title` starts
+   with the term people search for (the page title adds "in Turkey"), and `summary` is
+   2–4 clear sentences (Google shows its first ~155 characters). If a published blog article
+   explains the topic, name its slug in `verify` so the HADARA session can link it (`article`).
 5. "Market" check: compare what you found with the figures the site already shows
    (`citizenship.*` in `src/i18n/en.json`: 400,000 USD, 3-year hold, 200,000/100,000 USD
    residence, 4% title deed fee, and the rules in laws.ts). If an official decision

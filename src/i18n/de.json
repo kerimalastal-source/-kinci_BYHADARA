@@ -408,7 +408,7 @@
       "titleVilla": "Broschüre {name} (PDF)",
       "textAll": "{name} und unsere weiteren Istanbuler Projekte, mit Fotos und technischen Daten. Geben Sie Ihre WhatsApp-Nummer ein, um ihn sofort zu erhalten; unser Team meldet sich anschließend mit den verfügbaren Preisen und Grundrissen.",
       "textVilla": "Fotos, technische Daten und die Aufteilung der Villa Etage für Etage in einer Datei. Geben Sie Ihre WhatsApp-Nummer ein, um sie sofort zu erhalten; unser Team meldet sich anschließend mit den Details.",
-      "langNote": "Der Katalog ist auf Englisch.",
+      "langNote": "",
       "nameLabel": "Name (optional)",
       "namePlaceholder": "Ihr Name",
       "phoneLabel": "WhatsApp-Nummer",
@@ -2608,6 +2608,12 @@
     "ctaButton": "Kontakt",
     "ctaWhatsapp": "Per WhatsApp fragen",
     "whatsappMessage": "Hallo, ich habe eine Frage zu den Immobiliengesetzen in der Türkei.",
+    "backLabel": "Alle Rechtsneuigkeiten",
+    "readMore": "Diese Meldung öffnen",
+    "otherTitle": "Weitere Rechtsneuigkeiten",
+    "relatedArticle": "Eine ausführliche Erklärung finden Sie in unserem Artikel:",
+    "decidedOn": "Datum der Entscheidung: {date}",
+    "projectsSubtitle": "Ausgewählte Projekte in Istanbul. Unser Team beantwortet gern Ihre Fragen zu diesen Projekten und zu den geltenden Regeln.",
     "topics": {
       "citizenship": "Staatsbürgerschaft",
       "residence": "Aufenthalt",
@@ -2739,6 +2745,25 @@
     }
   },
   "blogData": {
+    "yapi-denetim-building-inspection": {
+      "category": "Immobilienkauf",
+      "title": "Yapı Denetim in der Türkei: die Bauaufsicht erklärt",
+      "excerpt": "Yapı Denetim erklärt: wie lizenzierte Bauaufsichtsfirmen in der Türkei Neubauten überwachen und was Sie vor dem Kauf eines Neubaus fragen sollten.",
+      "body": [
+        "Wenn Sie in Istanbul eine neue Wohnung kaufen oder eine Wohnung, die sich noch im Bau befindet, vertrauen Sie darauf, dass das Gebäude hinter dem Prospekt ordnungsgemäß errichtet wird. Sie können nicht jeden Tag auf der Baustelle stehen und zusehen, wie der Beton gegossen wird, und die meisten Käufer wüssten auch nicht, worauf sie achten sollten. In der Türkei übernimmt diese tägliche Kontrolle ein System namens Yapı Denetim. Dieser Ratgeber erklärt, was es ist, wie es mit der Baugenehmigung und der Nutzungsgenehmigung zusammenhängt und welche Fragen Sie stellen sollten, bevor Sie einen Neubau oder eine Wohnung im Bau reservieren.",
+        "## Was Yapı Denetim ist",
+        "Yapı Denetim ist der türkische Begriff für Bauaufsicht oder Bauüberwachung. Nach türkischem Recht werden Neubauten während der Bauphase von einer unabhängigen Bauaufsichtsfirma überwacht, die als yapı denetim firması bezeichnet wird. Diese Firmen sind private Unternehmen, arbeiten jedoch mit einer staatlichen Lizenz und führen ihre Prüfungen im Auftrag des Staates durch. Ihre Aufgabe ist es sicherzustellen, dass das Gebäude gemäß dem genehmigten Projekt, den Bauvorschriften und den geltenden Erdbebenvorschriften errichtet wird.",
+        "Das entscheidende Wort ist unabhängig. Die Bauaufsichtsfirma ist weder der Bauträger noch das Bauunternehmen. Ihre Ingenieure und Architekten prüfen die Projektunterlagen, begleiten die Arbeiten vor Ort in den wichtigen Phasen und halten ihre Feststellungen in amtlichen Berichten fest. In der Regel umfasst das den Baugrund und das Fundament, das Tragwerk, die verwendeten Materialien einschließlich Proben von Beton und Bewehrungsstahl sowie die Haustechnik. Entsprechen die Arbeiten nicht dem genehmigten Projekt, wird von der Firma erwartet, dies den Behörden zu melden, statt darüber hinwegzusehen.",
+        "## Der Zusammenhang mit Baugenehmigung und İskan",
+        "Es hilft, Yapı Denetim als den Faden zu sehen, der zwei Dokumente verbindet. Die Baugenehmigung wird von der Gemeinde vor Beginn der Arbeiten erteilt und erlaubt den Baubeginn. Die Nutzungsgenehmigung, bekannt als İskan, wird am Ende erteilt und bestätigt, dass das fertige Gebäude dem Genehmigten entspricht und bewohnt werden darf. Dazwischen begleitet die Bauaufsichtsfirma den Bau, und ihre Berichte werden Teil der Akte, die zur İskan führt. Mit anderen Worten: Die Nutzungsgenehmigung entsteht nicht aus dem Nichts, sondern beruht auf der Prüfarbeit, die geleistet wurde, während das Gebäude wuchs. Die İskan erklären wir ausführlicher in einem eigenen Artikel dieses Blogs.",
+        "## Was das für Käufer eines Neubaus bedeutet",
+        "Bei einem fertigen Gebäude ist die İskan das deutlichste Zeichen dafür, dass die Bauaufsicht abgeschlossen ist. Ein Gebäude im Bau hat noch keine İskan, und genau dann ist Yapı Denetim am wichtigsten, denn dieses System überwacht die Arbeiten in Ihrem Interesse bis zur Übergabe. Es ersetzt Ihre eigenen Prüfungen nicht und garantiert nicht die Qualität des Innenausbaus wie Küche oder Bodenbeläge, sorgt aber für eine unabhängige und geordnete Überwachung des Gebäudes selbst. Zu wissen, dass ein Projekt eine namentlich bekannte Bauaufsichtsfirma, eine gültige Baugenehmigung und einen klaren Weg zur Nutzungsgenehmigung hat, ist eine solide Grundlage für den Kauf vom Plan.",
+        "## Was Sie vor Ihrer Entscheidung fragen sollten",
+        "Fragen Sie, welche Bauaufsichtsfirma das Projekt überwacht, und prüfen Sie, ob derselbe Name in der Baugenehmigung und auf dem Bauschild an der Baustelle steht, auf dem die türkischen Vorschriften die Angaben zum Projekt vorsehen. Lassen Sie sich die Baugenehmigung zeigen und fragen Sie, wann der Bauträger die Nutzungsgenehmigung erwartet. Fragen Sie bei jedem Projekt, ob es nach den türkischen Erdbebenvorschriften von 2018 geplant wurde und ob ein Bodengutachten vorliegt. Stellen Sie dann die üblichen Fragen zur Tapu: welche Art sie ist und ob eine Hypothek oder Pfändung auf der Immobilie lastet. Lassen Sie sich diese Antworten schriftlich geben, nicht nur mündlich.",
+        "Auf dieser Website ist Diamond Marin in Beylikdüzü ein Neustart von Yıltaş und Lotus Yapı mit geplanter Übergabe Ende 2027, und Lotus Şişli befindet sich im Bau. Die obigen Fragen sind daher genau die, die Sie unserem Team zu diesen Projekten stellen sollten. Die Marmara Haven Villa in Büyükçekmece zeigt das Ende des Prozesses auf einer vom HADARA-Team bestätigten verifizierten Projektkarte: eine von der Gemeinde Büyükçekmece erteilte Baugenehmigung, eine als erteilt ausgewiesene Nutzungsgenehmigung und eine Bauweise nach den türkischen Erdbebenvorschriften von 2018 mit Bodengutachten und Zertifikaten. Die Bedingungen entsprechen der aktuellen Rechtslage und können sich ändern; prüfen Sie daher immer die aktuellen Anforderungen.",
+        "HADARA, Ihr Immobilienpartner in Istanbul, erklärt Ihnen gern die Unterlagen jedes Projekts, das Sie in Betracht ziehen, und sagt Ihnen, welche Sie anfordern sollten. Kontaktieren Sie uns, um über die Wohnungen zu sprechen, die Sie interessieren, oder buchen Sie eine private Videobesichtigung, um sie auszuwählen, bevor Sie Istanbul besuchen und sie persönlich ansehen."
+      ]
+    },
     "tax-number-foreigners-turkey": {
       "category": "Immobilienkauf",
       "title": "Vergi Numarası: die türkische Steuernummer für Käufer",
@@ -3828,6 +3853,7 @@
       "title": "Käuferratgeber: Immobilienkauf in Istanbul, Schritt für Schritt",
       "description": "Als Ausländer in Istanbul kaufen: die Schritte vor dem Kauf, Kauf und Tapu sowie das Leben nach der Schlüsselübergabe – verständlich erklärt von HADARA."
     },
+    "lawTitle": "{title} in der Türkei",
     "laws": {
       "title": "Immobiliengesetze in der Türkei: aktuelle Änderungen",
       "description": "Aktuelle Regeln und neueste amtliche Beschlüsse zu Staatsbürgerschaft, Aufenthalt, Immobilienkauf, Steuern und Miete in der Türkei, mit Link zur Behördenquelle."
@@ -5037,6 +5063,7 @@
       "googleBusiness": "Google-Unternehmensprofil (Maps)",
       "ownerPersonal": "Persönliches Instagram des Inhabers",
       "companyInstagram": "Instagram des Unternehmens (Bio-Link)",
+      "catalog": "PDF-Katalog (Link im Katalog)",
       "chatgpt": "ChatGPT (KI-Assistent)",
       "perplexity": "Perplexity (KI-Assistent)",
       "gemini": "Gemini (KI-Assistent)",

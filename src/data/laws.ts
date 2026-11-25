@@ -47,7 +47,12 @@ export interface LawUpdate extends LawItem {
   reference: string;
   /** A bill still in parliament: shown with a "not law yet" badge. */
   stage?: "proposal";
+  /** A blog article (slug) that explains the topic, linked from the item's own page. */
+  article?: string;
 }
+
+/** Each approved update has its own page, /property-laws/<id>, so search engines can list it (owner 2026-11-25). */
+export const lawPath = (id: string) => `/property-laws/${id}`;
 
 /** Only government / official hosts are ever linked (owner's rule). */
 export function isOfficialUrl(url: string): boolean {
@@ -131,6 +136,7 @@ export const lawRules: LawRule[] = [
 export const lawUpdates: LawUpdate[] = [
   {
     id: "investor-residence-3-5-years",
+    article: "investor-residence-permit-turkey",
     topic: "residence",
     decided: "2026-11-18",
     effective: "2026-11-18",
@@ -155,6 +161,7 @@ export const lawUpdates: LawUpdate[] = [
   },
   {
     id: "law-7579-site-fees",
+    article: "monthly-fees-aidat",
     topic: "ownership",
     decided: "2026-05-22",
     effective: "2026-05-22",
@@ -179,6 +186,7 @@ export const lawUpdates: LawUpdate[] = [
   },
   {
     id: "secure-payment-system",
+    article: "buying-property-and-tapu",
     topic: "ownership",
     decided: "2026-10-01",
     effective: "2026-12-01",
@@ -220,6 +228,7 @@ export const lawUpdates: LawUpdate[] = [
   },
   {
     id: "property-tax-cap-2026",
+    article: "emlak-vergisi-property-tax",
     topic: "taxes",
     decided: "2025-12-19",
     effective: "2026-01-01",
@@ -233,6 +242,7 @@ export const lawUpdates: LawUpdate[] = [
   },
   {
     id: "title-deed-declared-price",
+    article: "taxes-and-tapu-fees",
     topic: "taxes",
     decided: "2025-12-19",
     reference: "7566 sayılı Kanun · Resmî Gazete 33112",
@@ -245,6 +255,7 @@ export const lawUpdates: LawUpdate[] = [
   },
   {
     id: "citizenship-amount-certificate",
+    article: "citizenship-by-real-estate",
     topic: "citizenship",
     decided: "2024-12-09",
     reference: "TKGM 2024/4 sayılı Genelge (değişik)",

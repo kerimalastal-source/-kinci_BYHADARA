@@ -328,7 +328,7 @@
       "titleVilla": "Brochure {name} (PDF)",
       "textAll": "{name} et nos autres projets à Istanbul, avec photos et caractéristiques. Indiquez votre numéro WhatsApp pour le recevoir tout de suite ; notre équipe vous enverra les prix et les plans disponibles.",
       "textVilla": "Les photos de la villa, ses caractéristiques et le détail de chaque étage dans un seul fichier. Indiquez votre numéro WhatsApp pour le recevoir tout de suite ; notre équipe vous enverra les détails.",
-      "langNote": "Le catalogue est en anglais.",
+      "langNote": "",
       "nameLabel": "Nom (facultatif)",
       "namePlaceholder": "Votre nom",
       "phoneLabel": "Numéro WhatsApp",
@@ -2452,6 +2452,12 @@
     "ctaButton": "Nous contacter",
     "ctaWhatsapp": "Nous écrire sur WhatsApp",
     "whatsappMessage": "Bonjour, j'ai une question sur le droit immobilier en Turquie.",
+    "backLabel": "Toutes les actualités juridiques",
+    "readMore": "Voir cette actualité",
+    "otherTitle": "Autres actualités juridiques",
+    "relatedArticle": "Pour une explication complète, lisez notre article :",
+    "decidedOn": "Date de la décision : {date}",
+    "projectsSubtitle": "Des projets sélectionnés à Istanbul. Notre équipe répond volontiers à vos questions sur ces projets et sur les règles qui s’y appliquent.",
     "topics": {
       "citizenship": "Citoyenneté",
       "residence": "Résidence",
@@ -2583,6 +2589,25 @@
     }
   },
   "blogData": {
+    "yapi-denetim-building-inspection": {
+      "category": "Achat immobilier",
+      "title": "Yapı Denetim en Turquie : le contrôle des constructions",
+      "excerpt": "Yapı Denetim expliqué : comment les bureaux de contrôle agréés supervisent les logements neufs en Turquie et quoi demander avant d'acheter sur plan.",
+      "body": [
+        "Lorsque vous achetez un logement neuf à Istanbul, ou un logement encore en construction, vous faites confiance au fait que le bâtiment derrière la brochure est construit correctement. Vous ne pouvez pas vous rendre chaque jour sur le chantier pour regarder couler le béton, et la plupart des acheteurs ne sauraient pas quoi observer s'ils le faisaient. En Turquie, cette surveillance quotidienne revient à un système appelé Yapı Denetim. Ce guide explique ce qu'il est, son lien avec le permis de construire et le permis d'habiter, et les questions à poser avant de réserver un logement neuf ou sur plan.",
+        "## Qu'est-ce que le Yapı Denetim",
+        "Yapı Denetim est le terme turc qui désigne le contrôle ou la supervision des constructions. Selon la loi turque, les bâtiments neufs sont supervisés pendant leur construction par un bureau de contrôle indépendant, appelé yapı denetim firması. Ces bureaux sont des sociétés privées, mais ils travaillent sous agrément de l'État et effectuent leurs contrôles en son nom. Leur rôle est de s'assurer que le bâtiment est construit conformément à son projet approuvé, aux règles de construction et aux règles parasismiques en vigueur.",
+        "Le mot clé est l'indépendance. Le bureau de contrôle n'est ni le promoteur ni l'entrepreneur. Ses ingénieurs et architectes examinent les documents du projet, suivent les travaux sur place aux étapes importantes et consignent leurs constats dans des rapports officiels. En règle générale, cela couvre le sol et les fondations, la structure porteuse, les matériaux utilisés, y compris des échantillons de béton et d'acier, ainsi que les installations du bâtiment. Si les travaux ne correspondent pas au projet approuvé, le bureau est censé le signaler aux autorités plutôt que de fermer les yeux.",
+        "## Son lien avec le permis de construire et l'İskan",
+        "Il est utile de voir le Yapı Denetim comme le fil qui relie deux documents. Le permis de construire est délivré par la municipalité avant le début des travaux et autorise le chantier à démarrer. Le permis d'habiter, appelé İskan, est délivré à la fin et confirme que le bâtiment achevé correspond à ce qui a été approuvé et qu'il peut être occupé. Entre les deux, le bureau de contrôle suit la construction, et ses rapports font partie du dossier qui mène à l'İskan. Autrement dit, le permis d'habiter ne sort pas de nulle part : il repose sur le travail de contrôle effectué pendant que le bâtiment s'élevait. Nous expliquons l'İskan plus en détail dans un article distinct de ce blog.",
+        "## Ce que cela signifie pour l'acheteur d'un logement neuf ou sur plan",
+        "Pour un bâtiment achevé, l'İskan est le signe le plus clair que le processus de contrôle est terminé. Un bâtiment encore en construction n'a pas encore d'İskan, et c'est précisément là que le Yapı Denetim compte le plus, car c'est le système qui surveille les travaux pour vous jusqu'à la livraison. Il ne remplace pas vos propres vérifications et ne garantit pas la qualité des finitions comme la cuisine ou les sols, mais il assure une supervision indépendante et structurée du bâtiment lui-même. Savoir qu'un projet a un bureau de contrôle identifié, un permis de construire valide et un cheminement clair vers son permis d'habiter constitue une base solide pour acheter sur plan.",
+        "## Les questions à poser avant de décider",
+        "Demandez quel bureau de contrôle supervise le projet et vérifiez que le même nom figure sur le permis de construire et sur le panneau du chantier, où les règles turques prévoient l'affichage des informations du projet. Demandez le permis de construire et la date à laquelle le promoteur prévoit d'obtenir le permis d'habiter. Pour tout projet, demandez s'il a été conçu selon le règlement sismique turc de 2018 et s'il existe une étude de sol. Posez ensuite les questions habituelles sur l'acte de propriété : son type, et l'existence éventuelle d'une hypothèque ou d'une saisie sur le bien. Demandez ces réponses par écrit, pas seulement de vive voix.",
+        "Sur ce site, Diamond Marin à Beylikdüzü est un nouveau lancement de Yıltaş et Lotus Yapı, dont la livraison est prévue pour fin 2027, et Lotus Şişli est en construction : les questions ci-dessus sont donc exactement celles à poser à notre équipe pour ces projets. La Marmara Haven Villa à Büyükçekmece montre la fin du processus sur une fiche de projet vérifiée, confirmée par l'équipe HADARA : un permis de construire délivré par la municipalité de Büyükçekmece, un permis d'habiter indiqué comme délivré, et une construction conforme au règlement sismique turc de 2018, avec étude de sol et certificats. Les conditions dépendent de la loi en vigueur et peuvent changer ; vérifiez donc toujours les exigences actuelles.",
+        "HADARA, votre partenaire immobilier à Istanbul, peut vous expliquer les documents de tout projet qui vous intéresse et vous indiquer ceux qu'il faut demander. Contactez-nous pour parler des logements qui vous plaisent, ou réservez une visite vidéo privée pour les choisir avant de venir à Istanbul les voir en personne."
+      ]
+    },
     "tax-number-foreigners-turkey": {
       "category": "Achat immobilier",
       "title": "Vergi Numarası : le numéro fiscal turc pour acheter un bien",
@@ -3672,6 +3697,7 @@
       "title": "Guide de l'acheteur : acheter un bien à Istanbul étape par étape",
       "description": "Acheter à Istanbul en tant qu'étranger : avant l'achat, l'achat et le titre de propriété, puis l'après-remise des clés, expliqués clairement par HADARA."
     },
+    "lawTitle": "{title} en Turquie",
     "laws": {
       "title": "Actualité du droit immobilier en Turquie",
       "description": "Règles en vigueur et dernières décisions officielles en Turquie : citoyenneté, résidence, achat, impôts et location, avec le lien vers la source officielle."
@@ -4873,6 +4899,7 @@
       "googleBusiness": "Fiche Google Business (Maps)",
       "ownerPersonal": "Instagram personnel du propriétaire",
       "companyInstagram": "Instagram de l'entreprise (lien bio)",
+      "catalog": "Catalogue PDF (lien dans le catalogue)",
       "chatgpt": "ChatGPT (assistant IA)",
       "perplexity": "Perplexity (assistant IA)",
       "gemini": "Gemini (assistant IA)",

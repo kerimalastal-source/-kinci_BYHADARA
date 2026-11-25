@@ -5,7 +5,7 @@
 // from, on what device, what they looked at, how interested they seem and what they are
 // probably after. Data: visit_report() (supabase/migrations/0018).
 import { aiAssistant } from "./aiSources.js";
-import { bioLink, COMPANY_INSTAGRAM_NAME, fromCompanyInstagram, fromGoogleBusiness, fromOwnerPersonal, OWNER_PERSONAL_NAME, fromGroupSite, GOOGLE_BUSINESS_NAME, GROUP_NAME } from "./groupSource.js";
+import { bioLink, catalogLink, COMPANY_INSTAGRAM_NAME, fromCompanyInstagram, fromGoogleBusiness, fromOwnerPersonal, OWNER_PERSONAL_NAME, fromGroupSite, GOOGLE_BUSINESS_NAME, GROUP_NAME } from "./groupSource.js";
 import { escapeHtml } from "./telegram.js";
 import { isDataCenterTown } from "./visitBots.js";
 import {
@@ -116,6 +116,7 @@ function source(f: VisitFacts): string {
   if (fromCompanyInstagram(f.campaign)) return COMPANY_INSTAGRAM_NAME;
   if (fromOwnerPersonal(f.campaign)) return OWNER_PERSONAL_NAME;
   if (bioLink(f.campaign)) return bioLink(f.campaign);
+  if (catalogLink(f.campaign)) return catalogLink(f.campaign);
   if (f.campaign) return `إعلان (${escapeHtml(f.campaign.slice(0, 60))})`;
   return f.referrer ? escapeHtml(f.referrer) : "دخول مباشر";
 }

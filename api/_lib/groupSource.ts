@@ -89,3 +89,17 @@ export function fromCompanyInstagram(campaign: string | null | undefined): boole
   if (!campaign || param(campaign, "utm_medium").toLowerCase() === "paid") return false;
   return param(campaign, "utm_source").toLowerCase() === "hadara_ig";
 }
+
+// Visits from a link or QR code inside our PDF catalogues (scripts/catalog): the projects
+// catalogue tags its links "utm_source=catalog · utm_medium=print · utm_campaign=catalog-<year>",
+// the villa brochure "utm_campaign=villa-brochure-<year>". The owner saw the first one on
+// 2026-11-24 as "📣 الإعلان" and asked for its own name. Free, not an ad.
+
+/** "كتالوج مشاريع حضارة (PDF)" or "كتالوج الفيلا (PDF)" when the visit came from a catalogue, else "". */
+export function catalogLink(campaign: string | null | undefined): string {
+  if (!campaign || param(campaign, "utm_medium").toLowerCase() === "paid") return "";
+  if (param(campaign, "utm_source").toLowerCase() !== "catalog") return "";
+  return param(campaign, "utm_campaign").toLowerCase().startsWith("villa")
+    ? "كتالوج فيلا مرمرة هيفن (PDF)"
+    : "كتالوج مشاريع حضارة (PDF)";
+}

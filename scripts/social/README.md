@@ -17,6 +17,27 @@ sends the result to the owner on Telegram. Each post goes out once per platform.
 **Never push to `main`.** The push must be done **before 08:50** so the 09:00 post is on
 the branch build in time.
 
+## Why we post (the owner's standing rule, 2026-11-25 — read first)
+
+The owner: we post to be present, **but above all social media is a channel that brings
+visitors to the website** — through useful posts that teach people something, never "posting
+for the sake of posting". Therefore:
+
+- **New official news first, always.** Any new law, decision or official change (from
+  `src/data/laws.ts`, approved, with its official .gov.tr source) gets a post **as soon as it is
+  on the site**, before anything else in the plan: people see it for the first time and come to
+  the site to read more. This includes news that is not about property but matters to foreigners
+  interested in Turkey (e.g. the investor residence: US$150,000 for 3 years, US$200,000 for
+  5 years; decision 11994), because they may buy property later.
+- **Ideas come from our articles and the laws page**: every post points to the page with the
+  details (an article, the laws page, the citizenship page, a project).
+- **Format for news and questions**: the approved news design (`scripts/social/news/`): a clear
+  Arabic headline in big bold letters that makes people want to read more, our website under it,
+  little or no other text on the image. **Caption short**: one or two sentences in clear formal
+  Arabic (English after it) and the link to the page with the details.
+- **Quality first**: correct, clear Arabic (MSA), bold readable type, professional and high
+  resolution; no government documents in AI images; no prices in posts (except the villa ads).
+
 ## Steps for the daily session
 
 > **ONE POST A DAY (owner's decision 2026-10-25, overrides everything below and the routine's

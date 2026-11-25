@@ -1,7 +1,7 @@
 // Telegram texts of the anonymous visitor alerts (api/track.ts), in Arabic, parse_mode
 // HTML: every value that comes from the request is escaped.
 import { aiAssistant } from "./aiSources.js";
-import { bioLink, COMPANY_INSTAGRAM_NAME, fromCompanyInstagram, fromGoogleBusiness, fromOwnerPersonal, OWNER_PERSONAL_NAME, fromGroupSite, groupPlacement, GOOGLE_BUSINESS_NAME, GROUP_NAME } from "./groupSource.js";
+import { bioLink, catalogLink, COMPANY_INSTAGRAM_NAME, fromCompanyInstagram, fromGoogleBusiness, fromOwnerPersonal, OWNER_PERSONAL_NAME, fromGroupSite, groupPlacement, GOOGLE_BUSINESS_NAME, GROUP_NAME } from "./groupSource.js";
 import { escapeHtml } from "./telegram.js";
 
 export const LOCALES = ["en", "ar", "fa", "fr", "ru", "de"] as const;
@@ -170,9 +170,11 @@ function otherPages(count: number): string {
 
 /** What the visitor opened when it's a specific project, resale listing or article. */
 function pageSubject(path: string): string | null {
-  const match = path.match(/^\/(?:(?:ar|fa|fr|ru|de)\/)?(projects|resale|blog)\/[^/]+\/?$/);
+  const match = path.match(/^\/(?:(?:ar|fa|fr|ru|de)\/)?(projects|resale|blog|property-laws)\/[^/]+\/?$/);
   if (!match) return null;
-  return { projects: "المشروع", resale: "العقار", blog: "المقال" }[match[1] as "projects" | "resale" | "blog"];
+  return { projects: "المشروع", resale: "العقار", blog: "المقال", "property-laws": "الخبر القانوني" }[
+    match[1] as "projects" | "resale" | "blog" | "property-laws"
+  ];
 }
 
 /** The 🏠 line for a project, resale listing or article page, or null. */
@@ -210,6 +212,7 @@ export function newVisitorMessage(view: PageView, geo: Geo, origin: string, extr
   else if (fromCompanyInstagram(view.campaign)) lines.push(`📸 جاء من: ${COMPANY_INSTAGRAM_NAME} (رابط البايو)`);
   else if (fromOwnerPersonal(view.campaign)) lines.push(`👤 جاء من: ${OWNER_PERSONAL_NAME} (رابط البايو)`);
   else if (bioLink(view.campaign)) lines.push(`📸 جاء من: ${bioLink(view.campaign)} (ليس إعلاناً)`);
+  else if (catalogLink(view.campaign)) lines.push(`📄 جاء من: رابط داخل ${catalogLink(view.campaign)}`);
   else if (view.campaign) lines.push(`📣 الإعلان: ${escapeHtml(view.campaign)}`);
   return [...lines, ...extra].join("\n");
 }

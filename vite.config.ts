@@ -2,7 +2,7 @@ import { defineConfig, type Plugin } from "vite";
 import "./src/i18n/all";
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
-import { buildMeta, indexableRoutes, renderHeadTags, isRtlLocale, DEFAULT_SITE_URL } from "./src/seo/meta";
+import { buildMeta, indexableRoutes, renderHeadTags, isRtlLocale, DEFAULT_SITE_URL, liveLawUpdates } from "./src/seo/meta";
 import { localizePath, routePath, type Route } from "./src/seo/routes";
 import { projects } from "./src/data/projects";
 import { blogPosts } from "./src/data/blog";
@@ -109,6 +109,7 @@ function seoPrerender(): Plugin {
 
 /** An article's own date (last rewrite, else first publication) for the sitemap; other pages use the build date. */
 function lastModified(route: Route): string | undefined {
+  if (route.name === "law") return liveLawUpdates().find((u) => u.id === route.id)?.checked;
   if (route.name !== "blog-post") return undefined;
   const post = blogPosts.find((p) => p.slug === route.slug);
   return post ? (post.updated ?? post.published) : undefined;

@@ -19,17 +19,25 @@ const BOT_AGENT = /bot|crawl|spider|slurp|headless|lighthouse/i;
 const MIN_FILL_MS = 2000;
 const SITE = "https://www.hadararealestate.com";
 
-/** The PDFs in public/catalogs/ (web edition of scripts/catalog; Arabic and English only). */
+/** The PDFs in public/catalogs/ (web edition of scripts/catalog; one per site language). */
 export const CATALOGS: Record<string, { path: string; ar: string }> = {
   "catalogue-ar": { path: "/catalogs/hadara-catalogue-ar.pdf", ar: "كتالوج مشاريع حضارة (بالعربية)" },
   "catalogue-en": { path: "/catalogs/hadara-catalogue-en.pdf", ar: "كتالوج مشاريع حضارة (بالإنجليزية)" },
+  "catalogue-fa": { path: "/catalogs/hadara-catalogue-fa.pdf", ar: "كتالوج مشاريع حضارة (بالفارسية)" },
+  "catalogue-fr": { path: "/catalogs/hadara-catalogue-fr.pdf", ar: "كتالوج مشاريع حضارة (بالفرنسية)" },
+  "catalogue-ru": { path: "/catalogs/hadara-catalogue-ru.pdf", ar: "كتالوج مشاريع حضارة (بالروسية)" },
+  "catalogue-de": { path: "/catalogs/hadara-catalogue-de.pdf", ar: "كتالوج مشاريع حضارة (بالألمانية)" },
   "villa-ar": { path: "/catalogs/marmara-haven-villa-ar.pdf", ar: "كتالوج فيلا مرمرة هيفن (بالعربية)" },
-  "villa-en": { path: "/catalogs/marmara-haven-villa-en.pdf", ar: "كتالوج فيلا مرمرة هيفن (بالإنجليزية)" }
+  "villa-en": { path: "/catalogs/marmara-haven-villa-en.pdf", ar: "كتالوج فيلا مرمرة هيفن (بالإنجليزية)" },
+  "villa-fa": { path: "/catalogs/marmara-haven-villa-fa.pdf", ar: "كتالوج فيلا مرمرة هيفن (بالفارسية)" },
+  "villa-fr": { path: "/catalogs/marmara-haven-villa-fr.pdf", ar: "كتالوج فيلا مرمرة هيفن (بالفرنسية)" },
+  "villa-ru": { path: "/catalogs/marmara-haven-villa-ru.pdf", ar: "كتالوج فيلا مرمرة هيفن (بالروسية)" },
+  "villa-de": { path: "/catalogs/marmara-haven-villa-de.pdf", ar: "كتالوج فيلا مرمرة هيفن (بالألمانية)" }
 };
 
 /** The villa has its own brochure; every other project gets the catalogue of all projects. Keep in step with src/data/catalogs.ts. */
 export function catalogKey(slug: string, locale: SiteLocale): string {
-  return `${slug === "marmara-haven-villa" ? "villa" : "catalogue"}-${locale === "ar" ? "ar" : "en"}`;
+  return `${slug === "marmara-haven-villa" ? "villa" : "catalogue"}-${locale}`;
 }
 
 interface CatalogRequest {

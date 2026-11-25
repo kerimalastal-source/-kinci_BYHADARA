@@ -38,7 +38,7 @@ export const SKIPPED_ROUTES: ReadonlySet<Route["name"]> = new Set([
 ]);
 
 /** Pages whose title names a specific project, resale listing or article (shown in the alert). */
-const TITLED_ROUTES: ReadonlySet<Route["name"]> = new Set(["project", "resale-listing", "blog-post"]);
+const TITLED_ROUTES: ReadonlySet<Route["name"]> = new Set(["project", "resale-listing", "blog-post", "law"]);
 
 let previousPath = "";
 
