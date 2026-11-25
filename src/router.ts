@@ -9,6 +9,7 @@ import { renderPrivacy } from "./pages/privacy";
 import { renderLaws } from "./pages/laws";
 import { renderLawDetail } from "./pages/lawDetail";
 import { renderBuyersGuide } from "./pages/buyersGuide";
+import { renderLinks } from "./pages/links";
 import { LAWS_PAGE_LIVE } from "./data/laws";
 import { RESALE_LIVE } from "./data/resale";
 import { renderBlog } from "./pages/blog";
@@ -137,6 +138,9 @@ function renderRoute(route: Route, main: HTMLElement): void {
       break;
     case "buyers-guide":
       renderBuyersGuide(main);
+      break;
+    case "links":
+      renderLinks(main);
       break;
     case "blog":
       renderBlog(main);

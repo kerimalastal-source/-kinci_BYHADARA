@@ -67,6 +67,14 @@
       "destination": "/"
     },
     {
+      "source": "/links",
+      "destination": "/"
+    },
+    {
+      "source": "/(ar|fa|fr|ru|de)/links",
+      "destination": "/"
+    },
+    {
       "source": "/resale/([^/]+)",
       "destination": "/"
     },

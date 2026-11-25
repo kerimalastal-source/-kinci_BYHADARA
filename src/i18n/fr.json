@@ -2420,6 +2420,7 @@
     "relatedDistrictSubtitle": "Nos projets disponibles à la vente à {district}. Notre équipe vous envoie volontiers les détails et organise une visite ou une visite vidéo.",
     "relatedDistrictNearbySubtitle": "Nos projets disponibles à la vente à {district} et dans les quartiers voisins. Notre équipe vous envoie volontiers les détails et organise une visite ou une visite vidéo."
   },
+  "links": {"title": "HADARA Real Estate", "subtitle": "Votre partenaire immobilier à Istanbul. Tout ce que nous publions, au même endroit.", "whatsapp": "Écrivez-nous sur WhatsApp", "whatsappMessage": "Bonjour, je vous ai trouvés sur Instagram et j'aimerais me renseigner sur un bien.", "projects": "Tous nos projets à Istanbul", "villa": "Marmara Haven, villa avec vue sur la mer", "citizenship": "La citoyenneté turque par l'immobilier", "videoTour": "Réserver une visite privée en vidéo", "latestLaws": "Dernières actualités juridiques", "allLaws": "Toutes les actualités juridiques", "latestArticles": "Derniers articles", "allArticles": "Tous les articles", "ourProjects": "Nos projets"},
   "laws": {
     "heroEyebrow": "Lois immobilières",
     "heroTitle": "Actualité du droit immobilier en Turquie",
@@ -3712,6 +3713,7 @@
     "processTeaserCta": "Découvrir notre méthode"
   },
   "seo": {
+    "links": {"title": "Nos liens", "description": "Les liens de nos publications Instagram : actualités juridiques, nouveaux articles, nos projets à Istanbul et contact WhatsApp."},
     "guide": {
       "title": "Guide de l'acheteur : acheter un bien à Istanbul étape par étape",
       "description": "Acheter à Istanbul en tant qu'étranger : avant l'achat, l'achat et le titre de propriété, puis l'après-remise des clés, expliqués clairement par HADARA."

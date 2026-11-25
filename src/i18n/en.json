@@ -2418,6 +2418,7 @@
     "relatedDistrictSubtitle": "Our projects available for sale in {district}. Our team is happy to send you the details and arrange a visit or a video tour.",
     "relatedDistrictNearbySubtitle": "Our projects available for sale in {district} and the districts around it. Our team is happy to send you the details and arrange a visit or a video tour."
   },
+  "links": {"title": "HADARA Real Estate", "subtitle": "Your real estate partner in Istanbul. Everything we post, in one place.", "whatsapp": "Message us on WhatsApp", "whatsappMessage": "Hello, I found you on Instagram and would like to ask about a property.", "projects": "All our projects in Istanbul", "villa": "Marmara Haven, a sea-view villa", "citizenship": "Turkish citizenship through property", "videoTour": "Book a private video tour", "latestLaws": "Latest legal updates", "allLaws": "All legal updates", "latestArticles": "Latest articles", "allArticles": "All articles", "ourProjects": "Our projects"},
   "laws": {
     "heroEyebrow": "Property Laws",
     "heroTitle": "Turkish Property Law Updates",
@@ -3710,6 +3711,7 @@
     "processTeaserCta": "See how we work"
   },
   "seo": {
+    "links": {"title": "Our links", "description": "Links from our Instagram posts: the latest legal updates, new articles, our projects in Istanbul and WhatsApp contact."},
     "guide": {
       "title": "Buyer's Guide: Buying Property in Istanbul Step by Step",
       "description": "Buying a home in Istanbul as a foreigner: the steps before you buy, the purchase and the title deed, and life after you receive the keys, explained clearly by HADARA."

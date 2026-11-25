@@ -53,6 +53,7 @@ const PAGE_KEYS: Partial<Record<Route["name"], string>> = {
   privacy: "privacy",
   laws: "laws",
   "buyers-guide": "guide",
+  links: "links",
   blog: "blog",
   "property-request": "propertyRequest",
   "video-tour": "videoTour",
@@ -78,6 +79,7 @@ const PAGE_KEYS: Partial<Record<Route["name"], string>> = {
 };
 
 const NOINDEX: Route["name"][] = [
+  "links",
   "login",
   "register",
   "account",
