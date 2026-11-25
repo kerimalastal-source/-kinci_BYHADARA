@@ -22,6 +22,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "secure-payment-system-turkey",
+    priority: -31,
+    published: "2026-11-25",
+    relatedProjects: ["tual-comfort", "sea-pearl-atakoy", "lotus-yali"],
+    coverImage: { src: "/images/blog/secure-payment-system-turkey.jpg", width: 1418, height: 945 }
+  },
+  {
     slug: "yapi-denetim-building-inspection",
     priority: -30,
     published: "2026-11-24",
