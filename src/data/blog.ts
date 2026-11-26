@@ -22,6 +22,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "emlak-konut-projects-istanbul",
+    priority: -32,
+    published: "2026-11-26",
+    relatedProjects: ["hayat-flora", "gokturk-kemer-evleri", "vadi-panorama"],
+    coverImage: { src: "/images/blog/emlak-konut-projects-istanbul.jpg", width: 1390, height: 927 }
+  },
+  {
     slug: "secure-payment-system-turkey",
     priority: -31,
     published: "2026-11-25",
