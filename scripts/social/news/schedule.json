@@ -103,29 +103,29 @@
     {
       "date": "2026-12-01",
       "at": "14:00",
-      "id": "news-valuable-housing-tax",
-      "spec": "valuable-housing-tax.json",
-      "topic": "تصميم الأخبار: ضريبة المسكن القيّم 2026",
+      "id": "news-revaluation-2026",
+      "spec": "revaluation-2026.json",
+      "topic": "تصميم الأخبار: معدل إعادة التقييم 2026 وضريبة العقار",
       "caption": {
         "ar": {
-          "title": "ضريبة المسكن القيّم: متى تدفعها؟",
-          "intro": "تُفرض ضريبة المسكن القيّم (Değerli Konut Vergisi) على المساكن التي تتجاوز قيمتها الضريبية حداً تحدده إدارة الإيرادات كل عام، وهو 17,711,000 ليرة تركية لعام 2026، بعد أن كان 15,709,000 ليرة لعام 2025.",
+          "title": "معدل إعادة التقييم لعام 2026: 27.83%",
+          "intro": "أعلنت وزارة الخزانة والمالية في الجريدة الرسمية أن معدل إعادة التقييم لعام 2026 هو 27.83%. ووفق قانون ضريبة العقار، ترتفع القيمة الضريبية للمباني والأراضي كل عام بهذا المعدل، ويحق لرئيس الجمهورية تخفيض الزيادة حتى الصفر.",
           "closing": [
-            "نخبرك إن كان العقار الذي تختاره قد يخضع لهذه الضريبة.",
-            "راسلنا على واتساب باسم المشروع الذي يهمك."
+            "وترتفع حدود ضريبة المسكن القيّم (17,711,000 ليرة تركية لعام 2026) كل عام بنصف هذا المعدل.",
+            "نوضح لك الضرائب والرسوم السنوية المتوقعة للعقار قبل الشراء."
           ],
           "cta": "تفاصيل الخبر ومصدره الرسمي",
-          "path": "/property-laws/valuable-housing-tax-2026"
+          "path": "/property-laws/revaluation-rate-2026-property-tax"
         },
         "en": {
-          "title": "Valuable housing tax: when do you pay it?",
-          "intro": "The valuable housing tax (Değerli Konut Vergisi) applies to homes whose tax value exceeds a threshold set each year by the Revenue Administration: TRY 17,711,000 for 2026, up from TRY 15,709,000 for 2025.",
+          "title": "Turkey's 2026 revaluation rate: 27.83%",
+          "intro": "The Ministry of Treasury and Finance announced in the Official Gazette that the revaluation rate for 2026 is 27.83%. Under the Property Tax Law, the tax value of buildings and land rises each year by this rate, and the President may reduce the increase down to zero.",
           "closing": [
-            "We tell you whether the property you choose may be subject to it.",
-            "Message us on WhatsApp with the project you are interested in."
+            "The thresholds of the valuable housing tax (TRY 17,711,000 for 2026) rise each year by half of this rate.",
+            "We explain the expected yearly taxes and fees of a property before you buy."
           ],
           "cta": "The news and its official source",
-          "path": "/property-laws/valuable-housing-tax-2026"
+          "path": "/property-laws/revaluation-rate-2026-property-tax"
         },
         "hashtags": [
           "#قوانين_العقار",
