@@ -119,7 +119,9 @@ export async function recordVisit(view: PageView, geo: Geo, origin: string, opti
   const check = await burstFor(view.sessionId, landing.path);
   if (!state.is_new && check.messageId) messageId = check.messageId;
   const reason = botReason(landing, check.burst);
-  if (reason) {
+  // A burst visit whose alert refreshAlert() already released (its use showed a person) is
+  // treated like any other visit from here on: its later pages edit the alert and send 🔥.
+  if (reason && !(reason === "same-page burst" && messageId)) {
     console.info(`track: no alert, likely automated: ${reason} (${landing.city ?? "?"}, ${landing.country ?? "?"})`);
     return;
   }
@@ -184,11 +186,18 @@ export async function refreshAlert(view: PageView, insight: Insight, origin: str
   const landing = insight.landing;
   if (!landing || (landing.referrer ?? "").startsWith("/") || isDataCenterTown(landing)) return;
   const facts = insightFacts(insight);
-  // A held visit (alertHold()) has no alert yet: it gets one once it no longer reads as
-  // automated, unless it was part of a same-page burst. Any other visit without an alert
-  // stays without one.
-  if (!messageId && (!alertHold(facts) || classifyVisit(facts).verdict === "bot")) return;
-  if (!messageId && (await burstFor(view.sessionId, landing.path)).burst > 0) return;
+  // A visit without an alert yet gets one once its use shows a person: a held visit
+  // (alertHold()) once it no longer reads as automated, and a visit that opened its first
+  // page together with other sessions (a same-page burst) once it reads as real. Meta's link
+  // preview often opens a newly shared link seconds before the person who shared it, so the
+  // burst alone would hide them for good (owner 2026-11-25). Any other visit without an
+  // alert (a driven browser, a new tab from the site) stays without one.
+  if (!messageId) {
+    const verdict = classifyVisit(facts).verdict;
+    if (verdict === "bot") return;
+    const burst = (await burstFor(view.sessionId, landing.path)).burst > 0;
+    if (burst ? verdict !== "real" : !alertHold(facts)) return;
+  }
   const pages = insight.pages?.length ?? 1;
   // A report for a page the visitor has already left: the next page's own edit (which
   // re-reads the visit) shows the newer state, so this one mustn't overwrite it.

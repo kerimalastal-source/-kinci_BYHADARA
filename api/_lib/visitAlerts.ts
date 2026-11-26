@@ -114,6 +114,7 @@ const PAGE_NAMES: Record<string, string> = {
   "/privacy": "سياسة الخصوصية",
   "/property-laws": "قوانين العقار",
   "/buyers-guide": "دليل المشتري",
+  "/links": "صفحة روابط إنستغرام",
   "/login": "تسجيل الدخول",
   "/register": "حساب جديد",
   "/engineering-architecture": "الاستشارات الهندسية",

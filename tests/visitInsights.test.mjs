@@ -271,6 +271,36 @@ test("a US visit gets no alert while it looks automated, and its alert goes out 
   await db.close();
 });
 
+test("a visit caught in a same-page burst gets its alert once it reads as real, the silent one never", async () => {
+  const db = await database();
+  const telegram = fakeServices(db);
+  // Meta's link preview and the person who shared the link open /links within seconds.
+  const person = view({ path: "/links", tz: "Europe/Istanbul", referrer: "instagram.com" });
+  const preview = view({ path: "/links", tz: "Europe/Istanbul", referrer: "instagram.com" });
+  const istanbul = { country: "TR", city: "Istanbul" };
+  await Promise.all([person, preview].map((v) => recordVisit(v, istanbul, ORIGIN, { settleMs: 300 })));
+  assert.equal(telegram.length, 0);
+  // The preview does nothing: still no alert.
+  assert.equal((await engagement(preview, { active: 2 })).status, 204);
+  await new Promise((resolve) => setTimeout(resolve, 150));
+  assert.equal(telegram.length, 0);
+  // Limited use is not enough for a burst visit.
+  assert.equal((await engagement(person, { active: 8, interactions: 1 })).status, 204);
+  await new Promise((resolve) => setTimeout(resolve, 150));
+  assert.equal(telegram.length, 0);
+  // The person touches, scrolls and reads: the alert goes out, once.
+  assert.equal((await engagement(person, { active: 30, scroll: 80, interactions: 6 })).status, 204);
+  await until(() => telegram.length > 0);
+  assert.deepEqual(telegram.map((m) => m.method), ["sendMessage"]);
+  assert.match(telegram[0].text, /🟢/);
+  // From now on a later page edits the alert and the contact page sends 🔥.
+  telegram.length = 0;
+  await recordVisit({ ...person, path: "/ar/contact", referrer: person.path }, istanbul, ORIGIN, quiet);
+  assert.deepEqual(telegram.map((m) => m.method), ["editMessageText", "sendMessage"]);
+  assert.match(telegram[1].text, /🔥/);
+  await db.close();
+});
+
 test("Meta's 2000x2000 check never gets an alert, whatever it does", async () => {
   const db = await database();
   const telegram = fakeServices(db);
