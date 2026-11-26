@@ -9,6 +9,9 @@
 // spec: { "id": "citizenship-more-than-one", "hero": "heroes/<id>.jpg" (relative to this
 //         folder, 4:5, about 2160x2700), "line1": "الجنسية التركية",
 //         "line2": "بأكثر من {عقار}؟" }   ({…} = the gold word)
+//       optional "stat": { "value": "27.83%", "label": "..." } = one big gold figure on a light
+//       card below the headline, in the open sky above the illustration (owner 2026-11-26:
+//       a figure belongs lower, not squeezed into the headline).
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -35,6 +38,9 @@ const url = (p) => "file://" + p;
 const hero = path.resolve(here, spec.hero);
 if (!fs.existsSync(hero)) { console.error(`hero not found: ${hero}`); process.exit(1); }
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const stat = spec.stat && spec.stat.value
+  ? `<div class="stat"><b dir="ltr">${esc(spec.stat.value)}</b>${spec.stat.label ? `<span>${esc(spec.stat.label)}</span>` : ""}</div>`
+  : "";
 const line2 = esc(spec.line2).replace(/\{([^}]+)\}/, "<em>$1</em>");
 const th = (w, n) => `@font-face{font-family:Th;src:url(${url(path.join(root, `public/fonts/thmanyah/thmanyahsans-${n}.woff2`))});font-weight:${w}}`;
 const BG = "#e2e4e8";
@@ -60,6 +66,9 @@ body{width:1080px;height:1350px;overflow:hidden;position:relative;background:${B
 .t1{background:rgba(15,43,33,.9);color:#f7f5f0;font-weight:900;font-size:98px;line-height:1.15;padding:4px 48px 20px;box-shadow:0 14px 34px rgba(15,43,33,.25);white-space:nowrap}
 .t2{color:#0f2b21;font-weight:900;font-size:104px;line-height:1.15;text-shadow:0 2px 10px rgba(255,255,255,.7);white-space:nowrap}
 .t2 em{font-style:normal;color:#a27c26}
+.stat{position:absolute;top:505px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 64px 22px;background:rgba(247,245,240,.88);border:3px solid rgba(162,124,38,.55);border-radius:28px;box-shadow:0 16px 40px rgba(15,43,33,.16);direction:rtl;white-space:nowrap}
+.stat b{font-family:Inter;font-weight:700;font-size:136px;line-height:1.08;color:#a27c26;letter-spacing:-.01em}
+.stat span{font-weight:700;font-size:42px;line-height:1.2;color:#0f2b21}
 .url{position:absolute;bottom:40px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:14px;direction:ltr}
 .url b{font-family:Inter;font-weight:700;font-size:38px;color:#0f2b21;letter-spacing:.02em}.url svg{width:38px;height:38px}`;
 const globe = '<svg viewBox="0 0 24 24" fill="none" stroke="#a27c26" stroke-width="1.9"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2c3 3.2 3 16.8 0 20M12 2c-3 3.2-3 16.8 0 20"/></svg>';
@@ -69,6 +78,7 @@ const html = `<html><head><meta charset="utf-8"><style>${css}</style></head><bod
 <div class="dots d1"></div><div class="dots d2"></div><div class="vl v1"></div><div class="vl v2"></div>
 <div class="logo"><img src="${url(path.join(root, "public/logo-dark.png"))}"><div><b>HADARA</b><span>REAL ESTATE</span></div></div>
 <div class="head"><div class="t1">${esc(spec.line1)}</div><div class="t2">${line2}</div></div>
+${stat}
 <div class="url">${globe}<b>hadararealestate.com</b></div></body></html>`;
 
 const htmlPath = path.join(outDir, `${spec.id}.html`);
@@ -81,10 +91,12 @@ await page.waitForTimeout(300);
 const check = await page.evaluate(() => {
   const w = (s) => document.querySelector(s).getBoundingClientRect();
   const fonts = [...document.fonts].filter((f) => f.family.replace(/"/g, "") === "Th" && f.status === "loaded").length;
-  return { t1: w(".t1").width, t2: w(".t2").width, fonts };
+  const st = document.querySelector(".stat");
+  return { t1: w(".t1").width, t2: w(".t2").width, st: st ? st.getBoundingClientRect().width : 0, fonts };
 });
 const issues = [];
 if (check.t1 > 1000 || check.t2 > 1000) issues.push("headline line too wide (shorten it, ~16 letters a line)");
+if (check.st > 1000) issues.push("stat card too wide (shorten the label)");
 if (!check.fonts) issues.push("Thmanyah Sans did not load");
 const png = path.join(outDir, `${spec.id}-2160.png`);
 await page.screenshot({ path: png });
