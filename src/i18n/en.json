@@ -2511,6 +2511,13 @@
       }
     },
     "updates": {
+      "revaluation-rate-2026-property-tax": {
+        "title": "Revaluation rate for 2026 set at 27.83%: what it means for property tax",
+        "summary": "The Ministry of Treasury and Finance announced in the Official Gazette of 24 November 2026 that the revaluation rate for 2026 is 27.83%. Under the Property Tax Law, this rate is used each year to raise the tax value of buildings and land and, at half the rate, the thresholds of the valuable housing tax.",
+        "after": "The revaluation rate for 2026 is 27.83%. Under Article 29 of Property Tax Law No. 1319, as amended by Law No. 7566, the tax value of a building or land rises each year by the revaluation rate; the President may reduce this increase, down to zero. The value thresholds of the valuable housing tax (17,711,000 TL for 2026) rise each year by half of the previous year's revaluation rate.",
+        "affects": "Property owners in Turkey who pay the annual property tax, and owners of high-value homes who may pay the valuable housing tax.",
+        "help": "We explain the expected yearly taxes and fees of a property before you buy."
+      },
       "investor-residence-3-5-years": {
         "title": "Residence permit of 3 or 5 years for foreign investors",
         "summary": "A Presidential Decision published on 18 November 2026 lets foreigners who do not work in Turkey obtain a residence permit for investing at least US$150,000 (3 years) or at least US$200,000 (5 years), or the equivalent in foreign currency. The investment can be a deposit in a bank operating in Turkey, government debt securities, participation shares in a real estate investment fund or venture capital investment fund, or contributions to the private pension system, each kept for at least half of the permit period.",
