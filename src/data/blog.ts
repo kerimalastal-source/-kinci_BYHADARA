@@ -22,6 +22,14 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "ispartakule-avcilar-district-guide",
+    priority: -33,
+    published: "2026-11-27",
+    relatedProjects: ["cadde-ispartakule", "hayat-flora"],
+    district: "Ispartakule",
+    coverImage: { src: "/images/blog/ispartakule-avcilar-district-guide.jpg", width: 1536, height: 1024 }
+  },
+  {
     slug: "emlak-konut-projects-istanbul",
     priority: -32,
     published: "2026-11-26",
