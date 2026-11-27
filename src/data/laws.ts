@@ -135,6 +135,19 @@ export const lawRules: LawRule[] = [
 
 export const lawUpdates: LawUpdate[] = [
   {
+    id: "revaluation-rate-2026-property-tax",
+    article: "emlak-vergisi-property-tax",
+    topic: "taxes",
+    decided: "2026-11-24",
+    reference: "Vergi Usul Kanunu Genel Tebliği (Sıra No: 599) · Resmî Gazete 33440 (24/11/2026); 1319 sayılı Emlak Vergisi Kanunu md. 29 ve değerli konut vergisi hükümleri",
+    sources: [
+      { key: "resmiGazete", url: "https://www.resmigazete.gov.tr/eskiler/2026/11/20261124-3.htm" },
+      { key: "mevzuat", url: "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.1319.pdf" }
+    ],
+    checked: "2026-11-26",
+    approved: true
+  },
+  {
     id: "investor-residence-3-5-years",
     article: "investor-residence-permit-turkey",
     topic: "residence",
