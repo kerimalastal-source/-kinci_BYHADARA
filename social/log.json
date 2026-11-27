@@ -1214,5 +1214,13 @@
     "headlineAr": "سي بيرل أتاكوي: شقق بين الحدائق والبحر في إسطنبول",
     "headlineEn": "Sea Pearl Ataköy: homes between gardens and the sea in Istanbul",
     "photo": "/images/projects/sea-pearl-atakoy/palace-gardens.jpg"
+  },
+  {
+    "date": "2026-11-27",
+    "id": "news-declared-price",
+    "topic": "تصميم الأخبار: غرامة السعر الأقل في الطابو",
+    "headlineAr": "سعر أقل في الطابو؟ انتبه للغرامة",
+    "headlineEn": "A lower price at the land registry? Mind the penalty",
+    "photo": "news/heroes/declared-price.jpg"
   }
 ]
